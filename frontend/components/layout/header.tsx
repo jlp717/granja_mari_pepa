@@ -67,8 +67,8 @@ export function Header() {
 
   return (
     <div className="relative">
-      {/* Top Utility Bar */}
-      <div className="bg-blue-600 text-white text-xs py-2">
+      {/* Top Utility Bar - Fixed */}
+      <div className="fixed top-0 left-0 right-0 bg-blue-600/98 md:bg-blue-600 text-white text-xs py-2 z-[60] transition-all duration-300 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
@@ -86,14 +86,14 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main Header */}
+      {/* Main Header - Fixed and positioned below utility bar */}
       <header
-        className={`relative z-50 transition-all duration-500 ease-out ${
+        className={`fixed top-8 left-0 right-0 z-50 transition-all duration-500 ease-out ${
           isScrolled
-            ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-slate-900/20'
+            ? 'bg-slate-900/98 md:bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-slate-900/20'
             : isHomePage
-            ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5'
-            : 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/10'
+            ? 'bg-white/98 md:bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5'
+            : 'bg-white/98 md:bg-white/95 backdrop-blur-xl shadow-lg shadow-black/10'
         }`}
         style={{
           borderBottom: isScrolled 
@@ -160,10 +160,6 @@ export function Header() {
                     height={180}
                     className="object-contain transition-all duration-300 group-hover:brightness-110 group-hover:drop-shadow-2xl relative z-10 
                                w-24 h-18 xs:w-32 xs:h-24 sm:w-40 sm:h-30 md:w-48 md:h-36 lg:w-56 lg:h-42 xl:w-60 xl:h-45"
-                    style={{ 
-                      maxWidth: '100%', 
-                      height: 'auto'
-                    }}
                     priority
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -296,94 +292,179 @@ export function Header() {
           </div>
         </nav>
 
-        {/* Mobile Navigation Drawer - Pantalla completa */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 z-[8000] bg-white">
-            {/* Header del menú móvil con logo Mari Pepa */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-6 flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="relative w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/images/logo.jpeg"
-                    alt="Mari Pepa"
-                    width={48}
-                    height={48}
-                    className="object-cover rounded-xl"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg">Mari Pepa</h3>
-                  <p className="text-blue-100 text-sm">Del mar a tu mesa</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        {/* Mobile Navigation Overlay - Full-screen professional */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden fixed inset-0 z-[9999] bg-slate-900/98 backdrop-blur-2xl"
+              style={{ height: '100vh', width: '100vw', top: 0, left: 0, position: 'fixed' }}
+            >
+              {/* Header del menú móvil - Solo logo minimalista */}
+              <motion.div 
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="flex items-center justify-between p-6 border-b border-white/10"
               >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Lista de navegación que ocupa el resto del espacio */}
-            <div className="flex-1 py-6 h-full overflow-y-auto">
-              {navigation.map((item, index) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center px-6 py-5 text-lg font-medium transition-all duration-200 border-l-4 ${
-                    pathname === item.href
-                      ? 'text-blue-600 bg-blue-50 border-blue-600 shadow-sm'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50 border-transparent hover:border-blue-300'
-                  }`}
+                <Link 
+                  href="/" 
                   onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center space-x-3 group"
                 >
-                  <div className={`w-10 h-10 rounded-xl mr-4 flex items-center justify-center ${
-                    pathname === item.href ? 'bg-blue-100' : 'bg-gray-100'
-                  }`}>
-                    {index === 0 && <ShoppingBag className="w-5 h-5" />}
-                    {index === 1 && <User className="w-5 h-5" />}
-                    {index === 2 && <Phone className="w-5 h-5" />}
-                    {index === 3 && <MapPin className="w-5 h-5" />}
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-base">{item.name}</div>
-                    <div className="text-sm text-gray-500">
-                      {index === 0 && 'Ver catálogo completo'}
-                      {index === 1 && 'Conoce nuestra historia'}
-                      {index === 2 && 'Ponte en contacto'}
-                      {index === 3 && 'Accede a tu cuenta'}
-                    </div>
-                  </div>
-                  {pathname === item.href && (
-                    <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-                  )}
+                  <motion.div 
+                    className="relative overflow-hidden rounded-2xl bg-white/10 p-2 backdrop-blur-sm border border-white/20"
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Image
+                      src="/images/logo.jpeg"
+                      alt="Logo"
+                      width={40}
+                      height={40}
+                      className="object-cover rounded-xl transition-transform duration-300"
+                    />
+                  </motion.div>
+                  <motion.div 
+                    className="text-white"
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="font-bold text-lg tracking-wide">Mari Pepa</div>
+                  </motion.div>
                 </Link>
-              ))}
+                
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-12 h-12 rounded-2xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 backdrop-blur-sm border border-white/20"
+                >
+                  <X className="w-6 h-6 text-white" />
+                </motion.button>
+              </motion.div>
 
-              {/* Espaciador para empujar el footer hacia abajo */}
-              <div className="flex-1 min-h-[200px]"></div>
+              {/* Contenido principal del menú scrollable */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="min-h-[calc(100vh-140px)] flex flex-col justify-center p-6">
+                  {/* Lista de navegación moderna */}
+                  <div className="space-y-4 mb-8">
+                    {navigation.map((item, index) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: -100, scale: 0.8 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        transition={{ 
+                          duration: 0.6, 
+                          delay: index * 0.15,
+                          type: "spring",
+                          stiffness: 120,
+                          damping: 20
+                        }}
+                      >
+                        <Link
+                          href={item.href}
+                          className={`group flex items-center p-5 rounded-3xl border transition-all duration-300 transform hover:scale-105 ${
+                            pathname === item.href
+                              ? 'bg-gradient-to-r from-blue-600/30 to-blue-700/30 border-blue-400/50 text-blue-300 shadow-2xl shadow-blue-500/20 backdrop-blur-sm'
+                              : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10 backdrop-blur-sm'
+                          }`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <motion.div 
+                            className={`w-14 h-14 rounded-2xl mr-5 flex items-center justify-center transition-all duration-300 ${
+                              pathname === item.href 
+                                ? 'bg-blue-500/40 text-blue-200 shadow-lg shadow-blue-500/30' 
+                                : 'bg-white/10 text-white/80 group-hover:bg-white/20 group-hover:scale-110 group-hover:shadow-lg'
+                            }`}
+                            whileHover={{ 
+                              rotate: [0, -10, 10, 0],
+                              transition: { duration: 0.5 }
+                            }}
+                          >
+                            {index === 0 && <ShoppingBag className="w-7 h-7" />}
+                            {index === 1 && <User className="w-7 h-7" />}
+                            {index === 2 && <Phone className="w-7 h-7" />}
+                            {index === 3 && <MapPin className="w-7 h-7" />}
+                          </motion.div>
+                          
+                          <div className="flex-1">
+                            <div className="font-bold text-xl mb-1 tracking-wide">
+                              {item.name}
+                            </div>
+                            <div className={`text-sm transition-colors duration-300 ${
+                              pathname === item.href ? 'text-blue-200/80' : 'text-white/60 group-hover:text-white/80'
+                            }`}>
+                              {index === 0 && 'Ver todo el catálogo'}
+                              {index === 1 && 'Nuestra historia'}
+                              {index === 2 && 'Ponte en contacto'}
+                              {index === 3 && 'Área personal'}
+                            </div>
+                          </div>
+                          
+                          {pathname === item.href && (
+                            <motion.div
+                              layoutId="activeMobileIndicator"
+                              className="w-4 h-4 bg-blue-400 rounded-full shadow-xl shadow-blue-400/50"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                            />
+                          )}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
 
-              {/* Información de contacto en la parte inferior */}
-              <div className="mt-auto px-6 py-6 bg-gray-50 border-t border-gray-200">
-                <div className="space-y-3">
-                  <div className="flex items-center text-base text-gray-600">
-                    <Phone className="w-5 h-5 mr-3 text-blue-600" />
-                    <span className="font-medium">968 123 456</span>
-                  </div>
-                  <div className="flex items-center text-base text-gray-600">
-                    <MapPin className="w-5 h-5 mr-3 text-blue-600" />
-                    <span className="font-medium">Murcia • Almería</span>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-gray-300">
-                    <p className="text-sm text-gray-500 text-center">
-                      Más de 35 años llevando la excelencia marina a tu negocio
-                    </p>
-                  </div>
+                  {/* Footer con información de contacto */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    className="mt-auto p-6 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl border border-white/10 backdrop-blur-sm"
+                  >
+                    <div className="grid grid-cols-1 gap-4 text-center mb-4">
+                      <motion.div 
+                        className="flex items-center justify-center space-x-3 p-3 rounded-2xl bg-white/5"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-blue-500/30 flex items-center justify-center">
+                          <Phone className="w-5 h-5 text-blue-300" />
+                        </div>
+                        <div>
+                          <div className="text-white font-semibold">968 123 456</div>
+                          <div className="text-white/60 text-sm">Llámanos ahora</div>
+                        </div>
+                      </motion.div>
+                      
+                      <motion.div 
+                        className="flex items-center justify-center space-x-3 p-3 rounded-2xl bg-white/5"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-green-500/30 flex items-center justify-center">
+                          <MapPin className="w-5 h-5 text-green-300" />
+                        </div>
+                        <div>
+                          <div className="text-white font-semibold">Murcia • Almería</div>
+                          <div className="text-white/60 text-sm">Nuestras sedes</div>
+                        </div>
+                      </motion.div>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-white/10 text-center">
+                      <p className="text-white/70 text-sm font-medium">
+                        ✨ Más de 35 años de excelencia marina
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <CartDrawer />
