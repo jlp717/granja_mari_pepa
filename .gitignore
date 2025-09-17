@@ -117,8 +117,9 @@ logs
 *.log
 
 # GSAP and animation assets (optional - uncomment if you want to ignore them)
-# frontend/public/animations/
-# frontend/lib/gsap-config.ts
+frontend/public/animations/
+frontend/lib/gsap-config.ts
+frontend/components/cart/new-cart-drawer.tsx
 
 # Additional images (keep only essential ones in repo)
 # frontend/public/images/logo-*.png
