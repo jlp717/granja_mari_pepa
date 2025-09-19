@@ -4,66 +4,99 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, ArrowRight, Star, Award, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useAnimatedSection } from '@/hooks/use-animated-section';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+// Deterministic values to avoid hydration mismatch
+const PARTICLE_DATA = [
+  { width: 3.5, height: 2.7, left: 12, top: 25, color: 0, duration: 6.2, delay: 0.5 },
+  { width: 4.1, height: 3.8, left: 34, top: 67, color: 1, duration: 5.8, delay: 1.2 },
+  { width: 2.8, height: 4.2, left: 56, top: 43, color: 2, duration: 7.1, delay: 0.8 },
+  { width: 3.9, height: 2.9, left: 78, top: 81, color: 0, duration: 6.5, delay: 1.8 },
+  { width: 4.3, height: 3.1, left: 23, top: 15, color: 1, duration: 5.9, delay: 0.3 },
+  { width: 2.6, height: 4.8, left: 67, top: 58, color: 2, duration: 6.8, delay: 1.5 },
+  { width: 3.2, height: 3.5, left: 89, top: 32, color: 0, duration: 7.3, delay: 0.7 },
+  { width: 4.7, height: 2.4, left: 45, top: 74, color: 1, duration: 5.6, delay: 2.1 },
+  { width: 3.6, height: 4.1, left: 8, top: 49, color: 2, duration: 6.7, delay: 0.9 },
+  { width: 2.9, height: 3.3, left: 72, top: 19, color: 0, duration: 6.1, delay: 1.7 },
+  { width: 4.2, height: 2.8, left: 51, top: 85, color: 1, duration: 7.0, delay: 0.4 },
+  { width: 3.1, height: 4.5, left: 27, top: 61, color: 2, duration: 5.7, delay: 1.3 },
+  { width: 4.6, height: 3.7, left: 83, top: 37, color: 0, duration: 6.9, delay: 0.6 },
+  { width: 2.5, height: 2.6, left: 16, top: 73, color: 1, duration: 6.4, delay: 1.9 },
+  { width: 3.8, height: 4.0, left: 64, top: 28, color: 2, duration: 5.5, delay: 0.2 },
+  { width: 4.4, height: 3.2, left: 91, top: 52, color: 0, duration: 7.2, delay: 1.6 },
+  { width: 2.7, height: 4.9, left: 39, top: 16, color: 1, duration: 6.0, delay: 1.0 },
+  { width: 3.4, height: 2.3, left: 75, top: 79, color: 2, duration: 6.6, delay: 1.4 },
+  { width: 4.8, height: 3.9, left: 20, top: 44, color: 0, duration: 5.4, delay: 0.1 },
+  { width: 3.0, height: 4.6, left: 58, top: 66, color: 1, duration: 7.4, delay: 2.0 }
+];
+
+const ORB_DATA = [
+  { width: 65, height: 72, left: 15, top: 30, duration: 9.5, delay: 0.8 },
+  { width: 48, height: 55, left: 42, top: 68, duration: 11.2, delay: 1.5 },
+  { width: 78, height: 63, left: 71, top: 41, duration: 8.7, delay: 2.1 },
+  { width: 52, height: 84, left: 28, top: 75, duration: 10.9, delay: 0.3 },
+  { width: 69, height: 47, left: 85, top: 22, duration: 9.1, delay: 1.8 },
+  { width: 41, height: 76, left: 56, top: 59, duration: 12.3, delay: 0.6 }
+];
 
 export function Footer() {
-  const footerRef = useRef<HTMLDivElement>(null);
-  const [isReduced, setIsReduced] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Use the new animated section hook
+  const { sectionRef, isReduced } = useAnimatedSection({
+    threshold: 0.1,
+    rootMargin: '50px',
+    animationDelay: 100,
+    stagger: 0.2
+  });
 
-  // Check for reduced motion preference
+  // Prevent hydration mismatch
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReduced(mediaQuery.matches);
-    
-    const handleChange = (e: MediaQueryListEvent) => setIsReduced(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    setIsMounted(true);
   }, []);
 
-  // Professional footer animations
-  useEffect(() => {
-    if (!footerRef.current || isReduced) return;
-
-    const footer = footerRef.current;
-
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: footer,
-        start: 'top 90%',
-        end: 'top 60%',
-        toggleActions: 'play none none reverse'
-      }
-    })
-    .fromTo(footer.children, {
-      opacity: 0,
-      y: 40,
-      scale: 0.95
-    }, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power2.out'
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [isReduced]);
+  if (!isMounted) {
+    // Return basic footer without animations during SSR
+    return (
+      <footer 
+        className="relative overflow-hidden"
+        style={{
+          background: `
+            linear-gradient(135deg, 
+              #0a0a0a 0%, 
+              #1a0a2e 25%, 
+              #2a1810 50%, 
+              #1a0a2e 75%, 
+              #0a0a0a 100%
+            )
+          `
+        }}
+      >
+        <div className="container mx-auto px-4 py-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            {/* Basic content without animations */}
+            <div className="lg:col-span-1 text-center lg:text-left">
+              <h3 className="text-3xl md:text-4xl font-black mb-2">
+                <span className="bg-gradient-to-r from-amber-200 via-orange-300 to-yellow-200 bg-clip-text text-transparent">
+                  GRANJA MARI PEPA
+                </span>
+              </h3>
+              <p className="text-blue-200/80 text-lg mb-8">
+                Distribuidores de productos alimentarios premium
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer 
-      ref={footerRef}
+      ref={sectionRef}
       className="relative overflow-hidden"
       style={{
+        position: 'relative', // Fix for ScrollTrigger positioning warning
         background: `
           linear-gradient(135deg, 
             #0a0a0a 0%, 
@@ -123,37 +156,37 @@ export function Footer() {
 
       {/* Professional background effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated particles */}
-        {[...Array(20)].map((_, i) => (
+        {/* Animated particles with deterministic values */}
+        {PARTICLE_DATA.map((particle, i) => (
           <div
-            key={i}
+            key={`particle-${i}`}
             className="absolute rounded-full opacity-30"
             style={{
-              width: `${2 + Math.random() * 4}px`,
-              height: `${2 + Math.random() * 4}px`,
-              background: `rgba(${i % 3 === 0 ? '255, 193, 7' : i % 3 === 1 ? '255, 152, 0' : '255, 87, 34'}, 0.7)`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              width: `${particle.width}px`,
+              height: `${particle.height}px`,
+              background: `rgba(${particle.color === 0 ? '255, 193, 7' : particle.color === 1 ? '255, 152, 0' : '255, 87, 34'}, 0.7)`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
               boxShadow: '0 0 15px rgba(255, 193, 7, 0.6)',
-              animation: `float-footer-${i % 4} ${5 + Math.random() * 3}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 3}s`
+              animation: `float-footer-${i % 4} ${particle.duration}s ease-in-out infinite`,
+              animationDelay: `${particle.delay}s`
             }}
           />
         ))}
 
-        {/* Glowing orbs */}
-        {[...Array(6)].map((_, i) => (
+        {/* Glowing orbs with deterministic values */}
+        {ORB_DATA.map((orb, i) => (
           <div
             key={`orb-${i}`}
             className="absolute rounded-full opacity-10"
             style={{
-              width: `${40 + Math.random() * 80}px`,
-              height: `${40 + Math.random() * 80}px`,
+              width: `${orb.width}px`,
+              height: `${orb.height}px`,
               background: `radial-gradient(circle, rgba(255, 193, 7, 0.6) 0%, transparent 70%)`,
-              left: `${Math.random() * 100}%`,
-              top: `${20 + Math.random() * 60}%`,
-              animation: `pulse-glow ${8 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 4}s`
+              left: `${orb.left}%`,
+              top: `${orb.top}%`,
+              animation: `pulse-glow ${orb.duration}s ease-in-out infinite`,
+              animationDelay: `${orb.delay}s`
             }}
           />
         ))}
@@ -162,12 +195,13 @@ export function Footer() {
       <div className="container mx-auto px-4 py-16 relative z-10">
         
         {/* Main footer content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16" data-animate="content">
           
           {/* Brand section */}
           <motion.div 
             className="lg:col-span-1 text-center lg:text-left"
             whileHover={{ scale: 1.02 }}
+            data-animate="title"
           >
             <div className="mb-6">
               <h3 className="text-3xl md:text-4xl font-black mb-2">

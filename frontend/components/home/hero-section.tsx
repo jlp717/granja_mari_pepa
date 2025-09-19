@@ -3,13 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ResponsiveVideo from '@/components/ui/responsive-video';
+import ResponsiveImage from '@/components/ui/responsive-image';
 import Link from 'next/link';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-declare global {
-  interface Window {
-    ScrollMagic: any;
-    gsap: any;
-  }
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 export function HeroSection() {
@@ -17,102 +19,138 @@ export function HeroSection() {
   const squidRef = useRef<HTMLDivElement>(null);
   const inkRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const [scrollMagicReady, setScrollMagicReady] = useState(false);
+  const [isReduced, setIsReduced] = useState(false);
 
+  // Check for reduced motion preference
   useEffect(() => {
-    const checkDependencies = () => {
-      if (typeof window !== 'undefined' && window.ScrollMagic && window.gsap) {
-        setScrollMagicReady(true);
-        initScrollMagic();
-      } else {
-        setTimeout(checkDependencies, 100);
-      }
-    };
-
-    checkDependencies();
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReduced(mediaQuery.matches);
+    
+    const handleChange = (e: MediaQueryListEvent) => setIsReduced(e.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const initScrollMagic = () => {
-    if (!scrollMagicReady || !window.ScrollMagic || !window.gsap) return;
+  // Fixed floating particles data to prevent hydration issues
+  const FLOATING_PARTICLES = [
+    { left: 15, top: 25, size: 4, opacity: 0.4, duration: 12, delay: 0 },
+    { left: 85, top: 60, size: 3, opacity: 0.3, duration: 15, delay: 2 },
+    { left: 45, top: 80, size: 5, opacity: 0.5, duration: 10, delay: 1 },
+    { left: 75, top: 15, size: 4, opacity: 0.4, duration: 13, delay: 3 },
+    { left: 25, top: 45, size: 3, opacity: 0.3, duration: 14, delay: 1.5 },
+    { left: 65, top: 35, size: 4, opacity: 0.4, duration: 11, delay: 2.5 },
+    { left: 35, top: 70, size: 5, opacity: 0.5, duration: 12, delay: 0.5 },
+    { left: 90, top: 40, size: 3, opacity: 0.3, duration: 16, delay: 1.8 },
+    { left: 10, top: 55, size: 4, opacity: 0.4, duration: 13, delay: 2.3 },
+    { left: 55, top: 20, size: 3, opacity: 0.3, duration: 14, delay: 1.1 },
+    { left: 20, top: 65, size: 4, opacity: 0.4, duration: 15, delay: 0.8 },
+    { left: 80, top: 25, size: 5, opacity: 0.5, duration: 11, delay: 2.8 },
+    { left: 40, top: 50, size: 3, opacity: 0.3, duration: 13, delay: 1.3 },
+    { left: 70, top: 75, size: 4, opacity: 0.4, duration: 12, delay: 2.1 },
+    { left: 30, top: 30, size: 5, opacity: 0.5, duration: 14, delay: 0.3 }
+  ];
 
-    const controller = new window.ScrollMagic.Controller();
-    const { gsap } = window;
+  useEffect(() => {
+    if (!heroRef.current || isReduced) return;
 
-    // Efecto de tinta expandiéndose
-    const inkScene = new window.ScrollMagic.Scene({
-      triggerElement: heroRef.current,
-      triggerHook: 0.8,
-      duration: window.innerHeight * 1.5
-    })
-    .setTween(gsap.timeline()
-      .to(inkRef.current, {
-        scale: 15,
-        opacity: 0.9,
-        duration: 1.5,
-        ease: "power2.out"
-      })
-      .to(squidRef.current, {
-        scale: 1.2,
-        rotation: 10,
-        opacity: 0.3,
-        duration: 1,
-        ease: "power2.out"
-      }, 0)
-    )
-    .addTo(controller);
+    const hero = heroRef.current;
+    const squid = squidRef.current;
+    const ink = inkRef.current;
+    const title = titleRef.current;
 
-    // Efecto parallax del título
-    const titleScene = new window.ScrollMagic.Scene({
-      triggerElement: heroRef.current,
-      triggerHook: 1,
-      duration: window.innerHeight
-    })
-    .setTween(gsap.to(titleRef.current, {
-      y: -100,
-      opacity: 0.5,
-      duration: 1,
-      ease: "power1.out"
-    }))
-    .addTo(controller);
-
-    // Rotación continua del calamar
-    gsap.to(squidRef.current, {
-      rotation: 360,
-      duration: 20,
-      ease: "none",
-      repeat: -1
+    // Professional parallax effects with ScrollTrigger
+    const parallaxTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
+      }
     });
 
-    // Animación de partículas flotantes
-    const createFloatingParticles = () => {
-      for (let i = 0; i < 15; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'floating-particle';
-        particle.style.cssText = `
-          position: absolute;
-          width: ${Math.random() * 6 + 2}px;
-          height: ${Math.random() * 6 + 2}px;
-          background: rgba(59, 130, 246, ${Math.random() * 0.5 + 0.2});
-          border-radius: 50%;
-          pointer-events: none;
-          left: ${Math.random() * 100}%;
-          top: ${Math.random() * 100}%;
-        `;
-        heroRef.current?.appendChild(particle);
+    // Smooth title parallax
+    if (title) {
+      parallaxTl.to(title, {
+        y: -50,
+        opacity: 0.7,
+        ease: 'none'
+      });
+    }
 
-        gsap.to(particle, {
-          x: (Math.random() - 0.5) * 200,
-          y: (Math.random() - 0.5) * 200,
-          duration: Math.random() * 10 + 10,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut"
-        });
-      }
+    // Professional ink expansion effect
+    if (ink) {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: hero,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 2
+        }
+      }).to(ink.querySelector('div'), {
+        scale: 8,
+        opacity: 0.6,
+        ease: 'power2.out'
+      });
+    }
+
+    // Smooth squid rotation
+    if (squid) {
+      gsap.to(squid, {
+        rotation: 360,
+        duration: 25,
+        ease: 'none',
+        repeat: -1
+      });
+
+      // Squid parallax effect
+      gsap.to(squid, {
+        scrollTrigger: {
+          trigger: hero,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5
+        },
+        scale: 1.1,
+        opacity: 0.4,
+        ease: 'none'
+      });
+    }
+
+    // Create deterministic floating particles
+    FLOATING_PARTICLES.forEach((particle, i) => {
+      const particleEl = document.createElement('div');
+      particleEl.className = 'floating-particle';
+      particleEl.style.cssText = `
+        position: absolute;
+        width: ${particle.size}px;
+        height: ${particle.size}px;
+        background: rgba(59, 130, 246, ${particle.opacity});
+        border-radius: 50%;
+        pointer-events: none;
+        left: ${particle.left}%;
+        top: ${particle.top}%;
+        z-index: 5;
+      `;
+      hero.appendChild(particleEl);
+
+      gsap.to(particleEl, {
+        x: (particle.left > 50 ? -100 : 100),
+        y: (particle.top > 50 ? -80 : 80),
+        duration: particle.duration,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: particle.delay
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      // Clean up particles
+      hero.querySelectorAll('.floating-particle').forEach(p => p.remove());
     };
-
-    createFloatingParticles();
-  };
+  }, [isReduced]);
 
   const scrollToProducts = () => {
     const productsSection = document.getElementById('productos-section');
@@ -130,13 +168,14 @@ export function HeroSection() {
         ref={heroRef}
         className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"
         style={{
-          background: 'radial-gradient(ellipse at center, #1e3a8a 0%, #0f172a 70%)'
+          background: 'radial-gradient(ellipse at center, #1e3a8a 0%, #0f172a 70%)',
+          minHeight: '100dvh' // Usar dvh para mejor soporte móvil
         }}
       >
         {/* Overlay con textura */}
         <div className="absolute inset-0 bg-black/30 z-10"></div>
         
-        {/* Efecto de ondas de agua */}
+        {/* Efecto de ondas de agua - RESPONSIVO */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-blue-400/10"></div>
           <div 
@@ -151,13 +190,13 @@ export function HeroSection() {
           ></div>
         </div>
 
-        {/* Calamar principal */}
+        {/* Calamar principal - RESPONSIVO */}
         <div 
           ref={squidRef}
-          className="absolute inset-0 flex items-center justify-center z-5 opacity-80"
+          className="absolute inset-0 flex items-center justify-center z-5 opacity-60 sm:opacity-80"
         >
           <div 
-            className="w-96 h-96 relative transform transition-all duration-1000"
+            className="w-48 h-48 sm:w-80 sm:h-80 lg:w-96 lg:h-96 relative transform transition-all duration-1000"
             style={{
               background: `
                 radial-gradient(ellipse 60% 80% at 50% 40%, rgba(31, 41, 55, 0.9) 0%, rgba(31, 41, 55, 0.7) 40%, transparent 70%),
@@ -166,49 +205,49 @@ export function HeroSection() {
               clipPath: 'ellipse(45% 60% at 50% 45%)'
             }}
           >
-            {/* Tentáculos del calamar */}
+            {/* Tentáculos del calamar - RESPONSIVO */}
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
                 className="absolute bottom-0 left-1/2 origin-top transform -translate-x-1/2"
                 style={{
-                  width: '3px',
-                  height: `${Math.random() * 80 + 60}px`,
+                  width: '2px',
+                  height: `${Math.random() * 40 + 30}px`,
                   background: 'linear-gradient(to bottom, rgba(75, 85, 99, 0.9), rgba(55, 65, 81, 0.6))',
                   borderRadius: '2px',
-                  transform: `translateX(-50%) rotate(${(i * 45) - 157.5}deg) translateY(20px)`,
+                  transform: `translateX(-50%) rotate(${(i * 45) - 157.5}deg) translateY(10px)`,
                   animation: `tentacle-wave-${i} ${3 + Math.random() * 2}s ease-in-out infinite`
                 }}
               />
             ))}
             
-            {/* Ojos del calamar */}
-            <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-red-400 rounded-full opacity-70 animate-pulse"></div>
-            <div className="absolute top-1/3 right-1/3 w-4 h-4 bg-red-400 rounded-full opacity-70 animate-pulse"></div>
+            {/* Ojos del calamar - RESPONSIVO */}
+            <div className="absolute top-1/3 left-1/3 w-2 h-2 sm:w-4 sm:h-4 bg-red-400 rounded-full opacity-70 animate-pulse"></div>
+            <div className="absolute top-1/3 right-1/3 w-2 h-2 sm:w-4 sm:h-4 bg-red-400 rounded-full opacity-70 animate-pulse"></div>
           </div>
         </div>
 
-        {/* Efecto de tinta que se expande */}
+        {/* Efecto de tinta que se expande - RESPONSIVO */}
         <div 
           ref={inkRef}
           className="absolute inset-0 z-0 flex items-center justify-center"
         >
           <div 
-            className="w-32 h-32 rounded-full opacity-0 transform scale-0"
+            className="w-16 h-16 sm:w-32 sm:h-32 rounded-full opacity-0 transform scale-0"
             style={{
               background: 'radial-gradient(circle, rgba(0, 0, 0, 0.9) 0%, rgba(30, 58, 138, 0.8) 30%, rgba(59, 130, 246, 0.6) 60%, transparent 100%)'
             }}
           ></div>
         </div>
 
-        {/* Contenido principal */}
+        {/* Contenido principal - ULTRA RESPONSIVO */}
         <div 
           ref={titleRef}
-          className="relative z-20 text-center max-w-4xl mx-auto px-4"
+          className="relative z-20 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         >
-          {/* Título principal con efectos */}
-          <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+          {/* Título principal con efectos - RESPONSIVO */}
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               <span 
                 className="inline-block"
                 style={{
@@ -224,7 +263,7 @@ export function HeroSection() {
               </span>
             </h1>
             <div 
-              className="text-2xl md:text-4xl font-light mb-2"
+              className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light mb-2"
               style={{
                 background: 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%)',
                 backgroundClip: 'text',
@@ -234,75 +273,76 @@ export function HeroSection() {
             >
               Grupo Topgel
             </div>
-            <div className="text-lg text-blue-300 opacity-90">
+            <div className="text-sm sm:text-base lg:text-lg text-blue-300 opacity-90">
               Del mar a tu mesa
             </div>
           </div>
 
-          {/* Descripción */}
-          <p className="text-xl md:text-2xl text-slate-200 mb-12 max-w-3xl mx-auto leading-relaxed opacity-90">
+          {/* Descripción - RESPONSIVO */}
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-200 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed opacity-90 px-4">
             Productos del mar de la más alta calidad.
-            <span className="block mt-3 text-lg text-blue-200">
+            <span className="block mt-2 sm:mt-3 text-sm sm:text-base lg:text-lg text-blue-200">
               Más de 35 años llevando la excelencia marina a tu negocio.
             </span>
           </p>
 
-          {/* Botones CTA */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+          {/* Botones CTA - ULTRA RESPONSIVO */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 px-4">
             <Button 
               onClick={scrollToProducts}
               size="lg" 
-              className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 border border-blue-400/30"
+              className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 border border-blue-400/30 w-full sm:w-auto"
               style={{
                 boxShadow: '0 0 30px rgba(59, 130, 246, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1)'
               }}
             >
-              Descubre nuestros productos
-              <ArrowRight className="ml-3 w-6 h-6" />
+              <span className="hidden xs:inline">Descubre nuestros productos</span>
+              <span className="xs:hidden">Ver productos</span>
+              <ArrowRight className="ml-3 w-5 h-5 sm:w-6 sm:h-6" />
             </Button>
             
-            <Link href="/contacto">
+            <Link href="/contacto" className="w-full sm:w-auto">
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-2 border-white/70 text-white hover:bg-white hover:text-slate-900 px-12 py-6 text-xl font-bold rounded-2xl backdrop-blur-md bg-white/10 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="border-2 border-white/70 text-white hover:bg-white hover:text-slate-900 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl backdrop-blur-md bg-white/10 transform transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto"
               >
                 Contacto
               </Button>
             </Link>
           </div>
 
-          {/* Indicador de scroll animado */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          {/* Indicador de scroll animado - RESPONSIVO */}
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2">
             <div 
               onClick={scrollToProducts}
               className="cursor-pointer group"
             >
               <div className="flex flex-col items-center text-white/70 group-hover:text-white transition-colors">
-                <span className="text-sm mb-2 font-medium">Explora hacia abajo</span>
-                <div className="w-8 h-12 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors">
+                <span className="text-xs sm:text-sm mb-2 font-medium hidden sm:block">Explora hacia abajo</span>
+                <div className="w-6 h-8 sm:w-8 sm:h-12 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors">
                   <div 
-                    className="w-1.5 h-6 bg-white/70 rounded-full mt-2 group-hover:bg-white transition-colors"
+                    className="w-1 h-3 sm:w-1.5 sm:h-6 bg-white/70 rounded-full mt-1 sm:mt-2 group-hover:bg-white transition-colors"
                     style={{
                       animation: 'scroll-indicator 2s ease-in-out infinite'
                     }}
                   ></div>
                 </div>
-                <ChevronDown className="w-6 h-6 mt-2 animate-bounce" />
+                <ChevronDown className="w-4 h-4 sm:w-6 sm:h-6 mt-1 sm:mt-2 animate-bounce" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Burbujas flotantes */}
+        {/* Burbujas flotantes - RESPONSIVO */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-5">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(window.innerWidth < 640 ? 10 : 20)].map((_, i) => (
             <div
               key={i}
               className="absolute rounded-full bg-white/10 backdrop-blur-sm"
               style={{
-                width: `${Math.random() * 10 + 5}px`,
-                height: `${Math.random() * 10 + 5}px`,
+                width: `${Math.random() * 6 + 3}px`,
+                height: `${Math.random() * 6 + 3}px`,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animation: `bubble-float-${i % 3} ${Math.random() * 10 + 10}s ease-in-out infinite`

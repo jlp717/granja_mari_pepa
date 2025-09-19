@@ -56,14 +56,15 @@ export function CinematicHero() {
         pin: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          // Sync video with scroll progress for dramatic effect
-          if (video && videoLoaded) {
-            const progress = self.progress;
-            const videoDuration = video.duration;
-            video.currentTime = progress * videoDuration;
-          }
-        }
+        // Removed video sync with scroll to prevent restart on scroll
+        // onUpdate: (self) => {
+        //   // Sync video with scroll progress for dramatic effect
+        //   if (video && videoLoaded) {
+        //     const progress = self.progress;
+        //     const videoDuration = video.duration;
+        //     video.currentTime = progress * videoDuration;
+        //   }
+        // }
       }
     });
 
@@ -214,6 +215,8 @@ export function CinematicHero() {
                 height={120}
                 className="drop-shadow-2xl"
                 style={{
+                  width: 'auto',
+                  height: 'auto',
                   filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.3))'
                 }}
                 priority
@@ -285,7 +288,7 @@ export function CinematicHero() {
               }}
             >
               <span className="group-hover:scale-110 transition-transform duration-300">
-                Ver Catálogo
+                Explorar Productos
               </span>
               <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Button>

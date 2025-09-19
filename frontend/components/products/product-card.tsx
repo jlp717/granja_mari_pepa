@@ -106,9 +106,9 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                    className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white transition-all duration-200"
                   >
-                    <Eye className="w-4 h-4 mr-2" />
+                    <Eye className="w-4 h-4 mr-2 text-white opacity-100" />
                     Ver
                   </Button>
                 </Link>
@@ -116,9 +116,9 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                   size="sm"
                   disabled={!product.inStock}
                   onClick={handleAddToCart}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                 >
-                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  <ShoppingCart className="w-4 h-4 mr-2 text-white opacity-100" />
                   {product.inStock ? 'Añadir' : 'Agotado'}
                 </Button>
               </div>
@@ -172,7 +172,7 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                 className="flex items-center"
               >
                 <Badge className="bg-gradient-to-r from-red-500 to-pink-600 text-white font-bold px-3 py-1 shadow-lg">
-                  <Zap className="w-3 h-3 mr-1" />
+                  <Zap className="w-3 h-3 mr-1 text-white opacity-100" />
                   -{product.discount}%
                 </Badge>
               </motion.div>
@@ -184,7 +184,7 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                 transition={{ delay: 0.4 }}
               >
                 <Badge className="bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold px-3 py-1 shadow-lg">
-                  <Star className="w-3 h-3 mr-1" />
+                  <Star className="w-3 h-3 mr-1 text-white opacity-100" />
                   Destacado
                 </Badge>
               </motion.div>
@@ -198,31 +198,29 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
 
           {/* Enhanced Quick actions overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-            <motion.div 
-              className="flex space-x-3"
-              initial={{ y: 20, opacity: 0 }}
-              whileHover={{ y: 0, opacity: 1 }}
+            <div 
+              className="flex space-x-3 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
             >
               <Link href={`/productos/${product.id}`}>
                 <Button 
                   size="sm" 
-                  className="bg-white/90 text-gray-900 hover:bg-white rounded-full backdrop-blur-sm"
+                  className="bg-white/95 text-gray-900 hover:bg-white hover:scale-105 rounded-full backdrop-blur-sm px-3 py-2 text-sm transition-all duration-200"
                 >
-                  <Eye className="w-4 h-4 mr-2" />
+                  <Eye className="w-4 h-4 mr-2 text-gray-900 opacity-100" />
                   Ver detalles
                 </Button>
               </Link>
               {product.inStock && (
                 <Button 
                   size="sm" 
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-full"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-full px-3 py-2 text-sm"
                   onClick={handleAddToCart}
                 >
-                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  <ShoppingCart className="w-4 h-4 mr-2 text-white opacity-100" />
                   Añadir
                 </Button>
               )}
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -253,27 +251,27 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
             </div>
             
             <div className="flex items-center text-xs text-purple-300/70 bg-purple-500/10 px-3 py-1 rounded-full">
-              <Tag className="w-3 h-3 mr-1" />
+              <Tag className="w-3 h-3 mr-1 text-purple-300 opacity-100" />
               {product.category}
             </div>
           </div>
 
           <div className="flex space-x-2">
             <Button 
-              className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 font-semibold" 
+              className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 font-semibold text-white" 
               disabled={!product.inStock}
               onClick={handleAddToCart}
             >
-              <ShoppingCart className="w-4 h-4 mr-2" />
+              <ShoppingCart className="w-4 h-4 mr-2 text-white opacity-100" />
               {product.inStock ? 'Añadir al carrito' : 'Agotado'}
             </Button>
             <Link href={`/productos/${product.id}`}>
               <Button 
                 variant="outline" 
                 size="icon"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white transition-all duration-200"
               >
-                <Eye className="w-4 h-4" />
+                <Eye className="w-4 h-4 text-white opacity-100" />
               </Button>
             </Link>
           </div>

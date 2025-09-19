@@ -24,6 +24,15 @@ interface AuthStore {
   updateProfile: (data: Partial<UserProfile>) => void;
 }
 
+interface FavoritesStore {
+  favorites: string[]; // Array of product IDs
+  addFavorite: (productId: string) => void;
+  removeFavorite: (productId: string) => void;
+  toggleFavorite: (productId: string) => void;
+  isFavorite: (productId: string) => boolean;
+  getFavoritesCount: () => number;
+}
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
@@ -62,7 +71,10 @@ export const useCartStore = create<CartStore>()(
       clearCart: () => set({ items: [] }),
       toggleCart: () => set({ isOpen: !get().isOpen }),
       getTotalItems: () => get().items.reduce((total, item) => total + item.quantity, 0),
-      getTotalPrice: () => get().items.reduce((total, item) => total + (item.product.price * item.quantity), 0)
+      getTotalPrice: () => get().items.reduce((total, item) => {
+        const price = item.product.price || 0;
+        return total + (price * item.quantity);
+      }, 0)
     }),
     {
       name: 'topgel-cart'
@@ -99,6 +111,38 @@ export const useAuthStore = create<AuthStore>()(
     }),
     {
       name: 'topgel-auth'
+    }
+  )
+);
+
+export const useFavoritesStore = create<FavoritesStore>()(
+  persist(
+    (set, get) => ({
+      favorites: [],
+      addFavorite: (productId: string) => {
+        const favorites = get().favorites;
+        if (!favorites.includes(productId)) {
+          set({ favorites: [...favorites, productId] });
+        }
+      },
+      removeFavorite: (productId: string) => {
+        set({ favorites: get().favorites.filter(id => id !== productId) });
+      },
+      toggleFavorite: (productId: string) => {
+        const isFavorite = get().isFavorite(productId);
+        if (isFavorite) {
+          get().removeFavorite(productId);
+        } else {
+          get().addFavorite(productId);
+        }
+      },
+      isFavorite: (productId: string) => {
+        return get().favorites.includes(productId);
+      },
+      getFavoritesCount: () => get().favorites.length
+    }),
+    {
+      name: 'topgel-favorites'
     }
   )
 );

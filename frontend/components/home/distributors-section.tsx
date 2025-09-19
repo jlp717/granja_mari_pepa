@@ -4,13 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Award, ShieldCheck, Sparkles } from 'lucide-react';
 import { LayoutGrid, GridItem } from '@/components/ui/layout-grid';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import ResponsiveImage from '@/components/ui/responsive-image';
+import { useAnimatedSection } from '@/hooks/use-animated-section';
 
 const distributors = [
   {
@@ -18,7 +13,7 @@ const distributors = [
     name: 'Nestlé',
     description: 'Líder mundial en nutrición, salud y bienestar',
     detailedDescription: 'Nestlé es la empresa de alimentos y bebidas más grande del mundo, comprometida con mejorar la calidad de vida y contribuir a un futuro más saludable.',
-    image: 'https://images.pexels.com/photos/4109942/pexels-photo-4109942.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/logo-nestle.png',
     size: 'large' as const,
     category: 'Premium Partner',
     achievements: ['150+ años de experiencia', 'Presente en 180+ países', 'Líder en innovación alimentaria'],
@@ -29,7 +24,7 @@ const distributors = [
     name: 'Panamar',
     description: 'Especialistas en productos del mar de primera calidad',
     detailedDescription: 'Panamar se dedica a la pesca, transformación y comercialización de productos del mar, garantizando frescura y calidad excepcional en cada producto.',
-    image: 'https://images.pexels.com/photos/1267697/pexels-photo-1267697.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/logo-panamar.png',
     size: 'large' as const,
     category: 'Seafood Excellence',
     achievements: ['40+ años en el sector', 'Flota propia de embarcaciones', 'Certificación sostenible'],
@@ -40,7 +35,7 @@ const distributors = [
     name: 'Okin',
     description: 'Productos cárnicos de primera calidad',
     detailedDescription: 'Okin es reconocida por su excelencia en productos cárnicos, manteniendo los más altos estándares de calidad y seguridad alimentaria.',
-    image: 'https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: '/images/logo-okin.png',
     size: 'normal' as const,
     category: 'Premium Meat',
     achievements: ['Certificación IFS', 'Trazabilidad 100%', 'Sostenibilidad verificada'],
@@ -51,7 +46,7 @@ const distributors = [
     name: 'Pastelería Amparín',
     description: 'Repostería tradicional y moderna',
     detailedDescription: 'Amparín combina la tradición repostera con técnicas modernas, creando dulces únicos que deleitan paladares exigentes.',
-    image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: '/images/logo-pamparin.png',
     size: 'normal' as const,
     category: 'Artisan Pastry',
     achievements: ['Recetas centenarias', 'Ingredientes naturales', 'Elaboración artesanal'],
@@ -60,79 +55,13 @@ const distributors = [
 ];
 
 export function DistributorsSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const [isReduced, setIsReduced] = useState(false);
-
-  // Check for reduced motion preference
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReduced(mediaQuery.matches);
-    
-    const handleChange = (e: MediaQueryListEvent) => setIsReduced(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  // Professional GSAP animations
-  useEffect(() => {
-    if (!sectionRef.current || isReduced) return;
-
-    const section = sectionRef.current;
-    const title = titleRef.current;
-    const grid = gridRef.current;
-
-    // Professional title entrance
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 85%',
-        end: 'top 50%',
-        toggleActions: 'play none none reverse'
-      }
-    })
-    .fromTo(title, {
-      opacity: 0,
-      y: 80,
-      scale: 0.8
-    }, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.2,
-      ease: 'power3.out'
-    });
-
-    // Grid animation
-    if (grid) {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: grid,
-          start: 'top 90%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-      .fromTo(grid.children, {
-        opacity: 0,
-        y: 60,
-        scale: 0.9
-      }, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'back.out(1.7)'
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [isReduced]);
+  // Use the new animated section hook
+  const { sectionRef, isReduced } = useAnimatedSection({
+    threshold: 0.2,
+    rootMargin: '100px', 
+    animationDelay: 50,
+    stagger: 0.2
+  });
 
   const gridItems = distributors.map((distributor, index) => {
     const isLarge = distributor.size === 'large';
@@ -206,6 +135,7 @@ export function DistributorsSection() {
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
       style={{
+        position: 'relative', // Fix for ScrollTrigger positioning warning
         background: `
           linear-gradient(135deg, 
             #0f172a 0%, 
@@ -278,8 +208,8 @@ export function DistributorsSection() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Professional title section */}
         <div 
-          ref={titleRef}
           className="text-center mb-20"
+          data-animate="title"
         >
           <motion.div 
             className="inline-flex items-center mb-6 px-6 py-3 rounded-full border border-purple-400/30 bg-purple-500/10 backdrop-blur-sm"
@@ -290,7 +220,7 @@ export function DistributorsSection() {
             <Award className="w-5 h-5 text-purple-400 ml-2" />
           </motion.div>
 
-          <h2 className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 sm:mb-8 leading-tight">
             <span 
               className="block bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent"
               style={{
@@ -301,7 +231,7 @@ export function DistributorsSection() {
               NUESTROS
             </span>
             <span 
-              className="block bg-gradient-to-r from-purple-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent mt-2"
+              className="block bg-gradient-to-r from-purple-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent mt-1 sm:mt-2"
               style={{
                 textShadow: '0 0 100px rgba(147, 51, 234, 0.8)',
                 filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.9))'
@@ -311,7 +241,7 @@ export function DistributorsSection() {
             </span>
           </h2>
           
-          <p className="text-xl lg:text-2xl text-purple-200/90 font-medium max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-purple-200/90 font-medium max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">
             <span 
               className="bg-gradient-to-r from-purple-200 to-cyan-300 bg-clip-text text-transparent"
               style={{
@@ -325,7 +255,7 @@ export function DistributorsSection() {
         </div>
 
         {/* Professional distributors grid */}
-        <div ref={gridRef}>
+        <div data-animate="content">
           <LayoutGrid cards={gridItems} className="mx-auto" />
         </div>
       </div>

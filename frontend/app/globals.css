@@ -459,6 +459,15 @@ html {
     }
   }
 
+  @keyframes shrink {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+
   @keyframes bounce {
     0%, 20%, 53%, 80%, 100% {
       transform: translate3d(0,0,0);
@@ -593,5 +602,98 @@ html {
 
   .animate-slide-down {
     animation: slide-down 0.3s ease-out;
+  }
+
+  /* Custom toast styles for spectacular animations */
+  @keyframes toast-slide-in {
+    from {
+      transform: translateX(100%) scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes toast-bounce {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.05);
+    }
+  }
+
+  @keyframes toast-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .success-toast {
+    animation: toast-slide-in 0.5s ease-out, toast-bounce 0.6s ease-out 0.2s;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    border-radius: 12px !important;
+    overflow: hidden;
+  }
+
+  .success-toast::before {
+    content: '🎉';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    animation: toast-bounce 1s ease-out infinite;
+  }
+
+  /* Enhanced button styling for toasts */
+  .success-toast [role="button"] {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    transition: all 0.2s ease !important;
+    backdrop-filter: blur(10px) !important;
+  }
+
+  .success-toast [role="button"]:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Custom toast animations for enter/leave */
+  @keyframes animate-enter {
+    0% {
+      transform: scale(0.9) translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes animate-leave {
+    0% {
+      transform: scale(1) translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.95) translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  .animate-enter {
+    animation: animate-enter 0.5s ease-out forwards;
+  }
+
+  .animate-leave {
+    animation: animate-leave 0.3s ease-in forwards;
   }
 }

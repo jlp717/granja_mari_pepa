@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,18 +27,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <head>
-        {/* ScrollMagic CDN */}
-        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js" async></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js" async></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" async></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js" async></script>
-      </head>
       <body className={inter.className}>
         <Header />
-        <main>{children}</main>
+        <main className="pt-32 sm:pt-36 md:pt-40 lg:pt-44">{children}</main>
         <Footer />
         <Toaster />
+        <Sonner />
       </body>
     </html>
   );
