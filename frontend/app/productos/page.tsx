@@ -692,7 +692,7 @@ export default function ProductsPage() {
                     
                     {/* Page Numbers - RESPONSIVE */}
                     {Array.from({ length: Math.min(typeof window !== 'undefined' && window.innerWidth < 640 ? 3 : 5, totalPages) }, (_, i) => {
-                      let pageNum;
+                      let pageNum: number;
                       const maxPages = typeof window !== 'undefined' && window.innerWidth < 640 ? 3 : 5;
                       if (totalPages <= maxPages) {
                         pageNum = i + 1;
