@@ -26,6 +26,10 @@ export default function CustomerAreaPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  const [forgotPasswordStep, setForgotPasswordStep] = useState<'email' | 'code' | 'success'>('email');
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { isAuthenticated, login } = useAuthStore();
   
@@ -55,6 +59,45 @@ export default function CustomerAreaPage() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleForgotPassword = async (email: string) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setForgotPasswordStep('code');
+      toast.success('Código de verificación enviado a tu email');
+    } catch (error) {
+      toast.error('Error al enviar el código. Inténtalo más tarde.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleVerifyCode = async (code: string) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (code === '123456') { // Demo code
+        setForgotPasswordStep('success');
+        toast.success('¡Contraseña restablecida correctamente!');
+      } else {
+        toast.error('Código incorrecto. Inténtalo nuevamente.');
+      }
+    } catch (error) {
+      toast.error('Error al verificar el código.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const resetForgotPasswordModal = () => {
+    setShowForgotPasswordModal(false);
+    setForgotPasswordStep('email');
+    setForgotPasswordEmail('');
+    setVerificationCode('');
   };
 
   if (isAuthenticated) {
@@ -382,6 +425,7 @@ export default function CustomerAreaPage() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      onClick={() => setShowForgotPasswordModal(true)}
                       className="text-sm text-blue-600 hover:text-blue-700 transition-colors font-medium"
                     >
                       ¿Olvidaste tu contraseña?
@@ -550,7 +594,10 @@ export default function CustomerAreaPage() {
                     </Button>
                     <Button
                       variant="ghost"
-                      onClick={() => setShowErrorModal(false)}
+                      onClick={() => {
+                        setShowErrorModal(false);
+                        setShowForgotPasswordModal(true);
+                      }}
                       className="w-full text-gray-600 hover:text-gray-800 py-2"
                     >
                       ¿Olvidaste tu contraseña?
@@ -560,6 +607,217 @@ export default function CustomerAreaPage() {
               </motion.div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* MODAL RECUPERACIÓN DE CONTRASEÑA - FLUJO COMPLETO */}
+      <AnimatePresence>
+        {showForgotPasswordModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={resetForgotPasswordModal}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white relative">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={resetForgotPasswordModal}
+                  className="absolute top-4 right-4 p-1 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </motion.button>
+                
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                    <Lock className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Recuperar Contraseña</h3>
+                    <p className="text-blue-100 text-sm">
+                      {forgotPasswordStep === 'email' && 'Ingresa tu email para continuar'}
+                      {forgotPasswordStep === 'code' && 'Ingresa el código de verificación'}
+                      {forgotPasswordStep === 'success' && '¡Contraseña restablecida!'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <AnimatePresence mode="wait">
+                  {/* Paso 1: Ingreso de email */}
+                  {forgotPasswordStep === 'email' && (
+                    <motion.div
+                      key="email-step"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      className="space-y-4"
+                    >
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Dirección de email
+                        </label>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <Input
+                            type="email"
+                            value={forgotPasswordEmail}
+                            onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                            placeholder="tu@email.com"
+                            className="pl-10 h-12 border-2 focus:border-blue-500"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="bg-blue-50 p-4 rounded-xl">
+                        <div className="flex items-start gap-3">
+                          <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+                          <div className="text-sm text-blue-800">
+                            Te enviaremos un código de verificación a tu email registrado.
+                          </div>
+                        </div>
+                      </div>
+
+                      <Button
+                        onClick={() => handleForgotPassword(forgotPasswordEmail)}
+                        disabled={!forgotPasswordEmail || isLoading}
+                        className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl"
+                      >
+                        {isLoading ? (
+                          <LoadingSpinner className="w-5 h-5" />
+                        ) : (
+                          <>
+                            Enviar código
+                            <ArrowRight className="w-5 h-5 ml-2" />
+                          </>
+                        )}
+                      </Button>
+                    </motion.div>
+                  )}
+
+                  {/* Paso 2: Verificación de código */}
+                  {forgotPasswordStep === 'code' && (
+                    <motion.div
+                      key="code-step"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      className="space-y-4"
+                    >
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Código de verificación
+                        </label>
+                        <Input
+                          type="text"
+                          value={verificationCode}
+                          onChange={(e) => setVerificationCode(e.target.value)}
+                          placeholder="123456"
+                          className="h-12 text-center text-xl font-mono border-2 focus:border-blue-500 tracking-widest"
+                          maxLength={6}
+                        />
+                      </div>
+                      
+                      <div className="bg-green-50 p-4 rounded-xl">
+                        <div className="flex items-start gap-3">
+                          <Mail className="w-5 h-5 text-green-600 mt-0.5" />
+                          <div className="text-sm text-green-800">
+                            Código enviado a <span className="font-semibold">{forgotPasswordEmail}</span>
+                            <br />
+                            <span className="text-xs text-green-600 mt-1 block">
+                              Para demo, usa el código: <strong>123456</strong>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <Button
+                          variant="outline"
+                          onClick={() => setForgotPasswordStep('email')}
+                          className="flex-1 h-12 border-2"
+                        >
+                          Atrás
+                        </Button>
+                        <Button
+                          onClick={() => handleVerifyCode(verificationCode)}
+                          disabled={!verificationCode || isLoading}
+                          className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold"
+                        >
+                          {isLoading ? (
+                            <LoadingSpinner className="w-5 h-5" />
+                          ) : (
+                            'Verificar'
+                          )}
+                        </Button>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Paso 3: Éxito */}
+                  {forgotPasswordStep === 'success' && (
+                    <motion.div
+                      key="success-step"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      className="text-center space-y-4"
+                    >
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring" }}
+                        >
+                          <Star className="w-8 h-8 text-green-600 fill-current" />
+                        </motion.div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-900 mb-2">
+                          ¡Contraseña restablecida!
+                        </h4>
+                        <p className="text-gray-600">
+                          Tu nueva contraseña temporal es: <br />
+                          <span className="font-mono bg-gray-100 px-3 py-1 rounded text-lg">
+                            nueva123
+                          </span>
+                        </p>
+                      </div>
+                      
+                      <div className="bg-yellow-50 p-4 rounded-xl">
+                        <div className="flex items-start gap-3">
+                          <Shield className="w-5 h-5 text-yellow-600 mt-0.5" />
+                          <div className="text-sm text-yellow-800">
+                            Por seguridad, cambia tu contraseña después de iniciar sesión.
+                          </div>
+                        </div>
+                      </div>
+
+                      <Button
+                        onClick={resetForgotPasswordModal}
+                        className="w-full h-12 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-semibold"
+                      >
+                        Continuar al login
+                      </Button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

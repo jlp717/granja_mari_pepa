@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { ShineBorder } from './shine-border';
 
 export interface GridItem {
   id: string;
@@ -44,7 +45,7 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
           <motion.div
             key={card.id}
             className={cn(
-              'relative overflow-hidden rounded-2xl cursor-pointer transform-gpu',
+              'relative overflow-hidden rounded-2xl cursor-pointer transform-gpu group',
               'bg-gradient-to-br from-slate-800/50 to-slate-900/80 backdrop-blur-sm',
               'border border-blue-400/20 hover:border-blue-400/60',
               'transition-all duration-500',
@@ -60,7 +61,35 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
             }}
             layout
           >
-            <motion.div className="absolute inset-0 w-full h-full">
+            {/* SHINE BORDER EFFECT */}
+            <ShineBorder 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10"
+              duration={3}
+              color="rgba(147, 51, 234, 0.6)"
+              borderRadius={16}
+              borderWidth={2}
+            >
+              <div className="w-full h-full" />
+            </ShineBorder>
+            
+            {/* SECONDARY SHINE EFFECT */}
+            <motion.div
+              className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none z-5"
+              style={{
+                background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent)',
+              }}
+              animate={{
+                x: [-100, 400],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 3,
+                ease: "easeInOut",
+              }}
+            />
+
+            <motion.div className="absolute inset-0 w-full h-full z-0">
               {card.header || (
                 <div className="w-full h-full relative">
                   {card.image && (
