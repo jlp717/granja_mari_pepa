@@ -8,6 +8,7 @@ import ResponsiveImage from '@/components/ui/responsive-image';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -286,52 +287,176 @@ export function HeroSection() {
             </span>
           </p>
 
-          {/* Botones CTA - ULTRA RESPONSIVO */}
+          {/* Botones CTA - ULTRA RESPONSIVO Y PERFECTO */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 px-4">
-            <Button 
-              onClick={scrollToProducts}
-              size="lg" 
-              className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 border border-blue-400/30 w-full sm:w-auto"
-              style={{
-                boxShadow: '0 0 30px rgba(59, 130, 246, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1)'
+            <motion.div
+              whileHover={{ 
+                scale: 1.05,
+                rotate: [0, 1, -1, 0],
+                transition: { 
+                  rotate: { duration: 0.5, repeat: Infinity, repeatType: "reverse" },
+                  scale: { duration: 0.3, type: "spring", stiffness: 400 }
+                }
               }}
+              whileTap={{ scale: 0.98, rotate: 0 }}
+              className="w-full sm:w-auto relative group"
             >
-              <span className="hidden xs:inline">Descubre nuestros productos</span>
-              <span className="xs:hidden">Ver productos</span>
-              <ArrowRight className="ml-3 w-5 h-5 sm:w-6 sm:h-6" />
-            </Button>
+              <Button 
+                onClick={scrollToProducts}
+                size="lg" 
+                className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl shadow-2xl transition-all duration-500 border border-blue-400/30 w-full sm:w-auto focus-ring"
+                style={{
+                  boxShadow: '0 0 30px rgba(59, 130, 246, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                {/* Efecto de ondas al hover */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                
+                {/* Partículas brillantes */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute top-2 left-4 w-1 h-1 bg-white/80 rounded-full animate-ping" />
+                  <div className="absolute top-4 right-6 w-1 h-1 bg-white/60 rounded-full animate-ping animation-delay-300" />
+                  <div className="absolute bottom-3 left-8 w-1 h-1 bg-white/70 rounded-full animate-ping animation-delay-500" />
+                </div>
+                
+                {/* Contenido del botón */}
+                <div className="relative z-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                  <span className="hidden xs:inline mr-3 group-hover:tracking-wide transition-all duration-300">
+                    Descubre nuestros productos
+                  </span>
+                  <span className="xs:hidden mr-3 group-hover:tracking-wide transition-all duration-300">
+                    Ver productos
+                  </span>
+                  <motion.div
+                    animate={{ x: 0 }}
+                    whileHover={{ x: 3 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:drop-shadow-lg" />
+                  </motion.div>
+                </div>
+
+                {/* Borde brillante animado */}
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-2 border-white/30 animate-pulse" />
+              </Button>
+            </motion.div>
             
             <Link href="/contacto" className="w-full sm:w-auto">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-2 border-white/70 text-white hover:bg-white hover:text-slate-900 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl backdrop-blur-md bg-white/10 transform transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto"
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 0 25px rgba(255, 255, 255, 0.3)"
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full relative group"
               >
-                Contacto
-              </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="relative overflow-hidden border-2 border-white/70 text-white hover:bg-white hover:text-slate-900 px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl backdrop-blur-md bg-white/10 transition-all duration-500 w-full sm:w-auto focus-ring group-hover:border-white"
+                >
+                  {/* Efecto de llenado desde abajo */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white to-white scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom rounded-xl" />
+                  
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                  
+                  <span className="relative z-10 group-hover:scale-105 transition-transform duration-300 group-hover:font-black">
+                    Contacto
+                  </span>
+                </Button>
+              </motion.div>
             </Link>
           </div>
 
-          {/* Indicador de scroll animado - RESPONSIVO */}
-          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2">
-            <div 
+          {/* Indicador de scroll animado - PERFECCIONADO */}
+          <motion.div 
+            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 1 }}
+          >
+            <motion.div 
               onClick={scrollToProducts}
-              className="cursor-pointer group"
+              className="cursor-pointer group relative"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="flex flex-col items-center text-white/70 group-hover:text-white transition-colors">
-                <span className="text-xs sm:text-sm mb-2 font-medium hidden sm:block">Explora hacia abajo</span>
-                <div className="w-6 h-8 sm:w-8 sm:h-12 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors">
-                  <div 
-                    className="w-1 h-3 sm:w-1.5 sm:h-6 bg-white/70 rounded-full mt-1 sm:mt-2 group-hover:bg-white transition-colors"
-                    style={{
-                      animation: 'scroll-indicator 2s ease-in-out infinite'
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-full blur-md bg-white/20 scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="flex flex-col items-center text-white/70 group-hover:text-white transition-all duration-300 relative z-10">
+                <motion.span 
+                  className="text-xs sm:text-sm mb-2 font-medium hidden sm:block group-hover:scale-105 transition-transform duration-300"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  Explora hacia abajo
+                </motion.span>
+                
+                <div className="relative">
+                  {/* Outer ring with pulse */}
+                  <motion.div 
+                    className="absolute inset-0 w-6 h-8 sm:w-8 sm:h-12 border-2 border-white/30 rounded-full"
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      borderColor: ["rgba(255,255,255,0.3)", "rgba(255,255,255,0.7)", "rgba(255,255,255,0.3)"]
                     }}
-                  ></div>
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  
+                  {/* Main scroll indicator */}
+                  <div className="w-6 h-8 sm:w-8 sm:h-12 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors duration-300 bg-white/5 backdrop-blur-sm">
+                    <motion.div 
+                      className="w-1 h-3 sm:w-1.5 sm:h-6 bg-white/70 rounded-full mt-1 sm:mt-2 group-hover:bg-white transition-colors duration-300"
+                      animate={{
+                        y: [0, 8, 0],
+                        opacity: [0.7, 1, 0.7]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Floating particles around indicator */}
+                  <motion.div 
+                    className="absolute -top-1 -left-1 w-1 h-1 bg-white/60 rounded-full opacity-0 group-hover:opacity-100"
+                    animate={{ 
+                      scale: [0, 1, 0],
+                      rotate: [0, 360] 
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      delay: 0 
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute -top-1 -right-1 w-1 h-1 bg-white/60 rounded-full opacity-0 group-hover:opacity-100"
+                    animate={{ 
+                      scale: [0, 1, 0],
+                      rotate: [360, 0] 
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      delay: 1 
+                    }}
+                  />
                 </div>
-                <ChevronDown className="w-4 h-4 sm:w-6 sm:h-6 mt-1 sm:mt-2 animate-bounce" />
+                
+                <motion.div
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ChevronDown className="w-4 h-4 sm:w-6 sm:h-6 mt-1 sm:mt-2 group-hover:scale-110 transition-transform duration-300" />
+                </motion.div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Burbujas flotantes - RESPONSIVO */}

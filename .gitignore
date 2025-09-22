@@ -126,3 +126,5 @@ frontend/components/cart/new-cart-drawer.tsx
 # frontend/public/images/squid-3d.jpg
 # frontend/public/images/squid-3d.webp
 # frontend/public/images/squid-professional.jpg
+# Local Netlify folder
+.netlify
