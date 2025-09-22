@@ -173,8 +173,17 @@ export function HeroSection() {
           minHeight: '100dvh' // Usar dvh para mejor soporte móvil
         }}
       >
-        {/* Overlay con textura */}
-        <div className="absolute inset-0 bg-black/30 z-10"></div>
+        {/* Overlay más oscuro para mejor legibilidad */}
+        <div className="absolute inset-0 bg-black/50 z-10" aria-hidden="true"></div>
+        
+        {/* Overlay adicional con gradiente para profundidad */}
+        <div 
+          className="absolute inset-0 z-10" 
+          style={{
+            background: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(30,58,138,0.4) 50%, rgba(0,0,0,0.5) 100%)'
+          }}
+          aria-hidden="true"
+        ></div>
         
         {/* Efecto de ondas de agua - RESPONSIVO */}
         <div className="absolute inset-0 opacity-20">
@@ -241,14 +250,19 @@ export function HeroSection() {
           ></div>
         </div>
 
-        {/* Contenido principal - ULTRA RESPONSIVO */}
+        {/* Contenido principal - ULTRA RESPONSIVO con mejor accesibilidad */}
         <div 
           ref={titleRef}
           className="relative z-20 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          role="main"
+          aria-label="Sección principal Mari Pepa"
         >
-          {/* Título principal con efectos - RESPONSIVO */}
+          {/* Título principal con efectos - RESPONSIVO y accesible */}
           <div className="mb-6 sm:mb-8">
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+            <h1 
+              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight"
+              aria-label="Mari Pepa - Grupo Topgel, productos del mar de calidad"
+            >
               <span 
                 className="inline-block"
                 style={{

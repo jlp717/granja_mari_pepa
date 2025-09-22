@@ -177,27 +177,27 @@ export const delegations = [
 export const products: Product[] = [
   {
     id: '1',
-    name: 'Langostinos Congelados Premium',
+    name: 'Langostinos Tigre Premium IQF',
     category: 'mar',
     brand: 'grupo-topgel',
     price: 24.99,
     originalPrice: 29.99,
     units: 'kg',
-    description: 'Langostinos de primera calidad, congelados IQF para mantener toda su frescura y sabor.',
-    image: 'https://images.pexels.com/photos/1267697/pexels-photo-1267697.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Langostinos tigre de primera calidad, congelados IQF para mantener toda su frescura y sabor natural del mar.',
+    image: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?ixlib=rb-4.0.3&w=800&q=80',
     inStock: true,
     discount: 17,
     featured: true
   },
   {
     id: '2',
-    name: 'Solomillo de Ternera',
+    name: 'Solomillo de Ternera Premium',
     category: 'carne-fresca',
     brand: 'okin',
     price: 32.50,
     units: 'kg',
-    description: 'Solomillo de ternera lechal, tierno y jugoso, perfecto para ocasiones especiales.',
-    image: 'https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Solomillo de ternera lechal premium, tierno y jugoso, selección especial para ocasiones gastronómicas.',
+    image: 'https://images.unsplash.com/photo-1588168333986-5078d3ae3976?ixlib=rb-4.0.3&w=800&q=80',
     inStock: true,
     featured: true
   },

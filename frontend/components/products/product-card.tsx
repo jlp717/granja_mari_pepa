@@ -22,12 +22,18 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
     e.preventDefault();
     e.stopPropagation();
     addItem(product);
-    toast.success(`${product.name} añadido al carrito`, {
+    toast.success(`${product.name} añadido al carrito ✅`, {
+      duration: 3000,
+      position: 'top-right',
       style: {
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
         color: 'white',
-        fontWeight: 'bold',
-      }
+        fontWeight: '600',
+        borderRadius: '12px',
+        border: '1px solid rgba(255,255,255,0.2)',
+        boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)',
+      },
+      icon: '🛒',
     });
   };
 
