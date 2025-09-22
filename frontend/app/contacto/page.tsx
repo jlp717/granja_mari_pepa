@@ -391,7 +391,7 @@ export default function ContactPage() {
             >
               <div>
                 <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                  <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                     Cuéntanos
                   </span>
                   <br />
@@ -574,7 +574,7 @@ export default function ContactPage() {
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white text-lg font-semibold py-4 rounded-2xl shadow-2xl"
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg font-semibold py-4 rounded-2xl shadow-2xl"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -632,18 +632,18 @@ export default function ContactPage() {
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="group"
               >
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 hover:bg-white/20 transition-all duration-500 h-full">
+                <div className="bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-gradient-to-br hover:from-white/25 hover:via-white/20 hover:to-white/15 hover:border-white/40 transition-all duration-500 h-full shadow-2xl shadow-black/20">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-4">
                       <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <MapPin className="w-8 h-8 text-white" />
+                        <MapPin className="w-8 h-8 text-white drop-shadow-lg" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-white">{delegation.city}</h3>
-                        <div className="text-emerald-400 font-semibold">Delegación Principal</div>
+                        <h3 className="text-2xl font-bold text-white drop-shadow-lg">{delegation.city}</h3>
+                        <div className="text-emerald-300 font-semibold drop-shadow-sm">Delegación Principal</div>
                       </div>
                     </div>
-                    <Badge className="bg-gradient-to-r from-emerald-500 to-cyan-600 text-white px-3 py-1">
+                    <Badge className="bg-gradient-to-r from-emerald-500 to-cyan-600 text-white px-3 py-1 shadow-lg">
                       Activa
                     </Badge>
                   </div>
@@ -653,7 +653,7 @@ export default function ContactPage() {
                       <Building2 className="w-5 h-5 text-emerald-400 mt-1 flex-shrink-0" />
                       <div>
                         <div className="text-white font-medium">Dirección</div>
-                        <div className="text-white/70">{delegation.address}</div>
+                        <div className="text-white/90 font-medium drop-shadow-sm">{delegation.address}</div>
                       </div>
                     </div>
                     

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, ShoppingCart, User, Phone, Mail, ChevronDown, ShoppingBag, MapPin, Home } from 'lucide-react'
+import { Menu, X, ShoppingCart, User, Phone, Mail, ChevronDown, ShoppingBag, MapPin, Home, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
@@ -121,33 +121,38 @@ export function Header() {
 
   return (
     <div className="relative">
-      {/* Top Utility Bar - Fixed */}
-      <div className="fixed top-0 left-0 right-0 bg-blue-600 text-white text-xs py-2 z-[60] transition-all duration-300 shadow-lg">
-        <div className="container mx-auto px-4 h-full flex items-center justify-between">
-          <div className="flex items-center space-x-6">
+      {/* Top Utility Bar - Fixed with proper margins and padding */}
+      <div className="fixed top-0 left-0 right-0 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-600 text-white text-xs py-3 z-[60] transition-all duration-300 shadow-xl shadow-blue-900/30 border-b border-blue-500/20">
+        <div className="container mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+          <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2">
-              <MapPin className="w-3 h-3 text-blue-200" />
-              <span className="text-blue-50 font-medium">Murcia • Almería</span>
+              <MapPin className="w-4 h-4 text-blue-200 drop-shadow-lg" />
+              <span className="text-blue-50 font-semibold tracking-wide">Murcia • Almería</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <Phone className="w-3 h-3 text-blue-200" />
-              <span className="text-blue-50 font-medium">968 123 456</span>
+            <div className="flex items-center space-x-2 hidden sm:flex">
+              <Phone className="w-4 h-4 text-blue-200 drop-shadow-lg" />
+              <span className="text-blue-50 font-semibold tracking-wide">968 123 456</span>
             </div>
           </div>
-          <div className="hidden md:block">
-            <span className="text-blue-100 font-semibold">Distribución especializada desde 1985</span>
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full border border-white/20">
+              <span className="text-white font-bold tracking-wide drop-shadow-lg">✨ Distribución especializada desde 1985 ✨</span>
+            </div>
+          </div>
+          <div className="hidden lg:block text-blue-100 font-medium">
+            <span className="opacity-90">Calidad Premium</span>
           </div>
         </div>
       </div>
 
-      {/* Main Header - Fixed and positioned below utility bar */}
+      {/* Main Header - Fixed and positioned below utility bar with enhanced shadow */}
       <header
-        className={`fixed top-8 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        className={`fixed top-12 left-0 right-0 z-50 transition-all duration-500 ease-out ${
           isScrolled
-            ? 'bg-slate-900 shadow-2xl shadow-slate-900/20 border-b border-slate-700/50'
+            ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-slate-900/40 border-b border-slate-700/50'
             : isHomePage
-            ? 'bg-white shadow-lg shadow-black/5 border-b border-gray-200/30'
-            : 'bg-white shadow-lg shadow-black/10 border-b border-gray-200/50'
+            ? 'bg-white/95 backdrop-blur-xl shadow-xl shadow-black/10 border-b border-gray-200/50'
+            : 'bg-white/95 backdrop-blur-xl shadow-xl shadow-black/15 border-b border-gray-200/60'
         }`}
       >
         <nav className="container mx-auto px-2 sm:px-4 lg:px-6 xl:px-8">
@@ -202,7 +207,7 @@ export function Header() {
                   {/* Responsive logo - OPTIMIZADO PARA MÓVILES */}
                   <Image
                     src="/images/logo.jpeg"
-                    alt="Granja Mari Pepa Logo"
+                    alt="Granja Mari Pepa - Logo oficial de distribución alimentaria"
                     width={240}
                     height={180}
                     className="object-contain transition-all duration-300 group-hover:brightness-110 group-hover:drop-shadow-2xl relative z-10 
@@ -216,8 +221,8 @@ export function Header() {
                   />
 
                   {/* Fallback logo - OPTIMIZADO PARA MÓVILES */}
-                  <div className="hidden w-16 h-12 xs:w-20 xs:h-15 sm:w-24 sm:h-18 md:w-32 md:h-24 lg:w-40 lg:h-30 xl:w-48 xl:h-36 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center">
-                    <span className="text-white font-bold text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl drop-shadow-lg">G</span>
+                  <div className="hidden w-16 h-12 xs:w-20 xs:h-15 sm:w-24 sm:h-18 md:w-32 md:h-24 lg:w-40 lg:h-30 xl:w-48 xl:h-36 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center" role="img" aria-label="Granja Mari Pepa - Logotipo alternativo">
+                    <span className="text-white font-bold text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl drop-shadow-lg" aria-hidden="true">G</span>
                   </div>
                   
                   {/* Glow effect on hover */}
@@ -260,6 +265,9 @@ export function Header() {
                           className={`p-1.5 lg:p-2 ml-1 transition-all duration-300 rounded-lg ${
                             isScrolled ? 'text-slate-300 hover:text-white' : 'text-slate-700 hover:text-blue-600'
                           }`}
+                          aria-label="Abrir menú de productos"
+                          aria-expanded={activeSubmenu === item.name}
+                          aria-haspopup="true"
                         >
                           <ChevronDown 
                             className={`w-3 h-3 lg:w-4 lg:h-4 transition-transform duration-300 ${
@@ -268,8 +276,7 @@ export function Header() {
                           />
                         </button>
 
-                        
-                        {/* Submenu Dropdown - Más compacto */}
+                        {/* Submenu Dropdown - Más compacto y con scroll interno */}
                         {item.hasSubmenu && item.submenu && (
                           <AnimatePresence>
                             {activeSubmenu === item.name && (
@@ -278,23 +285,36 @@ export function Header() {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                 transition={{ duration: 0.2 }}
-                                className="absolute top-full right-0 mt-2 w-56 lg:w-64 bg-white backdrop-blur-xl rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-[9999]"
+                                className="absolute top-full right-0 mt-2 w-80 max-h-96 bg-white backdrop-blur-xl rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-[9999]"
                                 onMouseEnter={() => setActiveSubmenu(item.name)}
                                 onMouseLeave={() => setActiveSubmenu(null)}
                               >
-                                <div className="p-3">
-                                  <h3 className="text-sm font-bold text-gray-700 mb-3 px-2">
-                                    Nuestras Marcas
-                                  </h3>
-                                  <div className="space-y-1">
+                                {/* Header del dropdown */}
+                                <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 border-b border-gray-200">
+                                  <div className="flex items-center justify-between">
+                                    <h3 className="text-lg font-bold text-gray-800">
+                                      Nuestras Marcas
+                                    </h3>
+                                    <button
+                                      onClick={() => setActiveSubmenu(null)}
+                                      className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                                    >
+                                      ×
+                                    </button>
+                                  </div>
+                                </div>
+                                
+                                {/* Contenido con scroll interno */}
+                                <div className="overflow-y-auto max-h-80 p-3">
+                                  <div className="grid grid-cols-2 gap-3">
                                     {item.submenu.map((brand) => (
-                                      <div key={brand.name}>
+                                      <div key={brand.name} className="space-y-1">
                                         <Link
                                           href={brand.href}
                                           onClick={() => setActiveSubmenu(null)}
-                                          className="flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-gray-50 group"
+                                          className="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-gray-50 group border border-gray-100 hover:border-gray-200 hover:shadow-md"
                                         >
-                                          <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mr-3 overflow-hidden">
+                                          <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mr-3 overflow-hidden group-hover:scale-110 transition-transform duration-200">
                                             <Image
                                               src={`/images/logo-${
                                                 brand.name === 'Grupo Topgel' ? 'gtg' :
@@ -305,34 +325,48 @@ export function Header() {
                                                 'gtg'
                                               }.png`}
                                               alt={brand.name}
-                                              width={36}
-                                              height={36}
+                                              width={28}
+                                              height={28}
                                               style={{ width: 'auto', height: 'auto' }}
                                               className="object-contain max-w-full max-h-full"
                                             />
                                           </div>
-                                          <div className="flex-1">
-                                            <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900">
+                                          <div className="flex-1 min-w-0">
+                                            <span className="text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-200 block truncate">
                                               {brand.name}
                                             </span>
                                           </div>
                                         </Link>
                                         
-                                        {/* Subcategorías más compactas */}
-                                        <div className="ml-15 space-y-0.5">
-                                          {brand.subcategories?.map((subcat) => (
-                                            <Link
-                                              key={subcat.name}
-                                              href={subcat.href}
-                                              onClick={() => setActiveSubmenu(null)}
-                                              className="block px-2 py-1 text-xs text-gray-500 hover:text-gray-700 hover:bg-gray-50 rounded transition-all duration-150"
-                                            >
-                                              {subcat.name}
-                                            </Link>
-                                          ))}
-                                        </div>
+                                        {/* Subcategorías más compactas en columnas */}
+                                        {brand.subcategories && (
+                                          <div className="ml-2 space-y-0.5">
+                                            {brand.subcategories.map((subcat) => (
+                                              <Link
+                                                key={subcat.name}
+                                                href={subcat.href}
+                                                onClick={() => setActiveSubmenu(null)}
+                                                className="block px-3 py-1.5 text-xs text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-150 truncate"
+                                              >
+                                                • {subcat.name}
+                                              </Link>
+                                            ))}
+                                          </div>
+                                        )}
                                       </div>
                                     ))}
+                                  </div>
+                                  
+                                  {/* Footer del dropdown */}
+                                  <div className="mt-4 pt-3 border-t border-gray-200">
+                                    <Link
+                                      href="/productos"
+                                      onClick={() => setActiveSubmenu(null)}
+                                      className="flex items-center justify-center p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium"
+                                    >
+                                      Ver todos los productos
+                                      <ArrowRight className="w-4 h-4 ml-2" />
+                                    </Link>
                                   </div>
                                 </div>
                               </motion.div>
@@ -379,7 +413,7 @@ export function Header() {
                   }`}
                   aria-label={`Carrito de compras ${isHydrated && getTotalItems() > 0 ? `con ${getTotalItems()} productos` : 'vacío'}`}
                 >
-                  <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </Button>
                 
                 {isHydrated && getTotalItems() > 0 && (
@@ -420,7 +454,7 @@ export function Header() {
                       border: '2px solid transparent'
                     }} />
                     
-                    <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 relative z-10 group-hover:scale-125 transition-all duration-500 group-hover:drop-shadow-lg" />
+                    <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 relative z-10 group-hover:scale-125 transition-all duration-500 group-hover:drop-shadow-lg" aria-hidden="true" />
                   </Button>
                 </Link>
               </motion.div>

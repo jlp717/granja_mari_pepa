@@ -230,12 +230,21 @@ export default function ProductDetailClient({ product, currentBrand, relatedProd
       addItem(cleanProduct, quantityToAdd);
       console.log('Added to store successfully');
       
-      // Simple and beautiful toast notification
-      toast.success(`¡${productToAdd.name || 'Producto'} añadido al carrito!`, {
+      // Modern and beautiful toast notification - top right
+      toast.success(`¡${productToAdd.name || 'Producto'} añadido al carrito! ✅`, {
         description: `${quantityToAdd} unidad${quantityToAdd > 1 ? 'es' : ''} añadida${quantityToAdd > 1 ? 's' : ''} con éxito`,
         duration: 4000,
+        position: 'top-right',
+        style: {
+          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          color: 'white',
+          fontWeight: '600',
+          borderRadius: '12px',
+          border: '1px solid rgba(255,255,255,0.2)',
+          boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)',
+        },
         action: {
-          label: "Ver carrito",
+          label: "Ver carrito 🛒",
           onClick: () => {
             const { toggleCart } = useCartStore.getState();
             toggleCart();

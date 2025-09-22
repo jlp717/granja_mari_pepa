@@ -37,6 +37,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import toast from 'react-hot-toast';
 
+// Configurar toast para posición superior derecha
+toast.remove(); // Limpiar cualquier toast previo
+
 interface ShippingAddress {
   id: string;
   name: string;
@@ -137,7 +140,16 @@ export default function CheckoutPage() {
   const handleApplyPromo = () => {
     if (promoCode.toLowerCase() === 'descuento10') {
       setIsPromoApplied(true);
-      toast.success('¡Código promocional aplicado! 10% de descuento');
+      toast.success('¡Código promocional aplicado! 💰 10% de descuento', {
+        duration: 4000,
+        position: 'top-right',
+        style: {
+          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          color: 'white',
+          fontWeight: '600',
+          borderRadius: '12px',
+        },
+      });
     } else {
       toast.error('Código promocional inválido');
     }
@@ -201,7 +213,19 @@ export default function CheckoutPage() {
         top: 0,
         behavior: 'smooth'
       });
-      toast.success('¡Pedido procesado con éxito!');
+      toast.success('¡Pedido procesado con éxito! 🎉', {
+        duration: 5000,
+        position: 'top-right',
+        style: {
+          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          color: 'white',
+          fontWeight: '600',
+          borderRadius: '12px',
+          border: '1px solid rgba(255,255,255,0.2)',
+          boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)',
+        },
+        icon: '✅',
+      });
       
       // Clear cart after successful order
       setTimeout(() => {
