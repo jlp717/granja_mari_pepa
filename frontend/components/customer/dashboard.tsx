@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CustomToast } from '@/components/ui/custom-toast';
 import { 
   User, 
   FileText, 
@@ -1109,8 +1110,17 @@ Gracias por confiar en TopGel Distribuciones.
                                     className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                                     onClick={() => {
                                       addItem(product, 1);
-                                      toast.success(`${product.name} añadido al carrito!`, {
-                                        description: '1 unidad añadida con éxito'
+                                      toast.custom((t) => (
+                                        <CustomToast 
+                                          message={`${product.name} añadido al carrito!`}
+                                          productName={product.name}
+                                          productImage={product.image}
+                                          quantity={1}
+                                          onDismiss={() => toast.dismiss(t.id)}
+                                        />
+                                      ), {
+                                        duration: 4000,
+                                        position: 'top-right',
                                       });
                                     }}
                                     disabled={!product.inStock}

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CustomToast } from '@/components/ui/custom-toast';
 import { 
   ShoppingCart, 
   Heart, 
@@ -230,26 +231,18 @@ export default function ProductDetailClient({ product, currentBrand, relatedProd
       addItem(cleanProduct, quantityToAdd);
       console.log('Added to store successfully');
       
-      // Modern and beautiful toast notification - top right
-      toast.success(`¡${productToAdd.name || 'Producto'} añadido al carrito! ✅`, {
-        description: `${quantityToAdd} unidad${quantityToAdd > 1 ? 'es' : ''} añadida${quantityToAdd > 1 ? 's' : ''} con éxito`,
+      // Custom Mari Pepa notification
+      toast.custom((t) => (
+        <CustomToast 
+          message={`¡${productToAdd.name || 'Producto'} añadido al carrito!`}
+          productName={productToAdd.name || 'Producto'}
+          productImage={productToAdd.image}
+          quantity={quantityToAdd}
+          onDismiss={() => toast.dismiss(t.id)}
+        />
+      ), {
         duration: 4000,
         position: 'top-right',
-        style: {
-          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-          color: 'white',
-          fontWeight: '600',
-          borderRadius: '12px',
-          border: '1px solid rgba(255,255,255,0.2)',
-          boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)',
-        },
-        action: {
-          label: "Ver carrito 🛒",
-          onClick: () => {
-            const { toggleCart } = useCartStore.getState();
-            toggleCart();
-          }
-        }
       });
       console.log('Toast triggered');
       
@@ -287,7 +280,7 @@ export default function ProductDetailClient({ product, currentBrand, relatedProd
       {/* Background Effects */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-slate-900/50 to-slate-900 pointer-events-none" />
       
-      <div className="relative z-10 pt-56 pb-16">
+      <div className="relative z-10 pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
           <motion.button
