@@ -121,9 +121,11 @@ export function Header() {
 
   return (
     <div className="relative">
-      {/* Top Utility Bar - Fixed with proper margins and padding */}
-      <div className="fixed top-0 left-0 right-0 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-600 text-white text-xs py-3 z-[60] transition-all duration-300 shadow-xl shadow-blue-900/30 border-b border-blue-500/20">
-        <div className="container mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+      {/* Top Utility Bar - Fixed with solid background and full coverage */}
+      <div className="fixed top-0 left-0 right-0 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-600 text-white text-xs py-3 z-[60] transition-all duration-300 shadow-xl shadow-blue-900/30 border-b border-blue-500/20 w-full backdrop-blur-xl h-12">
+        {/* Solid background overlay for full coverage */}
+        <div className="absolute inset-0 bg-blue-700/95 backdrop-blur-md"></div>
+        <div className="container mx-auto px-6 lg:px-8 h-full flex items-center justify-between relative z-10">
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2">
               <MapPin className="w-4 h-4 text-blue-200 drop-shadow-lg" />
@@ -145,17 +147,29 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main Header - Fixed and positioned below utility bar with enhanced shadow */}
+      {/* Main Header - Fixed and positioned immediately below utility bar with NO GAP */}
       <header
-        className={`fixed top-12 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        className={`fixed top-12 left-0 right-0 z-50 transition-all duration-500 ease-out w-full ${
           isScrolled
             ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-slate-900/40 border-b border-slate-700/50'
             : isHomePage
             ? 'bg-white/95 backdrop-blur-xl shadow-xl shadow-black/10 border-b border-gray-200/50'
             : 'bg-white/95 backdrop-blur-xl shadow-xl shadow-black/15 border-b border-gray-200/60'
         }`}
+        style={{
+          marginTop: '0px', // Ensure no margin
+          borderTop: 'none' // Remove any border that might create gap
+        }}
       >
-        <nav className="container mx-auto px-2 sm:px-4 lg:px-6 xl:px-8">
+        {/* Solid background overlay for complete coverage */}
+        <div className={`absolute inset-0 ${
+          isScrolled
+            ? 'bg-slate-900/99'
+            : isHomePage
+            ? 'bg-white/99'
+            : 'bg-white/99'
+        }`}></div>
+        <nav className="container mx-auto px-2 sm:px-4 lg:px-6 xl:px-8 relative z-10">
           <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36">
             {/* Logo and Brand */}
             <Link 
@@ -204,14 +218,14 @@ export function Header() {
                     }}
                   />
 
-                  {/* Responsive logo - OPTIMIZADO PARA MÓVILES */}
+                  {/* Responsive logo - TAMAÑO AUMENTADO SIGNIFICATIVAMENTE */}
                   <Image
                     src="/images/logo.jpeg"
                     alt="Granja Mari Pepa - Logo oficial de distribución alimentaria"
-                    width={240}
-                    height={180}
+                    width={320}
+                    height={240}
                     className="object-contain transition-all duration-300 group-hover:brightness-110 group-hover:drop-shadow-2xl relative z-10 
-                               w-16 h-12 xs:w-20 xs:h-15 sm:w-24 sm:h-18 md:w-32 md:h-24 lg:w-40 lg:h-30 xl:w-48 xl:h-36"
+                               w-24 h-18 xs:w-28 xs:h-21 sm:w-32 sm:h-24 md:w-40 md:h-30 lg:w-48 lg:h-36 xl:w-56 xl:h-42 2xl:w-64 2xl:h-48"
                     priority
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -220,9 +234,9 @@ export function Header() {
                     }}
                   />
 
-                  {/* Fallback logo - OPTIMIZADO PARA MÓVILES */}
-                  <div className="hidden w-16 h-12 xs:w-20 xs:h-15 sm:w-24 sm:h-18 md:w-32 md:h-24 lg:w-40 lg:h-30 xl:w-48 xl:h-36 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center" role="img" aria-label="Granja Mari Pepa - Logotipo alternativo">
-                    <span className="text-white font-bold text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl drop-shadow-lg" aria-hidden="true">G</span>
+                  {/* Fallback logo - TAMAÑO AUMENTADO SIGNIFICATIVAMENTE */}
+                  <div className="hidden w-24 h-18 xs:w-28 xs:h-21 sm:w-32 sm:h-24 md:w-40 md:h-30 lg:w-48 lg:h-36 xl:w-56 xl:h-42 2xl:w-64 2xl:h-48 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center" role="img" aria-label="Granja Mari Pepa - Logotipo alternativo">
+                    <span className="text-white font-bold text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl drop-shadow-lg" aria-hidden="true">G</span>
                   </div>
                   
                   {/* Glow effect on hover */}
@@ -494,7 +508,7 @@ export function Header() {
           </div>
         </nav>
 
-        {/* Mobile Navigation - PANTALLA COMPLETA MEJORADO */}
+        {/* Mobile Navigation - PANTALLA COMPLETA CORREGIDO */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -502,7 +516,16 @@ export function Header() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="lg:hidden fixed inset-0 bg-slate-900 z-[1000] overflow-hidden"
+              className="lg:hidden fixed inset-0 bg-slate-900 z-[1000] overflow-y-auto"
+              style={{ 
+                top: '0',
+                left: '0',
+                right: '0',
+                bottom: '0',
+                position: 'fixed',
+                width: '100vw',
+                height: '100vh'
+              }}
             >
               {/* Header del menú mejorado con más separación */}
               <div className="bg-blue-600 px-6 py-8 flex items-center justify-between">
@@ -514,10 +537,9 @@ export function Header() {
                   <Image
                     src="/images/logo.jpeg"
                     alt="Mari Pepa"
-                    width={56}
-                    height={56}
-                    className="object-contain rounded-lg w-14 h-14"
-                    style={{ width: 'auto', height: 'auto', maxWidth: '56px', maxHeight: '56px' }}
+                    width={80}
+                    height={60}
+                    className="object-contain rounded-lg w-20 h-15"
                   />
                 </Link>
                 

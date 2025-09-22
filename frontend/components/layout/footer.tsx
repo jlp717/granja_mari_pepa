@@ -72,7 +72,7 @@ export function Footer() {
           `
         }}
       >
-        <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="container mx-auto px-4 pt-20 pb-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             {/* Basic content without animations */}
             <div className="lg:col-span-1 text-center lg:text-left">
@@ -108,10 +108,10 @@ export function Footer() {
         `
       }}
     >
-      {/* Elegant wave divider */}
+      {/* Elegant wave divider with more space */}
       <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none">
         <svg
-          className="relative block w-full h-20"
+          className="relative block w-full h-32 md:h-40"
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
@@ -135,10 +135,10 @@ export function Footer() {
         </svg>
       </div>
 
-      {/* Animated secondary wave */}
+      {/* Animated secondary wave with more height */}
       <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none">
         <svg
-          className="relative block w-full h-16 opacity-60"
+          className="relative block w-full h-24 md:h-32 opacity-60"
           data-name="Layer 2"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
@@ -192,7 +192,7 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4 pt-20 pb-12 relative z-10">
         
         {/* Main footer content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16" data-animate="content">
