@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://granjamaripepa.netlify.app/sitemap.xml
+Sitemap: https://granjamaripepaweb.netlify.app/sitemap.xml
