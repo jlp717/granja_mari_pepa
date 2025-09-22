@@ -1,11 +1,32 @@
 [build]
-  command = "cd frontend && npm run build"
+  command = "cd frontend && npm ci && npm run build"
   publish = "frontend/out"
 
 [build.environment]
   NODE_VERSION = "18"
-  
+  NPM_FLAGS = "--prefer-offline --no-audit"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
