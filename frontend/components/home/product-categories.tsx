@@ -9,16 +9,18 @@ import { Button } from '@/components/ui/button';
 import { GlareCard } from '@/components/ui/glare-card';
 import ResponsiveImage from '@/components/ui/responsive-image';
 import { useAnimatedSection } from '@/hooks/use-animated-section';
+import { useReAnimatedSection } from '@/hooks/use-re-animated-section';
 
 export function ProductCategories() {
   const [windowWidth, setWindowWidth] = useState(0);
   
-  // Use the new animated section hook
-  const { sectionRef, isReduced } = useAnimatedSection({
+  // Use the new re-animated section hook for navigation persistence
+  const { sectionRef, isReduced } = useReAnimatedSection({
     threshold: 0.2,
     rootMargin: '100px',
     animationDelay: 50,
-    stagger: 0.15
+    stagger: 0.15,
+    retriggerOnNavigation: true
   });
 
   // Handle window resize

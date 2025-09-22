@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import { Star, Award, ShieldCheck, Sparkles } from 'lucide-react';
 import { LayoutGrid, GridItem } from '@/components/ui/layout-grid';
 import ResponsiveImage from '@/components/ui/responsive-image';
+import { ShineBorder } from '@/components/ui/shine-border';
 import { useAnimatedSection } from '@/hooks/use-animated-section';
+import { useReAnimatedSection } from '@/hooks/use-re-animated-section';
 
 const distributors = [
   {
@@ -55,12 +57,13 @@ const distributors = [
 ];
 
 export function DistributorsSection() {
-  // Use the new animated section hook
-  const { sectionRef, isReduced } = useAnimatedSection({
+  // Use the new re-animated section hook for navigation persistence
+  const { sectionRef, isReduced } = useReAnimatedSection({
     threshold: 0.2,
-    rootMargin: '100px', 
+    rootMargin: '100px',
     animationDelay: 50,
-    stagger: 0.2
+    stagger: 0.2,
+    retriggerOnNavigation: true
   });
 
   const gridItems = distributors.map((distributor, index) => {

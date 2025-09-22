@@ -29,6 +29,7 @@ export interface Product {
   origin?: string;
   weight?: string;
   dimensions?: string;
+  certifications?: string[]; // Product certifications
   tags?: string[]; // For filtering and related products
 }
 
