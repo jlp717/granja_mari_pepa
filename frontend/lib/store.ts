@@ -14,6 +14,7 @@ interface CartStore {
   toggleCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
+  resetStore: () => void;
 }
 
 interface AuthStore {
@@ -70,11 +71,27 @@ export const useCartStore = create<CartStore>()(
       },
       clearCart: () => set({ items: [] }),
       toggleCart: () => set({ isOpen: !get().isOpen }),
-      getTotalItems: () => get().items.reduce((total, item) => total + item.quantity, 0),
+      getTotalItems: () => {
+        const items = get().items;
+        const total = items.reduce((total, item) => total + item.quantity, 0);
+        // Debug logging for cart sync issues
+        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+          console.log('🛒 Cart items:', items.length, 'Total quantity:', total);
+        }
+        return total;
+      },
       getTotalPrice: () => get().items.reduce((total, item) => {
         const price = item.product.price || 0;
         return total + (price * item.quantity);
-      }, 0)
+      }, 0),
+      resetStore: () => {
+        // Clear localStorage and reset state
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('topgel-cart');
+          console.log('🛒 Cart store reset - localStorage cleared');
+        }
+        set({ items: [], isOpen: false });
+      }
     }),
     {
       name: 'topgel-cart'

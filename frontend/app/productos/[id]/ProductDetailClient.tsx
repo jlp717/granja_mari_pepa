@@ -840,29 +840,29 @@ export default function ProductDetailClient({ product, currentBrand, relatedProd
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
                         
-                        {/* Quick Action Buttons */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                        {/* Quick Action Buttons - Compact & Subtle */}
+                        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-2">
                           <Button
                             size="sm"
-                            className="bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg border border-gray-200"
+                            className="bg-white/95 hover:bg-white text-gray-700 hover:text-gray-900 shadow-md border border-gray-100 w-8 h-8 p-0 rounded-lg transition-all duration-300 hover:scale-110"
                             onClick={(e) => {
                               e.stopPropagation();
                               router.push(`/productos/${relatedProduct.id}`);
                             }}
                             title="Ver detalles"
                           >
-                            <Eye className="w-4 h-4" />
+                            <Eye className="w-3.5 h-3.5" />
                           </Button>
                           <Button
                             size="sm"
-                            className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg"
+                            className="bg-purple-600/90 hover:bg-purple-600 text-white shadow-md w-8 h-8 p-0 rounded-lg transition-all duration-300 hover:scale-110"
                             onClick={(e) => {
                               e.stopPropagation();
                               addToCart(relatedProduct, 1);
                             }}
                             title="Añadir al carrito"
                           >
-                            <ShoppingCart className="w-4 h-4" />
+                            <ShoppingCart className="w-3.5 h-3.5" />
                           </Button>
                         </div>
                         
