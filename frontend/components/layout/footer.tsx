@@ -58,21 +58,23 @@ export function Footer() {
   if (!isMounted) {
     // Return basic footer without animations during SSR
     return (
-      <footer 
+      <footer
         className="relative overflow-hidden"
         style={{
+          marginBottom: 0,
+          paddingBottom: '60px',
           background: `
-            linear-gradient(135deg, 
-              #0a0a0a 0%, 
-              #1a0a2e 25%, 
-              #2a1810 50%, 
-              #1a0a2e 75%, 
+            linear-gradient(135deg,
+              #0a0a0a 0%,
+              #1a0a2e 25%,
+              #2a1810 50%,
+              #1a0a2e 75%,
               #0a0a0a 100%
             )
           `
         }}
       >
-        <div className="container mx-auto px-4 pt-20 pb-12 relative z-10">
+        <div className="container mx-auto px-4 pt-32 pb-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             {/* Basic content without animations */}
             <div className="lg:col-span-1 text-center lg:text-left">
@@ -92,26 +94,28 @@ export function Footer() {
   }
 
   return (
-    <footer 
+    <footer
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{
-        position: 'relative', // Fix for ScrollTrigger positioning warning
+        position: 'relative',
+        marginBottom: 0,
+        paddingBottom: '60px',
         background: `
-          linear-gradient(135deg, 
-            #0a0a0a 0%, 
-            #1a0a2e 25%, 
-            #2a1810 50%, 
-            #1a0a2e 75%, 
+          linear-gradient(135deg,
+            #0a0a0a 0%,
+            #1a0a2e 25%,
+            #2a1810 50%,
+            #1a0a2e 75%,
             #0a0a0a 100%
           )
         `
       }}
     >
-      {/* Elegant wave divider with more space */}
+      {/* Elegant wave divider - subtle and clean */}
       <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none">
         <svg
-          className="relative block w-full h-32 md:h-40"
+          className="relative block w-full h-20 md:h-24"
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
@@ -135,10 +139,10 @@ export function Footer() {
         </svg>
       </div>
 
-      {/* Animated secondary wave with more height */}
+      {/* Animated secondary wave - subtle */}
       <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none">
         <svg
-          className="relative block w-full h-24 md:h-32 opacity-60"
+          className="relative block w-full h-16 md:h-20 opacity-60"
           data-name="Layer 2"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
@@ -192,7 +196,7 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 pt-20 pb-12 relative z-10">
+      <div className="container mx-auto px-4 pt-28 md:pt-32 pb-8 relative z-10">
         
         {/* Main footer content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16" data-animate="content">

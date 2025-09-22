@@ -211,120 +211,132 @@ export function CartDrawer() {
               ) : (
                 <div className="space-y-4">
                   {items.map((item) => (
-                    <div 
-                      key={item.product.id} 
-                      className={`bg-gradient-to-r from-slate-50 to-white rounded-xl p-4 border border-slate-200 shadow-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-blue-200 ${
+                    <div
+                      key={item.product.id}
+                      className={`bg-gradient-to-r from-slate-50 to-white rounded-xl p-3 md:p-4 border border-slate-200 shadow-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-blue-200 ${
                         isAnimatingRemove === item.product.id ? 'scale-95 opacity-0' : ''
                       }`}
                     >
-                      <div className="flex space-x-4">
-                        <div className="relative">
-                          <img
-                            src={item.product.image}
-                            alt={item.product.name}
-                            className="w-16 h-16 object-cover rounded-lg shadow-md border border-slate-200"
-                          />
-                          <div className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                            {item.quantity}
+                      {/* Two-Row Layout: Product info on top, controls below */}
+                      <div className="space-y-3">
+
+                        {/* Product Info Row - Full width for complete names */}
+                        <div className="flex space-x-3">
+                          <div className="relative flex-shrink-0">
+                            <img
+                              src={item.product.image}
+                              alt={item.product.name}
+                              className="w-16 h-16 object-cover rounded-lg shadow-md border border-slate-200 hover:scale-105 transition-transform duration-200"
+                            />
+                            <div className="absolute -top-1 -right-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg border-2 border-white">
+                              {item.quantity}
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-bold text-slate-800 mb-1 text-base md:text-lg leading-tight">{item.product.name}</h4>
+                            <p className="text-slate-600 text-sm">
+                              {item.product.price ? `${item.product.price.toFixed(2)}€/ud` : 'Precio no disponible'}
+                            </p>
                           </div>
                         </div>
-                        <div className="flex-1">
-                          <h4 className="font-bold text-slate-800 mb-1">{item.product.name}</h4>
-                          <p className="text-slate-600 text-sm mb-2">
-                            {item.product.price ? `${item.product.price.toFixed(2)}€/ud` : 'Precio no disponible'}
-                          </p>
-                          
-                          <div className="flex items-center justify-between mt-3">
-                            <div className="flex items-center space-x-2">
-                              {editingItem === item.product.id ? (
-                                <div className="flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-indigo-50 p-2 rounded-lg border-2 border-blue-200 animate-fade-in shadow-md">
-                                  <Input
-                                    type="number"
-                                    min="1"
-                                    max="99"
-                                    value={tempQuantity}
-                                    onChange={(e) => setTempQuantity(parseInt(e.target.value) || 0)}
-                                    onKeyDown={(e) => handleKeyPress(e, item.product.id)}
-                                    className="w-16 h-10 text-center font-bold text-lg border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                                    autoFocus
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    onClick={() => saveQuantity(item.product.id)}
-                                    className="h-10 px-3 bg-green-50 text-green-700 border-green-300 hover:bg-green-100 hover:border-green-400 transition-all duration-200"
-                                  >
-                                    <Check className="w-4 h-4 mr-1" />
-                                    Guardar
-                                  </Button>
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    onClick={cancelEditing}
-                                    className="h-10 px-3 bg-red-50 text-red-700 border-red-300 hover:bg-red-100 hover:border-red-400 transition-all duration-200"
-                                  >
-                                    <X className="w-4 h-4 mr-1" />
-                                    Cancelar
-                                  </Button>
-                                </div>
-                              ) : (
-                                <div className="flex items-center space-x-2 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
-                                  <Button
-                                    variant="outline"
-                                    size="icon"
-                                    className="h-8 w-8 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-200"
-                                    onClick={() => handleQuantityChange(item.product.id, item.quantity - 1, item.product.name)}
-                                  >
-                                    <Minus className="w-4 h-4" />
-                                  </Button>
-                                  
-                                  <div className="flex items-center space-x-1 px-2">
-                                    <span className="font-bold text-xl min-w-[32px] text-center text-slate-800">
-                                      {item.quantity}
-                                    </span>
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      className="h-6 w-6 text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 rounded-full"
-                                      onClick={() => startEditing(item.product.id, item.quantity)}
-                                      title="Editar cantidad"
-                                    >
-                                      <Edit className="w-3 h-3" />
-                                    </Button>
-                                  </div>
-                                  
-                                  <Button
-                                    variant="outline"
-                                    size="icon"
-                                    className="h-8 w-8 hover:bg-green-50 hover:border-green-300 hover:text-green-600 transition-all duration-200"
-                                    onClick={() => handleQuantityChange(item.product.id, item.quantity + 1, item.product.name)}
-                                  >
-                                    <Plus className="w-4 h-4" />
-                                  </Button>
-                                </div>
-                              )}
-                            </div>
-                            
-                            <div className="flex items-center space-x-3">
-                              <div className="text-right">
-                                <div className="font-bold text-xl text-blue-600">
-                                  {item.product.price ? (item.product.price * item.quantity).toFixed(2) : '0.00'}€
-                                </div>
-                                <div className="text-xs text-slate-500">
-                                  {item.quantity}x {item.product.price ? item.product.price.toFixed(2) : '0.00'}€
-                                </div>
+
+                        {/* Controls Row - Quantity, Price, Delete */}
+                        <div className="flex items-center justify-between gap-4">
+                          {/* Quantity Selector */}
+                          <div className="flex-shrink-0">
+                            {editingItem === item.product.id ? (
+                              <div className="flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-indigo-50 p-2 rounded-lg border-2 border-blue-200 animate-fade-in shadow-md">
+                                <Input
+                                  type="number"
+                                  min="1"
+                                  max="99"
+                                  value={tempQuantity}
+                                  onChange={(e) => setTempQuantity(parseInt(e.target.value) || 0)}
+                                  onKeyDown={(e) => handleKeyPress(e, item.product.id)}
+                                  className="w-16 h-10 text-center font-bold text-lg border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                                  autoFocus
+                                />
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => saveQuantity(item.product.id)}
+                                  className="h-10 px-3 bg-green-50 text-green-700 border-green-300 hover:bg-green-100 hover:border-green-400 transition-all duration-200"
+                                >
+                                  <Check className="w-4 h-4 mr-1" />
+                                  Guardar
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={cancelEditing}
+                                  className="h-10 px-3 bg-red-50 text-red-700 border-red-300 hover:bg-red-100 hover:border-red-400 transition-all duration-200"
+                                >
+                                  <X className="w-4 h-4 mr-1" />
+                                  Cancelar
+                                </Button>
                               </div>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-9 w-9 text-red-500 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-all duration-200 rounded-lg"
-                                onClick={() => handleRemoveItem(item.product.id, item.product.name)}
-                                title="Eliminar producto"
-                              >
-                                <Trash2 className="w-5 h-5" />
-                              </Button>
-                            </div>
+                            ) : (
+                              <div className="flex items-center space-x-2 bg-white p-1 md:p-2 rounded-lg border border-slate-200 shadow-sm">
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8 md:h-9 md:w-9 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-200"
+                                  onClick={() => handleQuantityChange(item.product.id, item.quantity - 1, item.product.name)}
+                                >
+                                  <Minus className="w-3 h-3 md:w-4 md:h-4" />
+                                </Button>
+
+                                <div className="flex items-center space-x-1 px-2">
+                                  <span className="font-bold text-base md:text-lg min-w-[32px] md:min-w-[36px] text-center text-slate-800">
+                                    {item.quantity}
+                                  </span>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-5 w-5 md:h-6 md:w-6 text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 rounded-full"
+                                    onClick={() => startEditing(item.product.id, item.quantity)}
+                                    title="Editar cantidad"
+                                  >
+                                    <Edit className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                                  </Button>
+                                </div>
+
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8 md:h-9 md:w-9 hover:bg-green-50 hover:border-green-300 hover:text-green-600 transition-all duration-200"
+                                  onClick={() => handleQuantityChange(item.product.id, item.quantity + 1, item.product.name)}
+                                >
+                                  <Plus className="w-3 h-3 md:w-4 md:h-4" />
+                                </Button>
+                              </div>
+                            )}
                           </div>
+
+                          {/* Price and Delete Section */}
+                          <div className="flex items-center gap-3">
+                            {/* Total Price */}
+                            <div className="text-right">
+                              <div className="font-bold text-base md:text-lg text-blue-600 leading-tight">
+                                {item.product.price ? (item.product.price * item.quantity).toFixed(2) : '0.00'}€
+                              </div>
+                              <div className="text-xs md:text-sm text-slate-500 leading-tight">
+                                {item.quantity}x {item.product.price ? item.product.price.toFixed(2) : '0.00'}€
+                              </div>
+                            </div>
+
+                            {/* Delete Button */}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-9 w-9 text-red-500 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-all duration-200 rounded-lg"
+                              onClick={() => handleRemoveItem(item.product.id, item.product.name)}
+                              title="Eliminar producto"
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </Button>
+                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -405,18 +417,18 @@ export function CartDrawer() {
                 <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 shadow-lg border border-white/50 mb-6">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
-                        <ShoppingBag className="w-5 h-5 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                        <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </div>
                       <div>
-                        <span className="text-lg font-bold text-slate-800">Total Final:</span>
+                        <span className="text-base sm:text-lg font-bold text-slate-800">Total Final:</span>
                         <p className="text-xs text-slate-500 mt-0.5">
                           Incluye todos los productos seleccionados
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                         {getTotalPrice().toFixed(2)}€
                       </div>
                       <div className="text-sm text-slate-500">
