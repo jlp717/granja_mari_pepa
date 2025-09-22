@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Filter, Grid, List, Search, ChevronDown, Star, Zap, Clock, TrendingUp, Award, Sparkles } from 'lucide-react';
+import { Filter, Grid, List, Search, ChevronDown, Star, Zap, Clock, TrendingUp, Award, Sparkles, X } from 'lucide-react';
 import { products, productCategories, brands } from '@/lib/data';
 import { ProductCard } from '@/components/products/product-card';
 import { Button } from '@/components/ui/button';
@@ -586,12 +586,22 @@ export default function ProductsPage() {
                           }}
                         >
                           <SheetHeader className="mb-8">
-                            <SheetTitle className="flex items-center text-xl sm:text-2xl text-white">
-                              <Filter className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-amber-400 opacity-100" />
-                              <span className="bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
-                                Filtros
-                              </span>
-                            </SheetTitle>
+                            <div className="flex items-center justify-between">
+                              <SheetTitle className="flex items-center text-xl sm:text-2xl text-white">
+                                <Filter className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-amber-400 opacity-100" />
+                                <span className="bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
+                                  Filtros
+                                </span>
+                              </SheetTitle>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setIsFiltersOpen(false)}
+                                className="h-8 w-8 text-gray-400 hover:text-white hover:bg-white/10 rounded-full"
+                              >
+                                <X className="h-5 w-5" />
+                              </Button>
+                            </div>
                           </SheetHeader>
                           <FilterContent />
                         </div>

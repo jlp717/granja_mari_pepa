@@ -169,12 +169,22 @@ export default function CheckoutPage() {
     
     if (currentStep < checkoutSteps.length - 1) {
       setCurrentStep(currentStep + 1);
+      // Scroll to top smoothly
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   };
 
   const handlePrevStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+      // Scroll to top smoothly
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -186,6 +196,11 @@ export default function CheckoutPage() {
       await new Promise(resolve => setTimeout(resolve, 3000));
       
       setCurrentStep(3);
+      // Scroll to top smoothly
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
       toast.success('¡Pedido procesado con éxito!');
       
       // Clear cart after successful order

@@ -409,8 +409,11 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 opacity-30"></div>
+            {/* Timeline Line - Desktop */}
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 opacity-30"></div>
+            
+            {/* Timeline Line - Mobile */}
+            <div className="md:hidden absolute left-8 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 opacity-30"></div>
 
             {companyHistory.map((milestone, index) => {
               const IconComponent = milestone.icon;
@@ -423,10 +426,29 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
-                  className={`relative flex items-center mb-20 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+                  className={`relative flex items-center mb-12 md:mb-20 ${
+                    // Mobile: always left-aligned, Desktop: alternating
+                    'flex-col md:flex-row' + (isEven ? ' md:flex-row' : ' md:flex-row-reverse')
+                  }`}
                 >
-                  {/* Content */}
-                  <div className={`w-5/12 ${isEven ? 'text-right pr-8' : 'text-left pl-8'}`}>
+                  {/* Mobile Layout */}
+                  <div className="md:hidden w-full pl-20 pr-4">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-4 mb-4 justify-start">
+                        <Badge className={`bg-gradient-to-r ${milestone.color} text-white px-3 py-1 text-sm font-bold`}>
+                          {milestone.year}
+                        </Badge>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">{milestone.title}</h3>
+                      <p className="text-white/70 leading-relaxed text-sm">{milestone.description}</p>
+                    </motion.div>
+                  </div>
+
+                  {/* Desktop Layout - Content */}
+                  <div className={`hidden md:block w-5/12 ${isEven ? 'text-right pr-8' : 'text-left pl-8'}`}>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300"
@@ -441,8 +463,19 @@ export default function AboutPage() {
                     </motion.div>
                   </div>
 
-                  {/* Central Icon */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
+                  {/* Mobile Icon */}
+                  <div className="md:hidden absolute left-4 top-4 z-10">
+                    <motion.div
+                      whileHover={{ scale: 1.2 }}
+                      transition={{ duration: 0.3 }}
+                      className={`w-10 h-10 rounded-full bg-gradient-to-r ${milestone.color} flex items-center justify-center border-2 border-slate-900 shadow-lg`}
+                    >
+                      <IconComponent className="w-5 h-5 text-white" />
+                    </motion.div>
+                  </div>
+
+                  {/* Desktop Central Icon */}
+                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 z-10">
                     <motion.div
                       whileHover={{ scale: 1.2, rotate: 360 }}
                       transition={{ duration: 0.5 }}
@@ -452,8 +485,8 @@ export default function AboutPage() {
                     </motion.div>
                   </div>
 
-                  {/* Spacer */}
-                  <div className="w-5/12"></div>
+                  {/* Desktop Spacer */}
+                  <div className="hidden md:block w-5/12"></div>
                 </motion.div>
               );
             })}

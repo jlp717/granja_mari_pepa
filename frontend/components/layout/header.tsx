@@ -74,8 +74,7 @@ const navigation = [
     ]
   },
   { name: 'Quiénes somos', href: '/acerca' },
-  { name: 'Contacto', href: '/contacto' },
-  { name: 'Área de clientes', href: '/area-clientes' }
+  { name: 'Contacto', href: '/contacto' }
 ];
 
 export function Header() {
@@ -390,7 +389,7 @@ export function Header() {
                 )}
               </div>
 
-              {/* User Button - RESPONSIVO */}
+              {/* User Button - SOLO ICONO */}
               <motion.div
                 whileHover={{ scale: 1.1, rotate: -5 }}
                 whileTap={{ scale: 0.9 }}
@@ -404,15 +403,22 @@ export function Header() {
                     className={`h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 rounded-xl lg:rounded-2xl transition-all duration-500 group relative overflow-hidden ${
                       isScrolled
                         ? 'text-slate-300 hover:text-white hover:bg-gradient-to-br hover:from-slate-700 hover:to-slate-600 hover:shadow-2xl hover:shadow-slate-500/30'
-                        : 'text-slate-700 hover:text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-blue-700 hover:shadow-2xl hover:shadow-blue-500/40'
+                        : 'text-slate-700 hover:text-white hover:bg-gradient-to-br hover:from-emerald-600 hover:to-cyan-600 hover:shadow-2xl hover:shadow-emerald-400/40'
                     } focus-ring`}
                     aria-label="Área de clientes"
+                    title="Área de clientes"
                   >
-                    {/* Ripple effect */}
-                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:animate-ping bg-blue-400/30 transition-opacity duration-300" />
+                    {/* Enhanced ripple effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:animate-ping bg-emerald-400/40 transition-opacity duration-300" />
                     
-                    {/* Gradient background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-cyan-400/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-0 group-hover:scale-100 rounded-2xl" />
+                    {/* Enhanced gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/30 via-cyan-400/30 to-blue-500/30 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-0 group-hover:scale-100 rounded-2xl" />
+                    
+                    {/* Subtle border glow */}
+                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-emerald-400/0 via-emerald-400/50 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-all duration-500" style={{
+                      backgroundClip: 'padding-box',
+                      border: '2px solid transparent'
+                    }} />
                     
                     <User className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 relative z-10 group-hover:scale-125 transition-all duration-500 group-hover:drop-shadow-lg" />
                   </Button>

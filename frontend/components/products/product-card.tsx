@@ -131,14 +131,21 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: 'backOut' }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="group h-full"
+      initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 45 }}
+      animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+      transition={{ duration: 0.8, delay: index * 0.15, ease: 'backOut' }}
+      whileHover={{ 
+        y: -12, 
+        scale: 1.03,
+        rotateY: 5,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+      whileTap={{ scale: 0.98, rotateY: 0 }}
+      className="group h-full perspective-1000"
+      style={{ transformStyle: 'preserve-3d' }}
     >
       <div 
-        className="h-full rounded-3xl overflow-hidden shadow-xl border border-white/10 backdrop-blur-xl group-hover:shadow-2xl group-hover:border-purple-400/30 transition-all duration-500 flex flex-col"
+        className="h-full rounded-3xl overflow-hidden shadow-xl border border-white/10 backdrop-blur-xl group-hover:shadow-2xl group-hover:border-purple-400/30 transition-all duration-500 flex flex-col relative"
         style={{
           background: `
             linear-gradient(135deg, 
@@ -148,18 +155,61 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
           `
         }}
       >
+        {/* Magical shimmer effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+        </div>
+        
+        {/* Floating particles on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <motion.div 
+            className="absolute top-1/4 left-1/4 w-1 h-1 bg-cyan-400 rounded-full"
+            animate={{ 
+              y: [-20, 20, -20], 
+              x: [-10, 10, -10],
+              opacity: [0, 1, 0] 
+            }}
+            transition={{ duration: 3, repeat: Infinity, delay: 0 }}
+          />
+          <motion.div 
+            className="absolute top-1/3 right-1/4 w-1 h-1 bg-purple-400 rounded-full"
+            animate={{ 
+              y: [20, -20, 20], 
+              x: [10, -10, 10],
+              opacity: [0, 1, 0] 
+            }}
+            transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+          />
+          <motion.div 
+            className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-blue-400 rounded-full"
+            animate={{ 
+              y: [-15, 15, -15], 
+              x: [15, -15, 15],
+              opacity: [0, 1, 0] 
+            }}
+            transition={{ duration: 3, repeat: Infinity, delay: 2 }}
+          />
+        </div>
+
         <div className="relative overflow-hidden flex-shrink-0">
           <Link href={`/productos/${product.id}`}>
-            <div className="relative">
+            <motion.div 
+              className="relative overflow-hidden rounded-t-3xl"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               <img
                 src={product.image}
                 alt={product.name}
                 className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
               />
               
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+              {/* Enhanced gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Glowing border on hover */}
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-cyan-400/50 rounded-t-3xl transition-colors duration-500" />
+            </motion.div>
           </Link>
           
           {/* Enhanced Badges */}
@@ -196,31 +246,70 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
             )}
           </div>
 
-          {/* Enhanced Quick actions overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-            <div 
-              className="flex space-x-3 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
+          {/* Enhanced Quick actions overlay - PERFECCIONADO */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[1px]">
+            <motion.div 
+              className="flex space-x-4 transform translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500"
+              initial={{ scale: 0.8 }}
+              whileInView={{ scale: 1 }}
             >
               <Link href={`/productos/${product.id}`}>
-                <Button 
-                  size="sm" 
-                  className="bg-white/95 text-gray-900 hover:bg-white hover:scale-105 rounded-full backdrop-blur-sm px-3 py-2 text-sm transition-all duration-200"
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 3 }}
+                  whileTap={{ scale: 0.95, rotate: -3 }}
                 >
-                  <Eye className="w-4 h-4 mr-2 text-gray-900 opacity-100" />
-                  Ver detalles
-                </Button>
+                  <Button 
+                    size="sm" 
+                    className="bg-white/95 text-gray-900 hover:bg-white hover:shadow-lg rounded-full backdrop-blur-sm px-4 py-2.5 text-sm transition-all duration-300 group relative overflow-hidden"
+                  >
+                    {/* Button shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
+                    
+                    <motion.div 
+                      className="flex items-center relative z-10"
+                      whileHover={{ x: 2 }}
+                    >
+                      <Eye className="w-4 h-4 mr-2 text-gray-900 opacity-100" />
+                      Ver detalles
+                    </motion.div>
+                  </Button>
+                </motion.div>
               </Link>
+              
               {product.inStock && (
-                <Button 
-                  size="sm" 
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-full px-3 py-2 text-sm"
-                  onClick={handleAddToCart}
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: -3 }}
+                  whileTap={{ scale: 0.95, rotate: 3 }}
                 >
-                  <ShoppingCart className="w-4 h-4 mr-2 text-white opacity-100" />
-                  Añadir
-                </Button>
+                  <Button 
+                    size="sm" 
+                    className="bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 hover:from-purple-700 hover:via-purple-800 hover:to-blue-700 rounded-full px-4 py-2.5 text-sm transition-all duration-300 group relative overflow-hidden shadow-lg hover:shadow-purple-500/50"
+                    onClick={handleAddToCart}
+                  >
+                    {/* Glowing particles on button */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-1 left-2 w-1 h-1 bg-white/80 rounded-full animate-ping animation-delay-0" />
+                      <div className="absolute top-1 right-3 w-1 h-1 bg-white/60 rounded-full animate-ping animation-delay-300" />
+                      <div className="absolute bottom-1 left-4 w-1 h-1 bg-white/70 rounded-full animate-ping animation-delay-500" />
+                    </div>
+                    
+                    <motion.div 
+                      className="flex items-center relative z-10"
+                      whileHover={{ x: 2 }}
+                    >
+                      <motion.div
+                        animate={{ rotate: [0, 15, -15, 0] }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        whileHover={{ rotate: 360 }}
+                      >
+                        <ShoppingCart className="w-4 h-4 mr-2 text-white opacity-100" />
+                      </motion.div>
+                      Añadir
+                    </motion.div>
+                  </Button>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
 

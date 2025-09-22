@@ -62,7 +62,7 @@ export default function CustomerAreaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pt-24 md:pt-32 lg:pt-36 xl:pt-40 overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pt-8 md:pt-12 lg:pt-16 xl:pt-20 overflow-hidden relative">
       {/* Background Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -116,7 +116,7 @@ export default function CustomerAreaPage() {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
+      <div className="container mx-auto px-4 py-4 md:py-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           
           {/* Main Content Grid */}

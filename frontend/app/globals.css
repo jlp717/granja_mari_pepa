@@ -86,9 +86,25 @@
     @apply bg-background text-foreground;
   }
   
+  /* MOBILE-FIRST TOUCH OPTIMIZATIONS */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    scroll-behavior: smooth;
+  }
+  
+  /* PERFECT TOUCH TARGETS */
+  button, [role="button"], [tabindex], a, input, textarea, select {
+    min-height: 44px; /* iOS recommended minimum */
+    touch-action: manipulation;
+  }
+  
   /* Smooth scrolling for the entire page */
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
   
   /* Enhanced smooth scrolling with custom easing */
@@ -99,6 +115,18 @@
   @supports (scroll-behavior: smooth) {
     html, body {
       scroll-behavior: smooth;
+    }
+  }
+  
+  /* REDUCE MOTION FOR ACCESSIBILITY */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
