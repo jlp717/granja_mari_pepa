@@ -34,4 +34,22 @@ router.get('/me', authenticateToken, authController.getCurrentUser);
  */
 router.post('/logout', authenticateToken, authController.logout);
 
+/**
+ * GET /api/auth/estadisticas/:codigoCliente
+ * Obtener estadísticas del cliente
+ */
+router.get('/estadisticas/:codigoCliente', authenticateToken, authController.obtenerEstadisticas);
+
+/**
+ * GET /api/auth/top-productos/:codigoCliente
+ * Obtener top productos del cliente
+ */
+router.get('/top-productos/:codigoCliente', authenticateToken, authController.obtenerTopProductos);
+
+/**
+ * GET /api/auth/perfil
+ * Obtener perfil completo del cliente
+ */
+router.get('/perfil', authenticateToken, authController.obtenerPerfil);
+
 module.exports = router;

@@ -31,7 +31,7 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
         productName={product.name}
         productImage={product.image}
         quantity={1}
-        onDismiss={() => toast.dismiss(t.id)}
+        onDismiss={() => toast.dismiss(t)}
       />
     ), {
       duration: 4000,
@@ -49,21 +49,15 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
         className="group w-full"
       >
         <div 
-          className="flex items-center p-6 rounded-3xl overflow-hidden shadow-xl border border-white/10 backdrop-blur-xl group-hover:shadow-2xl transition-all duration-500"
-          style={{
-            background: `
-              linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 100%
-              )
-            `
-          }}
+          className="flex items-center p-6 rounded-3xl overflow-hidden shadow-xl border border-border bg-card group-hover:shadow-2xl transition-all duration-500"
         >
           <div className="relative overflow-hidden rounded-2xl flex-shrink-0">
             <Link href={`/productos/${product.id}`}>
               <img
                 src={product.image}
                 alt={product.name}
+                loading="lazy"
+                decoding="async"
                 className="w-32 h-32 object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </Link>
@@ -75,9 +69,15 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                   -{product.discount}%
                 </Badge>
               )}
+              {(product as any).promocion && (
+                <Badge className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs px-2 py-1 flex items-center gap-1">
+                  <Tag className="w-3 h-3" />
+                  Promo
+                </Badge>
+              )}
               {product.featured && (
-                <Badge className="bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs px-2 py-1">
-                  ⭐
+                <Badge className="bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs px-2 py-1 flex items-center gap-1">
+                  <Star className="w-3 h-3 fill-current" />
                 </Badge>
               )}
             </div>
@@ -87,26 +87,26 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <Link href={`/productos/${product.id}`}>
-                  <h3 className="text-white text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors line-clamp-2">
+                  <h3 className="text-foreground text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
                     {product.name}
                   </h3>
                 </Link>
                 
-                <p className="text-white/70 text-sm mb-3 line-clamp-2">
+                <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                   {product.description}
                 </p>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-green-400">
+                    <span className="text-2xl font-bold text-success">
                       {product.price}€
                     </span>
                     {product.originalPrice && (
-                      <span className="text-lg text-white/50 line-through">
+                      <span className="text-lg text-muted-foreground line-through">
                         {product.originalPrice}€
                       </span>
                     )}
-                    <span className="text-white/60 text-sm">
+                    <span className="text-muted-foreground text-sm">
                       /{product.units || 'kg'}
                     </span>
                   </div>
@@ -125,11 +125,7 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                           stiffness: 300, 
                           damping: 10 
                         }}
-                        className="group/btn relative px-5 py-2.5 bg-gradient-to-br from-slate-800/90 via-slate-700/95 to-slate-800/90 backdrop-blur-xl border border-cyan-400/40 hover:border-cyan-300/70 text-white/95 hover:text-cyan-100 rounded-xl font-semibold text-sm flex items-center gap-2.5 overflow-hidden transition-all duration-400 shadow-lg"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.95) 50%, rgba(30, 41, 59, 0.9) 100%)',
-                          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                        }}
+                        className="group/btn relative px-5 py-2.5 bg-secondary border border-accent/40 hover:border-accent/70 text-foreground hover:text-accent rounded-xl font-semibold text-sm flex items-center gap-2.5 overflow-hidden transition-all duration-400 shadow-lg"
                       >
                         {/* Animated tech background */}
                         <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">
@@ -159,20 +155,14 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                         damping: 10 
                       }}
                       disabled={!product.inStock}
-                      className="group/btn relative px-5 py-2.5 bg-gradient-to-br from-emerald-600/90 via-green-500/95 to-emerald-700/90 backdrop-blur-xl border border-emerald-400/50 hover:border-emerald-300/70 text-white rounded-xl font-semibold text-sm flex items-center gap-2.5 overflow-hidden transition-all duration-400 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-                      style={{
-                        background: !product.inStock 
-                          ? 'linear-gradient(135deg, rgba(71, 85, 105, 0.8) 0%, rgba(100, 116, 139, 0.9) 50%, rgba(71, 85, 105, 0.8) 100%)'
-                          : 'linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(34, 197, 94, 0.95) 50%, rgba(5, 150, 105, 0.9) 100%)',
-                        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                      }}
+                      className="group/btn relative px-5 py-2.5 bg-success border border-success/50 hover:border-success/70 text-success-foreground rounded-xl font-semibold text-sm flex items-center gap-2.5 overflow-hidden transition-all duration-400 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                       {/* Energy pulse effect */}
                       <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 via-green-300/25 to-cyan-400/20 animate-pulse" />
+                        <div className="absolute inset-0 bg-success/20 animate-pulse" />
                       </div>
                       
-                      <ShoppingCart className="w-4 h-4 relative z-10 transition-all duration-400 group-hover/btn:scale-110 group-hover/btn:drop-shadow-[0_0_8px_rgba(16,185,129,0.9)] group-hover/btn:rotate-6" />
+                      <ShoppingCart className="w-4 h-4 relative z-10 transition-all duration-400 group-hover/btn:scale-110" />
                       <span className="relative z-10 tracking-wide">{product.inStock ? 'Añadir' : 'Agotado'}</span>
                       
                       {/* Quantum shimmer */}
@@ -198,18 +188,8 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
       className="group relative w-full h-full"
     >
       <div 
-        className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl border border-white/10 backdrop-blur-xl group-hover:shadow-2xl transition-all duration-500"
-        style={{
-          background: `
-            linear-gradient(135deg, 
-              rgba(255, 255, 255, 0.12) 0%, 
-              rgba(255, 255, 255, 0.06) 50%,
-              rgba(255, 255, 255, 0.08) 100%
-            )
-          `,
-          backdropFilter: 'blur(20px)',
-          minHeight: '420px'
-        }}
+        className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl border border-border bg-card group-hover:shadow-2xl transition-all duration-500"
+        style={{ minHeight: '420px' }}
       >
         {/* Enhanced shimmer effect */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -218,7 +198,7 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
 
         {/* Enhanced gradient overlay */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-t from-blue-500/20 via-purple-500/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-accent/5 to-transparent" />
         </div>
 
         <div className="relative h-full flex flex-col">
@@ -233,6 +213,8 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                 <img
                   src={product.image}
                   alt={product.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 
@@ -259,14 +241,26 @@ export function ProductCard({ product, index = 0, viewMode = 'grid' }: ProductCa
                   </Badge>
                 </motion.div>
               )}
+              {(product as any).promocion && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.35 }}
+                >
+                  <Badge className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold px-3 py-1 shadow-lg flex items-center gap-1">
+                    <Tag className="w-3 h-3" />
+                    Promoción
+                  </Badge>
+                </motion.div>
+              )}
               {product.featured && (
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <Badge className="bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold px-3 py-1 shadow-lg">
-                    <Star className="w-3 h-3 mr-1 text-white opacity-100" />
+                  <Badge className="bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold px-3 py-1 shadow-lg flex items-center gap-1">
+                    <Star className="w-3 h-3 fill-current" />
                     Destacado
                   </Badge>
                 </motion.div>

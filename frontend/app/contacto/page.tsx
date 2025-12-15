@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, MessageSquare, Send, Star, Building2, Users, Globe as GlobeIcon, ArrowRight, ExternalLink, Zap } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageSquare, Send, Star, Building2, Users, Globe as GlobeIcon, ArrowRight, ExternalLink, Zap, Truck } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from 'sonner';
 import { delegations } from '@/lib/data';
-import Globe from '@/components/ui/globe';
+import Globe from '@/components/ui/openstreetmap-globe';
 
 // Definir la interfaz Location localmente para coincidir con el Globe component
 interface Location {
@@ -235,10 +235,10 @@ export default function ContactPage() {
               <Button 
                 size="lg"
                 className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border border-white/30 px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
-                onClick={() => handlePhoneCall("+34968123456")}
+                onClick={() => handlePhoneCall("+34968467514")}
               >
                 <Phone className="w-6 h-6 mr-2" />
-                Llamar ahora
+                968 46 75 14
               </Button>
             </motion.div>
           </motion.div>
@@ -284,30 +284,30 @@ export default function ContactPage() {
             {[
               {
                 icon: Phone,
-                title: "Llamada Directa",
-                description: "Habla directamente con nuestro equipo comercial",
-                info: "+34 968 123 456",
-                action: () => handlePhoneCall("+34968123456"),
+                title: "Delegación Murcia",
+                description: "Lorca - Sede central",
+                info: "968 46 75 14 / 639 77 86 55",
+                action: () => handlePhoneCall("+34968467514"),
                 color: "from-green-500 to-emerald-600",
                 bgColor: "from-green-500/20 to-emerald-600/20"
               },
               {
                 icon: Mail,
-                title: "Email Corporativo",
-                description: "Envíanos tu consulta y te responderemos en 24h",
-                info: "info@granjamaripepa.com",
-                action: () => handleEmailClick("info@granjamaripepa.com"),
+                title: "Email de Pedidos",
+                description: "Consultas y pedidos",
+                info: "pedidos@granjamaripepa.com",
+                action: () => handleEmailClick("pedidos@granjamaripepa.com"),
                 color: "from-blue-500 to-blue-600",
                 bgColor: "from-blue-500/20 to-blue-600/20"
               },
               {
-                icon: MessageSquare,
-                title: "WhatsApp Business",
-                description: "Chat directo para consultas rápidas",
-                info: "Enviar mensaje",
-                action: () => handleWhatsAppClick("+34968123456"),
-                color: "from-green-400 to-green-500",
-                bgColor: "from-green-400/20 to-green-500/20"
+                icon: Phone,
+                title: "Delegación Almería",
+                description: "Viator",
+                info: "950 97 34 29 / 670 49 01 47",
+                action: () => handlePhoneCall("+34950973429"),
+                color: "from-purple-500 to-purple-600",
+                bgColor: "from-purple-400/20 to-purple-500/20"
               }
             ].map((contact, index) => {
               const IconComponent = contact.icon;
@@ -345,7 +345,7 @@ export default function ContactPage() {
             })}
           </div>
 
-          {/* Horarios de Atención */}
+          {/* Horarios de Atención - DATOS REALES */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -355,19 +355,15 @@ export default function ContactPage() {
           >
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-12">
               <Clock className="w-16 h-16 text-blue-400 mx-auto mb-6" />
-              <h3 className="text-3xl font-bold text-white mb-8">Horarios de Atención</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <h3 className="text-3xl font-bold text-white mb-8">Horarios de Atención al Cliente</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
                 <div>
                   <div className="text-2xl font-bold text-blue-400 mb-2">Lunes - Viernes</div>
-                  <div className="text-white/70">8:00 - 18:00</div>
+                  <div className="text-white/70">8:00 - 13:00 y 16:00 - 19:00</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-purple-400 mb-2">Sábados</div>
-                  <div className="text-white/70">9:00 - 14:00</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-pink-400 mb-2">Domingos</div>
-                  <div className="text-white/70">Cerrado</div>
+                  <div className="text-2xl font-bold text-purple-400 mb-2">Teléfonos fuera de horario</div>
+                  <div className="text-white/70">968 46 75 14 / 639 77 86 55</div>
                 </div>
               </div>
             </div>
@@ -403,13 +399,13 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              {/* Estadísticas de Respuesta */}
+              {/* Estadísticas de Respuesta - datos reales */}
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { number: "< 24h", label: "Tiempo de respuesta", icon: Clock },
-                  { number: "98%", label: "Satisfacción cliente", icon: Star },
-                  { number: "500+", label: "Clientes activos", icon: Users },
-                  { number: "35+", label: "Años experiencia", icon: Building2 }
+                  { number: "24-48h", label: "Entrega garantizada", icon: Truck },
+                  { number: "ISO 9001", label: "Calidad certificada", icon: Star },
+                  { number: "1966", label: "Año de fundación", icon: Building2 },
+                  { number: "+55", label: "Años experiencia", icon: Clock }
                 ].map((stat, index) => {
                   const IconComponent = stat.icon;
                   
@@ -701,7 +697,7 @@ export default function ContactPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 relative overflow-hidden"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-4 sm:p-8 relative"
           >
             <div className="text-center mb-8">
               <motion.div
@@ -717,9 +713,9 @@ export default function ContactPage() {
             
             <div className="relative">
               {/* Globe Component */}
-              <div className="h-[500px] w-full flex items-center justify-center">
+              <div className="w-full">
                 <Globe 
-                  className="w-full h-full"
+                  className="w-full"
                   onLocationClick={handleLocationClick}
                 />
               </div>
@@ -817,22 +813,22 @@ export default function ContactPage() {
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-6 text-xl font-semibold rounded-3xl shadow-2xl"
-                onClick={() => handlePhoneCall("+34968123456")}
+                onClick={() => handlePhoneCall("+34968467514")}
               >
                 <Phone className="w-6 h-6 mr-3" />
-                Llamar ahora
+                968 46 75 14
               </Button>
               <Button 
                 size="lg" 
                 className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border border-white/30 px-10 py-6 text-xl rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300"
-                onClick={() => handleWhatsAppClick("+34968123456", "¡Hola! Me interesa conocer más sobre sus servicios. ¿Podrían proporcionarme más información?")}
+                onClick={() => handleWhatsAppClick("+34639778655", "¡Hola! Me gustaría información sobre sus productos para HORECA.")}
               >
                 <MessageSquare className="w-6 h-6 mr-3" />
-                Chat en vivo
+                WhatsApp
               </Button>
             </div>
             
-            {/* Garantías de Servicio */}
+            {/* Garantías de Servicio - datos reales */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -841,9 +837,9 @@ export default function ContactPage() {
               className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
             >
               {[
-                { icon: Clock, text: "Respuesta en 24h", desc: "Garantizada" },
-                { icon: Users, text: "Atención personalizada", desc: "Especialistas dedicados" },
-                { icon: Star, text: "Satisfacción 98%", desc: "Clientes satisfechos" }
+                { icon: Truck, text: "Entrega 24-48h", desc: "Cadena de frío garantizada" },
+                { icon: Users, text: "Atención personalizada", desc: "Especialistas HORECA" },
+                { icon: Star, text: "Calidad ISO 9001", desc: "Certificación garantizada" }
               ].map((guarantee, index) => {
                 const IconComponent = guarantee.icon;
                 

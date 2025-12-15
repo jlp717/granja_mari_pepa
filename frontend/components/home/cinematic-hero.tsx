@@ -210,7 +210,7 @@ export function CinematicHero() {
             <div className="relative">
               <Image
                 src="/images/logo-gtg.png"
-                alt="Grupo Topgel Logo"
+                alt="Granja Maripepa Logo"
                 width={200}
                 height={120}
                 className="drop-shadow-2xl"
@@ -246,7 +246,7 @@ export function CinematicHero() {
                   filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.8))'
                 }}
               >
-                GRUPO
+                GRANJA
               </span>
               <span 
                 className="block bg-gradient-to-r from-blue-200 via-blue-400 to-cyan-300 bg-clip-text text-transparent mt-2"
@@ -255,7 +255,7 @@ export function CinematicHero() {
                   filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.9))'
                 }}
               >
-                TOPGEL
+                MARI PEPA
               </span>
             </h1>
             
@@ -267,7 +267,7 @@ export function CinematicHero() {
                   filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))'
                 }}
               >
-                Del mar a tu mesa - Productos marinos de excelencia
+                Distribuidor oficial Nestlé desde 1966 — Congelados, refrigerados y helados para HORECA
               </span>
             </p>
           </div>

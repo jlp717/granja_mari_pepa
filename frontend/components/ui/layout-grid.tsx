@@ -96,6 +96,8 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
                     <img
                       src={card.image}
                       alt={card.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                       style={{
                         filter: 'contrast(1.1) saturate(1.2) brightness(0.8)'
@@ -134,7 +136,7 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
                         }}
                         whileHover={{ scale: 1.1 }}
                       >
-                        ⭐ DESTACADO
+                        DESTACADO
                       </motion.div>
                     </div>
                   )}
@@ -227,6 +229,8 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
               <img
                 src={selected.image}
                 alt={selected.title}
+                loading="eager"
+                decoding="async"
                 className="w-full h-48 object-cover rounded-xl mb-6"
               />
             )}

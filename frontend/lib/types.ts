@@ -65,6 +65,37 @@ export interface Invoice {
   downloadUrl: string;
 }
 
+export interface FacturaBackend {
+  // Datos del albarán (para obtener la factura)
+  subempresa: string;
+  ejercicio: number;
+  serie: string;
+  terminal: number;
+  numero_albaran: number;
+  lista_albaranes?: string; // Lista de albaranes separados por coma (ej: "510, 533") - LEGACY
+  albaranes?: string; // Lista de albaranes concatenados desde CAC (ej: "510, 533, 612")
+  numAlbaranes?: number; // Cantidad de albaranes asociados a la factura
+  primerAlbaran?: number; // Primer número de albarán (para generación de PDF)
+  // Datos de la factura (para mostrar)
+  serieFactura: string;
+  numeroFactura: number;
+  tipoDocumento: string;
+  // Fecha
+  fecha: string; // Formato DD/MM/YYYY
+  dia: number;
+  mes: number;
+  ano: number;
+  // Importes
+  totalBase: number;
+  totalIVA: number;
+  totalFactura: number;
+  // Estado
+  importePendiente: number;
+  estadoPago: 'pagada' | 'pendiente';
+  // Forma de pago
+  codigoFormaPago: string | null;
+}
+
 export interface ContactForm {
   nombre: string;
   empresa: string;

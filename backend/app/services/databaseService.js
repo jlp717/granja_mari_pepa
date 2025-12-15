@@ -14,30 +14,38 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
   try {
     logger.info('🔍 Obteniendo detalle de factura', { serie, numero, ejercicio, codigoCliente });
     
-    // Cabecera de factura
+    // Cabecera de factura con JOIN a CLI para datos del cliente
+    // IMPORTANTE: CAC tiene múltiples registros por factura (uno por albarán)
+    // Por eso usamos GROUP BY y SUM para obtener los totales correctos
     const headerQuery = `
-      SELECT 
+      SELECT
         CAC.SERIEFACTURA,
         CAC.NUMEROFACTURA,
         CAC.EJERCICIOFACTURA,
-        CAC.FECHAFACTURA,
-        CAC.CODIGOCLIENTEFACTURA,
-        CAC.NOMBRECLIENTEFACTURA,
-        CAC.DIRECCIONCLIENTEFACTURA,
-        CAC.POBLACIONCLIENTEFACTURA,
-        CAC.PROVINCIACLIENTEFACTURA,
-        CAC.CPCLIENTEFACTURA,
-        CAC.CIFCLIENTEFACTURA,
-        CAC.BASEFACTURA,
-        CAC.IVAFACTURA,
-        CAC.RECARGOFACTURA,
-        CAC.TOTALFACTURA,
-        CAC.OBSERVACIONESFACTURA
-      FROM CAC
+        MAX(CAC.DIAFACTURA) as DIAFACTURA,
+        MAX(CAC.MESFACTURA) as MESFACTURA,
+        MAX(CAC.ANOFACTURA) as ANOFACTURA,
+        TRIM(CAC.CODIGOCLIENTEFACTURA) as CODIGOCLIENTEFACTURA,
+        MAX(CLI.NOMBRECLIENTE) as NOMBRECLIENTEFACTURA,
+        MAX(CLI.DIRECCION) as DIRECCIONCLIENTEFACTURA,
+        MAX(CLI.POBLACION) as POBLACIONCLIENTEFACTURA,
+        MAX(CLI.PROVINCIA) as PROVINCIACLIENTEFACTURA,
+        MAX(CLI.CODIGOPOSTAL) as CPCLIENTEFACTURA,
+        MAX(CLI.NIF) as CIFCLIENTEFACTURA,
+        SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 +
+            CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) as BASEFACTURA,
+        SUM(CAC.IMPORTEIVA1 + CAC.IMPORTEIVA2 + CAC.IMPORTEIVA3 + CAC.IMPORTEIVA4 + CAC.IMPORTEIVA5) as IVAFACTURA,
+        SUM(CAC.IMPORTERECARGO1 + CAC.IMPORTERECARGO2 + CAC.IMPORTERECARGO3 +
+            CAC.IMPORTERECARGO4 + CAC.IMPORTERECARGO5) as RECARGOFACTURA,
+        SUM(CAC.IMPORTETOTAL) as TOTALFACTURA,
+        MAX(CAC.OBSERVACIONES) as OBSERVACIONESFACTURA
+      FROM DSEDAC.CAC
+      INNER JOIN DSEDAC.CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
       WHERE CAC.SERIEFACTURA = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
         AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+      GROUP BY CAC.SERIEFACTURA, CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA, TRIM(CAC.CODIGOCLIENTEFACTURA)
     `;
     
     const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio, codigoCliente]);
@@ -47,44 +55,75 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     }
     
     // Líneas de factura con productos
+    // IMPORTANTE: Mantener el % IVA por línea (CODIGOIVA) para soportar facturas con múltiples tipos de IVA.
+    // Además, devolver importes de IVA/recargo por línea para que el PDF pueda sumar con precisión.
     const linesQuery = `
-      SELECT 
-        LAC.NUMEROLINEA,
+      SELECT
+        LAC.SECUENCIA as NUMEROLINEA,
         LAC.CODIGOARTICULO,
-        LAC.DESCRIPCIONARTICULO,
-        LAC.CANTIDADARTICULO,
-        LAC.PRECIOARTICULO,
-        LAC.PORCENTAJEDESCUENTOARTICULO,
-        LAC.PORCENTAJEIVAARTICULO,
-        LAC.PORCENTAJERECARGOARTICULO,
-        LAC.IMPORTENETOARTICULO,
+        LAC.DESCRIPCION as DESCRIPCIONARTICULO,
+        COALESCE(LAC.CANTIDADUNIDADES, 0) as CANTIDADARTICULO,
+        LAC.PRECIOVENTA as PRECIOARTICULO,
+        LAC.PORCENTAJEDESCUENTO as PORCENTAJEDESCUENTOARTICULO,
+        COALESCE(IVA.PORCENTAJEIVA, 0) as PORCENTAJEIVAARTICULO,
+        COALESCE(IVA.PORCENTAJERECARGO, 0) as PORCENTAJERECARGOARTICULO,
+        LAC.IMPORTEVENTA as IMPORTENETOARTICULO,
+        (LAC.IMPORTEVENTA * COALESCE(IVA.PORCENTAJEIVA, 0) / 100.0) as IMPORTEIVAARTICULO,
+        (LAC.IMPORTEVENTA * COALESCE(IVA.PORCENTAJERECARGO, 0) / 100.0) as IMPORTERECARGOARTICULO,
         LAC.SERIEALBARAN,
-        LAC.NUMEROALBARAN
-      FROM LAC
-      WHERE LAC.SERIEFACTURA = ?
-        AND LAC.NUMEROFACTURA = ?
-        AND LAC.EJERCICIOFACTURA = ?
-        AND TRIM(LAC.CODIGOCLIENTEFACTURA) = ?
-      ORDER BY LAC.NUMEROLINEA
+        LAC.NUMEROALBARAN,
+        COALESCE(LAC.CODIGOLOTE, '') as LOTE,
+        COALESCE(LAC.CODIGOLOTE, '') as LOTEARTICULO,
+        COALESCE(LAC.CANTIDADENVASES, 0) as NUMEROCAJAS,
+        COALESCE(LAC.CANTIDADENVASES, 0) as CAJASARTICULO
+      FROM DSEDAC.LAC
+      INNER JOIN DSEDAC.CAC
+        ON CAC.SUBEMPRESAALBARAN = LAC.SUBEMPRESAALBARAN
+        AND CAC.EJERCICIOALBARAN = LAC.EJERCICIOALBARAN
+        AND CAC.SERIEALBARAN = LAC.SERIEALBARAN
+        AND CAC.TERMINALALBARAN = LAC.TERMINALALBARAN
+        AND CAC.NUMEROALBARAN = LAC.NUMEROALBARAN
+      LEFT JOIN DSEDAC.IVA
+        ON IVA.IVA = LAC.CODIGOIVA
+      WHERE TRIM(CAC.SERIEFACTURA) = ?
+        AND CAC.NUMEROFACTURA = ?
+        AND CAC.EJERCICIOFACTURA = ?
+        AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+        AND LAC.IMPORTEVENTA <> 0
+        AND TRIM(LAC.CODIGOARTICULO) <> ''
+      ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
     `;
     
     const lines = await odbcPool.query(linesQuery, [serie, numero, ejercicio, codigoCliente]);
-    
-    // Estado de pago
+
+    // NO sobrescribir PORCENTAJEIVAARTICULO: necesitamos soportar multi-IVA.
+    // Solo trazamos una muestra de tipos de IVA detectados.
+    const ivaRates = [...new Set((lines || []).map(l => Number.parseFloat(l.PORCENTAJEIVAARTICULO) || 0))].sort((a, b) => a - b);
+    logger.info('✅ IVA por línea detectado', {
+      serie,
+      numero,
+      ejercicio,
+      lineas: lines.length,
+      ivaRates: ivaRates.slice(0, 10)
+    });
+
+    // Estado de pago - COLUMNAS REALES de DSEDAC.CVC
     const paymentQuery = `
-      SELECT 
-        CCC.NUMEROVENCIMIENTO,
-        CCC.FECHAVENCIMIENTO,
-        CCC.IMPORTEVENCIMIENTO,
-        CCC.PENDIENTE,
-        CCC.FORMAPAGO
-      FROM CCC
-      WHERE CCC.SERIEFACTURA = ?
-        AND CCC.NUMEROFACTURA = ?
-        AND CCC.EJERCICIOFACTURA = ?
-      ORDER BY CCC.FECHAVENCIMIENTO
+      SELECT
+        CVC.NUMERODOCUMENTO as NUMEROVENCIMIENTO,
+        CAST(CAST(CVC.ANOVENCIMIENTO AS CHAR(4)) || '-' ||
+             LPAD(CAST(CVC.MESVENCIMIENTO AS CHAR(2)), 2, '0') || '-' ||
+             LPAD(CAST(CVC.DIAVENCIMIENTO AS CHAR(2)), 2, '0') AS DATE) as FECHAVENCIMIENTO,
+        CVC.IMPORTEVENCIMIENTO,
+        CVC.IMPORTEPENDIENTE as PENDIENTE,
+        CVC.CODIGOFORMAPAGO as FORMAPAGO
+      FROM DSEDAC.CVC
+      WHERE TRIM(CVC.SERIEDOCUMENTO) = ?
+        AND CVC.NUMERODOCUMENTO = ?
+        AND CVC.EJERCICIODOCUMENTO = ?
+      ORDER BY CVC.ANOVENCIMIENTO, CVC.MESVENCIMIENTO, CVC.DIAVENCIMIENTO
     `;
-    
+
     const payments = await odbcPool.query(paymentQuery, [serie, numero, ejercicio]);
     
     logger.success('✅ Detalle de factura obtenido', { serie, numero, ejercicio });
@@ -101,34 +140,35 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
 }
 
 /**
- * Obtener productos del cliente
+ * Obtener productos del cliente - OPTIMIZADO
  */
 async function getClientProducts(codigoCliente, limit = 100) {
   try {
     logger.info('📦 Obteniendo productos del cliente', { codigoCliente, limit });
-    
+
+    // Consulta optimizada: calculamos importe total directamente
+    // Usamos EJERCICIOALBARAN en vez de EJERCICIOFACTURA porque las líneas
+    // de albarán pueden tener EJERCICIOFACTURA = 0 si no están facturadas
     const query = `
-      SELECT DISTINCT TOP ${limit}
-        LAC.CODIGOARTICULO,
-        LAC.DESCRIPCIONARTICULO,
-        AVG(LAC.PRECIOARTICULO) AS PRECIOPROMEDIO,
-        SUM(LAC.CANTIDADARTICULO) AS CANTIDADTOTAL,
-        COUNT(DISTINCT LAC.NUMEROFACTURA) AS NUMEROFACTURAS,
-        MAX(CAC.FECHAFACTURA) AS ULTIMACOMPRA
-      FROM LAC
-      INNER JOIN CAC ON 
-        LAC.SERIEFACTURA = CAC.SERIEFACTURA
-        AND LAC.NUMEROFACTURA = CAC.NUMEROFACTURA
-        AND LAC.EJERCICIOFACTURA = CAC.EJERCICIOFACTURA
+      SELECT
+        TRIM(LAC.CODIGOARTICULO) AS CODIGOARTICULO,
+        TRIM(LAC.DESCRIPCION) AS DESCRIPCION,
+        AVG(LAC.PRECIOVENTA) AS PRECIOPROMEDIO,
+        SUM(ABS(LAC.CANTIDADUNIDADES)) AS CANTIDADTOTAL,
+        SUM(ABS(LAC.IMPORTEVENTA)) AS IMPORTETOTAL,
+        COUNT(DISTINCT LAC.NUMEROALBARAN) AS NUMEROPEDIDOS
+      FROM DSEDAC.LAC
       WHERE TRIM(LAC.CODIGOCLIENTEFACTURA) = ?
-      GROUP BY LAC.CODIGOARTICULO, LAC.DESCRIPCIONARTICULO
-      ORDER BY ULTIMACOMPRA DESC
+        AND LAC.EJERCICIOALBARAN >= YEAR(CURRENT_DATE) - 2
+      GROUP BY TRIM(LAC.CODIGOARTICULO), TRIM(LAC.DESCRIPCION)
+      ORDER BY IMPORTETOTAL DESC
+      FETCH FIRST ${limit} ROWS ONLY
     `;
-    
+
     const result = await odbcPool.query(query, [codigoCliente]);
-    
+
     logger.success(`✅ Productos obtenidos: ${result.length}`, { codigoCliente });
-    
+
     return result;
   } catch (error) {
     logger.error('❌ Error obteniendo productos', error);
@@ -137,38 +177,65 @@ async function getClientProducts(codigoCliente, limit = 100) {
 }
 
 /**
- * Obtener resumen de facturación del cliente
+ * Obtener resumen de facturación del cliente (total agregado)
  */
 async function getClientSummary(codigoCliente, ejercicio) {
   try {
     logger.info('📊 Obteniendo resumen del cliente', { codigoCliente, ejercicio });
-    
+
     const query = `
-      SELECT 
+      SELECT
         COUNT(*) AS TOTALFACTURAS,
-        SUM(CAC.BASEFACTURA) AS TOTALBASE,
-        SUM(CAC.IVAFACTURA) AS TOTALIVA,
-        SUM(CAC.TOTALFACTURA) AS TOTALFACTURADO,
-        SUM(CASE WHEN EXISTS (
-          SELECT 1 FROM CCC 
-          WHERE CCC.SERIEFACTURA = CAC.SERIEFACTURA 
-            AND CCC.NUMEROFACTURA = CAC.NUMEROFACTURA
-            AND CCC.EJERCICIOFACTURA = CAC.EJERCICIOFACTURA
-            AND CCC.PENDIENTE > 0
-        ) THEN CAC.TOTALFACTURA ELSE 0 END) AS TOTALPENDIENTE
-      FROM CAC
+        SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 + CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) AS TOTALBASE,
+        SUM(CAC.IMPORTEIVA1 + CAC.IMPORTEIVA2 + CAC.IMPORTEIVA3 + CAC.IMPORTEIVA4 + CAC.IMPORTEIVA5) AS TOTALIVA,
+        SUM(CAC.IMPORTETOTAL) AS TOTALFACTURADO
+      FROM DSEDAC.CAC
       WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
         ${ejercicio ? 'AND CAC.EJERCICIOFACTURA = ?' : ''}
     `;
-    
+
     const params = ejercicio ? [codigoCliente, ejercicio] : [codigoCliente];
     const result = await odbcPool.query(query, params);
-    
+
     logger.success('✅ Resumen obtenido', { codigoCliente });
-    
+
     return result[0] || {};
   } catch (error) {
     logger.error('❌ Error obteniendo resumen', error);
+    throw error;
+  }
+}
+
+/**
+ * Obtener resumen de facturación del cliente agrupado por año
+ * Devuelve estadísticas anuales para los últimos 5 años
+ */
+async function getClientSummaryByYear(codigoCliente) {
+  try {
+    logger.info('📊 Obteniendo estadísticas por año del cliente', { codigoCliente });
+
+    const query = `
+      SELECT
+        CAC.EJERCICIOFACTURA AS YEAR,
+        COUNT(*) AS TOTAL,
+        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) = 0 THEN 1 ELSE 0 END) AS PAGADAS,
+        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) > 0 THEN 1 ELSE 0 END) AS PENDIENTES,
+        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) = 0 THEN CAC.IMPORTETOTAL ELSE 0 END) AS TOTALPAGADAS,
+        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) > 0 THEN CAC.IMPORTETOTAL ELSE 0 END) AS TOTALPENDIENTES
+      FROM DSEDAC.CAC
+      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+        AND CAC.EJERCICIOFACTURA >= YEAR(CURRENT_DATE) - 4
+      GROUP BY CAC.EJERCICIOFACTURA
+      ORDER BY CAC.EJERCICIOFACTURA ASC
+    `;
+
+    const result = await odbcPool.query(query, [codigoCliente]);
+
+    logger.success(`✅ Estadísticas por año obtenidas: ${result.length} años`, { codigoCliente });
+
+    return result || [];
+  } catch (error) {
+    logger.error('❌ Error obteniendo estadísticas por año', error);
     throw error;
   }
 }
@@ -198,5 +265,6 @@ module.exports = {
   getInvoiceDetail,
   getClientProducts,
   getClientSummary,
+  getClientSummaryByYear,
   getAvailableYears
 };

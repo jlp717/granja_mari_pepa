@@ -38,6 +38,7 @@ const tempLinkController = require('./app/controllers/tempLinkController');
 const pedidoController = require('./app/controllers/pedidoController');
 const productsController = require('./app/controllers/productsController');
 const chatbotController = require('./app/controllers/chatbotController'); // 🤖 Chatbot IA
+const libroIvaController = require('./app/controllers/libroIvaController'); // 📊 Libro IVA
 const { generalLimiter, pdfLimiter } = require('./app/middleware/rateLimiter');
 const { notFoundHandler, errorHandler, requestLogger } = require('./app/middleware/errorHandler');
 
@@ -287,8 +288,7 @@ app.use('/health', healthRoutes);
 // Legacy health check (mantener para compatibilidad)
 app.get('/api/health', facturaController.healthCheck.bind(facturaController));
 
-// 🛡️ RUTAS DE SEGURIDAD (CSRF Token y estadísticas)
-app.get('/api/security/csrf-token', requireAuth, getCSRFToken);
+// 🛡️ RUTAS DE SEGURIDAD (estadísticas internas)
 app.get('/api/security/stats', requireAuth, (req, res) => {
   // Solo permitir en desarrollo o para administradores
   if (process.env.NODE_ENV === 'production') {
@@ -340,6 +340,54 @@ app.get('/api/auth/v2/verificar-cambio/:codigoCliente', generalLimiter, authCont
 // PROTEGIDO: Cambiar contraseña (usuario logueado)
 app.post('/api/auth/v2/cambiar-password', requireAuth, generalLimiter, authControllerV2.cambiarPassword.bind(authControllerV2));
 
+// =====================================================
+// SEGURIDAD: CSRF TOKEN
+// =====================================================
+// PÚBLICO: Obtener token CSRF para peticiones mutativas
+app.get('/api/csrf-token', generalLimiter, getCSRFToken);
+app.get('/api/security/csrf-token', generalLimiter, getCSRFToken);
+
+// =====================================================
+// RUTAS DE FACTURAS Y DASHBOARD
+// =====================================================
+// PROTEGIDO: Obtener facturas del cliente
+app.get('/api/facturas', requireAuth, generalLimiter, facturaController.obtenerFacturasCliente.bind(facturaController));
+// PROTEGIDO: Obtener dashboard con estadísticas
+app.get('/api/dashboard', requireAuth, generalLimiter, facturaController.obtenerDashboard.bind(facturaController));
+// PROTEGIDO: Generar PDF de factura específica
+app.post('/api/generar-factura', requireAuth, pdfLimiter, validateGenerarFactura, auditDataAccess('GENERAR_FACTURA'), facturaController.generarFactura.bind(facturaController));
+// PROTEGIDO: Libro de IVA repercutido
+app.post('/api/libro-iva', requireAuth, pdfLimiter, auditDataAccess('LIBRO_IVA'), libroIvaController.generarLibroIVA);
+
+// =====================================================
+// ANALYTICS
+// =====================================================
+// PROTEGIDO: Registrar eventos de analytics
+app.post('/api/analytics/events', requireAuth, generalLimiter, (req, res) => {
+  // Registro de eventos para analytics
+  const { event, data } = req.body;
+  logger.info('📊 Analytics event', { 
+    codigoCliente: req.user?.codigoCliente, 
+    event, 
+    timestamp: new Date().toISOString() 
+  });
+  res.json({ success: true, message: 'Event registered' });
+});
+
+// LOGS DE ERRORES FRONTEND
+// =====================================================
+app.post('/api/logs/frontend-error', generalLimiter, (req, res) => {
+  const { error, componentStack, userAgent, url } = req.body;
+  logger.warn('⚠️ Frontend error', {
+    error,
+    componentStack,
+    userAgent,
+    url,
+    timestamp: new Date().toISOString()
+  });
+  res.json({ success: true, message: 'Error logged' });
+});
+
 // RUTAS DE AUTENTICACIÓN (PROTEGIDAS - REQUIEREN JWT)
 app.post('/api/auth/logout', requireAuth, authController.logout.bind(authController));
 app.get('/api/auth/perfil', requireAuth, authController.obtenerPerfil.bind(authController));
@@ -365,15 +413,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.post('/api/clientes/test-insert', clienteController.testInsert.bind(clienteController));
 }
 
-// Generación de factura (con rate limit específico + auditoría)
-app.post('/api/generar-factura', pdfLimiter, validateGenerarFactura, auditDataAccess('GENERAR_FACTURA'), facturaController.generarFactura.bind(facturaController));
-
 // Enviar factura por email (PROTEGIDA + AUDITORÍA)
 app.post('/api/clientes/enviar-factura-email', requireAuth, generalLimiter, validateEnviarFacturaEmail, auditDataAccess('ENVIAR_FACTURA_EMAIL'), facturaController.enviarFacturaPorEmail.bind(facturaController));
-
-// Libro de IVA repercutido (AUDITORÍA)
-const libroIvaController = require('./app/controllers/libroIvaController');
-app.post('/api/libro-iva', requireAuth, pdfLimiter, auditDataAccess('LIBRO_IVA'), libroIvaController.generarLibroIVA);
 
 // RUTAS DE COMPARTIR FACTURAS (ENLACES TEMPORALES + AUDITORÍA)
 app.post('/api/compartir/generar-enlace', requireAuth, generalLimiter, auditDataAccess('GENERAR_ENLACE_COMPARTIR'), tempLinkController.generarEnlace.bind(tempLinkController));

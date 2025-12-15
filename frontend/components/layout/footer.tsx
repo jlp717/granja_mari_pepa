@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, ArrowRight, Star, Award, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, Star, Award, Clock, Package, User, PhoneCall } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAnimatedSection } from '@/hooks/use-animated-section';
 
@@ -62,16 +62,8 @@ export function Footer() {
         className="relative overflow-hidden"
         style={{
           marginBottom: 0,
-          paddingBottom: '60px',
-          background: `
-            linear-gradient(135deg,
-              #0a0a0a 0%,
-              #1a0a2e 25%,
-              #2a1810 50%,
-              #1a0a2e 75%,
-              #0a0a0a 100%
-            )
-          `
+          paddingBottom: 0,
+          background: '#0a0a0a'
         }}
       >
         <div className="container mx-auto px-4 pt-32 pb-12 relative z-10">
@@ -100,16 +92,8 @@ export function Footer() {
       style={{
         position: 'relative',
         marginBottom: 0,
-        paddingBottom: '60px',
-        background: `
-          linear-gradient(135deg,
-            #0a0a0a 0%,
-            #1a0a2e 25%,
-            #2a1810 50%,
-            #1a0a2e 75%,
-            #0a0a0a 100%
-          )
-        `
+        paddingBottom: 0,
+        background: '#0a0a0a'
       }}
     >
       {/* Elegant wave divider - subtle and clean */}
@@ -196,10 +180,10 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 pt-28 md:pt-32 pb-8 relative z-10">
+      <div className="container mx-auto px-4 pt-28 md:pt-32 pb-0 relative z-10">
         
         {/* Main footer content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16" data-animate="content">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-8" data-animate="content">
           
           {/* Brand section */}
           <motion.div 
@@ -210,26 +194,26 @@ export function Footer() {
             <div className="mb-6">
               <h3 className="text-3xl md:text-4xl font-black mb-2">
                 <span className="bg-gradient-to-r from-amber-200 via-orange-300 to-yellow-200 bg-clip-text text-transparent">
-                  GRANJA MARI PEPA
+                  GRANJA MARIPEPA
                 </span>
               </h3>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-2 h-2 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-pulse"></div>
                 <p className="text-amber-300/80 font-medium text-base">
-                  Grupo Topgel Company
+                  Distribuidor Oficial Nestlé
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-orange-400 text-sm">🏭</span>
                 <p className="text-orange-300/70 text-sm font-light">
-                  Distribución Premium desde 1985
+                  Fundada en 1966 en Lorca (Murcia)
                 </p>
               </div>
             </div>
 
             <p className="text-blue-200/80 text-lg mb-8 leading-relaxed max-w-md mx-auto lg:mx-0">
-              Distribuidores de productos alimentarios premium con 
-              <span className="text-cyan-300 font-semibold"> más de 35 años</span> de excelencia.
+              Especialistas en productos congelados, refrigerados y helados para 
+              <span className="text-cyan-300 font-semibold"> HORECA</span> en Murcia, Almería y Alicante.
             </p>
 
             {/* Professional badges */}
@@ -246,7 +230,7 @@ export function Footer() {
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 197, 94, 0.3)' }}
               >
                 <Star className="w-4 h-4 text-green-400" />
-                <span className="text-green-300 text-sm font-semibold">Eco</span>
+                <span className="text-green-300 text-sm font-semibold">Energía Verde</span>
               </motion.div>
             </div>
           </motion.div>
@@ -264,9 +248,9 @@ export function Footer() {
             
             <div className="space-y-4">
               {[
-                { href: '/productos', label: 'Catálogo', icon: '📦' },
-                { href: '/area-clientes', label: 'Portal Cliente', icon: '👤' },
-                { href: '/contacto', label: 'Contacto', icon: '📞' }
+                { href: '/productos', label: 'Catálogo', Icon: Package },
+                { href: '/area-clientes', label: 'Portal Cliente', Icon: User },
+                { href: '/contacto', label: 'Contacto', Icon: PhoneCall }
               ].map((link, index) => (
                 <motion.div
                   key={index}
@@ -277,7 +261,7 @@ export function Footer() {
                     href={link.href}
                     className="flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/50 transition-all duration-300 group"
                   >
-                    <span className="text-xl">{link.icon}</span>
+                    <link.Icon className="w-5 h-5 text-primary" />
                     <span className="text-white font-medium">{link.label}</span>
                     <ArrowRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -298,16 +282,16 @@ export function Footer() {
             </h4>
             
             <div className="space-y-6">
-              {/* Main contact */}
+              {/* Delegación Murcia */}
               <motion.div 
                 className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
                 whileHover={{ y: -2 }}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <Phone className="w-5 h-5 text-cyan-400" />
-                  <span className="text-white font-medium">Central</span>
+                  <span className="text-white font-medium">Lorca (Murcia)</span>
                 </div>
-                <p className="text-cyan-200">+34 968 123 456</p>
+                <p className="text-cyan-200">968 46 75 14 / 639 77 86 55</p>
               </motion.div>
 
               <motion.div 
@@ -318,7 +302,7 @@ export function Footer() {
                   <Mail className="w-5 h-5 text-purple-400" />
                   <span className="text-white font-medium">Email</span>
                 </div>
-                <p className="text-purple-200">info@grupotopgel.com</p>
+                <p className="text-purple-200">pedidos@granjamaripepa.com</p>
               </motion.div>
 
               <motion.div 
@@ -329,7 +313,7 @@ export function Footer() {
                   <Clock className="w-5 h-5 text-blue-400" />
                   <span className="text-white font-medium">Horario</span>
                 </div>
-                <p className="text-blue-200 text-sm">L-V: 8:00-18:00 • S: 9:00-14:00</p>
+                <p className="text-blue-200 text-sm">L-V: 8:00-13:00 y 16:00-19:00</p>
               </motion.div>
             </div>
           </motion.div>
@@ -337,25 +321,25 @@ export function Footer() {
 
         {/* Bottom section */}
         <motion.div 
-          className="border-t border-white/10 pt-8 text-center"
+          className="border-t border-white/10 pt-6 pb-6 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-blue-200/70">
-              &copy; 2025 Grupo Topgel. Todos los derechos reservados.
+              &copy; 2025 Granja Maripepa, S.L. Todos los derechos reservados.
             </p>
             
             <div className="flex items-center gap-6 text-sm">
-              <Link href="/politica-privacidad" className="text-purple-300 hover:text-white transition-colors">
+              <Link href="/legal/privacidad" className="text-purple-300 hover:text-white transition-colors">
                 Privacidad
               </Link>
-              <Link href="/terminos" className="text-purple-300 hover:text-white transition-colors">
+              <Link href="/legal/terminos" className="text-purple-300 hover:text-white transition-colors">
                 Términos
               </Link>
               <span className="text-blue-300 font-medium">
-                🇪🇸 España
+                🇪🇸 Lorca, Murcia
               </span>
             </div>
           </div>

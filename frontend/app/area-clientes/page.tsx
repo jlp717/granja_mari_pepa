@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Lock, Eye, EyeOff, Mail, Shield, Star, ArrowRight, Sparkles, Crown, TrendingUp, AlertCircle, X } from 'lucide-react';
+import { User, Lock, Eye, EyeOff, Mail, Shield, Star, ArrowRight, Sparkles, Crown, TrendingUp, AlertCircle, X, Clipboard, FileText, BarChart3 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -11,12 +11,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import toast from 'react-hot-toast';
 import { CustomerDashboard } from '@/components/customer/dashboard';
 
 const loginFormSchema = z.object({
-  email: z.string().email('Email inválido'),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres')
+  codigoCliente: z.string().min(1, 'Código de cliente es requerido'),
+  password: z.string().min(1, 'Contraseña es requerida')
 });
 
 type LoginFormData = z.infer<typeof loginFormSchema>;
@@ -27,30 +28,37 @@ export default function CustomerAreaPage() {
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-  const [forgotPasswordStep, setForgotPasswordStep] = useState<'email' | 'code' | 'success'>('email');
-  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+  const [forgotPasswordStep, setForgotPasswordStep] = useState<'clientCode' | 'code' | 'newPassword' | 'success'>('clientCode');
+  const [forgotPasswordClientCode, setForgotPasswordClientCode] = useState('');
+  const [clientName, setClientName] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
+  const [devVerificationCode, setDevVerificationCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [canChangePassword, setCanChangePassword] = useState(true);
+  const [daysRemaining, setDaysRemaining] = useState(0);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { isAuthenticated, login } = useAuthStore();
   
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: '',
+      codigoCliente: '',
       password: ''
     }
   });
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-    
+
     try {
-      const success = await login(data.email, data.password);
-      
+      const success = await login(data.codigoCliente, data.password);
+
       if (success) {
         toast.success('¡Bienvenido! Has iniciado sesión correctamente.');
       } else {
-        setErrorMessage('Credenciales incorrectas. Verifica tu email y contraseña.');
+        setErrorMessage('Credenciales incorrectas. Verifica tu código de cliente y contraseña.');
         setShowErrorModal(true);
       }
     } catch (error) {
@@ -61,33 +69,131 @@ export default function CustomerAreaPage() {
     }
   };
 
-  const handleForgotPassword = async (email: string) => {
+  // Paso 1: Solicitar código de verificación (solo con código de cliente)
+  const handleRequestVerificationCode = async () => {
+    if (!forgotPasswordClientCode) {
+      toast.error('Por favor, ingresa tu código de cliente');
+      return;
+    }
+
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setForgotPasswordStep('code');
-      toast.success('Código de verificación enviado a tu email');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
+      // Verificar si puede cambiar contraseña (restricción 30 días)
+      const checkResponse = await fetch(`${API_URL}/api/auth/v2/verificar-cambio/${forgotPasswordClientCode}`);
+      const checkData = await checkResponse.json();
+
+      if (!checkData.puedeCambiar && !checkData.esPrimerCambio) {
+        setCanChangePassword(false);
+        setDaysRemaining(checkData.diasRestantes || 0);
+        
+        // Construir mensaje informativo con fechas
+        let mensaje = `No puedes cambiar la contraseña todavía.`;
+        if (checkData.fechaUltimoCambio) {
+          const fechaUltimo = new Date(checkData.fechaUltimoCambio);
+          mensaje += `\n\nÚltimo cambio: ${fechaUltimo.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}`;
+        }
+        if (checkData.fechaProximoCambio) {
+          const fechaProximo = new Date(checkData.fechaProximoCambio);
+          mensaje += `\nPodrás cambiarla a partir del: ${fechaProximo.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
+        }
+        mensaje += `\n\nDebes esperar ${checkData.diasRestantes} día${checkData.diasRestantes > 1 ? 's' : ''} más.`;
+        
+        toast.error(mensaje, { duration: 6000 });
+        return;
+      }
+
+      // Solicitar código de verificación
+      const response = await fetch(`${API_URL}/api/auth/v2/solicitar-codigo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigoCliente: forgotPasswordClientCode }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setClientName(data.nombreCliente || '');
+        setForgotPasswordStep('code');
+        
+        // En desarrollo, guardar el código para mostrarlo
+        if (data.modoDesarrollo && data.codigoVerificacion) {
+          setDevVerificationCode(data.codigoVerificacion);
+          console.log('🔑 Código de verificación (DEV):', data.codigoVerificacion);
+        }
+        
+        toast.success('Código de verificación generado. Contacta con la empresa para obtenerlo.');
+      } else {
+        toast.error(data.error || 'Error al procesar la solicitud');
+        if (data.diasRestantes) {
+          setCanChangePassword(false);
+          setDaysRemaining(data.diasRestantes);
+        }
+      }
     } catch (error) {
-      toast.error('Error al enviar el código. Inténtalo más tarde.');
+      console.error('Error solicitando código:', error);
+      toast.error('Error al procesar la solicitud. Inténtalo más tarde.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleVerifyCode = async (code: string) => {
+  // Paso 2: Verificar código y mostrar confirmación
+  const handleVerifyCode = async () => {
+    if (!verificationCode || verificationCode.length !== 6) {
+      toast.error('Ingresa el código de 6 dígitos');
+      return;
+    }
+
+    // Mostrar diálogo de confirmación antes de cambiar
+    setShowConfirmDialog(true);
+  };
+
+  // Paso 3: Confirmar cambio de contraseña
+  const handleConfirmPasswordChange = async () => {
+    if (newPassword !== confirmPassword) {
+      toast.error('Las contraseñas no coinciden');
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      toast.error('La contraseña debe tener al menos 8 caracteres');
+      return;
+    }
+
+    if (!/[a-zA-Z]/.test(newPassword) || !/[0-9]/.test(newPassword)) {
+      toast.error('La contraseña debe contener letras y números');
+      return;
+    }
+
+    setShowConfirmDialog(false);
     setIsLoading(true);
+    
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      if (code === '123456') { // Demo code
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
+      const response = await fetch(`${API_URL}/api/auth/v2/verificar-codigo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          codigoCliente: forgotPasswordClientCode,
+          codigoVerificacion: verificationCode,
+          nuevaPassword: newPassword
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setForgotPasswordStep('success');
-        toast.success('¡Contraseña restablecida correctamente!');
+        toast.success('¡Contraseña cambiada exitosamente!');
       } else {
-        toast.error('Código incorrecto. Inténtalo nuevamente.');
+        toast.error(data.error || 'Error al cambiar la contraseña');
       }
     } catch (error) {
-      toast.error('Error al verificar el código.');
+      console.error('Error cambiando contraseña:', error);
+      toast.error('Error al cambiar la contraseña');
     } finally {
       setIsLoading(false);
     }
@@ -95,17 +201,32 @@ export default function CustomerAreaPage() {
 
   const resetForgotPasswordModal = () => {
     setShowForgotPasswordModal(false);
-    setForgotPasswordStep('email');
-    setForgotPasswordEmail('');
+    setForgotPasswordStep('clientCode');
+    setForgotPasswordClientCode('');
+    setClientName('');
     setVerificationCode('');
+    setDevVerificationCode('');
+    setNewPassword('');
+    setConfirmPassword('');
+    setCanChangePassword(true);
+    setDaysRemaining(0);
+    setShowConfirmDialog(false);
   };
+
+  // 🔧 FIX: Scroll al top inmediatamente cuando el usuario se autentica
+  // Esto evita que se vea el footer durante la transición
+  useLayoutEffect(() => {
+    if (isAuthenticated) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }, [isAuthenticated]);
 
   if (isAuthenticated) {
     return <CustomerDashboard />;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pt-8 md:pt-12 lg:pt-16 xl:pt-20 overflow-hidden relative">
+    <div className="min-h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8 overflow-hidden relative">
       {/* Background Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -204,7 +325,7 @@ export default function CustomerAreaPage() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-gray-600 leading-relaxed"
                 >
-                  Accede a tu dashboard personalizado para gestionar pedidos, 
+                  Accede a tu panel de control personalizado para gestionar pedidos, 
                   descargar facturas y mucho más con total comodidad.
                 </motion.p>
               </div>
@@ -292,26 +413,26 @@ export default function CustomerAreaPage() {
                       
                       <FormField
                         control={form.control}
-                        name="email"
+                        name="codigoCliente"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-gray-700 font-medium">Email</FormLabel>
+                            <FormLabel className="text-gray-700 font-medium">Código de Cliente</FormLabel>
                             <FormControl>
                               <div className="relative group">
-                                <Mail className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${
-                                  focusedInput === 'email' ? 'text-blue-600' : 'text-gray-400'
+                                <User className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${
+                                  focusedInput === 'codigoCliente' ? 'text-blue-600' : 'text-gray-400'
                                 }`} />
-                                <Input 
-                                  type="email" 
-                                  placeholder="tu@email.com" 
+                                <Input
+                                  type="text"
+                                  placeholder="Ej: 0123456789"
                                   className="pl-11 h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-0 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 placeholder:text-gray-400"
                                   {...field}
                                   disabled={isLoading}
-                                  onFocus={() => setFocusedInput('email')}
+                                  onFocus={() => setFocusedInput('codigoCliente')}
                                   onBlur={() => setFocusedInput(null)}
                                 />
                                 <AnimatePresence>
-                                  {focusedInput === 'email' && (
+                                  {focusedInput === 'codigoCliente' && (
                                     <motion.div
                                       initial={{ scale: 0 }}
                                       animate={{ scale: 1 }}
@@ -338,9 +459,9 @@ export default function CustomerAreaPage() {
                                 <Lock className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${
                                   focusedInput === 'password' ? 'text-blue-600' : 'text-gray-400'
                                 }`} />
-                                <Input 
+                                <Input
                                   type={showPassword ? "text" : "password"}
-                                  placeholder="••••••••" 
+                                  placeholder="Tu contraseña"
                                   className="pl-11 pr-12 h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-0 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 placeholder:text-gray-400"
                                   {...field}
                                   disabled={isLoading}
@@ -403,23 +524,6 @@ export default function CustomerAreaPage() {
                     </form>
                   </Form>
 
-                  {/* Demo credentials */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.6 }}
-                    className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100"
-                  >
-                    <h3 className="text-sm font-semibold text-blue-900 mb-3 flex items-center gap-2">
-                      <Star className="w-4 h-4" />
-                      Credenciales de demo:
-                    </h3>
-                    <div className="text-sm text-blue-800 space-y-1">
-                      <p><strong>Email:</strong> cliente@example.com</p>
-                      <p><strong>Contraseña:</strong> password123</p>
-                    </div>
-                  </motion.div>
-
                   {/* Additional links */}
                   <div className="mt-6 text-center space-y-3">
                     <motion.button
@@ -447,7 +551,7 @@ export default function CustomerAreaPage() {
             </motion.div>
           </div>
 
-          {/* Bottom Features Section */}
+          {/* Bottom Features Section - DISEÑO PREMIUM */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -455,11 +559,20 @@ export default function CustomerAreaPage() {
             className="mt-16 lg:mt-24"
           >
             <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.85, duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 rounded-full text-blue-700 text-sm font-medium mb-4"
+              >
+                <Sparkles className="w-4 h-4" />
+                Panel de Control
+              </motion.div>
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.6 }}
-                className="text-2xl md:text-3xl font-bold text-gray-900 mb-4"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4"
               >
                 Todo lo que necesitas en un solo lugar
               </motion.h3>
@@ -467,62 +580,134 @@ export default function CustomerAreaPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.6 }}
-                className="text-gray-600 max-w-2xl mx-auto"
+                className="text-gray-600 max-w-2xl mx-auto text-lg"
               >
                 Gestiona tu relación comercial con nosotros de forma fácil y eficiente
               </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { 
-                  icon: '📋', 
+                  icon: Clipboard, 
                   title: 'Gestión de Pedidos', 
-                  desc: 'Realiza y consulta todos tus pedidos',
-                  color: 'from-blue-500 to-cyan-500'
+                  desc: 'Realiza y consulta todos tus pedidos en tiempo real',
+                  gradient: 'from-blue-500 to-indigo-600',
+                  bgGlow: 'bg-blue-500/20',
+                  stats: '24/7',
+                  statsLabel: 'Disponible'
                 },
                 { 
-                  icon: '🧾', 
+                  icon: FileText, 
                   title: 'Facturas PDF', 
-                  desc: 'Descarga y gestiona tus facturas',
-                  color: 'from-purple-500 to-pink-500'
+                  desc: 'Descarga y gestiona tus facturas al instante',
+                  gradient: 'from-purple-500 to-pink-600',
+                  bgGlow: 'bg-purple-500/20',
+                  stats: '100%',
+                  statsLabel: 'Digital'
                 },
                 { 
-                  icon: '👤', 
+                  icon: User, 
                   title: 'Perfil Personal', 
-                  desc: 'Actualiza tus datos y preferencias',
-                  color: 'from-emerald-500 to-teal-500'
+                  desc: 'Actualiza tus datos y preferencias de contacto',
+                  gradient: 'from-emerald-500 to-teal-600',
+                  bgGlow: 'bg-emerald-500/20',
+                  stats: '∞',
+                  statsLabel: 'Personalizable'
                 },
                 { 
-                  icon: '📊', 
+                  icon: BarChart3, 
                   title: 'Estadísticas', 
-                  desc: 'Analiza tu historial de compras',
-                  color: 'from-orange-500 to-red-500'
+                  desc: 'Analiza tu historial y patrones de compra',
+                  gradient: 'from-amber-500 to-orange-600',
+                  bgGlow: 'bg-amber-500/20',
+                  stats: '📊',
+                  statsLabel: 'Insights'
                 }
-              ].map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
-                  whileHover={{ 
-                    y: -10,
-                    transition: { duration: 0.2 }
-                  }}
-                  className="group cursor-pointer"
-                >
-                  <div className="relative bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/30 hover:shadow-2xl transition-all duration-300 hover:bg-white/90">
-                    <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+              ].map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
+                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                    className="group cursor-pointer relative"
+                  >
+                    {/* Glow effect on hover */}
+                    <div className={`absolute inset-0 ${feature.bgGlow} rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
                     
-                    <div className="relative z-10 text-center">
-                      <div className="text-4xl mb-4">{feature.icon}</div>
-                      <h4 className="font-bold text-gray-900 mb-2 text-lg">{feature.title}</h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
+                    <div className="relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-2xl hover:border-gray-200 transition-all duration-500 h-full">
+                      {/* Icon with gradient background */}
+                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                        <IconComponent className="w-7 h-7 text-white" />
+                      </div>
+                      
+                      {/* Content */}
+                      <h4 className="font-bold text-gray-900 mb-2 text-lg group-hover:text-gray-800 transition-colors">
+                        {feature.title}
+                      </h4>
+                      <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                        {feature.desc}
+                      </p>
+                      
+                      {/* Stats badge */}
+                      <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
+                        <span className={`text-xl font-bold bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                          {feature.stats}
+                        </span>
+                        <span className="text-xs text-gray-500 font-medium uppercase tracking-wide">
+                          {feature.statsLabel}
+                        </span>
+                      </div>
+                      
+                      {/* Hover arrow indicator */}
+                      <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                        <ArrowRight className={`w-5 h-5 bg-gradient-to-r ${feature.gradient} bg-clip-text`} style={{ color: 'currentColor' }} />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
+            
+            {/* Bottom CTA Banner */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.6 }}
+              className="mt-12 relative overflow-hidden"
+            >
+              <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-2xl p-8 md:p-10 relative">
+                {/* Background pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  }} />
+                </div>
+                
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="text-center md:text-left">
+                    <h4 className="text-xl md:text-2xl font-bold text-white mb-2">
+                      ¿Aún no tienes cuenta?
+                    </h4>
+                    <p className="text-blue-100 text-sm md:text-base">
+                      Contacta con nuestro equipo comercial para obtener acceso
+                    </p>
+                  </div>
+                  <motion.a
+                    href="/contacto"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Contactar
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -645,8 +830,9 @@ export default function CustomerAreaPage() {
                   <div>
                     <h3 className="text-xl font-bold">Recuperar Contraseña</h3>
                     <p className="text-blue-100 text-sm">
-                      {forgotPasswordStep === 'email' && 'Ingresa tu email para continuar'}
-                      {forgotPasswordStep === 'code' && 'Ingresa el código de verificación'}
+                      {forgotPasswordStep === 'clientCode' && 'Ingresa tu código de cliente'}
+                      {forgotPasswordStep === 'code' && 'Ingresa el código y nueva contraseña'}
+                      {forgotPasswordStep === 'newPassword' && 'Define tu nueva contraseña'}
                       {forgotPasswordStep === 'success' && '¡Contraseña restablecida!'}
                     </p>
                   </div>
@@ -656,10 +842,10 @@ export default function CustomerAreaPage() {
               {/* Content */}
               <div className="p-6">
                 <AnimatePresence mode="wait">
-                  {/* Paso 1: Ingreso de email */}
-                  {forgotPasswordStep === 'email' && (
+                  {/* Paso 1: Solo código de cliente */}
+                  {forgotPasswordStep === 'clientCode' && (
                     <motion.div
-                      key="email-step"
+                      key="clientCode-step"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
@@ -667,39 +853,56 @@ export default function CustomerAreaPage() {
                     >
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Dirección de email
+                          Código de cliente
                         </label>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                           <Input
-                            type="email"
-                            value={forgotPasswordEmail}
-                            onChange={(e) => setForgotPasswordEmail(e.target.value)}
-                            placeholder="tu@email.com"
-                            className="pl-10 h-12 border-2 focus:border-blue-500"
+                            type="text"
+                            value={forgotPasswordClientCode}
+                            onChange={(e) => setForgotPasswordClientCode(e.target.value)}
+                            placeholder="Ej: 0123456789"
+                            className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
                           />
                         </div>
                       </div>
                       
-                      <div className="bg-blue-50 p-4 rounded-xl">
+                      {!canChangePassword && daysRemaining > 0 && (
+                        <div className="bg-red-50 p-4 rounded-xl border border-red-200">
+                          <div className="flex items-start gap-3">
+                            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+                            <div className="text-sm text-red-800">
+                              <strong>No puedes cambiar la contraseña todavía.</strong>
+                              <p className="mt-1">Debes esperar {daysRemaining} día{daysRemaining > 1 ? 's' : ''} más.</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
                         <div className="flex items-start gap-3">
-                          <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+                          <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
                           <div className="text-sm text-blue-800">
-                            Te enviaremos un código de verificación a tu email registrado.
+                            <strong>Proceso seguro:</strong>
+                            <ol className="mt-2 space-y-1 list-decimal list-inside">
+                              <li>Ingresa tu código de cliente</li>
+                              <li>Contacta con la empresa para obtener el código de verificación</li>
+                              <li>Establece tu nueva contraseña</li>
+                            </ol>
                           </div>
                         </div>
                       </div>
 
                       <Button
-                        onClick={() => handleForgotPassword(forgotPasswordEmail)}
-                        disabled={!forgotPasswordEmail || isLoading}
+                        onClick={handleRequestVerificationCode}
+                        disabled={!forgotPasswordClientCode || isLoading || !canChangePassword}
                         className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl"
                       >
                         {isLoading ? (
                           <LoadingSpinner className="w-5 h-5" />
                         ) : (
                           <>
-                            Enviar código
+                            Solicitar código
                             <ArrowRight className="w-5 h-5 ml-2" />
                           </>
                         )}
@@ -707,7 +910,7 @@ export default function CustomerAreaPage() {
                     </motion.div>
                   )}
 
-                  {/* Paso 2: Verificación de código */}
+                  {/* Paso 2: Código de verificación + Nueva contraseña */}
                   {forgotPasswordStep === 'code' && (
                     <motion.div
                       key="code-step"
@@ -716,6 +919,14 @@ export default function CustomerAreaPage() {
                       exit={{ opacity: 0, x: -20 }}
                       className="space-y-4"
                     >
+                      {clientName && (
+                        <div className="bg-blue-50 p-3 rounded-xl border border-blue-200 text-center">
+                          <p className="text-sm text-blue-800">
+                            Hola, <span className="font-semibold">{clientName}</span>
+                          </p>
+                        </div>
+                      )}
+
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Código de verificación
@@ -723,43 +934,81 @@ export default function CustomerAreaPage() {
                         <Input
                           type="text"
                           value={verificationCode}
-                          onChange={(e) => setVerificationCode(e.target.value)}
-                          placeholder="123456"
-                          className="h-12 text-center text-xl font-mono border-2 focus:border-blue-500 tracking-widest"
+                          onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                          placeholder="000000"
+                          className="h-12 text-center text-2xl font-mono border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 tracking-widest"
                           maxLength={6}
                         />
                       </div>
+
+                      {/* En desarrollo: mostrar código - solo para testing local */}
+                      {devVerificationCode && process.env.NODE_ENV === 'development' && (
+                        <div className="bg-yellow-50 p-3 rounded-xl border border-yellow-300">
+                          <p className="text-sm text-yellow-800 text-center">
+                            <strong>🔧 Testing:</strong> Código <span className="font-mono font-bold text-lg">{devVerificationCode}</span>
+                          </p>
+                        </div>
+                      )}
                       
-                      <div className="bg-green-50 p-4 rounded-xl">
+                      <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
                         <div className="flex items-start gap-3">
-                          <Mail className="w-5 h-5 text-green-600 mt-0.5" />
-                          <div className="text-sm text-green-800">
-                            Código enviado a <span className="font-semibold">{forgotPasswordEmail}</span>
-                            <br />
-                            <span className="text-xs text-green-600 mt-1 block">
-                              Para demo, usa el código: <strong>123456</strong>
-                            </span>
+                          <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
+                          <div className="text-sm text-amber-800">
+                            <strong>¿No tienes el código?</strong>
+                            <p className="mt-1">Llama al <strong>639 77 86 56</strong> para obtener tu código de verificación.</p>
                           </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Nueva Contraseña
+                        </label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <Input
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            placeholder="Mínimo 8 caracteres, letras y números"
+                            className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Confirmar Contraseña
+                        </label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <Input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder="Repite tu contraseña"
+                            className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                          />
                         </div>
                       </div>
 
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          onClick={() => setForgotPasswordStep('email')}
+                          onClick={() => setForgotPasswordStep('clientCode')}
                           className="flex-1 h-12 border-2"
                         >
                           Atrás
                         </Button>
                         <Button
-                          onClick={() => handleVerifyCode(verificationCode)}
-                          disabled={!verificationCode || isLoading}
+                          onClick={handleVerifyCode}
+                          disabled={verificationCode.length !== 6 || !newPassword || !confirmPassword || isLoading}
                           className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold"
                         >
                           {isLoading ? (
                             <LoadingSpinner className="w-5 h-5" />
                           ) : (
-                            'Verificar'
+                            'Cambiar'
                           )}
                         </Button>
                       </div>
@@ -790,18 +1039,24 @@ export default function CustomerAreaPage() {
                           ¡Contraseña restablecida!
                         </h4>
                         <p className="text-gray-600">
-                          Tu nueva contraseña temporal es: <br />
-                          <span className="font-mono bg-gray-100 px-3 py-1 rounded text-lg">
-                            nueva123
-                          </span>
+                          Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión.
                         </p>
                       </div>
-                      
-                      <div className="bg-yellow-50 p-4 rounded-xl">
+
+                      <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
                         <div className="flex items-start gap-3">
-                          <Shield className="w-5 h-5 text-yellow-600 mt-0.5" />
-                          <div className="text-sm text-yellow-800">
-                            Por seguridad, cambia tu contraseña después de iniciar sesión.
+                          <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
+                          <div className="text-sm text-amber-800">
+                            <strong>Importante:</strong> Solo podrás cambiar tu contraseña de nuevo dentro de 30 días.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="bg-green-50 p-4 rounded-xl">
+                        <div className="flex items-start gap-3">
+                          <Shield className="w-5 h-5 text-green-600 mt-0.5" />
+                          <div className="text-sm text-green-800">
+                            Tu cuenta está protegida. Recuerda mantener tu contraseña segura.
                           </div>
                         </div>
                       </div>
@@ -820,6 +1075,65 @@ export default function CustomerAreaPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Diálogo de confirmación antes de cambiar contraseña */}
+      <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <DialogContent className="sm:max-w-md bg-white border shadow-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-gray-900">
+              <AlertCircle className="w-5 h-5 text-amber-500" />
+              Confirmar cambio de contraseña
+            </DialogTitle>
+            <DialogDescription className="text-gray-600">
+              Esta acción es importante y tiene consecuencias de seguridad.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+              <ul className="space-y-2 text-sm text-amber-800">
+                <li className="flex items-start gap-2">
+                  <Shield className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>Tu contraseña actual dejará de funcionar inmediatamente.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>No podrás cambiar tu contraseña de nuevo durante 30 días.</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Lock className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>Asegúrate de recordar tu nueva contraseña o guárdala en un lugar seguro.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <p className="text-center text-gray-700 font-medium">
+              ¿Estás seguro de que deseas continuar?
+            </p>
+          </div>
+          
+          <DialogFooter className="flex gap-3 sm:gap-3">
+            <Button
+              variant="outline"
+              onClick={() => setShowConfirmDialog(false)}
+              className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleConfirmPasswordChange}
+              disabled={isLoading}
+              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+            >
+              {isLoading ? (
+                <LoadingSpinner className="w-5 h-5" />
+              ) : (
+                'Sí, cambiar contraseña'
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

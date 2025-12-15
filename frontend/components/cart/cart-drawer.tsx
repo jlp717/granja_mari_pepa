@@ -178,35 +178,177 @@ export function CartDrawer() {
             className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[9000] transition-opacity duration-300 ease-in-out"
           />
           
-          <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-white shadow-2xl z-[9001] flex flex-col transform transition-transform duration-300 ease-in-out">
-            <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-              <div className="flex items-center space-x-3">
-                <ShoppingBag className="w-6 h-6" />
-                <h2 className="text-xl font-bold">Tu Carrito ({getTotalItems()})</h2>
+          <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-white shadow-2xl z-[9001] flex flex-col transform transition-all duration-300 ease-premium animate-slide-in-right">
+            {/* ✨ Premium Header with gradient */}
+            <div className="relative overflow-hidden">
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600" />
+              
+              {/* Subtle pattern overlay */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{ 
+                  backgroundImage: `radial-gradient(circle at 25% 25%, white 1px, transparent 1px)`,
+                  backgroundSize: '20px 20px'
+                }} />
               </div>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={toggleCart}
-                className="text-white hover:bg-white/20 transition-colors duration-200"
-              >
-                <X className="w-6 h-6" />
-              </Button>
+              
+              {/* Header content */}
+              <div className="relative flex items-center justify-between p-6 text-white">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <ShoppingBag className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold tracking-tight">Tu Carrito</h2>
+                    <p className="text-blue-100 text-sm">
+                      {getTotalItems() === 0 
+                        ? 'Vacío' 
+                        : `${getTotalItems()} ${getTotalItems() === 1 ? 'producto' : 'productos'}`
+                      }
+                    </p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={toggleCart}
+                  className="text-white hover:bg-white/20 transition-all duration-200 rounded-xl h-10 w-10"
+                  aria-label="Cerrar carrito"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
             <div className="flex-1 overflow-y-auto p-6">
               {items.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in">
-                  <div className="animate-bounce">
-                    <ShoppingBag className="w-16 h-16 text-slate-400 mb-4" />
+                /* ✨ PREMIUM EMPTY STATE - Emotional & Delightful */
+                <div className="flex flex-col items-center justify-center h-full text-center px-4">
+                  {/* Animated illustration container */}
+                  <div className="relative mb-8">
+                    {/* Glow effect behind icon */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-400/10 to-transparent rounded-full blur-2xl scale-150 animate-pulse" />
+                    
+                    {/* Main icon with premium animation */}
+                    <div className="relative">
+                      <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200/80 shadow-lg flex items-center justify-center animate-float">
+                        {/* Shopping bag icon with gradient */}
+                        <svg 
+                          className="w-14 h-14 text-slate-400"
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <defs>
+                            <linearGradient id="bagGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#94a3b8" />
+                              <stop offset="100%" stopColor="#64748b" />
+                            </linearGradient>
+                          </defs>
+                          <path 
+                            d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" 
+                            stroke="url(#bagGradient)" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                          />
+                          <path 
+                            d="M3 6H21" 
+                            stroke="url(#bagGradient)" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                          />
+                          <path 
+                            d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" 
+                            stroke="url(#bagGradient)" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                          />
+                          {/* Smile inside the bag */}
+                          <path 
+                            d="M9.5 16.5C10.3 17.3 11.1 17.5 12 17.5C12.9 17.5 13.7 17.3 14.5 16.5" 
+                            stroke="url(#bagGradient)" 
+                            strokeWidth="1.5" 
+                            strokeLinecap="round"
+                            className="opacity-60"
+                          />
+                        </svg>
+                      </div>
+                      
+                      {/* Decorative sparkles */}
+                      <div className="absolute -top-2 -right-2 w-4 h-4 text-yellow-400 animate-pulse">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                        </svg>
+                      </div>
+                      <div className="absolute -bottom-1 -left-1 w-3 h-3 text-blue-400 animate-pulse delay-300">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-700 mb-2">Tu carrito está vacío</h3>
-                  <p className="text-slate-500 mb-4">¡Descubre nuestros deliciosos productos!</p>
+                  
+                  {/* Text content with premium typography */}
+                  <h3 className="text-2xl font-bold text-slate-800 mb-3 tracking-tight">
+                    Tu carrito está vacío
+                  </h3>
+                  <p className="text-slate-500 mb-6 text-base leading-relaxed max-w-xs">
+                    Explora nuestro catálogo y añade productos de calidad a tu pedido
+                  </p>
+                  
+                  {/* Feature pills - sin emojis */}
+                  <div className="flex flex-wrap justify-center gap-2 mb-8">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
+                      <Package className="w-3.5 h-3.5 text-slate-400" />
+                      Productos frescos
+                    </div>
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
+                      <Sparkles className="w-3.5 h-3.5 text-slate-400" />
+                      Calidad premium
+                    </div>
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
+                      Envío incluido
+                    </div>
+                  </div>
+                  
+                  {/* Premium CTA Button */}
                   <Button 
-                    onClick={handleExploreProducts} 
-                    className="mt-4 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                    onClick={handleExploreProducts}
+                    size="lg"
+                    className="group relative overflow-hidden bg-slate-900 hover:bg-slate-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    Explorar Productos
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                    
+                    <span className="relative flex items-center gap-2">
+                      <Package className="w-5 h-5" />
+                      Ver Catálogo
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </span>
                   </Button>
+                  
+                  {/* Stats - más profesionales */}
+                  <div className="mt-10 pt-6 border-t border-slate-100 w-full">
+                    <div className="flex items-center justify-center gap-8 text-xs text-slate-400">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-slate-600">+500</div>
+                        <div>Productos</div>
+                      </div>
+                      <div className="w-px h-8 bg-slate-200" />
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-slate-600">24h</div>
+                        <div>Entrega</div>
+                      </div>
+                      <div className="w-px h-8 bg-slate-200" />
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-slate-600">+35</div>
+                        <div>Años</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-4">

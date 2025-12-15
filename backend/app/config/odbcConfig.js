@@ -4,11 +4,12 @@
  * Pool de conexiones a SQL Server/Access via ODBC
  */
 
+require('dotenv').config();
 const odbc = require('odbc');
 const logger = require('../utils/logger');
 
 // Pool de conexiones ODBC
-const connectionString = 'DSN=ERPUNI';
+const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
 
 let pool;
 
@@ -83,11 +84,41 @@ async function closePool() {
   }
 }
 
+/**
+ * Cerrar pool
+ */
+async function closePool() {
+  if (pool) {
+    try {
+      await pool.close();
+      logger.info('✅ Pool ODBC cerrado correctamente');
+    } catch (error) {
+      logger.error('❌ Error cerrando pool:', error);
+    }
+  }
+}
+
+/**
+ * Inicializar pool (alias de initPool)
+ */
+async function initialize() {
+  return await initPool();
+}
+
+/**
+ * Cerrar pool (alias de closePool)
+ */
+async function close() {
+  return await closePool();
+}
+
 module.exports = {
   initPool,
   getConnection,
   query,
   closePool,
+  initialize,
+  close,
   get pool() {
     return pool;
   }

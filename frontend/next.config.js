@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
+
+// Bundle analyzer para desarrollo
+const withBundleAnalyzer = process.env.ANALYZE === 'true' 
+  ? require('@next/bundle-analyzer')({ enabled: true })
+  : (config) => config;
+
 const nextConfig = {
   output: 'export',
   eslint: {
@@ -15,8 +21,12 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
-  generateEtags: false,
+  generateEtags: true,
   trailingSlash: true,
+  
+  // Optimizaciones de React 18
+  reactStrictMode: true,
+  
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
@@ -25,12 +35,20 @@ const nextConfig = {
       '@radix-ui/react-dialog',
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-toast',
+      '@radix-ui/react-tooltip',
+      '@radix-ui/react-popover',
       'zustand',
+      'recharts',
+      'date-fns',
     ],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  
+  // NOTA: Los headers de seguridad están en netlify.toml
+  // ya que con output: 'export' no se pueden usar aquí
+  
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
@@ -40,7 +58,13 @@ const nextConfig = {
         cacheGroups: {
           framework: {
             name: 'framework',
-            test: /[\\/]node_modules[\\/](react|react-dom|next)[\\/]/,
+            test: /[\\/]node_modules[\\/](react|react-dom|next|scheduler)[\\/]/,
+            priority: 50,
+            enforce: true,
+          },
+          ui: {
+            name: 'ui',
+            test: /[\\/]node_modules[\\/](@radix-ui|framer-motion|lucide-react)[\\/]/,
             priority: 40,
             enforce: true,
           },
@@ -58,16 +82,16 @@ const nextConfig = {
             reuseExistingChunk: true,
           },
         },
-      }
+      };
     }
 
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
-    })
+    });
 
-    return config
+    return config;
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

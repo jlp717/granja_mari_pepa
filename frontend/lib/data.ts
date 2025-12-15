@@ -1,140 +1,135 @@
 import { Product, Order, Invoice } from './types';
 
-// Estructura jerárquica de marcas y categorías
+// Estructura jerárquica de marcas y categorías - FUENTE: https://granjamaripepa.com/productos/
 export const brands = [
   {
     id: 'grupo-topgel',
     name: 'Grupo Topgel',
-    description: 'Distribuidor líder en productos congelados de alta calidad',
+    description: 'Productos del mar, carnes, precocinados y repostería congelados',
     image: 'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600',
     color: 'blue',
+    externalUrl: 'http://www.grupotopgel.es/',
     subcategories: [
       {
         id: 'mar',
         name: 'Productos del mar',
-        description: 'Pescados y mariscos frescos congelados de la más alta calidad',
-        image: 'https://images.pexels.com/photos/1267697/pexels-photo-1267697.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🐟'
+        description: 'Pescados y mariscos congelados de la más alta calidad',
+        image: 'https://images.pexels.com/photos/3296279/pexels-photo-3296279.jpeg?auto=compress&cs=tinysrgb&w=800',
+        icon: 'Fish',
+        externalUrl: 'https://maripepa.grupotopgel.es/15-productos-del-mar'
       },
       {
         id: 'carne',
-        name: 'Carne',
-        description: 'Carnes selectas y productos cárnicos premium congelados',
-        image: 'https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🥩'
+        name: 'Carnes',
+        description: 'Carnes selectas congeladas',
+        image: 'https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=800',
+        icon: 'Beef',
+        externalUrl: 'https://maripepa.grupotopgel.es/11-carnes'
       },
       {
         id: 'precocinados',
         name: 'Precocinados',
-        description: 'Platos preparados congelados listos para consumir',
-        image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🍽️'
+        description: 'Preparados y verduras congelados',
+        image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=800',
+        icon: 'UtensilsCrossed',
+        externalUrl: 'https://maripepa.grupotopgel.es/14-precocinados-preparados-y-verduras'
       },
       {
         id: 'reposteria',
         name: 'Repostería',
-        description: 'Dulces y postres artesanales congelados',
+        description: 'Dulces y postres congelados',
         image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🧁'
+        icon: 'Cake',
+        externalUrl: 'https://maripepa.grupotopgel.es/18-reposteria'
       }
     ]
   },
   {
     id: 'nestle',
     name: 'Nestlé',
-    description: 'Productos de alimentación de calidad mundial y confianza familiar',
+    description: 'Distribuidor oficial de helados Nestlé — Calidad mundial',
     image: 'https://images.pexels.com/photos/4109942/pexels-photo-4109942.jpeg?auto=compress&cs=tinysrgb&w=800',
     color: 'red',
+    externalUrl: 'https://www.helados.nestle.es/',
     subcategories: [
       {
-        id: 'lacteos',
-        name: 'Lácteos',
-        description: 'Leches, yogures y productos lácteos premium',
-        image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🥛'
-      },
-      {
-        id: 'cereales',
-        name: 'Cereales',
-        description: 'Cereales nutritivos para toda la familia',
-        image: 'https://images.pexels.com/photos/5644860/pexels-photo-5644860.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🥣'
+        id: 'helados',
+        name: 'Helados',
+        description: 'Amplia gama de helados Nestlé para hostelería',
+        image: 'https://images.pexels.com/photos/1352278/pexels-photo-1352278.jpeg?auto=compress&cs=tinysrgb&w=800',
+        icon: 'IceCream'
       },
       {
         id: 'chocolate',
         name: 'Chocolate',
         description: 'Chocolates y productos de cacao de primera calidad',
         image: 'https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🍫'
+        icon: 'Candy'
       }
     ]
   },
   {
     id: 'panamar',
     name: 'Panamar',
-    description: 'Especialistas en productos del mar frescos y de temporada',
+    description: 'Especialistas en pan y masas congeladas',
     image: 'https://images.pexels.com/photos/1267697/pexels-photo-1267697.jpeg?auto=compress&cs=tinysrgb&w=800',
     color: 'cyan',
+    externalUrl: 'http://www.panamar.es/',
     subcategories: [
       {
-        id: 'pescado-fresco',
-        name: 'Pescado Fresco',
-        description: 'Pescados frescos del día, captura sostenible',
-        image: 'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🐟'
-      },
-      {
-        id: 'mariscos',
-        name: 'Mariscos',
-        description: 'Mariscos selectos y crustáceos de primera',
-        image: 'https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🦐'
+        id: 'pan',
+        name: 'Pan Congelado',
+        description: 'Panes y masas congeladas de alta calidad',
+        image: 'https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=800',
+        icon: 'Croissant'
       }
     ]
   },
   {
     id: 'okin',
     name: 'Okin',
-    description: 'Productos cárnicos de primera calidad y tradición familiar',
+    description: 'Productos cárnicos de primera calidad',
     image: 'https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=600',
     color: 'amber',
+    externalUrl: 'http://okin.es/es/',
     subcategories: [
       {
         id: 'carne-fresca',
-        name: 'Carne Fresca',
-        description: 'Carnes frescas de alta calidad y trazabilidad',
+        name: 'Carne',
+        description: 'Carnes de alta calidad',
         image: 'https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🥩'
+        icon: 'Beef'
       },
       {
         id: 'embutidos',
         name: 'Embutidos',
-        description: 'Embutidos artesanales y chacinas tradicionales',
+        description: 'Embutidos tradicionales',
         image: 'https://images.pexels.com/photos/4202479/pexels-photo-4202479.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🌭'
+        icon: 'Sandwich'
       }
     ]
   },
   {
     id: 'amparin',
     name: 'Pastelería Amparín',
-    description: 'Repostería tradicional y moderna, elaboración artesanal',
+    description: 'Repostería artesanal congelada',
     image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=600',
     color: 'pink',
+    externalUrl: 'http://www.pasteleriaamparin.com/',
     subcategories: [
       {
         id: 'tartas',
         name: 'Tartas',
-        description: 'Tartas artesanales para toda ocasión',
+        description: 'Tartas artesanales para hostelería',
         image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🎂'
+        icon: 'Cake'
       },
       {
         id: 'bolleria',
         name: 'Bollería',
-        description: 'Pan dulce y bollería tradicional',
+        description: 'Bollería congelada',
         image: 'https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?auto=compress&cs=tinysrgb&w=800',
-        icon: '🥐'
+        icon: 'Cookie'
       }
     ]
   }
@@ -159,20 +154,55 @@ export const distributors = brands.map(brand => ({
 
 export const delegations = [
   {
-    id: 'murcia',
-    city: 'Murcia',
-    address: 'Polígono Industrial Oeste, Calle 15, Nave 8, 30169 San Ginés, Murcia',
-    phone: '+34 968 123 456',
-    coordinates: { lat: 37.9922, lng: -1.1307 }
+    id: 'lorca',
+    city: 'Lorca (Murcia)',
+    address: 'Avd. Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca (Murcia)',
+    phone: '+34 968 46 75 14',
+    phone2: '+34 639 77 86 55',
+    email: 'pedidos@granjamaripepa.com',
+    coordinates: { lat: 37.6756, lng: -1.7003 },
+    mapUrl: 'https://goo.gl/maps/8tnxQXqGQbC2'
   },
   {
     id: 'almeria',
-    city: 'Almería',
-    address: 'Carretera de Níjar km 15, Polígono La Redonda, 04120 Almería',
-    phone: '+34 950 987 654',
-    coordinates: { lat: 36.8381, lng: -2.4597 }
+    city: 'Viator (Almería)',
+    address: 'C/ Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator (Almería)',
+    phone: '+34 950 97 34 29',
+    phone2: '+34 670 49 01 47',
+    email: 'pedidos@granjamaripepa.com',
+    coordinates: { lat: 36.8344, lng: -2.4637 },
+    mapUrl: 'https://goo.gl/maps/9UTP56nfxon'
   }
 ];
+
+// Datos de la empresa - FUENTE: https://granjamaripepa.com
+export const companyInfo = {
+  name: 'Granja Maripepa, S.L.',
+  shortName: 'Granja Mari Pepa',
+  foundedYear: 1966,
+  foundedCity: 'Lorca (Murcia)',
+  email: 'pedidos@granjamaripepa.com',
+  slogan: 'Especialistas en productos congelados, refrigerados y helados para HORECA',
+  description: 'Granja Maripepa, S.L. se fundó en 1966 en Lorca (Murcia), especializada en el mercado HORECA (hostelería, restauración y catering) y en el canal de Alimentación. Actualmente contamos con una gama de más de 1500 referencias en tres temperaturas (congelado, refrigerado y temperatura ambiente).',
+  certifications: ['ISO 9001:2008', 'Energía 100% Verde'],
+  serviceAreas: ['Murcia', 'Almería', 'Alicante'],
+  deliveryTime: '24 - 48 horas',
+  coldStorageCapacity: '5.000m³',
+  productReferences: '1500+',
+  schedule: {
+    weekdays: 'Lunes a viernes: 8:00 - 13:00 y 16:00 - 19:00',
+    mainPhone: '968 46 75 14',
+    mobilePhone: '639 77 86 55'
+  },
+  values: {
+    quality: 'Garantía de calidad, respaldada por la Norma ISO 9001',
+    traceability: 'Trazabilidad de todos nuestros productos',
+    delivery: 'Servicio de entrega en 24 – 48 horas',
+    coverage: 'Servicio en Murcia, Almería y Alicante',
+    attention: 'Atención personalizada'
+  },
+  officialDistributors: ['Nestlé', 'Panamar', 'Okin', 'Pastelería Amparín', 'Grupo Topgel']
+};
 
 export const products: Product[] = [
   {

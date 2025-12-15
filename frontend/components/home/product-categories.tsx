@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Fish, Beef, UtensilsCrossed, Cake, IceCream, Cookie, Candy, Croissant, Sandwich, Pizza, Package, ShoppingBasket, Wheat, Coffee } from 'lucide-react';
 import Link from 'next/link';
 import { productCategories } from '@/lib/data';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,29 @@ import { GlareCard } from '@/components/ui/glare-card';
 import ResponsiveImage from '@/components/ui/responsive-image';
 import { useAnimatedSection } from '@/hooks/use-animated-section';
 import { useReAnimatedSection } from '@/hooks/use-re-animated-section';
+
+// Mapeo de iconos profesionales por categoría
+const iconMap: Record<string, React.ElementType> = {
+  'Fish': Fish,
+  'Beef': Beef,
+  'UtensilsCrossed': UtensilsCrossed,
+  'Cake': Cake,
+  'IceCream': IceCream,
+  'Cookie': Cookie,
+  'Candy': Candy,
+  'Croissant': Croissant,
+  'Sandwich': Sandwich,
+  'Pizza': Pizza,
+  'Package': Package,
+  'ShoppingBasket': ShoppingBasket,
+  'Wheat': Wheat,
+  'Coffee': Coffee,
+};
+
+// Función para obtener el icono correcto
+const getCategoryIcon = (iconName: string): React.ElementType => {
+  return iconMap[iconName] || Package;
+};
 
 export function ProductCategories() {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -139,7 +162,7 @@ export function ProductCategories() {
           </p>
         </div>
 
-        {/* Professional cards grid - COMPLETAMENTE RESPONSIVO */}
+        {/* Professional cards grid - COMPLETAMENTE RESPONSIVO - ALTURA UNIFORME */}
         <div 
           className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16"
           data-animate="content"
@@ -148,7 +171,7 @@ export function ProductCategories() {
             <Link 
               key={category.id} 
               href={`/productos?brand=${category.brandId}&category=${category.id}`} 
-              className="block"
+              className="block h-full"
             >
               <GlareCard
                 className="h-full group cursor-pointer transform transition-all duration-500 hover:scale-105"
@@ -158,7 +181,7 @@ export function ProductCategories() {
                 scaleOnHover={1.03}
                 data-animate="card"
               >
-                <div className="relative h-full bg-gradient-to-br from-slate-800/50 to-slate-900/80 backdrop-blur-sm border border-blue-400/20 rounded-lg sm:rounded-xl overflow-hidden">
+                <div className="relative h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[450px] flex flex-col bg-gradient-to-br from-slate-800/50 to-slate-900/80 backdrop-blur-sm border border-blue-400/20 rounded-lg sm:rounded-xl overflow-hidden">
                   
                   {/* Professional image with overlay - RESPONSIVO */}
                   <div className="h-40 sm:h-48 lg:h-56 relative overflow-hidden">
@@ -186,17 +209,18 @@ export function ProductCategories() {
                       }}
                     />
 
-                    {/* Floating category icon - RESPONSIVO */}
+                    {/* Floating category icon - RESPONSIVO - ICONOS PROFESIONALES LUCIDE */}
                     <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
                       <div 
-                        className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 flex items-center justify-center"
+                        className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-blue-500/30 backdrop-blur-md border border-blue-400/40 flex items-center justify-center"
                         style={{
-                          boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)'
+                          boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)'
                         }}
                       >
-                        <span className="text-lg sm:text-2xl filter drop-shadow-lg">
-                          {category.icon}
-                        </span>
+                        {(() => {
+                          const IconComponent = getCategoryIcon(category.icon);
+                          return <IconComponent className="w-5 h-5 sm:w-7 sm:h-7 text-white drop-shadow-lg" strokeWidth={2} />;
+                        })()}
                       </div>
                     </div>
 
@@ -216,18 +240,18 @@ export function ProductCategories() {
                     </div>
                   </div>
 
-                  {/* Professional content - RESPONSIVO */}
-                  <div className="p-4 sm:p-6 relative">
+                  {/* Professional content - RESPONSIVO - ALTURA UNIFORME */}
+                  <div className="flex-1 p-4 sm:p-6 relative flex flex-col">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-blue-300 transition-colors duration-300 line-clamp-2">
                       {category.name}
                     </h3>
                     
-                    <p className="text-blue-200/80 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3 leading-relaxed">
+                    <p className="text-blue-200/80 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-3 leading-relaxed flex-1">
                       {category.description}
                     </p>
                     
-                    {/* Professional CTA - RESPONSIVO */}
-                    <div className="flex items-center justify-between">
+                    {/* Professional CTA - RESPONSIVO - SIEMPRE AL FONDO */}
+                    <div className="flex items-center justify-between mt-auto">
                       <Button 
                         variant="ghost" 
                         className="p-0 h-auto text-blue-300 hover:text-blue-200 group-hover:text-white transition-all duration-300"

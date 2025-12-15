@@ -123,9 +123,129 @@ function sanitizeInputs(req, res, next) {
   next();
 }
 
+/**
+ * Logger de seguridad
+ */
+function securityLogger(req, res, next) {
+  logger.debug('🔒 Security check', { 
+    ip: req.ip, 
+    path: req.path, 
+    method: req.method 
+  });
+  next();
+}
+
+/**
+ * Sanitizar todos los inputs (alias para sanitizeInputs)
+ */
+function sanitizarTodos(req, res, next) {
+  sanitizeInputs(req, res, next);
+}
+
+/**
+ * Detectar patrones sospechosos (alias para detectMaliciousPatterns)
+ */
+function detectarPatronesSospechosos(req, res, next) {
+  detectMaliciousPatterns(req, res, next);
+}
+
+/**
+ * Validar datos de login
+ */
+function validarLogin(req, res, next) {
+  const { codigoCliente, email } = req.body;
+  if (!codigoCliente || !email) {
+    return res.status(400).json({ success: false, message: 'Datos incompletos' });
+  }
+  next();
+}
+
+/**
+ * Validar refresh token
+ */
+function validarRefreshToken(req, res, next) {
+  const { token } = req.body;
+  if (!token) {
+    return res.status(400).json({ success: false, message: 'Token requerido' });
+  }
+  next();
+}
+
+// Store para rate limiting
+const rateLimitStore = new Map();
+
+/**
+ * Rate limiter para login
+ */
+function loginRateLimiter(req, res, next) {
+  const ip = req.ip;
+  const key = `login_${ip}`;
+  const windowMs = 5 * 60 * 1000; // 5 minutos
+  const maxRequests = 10;
+  
+  if (!rateLimitStore.has(key)) {
+    rateLimitStore.set(key, { count: 0, resetTime: Date.now() + windowMs });
+    setTimeout(() => rateLimitStore.delete(key), windowMs);
+  }
+  
+  const data = rateLimitStore.get(key);
+  
+  if (Date.now() > data.resetTime) {
+    data.count = 0;
+    data.resetTime = Date.now() + windowMs;
+  }
+  
+  data.count++;
+  
+  if (data.count > maxRequests) {
+    logger.warn('⚠️ Rate limit login excedido', { ip, count: data.count });
+    return res.status(429).json({ success: false, message: 'Demasiados intentos de login' });
+  }
+  
+  next();
+}
+
+/**
+ * Rate limiter para refresh token
+ */
+function refreshRateLimiter(req, res, next) {
+  const ip = req.ip;
+  const key = `refresh_${ip}`;
+  const windowMs = 15 * 60 * 1000; // 15 minutos
+  const maxRequests = 50;
+  
+  if (!rateLimitStore.has(key)) {
+    rateLimitStore.set(key, { count: 0, resetTime: Date.now() + windowMs });
+    setTimeout(() => rateLimitStore.delete(key), windowMs);
+  }
+  
+  const data = rateLimitStore.get(key);
+  
+  if (Date.now() > data.resetTime) {
+    data.count = 0;
+    data.resetTime = Date.now() + windowMs;
+  }
+  
+  data.count++;
+  
+  if (data.count > maxRequests) {
+    logger.warn('⚠️ Rate limit refresh excedido', { ip, count: data.count });
+    return res.status(429).json({ success: false, message: 'Demasiadas peticiones' });
+  }
+  
+  next();
+}
+
 module.exports = {
   detectMaliciousPatterns,
   logRequest,
   validateContentType,
-  sanitizeInputs
+  sanitizeInputs,
+  securityLogger,
+  sanitizarTodos,
+  detectarPatronesSospechosos,
+  validarLogin,
+  validarRefreshToken,
+  loginRateLimiter,
+  refreshRateLimiter
 };

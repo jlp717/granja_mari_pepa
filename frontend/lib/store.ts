@@ -20,7 +20,7 @@ interface CartStore {
 interface AuthStore {
   user: UserProfile | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (codigoCliente: string, password: string) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: Partial<UserProfile>) => void;
 }
@@ -99,35 +99,121 @@ export const useCartStore = create<CartStore>()(
   )
 );
 
+/**
+ * ====================================================================
+ * SEGURIDAD: Auth Store con HttpOnly Cookies
+ * ====================================================================
+ * Los tokens JWT ahora se almacenan en cookies HttpOnly configuradas
+ * por el backend. El frontend NO tiene acceso a los tokens directamente.
+ * Esto previene ataques XSS de robo de tokens.
+ * ====================================================================
+ */
 export const useAuthStore = create<AuthStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       isAuthenticated: false,
-      login: async (email: string, password: string) => {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        if (email === 'cliente@example.com' && password === 'password123') {
-          const user: UserProfile = {
-            id: '1',
-            name: 'Juan Pérez',
-            email: 'cliente@example.com',
-            company: 'Restaurante El Buen Sabor',
-            phone: '+34 666 123 456'
-          };
-          set({ user, isAuthenticated: true });
-          return true;
+      
+      /**
+       * Login seguro - Los tokens se reciben como HttpOnly cookies
+       * El frontend solo almacena información del usuario, NO tokens
+       */
+      login: async (codigoCliente: string, password: string) => {
+        try {
+          const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
+          const response = await fetch(`${API_URL}/api/auth/v2/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include', // 🔐 CRÍTICO: Permite enviar/recibir cookies HttpOnly
+            body: JSON.stringify({
+              codigoCliente: codigoCliente.trim(),
+              password: password.trim()
+            }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.success) {
+            const user: UserProfile = {
+              id: data.cliente.codigoCliente,
+              name: data.cliente.nombre,
+              email: data.cliente.email || '',
+              company: data.cliente.nombreAlternativo || data.cliente.nombreComercial || data.cliente.nombre,
+              phone: data.cliente.telefono
+            };
+
+            // 🔐 SEGURIDAD: NO guardamos tokens en localStorage
+            // Los tokens HttpOnly son configurados automáticamente por el backend
+            // Limpiar cualquier token legacy que pudiera existir
+            if (typeof window !== 'undefined') {
+              localStorage.removeItem('access_token');
+              localStorage.removeItem('refresh_token');
+            }
+
+            set({ user, isAuthenticated: true });
+            return true;
+          }
+
+          return false;
+        } catch (error) {
+          console.error('Error en login:', error);
+          return false;
         }
-        return false;
       },
-      logout: () => set({ user: null, isAuthenticated: false }),
+      
+      /**
+       * Logout seguro - El backend limpia las cookies HttpOnly
+       */
+      logout: async () => {
+        try {
+          const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+          
+          try {
+            await fetch(`${API_URL}/api/auth/logout`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include', // 🔐 Envía cookies para que el backend las invalide
+            });
+          } catch (error) {
+            console.warn('Error calling logout endpoint:', error);
+            // Continuar con logout local incluso si el backend falla
+          }
+          
+          // 🔐 Limpiar cualquier token legacy de localStorage (por si migración)
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+          }
+          
+          // Limpiar estado de autenticación
+          set({ user: null, isAuthenticated: false });
+        } catch (error) {
+          console.error('Error en logout:', error);
+          // 🔐 Forzar limpieza completa en caso de error
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+          }
+          set({ user: null, isAuthenticated: false });
+        }
+      },
+      
       updateProfile: (data) => set(state => ({
         user: state.user ? { ...state.user, ...data } : null
       }))
     }),
     {
-      name: 'topgel-auth'
+      name: 'topgel-auth',
+      // 🔐 Solo persistir user info, nunca tokens
+      partialize: (state) => ({ 
+        user: state.user, 
+        isAuthenticated: state.isAuthenticated 
+      }),
     }
   )
 );
