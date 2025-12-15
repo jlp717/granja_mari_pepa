@@ -1,0 +1,38 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar variables de entorno (CRÍTICO)
+.env
+.env.*
+!.env.example
+
+# Ignorar logs
+logs/
+*.log
+
+# Ignorar bases de datos
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignorar archivos temporales
+*.tmp
+*.temp
+
+# Ignorar certificados
+*.pem
+*.key
+*.crt
+
+# Ignorar PM2
+.pm2/
+ecosystem.config.js
+
+# Ignorar coverage de tests
+coverage/
+.nyc_output/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,80 @@
+# CONFIGURACIÓN DE TEST DE CARGA CON ARTILLERY
+# Ejecutar con: npm run test:load
+
+config:
+  target: 'http://localhost:3000'
+  phases:
+    # Fase 1: Warmup
+    - duration: 30
+      arrivalRate: 5
+      name: "Warmup"
+
+    # Fase 2: Carga gradual
+    - duration: 60
+      arrivalRate: 10
+      rampTo: 50
+      name: "Ramp up"
+
+    # Fase 3: Carga sostenida
+    - duration: 120
+      arrivalRate: 50
+      name: "Sustained load"
+
+    # Fase 4: Pico de carga
+    - duration: 60
+      arrivalRate: 100
+      name: "Spike"
+
+    # Fase 5: Cooldown
+    - duration: 30
+      arrivalRate: 10
+      name: "Cooldown"
+
+  processor: "./tests/load-test-processor.js"
+
+scenarios:
+  - name: "Generar Factura"
+    weight: 70
+    flow:
+      - post:
+          url: "/api/generar-factura"
+          json:
+            subempresa: "GMP"
+            ejercicio: 2023
+            serie: "A"
+            terminal: 0
+            numero_albaran: "{{ $randomNumber(1, 1000) }}"
+          expect:
+            - statusCode: [200, 404]
+          capture:
+            - json: "$.success"
+              as: "success"
+
+  - name: "Health Check"
+    weight: 20
+    flow:
+      - get:
+          url: "/health"
+          expect:
+            - statusCode: 200
+            - contentType: json
+
+  - name: "Métricas"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/metrics"
+          expect:
+            - statusCode: 200
+
+  - name: "Invalidar Cache"
+    weight: 5
+    flow:
+      - delete:
+          url: "/api/cache/factura"
+          json:
+            subempresa: "GMP"
+            ejercicio: 2023
+            serie: "A"
+            terminal: 0
+            numero_albaran: "{{ $randomNumber(1, 100) }}"
