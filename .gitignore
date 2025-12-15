@@ -182,3 +182,6 @@ ecosystem.config.js
 # Archivos de análisis y scripts temporales
 backend/scripts/analizar-*.js
 backend/analisis-*.js
+
+# Ignore the 'basura' folder
+backend/basura/
