@@ -13,7 +13,7 @@ const logger = require('../utils/logger');
 async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
   try {
     logger.info('🔍 Obteniendo detalle de factura', { serie, numero, ejercicio, codigoCliente });
-    
+
     // Cabecera de factura con JOIN a CLI para datos del cliente
     // IMPORTANTE: CAC tiene múltiples registros por factura (uno por albarán)
     // Por eso usamos GROUP BY y SUM para obtener los totales correctos
@@ -47,16 +47,16 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
       GROUP BY CAC.SERIEFACTURA, CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA, TRIM(CAC.CODIGOCLIENTEFACTURA)
     `;
-    
+
     const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio, codigoCliente]);
-    
+
     if (!header || header.length === 0) {
       throw new Error('Factura no encontrada');
     }
-    
+
     // Líneas de factura con productos
-    // IMPORTANTE: Mantener el % IVA por línea (CODIGOIVA) para soportar facturas con múltiples tipos de IVA.
-    // Además, devolver importes de IVA/recargo por línea para que el PDF pueda sumar con precisión.
+    // IMPORTANTE: La tabla DSEDAC.IVA tiene valores obsoletos (7%, 16%).
+    // Usamos un CASE para mapear los códigos de IVA a los valores vigentes (10%, 21%, 4%).
     const linesQuery = `
       SELECT
         LAC.SECUENCIA as NUMEROLINEA,
@@ -65,11 +65,31 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         COALESCE(LAC.CANTIDADUNIDADES, 0) as CANTIDADARTICULO,
         LAC.PRECIOVENTA as PRECIOARTICULO,
         LAC.PORCENTAJEDESCUENTO as PORCENTAJEDESCUENTOARTICULO,
-        COALESCE(IVA.PORCENTAJEIVA, 0) as PORCENTAJEIVAARTICULO,
-        COALESCE(IVA.PORCENTAJERECARGO, 0) as PORCENTAJERECARGOARTICULO,
+        CASE LAC.CODIGOIVA
+          WHEN 1 THEN 10.00
+          WHEN 2 THEN 21.00
+          WHEN 3 THEN 4.00
+          WHEN 4 THEN 0.00
+          WHEN 5 THEN 10.00
+          ELSE 10.00 -- Fallback seguro
+        END as PORCENTAJEIVAARTICULO,
+        CASE LAC.CODIGOIVA
+          WHEN 5 THEN 1.40 -- Recargo de equivalencia para tipo 5 (10% + 1.4%)
+          ELSE 0.00
+        END as PORCENTAJERECARGOARTICULO,
         LAC.IMPORTEVENTA as IMPORTENETOARTICULO,
-        (LAC.IMPORTEVENTA * COALESCE(IVA.PORCENTAJEIVA, 0) / 100.0) as IMPORTEIVAARTICULO,
-        (LAC.IMPORTEVENTA * COALESCE(IVA.PORCENTAJERECARGO, 0) / 100.0) as IMPORTERECARGOARTICULO,
+        (LAC.IMPORTEVENTA * CASE LAC.CODIGOIVA
+          WHEN 1 THEN 0.10
+          WHEN 2 THEN 0.21
+          WHEN 3 THEN 0.04
+          WHEN 4 THEN 0.00
+          WHEN 5 THEN 0.10
+          ELSE 0.10
+        END) as IMPORTEIVAARTICULO,
+        (LAC.IMPORTEVENTA * CASE LAC.CODIGOIVA
+          WHEN 5 THEN 0.014
+          ELSE 0.00
+        END) as IMPORTERECARGOARTICULO,
         LAC.SERIEALBARAN,
         LAC.NUMEROALBARAN,
         COALESCE(LAC.CODIGOLOTE, '') as LOTE,
@@ -83,8 +103,6 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         AND CAC.SERIEALBARAN = LAC.SERIEALBARAN
         AND CAC.TERMINALALBARAN = LAC.TERMINALALBARAN
         AND CAC.NUMEROALBARAN = LAC.NUMEROALBARAN
-      LEFT JOIN DSEDAC.IVA
-        ON IVA.IVA = LAC.CODIGOIVA
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
@@ -93,13 +111,13 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         AND TRIM(LAC.CODIGOARTICULO) <> ''
       ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
     `;
-    
+
     const lines = await odbcPool.query(linesQuery, [serie, numero, ejercicio, codigoCliente]);
 
     // NO sobrescribir PORCENTAJEIVAARTICULO: necesitamos soportar multi-IVA.
     // Solo trazamos una muestra de tipos de IVA detectados.
     const ivaRates = [...new Set((lines || []).map(l => Number.parseFloat(l.PORCENTAJEIVAARTICULO) || 0))].sort((a, b) => a - b);
-    logger.info('✅ IVA por línea detectado', {
+    logger.info('✅ IVA por línea detectado (Corregido)', {
       serie,
       numero,
       ejercicio,
@@ -125,9 +143,9 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     `;
 
     const payments = await odbcPool.query(paymentQuery, [serie, numero, ejercicio]);
-    
+
     logger.success('✅ Detalle de factura obtenido', { serie, numero, ejercicio });
-    
+
     return {
       header: header[0],
       lines: lines || [],
@@ -184,14 +202,25 @@ async function getClientSummary(codigoCliente, ejercicio) {
     logger.info('📊 Obteniendo resumen del cliente', { codigoCliente, ejercicio });
 
     const query = `
+      WITH FacturasUnicas AS (
+        SELECT
+          TRIM(CAC.SERIEFACTURA) AS SERIE,
+          CAC.NUMEROFACTURA AS NUMERO,
+          CAC.EJERCICIOFACTURA AS EJERCICIO,
+          SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 + CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) AS BASE_FACTURA,
+          SUM(CAC.IMPORTEIVA1 + CAC.IMPORTEIVA2 + CAC.IMPORTEIVA3 + CAC.IMPORTEIVA4 + CAC.IMPORTEIVA5) AS IVA_FACTURA,
+          SUM(CAC.IMPORTETOTAL) AS TOTAL_FACTURA
+        FROM DSEDAC.CAC
+        WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+          ${ejercicio ? 'AND CAC.EJERCICIOFACTURA = ?' : ''}
+        GROUP BY TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
+      )
       SELECT
         COUNT(*) AS TOTALFACTURAS,
-        SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 + CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) AS TOTALBASE,
-        SUM(CAC.IMPORTEIVA1 + CAC.IMPORTEIVA2 + CAC.IMPORTEIVA3 + CAC.IMPORTEIVA4 + CAC.IMPORTEIVA5) AS TOTALIVA,
-        SUM(CAC.IMPORTETOTAL) AS TOTALFACTURADO
-      FROM DSEDAC.CAC
-      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
-        ${ejercicio ? 'AND CAC.EJERCICIOFACTURA = ?' : ''}
+        SUM(BASE_FACTURA) AS TOTALBASE,
+        SUM(IVA_FACTURA) AS TOTALIVA,
+        SUM(TOTAL_FACTURA) AS TOTALFACTURADO
+      FROM FacturasUnicas
     `;
 
     const params = ejercicio ? [codigoCliente, ejercicio] : [codigoCliente];
@@ -214,19 +243,34 @@ async function getClientSummaryByYear(codigoCliente) {
   try {
     logger.info('📊 Obteniendo estadísticas por año del cliente', { codigoCliente });
 
+    // CAC contiene múltiples registros por factura (uno por albarán).
+    // Para obtener estadísticas por factura (no por registro de albarán)
+    // primero agrupamos por factura y calculamos totales por factura,
+    // y luego agregamos por año. Esto evita contar albaranes como facturas.
     const query = `
+      WITH FacturasUnicas AS (
+        SELECT
+          TRIM(CAC.SERIEFACTURA) AS SERIE,
+          CAC.NUMEROFACTURA AS NUMERO,
+          CAC.EJERCICIOFACTURA AS YEAR,
+          SUM(CAC.IMPORTETOTAL) AS TOTAL_FACTURA,
+          CASE WHEN SUM(COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0)) = 0 THEN 1 ELSE 0 END AS PAGADA_FLAG
+        FROM DSEDAC.CAC
+        WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+          AND CAC.NUMEROFACTURA > 0
+        GROUP BY TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
+      )
       SELECT
-        CAC.EJERCICIOFACTURA AS YEAR,
+        YEAR,
         COUNT(*) AS TOTAL,
-        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) = 0 THEN 1 ELSE 0 END) AS PAGADAS,
-        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) > 0 THEN 1 ELSE 0 END) AS PENDIENTES,
-        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) = 0 THEN CAC.IMPORTETOTAL ELSE 0 END) AS TOTALPAGADAS,
-        SUM(CASE WHEN COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) > 0 THEN CAC.IMPORTETOTAL ELSE 0 END) AS TOTALPENDIENTES
-      FROM DSEDAC.CAC
-      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
-        AND CAC.EJERCICIOFACTURA >= YEAR(CURRENT_DATE) - 4
-      GROUP BY CAC.EJERCICIOFACTURA
-      ORDER BY CAC.EJERCICIOFACTURA ASC
+        SUM(PAGADA_FLAG) AS PAGADAS,
+        COUNT(*) - SUM(PAGADA_FLAG) AS PENDIENTES,
+        SUM(CASE WHEN PAGADA_FLAG = 1 THEN TOTAL_FACTURA ELSE 0 END) AS TOTALPAGADAS,
+        SUM(CASE WHEN PAGADA_FLAG = 0 THEN TOTAL_FACTURA ELSE 0 END) AS TOTALPENDIENTES
+      FROM FacturasUnicas
+      WHERE YEAR >= YEAR(CURRENT_DATE) - 4
+      GROUP BY YEAR
+      ORDER BY YEAR ASC
     `;
 
     const result = await odbcPool.query(query, [codigoCliente]);
@@ -251,12 +295,31 @@ async function getAvailableYears(codigoCliente) {
       WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
       ORDER BY CAC.EJERCICIOFACTURA DESC
     `;
-    
+
     const result = await odbcPool.query(query, [codigoCliente]);
-    
+
     return result.map(row => row.EJERCICIOFACTURA);
   } catch (error) {
     logger.error('❌ Error obteniendo ejercicios', error);
+    throw error;
+  }
+}
+
+/**
+ * Método genérico para ejecutar queries SQL
+ * Usado por authServiceSecure para operaciones CRUD
+ */
+async function executeQuery(sql, params = []) {
+  try {
+    logger.info('🔍 Ejecutando query', { sql: sql.substring(0, 100), paramsCount: params.length });
+
+    const result = await odbcPool.query(sql, params);
+
+    logger.success(`✅ Query ejecutado exitosamente: ${result.length} filas`);
+
+    return result;
+  } catch (error) {
+    logger.error('❌ Error ejecutando query', error);
     throw error;
   }
 }
@@ -266,5 +329,6 @@ module.exports = {
   getClientProducts,
   getClientSummary,
   getClientSummaryByYear,
-  getAvailableYears
+  getAvailableYears,
+  executeQuery // Nuevo método para auth service
 };

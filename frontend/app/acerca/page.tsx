@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { delegations } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -37,13 +38,7 @@ const companyHistory = [
     icon: Award,
     color: 'from-yellow-500 to-orange-500'
   },
-  {
-    year: '2010',
-    title: 'Delegación en Almería',
-    description: 'Apertura de la delegación en Viator (Almería) para dar servicio a toda la provincia andaluza.',
-    icon: MapPin,
-    color: 'from-purple-500 to-pink-500'
-  },
+
   {
     year: '2020',
     title: 'Energía 100% Verde',
@@ -54,7 +49,7 @@ const companyHistory = [
   {
     year: 'Hoy',
     title: 'Más de 1.500 referencias',
-    description: 'Actualmente contamos con una gama de más de 1.500 referencias en tres temperaturas, sirviendo a Murcia, Almería y Alicante.',
+    description: 'Actualmente contamos con una gama de más de 1.500 referencias en tres temperaturas, sirviendo a Murcia y Alicante.',
     icon: Zap,
     color: 'from-indigo-500 to-blue-500'
   }
@@ -152,10 +147,10 @@ const companyValues = [
   },
   {
     title: "Cobertura Regional",
-    description: "Servicio en Murcia, Almería y Alicante con delegaciones estratégicas en Lorca y Viator.",
+    description: "Servicio en Murcia y Alicante con delegación estratégica en Lorca.",
     icon: MapPin,
     color: "from-purple-500 to-purple-600",
-    stat: "3",
+    stat: "2",
     statLabel: "Provincias atendidas"
   },
   {
@@ -176,7 +171,7 @@ const customerTestimonials = [
   {
     name: "Clientes HORECA",
     business: "Hostelería y Restauración",
-    comment: "Más de 55 años sirviendo a los mejores establecimientos de Murcia, Almería y Alicante con productos de máxima calidad."
+    comment: "Más de 55 años sirviendo a los mejores establecimientos de Murcia y Alicante con productos de máxima calidad."
   }
 ];
 
@@ -417,6 +412,41 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Delegaciones - Mostrar únicamente la sede de Lorca (direcciones reales) */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800 relative">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Nuestras Delegaciones</h2>
+            <p className="text-white/70 max-w-2xl mx-auto">A continuación la dirección oficial de nuestra sede en Lorca (Murcia).</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {delegations.filter(d => d.id === 'lorca').map(d => (
+              <motion.div
+                key={d.id}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+              >
+                <h3 className="text-2xl font-bold text-white mb-2">{d.city}</h3>
+                <div className="text-white/90 mb-4">{d.address}</div>
+                <div className="text-white/70 mb-4">Tel: {d.phone} {d.phone2 ? `• ${d.phone2}` : ''}</div>
+                <div className="text-white/70 mb-4">Email: {d.email}</div>
+                <a href={d.mapUrl} target="_blank" rel="noreferrer" className="inline-block text-sm text-blue-300 hover:underline">Ver en Google Maps</a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Valores Corporativos - 3D Cards */}
       <section className="py-32 bg-gradient-to-br from-slate-800 to-slate-700 relative">
         <div className="absolute inset-0 bg-pattern-dots opacity-5"></div>
@@ -515,7 +545,7 @@ export default function AboutPage() {
                 { icon: Award, text: 'Garantía de calidad, respaldada por la Norma ISO 9001' },
                 { icon: Eye, text: 'Trazabilidad de todos nuestros productos' },
                 { icon: Truck, text: 'Servicio de entrega en 24 – 48 horas' },
-                { icon: MapPin, text: 'Servicio en Murcia, Almería y Alicante' },
+                { icon: MapPin, text: 'Servicio en Murcia y Alicante' },
                 { icon: Heart, text: 'Atención personalizada' },
                 { icon: Building2, text: 'Capacidad frigorífica de 5.000m³' }
               ].map((item, index) => {
@@ -960,7 +990,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto mb-12">
               Únete a los establecimientos HORECA que confían en Granja Maripepa para llevar 
-              productos de calidad certificada a sus clientes en Murcia, Almería y Alicante.
+              productos de calidad certificada a sus clientes en Murcia y Alicante.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     url: 'https://granjamaripepa.netlify.app',
     siteName: 'Granja Mari Pepa Lorca | Grupo Topgel',
     title: 'Granja Mari Pepa Lorca - Distribución Alimentaria | Grupo Topgel',
-    description: 'Granja Mari Pepa en Lorca. Distribución de productos alimentarios de alta calidad en Murcia y Almería. Especialistas en productos del mar, carne, precocinados y repostería desde 1985.',
+    description: 'Granja Mari Pepa en Lorca. Distribución de productos alimentarios de alta calidad en Murcia y Almería. Especialistas en productos del mar, carne, precocinados y repostería desde 1966.',
     images: [
       {
         url: '/og-image.jpg',

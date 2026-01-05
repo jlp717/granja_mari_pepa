@@ -23,13 +23,13 @@ const LOCK_TIME_MINUTES = 30;
 async function authenticateClient(codigoCliente, password, nif = null, req = null) {
   try {
     logger.info('🔐 Intento de autenticación', { codigoCliente });
-    
+
     if (!codigoCliente || !password) {
       return { success: false, message: 'Código de cliente y contraseña requeridos' };
     }
-    
+
     const codigo = codigoCliente.toString().trim();
-    
+
     // 1. Buscar cliente en CLI
     const clienteQuery = `
       SELECT 
@@ -46,17 +46,17 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       LEFT JOIN DSEDAC.CLIP CLIP ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CLIP.CODIGOCLIENTE)
       WHERE TRIM(CLI.CODIGOCLIENTE) = ?
     `;
-    
+
     const clientes = await odbcPool.query(clienteQuery, [codigo]);
-    
+
     if (!clientes || clientes.length === 0) {
       logger.warn('⚠️ Cliente no encontrado', { codigo });
       if (req) await registrarLoginHistory(codigo, false, req, 'Cliente no existe');
       return { success: false, message: 'Credenciales inválidas' };
     }
-    
+
     const cliente = clientes[0];
-    
+
     // 2. Verificar NIF si se proporcionó
     if (nif && cliente.NIF) {
       if (cliente.NIF.trim() !== nif.trim()) {
@@ -65,7 +65,7 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
         return { success: false, message: 'Credenciales inválidas' };
       }
     }
-    
+
     // 3. Buscar credenciales en JAVIER.CUSTOMER_PASSWORDS
     const authQuery = `
       SELECT 
@@ -76,24 +76,24 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       FROM JAVIER.CUSTOMER_PASSWORDS
       WHERE TRIM(CODIGO_CLIENTE) = ?
     `;
-    
+
     const authRecords = await odbcPool.query(authQuery, [codigo]);
-    
+
     if (!authRecords || authRecords.length === 0) {
       logger.warn('⚠️ Cliente sin credenciales', { codigo });
       if (req) await registrarLoginHistory(codigo, false, req, 'Sin credenciales');
       return { success: false, message: 'Cliente no registrado en el sistema' };
     }
-    
+
     const authRecord = authRecords[0];
-    
+
     // 4. Verificar si cuenta está bloqueada
     if (authRecord.BLOQUEADO_HASTA) {
       const lockedUntil = new Date(authRecord.BLOQUEADO_HASTA);
       if (lockedUntil > new Date()) {
         logger.warn('🔒 Cuenta bloqueada', { codigo, lockedUntil });
-        return { 
-          success: false, 
+        return {
+          success: false,
           message: `Cuenta bloqueada hasta ${lockedUntil.toLocaleString('es-ES')}`,
           lockedUntil: lockedUntil.toISOString()
         };
@@ -105,26 +105,26 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
         );
       }
     }
-    
+
     // 5. Verificar contraseña
     const passwordMatch = await bcrypt.compare(password, authRecord.PASSWORD_HASH);
-    
+
     if (!passwordMatch) {
       const newAttempts = (authRecord.INTENTOS_FALLIDOS || 0) + 1;
       const shouldLock = newAttempts >= MAX_INTENTOS_FALLIDOS;
-      
+
       if (shouldLock) {
         const lockUntil = new Date(Date.now() + LOCK_TIME_MINUTES * 60 * 1000);
         await odbcPool.query(
           `UPDATE JAVIER.CUSTOMER_PASSWORDS SET INTENTOS_FALLIDOS = ?, BLOQUEADO_HASTA = ? WHERE TRIM(CODIGO_CLIENTE) = ?`,
           [newAttempts, lockUntil.toISOString(), codigo]
         );
-        
+
         logger.warn('🔒 Cuenta bloqueada por intentos', { codigo, attempts: newAttempts });
         if (req) await registrarLoginHistory(codigo, false, req, 'Demasiados intentos');
-        
-        return { 
-          success: false, 
+
+        return {
+          success: false,
           message: `Cuenta bloqueada por ${LOCK_TIME_MINUTES} minutos debido a múltiples intentos fallidos`
         };
       } else {
@@ -132,30 +132,30 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
           `UPDATE JAVIER.CUSTOMER_PASSWORDS SET INTENTOS_FALLIDOS = ? WHERE TRIM(CODIGO_CLIENTE) = ?`,
           [newAttempts, codigo]
         );
-        
+
         logger.warn('⚠️ Contraseña incorrecta', { codigo, attempts: newAttempts });
         if (req) await registrarLoginHistory(codigo, false, req, 'Contraseña incorrecta');
-        
-        return { 
-          success: false, 
+
+        return {
+          success: false,
           message: 'Credenciales inválidas',
           attemptsRemaining: MAX_INTENTOS_FALLIDOS - newAttempts
         };
       }
     }
-    
+
     // 6. Login exitoso - Resetear intentos
     await odbcPool.query(
       `UPDATE JAVIER.CUSTOMER_PASSWORDS SET INTENTOS_FALLIDOS = 0, BLOQUEADO_HASTA = NULL, ULTIMO_LOGIN = CURRENT_TIMESTAMP WHERE TRIM(CODIGO_CLIENTE) = ?`,
       [codigo]
     );
-    
+
     // 7. Registrar en historial
     if (req) await registrarLoginHistory(codigo, true, req, null);
-    
+
     // 8. Generar tokens
     const accessToken = jwt.sign(
-      { 
+      {
         codigoCliente: codigo.trim(),
         nombre: cliente.NOMBRECLIENTE.trim(),
         tipo: 'access'
@@ -163,21 +163,21 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       JWT_SECRET,
       { expiresIn: JWT_EXPIRY }
     );
-    
+
     const refreshToken = jwt.sign(
-      { 
+      {
         codigoCliente: codigo.trim(),
         tipo: 'refresh'
       },
       JWT_SECRET,
       { expiresIn: JWT_REFRESH_EXPIRY }
     );
-    
+
     // 9. Guardar refresh token (OPCIONAL - no debe bloquear login)
     try {
       const deviceInfo = (req ? req.get('user-agent') : 'Unknown') || 'Unknown';
       const ipAddress = (req ? req.ip : '0.0.0.0') || '0.0.0.0';
-      
+
       await odbcPool.query(
         `INSERT INTO JAVIER.REFRESH_TOKENS (CODIGO_CLIENTE, REFRESH_TOKEN, DEVICE_INFO, IP_ADDRESS) 
          VALUES (?, ?, ?, ?)`,
@@ -188,11 +188,20 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       logger.warn('⚠️ Error guardando refresh token (no crítico)', err.message);
       // NO FALLAR EL LOGIN - el refresh token es opcional
     }
-    
+
     logger.success('✅ Autenticación exitosa', { codigo });
-    
+
+    // Check if email is configured
+    const email = cliente.EMAIL ? cliente.EMAIL.trim() : null;
+    const hasValidEmail = email && email.includes('@') && !email.includes('@granja.local');
+
+    if (!hasValidEmail) {
+      logger.info('⚠️ Login exitoso pero usuario sin email configurado - Requiere configuración', { codigo });
+    }
+
     return {
       success: true,
+      requiresEmailSetup: !hasValidEmail, // Flag for frontend
       accessToken,
       refreshToken,
       expiresIn: JWT_EXPIRY,
@@ -205,10 +214,10 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
         provincia: cliente.PROVINCIA ? cliente.PROVINCIA.trim() : null,
         cp: cliente.CP ? cliente.CP.trim() : null,
         telefono: cliente.TELEFONO ? cliente.TELEFONO.trim() : null,
-        email: cliente.EMAIL ? cliente.EMAIL.trim() : null
+        email: email
       }
     };
-    
+
   } catch (error) {
     logger.error('❌ Error en autenticación', error);
     throw error;
@@ -243,45 +252,45 @@ async function refreshAccessToken(refreshToken) {
   try {
     // Verificar token
     const decoded = jwt.verify(refreshToken, JWT_SECRET);
-    
+
     if (decoded.tipo !== 'refresh') {
       return { success: false, message: 'Token inválido' };
     }
-    
+
     // Verificar que no esté revocado
     const tokenCheck = await odbcPool.query(
       `SELECT REVOCADO, FECHA_EXPIRACION FROM JAVIER.REFRESH_TOKENS WHERE REFRESH_TOKEN = ?`,
       [refreshToken]
     );
-    
+
     if (!tokenCheck || tokenCheck.length === 0) {
       return { success: false, message: 'Token no encontrado' };
     }
-    
+
     if (tokenCheck[0].REVOCADO === '1') {
       return { success: false, message: 'Token revocado' };
     }
-    
+
     if (new Date(tokenCheck[0].FECHA_EXPIRACION) < new Date()) {
       return { success: false, message: 'Token expirado' };
     }
-    
+
     // Generar nuevo access token
     const accessToken = jwt.sign(
-      { 
+      {
         codigoCliente: decoded.codigoCliente,
         tipo: 'access'
       },
       JWT_SECRET,
       { expiresIn: JWT_EXPIRY }
     );
-    
+
     return {
       success: true,
       accessToken,
       expiresIn: JWT_EXPIRY
     };
-    
+
   } catch (error) {
     logger.error('❌ Error refrescando token', error);
     return { success: false, message: 'Token inválido' };
@@ -352,7 +361,7 @@ async function getClientInvoices(codigoCliente, year = null) {
     logger.success(`✅ ${facturas ? facturas.length : 0} facturas obtenidas`, { codigoCliente });
 
     return facturas || [];
-    
+
   } catch (error) {
     logger.error('❌ Error obteniendo facturas', error);
     throw error;

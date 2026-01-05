@@ -17,10 +17,17 @@ interface CartStore {
   resetStore: () => void;
 }
 
+interface LoginResult {
+  success: boolean;
+  showPasswordChangeModal?: boolean;
+  requiresEmailSetup?: boolean;
+  message?: string;
+}
+
 interface AuthStore {
   user: UserProfile | null;
   isAuthenticated: boolean;
-  login: (codigoCliente: string, password: string) => Promise<boolean>;
+  login: (codigoCliente: string, password: string) => Promise<LoginResult>;
   logout: () => void;
   updateProfile: (data: Partial<UserProfile>) => void;
 }
@@ -42,7 +49,7 @@ export const useCartStore = create<CartStore>()(
       addItem: (product, quantity = 1) => {
         const items = get().items;
         const existingItem = items.find(item => item.product.id === product.id);
-        
+
         if (existingItem) {
           set({
             items: items.map(item =>
@@ -113,7 +120,7 @@ export const useAuthStore = create<AuthStore>()(
     (set, get) => ({
       user: null,
       isAuthenticated: false,
-      
+
       /**
        * Login seguro - Los tokens se reciben como HttpOnly cookies
        * El frontend solo almacena información del usuario, NO tokens
@@ -139,6 +146,7 @@ export const useAuthStore = create<AuthStore>()(
           if (response.ok && data.success) {
             const user: UserProfile = {
               id: data.cliente.codigoCliente,
+              customerId: data.cliente.id || data.cliente.customerId, // ID numérico del backend
               name: data.cliente.nombre,
               email: data.cliente.email || '',
               company: data.cliente.nombreAlternativo || data.cliente.nombreComercial || data.cliente.nombre,
@@ -154,23 +162,41 @@ export const useAuthStore = create<AuthStore>()(
             }
 
             set({ user, isAuthenticated: true });
-            return true;
+
+            // ✅ Devolver objeto completo
+            return {
+              success: true,
+              showPasswordChangeModal: data.showPasswordChangeModal || false,
+              requiresEmailSetup: data.requiresEmailSetup || false,
+              message: data.message
+            };
           }
 
-          return false;
+          // Special case: Login successful but requires email setup
+          if (response.ok && data.success && data.requiresEmailSetup) {
+            // 🔐 DO NOT set isAuthenticated: true yet
+            // Return success so UI can show the setup modal, but keep app locked
+            return {
+              success: true,
+              requiresEmailSetup: true,
+              message: 'Configuración de email requerida'
+            };
+          }
+
+          return { success: false };
         } catch (error) {
           console.error('Error en login:', error);
-          return false;
+          return { success: false };
         }
       },
-      
+
       /**
        * Logout seguro - El backend limpia las cookies HttpOnly
        */
       logout: async () => {
         try {
           const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-          
+
           try {
             await fetch(`${API_URL}/api/auth/logout`, {
               method: 'POST',
@@ -183,13 +209,13 @@ export const useAuthStore = create<AuthStore>()(
             console.warn('Error calling logout endpoint:', error);
             // Continuar con logout local incluso si el backend falla
           }
-          
+
           // 🔐 Limpiar cualquier token legacy de localStorage (por si migración)
           if (typeof window !== 'undefined') {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
           }
-          
+
           // Limpiar estado de autenticación
           set({ user: null, isAuthenticated: false });
         } catch (error) {
@@ -202,7 +228,7 @@ export const useAuthStore = create<AuthStore>()(
           set({ user: null, isAuthenticated: false });
         }
       },
-      
+
       updateProfile: (data) => set(state => ({
         user: state.user ? { ...state.user, ...data } : null
       }))
@@ -210,9 +236,9 @@ export const useAuthStore = create<AuthStore>()(
     {
       name: 'topgel-auth',
       // 🔐 Solo persistir user info, nunca tokens
-      partialize: (state) => ({ 
-        user: state.user, 
-        isAuthenticated: state.isAuthenticated 
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated
       }),
     }
   )

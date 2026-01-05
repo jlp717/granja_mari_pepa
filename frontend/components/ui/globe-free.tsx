@@ -28,14 +28,6 @@ const locations: Location[] = [
     coordinates: { lat: 37.6756, lng: -1.7003 },
     color: '#10b981',
     description: 'Sede Central'
-  },
-  {
-    id: 'almeria', 
-    name: 'Almería',
-    region: 'Andalucía',
-    coordinates: { lat: 36.8381, lng: -2.4597 },
-    color: '#06b6d4',
-    description: 'Delegación Sur'
   }
 ];
 

@@ -41,14 +41,7 @@ const organizationSchema = {
       postalCode: '30817',
       addressCountry: 'ES',
     },
-    {
-      '@type': 'PostalAddress',
-      streetAddress: 'Pol. Industrial La Juaida, C/ Sierra de Ronda, 26',
-      addressLocality: 'Viator',
-      addressRegion: 'Almería',
-      postalCode: '04240',
-      addressCountry: 'ES',
-    },
+
   ],
   contactPoint: [
     {
@@ -87,11 +80,7 @@ const organizationSchema = {
       name: 'Murcia',
       '@id': 'https://www.wikidata.org/wiki/Q5765',
     },
-    {
-      '@type': 'State',
-      name: 'Almería',
-      '@id': 'https://www.wikidata.org/wiki/Q5765',
-    },
+
     {
       '@type': 'State',
       name: 'Alicante',
@@ -152,48 +141,7 @@ const localBusinessSchemaMurcia = {
   },
 };
 
-// Schema del negocio local (Almería)
-const localBusinessSchemaAlmeria = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': 'https://granjamaripepa.com/#almeria',
-  name: 'Granja Mari Pepa - Delegación Almería',
-  image: 'https://granjamaripepa.com/og-image.jpg',
-  url: 'https://granjamaripepa.com',
-  telephone: '+34-950-97-34-29',
-  email: 'pedidos@granjamaripepa.com',
-  priceRange: '€€',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Pol. Industrial La Juaida, C/ Sierra de Ronda, 26',
-    addressLocality: 'Viator',
-    addressRegion: 'Almería',
-    postalCode: '04240',
-    addressCountry: 'ES',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 36.8912,
-    longitude: -2.4264,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '13:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '16:00',
-      closes: '19:00',
-    },
-  ],
-  parentOrganization: {
-    '@id': 'https://granjamaripepa.com/#organization',
-  },
-};
+
 
 // Schema del sitio web
 const websiteSchema = {
@@ -227,7 +175,7 @@ const faqSchema = {
       name: '¿En qué zonas realiza entregas Granja Mari Pepa?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Realizamos entregas en toda la Región de Murcia, provincia de Almería y sur de la provincia de Alicante, con entrega en 24-48 horas garantizando la cadena de frío.',
+        text: 'Realizamos entregas en toda la Región de Murcia y sur de la provincia de Alicante, con entrega en 24-48 horas garantizando la cadena de frío.',
       },
     },
     {
@@ -271,14 +219,7 @@ export function JsonLdSchemas() {
           __html: JSON.stringify(localBusinessSchemaMurcia),
         }}
       />
-      <Script
-        id="local-business-almeria-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchemaAlmeria),
-        }}
-      />
+
       <Script
         id="website-schema"
         type="application/ld+json"

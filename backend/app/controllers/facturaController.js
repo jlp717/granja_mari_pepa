@@ -128,6 +128,7 @@ async function getInvoiceSummary(req, res) {
     const codigoCliente = req.user.codigoCliente;
     const { ejercicio } = req.query;
     
+    // Request summary aggregated per factura única (no por registro de albarán)
     const resumen = await databaseService.getClientSummary(codigoCliente, ejercicio);
     
     return res.json({
@@ -415,26 +416,48 @@ async function obtenerDashboard(req, res) {
     const mesActual = new Date().getMonth() + 1;
     
     // Obtener totales del año actual
+    // Agrupar por factura única para evitar contar albaranes como facturas
     const queryTotales = `
-      SELECT 
+      WITH FacturasUnicas AS (
+        SELECT
+          TRIM(SERIEFACTURA) AS SERIE,
+          NUMEROFACTURA AS NUMERO,
+          EJERCICIOFACTURA AS YEAR,
+          SUM(IMPORTEBASEIMPONIBLE1 + IMPORTEBASEIMPONIBLE2 + IMPORTEBASEIMPONIBLE3 + 
+              IMPORTEBASEIMPONIBLE4 + IMPORTEBASEIMPONIBLE5) AS BASE_FACTURA,
+          SUM(IMPORTEIVA1 + IMPORTEIVA2 + IMPORTEIVA3 + IMPORTEIVA4 + IMPORTEIVA5) AS IVA_FACTURA,
+          SUM(IMPORTETOTAL) AS TOTAL_FACTURA
+        FROM DSEDAC.CAC
+        WHERE CODIGOCLIENTE = ? AND EJERCICIOFACTURA = ?
+        GROUP BY TRIM(SERIEFACTURA), NUMEROFACTURA, EJERCICIOFACTURA
+      )
+      SELECT
         COUNT(*) AS NUM_FACTURAS,
-        SUM(IMPORTEBASEIMPONIBLE1 + IMPORTEBASEIMPONIBLE2 + IMPORTEBASEIMPONIBLE3 + 
-            IMPORTEBASEIMPONIBLE4 + IMPORTEBASEIMPONIBLE5) AS BASE_TOTAL,
-        SUM(IMPORTEIVA1 + IMPORTEIVA2 + IMPORTEIVA3 + IMPORTEIVA4 + IMPORTEIVA5) AS IVA_TOTAL,
-        SUM(IMPORTETOTAL) AS TOTAL
-      FROM DSEDAC.CAC
-      WHERE CODIGOCLIENTE = ? AND EJERCICIOFACTURA = ?
+        SUM(BASE_FACTURA) AS BASE_TOTAL,
+        SUM(IVA_FACTURA) AS IVA_TOTAL,
+        SUM(TOTAL_FACTURA) AS TOTAL
+      FROM FacturasUnicas
     `;
     
-    // Obtener totales del mes actual
+    // Obtener totales del mes actual (agrupando por factura única y filtrando por mes)
     const queryMesActual = `
+      WITH FacturasUnicas AS (
+        SELECT
+          TRIM(SERIEFACTURA) AS SERIE,
+          NUMEROFACTURA AS NUMERO,
+          EJERCICIOFACTURA AS YEAR,
+          MAX(MESFACTURA) AS MES,
+          SUM(IMPORTETOTAL) AS TOTAL_FACTURA
+        FROM DSEDAC.CAC
+        WHERE CODIGOCLIENTE = ? 
+          AND EJERCICIOFACTURA = ? 
+        GROUP BY TRIM(SERIEFACTURA), NUMEROFACTURA, EJERCICIOFACTURA
+      )
       SELECT 
         COUNT(*) AS NUM_FACTURAS,
-        SUM(IMPORTETOTAL) AS TOTAL
-      FROM DSEDAC.CAC
-      WHERE CODIGOCLIENTE = ? 
-        AND EJERCICIOFACTURA = ? 
-        AND MESFACTURA = ?
+        SUM(TOTAL_FACTURA) AS TOTAL
+      FROM FacturasUnicas
+      WHERE MES = ?
     `;
     
     const [totalesAno, totalesMes] = await Promise.all([

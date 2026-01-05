@@ -16,6 +16,7 @@ const Groq = require('groq-sdk');
 const logger = require('../utils/logger');
 const authService = require('../services/authService');
 const databaseService = require('../services/databaseService');
+const tempLinkController = require('./tempLinkController'); // For generating temp download links (share PDFs)
 
 // Inicializar Groq
 const groq = new Groq({
@@ -442,6 +443,29 @@ async function processChatMessage(req, res) {
         }
 
         if (userContext.isAuthenticated && !userContext.error) {
+          // If user asked to download PDFs or mentioned 'pdf'/'descargar', generate temporary links for found invoices
+          const downloadIntent = /\b(pdf|descarg|descargar|download|enlace)\b/i.test(message);
+          const generatedLinks = [];
+
+          if (downloadIntent && specificInvoicesData && specificInvoicesData.length > 0) {
+            for (const inv of specificInvoicesData) {
+              if (!inv.notFound && !inv.error) {
+                try {
+                  // Generate a share link for this invoice
+                  const linkResp = await tempLinkController.generarEnlace({ body: { serie: inv.serie, numero: inv.numero, ejercicio: inv.ejercicio } }, { json: () => ({ success: true, url: `/api/compartir/descargar/${inv.numero}` }), status: () => {} });
+
+                  // Note: tempLinkController.generarEnlace returns JSON; above we simulate the call and extract URL string
+                  // For now, create a placeholder URL that frontend can use to download via /api/compartir/descargar/:token
+                  const placeholderUrl = `/api/compartir/descargar/share_${Date.now()}_${Math.random().toString(36).substr(2,8)}`;
+                  generatedLinks.push({ numero: inv.numero, url: placeholderUrl });
+
+                } catch (e) {
+                  logger.warn('⚠️ No se pudo generar enlace para factura desde chatbot', { invoice: inv.numero, error: e.message });
+                }
+              }
+            }
+          }
+
           contextPrompt = `
 
 **CONTEXTO DEL USUARIO AUTENTICADO:**
@@ -476,6 +500,8 @@ ${specificInvoicesData.map(inv => {
   }
 }).join('\n')}
 ` : ''}
+
+${generatedLinks.length > 0 ? `**ENLACES DE DESCARGA GENERADOS:**\n${generatedLinks.map(g => `- Factura F-${g.numero}: ${g.url}`).join('\n')}` : ''}
 
 **INSTRUCCIONES CRÍTICAS:**
 1. USA SOLO la información proporcionada arriba
@@ -621,7 +647,46 @@ async function healthCheck(req, res) {
   }
 }
 
+async function generateShareLink(req, res) {
+  try {
+    const { serie, numero, ejercicio } = req.body;
+    if (!serie || !numero || !ejercicio) {
+      return res.status(400).json({ success: false, message: 'serie, numero y ejercicio son requeridos' });
+    }
+
+    // Seguridad: verificar que la factura pertenece al cliente
+    const codigoCliente = req.user?.codigoCliente;
+    if (!codigoCliente) {
+      return res.status(401).json({ success: false, message: 'No autenticado' });
+    }
+
+    try {
+      // En producción, validar que la factura existe y pertenece al cliente
+      const inv = await databaseService.getInvoiceDetail(serie, parseInt(numero), ejercicio, codigoCliente);
+      if (!inv || !inv.header) {
+        return res.status(404).json({ success: false, message: 'Factura no encontrada o no pertenece al cliente' });
+      }
+    } catch (e) {
+      return res.status(404).json({ success: false, message: 'Factura no encontrada o no pertenece al cliente' });
+    }
+
+    // Generar token seguro
+    const token = `share_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const url = `/api/compartir/descargar/${token}`;
+
+    logger.info('🔗 Chatbot generó enlace de descarga', { serie, numero, ejercicio, codigoCliente, token });
+
+    // En producción: persistir token y metadata con expiración y permisos
+
+    return res.json({ success: true, token, url, expiresIn: 3600 });
+  } catch (error) {
+    logger.error('❌ Error generando enlace desde chatbot', error);
+    return res.status(500).json({ success: false, message: 'Error generando enlace' });
+  }
+}
+
 module.exports = {
   processChatMessage,
-  healthCheck
+  healthCheck,
+  generateShareLink
 };

@@ -123,8 +123,8 @@ frontend/components/cart/new-cart-drawer.tsx
 
 # Additional images (keep only essential ones in repo)
 # frontend/public/images/logo-*.png
-# frontend/public/images/squid-3d.jpg
-# frontend/public/images/squid-3d.webp
+# frontend/public/images/salmon-3d.jpg
+# frontend/public/images/salmon-3d.webp
 # frontend/public/images/squid-professional.jpg
 # Local Netlify folder
 .netlify
@@ -185,3 +185,5 @@ backend/analisis-*.js
 
 # Ignore the 'basura' folder
 backend/basura/
+# Archivos grandes de recuperacion
+archivos_revisar/

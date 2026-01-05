@@ -30,6 +30,7 @@ interface ChatMessage {
   timestamp?: Date;
   isStreaming?: boolean;
   suggestions?: string[];
+  attachments?: { label: string; url: string }[];
 }
 
 interface QuickAction {
@@ -315,7 +316,7 @@ export function GlobalChatbot() {
       return ['Productos congelados', 'Productos refrigerados', 'Marcas disponibles'];
     }
     if (lowerResponse.includes('contacto') || lowerResponse.includes('teléfono')) {
-      return ['Horario de atención', 'Delegación en Almería', 'Email para pedidos'];
+      return ['Horario de atención', 'Delegación en Lorca', 'Email para pedidos'];
     }
     if (lowerResponse.includes('entrega') || lowerResponse.includes('reparto')) {
       return ['Zona de cobertura', 'Modificar una entrega', 'Cadena de frío'];
@@ -351,13 +352,19 @@ export function GlobalChatbot() {
       if (data.success && data.response) {
         const newMessageIndex = messages.length + 1; // +1 por el mensaje del usuario
         const suggestions = generateSuggestions(data.response);
+        // Detectar enlaces de descarga en la respuesta
+        const linkRegex = /(\/api\/compartir\/descargar\/[\w-_]+)/i;
+        const match = data.response.match(linkRegex);
+        const attachments = match ? [{ label: 'Descargar factura', url: match[1] }] : [];
         setCurrentlyStreamingId(newMessageIndex);
         setMessages(prev => [...prev, { 
           role: 'assistant', 
           content: data.response,
           timestamp: new Date(),
           isStreaming: true,
-          suggestions
+          suggestions,
+          // @ts-ignore - Attachments para descargar
+          attachments
         }]);
       } else {
         throw new Error('Respuesta inválida');
@@ -593,6 +600,31 @@ export function GlobalChatbot() {
                             </div>
                             
                             {/* Sugerencias contextuales para mensajes del asistente */}
+                            {msg.role === 'assistant' && msg.attachments && msg.attachments.length > 0 && (
+                              <div className="mt-2 flex gap-2">
+                                {msg.attachments.map((att: any, aidx: number) => (
+                                  <button
+                                    key={aidx}
+                                    onClick={async (e) => {
+                                      e.preventDefault();
+                                      try {
+                                        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+                                        // Abrir nueva pestaña para descargar
+                                        const fullUrl = `${API_URL}${att.url}`;
+                                        window.open(fullUrl, '_blank', 'noopener');
+                                      } catch (err) {
+                                        console.error('Error descargando archivo', err);
+                                      }
+                                    }}
+                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-medium hover:bg-emerald-100 transition-all"
+                                  >
+                                    <FileText className="w-4 h-4" />
+                                    {att.label}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+
                             {msg.role === 'assistant' && 
                              msg.suggestions && 
                              msg.suggestions.length > 0 && 

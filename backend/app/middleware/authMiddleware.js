@@ -7,7 +7,7 @@
 const jwt = require('jsonwebtoken');
 const logger = require('../utils/logger');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'CAMBIAR-EN-PRODUCCION-POR-SECRETO-MUY-LARGO';
+const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || 'CAMBIAR-EN-PRODUCCION-POR-SECRETO-MUY-LARGO';
 
 /**
  * Middleware para verificar JWT
@@ -35,7 +35,7 @@ function authenticateToken(req, res, next) {
     }
     
     // Verificar token con JWT
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, JWT_ACCESS_SECRET, (err, decoded) => {
       if (err) {
         logger.warn('⚠️ Token inválido', { 
           ip: req.ip,
@@ -49,7 +49,11 @@ function authenticateToken(req, res, next) {
       
       // Añadir datos del usuario al request
       req.user = {
-        codigoCliente: decoded.codigoCliente,
+        customerId: decoded.customerId,
+        customerCode: decoded.customerCode,
+        email: decoded.email,
+        // Mantener compatibilidad con código legacy
+        codigoCliente: decoded.customerCode || decoded.codigoCliente,
         nombre: decoded.nombre
       };
       
@@ -89,7 +93,7 @@ function optionalAuth(req, res, next) {
     }
 
     // Verificar token con JWT
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, JWT_ACCESS_SECRET, (err, decoded) => {
       if (err) {
         // Token inválido - continuar sin autenticar (es opcional)
         logger.debug('⚠️ Token inválido en optionalAuth (no crítico)', {
@@ -100,7 +104,11 @@ function optionalAuth(req, res, next) {
 
       // Token válido - añadir datos del usuario al request
       req.user = {
-        codigoCliente: decoded.codigoCliente,
+        customerId: decoded.customerId,
+        customerCode: decoded.customerCode,
+        email: decoded.email,
+        // Mantener compatibilidad con código legacy
+        codigoCliente: decoded.customerCode || decoded.codigoCliente,
         nombre: decoded.nombre
       };
 

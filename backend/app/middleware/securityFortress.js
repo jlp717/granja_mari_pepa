@@ -29,16 +29,16 @@ function checkBannedIP(req, res, next) {
 function detectMaliciousBots(req, res, next) {
   const userAgent = req.get('user-agent') || '';
   const botPatterns = ['bot', 'crawler', 'spider', 'scraper', 'curl', 'wget'];
-  
-  const isSuspiciousBot = botPatterns.some(pattern => 
+
+  const isSuspiciousBot = botPatterns.some(pattern =>
     userAgent.toLowerCase().includes(pattern)
   );
-  
+
   if (isSuspiciousBot && req.path.startsWith('/api/')) {
     logger.warn('🤖 Bot sospechoso detectado', { userAgent, ip: req.ip, path: req.path });
     // Por ahora solo log, no bloqueamos
   }
-  
+
   next();
 }
 
@@ -47,14 +47,14 @@ function detectMaliciousBots(req, res, next) {
  */
 function validateHeaders(req, res, next) {
   const requiredHeaders = ['user-agent'];
-  
+
   for (const header of requiredHeaders) {
     if (!req.get(header)) {
       logger.warn('⚠️ Header requerido faltante', { header, ip: req.ip });
       return res.status(400).json({ success: false, message: 'Request inválido' });
     }
   }
-  
+
   next();
 }
 
@@ -64,7 +64,7 @@ function validateHeaders(req, res, next) {
 function detectMaliciousPayloads(req, res, next) {
   if (req.body) {
     const bodyStr = JSON.stringify(req.body);
-    
+
     // Patrones de ataque comunes
     const maliciousPatterns = [
       /<script/i,
@@ -77,7 +77,7 @@ function detectMaliciousPayloads(req, res, next) {
       /insert\s+into/i,
       /delete\s+from/i
     ];
-    
+
     for (const pattern of maliciousPatterns) {
       if (pattern.test(bodyStr)) {
         logger.warn('⚠️ Payload malicioso detectado', { pattern: pattern.source, ip: req.ip });
@@ -85,7 +85,7 @@ function detectMaliciousPayloads(req, res, next) {
       }
     }
   }
-  
+
   next();
 }
 
@@ -111,13 +111,17 @@ function csrfProtectionAdvanced(req, res, next) {
   if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
     return next();
   }
-  
+
   // Excluir rutas públicas de autenticación, recuperación y chatbot
   const publicRoutes = [
     '/api/auth/v2/login',
     '/api/auth/login',
     '/api/auth/v2/solicitar-codigo',
     '/api/auth/v2/verificar-codigo',
+    '/api/auth/v2/verificar-solo-codigo',
+    '/api/auth/v2/configure-email',
+    '/api/auth/change-password',
+    '/api/auth/check-password-pwned',
     '/api/csrf-token',
     '/api/security/csrf-token',
     '/api/analytics/events',
@@ -131,28 +135,28 @@ function csrfProtectionAdvanced(req, res, next) {
   if (publicRoutes.includes(req.path)) {
     return next();
   }
-  
+
   // Verificar token CSRF
   const token = req.get('x-csrf-token') || req.get('X-CSRF-Token');
-  
+
   if (!token) {
     logger.warn('⚠️ CSRF token faltante', { ip: req.ip, path: req.path, method: req.method });
-    return res.status(403).json({ 
-      success: false, 
+    return res.status(403).json({
+      success: false,
       message: 'CSRF token requerido',
       code: 'CSRF_TOKEN_MISSING'
     });
   }
-  
+
   if (!csrfTokens.has(token)) {
     logger.warn('⚠️ CSRF token inválido', { ip: req.ip, path: req.path });
-    return res.status(403).json({ 
-      success: false, 
+    return res.status(403).json({
+      success: false,
       message: 'CSRF token inválido o expirado',
       code: 'CSRF_TOKEN_INVALID'
     });
   }
-  
+
   next();
 }
 
@@ -184,9 +188,9 @@ function deviceFingerprinting(req, res, next) {
     acceptEncoding: req.get('accept-encoding'),
     ip: req.ip
   };
-  
+
   const fingerprintHash = JSON.stringify(fingerprint);
-  
+
   if (!deviceFingerprints.has(fingerprintHash)) {
     deviceFingerprints.set(fingerprintHash, {
       firstSeen: Date.now(),
@@ -194,19 +198,19 @@ function deviceFingerprinting(req, res, next) {
     });
     logger.debug('🔍 Nuevo dispositivo registrado', { ip: req.ip });
   }
-  
+
   const device = deviceFingerprints.get(fingerprintHash);
   device.requests++;
   device.lastSeen = Date.now();
-  
+
   // Detectar comportamiento anómalo
   if (device.requests > 1000) {
-    logger.warn('⚠️ Dispositivo con actividad sospechosa', { 
-      ip: req.ip, 
-      requests: device.requests 
+    logger.warn('⚠️ Dispositivo con actividad sospechosa', {
+      ip: req.ip,
+      requests: device.requests
     });
   }
-  
+
   next();
 }
 
@@ -215,8 +219,8 @@ function deviceFingerprinting(req, res, next) {
  */
 function maskPIIInResponse(req, res, next) {
   const originalJson = res.json.bind(res);
-  
-  res.json = function(data) {
+
+  res.json = function (data) {
     if (data && typeof data === 'object') {
       // Enmascarar emails y teléfonos en logs (no en respuesta)
       if (data.email && !req.user) {
@@ -225,7 +229,7 @@ function maskPIIInResponse(req, res, next) {
     }
     return originalJson(data);
   };
-  
+
   next();
 }
 
@@ -236,26 +240,26 @@ function perUserRateLimit(req, res, next) {
   if (req.user) {
     const userId = req.user.codigoCliente;
     const now = Date.now();
-    
+
     if (!ipAccessHistory.has(userId)) {
       ipAccessHistory.set(userId, { count: 0, resetTime: now + 60000 });
     }
-    
+
     const userAccess = ipAccessHistory.get(userId);
-    
+
     if (now > userAccess.resetTime) {
       userAccess.count = 0;
       userAccess.resetTime = now + 60000;
     }
-    
+
     userAccess.count++;
-    
+
     if (userAccess.count > 100) {
       logger.warn('⚠️ Rate limit por usuario excedido', { userId, count: userAccess.count });
       return res.status(429).json({ success: false, message: 'Demasiadas peticiones' });
     }
   }
-  
+
   next();
 }
 
@@ -265,10 +269,10 @@ function perUserRateLimit(req, res, next) {
 function getCSRFToken(req, res) {
   const token = require('crypto').randomBytes(32).toString('hex');
   csrfTokens.set(token, Date.now());
-  
+
   // Limpiar tokens viejos
   setTimeout(() => csrfTokens.delete(token), 3600000); // 1 hora
-  
+
   return res.json({ success: true, token });
 }
 

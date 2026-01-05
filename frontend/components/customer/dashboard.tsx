@@ -22,7 +22,7 @@ import {
   TrendingUp,
   TrendingDown,
   Award,
-  Bell,
+  // Bell,
   MapPin,
   Phone,
   Mail,
@@ -70,11 +70,15 @@ import {
   UserPlus,
   Lock,
   Pencil,
-  Info
+  Info,
+  Shield,
+  Key,
+  AlertTriangle
 } from 'lucide-react';
 import { useAuthStore, useFavoritesStore, useCartStore } from '@/lib/store';
 import LibroIvaModal from './libro-iva-modal';
 import { DashboardCharts } from './dashboard-charts';
+import { PasswordChangeForm } from './password-change-form';
 import { useApiData } from '@/hooks/useApiData';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -84,13 +88,14 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { FacturaBackend } from '@/lib/types';
-import { formatCurrency, formatCurrencyNoDecimals} from '@/lib/utils';
+import { formatCurrency, formatCurrencyNoDecimals } from '@/lib/utils';
 import { secureFetch, secureDownload } from '@/lib/secureFetch'; // 🔐 HttpOnly Cookie Auth
 import apiClient from '@/lib/apiClient'; // 🔐 Cliente API con autenticación automática
 
 const tabs = [
-  { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
-  { id: 'pedidos', name: 'Pedidos', icon: ShoppingBag },
+  // Comentado temporalmente: ocultamos Dashboard y Pedidos para que el área de clientes muestre directamente Facturas
+  // { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
+  // { id: 'pedidos', name: 'Pedidos', icon: ShoppingBag },
   { id: 'facturas', name: 'Facturas', icon: FileText },
   { id: 'perfil', name: 'Perfil', icon: User },
   { id: 'favoritos', name: 'Favoritos', icon: Heart }
@@ -138,7 +143,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
       const isSmallScreen = window.innerWidth < 768;
       setIsMobile(isMobileDevice || isSmallScreen);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -192,7 +197,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
           <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
             <FileText className="w-10 h-10 text-white" />
           </div>
-          
+
           {/* Título */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
@@ -202,7 +207,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
               Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.
             </p>
           </div>
-          
+
           {/* Botón de descarga */}
           <a
             href={pdfUrl}
@@ -212,7 +217,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
             <Download className="w-5 h-5" />
             Descargar PDF
           </a>
-          
+
           {/* Info adicional */}
           <p className="text-xs text-gray-500 dark:text-gray-500">
             El PDF se guardará en tu carpeta de descargas
@@ -233,16 +238,17 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
 }
 
 export function CustomerDashboard() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  // Cambiado para que al cargar el área de clientes se muestre directamente 'facturas'
+  const [activeTab, setActiveTab] = useState('facturas');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterMonth, setFilterMonth] = useState('all');
   const [filterYear, setFilterYear] = useState('2025'); // Año actual por defecto
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  
+
   // Ref para el contenido principal (scroll en móvil)
   const mainContentRef = useRef<HTMLDivElement>(null);
-  
+
   // Filtros avanzados para rango de fechas
   const [fechaDesde, setFechaDesde] = useState('');
   const [fechaHasta, setFechaHasta] = useState('');
@@ -266,29 +272,29 @@ export function CustomerDashboard() {
   const [facturaPreview, setFacturaPreview] = useState<FacturaBackend | null>(null);
 
   // Estado para notificaciones - Sistema completo
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [notifications, setNotifications] = useState<Array<{
-    id: string;
-    type: 'info' | 'success' | 'warning' | 'alert';
-    title: string;
-    message: string;
-    time: Date;
-    read: boolean;
-    icon?: string;
-    action?: { label: string; tab?: string };
-  }>>([]);
+  // const [showNotifications, setShowNotifications] = useState(false);
+  // const [notifications, setNotifications] = useState<Array<{
+  //   id: string;
+  //   type: 'info' | 'success' | 'warning' | 'alert';
+  //   title: string;
+  //   message: string;
+  //   time: Date;
+  //   read: boolean;
+  //   icon?: string;
+  //   action?: { label: string; tab?: string };
+  // }>>([]);
 
   // NOTA: El useEffect para generar notificaciones se encuentra después del useMemo de clientProfile
-  
-  const unreadNotifications = notifications.filter(n => !n.read).length;
-  
-  const markNotificationAsRead = (id: string) => {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
-  };
-  
-  const markAllAsRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-  };
+
+  // const unreadNotifications = notifications.filter(n => !n.read).length;
+
+  // const markNotificationAsRead = (id: string) => {
+  //   setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+  // };
+
+  // const markAllAsRead = () => {
+  //   setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+  // };
 
   // Caché de PDFs en memoria - NUEVO para performance
   const [pdfCache, setPdfCache] = useState<Record<string, string>>({}); // facturaId -> blob URL
@@ -322,6 +328,15 @@ export function CustomerDashboard() {
   // Estado para perfil completo del cliente
   const [perfilCliente, setPerfilCliente] = useState<any>(null);
   const [loadingPerfil, setLoadingPerfil] = useState(false);
+
+  // Estados para alertas de seguridad pendientes (persistir tras recarga)
+  const [securityWarnings, setSecurityWarnings] = useState<{
+    hasLegacyPassword: boolean;
+    needsContactSetup: boolean;
+  }>({ hasLegacyPassword: false, needsContactSetup: false });
+
+  // Estado para modal de cambio de contraseña
+  const [showPasswordChangeModal, setShowPasswordChangeModal] = useState(false);
 
   const { user, logout } = useAuthStore();
   const { favorites, removeFavorite, getFavoritesCount } = useFavoritesStore();
@@ -416,7 +431,7 @@ export function CustomerDashboard() {
           }
         };
         setPerfilCliente(perfil);
-        
+
         // Cargar datos de contacto en los estados (siempre editables)
         if (perfil.contacto.email) {
           setUserEmail(perfil.contacto.email);
@@ -424,6 +439,30 @@ export function CustomerDashboard() {
 
         if (perfil.contacto.telefono) {
           setUserPhone(perfil.contacto.telefono);
+        }
+
+        // 🔒 Check security status - alerts for legacy password or missing contact
+        const hasLegacyPassword = perfil.seguridad?.isLegacyPassword === true ||
+          perfil.seguridad?.isLegacyPassword === 1 ||
+          perfil.seguridad?.isLegacyPassword === '1';
+
+        const hasValidEmail = perfil.contacto.email &&
+          perfil.contacto.email.includes('@') &&
+          !perfil.contacto.email.includes('@granja.local');
+
+        const hasValidPhone = perfil.contacto.telefono &&
+          perfil.contacto.telefono.replace(/\D/g, '').length >= 9;
+
+        const needsContactSetup = !hasValidEmail || !hasValidPhone;
+
+        setSecurityWarnings({
+          hasLegacyPassword,
+          needsContactSetup
+        });
+
+        // Si hay problemas de seguridad, mostrar advertencia
+        if (hasLegacyPassword || needsContactSetup) {
+          console.log('⚠️ Security warnings detected:', { hasLegacyPassword, needsContactSetup });
         }
       }
     } catch (error) {
@@ -436,10 +475,10 @@ export function CustomerDashboard() {
   // Función para cambiar de tab y hacer scroll apropiado
   const handleTabChange = useCallback((tabId: string) => {
     setActiveTab(tabId);
-    
+
     // Detectar si es móvil/tablet (< 1280px que es xl breakpoint)
     const isMobileOrTablet = window.innerWidth < 1280;
-    
+
     if (isMobileOrTablet && mainContentRef.current) {
       // En móvil/tablet, scroll al contenido principal con offset para el header
       setTimeout(() => {
@@ -563,7 +602,7 @@ export function CustomerDashboard() {
         greetingContext: 'Bienvenido a tu portal exclusivo',
         isNewClient: true,
         clientId: user?.id || 'new',
-        
+
         // Tier y visuales
         tier: 'starter' as const,
         tierLabel: 'Nuevo Cliente',
@@ -571,7 +610,7 @@ export function CustomerDashboard() {
         tierGradient: 'from-slate-600 via-slate-700 to-slate-800',
         accentColor: '#64748B',
         secondaryColor: '#94A3B8',
-        
+
         // Métricas básicas
         stats: {
           totalFacturado: 0,
@@ -580,7 +619,7 @@ export function CustomerDashboard() {
           importeMes: 0,
           totalFacturas: 0,
         },
-        
+
         // Timeline vacío
         timeline: {
           primeraFactura: null as string | null,
@@ -588,7 +627,7 @@ export function CustomerDashboard() {
           diasComoCliente: 0,
           diasDesdeUltimaCompra: null as number | null,
         },
-        
+
         // Patrones vacíos
         patterns: {
           mesActivo: false,
@@ -600,7 +639,7 @@ export function CustomerDashboard() {
           frecuenciaCompra: null as number | null,
           estacionalidad: null as 'alta' | 'media' | 'baja' | null,
         },
-        
+
         // Tendencias
         trends: {
           tendencia: 'neutral' as 'up' | 'down' | 'neutral',
@@ -608,7 +647,7 @@ export function CustomerDashboard() {
           tendenciaTexto: 'Sin datos suficientes',
           velocidadCrecimiento: 'estable' as 'acelerado' | 'estable' | 'desacelerado',
         },
-        
+
         // Predicciones
         predictions: {
           proximaCompraEstimada: null as string | null,
@@ -616,7 +655,7 @@ export function CustomerDashboard() {
           riesgoInactividad: 'bajo' as 'bajo' | 'medio' | 'alto',
           potencialCrecimiento: 'alto' as 'bajo' | 'medio' | 'alto',
         },
-        
+
         // Insights personalizados
         insights: [] as Array<{
           type: 'achievement' | 'opportunity' | 'trend' | 'milestone' | 'alert';
@@ -626,13 +665,13 @@ export function CustomerDashboard() {
           color: string;
           priority: number;
         }>,
-        
+
         // Quick actions
         quickActions: [
           { id: 'catalog', label: 'Explorar catálogo', icon: 'shopping-bag', primary: true },
           { id: 'contact', label: 'Contactar', icon: 'message-circle', primary: false },
         ],
-        
+
         // Hitos/Milestones
         milestones: {
           achieved: [] as Array<{ id: string; label: string; date: string }>,
@@ -647,10 +686,10 @@ export function CustomerDashboard() {
     }
 
     // ========== ANÁLISIS PROFUNDO DEL CLIENTE ==========
-    
+
     // Filtrar facturas que tengan fecha válida
     const facturasValidas = facturas.filter(f => f && f.fecha && typeof f.fecha === 'string');
-    
+
     // Ordenar facturas por fecha
     const facturasOrdenadas = [...facturasValidas].sort((a, b) => {
       const dateA = a.fecha.split('/').reverse().join('-');
@@ -672,10 +711,10 @@ export function CustomerDashboard() {
     // Timeline del cliente
     const primeraFactura = facturasOrdenadas[0]?.fecha || null;
     const ultimaFactura = facturasRecientes[0]?.fecha || null;
-    
+
     let diasComoCliente = 0;
     let diasDesdeUltimaCompra: number | null = null;
-    
+
     if (primeraFactura) {
       const parts = primeraFactura.split('/');
       if (parts.length >= 3) {
@@ -683,7 +722,7 @@ export function CustomerDashboard() {
         diasComoCliente = Math.ceil((now.getTime() - fechaPrimera.getTime()) / (1000 * 60 * 60 * 24));
       }
     }
-    
+
     if (ultimaFactura) {
       const parts = ultimaFactura.split('/');
       if (parts.length >= 3) {
@@ -697,7 +736,7 @@ export function CustomerDashboard() {
     const importesPorMes: { [key: string]: number } = {};
     const facturasPorDiaSemana: { [key: number]: number } = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
     const facturasPorHora: { [key: number]: number } = {};
-    
+
     facturasValidas.forEach(f => {
       if (f.fecha) {
         const parts = f.fecha.split('/');
@@ -707,7 +746,7 @@ export function CustomerDashboard() {
           const key = `${año}-${mes}`;
           facturasPorMes[key] = (facturasPorMes[key] || 0) + 1;
           importesPorMes[key] = (importesPorMes[key] || 0) + (f.totalFactura || 0);
-          
+
           // Día de la semana
           const fecha = new Date(parseInt(año), parseInt(mes) - 1, parseInt(parts[0]));
           facturasPorDiaSemana[fecha.getDay()]++;
@@ -738,14 +777,14 @@ export function CustomerDashboard() {
     const avgMensual = totalFacturado / mesesConActividad;
 
     // Tendencia vs mes anterior
-    const keyMesAnterior = mesActual === 1 
-      ? `${añoActual - 1}-12` 
+    const keyMesAnterior = mesActual === 1
+      ? `${añoActual - 1}-12`
       : `${añoActual}-${String(mesActual - 1).padStart(2, '0')}`;
     const importeMesAnterior = importesPorMes[keyMesAnterior] || 0;
-    
+
     let tendencia: 'up' | 'down' | 'neutral' = 'neutral';
     let porcentajeCambio = 0;
-    
+
     if (importeMesAnterior > 0) {
       porcentajeCambio = ((importeMes - importeMesAnterior) / importeMesAnterior) * 100;
       if (porcentajeCambio > 5) tendencia = 'up';
@@ -989,7 +1028,7 @@ export function CustomerDashboard() {
 
     // ========== MILESTONES ==========
     const achieved: Array<{ id: string; label: string; date: string }> = [];
-    
+
     if (totalFacturas >= 1) achieved.push({ id: 'first-order', label: 'Primera factura', date: primeraFactura || '' });
     if (totalFacturado >= 1000) achieved.push({ id: '1k', label: '1.000€ facturados', date: '' });
     if (totalFacturado >= 5000) achieved.push({ id: '5k', label: '5.000€ facturados', date: '' });
@@ -1070,7 +1109,7 @@ export function CustomerDashboard() {
       greetingContext,
       isNewClient: false,
       clientId: user?.id || '',
-      
+
       // Tier y visuales
       tier,
       tierLabel,
@@ -1078,7 +1117,7 @@ export function CustomerDashboard() {
       tierGradient,
       accentColor,
       secondaryColor,
-      
+
       // Métricas
       stats: {
         totalFacturado,
@@ -1088,7 +1127,7 @@ export function CustomerDashboard() {
         totalFacturas,
         avgPorFactura,
       },
-      
+
       // Timeline
       timeline: {
         primeraFactura,
@@ -1096,7 +1135,7 @@ export function CustomerDashboard() {
         diasComoCliente,
         diasDesdeUltimaCompra,
       },
-      
+
       // Patrones
       patterns: {
         mesActivo,
@@ -1109,19 +1148,19 @@ export function CustomerDashboard() {
         estacionalidad,
         mesesConActividad,
       },
-      
+
       // Tendencias
       trends: {
         tendencia,
         porcentajeCambio,
-        tendenciaTexto: tendencia === 'up' 
+        tendenciaTexto: tendencia === 'up'
           ? `+${porcentajeCambio.toFixed(0)}% vs mes anterior`
           : tendencia === 'down'
-          ? `${porcentajeCambio.toFixed(0)}% vs mes anterior`
-          : 'Estable',
+            ? `${porcentajeCambio.toFixed(0)}% vs mes anterior`
+            : 'Estable',
         velocidadCrecimiento,
       },
-      
+
       // Predicciones
       predictions: {
         proximaCompraEstimada,
@@ -1129,13 +1168,13 @@ export function CustomerDashboard() {
         riesgoInactividad,
         potencialCrecimiento,
       },
-      
+
       // Insights
       insights: insights.slice(0, 3), // Máximo 3 insights visibles
-      
+
       // Quick actions
       quickActions,
-      
+
       // Milestones
       milestones: {
         achieved,
@@ -1176,94 +1215,94 @@ export function CustomerDashboard() {
 
   // Generar notificaciones dinámicas basadas en datos reales
   // IMPORTANTE: Este useEffect debe estar DESPUÉS del useMemo de clientProfile
-  useEffect(() => {
-    if (!facturas || facturas.length === 0) return;
-    
-    const newNotifications: Array<{
-      id: string;
-      type: 'info' | 'success' | 'warning' | 'alert';
-      title: string;
-      message: string;
-      time: Date;
-      read: boolean;
-      icon?: string;
-      action?: { label: string; tab?: string };
-    }> = [];
-    
-    const now = new Date();
-    const currentMonth = now.getMonth();
-    const currentYear = now.getFullYear();
-    
-    // Notificación: Facturas nuevas este mes
-    const facturasEsteMes = facturas.filter(f => f.mes === (currentMonth + 1) && f.ano === currentYear);
-    if (facturasEsteMes.length > 0) {
-      newNotifications.push({
-        id: 'facturas-mes',
-        type: 'info',
-        title: 'Facturas del mes',
-        message: `Tienes ${facturasEsteMes.length} ${facturasEsteMes.length === 1 ? 'factura' : 'facturas'} en ${now.toLocaleDateString('es-ES', { month: 'long' })}`,
-        time: new Date(),
-        read: false,
-        icon: 'file',
-        action: { label: 'Ver facturas', tab: 'facturas' }
-      });
-    }
-    
-    // Notificación: Cliente desde hace mucho tiempo
-    if (clientProfile.timeline.diasComoCliente > 365) {
-      const años = Math.floor(clientProfile.timeline.diasComoCliente / 365);
-      newNotifications.push({
-        id: 'aniversario',
-        type: 'success',
-        title: 'Cliente fiel',
-        message: `Llevas ${años} ${años === 1 ? 'año' : 'años'} confiando en nosotros`,
-        time: new Date(Date.now() - 86400000),
-        read: false,
-        icon: 'award'
-      });
-    }
-    
-    // Notificación: Sin actividad reciente
-    if (!clientProfile.patterns.mesActivo && facturas.length > 0) {
-      newNotifications.push({
-        id: 'sin-actividad',
-        type: 'warning',
-        title: 'Te echamos de menos',
-        message: `Han pasado ${clientProfile.timeline.diasDesdeUltimaCompra || 'varios'} días desde tu última compra`,
-        time: new Date(Date.now() - 172800000),
-        read: false,
-        icon: 'clock'
-      });
-    }
-    
-    // Notificación: Nuevo nivel de cliente
-    if (clientProfile.tier === 'strategic' || clientProfile.tier === 'enterprise') {
-      newNotifications.push({
-        id: 'nivel-premium',
-        type: 'success',
-        title: 'Nivel Premium',
-        message: `Eres cliente ${clientProfile.tierLabel}. Gracias por tu confianza.`,
-        time: new Date(Date.now() - 259200000),
-        read: true,
-        icon: 'crown'
-      });
-    }
-    
-    // Notificación: Récord de facturación
-    if (clientProfile.stats.totalFacturado > 100000) {
-      newNotifications.push({
-        id: 'record',
-        type: 'success',
-        title: 'Hito alcanzado',
-        message: `Has superado los 100.000€ en facturación total`,
-        time: new Date(Date.now() - 604800000),
-        read: true,
-        icon: 'trophy'
-      });
-    }
-    
-    setNotifications(newNotifications);
-  }, [facturas, clientProfile]);
+  // useEffect(() => {
+  //   if (!facturas || facturas.length === 0) return;
+
+  //   const newNotifications: Array<{
+  //     id: string;
+  //     type: 'info' | 'success' | 'warning' | 'alert';
+  //     title: string;
+  //     message: string;
+  //     time: Date;
+  //     read: boolean;
+  //     icon?: string;
+  //     action?: { label: string; tab?: string };
+  //   }> = [];
+
+  //   const now = new Date();
+  //   const currentMonth = now.getMonth();
+  //   const currentYear = now.getFullYear();
+
+  //   // Notificación: Facturas nuevas este mes
+  //   const facturasEsteMes = facturas.filter(f => f.mes === (currentMonth + 1) && f.ano === currentYear);
+  //   if (facturasEsteMes.length > 0) {
+  //     newNotifications.push({
+  //       id: 'facturas-mes',
+  //       type: 'info',
+  //       title: 'Facturas del mes',
+  //       message: `Tienes ${facturasEsteMes.length} ${facturasEsteMes.length === 1 ? 'factura' : 'facturas'} en ${now.toLocaleDateString('es-ES', { month: 'long' })}`,
+  //       time: new Date(),
+  //       read: false,
+  //       icon: 'file',
+  //       action: { label: 'Ver facturas', tab: 'facturas' }
+  //     });
+  //   }
+
+  //   // Notificación: Cliente desde hace mucho tiempo
+  //   if (clientProfile.timeline.diasComoCliente > 365) {
+  //     const años = Math.floor(clientProfile.timeline.diasComoCliente / 365);
+  //     newNotifications.push({
+  //       id: 'aniversario',
+  //       type: 'success',
+  //       title: 'Cliente fiel',
+  //       message: `Llevas ${años} ${años === 1 ? 'año' : 'años'} confiando en nosotros`,
+  //       time: new Date(Date.now() - 86400000),
+  //       read: false,
+  //       icon: 'award'
+  //     });
+  //   }
+
+  //   // Notificación: Sin actividad reciente
+  //   if (!clientProfile.patterns.mesActivo && facturas.length > 0) {
+  //     newNotifications.push({
+  //       id: 'sin-actividad',
+  //       type: 'warning',
+  //       title: 'Te echamos de menos',
+  //       message: `Han pasado ${clientProfile.timeline.diasDesdeUltimaCompra || 'varios'} días desde tu última compra`,
+  //       time: new Date(Date.now() - 172800000),
+  //       read: false,
+  //       icon: 'clock'
+  //     });
+  //   }
+
+  //   // Notificación: Nuevo nivel de cliente
+  //   if (clientProfile.tier === 'strategic' || clientProfile.tier === 'enterprise') {
+  //     newNotifications.push({
+  //       id: 'nivel-premium',
+  //       type: 'success',
+  //       title: 'Nivel Premium',
+  //       message: `Eres cliente ${clientProfile.tierLabel}. Gracias por tu confianza.`,
+  //       time: new Date(Date.now() - 259200000),
+  //       read: true,
+  //       icon: 'crown'
+  //     });
+  //   }
+
+  //   // Notificación: Récord de facturación
+  //   if (clientProfile.stats.totalFacturado > 100000) {
+  //     newNotifications.push({
+  //       id: 'record',
+  //       type: 'success',
+  //       title: 'Hito alcanzado',
+  //       message: `Has superado los 100.000€ en facturación total`,
+  //       time: new Date(Date.now() - 604800000),
+  //       read: true,
+  //       icon: 'trophy'
+  //     });
+  //   }
+
+  //   setNotifications(newNotifications);
+  // }, [facturas, clientProfile]);
 
   // Abrir modal de compartir factura
   const handleShareInvoice = (factura: FacturaBackend, method: 'whatsapp' | 'email') => {
@@ -1383,8 +1422,16 @@ export function CustomerDashboard() {
   const guardarDatosContacto = async (datos: { email?: string | null; telefono?: string | null }) => {
     try {
       // 🔐 SEGURIDAD: Usar secureFetch con HttpOnly cookies
+      // Use codigoCliente instead of numeric ID
+      // Use codigoCliente from user.id (defined in AuthStore)
+      const codigoCliente = user?.id || user?.codigoCliente || user?.customerCode;
+      if (!codigoCliente) {
+        toast.error('No se encontró el código de cliente');
+        return;
+      }
+
       const { data, ok } = await secureFetch<{ success: boolean; error?: string }>(
-        `/api/clientes/${user?.id}/contacto`,
+        `/api/clientes/${codigoCliente}/contacto`,
         {
           method: 'PUT',
           body: JSON.stringify(datos)
@@ -1465,17 +1512,17 @@ export function CustomerDashboard() {
   const generatePdfBlob = useCallback(async (factura: FacturaBackend): Promise<string> => {
     // Crear clave única para la factura (corregido: usar campos que existen)
     const cacheKey = `${factura.serieFactura}-${factura.numeroFactura}-${factura.ejercicio}`;
-    
+
     // Si ya está en caché, devolverlo
     if (pdfCache[cacheKey]) {
       console.log('✅ PDF recuperado de caché:', cacheKey);
       return pdfCache[cacheKey];
     }
-    
+
     setLoadingPdf(true);
     try {
       console.log('🔄 Generando PDF:', cacheKey);
-      
+
       const response = await apiClient.post('/api/generar-factura', {
         serie: factura.serieFactura || factura.serie,
         numero: factura.numeroFactura || factura.numero,
@@ -1486,24 +1533,24 @@ export function CustomerDashboard() {
       });
 
       const blob = response.data;
-      
+
       if (blob.size === 0) {
         throw new Error('PDF vacío recibido del servidor');
       }
-      
+
       const blobUrl = URL.createObjectURL(blob);
       console.log('✅ PDF generado exitosamente:', cacheKey);
-      
+
       // Limitar caché a 2 PDFs máximo (FIFO - First In, First Out)
       setPdfCache(prev => {
         const entries = Object.entries(prev);
-        
+
         // Si ya tenemos 2 PDFs, eliminar el más antiguo
         if (entries.length >= 2) {
           const [oldestKey, oldestUrl] = entries[0];
           URL.revokeObjectURL(oldestUrl); // Liberar memoria del blob antiguo
           console.log('🗑️ Eliminado PDF antiguo de caché:', oldestKey);
-          
+
           // Devolver solo el segundo PDF y el nuevo
           const [, ...remaining] = entries;
           return {
@@ -1511,18 +1558,18 @@ export function CustomerDashboard() {
             [cacheKey]: blobUrl
           };
         }
-        
+
         return {
           ...prev,
           [cacheKey]: blobUrl
         };
       });
-      
+
       return blobUrl;
     } catch (error: any) {
       console.error('❌ Error generando PDF:', error);
-      const errorMsg = error.name === 'AbortError' 
-        ? 'Tiempo de espera agotado. Intenta de nuevo.' 
+      const errorMsg = error.name === 'AbortError'
+        ? 'Tiempo de espera agotado. Intenta de nuevo.'
         : error.message || 'Error desconocido al generar PDF';
       toast.error(`Error al generar PDF: ${errorMsg}`);
       throw error;
@@ -1549,25 +1596,25 @@ export function CustomerDashboard() {
         <span>Descargando factura {factura.serieFactura} {factura.numeroFactura}...</span>
       </div>
     );
-    
+
     try {
       // Generar o usar el PDF de caché
       const blobUrl = await generatePdfBlob(factura);
-      
+
       // Descargar
       const link = document.createElement('a');
       link.href = blobUrl;
-      
+
       // Nombre de archivo profesional
       const fechaFormateada = factura.fecha.replace(/\//g, '-');
       const nombreArchivo = `Factura_${factura.serieFactura}_${String(factura.numeroFactura).padStart(5, '0')}_${factura.subempresa}_${fechaFormateada}.pdf`;
       link.download = nombreArchivo;
-      
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(blobUrl);
-      
+
       toast.success(
         <div className="flex flex-col">
           <div className="font-bold flex items-center gap-2">
@@ -1577,7 +1624,7 @@ export function CustomerDashboard() {
           <div className="text-sm text-gray-600">{nombreArchivo}</div>
           <div className="text-xs text-gray-500 mt-1">€{factura.totalFactura.toFixed(2)}</div>
         </div>,
-        { 
+        {
           id: toastId,
           duration: 4000
         }
@@ -1589,7 +1636,7 @@ export function CustomerDashboard() {
           <div className="font-bold">❌ Error al descargar</div>
           <div className="text-sm text-gray-600">{error instanceof Error ? error.message : 'Error desconocido'}</div>
         </div>,
-        { 
+        {
           id: toastId,
           duration: 5000
         }
@@ -1601,10 +1648,10 @@ export function CustomerDashboard() {
   const filteredOrders = useMemo(() => {
     return (pedidos || []).filter(pedido => {
       const searchLower = searchTerm.toLowerCase();
-      const matchesSearch = searchTerm === '' || 
+      const matchesSearch = searchTerm === '' ||
         pedido.numeroPedido?.toString().includes(searchTerm) ||
         pedido.subempresa?.toLowerCase().includes(searchLower);
-      const matchesStatus = filterStatus === 'all' || 
+      const matchesStatus = filterStatus === 'all' ||
         (filterStatus === 'paid' && pedido.estadoPago === 'Pagado') ||
         (filterStatus === 'pending' && pedido.estadoPago === 'Pendiente');
       return matchesSearch && matchesStatus;
@@ -1624,9 +1671,12 @@ export function CustomerDashboard() {
         factura.subempresa?.toLowerCase().includes(searchLower);
 
       // Filtro por mes
-      const matchesMonth = filterMonth === 'all' || factura.mes?.toString() === filterMonth;
-      // Filtro por año
-      const matchesYear = filterYear === 'all' || factura.ano?.toString() === filterYear;
+      const matchesMonth = filterMonth === 'all' || (factura.mes !== undefined && String(factura.mes) === filterMonth) || (factura.mes !== undefined && String(factura.mes).padStart(2, '0') === filterMonth);
+      // Filtro por año (Usar año de la fecha visual para consistencia)
+      const dateYear = factura.fecha ? factura.fecha.split('/')[2] : '';
+      const matchesYear = filterYear === 'all' ||
+        dateYear === filterYear ||
+        (factura.ano !== undefined && String(factura.ano) === filterYear);
 
       // Filtro por rango de fechas
       let matchesDateRange = true;
@@ -1649,9 +1699,9 @@ export function CustomerDashboard() {
     });
   }, [facturas, searchTerm, filterMonth, filterYear, fechaDesde, fechaHasta]);
 
-  // Estadísticas del DASHBOARD - SIEMPRE con TODAS las facturas (acumulado histórico)
-  const totalFacturasCountDashboard = useMemo(() => facturas?.length || 0, [facturas]);
-  const totalFacturadoDashboard = useMemo(() => (facturas || []).reduce((sum, f) => sum + (f.totalFactura || 0), 0), [facturas]);
+  // Estadísticas del DASHBOARD - Usar filteredFacturas para que coincida con lo que ve el usuario
+  const totalFacturasCountDashboard = useMemo(() => filteredFacturas?.length || 0, [filteredFacturas]);
+  const totalFacturadoDashboard = useMemo(() => (filteredFacturas || []).reduce((sum, f) => sum + (f.totalFactura || 0), 0), [filteredFacturas]);
 
   // Estadísticas de la TABLA DE FACTURAS - Según filtros activos
   const totalFacturasCount = useMemo(() => filteredFacturas?.length || 0, [filteredFacturas]);
@@ -1814,13 +1864,50 @@ export function CustomerDashboard() {
         <div className="absolute bottom-40 left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
       </div>
 
+      {/* 🔒 Security Alert Banner - shows when there are pending security issues */}
+      <AnimatePresence>
+        {(securityWarnings.hasLegacyPassword || securityWarnings.needsContactSetup) && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-3 relative z-50"
+          >
+            <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+              <div className="flex items-center gap-3">
+                <AlertTriangle className="w-5 h-5 flex-shrink-0" />
+                <span className="text-sm font-medium">
+                  {securityWarnings.hasLegacyPassword && securityWarnings.needsContactSetup
+                    ? '¡Atención! Tu cuenta necesita una contraseña segura y datos de contacto.'
+                    : securityWarnings.hasLegacyPassword
+                      ? '¡Tu contraseña es insegura! Cámbiala en la sección Perfil → Seguridad.'
+                      : 'Configura tu email y teléfono para poder recuperar tu contraseña.'}
+                </span>
+              </div>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+                  setActiveTab('perfil');
+                  setShowPasswordChangeModal(true);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="bg-white/20 hover:bg-white/30 text-white border-0 text-xs px-3 py-1"
+              >
+                Ir a Perfil →
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Panel Header - Diseño limpio y sólido */}
       <div className="bg-card border-b border-border shadow-sm sticky top-0 z-40">
         <div className="container mx-auto px-3 sm:px-4">
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo/Brand */}
             <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-              <motion.div 
+              <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
                 className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
@@ -1848,7 +1935,7 @@ export function CustomerDashboard() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-1 sm:gap-3 flex-shrink-0">
-              {/* Notifications con dropdown */}
+              {/*
               <div className="relative">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -1864,11 +1951,9 @@ export function CustomerDashboard() {
                   )}
                 </motion.button>
 
-                {/* Dropdown de notificaciones */}
                 <AnimatePresence>
                   {showNotifications && (
                     <>
-                      {/* Overlay para cerrar en móvil */}
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -1882,104 +1967,102 @@ export function CustomerDashboard() {
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         className="fixed md:absolute left-3 right-3 md:left-auto md:right-0 top-[120px] md:top-auto md:mt-2 w-auto md:w-96 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
                       >
-                      <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 sm:p-4 text-white">
-                        <div className="flex items-center justify-between">
-                          <h3 className="font-bold text-base sm:text-lg flex items-center gap-2">
-                            <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
-                            Notificaciones
-                          </h3>
-                          {unreadNotifications > 0 && (
-                            <button 
-                              onClick={markAllAsRead}
-                              className="text-xs text-white/80 hover:text-white transition-colors"
-                            >
-                              Marcar todas leídas
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                      <div className="max-h-80 sm:max-h-96 overflow-y-auto">
-                        {notifications.length === 0 ? (
-                          <div className="p-6 text-center">
-                            <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                              Todo al día. No tienes notificaciones.
-                            </p>
-                          </div>
-                        ) : (
-                          <div className="divide-y divide-gray-100 dark:divide-gray-700">
-                            {notifications.map((notif) => (
-                              <motion.div
-                                key={notif.id}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                className={`p-3 sm:p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer ${
-                                  !notif.read ? 'bg-blue-50/50 dark:bg-blue-900/20' : ''
-                                }`}
-                                onClick={() => {
-                                  markNotificationAsRead(notif.id);
-                                  if (notif.action?.tab) {
-                                    handleTabChange(notif.action.tab);
-                                    setShowNotifications(false);
-                                  }
-                                }}
+                        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 sm:p-4 text-white">
+                          <div className="flex items-center justify-between">
+                            <h3 className="font-bold text-base sm:text-lg flex items-center gap-2">
+                              <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
+                              Notificaciones
+                            </h3>
+                            {unreadNotifications > 0 && (
+                              <button
+                                onClick={markAllAsRead}
+                                className="text-xs text-white/80 hover:text-white transition-colors"
                               >
-                                <div className="flex items-start gap-3">
-                                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                                    notif.type === 'success' ? 'bg-green-100 text-green-600' :
-                                    notif.type === 'warning' ? 'bg-amber-100 text-amber-600' :
-                                    notif.type === 'alert' ? 'bg-red-100 text-red-600' :
-                                    'bg-blue-100 text-blue-600'
-                                  }`}>
-                                    {notif.icon === 'file' && <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                    {notif.icon === 'award' && <Award className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                    {notif.icon === 'clock' && <Clock className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                    {notif.icon === 'crown' && <Crown className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                    {notif.icon === 'trophy' && <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                    {!notif.icon && <Bell className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                  </div>
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center justify-between gap-2">
-                                      <p className={`text-sm font-semibold text-gray-900 dark:text-white truncate ${
-                                        !notif.read ? 'text-blue-700 dark:text-blue-400' : ''
+                                Marcar todas leídas
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                        <div className="max-h-80 sm:max-h-96 overflow-y-auto">
+                          {notifications.length === 0 ? (
+                            <div className="p-6 text-center">
+                              <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Todo al día. No tienes notificaciones.
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                              {notifications.map((notif) => (
+                                <motion.div
+                                  key={notif.id}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  className={`p-3 sm:p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer ${!notif.read ? 'bg-blue-50/50 dark:bg-blue-900/20' : ''
+                                    }`}
+                                  onClick={() => {
+                                    markNotificationAsRead(notif.id);
+                                    if (notif.action?.tab) {
+                                      handleTabChange(notif.action.tab);
+                                      setShowNotifications(false);
+                                    }
+                                  }}
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${notif.type === 'success' ? 'bg-green-100 text-green-600' :
+                                      notif.type === 'warning' ? 'bg-amber-100 text-amber-600' :
+                                        notif.type === 'alert' ? 'bg-red-100 text-red-600' :
+                                          'bg-blue-100 text-blue-600'
                                       }`}>
-                                        {notif.title}
+                                      {notif.icon === 'file' && <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
+                                      {notif.icon === 'award' && <Award className="w-4 h-4 sm:w-5 sm:h-5" />}
+                                      {notif.icon === 'clock' && <Clock className="w-4 h-4 sm:w-5 sm:h-5" />}
+                                      {notif.icon === 'crown' && <Crown className="w-4 h-4 sm:w-5 sm:h-5" />}
+                                      {notif.icon === 'trophy' && <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />}
+                                      {!notif.icon && <Bell className="w-4 h-4 sm:w-5 sm:h-5" />}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <div className="flex items-center justify-between gap-2">
+                                        <p className={`text-sm font-semibold text-gray-900 dark:text-white truncate ${!notif.read ? 'text-blue-700 dark:text-blue-400' : ''
+                                          }`}>
+                                          {notif.title}
+                                        </p>
+                                        {!notif.read && (
+                                          <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
+                                        )}
+                                      </div>
+                                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-2">
+                                        {notif.message}
                                       </p>
-                                      {!notif.read && (
-                                        <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
+                                      <p className="text-[10px] sm:text-xs text-gray-400 mt-1">
+                                        {(() => {
+                                          const diff = Date.now() - notif.time.getTime();
+                                          const mins = Math.floor(diff / 60000);
+                                          const hours = Math.floor(diff / 3600000);
+                                          const days = Math.floor(diff / 86400000);
+                                          if (days > 0) return `Hace ${days} ${days === 1 ? 'día' : 'días'}`;
+                                          if (hours > 0) return `Hace ${hours} ${hours === 1 ? 'hora' : 'horas'}`;
+                                          return `Hace ${mins} min`;
+                                        })()}
+                                      </p>
+                                      {notif.action && (
+                                        <button className="text-xs text-blue-600 hover:text-blue-700 font-medium mt-1">
+                                          {notif.action.label} →
+                                        </button>
                                       )}
                                     </div>
-                                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-2">
-                                      {notif.message}
-                                    </p>
-                                    <p className="text-[10px] sm:text-xs text-gray-400 mt-1">
-                                      {(() => {
-                                        const diff = Date.now() - notif.time.getTime();
-                                        const mins = Math.floor(diff / 60000);
-                                        const hours = Math.floor(diff / 3600000);
-                                        const days = Math.floor(diff / 86400000);
-                                        if (days > 0) return `Hace ${days} ${days === 1 ? 'día' : 'días'}`;
-                                        if (hours > 0) return `Hace ${hours} ${hours === 1 ? 'hora' : 'horas'}`;
-                                        return `Hace ${mins} min`;
-                                      })()}
-                                    </p>
-                                    {notif.action && (
-                                      <button className="text-xs text-blue-600 hover:text-blue-700 font-medium mt-1">
-                                        {notif.action.label} →
-                                      </button>
-                                    )}
                                   </div>
-                                </div>
-                              </motion.div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
+                                </motion.div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
                     </>
                   )}
                 </AnimatePresence>
               </div>
+              */}
 
               {/* Ver Perfil Button */}
               <motion.button
@@ -2017,10 +2100,10 @@ export function CustomerDashboard() {
       {/* Contenido principal */}
       <div className="container mx-auto px-4 py-6 relative z-10">
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-8">
-          
+
           {/* Enhanced Sidebar */}
           <div className="xl:col-span-1 space-y-6">
-            
+
             {/* User Profile Card - DISEÑO SÓLIDO SIN TRANSPARENCIAS */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -2030,14 +2113,14 @@ export function CustomerDashboard() {
             >
               {/* Decorative accent bar */}
               <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: 'linear-gradient(90deg, #3B82F6 0%, #06B6D4 50%, #8B5CF6 100%)' }} />
-              
+
               {/* Subtle background pattern */}
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-100 rounded-full blur-2xl opacity-50" />
               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-100 rounded-full blur-2xl opacity-50" />
-              
+
               <div className="relative z-10 text-center">
                 <div className="relative inline-block">
-                  <div 
+                  <div
                     className="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg ring-4 ring-blue-100 transform hover:scale-105 transition-transform"
                     style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' }}
                   >
@@ -2047,7 +2130,7 @@ export function CustomerDashboard() {
                     <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse" />
                   </div>
                 </div>
-                
+
                 {/* Solo mostrar nombre alternativo (empresa) */}
                 <h2 className="text-xl font-bold text-foreground mb-3 tracking-tight">
                   {perfilCliente?.empresa || user?.company}
@@ -2057,13 +2140,13 @@ export function CustomerDashboard() {
                 <div className="w-full px-2">
                   {(() => {
                     const emailCandidato = perfilCliente?.contacto?.email || userEmail || user?.email || '';
-                    const esEmailValido = emailCandidato && 
-                                         !emailCandidato.includes('@granja.local') && 
-                                         emailCandidato.includes('@') &&
-                                         emailCandidato.length > 5;
-                    
+                    const esEmailValido = emailCandidato &&
+                      !emailCandidato.includes('@granja.local') &&
+                      emailCandidato.includes('@') &&
+                      emailCandidato.length > 5;
+
                     return esEmailValido ? (
-                      <div 
+                      <div
                         className="flex items-center justify-center text-xs rounded-lg px-3 py-2 border-l-4 border-blue-400"
                         style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
                       >
@@ -2075,17 +2158,19 @@ export function CustomerDashboard() {
                         onClick={() => handleTabChange('perfil')}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full flex items-center justify-center text-xs text-white rounded-lg px-3 py-2.5 shadow-lg hover:shadow-xl transition-all group relative overflow-hidden"
+                        className="w-full flex items-center justify-between text-xs text-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all group relative overflow-hidden"
                         style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' }}
                       >
-                        <Sparkles className="w-4 h-4 mr-2 animate-pulse relative z-10" />
-                        <span className="font-semibold relative z-10">Añade tu email</span>
-                        <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform relative z-10" />
+                        <div className="flex items-center relative z-10">
+                          <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                          <span className="font-bold">Añade tu email</span>
+                        </div>
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                       </motion.button>
                     );
                   })()}
                 </div>
-                
+
                 {/* Quick stats - Se ajusta según FILTROS activos */}
                 <div className="space-y-3 mt-5 pt-4 border-t border-border">
                   {/* Filtro de Año con selector */}
@@ -2162,7 +2247,7 @@ export function CustomerDashboard() {
                   {/* Etiqueta del filtro activo */}
                   <div className="flex flex-wrap items-center justify-center gap-1.5">
                     {filterYear !== 'all' && (
-                      <div 
+                      <div
                         className="flex items-center gap-1 px-2 py-1 rounded-md border-l-2 border-blue-500 shadow-sm"
                         style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
                       >
@@ -2173,7 +2258,7 @@ export function CustomerDashboard() {
                       </div>
                     )}
                     {filterMonth !== 'all' && (
-                      <div 
+                      <div
                         className="flex items-center gap-1 px-2 py-1 rounded-md border-l-2 border-cyan-500 shadow-sm"
                         style={{ background: 'linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)' }}
                       >
@@ -2183,7 +2268,7 @@ export function CustomerDashboard() {
                       </div>
                     )}
                     {filterYear === 'all' && filterMonth === 'all' && (
-                      <div 
+                      <div
                         className="flex items-center gap-1 px-2 py-1 rounded-md border-l-2 border-purple-500 shadow-sm"
                         style={{ background: 'linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)' }}
                       >
@@ -2196,16 +2281,16 @@ export function CustomerDashboard() {
                   </div>
 
                   {/* Facturas Card */}
-                  <div 
+                  <div
                     className="text-center rounded-xl p-3 border-l-4 border-blue-500 shadow-sm"
                     style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
                   >
                     <div className="text-2xl font-bold text-blue-600">{totalFacturasCount}</div>
                     <div className="text-xs text-blue-700 font-medium mt-1">Facturas</div>
                   </div>
-                  
+
                   {/* Total Card - Optimizado para mostrar cifra completa */}
-                  <div 
+                  <div
                     className="text-center rounded-xl p-3 border-l-4 border-emerald-500 shadow-sm"
                     style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
                   >
@@ -2239,7 +2324,7 @@ export function CustomerDashboard() {
                 {tabs.map((tab, index) => {
                   const IconComponent = tab.icon;
                   const isActive = activeTab === tab.id;
-                  
+
                   // Calcular badges/notificaciones por tab
                   let badgeCount = 0;
                   // BADGE DE PENDIENTES EN FACTURAS COMENTADO - NO ELIMINAR
@@ -2249,10 +2334,10 @@ export function CustomerDashboard() {
                   if (tab.id === 'favoritos') {
                     badgeCount = getFavoritesCount();
                   }
-                  
+
                   // Mostrar badge solo si NO estamos en la pestaña activa
                   const showBadge = badgeCount > 0 && !isActive;
-                  
+
                   return (
                     <motion.button
                       key={tab.id}
@@ -2262,30 +2347,28 @@ export function CustomerDashboard() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: index * 0.1 }}
-                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 group relative ${
-                        isActive
-                          ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
-                          : 'text-foreground hover:bg-secondary'
-                      }`}
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 group relative ${isActive
+                        ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
+                        : 'text-foreground hover:bg-secondary'
+                        }`}
                     >
                       <IconComponent className={`w-5 h-5 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-foreground'}`} />
                       <span className="font-medium flex-1 text-left">{tab.name}</span>
-                      
+
                       {/* Badge de notificaciones */}
                       {showBadge && (
                         <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                            isActive 
-                              ? 'bg-primary-foreground text-primary' 
-                              : 'bg-destructive text-destructive-foreground'
-                          }`}
+                          className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${isActive
+                            ? 'bg-primary-foreground text-primary'
+                            : 'bg-destructive text-destructive-foreground'
+                            }`}
                         >
                           {badgeCount > 99 ? '99+' : badgeCount}
                         </motion.div>
                       )}
-                      
+
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
@@ -2298,9 +2381,9 @@ export function CustomerDashboard() {
                   );
                 })}
               </nav>
-              
+
               <Separator className="my-6" />
-              
+
               <motion.button
                 onClick={handleLogoutClick}
                 whileHover={{ scale: 1.02, x: 4 }}
@@ -2323,7 +2406,7 @@ export function CustomerDashboard() {
                 <Sparkles className="w-5 h-5 mr-2 text-warning" />
                 Acceso rápido
               </h3>
-              
+
               <div className="space-y-3">
                 {/* Libro de IVA */}
                 <motion.button
@@ -2339,7 +2422,7 @@ export function CustomerDashboard() {
                   </div>
                   <ChevronRight className="w-4 h-4 text-blue-500" />
                 </motion.button>
-                
+
                 {/* Últimos Pedidos */}
                 <motion.button
                   whileHover={{ scale: 1.02 }}
@@ -2369,19 +2452,19 @@ export function CustomerDashboard() {
                 transition={{ duration: 0.5 }}
                 className="bg-card rounded-2xl p-8 shadow-lg border border-border"
               >
-                
+
                 {/* DASHBOARD TAB */}
-                {activeTab === 'dashboard' && (
+                {false && (
                   <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-                    
+
                     {/* ================================================================
                         🎯 COMMAND CENTER - EXPERIENCIA NIVEL STRIPE/LINEAR
                         Dashboard ejecutivo con diseño de clase mundial
                     ================================================================ */}
-                    
+
                     {/* BENTO GRID HERO - Diseño Asymétrico Premium */}
                     <div className="grid grid-cols-12 gap-2 sm:gap-4 lg:gap-6">
-                      
+
                       {/* ═══════ MAIN CARD - Cliente Identity ═══════ */}
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -2406,7 +2489,7 @@ export function CustomerDashboard() {
                             </>
                           )}
                           {/* Grid pattern premium */}
-                          <div 
+                          <div
                             className="absolute inset-0 opacity-[0.02]"
                             style={{
                               backgroundImage: `
@@ -2431,7 +2514,7 @@ export function CustomerDashboard() {
                                 />
                                 <span className="text-xs font-medium text-white/80">En línea</span>
                               </div>
-                              
+
                               {/* Date & Time */}
                               <div className="hidden sm:flex items-center gap-4 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/5">
                                 <div className="flex items-center gap-1.5 text-white/60">
@@ -2458,12 +2541,11 @@ export function CustomerDashboard() {
                               className="relative"
                             >
                               <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
-                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-                                  clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-400 to-orange-500' :
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-400 to-orange-500' :
                                   clientProfile.tier === 'enterprise' ? 'bg-gradient-to-br from-violet-400 to-purple-500' :
-                                  clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
-                                  'bg-gradient-to-br from-slate-400 to-gray-500'
-                                }`}>
+                                    clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
+                                      'bg-gradient-to-br from-slate-400 to-gray-500'
+                                  }`}>
                                   {clientProfile.tierIcon === 'crown' && <Crown className="w-4 h-4 text-white" />}
                                   {clientProfile.tierIcon === 'gem' && <Gem className="w-4 h-4 text-white" />}
                                   {clientProfile.tierIcon === 'zap' && <Zap className="w-4 h-4 text-white" />}
@@ -2486,20 +2568,20 @@ export function CustomerDashboard() {
                             {/* Identity Section */}
                             <div className="flex-1 flex items-start gap-5 min-w-0">
                               {/* Avatar Generativo Premium */}
-                              <motion.div 
+                              <motion.div
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
                                 transition={{ type: "spring", bounce: 0.5, delay: 0.1 }}
                                 className="relative shrink-0"
                               >
-                                <div 
+                                <div
                                   className="w-20 h-20 lg:w-28 lg:h-28 rounded-3xl flex items-center justify-center shadow-2xl border-2 border-white/20 backdrop-blur-sm overflow-hidden"
-                                  style={{ 
+                                  style={{
                                     background: `linear-gradient(135deg, ${clientProfile.accentColor}50, ${clientProfile.secondaryColor}30)`,
                                   }}
                                 >
                                   {/* Patrón interno único */}
-                                  <div 
+                                  <div
                                     className="absolute inset-0 opacity-30"
                                     style={{
                                       backgroundImage: `radial-gradient(circle at 30% 30%, ${clientProfile.accentColor}40, transparent 50%)`,
@@ -2510,7 +2592,7 @@ export function CustomerDashboard() {
                                   {clientProfile.tierIcon === 'zap' && <Zap className="w-10 h-10 lg:w-14 lg:h-14 text-white drop-shadow-2xl relative z-10" />}
                                   {clientProfile.tierIcon === 'sparkles' && <Building2 className="w-10 h-10 lg:w-14 lg:h-14 text-white drop-shadow-2xl relative z-10" />}
                                 </div>
-                                
+
                                 {/* Status Ring */}
                                 {clientProfile.patterns.mesActivo && (
                                   <motion.div
@@ -2522,7 +2604,7 @@ export function CustomerDashboard() {
                                     <Check className="w-4 h-4 text-white" />
                                   </motion.div>
                                 )}
-                                
+
                                 {/* Racha Badge */}
                                 {clientProfile.patterns.rachaActiva >= 3 && (
                                   <motion.div
@@ -2548,7 +2630,7 @@ export function CustomerDashboard() {
                                   <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-3xl 2xl:text-4xl font-bold text-white truncate leading-tight mt-1 mb-3">
                                     {perfilCliente?.empresa || user?.company || 'Bienvenido'}
                                   </h1>
-                                  
+
                                   {/* Context Tags */}
                                   <div className="flex flex-wrap items-center gap-2">
                                     {clientProfile.timeline.diasComoCliente > 0 && (
@@ -2588,18 +2670,17 @@ export function CustomerDashboard() {
                                 </span>
                               </div>
                               {clientProfile.trends.tendencia !== 'neutral' && (
-                                <div className={`inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-lg ${
-                                  clientProfile.trends.tendencia === 'up' 
-                                    ? 'bg-emerald-500/20 text-emerald-300' 
-                                    : 'bg-amber-500/20 text-amber-300'
-                                }`}>
+                                <div className={`inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-lg ${clientProfile.trends.tendencia === 'up'
+                                  ? 'bg-emerald-500/20 text-emerald-300'
+                                  : 'bg-amber-500/20 text-amber-300'
+                                  }`}>
                                   {clientProfile.trends.tendencia === 'up' ? (
                                     <TrendingUp className="w-3.5 h-3.5" />
                                   ) : (
                                     <TrendingDown className="w-3.5 h-3.5" />
                                   )}
                                   <span className="text-xs font-semibold">
-                                    {clientProfile.trends.porcentajeCambio > 0 ? '+' : ''}{clientProfile.trends.porcentajeCambio.toFixed(0)}% este mes
+                                    {clientProfile.trends.porcentajeCambio > 0 ? '+' : ''}{clientProfile.trends.porcentajeCambio.toFixed(0)}% vs mes anterior
                                   </span>
                                 </div>
                               )}
@@ -2646,7 +2727,7 @@ export function CustomerDashboard() {
 
                       {/* ═══════ SIDE CARDS - Métricas Clave ═══════ */}
                       <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-4 lg:gap-6">
-                        
+
                         {/* Este Mes Card */}
                         <motion.div
                           initial={{ opacity: 0, x: 20 }}
@@ -2706,12 +2787,11 @@ export function CustomerDashboard() {
                             className="col-span-2 lg:col-span-1 relative overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-5 lg:p-6 bg-white border border-gray-200 shadow-lg"
                           >
                             <div className="flex items-start gap-2 sm:gap-3">
-                              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${
-                                clientProfile.insights[0].type === 'achievement' ? 'bg-amber-100' :
+                              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${clientProfile.insights[0].type === 'achievement' ? 'bg-amber-100' :
                                 clientProfile.insights[0].type === 'trend' ? 'bg-emerald-100' :
-                                clientProfile.insights[0].type === 'alert' ? 'bg-amber-100' :
-                                'bg-blue-100'
-                              }`}>
+                                  clientProfile.insights[0].type === 'alert' ? 'bg-amber-100' :
+                                    'bg-blue-100'
+                                }`}>
                                 {clientProfile.insights[0].icon === 'flame' && <Flame className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />}
                                 {clientProfile.insights[0].icon === 'rocket' && <Rocket className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />}
                                 {clientProfile.insights[0].icon === 'trending-up' && <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />}
@@ -2815,7 +2895,7 @@ export function CustomerDashboard() {
                     </motion.div>
 
                     {/* ═══════ STATS CARDS - DISEÑO GLASS MORPHISM PREMIUM ═══════ */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 }}
@@ -2847,8 +2927,8 @@ export function CustomerDashboard() {
                         {
                           title: 'Ticket Medio',
                           subtitle: 'Por factura',
-                          value: (facturas && facturas.length > 0) 
-                            ? formatCurrencyNoDecimals(totalFacturadoDashboard / facturas.length) 
+                          value: (facturas && facturas.length > 0)
+                            ? formatCurrencyNoDecimals(totalFacturadoDashboard / facturas.length)
                             : '€0',
                           icon: TrendingUp,
                           gradient: 'from-amber-500 via-orange-500 to-rose-500',
@@ -2874,16 +2954,16 @@ export function CustomerDashboard() {
                           initial={{ opacity: 0, y: 30, scale: 0.9 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           transition={{ delay: 0.55 + index * 0.1, type: "spring", bounce: 0.3 }}
-                          whileHover={{ 
-                            y: -8, 
+                          whileHover={{
+                            y: -8,
                             scale: 1.03,
-                            transition: { type: "spring", stiffness: 400 } 
+                            transition: { type: "spring", stiffness: 400 }
                           }}
                           className={`relative group cursor-pointer`}
                         >
                           {/* Glow effect on hover */}
                           <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10`} />
-                          
+
                           {/* Main Card */}
                           <div className={`relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border-l-4 ${stat.accentBorder} shadow-lg ${stat.glowColor} hover:shadow-2xl transition-all duration-500`}>
                             {/* Background Pattern */}
@@ -2893,17 +2973,17 @@ export function CustomerDashboard() {
                                 backgroundSize: '16px 16px'
                               }} />
                             </div>
-                            
+
                             {/* Decorative Gradient Orb */}
                             <div className={`absolute -top-10 -right-10 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br ${stat.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 group-hover:scale-150 transition-all duration-700`} />
-                            
+
                             <div className="relative z-10 p-3 sm:p-5 lg:p-6">
                               {/* Header */}
                               <div className="flex items-start justify-between mb-2 sm:mb-4">
                                 <div className={`${stat.iconBg} p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                                   <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
                                 </div>
-                                
+
                                 {/* Mini Sparkline - Hidden on very small screens */}
                                 <div className="hidden xs:flex items-end gap-0.5 h-6 sm:h-8 opacity-40 group-hover:opacity-70 transition-opacity">
                                   {stat.sparkline.map((value, i) => (
@@ -2917,10 +2997,10 @@ export function CustomerDashboard() {
                                   ))}
                                 </div>
                               </div>
-                              
+
                               {/* Value */}
                               <div className="mb-1">
-                                <motion.span 
+                                <motion.span
                                   className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 tracking-tight whitespace-nowrap"
                                   initial={{ opacity: 0 }}
                                   animate={{ opacity: 1 }}
@@ -2929,14 +3009,14 @@ export function CustomerDashboard() {
                                   {stat.value}
                                 </motion.span>
                               </div>
-                              
+
                               {/* Labels */}
                               <div className="flex items-center justify-between">
                                 <div className="min-w-0">
                                   <p className="text-xs sm:text-sm font-bold text-gray-700 truncate">{stat.title}</p>
                                   <p className="text-[10px] sm:text-xs text-gray-500 truncate">{stat.subtitle}</p>
                                 </div>
-                                
+
                                 {/* Trend Indicator - Hidden on mobile */}
                                 <div className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-50 text-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity">
                                   <ArrowUpRight className="w-3 h-3" />
@@ -2951,7 +3031,7 @@ export function CustomerDashboard() {
 
                     {/* ═══════ ACTIVITY SECTION - BENTO LAYOUT PREMIUM ═══════ */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6">
-                      
+
                       {/* Recent Orders - Diseño Premium */}
                       <motion.div
                         initial={{ opacity: 0, x: -30 }}
@@ -2969,7 +3049,7 @@ export function CustomerDashboard() {
                                     <Package className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                                   </div>
                                   {pedidos.length > 0 && (
-                                    <motion.div 
+                                    <motion.div
                                       animate={{ scale: [1, 1.2, 1] }}
                                       transition={{ duration: 2, repeat: Infinity }}
                                       className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center"
@@ -2986,7 +3066,7 @@ export function CustomerDashboard() {
                               <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() => setActiveTab('pedidos')}
+                                onClick={() => { /* disabled: pedidos removed */ }}
                                 className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs sm:text-sm transition-colors"
                               >
                                 <span className="hidden xs:inline">Ver todos</span>
@@ -3017,7 +3097,7 @@ export function CustomerDashboard() {
                               <div className="space-y-2 sm:space-y-3">
                                 {pedidos.slice(0, 4).map((pedido, index) => {
                                   const isPaid = pedido.estadoPago === 'Pagado';
-                                  
+
                                   return (
                                     <motion.div
                                       key={`${pedido.subempresa}-${pedido.numeroPedido}`}
@@ -3028,9 +3108,8 @@ export function CustomerDashboard() {
                                       className="flex items-center justify-between p-2 sm:p-4 rounded-xl sm:rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                     >
                                       <div className="flex items-center gap-2 sm:gap-4">
-                                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${
-                                          isPaid ? 'bg-emerald-100' : 'bg-amber-100'
-                                        }`}>
+                                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${isPaid ? 'bg-emerald-100' : 'bg-amber-100'
+                                          }`}>
                                           {isPaid ? (
                                             <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                                           ) : (
@@ -3044,15 +3123,14 @@ export function CustomerDashboard() {
                                           <p className="text-[10px] sm:text-xs text-gray-500">{pedido.fecha}</p>
                                         </div>
                                       </div>
-                                      
+
                                       <div className="flex items-center gap-2 sm:gap-4">
                                         <div className="text-right">
                                           <p className="font-bold text-gray-900 text-xs sm:text-base">{formatCurrency(pedido.importeTotal)}</p>
-                                          <Badge className={`text-[10px] sm:text-xs ${
-                                            isPaid 
-                                              ? 'bg-emerald-100 text-emerald-700 border-emerald-200' 
-                                              : 'bg-amber-100 text-amber-700 border-amber-200'
-                                          }`}>
+                                          <Badge className={`text-[10px] sm:text-xs ${isPaid
+                                            ? 'bg-emerald-100 text-emerald-700 border-emerald-200'
+                                            : 'bg-amber-100 text-amber-700 border-amber-200'
+                                            }`}>
                                             {pedido.estadoPago}
                                           </Badge>
                                         </div>
@@ -3081,7 +3159,7 @@ export function CustomerDashboard() {
                             <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-white/10 rounded-full blur-3xl" />
                             <div className="absolute bottom-0 left-0 w-24 sm:w-32 h-24 sm:h-32 bg-black/10 rounded-full blur-2xl" />
                           </div>
-                          
+
                           <div className="relative z-10">
                             <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center">
@@ -3092,7 +3170,7 @@ export function CustomerDashboard() {
                                 <p className="text-[10px] sm:text-xs text-white/60">Estadísticas del período</p>
                               </div>
                             </div>
-                            
+
                             {/* Quick Stats */}
                             <div className="grid grid-cols-2 gap-2 sm:gap-4">
                               <div className="bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 backdrop-blur-sm">
@@ -3106,7 +3184,7 @@ export function CustomerDashboard() {
                                 <p className="text-lg sm:text-2xl font-bold text-white">{clientProfile.timeline.diasComoCliente}</p>
                               </div>
                             </div>
-                            
+
                             {/* Progress to next tier */}
                             {clientProfile.milestones.next.progress < 100 && (
                               <div className="mt-4 sm:mt-6">
@@ -3115,7 +3193,7 @@ export function CustomerDashboard() {
                                   <span className="text-[10px] sm:text-xs font-bold text-white">{clientProfile.milestones.next.progress.toFixed(0)}%</span>
                                 </div>
                                 <div className="h-1.5 sm:h-2 bg-white/20 rounded-full overflow-hidden">
-                                  <motion.div 
+                                  <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${clientProfile.milestones.next.progress}%` }}
                                     transition={{ delay: 1, duration: 1.5 }}
@@ -3131,12 +3209,11 @@ export function CustomerDashboard() {
                         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-gray-200 shadow-lg p-4 sm:p-6">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2 sm:gap-4">
-                              <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${
-                                clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
+                              <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
                                 clientProfile.tier === 'enterprise' ? 'bg-gradient-to-br from-violet-500 to-purple-600' :
-                                clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' :
-                                'bg-gradient-to-br from-slate-500 to-gray-600'
-                              } shadow-lg`}>
+                                  clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' :
+                                    'bg-gradient-to-br from-slate-500 to-gray-600'
+                                } shadow-lg`}>
                                 {clientProfile.tierIcon === 'crown' && <Crown className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
                                 {clientProfile.tierIcon === 'gem' && <Gem className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
                                 {clientProfile.tierIcon === 'zap' && <Zap className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
@@ -3152,7 +3229,7 @@ export function CustomerDashboard() {
                               <p className="text-sm sm:text-lg font-bold text-emerald-600">Activos</p>
                             </div>
                           </div>
-                          
+
                           {/* Tier Benefits */}
                           <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-gray-100">
                             <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
@@ -3188,7 +3265,8 @@ export function CustomerDashboard() {
                 )}
 
                 {/* PEDIDOS TAB */}
-                {activeTab === 'pedidos' && (
+
+                {false && (
                   <div className="space-y-6">
                     {/* Header with search and filters */}
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -3200,7 +3278,7 @@ export function CustomerDashboard() {
                           Consulta el estado de todos tus pedidos
                         </p>
                       </div>
-                      
+
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -3222,7 +3300,7 @@ export function CustomerDashboard() {
                           className="pl-10 border-border bg-card shadow-sm"
                         />
                       </div>
-                      
+
                       <select
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
@@ -3247,13 +3325,13 @@ export function CustomerDashboard() {
                         {filteredOrders.map((pedido, index) => {
                           const isPaid = pedido.estadoPago === 'Pagado';
                           const StatusIcon = isPaid ? CheckCircle : Clock;
-                          const statusColor = isPaid 
-                            ? 'text-emerald-700 border-emerald-400' 
+                          const statusColor = isPaid
+                            ? 'text-emerald-700 border-emerald-400'
                             : 'text-amber-700 border-amber-400';
-                          const statusBg = isPaid 
-                            ? 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' 
+                          const statusBg = isPaid
+                            ? 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)'
                             : 'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)';
-                          
+
                           return (
                             <motion.div
                               key={`${pedido.subempresa}-${pedido.numeroPedido}`}
@@ -3266,7 +3344,7 @@ export function CustomerDashboard() {
                               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                                 <div className="space-y-3">
                                   <div className="flex items-center space-x-3">
-                                    <div 
+                                    <div
                                       className="p-2 rounded-xl border-l-4 border-blue-500"
                                       style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
                                     >
@@ -3292,10 +3370,10 @@ export function CustomerDashboard() {
                                       </div>
                                     </div>
                                   </div>
-                                  
+
                                   {pedido.tieneFactura && (
                                     <div className="pl-11">
-                                      <div 
+                                      <div
                                         className="flex items-center text-sm text-emerald-700 font-medium px-3 py-1.5 rounded-lg w-fit border-l-4 border-emerald-500"
                                         style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
                                       >
@@ -3305,20 +3383,20 @@ export function CustomerDashboard() {
                                     </div>
                                   )}
                                 </div>
-                                
+
                                 <div className="flex flex-col items-end space-y-3">
-                                  <Badge 
+                                  <Badge
                                     className={`${statusColor} font-semibold px-3 py-1.5 border-l-4 rounded-lg shadow-sm`}
                                     style={{ background: statusBg }}
                                   >
                                     <StatusIcon className="w-3 h-3 mr-1" />
                                     {pedido.estadoPago}
                                   </Badge>
-                                  
+
                                   <div className="flex space-x-2">
-                                    <Button 
-                                      variant="outline" 
-                                      size="sm" 
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
                                       className="border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-400 transition-all duration-200 shadow-sm"
                                     >
                                       <Eye className="w-4 h-4 mr-1" />
@@ -3342,7 +3420,7 @@ export function CustomerDashboard() {
                               No se encontraron pedidos
                             </h3>
                             <p className="text-muted-foreground">
-                              {searchTerm 
+                              {searchTerm
                                 ? 'Prueba con diferentes criterios de búsqueda'
                                 : 'Todavía no tienes pedidos registrados'
                               }
@@ -3386,7 +3464,7 @@ export function CustomerDashboard() {
                           {filteredFacturas.length} facturas encontradas • Descarga tus documentos en PDF
                         </p>
                       </div>
-                      
+
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -3791,7 +3869,7 @@ export function CustomerDashboard() {
                         </Table>
                       </div>
                     </div>
-                      
+
                     {/* Mensaje sin resultados - visible en móvil y desktop */}
                     {!loadingFacturas && filteredFacturas.length === 0 && (
                       <motion.div
@@ -3830,11 +3908,10 @@ export function CustomerDashboard() {
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setCurrentPage(1)}
                             disabled={currentPage === 1}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                              currentPage === 1
-                                ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                                : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                            }`}
+                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === 1
+                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                              }`}
                             title="Primera página"
                           >
                             <ChevronsLeft className="w-4 h-4" />
@@ -3846,11 +3923,10 @@ export function CustomerDashboard() {
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                              currentPage === 1
-                                ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                                : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                            }`}
+                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === 1
+                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                              }`}
                             title="Página anterior"
                           >
                             <ChevronLeft className="w-4 h-4" />
@@ -3876,11 +3952,10 @@ export function CustomerDashboard() {
                                   whileHover={{ scale: 1.1 }}
                                   whileTap={{ scale: 0.9 }}
                                   onClick={() => setCurrentPage(pageNum)}
-                                  className={`w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${
-                                    currentPage === pageNum
-                                      ? 'bg-primary text-primary-foreground shadow-lg'
-                                      : 'bg-card text-foreground hover:bg-secondary hover:text-primary shadow-md'
-                                  }`}
+                                  className={`w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${currentPage === pageNum
+                                    ? 'bg-primary text-primary-foreground shadow-lg'
+                                    : 'bg-card text-foreground hover:bg-secondary hover:text-primary shadow-md'
+                                    }`}
                                 >
                                   {pageNum}
                                 </motion.button>
@@ -3894,11 +3969,10 @@ export function CustomerDashboard() {
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                              currentPage === totalPages
-                                ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                                : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                            }`}
+                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === totalPages
+                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                              }`}
                             title="Página siguiente"
                           >
                             <ChevronRight className="w-4 h-4" />
@@ -3910,11 +3984,10 @@ export function CustomerDashboard() {
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setCurrentPage(totalPages)}
                             disabled={currentPage === totalPages}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                              currentPage === totalPages
-                                ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                                : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                            }`}
+                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === totalPages
+                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                              }`}
                             title="Última página"
                           >
                             <ChevronsRight className="w-4 h-4" />
@@ -3958,21 +4031,20 @@ export function CustomerDashboard() {
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
                         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
                       </div>
-                      
+
                       <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                         {/* Avatar Grande con Tier */}
                         <div className="relative">
-                          <div className={`w-32 h-32 rounded-3xl flex items-center justify-center shadow-2xl ${
-                            clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
+                          <div className={`w-32 h-32 rounded-3xl flex items-center justify-center shadow-2xl ${clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
                             clientProfile.tier === 'enterprise' ? 'bg-gradient-to-br from-violet-500 to-purple-600' :
-                            clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' :
-                            'bg-gradient-to-br from-slate-500 to-gray-600'
-                          }`}>
+                              clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' :
+                                'bg-gradient-to-br from-slate-500 to-gray-600'
+                            }`}>
                             <span className="text-5xl font-black text-white">
                               {(user?.name || 'C').charAt(0).toUpperCase()}
                             </span>
                           </div>
-                          <motion.div 
+                          <motion.div
                             animate={{ scale: [1, 1.1, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
                             className="absolute -bottom-2 -right-2 w-10 h-10 rounded-xl bg-white shadow-lg flex items-center justify-center"
@@ -3983,7 +4055,7 @@ export function CustomerDashboard() {
                             {clientProfile.tierIcon === 'sparkles' && <Sparkles className="w-5 h-5 text-slate-500" />}
                           </motion.div>
                         </div>
-                        
+
                         {/* Info Principal */}
                         <div className="flex-1 text-center md:text-left">
                           <h1 className="text-3xl md:text-4xl font-black text-white mb-2">
@@ -3992,9 +4064,11 @@ export function CustomerDashboard() {
                           <p className="text-lg text-slate-400 mb-4">
                             {perfilCliente?.empresa || user?.company || 'Empresa'}
                           </p>
-                          
+
                           {/* Tags */}
                           <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                            {/* Badge de tier COMENTADO: No mostrar nivel de cliente/partner estratégico */}
+                            {/*
                             <Badge className={`${clientProfile.tierGradient} text-white border-0 px-4 py-1.5 text-sm font-bold shadow-lg`}>
                               {clientProfile.tierIcon === 'crown' && <Crown className="w-4 h-4 mr-1.5" />}
                               {clientProfile.tierIcon === 'gem' && <Gem className="w-4 h-4 mr-1.5" />}
@@ -4002,6 +4076,7 @@ export function CustomerDashboard() {
                               {clientProfile.tierIcon === 'sparkles' && <Sparkles className="w-4 h-4 mr-1.5" />}
                               {clientProfile.tierLabel}
                             </Badge>
+                            */}
                             <Badge className="bg-white/10 text-white border-0 backdrop-blur-sm px-4 py-1.5">
                               <Calendar className="w-4 h-4 mr-1.5" />
                               {clientProfile.timeline.diasComoCliente} días como cliente
@@ -4014,9 +4089,9 @@ export function CustomerDashboard() {
                             )}
                           </div>
                         </div>
-                        
-                        {/* Stats Mini */}
-                        <div className="grid grid-cols-2 gap-4">
+
+                        {/* Stats Mini - COMENTADO: No mostrar total facturado y total facturas al cliente */}
+                        {/* <div className="grid grid-cols-2 gap-4">
                           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/10">
                             <p className="text-slate-400 text-xs font-medium mb-1">Total Facturado</p>
                             <p className="text-base sm:text-lg font-bold text-white tracking-tight whitespace-nowrap">{formatCurrencyNoDecimals(clientProfile.stats.totalFacturado)}</p>
@@ -4025,7 +4100,7 @@ export function CustomerDashboard() {
                             <p className="text-slate-400 text-xs font-medium mb-1">Facturas</p>
                             <p className="text-xl font-bold text-white">{clientProfile.stats.totalFacturas}</p>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </motion.div>
 
@@ -4041,7 +4116,7 @@ export function CustomerDashboard() {
                         <div className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl">
                           {/* Decorative Top Bar */}
                           <div className="h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-                          
+
                           <div className="p-6">
                             <div className="flex items-center justify-between mb-6">
                               <div className="flex items-center gap-4">
@@ -4183,7 +4258,7 @@ export function CustomerDashboard() {
                         {/* Company Info Card */}
                         <div className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl">
                           <div className="h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
-                          
+
                           <div className="p-6">
                             <div className="flex items-center gap-4 mb-6">
                               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
@@ -4251,7 +4326,7 @@ export function CustomerDashboard() {
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
                             <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/10 rounded-full blur-xl" />
                           </div>
-                          
+
                           <div className="relative z-10">
                             <div className="flex items-center gap-3 mb-4">
                               <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -4262,14 +4337,20 @@ export function CustomerDashboard() {
                                 <p className="text-sm text-white/60">Cambios en datos de empresa</p>
                               </div>
                             </div>
-                            
+
                             <p className="text-white/80 mb-5 text-sm leading-relaxed">
                               Para modificar tus datos fiscales o de empresa, ponte en contacto con nuestro equipo de soporte.
                             </p>
-                            
+
                             <motion.button
                               whileHover={{ scale: 1.02 }}
                               whileTap={{ scale: 0.98 }}
+                              onClick={() => {
+                                toast.info('Contactar soporte', {
+                                  description: '📞 Teléfono: +34 965 123 456\n📧 Email: soporte@granja-mari-pepa.com\n🕒 Horario: L-V 9:00-18:00',
+                                  duration: 8000,
+                                });
+                              }}
                               className="w-full py-3.5 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                             >
                               <Phone className="w-5 h-5" />
@@ -4278,64 +4359,53 @@ export function CustomerDashboard() {
                           </div>
                         </div>
 
-                        {/* Notifications Card */}
-                        <div className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl">
-                          <div className="h-2 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500" />
-                          
-                          <div className="p-6">
-                            <div className="flex items-center gap-3 mb-5">
-                              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
-                                <Bell className="w-5 h-5 text-white" />
+                        {/* Security Card */}
+                        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 p-6 shadow-xl shadow-emerald-500/20">
+                          <div className="absolute inset-0 overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/10 rounded-full blur-xl" />
+                          </div>
+
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <Shield className="w-6 h-6 text-white" />
                               </div>
-                              <h3 className="font-bold text-gray-900">Preferencias de notificación</h3>
+                              <div>
+                                <h3 className="font-bold text-white text-lg">Seguridad</h3>
+                                <p className="text-sm text-white/60">Gestiona tu contraseña</p>
+                              </div>
                             </div>
-                            
-                            <div className="space-y-4">
-                              {[
-                                { label: 'Notificaciones por email', icon: Mail, color: 'bg-purple-100 text-purple-600' },
-                                { label: 'Actualizaciones de pedidos', icon: Package, color: 'bg-blue-100 text-blue-600' },
-                                { label: 'Ofertas y promociones', icon: Sparkles, color: 'bg-amber-100 text-amber-600' }
-                              ].map((pref, index) => (
-                                <motion.label
-                                  key={index}
-                                  whileHover={{ x: 4 }}
-                                  className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer group"
-                                >
-                                  <div className="flex items-center gap-3">
-                                    <div className={`w-8 h-8 rounded-lg ${pref.color} flex items-center justify-center`}>
-                                      <pref.icon className="w-4 h-4" />
-                                    </div>
-                                    <span className="text-gray-700 font-medium text-sm group-hover:text-gray-900 transition-colors">
-                                      {pref.label}
-                                    </span>
-                                  </div>
-                                  <div className="relative">
-                                    <input
-                                      type="checkbox"
-                                      defaultChecked
-                                      className="sr-only peer"
-                                    />
-                                    <div className="w-11 h-6 bg-gray-300 peer-checked:bg-emerald-500 rounded-full transition-colors" />
-                                    <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-5 transition-transform" />
-                                  </div>
-                                </motion.label>
-                              ))}
-                            </div>
+
+                            <p className="text-white/80 mb-5 text-sm leading-relaxed">
+                              Mantén tu cuenta segura actualizando tu contraseña regularmente.
+                            </p>
+
+                            <motion.button
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => setShowPasswordChangeModal(true)}
+                              className="w-full py-3.5 bg-white text-emerald-700 font-bold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+                            >
+                              <Key className="w-5 h-5" />
+                              Cambiar Contraseña
+                            </motion.button>
                           </div>
                         </div>
 
-                        {/* Quick Stats Mini Card */}
+                        {/* Quick Stats Mini Card - COMENTADO: No mostrar sección de rendimiento al cliente */}
+                        {/*
                         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900 p-5 shadow-xl">
                           <div className="absolute inset-0 overflow-hidden">
                             <div className="absolute top-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl" />
                           </div>
-                          
+
                           <div className="relative z-10">
                             <div className="flex items-center gap-2 mb-4">
                               <TrendingUp className="w-5 h-5 text-emerald-400" />
                               <span className="text-sm font-semibold text-white">Tu rendimiento</span>
                             </div>
-                            
+
                             <div className="grid grid-cols-2 gap-3">
                               <div className="bg-white/5 rounded-xl p-3 backdrop-blur-sm border border-white/10">
                                 <p className="text-xs text-slate-400">Media mensual</p>
@@ -4348,6 +4418,7 @@ export function CustomerDashboard() {
                             </div>
                           </div>
                         </div>
+                        */}
                       </motion.div>
                     </div>
                   </div>
@@ -4366,7 +4437,7 @@ export function CustomerDashboard() {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
                         <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl" />
                       </div>
-                      
+
                       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="flex items-center gap-6">
                           <div className="w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl">
@@ -4377,14 +4448,14 @@ export function CustomerDashboard() {
                               Mis Favoritos
                             </h1>
                             <p className="text-white/70 text-lg">
-                              {getFavoritesCount() > 0 
+                              {getFavoritesCount() > 0
                                 ? `${getFavoritesCount()} productos guardados`
                                 : 'Guarda tus productos preferidos aquí'
                               }
                             </p>
                           </div>
                         </div>
-                        
+
                         {getFavoritesCount() > 0 && (
                           <motion.button
                             whileHover={{ scale: 1.05 }}
@@ -4412,7 +4483,7 @@ export function CustomerDashboard() {
                           <div className="absolute top-0 right-0 w-96 h-96 bg-rose-50 rounded-full blur-3xl opacity-50" />
                           <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-50 rounded-full blur-2xl opacity-50" />
                         </div>
-                        
+
                         <div className="relative z-10 text-center max-w-md mx-auto">
                           <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center">
                             <Heart className="w-12 h-12 text-rose-400" />
@@ -4421,12 +4492,13 @@ export function CustomerDashboard() {
                             Tu lista está vacía
                           </h3>
                           <p className="text-gray-500 mb-8 leading-relaxed">
-                            Explora nuestro catálogo y guarda como favoritos los productos que más te gusten. 
+                            Explora nuestro catálogo y guarda como favoritos los productos que más te gusten.
                             Así podrás encontrarlos rápidamente cuando los necesites.
                           </p>
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => window.location.href = '/productos'}
                             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-xl shadow-lg shadow-rose-500/30 hover:shadow-xl hover:shadow-rose-500/40 transition-all"
                           >
                             <ShoppingCart className="w-5 h-5" />
@@ -4443,9 +4515,9 @@ export function CustomerDashboard() {
                         <div className="absolute inset-0 overflow-hidden">
                           <div className="absolute top-0 right-0 w-96 h-96 bg-rose-50 rounded-full blur-3xl opacity-50" />
                         </div>
-                        
+
                         <div className="relative z-10 text-center max-w-md mx-auto">
-                          <motion.div 
+                          <motion.div
                             animate={{ scale: [1, 1.1, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
                             className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/30"
@@ -4456,7 +4528,7 @@ export function CustomerDashboard() {
                             {getFavoritesCount()} productos guardados
                           </h3>
                           <p className="text-gray-500 mb-8 leading-relaxed">
-                            El catálogo de productos estará disponible próximamente. 
+                            El catálogo de productos estará disponible próximamente.
                             Tus favoritos se guardarán automáticamente y podrás acceder a ellos cuando quieras.
                           </p>
                           <Badge className="bg-rose-100 text-rose-700 border-rose-200 px-4 py-2 text-sm font-medium">
@@ -4685,7 +4757,7 @@ export function CustomerDashboard() {
               className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div 
+                <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center border-l-4 border-emerald-500 shadow-md"
                   style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
                 >
@@ -4712,18 +4784,18 @@ export function CustomerDashboard() {
                   <p className="text-xs text-muted-foreground mt-1">Ejemplo: +34666555444 (sin espacios ni guiones)</p>
                 </div>
 
-                <div 
+                <div
                   className="rounded-xl p-4 border-l-4 border-emerald-400"
                   style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
                 >
                   <p className="text-sm font-semibold text-emerald-800 mb-2">Mensaje a enviar:</p>
                   <p className="text-sm text-emerald-700">
-                    ¡Hola! 👋<br/><br/>
-                    Te envío la información de la factura:<br/><br/>
-                    📄 <strong>Factura:</strong> {selectedFacturaForShare.serieFactura}-{selectedFacturaForShare.numeroFactura}<br/>
-                    📅 <strong>Fecha:</strong> {selectedFacturaForShare.fecha}<br/>
-                    💰 <strong>Importe:</strong> {formatCurrency(selectedFacturaForShare.totalFactura)}<br/>
-                    {selectedFacturaForShare.estadoPago === 'pagada' ? '✅ Estado: Pagada' : '⏳ Estado: Pendiente'}<br/><br/>
+                    ¡Hola! 👋<br /><br />
+                    Te envío la información de la factura:<br /><br />
+                    📄 <strong>Factura:</strong> {selectedFacturaForShare.serieFactura}-{selectedFacturaForShare.numeroFactura}<br />
+                    📅 <strong>Fecha:</strong> {selectedFacturaForShare.fecha}<br />
+                    💰 <strong>Importe:</strong> {formatCurrency(selectedFacturaForShare.totalFactura)}<br />
+                    {selectedFacturaForShare.estadoPago === 'pagada' ? '✅ Estado: Pagada' : '⏳ Estado: Pendiente'}<br /><br />
                     ¿Necesitas el PDF? Solicítamelo y te lo envío. 📎
                   </p>
                 </div>
@@ -4748,10 +4820,10 @@ export function CustomerDashboard() {
                     }
 
                     const mensaje = `¡Hola! 👋\n\nTe envío la información de la factura:\n\n📄 *Factura:* ${selectedFacturaForShare.serieFactura}-${selectedFacturaForShare.numeroFactura}\n📅 *Fecha:* ${selectedFacturaForShare.fecha}\n💰 *Importe:* ${formatCurrency(selectedFacturaForShare.totalFactura)}\n${selectedFacturaForShare.estadoPago === 'pagada' ? '✅ Estado: Pagada' : '⏳ Estado: Pendiente'}\n\n¿Necesitas el PDF? Solicítamelo y te lo envío. 📎`;
-                    
+
                     const url = `https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`;
                     window.open(url, '_blank');
-                    
+
                     setShowWhatsAppModal(false);
                     setWhatsappPhone('');
                     toast.success('Abriendo WhatsApp...');
@@ -4783,7 +4855,7 @@ export function CustomerDashboard() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ 
+                transition={{
                   duration: 0.3,
                   type: "spring",
                   stiffness: 300,
@@ -4796,15 +4868,15 @@ export function CustomerDashboard() {
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-destructive/10 flex items-center justify-center">
                     <LogOut className="w-8 h-8 text-destructive" />
                   </div>
-                  
+
                   <h2 className="text-2xl font-bold text-foreground mb-3">
                     ¿Cerrar sesión?
                   </h2>
-                  
+
                   <p className="text-muted-foreground mb-8 leading-relaxed">
                     ¿Estás seguro de que quieres cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder a tu cuenta.
                   </p>
-                  
+
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button
                       onClick={() => setShowLogoutModal(false)}
@@ -4974,11 +5046,10 @@ export function CustomerDashboard() {
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                        shareMethod === 'whatsapp'
-                          ? 'bg-success/10'
-                          : 'bg-primary/10'
-                      }`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${shareMethod === 'whatsapp'
+                        ? 'bg-success/10'
+                        : 'bg-primary/10'
+                        }`}>
                         {shareMethod === 'whatsapp' ? (
                           <MessageCircle className={`w-6 h-6 ${shareMethod === 'whatsapp' ? 'text-success' : 'text-primary'}`} />
                         ) : (
@@ -5053,11 +5124,11 @@ export function CustomerDashboard() {
                     />
                     {((shareMethod === 'whatsapp' && !userPhoneEditable && userPhone) ||
                       (shareMethod === 'email' && !userEmailEditable && userEmail)) && (
-                      <p className="text-xs text-primary flex items-center gap-1">
-                        <Check className="w-3 h-3" />
-                        Datos recuperados de tu perfil
-                      </p>
-                    )}
+                        <p className="text-xs text-primary flex items-center gap-1">
+                          <Check className="w-3 h-3" />
+                          Datos recuperados de tu perfil
+                        </p>
+                      )}
                   </div>
 
                   {/* Info adicional */}
@@ -5092,11 +5163,10 @@ export function CustomerDashboard() {
                     <Button
                       onClick={handleShareSubmit}
                       disabled={loadingShare || !shareInput.trim()}
-                      className={`flex-1 rounded-2xl text-white transition-all duration-300 ${
-                        shareMethod === 'whatsapp'
-                          ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700'
-                          : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
-                      }`}
+                      className={`flex-1 rounded-2xl text-white transition-all duration-300 ${shareMethod === 'whatsapp'
+                        ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700'
+                        : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                        }`}
                     >
                       {loadingShare ? (
                         <div className="flex items-center gap-2">
@@ -5119,10 +5189,16 @@ export function CustomerDashboard() {
       </AnimatePresence>
 
       {/* Modal Libro IVA */}
-      <LibroIvaModal 
+      <LibroIvaModal
         isOpen={showLibroIvaModal}
         onClose={() => setShowLibroIvaModal(false)}
         codigoCliente={user?.id || ''}
+      />
+
+      {/* Modal Cambiar Contraseña */}
+      <PasswordChangeForm
+        isOpen={showPasswordChangeModal}
+        onClose={() => setShowPasswordChangeModal(false)}
       />
     </div>
   );

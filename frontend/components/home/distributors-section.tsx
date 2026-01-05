@@ -45,6 +45,7 @@ const distributors = [
     color: '#06B6D4',
     specialties: ['Pan congelado', 'Masas fermentadas', 'Bollería']
   },
+  /*
   {
     id: 'okin',
     name: 'Okin',
@@ -57,6 +58,8 @@ const distributors = [
     color: '#F59E0B',
     specialties: ['Carnes frescas', 'Embutidos', 'Productos curados']
   },
+  */
+  /*
   {
     id: 'amparin',
     name: 'Pastelería Amparín',
@@ -69,6 +72,7 @@ const distributors = [
     color: '#EC4899',
     specialties: ['Tartas', 'Bollería', 'Dulces artesanales']
   }
+  */
 ];
 
 export function DistributorsSection() {

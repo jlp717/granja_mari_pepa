@@ -20,16 +20,38 @@ const HEADER_WEBP = path.join(__dirname, '../../assets/header.webp');
 const HEADER_PNG = path.join(__dirname, '../../assets/header.png');
 
 const COLORS = {
+  // Colores principales premium
+  primary: '#003d7a',
+  primaryLight: '#1a5490',
+  secondary: '#0056b3',
+  accent: '#28a745',
+  accentLight: '#34c759',
+  
+  // Colores originales mantenidos para compatibilidad
   blue: '#1a5490',
   blueLight: '#cfe3f3',
   blueLine: '#2b73b8',
-  text: '#000000',
+  
+  // Texto y grises profesionales
+  text: '#2c3e50',
+  darkGray: '#2c3e50',
+  mediumGray: '#6c757d',
   gray: '#6c757d',
-  border: '#b7c7d8',
-  zebra: '#f3f8fd',
-  totalRow: '#f6efc9',
-  totalBar: '#d6e5e1',
-  white: '#ffffff'
+  lightGray: '#E8E8E8',
+  ultraLight: '#f8f9fa',
+  
+  // Bordes y fondos
+  border: '#dee2e6',
+  zebra: '#f8f9fa',
+  
+  // Totales premium
+  totalRow: '#fff9e6',
+  totalBar: '#e8f5e9',
+  
+  // Especiales
+  white: '#ffffff',
+  gold: '#ffc107',
+  success: '#28a745'
 };
 
 function formatNumber(num, decimals = 2) {
@@ -173,12 +195,12 @@ function drawTotalsRow(doc, y, cols, totals) {
   doc.font('Helvetica-Bold').fontSize(8).fillColor(COLORS.text);
 
   // Solo rellenamos los campos clave como en la referencia (base, %iva, iva, %rec, total)
-  doc.text(formatNumber(totals.totalBase, 2), cols.base, y + 6, { width: cols.wBase, align: 'right', lineBreak: false });
-  doc.text(formatNumber(porcIva, 2), cols.porcIva, y + 6, { width: cols.wPorcIva, align: 'right', lineBreak: false });
-  doc.text(money(totals.totalIVA), cols.impIva, y + 6, { width: cols.wImpIva, align: 'right', lineBreak: false });
-  doc.text(porcRec !== 0 ? formatNumber(porcRec, 2) : '-', cols.porcRec, y + 6, { width: cols.wPorcRec, align: 'right', lineBreak: false });
-  doc.text(totals.totalRecargo !== 0 ? money(totals.totalRecargo) : '-', cols.impRec, y + 6, { width: cols.wImpRec, align: 'right' });
-  doc.text(money(totals.totalGeneral), cols.totalFactura, y + 6, { width: cols.wTotalFactura, align: 'right' });
+  doc.text(formatNumber(totals.totalBase, 2), cols.base, y + 6, { width: cols.wBase, align: 'right', lineBreak: false, ellipsis: true });
+  doc.text(formatNumber(porcIva, 2), cols.porcIva, y + 6, { width: cols.wPorcIva, align: 'right', lineBreak: false, ellipsis: true });
+  doc.text(money(totals.totalIVA), cols.impIva, y + 6, { width: cols.wImpIva, align: 'right', lineBreak: false, ellipsis: true });
+  doc.text(porcRec !== 0 ? formatNumber(porcRec, 2) : '-', cols.porcRec, y + 6, { width: cols.wPorcRec, align: 'right', lineBreak: false, ellipsis: true });
+  doc.text(totals.totalRecargo !== 0 ? money(totals.totalRecargo) : '-', cols.impRec, y + 6, { width: cols.wImpRec, align: 'right', lineBreak: false, ellipsis: true });
+  doc.text(money(totals.totalGeneral), cols.totalFactura, y + 6, { width: cols.wTotalFactura, align: 'right', lineBreak: false, ellipsis: true });
 
   return y + 18;
 }
@@ -341,30 +363,29 @@ async function generateLibroIvaPDF(datosLibro) {
 
       // Columnas (ajustadas a ancho A4 con margen)
       // Ancho útil: 515 (de x=40 a x=555). Debe CABER TODO.
-      // Nueva distribución ajustada para ancho 515
-      // Factura 80 | Fecha 45 | Cliente 50 | NIF 60 | Base 70 | %IVA 30 | IVA 60 | %Rec 15 | ImpRec 20 | TotalFact. 85
-      let x = 40;
+      // Nueva distribución optimizada para ancho 515px
+      // Factura 75 | Fecha 50 | Cliente 70 | NIF 55 | Base 60 | %IVA 28 | IVA 55 | %Rec 25 | ImpRec 25 | Total 72 = 515
       const cols = {
-        factura: x,
-        wFactura: 80,
-        fecha: (x += 80),
-        wFecha: 45,
-        cliente: (x += 45),
-        wCliente: 50,
-        nif: (x += 50),
-        wNif: 60,
-        base: (x += 60),
-        wBase: 70,
-        porcIva: (x += 70),
-        wPorcIva: 30,
-        impIva: (x += 30),
-        wImpIva: 60,
-        porcRec: (x += 60),
-        wPorcRec: 15,
-        impRec: (x += 15),
-        wImpRec: 20,
-        totalFactura: (x += 20),
-        wTotalFactura: 85
+        factura: 40,
+        wFactura: 75,
+        fecha: 115,
+        wFecha: 50,
+        cliente: 165,
+        wCliente: 70,
+        nif: 235,
+        wNif: 55,
+        base: 290,
+        wBase: 60,
+        porcIva: 350,
+        wPorcIva: 28,
+        impIva: 378,
+        wImpIva: 55,
+        porcRec: 433,
+        wPorcRec: 25,
+        impRec: 458,
+        wImpRec: 25,
+        totalFactura: 483,
+        wTotalFactura: 72
       };
 
       let y = drawHeader(doc, {
@@ -405,17 +426,17 @@ async function generateLibroIvaPDF(datosLibro) {
         const porcIva = base !== 0 ? (iva / base) * 100 : 0;
         const porcRec = base !== 0 ? (rec / base) * 100 : 0;
 
-        doc.text(formatFacturaId(reg), cols.factura, y + 4, { width: cols.wFactura, lineBreak: false });
-        doc.text(safeText(reg.FECHAFACTURA), cols.fecha, y + 4, { width: cols.wFecha, lineBreak: false });
-        doc.text(safeText(reg.CODIGOCLIENTE || reg.CODIGOCLIENTEFACTURA || '').substring(0, 12), cols.cliente, y + 4, { width: cols.wCliente, lineBreak: false });
-        doc.text(safeText(reg.CIFCLIENTE || '').substring(0, 20), cols.nif, y + 4, { width: cols.wNif, lineBreak: false });
+        doc.text(formatFacturaId(reg), cols.factura, y + 4, { width: cols.wFactura, lineBreak: false, ellipsis: true });
+        doc.text(safeText(reg.FECHAFACTURA), cols.fecha, y + 4, { width: cols.wFecha, lineBreak: false, ellipsis: true });
+        doc.text(safeText(reg.CODIGOCLIENTE || reg.CODIGOCLIENTEFACTURA || ''), cols.cliente, y + 4, { width: cols.wCliente, lineBreak: false, ellipsis: true });
+        doc.text(safeText(reg.CIFCLIENTE || ''), cols.nif, y + 4, { width: cols.wNif, lineBreak: false, ellipsis: true });
 
-        doc.text(money(base), cols.base, y + 4, { width: cols.wBase, align: 'right', lineBreak: false });
-        doc.text(formatNumber(porcIva, 2), cols.porcIva, y + 4, { width: cols.wPorcIva, align: 'right', lineBreak: false });
-        doc.text(money(iva), cols.impIva, y + 4, { width: cols.wImpIva, align: 'right', lineBreak: false });
-        doc.text(rec !== 0 ? formatNumber(porcRec, 2) : '-', cols.porcRec, y + 4, { width: cols.wPorcRec, align: 'right', lineBreak: false });
-        doc.text(rec !== 0 ? money(rec) : '-', cols.impRec, y + 4, { width: cols.wImpRec, align: 'right', lineBreak: false });
-        doc.text(money(total), cols.totalFactura, y + 4, { width: cols.wTotalFactura, align: 'right' });
+        doc.text(money(base), cols.base, y + 4, { width: cols.wBase, align: 'right', lineBreak: false, ellipsis: true });
+        doc.text(formatNumber(porcIva, 2), cols.porcIva, y + 4, { width: cols.wPorcIva, align: 'right', lineBreak: false, ellipsis: true });
+        doc.text(money(iva), cols.impIva, y + 4, { width: cols.wImpIva, align: 'right', lineBreak: false, ellipsis: true });
+        doc.text(rec !== 0 ? formatNumber(porcRec, 2) : '-', cols.porcRec, y + 4, { width: cols.wPorcRec, align: 'right', lineBreak: false, ellipsis: true });
+        doc.text(rec !== 0 ? money(rec) : '-', cols.impRec, y + 4, { width: cols.wImpRec, align: 'right', lineBreak: false, ellipsis: true });
+        doc.text(money(total), cols.totalFactura, y + 4, { width: cols.wTotalFactura, align: 'right', lineBreak: false, ellipsis: true });
 
         y += rowH;
       });

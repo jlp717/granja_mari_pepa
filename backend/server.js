@@ -136,34 +136,34 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(helmet({
   // SECURITY: CSP ya configurado en securityUltra.js con nonces
   contentSecurityPolicy: false, // Desactivado aquí, gestionado por Security Ultra
-  
+
   // SECURITY: COEP puede romper recursos externos - configurar según necesidades
   crossOriginEmbedderPolicy: false,
-  
+
   // SECURITY: CORP configurado para cross-origin por compatibilidad con frontend
   crossOriginResourcePolicy: { policy: "cross-origin" },
-  
+
   // SECURITY: Desactivar DNS prefetch para privacidad
   dnsPrefetchControl: { allow: false },
-  
+
   // SECURITY: X-Frame-Options DENY (ya en Security Ultra, redundante pero seguro)
   frameguard: { action: 'deny' },
-  
+
   // SECURITY: Ocultar X-Powered-By
   hidePoweredBy: true,
-  
+
   // SECURITY: HSTS ya configurado en Security Ultra con valores más altos
   hsts: false, // Gestionado por Security Ultra con 2 años
-  
+
   // SECURITY: IE specific
   ieNoOpen: true,
-  
+
   // SECURITY: X-Content-Type-Options ya en Security Ultra
   noSniff: true,
-  
+
   // SECURITY: Referrer-Policy ya en Security Ultra como 'no-referrer'
   referrerPolicy: false,
-  
+
   // SECURITY: X-XSS-Protection ya en Security Ultra
   xssFilter: false, // Obsoleto, pero Security Ultra lo incluye
 }));
@@ -172,9 +172,9 @@ app.use(helmet({
 const allowedOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(',')
   : [
-      'http://localhost:3000', 
-      'http://localhost:3001'
-    ];
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ];
 
 // TODO: Temporal - Patrón para DevTunnels (QUITAR en producción)
 const devTunnelsPattern = /^https:\/\/[a-z0-9-]+-\d+\.uks1\.devtunnels\.ms$/;
@@ -193,7 +193,7 @@ app.use(cors({
     // Permitir orígenes de la lista
     if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
       callback(null, true);
-    } 
+    }
     // TODO: Temporal - Permitir DevTunnels en desarrollo (QUITAR en producción)
     else if (process.env.NODE_ENV !== 'production' && devTunnelsPattern.test(origin)) {
       logger.info(`CORS permitido para DevTunnel: ${origin}`);
@@ -335,10 +335,20 @@ app.post('/api/auth/v2/login', loginRateLimiter, authControllerV2.login.bind(aut
 app.post('/api/auth/v2/solicitar-codigo', loginRateLimiter, authControllerV2.solicitarCodigo.bind(authControllerV2));
 // PÚBLICO: Verificar código y cambiar contraseña
 app.post('/api/auth/v2/verificar-codigo', loginRateLimiter, authControllerV2.verificarCodigoYCambiarPassword.bind(authControllerV2));
+// PÚBLICO: Verificar solo código (sin cambiar contraseña) - para flujo de dos pasos
+app.post('/api/auth/v2/verificar-solo-codigo', loginRateLimiter, authControllerV2.verificarSoloCodigo.bind(authControllerV2));
+// PÚBLICO: Configurar email para reset de contraseña
+app.post('/api/auth/v2/configure-email', loginRateLimiter, authControllerV2.configureEmailForReset.bind(authControllerV2));
 // PÚBLICO: Verificar si puede cambiar contraseña (restricción 30 días)
 app.get('/api/auth/v2/verificar-cambio/:codigoCliente', generalLimiter, authControllerV2.verificarPermisoCambio.bind(authControllerV2));
 // PROTEGIDO: Cambiar contraseña (usuario logueado)
 app.post('/api/auth/v2/cambiar-password', requireAuth, generalLimiter, authControllerV2.cambiarPassword.bind(authControllerV2));
+// ALIAS: Cambiar contraseña (para compatibilidad con frontend)
+app.post('/api/auth/change-password', requireAuth, generalLimiter, authControllerV2.cambiarPassword.bind(authControllerV2));
+// PÚBLICO: Verificar si contraseña está en HaveIBeenPwned
+app.post('/api/auth/check-password-pwned', generalLimiter, authControllerV2.checkPasswordPwned.bind(authControllerV2));
+// PROTEGIDO: Descartar advertencia de contraseña legacy
+app.post('/api/auth/dismiss-password-warning', requireAuth, generalLimiter, authControllerV2.dismissPasswordWarning.bind(authControllerV2));
 
 // =====================================================
 // SEGURIDAD: CSRF TOKEN
@@ -366,10 +376,10 @@ app.post('/api/libro-iva', requireAuth, pdfLimiter, auditDataAccess('LIBRO_IVA')
 app.post('/api/analytics/events', requireAuth, generalLimiter, (req, res) => {
   // Registro de eventos para analytics
   const { event, data } = req.body;
-  logger.info('📊 Analytics event', { 
-    codigoCliente: req.user?.codigoCliente, 
-    event, 
-    timestamp: new Date().toISOString() 
+  logger.info('📊 Analytics event', {
+    codigoCliente: req.user?.codigoCliente,
+    event,
+    timestamp: new Date().toISOString()
   });
   res.json({ success: true, message: 'Event registered' });
 });
@@ -452,6 +462,13 @@ app.delete('/api/cache/all', requireAuth, facturaController.invalidarTodoCache.b
 // Chatbot accesible para usuarios autenticados o con rate limiting estricto
 app.post('/api/chatbot', optionalAuth, generalLimiter, chatbotController.processChatMessage);
 app.get('/api/chatbot/health', chatbotController.healthCheck);
+
+// =====================================================
+// 🔒 SISTEMA DE AUTENTICACIÓN SEGURA (NIVEL BANCARIO)
+// =====================================================
+// Implementa: bcrypt, zxcvbn, HaveIBeenPwned, JWT, historial de contraseñas
+const authSecureRoutes = require('./app/routes/authSecureRoutes');
+app.use('/api/auth/secure', authSecureRoutes);
 
 // Ruta raíz - información de la API
 app.get('/', (req, res) => {

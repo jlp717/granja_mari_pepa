@@ -46,6 +46,7 @@ const NAVIGATION = [
           { name: 'Mariscos', href: '/productos?brand=panamar&category=mariscos' }
         ]
       },
+      /*
       {
         name: 'Okin',
         href: '/productos?brand=okin',
@@ -64,6 +65,7 @@ const NAVIGATION = [
           { name: 'Bollería', href: '/productos?brand=amparin&category=bolleria' }
         ]
       }
+      */
     ]
   },
   { name: 'Quiénes somos', href: '/acerca' },
@@ -249,14 +251,12 @@ export function Header() {
               <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <Phone className="w-3.5 h-3.5 text-primary-foreground/80" />
               </div>
-              <span className="text-primary-foreground/90 font-medium tracking-wide group-hover:text-primary-foreground transition-colors">968 123 456</span>
+              <span className="text-primary-foreground/90 font-medium tracking-wide group-hover:text-primary-foreground transition-colors">968 46 75 14</span>
             </a>
           </div>
-          <div className="hidden md:flex items-center justify-center flex-1">
             <div className="bg-primary-foreground/10 px-5 py-1.5 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all duration-300">
-              <span className="text-primary-foreground font-semibold text-[13px] tracking-wide">Distribución especializada desde 1985</span>
+              <span className="text-primary-foreground font-semibold text-[13px] tracking-wide">Distribución especializada desde 1966</span>
             </div>
-          </div>
           <div className="hidden lg:flex items-center space-x-2 text-primary-foreground/80 font-medium">
             <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse" />
             <span className="text-[13px]">Calidad Premium</span>
@@ -584,7 +584,7 @@ export function Header() {
                       >
                         <Phone className="w-5 h-5 text-primary" />
                         <div>
-                          <div className="text-foreground text-sm font-semibold">968 123 456</div>
+                          <div className="text-foreground text-sm font-semibold">968 46 75 146</div>
                           <div className="text-muted-foreground text-xs">Llamadas y WhatsApp</div>
                         </div>
                       </motion.div>

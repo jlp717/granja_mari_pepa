@@ -85,6 +85,7 @@ export const brands = [
       }
     ]
   },
+  /*
   {
     id: 'okin',
     name: 'Okin',
@@ -133,6 +134,7 @@ export const brands = [
       }
     ]
   }
+  */
 ];
 
 // Compatibilidad con estructura anterior
@@ -156,22 +158,12 @@ export const delegations = [
   {
     id: 'lorca',
     city: 'Lorca (Murcia)',
-    address: 'Avd. Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca (Murcia)',
+    address: 'Pol Ind Saprelorca Parcela D3 Jimeno Sola, 3, 30817, Murcia',
     phone: '+34 968 46 75 14',
     phone2: '+34 639 77 86 55',
     email: 'pedidos@granjamaripepa.com',
     coordinates: { lat: 37.6756, lng: -1.7003 },
-    mapUrl: 'https://goo.gl/maps/8tnxQXqGQbC2'
-  },
-  {
-    id: 'almeria',
-    city: 'Viator (Almería)',
-    address: 'C/ Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator (Almería)',
-    phone: '+34 950 97 34 29',
-    phone2: '+34 670 49 01 47',
-    email: 'pedidos@granjamaripepa.com',
-    coordinates: { lat: 36.8344, lng: -2.4637 },
-    mapUrl: 'https://goo.gl/maps/9UTP56nfxon'
+    mapUrl: 'https://maps.app.goo.gl/qfHqTqVhJeGezwRm9'
   }
 ];
 
@@ -185,7 +177,7 @@ export const companyInfo = {
   slogan: 'Especialistas en productos congelados, refrigerados y helados para HORECA',
   description: 'Granja Maripepa, S.L. se fundó en 1966 en Lorca (Murcia), especializada en el mercado HORECA (hostelería, restauración y catering) y en el canal de Alimentación. Actualmente contamos con una gama de más de 1500 referencias en tres temperaturas (congelado, refrigerado y temperatura ambiente).',
   certifications: ['ISO 9001:2008', 'Energía 100% Verde'],
-  serviceAreas: ['Murcia', 'Almería', 'Alicante'],
+  serviceAreas: ['Murcia', 'Alicante'],
   deliveryTime: '24 - 48 horas',
   coldStorageCapacity: '5.000m³',
   productReferences: '1500+',
@@ -198,7 +190,7 @@ export const companyInfo = {
     quality: 'Garantía de calidad, respaldada por la Norma ISO 9001',
     traceability: 'Trazabilidad de todos nuestros productos',
     delivery: 'Servicio de entrega en 24 – 48 horas',
-    coverage: 'Servicio en Murcia, Almería y Alicante',
+    coverage: 'Servicio en Murcia y Alicante',
     attention: 'Atención personalizada'
   },
   officialDistributors: ['Nestlé', 'Panamar', 'Okin', 'Pastelería Amparín', 'Grupo Topgel']

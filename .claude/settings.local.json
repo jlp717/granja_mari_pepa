@@ -36,7 +36,8 @@
       "WebFetch(domain:console.groq.com)",
       "Bash(grep:*)",
       "Bash(ls:*)",
-      "Bash(if not exist backendassets mkdir backendassets)"
+      "Bash(if not exist backendassets mkdir backendassets)",
+      "Bash(if not exist \"C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\backend\\app\\services\" mkdir \"C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\backend\\app\\services\")"
     ],
     "deny": [],
     "ask": []

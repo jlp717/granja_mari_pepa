@@ -94,17 +94,16 @@ export default function ContactPage() {
   };
 
   const handleViewOnMap = (delegationCity: string) => {
-    const locationId = delegationCity.toLowerCase() === 'lorca' ? 'lorca' : 'almeria';
+    // Solo mostramos Lorca como delegación oficial
+    const locationId = 'lorca';
     
     setSelectedLocation(locationId);
     setSelectedLocationData({
       id: locationId,
-      name: delegationCity,
-      lat: locationId === 'lorca' ? 37.6756 : 36.8344,
-      lng: locationId === 'lorca' ? -1.7003 : -2.4637,
-      description: locationId === 'lorca' 
-        ? 'Sede central de operaciones en Murcia' 
-        : 'Delegación comercial en Andalucía'
+      name: 'Lorca',
+      lat: 37.6756,
+      lng: -1.7003,
+      description: 'Sede central de operaciones en Murcia'
     });
     setShowGlobeDetails(true);
     
@@ -758,15 +757,17 @@ export default function ContactPage() {
                     
                     <p className="text-white/80 text-sm mb-3">{selectedLocationData.description}</p>
                     
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700"
                       onClick={() => {
-                        const delegation = delegations.find(d => 
-                          d.city.toLowerCase() === selectedLocationData.name.toLowerCase()
-                        );
+                        const delegation = delegations.find(d => d.id === selectedLocationData.id);
                         if (delegation) {
-                          handleGoogleMaps(delegation.address, delegation.city);
+                          if (delegation.mapUrl) {
+                            window.open(delegation.mapUrl, '_blank');
+                          } else {
+                            handleGoogleMaps(delegation.address, delegation.city);
+                          }
                         }
                       }}
                     >

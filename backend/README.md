@@ -65,6 +65,12 @@ backend/
 
 ## 📡 API Endpoints
 
+### Chatbot
+- `POST /api/chatbot` - Enviar mensaje al asistente virtual (opcionalmente autenticado). Devuelve `reply` y `conversationId`.
+- `GET /api/chatbot/health` - Health check del chatbot.
+- `POST /api/chatbot/generar-enlace` - Generar enlace temporal de descarga para una factura (PROTEGIDO, requiere JWT).
+
+
 ### Autenticación
 
 - `POST /api/auth/login` - Login con código de cliente y email

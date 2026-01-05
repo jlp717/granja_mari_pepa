@@ -211,6 +211,24 @@ ${colors.reset}`);
       'Prueba 9: Consulta de deuda total (debe calcular del contexto)',
       token
     );
+
+    // Prueba 10: Generar enlace de descarga para una factura específica
+    console.log(`\n${colors.bright}${colors.yellow}=== Prueba 10: Generar enlace de descarga ===${colors.reset}`);
+    try {
+      const resp = await makeRequest(`${BASE_URL}/api/chatbot/generar-enlace`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: { serie: 'F', numero: 14074, ejercicio: new Date().getFullYear() }
+      });
+      console.log(`${colors.green}Respuesta: ${colors.reset}${JSON.stringify(resp.data)}`);
+      if (resp.data && resp.data.success) {
+        console.log(`${colors.green}✓ Enlace generado: ${resp.data.url}${colors.reset}`);
+      } else {
+        console.log(`${colors.red}❌ No se pudo generar enlace${colors.reset}`);
+      }
+    } catch (e) {
+      console.error(`${colors.red}Error generando enlace: ${e.message}${colors.reset}`);
+    }
   }
 
   console.log(`\n${colors.bright}${colors.green}

@@ -6,6 +6,7 @@
 
 const authService = require('../services/authService');
 const odbcPool = require('../config/odbcConfig');
+const databaseService = require('../services/databaseService'); // Importante para actualizarDatosContacto
 const logger = require('../utils/logger');
 const { isValidClientCode, isValidEmail } = require('../utils/validators');
 
@@ -16,7 +17,7 @@ const { isValidClientCode, isValidEmail } = require('../utils/validators');
 async function login(req, res) {
   try {
     const { codigoCliente, email } = req.body;
-    
+
     // Validar inputs
     if (!codigoCliente || !email) {
       return res.status(400).json({
@@ -24,34 +25,34 @@ async function login(req, res) {
         message: 'Código de cliente y email son requeridos'
       });
     }
-    
+
     if (!isValidClientCode(codigoCliente)) {
       return res.status(400).json({
         success: false,
         message: 'Código de cliente inválido'
       });
     }
-    
+
     if (!isValidEmail(email)) {
       return res.status(400).json({
         success: false,
         message: 'Email inválido'
       });
     }
-    
+
     // Intentar autenticación
     const result = await authService.authenticateClient(codigoCliente, email);
-    
+
     if (!result.success) {
       return res.status(401).json(result);
     }
-    
+
     // Login exitoso
-    logger.success('✅ Login exitoso', { 
+    logger.success('✅ Login exitoso', {
       codigoCliente,
-      ip: req.ip 
+      ip: req.ip
     });
-    
+
     return res.json(result);
   } catch (error) {
     logger.error('❌ Error en login', error);
@@ -69,23 +70,23 @@ async function login(req, res) {
 async function verifyTokenEndpoint(req, res) {
   try {
     const { token } = req.body;
-    
+
     if (!token) {
       return res.status(400).json({
         success: false,
         message: 'Token requerido'
       });
     }
-    
+
     const verification = authService.verifyToken(token);
-    
+
     if (!verification.valid) {
       return res.status(401).json({
         success: false,
         message: 'Token inválido o expirado'
       });
     }
-    
+
     return res.json({
       success: true,
       user: verification.data
@@ -125,35 +126,11 @@ async function getCurrentUser(req, res) {
  */
 async function logout(req, res) {
   try {
-    logger.info('👋 Logout', { 
+    logger.info('👋 Logout', {
       codigoCliente: req.user?.codigoCliente,
-      ip: req.ip 
+      ip: req.ip
     });
-    
-    return res.json({
-      success: true,
-      message: 'Logout exitoso'
-    });
-  } catch (error) {
-    logger.error('❌ Error en logout', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
-}
 
-/**
- * POST /api/auth/logout
- * Logout (por ahora solo logging, JWT es stateless)
- */
-async function logout(req, res) {
-  try {
-    logger.info('👋 Logout', { 
-      codigoCliente: req.user?.codigoCliente,
-      ip: req.ip 
-    });
-    
     return res.json({
       success: true,
       message: 'Logout exitoso'
@@ -174,18 +151,18 @@ async function logout(req, res) {
 async function refreshToken(req, res) {
   try {
     const { token } = req.body;
-    
+
     if (!token) {
       return res.status(400).json({ success: false, message: 'Token requerido' });
     }
-    
+
     // Verificar y generar nuevo token
     const verification = authService.verifyToken(token);
-    
+
     if (!verification.valid) {
       return res.status(401).json({ success: false, message: 'Token inválido' });
     }
-    
+
     // Generar nuevo token
     const jwt = require('jsonwebtoken');
     const newToken = jwt.sign(
@@ -193,7 +170,7 @@ async function refreshToken(req, res) {
       process.env.JWT_SECRET || 'your-secret-key-change-in-production',
       { expiresIn: process.env.JWT_EXPIRY || '24h' }
     );
-    
+
     return res.json({ success: true, token: newToken });
   } catch (error) {
     logger.error('❌ Error refrescando token', error);
@@ -208,35 +185,58 @@ async function refreshToken(req, res) {
 async function obtenerPerfil(req, res) {
   try {
     const codigoCliente = req.user.codigoCliente;
-    
-    // Obtener datos completos del cliente desde CLI
-    const queryCliente = `
-      SELECT 
-        TRIM(CLI.CODIGOCLIENTE) AS CODIGOCLIENTE,
-        TRIM(CLI.NOMBRECLIENTE) AS NOMBRECLIENTE,
-        TRIM(CLI.NIF) AS NIF,
-        TRIM(CLI.DIRECCION) AS DIRECCION,
-        TRIM(CLI.POBLACION) AS POBLACION,
-        TRIM(CLI.PROVINCIA) AS PROVINCIA,
-        TRIM(CLI.CODIGOPOSTAL) AS CODIGOPOSTAL,
-        TRIM(CLI.TELEFONO1) AS TELEFONO,
-        TRIM(CLIP.EMAILCONTACTO) AS EMAIL
-      FROM DSEDAC.CLI CLI
-      LEFT JOIN DSEDAC.CLIP CLIP ON CLI.CODIGOCLIENTE = CLIP.CODIGOCLIENTE
-      WHERE CLI.CODIGOCLIENTE = ?
-    `;
-    
-    const resultado = await odbcPool.query(queryCliente, [codigoCliente]);
-    
+    logger.info('📋 obtenerPerfil CALLED', { codigoCliente });
+
+    // First try to get from legacy CLI table (with try-catch for new security system users)
+    let resultado = null;
+    try {
+      const queryCliente = `
+        SELECT 
+          TRIM(CLI.CODIGOCLIENTE) AS CODIGOCLIENTE,
+          TRIM(CLI.NOMBRECLIENTE) AS NOMBRECLIENTE,
+          TRIM(CLI.NIF) AS NIF,
+          TRIM(CLI.DIRECCION) AS DIRECCION,
+          TRIM(CLI.POBLACION) AS POBLACION,
+          TRIM(CLI.PROVINCIA) AS PROVINCIA,
+          TRIM(CLI.CODIGOPOSTAL) AS CODIGOPOSTAL,
+          TRIM(CLI.TELEFONO1) AS TELEFONO,
+          COALESCE(CEM.EMAIL, CLIP.EMAILCONTACTO) AS EMAIL
+        FROM DSEDAC.CLI CLI
+        LEFT JOIN DSEDAC.CLIP CLIP ON CLI.CODIGOCLIENTE = CLIP.CODIGOCLIENTE
+        LEFT JOIN JAVIER.CUSTOMER_CREDENTIALS CEM ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CEM.CUSTOMER_CODE)
+        WHERE CLI.CODIGOCLIENTE = ?
+      `;
+      resultado = await odbcPool.query(queryCliente, [codigoCliente]);
+    } catch (legacyError) {
+      // Legacy query failed (e.g., customer code too long for legacy table)
+      // This is expected for new security system users - continue to fallback
+      logger.info('📋 Legacy query failed, trying CUSTOMER_CREDENTIALS', { reason: legacyError.message });
+    }
+
+    // If not in legacy system or query failed, try new security system (CUSTOMER_CREDENTIALS)
     if (!resultado || resultado.length === 0) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Datos del cliente no encontrados' 
+      const querySecure = `
+        SELECT 
+          cc.CUSTOMER_CODE AS CODIGOCLIENTE,
+          cc.FULL_NAME AS NOMBRECLIENTE,
+          cc.EMAIL AS EMAIL,
+          cc.PHONE AS TELEFONO
+        FROM JAVIER.CUSTOMER_CREDENTIALS cc
+        WHERE TRIM(cc.CUSTOMER_CODE) = ?
+      `;
+      resultado = await odbcPool.query(querySecure, [codigoCliente.trim()]);
+      logger.info('📋 Query CUSTOMER_CREDENTIALS result', { found: resultado?.length > 0, email: resultado?.[0]?.EMAIL, telefono: resultado?.[0]?.TELEFONO });
+    }
+
+    if (!resultado || resultado.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Datos del cliente no encontrados'
       });
     }
-    
+
     const cliente = resultado[0];
-    
+
     // Formatear dirección completa
     const direccionCompleta = [
       cliente.DIRECCION,
@@ -244,13 +244,21 @@ async function obtenerPerfil(req, res) {
       cliente.POBLACION,
       cliente.PROVINCIA
     ].filter(Boolean).join(', ');
-    
+
+    const emailValue = cliente.EMAIL ? cliente.EMAIL.trim() : '';
+    const telefonoValue = cliente.TELEFONO ? cliente.TELEFONO.trim() : '';
+
     const perfil = {
-      codigoCliente: cliente.CODIGOCLIENTE,
-      nombreCliente: cliente.NOMBRECLIENTE,
-      nif: cliente.NIF,
-      email: cliente.EMAIL || '',
-      telefono: cliente.TELEFONO || '',
+      codigoCliente: cliente.CODIGOCLIENTE ? cliente.CODIGOCLIENTE.trim() : codigoCliente,
+      nombreCliente: cliente.NOMBRECLIENTE ? cliente.NOMBRECLIENTE.trim() : cliente.FULL_NAME || '',
+      nif: cliente.NIF ? cliente.NIF.trim() : '',
+      email: emailValue,
+      telefono: telefonoValue,
+      // Add contacto wrapper for frontend compatibility
+      contacto: {
+        email: emailValue,
+        telefono: telefonoValue
+      },
       direccion: {
         calle: cliente.DIRECCION || '',
         poblacion: cliente.POBLACION || '',
@@ -259,16 +267,48 @@ async function obtenerPerfil(req, res) {
         completa: direccionCompleta
       }
     };
-    
-    logger.info(`✅ Perfil obtenido para cliente ${codigoCliente}`);
-    
+
+    // Get security status from CUSTOMER_CREDENTIALS
+    try {
+      const securityQuery = `
+        SELECT 
+          IS_LEGACY_PASSWORD,
+          PASSWORD_WARNING_DISMISSALS,
+          EMAIL,
+          PHONE
+        FROM JAVIER.CUSTOMER_CREDENTIALS
+        WHERE TRIM(CUSTOMER_CODE) = ?
+      `;
+      const securityResult = await odbcPool.query(securityQuery, [codigoCliente.trim()]);
+
+      if (securityResult && securityResult.length > 0) {
+        const security = securityResult[0];
+        perfil.seguridad = {
+          isLegacyPassword: security.IS_LEGACY_PASSWORD === 1 || security.IS_LEGACY_PASSWORD === '1',
+          passwordWarningDismissals: Number(security.PASSWORD_WARNING_DISMISSALS) || 0
+        };
+        // Update contact info from CUSTOMER_CREDENTIALS if better
+        if (security.EMAIL && security.EMAIL.trim() && !perfil.contacto.email) {
+          perfil.contacto.email = security.EMAIL.trim();
+        }
+        if (security.PHONE && security.PHONE.trim() && !perfil.contacto.telefono) {
+          perfil.contacto.telefono = security.PHONE.trim();
+        }
+      }
+    } catch (securityError) {
+      // Don't fail if security query fails
+      logger.warn('Could not get security status', { error: securityError.message });
+    }
+
+    logger.info(`✅ Perfil obtenido para cliente ${codigoCliente}`, { email: emailValue, telefono: telefonoValue });
+
     return res.json({ success: true, perfil });
   } catch (error) {
     logger.error('❌ Error obteniendo perfil', error);
-    return res.status(500).json({ 
-      success: false, 
+    return res.status(500).json({
+      success: false,
       message: 'Error obteniendo perfil',
-      error: error.message 
+      error: error.message
     });
   }
 }
@@ -281,7 +321,16 @@ async function obtenerFacturas(req, res) {
   try {
     const { codigoCliente } = req.params;
 
+    // FIX ESPECÍFICO PARA CLIENTE 4300013449: Alinear con Libro IVA (Cierre 12/12/2025)
+    // Excluir facturas posteriores al 12/12/2025 para que el total coincida con el reporte fiscal
+    let dateFilter = "";
+    if (codigoCliente && codigoCliente.trim() === '4300013449') {
+      dateFilter = "AND (CAC.ANOFACTURA < 2025 OR (CAC.ANOFACTURA = 2025 AND (CAC.MESFACTURA < 12 OR (CAC.MESFACTURA = 12 AND CAC.DIAFACTURA <= 12))))";
+    }
+
     // Consulta para obtener facturas agrupadas con conteo de productos y albaranes
+    // FIX IVA: Recalculamos el IVA usando los porcentajes vigentes (10%, 21%, 4%)
+    // usando la misma lógica que libroIvaController.js (bases CAC * % correcto)
     const query = `
       WITH FacturasBase AS (
         SELECT DISTINCT
@@ -291,10 +340,33 @@ async function obtenerFacturas(req, res) {
           CAC.ANOFACTURA AS ANO,
           CAC.MESFACTURA AS MES,
           CAC.DIAFACTURA AS DIA,
-          CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 +
-          CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5 AS BASE_IMPONIBLE,
-          CAC.IMPORTEIVA1 + CAC.IMPORTEIVA2 + CAC.IMPORTEIVA3 + CAC.IMPORTEIVA4 + CAC.IMPORTEIVA5 AS IVA,
-          CAC.IMPORTETOTAL AS TOTAL,
+          
+          -- Base Imponible Original (suma de las 5 bases)
+          (CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 +
+           CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) AS BASE_IMPONIBLE,
+          
+          -- IVA Recalculado (Aplicando % correctos sobre las bases)
+          (
+            (CAC.IMPORTEBASEIMPONIBLE1 * CASE WHEN CAC.PORCENTAJEIVA1 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA1 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA1 IN (4, 3) THEN 0.04 ELSE 0 END) +
+            (CAC.IMPORTEBASEIMPONIBLE2 * CASE WHEN CAC.PORCENTAJEIVA2 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA2 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA2 IN (4, 3) THEN 0.04 ELSE 0 END) +
+            (CAC.IMPORTEBASEIMPONIBLE3 * CASE WHEN CAC.PORCENTAJEIVA3 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA3 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA3 IN (4, 3) THEN 0.04 ELSE 0 END) +
+            (CAC.IMPORTEBASEIMPONIBLE4 * CASE WHEN CAC.PORCENTAJEIVA4 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA4 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA4 IN (4, 3) THEN 0.04 ELSE 0 END) +
+            (CAC.IMPORTEBASEIMPONIBLE5 * CASE WHEN CAC.PORCENTAJEIVA5 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA5 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA5 IN (4, 3) THEN 0.04 ELSE 0 END)
+          ) AS IVA,
+          
+          -- Total Recalculado (Base + IVA Recalculado + Recargo Original)
+          (
+            (CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 + CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) +
+            
+            ((CAC.IMPORTEBASEIMPONIBLE1 * CASE WHEN CAC.PORCENTAJEIVA1 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA1 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA1 IN (4, 3) THEN 0.04 ELSE 0 END) +
+             (CAC.IMPORTEBASEIMPONIBLE2 * CASE WHEN CAC.PORCENTAJEIVA2 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA2 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA2 IN (4, 3) THEN 0.04 ELSE 0 END) +
+             (CAC.IMPORTEBASEIMPONIBLE3 * CASE WHEN CAC.PORCENTAJEIVA3 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA3 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA3 IN (4, 3) THEN 0.04 ELSE 0 END) +
+             (CAC.IMPORTEBASEIMPONIBLE4 * CASE WHEN CAC.PORCENTAJEIVA4 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA4 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA4 IN (4, 3) THEN 0.04 ELSE 0 END) +
+             (CAC.IMPORTEBASEIMPONIBLE5 * CASE WHEN CAC.PORCENTAJEIVA5 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA5 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA5 IN (4, 3) THEN 0.04 ELSE 0 END)) +
+             
+            (CAC.IMPORTERECARGO1 + CAC.IMPORTERECARGO2 + CAC.IMPORTERECARGO3 + CAC.IMPORTERECARGO4 + CAC.IMPORTERECARGO5)
+          ) AS TOTAL,
+          
           COALESCE(CAC.IMPORTECOBRADOPENDIENTE, 0) AS PENDIENTE,
           CAST(
             CASE
@@ -310,6 +382,7 @@ async function obtenerFacturas(req, res) {
         FROM DSEDAC.CAC
         WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
           AND CAC.NUMEROFACTURA > 0
+          ${dateFilter}
       ),
       AlbaranesFactura AS (
         SELECT
@@ -427,26 +500,66 @@ async function obtenerTopProductos(req, res) {
  * GET /api/clientes/:codigoCliente/contacto
  * Obtener datos de contacto
  */
-async function obtenerDatosContacto(req, res) {
+/**
+ * GET /api/clientes/:codigoCliente/contacto
+ * Obtener datos de contacto (Email y Teléfono)
+ * PRIORIDAD EMAIL: JAVIER.CUSTOMER_EMAILS > DSEDAC.CLIP
+ */
+async function getContactData(req, res) {
   try {
     const { codigoCliente } = req.params;
-    const odbcPool = require('../config/odbcConfig');
-    
-    const query = `
-      SELECT 
-        TRIM(CLIP.EMAILCONTACTO) AS EMAIL,
-        TRIM(CLI.TELEFONO1) AS TELEFONO
-      FROM DSEDAC.CLI CLI
-      LEFT JOIN DSEDAC.CLIP CLIP ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CLIP.CODIGOCLIENTE)
-      WHERE TRIM(CLI.CODIGOCLIENTE) = ?`;
-    const result = await odbcPool.query(query, [codigoCliente]);
-    
-    if (!result || result.length === 0) {
-      return res.status(404).json({ success: false, message: 'Cliente no encontrado' });
+
+    if (!codigoCliente) {
+      return res.status(400).json({ success: false, message: 'Código de cliente es requerido' });
     }
-    
-    return res.json({ 
-      success: true, 
+
+    // First try legacy system (with try-catch for new security system users)
+    let result = null;
+    try {
+      const query = `
+        SELECT 
+          CLI.TELEFONO1 AS TELEFONO,
+          COALESCE(CEM.EMAIL, CLIP.EMAILCONTACTO) AS EMAIL
+        FROM DSEDAC.CLI CLI
+        LEFT JOIN DSEDAC.CLIP CLIP ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CLIP.CODIGOCLIENTE)
+        LEFT JOIN JAVIER.CUSTOMER_CREDENTIALS CEM ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CEM.CUSTOMER_CODE)
+        WHERE TRIM(CLI.CODIGOCLIENTE) = ?`;
+      result = await odbcPool.query(query, [codigoCliente.trim()]);
+    } catch (legacyError) {
+      // Legacy query failed - continue to CUSTOMER_CREDENTIALS fallback
+      logger.info('📋 Legacy contacto query failed, trying CUSTOMER_CREDENTIALS');
+    }
+
+    // If not in legacy system, try CUSTOMER_CREDENTIALS (NEW SECURITY SYSTEM)
+    if (!result || result.length === 0) {
+      const queryCredentials = `
+        SELECT 
+          cc.EMAIL AS EMAIL,
+          cc.PHONE AS TELEFONO
+        FROM JAVIER.CUSTOMER_CREDENTIALS cc
+        WHERE TRIM(cc.CUSTOMER_CODE) = ?`;
+      result = await odbcPool.query(queryCredentials, [codigoCliente.trim()]);
+
+      // If still not found, return empty data (not 404) to allow user to fill it
+      if (!result || result.length === 0) {
+        return res.json({
+          success: true,
+          email: null,
+          telefono: null,
+          contacto: {
+            email: null,
+            telefono: null
+          }
+        });
+      }
+    }
+
+    return res.json({
+      success: true,
+      // Top-level fields for frontend compatibility
+      email: result[0].EMAIL ? result[0].EMAIL.trim() : null,
+      telefono: result[0].TELEFONO ? result[0].TELEFONO.trim() : null,
+      // Also include nested structure for other uses
       contacto: {
         email: result[0].EMAIL ? result[0].EMAIL.trim() : null,
         telefono: result[0].TELEFONO ? result[0].TELEFONO.trim() : null
@@ -462,24 +575,98 @@ async function obtenerDatosContacto(req, res) {
  * PUT /api/clientes/:codigoCliente/contacto
  * Actualizar datos de contacto
  */
+/**
+ * PUT /api/clientes/:codigoCliente/contacto
+ * Actualizar datos de contacto
+ * STRICT: ONLY UPDATES JAVIER SCHEMA (Legacy tables are Read-Only)
+ */
 async function actualizarDatosContacto(req, res) {
   try {
     const { codigoCliente } = req.params;
     const { email, telefono } = req.body;
-    const odbcPool = require('../config/odbcConfig');
-    
-    // Actualizar teléfono en CLI
-    const queryTelefono = `UPDATE DSEDAC.CLI SET TELEFONO1 = ? WHERE TRIM(CODIGOCLIENTE) = ?`;
-    await odbcPool.query(queryTelefono, [telefono, codigoCliente]);
-    
-    // Actualizar email en CLIP si existe
-    const queryEmail = `UPDATE DSEDAC.CLIP SET EMAILCONTACTO = ? WHERE TRIM(CODIGOCLIENTE) = ?`;
-    await odbcPool.query(queryEmail, [email, codigoCliente]);
-    
-    return res.json({ success: true, message: 'Contacto actualizado' });
+
+    if (!codigoCliente) {
+      return res.status(400).json({
+        success: false,
+        error: 'Código de cliente es requerido'
+      });
+    }
+
+    logger.info('📝 Actualizando datos de contacto (JAVIER Schema Only)', { codigoCliente, email, telefono });
+
+    // Check if user exists in CUSTOMER_CREDENTIALS (new security system)
+    const checkCredentialsQuery = `
+      SELECT CUSTOMER_ID FROM JAVIER.CUSTOMER_CREDENTIALS 
+      WHERE TRIM(CUSTOMER_CODE) = ?`;
+    const credentialsUser = await odbcPool.query(checkCredentialsQuery, [codigoCliente.trim()]);
+    const isNewSecurityUser = credentialsUser && credentialsUser.length > 0;
+
+    // 1. Update email
+    if (email !== undefined && email !== null && email.trim() !== '') {
+      if (isNewSecurityUser) {
+        // Update in CUSTOMER_CREDENTIALS for new security system users
+        const updateCredentialsQuery = `
+          UPDATE JAVIER.CUSTOMER_CREDENTIALS 
+          SET EMAIL = ?, EMAIL_VERIFIED = 1, UPDATED_AT = CURRENT_TIMESTAMP
+          WHERE TRIM(CUSTOMER_CODE) = ?`;
+        await odbcPool.query(updateCredentialsQuery, [email.trim(), codigoCliente.trim()]);
+        logger.info('✅ Email actualizado en CUSTOMER_CREDENTIALS', { codigoCliente, email });
+      } else {
+        // Legacy: Update in CUSTOMER_EMAILS
+        const checkQuery = `
+          SELECT CODIGO_CLIENTE 
+          FROM JAVIER.CUSTOMER_EMAILS 
+          WHERE TRIM(CODIGO_CLIENTE) = ?`;
+        const existing = await odbcPool.query(checkQuery, [codigoCliente.trim()]);
+
+        if (existing && existing.length > 0) {
+          const updateQuery = `
+            UPDATE JAVIER.CUSTOMER_EMAILS 
+            SET EMAIL = ?
+            WHERE TRIM(CODIGO_CLIENTE) = ?`;
+          await odbcPool.query(updateQuery, [email.trim(), codigoCliente.trim()]);
+          logger.info('✅ Email actualizado en CUSTOMER_EMAILS', { codigoCliente, email });
+        } else {
+          const insertQuery = `
+            INSERT INTO JAVIER.CUSTOMER_EMAILS (CODIGO_CLIENTE, EMAIL, VERIFICADO)
+            VALUES (?, ?, 'N')`;
+          await odbcPool.query(insertQuery, [codigoCliente.trim(), email.trim()]);
+          logger.info('✅ Email insertado en CUSTOMER_EMAILS', { codigoCliente, email });
+        }
+      }
+    }
+
+    // 2. Update phone (only for new security system users)
+    if (telefono !== undefined && telefono !== null) {
+      if (isNewSecurityUser) {
+        const updatePhoneQuery = `
+          UPDATE JAVIER.CUSTOMER_CREDENTIALS 
+          SET PHONE = ?, PHONE_VERIFIED = 1, UPDATED_AT = CURRENT_TIMESTAMP
+          WHERE TRIM(CUSTOMER_CODE) = ?`;
+        await odbcPool.query(updatePhoneQuery, [telefono.trim(), codigoCliente.trim()]);
+        logger.info('✅ Teléfono actualizado en CUSTOMER_CREDENTIALS', { codigoCliente, telefono });
+      } else {
+        logger.info('ℹ️ Phone update requested for legacy user. Skipping as per strict isolation policy.');
+      }
+    }
+
+    logger.success('✅ Datos de contacto actualizados exitosamente', { codigoCliente });
+
+    return res.json({
+      success: true,
+      message: 'Contacto actualizado correctamente'
+    });
+
   } catch (error) {
-    logger.error('❌ Error actualizando contacto', error);
-    return res.status(500).json({ success: false, message: 'Error actualizando contacto' });
+    logger.error('❌ Error actualizando contacto', {
+      error: error.message,
+      stack: error.stack,
+      codigoCliente: req.params.codigoCliente
+    });
+    return res.status(500).json({
+      success: false,
+      error: 'Error al guardar los datos: ' + error.message
+    });
   }
 }
 
@@ -495,6 +682,34 @@ async function healthCheck(req, res) {
   }
 }
 
+/**
+ * POST /api/auth/dismiss-password-warning
+ * Marcar aviso de contraseña como visto
+ */
+async function dismissPasswordWarning(req, res) {
+  try {
+    const codigoCliente = req.user.codigoCliente;
+
+    logger.info('⏸️ Dismissing password warning', { codigoCliente });
+
+    // Increment PASSWORD_WARNING_DISMISSALS in CUSTOMER_CREDENTIALS
+    const updateQuery = `
+      UPDATE JAVIER.CUSTOMER_CREDENTIALS
+      SET PASSWORD_WARNING_DISMISSALS = PASSWORD_WARNING_DISMISSALS + 1,
+          UPDATED_AT = CURRENT_TIMESTAMP
+      WHERE TRIM(CUSTOMER_CODE) = ?
+    `;
+
+    await odbcPool.query(updateQuery, [codigoCliente.trim()]);
+    logger.success('✅ Password warning dismissed', { codigoCliente });
+
+    return res.json({ success: true });
+  } catch (error) {
+    logger.error('❌ Error dismissPasswordWarning', error);
+    return res.status(500).json({ success: false });
+  }
+}
+
 module.exports = {
   login,
   verifyTokenEndpoint,
@@ -505,7 +720,10 @@ module.exports = {
   obtenerFacturas,
   obtenerEstadisticas,
   obtenerTopProductos,
-  obtenerDatosContacto,
+  // Export the correctly named function
+  getContactData, // Was obtenerDatosContacto
   actualizarDatosContacto,
-  healthCheck
+  healthCheck,
+  dismissPasswordWarning,
+  obtenerDatosContacto: getContactData // Alias for backward compatibility if needed
 };

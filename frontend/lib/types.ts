@@ -112,6 +112,7 @@ export interface LoginForm {
 
 export interface UserProfile {
   id: string;
+  customerId?: number; // ID numérico para operaciones de backend
   name: string;
   email: string;
   company: string;

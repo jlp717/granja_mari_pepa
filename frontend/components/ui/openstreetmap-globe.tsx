@@ -20,6 +20,7 @@ interface Location {
   color: string;
   description: string;
   address?: string;
+  mapUrl?: string;
   phone?: string;
 }
 
@@ -31,18 +32,9 @@ const locations: Location[] = [
     coordinates: { lat: 37.6756, lng: -1.7003 },
     color: '#10b981',
     description: 'Sede Central',
-    address: 'Ctra. de Granada, Km. 1',
-    phone: '968 46 77 56'
-  },
-  {
-    id: 'almeria', 
-    name: 'Almería',
-    region: 'Andalucía',
-    coordinates: { lat: 36.8381, lng: -2.4597 },
-    color: '#3b82f6',
-    description: 'Delegación Sur',
-    address: 'Polígono Industrial',
-    phone: '950 XX XX XX'
+    address: 'Pol Ind Saprelorca Parcela D3 Jimeno Sola, 3, 30817, Murcia',
+    mapUrl: 'https://maps.app.goo.gl/qfHqTqVhJeGezwRm9',
+    phone: '968 46 75 14'
   }
 ];
 
@@ -66,6 +58,20 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
   }, [onLocationClick]);
 
   const openInGoogleMaps = (location: Location) => {
+    // Prefer an explicit map URL if provided
+    if (location.mapUrl) {
+      window.open(location.mapUrl, '_blank');
+      return;
+    }
+
+    // Otherwise prefer an address-based search
+    if (location.address) {
+      const q = encodeURIComponent(`${location.address}${location.name ? `, ${location.name}` : ''}`);
+      window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank');
+      return;
+    }
+
+    // Fallback to coordinates
     window.open(
       `https://www.google.com/maps/search/?api=1&query=${location.coordinates.lat},${location.coordinates.lng}`,
       '_blank'
@@ -275,7 +281,7 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
                 <div>
                   <h4 className="font-semibold text-white text-sm mb-1">Cobertura Regional</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Servicio de distribución en Murcia, Almería y Granada. Entregas en 24-48h.
+                    Servicio de distribución en Murcia y Alicante. Entregas en 24-48h.
                   </p>
                 </div>
               </div>

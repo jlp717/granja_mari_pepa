@@ -52,4 +52,10 @@ router.get('/top-productos/:codigoCliente', authenticateToken, authController.ob
  */
 router.get('/perfil', authenticateToken, authController.obtenerPerfil);
 
+/**
+ * POST /api/auth/dismiss-password-warning
+ * Ocultar aviso de contraseña
+ */
+router.post('/dismiss-password-warning', authenticateToken, authController.dismissPasswordWarning);
+
 module.exports = router;

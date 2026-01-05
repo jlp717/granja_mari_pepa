@@ -213,7 +213,7 @@ export function Footer() {
 
             <p className="text-blue-200/80 text-lg mb-8 leading-relaxed max-w-md mx-auto lg:mx-0">
               Especialistas en productos congelados, refrigerados y helados para 
-              <span className="text-cyan-300 font-semibold"> HORECA</span> en Murcia, Almería y Alicante.
+              <span className="text-cyan-300 font-semibold"> HORECA</span> en Murcia y Alicante.
             </p>
 
             {/* Professional badges */}

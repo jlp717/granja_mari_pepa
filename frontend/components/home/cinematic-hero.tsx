@@ -189,7 +189,7 @@ export function CinematicHero() {
             filter: 'contrast(1.2) saturate(1.1) brightness(0.9)',
           }}
         >
-          <source src="/images/squid-3d.mp4" type="video/mp4" />
+          <source src="/images/salmon-3d.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -267,7 +267,7 @@ export function CinematicHero() {
                   filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))'
                 }}
               >
-                Distribuidor oficial Nestlé desde 1966 — Congelados, refrigerados y helados para HORECA
+                Congelados, refrigerados y helados para HORECA
               </span>
             </p>
           </div>

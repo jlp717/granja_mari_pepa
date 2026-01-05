@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Lock, Eye, EyeOff, Mail, Shield, Star, ArrowRight, Sparkles, Crown, TrendingUp, AlertCircle, X, Clipboard, FileText, BarChart3 } from 'lucide-react';
+import { User, Lock, Eye, EyeOff, Mail, Shield, Star, ArrowRight, Sparkles, Crown, TrendingUp, AlertCircle, X, Clipboard, FileText, BarChart3, Phone, CheckCircle, Check } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -14,6 +14,8 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import toast from 'react-hot-toast';
 import { CustomerDashboard } from '@/components/customer/dashboard';
+import AuthFlowManager from '@/components/auth/AuthFlowManager';
+import { secureFetch } from '@/lib/secureFetch';
 
 const loginFormSchema = z.object({
   codigoCliente: z.string().min(1, 'Código de cliente es requerido'),
@@ -39,8 +41,18 @@ export default function CustomerAreaPage() {
   const [daysRemaining, setDaysRemaining] = useState(0);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const { isAuthenticated, login } = useAuthStore();
-  
+  const [showPasswordChangeFlow, setShowPasswordChangeFlow] = useState(false);
+  const [loginData, setLoginData] = useState<{ customerId: number; password: string } | null>(null);
+  const [needsEmail, setNeedsEmail] = useState(false);
+  const [tempEmail, setTempEmail] = useState('');
+  const [tempPhone, setTempPhone] = useState('');
+  const [isConfiguringEmail, setIsConfiguringEmail] = useState(false);
+  const [showEmailSetupModal, setShowEmailSetupModal] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+  const [codeVerified, setCodeVerified] = useState(false);
+  const { isAuthenticated, login, user } = useAuthStore();
+
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -53,9 +65,50 @@ export default function CustomerAreaPage() {
     setIsLoading(true);
 
     try {
-      const success = await login(data.codigoCliente, data.password);
+      const result = await login(data.codigoCliente, data.password);
 
-      if (success) {
+      // DEBUG: Log what we received from backend
+      console.log('🔍 Login result:', {
+        success: result.success,
+        showPasswordChangeModal: result.showPasswordChangeModal,
+        requiresEmailSetup: result.requiresEmailSetup,
+        message: result.message
+      });
+
+      if (result.success) {
+        // ✅ Login exitoso
+
+        // PRIORITY 1: Si necesita cambiar contraseña (usuario legacy), mostrar flujo PRIMERO
+        if (result.showPasswordChangeModal) {
+          console.log('🔐 Showing password change modal');
+          // Obtener el customerId del store después del login exitoso
+          const currentUser = useAuthStore.getState().user;
+          if (currentUser?.customerId) {
+            setLoginData({
+              customerId: currentUser.customerId,
+              password: data.password,
+              codigoCliente: data.codigoCliente,
+              needsEmailSetup: result.requiresEmailSetup || false // Store in loginData to avoid closure issue
+            });
+            setShowPasswordChangeFlow(true);
+            toast.success('¡Bienvenido! Recomendamos cambiar tu contraseña.');
+            setIsLoading(false);
+            return;
+          }
+        }
+
+        // PRIORITY 2: Check if email/phone setup is required (only if no password modal)
+        if (result.requiresEmailSetup) {
+          console.log('📧 Showing email setup modal');
+          setForgotPasswordClientCode(data.codigoCliente); // Reuse client code state
+          setLoginData({ customerId: 0, password: data.password }); // Save password for re-login
+          setShowEmailSetupModal(true);
+          toast('Por seguridad, necesitamos que configures tu email y teléfono.', { icon: '📧' });
+          setIsLoading(false);
+          return;
+        }
+
+        // No modals needed
         toast.success('¡Bienvenido! Has iniciado sesión correctamente.');
       } else {
         setErrorMessage('Credenciales incorrectas. Verifica tu código de cliente y contraseña.');
@@ -87,7 +140,7 @@ export default function CustomerAreaPage() {
       if (!checkData.puedeCambiar && !checkData.esPrimerCambio) {
         setCanChangePassword(false);
         setDaysRemaining(checkData.diasRestantes || 0);
-        
+
         // Construir mensaje informativo con fechas
         let mensaje = `No puedes cambiar la contraseña todavía.`;
         if (checkData.fechaUltimoCambio) {
@@ -99,7 +152,7 @@ export default function CustomerAreaPage() {
           mensaje += `\nPodrás cambiarla a partir del: ${fechaProximo.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
         }
         mensaje += `\n\nDebes esperar ${checkData.diasRestantes} día${checkData.diasRestantes > 1 ? 's' : ''} más.`;
-        
+
         toast.error(mensaje, { duration: 6000 });
         return;
       }
@@ -113,19 +166,21 @@ export default function CustomerAreaPage() {
 
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      // Check if user needs to configure email first
+      if (data.needsEmail) {
+        setNeedsEmail(true);
+        toast.error(data.message || 'Necesitas configurar tu email para recuperar la contraseña');
+        return;
+      }
+
+      if (response.ok && (data.success || data.ok)) {
         setClientName(data.nombreCliente || '');
         setForgotPasswordStep('code');
-        
-        // En desarrollo, guardar el código para mostrarlo
-        if (data.modoDesarrollo && data.codigoVerificacion) {
-          setDevVerificationCode(data.codigoVerificacion);
-          console.log('🔑 Código de verificación (DEV):', data.codigoVerificacion);
-        }
-        
-        toast.success('Código de verificación generado. Contacta con la empresa para obtenerlo.');
+
+        const emailMasked = data.emailMasked || data.maskedEmail || 'tu email registrado';
+        toast.success(`Código enviado a ${emailMasked}. Revisa tu bandeja de entrada.`);
       } else {
-        toast.error(data.error || 'Error al procesar la solicitud');
+        toast.error(data.error || data.message || 'Error al procesar la solicitud');
         if (data.diasRestantes) {
           setCanChangePassword(false);
           setDaysRemaining(data.diasRestantes);
@@ -136,6 +191,52 @@ export default function CustomerAreaPage() {
       toast.error('Error al procesar la solicitud. Inténtalo más tarde.');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // Configure email for password reset
+  const handleConfigureEmail = async () => {
+    if (!tempEmail) {
+      toast.error('Por favor, ingresa tu email');
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(tempEmail)) {
+      toast.error('Email inválido');
+      return;
+    }
+
+    setIsConfiguringEmail(true);
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/auth/v2/configure-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          codigoCliente: forgotPasswordClientCode,
+          email: tempEmail
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && (data.success || data.ok)) {
+        toast.success('Email configurado correctamente');
+        setNeedsEmail(false);
+        setTempEmail('');
+
+        // Retry requesting verification code now that email is configured
+        await handleRequestVerificationCode();
+      } else {
+        toast.error(data.message || 'Error al configurar email');
+      }
+    } catch (error) {
+      console.error('Error configurando email:', error);
+      toast.error('Error al configurar email. Inténtalo más tarde.');
+    } finally {
+      setIsConfiguringEmail(false);
     }
   };
 
@@ -157,19 +258,14 @@ export default function CustomerAreaPage() {
       return;
     }
 
-    if (newPassword.length < 8) {
-      toast.error('La contraseña debe tener al menos 8 caracteres');
-      return;
-    }
-
-    if (!/[a-zA-Z]/.test(newPassword) || !/[0-9]/.test(newPassword)) {
-      toast.error('La contraseña debe contener letras y números');
+    if (newPassword.length < 12) {
+      toast.error('La contraseña debe tener al menos 12 caracteres');
       return;
     }
 
     setShowConfirmDialog(false);
     setIsLoading(true);
-    
+
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -189,7 +285,10 @@ export default function CustomerAreaPage() {
         setForgotPasswordStep('success');
         toast.success('¡Contraseña cambiada exitosamente!');
       } else {
-        toast.error(data.error || 'Error al cambiar la contraseña');
+        // Show the actual error message from the backend
+        const errorMsg = data.message || data.error || 'Error al cambiar la contraseña';
+        toast.error(errorMsg);
+        console.error('Password change error:', errorMsg);
       }
     } catch (error) {
       console.error('Error cambiando contraseña:', error);
@@ -211,7 +310,10 @@ export default function CustomerAreaPage() {
     setCanChangePassword(true);
     setDaysRemaining(0);
     setShowConfirmDialog(false);
+    setNeedsEmail(false);
+    setTempEmail('');
   };
+
 
   // 🔧 FIX: Scroll al top inmediatamente cuando el usuario se autentica
   // Esto evita que se vea el footer durante la transición
@@ -221,8 +323,170 @@ export default function CustomerAreaPage() {
     }
   }, [isAuthenticated]);
 
+  // Function to handle email setup submission - MUST be declared BEFORE authenticated section uses it
+  const handleEmailSetupSubmit = async () => {
+    if (!tempEmail || !tempPhone) {
+      toast.error('Por favor, completa email y teléfono');
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(tempEmail)) {
+      toast.error('Email inválido');
+      return;
+    }
+
+    // Validate phone format (at least 9 digits)
+    const phoneRegex = /^\d{9,}$/;
+    if (!phoneRegex.test(tempPhone.replace(/\s/g, ''))) {
+      toast.error('Teléfono debe tener al menos 9 dígitos');
+      return;
+    }
+
+    setIsConfiguringEmail(true);
+    try {
+      // Use secureFetch to include CSRF token automatically
+      const response = await secureFetch('/api/auth/v2/configure-email', {
+        method: 'POST',
+        body: JSON.stringify({
+          codigoCliente: forgotPasswordClientCode,
+          email: tempEmail,
+          telefono: tempPhone
+        }),
+      });
+
+      if (response.ok && (response.data?.success || response.data?.ok)) {
+        toast.success('Email y teléfono configurados correctamente');
+        setShowEmailSetupModal(false);
+        setTempEmail('');
+        setTempPhone('');
+
+        // Reload to refresh user data
+        window.location.reload();
+      } else {
+        toast.error(response.data?.message || 'Error al guardar email');
+      }
+    } catch (error) {
+      console.error('Error guardando email:', error);
+      toast.error('Error al guardar. Inténtalo más tarde.');
+    } finally {
+      setIsConfiguringEmail(false);
+    }
+  };
+
   if (isAuthenticated) {
-    return <CustomerDashboard />;
+    return (
+      <>
+        <CustomerDashboard />
+
+        {/* Flujo de cambio de contraseña para usuarios legacy */}
+        {showPasswordChangeFlow && loginData && (
+          <AuthFlowManager
+            showLegacyWarning={true}
+            customerId={loginData.customerId}
+            currentPassword={loginData.password}
+            onFlowComplete={() => {
+              // Read from loginData to avoid closure issue
+              const needsEmailSetup = (loginData as any).needsEmailSetup;
+              const codigoCliente = (loginData as any).codigoCliente;
+              console.log('🔐 Password flow complete, needsEmailSetup:', needsEmailSetup);
+
+              setShowPasswordChangeFlow(false);
+              setLoginData(null);
+
+              // If user needs to configure email/phone, show that modal now
+              if (needsEmailSetup) {
+                console.log('📧 Showing email setup modal after password flow');
+                setForgotPasswordClientCode(codigoCliente);
+                setShowEmailSetupModal(true);
+                toast('Ahora configura tu email y teléfono para recuperación de contraseña.', { icon: '📧' });
+              }
+            }}
+          />
+        )}
+
+        {/* Modal de configuración de email/teléfono OBLIGATORIO - en sección autenticada */}
+        <AnimatePresence>
+          {showEmailSetupModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[95vh] overflow-y-auto mx-2 sm:mx-0"
+              >
+                <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-4 sm:p-6 text-white text-center">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <Mail className="w-6 h-6 sm:w-8 sm:h-8" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold">Configuración de Contacto</h3>
+                  <p className="text-amber-100 mt-2 text-sm sm:text-base">
+                    Para tu seguridad, necesitamos tus datos de contacto.
+                  </p>
+                </div>
+
+                <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded">
+                    <p className="text-xs sm:text-sm text-blue-900">
+                      <strong>📌 Uso de tus datos:</strong> Solo para <strong>recuperar tu contraseña</strong> y <strong>enviar facturas</strong>.
+                      No compartimos esta información.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email *
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="email"
+                          value={tempEmail}
+                          onChange={(e) => setTempEmail(e.target.value)}
+                          placeholder="ejemplo@correo.com"
+                          className="w-full pl-10 h-12 border-2 border-gray-300 rounded-lg bg-white text-gray-900 focus:border-amber-500 focus:ring-amber-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Teléfono *
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input
+                          type="tel"
+                          value={tempPhone}
+                          onChange={(e) => setTempPhone(e.target.value)}
+                          placeholder="612345678"
+                          className="w-full pl-10 h-12 border-2 border-gray-300 rounded-lg bg-white text-gray-900 focus:border-amber-500 focus:ring-amber-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleEmailSetupSubmit}
+                    disabled={!tempEmail || !tempPhone || isConfiguringEmail}
+                    className="w-full h-12 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-base sm:text-lg rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isConfiguringEmail ? 'Guardando...' : 'Guardar y Continuar'}
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </>
+    );
   }
 
   return (
@@ -255,7 +519,7 @@ export default function CustomerAreaPage() {
           }}
           className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-emerald-400 to-cyan-600 rounded-full blur-3xl"
         />
-        
+
         {/* Floating particles */}
         {[...Array(6)].map((_, i) => (
           <motion.div
@@ -282,10 +546,10 @@ export default function CustomerAreaPage() {
 
       <div className="container mx-auto px-4 py-4 md:py-8 relative z-10">
         <div className="max-w-6xl mx-auto">
-          
+
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            
+
             {/* Left Side - Welcome Section */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -318,14 +582,14 @@ export default function CustomerAreaPage() {
                     Área Personal
                   </span>
                 </motion.h1>
-                
+
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-gray-600 leading-relaxed"
                 >
-                  Accede a tu panel de control personalizado para gestionar pedidos, 
+                  Accede a tu panel de control personalizado para gestionar pedidos,
                   descargar facturas y mucho más con total comodidad.
                 </motion.p>
               </div>
@@ -370,12 +634,12 @@ export default function CustomerAreaPage() {
             >
               {/* Glassmorphism Card */}
               <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-2xl border border-white/20">
-                
+
                 {/* Animated border gradient */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 p-[1px]">
                   <div className="h-full w-full rounded-3xl bg-white/80 backdrop-blur-xl"></div>
                 </div>
-                
+
                 <div className="relative z-10">
                   {/* Header */}
                   <div className="text-center mb-8">
@@ -387,7 +651,7 @@ export default function CustomerAreaPage() {
                     >
                       <User className="w-10 h-10 text-white" />
                     </motion.div>
-                    
+
                     <motion.h2
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -396,7 +660,7 @@ export default function CustomerAreaPage() {
                     >
                       Iniciar Sesión
                     </motion.h2>
-                    
+
                     <motion.p
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -410,7 +674,7 @@ export default function CustomerAreaPage() {
                   {/* Login Form */}
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      
+
                       <FormField
                         control={form.control}
                         name="codigoCliente"
@@ -419,9 +683,8 @@ export default function CustomerAreaPage() {
                             <FormLabel className="text-gray-700 font-medium">Código de Cliente</FormLabel>
                             <FormControl>
                               <div className="relative group">
-                                <User className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${
-                                  focusedInput === 'codigoCliente' ? 'text-blue-600' : 'text-gray-400'
-                                }`} />
+                                <User className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${focusedInput === 'codigoCliente' ? 'text-blue-600' : 'text-gray-400'
+                                  }`} />
                                 <Input
                                   type="text"
                                   placeholder="Ej: 0123456789"
@@ -447,7 +710,7 @@ export default function CustomerAreaPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="password"
@@ -456,9 +719,8 @@ export default function CustomerAreaPage() {
                             <FormLabel className="text-gray-700 font-medium">Contraseña</FormLabel>
                             <FormControl>
                               <div className="relative group">
-                                <Lock className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${
-                                  focusedInput === 'password' ? 'text-blue-600' : 'text-gray-400'
-                                }`} />
+                                <Lock className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${focusedInput === 'password' ? 'text-blue-600' : 'text-gray-400'
+                                  }`} />
                                 <Input
                                   type={showPassword ? "text" : "password"}
                                   placeholder="Tu contraseña"
@@ -502,9 +764,9 @@ export default function CustomerAreaPage() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <Button 
-                          type="submit" 
-                          size="lg" 
+                        <Button
+                          type="submit"
+                          size="lg"
                           className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
                           disabled={isLoading}
                         >
@@ -534,12 +796,24 @@ export default function CustomerAreaPage() {
                     >
                       ¿Olvidaste tu contraseña?
                     </motion.button>
-                    
+
                     <div className="text-sm text-gray-600">
                       ¿Necesitas una cuenta?{' '}
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                          toast('📞 Contacta con nosotros\n\nTeléfono: +34 965 123 456\nEmail: soporte@granja-mari-pepa.com\nHorario: L-V 9:00-18:00', {
+                            duration: 8000,
+                            style: {
+                              background: '#3B82F6',
+                              color: '#FFFFFF',
+                              padding: '16px',
+                              borderRadius: '8px',
+                              whiteSpace: 'pre-line',
+                            },
+                          });
+                        }}
                         className="text-blue-600 hover:text-blue-700 transition-colors font-semibold"
                       >
                         Contacta con nosotros
@@ -588,36 +862,36 @@ export default function CustomerAreaPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { 
-                  icon: Clipboard, 
-                  title: 'Gestión de Pedidos', 
+                {
+                  icon: Clipboard,
+                  title: 'Gestión de Pedidos',
                   desc: 'Realiza y consulta todos tus pedidos en tiempo real',
                   gradient: 'from-blue-500 to-indigo-600',
                   bgGlow: 'bg-blue-500/20',
                   stats: '24/7',
                   statsLabel: 'Disponible'
                 },
-                { 
-                  icon: FileText, 
-                  title: 'Facturas PDF', 
+                {
+                  icon: FileText,
+                  title: 'Facturas PDF',
                   desc: 'Descarga y gestiona tus facturas al instante',
                   gradient: 'from-purple-500 to-pink-600',
                   bgGlow: 'bg-purple-500/20',
                   stats: '100%',
                   statsLabel: 'Digital'
                 },
-                { 
-                  icon: User, 
-                  title: 'Perfil Personal', 
+                {
+                  icon: User,
+                  title: 'Perfil Personal',
                   desc: 'Actualiza tus datos y preferencias de contacto',
                   gradient: 'from-emerald-500 to-teal-600',
                   bgGlow: 'bg-emerald-500/20',
                   stats: '∞',
                   statsLabel: 'Personalizable'
                 },
-                { 
-                  icon: BarChart3, 
-                  title: 'Estadísticas', 
+                {
+                  icon: BarChart3,
+                  title: 'Estadísticas',
                   desc: 'Analiza tu historial y patrones de compra',
                   gradient: 'from-amber-500 to-orange-600',
                   bgGlow: 'bg-amber-500/20',
@@ -637,13 +911,13 @@ export default function CustomerAreaPage() {
                   >
                     {/* Glow effect on hover */}
                     <div className={`absolute inset-0 ${feature.bgGlow} rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
-                    
+
                     <div className="relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-2xl hover:border-gray-200 transition-all duration-500 h-full">
                       {/* Icon with gradient background */}
                       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                         <IconComponent className="w-7 h-7 text-white" />
                       </div>
-                      
+
                       {/* Content */}
                       <h4 className="font-bold text-gray-900 mb-2 text-lg group-hover:text-gray-800 transition-colors">
                         {feature.title}
@@ -651,7 +925,7 @@ export default function CustomerAreaPage() {
                       <p className="text-gray-600 text-sm leading-relaxed mb-4">
                         {feature.desc}
                       </p>
-                      
+
                       {/* Stats badge */}
                       <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
                         <span className={`text-xl font-bold bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
@@ -661,7 +935,7 @@ export default function CustomerAreaPage() {
                           {feature.statsLabel}
                         </span>
                       </div>
-                      
+
                       {/* Hover arrow indicator */}
                       <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
                         <ArrowRight className={`w-5 h-5 bg-gradient-to-r ${feature.gradient} bg-clip-text`} style={{ color: 'currentColor' }} />
@@ -671,7 +945,7 @@ export default function CustomerAreaPage() {
                 );
               })}
             </div>
-            
+
             {/* Bottom CTA Banner */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -686,7 +960,7 @@ export default function CustomerAreaPage() {
                     backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
                   }} />
                 </div>
-                
+
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                   <div className="text-center md:text-left">
                     <h4 className="text-xl md:text-2xl font-bold text-white mb-2">
@@ -711,7 +985,7 @@ export default function CustomerAreaPage() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Modal de Error de Login */}
       <AnimatePresence>
         {showErrorModal && (
@@ -768,7 +1042,7 @@ export default function CustomerAreaPage() {
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     {errorMessage}
                   </p>
-                  
+
                   {/* Actions */}
                   <div className="space-y-3">
                     <Button
@@ -822,7 +1096,7 @@ export default function CustomerAreaPage() {
                 >
                   <X className="w-5 h-5" />
                 </motion.button>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                     <Lock className="w-6 h-6" />
@@ -866,7 +1140,7 @@ export default function CustomerAreaPage() {
                           />
                         </div>
                       </div>
-                      
+
                       {!canChangePassword && daysRemaining > 0 && (
                         <div className="bg-red-50 p-4 rounded-xl border border-red-200">
                           <div className="flex items-start gap-3">
@@ -893,20 +1167,66 @@ export default function CustomerAreaPage() {
                         </div>
                       </div>
 
-                      <Button
-                        onClick={handleRequestVerificationCode}
-                        disabled={!forgotPasswordClientCode || isLoading || !canChangePassword}
-                        className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl"
-                      >
-                        {isLoading ? (
-                          <LoadingSpinner className="w-5 h-5" />
-                        ) : (
-                          <>
-                            Solicitar código
-                            <ArrowRight className="w-5 h-5 ml-2" />
-                          </>
-                        )}
-                      </Button>
+                      {/* Show email configuration if needed */}
+                      {needsEmail && (
+                        <div className="space-y-4 mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                          <div className="flex items-start gap-3">
+                            <Mail className="w-5 h-5 text-amber-600 mt-0.5" />
+                            <div className="text-sm text-amber-800">
+                              <strong>Email requerido</strong>
+                              <p className="mt-1">Para recuperar tu contraseña necesitas configurar tu email primero.</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Tu email
+                            </label>
+                            <div className="relative">
+                              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <Input
+                                type="email"
+                                value={tempEmail}
+                                onChange={(e) => setTempEmail(e.target.value)}
+                                placeholder="tu@email.com"
+                                className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                              />
+                            </div>
+                          </div>
+
+                          <Button
+                            onClick={handleConfigureEmail}
+                            disabled={!tempEmail || isConfiguringEmail}
+                            className="w-full h-12 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold rounded-xl"
+                          >
+                            {isConfiguringEmail ? (
+                              <LoadingSpinner className="w-5 h-5" />
+                            ) : (
+                              <>
+                                Configurar email y continuar
+                                <ArrowRight className="w-5 h-5 ml-2" />
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      )}
+
+                      {!needsEmail && (
+                        <Button
+                          onClick={handleRequestVerificationCode}
+                          disabled={!forgotPasswordClientCode || isLoading || !canChangePassword}
+                          className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl"
+                        >
+                          {isLoading ? (
+                            <LoadingSpinner className="w-5 h-5" />
+                          ) : (
+                            <>
+                              Solicitar código
+                              <ArrowRight className="w-5 h-5 ml-2" />
+                            </>
+                          )}
+                        </Button>
+                      )}
                     </motion.div>
                   )}
 
@@ -927,6 +1247,7 @@ export default function CustomerAreaPage() {
                         </div>
                       )}
 
+                      {/* Código de verificación */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Código de verificación
@@ -938,135 +1259,301 @@ export default function CustomerAreaPage() {
                           placeholder="000000"
                           className="h-12 text-center text-2xl font-mono border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 tracking-widest"
                           maxLength={6}
+                          disabled={codeVerified}
                         />
                       </div>
 
-                      {/* En desarrollo: mostrar código - solo para testing local */}
-                      {devVerificationCode && process.env.NODE_ENV === 'development' && (
-                        <div className="bg-yellow-50 p-3 rounded-xl border border-yellow-300">
-                          <p className="text-sm text-yellow-800 text-center">
-                            <strong>🔧 Testing:</strong> Código <span className="font-mono font-bold text-lg">{devVerificationCode}</span>
+                      {/* Helpful hint about email - only show before code is verified */}
+                      {!codeVerified && (
+                        <div className="bg-blue-50 p-3 rounded-xl border border-blue-200">
+                          <p className="text-sm text-blue-800 text-center">
+                            📬 Revisa tu <strong>bandeja de entrada</strong> y carpeta de <strong>spam</strong>. El código tardará unos segundos en llegar.
                           </p>
                         </div>
                       )}
-                      
-                      <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                        <div className="flex items-start gap-3">
-                          <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
-                          <div className="text-sm text-amber-800">
-                            <strong>¿No tienes el código?</strong>
-                            <p className="mt-1">Llama al <strong>639 77 86 56</strong> para obtener tu código de verificación.</p>
+
+                      {/* Password fields - only show after code is verified */}
+                      {codeVerified && (
+                        <>
+                          <div className="bg-green-50 p-3 rounded-xl border border-green-300">
+                            <p className="text-sm text-green-800 text-center">
+                              ✅ Código verificado. Ahora elige una contraseña segura.
+                            </p>
                           </div>
-                        </div>
-                      </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Nueva Contraseña
-                        </label>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                          <Input
-                            type="password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            placeholder="Mínimo 8 caracteres, letras y números"
-                            className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                      </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Nueva Contraseña
+                            </label>
+                            <div className="relative">
+                              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <Input
+                                type={showNewPassword ? "text" : "password"}
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                placeholder="Mínimo 12 caracteres"
+                                className="pl-10 pr-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowNewPassword(!showNewPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                              >
+                                {showNewPassword ? (
+                                  <EyeOff className="w-5 h-5" />
+                                ) : (
+                                  <Eye className="w-5 h-5" />
+                                )}
+                              </button>
+                            </div>
+                            {/* Password strength indicator */}
+                            {newPassword && (
+                              <div className="mt-2">
+                                <div className="flex gap-1">
+                                  {[1, 2, 3, 4, 5].map((level) => (
+                                    <div
+                                      key={level}
+                                      className={`h-1 flex-1 rounded ${newPassword.length >= level * 3
+                                        ? newPassword.length >= 12
+                                          ? 'bg-green-500'
+                                          : newPassword.length >= 8
+                                            ? 'bg-yellow-500'
+                                            : 'bg-red-500'
+                                        : 'bg-gray-200'
+                                        }`}
+                                    />
+                                  ))}
+                                </div>
+                                <p className={`text-xs mt-1 ${newPassword.length >= 12 ? 'text-green-600' :
+                                  newPassword.length >= 8 ? 'text-yellow-600' : 'text-red-600'
+                                  }`}>
+                                  {newPassword.length >= 12 ? '✓ Contraseña fuerte' :
+                                    newPassword.length >= 8 ? '⚠ Contraseña aceptable (recomendamos 12+ caracteres)' :
+                                      '✗ Contraseña muy corta (mínimo 12 caracteres)'}
+                                </p>
+                              </div>
+                            )}
+                          </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Confirmar Contraseña
-                        </label>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                          <Input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="Repite tu contraseña"
-                            className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                      </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Confirmar Contraseña
+                            </label>
+                            <div className="relative">
+                              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <Input
+                                type={showConfirmNewPassword ? "text" : "password"}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Repite tu contraseña"
+                                className="pl-10 pr-10 h-12 border-2 border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                              >
+                                {showConfirmNewPassword ? (
+                                  <EyeOff className="w-5 h-5" />
+                                ) : (
+                                  <Eye className="w-5 h-5" />
+                                )}
+                              </button>
+                            </div>
+                            {confirmPassword && newPassword !== confirmPassword && (
+                              <p className="text-xs text-red-600 mt-1">✗ Las contraseñas no coinciden</p>
+                            )}
+                            {confirmPassword && newPassword === confirmPassword && (
+                              <p className="text-xs text-green-600 mt-1">✓ Las contraseñas coinciden</p>
+                            )}
+                          </div>
+                        </>
+                      )}
 
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          onClick={() => setForgotPasswordStep('clientCode')}
+                          onClick={() => {
+                            setForgotPasswordStep('clientCode');
+                            setCodeVerified(false);
+                            setVerificationCode('');
+                            setNewPassword('');
+                            setConfirmPassword('');
+                          }}
                           className="flex-1 h-12 border-2"
                         >
                           Atrás
                         </Button>
-                        <Button
-                          onClick={handleVerifyCode}
-                          disabled={verificationCode.length !== 6 || !newPassword || !confirmPassword || isLoading}
-                          className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold"
-                        >
-                          {isLoading ? (
-                            <LoadingSpinner className="w-5 h-5" />
-                          ) : (
-                            'Cambiar'
-                          )}
-                        </Button>
+
+                        {!codeVerified ? (
+                          <Button
+                            onClick={async () => {
+                              if (verificationCode.length !== 6) {
+                                toast.error('El código debe tener 6 dígitos');
+                                return;
+                              }
+                              setIsLoading(true);
+                              try {
+                                const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+                                const response = await fetch(`${API_URL}/api/auth/v2/verificar-solo-codigo`, {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({
+                                    codigoCliente: forgotPasswordClientCode,
+                                    codigoVerificacion: verificationCode
+                                  })
+                                });
+                                const data = await response.json();
+                                if (response.ok && (data.success || data.ok)) {
+                                  setCodeVerified(true);
+                                  toast.success('Código verificado correctamente');
+                                } else {
+                                  toast.error(data.message || 'Código incorrecto');
+                                }
+                              } catch (error) {
+                                console.error('Error verificando código:', error);
+                                toast.error('Error al verificar el código');
+                              } finally {
+                                setIsLoading(false);
+                              }
+                            }}
+                            disabled={verificationCode.length !== 6 || isLoading}
+                            className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold"
+                          >
+                            {isLoading ? (
+                              <LoadingSpinner className="w-5 h-5" />
+                            ) : (
+                              'Verificar Código'
+                            )}
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={handleVerifyCode}
+                            disabled={newPassword.length < 12 || newPassword !== confirmPassword || isLoading}
+                            className="flex-1 h-12 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold"
+                          >
+                            {isLoading ? (
+                              <LoadingSpinner className="w-5 h-5" />
+                            ) : (
+                              'Cambiar Contraseña'
+                            )}
+                          </Button>
+                        )}
                       </div>
                     </motion.div>
                   )}
 
-                  {/* Paso 3: Éxito */}
+                  {/* Paso 3: Éxito - Modal Celebratorio */}
                   {forgotPasswordStep === 'success' && (
                     <motion.div
                       key="success-step"
-                      initial={{ opacity: 0, scale: 0.9 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      className="text-center space-y-4"
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ type: "spring", stiffness: 200 }}
+                      className="text-center space-y-5"
                     >
-                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                      {/* Icono celebratorio con animación */}
+                      <div className="relative mx-auto w-24 h-24">
                         <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.2, type: "spring" }}
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ type: "spring", delay: 0.1, stiffness: 150 }}
+                          className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30"
                         >
-                          <Star className="w-8 h-8 text-green-600 fill-current" />
+                          <Shield className="w-12 h-12 text-white" />
                         </motion.div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="text-xl font-bold text-gray-900 mb-2">
-                          ¡Contraseña restablecida!
-                        </h4>
-                        <p className="text-gray-600">
-                          Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión.
-                        </p>
-                      </div>
-
-                      <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                        <div className="flex items-start gap-3">
-                          <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
-                          <div className="text-sm text-amber-800">
-                            <strong>Importante:</strong> Solo podrás cambiar tu contraseña de nuevo dentro de 30 días.
-                          </div>
-                        </div>
+                        {/* Confetti dots */}
+                        {[...Array(8)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{
+                              opacity: [0, 1, 0],
+                              scale: [0, 1, 0],
+                              x: Math.cos(i * 45 * Math.PI / 180) * 50,
+                              y: Math.sin(i * 45 * Math.PI / 180) * 50
+                            }}
+                            transition={{ delay: 0.3 + i * 0.05, duration: 0.8 }}
+                            className={`absolute top-1/2 left-1/2 w-2 h-2 rounded-full ${['bg-yellow-400', 'bg-green-400', 'bg-blue-400', 'bg-pink-400'][i % 4]
+                              }`}
+                          />
+                        ))}
                       </div>
 
-                      <div className="bg-green-50 p-4 rounded-xl">
-                        <div className="flex items-start gap-3">
-                          <Shield className="w-5 h-5 text-green-600 mt-0.5" />
-                          <div className="text-sm text-green-800">
-                            Tu cuenta está protegida. Recuerda mantener tu contraseña segura.
-                          </div>
-                        </div>
-                      </div>
-
-                      <Button
-                        onClick={resetForgotPasswordModal}
-                        className="w-full h-12 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-semibold"
+                      {/* Título y mensaje */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
                       >
-                        Continuar al login
-                      </Button>
+                        <h4 className="text-2xl font-bold text-gray-900 mb-2">
+                          🎉 ¡Enhorabuena!
+                        </h4>
+                        <p className="text-lg text-green-700 font-semibold">
+                          Tu contraseña ha sido actualizada
+                        </p>
+                      </motion.div>
+
+                      {/* Lista de beneficios */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-2xl border border-green-200"
+                      >
+                        <h5 className="text-sm font-bold text-green-800 mb-3 flex items-center justify-center gap-2">
+                          <CheckCircle className="w-4 h-4" />
+                          Tu cuenta ahora es más segura
+                        </h5>
+                        <ul className="space-y-2 text-left text-sm text-green-700">
+                          <li className="flex items-start gap-2">
+                            <Check className="w-4 h-4 mt-0.5 text-green-600 flex-shrink-0" />
+                            <span>Contraseña protegida con cifrado bancario</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <Check className="w-4 h-4 mt-0.5 text-green-600 flex-shrink-0" />
+                            <span>Mayor protección contra accesos no autorizados</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <Check className="w-4 h-4 mt-0.5 text-green-600 flex-shrink-0" />
+                            <span>Cumples con las mejores prácticas de seguridad</span>
+                          </li>
+                        </ul>
+                      </motion.div>
+
+                      {/* Recordatorios */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="bg-blue-50 p-3 rounded-xl border border-blue-200"
+                      >
+                        <p className="text-xs text-blue-800 flex items-center justify-center gap-2">
+                          <AlertCircle className="w-4 h-4" />
+                          <span>Guarda tu contraseña en un lugar seguro</span>
+                        </p>
+                      </motion.div>
+
+                      {/* Botón para continuar */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        <Button
+                          onClick={resetForgotPasswordModal}
+                          className="w-full h-14 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold text-lg rounded-xl shadow-lg shadow-green-500/30"
+                        >
+                          <motion.div
+                            className="flex items-center gap-2"
+                            whileHover={{ x: 5 }}
+                          >
+                            Iniciar Sesión
+                            <ArrowRight className="w-5 h-5" />
+                          </motion.div>
+                        </Button>
+                      </motion.div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -1088,7 +1575,7 @@ export default function CustomerAreaPage() {
               Esta acción es importante y tiene consecuencias de seguridad.
             </DialogDescription>
           </DialogHeader>
-          
+
           <div className="space-y-4 py-4">
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
               <ul className="space-y-2 text-sm text-amber-800">
@@ -1106,12 +1593,12 @@ export default function CustomerAreaPage() {
                 </li>
               </ul>
             </div>
-            
+
             <p className="text-center text-gray-700 font-medium">
               ¿Estás seguro de que deseas continuar?
             </p>
           </div>
-          
+
           <DialogFooter className="flex gap-3 sm:gap-3">
             <Button
               variant="outline"
@@ -1134,6 +1621,94 @@ export default function CustomerAreaPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  );
+
+  // Note: Removed duplicate handleEmailSetupSubmit - already declared above line 331
+
+  return (
+    <div className="min-h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8 overflow-hidden relative">
+      {/* ... existing content ... */}
+
+      {/* Existing content is rendered above, I am appending the modal here */}
+      <AnimatePresence>
+        {showEmailSetupModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            >
+              <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-6 text-white text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold">Configuración de Contacto</h3>
+                <p className="text-amber-100 mt-2">
+                  Para tu seguridad, necesitamos configurar tus datos de contacto.
+                </p>
+              </div>
+
+              <div className="p-8 space-y-6">
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                  <p className="text-sm text-blue-900">
+                    <strong>📌 Uso de tus datos:</strong> Solo para <strong>recuperar tu contraseña</strong> y <strong>enviar facturas</strong>.
+                    No compartimos ni usamos esta información para otros fines.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email *
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Input
+                        type="email"
+                        value={tempEmail}
+                        onChange={(e) => setTempEmail(e.target.value)}
+                        placeholder="ejemplo@correo.com"
+                        className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 focus:border-amber-500 focus:ring-amber-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Teléfono *
+                    </label>
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Input
+                        type="tel"
+                        value={tempPhone}
+                        onChange={(e) => setTempPhone(e.target.value)}
+                        placeholder="612345678"
+                        className="pl-10 h-12 border-2 border-gray-300 bg-white text-gray-900 focus:border-amber-500 focus:ring-amber-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleEmailSetupSubmit}
+                  disabled={!tempEmail || !tempPhone || isConfiguringEmail}
+                  className="w-full h-12 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-lg rounded-xl shadow-lg"
+                >
+                  {isConfiguringEmail ? <LoadingSpinner /> : 'Guardar y Continuar'}
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
