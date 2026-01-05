@@ -18,9 +18,9 @@ const authService = require('../services/authService');
 const databaseService = require('../services/databaseService');
 const tempLinkController = require('./tempLinkController'); // For generating temp download links (share PDFs)
 
-// Inicializar Groq
+// Inicializar Groq - API key DEBE estar en variables de entorno
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY || 'process.env.GROQ_API_KEY'
+  apiKey: process.env.GROQ_API_KEY
 });
 
 // Información completa de Granja Mari Pepa
@@ -622,7 +622,7 @@ ${generatedLinks.length > 0 ? `**ENLACES DE DESCARGA GENERADOS:**\n${generatedLi
  */
 async function healthCheck(req, res) {
   try {
-    const hasApiKey = !!(process.env.GROQ_API_KEY || 'process.env.GROQ_API_KEY');
+    const hasApiKey = !!process.env.GROQ_API_KEY;
 
     return res.json({
       status: 'ok',
