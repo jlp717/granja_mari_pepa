@@ -28,7 +28,7 @@ const nextConfig = {
   reactStrictMode: true,
   
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false, // Deshabilitado para evitar error de critters en build
     optimizePackageImports: [
       'lucide-react',
       'framer-motion',
