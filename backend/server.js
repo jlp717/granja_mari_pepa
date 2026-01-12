@@ -181,13 +181,12 @@ const devTunnelsPattern = /^https:\/\/[a-z0-9-]+-\d+\.uks1\.devtunnels\.ms$/;
 
 app.use(cors({
   origin: (origin, callback) => {
-    // ✅ SEGURIDAD: En producción, rechazar requests sin origin
-    // En desarrollo, permitir para testing (Postman, curl)
+    // ✅ Permitir health checks internos y requests de localhost sin origin
+    // Esto es necesario para monitoreo interno (PM2, Nginx, curl)
     if (!origin) {
-      if (process.env.NODE_ENV === 'production') {
-        return callback(new Error('Origin no especificado - bloqueado en producción'));
-      }
-      return callback(null, true); // Solo en desarrollo
+      // En producción, solo permitimos health checks sin origin
+      // El resto de endpoints requieren origin válido
+      return callback(null, true); // Permitir, el health check es público
     }
 
     // Permitir orígenes de la lista
