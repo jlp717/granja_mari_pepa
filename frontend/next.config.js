@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 // Bundle analyzer para desarrollo
-const withBundleAnalyzer = process.env.ANALYZE === 'true' 
+const withBundleAnalyzer = process.env.ANALYZE === 'true'
   ? require('@next/bundle-analyzer')({ enabled: true })
   : (config) => config;
 
 const nextConfig = {
-  output: 'export',
+  // SSR mode for production (no output: 'export')
+  // This enables 'npm run start' with Node.js server
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -23,10 +24,10 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: true,
   trailingSlash: true,
-  
+
   // Optimizaciones de React 18
   reactStrictMode: true,
-  
+
   experimental: {
     optimizeCss: false, // Deshabilitado para evitar error de critters en build
     optimizePackageImports: [
@@ -45,10 +46,10 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  
+
   // NOTA: Los headers de seguridad están en netlify.toml
   // ya que con output: 'export' no se pueden usar aquí
-  
+
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       config.optimization.splitChunks = {

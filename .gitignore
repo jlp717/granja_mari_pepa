@@ -1,4 +1,4 @@
-# Dependencies
+﻿# Dependencies
 node_modules/
 */node_modules/
 npm-debug.log*
@@ -130,7 +130,7 @@ frontend/components/cart/new-cart-drawer.tsx
 .netlify
 
 # ============================================
-# SEGURIDAD CRÍTICA - NO SUBIR NUNCA
+# SEGURIDAD CRÃTICA - NO SUBIR NUNCA
 # ============================================
 
 # Variables de entorno (CLAVES, SECRETOS, PASSWORDS)
@@ -158,7 +158,7 @@ backup/
 *.pfx
 ssl/
 
-# Archivos de sesión y caché sensible
+# Archivos de sesiÃ³n y cachÃ© sensible
 sessions/
 .sessions
 .cache-db/
@@ -169,17 +169,17 @@ venv/
 __pycache__/
 *.pyc
 
-# Scripts de instalación (pueden tener info del servidor)
+# Scripts de instalaciÃ³n (pueden tener info del servidor)
 SETUP_SERVIDOR_COMPLETO.sh
 COMANDOS_RAPIDOS.md
 GUIA_INSTALACION_PASO_A_PASO.md
-*.sh
+/*.sh
 
-# PM2 y configuraciones de producción
+# PM2 y configuraciones de producciÃ³n
 .pm2/
-ecosystem.config.js
+/ecosystem.config.js
 
-# Archivos de análisis y scripts temporales
+# Archivos de anÃ¡lisis y scripts temporales
 backend/scripts/analizar-*.js
 backend/analisis-*.js
 

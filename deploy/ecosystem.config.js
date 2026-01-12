@@ -1,0 +1,119 @@
+/**
+ * PM2 ECOSYSTEM CONFIGURATION - PRODUCTION
+ * =========================================
+ * Configuración profesional de PM2 para Granja Mari Pepa
+ * 
+ * Características:
+ * - Cluster mode para frontend (aprovecha múltiples CPUs)
+ * - Monitoreo de memoria y auto-restart
+ * - Logging estructurado con rotación
+ * - Health checks integrados
+ * - Graceful shutdown
+ */
+
+module.exports = {
+    apps: [
+        // ============================================
+        // BACKEND API (Express + ODBC)
+        // ============================================
+        {
+            name: 'mari-pepa-backend',
+            cwd: './backend',
+            script: 'server.js',
+
+            // Modo fork porque ODBC pool maneja conexiones
+            instances: 1,
+            exec_mode: 'fork',
+
+            // Auto-restart
+            autorestart: true,
+            watch: false,
+            max_restarts: 10,
+            min_uptime: '10s',
+            restart_delay: 4000,
+
+            // Límites de memoria (reinicia si excede)
+            max_memory_restart: '500M',
+
+            // Graceful shutdown
+            kill_timeout: 5000,
+            wait_ready: true,
+            listen_timeout: 10000,
+
+            // Entorno de producción
+            env: {
+                NODE_ENV: 'production',
+                PORT: 5000,
+                HOST: '127.0.0.1'
+            },
+
+            // Logging estructurado
+            error_file: '/var/log/mari-pepa/backend-error.log',
+            out_file: '/var/log/mari-pepa/backend-out.log',
+            log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS Z',
+            merge_logs: true,
+
+            // Backoff exponencial en reinicios
+            exp_backoff_restart_delay: 100
+        },
+
+        // ============================================
+        // FRONTEND (Next.js SSR)
+        // ============================================
+        {
+            name: 'mari-pepa-frontend',
+            cwd: './frontend',
+            script: 'node_modules/next/dist/bin/next',
+            args: 'start -p 3001',
+
+            // Cluster mode (2 instancias para mejor rendimiento)
+            instances: 2,
+            exec_mode: 'cluster',
+
+            // Auto-restart
+            autorestart: true,
+            watch: false,
+            max_restarts: 10,
+            min_uptime: '10s',
+            restart_delay: 4000,
+
+            // Límites de memoria
+            max_memory_restart: '512M',
+
+            // Graceful shutdown
+            kill_timeout: 5000,
+            wait_ready: true,
+            listen_timeout: 10000,
+
+            // Entorno de producción
+            env: {
+                NODE_ENV: 'production',
+                PORT: 3001,
+                NEXT_TELEMETRY_DISABLED: '1'
+            },
+
+            // Logging
+            error_file: '/var/log/mari-pepa/frontend-error.log',
+            out_file: '/var/log/mari-pepa/frontend-out.log',
+            log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS Z',
+            merge_logs: true,
+
+            // Backoff exponencial en reinicios
+            exp_backoff_restart_delay: 100
+        }
+    ],
+
+    // ============================================
+    // DEPLOY CONFIGURATION
+    // ============================================
+    deploy: {
+        production: {
+            user: 'gmp',
+            host: ['192.168.1.230'],
+            ref: 'origin/main',
+            repo: 'https://github.com/jlp717/granja_mari_pepa.git',
+            path: '/var/www/mari-pepa',
+            'post-deploy': 'bash deploy/scripts/post-deploy.sh'
+        }
+    }
+};
