@@ -18,12 +18,13 @@ router.get('/', async (req, res) => {
     // Verificar conexión a base de datos
     let dbStatus = 'disconnected';
     try {
-      await odbcPool.query('SELECT 1 AS test');
+      // Query compatible con DB2 para AS400
+      await odbcPool.query('SELECT 1 AS test FROM SYSIBM.SYSDUMMY1');
       dbStatus = 'connected';
     } catch (dbError) {
       logger.error('Error en health check DB:', dbError);
     }
-    
+
     return res.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
