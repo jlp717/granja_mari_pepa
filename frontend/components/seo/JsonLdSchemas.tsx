@@ -13,17 +13,17 @@ import Script from 'next/script';
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://granjamaripepa.com/#organization',
+  '@id': 'https://www.mari-pepa.com/#organization',
   name: 'Granja Mari Pepa',
   alternateName: 'Granja Maripepa S.L.',
-  url: 'https://granjamaripepa.com',
+  url: 'https://www.mari-pepa.com',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://granjamaripepa.com/logo.png',
+    url: 'https://www.mari-pepa.com/images/logo.jpeg',
     width: 512,
     height: 512,
   },
-  image: 'https://granjamaripepa.com/og-image.jpg',
+  image: 'https://www.mari-pepa.com/og-image.jpg',
   description: 'Distribución de productos alimentarios de alta calidad para el sector HORECA. Especialistas en congelados, refrigerados y productos de ambiente desde 1966.',
   foundingDate: '1966',
   founders: [
@@ -65,7 +65,7 @@ const organizationSchema = {
       availableLanguage: 'Spanish',
     },
   ],
-  email: 'pedidos@granjamaripepa.com',
+  email: 'pedidos@mari-pepa.com',
   sameAs: [
     'https://www.facebook.com/granjamaripepa',
     'https://www.instagram.com/granjamaripepa',
@@ -101,12 +101,12 @@ const organizationSchema = {
 const localBusinessSchemaMurcia = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://granjamaripepa.com/#murcia',
+  '@id': 'https://www.mari-pepa.com/#murcia',
   name: 'Granja Mari Pepa - Sede Central Murcia',
-  image: 'https://granjamaripepa.com/og-image.jpg',
-  url: 'https://granjamaripepa.com',
+  image: 'https://www.mari-pepa.com/og-image.jpg',
+  url: 'https://www.mari-pepa.com',
   telephone: '+34-968-46-75-14',
-  email: 'pedidos@granjamaripepa.com',
+  email: 'pedidos@mari-pepa.com',
   priceRange: '€€',
   address: {
     '@type': 'PostalAddress',
@@ -137,7 +137,7 @@ const localBusinessSchemaMurcia = {
   ],
   sameAs: organizationSchema.sameAs,
   parentOrganization: {
-    '@id': 'https://granjamaripepa.com/#organization',
+    '@id': 'https://www.mari-pepa.com/#organization',
   },
 };
 
@@ -147,12 +147,12 @@ const localBusinessSchemaMurcia = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://granjamaripepa.com/#website',
-  url: 'https://granjamaripepa.com',
+  '@id': 'https://www.mari-pepa.com/#website',
+  url: 'https://www.mari-pepa.com',
   name: 'Granja Mari Pepa',
   description: 'Portal de clientes de Granja Mari Pepa - Distribución alimentaria HORECA',
   publisher: {
-    '@id': 'https://granjamaripepa.com/#organization',
+    '@id': 'https://www.mari-pepa.com/#organization',
   },
   inLanguage: 'es-ES',
 };

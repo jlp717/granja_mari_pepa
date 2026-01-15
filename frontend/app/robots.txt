@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://granjamaripepaweb.netlify.app/sitemap.xml
+Sitemap: https://www.mari-pepa.com/sitemap.xml

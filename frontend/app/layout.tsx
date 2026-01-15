@@ -31,14 +31,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://granjamaripepa.netlify.app'),
-  title: {
-    default: 'Granja Mari Pepa Lorca | Grupo Topgel - Distribución Alimentaria',
-    template: '%s | Granja Mari Pepa Lorca'
-  },
-  description: 'Granja Mari Pepa en Lorca - Distribución de productos alimentarios de alta calidad. Especialistas en productos del mar, carne, precocinados y repostería. Más de 35 años de experiencia en Murcia y Almería.',
-  keywords: ['granja mari pepa', 'granja lorca', 'mari pepa lorca', 'distribución alimentaria lorca', 'productos del mar lorca', 'grupo topgel', 'distribuidora lorca', 'alimentación lorca', 'carne lorca', 'precocinados lorca', 'repostería lorca', 'granja murcia', 'distribución murcia', 'productos congelados lorca'],
-  authors: [{ name: 'Grupo Topgel' }],
+  metadataBase: new URL('https://www.mari-pepa.com'),
+  title: 'Granja Mari Pepa | Distribución Alimentaria Premium en Murcia y Almería',
+  description: 'Líderes en distribución alimentaria para hostelería (HORECA) desde 1966. Más de 4000 referencias en productos congelados, frescos y secos. Servicio logístico integral 24h en Murcia y Almería.',
+  keywords: [
+    'distribución alimentaria murcia',
+    'proveedores hostelería almería',
+    'granja mari pepa',
+    'productos congelados horeca',
+    'distribuidor carne lorca',
+    'pescado fresco por mayor',
+    'grupo topgel',
+    'logística alimentaria refrigerada'
+  ],
+  authors: [{ name: 'Granja Mari Pepa', url: 'https://www.mari-pepa.com' }],
   creator: 'Grupo Topgel',
   publisher: 'Granja Mari Pepa',
   robots: {
@@ -55,31 +61,36 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://granjamaripepa.netlify.app',
-    siteName: 'Granja Mari Pepa Lorca | Grupo Topgel',
-    title: 'Granja Mari Pepa Lorca - Distribución Alimentaria | Grupo Topgel',
-    description: 'Granja Mari Pepa en Lorca. Distribución de productos alimentarios de alta calidad en Murcia y Almería. Especialistas en productos del mar, carne, precocinados y repostería desde 1966.',
+    url: 'https://www.mari-pepa.com',
+    siteName: 'Granja Mari Pepa - Calidad y Servicio desde 1966',
+    title: 'Granja Mari Pepa | Distribución Alimentaria Premium',
+    description: 'Soluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Grupo Topgel - Granja Mari Pepa',
+        alt: 'Granja Mari Pepa - Distribución Profesional',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Granja Mari Pepa Lorca | Grupo Topgel',
-    description: 'Granja Mari Pepa en Lorca - Distribución de productos alimentarios de alta calidad en Murcia y Almería.',
+    title: 'Granja Mari Pepa | Proveedor Líder HORECA',
+    description: 'Distribución de productos alimentarios de alta calidad en Murcia y Almería. Servicio 24h.',
     images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://granjamaripepa.netlify.app',
+    canonical: 'https://www.mari-pepa.com',
   },
-  verification: {
-    google: 'google-verification-code',
-  },
+  icons: {
+    icon: [
+      { url: '/images/icons/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' } // Fallback
+    ],
+    apple: '/images/logo.jpeg', // Usamos el logo cuadrado para Apple touch icon
+    shortcut: '/favicon.ico'
+  }
 };
 
 export default function RootLayout({
@@ -110,8 +121,8 @@ export default function RootLayout({
                   <LazyLoadingProvider>
                     <ScrollToTopProvider />
                     {/* Skip to main content para accesibilidad */}
-                    <a 
-                      href="#main-content" 
+                    <a
+                      href="#main-content"
                       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none"
                     >
                       Ir al contenido principal
@@ -119,7 +130,7 @@ export default function RootLayout({
                     <Header />
                     {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
                         sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
-                    <main 
+                    <main
                       id="main-content"
                       className="pt-32 sm:pt-36 md:pt-40 lg:pt-44 flex-1 bg-background"
                       role="main"
