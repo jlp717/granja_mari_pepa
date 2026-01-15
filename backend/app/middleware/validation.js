@@ -21,7 +21,7 @@ function createValidator(rules = {}) {
           }
         }
       }
-      
+
       if (rules.query) {
         for (const [field, required] of Object.entries(rules.query)) {
           if (required && !req.query[field]) {
@@ -32,7 +32,7 @@ function createValidator(rules = {}) {
           }
         }
       }
-      
+
       next();
     } catch (error) {
       logger.error('❌ Error en validación', error);
@@ -63,7 +63,7 @@ const validateActualizarContacto = createValidator({
 });
 
 const validateEnviarFacturaEmail = createValidator({
-  body: { email: true, facturaId: true }
+  body: { destinatario: true, factura: true }
 });
 
 const validateCompartirWhatsApp = createValidator({
