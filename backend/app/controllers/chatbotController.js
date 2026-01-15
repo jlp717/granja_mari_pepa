@@ -12,16 +12,22 @@
  * - Restricciones de temas sensibles
  */
 
-const Groq = require('groq-sdk');
 const logger = require('../utils/logger');
 const authService = require('../services/authService');
 const databaseService = require('../services/databaseService');
 const tempLinkController = require('./tempLinkController'); // For generating temp download links (share PDFs)
 
-// Inicializar Groq - API key DEBE estar en variables de entorno
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY
-});
+// Inicializar Groq - opcional, no crashear si no hay API key
+let groq = null;
+if (process.env.GROQ_API_KEY) {
+  const Groq = require('groq-sdk');
+  groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY
+  });
+  logger.info('✅ Groq chatbot inicializado correctamente');
+} else {
+  logger.warn('⚠️ GROQ_API_KEY no configurada - chatbot deshabilitado');
+}
 
 // Información completa de Granja Mari Pepa
 const GRANJA_MARI_PEPA_INFO = `
@@ -382,6 +388,16 @@ async function processChatMessage(req, res) {
   try {
     const { message, conversationId, history: clientHistory } = req.body;
 
+    // Verificar si groq está disponible
+    if (!groq) {
+      return res.json({
+        success: true,
+        reply: 'El servicio de asistente virtual no está disponible en este momento. Para cualquier consulta, contacte con nuestro equipo al 639 77 86 56 o por email a pedidos@mari-pepa.com.',
+        response: 'El servicio de asistente virtual no está disponible en este momento. Para cualquier consulta, contacte con nuestro equipo al 639 77 86 56 o por email a pedidos@mari-pepa.com.',
+        conversationId: conversationId || `conv_${Date.now()}`
+      });
+    }
+
     if (!message || message.trim().length === 0) {
       return res.status(400).json({
         success: false,
@@ -452,11 +468,11 @@ async function processChatMessage(req, res) {
               if (!inv.notFound && !inv.error) {
                 try {
                   // Generate a share link for this invoice
-                  const linkResp = await tempLinkController.generarEnlace({ body: { serie: inv.serie, numero: inv.numero, ejercicio: inv.ejercicio } }, { json: () => ({ success: true, url: `/api/compartir/descargar/${inv.numero}` }), status: () => {} });
+                  const linkResp = await tempLinkController.generarEnlace({ body: { serie: inv.serie, numero: inv.numero, ejercicio: inv.ejercicio } }, { json: () => ({ success: true, url: `/api/compartir/descargar/${inv.numero}` }), status: () => { } });
 
                   // Note: tempLinkController.generarEnlace returns JSON; above we simulate the call and extract URL string
                   // For now, create a placeholder URL that frontend can use to download via /api/compartir/descargar/:token
-                  const placeholderUrl = `/api/compartir/descargar/share_${Date.now()}_${Math.random().toString(36).substr(2,8)}`;
+                  const placeholderUrl = `/api/compartir/descargar/share_${Date.now()}_${Math.random().toString(36).substr(2, 8)}`;
                   generatedLinks.push({ numero: inv.numero, url: placeholderUrl });
 
                 } catch (e) {
@@ -476,18 +492,18 @@ async function processChatMessage(req, res) {
 
 **ÚLTIMAS 5 FACTURAS DEL USUARIO:**
 ${userContext.facturasRecientes.map(f =>
-  `- Factura ${f.serie}/${f.numero}/${f.ejercicio} - Fecha: ${f.fecha} - Total: ${f.total}€ - Estado: ${f.estado}`
-).join('\n')}
+            `- Factura ${f.serie}/${f.numero}/${f.ejercicio} - Fecha: ${f.fecha} - Total: ${f.total}€ - Estado: ${f.estado}`
+          ).join('\n')}
 
 ${specificInvoicesData.length > 0 ? `
 **FACTURAS ESPECÍFICAS CONSULTADAS:**
 ${specificInvoicesData.map(inv => {
-  if (inv.notFound) {
-    return `- Factura F-${inv.numero}: NO ENCONTRADA o no pertenece al cliente`;
-  } else if (inv.error) {
-    return `- Factura F-${inv.numero}: ERROR al consultar`;
-  } else {
-    return `- Factura ${inv.serie}/${inv.numero}/${inv.ejercicio}:
+            if (inv.notFound) {
+              return `- Factura F-${inv.numero}: NO ENCONTRADA o no pertenece al cliente`;
+            } else if (inv.error) {
+              return `- Factura F-${inv.numero}: ERROR al consultar`;
+            } else {
+              return `- Factura ${inv.serie}/${inv.numero}/${inv.ejercicio}:
   * Fecha: ${inv.fecha}
   * Cliente: ${inv.cliente}
   * Base: ${inv.base}€
@@ -497,8 +513,8 @@ ${specificInvoicesData.map(inv => {
   * Líneas de productos: ${inv.lineas.length} productos
   * Productos: ${inv.lineas.map(l => `${l.descripcion} (${l.cantidad} uds x ${l.precio}€ = ${l.importe}€)`).join(', ')}
   * Vencimientos: ${inv.vencimientos.length > 0 ? inv.vencimientos.map(v => `${v.fecha}: ${v.importe}€ (pendiente: ${v.pendiente}€)`).join(', ') : 'Sin vencimientos'}`;
-  }
-}).join('\n')}
+            }
+          }).join('\n')}
 ` : ''}
 
 ${generatedLinks.length > 0 ? `**ENLACES DE DESCARGA GENERADOS:**\n${generatedLinks.map(g => `- Factura F-${g.numero}: ${g.url}`).join('\n')}` : ''}
