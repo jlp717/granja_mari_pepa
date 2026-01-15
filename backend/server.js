@@ -367,6 +367,8 @@ app.get('/api/dashboard', requireAuth, generalLimiter, facturaController.obtener
 app.post('/api/generar-factura', requireAuth, pdfLimiter, validateGenerarFactura, auditDataAccess('GENERAR_FACTURA'), facturaController.generarFactura.bind(facturaController));
 // PROTEGIDO: Libro de IVA repercutido
 app.post('/api/libro-iva', requireAuth, pdfLimiter, auditDataAccess('LIBRO_IVA'), libroIvaController.generarLibroIVA);
+// PROTEGIDO: Enviar Libro de IVA por email
+app.post('/api/libro-iva/enviar-email', requireAuth, generalLimiter, auditDataAccess('LIBRO_IVA_EMAIL'), libroIvaController.enviarLibroIVAPorEmail);
 
 // =====================================================
 // ANALYTICS

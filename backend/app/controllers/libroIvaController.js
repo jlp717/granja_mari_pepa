@@ -405,11 +405,207 @@ function calcularTotales(registros) {
 }
 
 /**
- * Función generarPDFLibroIVA ELIMINADA - Ahora se usa libroIvaPdfService.js
- * Esta función estaba duplicada y generaba PDFs con diseño incorrecto.
- * El servicio correcto está en: backend/app/services/libroIvaPdfService.js
+ * POST /api/libro-iva/enviar-email
+ * Enviar Libro de IVA por email
  */
+async function enviarLibroIVAPorEmail(req, res) {
+  try {
+    const { ejercicio, destinatario } = req.body;
+    const codigoCliente = req.user?.codigoCliente;
+
+    if (!codigoCliente) {
+      return res.status(401).json({
+        success: false,
+        message: 'No autenticado'
+      });
+    }
+
+    if (!ejercicio || !destinatario) {
+      return res.status(400).json({
+        success: false,
+        message: 'Se requieren ejercicio y destinatario'
+      });
+    }
+
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(destinatario)) {
+      return res.status(400).json({
+        success: false,
+        message: 'El email proporcionado no es válido'
+      });
+    }
+
+    logger.info('📧 Enviando Libro IVA por email', {
+      ejercicio,
+      destinatario,
+      codigoCliente
+    });
+
+    // Obtener datos del libro IVA (anual)
+    const fechaInicio = `${ejercicio}-01-01`;
+    const fechaFin = `${ejercicio}-12-31`;
+    const datosLibro = await obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente);
+    const totales = calcularTotales(datosLibro);
+
+    // Obtener datos del cliente
+    let clienteData = null;
+    const queryCliente = `
+      SELECT
+        TRIM(CLI.CODIGOCLIENTE) AS CODIGOCLIENTE,
+        TRIM(CLI.NOMBRECLIENTE) AS NOMBRECLIENTE,
+        TRIM(CLI.NIF) AS NIF
+      FROM DSEDAC.CLI CLI
+      WHERE TRIM(CLI.CODIGOCLIENTE) = ?
+    `;
+    const clienteResult = await odbcPool.query(queryCliente, [codigoCliente.trim()]);
+    if (clienteResult && clienteResult.length > 0) {
+      clienteData = clienteResult[0];
+    }
+
+    // Generar PDF
+    const datosPDF = {
+      ejercicio,
+      cliente: clienteData,
+      registros: datosLibro,
+      totales
+    };
+    const pdfBuffer = await libroIvaPdfService.generateLibroIvaPDF(datosPDF);
+
+    // Configurar nodemailer
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport({
+      host: 'mail.mari-pepa.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: 'noreply@mari-pepa.com',
+        pass: '6pVyRf3xptxiN3i'
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+
+    const nombreCliente = clienteData?.NOMBRECLIENTE || 'Cliente';
+    const nifCliente = clienteData?.NIF || '';
+    const filename = `Libro_IVA_${ejercicio}_${codigoCliente}.pdf`;
+
+    // Template HTML profesional
+    const htmlTemplate = `
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#F1F5F9;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#F1F5F9;padding:24px 0;">
+        <tr><td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                
+                <!-- Header -->
+                <tr><td style="background:linear-gradient(135deg, #1E3A5F 0%, #2D5A87 100%);padding:32px;text-align:center;">
+                    <h1 style="color:#FFFFFF;margin:0;font-size:24px;font-weight:600;">
+                        📊 Libro de IVA ${ejercicio}
+                    </h1>
+                    <p style="color:#93C5FD;margin:8px 0 0;font-size:14px;">
+                        Granja Mari Pepa
+                    </p>
+                </td></tr>
+                
+                <!-- Contenido -->
+                <tr><td style="padding:32px;">
+                    <p style="color:#1E293B;font-size:16px;line-height:1.6;margin:0 0 24px;">
+                        Hola <strong>${nombreCliente}</strong>,
+                    </p>
+                    <p style="color:#475569;font-size:14px;line-height:1.6;margin:0 0 24px;">
+                        Te enviamos adjunto tu Libro de IVA del ejercicio ${ejercicio}.
+                    </p>
+                    
+                    <!-- Resumen -->
+                    <table width="100%" cellpadding="0" cellspacing="0" style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;overflow:hidden;margin-bottom:24px;">
+                        <tr>
+                            <td style="padding:16px;border-bottom:1px solid #E2E8F0;">
+                                <span style="color:#64748B;font-size:12px;text-transform:uppercase;">Ejercicio</span><br>
+                                <span style="color:#1E293B;font-size:16px;font-weight:600;">${ejercicio}</span>
+                            </td>
+                            <td style="padding:16px;border-bottom:1px solid #E2E8F0;text-align:right;">
+                                <span style="color:#64748B;font-size:12px;text-transform:uppercase;">Facturas</span><br>
+                                <span style="color:#1E293B;font-size:16px;font-weight:600;">${datosLibro.length}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:16px;">
+                                <span style="color:#64748B;font-size:12px;text-transform:uppercase;">Base Imponible Total</span><br>
+                                <span style="color:#1E293B;font-size:16px;font-weight:600;">${totales.totalBase.toFixed(2)} €</span>
+                            </td>
+                            <td style="padding:16px;text-align:right;">
+                                <span style="color:#64748B;font-size:12px;text-transform:uppercase;">IVA Total</span><br>
+                                <span style="color:#059669;font-size:16px;font-weight:700;">${totales.totalIVA.toFixed(2)} €</span>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <p style="color:#64748B;font-size:13px;line-height:1.5;margin:0;padding:16px;background:#EFF6FF;border-radius:6px;border-left:4px solid #3B82F6;">
+                        📎 El PDF de tu Libro de IVA está adjunto a este email.
+                    </p>
+                </td></tr>
+                
+                <!-- Footer -->
+                <tr><td style="background:#F8FAFC;padding:24px;border-top:1px solid #E2E8F0;text-align:center;">
+                    <p style="color:#64748B;font-size:13px;margin:0 0 8px;">
+                        <strong>Granja Mari Pepa</strong>
+                    </p>
+                    <p style="color:#94A3B8;font-size:12px;margin:0;">
+                        Tel: 639 77 86 56 · pedidos@mari-pepa.com · www.mari-pepa.com
+                    </p>
+                </td></tr>
+                
+            </table>
+        </td></tr>
+    </table>
+</body>
+</html>`;
+
+    // Enviar email con PDF adjunto
+    const mailOptions = {
+      from: '"Granja Mari Pepa" <noreply@mari-pepa.com>',
+      to: destinatario,
+      subject: `Libro de IVA ${ejercicio} - ${nombreCliente}`,
+      html: htmlTemplate,
+      attachments: [
+        {
+          filename: filename,
+          content: pdfBuffer,
+          contentType: 'application/pdf'
+        }
+      ]
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+
+    logger.success('✅ Libro IVA enviado por email', {
+      messageId: info.messageId,
+      destinatario,
+      ejercicio
+    });
+
+    return res.json({
+      success: true,
+      message: `Libro de IVA ${ejercicio} enviado correctamente a ${destinatario}`,
+      messageId: info.messageId
+    });
+  } catch (error) {
+    logger.error('❌ Error enviando Libro IVA por email', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Error enviando email: ' + (error.message || 'Error desconocido')
+    });
+  }
+}
 
 module.exports = {
-  generarLibroIVA
+  generarLibroIVA,
+  enviarLibroIVAPorEmail
 };
