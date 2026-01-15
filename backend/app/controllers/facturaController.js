@@ -288,51 +288,32 @@ async function enviarFacturaPorEmail(req, res) {
       codigoCliente
     });
 
-    // Obtener datos completos de la factura
-    // Necesitamos buscar la factura en base a los datos del albarán
-    const queryFactura = `
-      SELECT 
-        TRIM(CAC.SERIEFACTURA) as SERIEFACTURA,
-        CAC.NUMEROFACTURA,
-        CAC.EJERCICIOFACTURA,
-        MAX(CAC.DIAFACTURA) as DIAFACTURA,
-        MAX(CAC.MESFACTURA) as MESFACTURA,
-        MAX(CAC.ANOFACTURA) as ANOFACTURA,
-        SUM(CAC.IMPORTETOTAL) as TOTALFACTURA
-      FROM DSEDAC.CAC CAC
-      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
-        AND CAC.SUBEMPRESAALBARAN = ?
-        AND CAC.EJERCICIOALBARAN = ?
-        AND TRIM(CAC.SERIEALBARAN) = ?
-        AND CAC.TERMINALALBARAN = ?
-        AND CAC.NUMEROALBARAN = ?
-        AND CAC.NUMEROFACTURA > 0
-      GROUP BY TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
-    `;
-
-    const facturaResult = await odbcPool.query(queryFactura, [
-      codigoCliente,
-      factura.subempresa,
-      factura.ejercicio,
-      factura.serie,
-      factura.terminal,
-      factura.numero_albaran
-    ]);
-
-    if (!facturaResult || facturaResult.length === 0) {
-      return res.status(404).json({
+    // Validar datos mínimos de factura
+    if (!factura.serie || !factura.numero || !factura.ejercicio) {
+      return res.status(400).json({
         success: false,
-        message: 'Factura no encontrada'
+        message: 'Datos de factura incompletos (serie, numero, ejercicio)'
       });
     }
 
-    const facturaData = facturaResult[0];
-    const serie = facturaData.SERIEFACTURA || factura.serie;
-    const numero = facturaData.NUMEROFACTURA;
-    const ejercicio = facturaData.EJERCICIOFACTURA || factura.ejercicio;
+    const serie = factura.serie;
+    const numero = factura.numero;
+    const ejercicio = factura.ejercicio;
+
+    logger.info('📧 Procesando envío de factura', { serie, numero, ejercicio, destinatario });
 
     // Obtener detalle completo para generar PDF
-    const facturaDetail = await databaseService.getInvoiceDetail(serie, numero, ejercicio, codigoCliente);
+    // getInvoiceDetail ya valida si existe y lanza error si no
+    let facturaDetail;
+    try {
+      facturaDetail = await databaseService.getInvoiceDetail(serie, numero, ejercicio, codigoCliente);
+    } catch (err) {
+      logger.warn('Factura no encontrada para email', { serie, numero, ejercicio });
+      return res.status(404).json({
+        success: false,
+        message: 'La factura solicitada no existe o no pertenece al cliente'
+      });
+    }
 
     // Generar PDF
     const pdfBuffer = await pdfService.generateInvoicePDF(facturaDetail);

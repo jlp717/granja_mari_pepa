@@ -297,7 +297,15 @@ async function getAvailableYears(codigoCliente) {
 
     const result = await odbcPool.query(query, [codigoCliente]);
 
-    return result.map(row => row.EJERCICIOFACTURA);
+    // Extraer años de la DB
+    const dbYears = result.map(row => Number(row.EJERCICIOFACTURA));
+
+    // Asegurar año actual y anterior
+    const currentYear = new Date().getFullYear();
+    const allYears = new Set([...dbYears, currentYear, currentYear - 1]);
+
+    // Retornar ordenados descendente
+    return Array.from(allYears).sort((a, b) => b - a);
   } catch (error) {
     logger.error('❌ Error obteniendo ejercicios', error);
     throw error;
