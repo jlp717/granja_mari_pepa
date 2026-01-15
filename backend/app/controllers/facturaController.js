@@ -322,12 +322,12 @@ async function enviarFacturaPorEmail(req, res) {
     const nodemailer = require('nodemailer');
 
     const transporter = nodemailer.createTransport({
-      host: 'mail.mari-pepa.com',
-      port: 587,
-      secure: false,
+      host: process.env.SMTP_HOST || 'mail.mari-pepa.com',
+      port: parseInt(process.env.SMTP_PORT || '465'), // 465 (SSL) es más seguro y salta firewalls
+      secure: true, // SSL forzado
       auth: {
-        user: 'noreply@mari-pepa.com',
-        pass: '6pVyRf3xptxiN3i'
+        user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
+        pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
       },
       tls: {
         rejectUnauthorized: false
