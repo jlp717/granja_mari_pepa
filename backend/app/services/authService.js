@@ -360,7 +360,41 @@ async function getClientInvoices(codigoCliente, year = null) {
 
     logger.success(`✅ ${facturas ? facturas.length : 0} facturas obtenidas`, { codigoCliente });
 
-    return facturas || [];
+    // Transformar datos para coincidir con lo que espera el frontend
+    return (facturas || []).map(f => {
+      // Manejo seguro de fecha
+      let fechaObj = null;
+      let fechaStr = f.fecha;
+
+      if (f.fecha instanceof Date) {
+        fechaObj = f.fecha;
+      } else if (typeof f.fecha === 'string') {
+        // Intentar parsear si es string
+        fechaObj = new Date(f.fecha);
+      }
+
+      // Extraer mes y año
+      const mes = fechaObj && !isNaN(fechaObj.getTime()) ? fechaObj.getMonth() + 1 : 0;
+      const ano = fechaObj && !isNaN(fechaObj.getTime()) ? fechaObj.getFullYear() : (f.ejercicio || 0);
+
+      // Formatear fecha a DD/MM/YYYY si es necesaria para el frontend
+      if (fechaObj && !isNaN(fechaObj.getTime())) {
+        const d = String(fechaObj.getDate()).padStart(2, '0');
+        const m = String(fechaObj.getMonth() + 1).padStart(2, '0');
+        const y = fechaObj.getFullYear();
+        fechaStr = `${d}/${m}/${y}`;
+      }
+
+      return {
+        ...f,
+        factura: true, // Flag para identificar
+        serieFactura: f.serie,
+        numeroFactura: f.numero,
+        mes: mes,
+        ano: ano,
+        fecha: fechaStr
+      };
+    });
 
   } catch (error) {
     logger.error('❌ Error obteniendo facturas', error);
