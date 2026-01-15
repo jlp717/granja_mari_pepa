@@ -379,7 +379,7 @@ async function obtenerFacturas(req, res) {
             END || '/' ||
             TRIM(CAST(CAC.ANOFACTURA AS CHAR(4)))
           AS VARCHAR(10)) AS FECHA
-        FROM DSEDAC.CAC
+        FROM DSEDAC.CAC CAC
         WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
           AND CAC.NUMEROFACTURA > 0
           ${dateFilter}
