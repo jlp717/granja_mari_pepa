@@ -11,8 +11,8 @@ const logger = require('../utils/logger');
 // Configuración SMTP desde variables de entorno
 const SMTP_CONFIG = {
     host: process.env.SMTP_HOST || 'mail.mari-pepa.com',
-    port: parseInt(process.env.SMTP_PORT || '465'), // Usar 465 (SSL) por defecto para evitar bloqueos
-    secure: process.env.SMTP_SECURE === 'true' || true, // Force true by default for 465
+    port: 465, // FORZADO: Siempre usar 465 (SSL) para evitar conflictos con .env (587)
+    secure: true, // FORZADO: Siempre SSL
     auth: {
         user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
         pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'

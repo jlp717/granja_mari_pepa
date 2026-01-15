@@ -2,11 +2,11 @@
 
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Bot, 
-  X, 
-  Send, 
-  RefreshCw, 
+import {
+  Bot,
+  X,
+  Send,
+  RefreshCw,
   Sparkles,
   Minimize2,
   Maximize2,
@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import apiClient from '@/lib/apiClient'; // 🔐 Cliente seguro para auth
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -46,17 +47,17 @@ const MarkdownText = ({ content }: { content: string }) => {
   const parseMarkdown = (text: string): React.ReactNode[] => {
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    
+
     // Regex para negrita **texto**, cursiva *texto*, y enlaces [texto](url)
     const regex = /(\*\*(.+?)\*\*)|(\*(.+?)\*)|(\[(.+?)\]\((.+?)\))/g;
     let match;
-    
+
     while ((match = regex.exec(text)) !== null) {
       // Añadir texto antes del match
       if (match.index > lastIndex) {
         parts.push(text.slice(lastIndex, match.index));
       }
-      
+
       if (match[1]) {
         // Negrita **texto**
         parts.push(<strong key={match.index} className="font-bold text-emerald-700">{match[2]}</strong>);
@@ -66,10 +67,10 @@ const MarkdownText = ({ content }: { content: string }) => {
       } else if (match[5]) {
         // Enlace [texto](url)
         parts.push(
-          <a 
-            key={match.index} 
-            href={match[7]} 
-            target="_blank" 
+          <a
+            key={match.index}
+            href={match[7]}
+            target="_blank"
             rel="noopener noreferrer"
             className="text-emerald-600 underline hover:text-emerald-800 transition-colors"
           >
@@ -77,21 +78,21 @@ const MarkdownText = ({ content }: { content: string }) => {
           </a>
         );
       }
-      
+
       lastIndex = match.index + match[0].length;
     }
-    
+
     // Añadir texto restante
     if (lastIndex < text.length) {
       parts.push(text.slice(lastIndex));
     }
-    
+
     return parts.length > 0 ? parts : [text];
   };
-  
+
   // Dividir por líneas para preservar saltos de línea
   const lines = content.split('\n');
-  
+
   return (
     <>
       {lines.map((line, lineIndex) => (
@@ -104,70 +105,71 @@ const MarkdownText = ({ content }: { content: string }) => {
   );
 };
 
-// Hook para efecto de streaming de texto
+// Hook para efecto de streaming de texto basado en tiempo (no afectado por cambio de pestaña)
 const useStreamingText = (
-  fullText: string, 
-  isStreaming: boolean, 
+  fullText: string,
+  isStreaming: boolean,
   onComplete?: () => void
 ) => {
   const [displayedText, setDisplayedText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
-  
+  const startTimeRef = useRef<number | null>(null);
+  const durationRef = useRef<number>(0);
+  const animationFrameRef = useRef<number | null>(null);
+
   useEffect(() => {
     if (!isStreaming) {
       setDisplayedText(fullText);
       setIsComplete(true);
       return;
     }
-    
+
     setDisplayedText('');
     setIsComplete(false);
-    
-    let currentIndex = 0;
-    const textLength = fullText.length;
-    
-    // Velocidad variable para parecer más natural
-    const getDelay = () => {
-      const char = fullText[currentIndex];
-      // Pausas más largas en puntuación
-      if (['.', '!', '?', ':'].includes(char)) return 80;
-      if ([',', ';'].includes(char)) return 40;
-      // Velocidad base aleatoria para efecto natural
-      return 15 + Math.random() * 15;
-    };
-    
-    const streamText = () => {
-      if (currentIndex < textLength) {
-        setDisplayedText(fullText.slice(0, currentIndex + 1));
-        currentIndex++;
-        setTimeout(streamText, getDelay());
+    startTimeRef.current = Date.now();
+
+    // Calcular duración estimada: 20ms por caracter aprox, máx 3 seg
+    durationRef.current = Math.min(fullText.length * 20, 3000);
+
+    const animate = () => {
+      const now = Date.now();
+      const elapsed = now - (startTimeRef.current || now);
+      const progress = Math.min(elapsed / durationRef.current, 1);
+
+      const charIndex = Math.floor(progress * fullText.length);
+      setDisplayedText(fullText.slice(0, charIndex));
+
+      if (progress < 1) {
+        animationFrameRef.current = requestAnimationFrame(animate);
       } else {
+        setDisplayedText(fullText);
         setIsComplete(true);
         onComplete?.();
       }
     };
-    
-    // Pequeño delay inicial antes de empezar
-    const initialDelay = setTimeout(streamText, 200);
-    
-    return () => clearTimeout(initialDelay);
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+    };
   }, [fullText, isStreaming, onComplete]);
-  
+
   return { displayedText, isComplete };
 };
 
 // Componente para mensaje con streaming
-const StreamingMessage = ({ 
-  content, 
+const StreamingMessage = ({
+  content,
   isStreaming,
-  onStreamComplete 
-}: { 
-  content: string; 
+  onStreamComplete
+}: {
+  content: string;
   isStreaming: boolean;
   onStreamComplete?: () => void;
 }) => {
   const { displayedText, isComplete } = useStreamingText(content, isStreaming, onStreamComplete);
-  
+
   return (
     <div className="relative">
       <p className="text-sm whitespace-pre-wrap leading-relaxed">
@@ -233,11 +235,11 @@ const QuickActions = ({ onAction }: { onAction: (action: string) => void }) => {
 };
 
 // Componente de sugerencias contextuales
-const ContextualSuggestions = ({ 
-  suggestions, 
-  onSelect 
-}: { 
-  suggestions: string[]; 
+const ContextualSuggestions = ({
+  suggestions,
+  onSelect
+}: {
+  suggestions: string[];
   onSelect: (suggestion: string) => void;
 }) => {
   if (!suggestions || suggestions.length === 0) return null;
@@ -305,7 +307,7 @@ export function GlobalChatbot() {
   // Función para generar sugerencias basadas en el contexto
   const generateSuggestions = useCallback((response: string): string[] => {
     const lowerResponse = response.toLowerCase();
-    
+
     if (lowerResponse.includes('factura')) {
       return ['Ver mi última factura', 'Descargar facturas en PDF', 'Problema con una factura'];
     }
@@ -321,7 +323,7 @@ export function GlobalChatbot() {
     if (lowerResponse.includes('entrega') || lowerResponse.includes('reparto')) {
       return ['Zona de cobertura', 'Modificar una entrega', 'Cadena de frío'];
     }
-    
+
     return [];
   }, []);
 
@@ -335,20 +337,16 @@ export function GlobalChatbot() {
     setIsLoading(true);
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      
-      const response = await fetch(`${API_URL}/api/chatbot`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ 
-          message: userMessage,
-          history: messages.slice(-6)
-        })
+      // Usar apiClient para asegurar envío de Cookies HttpOnly y CSRF token
+      // Esto permite que el backend reconozca al usuario autenticado (req.user)
+      const response = await apiClient.post('/api/chatbot', {
+        message: userMessage,
+        history: messages.slice(-6),
+        conversationId: undefined // Let backend generate or manage sessions
       });
 
-      const data = await response.json();
-      
+      const data = response.data;
+
       if (data.success && data.response) {
         const newMessageIndex = messages.length + 1; // +1 por el mensaje del usuario
         const suggestions = generateSuggestions(data.response);
@@ -357,8 +355,8 @@ export function GlobalChatbot() {
         const match = data.response.match(linkRegex);
         const attachments = match ? [{ label: 'Descargar factura', url: match[1] }] : [];
         setCurrentlyStreamingId(newMessageIndex);
-        setMessages(prev => [...prev, { 
-          role: 'assistant', 
+        setMessages(prev => [...prev, {
+          role: 'assistant',
           content: data.response,
           timestamp: new Date(),
           isStreaming: true,
@@ -370,8 +368,8 @@ export function GlobalChatbot() {
         throw new Error('Respuesta inválida');
       }
     } catch {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
+      setMessages(prev => [...prev, {
+        role: 'assistant',
         content: 'No se ha podido conectar con el servidor. Por favor, inténtalo de nuevo en unos segundos.',
         timestamp: new Date(),
         isStreaming: false
@@ -419,14 +417,13 @@ export function GlobalChatbot() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className={`mb-4 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col ${
-                isMinimized 
-                  ? 'w-64 sm:w-72 h-14' 
-                  : 'w-[calc(100vw-32px)] sm:w-[380px] md:w-[400px] h-[calc(100vh-120px)] sm:h-[500px] md:h-[550px] max-h-[600px]'
-              }`}
+              className={`mb-4 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col ${isMinimized
+                ? 'w-64 sm:w-72 h-14'
+                : 'w-[calc(100vw-32px)] sm:w-[380px] md:w-[400px] h-[calc(100vh-120px)] sm:h-[500px] md:h-[550px] max-h-[600px]'
+                }`}
             >
               {/* Header */}
-              <div 
+              <div
                 className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-4 py-3 flex items-center justify-between cursor-pointer"
                 onClick={() => isMinimized && setIsMinimized(false)}
               >
@@ -495,13 +492,13 @@ export function GlobalChatbot() {
               {!isMinimized && (
                 <>
                   {/* Messages Area */}
-                  <div 
+                  <div
                     ref={messagesContainerRef}
                     className="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-gray-50 to-white"
                   >
                     {messages.length === 0 && (
                       <div className="text-center py-4">
-                        <motion.div 
+                        <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ type: "spring", duration: 0.5 }}
@@ -519,7 +516,7 @@ export function GlobalChatbot() {
                             Tu asistente virtual de Granja Mari Pepa. Estoy aquí para ayudarte con productos, pedidos, facturas o cualquier duda.
                           </p>
                         </motion.div>
-                        
+
                         {showQuickActions && (
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -532,7 +529,7 @@ export function GlobalChatbot() {
                               Acciones rápidas
                             </p>
                             <QuickActions onAction={handleQuickAction} />
-                            
+
                             <div className="mt-4 pt-3 border-t border-gray-100">
                               <p className="text-xs text-gray-400 mb-2">O pregúntame directamente:</p>
                               <div className="space-y-1.5">
@@ -570,27 +567,25 @@ export function GlobalChatbot() {
                       >
                         <div className={`flex items-end gap-2 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
                           {/* Avatar */}
-                          <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                            msg.role === 'user' 
-                              ? 'bg-blue-600' 
-                              : 'bg-gradient-to-br from-emerald-500 to-teal-600'
-                          }`}>
-                            {msg.role === 'user' 
+                          <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${msg.role === 'user'
+                            ? 'bg-blue-600'
+                            : 'bg-gradient-to-br from-emerald-500 to-teal-600'
+                            }`}>
+                            {msg.role === 'user'
                               ? <User className="w-3.5 h-3.5 text-white" />
                               : <Bot className="w-3.5 h-3.5 text-white" />
                             }
                           </div>
-                          
+
                           {/* Message Bubble */}
                           <div className="flex flex-col">
-                            <div className={`rounded-2xl px-3.5 py-2.5 ${
-                              msg.role === 'user'
-                                ? 'bg-blue-600 text-white rounded-br-md'
-                                : 'bg-white border border-gray-200 text-gray-800 rounded-bl-md shadow-sm'
-                            }`}>
+                            <div className={`rounded-2xl px-3.5 py-2.5 ${msg.role === 'user'
+                              ? 'bg-blue-600 text-white rounded-br-md'
+                              : 'bg-white border border-gray-200 text-gray-800 rounded-bl-md shadow-sm'
+                              }`}>
                               {msg.role === 'assistant' ? (
-                                <StreamingMessage 
-                                  content={msg.content} 
+                                <StreamingMessage
+                                  content={msg.content}
                                   isStreaming={Boolean(msg.isStreaming) && currentlyStreamingId === index}
                                   onStreamComplete={handleStreamComplete}
                                 />
@@ -598,7 +593,7 @@ export function GlobalChatbot() {
                                 <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                               )}
                             </div>
-                            
+
                             {/* Sugerencias contextuales para mensajes del asistente */}
                             {msg.role === 'assistant' && msg.attachments && msg.attachments.length > 0 && (
                               <div className="mt-2 flex gap-2">
@@ -625,16 +620,16 @@ export function GlobalChatbot() {
                               </div>
                             )}
 
-                            {msg.role === 'assistant' && 
-                             msg.suggestions && 
-                             msg.suggestions.length > 0 && 
-                             index === messages.length - 1 &&
-                             currentlyStreamingId === null && (
-                              <ContextualSuggestions 
-                                suggestions={msg.suggestions} 
-                                onSelect={handleSuggestionSelect}
-                              />
-                            )}
+                            {msg.role === 'assistant' &&
+                              msg.suggestions &&
+                              msg.suggestions.length > 0 &&
+                              index === messages.length - 1 &&
+                              currentlyStreamingId === null && (
+                                <ContextualSuggestions
+                                  suggestions={msg.suggestions}
+                                  onSelect={handleSuggestionSelect}
+                                />
+                              )}
                           </div>
                         </div>
                       </motion.div>
@@ -711,15 +706,14 @@ export function GlobalChatbot() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-white transition-all relative overflow-hidden group ${
-            isOpen 
-              ? 'bg-gray-700 hover:bg-gray-800' 
-              : 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 hover:shadow-emerald-500/40'
-          }`}
+          className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-white transition-all relative overflow-hidden group ${isOpen
+            ? 'bg-gray-700 hover:bg-gray-800'
+            : 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 hover:shadow-emerald-500/40'
+            }`}
         >
           {/* Shine effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-          
+
           <AnimatePresence mode="wait">
             {isOpen ? (
               <motion.div
@@ -743,7 +737,7 @@ export function GlobalChatbot() {
               </motion.div>
             )}
           </AnimatePresence>
-          
+
           {/* Notification dot */}
           {!isOpen && (
             <motion.div

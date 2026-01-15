@@ -335,11 +335,148 @@ async function executeQuery(sql, params = []) {
   }
 }
 
+/**
+ * Obtener facturas del cliente
+ */
+async function getInvoices(codigoCliente, limit = 10, offset = 0, ejercicio = null) {
+  try {
+    logger.info('📄 Obteniendo facturas del cliente', { codigoCliente, limit, offset, ejercicio });
+
+    let query = `
+      SELECT
+        TRIM(CAC.SERIEFACTURA) AS SERIE,
+        CAC.NUMEROFACTURA AS NUMERO,
+        CAC.EJERCICIOFACTURA AS EJERCICIO,
+        CAC.FECHAFACTURA AS FECHA,
+        CAC.IMPORTETOTAL AS TOTAL,
+        CAC.IMPORTECOBRADOPENDIENTE AS PENDIENTE,
+        CASE WHEN CAC.IMPORTECOBRADOPENDIENTE = 0 THEN 'Pagada' ELSE 'Pendiente' END AS ESTADO
+      FROM DSEDAC.CAC CAC
+      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+        AND CAC.NUMEROFACTURA > 0
+        ${ejercicio ? 'AND CAC.EJERCICIOFACTURA = ?' : ''}
+      ORDER BY CAC.EJERCICIOFACTURA DESC, CAC.NUMEROFACTURA DESC
+      OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+    `;
+
+    const params = [codigoCliente];
+    if (ejercicio) params.push(ejercicio);
+    params.push(offset, limit);
+
+    const invoices = await odbcPool.query(query, params);
+
+    logger.success(`✅ Facturas obtenidas: ${invoices.length}`, { codigoCliente });
+
+    return invoices;
+  } catch (error) {
+    logger.error('❌ Error obteniendo facturas', error);
+    throw error;
+  }
+}
+
+/**
+ * Contar el total de facturas para un cliente
+ */
+async function countInvoices(codigoCliente, ejercicio = null) {
+  try {
+    let query = `
+      SELECT COUNT(*) AS TOTAL_ROWS
+      FROM DSEDAC.CAC CAC
+      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+        AND CAC.NUMEROFACTURA > 0
+        ${ejercicio ? 'AND CAC.EJERCICIOFACTURA = ?' : ''}
+    `;
+
+    const params = [codigoCliente];
+    if (ejercicio) params.push(ejercicio);
+
+    const result = await odbcPool.query(query, params);
+    return result[0].TOTAL_ROWS || 0;
+  } catch (error) {
+    logger.error('Error counting invoices:', error);
+    return 0;
+  }
+}
+
+/**
+ * Obtener estadísticas de consumo del cliente para el Chatbot
+ * - Top productos comprados
+ * - Gasto mensual últimos 12 meses
+ * - Frecuencia de compra
+ */
+async function getClientConsumptionStats(codigoCliente, months = 12) {
+  try {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const lastYear = currentYear - 1;
+
+    // 1. Top productos comprados (por importe) en el último año
+    // Usamos ALBARANES_LINEAS (LAL) ya que es más directo para consumo real que facturas
+    const topProductsQuery = `
+      SELECT 
+        LAL.CODIGOARTICULO, 
+        MAX(LAL.DESCRIPCION) as DESCRIPCION, 
+        SUM(LAL.CANTIDADUNIDADES) as UNIDADES, 
+        SUM(LAL.IMPORTEVENTA) as IMPORTE_TOTAL,
+        COUNT(DISTINCT LAL.NUMEROALBARAN) as VECES_COMPRADO,
+        MAX(LAL.FECHAALBARAN) as ULTIMA_COMPRA
+      FROM DSEDAC.LAL LAL
+      WHERE LAL.CODIGOCLIENTE = ? 
+        AND (LAL.ANOALBARAN = ? OR LAL.ANOALBARAN = ?)
+      GROUP BY LAL.CODIGOARTICULO
+      ORDER BY IMPORTE_TOTAL DESC
+      FETCH FIRST 10 ROWS ONLY
+    `;
+
+    // 2. Gasto mensual (evolución)
+    const monthlySalesQuery = `
+      SELECT 
+        MESALBARAN as MES, 
+        ANOALBARAN as ANO, 
+        SUM(IMPORTETOTAL) as TOTAL
+      FROM DSEDAC.CAL
+      WHERE CODIGOCLIENTE = ? 
+        AND (ANOALBARAN = ? OR ANOALBARAN = ?)
+      GROUP BY MESALBARAN, ANOALBARAN
+      ORDER BY ANOALBARAN DESC, MESALBARAN DESC
+      FETCH FIRST 12 ROWS ONLY
+    `;
+
+    const [topProducts, monthlySales] = await Promise.all([
+      odbcPool.query(topProductsQuery, [codigoCliente, currentYear, lastYear]),
+      odbcPool.query(monthlySalesQuery, [codigoCliente, currentYear, lastYear])
+    ]);
+
+    return {
+      topProducts: topProducts.map(p => ({
+        codigo: p.CODIGOARTICULO,
+        nombre: p.DESCRIPCION,
+        unidades: p.UNIDADES,
+        total: p.IMPORTE_TOTAL,
+        veces: p.VECES_COMPRADO,
+        ultimaCompra: p.ULTIMA_COMPRA // Formato YYYYMMDD
+      })),
+      monthlySales: monthlySales.map(m => ({
+        mes: m.MES,
+        ano: m.ANO,
+        total: m.TOTAL
+      }))
+    };
+
+  } catch (error) {
+    logger.error('Error getting consumption stats:', error);
+    return { topProducts: [], monthlySales: [] };
+  }
+}
+
 module.exports = {
   getInvoiceDetail,
+  getInvoices,
+  countInvoices,
   getClientProducts,
   getClientSummary,
   getClientSummaryByYear,
   getAvailableYears,
-  executeQuery // Nuevo método para auth service
+  executeQuery,
+  getClientConsumptionStats // Nueva función exportada
 };
