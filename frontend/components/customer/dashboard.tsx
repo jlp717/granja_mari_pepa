@@ -3533,11 +3533,11 @@ export function CustomerDashboard() {
                               className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
                             >
                               <option value="all">Todos los años</option>
-                              <option value="2025">2025</option>
-                              <option value="2024">2024</option>
-                              <option value="2023">2023</option>
-                              <option value="2022">2022</option>
-                              <option value="2021">2021</option>
+                              {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+                                <option key={year} value={String(year)}>
+                                  {year}
+                                </option>
+                              ))}
                             </select>
                           </div>
                         </div>
