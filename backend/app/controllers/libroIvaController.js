@@ -122,7 +122,7 @@ async function generarLibroIVA(req, res) {
             TRIM(CLI.PROVINCIA) AS PROVINCIA,
             TRIM(CLI.CODIGOPOSTAL) AS CODIGOPOSTAL,
             TRIM(CLI.TELEFONO1) AS TELEFONO
-          FROM DSEDAC.CLI
+          FROM DSEDAC.CLI CLI
           WHERE TRIM(CLI.CODIGOCLIENTE) = ?
         `;
         const clienteResult = await odbcPool.query(queryCliente, [codigoCliente.trim()]);

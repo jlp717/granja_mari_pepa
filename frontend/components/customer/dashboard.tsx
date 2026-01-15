@@ -1871,7 +1871,7 @@ export function CustomerDashboard() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-3 relative z-50"
+            className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-3 sticky top-0 z-[60]"
           >
             <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
               <div className="flex items-center gap-3">
