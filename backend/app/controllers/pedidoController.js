@@ -14,9 +14,9 @@ const odbcPool = require('../config/odbcConfig');
 async function obtenerPedidos(req, res) {
   try {
     const { codigoCliente } = req.params;
-    
+
     logger.info('📦 Obtener pedidos', { codigoCliente });
-    
+
     const query = `
       SELECT 
         SUBEMPRESAPEDIDO as subempresa,
@@ -30,7 +30,7 @@ async function obtenerPedidos(req, res) {
         CODIGOCLIENTEALBARAN as codigoCliente,
         SUM(IMPORTEVENTA) as importeTotal,
         COUNT(DISTINCT SECUENCIAPEDIDO) as numLineas
-      FROM HLPC_BK1
+      FROM DSEDAC.LPC
       WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
       GROUP BY 
         SUBEMPRESAPEDIDO, EJERCICIOPEDIDO, SERIEPEDIDO,
@@ -38,11 +38,11 @@ async function obtenerPedidos(req, res) {
         MESDOCUMENTO, ANODOCUMENTO, CODIGOCLIENTEALBARAN
       ORDER BY ANODOCUMENTO DESC, MESDOCUMENTO DESC, DIADOCUMENTO DESC
     `;
-    
+
     const pedidos = await odbcPool.query(query, [codigoCliente.trim()]);
-    
-    return res.json({ 
-      success: true, 
+
+    return res.json({
+      success: true,
       pedidos: pedidos || [],
       total: pedidos ? pedidos.length : 0
     });
@@ -60,9 +60,9 @@ async function obtenerDetallePedido(req, res) {
   try {
     const { codigoCliente } = req.params;
     const { subempresa, ejercicio, serie, terminal, numero } = req.query;
-    
+
     logger.info('🔍 Detalle pedido', { codigoCliente, subempresa, ejercicio, serie, terminal, numero });
-    
+
     const query = `
       SELECT 
         SECUENCIAPEDIDO as secuencia,
@@ -75,7 +75,7 @@ async function obtenerDetallePedido(req, res) {
         IMPORTEVENTA as importeVenta,
         CANTIDADENVASESSERVIDOS as envasesServidos,
         CANTIDADUNIDADESSERVIDAS as unidadesServidas
-      FROM HLPC_BK1
+      FROM DSEDAC.LPC
       WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
         AND SUBEMPRESAPEDIDO = ?
         AND EJERCICIOPEDIDO = ?
@@ -84,13 +84,13 @@ async function obtenerDetallePedido(req, res) {
         AND NUMEROPEDIDO = ?
       ORDER BY SECUENCIAPEDIDO
     `;
-    
+
     const lineas = await odbcPool.query(query, [
       codigoCliente.trim(), subempresa, ejercicio, serie, terminal, numero
     ]);
-    
-    return res.json({ 
-      success: true, 
+
+    return res.json({
+      success: true,
       detalle: { lineas: lineas || [], totalLineas: lineas ? lineas.length : 0 }
     });
   } catch (error) {
