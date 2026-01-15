@@ -300,9 +300,13 @@ async function getAvailableYears(codigoCliente) {
     // Extraer años de la DB
     const dbYears = result.map(row => Number(row.EJERCICIOFACTURA));
 
-    // Asegurar año actual y anterior
+    // Asegurar ventana de 5 años (Año actual + 4 anteriores)
+    // Ejemplo en 2026: [2026, 2025, 2024, 2023, 2022]
     const currentYear = new Date().getFullYear();
-    const allYears = new Set([...dbYears, currentYear, currentYear - 1]);
+    const mandantoryYears = Array.from({ length: 5 }, (_, i) => currentYear - i);
+
+    // Combinar años de DB con los obligatorios (Set elimina duplicados)
+    const allYears = new Set([...dbYears, ...mandantoryYears]);
 
     // Retornar ordenados descendente
     return Array.from(allYears).sort((a, b) => b - a);

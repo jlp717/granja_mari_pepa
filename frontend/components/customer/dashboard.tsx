@@ -1475,11 +1475,12 @@ export function CustomerDashboard() {
           method: 'POST',
           body: JSON.stringify({
             factura: {
-              subempresa: factura.subempresa,
+              // Enviar datos de FACTURA, no de albarán (backend actualizado)
+              serie: factura.serieFactura,
+              numero: factura.numeroFactura,
               ejercicio: factura.ejercicio,
-              serie: factura.serie,
-              terminal: factura.terminal,
-              numero_albaran: factura.numero_albaran
+              // Mantener resto por compatibilidad si es necesario, pero serie/numero mandan
+              subempresa: factura.subempresa,
             },
             destinatario: destinatario,
             clienteNombre: user?.name || 'Cliente'
