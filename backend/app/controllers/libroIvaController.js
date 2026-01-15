@@ -472,7 +472,7 @@ async function enviarLibroIVAPorEmail(req, res) {
     };
     const pdfBuffer = await libroIvaPdfService.generateLibroIvaPDF(datosPDF);
 
-    // Configurar nodemailer
+    // Configurar nodemailer con timeout
     const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
       host: 'mail.mari-pepa.com',
@@ -484,7 +484,9 @@ async function enviarLibroIVAPorEmail(req, res) {
       },
       tls: {
         rejectUnauthorized: false
-      }
+      },
+      connectionTimeout: 10000, // 10 segundos para conectar
+      socketTimeout: 15000 // 15 segundos de inactividad
     });
 
     const nombreCliente = clienteData?.NOMBRECLIENTE || 'Cliente';

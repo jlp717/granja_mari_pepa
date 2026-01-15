@@ -20,11 +20,11 @@ interface LibroIvaModalProps {
 export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmail, userPhone, clienteNombre }: LibroIvaModalProps) {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 2019 }, (_, i) => currentYear - i);
-  
+
   const [selectedYear, setSelectedYear] = useState(currentYear.toString());
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState('');
-  
+
   // Estados para compartir
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [shareMethod, setShareMethod] = useState<'download' | 'email' | 'whatsapp'>('download');
@@ -89,15 +89,15 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
 
     } catch (err: any) {
       console.error('Error generando libro IVA:', err);
-      
+
       // Usar el helper centralizado para manejar errores
       let errorMessage = handleApiError(err);
-      
+
       // Personalizar mensaje para 404 (sin facturas)
       if (err.response?.status === 404) {
         errorMessage = `No se encontraron facturas para el año ${selectedYear}. Verifica que tengas facturas registradas en ese período.`;
       }
-      
+
       setError(errorMessage);
       setIsGenerating(false);
     }
@@ -137,17 +137,11 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
   };
 
   const handleSendWhatsApp = async () => {
-    const phone = phoneInput.replace(/[\s\-\(\)]/g, '');
-    if (!phone || phone.length < 9) {
-      toast.error('Por favor, introduce un número de teléfono válido');
-      return;
-    }
-
     setIsSending(true);
     setError('');
 
     try {
-      // Primero generar y descargar el PDF
+      // 1. Generar y obtener el PDF como Blob
       const response = await apiClient.post(
         '/api/libro-iva',
         {
@@ -160,8 +154,33 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
         }
       );
 
-      // Descargar el PDF
       const blob = new Blob([response.data], { type: 'application/pdf' });
+      const file = new File([blob], `libro_iva_${selectedYear}.pdf`, { type: 'application/pdf' });
+
+      // 2. Intentar usar Web Share API (Móviles: iOS/Android)
+      if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            title: `Libro IVA ${selectedYear}`,
+            text: `Adjunto libro de IVA del ejercicio ${selectedYear} - Granja Mari Pepa`,
+            files: [file]
+          });
+          toast.success('Abriendo menú de compartir...');
+          onClose();
+          return; // Éxito con share nativo
+        } catch (shareError: any) {
+          if (shareError.name !== 'AbortError') {
+            console.warn('Error al compartir nativamente:', shareError);
+            // Si falla (no cancelado por usuario), seguimos con el fallback
+          } else {
+            setIsSending(false);
+            return; // Cancelado por usuario
+          }
+        }
+      }
+
+      // 3. Fallback para PC / Navegadores sin soporte de archivos
+      // Descargamos el archivo y abrimos WhatsApp Web
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -169,27 +188,34 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // No revocamos URL inmediatamente para dar tiempo a la descarga
 
-      // Crear mensaje de WhatsApp
-      const mensaje = `📊 *Libro de IVA Repercutido - ${selectedYear}*\n\n¡Hola!\n\nTe envío el Libro de IVA del ejercicio ${selectedYear}.\n\n📄 El PDF está adjunto/descargado.\n\n_Granja Mari Pepa_\n📞 639 77 86 56`;
-      
-      const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`;
+      const phone = phoneInput.replace(/[\s\-\(\)]/g, '');
+      const mensaje = `📊 *Libro de IVA ${selectedYear}*\n\nHola,\nAdjunto el documento PDF descargado.\n\n_Granja Mari Pepa_`;
+
+      let whatsappUrl = '';
+      if (phone && phone.length >= 9) {
+        whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`;
+      } else {
+        // Si no hay teléfono, ofrecemos abrir WhatsApp general
+        whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+      }
+
       window.open(whatsappUrl, '_blank');
 
       toast.success(
         <div className="flex flex-col">
-          <p className="font-semibold">✅ PDF descargado</p>
-          <p className="text-sm">Abriendo WhatsApp para enviar...</p>
+          <p className="font-semibold">✅ PDF Descargado</p>
+          <p className="text-xs">Como estás en PC, arrastra el archivo descargado al chat de WhatsApp.</p>
         </div>
       );
 
       onClose();
+
     } catch (err: any) {
-      console.error('Error preparando WhatsApp:', err);
+      console.error('Error preparación WhatsApp:', err);
       const errorMessage = handleApiError(err);
       setError(errorMessage);
-      toast.error(errorMessage);
     } finally {
       setIsSending(false);
     }
@@ -275,44 +301,41 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                     ¿Cómo quieres obtener el documento?
                   </p>
-                  
+
                   {/* Selector de método */}
                   <div className="grid grid-cols-3 gap-2">
                     <button
                       onClick={() => setShareMethod('download')}
-                      className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${
-                        shareMethod === 'download'
+                      className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${shareMethod === 'download'
                           ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
                           : 'border-gray-200 dark:border-gray-600 hover:border-gray-300'
-                      }`}
+                        }`}
                     >
                       <Download className={`w-5 h-5 ${shareMethod === 'download' ? 'text-blue-600' : 'text-gray-500'}`} />
                       <span className={`text-xs font-medium ${shareMethod === 'download' ? 'text-blue-700' : 'text-gray-600'}`}>
                         Descargar
                       </span>
                     </button>
-                    
+
                     <button
                       onClick={() => setShareMethod('email')}
-                      className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${
-                        shareMethod === 'email'
+                      className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${shareMethod === 'email'
                           ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30'
                           : 'border-gray-200 dark:border-gray-600 hover:border-gray-300'
-                      }`}
+                        }`}
                     >
                       <Mail className={`w-5 h-5 ${shareMethod === 'email' ? 'text-purple-600' : 'text-gray-500'}`} />
                       <span className={`text-xs font-medium ${shareMethod === 'email' ? 'text-purple-700' : 'text-gray-600'}`}>
                         Email
                       </span>
                     </button>
-                    
+
                     <button
                       onClick={() => setShareMethod('whatsapp')}
-                      className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${
-                        shareMethod === 'whatsapp'
+                      className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${shareMethod === 'whatsapp'
                           ? 'border-green-500 bg-green-50 dark:bg-green-900/30'
                           : 'border-gray-200 dark:border-gray-600 hover:border-gray-300'
-                      }`}
+                        }`}
                     >
                       <MessageCircle className={`w-5 h-5 ${shareMethod === 'whatsapp' ? 'text-green-600' : 'text-gray-500'}`} />
                       <span className={`text-xs font-medium ${shareMethod === 'whatsapp' ? 'text-green-700' : 'text-gray-600'}`}>
@@ -397,7 +420,7 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
                   >
                     Cancelar
                   </Button>
-                  
+
                   {shareMethod === 'download' && (
                     <Button
                       onClick={handleGenerate}

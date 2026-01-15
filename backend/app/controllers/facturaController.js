@@ -350,7 +350,9 @@ async function enviarFacturaPorEmail(req, res) {
       },
       tls: {
         rejectUnauthorized: false
-      }
+      },
+      connectionTimeout: 10000, // 10 segundos
+      socketTimeout: 15000 // 15 segundos
     });
 
     // Formatear datos
