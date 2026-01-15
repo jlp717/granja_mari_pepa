@@ -134,7 +134,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         CVC.IMPORTEVENCIMIENTO,
         CVC.IMPORTEPENDIENTE as PENDIENTE,
         CVC.CODIGOFORMAPAGO as FORMAPAGO
-      FROM DSEDAC.CVC
+      FROM DSEDAC.CVC CVC
       WHERE TRIM(CVC.SERIEDOCUMENTO) = ?
         AND CVC.NUMERODOCUMENTO = ?
         AND CVC.EJERCICIODOCUMENTO = ?
