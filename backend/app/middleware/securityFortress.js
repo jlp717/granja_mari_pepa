@@ -129,8 +129,15 @@ function csrfProtectionAdvanced(req, res, next) {
     '/api/logs/frontend-error',
     '/api/generar-factura',
     '/api/libro-iva',
+    '/api/libro-iva/enviar-email',
+    '/api/clientes/enviar-factura-email',
     '/api/chatbot' // Chatbot IA - excluido de CSRF (operación de consulta)
   ];
+
+  // Excluir rutas dinámicas de contacto (protegidas por JWT)
+  if (req.path.match(/^\/api\/clientes\/\d+\/contacto$/)) {
+    return next();
+  }
 
   if (publicRoutes.includes(req.path)) {
     return next();
