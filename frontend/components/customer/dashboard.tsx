@@ -5193,6 +5193,9 @@ export function CustomerDashboard() {
         isOpen={showLibroIvaModal}
         onClose={() => setShowLibroIvaModal(false)}
         codigoCliente={user?.id || ''}
+        userEmail={perfilCliente?.contacto?.email || user?.email || ''}
+        userPhone={perfilCliente?.contacto?.telefono || ''}
+        clienteNombre={perfilCliente?.nombre || user?.name || 'Cliente'}
       />
 
       {/* Modal Cambiar Contraseña */}
