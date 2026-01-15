@@ -701,7 +701,9 @@ class AuthServiceSecure {
 
         try {
             // Ensure all values are properly formatted and not null where required
-            const customerId = event.customerId ? Number(event.customerId) : 0; // 0 for anonymous
+            // Fixes ODBC -545 (Check constraint violation) by guaranteeing numeric ID
+            const customerId = !isNaN(Number(event.customerId)) ? Number(event.customerId) : 0;
+
             const eventType = (event.eventType || 'UNKNOWN').substring(0, 50);
             const eventCategory = (event.eventCategory || 'GENERAL').substring(0, 50);
             const severity = (event.severity || 'INFO').substring(0, 20);
@@ -911,7 +913,7 @@ class AuthServiceSecure {
 
             // 4. Audit event
             await this.auditSecurityEvent({
-                customerId: Number(customer.CUSTOMER_ID),
+                customerId: Number(customer.CUSTOMER_ID) || 0,
                 eventType: 'PASSWORD_RESET_REQUESTED',
                 eventCategory: 'PASSWORD_MANAGEMENT',
                 severity: 'INFO',
@@ -932,18 +934,12 @@ class AuthServiceSecure {
             try {
                 logger.info('📤 Sending verification code email...', { to: emailMasked });
 
-                // Add 15 second timeout
-                const emailPromise = emailService.sendVerificationCodeEmail(
+                // Use email service directly without extra race timeout (service handles its own timeouts)
+                const emailResult = await emailService.sendVerificationCodeEmail(
                     customer.EMAIL,
                     verificationCode,
                     customer.FULL_NAME || customerCode
                 );
-
-                const timeoutPromise = new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Email timeout after 15 seconds')), 15000)
-                );
-
-                const emailResult = await Promise.race([emailPromise, timeoutPromise]);
 
                 if (emailResult && emailResult.success) {
                     logger.success('✅ Verification code email sent', {
@@ -957,10 +953,12 @@ class AuthServiceSecure {
                     error: emailError.message,
                     email: emailMasked
                 });
+
                 // Return error to user if email fails - they need the code!
+                // Don't expose internal connection errors
                 return {
                     success: false,
-                    message: 'No se pudo enviar el email. Por favor, inténtalo de nuevo más tarde o contacta con soporte.'
+                    message: 'No se pudo enviar el correo electrónico. Por favor verifica tu conexión o intenta más tarde.'
                 };
             }
 

@@ -18,9 +18,9 @@ const SMTP_CONFIG = {
         pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
     },
     // Timeouts to prevent freezing
-    connectionTimeout: 10000,
-    greetingTimeout: 5000,
-    socketTimeout: 10000,
+    connectionTimeout: 20000, // Increased to 20s
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
     // TLS options - Handle certificate hostname mismatch
     // NOTE: The mail server (mail.mari-pepa.com) returns a certificate for 'clientes61.dnspropio.com'
     // This is a server-side configuration issue but we handle it here to allow email sending
@@ -42,11 +42,13 @@ let transporter = null;
 function initializeTransporter() {
     if (!transporter) {
         transporter = nodemailer.createTransport(SMTP_CONFIG);
-        logger.info('✅ Email service initialized', {
+        logger.info('✅ Email service initializing...', {
             host: SMTP_CONFIG.host,
             port: SMTP_CONFIG.port,
             secure: SMTP_CONFIG.secure,
-            from: FROM_EMAIL
+            user: SMTP_CONFIG.auth.user,
+            // Mask password in logs
+            message: 'Using hardcoded Port 465 settings'
         });
     }
     return transporter;
