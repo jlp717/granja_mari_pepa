@@ -1,0 +1,47 @@
+User-agent: *
+Allow: /
+
+# Optimización de velocidad de crawling
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://granjamaripepa.com/sitemap.xml
+
+# Archivos y directorios importantes
+Disallow: /_next/
+Disallow: /api/
+Disallow: /.well-known/
+Disallow: /admin/
+Allow: /_next/static/
+
+# Archivos específicos
+Disallow: *.pdf$
+Disallow: *.doc$
+Disallow: *.docx$
+Disallow: /*.json$
+Disallow: /package-lock.json
+Disallow: /yarn.lock
+
+# Parámetros de tracking
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid*
+Disallow: /*?*gclid*
+
+# Páginas privadas o temporales
+Disallow: /checkout/success/
+Disallow: /checkout/cancelled/
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Crawlers específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

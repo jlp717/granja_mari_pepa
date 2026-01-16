@@ -1,0 +1,55 @@
+{
+  "name": "Granja Mari Pepa - Distribución Alimentaria",
+  "short_name": "GranjaMP",
+  "description": "Productos alimentarios de alta calidad. Distribución en Murcia con más de 35 años de experiencia.",
+  "version": "2.0.0",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#16a34a",
+  "background_color": "#ffffff",
+  "lang": "es-ES",
+  "dir": "ltr",
+  "categories": ["food", "business", "shopping"],
+  "icons": [
+    {
+      "src": "/images/logo.jpeg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Productos",
+      "short_name": "Catálogo",
+      "description": "Ver todos nuestros productos",
+      "url": "/productos"
+    },
+    {
+      "name": "Contacto",
+      "short_name": "Contactar",
+      "description": "Contacta con nosotros",
+      "url": "/contacto"
+    },
+    {
+      "name": "Área Clientes",
+      "short_name": "Mi Cuenta",
+      "description": "Accede a tu área personal",
+      "url": "/area-clientes"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}
