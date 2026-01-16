@@ -374,7 +374,7 @@ app.post('/api/libro-iva/enviar-email', requireAuth, generalLimiter, auditDataAc
 // ANALYTICS
 // =====================================================
 // PROTEGIDO: Registrar eventos de analytics
-app.post('/api/analytics/events', requireAuth, generalLimiter, (req, res) => {
+app.post('/api/analytics/events', generalLimiter, (req, res) => {
   // Registro de eventos para analytics
   const { event, data } = req.body;
   logger.info('📊 Analytics event', {
