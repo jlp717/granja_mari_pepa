@@ -475,7 +475,7 @@ async function enviarLibroIVAPorEmail(req, res) {
     // Configurar nodemailer con timeout
     const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'mail.mari-pepa.com',
+      host: process.env.SMTP_HOST || '_dc-mx.bef93564e202.mari-pepa.com',
       port: 465, // FORZADO: 465 (SSL) para saltar bloqueos de puerto 587
       secure: true,
       auth: {
