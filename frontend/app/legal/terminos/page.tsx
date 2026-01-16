@@ -1,9 +1,6 @@
-
-import { Container } from '@/components/ui/container';
-
 export default function TerminosPage() {
     return (
-        <Container className="py-12">
+        <div className="container mx-auto py-12 px-4">
             <div className="prose prose-lg max-w-4xl mx-auto">
                 <h1 className="text-3xl font-bold mb-8">Términos y Condiciones</h1>
 
@@ -18,7 +15,7 @@ export default function TerminosPage() {
 
                 <h3>2. Uso del Sitio Web</h3>
                 <p>
-                    El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el "copyright" y demás datos identificativos de los derechos de sus titulares.
+                    El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el &quot;copyright&quot; y demás datos identificativos de los derechos de sus titulares.
                 </p>
 
                 <h3>3. Responsabilidad</h3>
@@ -36,6 +33,6 @@ export default function TerminosPage() {
                     Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia).
                 </p>
             </div>
-        </Container>
+        </div>
     );
 }

@@ -1,9 +1,6 @@
-
-import { Container } from '@/components/ui/container';
-
 export default function PrivacidadPage() {
     return (
-        <Container className="py-12">
+        <div className="container mx-auto py-12 px-4">
             <div className="prose prose-lg max-w-4xl mx-auto">
                 <h1 className="text-3xl font-bold mb-8">Política de Privacidad</h1>
 
@@ -44,6 +41,6 @@ export default function PrivacidadPage() {
                     Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios.
                 </p>
             </div>
-        </Container>
+        </div>
     );
 }
