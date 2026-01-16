@@ -189,7 +189,7 @@ export function CinematicHero() {
             filter: 'contrast(1.2) saturate(1.1) brightness(0.9)',
           }}
         >
-          <source src="/images/gmp.mp4" type="video/mp4" />
+          <source src="/images/squid-3d.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
