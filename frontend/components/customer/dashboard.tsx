@@ -1453,6 +1453,9 @@ export function CustomerDashboard() {
         setShowDeleteContactModal(false);
         setPendingContactSave(null);
 
+        // 🔄 Recargar datos de contacto para reflejar los cambios en la UI
+        await cargarDatosContacto();
+
       } else {
         toast.error(data.error || 'Error al guardar los datos');
       }
