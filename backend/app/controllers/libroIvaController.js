@@ -483,10 +483,12 @@ async function enviarLibroIVAPorEmail(req, res) {
         pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
       },
       tls: {
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
+        minVersion: 'TLSv1.2'
       },
-      connectionTimeout: 10000, // 10 segundos para conectar
-      socketTimeout: 15000 // 15 segundos de inactividad
+      connectionTimeout: 20000, // 20 segundos (Aumentado para evitar timeouts)
+      greetingTimeout: 10000,
+      socketTimeout: 20000 // 20 segundos
     });
 
     const nombreCliente = clienteData?.NOMBRECLIENTE || 'Cliente';
