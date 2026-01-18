@@ -32,8 +32,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mari-pepa.com'),
-  title: 'Granja Mari Pepa | Distribución Alimentaria Premium en Murcia y Almería',
-  description: 'Líderes en distribución alimentaria para hostelería (HORECA) desde 1966. Más de 4000 referencias en productos congelados, frescos y secos. Servicio logístico integral 24h en Murcia y Almería.',
+  title: 'Granja Mari Pepa | Distribución Alimentaria Premium - Más de 35 Años de Experiencia',
+  description: 'Líderes en distribución alimentaria para hostelería (HORECA) en Murcia y Almería. Alta calidad en productos congelados, frescos y secos. Servicio 24h.',
   keywords: [
     'distribución alimentaria murcia',
     'proveedores hostelería almería',
@@ -67,10 +67,11 @@ export const metadata: Metadata = {
     description: 'Soluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://www.mari-pepa.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Granja Mari Pepa - Distribución Profesional',
+        alt: 'Granja Mari Pepa - Distribución Alimentaria Premium',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -78,18 +79,24 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Granja Mari Pepa | Proveedor Líder HORECA',
     description: 'Distribución de productos alimentarios de alta calidad en Murcia y Almería. Servicio 24h.',
-    images: ['/og-image.jpg'],
+    images: ['https://www.mari-pepa.com/og-image.jpg'],
+    creator: '@GranjaMaripepa',
   },
   alternates: {
     canonical: 'https://www.mari-pepa.com',
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
       { url: '/images/icons/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' } // Fallback
     ],
-    apple: '/images/logo.jpeg', // Usamos el logo cuadrado para Apple touch icon
-    shortcut: '/favicon.ico'
+    apple: [
+      { url: '/images/logo.jpeg', sizes: '180x180', type: 'image/jpeg' },
+    ],
+    shortcut: '/favicon.ico',
+    other: [
+      { rel: 'mask-icon', url: '/images/icons/icon.svg', color: '#0d3d4d' },
+    ],
   }
 };
 

@@ -1,47 +1,60 @@
+# ==============================================
+# Granja Mari Pepa - robots.txt
+# https://www.mari-pepa.com
+# ==============================================
+
 User-agent: *
 Allow: /
 
-# Optimización de velocidad de crawling
-Crawl-delay: 1
+# Sitemap - URL correcta con www
+Sitemap: https://www.mari-pepa.com/sitemap.xml
 
-# Sitemap
-Sitemap: https://granjamaripepa.com/sitemap.xml
-
-# Archivos y directorios importantes
+# Directorios privados
 Disallow: /_next/
 Disallow: /api/
-Disallow: /.well-known/
 Disallow: /admin/
-Allow: /_next/static/
+Disallow: /dashboard/
+Disallow: /.well-known/
 
-# Archivos específicos
-Disallow: *.pdf$
-Disallow: *.doc$
-Disallow: *.docx$
+# Permitir archivos estáticos
+Allow: /_next/static/
+Allow: /images/
+Allow: /og-image.jpg
+
+# Archivos específicos que no indexar
 Disallow: /*.json$
 Disallow: /package-lock.json
 Disallow: /yarn.lock
+Disallow: /sw.js
 
-# Parámetros de tracking
+# Parámetros de tracking (evitar contenido duplicado)
 Disallow: /*?*utm_*
 Disallow: /*?*fbclid*
 Disallow: /*?*gclid*
 
-# Páginas privadas o temporales
+# Páginas de proceso (no indexar)
 Disallow: /checkout/success/
 Disallow: /checkout/cancelled/
-Disallow: /admin/
-Disallow: /dashboard/
 
 # Crawlers específicos
 User-agent: Googlebot
 Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /og-image.jpg
 
 User-agent: Bingbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
+Allow: /og-image.jpg
 
 User-agent: Twitterbot
 Allow: /
+Allow: /og-image.jpg
+
+User-agent: LinkedInBot
+Allow: /
+Allow: /og-image.jpg
