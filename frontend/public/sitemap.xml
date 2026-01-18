@@ -54,4 +54,12 @@
     <priority>0.5</priority>
   </url>
   
+  <!-- Página Local Lorca -->
+  <url>
+    <loc>https://www.mari-pepa.com/lorca/</loc>
+    <lastmod>2026-01-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
 </urlset>

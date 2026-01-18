@@ -15,7 +15,7 @@ const organizationSchema = {
   '@type': 'Organization',
   '@id': 'https://www.mari-pepa.com/#organization',
   name: 'Granja Mari Pepa',
-  alternateName: 'Granja Maripepa S.L.',
+  alternateName: ['Granja Maripepa S.L.', 'Mari Pepa Lorca', 'Granja Mari Pepa Lorca', 'Mari Pepa', 'Distribuidora Mari Pepa'],
   url: 'https://www.mari-pepa.com',
   logo: {
     '@type': 'ImageObject',

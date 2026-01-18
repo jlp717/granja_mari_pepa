@@ -32,17 +32,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mari-pepa.com'),
-  title: 'Granja Mari Pepa | Distribución Alimentaria Premium - Más de 35 Años de Experiencia',
-  description: 'Líderes en distribución alimentaria para hostelería (HORECA) en Murcia y Almería. Alta calidad en productos congelados, frescos y secos. Servicio 24h.',
+  title: 'Granja Mari Pepa Lorca | Distribución Alimentaria Murcia y Almería - Desde 1966',
+  description: 'Granja Mari Pepa en Lorca (Murcia) - Distribuidores de productos congelados, carnes y pescados para hostelería HORECA. Servicio 24h. Polígono Saprelorca. +55 años.',
   keywords: [
+    'granja mari pepa lorca',
+    'mari pepa lorca',
+    'distribución alimentaria lorca',
+    'polígono saprelorca',
     'distribución alimentaria murcia',
     'proveedores hostelería almería',
-    'granja mari pepa',
     'productos congelados horeca',
     'distribuidor carne lorca',
-    'pescado fresco por mayor',
-    'grupo topgel',
-    'logística alimentaria refrigerada'
+    'pescado fresco por mayor murcia',
+    'grupo topgel lorca',
+    'distribuidores alimentos hostelería',
+    'congelados para restaurantes murcia'
   ],
   authors: [{ name: 'Granja Mari Pepa', url: 'https://www.mari-pepa.com' }],
   creator: 'Grupo Topgel',
