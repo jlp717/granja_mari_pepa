@@ -356,47 +356,23 @@ export function CustomerDashboard() {
     retryDelay: 1000
   });
 
-  // Agrupar facturas por serieFactura + numeroFactura + ejercicio
+  // FIX: El backend ya devuelve las facturas agrupadas correctamente.
+  // No necesitamos re-agrupar en el cliente, solo asegurar que los datos estén limpios.
   const facturas = useMemo(() => {
     if (!facturasRaw) return [];
-    const map = new Map();
-    for (const f of facturasRaw) {
-      const key = `${f.serieFactura}-${f.numeroFactura}-${f.ejercicio}`;
-      if (!map.has(key)) {
-        map.set(key, {
-          ...f,
-          lista_albaranes: f.numero_albaran ? String(f.numero_albaran) : '',
-          totalFactura: f.totalFactura,
-          totalBase: f.totalBase,
-          totalIVA: f.totalIVA,
-          importePendiente: f.importePendiente,
-          count: 1
-        });
-      } else {
-        const prev = map.get(key);
-        // Concatenar albaranes
-        prev.lista_albaranes = prev.lista_albaranes
-          ? prev.lista_albaranes + ', ' + (f.numero_albaran ? String(f.numero_albaran) : '')
-          : (f.numero_albaran ? String(f.numero_albaran) : '');
-        // Sumar importes solo si es el mismo cliente (para casos especiales)
-        prev.totalFactura += f.totalFactura || 0;
-        prev.totalBase += f.totalBase || 0;
-        prev.totalIVA += f.totalIVA || 0;
-        prev.importePendiente += f.importePendiente || 0;
-        prev.count += 1;
-      }
-    }
-    // Para el cliente acabado en 9900, forzar el totalFactura a 1900 y pico si corresponde
-    const arr = Array.from(map.values());
-    arr.forEach(f => {
+
+    // Corregir casos especiales de totales si es necesario (legacy logic)
+    const processedFacturas = facturasRaw.map(f => {
+      let fCopy = { ...f };
       if (String(f.subempresa).endsWith('9900')) {
-        // Si el total agrupado supera 1900 y pico, forzarlo
         if (f.totalFactura > 1900 && f.totalFactura < 2000) {
-          f.totalFactura = 1900.00;
+          fCopy.totalFactura = 1900.00;
         }
       }
+      return fCopy;
     });
-    return arr;
+
+    return processedFacturas;
   }, [facturasRaw]);
 
   const {
@@ -1668,9 +1644,9 @@ export function CustomerDashboard() {
     return (facturas || []).filter(factura => {
       const searchLower = searchTerm.toLowerCase();
       const matchesSearch = searchTerm === '' ||
-        factura.numeroFactura?.toString().includes(searchTerm) ||
+        (factura.numeroFactura !== undefined && factura.numeroFactura !== null && String(factura.numeroFactura).includes(searchTerm)) ||
         factura.serieFactura?.toLowerCase().includes(searchLower) ||
-        (factura as any).lista_albaranes?.toLowerCase().includes(searchLower) ||
+        (factura as any).albaranes?.toLowerCase().includes(searchLower) ||
         factura.serie?.toLowerCase().includes(searchLower) ||
         factura.subempresa?.toLowerCase().includes(searchLower);
 
