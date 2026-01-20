@@ -66,15 +66,16 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       }
     }
 
-    // 3. Buscar credenciales en JAVIER.CUSTOMER_PASSWORDS
+    // 3. Buscar credenciales en JAVIER.CUSTOMER_CREDENTIALS (Nueva Tabla Unificada)
     const authQuery = `
       SELECT 
         PASSWORD_HASH,
-        INTENTOS_FALLIDOS as INTENTOS_FALLIDOS,
-        BLOQUEADO_HASTA as BLOQUEADO_HASTA,
-        ULTIMO_LOGIN as ULTIMO_LOGIN
-      FROM JAVIER.CUSTOMER_PASSWORDS
-      WHERE TRIM(CODIGO_CLIENTE) = ?
+        FAILED_LOGIN_ATTEMPTS as INTENTOS_FALLIDOS,
+        ACCOUNT_LOCKED_UNTIL as BLOQUEADO_HASTA,
+        LAST_LOGIN_AT as ULTIMO_LOGIN,
+        IS_LEGACY_PASSWORD
+      FROM JAVIER.CUSTOMER_CREDENTIALS
+      WHERE TRIM(CUSTOMER_CODE) = ?
     `;
 
     const authRecords = await odbcPool.query(authQuery, [codigo]);
@@ -100,7 +101,7 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       } else {
         // Desbloquear si ya pasó el tiempo
         await odbcPool.query(
-          `UPDATE JAVIER.CUSTOMER_PASSWORDS SET BLOQUEADO_HASTA = NULL, INTENTOS_FALLIDOS = 0 WHERE TRIM(CODIGO_CLIENTE) = ?`,
+          `UPDATE JAVIER.CUSTOMER_CREDENTIALS SET ACCOUNT_LOCKED_UNTIL = NULL, FAILED_LOGIN_ATTEMPTS = 0 WHERE TRIM(CUSTOMER_CODE) = ?`,
           [codigo]
         );
       }
@@ -116,7 +117,7 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       if (shouldLock) {
         const lockUntil = new Date(Date.now() + LOCK_TIME_MINUTES * 60 * 1000);
         await odbcPool.query(
-          `UPDATE JAVIER.CUSTOMER_PASSWORDS SET INTENTOS_FALLIDOS = ?, BLOQUEADO_HASTA = ? WHERE TRIM(CODIGO_CLIENTE) = ?`,
+          `UPDATE JAVIER.CUSTOMER_CREDENTIALS SET FAILED_LOGIN_ATTEMPTS = ?, ACCOUNT_LOCKED_UNTIL = ? WHERE TRIM(CUSTOMER_CODE) = ?`,
           [newAttempts, lockUntil.toISOString(), codigo]
         );
 
@@ -129,7 +130,7 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
         };
       } else {
         await odbcPool.query(
-          `UPDATE JAVIER.CUSTOMER_PASSWORDS SET INTENTOS_FALLIDOS = ? WHERE TRIM(CODIGO_CLIENTE) = ?`,
+          `UPDATE JAVIER.CUSTOMER_CREDENTIALS SET FAILED_LOGIN_ATTEMPTS = ? WHERE TRIM(CUSTOMER_CODE) = ?`,
           [newAttempts, codigo]
         );
 
@@ -146,7 +147,7 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
 
     // 6. Login exitoso - Resetear intentos
     await odbcPool.query(
-      `UPDATE JAVIER.CUSTOMER_PASSWORDS SET INTENTOS_FALLIDOS = 0, BLOQUEADO_HASTA = NULL, ULTIMO_LOGIN = CURRENT_TIMESTAMP WHERE TRIM(CODIGO_CLIENTE) = ?`,
+      `UPDATE JAVIER.CUSTOMER_CREDENTIALS SET FAILED_LOGIN_ATTEMPTS = 0, ACCOUNT_LOCKED_UNTIL = NULL, LAST_LOGIN_AT = CURRENT_TIMESTAMP WHERE TRIM(CUSTOMER_CODE) = ?`,
       [codigo]
     );
 
@@ -158,6 +159,7 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
       {
         codigoCliente: codigo.trim(),
         nombre: cliente.NOMBRECLIENTE.trim(),
+        isLegacyPassword: (authRecord.IS_LEGACY_PASSWORD === 1 || authRecord.IS_LEGACY_PASSWORD === '1'),
         tipo: 'access'
       },
       JWT_SECRET,
