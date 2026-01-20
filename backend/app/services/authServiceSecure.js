@@ -86,9 +86,9 @@ class AuthServiceSecure {
             await this.recordSuccessfulLogin(Number(customer.CUSTOMER_ID), ipAddress, userAgent);
 
             // 8. Determinar si mostrar modal de cambio de contraseña
-            // Solo mostrar si es legacy Y no ha sido descartado 2 veces
+            // Solo mostrar si es legacy Y no ha sido descartado 3 veces
             const dismissalCount = Number(customer.PASSWORD_WARNING_DISMISSALS || 0);
-            const showPasswordChangeModal = customer.IS_LEGACY_PASSWORD == 1 && dismissalCount < 2;
+            const showPasswordChangeModal = customer.IS_LEGACY_PASSWORD == 1 && dismissalCount < 3;
 
             // 9. CHECK MANDATORY EMAIL AND PHONE
             const email = customer.EMAIL ? customer.EMAIL.trim() : null;
