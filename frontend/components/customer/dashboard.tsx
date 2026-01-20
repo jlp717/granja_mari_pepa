@@ -243,7 +243,7 @@ export function CustomerDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterMonth, setFilterMonth] = useState('all');
-  const [filterYear, setFilterYear] = useState('2025'); // Año actual por defecto
+  const [filterYear, setFilterYear] = useState(String(new Date().getFullYear())); // Año actual dinámico
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   // Ref para el contenido principal (scroll en móvil)
@@ -2189,11 +2189,11 @@ export function CustomerDashboard() {
                       className="w-full px-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
                     >
                       <option value="all">Todos los años</option>
-                      <option value="2025">2025</option>
-                      <option value="2024">2024</option>
-                      <option value="2023">2023</option>
-                      <option value="2022">2022</option>
-                      <option value="2021">2021</option>
+                      {Array.from({ length: 6 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+                        <option key={year} value={String(year)}>
+                          {year}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
@@ -2227,14 +2227,14 @@ export function CustomerDashboard() {
                   )}
 
                   {/* Botón Restablecer Filtros */}
-                  {(filterYear !== '2025' || filterMonth !== 'all') && (
+                  {(filterYear !== String(new Date().getFullYear()) || filterMonth !== 'all') && (
                     <motion.button
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => {
-                        setFilterYear('2025');
+                        setFilterYear(String(new Date().getFullYear()));
                         setFilterMonth('all');
                         setSearchTerm('');
                         setFechaDesde('');
