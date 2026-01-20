@@ -203,23 +203,60 @@ function calcularFechaFinTrimestre(ejercicio, trimestre) {
 /**
  * Obtener registros de IVA Repercutido (Ventas)
  */
+/**
+ * Obtener registros de IVA Repercutido (Ventas)
+ * SOPORTA: Unificación por NIF (Muestra facturas de todos los códigos vinculados al mismo NIF)
+ */
 async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
   try {
+    // 1. OBTENER CÓDIGOS VINCULADOS (POR NIF)
+    let codigosVinculados = [];
+
+    if (codigoCliente) {
+      codigosVinculados = [`'${codigoCliente.trim()}'`];
+      try {
+        // Consultar NIF del cliente
+        const queryNif = `SELECT NIF FROM DSEDAC.CLI WHERE CODIGOCLIENTE = ?`;
+        const resultNif = await odbcPool.query(queryNif, [codigoCliente.trim()]);
+
+        if (resultNif.length > 0 && resultNif[0].NIF) {
+          const nif = resultNif[0].NIF.trim();
+          // Solo unificamos si hay NIF válido
+          if (nif) {
+            // Buscamos TODOS los clientes con ese NIF
+            const queryVinculados = `SELECT CODIGOCLIENTE FROM DSEDAC.CLI WHERE NIF = ?`;
+            const resultVinculados = await odbcPool.query(queryVinculados, [nif]);
+
+            if (resultVinculados.length > 0) {
+              codigosVinculados = resultVinculados.map(r => `'${r.CODIGOCLIENTE.trim()}'`);
+            }
+          }
+        }
+      } catch (errNif) {
+        logger.warn(`⚠️ Error buscando vinculaciones NIF para Libro IVA ${codigoCliente}`, errNif);
+        // Continuamos con el código original si falla la vinculación
+      }
+    }
+
+    const codigosInClause = codigosVinculados.join(', ');
+
     // FIX ESPECÍFICO PARA CLIENTE 4300013449 (GARCIA DE ALCARAZ MULERO PEDRO)
     // El cliente requiere que el Libro IVA coincida con su sistema de referencia que cierra el 12/12/2025.
     // Las facturas posteriores (13-18 dic) deben excluirse de este reporte específico.
-    if (codigoCliente === '4300013449' && fechaFin === '2025-12-31') {
+    // Aplicamos esto si alguno de los códigos vinculados es el 4300013449
+    if (codigosInClause.includes("'4300013449'") && fechaFin === '2025-12-31') {
       fechaFin = '2025-12-12';
-      logger.info('🔧 Aplicando parche de fecha fin 2025-12-12 para cliente 4300013449');
+      logger.info('🔧 Aplicando parche de fecha fin 2025-12-12 para cliente 4300013449 (Unificado)');
     }
 
     // Convertir fechas de 'YYYY-MM-DD' a formato numérico YYYYMMDD para comparación
     const fechaInicioNum = parseInt(fechaInicio.replace(/-/g, ''));
     const fechaFinNum = parseInt(fechaFin.replace(/-/g, ''));
 
-    logger.info('🔍 Buscando facturas con fechas numéricas', {
+    logger.info('🔍 Buscando facturas Libro IVA', {
       fechaInicioNum,
-      fechaFinNum
+      fechaFinNum,
+      codigos: codigosInClause || 'TODOS'
     });
 
     // Usar CAC (Cabecera de Albaranes de Cliente) que es donde están las facturas
@@ -284,7 +321,7 @@ async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
       WHERE (C.ANOFACTURA * 10000 + C.MESFACTURA * 100 + C.DIAFACTURA) >= ?
         AND (C.ANOFACTURA * 10000 + C.MESFACTURA * 100 + C.DIAFACTURA) <= ?
         AND C.NUMEROFACTURA > 0
-        ${codigoCliente ? 'AND TRIM(C.CODIGOCLIENTEFACTURA) = ?' : ''}
+        ${codigoCliente ? `AND TRIM(C.CODIGOCLIENTEFACTURA) IN (${codigosInClause})` : ''}
       GROUP BY
         TRIM(C.SERIEFACTURA),
         C.NUMEROFACTURA,
@@ -299,9 +336,8 @@ async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
       ORDER BY ANOFACTURA DESC, MESFACTURA DESC, DIAFACTURA DESC, SERIEFACTURA, NUMEROFACTURA
     `;
 
-    const params = codigoCliente
-      ? [fechaInicioNum, fechaFinNum, codigoCliente.trim()]
-      : [fechaInicioNum, fechaFinNum];
+    // Parámetros de la query (solo fechas, porque los códigos van IN)
+    const params = [fechaInicioNum, fechaFinNum];
 
     const result = await odbcPool.query(query, params);
 
@@ -309,7 +345,8 @@ async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
       registros: result.length,
       fechaInicio,
       fechaFin,
-      codigoCliente: codigoCliente || 'TODOS'
+      codigoCliente: codigoCliente || 'TODOS',
+      unificado: codigosVinculados.length > 1
     });
 
     return result || [];

@@ -1643,15 +1643,18 @@ export function CustomerDashboard() {
   const filteredFacturas = useMemo(() => {
     return (facturas || []).filter(factura => {
       const searchLower = searchTerm.toLowerCase();
+
+      // Búsqueda en campos disponibles del backend
       const matchesSearch = searchTerm === '' ||
-        (factura.numeroFactura !== undefined && factura.numeroFactura !== null && String(factura.numeroFactura).includes(searchTerm)) ||
+        (factura.numeroFactura !== undefined && String(factura.numeroFactura).includes(searchTerm)) ||
         factura.serieFactura?.toLowerCase().includes(searchLower) ||
-        (factura as any).albaranes?.toLowerCase().includes(searchLower) ||
-        factura.serie?.toLowerCase().includes(searchLower) ||
-        factura.subempresa?.toLowerCase().includes(searchLower);
+        (factura.albaranes && String(factura.albaranes).toLowerCase().includes(searchLower));
 
       // Filtro por mes
-      const matchesMonth = filterMonth === 'all' || (factura.mes !== undefined && String(factura.mes) === filterMonth) || (factura.mes !== undefined && String(factura.mes).padStart(2, '0') === filterMonth);
+      const matchesMonth = filterMonth === 'all' ||
+        (factura.mes !== undefined && String(factura.mes) === filterMonth) ||
+        (factura.mes !== undefined && String(factura.mes).padStart(2, '0') === filterMonth);
+
       // Filtro por año (Usar año de la fecha visual para consistencia)
       const dateYear = factura.fecha ? factura.fecha.split('/')[2] : '';
       const matchesYear = filterYear === 'all' ||
@@ -1670,6 +1673,7 @@ export function CustomerDashboard() {
           }
           if (fechaHasta) {
             const hasta = new Date(fechaHasta);
+            // Ajustar hasta al final del día
             hasta.setHours(23, 59, 59, 999);
             matchesDateRange = matchesDateRange && facturaDate <= hasta;
           }
@@ -3572,7 +3576,7 @@ export function CustomerDashboard() {
                       ) : paginatedFacturas.length > 0 ? (
                         paginatedFacturas.map((factura, index) => (
                           <motion.div
-                            key={`mobile-${factura.subempresa}-${factura.ejercicio}-${factura.serie}-${factura.terminal}-${factura.numero_albaran}`}
+                            key={`mobile-${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
@@ -3730,7 +3734,7 @@ export function CustomerDashboard() {
                                 const isPagada = factura.estadoPago === 'pagada';
                                 return (
                                   <tr
-                                    key={`${factura.subempresa}-${factura.ejercicio}-${factura.serie}-${factura.terminal}-${factura.numero_albaran}`}
+                                    key={`${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`}
                                     className="relative hover:bg-blue-50 transition-colors duration-150 border-b border-gray-100 group cursor-pointer"
                                   >
                                     {/* Número de Factura - Diseño Premium */}

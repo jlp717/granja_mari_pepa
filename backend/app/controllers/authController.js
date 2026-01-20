@@ -316,21 +316,48 @@ async function obtenerPerfil(req, res) {
 /**
  * GET /api/auth/facturas/:codigoCliente
  * Obtener facturas del cliente con información de productos
+ * SOPORTA: Unificación por NIF (Muestra facturas de todos los códigos vinculados al mismo NIF)
  */
 async function obtenerFacturas(req, res) {
   try {
     const { codigoCliente } = req.params;
 
+    // 1. OBTENER CÓDIGOS VINCULADOS (POR NIF)
+    let codigosVinculados = [`'${codigoCliente}'`]; // Por defecto, solo el propio código
+
+    try {
+      // Consultar NIF del cliente
+      const queryNif = `SELECT NIF FROM DSEDAC.CLI WHERE CODIGOCLIENTE = ?`;
+      const resultNif = await odbcPool.query(queryNif, [codigoCliente]);
+
+      if (resultNif.length > 0 && resultNif[0].NIF) {
+        const nif = resultNif[0].NIF.trim();
+        if (nif) {
+          // Buscamos TODOS los clientes con ese NIF
+          const queryVinculados = `SELECT CODIGOCLIENTE FROM DSEDAC.CLI WHERE NIF = ?`;
+          const resultVinculados = await odbcPool.query(queryVinculados, [nif]);
+
+          if (resultVinculados.length > 0) {
+            codigosVinculados = resultVinculados.map(r => `'${r.CODIGOCLIENTE.trim()}'`);
+          }
+        }
+      }
+    } catch (errNif) {
+      logger.warn(`⚠️ Error buscando vinculaciones NIF para ${codigoCliente}`, errNif);
+      // Continuamos con el código original si falla la vinculación
+    }
+
+    const codigosInClause = codigosVinculados.join(', ');
+
+    // 2. APLICAR FILTROS ESPECÍFICOS
     // FIX ESPECÍFICO PARA CLIENTE 4300013449: Alinear con Libro IVA (Cierre 12/12/2025)
-    // Excluir facturas posteriores al 12/12/2025 para que el total coincida con el reporte fiscal
     let dateFilter = "";
-    if (codigoCliente && codigoCliente.trim() === '4300013449') {
+    if (codigosInClause.includes("'4300013449'")) {
       dateFilter = "AND (CAC.ANOFACTURA < 2025 OR (CAC.ANOFACTURA = 2025 AND (CAC.MESFACTURA < 12 OR (CAC.MESFACTURA = 12 AND CAC.DIAFACTURA <= 12))))";
     }
 
-    // Consulta para obtener facturas agrupadas con conteo de productos y albaranes
-    // FIX: Usar GROUP BY con SUM() para agregar correctamente los importes de todos los albaranes
-    // SELECT DISTINCT causaba pérdida de ~1000€ al eliminar filas "duplicadas"
+    // 3. CONSULTA PRINCIPAL (Unificada)
+    // Usamos IN (${codigosInClause}) para traer facturas de todas las cuentas
     const query = `
       WITH FacturasBase AS (
         SELECT
@@ -340,6 +367,7 @@ async function obtenerFacturas(req, res) {
           MAX(CAC.ANOFACTURA) AS ANO,
           MAX(CAC.MESFACTURA) AS MES,
           MAX(CAC.DIAFACTURA) AS DIA,
+          MAX(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
           
           -- Base Imponible: SUMA de todos los albaranes de la factura
           SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 +
@@ -380,7 +408,7 @@ async function obtenerFacturas(req, res) {
             TRIM(CAST(MAX(CAC.ANOFACTURA) AS CHAR(4)))
           AS VARCHAR(10)) AS FECHA
         FROM DSEDAC.CAC CAC
-        WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+        WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) IN (${codigosInClause})
           AND CAC.NUMEROFACTURA > 0
           ${dateFilter}
         GROUP BY TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
@@ -394,7 +422,7 @@ async function obtenerFacturas(req, res) {
             WITHIN GROUP (ORDER BY NUMEROALBARAN) AS ALBARANES,
           COUNT(DISTINCT NUMEROALBARAN) AS NUM_ALBARANES
         FROM DSEDAC.CAC
-        WHERE TRIM(CODIGOCLIENTEFACTURA) = ?
+        WHERE TRIM(CODIGOCLIENTEFACTURA) IN (${codigosInClause})
           AND NUMEROFACTURA > 0
         GROUP BY TRIM(SERIEFACTURA), NUMEROFACTURA, EJERCICIOFACTURA
       ),
@@ -424,10 +452,11 @@ async function obtenerFacturas(req, res) {
       ORDER BY FB.ANO DESC, FB.MES DESC, FB.DIA DESC, FB.NUMERO DESC
     `;
 
-    // Pasar codigoCliente dos veces (para FacturasBase y AlbaranesFactura)
-    const facturasRaw = await odbcPool.query(query, [codigoCliente, codigoCliente]);
+    // Ejecutamos la query
+    // NOTA: Como usamos IN (${str}), no pasamos parámetros en el array para esa parte
+    const facturasRaw = await odbcPool.query(query);
 
-    // Mapear a formato camelCase que espera el frontend
+    // Mapear a formato camelCase
     const facturas = (facturasRaw || []).map(f => ({
       serieFactura: f.SERIE || '',
       numeroFactura: f.NUMERO || 0,
@@ -445,7 +474,7 @@ async function obtenerFacturas(req, res) {
       numAlbaranes: f.NUM_ALBARANES || 0
     }));
 
-    logger.info(`✅ Facturas obtenidas: ${facturas.length} para cliente ${codigoCliente}`);
+    logger.info(`✅ Facturas obtenidas (Unificación NIF): ${facturas.length} docs para clientes [${codigosInClause}]`);
 
     return res.json({ success: true, facturas });
   } catch (error) {
@@ -518,13 +547,13 @@ async function getContactData(req, res) {
     let result = null;
     try {
       const query = `
-        SELECT 
-          COALESCE(CEM.PHONE, CLI.TELEFONO1) AS TELEFONO,
-          COALESCE(CEM.EMAIL, CLIP.EMAILCONTACTO) AS EMAIL
-        FROM DSEDAC.CLI CLI
-        LEFT JOIN DSEDAC.CLIP CLIP ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CLIP.CODIGOCLIENTE)
-        LEFT JOIN JAVIER.CUSTOMER_CREDENTIALS CEM ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CEM.CUSTOMER_CODE)
-        WHERE TRIM(CLI.CODIGOCLIENTE) = ?`;
+      SELECT 
+        COALESCE(CEM.PHONE, CLI.TELEFONO1) AS TELEFONO,
+        COALESCE(CEM.EMAIL, CLIP.EMAILCONTACTO) AS EMAIL
+      FROM DSEDAC.CLI CLI
+      LEFT JOIN DSEDAC.CLIP CLIP ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CLIP.CODIGOCLIENTE)
+      LEFT JOIN JAVIER.CUSTOMER_CREDENTIALS CEM ON TRIM(CLI.CODIGOCLIENTE) = TRIM(CEM.CUSTOMER_CODE)
+      WHERE TRIM(CLI.CODIGOCLIENTE) = ?`;
       result = await odbcPool.query(query, [codigoCliente.trim()]);
     } catch (legacyError) {
       // Legacy query failed - continue to CUSTOMER_CREDENTIALS fallback
@@ -534,11 +563,11 @@ async function getContactData(req, res) {
     // If not in legacy system, try CUSTOMER_CREDENTIALS (NEW SECURITY SYSTEM)
     if (!result || result.length === 0) {
       const queryCredentials = `
-        SELECT 
-          cc.EMAIL AS EMAIL,
-          cc.PHONE AS TELEFONO
-        FROM JAVIER.CUSTOMER_CREDENTIALS cc
-        WHERE TRIM(cc.CUSTOMER_CODE) = ?`;
+      SELECT 
+        cc.EMAIL AS EMAIL,
+        cc.PHONE AS TELEFONO
+      FROM JAVIER.CUSTOMER_CREDENTIALS cc
+      WHERE TRIM(cc.CUSTOMER_CODE) = ?`;
       result = await odbcPool.query(queryCredentials, [codigoCliente.trim()]);
 
       // If still not found, return empty data (not 404) to allow user to fill it
@@ -597,8 +626,8 @@ async function actualizarDatosContacto(req, res) {
 
     // Check if user exists in CUSTOMER_CREDENTIALS (new security system)
     const checkCredentialsQuery = `
-      SELECT CUSTOMER_ID FROM JAVIER.CUSTOMER_CREDENTIALS 
-      WHERE TRIM(CUSTOMER_CODE) = ?`;
+    SELECT CUSTOMER_ID FROM JAVIER.CUSTOMER_CREDENTIALS 
+    WHERE TRIM(CUSTOMER_CODE) = ?`;
     const credentialsUser = await odbcPool.query(checkCredentialsQuery, [codigoCliente.trim()]);
     const isNewSecurityUser = credentialsUser && credentialsUser.length > 0;
 
@@ -607,30 +636,30 @@ async function actualizarDatosContacto(req, res) {
       if (isNewSecurityUser) {
         // Update in CUSTOMER_CREDENTIALS for new security system users
         const updateCredentialsQuery = `
-          UPDATE JAVIER.CUSTOMER_CREDENTIALS 
-          SET EMAIL = ?, EMAIL_VERIFIED = 1, UPDATED_AT = CURRENT_TIMESTAMP
-          WHERE TRIM(CUSTOMER_CODE) = ?`;
+        UPDATE JAVIER.CUSTOMER_CREDENTIALS 
+        SET EMAIL = ?, EMAIL_VERIFIED = 1, UPDATED_AT = CURRENT_TIMESTAMP
+        WHERE TRIM(CUSTOMER_CODE) = ?`;
         await odbcPool.query(updateCredentialsQuery, [email.trim(), codigoCliente.trim()]);
         logger.info('✅ Email actualizado en CUSTOMER_CREDENTIALS', { codigoCliente, email });
       } else {
         // Legacy: Update in CUSTOMER_EMAILS
         const checkQuery = `
-          SELECT CODIGO_CLIENTE 
-          FROM JAVIER.CUSTOMER_EMAILS 
-          WHERE TRIM(CODIGO_CLIENTE) = ?`;
+        SELECT CODIGO_CLIENTE 
+        FROM JAVIER.CUSTOMER_EMAILS 
+        WHERE TRIM(CODIGO_CLIENTE) = ?`;
         const existing = await odbcPool.query(checkQuery, [codigoCliente.trim()]);
 
         if (existing && existing.length > 0) {
           const updateQuery = `
-            UPDATE JAVIER.CUSTOMER_EMAILS 
-            SET EMAIL = ?
-            WHERE TRIM(CODIGO_CLIENTE) = ?`;
+          UPDATE JAVIER.CUSTOMER_EMAILS 
+          SET EMAIL = ?
+          WHERE TRIM(CODIGO_CLIENTE) = ?`;
           await odbcPool.query(updateQuery, [email.trim(), codigoCliente.trim()]);
           logger.info('✅ Email actualizado en CUSTOMER_EMAILS', { codigoCliente, email });
         } else {
           const insertQuery = `
-            INSERT INTO JAVIER.CUSTOMER_EMAILS (CODIGO_CLIENTE, EMAIL, VERIFICADO)
-            VALUES (?, ?, 'N')`;
+          INSERT INTO JAVIER.CUSTOMER_EMAILS (CODIGO_CLIENTE, EMAIL, VERIFICADO)
+          VALUES (?, ?, 'N')`;
           await odbcPool.query(insertQuery, [codigoCliente.trim(), email.trim()]);
           logger.info('✅ Email insertado en CUSTOMER_EMAILS', { codigoCliente, email });
         }
@@ -641,9 +670,9 @@ async function actualizarDatosContacto(req, res) {
     if (telefono !== undefined && telefono !== null) {
       if (isNewSecurityUser) {
         const updatePhoneQuery = `
-          UPDATE JAVIER.CUSTOMER_CREDENTIALS 
-          SET PHONE = ?, PHONE_VERIFIED = 1, UPDATED_AT = CURRENT_TIMESTAMP
-          WHERE TRIM(CUSTOMER_CODE) = ?`;
+        UPDATE JAVIER.CUSTOMER_CREDENTIALS 
+        SET PHONE = ?, PHONE_VERIFIED = 1, UPDATED_AT = CURRENT_TIMESTAMP
+        WHERE TRIM(CUSTOMER_CODE) = ?`;
         await odbcPool.query(updatePhoneQuery, [telefono.trim(), codigoCliente.trim()]);
         logger.info('✅ Teléfono actualizado en CUSTOMER_CREDENTIALS', { codigoCliente, telefono });
       } else {
@@ -695,11 +724,11 @@ async function dismissPasswordWarning(req, res) {
 
     // Increment PASSWORD_WARNING_DISMISSALS in CUSTOMER_CREDENTIALS
     const updateQuery = `
-      UPDATE JAVIER.CUSTOMER_CREDENTIALS
-      SET PASSWORD_WARNING_DISMISSALS = PASSWORD_WARNING_DISMISSALS + 1,
-          UPDATED_AT = CURRENT_TIMESTAMP
-      WHERE TRIM(CUSTOMER_CODE) = ?
-    `;
+    UPDATE JAVIER.CUSTOMER_CREDENTIALS
+    SET PASSWORD_WARNING_DISMISSALS = PASSWORD_WARNING_DISMISSALS + 1,
+        UPDATED_AT = CURRENT_TIMESTAMP
+    WHERE TRIM(CUSTOMER_CODE) = ?
+  `;
 
     await odbcPool.query(updateQuery, [codigoCliente.trim()]);
     logger.success('✅ Password warning dismissed', { codigoCliente });
