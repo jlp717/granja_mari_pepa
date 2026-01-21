@@ -15,7 +15,8 @@
  * @version 3.0.0
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+// URL base para API (vacío = rutas relativas que usa Next.js rewrites)
+const API_URL = '';
 
 // 🔐 Evento global para notificar cuando la sesión expira
 export const SESSION_EXPIRED_EVENT = 'session:expired';

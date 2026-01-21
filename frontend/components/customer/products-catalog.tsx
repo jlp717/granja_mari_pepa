@@ -60,7 +60,8 @@ export default function ProductsCatalog() {
   const { cliente } = useSession();
   const addToCart = useCartStore((state) => state.addItem);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  // API base URL (vacío = rutas relativas manejadas por Next.js rewrites)
+  const API_URL = '';
 
   // Cargar familias
   useEffect(() => {

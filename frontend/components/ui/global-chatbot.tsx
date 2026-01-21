@@ -682,10 +682,8 @@ export function GlobalChatbot() {
                                     onClick={async (e) => {
                                       e.preventDefault();
                                       try {
-                                        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
                                         // Abrir nueva pestaña para descargar
-                                        const fullUrl = `${API_URL}${att.url}`;
-                                        window.open(fullUrl, '_blank', 'noopener');
+                                        window.open(att.url, '_blank', 'noopener');
                                       } catch (err) {
                                         console.error('Error descargando archivo', err);
                                       }
