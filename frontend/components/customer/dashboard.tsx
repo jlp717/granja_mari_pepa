@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CustomToast } from '@/components/ui/custom-toast';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
@@ -130,6 +131,7 @@ const statusIcons = {
 
 // Componente para visualizar PDF desde blob - con soporte móvil
 function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, generatePdfBlob: (f: FacturaBackend) => Promise<string> }) {
+  const t = useTranslations('customerArea.dashboard.pdf');
   const [pdfUrl, setPdfUrl] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
@@ -157,7 +159,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
         const url = await generatePdfBlob(factura);
         setPdfUrl(url);
       } catch (err: any) {
-        setError(err.message || 'Error al cargar el PDF');
+        setError(err.message || t('error'));
       } finally {
         setLoading(false);
       }
@@ -171,7 +173,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
       <div className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900 rounded-lg">
         <div className="text-center">
           <div className="animate-spin rounded-full h-10 w-10 md:h-12 md:w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">Cargando PDF...</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">{t('loading')}</p>
         </div>
       </div>
     );
@@ -201,10 +203,10 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
           {/* Título */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
-              Factura {factura.serieFactura}-{factura.numeroFactura}
+              {t('mobileTitle', { serie: factura.serieFactura, numero: factura.numeroFactura })}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.
+              {t('mobileDesc')}
             </p>
           </div>
 
@@ -215,12 +217,12 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
             className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95"
           >
             <Download className="w-5 h-5" />
-            Descargar PDF
+            {t('download')}
           </a>
 
           {/* Info adicional */}
           <p className="text-xs text-gray-500 dark:text-gray-500">
-            El PDF se guardará en tu carpeta de descargas
+            {t('saveInfo')}
           </p>
         </div>
       </div>

@@ -123,6 +123,302 @@
         "interested": "Interested in our products?",
         "requestInfo": "Request information"
     },
+    "contact_page": {
+        "hero": {
+            "badge": "Direct Contact",
+            "title": "Let's Talk",
+            "subtitle_1": "We are here to",
+            "subtitle_highlight": "listen",
+            "subtitle_2": "and help you",
+            "description": "Our team of experts is available to answer your questions, customize solutions and accompany you every step of the way to success.",
+            "cta_send": "Send message"
+        },
+        "channels": {
+            "title_1": "Connect",
+            "title_2": "with Us",
+            "description": "Multiple communication channels so you can choose the one that suits you best",
+            "murcia": {
+                "title": "Murcia Delegation",
+                "desc": "Lorca - Headquarters"
+            },
+            "email": {
+                "title": "Orders Email",
+                "desc": "Inquiries and orders"
+            },
+            "almeria": {
+                "title": "Almeria Delegation",
+                "desc": "Viator"
+            }
+        },
+        "schedule": {
+            "title": "Customer Service Hours",
+            "days": "Monday - Friday",
+            "hours": "8:00 - 13:00 and 16:00 - 19:00",
+            "after_hours": "After-hours phones"
+        },
+        "form_section": {
+            "title_1": "Tell us about",
+            "title_2": "your project",
+            "description": "Every business is unique. Share your needs and we will create a personalized solution that drives your growth.",
+            "stats": {
+                "delivery": "Guaranteed delivery",
+                "quality": "Certified quality",
+                "foundation": "Foundation year",
+                "experience": "Years experience"
+            },
+            "form_title": "Send us your message",
+            "form_subtitle": "We will respond as soon as possible",
+            "labels": {
+                "name": "Full name *",
+                "company": "Company *",
+                "email": "Email *",
+                "phone": "Phone *",
+                "message": "Message *",
+                "privacy": "I accept the privacy policy *",
+                "privacy_desc": "By sending this form you accept that we process your data to answer your query."
+            },
+            "placeholders": {
+                "name": "Your name",
+                "company": "Your company name",
+                "email": "you@email.com",
+                "phone": "+34 XXX XXX XXX",
+                "message": "Tell us how we can help you..."
+            },
+            "errors": {
+                "name": "Name must have at least 2 characters",
+                "company": "Company must have at least 2 characters",
+                "email": "Invalid email",
+                "phone": "Invalid phone",
+                "message": "Message must have at least 10 characters",
+                "privacy": "You must accept the privacy policy"
+            },
+            "success": "Message sent successfully! We will contact you soon.",
+            "submit": "Send message",
+            "sending": "Sending..."
+        },
+        "locations": {
+            "title_1": "Our",
+            "title_2": "Locations",
+            "description": "Present in the main cities of the southeast of Spain to be closer to you",
+            "main_delegation": "Main Delegation",
+            "active": "Active",
+            "address": "Address",
+            "phone": "Phone",
+            "view_globe": "View on globe"
+        },
+        "globe": {
+            "title": "Interactive 3D Globe",
+            "subtitle": "Click on locations for an immersive experience",
+            "view_maps": "View on Maps",
+            "sede_murcia": "Headquarters in Murcia",
+            "delegation_andalucia": "Commercial delegation in Andalusia"
+        },
+        "cta_final": {
+            "title_1": "Ready to",
+            "title_2": "start?",
+            "description": "Our team is prepared to help you find the best solutions for your business. The first step is as simple as a call.",
+            "whatsapp": "WhatsApp",
+            "guarantees": {
+                "delivery": {
+                    "text": "Delivery 24-48h",
+                    "desc": "Cold chain guaranteed"
+                },
+                "support": {
+                    "text": "Personalized attention",
+                    "desc": "HORECA specialists"
+                },
+                "quality": {
+                    "text": "ISO 9001 Quality",
+                    "desc": "Certified guarantee"
+                }
+            }
+        }
+    },
+    "about_page": {
+        "hero": {
+            "title": "Granja Maripepa",
+            "subtitle_1": "More than",
+            "subtitle_highlight": "55 years",
+            "subtitle_2": "serving the HORECA sector",
+            "description": "Since 1966 in Lorca (Murcia), we are specialists in the distribution of frozen, refrigerated, and ambient products for hospitality, catering, and food services.",
+            "cta_history": "Discover our history",
+            "cta_contact": "Contact now"
+        },
+        "history": {
+            "title_1": "Our",
+            "title_2": "History",
+            "description": "More than five decades of experience and commitment to quality in the food sector",
+            "milestones": {
+                "1966": {
+                    "title": "Founded in Lorca (Murcia)",
+                    "desc": "Granja Maripepa, S.L. was founded in Lorca (Murcia), specializing from the start in the HORECA market and food channel."
+                },
+                "1980s": {
+                    "title": "Regional Consolidation",
+                    "desc": "Expansion of the range of frozen, refrigerated, and ambient products for hospitality and catering."
+                },
+                "2000s": {
+                    "title": "ISO 9001 Certification",
+                    "desc": "Obtained ISO 9001:2008 certification guaranteeing our Quality Management System."
+                },
+                "2020": {
+                    "title": "100% Green Energy",
+                    "desc": "Certification from Feníe Energía and CNMC that our energy is 100% renewable origin."
+                },
+                "today": {
+                    "title": "More than 1,500 references",
+                    "desc": "Currently we have a range of more than 1,500 references in three temperatures, serving Murcia and Alicante."
+                }
+            }
+        },
+        "delegations": {
+            "title": "Our Delegations",
+            "description": "Below is the official address of our headquarters in Lorca (Murcia).",
+            "view_maps": "View on Google Maps"
+        },
+        "values": {
+            "title_1": "Our",
+            "title_2": "Values",
+            "description": "The pillars that sustain our excellence and define our way of working every day",
+            "items": {
+                "quality": {
+                    "title": "Certified Quality",
+                    "desc": "Quality guarantee backed by ISO 9001 Standard. Traceability of all our products.",
+                    "label": "Quality Certification"
+                },
+                "service": {
+                    "title": "Fast Service",
+                    "desc": "24-48 hour delivery service respecting the cold chain at all times.",
+                    "label": "Delivery Time"
+                },
+                "coverage": {
+                    "title": "Regional Coverage",
+                    "desc": "Service in Murcia and Alicante with strategic delegation in Lorca.",
+                    "label": "Provinces attended"
+                },
+                "attention": {
+                    "title": "Personalized Attention",
+                    "desc": "Highly qualified human team knowledgeable about the market and HORECA product.",
+                    "label": "Years experience"
+                }
+            }
+        },
+        "commitment": {
+            "title_1": "Our",
+            "title_2": "Commitment",
+            "description": "What differentiates us and makes our clients trust us for more than 55 years",
+            "offer_title": "What We Offer",
+            "items": {
+                "quality": "Quality guarantee, backed by ISO 9001 Standard",
+                "traceability": "Traceability of all our products",
+                "delivery": "Delivery service in 24 – 48 hours",
+                "service": "Service in Murcia and Alicante",
+                "attention": "Personalized attention",
+                "capacity": "Refrigerated capacity of 5,000m³"
+            },
+            "stats": {
+                "title": "Granja Maripepa in Figures",
+                "founded_label": "Founding Year",
+                "references_label": "Product References",
+                "capacity_label": "Refrigerated Capacity",
+                "temps_label": "Temperatures (frozen, refrigerated, ambient)"
+            }
+        },
+        "certifications": {
+            "title_1": "Certifications",
+            "title_2": "& Quality",
+            "description": "Our commitment to the highest standards of quality and food safety",
+            "items": {
+                "iso": {
+                    "name": "ISO 9001:2008",
+                    "desc": "Quality Management System",
+                    "label": "Certified"
+                },
+                "green": {
+                    "name": "100% Green Energy",
+                    "desc": "Feníe Energía + CNMC",
+                    "label": "Renewable"
+                },
+                "traceability": {
+                    "name": "Total Traceability",
+                    "desc": "Product control",
+                    "label": "Guarantee"
+                },
+                "cold_chain": {
+                    "name": "Cold Chain",
+                    "desc": "5,000m³ refrigerated capacity",
+                    "label": "Certified"
+                }
+            },
+            "process": {
+                "title": "Quality Control Process",
+                "description": "From reception to delivery, every step is controlled",
+                "steps": {
+                    "reception": {
+                        "title": "Reception",
+                        "desc": "Temperature and quality control upon receipt"
+                    },
+                    "inspection": {
+                        "title": "Inspection",
+                        "desc": "Exhaustive verification of all products"
+                    },
+                    "certification": {
+                        "title": "Certification",
+                        "desc": "Labeling and registration according to regulations"
+                    },
+                    "distribution": {
+                        "title": "Distribution",
+                        "desc": "Delivery with guaranteed cold chain"
+                    }
+                }
+            }
+        },
+        "strategy": {
+            "title_1": "Our",
+            "title_2": "Business Strategy",
+            "description": "Committed to excellence in service to the HORECA sector",
+            "mission": {
+                "title": "Our Mission",
+                "item_1": "Offer support to the restoration guild through the distribution of selected top quality products.",
+                "item_2": "Always seek innovation to meet the demands of the final customer.",
+                "item_3": "Facilitate the task of the kitchen professional."
+            },
+            "vision": {
+                "title": "Our Vision",
+                "item_1": "More demanding and informed clients demanding higher quality in products and services.",
+                "item_2": "Selecting the professional support that covers those expectations can make the difference.",
+                "item_3": "Our purpose is to be that support for the HORECA channel."
+            }
+        },
+        "reviews": {
+            "badge": "Google Reviews",
+            "title_1": "What",
+            "title_highlight": "our clients say",
+            "description": "The opinion of those who trust Granja Maripepa for their business",
+            "antonio_review": {
+                "text": "This company distributes all kinds of frozen foods, ice creams, and endless products. If you want quality products and exceptional treatment look no further. The best company I know in its sector.",
+                "role": "8 reviews · Local guide"
+            },
+            "view_all": {
+                "title": "View all reviews",
+                "subtitle": "Read the 18 opinions of our clients on Google Maps",
+                "link": "Open in Google Maps"
+            },
+            "summary": {
+                "rating_label": "Google Rating",
+                "reviews_label": "Customer reviews",
+                "write_review": "Write a review"
+            }
+        },
+        "cta_final": {
+            "title_1": "Ready to",
+            "title_highlight": "work together",
+            "title_suffix": "?",
+            "description": "Join the HORECA establishments that trust Granja Maripepa to bring certified quality products to their customers in Murcia and Alicante.",
+            "contact": "Contact now",
+            "catalog": "View catalog"
+        }
+    },
     "contact": {
         "title": "Contact",
         "subtitle": "We're here to help",
@@ -159,6 +455,14 @@
             "city": "30817 - Lorca (Murcia), Spain"
         }
     },
+    "products_page": {
+        "title": "Coming Soon",
+        "subtitle_1": "We are preparing something special",
+        "subtitle_2": "Our product catalog is being updated with new features.",
+        "cta_home": "Back to Home",
+        "cta_clients": "Customer Area",
+        "badge": "Available soon"
+    },
     "customerArea": {
         "title": "Customer Area",
         "welcome": "Welcome to your",
@@ -176,7 +480,20 @@
             "accessButton": "Access",
             "loggingIn": "Logging in...",
             "needHelp": "Need help?",
-            "contactSupport": "Contact support"
+            "contactSupport": "Contact support",
+            "needAccount": "Need an account?",
+            "contactUs": "Contact us",
+            "contactToast": "📞 Contact us\\n\\nPhone: +34 965 123 456\\nEmail: soporte@granja-mari-pepa.com\\nHours: Mon-Fri 9:00-18:00"
+        },
+        "emailSetup": {
+            "title": "Contact Setup",
+            "subtitle": "For your security, we need your contact details.",
+            "data_usage": "Data usage:",
+            "data_usage_desc": "Only for password recovery and sending invoices. We do not share this information.",
+            "email": "Email",
+            "phone": "Phone",
+            "save": "Save and Continue",
+            "saving": "Saving..."
         },
         "features": {
             "history": "Complete history",
@@ -201,7 +518,61 @@
             "noInvoices": "You have no recent invoices",
             "lastInvoices": "Recent invoices",
             "totalPending": "Total pending",
-            "logout": "Log out"
+            "logout": "Log out",
+            "tabs": {
+                "facturas": "Invoices",
+                "perfil": "Profile",
+                "favoritos": "Favorites",
+                "pedidos": "Orders"
+            },
+            "status": {
+                "pending": "Pending",
+                "processing": "Processing",
+                "shipped": "Shipped",
+                "delivered": "Delivered",
+                "paid": "Paid",
+                "cancelled": "Cancelled"
+            },
+            "pdf": {
+                "loading": "Loading PDF...",
+                "error": "Error loading PDF",
+                "mobileTitle": "Invoice {serie}-{numero}",
+                "mobileDesc": "To view the full PDF on your mobile device, download it directly.",
+                "download": "Download PDF",
+                "saveInfo": "The PDF will be saved in your downloads folder"
+            }
+        },
+        "publicFeatures": {
+            "badge": "Control Panel",
+            "title": "Everything you need in one place",
+            "subtitle": "Manage your commercial relationship with us easily and efficiently",
+            "items": {
+                "orders": {
+                    "title": "Order Management",
+                    "desc": "Place and track all your orders in real time",
+                    "label": "Available"
+                },
+                "invoices": {
+                    "title": "PDF Invoices",
+                    "desc": "Download and manage your invoices instantly",
+                    "label": "Digital"
+                },
+                "profile": {
+                    "title": "Personal Profile",
+                    "desc": "Update your data and contact preferences",
+                    "label": "Customizable"
+                },
+                "stats": {
+                    "title": "Statistics",
+                    "desc": "Analyze your history and purchasing patterns",
+                    "label": "Insights"
+                }
+            },
+            "cta": {
+                "title": "Don't have an account yet?",
+                "desc": "Contact our sales team to get access",
+                "button": "Contact"
+            }
         },
         "invoice": {
             "number": "Number",
@@ -320,5 +691,63 @@
         "title": "Granja Mari Pepa | Premium Food Distribution",
         "description": "Distributors of frozen products, meats and fish for HORECA hospitality in Murcia and Almería, Spain. 24h service. Since 1966.",
         "keywords": "food distribution, frozen products, HORECA, Murcia, Almería, meats, fish"
+    },
+    "legal": {
+        "privacy": {
+            "title": "Privacy Policy",
+            "intro": "At Granja Mari Pepa we take the privacy of our customers and users very seriously.",
+            "sections": {
+                "s1": {
+                    "title": "1. Data Controller",
+                    "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+                },
+                "s2": {
+                    "title": "2. Purpose of Processing",
+                    "content": "We process the information you provide in order to provide the requested service, perform billing and send commercial communications related to our products and services."
+                },
+                "s3": {
+                    "title": "3. Data Retention",
+                    "content": "The data provided will be kept as long as the commercial relationship is maintained or for the years necessary to comply with legal obligations."
+                },
+                "s4": {
+                    "title": "4. Legitimation",
+                    "content": "The legal basis for the processing of your data is the execution of the contract for the provision of services and/or sale of products."
+                },
+                "s5": {
+                    "title": "5. Recipients",
+                    "content": "The data will not be transferred to third parties except in cases where there is a legal obligation."
+                },
+                "s6": {
+                    "title": "6. Rights",
+                    "content": "You have the right to obtain confirmation as to whether Granja Mari Pepa is processing your personal data, therefore you have the right to access your personal data, rectify inaccurate data or request its deletion when the data is no longer necessary."
+                }
+            }
+        },
+        "terms": {
+            "title": "Terms and Conditions",
+            "intro": "Welcome to the Granja Mari Pepa website. By accessing and using this site, you agree to the following terms and conditions.",
+            "sections": {
+                "s1": {
+                    "title": "1. Intellectual Property",
+                    "content": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Granja Mari Pepa."
+                },
+                "s2": {
+                    "title": "2. Use of the Website",
+                    "content": "The user undertakes to use the website, its services and contents diligently, correctly and lawfully, and in particular, undertakes to refrain from suppressing, circumventing or manipulating the copyright and other identifying data of the rights of its holders."
+                },
+                "s3": {
+                    "title": "3. Liability",
+                    "content": "Granja Mari Pepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein."
+                },
+                "s4": {
+                    "title": "4. Modifications",
+                    "content": "Granja Mari Pepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website."
+                },
+                "s5": {
+                    "title": "5. Applicable Law",
+                    "content": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Granja Mari Pepa agree to expressly submit to the courts and tribunals of Lorca (Murcia)."
+                }
+            }
+        }
     }
 }

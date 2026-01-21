@@ -123,6 +123,302 @@
         "interested": "¿Interesado en nuestros productos?",
         "requestInfo": "Solicitar información"
     },
+    "contact_page": {
+        "hero": {
+            "badge": "Contacto Directo",
+            "title": "Hablemos",
+            "subtitle_1": "Estamos aquí para",
+            "subtitle_highlight": "escucharte",
+            "subtitle_2": "y ayudarte",
+            "description": "Nuestro equipo de expertos está disponible para resolver tus dudas, personalizar soluciones y acompañarte en cada paso hacia el éxito.",
+            "cta_send": "Enviar mensaje"
+        },
+        "channels": {
+            "title_1": "Conecta",
+            "title_2": "con Nosotros",
+            "description": "Múltiples canales de comunicación para que elijas el que mejor se adapte a ti",
+            "murcia": {
+                "title": "Delegación Murcia",
+                "desc": "Lorca - Sede central"
+            },
+            "email": {
+                "title": "Email de Pedidos",
+                "desc": "Consultas y pedidos"
+            },
+            "almeria": {
+                "title": "Delegación Almería",
+                "desc": "Viator"
+            }
+        },
+        "schedule": {
+            "title": "Horarios de Atención al Cliente",
+            "days": "Lunes - Viernes",
+            "hours": "8:00 - 13:00 y 16:00 - 19:00",
+            "after_hours": "Teléfonos fuera de horario"
+        },
+        "form_section": {
+            "title_1": "Cuéntanos",
+            "title_2": "tu proyecto",
+            "description": "Cada negocio es único. Comparte tus necesidades y crearemos una solución personalizada que impulse tu crecimiento.",
+            "stats": {
+                "delivery": "Entrega garantizada",
+                "quality": "Calidad certificada",
+                "foundation": "Año de fundación",
+                "experience": "Años experiencia"
+            },
+            "form_title": "Envíanos tu mensaje",
+            "form_subtitle": "Te responderemos lo antes posible",
+            "labels": {
+                "name": "Nombre completo *",
+                "company": "Empresa *",
+                "email": "Email *",
+                "phone": "Teléfono *",
+                "message": "Mensaje *",
+                "privacy": "Acepto la política de privacidad *",
+                "privacy_desc": "Al enviar este formulario aceptas que tratemos tus datos para responder a tu consulta."
+            },
+            "placeholders": {
+                "name": "Tu nombre",
+                "company": "Nombre de tu empresa",
+                "email": "tu@email.com",
+                "phone": "+34 XXX XXX XXX",
+                "message": "Cuéntanos en qué podemos ayudarte..."
+            },
+            "errors": {
+                "name": "El nombre debe tener al menos 2 caracteres",
+                "company": "La empresa debe tener al menos 2 caracteres",
+                "email": "Email inválido",
+                "phone": "Teléfono inválido",
+                "message": "El mensaje debe tener al menos 10 caracteres",
+                "privacy": "Debes aceptar la política de privacidad"
+            },
+            "success": "¡Mensaje enviado correctamente! Te contactaremos pronto.",
+            "submit": "Enviar mensaje",
+            "sending": "Enviando..."
+        },
+        "locations": {
+            "title_1": "Nuestras",
+            "title_2": "Ubicaciones",
+            "description": "Presentes en las principales ciudades del sureste español para estar más cerca de ti",
+            "main_delegation": "Delegación Principal",
+            "active": "Activa",
+            "address": "Dirección",
+            "phone": "Teléfono",
+            "view_globe": "Ver en globo"
+        },
+        "globe": {
+            "title": "Globo Interactivo 3D",
+            "subtitle": "Haz clic en las ubicaciones para una experiencia inmersiva",
+            "view_maps": "Ver en Maps",
+            "sede_murcia": "Sede central de operaciones en Murcia",
+            "delegation_andalucia": "Delegación comercial en Andalucía"
+        },
+        "cta_final": {
+            "title_1": "¿Listo para",
+            "title_2": "comenzar?",
+            "description": "Nuestro equipo está preparado para ayudarte a encontrar las mejores soluciones para tu negocio. El primer paso es tan simple como una llamada.",
+            "whatsapp": "WhatsApp",
+            "guarantees": {
+                "delivery": {
+                    "text": "Entrega 24-48h",
+                    "desc": "Cadena de frío garantizada"
+                },
+                "support": {
+                    "text": "Atención personalizada",
+                    "desc": "Especialistas HORECA"
+                },
+                "quality": {
+                    "text": "Calidad ISO 9001",
+                    "desc": "Certificación garantizada"
+                }
+            }
+        }
+    },
+    "about_page": {
+        "hero": {
+            "title": "Granja Maripepa",
+            "subtitle_1": "Más de",
+            "subtitle_highlight": "55 años",
+            "subtitle_2": "al servicio del sector HORECA",
+            "description": "Desde 1966 en Lorca (Murcia), somos especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería, restauración y catering.",
+            "cta_history": "Descubre nuestra historia",
+            "cta_contact": "Contactar ahora"
+        },
+        "history": {
+            "title_1": "Nuestra",
+            "title_2": "Historia",
+            "description": "Más de cinco décadas de experiencia y compromiso con la calidad en el sector alimentario",
+            "milestones": {
+                "1966": {
+                    "title": "Fundación en Lorca (Murcia)",
+                    "desc": "Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
+                },
+                "1980s": {
+                    "title": "Consolidación regional",
+                    "desc": "Ampliación de la gama de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración."
+                },
+                "2000s": {
+                    "title": "Certificación ISO 9001",
+                    "desc": "Obtención de la certificación ISO 9001:2008 que garantiza nuestro Sistema de Gestión de la Calidad."
+                },
+                "2020": {
+                    "title": "Energía 100% Verde",
+                    "desc": "Certificación de Feníe Energía y la CNMC de que nuestra energía es de origen 100% renovable."
+                },
+                "today": {
+                    "title": "Más de 1.500 referencias",
+                    "desc": "Actualmente contamos con una gama de más de 1.500 referencias en tres temperaturas, sirviendo a Murcia y Alicante."
+                }
+            }
+        },
+        "delegations": {
+            "title": "Nuestras Delegaciones",
+            "description": "A continuación la dirección oficial de nuestra sede en Lorca (Murcia).",
+            "view_maps": "Ver en Google Maps"
+        },
+        "values": {
+            "title_1": "Nuestros",
+            "title_2": "Valores",
+            "description": "Los pilares que sostienen nuestra excelencia y definen nuestra manera de trabajar cada día",
+            "items": {
+                "quality": {
+                    "title": "Calidad Certificada",
+                    "desc": "Garantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos.",
+                    "label": "Certificación de calidad"
+                },
+                "service": {
+                    "title": "Servicio Rápido",
+                    "desc": "Servicio de entrega en 24-48 horas respetando en todo momento la cadena de frío.",
+                    "label": "Tiempo de entrega"
+                },
+                "coverage": {
+                    "title": "Cobertura Regional",
+                    "desc": "Servicio en Murcia y Alicante con delegación estratégica en Lorca.",
+                    "label": "Provincias atendidas"
+                },
+                "attention": {
+                    "title": "Atención Personalizada",
+                    "desc": "Equipo humano altamente cualificado y conocedor del mercado y el producto HORECA.",
+                    "label": "Años de experiencia"
+                }
+            }
+        },
+        "commitment": {
+            "title_1": "Nuestro",
+            "title_2": "Compromiso",
+            "description": "Lo que nos diferencia y hace que nuestros clientes confíen en nosotros desde hace más de 55 años",
+            "offer_title": "Qué Ofrecemos",
+            "items": {
+                "quality": "Garantía de calidad, respaldada por la Norma ISO 9001",
+                "traceability": "Trazabilidad de todos nuestros productos",
+                "delivery": "Servicio de entrega en 24 – 48 horas",
+                "service": "Servicio en Murcia y Alicante",
+                "attention": "Atención personalizada",
+                "capacity": "Capacidad frigorífica de 5.000m³"
+            },
+            "stats": {
+                "title": "Granja Maripepa en Cifras",
+                "founded_label": "Año de fundación",
+                "references_label": "Referencias de producto",
+                "capacity_label": "Capacidad frigorífica",
+                "temps_label": "Temperaturas (congelado, refrigerado, ambiente)"
+            }
+        },
+        "certifications": {
+            "title_1": "Certificaciones",
+            "title_2": "& Calidad",
+            "description": "Nuestro compromiso con los más altos estándares de calidad y seguridad alimentaria",
+            "items": {
+                "iso": {
+                    "name": "ISO 9001:2008",
+                    "desc": "Sistema de Gestión de Calidad",
+                    "label": "Certificado"
+                },
+                "green": {
+                    "name": "Energía 100% Verde",
+                    "desc": "Feníe Energía + CNMC",
+                    "label": "Renovable"
+                },
+                "traceability": {
+                    "name": "Trazabilidad Total",
+                    "desc": "Control de productos",
+                    "label": "Garantía"
+                },
+                "cold_chain": {
+                    "name": "Cadena de Frío",
+                    "desc": "5.000m³ capacidad frigorífica",
+                    "label": "Certificado"
+                }
+            },
+            "process": {
+                "title": "Proceso de Control de Calidad",
+                "description": "Desde la recepción hasta la entrega, cada paso está controlado",
+                "steps": {
+                    "reception": {
+                        "title": "Recepción",
+                        "desc": "Control de temperatura y calidad al recibir"
+                    },
+                    "inspection": {
+                        "title": "Inspección",
+                        "desc": "Verificación exhaustiva de todos los productos"
+                    },
+                    "certification": {
+                        "title": "Certificación",
+                        "desc": "Etiquetado y registro según normativas"
+                    },
+                    "distribution": {
+                        "title": "Distribución",
+                        "desc": "Entrega con cadena de frío garantizada"
+                    }
+                }
+            }
+        },
+        "strategy": {
+            "title_1": "Nuestra",
+            "title_2": "Estrategia Empresarial",
+            "description": "Comprometidos con la excelencia en el servicio al sector HORECA",
+            "mission": {
+                "title": "Nuestra Misión",
+                "item_1": "Ofrecer apoyo al gremio de la restauración mediante la distribución de productos seleccionados de máxima calidad.",
+                "item_2": "Buscar siempre la innovación para satisfacer las demandas del cliente final.",
+                "item_3": "Facilitar la tarea del profesional de la cocina."
+            },
+            "vision": {
+                "title": "Nuestra Visión",
+                "item_1": "Clientes más exigentes e informados que demandan mayor calidad en productos y servicios.",
+                "item_2": "Seleccionar el soporte profesional que cubra esas expectativas puede hacer la diferencia.",
+                "item_3": "Nuestro propósito es ser ese soporte para el canal HORECA."
+            }
+        },
+        "reviews": {
+            "badge": "Reseñas en Google",
+            "title_1": "Lo que dicen",
+            "title_highlight": "nuestros clientes",
+            "description": "La opinión de quienes confían en Granja Maripepa para su negocio",
+            "antonio_review": {
+                "text": "Esta empresa distribuye todo tipo de congelados, helados, y un sinfín de productos. Si quieres productos de calidad y un trato excepcional no busques más. La mejor empresa que conozco de su sector.",
+                "role": "8 reseñas · Guía local"
+            },
+            "view_all": {
+                "title": "Ver todas las reseñas",
+                "subtitle": "Lee las 18 opiniones de nuestros clientes en Google Maps",
+                "link": "Abrir en Google Maps"
+            },
+            "summary": {
+                "rating_label": "Valoración en Google",
+                "reviews_label": "Reseñas de clientes",
+                "write_review": "Escribir una reseña"
+            }
+        },
+        "cta_final": {
+            "title_1": "¿Listo para",
+            "title_highlight": "trabajar juntos",
+            "title_suffix": "?",
+            "description": "Únete a los establecimientos HORECA que confían en Granja Maripepa para llevar productos de calidad certificada a sus clientes en Murcia y Alicante.",
+            "contact": "Contactar ahora",
+            "catalog": "Ver catálogo"
+        }
+    },
     "contact": {
         "title": "Contacto",
         "subtitle": "Estamos aquí para ayudarte",
@@ -159,6 +455,14 @@
             "city": "30817 - Lorca (Murcia)"
         }
     },
+    "products_page": {
+        "title": "Próximamente",
+        "subtitle_1": "Estamos preparando algo especial",
+        "subtitle_2": "Nuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.",
+        "cta_home": "Volver al inicio",
+        "cta_clients": "Área de clientes",
+        "badge": "Disponible próximamente"
+    },
     "customerArea": {
         "title": "Área de Clientes",
         "welcome": "Bienvenido a tu",
@@ -176,7 +480,20 @@
             "accessButton": "Acceder",
             "loggingIn": "Iniciando sesión...",
             "needHelp": "¿Necesitas ayuda?",
-            "contactSupport": "Contacta con soporte"
+            "contactSupport": "Contacta con soporte",
+            "needAccount": "¿Necesitas una cuenta?",
+            "contactUs": "Contacta con nosotros",
+            "contactToast": "📞 Contacta con nosotros\\n\\nTeléfono: +34 965 123 456\\nEmail: soporte@granja-mari-pepa.com\\nHorario: L-V 9:00-18:00"
+        },
+        "emailSetup": {
+            "title": "Configuración de Contacto",
+            "subtitle": "Para tu seguridad, necesitamos tus datos de contacto.",
+            "data_usage": "Uso de tus datos:",
+            "data_usage_desc": "Solo para recuperar tu contraseña y enviar facturas. No compartimos esta información.",
+            "email": "Email",
+            "phone": "Teléfono",
+            "save": "Guardar y Continuar",
+            "saving": "Guardando..."
         },
         "features": {
             "history": "Historial completo",
@@ -201,7 +518,61 @@
             "noInvoices": "No tienes facturas recientes",
             "lastInvoices": "Últimas facturas",
             "totalPending": "Total pendiente",
-            "logout": "Cerrar sesión"
+            "logout": "Cerrar sesión",
+            "tabs": {
+                "facturas": "Facturas",
+                "perfil": "Perfil",
+                "favoritos": "Favoritos",
+                "pedidos": "Pedidos"
+            },
+            "status": {
+                "pending": "Pendiente",
+                "processing": "Procesando",
+                "shipped": "Enviado",
+                "delivered": "Entregado",
+                "paid": "Pagada",
+                "cancelled": "Cancelado"
+            },
+            "pdf": {
+                "loading": "Cargando PDF...",
+                "error": "Error al cargar el PDF",
+                "mobileTitle": "Factura {serie}-{numero}",
+                "mobileDesc": "Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.",
+                "download": "Descargar PDF",
+                "saveInfo": "El PDF se guardará en tu carpeta de descargas"
+            }
+        },
+        "publicFeatures": {
+            "badge": "Panel de Control",
+            "title": "Todo lo que necesitas en un solo lugar",
+            "subtitle": "Gestiona tu relación comercial con nosotros de forma fácil y eficiente",
+            "items": {
+                "orders": {
+                    "title": "Gestión de Pedidos",
+                    "desc": "Realiza y consulta todos tus pedidos en tiempo real",
+                    "label": "Disponible"
+                },
+                "invoices": {
+                    "title": "Facturas PDF",
+                    "desc": "Descarga y gestiona tus facturas al instante",
+                    "label": "Digital"
+                },
+                "profile": {
+                    "title": "Perfil Personal",
+                    "desc": "Actualiza tus datos y preferencias de contacto",
+                    "label": "Personalizable"
+                },
+                "stats": {
+                    "title": "Estadísticas",
+                    "desc": "Analiza tu historial y patrones de compra",
+                    "label": "Insights"
+                }
+            },
+            "cta": {
+                "title": "¿Aún no tienes cuenta?",
+                "desc": "Contacta con nuestro equipo comercial para obtener acceso",
+                "button": "Contactar"
+            }
         },
         "invoice": {
             "number": "Número",
@@ -320,5 +691,63 @@
         "title": "Granja Mari Pepa | Distribución Alimentaria Premium",
         "description": "Distribuidores de productos congelados, carnes y pescados para hostelería HORECA en Murcia y Almería. Servicio 24h. Desde 1966.",
         "keywords": "distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados"
+    },
+    "legal": {
+        "privacy": {
+            "title": "Política de Privacidad",
+            "intro": "En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios.",
+            "sections": {
+                "s1": {
+                    "title": "1. Responsable del Tratamiento",
+                    "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+                },
+                "s2": {
+                    "title": "2. Finalidad del Tratamiento",
+                    "content": "Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios."
+                },
+                "s3": {
+                    "title": "3. Conservación de Datos",
+                    "content": "Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales."
+                },
+                "s4": {
+                    "title": "4. Legitimación",
+                    "content": "La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos."
+                },
+                "s5": {
+                    "title": "5. Destinatarios",
+                    "content": "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal."
+                },
+                "s6": {
+                    "title": "6. Derechos",
+                    "content": "Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios."
+                }
+            }
+        },
+        "terms": {
+            "title": "Términos y Condiciones",
+            "intro": "Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+            "sections": {
+                "s1": {
+                    "title": "1. Propiedad Intelectual",
+                    "content": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa."
+                },
+                "s2": {
+                    "title": "2. Uso del Sitio Web",
+                    "content": "El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares."
+                },
+                "s3": {
+                    "title": "3. Responsabilidad",
+                    "content": "Granja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo."
+                },
+                "s4": {
+                    "title": "4. Modificaciones",
+                    "content": "Granja Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web."
+                },
+                "s5": {
+                    "title": "5. Ley Aplicable",
+                    "content": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
+                }
+            }
+        }
     }
 }
