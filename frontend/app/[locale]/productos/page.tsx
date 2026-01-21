@@ -4,8 +4,10 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
 
 export default function ProductsPage() {
+  const t = useTranslations('products_page');
   const router = useRouter();
 
   return (
@@ -23,32 +25,32 @@ export default function ProductsPage() {
       >
         <Lock className="w-24 h-24 mx-auto text-purple-400 opacity-80 mb-8" />
         <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-          Próximamente
+          {t('title')}
         </h1>
         <p className="text-xl sm:text-2xl text-blue-200/90 mb-4">
-          Estamos preparando algo especial
+          {t('subtitle_1')}
         </p>
         <p className="text-base sm:text-lg text-blue-200/70 mb-8 max-w-xl mx-auto">
-          Nuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.
+          {t('subtitle_2')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             onClick={() => router.push('/')}
             className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-3"
           >
-            Volver al inicio
+            {t('cta_home')}
           </Button>
           <Button
             onClick={() => router.push('/area-clientes')}
             variant="outline"
             className="border-2 border-purple-400/30 text-purple-300 px-8 py-3"
           >
-            Área de clientes
+            {t('cta_clients')}
           </Button>
         </div>
         <div className="mt-12 flex items-center justify-center gap-2 text-blue-300/60 text-sm">
           <Clock className="w-4 h-4" />
-          <span>Disponible próximamente</span>
+          <span>{t('badge')}</span>
         </div>
       </motion.div>
     </div>

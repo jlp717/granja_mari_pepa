@@ -3,14 +3,15 @@
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  Users, Target, Zap, Shield, Award, Leaf, Heart, Clock, 
+import {
+  Users, Target, Zap, Shield, Award, Leaf, Heart, Clock,
   MapPin, Star, CheckCircle, Building2, Truck, Factory,
   Globe, TrendingUp, Calendar, Phone, Mail, ArrowRight,
   PlayCircle, PauseCircle, Quote, Eye, Camera
 } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useTranslations, useLocale } from 'next-intl';
 import { delegations } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -176,11 +177,117 @@ const customerTestimonials = [
 ];
 
 export default function AboutPage() {
+  const t = useTranslations('about_page');
+  const locale = useLocale();
   const router = useRouter();
+
+  const companyHistory = [
+    {
+      year: '1966',
+      title: t('history.milestones.1966.title'),
+      description: t('history.milestones.1966.desc'),
+      icon: Factory,
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      year: '1980s',
+      title: t('history.milestones.1980s.title'),
+      description: t('history.milestones.1980s.desc'),
+      icon: TrendingUp,
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      year: '2000s',
+      title: t('history.milestones.2000s.title'),
+      description: t('history.milestones.2000s.desc'),
+      icon: Award,
+      color: 'from-yellow-500 to-orange-500'
+    },
+    {
+      year: '2020',
+      title: t('history.milestones.2020.title'),
+      description: t('history.milestones.2020.desc'),
+      icon: Leaf,
+      color: 'from-green-600 to-teal-500'
+    },
+    {
+      year: locale === 'es' ? 'Actualidad' : 'Today',
+      title: t('history.milestones.today.title'),
+      description: t('history.milestones.today.desc'),
+      icon: Zap,
+      color: 'from-indigo-500 to-blue-500'
+    }
+  ];
+
+  const companyValues = [
+    {
+      title: t('values.items.quality.title'),
+      description: t('values.items.quality.desc'),
+      icon: Award,
+      color: "from-emerald-500 to-emerald-600",
+      stat: "ISO 9001",
+      statLabel: t('values.items.quality.label')
+    },
+    {
+      title: t('values.items.service.title'),
+      description: t('values.items.service.desc'),
+      icon: Clock,
+      color: "from-blue-500 to-blue-600",
+      stat: "24-48h",
+      statLabel: t('values.items.service.label')
+    },
+    {
+      title: t('values.items.coverage.title'),
+      description: t('values.items.coverage.desc'),
+      icon: MapPin,
+      color: "from-purple-500 to-purple-600",
+      stat: "2",
+      statLabel: t('values.items.coverage.label')
+    },
+    {
+      title: t('values.items.attention.title'),
+      description: t('values.items.attention.desc'),
+      icon: Heart,
+      color: "from-rose-500 to-rose-600",
+      stat: "+55",
+      statLabel: t('values.items.attention.label')
+    }
+  ];
+
+  const certifications = [
+    {
+      name: t('certifications.items.iso.name'),
+      description: t('certifications.items.iso.desc'),
+      icon: Award,
+      year: t('certifications.items.iso.label'),
+      color: 'bg-blue-500'
+    },
+    {
+      name: t('certifications.items.green.name'),
+      description: t('certifications.items.green.desc'),
+      icon: Leaf,
+      year: t('certifications.items.green.label'),
+      color: 'bg-green-500'
+    },
+    {
+      name: t('certifications.items.traceability.name'),
+      description: t('certifications.items.traceability.desc'),
+      icon: Shield,
+      year: t('certifications.items.traceability.label'),
+      color: 'bg-purple-500'
+    },
+    {
+      name: t('certifications.items.cold_chain.name'),
+      description: t('certifications.items.cold_chain.desc'),
+      icon: CheckCircle,
+      year: t('certifications.items.cold_chain.label'),
+      color: 'bg-cyan-500'
+    }
+  ];
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -207,7 +314,7 @@ export default function AboutPage() {
   return (
     <div ref={containerRef} className="min-h-screen bg-slate-900 overflow-x-hidden">
       {/* Hero Section Cinematográfico */}
-      <motion.section 
+      <motion.section
         ref={heroRef}
         style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -215,10 +322,10 @@ export default function AboutPage() {
         {/* Background Video/Image */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 z-10" />
-          <video 
-            autoPlay 
-            muted 
-            loop 
+          <video
+            autoPlay
+            muted
+            loop
             playsInline
             className="w-full h-full object-cover"
           >
@@ -238,17 +345,17 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.23, 1, 0.320, 1] }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-7xl md:text-8xl lg:text-9xl font-bold text-white mb-8"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, delay: 0.3 }}
             >
               <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Granja Maripepa
+                {t('hero.title')}
               </span>
             </motion.h1>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -256,11 +363,10 @@ export default function AboutPage() {
               className="mb-12"
             >
               <h2 className="text-2xl md:text-4xl text-white/90 font-light mb-6">
-                Más de <span className="text-blue-400 font-semibold">55 años</span> al servicio del sector HORECA
+                {t('hero.subtitle_1')} <span className="text-blue-400 font-semibold">{t('hero.subtitle_highlight')}</span> {t('hero.subtitle_2')}
               </h2>
               <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-                Desde 1966 en Lorca (Murcia), somos especialistas en distribución de productos congelados, 
-                refrigerados y temperatura ambiente para hostelería, restauración y catering.
+                {t('hero.description')}
               </p>
             </motion.div>
 
@@ -270,21 +376,21 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 1.2 }}
               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={handleScrollToHistory}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-2xl"
               >
                 <Eye className="w-6 h-6 mr-2" />
-                Descubre nuestra historia
+                {t('hero.cta_history')}
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={handleContactNavigation}
                 className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border border-white/30 px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
               >
                 <Phone className="w-6 h-6 mr-2" />
-                Contactar ahora
+                {t('hero.cta_contact')}
               </Button>
             </motion.div>
           </motion.div>
@@ -309,7 +415,7 @@ export default function AboutPage() {
       {/* Timeline Histórica Interactiva */}
       <section id="history-section" className="py-32 bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -319,17 +425,17 @@ export default function AboutPage() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Nuestra <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Historia</span>
+              {t('history.title_1')} <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">{t('history.title_2')}</span>
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Más de cinco décadas de experiencia y compromiso con la calidad en el sector alimentario
+              {t('history.description')}
             </p>
           </motion.div>
 
           <div className="relative">
             {/* Timeline Line - Desktop */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 opacity-30"></div>
-            
+
             {/* Timeline Line - Mobile */}
             <div className="md:hidden absolute left-8 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 opacity-30"></div>
 
@@ -347,7 +453,7 @@ export default function AboutPage() {
                   className={`relative flex items-center mb-12 md:mb-20 ${
                     // Mobile: always left-aligned, Desktop: alternating
                     'flex-col md:flex-row' + (isEven ? ' md:flex-row' : ' md:flex-row-reverse')
-                  }`}
+                    }`}
                 >
                   {/* Mobile Layout */}
                   <div className="md:hidden w-full pl-20 pr-4">
@@ -422,8 +528,8 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Nuestras Delegaciones</h2>
-            <p className="text-white/70 max-w-2xl mx-auto">A continuación la dirección oficial de nuestra sede en Lorca (Murcia).</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t('delegations.title')}</h2>
+            <p className="text-white/70 max-w-2xl mx-auto">{t('delegations.description')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -450,7 +556,7 @@ export default function AboutPage() {
       {/* Valores Corporativos - 3D Cards */}
       <section className="py-32 bg-gradient-to-br from-slate-800 to-slate-700 relative">
         <div className="absolute inset-0 bg-pattern-dots opacity-5"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -460,17 +566,17 @@ export default function AboutPage() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Nuestros <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Valores</span>
+              {t('values.title_1')} <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">{t('values.title_2')}</span>
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Los pilares que sostienen nuestra excelencia y definen nuestra manera de trabajar cada día
+              {t('values.description')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {companyValues.map((value, index) => {
               const IconComponent = value.icon;
-              
+
               return (
                 <motion.div
                   key={value.title}
@@ -478,10 +584,10 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.05, 
+                  whileHover={{
+                    scale: 1.05,
                     rotateY: 5,
-                    transition: { duration: 0.3 } 
+                    transition: { duration: 0.3 }
                   }}
                   className="group perspective-1000"
                 >
@@ -494,10 +600,10 @@ export default function AboutPage() {
                       >
                         <IconComponent className="w-10 h-10 text-white" />
                       </motion.div>
-                      
+
                       <h3 className="text-2xl font-bold text-white mb-4">{value.title}</h3>
                       <p className="text-white/70 leading-relaxed mb-6">{value.description}</p>
-                      
+
                       <div className="pt-4 border-t border-white/20">
                         <div className="text-3xl font-bold text-white mb-1">{value.stat}</div>
                         <div className="text-white/60 text-sm">{value.statLabel}</div>
@@ -514,7 +620,7 @@ export default function AboutPage() {
       {/* Sección de Compromiso (reemplaza equipo inventado) */}
       <section className="py-32 bg-gradient-to-br from-slate-700 to-slate-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-hexagon-pattern opacity-5"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -524,10 +630,10 @@ export default function AboutPage() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Nuestro <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Compromiso</span>
+              {t('commitment.title_1')} <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">{t('commitment.title_2')}</span>
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Lo que nos diferencia y hace que nuestros clientes confíen en nosotros desde hace más de 55 años
+              {t('commitment.description')}
             </p>
           </motion.div>
 
@@ -539,15 +645,15 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-12 mb-12"
           >
-            <h3 className="text-3xl font-bold text-white mb-8 text-center">Qué Ofrecemos</h3>
+            <h3 className="text-3xl font-bold text-white mb-8 text-center">{t('commitment.offer_title')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: Award, text: 'Garantía de calidad, respaldada por la Norma ISO 9001' },
-                { icon: Eye, text: 'Trazabilidad de todos nuestros productos' },
-                { icon: Truck, text: 'Servicio de entrega en 24 – 48 horas' },
-                { icon: MapPin, text: 'Servicio en Murcia y Alicante' },
-                { icon: Heart, text: 'Atención personalizada' },
-                { icon: Building2, text: 'Capacidad frigorífica de 5.000m³' }
+                { icon: Award, text: t('commitment.items.quality') },
+                { icon: Eye, text: t('commitment.items.traceability') },
+                { icon: Truck, text: t('commitment.items.delivery') },
+                { icon: MapPin, text: t('commitment.items.service') },
+                { icon: Heart, text: t('commitment.items.attention') },
+                { icon: Building2, text: t('commitment.items.capacity') }
               ].map((item, index) => {
                 const IconComponent = item.icon;
                 return (
@@ -576,23 +682,23 @@ export default function AboutPage() {
             className="text-center"
           >
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-12">
-              <h3 className="text-3xl font-bold text-white mb-8">Granja Maripepa en Cifras</h3>
+              <h3 className="text-3xl font-bold text-white mb-8">{t('commitment.stats.title')}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div className="space-y-2">
                   <div className="text-4xl font-bold text-orange-400">1966</div>
-                  <div className="text-white/70">Año de fundación</div>
+                  <div className="text-white/70">{t('commitment.stats.founded_label')}</div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-4xl font-bold text-orange-400">1500+</div>
-                  <div className="text-white/70">Referencias de producto</div>
+                  <div className="text-white/70">{t('commitment.stats.references_label')}</div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-4xl font-bold text-orange-400">5.000m³</div>
-                  <div className="text-white/70">Capacidad frigorífica</div>
+                  <div className="text-white/70">{t('commitment.stats.capacity_label')}</div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-4xl font-bold text-orange-400">3</div>
-                  <div className="text-white/70">Temperaturas (congelado, refrigerado, ambiente)</div>
+                  <div className="text-white/70">{t('commitment.stats.temps_label')}</div>
                 </div>
               </div>
             </div>
@@ -603,7 +709,7 @@ export default function AboutPage() {
       {/* Certificaciones y Calidad */}
       <section className="py-32 bg-gradient-to-br from-slate-600 to-slate-500 relative">
         <div className="absolute inset-0 bg-circuit-pattern opacity-10"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -613,17 +719,17 @@ export default function AboutPage() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              <span className="bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">Certificaciones</span> & Calidad
+              <span className="bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">{t('certifications.title_1')}</span> {t('certifications.title_2')}
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Nuestro compromiso con los más altos estándares de calidad y seguridad alimentaria
+              {t('certifications.description')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {certifications.map((cert, index) => {
               const IconComponent = cert.icon;
-              
+
               return (
                 <motion.div
                   key={cert.name}
@@ -642,10 +748,10 @@ export default function AboutPage() {
                     >
                       <IconComponent className="w-12 h-12 text-white" />
                     </motion.div>
-                    
+
                     <h3 className="text-2xl font-bold text-white mb-3">{cert.name}</h3>
                     <p className="text-white/70 leading-relaxed mb-4">{cert.description}</p>
-                    
+
                     <Badge className={`bg-gradient-to-r ${cert.color} text-white px-4 py-2`}>
                       {cert.year}
                     </Badge>
@@ -664,19 +770,19 @@ export default function AboutPage() {
             className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-12"
           >
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-white mb-4">Proceso de Control de Calidad</h3>
-              <p className="text-white/70 text-lg">Desde la recepción hasta la entrega, cada paso está controlado</p>
+              <h3 className="text-3xl font-bold text-white mb-4">{t('certifications.process.title')}</h3>
+              <p className="text-white/70 text-lg">{t('certifications.process.description')}</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
-                { icon: Truck, title: "Recepción", desc: "Control de temperatura y calidad al recibir", color: "from-blue-500 to-blue-600" },
-                { icon: Eye, title: "Inspección", desc: "Verificación exhaustiva de todos los productos", color: "from-green-500 to-green-600" },
-                { icon: Award, title: "Certificación", desc: "Etiquetado y registro según normativas", color: "from-yellow-500 to-yellow-600" },
-                { icon: ArrowRight, title: "Distribución", desc: "Entrega con cadena de frío garantizada", color: "from-purple-500 to-purple-600" }
+                { icon: Truck, title: t('certifications.process.steps.reception.title'), desc: t('certifications.process.steps.reception.desc'), color: "from-blue-500 to-blue-600" },
+                { icon: Eye, title: t('certifications.process.steps.inspection.title'), desc: t('certifications.process.steps.inspection.desc'), color: "from-green-500 to-green-600" },
+                { icon: Award, title: t('certifications.process.steps.certification.title'), desc: t('certifications.process.steps.certification.desc'), color: "from-yellow-500 to-yellow-600" },
+                { icon: ArrowRight, title: t('certifications.process.steps.distribution.title'), desc: t('certifications.process.steps.distribution.desc'), color: "from-purple-500 to-purple-600" }
               ].map((step, index) => {
                 const IconComponent = step.icon;
-                
+
                 return (
                   <motion.div
                     key={step.title}
@@ -702,7 +808,7 @@ export default function AboutPage() {
       {/* Misión y Visión - Datos reales */}
       <section className="py-32 bg-gradient-to-br from-slate-500 to-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-wave-pattern opacity-5"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -712,10 +818,10 @@ export default function AboutPage() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Nuestra <span className="bg-gradient-to-r from-pink-400 to-violet-500 bg-clip-text text-transparent">Estrategia Empresarial</span>
+              {t('strategy.title_1')} <span className="bg-gradient-to-r from-pink-400 to-violet-500 bg-clip-text text-transparent">{t('strategy.title_2')}</span>
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Comprometidos con la excelencia en el servicio al sector HORECA
+              {t('strategy.description')}
             </p>
           </motion.div>
 
@@ -730,20 +836,20 @@ export default function AboutPage() {
             >
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <Target className="w-8 h-8 text-pink-400 mr-3" />
-                Nuestra Misión
+                {t('strategy.mission.title')}
               </h3>
               <ul className="space-y-4 text-white/80">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-pink-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>Ofrecer apoyo al gremio de la restauración mediante la distribución de productos seleccionados de máxima calidad.</span>
+                  <span>{t('strategy.mission.item_1')}</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-pink-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>Buscar siempre la innovación para satisfacer las demandas del cliente final.</span>
+                  <span>{t('strategy.mission.item_2')}</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-pink-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>Facilitar la tarea del profesional de la cocina.</span>
+                  <span>{t('strategy.mission.item_3')}</span>
                 </li>
               </ul>
             </motion.div>
@@ -758,20 +864,20 @@ export default function AboutPage() {
             >
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <Eye className="w-8 h-8 text-violet-400 mr-3" />
-                Nuestra Visión
+                {t('strategy.vision.title')}
               </h3>
               <ul className="space-y-4 text-white/80">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-violet-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>Clientes más exigentes e informados que demandan mayor calidad en productos y servicios.</span>
+                  <span>{t('strategy.vision.item_1')}</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-violet-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>Seleccionar el soporte profesional que cubra esas expectativas puede hacer la diferencia.</span>
+                  <span>{t('strategy.vision.item_2')}</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-violet-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>Nuestro propósito es ser ese soporte para el canal HORECA.</span>
+                  <span>{t('strategy.vision.item_3')}</span>
                 </li>
               </ul>
             </motion.div>
@@ -783,7 +889,7 @@ export default function AboutPage() {
       <section className="py-24 sm:py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
         {/* Fondo decorativo */}
         <div className="absolute inset-0 opacity-10">
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               backgroundImage: `radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
@@ -791,7 +897,7 @@ export default function AboutPage() {
             }}
           />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -801,24 +907,24 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             {/* Badge de Google */}
-            <motion.div 
+            <motion.div
               className="inline-flex items-center mb-6 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
               whileHover={{ scale: 1.05 }}
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
-              <span className="text-white/90 font-semibold text-sm">Reseñas en Google</span>
+              <span className="text-white/90 font-semibold text-sm">{t('reviews.badge')}</span>
             </motion.div>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Lo que dicen <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">nuestros clientes</span>
+              {t('reviews.title_1')} <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">{t('reviews.title_highlight')}</span>
             </h2>
             <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
-              La opinión de quienes confían en Granja Maripepa para su negocio
+              {t('reviews.description')}
             </p>
           </motion.div>
 
@@ -833,7 +939,7 @@ export default function AboutPage() {
               whileHover={{ scale: 1.02, y: -5 }}
               className="group"
             >
-              <div 
+              <div
                 className="h-full rounded-2xl p-6 sm:p-8 transition-all duration-300"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)',
@@ -853,16 +959,16 @@ export default function AboutPage() {
                       <div className="flex items-center gap-2">
                         <h4 className="font-bold text-white">Antonio López</h4>
                       </div>
-                      <p className="text-sm text-white/60">8 reseñas · Guía local</p>
+                      <p className="text-sm text-white/60">{t('reviews.antonio_review.role')}</p>
                     </div>
                   </div>
-                  
+
                   {/* Google icon */}
                   <svg className="w-6 h-6 opacity-60" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                   </svg>
                 </div>
 
@@ -878,7 +984,7 @@ export default function AboutPage() {
                 <div className="relative">
                   <Quote className="absolute -top-2 -left-1 w-8 h-8 text-white/10" />
                   <p className="text-white/80 leading-relaxed pl-4">
-                    Esta empresa distribuye todo tipo de congelados, helados, y un sinfín de productos. Si quieres productos de calidad y un trato excepcional no busques más. La mejor empresa que conozco de su sector.
+                    {t('reviews.antonio_review.text')}
                   </p>
                 </div>
               </div>
@@ -896,7 +1002,7 @@ export default function AboutPage() {
               whileHover={{ scale: 1.02, y: -5 }}
               className="group block"
             >
-              <div 
+              <div
                 className="h-full rounded-2xl p-6 sm:p-8 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[200px]"
                 style={{
                   background: 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(147,51,234,0.15) 100%)',
@@ -906,15 +1012,15 @@ export default function AboutPage() {
                 }}
               >
                 <svg className="w-12 h-12 mb-4 opacity-80" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                 </svg>
-                <h4 className="text-xl font-bold text-white mb-2">Ver todas las reseñas</h4>
-                <p className="text-white/60 mb-4">Lee las 18 opiniones de nuestros clientes en Google Maps</p>
+                <h4 className="text-xl font-bold text-white mb-2">{t('reviews.view_all.title')}</h4>
+                <p className="text-white/60 mb-4">{t('reviews.view_all.subtitle')}</p>
                 <div className="inline-flex items-center gap-2 text-blue-400 font-medium group-hover:text-blue-300 transition-colors">
-                  Abrir en Google Maps
+                  {t('reviews.view_all.link')}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -934,39 +1040,39 @@ export default function AboutPage() {
                 <span className="text-5xl font-bold text-white">4,1</span>
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={`w-6 h-6 ${i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-yellow-400/30'}`} 
+                    <Star
+                      key={i}
+                      className={`w-6 h-6 ${i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-yellow-400/30'}`}
                     />
                   ))}
                 </div>
               </div>
-              <p className="text-white/60">Valoración en Google</p>
+              <p className="text-white/60">{t('reviews.summary.rating_label')}</p>
             </div>
-            
+
             <div className="hidden sm:block w-px h-16 bg-white/20" />
-            
+
             <div className="text-center">
               <div className="text-4xl font-bold text-white mb-2">18</div>
-              <p className="text-white/60">Reseñas de clientes</p>
+              <p className="text-white/60">{t('reviews.summary.reviews_label')}</p>
             </div>
-            
+
             <div className="hidden sm:block w-px h-16 bg-white/20" />
-            
+
             <div className="text-center">
-              <a 
-                href="https://www.google.com/maps/place/Granja+Mari+Pepa/@37.6867029,-1.7242629,17z/data=!4m8!3m7!1s0xd63876c6a1c7b63:0x4e7e9c4a6c8f4c3a!8m2!3d37.6867029!4d-1.721688!9m1!1b1!16s%2Fg%2F11c5qzv_9n" 
-                target="_blank" 
+              <a
+                href="https://www.google.com/maps/place/Granja+Mari+Pepa/@37.6867029,-1.7242629,17z/data=!4m8!3m7!1s0xd63876c6a1c7b63:0x4e7e9c4a6c8f4c3a!8m2!3d37.6867029!4d-1.721688!9m1!1b1!16s%2Fg%2F11c5qzv_9n"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 text-white font-medium"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                 </svg>
-                Escribir una reseña
+                {t('reviews.summary.write_review')}
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
@@ -977,7 +1083,7 @@ export default function AboutPage() {
       {/* Call to Action Final */}
       <section className="py-32 bg-gradient-to-br from-slate-900 to-black relative overflow-hidden">
         <div className="absolute inset-0 bg-stars-pattern opacity-20"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -986,29 +1092,28 @@ export default function AboutPage() {
             transition={{ duration: 1 }}
           >
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
-              ¿Listo para <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">trabajar juntos</span>?
+              {t('cta_final.title_1')} <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">{t('cta_final.title_highlight')}</span>{t('cta_final.title_suffix')}
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto mb-12">
-              Únete a los establecimientos HORECA que confían en Granja Maripepa para llevar 
-              productos de calidad certificada a sus clientes en Murcia y Alicante.
+              {t('cta_final.description')}
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={handleContactNavigation}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-6 text-xl font-semibold rounded-3xl shadow-2xl"
               >
                 <Phone className="w-6 h-6 mr-3" />
-                Contactar ahora
+                {t('cta_final.contact')}
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={handleProductsNavigation}
                 className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border border-white/30 px-10 py-6 text-xl rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300"
               >
                 <Eye className="w-6 h-6 mr-3" />
-                Ver catálogo
+                {t('cta_final.catalog')}
               </Button>
             </div>
           </motion.div>

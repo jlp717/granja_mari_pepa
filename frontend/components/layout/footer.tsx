@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, ArrowRight, Star, Award, Clock, Package, User, PhoneCall } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { useAnimatedSection } from '@/hooks/use-animated-section';
 
 // Deterministic values to avoid hydration mismatch
 const PARTICLE_DATA = [
+
   { width: 3.5, height: 2.7, left: 12, top: 25, color: 0, duration: 6.2, delay: 0.5 },
   { width: 4.1, height: 3.8, left: 34, top: 67, color: 1, duration: 5.8, delay: 1.2 },
   { width: 2.8, height: 4.2, left: 56, top: 43, color: 2, duration: 7.1, delay: 0.8 },
@@ -41,7 +43,9 @@ const ORB_DATA = [
 
 export function Footer() {
   const [isMounted, setIsMounted] = useState(false);
-  
+  const t = useTranslations('footer');
+  const tNav = useTranslations('nav');
+
   // Use the new animated section hook
   const { sectionRef, isReduced } = useAnimatedSection({
     threshold: 0.1,
@@ -76,9 +80,10 @@ export function Footer() {
                 </span>
               </h3>
               <p className="text-blue-200/80 text-lg mb-8">
-                Distribuidores de productos alimentarios premium
+                {t('description_short')}
               </p>
             </div>
+
           </div>
         </div>
       </footer>
@@ -181,12 +186,12 @@ export function Footer() {
       </div>
 
       <div className="container mx-auto px-4 pt-28 md:pt-32 pb-0 relative z-10">
-        
+
         {/* Main footer content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-8" data-animate="content">
-          
+
           {/* Brand section */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-1 text-center lg:text-left"
             whileHover={{ scale: 1.02 }}
             data-animate="title"
@@ -200,64 +205,64 @@ export function Footer() {
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-2 h-2 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-pulse"></div>
                 <p className="text-amber-300/80 font-medium text-base">
-                  Distribuidor Oficial Nestlé
+                  {t('nestle_distributor')}
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-orange-400 text-sm">🏭</span>
                 <p className="text-orange-300/70 text-sm font-light">
-                  Fundada en 1966 en Lorca (Murcia)
+                  {t('founded_text')}
                 </p>
               </div>
             </div>
 
             <p className="text-blue-200/80 text-lg mb-8 leading-relaxed max-w-md mx-auto lg:mx-0">
-              Especialistas en productos congelados, refrigerados y helados para 
-              <span className="text-cyan-300 font-semibold"> HORECA</span> en Murcia y Alicante.
+              {t('description_long')}
             </p>
 
             {/* Professional badges */}
             <div className="flex justify-center lg:justify-start gap-4">
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30"
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(59, 130, 246, 0.3)' }}
               >
                 <Award className="w-4 h-4 text-blue-400" />
                 <span className="text-blue-300 text-sm font-semibold">ISO 9001</span>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 border border-green-400/30"
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 197, 94, 0.3)' }}
               >
                 <Star className="w-4 h-4 text-green-400" />
-                <span className="text-green-300 text-sm font-semibold">Energía Verde</span>
+                <span className="text-green-300 text-sm font-semibold">{t('green_energy')}</span>
               </motion.div>
             </div>
+
           </motion.div>
 
           {/* Quick actions */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-1 text-center"
             whileHover={{ scale: 1.02 }}
           >
             <h4 className="text-2xl font-bold text-white mb-8">
               <span className="bg-gradient-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent">
-                Acceso Rápido
+                {t('quick_access')}
               </span>
             </h4>
-            
+
             <div className="space-y-4">
               {[
-                { href: '/productos', label: 'Catálogo', Icon: Package },
-                { href: '/area-clientes', label: 'Portal Cliente', Icon: User },
-                { href: '/contacto', label: 'Contacto', Icon: PhoneCall }
+                { href: '/productos', label: t('catalog'), Icon: Package },
+                { href: '/area-clientes', label: t('client_portal'), Icon: User },
+                { href: '/contacto', label: t('contact'), Icon: PhoneCall }
               ].map((link, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ x: 10, scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link 
+                  <Link
                     href={link.href}
                     className="flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/50 transition-all duration-300 group"
                   >
@@ -271,30 +276,30 @@ export function Footer() {
           </motion.div>
 
           {/* Contact info */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-1 text-center lg:text-left"
             whileHover={{ scale: 1.02 }}
           >
             <h4 className="text-2xl font-bold text-white mb-8">
               <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                Contacto
+                {t('contact')}
               </span>
             </h4>
-            
+
             <div className="space-y-6">
               {/* Delegación Murcia */}
-              <motion.div 
+              <motion.div
                 className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
                 whileHover={{ y: -2 }}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <Phone className="w-5 h-5 text-cyan-400" />
-                  <span className="text-white font-medium">Lorca (Murcia)</span>
+                  <span className="text-white font-medium">{t('delegation')}</span>
                 </div>
                 <p className="text-cyan-200">968 46 75 14 / 639 77 86 55</p>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
                 whileHover={{ y: -2 }}
               >
@@ -305,22 +310,22 @@ export function Footer() {
                 <p className="text-purple-200">pedidos@granjamaripepa.com</p>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
                 whileHover={{ y: -2 }}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <Clock className="w-5 h-5 text-blue-400" />
-                  <span className="text-white font-medium">Horario</span>
+                  <span className="text-white font-medium">{t('schedule')}</span>
                 </div>
-                <p className="text-blue-200 text-sm">L-V: 8:00-13:00 y 16:00-19:00</p>
+                <p className="text-blue-200 text-sm">{t('schedule_hours')}</p>
               </motion.div>
             </div>
           </motion.div>
         </div>
 
         {/* Bottom section */}
-        <motion.div 
+        <motion.div
           className="border-t border-white/10 pt-6 pb-6 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -328,20 +333,21 @@ export function Footer() {
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-blue-200/70">
-              &copy; 2025 Granja Maripepa, S.L. Todos los derechos reservados.
+              &copy; 2025 Granja Maripepa, S.L. {t('rights_reserved')}
             </p>
-            
+
             <div className="flex items-center gap-6 text-sm">
               <Link href="/legal/privacidad" className="text-purple-300 hover:text-white transition-colors">
-                Privacidad
+                {t('privacy')}
               </Link>
               <Link href="/legal/terminos" className="text-purple-300 hover:text-white transition-colors">
-                Términos
+                {t('terms')}
               </Link>
               <span className="text-blue-300 font-medium">
                 🇪🇸 Lorca, Murcia
               </span>
             </div>
+
           </div>
         </motion.div>
       </div>

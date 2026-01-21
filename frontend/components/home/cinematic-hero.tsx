@@ -7,6 +7,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -14,8 +15,10 @@ if (typeof window !== 'undefined') {
 }
 
 export function CinematicHero() {
+  const t = useTranslations('hero');
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
   const logoRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -267,7 +270,7 @@ export function CinematicHero() {
                   filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))'
                 }}
               >
-                Congelados, refrigerados y helados para HORECA
+                {t('subtitle')}
               </span>
             </p>
           </div>
@@ -288,7 +291,7 @@ export function CinematicHero() {
               }}
             >
               <span className="group-hover:scale-110 transition-transform duration-300">
-                Explorar Productos
+                {t('explore_products')}
               </span>
               <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Button>
@@ -307,7 +310,7 @@ export function CinematicHero() {
                 }}
               >
                 <span className="group-hover:scale-110 transition-transform duration-300">
-                  Contactar
+                  {t('contact_us')}
                 </span>
               </Button>
             </Link>
@@ -321,7 +324,7 @@ export function CinematicHero() {
             className="cursor-pointer group flex flex-col items-center text-white/80 hover:text-white transition-all duration-300"
           >
             <span className="text-sm mb-3 font-semibold opacity-90 group-hover:opacity-100">
-              Continúa explorando
+              {t('scroll_down')}
             </span>
             <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center group-hover:border-white transition-all duration-300 group-hover:scale-110">
               <div

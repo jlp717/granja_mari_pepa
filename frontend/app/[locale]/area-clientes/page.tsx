@@ -14,6 +14,7 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import toast from 'react-hot-toast';
 import { CustomerDashboard } from '@/components/customer/dashboard';
+import { useTranslations } from 'next-intl';
 import AuthFlowManager from '@/components/auth/AuthFlowManager';
 import { secureFetch } from '@/lib/secureFetch';
 
@@ -25,6 +26,7 @@ const loginFormSchema = z.object({
 type LoginFormData = z.infer<typeof loginFormSchema>;
 
 export default function CustomerAreaPage() {
+  const t = useTranslations('customerArea');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
@@ -425,24 +427,23 @@ export default function CustomerAreaPage() {
                   <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                     <Mail className="w-6 h-6 sm:w-8 sm:h-8" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold">Configuración de Contacto</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold">{t('emailSetup.title')}</h3>
                   <p className="text-amber-100 mt-2 text-sm sm:text-base">
-                    Para tu seguridad, necesitamos tus datos de contacto.
+                    {t('emailSetup.subtitle')}
                   </p>
                 </div>
 
                 <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
                   <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded">
                     <p className="text-xs sm:text-sm text-blue-900">
-                      <strong>📌 Uso de tus datos:</strong> Solo para <strong>recuperar tu contraseña</strong> y <strong>enviar facturas</strong>.
-                      No compartimos esta información.
+                      <strong>📌 {t('emailSetup.data_usage')}</strong> {t('emailSetup.data_usage_desc')}
                     </p>
                   </div>
 
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
+                        {t('emailSetup.email')} *
                       </label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -458,7 +459,7 @@ export default function CustomerAreaPage() {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Teléfono *
+                        {t('emailSetup.phone')} *
                       </label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -478,7 +479,7 @@ export default function CustomerAreaPage() {
                     disabled={!tempEmail || !tempPhone || isConfiguringEmail}
                     className="w-full h-12 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-base sm:text-lg rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isConfiguringEmail ? 'Guardando...' : 'Guardar y Continuar'}
+                    {isConfiguringEmail ? t('emailSetup.saving') : t('emailSetup.save')}
                   </button>
                 </div>
               </motion.div>
@@ -565,7 +566,7 @@ export default function CustomerAreaPage() {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 rounded-full text-sm font-medium border border-amber-200"
               >
                 <Crown className="w-4 h-4" />
-                Área Exclusiva para Clientes
+                {t('exclusiveBadge')}
                 <Sparkles className="w-4 h-4" />
               </motion.div>
 
@@ -577,9 +578,9 @@ export default function CustomerAreaPage() {
                   transition={{ delay: 0.3, duration: 0.8 }}
                   className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
                 >
-                  Bienvenido a tu
+                  {t('welcome')}
                   <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                    Área Personal
+                    {t('welcomeHighlight')}
                   </span>
                 </motion.h1>
 
@@ -589,8 +590,7 @@ export default function CustomerAreaPage() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-gray-600 leading-relaxed"
                 >
-                  Accede a tu panel de control personalizado para gestionar pedidos,
-                  descargar facturas y mucho más con total comodidad.
+                  {t('description')}
                 </motion.p>
               </div>
 
@@ -602,9 +602,9 @@ export default function CustomerAreaPage() {
                 className="space-y-4"
               >
                 {[
-                  { icon: TrendingUp, title: 'Historial completo', desc: 'Todos tus pedidos organizados' },
-                  { icon: Shield, title: 'Datos seguros', desc: 'Protección garantizada' },
-                  { icon: Star, title: 'Acceso prioritario', desc: 'Ofertas y novedades exclusivas' }
+                  { icon: TrendingUp, title: t('features.history'), desc: t('features.historyDesc') },
+                  { icon: Shield, title: t('features.security'), desc: t('features.securityDesc') },
+                  { icon: Star, title: t('features.priority'), desc: t('features.priorityDesc') }
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
@@ -658,7 +658,7 @@ export default function CustomerAreaPage() {
                       transition={{ delay: 0.4, duration: 0.6 }}
                       className="text-2xl font-bold text-gray-900 mb-2"
                     >
-                      Iniciar Sesión
+                      {t('login.title')}
                     </motion.h2>
 
                     <motion.p
@@ -667,7 +667,7 @@ export default function CustomerAreaPage() {
                       transition={{ delay: 0.5, duration: 0.6 }}
                       className="text-gray-600"
                     >
-                      Accede con tus credenciales
+                      {t('login.subtitle')}
                     </motion.p>
                   </div>
 
@@ -680,14 +680,14 @@ export default function CustomerAreaPage() {
                         name="codigoCliente"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-gray-700 font-medium">Código de Cliente</FormLabel>
+                            <FormLabel className="text-gray-700 font-medium">{t('login.clientCode')}</FormLabel>
                             <FormControl>
                               <div className="relative group">
                                 <User className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${focusedInput === 'codigoCliente' ? 'text-blue-600' : 'text-gray-400'
                                   }`} />
                                 <Input
                                   type="text"
-                                  placeholder="Ej: 0123456789"
+                                  placeholder={t('login.clientCodePlaceholder')}
                                   className="pl-11 h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-0 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 placeholder:text-gray-400"
                                   {...field}
                                   disabled={isLoading}
@@ -716,14 +716,14 @@ export default function CustomerAreaPage() {
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-gray-700 font-medium">Contraseña</FormLabel>
+                            <FormLabel className="text-gray-700 font-medium">{t('login.password')}</FormLabel>
                             <FormControl>
                               <div className="relative group">
                                 <Lock className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-200 ${focusedInput === 'password' ? 'text-blue-600' : 'text-gray-400'
                                   }`} />
                                 <Input
                                   type={showPassword ? "text" : "password"}
-                                  placeholder="Tu contraseña"
+                                  placeholder={t('login.passwordPlaceholder')}
                                   className="pl-11 pr-12 h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-0 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-200 placeholder:text-gray-400"
                                   {...field}
                                   disabled={isLoading}
@@ -773,11 +773,11 @@ export default function CustomerAreaPage() {
                           {isLoading ? (
                             <div className="flex items-center gap-2">
                               <LoadingSpinner size="sm" />
-                              Iniciando sesión...
+                              {t('login.loggingIn')}
                             </div>
                           ) : (
                             <div className="flex items-center gap-2">
-                              Acceder
+                              {t('login.accessButton')}
                               <ArrowRight className="w-4 h-4" />
                             </div>
                           )}
@@ -794,16 +794,16 @@ export default function CustomerAreaPage() {
                       onClick={() => setShowForgotPasswordModal(true)}
                       className="text-sm text-blue-600 hover:text-blue-700 transition-colors font-medium"
                     >
-                      ¿Olvidaste tu contraseña?
+                      {t('login.forgotPassword')}
                     </motion.button>
 
                     <div className="text-sm text-gray-600">
-                      ¿Necesitas una cuenta?{' '}
+                      {t('login.needAccount')}{' '}
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => {
-                          toast('📞 Contacta con nosotros\n\nTeléfono: +34 965 123 456\nEmail: soporte@granja-mari-pepa.com\nHorario: L-V 9:00-18:00', {
+                          toast(t('login.contactToast'), {
                             duration: 8000,
                             style: {
                               background: '#3B82F6',
@@ -816,7 +816,7 @@ export default function CustomerAreaPage() {
                         }}
                         className="text-blue-600 hover:text-blue-700 transition-colors font-semibold"
                       >
-                        Contacta con nosotros
+                        {t('login.contactUs')}
                       </motion.button>
                     </div>
                   </div>
@@ -840,7 +840,7 @@ export default function CustomerAreaPage() {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 rounded-full text-blue-700 text-sm font-medium mb-4"
               >
                 <Sparkles className="w-4 h-4" />
-                Panel de Control
+                {t('publicFeatures.badge')}
               </motion.div>
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
@@ -848,7 +848,7 @@ export default function CustomerAreaPage() {
                 transition={{ delay: 0.9, duration: 0.6 }}
                 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4"
               >
-                Todo lo que necesitas en un solo lugar
+                {t('publicFeatures.title')}
               </motion.h3>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -856,7 +856,7 @@ export default function CustomerAreaPage() {
                 transition={{ delay: 1, duration: 0.6 }}
                 className="text-gray-600 max-w-2xl mx-auto text-lg"
               >
-                Gestiona tu relación comercial con nosotros de forma fácil y eficiente
+                {t('publicFeatures.subtitle')}
               </motion.p>
             </div>
 
@@ -864,39 +864,39 @@ export default function CustomerAreaPage() {
               {[
                 {
                   icon: Clipboard,
-                  title: 'Gestión de Pedidos',
-                  desc: 'Realiza y consulta todos tus pedidos en tiempo real',
+                  title: t('publicFeatures.items.orders.title'),
+                  desc: t('publicFeatures.items.orders.desc'),
                   gradient: 'from-blue-500 to-indigo-600',
                   bgGlow: 'bg-blue-500/20',
                   stats: '24/7',
-                  statsLabel: 'Disponible'
+                  statsLabel: t('publicFeatures.items.orders.label')
                 },
                 {
                   icon: FileText,
-                  title: 'Facturas PDF',
-                  desc: 'Descarga y gestiona tus facturas al instante',
+                  title: t('publicFeatures.items.invoices.title'),
+                  desc: t('publicFeatures.items.invoices.desc'),
                   gradient: 'from-purple-500 to-pink-600',
                   bgGlow: 'bg-purple-500/20',
                   stats: '100%',
-                  statsLabel: 'Digital'
+                  statsLabel: t('publicFeatures.items.invoices.label')
                 },
                 {
                   icon: User,
-                  title: 'Perfil Personal',
-                  desc: 'Actualiza tus datos y preferencias de contacto',
+                  title: t('publicFeatures.items.profile.title'),
+                  desc: t('publicFeatures.items.profile.desc'),
                   gradient: 'from-emerald-500 to-teal-600',
                   bgGlow: 'bg-emerald-500/20',
                   stats: '∞',
-                  statsLabel: 'Personalizable'
+                  statsLabel: t('publicFeatures.items.profile.label')
                 },
                 {
                   icon: BarChart3,
-                  title: 'Estadísticas',
-                  desc: 'Analiza tu historial y patrones de compra',
+                  title: t('publicFeatures.items.stats.title'),
+                  desc: t('publicFeatures.items.stats.desc'),
                   gradient: 'from-amber-500 to-orange-600',
                   bgGlow: 'bg-amber-500/20',
                   stats: '📊',
-                  statsLabel: 'Insights'
+                  statsLabel: t('publicFeatures.items.stats.label')
                 }
               ].map((feature, index) => {
                 const IconComponent = feature.icon;
@@ -964,10 +964,10 @@ export default function CustomerAreaPage() {
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                   <div className="text-center md:text-left">
                     <h4 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      ¿Aún no tienes cuenta?
+                      {t('publicFeatures.cta.title')}
                     </h4>
                     <p className="text-blue-100 text-sm md:text-base">
-                      Contacta con nuestro equipo comercial para obtener acceso
+                      {t('publicFeatures.cta.desc')}
                     </p>
                   </div>
                   <motion.a
@@ -976,7 +976,7 @@ export default function CustomerAreaPage() {
                     whileTap={{ scale: 0.95 }}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    Contactar
+                    {t('publicFeatures.cta.button')}
                     <ArrowRight className="w-4 h-4" />
                   </motion.a>
                 </div>

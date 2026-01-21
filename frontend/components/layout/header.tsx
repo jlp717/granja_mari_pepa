@@ -6,9 +6,12 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations, useLocale } from 'next-intl'
 import { useCartStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { CartDrawer } from '@/components/cart/cart-drawer'
+import { LanguageSwitcher } from '@/components/ui/language-switcher'
+
 
 const NAVIGATION = [
   {
@@ -97,6 +100,7 @@ export function Header() {
 
   const pathname = usePathname()
   const { getTotalItems, toggleCart } = useCartStore()
+  const locale = useLocale()
 
   const isHomePage = pathname === '/'
   const styles = isScrolled ? NAV_STYLES.scrolled : NAV_STYLES.normal
@@ -120,7 +124,7 @@ export function Header() {
   const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), [])
 
   const NavLink = ({ item, isMobile = false }: { item: typeof NAVIGATION[0], isMobile?: boolean }) => {
-    const isActive = pathname === item.href || 
+    const isActive = pathname === item.href ||
       (item.hasSubmenu && pathname.startsWith('/productos')) ||
       (item.href === '/area-clientes' && pathname.startsWith('/area-clientes'))
 
@@ -192,9 +196,8 @@ export function Header() {
     }
 
     // Desktop version
-    const baseClass = `px-4 py-3 xl:px-6 text-sm font-semibold transition-all duration-300 rounded-lg ${
-      isActive ? styles.activeText : `${styles.text} ${styles.hoverText}`
-    } hover:scale-105 focus-ring flex items-center gap-2`
+    const baseClass = `px-4 py-3 xl:px-6 text-sm font-semibold transition-all duration-300 rounded-lg ${isActive ? styles.activeText : `${styles.text} ${styles.hoverText}`
+      } hover:scale-105 focus-ring flex items-center gap-2`
 
     return (
       <Link
@@ -238,7 +241,7 @@ export function Header() {
         {/* Animated background pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.1)_50%,transparent_100%)] bg-[length:200%_100%] animate-[shimmer_3s_infinite]" />
         <div className="absolute inset-0 bg-primary" />
-        
+
         <div className="container mx-auto px-6 lg:px-8 h-full flex items-center justify-between relative z-10">
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2 group cursor-default">
@@ -254,15 +257,21 @@ export function Header() {
               <span className="text-primary-foreground/90 font-medium tracking-wide group-hover:text-primary-foreground transition-colors">968 46 75 14</span>
             </a>
           </div>
+          <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher variant="default" />
             <div className="bg-primary-foreground/10 px-5 py-1.5 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all duration-300">
-              <span className="text-primary-foreground font-semibold text-[13px] tracking-wide">Distribución especializada desde 1966</span>
+              <span className="text-primary-foreground font-semibold text-[13px] tracking-wide">
+                {locale === 'es' ? 'Distribución especializada desde 1966' : 'Specialized distribution since 1966'}
+              </span>
             </div>
+          </div>
           <div className="hidden lg:flex items-center space-x-2 text-primary-foreground/80 font-medium">
             <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse" />
-            <span className="text-[13px]">Calidad Premium</span>
+            <span className="text-[13px]">{locale === 'es' ? 'Calidad Premium' : 'Premium Quality'}</span>
           </div>
         </div>
       </div>
+
 
       {/* Main Header - Solid Background */}
       <header className={`fixed top-12 left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
@@ -298,9 +307,8 @@ export function Header() {
                           className={`p-2 ml-1 transition-all duration-300 rounded-lg ${styles.text}`}
                           aria-expanded={activeSubmenu === item.name}
                         >
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${
-                            activeSubmenu === item.name ? 'rotate-180' : ''
-                          }`} />
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeSubmenu === item.name ? 'rotate-180' : ''
+                            }`} />
                         </button>
 
                         {/* Submenu Dropdown */}
@@ -394,7 +402,7 @@ export function Header() {
                 </Button>
 
                 {cartItemCount > 0 && (
-                  <motion.span 
+                  <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     className="absolute -top-1.5 -right-1.5 bg-destructive text-destructive-foreground text-[11px] rounded-full min-w-[20px] h-5 flex items-center justify-center font-bold border-2 border-card shadow-lg z-50"
@@ -443,7 +451,7 @@ export function Header() {
                       className="w-[140px] sm:w-[160px] h-auto object-contain rounded-xl"
                     />
                   </Link>
-                  
+
                   {/* Botón cerrar */}
                   <button
                     onClick={closeMobileMenu}
@@ -493,9 +501,8 @@ export function Header() {
                             )}
                             className="w-14 py-4 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary border-l border-border"
                           >
-                            <ChevronDown className={`w-5 h-5 transition-transform ${
-                              activeMobileSubmenu === item.name ? 'rotate-180' : ''
-                            }`} />
+                            <ChevronDown className={`w-5 h-5 transition-transform ${activeMobileSubmenu === item.name ? 'rotate-180' : ''
+                              }`} />
                           </button>
                         </div>
 
