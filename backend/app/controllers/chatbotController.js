@@ -383,7 +383,8 @@ async function getSpecificInvoices(invoiceNumbers, codigoCliente) {
  */
 async function processChatMessage(req, res) {
   try {
-    const { message, conversationId, history: clientHistory } = req.body;
+    const { message, conversationId, history: clientHistory, locale = 'es' } = req.body;
+
 
     // Verificar si groq está disponible
     if (!groq) {
@@ -419,13 +420,17 @@ async function processChatMessage(req, res) {
     const isProhibitedTopic = prohibitedTopics.some(regex => regex.test(message));
 
     if (isProhibitedTopic) {
+      const prohibitedResponse = locale === 'en'
+        ? 'I am the Mari Pepa assistant and I specialize in helping you with products and services for hospitality. Do you have any questions about our frozen products, orders or invoices?'
+        : 'Soy el asistente de Mari Pepa y estoy especializado en ayudarle con productos y servicios para hostelería. ¿Tiene alguna pregunta sobre nuestros productos congelados, pedidos o facturación?';
       return res.json({
         success: true,
-        reply: 'Soy el asistente de Mari Pepa y estoy especializado en ayudarle con productos y servicios para hostelería. ¿Tiene alguna pregunta sobre nuestros productos congelados, pedidos o facturación?',
-        response: 'Soy el asistente de Mari Pepa y estoy especializado en ayudarle con productos y servicios para hostelería. ¿Tiene alguna pregunta sobre nuestros productos congelados, pedidos o facturación?',
+        reply: prohibitedResponse,
+        response: prohibitedResponse,
         conversationId: conversationId || `conv_${Date.now()}`
       });
     }
+
 
     // Detectar si el usuario pregunta por sus facturas o información personal
     const askingForInvoices = /\b(factura|facturas|facturaci[oó]n|pago|pagos|debe|deuda|debo|libro.*iva|mis\s+datos)\b/i.test(message);
@@ -625,7 +630,12 @@ ${generatedLinks.length > 0 ? `**ENLACES DE DESCARGA GENERADOS:**\n${generatedLi
     }));
 
     // Construir mensajes para Groq
-    const systemPrompt = SYSTEM_PROMPT + contextPrompt;
+    // Add language instruction based on locale
+    const languageInstruction = locale === 'en'
+      ? '\n\n**CRITICAL LANGUAGE INSTRUCTION:** You MUST respond ONLY in English. Translate all company information to English. The user is viewing the English version of the website.'
+      : '\n\n**INSTRUCCIÓN DE IDIOMA CRÍTICA:** Debes responder SOLO en español.';
+
+    const systemPrompt = SYSTEM_PROMPT + contextPrompt + languageInstruction;
 
     const messages = [
       {

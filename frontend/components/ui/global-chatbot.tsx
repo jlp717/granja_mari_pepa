@@ -19,11 +19,15 @@ import {
   MapPin,
   TrendingUp,
   ChevronRight,
-  Zap
+  Zap,
+  Mic,
+  MicOff
 } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import apiClient from '@/lib/apiClient'; // 🔐 Cliente seguro para auth
+
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -283,10 +287,29 @@ export function GlobalChatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentlyStreamingId, setCurrentlyStreamingId] = useState<number | null>(null);
   const [showQuickActions, setShowQuickActions] = useState(true);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { greeting, period } = useTimeBasedGreeting();
+  const recognitionRef = useRef<any>(null);
+
+  // i18n hooks
+  const t = useTranslations('chatbot');
+  const locale = useLocale();
+
+  // Greeting based on time and locale
+  const { greeting } = useMemo(() => {
+    const hour = new Date().getHours();
+    if (locale === 'en') {
+      if (hour >= 6 && hour < 12) return { greeting: t('greetingMorning') };
+      if (hour >= 12 && hour < 20) return { greeting: t('greetingAfternoon') };
+      return { greeting: t('greetingEvening') };
+    }
+    if (hour >= 6 && hour < 12) return { greeting: t('greetingMorning') };
+    if (hour >= 12 && hour < 20) return { greeting: t('greetingAfternoon') };
+    return { greeting: t('greetingEvening') };
+  }, [locale, t]);
+
 
   // Auto-scroll cuando hay nuevos mensajes o durante streaming
   useEffect(() => {
@@ -342,8 +365,10 @@ export function GlobalChatbot() {
       const response = await apiClient.post('/api/chatbot', {
         message: userMessage,
         history: messages.slice(-6),
-        conversationId: undefined // Let backend generate or manage sessions
+        conversationId: undefined, // Let backend generate or manage sessions
+        locale: locale // Send user's language for bilingual responses
       });
+
 
       const data = response.data;
 
@@ -370,7 +395,7 @@ export function GlobalChatbot() {
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'No se ha podido conectar con el servidor. Por favor, inténtalo de nuevo en unos segundos.',
+        content: t('connectionError'),
         timestamp: new Date(),
         isStreaming: false
       }]);
@@ -386,6 +411,59 @@ export function GlobalChatbot() {
     setShowQuickActions(true);
   };
 
+  // Voice input functions
+  const startVoiceInput = useCallback(() => {
+    // Check for browser support
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      // Voice not supported
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: t('voiceNotSupported'),
+        timestamp: new Date(),
+        isStreaming: false
+      }]);
+      return;
+    }
+
+    try {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.lang = locale === 'en' ? 'en-US' : 'es-ES';
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+
+      recognitionRef.current.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInput(transcript);
+        inputRef.current?.focus();
+      };
+
+      recognitionRef.current.start();
+    } catch {
+      setIsListening(false);
+    }
+  }, [locale, t]);
+
+  const stopVoiceInput = useCallback(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  }, []);
+
   const handleQuickAction = useCallback((action: string) => {
     sendMessage(action);
   }, []);
@@ -393,6 +471,7 @@ export function GlobalChatbot() {
   const handleSuggestionSelect = useCallback((suggestion: string) => {
     sendMessage(suggestion);
   }, []);
+
 
   const quickQuestions = [
     '¿Qué productos distribuís?',
@@ -671,10 +750,25 @@ export function GlobalChatbot() {
                         ref={inputRef}
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="Escribe tu mensaje..."
-                        className="flex-1 h-10 rounded-xl border-gray-200 focus:border-emerald-400 focus:ring-emerald-100 text-sm"
+                        placeholder={isListening ? t('voiceListening') : t('placeholder')}
+                        className={`flex-1 h-10 rounded-xl border-gray-200 focus:border-emerald-400 focus:ring-emerald-100 text-sm ${isListening ? 'border-red-400 bg-red-50' : ''}`}
                         disabled={isLoading || currentlyStreamingId !== null}
                       />
+                      {/* Voice Input Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        type="button"
+                        onClick={isListening ? stopVoiceInput : startVoiceInput}
+                        disabled={isLoading || currentlyStreamingId !== null}
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-lg ${isListening
+                            ? 'bg-red-500 text-white animate-pulse hover:bg-red-600'
+                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800'
+                          }`}
+                        aria-label={t('voiceInput')}
+                      >
+                        {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                      </motion.button>
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -688,13 +782,14 @@ export function GlobalChatbot() {
                     <div className="flex items-center justify-between mt-2 px-1">
                       <p className="text-[10px] text-gray-400 flex items-center gap-1">
                         <Sparkles className="w-3 h-3" />
-                        Pepa IA
+                        {t('poweredBy')}
                       </p>
                       <p className="text-[10px] text-gray-400">
-                        HORECA desde 1966
+                        {t('since')}
                       </p>
                     </div>
                   </div>
+
                 </>
               )}
             </motion.div>

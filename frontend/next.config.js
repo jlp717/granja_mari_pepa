@@ -5,6 +5,10 @@ const withBundleAnalyzer = process.env.ANALYZE === 'true'
   ? require('@next/bundle-analyzer')({ enabled: true })
   : (config) => config;
 
+// next-intl para internacionalización
+const withNextIntl = require('next-intl/plugin')('./i18n.ts');
+
+
 const nextConfig = {
   // SSR mode for production (no output: 'export')
   // This enables 'npm run start' with Node.js server
@@ -95,4 +99,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withNextIntl(withBundleAnalyzer(nextConfig));
