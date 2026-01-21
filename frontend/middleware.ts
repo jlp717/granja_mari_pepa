@@ -8,9 +8,8 @@ export default createMiddleware({
     // Locale por defecto
     defaultLocale,
 
-    // 'as-needed': Solo muestra prefijo para locales no-default (/en/page pero / para español)
     // 'always': Siempre muestra prefijo (/es/page, /en/page)
-    localePrefix: 'as-needed',
+    localePrefix: 'always',
 
     // Detectar idioma del navegador
     localeDetection: true
