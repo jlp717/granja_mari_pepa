@@ -7,11 +7,16 @@ export const defaultLocale = 'es' as const;
 
 export type Locale = (typeof locales)[number];
 
-export default getRequestConfig(async ({ locale }) => {
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale;
+
   // Validar que el locale existe
-  if (!locales.includes(locale as Locale)) notFound();
+  if (!locale || !locales.includes(locale as Locale)) {
+    locale = defaultLocale;
+  }
 
   return {
+    locale,
     messages: (await import(`./messages/${locale}.json`)).default
   };
 });
