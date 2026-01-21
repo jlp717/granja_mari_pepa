@@ -27,7 +27,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
-  trailingSlash: true,
+  trailingSlash: false,
 
   // Optimizaciones de React 18
   reactStrictMode: true,
