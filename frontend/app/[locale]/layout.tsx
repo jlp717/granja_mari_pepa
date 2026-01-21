@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, unstable_setRequestLocale } from 'next-intl/server'
+import { getMessages } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Toaster } from '@/components/ui/toaster'
@@ -25,6 +25,9 @@ const inter = Inter({
     preload: true,
     fallback: ['system-ui', 'arial']
 })
+
+// Force dynamic rendering to avoid SSG 404s
+export const dynamic = 'force-dynamic';
 
 // Viewport separado (requerido en Next.js 14+)
 export const viewport: Viewport = {
@@ -140,9 +143,6 @@ export default async function LocaleLayout({
     children,
     params: { locale }
 }: LocaleLayoutProps) {
-    // Enable static rendering
-    unstable_setRequestLocale(locale);
-
     // Validar locale
     if (!locales.includes(locale)) {
         notFound();
