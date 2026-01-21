@@ -789,7 +789,7 @@ export default function ContactPage() {
             {/* Instructions - Simplificadas */}
             <div className="mt-6 text-center">
               <p className="text-white/60 text-sm mb-2">
-                Haz clic en los puntos para una experiencia inmersiva
+                {t('globe.click_points_hint')}
               </p>
               <div className="flex justify-center gap-4">
               </div>

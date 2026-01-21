@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Navigation, Building2, Phone, ExternalLink, Zap, Satellite, Globe2, Map, ArrowUpRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface LocationMapProps {
   className?: string;
@@ -18,7 +19,7 @@ interface Location {
     lng: number;
   };
   color: string;
-  description: string;
+  descriptionKey: string;
   address?: string;
   mapUrl?: string;
   phone?: string;
@@ -31,7 +32,7 @@ const locations: Location[] = [
     region: 'Murcia',
     coordinates: { lat: 37.6756, lng: -1.7003 },
     color: '#10b981',
-    description: 'Sede Central',
+    descriptionKey: 'headquarters',
     address: 'Pol Ind Saprelorca Parcela D3 Jimeno Sola, 3, 30817, Murcia',
     mapUrl: 'https://maps.app.goo.gl/qfHqTqVhJeGezwRm9',
     phone: '968 46 75 14'
@@ -42,6 +43,7 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
   className = "", 
   onLocationClick
 }) => {
+  const t = useTranslations('globe_map');
   const [selectedLocation, setSelectedLocation] = useState<Location>(locations[0]);
   const [isClient, setIsClient] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -130,18 +132,18 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
             transition={{ delay: 0.2 }}
           >
             <Zap className="w-4 h-4 text-cyan-400" />
-            <span className="text-cyan-400 text-sm font-medium tracking-wide">RED DE DISTRIBUCIÓN</span>
+            <span className="text-cyan-400 text-sm font-medium tracking-wide">{t('badge')}</span>
           </motion.div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-            <span className="text-white">Nuestra </span>
+            <span className="text-white">{t('title_1')} </span>
             <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              Presencia
+              {t('title_2')}
             </span>
           </h2>
           
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Cobertura estratégica en el sureste peninsular
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -161,8 +163,8 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
                 <Building2 className="w-5 h-5 text-cyan-400" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Centros Operativos</h3>
-                <p className="text-xs text-slate-500 font-mono">Selecciona para ver en el mapa</p>
+                <h3 className="text-lg font-bold text-white">{t('operations_title')}</h3>
+                <p className="text-xs text-slate-500 font-mono">{t('select_to_view')}</p>
               </div>
             </div>
 
@@ -216,7 +218,7 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
                               border: `1px solid ${location.color}40`
                             }}
                           >
-                            {location.description}
+                            {t(location.descriptionKey)}
                           </span>
                         </div>
                       </div>
@@ -228,10 +230,10 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
                             className="w-2 h-2 rounded-full animate-pulse"
                             style={{ backgroundColor: location.color }}
                           />
-                          <span className="text-xs font-mono text-slate-500">ONLINE</span>
+                          <span className="text-xs font-mono text-slate-500">{t('status_online')}</span>
                         </div>
                         {selectedLocation?.id === location.id && (
-                          <span className="text-[10px] text-cyan-400 font-mono">VIEWING</span>
+                          <span className="text-[10px] text-cyan-400 font-mono">{t('status_viewing')}</span>
                         )}
                       </div>
                     </div>
@@ -279,9 +281,9 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
                   <Zap className="w-5 h-5 text-amber-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white text-sm mb-1">Cobertura Regional</h4>
+                  <h4 className="font-semibold text-white text-sm mb-1">{t('regional_coverage')}</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Servicio de distribución en Murcia y Alicante. Entregas en 24-48h.
+                    {t('regional_coverage_desc')}
                   </p>
                 </div>
               </div>
@@ -361,7 +363,7 @@ const OpenStreetMapGlobe: React.FC<LocationMapProps> = ({
                   className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20"
                 >
                   <MapPin className="w-4 h-4" />
-                  Ir a {selectedLocation.name}
+                  {t('go_to')} {selectedLocation.name}
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>

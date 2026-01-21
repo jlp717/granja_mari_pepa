@@ -209,6 +209,7 @@
         "globe": {
             "title": "Globo Interactivo 3D",
             "subtitle": "Haz clic en las ubicaciones para una experiencia inmersiva",
+            "click_points_hint": "Haz clic en los puntos para una experiencia inmersiva",
             "view_maps": "Ver en Maps",
             "sede_murcia": "Sede central de operaciones en Murcia",
             "delegation_andalucia": "Delegación comercial en Andalucía"
@@ -652,6 +653,12 @@
     "footer": {
         "companyName": "GRANJA MARI PEPA",
         "tagline": "Distribuidores de productos alimentarios premium",
+        "description_short": "Distribuidores de alimentación premium para HORECA",
+        "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
+        "nestle_distributor": "Distribuidor Oficial Nestlé",
+        "founded_text": "Fundada en Lorca, 1966",
+        "green_energy": "Energía Verde",
+        "quick_access": "Acceso Rápido",
         "copyright": "© {year} Granja Mari Pepa. Todos los derechos reservados.",
         "quickLinks": "Enlaces rápidos",
         "legal": "Legal",
@@ -661,6 +668,20 @@
         "legalNotice": "Aviso Legal",
         "contact": "Contacto",
         "followUs": "Síguenos"
+    },
+    "globe_map": {
+        "badge": "RED DE DISTRIBUCIÓN",
+        "title_1": "Nuestra",
+        "title_2": "Presencia",
+        "subtitle": "Cobertura estratégica en el sureste peninsular",
+        "operations_title": "Centros Operativos",
+        "select_to_view": "Selecciona para ver en el mapa",
+        "status_online": "ONLINE",
+        "status_viewing": "VIENDO",
+        "headquarters": "Sede Central",
+        "regional_coverage": "Cobertura Regional",
+        "regional_coverage_desc": "Servicio de distribución en Murcia y Alicante. Entregas en 24-48h.",
+        "go_to": "Ir a"
     },
     "errors": {
         "notFound": "Página no encontrada",
