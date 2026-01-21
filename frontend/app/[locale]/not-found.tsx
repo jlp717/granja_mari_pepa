@@ -3,8 +3,7 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Home, ShoppingBag, Search } from 'lucide-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { Link, useRouter } from '@/lib/navigation'
 
 export default function NotFound() {
   const router = useRouter()

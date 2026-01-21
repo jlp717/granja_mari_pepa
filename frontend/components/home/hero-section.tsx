@@ -5,7 +5,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ResponsiveVideo from '@/components/ui/responsive-video';
 import ResponsiveImage from '@/components/ui/responsive-image';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';

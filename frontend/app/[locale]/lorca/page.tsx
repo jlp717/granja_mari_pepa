@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Link } from '@/lib/navigation'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, Clock, Truck, Award, Users, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'

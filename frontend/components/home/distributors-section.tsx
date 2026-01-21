@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Star, Award, ShieldCheck, Sparkles, ExternalLink, ArrowRight, Building2 } from 'lucide-react';
 import ResponsiveImage from '@/components/ui/responsive-image';
 import { useReAnimatedSection } from '@/hooks/use-re-animated-section';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
 
 // DATOS REALES - FUENTE: https://granjamaripepa.com/productos/

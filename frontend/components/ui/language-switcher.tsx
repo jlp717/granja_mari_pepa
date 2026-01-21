@@ -1,10 +1,11 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter, usePathname } from '@/lib/navigation';
 import { motion } from 'framer-motion';
 import { Globe, ChevronDown } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useTransition } from 'react';
+import { locales } from '@/i18n';
 
 const languages = [
     { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -21,6 +22,7 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
     const router = useRouter();
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    const [isPending, startTransition] = useTransition();
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     // Cerrar dropdown al hacer clic fuera
@@ -36,23 +38,14 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
     }, []);
 
     const switchLocale = (newLocale: string) => {
-        // Remove current locale from path and add new one
-        const segments = pathname.split('/').filter(Boolean);
-
-        // Check if first segment is a locale
-        if (segments[0] === 'es' || segments[0] === 'en') {
-            segments[0] = newLocale;
-        } else {
-            segments.unshift(newLocale);
-        }
-
-        // For Spanish (default locale), we might not need the prefix
-        const newPath = newLocale === 'es'
-            ? '/' + segments.slice(1).join('/')
-            : '/' + segments.join('/');
-
-        router.push(newPath || '/');
         setIsOpen(false);
+        
+        // Usar startTransition para navegación no bloqueante
+        startTransition(() => {
+            // El pathname de usePathname() de @/lib/navigation ya viene SIN el locale
+            // Solo necesitamos usar router.replace con el nuevo locale
+            router.replace(pathname, { locale: newLocale as typeof locales[number] });
+        });
     };
 
     const currentLanguage = languages.find(l => l.code === locale) || languages[0];

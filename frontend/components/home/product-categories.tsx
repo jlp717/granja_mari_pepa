@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap, Fish, Beef, UtensilsCrossed, Cake, IceCream, Cookie, Candy, Croissant, Sandwich, Pizza, Package, ShoppingBasket, Wheat, Coffee } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { productCategories } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { GlareCard } from '@/components/ui/glare-card';
