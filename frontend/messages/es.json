@@ -1,4 +1,44 @@
 {
+    "header": {
+        "top_bar": {
+            "location": "Murcia • Almería",
+            "tagline": "Distribución especializada desde 1966",
+            "tagline_short": "Distribución especializada",
+            "quality": "Calidad Premium"
+        },
+        "brands_title": "Nuestras Marcas",
+        "view_all_products": "Ver todos los productos",
+        "cart_label": "Carrito de compra ({count})",
+        "close_menu": "Cerrar menú",
+        "open_menu": "Abrir menú",
+        "you_are_here": "Estás en",
+        "browsing": "Navegando",
+        "help_title": "¿Necesitas ayuda?",
+        "help_text": "Nuestro equipo de expertos está disponible para asesorarte en productos y pedidos.",
+        "call_cta": "Llamadas y WhatsApp",
+        "contact_now": "Contactar ahora",
+        "excellence_msg": "Más de 55 años de excelencia en el servicio HORECA.",
+        "categories": {
+            "sea": "Productos del mar",
+            "meat": "Carne",
+            "precooked": "Precocinados",
+            "pastry": "Repostería",
+            "dairy": "Lácteos",
+            "cereals": "Cereales",
+            "chocolate": "Chocolate",
+            "fresh_fish": "Pescado Fresco",
+            "seafood": "Mariscos"
+        }
+    },
+    "nav": {
+        "home": "Inicio",
+        "products": "Productos",
+        "about": "Quiénes somos",
+        "contact": "Contacto",
+        "customerArea": "Área Clientes",
+        "openMenu": "Abrir menú",
+        "closeMenu": "Cerrar menú"
+    },
     "categories_section": {
         "premium_catalog": "CATÁLOGO PREMIUM",
         "our_products_1": "NUESTROS",
@@ -59,15 +99,6 @@
             "fermented_dough": "Masas fermentadas",
             "specialties": "Especialidades"
         }
-    },
-    "nav": {
-        "home": "Inicio",
-        "products": "Productos",
-        "about": "Quiénes somos",
-        "contact": "Contacto",
-        "customerArea": "Área Clientes",
-        "openMenu": "Abrir menú",
-        "closeMenu": "Cerrar menú"
     },
     "hero": {
         "title": "GRANJA MARI PEPA",
@@ -708,10 +739,40 @@
         "loading": "Cargando contenido",
         "newWindow": "Se abre en nueva ventana"
     },
+    "categories": {
+        "mar": {
+            "name": "Productos del mar",
+            "description": "Pescados y mariscos congelados de la más alta calidad"
+        },
+        "carne": {
+            "name": "Carnes",
+            "description": "Carnes selectas congeladas"
+        },
+        "precocinados": {
+            "name": "Precocinados",
+            "description": "Preparados y verduras congelados"
+        },
+        "reposteria": {
+            "name": "Repostería",
+            "description": "Dulces y postres congelados"
+        },
+        "helados": {
+            "name": "Helados",
+            "description": "Amplia gama de helados Nestlé para hostelería"
+        },
+        "chocolate": {
+            "name": "Chocolate",
+            "description": "Chocolates y productos de cacao de primera calidad"
+        },
+        "pan": {
+            "name": "Pan Congelado",
+            "description": "Panes y masas congeladas de alta calidad"
+        }
+    },
     "meta": {
-        "title": "Granja Mari Pepa | Distribución Alimentaria Premium",
-        "description": "Distribuidores de productos congelados, carnes y pescados para hostelería HORECA en Murcia y Almería. Servicio 24h. Desde 1966.",
-        "keywords": "distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados"
+        "title": "Granja Mari Pepa | Distribución HORECA Lorca y Murcia",
+        "description": "Líderes en distribución alimentaria para HORECA en Murcia y Almería. Especialistas en congelados, carnes y pescados. Servicio premium desde 1966.",
+        "keywords": "distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados, lorca"
     },
     "legal": {
         "privacy": {

@@ -246,11 +246,11 @@ export function ProductCategories() {
                   {/* Professional content - RESPONSIVO - ALTURA UNIFORME */}
                   <div className="flex-1 p-4 sm:p-6 relative flex flex-col">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-blue-300 transition-colors duration-300 line-clamp-2">
-                      {category.name}
+                      {tCats(`${category.id}.name`)}
                     </h3>
 
                     <p className="text-blue-200/80 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-3 leading-relaxed flex-1">
-                      {category.description}
+                      {tCats(`${category.id}.description`)}
                     </p>
 
                     {/* Professional CTA - RESPONSIVO - SIEMPRE AL FONDO */}

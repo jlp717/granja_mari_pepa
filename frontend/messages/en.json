@@ -1,4 +1,44 @@
 {
+    "header": {
+        "top_bar": {
+            "location": "Murcia • Almería",
+            "tagline": "Specialized distribution since 1966",
+            "tagline_short": "Specialized distribution",
+            "quality": "Premium Quality"
+        },
+        "brands_title": "Our Brands",
+        "view_all_products": "View all products",
+        "cart_label": "Shopping cart ({count})",
+        "close_menu": "Close menu",
+        "open_menu": "Open menu",
+        "you_are_here": "You are at",
+        "browsing": "Browsing",
+        "help_title": "Need help?",
+        "help_text": "Our team of experts is available to advise you on products and orders.",
+        "call_cta": "Calls and WhatsApp",
+        "contact_now": "Contact now",
+        "excellence_msg": "Over 55 years of excellence in HORECA service.",
+        "categories": {
+            "sea": "Seafood",
+            "meat": "Meat",
+            "precooked": "Pre-cooked",
+            "pastry": "Pastry",
+            "dairy": "Dairy",
+            "cereals": "Cereals",
+            "chocolate": "Chocolate",
+            "fresh_fish": "Fresh Fish",
+            "seafood_shell": "Shellfish"
+        }
+    },
+    "nav": {
+        "home": "Home",
+        "products": "Products",
+        "about": "About Us",
+        "contact": "Contact",
+        "customerArea": "Customer Area",
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu"
+    },
     "categories_section": {
         "premium_catalog": "PREMIUM CATALOG",
         "our_products_1": "OUR",
@@ -59,15 +99,6 @@
             "fermented_dough": "Fermented doughs",
             "specialties": "Specialties"
         }
-    },
-    "nav": {
-        "home": "Home",
-        "products": "Products",
-        "about": "About Us",
-        "contact": "Contact",
-        "customerArea": "Customer Area",
-        "openMenu": "Open menu",
-        "closeMenu": "Close menu"
     },
     "hero": {
         "title": "GRANJA MARI PEPA",
@@ -708,10 +739,40 @@
         "loading": "Loading content",
         "newWindow": "Opens in new window"
     },
+    "categories": {
+        "mar": {
+            "name": "Seafood",
+            "description": "High quality frozen fish and seafood"
+        },
+        "carne": {
+            "name": "Meats",
+            "description": "Selected frozen meats"
+        },
+        "precocinados": {
+            "name": "Pre-cooked",
+            "description": "Frozen prepared dishes and vegetables"
+        },
+        "reposteria": {
+            "name": "Pastry",
+            "description": "Frozen sweets and desserts"
+        },
+        "helados": {
+            "name": "Ice Cream",
+            "description": "Wide range of Nestlé ice creams for hospitality"
+        },
+        "chocolate": {
+            "name": "Chocolate",
+            "description": "Premium quality cocoa and chocolate products"
+        },
+        "pan": {
+            "name": "Frozen Bread",
+            "description": "High quality frozen breads and doughs"
+        }
+    },
     "meta": {
-        "title": "Granja Mari Pepa | Premium Food Distribution",
-        "description": "Distributors of frozen products, meats and fish for HORECA hospitality in Murcia and Almería, Spain. 24h service. Since 1966.",
-        "keywords": "food distribution, frozen products, HORECA, Murcia, Almería, meats, fish"
+        "title": "Granja Mari Pepa | HORECA Distribution Lorca & Murcia",
+        "description": "Leading food distributors for HORECA in Murcia and Almería. Specialists in frozen foods, meats, and seafood. Premium service since 1966.",
+        "keywords": "food distribution, frozen food, HORECA, Murcia, Almería, meats, seafood, lorca"
     },
     "legal": {
         "privacy": {

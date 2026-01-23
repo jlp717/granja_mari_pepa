@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, usePathname } from '@/lib/navigation'
 import Image from 'next/image'
 import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ArrowRight } from 'lucide-react'
@@ -10,70 +10,6 @@ import { useCartStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { CartDrawer } from '@/components/cart/cart-drawer'
 import { LanguageSwitcher } from '@/components/ui/language-switcher'
-
-
-const NAVIGATION = [
-  {
-    name: 'Productos',
-    href: '/productos',
-    hasSubmenu: true,
-    submenu: [
-      {
-        name: 'Grupo Topgel',
-        href: '/productos?brand=grupo-topgel',
-        logo: 'gtg',
-        subcategories: [
-          { name: 'Productos del mar', href: '/productos?brand=grupo-topgel&category=mar' },
-          { name: 'Carne', href: '/productos?brand=grupo-topgel&category=carne' },
-          { name: 'Precocinados', href: '/productos?brand=grupo-topgel&category=precocinados' },
-          { name: 'Repostería', href: '/productos?brand=grupo-topgel&category=reposteria' }
-        ]
-      },
-      {
-        name: 'Nestlé',
-        href: '/productos?brand=nestle',
-        logo: 'nestle',
-        subcategories: [
-          { name: 'Lácteos', href: '/productos?brand=nestle&category=lacteos' },
-          { name: 'Cereales', href: '/productos?brand=nestle&category=cereales' },
-          { name: 'Chocolate', href: '/productos?brand=nestle&category=chocolate' }
-        ]
-      },
-      {
-        name: 'Panamar',
-        href: '/productos?brand=panamar',
-        logo: 'panamar',
-        subcategories: [
-          { name: 'Pescado Fresco', href: '/productos?brand=panamar&category=pescado-fresco' },
-          { name: 'Mariscos', href: '/productos?brand=panamar&category=mariscos' }
-        ]
-      },
-      /*
-      {
-        name: 'Okin',
-        href: '/productos?brand=okin',
-        logo: 'okin',
-        subcategories: [
-          { name: 'Carne Fresca', href: '/productos?brand=okin&category=carne-fresca' },
-          { name: 'Embutidos', href: '/productos?brand=okin&category=embutidos' }
-        ]
-      },
-      {
-        name: 'Pastelería Amparín',
-        href: '/productos?brand=amparin',
-        logo: 'pamparin',
-        subcategories: [
-          { name: 'Tartas', href: '/productos?brand=amparin&category=tartas' },
-          { name: 'Bollería', href: '/productos?brand=amparin&category=bolleria' }
-        ]
-      }
-      */
-    ]
-  },
-  { name: 'Quiénes somos', href: '/acerca' },
-  { name: 'Contacto', href: '/contacto' },
-  { name: 'Área Clientes', href: '/area-clientes', icon: 'user' }
-]
 
 const NAV_STYLES = {
   scrolled: {
@@ -90,6 +26,21 @@ const NAV_STYLES = {
   }
 }
 
+// Define types for navigation
+type SubCategory = { name: string; href: string }
+type NavigationItem = {
+  name: string
+  href: string
+  hasSubmenu?: boolean
+  icon?: string
+  submenu?: Array<{
+    name: string
+    href: string
+    logo: string
+    subcategories?: SubCategory[]
+  }>
+}
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -100,9 +51,56 @@ export function Header() {
   const pathname = usePathname()
   const { getTotalItems, toggleCart } = useCartStore()
   const locale = useLocale()
+  const t = useTranslations('header')
+  const tNav = useTranslations('nav')
+  const tBrands = useTranslations('brands')
 
   const isHomePage = pathname === '/'
   const styles = isScrolled ? NAV_STYLES.scrolled : NAV_STYLES.normal
+
+  // Dynamic Navigation Structure based on translations
+  const NAVIGATION: NavigationItem[] = [
+    {
+      name: tNav('products'),
+      href: '/productos',
+      hasSubmenu: true,
+      submenu: [
+        {
+          name: tBrands('grupo-topgel.name'),
+          href: '/productos?brand=grupo-topgel',
+          logo: 'gtg',
+          subcategories: [
+            { name: t('categories.sea'), href: '/productos?brand=grupo-topgel&category=mar' },
+            { name: t('categories.meat'), href: '/productos?brand=grupo-topgel&category=carne' },
+            { name: t('categories.precooked'), href: '/productos?brand=grupo-topgel&category=precocinados' },
+            { name: t('categories.pastry'), href: '/productos?brand=grupo-topgel&category=reposteria' }
+          ]
+        },
+        {
+          name: tBrands('nestle.name'),
+          href: '/productos?brand=nestle',
+          logo: 'nestle',
+          subcategories: [
+            { name: t('categories.dairy'), href: '/productos?brand=nestle&category=lacteos' },
+            { name: t('categories.cereals'), href: '/productos?brand=nestle&category=cereales' },
+            { name: t('categories.chocolate'), href: '/productos?brand=nestle&category=chocolate' }
+          ]
+        },
+        {
+          name: tBrands('panamar.name'),
+          href: '/productos?brand=panamar',
+          logo: 'panamar',
+          subcategories: [
+            { name: t('categories.fresh_fish'), href: '/productos?brand=panamar&category=pescado-fresco' },
+            { name: t('categories.seafood'), href: '/productos?brand=panamar&category=mariscos' }
+          ]
+        }
+      ]
+    },
+    { name: tNav('about'), href: '/acerca' },
+    { name: tNav('contact'), href: '/contacto' },
+    { name: tNav('customerArea'), href: '/area-clientes', icon: 'user' }
+  ]
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -119,10 +117,9 @@ export function Header() {
     return () => document.body.classList.remove('mobile-menu-open')
   }, [isMobileMenuOpen])
 
-  const handleCartClick = useCallback(() => toggleCart(), [toggleCart])
-  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), [])
+  const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
-  const NavLink = ({ item, isMobile = false }: { item: typeof NAVIGATION[0], isMobile?: boolean }) => {
+  const NavLink = ({ item, isMobile = false }: { item: NavigationItem, isMobile?: boolean }) => {
     const isActive = pathname === item.href ||
       (item.hasSubmenu && pathname.startsWith('/productos')) ||
       (item.href === '/area-clientes' && pathname.startsWith('/area-clientes'))
@@ -165,12 +162,8 @@ export function Header() {
 
             {/* Content with micro-animation */}
             <span className="relative z-10 flex items-center gap-3">
-              {/* Icon for user/area clientes */}
-              {(item as any).icon === 'user' && (
-                <User className="w-5 h-5" />
-              )}
-              {/* Active indicator dot */}
-              {isActive && !(item as any).icon && (
+              {item.icon === 'user' && <User className="w-5 h-5" />}
+              {isActive && !item.icon && (
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
@@ -178,7 +171,6 @@ export function Header() {
                 />
               )}
               {item.name}
-              {/* Arrow indicator for active */}
               {isActive && (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
@@ -194,7 +186,6 @@ export function Header() {
       )
     }
 
-    // Desktop version
     const baseClass = `px-4 py-3 xl:px-6 text-sm font-semibold transition-all duration-300 rounded-lg ${isActive ? styles.activeText : `${styles.text} ${styles.hoverText}`
       } hover:scale-105 focus-ring flex items-center gap-2`
 
@@ -204,23 +195,13 @@ export function Header() {
         className={baseClass}
         aria-current={isActive ? 'page' : undefined}
       >
-        {(item as any).icon === 'user' && (
-          <User className="w-4 h-4" />
-        )}
+        {item.icon === 'user' && <User className="w-4 h-4" />}
         {item.name}
       </Link>
     )
   }
 
-  // Define tipo para brand
-  type BrandType = {
-    name: string;
-    href: string;
-    logo: string;
-    subcategories?: { name: string; href: string; }[];
-  }
-
-  const BrandLogo = ({ brand }: { brand: BrandType }) => (
+  const BrandLogo = ({ brand }: { brand: { name: string; logo: string } }) => (
     <Image
       src={`/images/logo-${brand.logo}.png`}
       alt={brand.name}
@@ -230,14 +211,12 @@ export function Header() {
     />
   )
 
-  // Fix: Direct store subscription for immediate updates
   const cartItemCount = isHydrated ? getTotalItems() : 0
 
   return (
     <div className="relative">
       {/* Top Utility Bar - Premium Solid */}
       <div className="fixed top-0 left-0 right-0 bg-primary text-primary-foreground text-xs z-[60] h-12 flex items-center overflow-hidden">
-        {/* Animated background pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.1)_50%,transparent_100%)] bg-[length:200%_100%] animate-[shimmer_3s_infinite]" />
         <div className="absolute inset-0 bg-primary" />
 
@@ -247,37 +226,38 @@ export function Header() {
               <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <MapPin className="w-3.5 h-3.5 text-primary-foreground/80" />
               </div>
-              <span className="text-primary-foreground/90 font-medium tracking-wide">Murcia • Almería</span>
+              <span className="text-primary-foreground/90 font-medium tracking-wide">{t('top_bar.location')}</span>
             </div>
-            <a href="tel:968123456" className="hidden sm:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300">
+            <a href="tel:968467514" className="hidden sm:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300">
               <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <Phone className="w-3.5 h-3.5 text-primary-foreground/80" />
               </div>
-              <span className="text-primary-foreground/90 font-medium tracking-wide group-hover:text-primary-foreground transition-colors">968 46 75 14</span>
+              <span className="text-primary-foreground/90 font-medium tracking-wide group-hover:text-primary-foreground transition-colors">
+                968 46 75 14
+              </span>
             </a>
           </div>
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher variant="default" />
             <div className="bg-primary-foreground/10 px-5 py-1.5 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all duration-300">
               <span className="text-primary-foreground font-semibold text-[13px] tracking-wide">
-                {locale === 'es' ? 'Distribución especializada desde 1966' : 'Specialized distribution since 1966'}
+                {t('top_bar.tagline')}
               </span>
             </div>
           </div>
           <div className="hidden lg:flex items-center space-x-2 text-primary-foreground/80 font-medium">
             <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse" />
-            <span className="text-[13px]">{locale === 'es' ? 'Calidad Premium' : 'Premium Quality'}</span>
+            <span className="text-[13px]">{t('top_bar.quality')}</span>
           </div>
         </div>
       </div>
 
-
-      {/* Main Header - Solid Background */}
+      {/* Main Header */}
       <header className={`fixed top-12 left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
         <div className="absolute inset-0 bg-card" />
         <nav className="container mx-auto px-4 lg:px-6 xl:px-8 relative z-10">
           <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32">
-            {/* Logo - Premium hover effect */}
+            {/* Logo */}
             <Link href="/" className="flex items-center focus-ring rounded-xl p-2 group relative">
               <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/5 transition-all duration-500" />
               <Image
@@ -306,11 +286,8 @@ export function Header() {
                           className={`p-2 ml-1 transition-all duration-300 rounded-lg ${styles.text}`}
                           aria-expanded={activeSubmenu === item.name}
                         >
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeSubmenu === item.name ? 'rotate-180' : ''
-                            }`} />
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeSubmenu === item.name ? 'rotate-180' : ''}`} />
                         </button>
-
-                        {/* Submenu Dropdown */}
                         <AnimatePresence>
                           {activeSubmenu === item.name && item.submenu && (
                             <motion.div
@@ -323,9 +300,8 @@ export function Header() {
                               onMouseLeave={() => setActiveSubmenu(null)}
                             >
                               <div className="p-4 bg-secondary border-b border-border">
-                                <h3 className="text-lg font-bold text-foreground">Nuestras Marcas</h3>
+                                <h3 className="text-lg font-bold text-foreground">{t('brands_title')}</h3>
                               </div>
-
                               <div className="overflow-y-auto max-h-80 p-3">
                                 <div className="grid grid-cols-2 gap-3">
                                   {item.submenu.map((brand) => (
@@ -342,7 +318,6 @@ export function Header() {
                                           {brand.name}
                                         </span>
                                       </Link>
-
                                       {brand.subcategories && (
                                         <div className="ml-2 space-y-0.5">
                                           {brand.subcategories.map((subcat) => (
@@ -360,14 +335,13 @@ export function Header() {
                                     </div>
                                   ))}
                                 </div>
-
                                 <div className="mt-4 pt-3 border-t border-border">
                                   <Link
                                     href="/productos"
                                     onClick={() => setActiveSubmenu(null)}
                                     className="flex items-center justify-center p-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary-hover transition-all font-medium"
                                   >
-                                    Ver todos los productos
+                                    {t('view_all_products')}
                                     <ArrowRight className="w-4 h-4 ml-2" />
                                   </Link>
                                 </div>
@@ -386,20 +360,17 @@ export function Header() {
 
             {/* Right Controls */}
             <div className="flex items-center space-x-3">
-              {/* Cart Button - Premium Solid Style */}
               <div className="relative group">
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={handleCartClick}
+                  onClick={toggleCart}
                   className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl transition-all duration-300 relative overflow-hidden text-muted-foreground hover:text-foreground hover:bg-secondary"
-                  aria-label={`Carrito ${cartItemCount > 0 ? `con ${cartItemCount} productos` : 'vacío'}`}
+                  aria-label={t('cart_label', { count: cartItemCount })}
                 >
-                  {/* Hover glow effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/10 rounded-xl" />
                   <ShoppingCart className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
                 </Button>
-
                 {cartItemCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
@@ -410,14 +381,12 @@ export function Header() {
                   </motion.span>
                 )}
               </div>
-
-              {/* Mobile Menu Button - Enhanced Visibility */}
               <Button
                 variant="ghost"
                 size="icon"
                 className="lg:hidden h-12 w-12 sm:h-14 sm:w-14 rounded-xl transition-all duration-300 bg-primary text-white hover:bg-primary/90 shadow-lg"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+                aria-label={isMobileMenuOpen ? t('close_menu') : t('open_menu')}
               >
                 <motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
                   {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2.5} /> : <Menu className="w-7 h-7" strokeWidth={2.5} />}
@@ -437,10 +406,8 @@ export function Header() {
               transition={{ duration: 0.3 }}
               className="lg:hidden fixed inset-0 bg-white z-[10000] overflow-y-auto"
             >
-              {/* Header del menú móvil - Con safe area */}
               <div className="bg-primary pt-14 sm:pt-16">
                 <div className="flex items-center justify-between px-5 py-4">
-                  {/* Logo - Sin fondo blanco, directamente */}
                   <Link href="/" onClick={closeMobileMenu} className="flex-shrink-0">
                     <Image
                       src="/images/logo.jpeg"
@@ -450,38 +417,34 @@ export function Header() {
                       className="w-[140px] sm:w-[160px] h-auto object-contain rounded-xl"
                     />
                   </Link>
-
-                  {/* Botón cerrar */}
                   <button
                     onClick={closeMobileMenu}
                     className="flex-shrink-0 w-14 h-14 rounded-xl bg-white flex items-center justify-center shadow-xl"
-                    aria-label="Cerrar menú"
+                    aria-label={t('close_menu')}
                   >
                     <X className="w-7 h-7 text-primary" strokeWidth={2.5} />
                   </button>
                 </div>
               </div>
 
-              {/* Current Page Context */}
               <div className="bg-slate-100 px-4 py-3 border-b border-slate-200">
                 <div className="flex items-center gap-2 text-sm">
                   <div className="w-2 h-2 bg-primary rounded-full" />
-                  <span className="text-slate-500">Estás en:</span>
+                  <span className="text-slate-500">{t('you_are_here')}:</span>
                   <span className="font-semibold text-slate-800">
                     {(() => {
-                      if (pathname === '/') return 'Inicio';
-                      if (pathname === '/productos') return 'Productos';
-                      if (pathname === '/acerca' || pathname === '/acerca/') return 'Quiénes somos';
-                      if (pathname === '/contacto' || pathname === '/contacto/') return 'Contacto';
-                      if (pathname === '/area-clientes' || pathname === '/area-clientes/') return 'Área Clientes';
-                      if (pathname.startsWith('/productos/')) return 'Producto';
-                      return 'Navegando';
+                      if (pathname === '/') return tNav('home')
+                      if (pathname === '/productos') return tNav('products')
+                      if (pathname === '/acerca' || pathname === '/acerca/') return tNav('about')
+                      if (pathname === '/contacto' || pathname === '/contacto/') return tNav('contact')
+                      if (pathname === '/area-clientes' || pathname === '/area-clientes/') return tNav('customerArea')
+                      if (pathname.startsWith('/productos/')) return tNav('products')
+                      return t('browsing')
                     })()}
                   </span>
                 </div>
               </div>
 
-              {/* Navigation Items */}
               <div className="px-4 py-6 space-y-2">
                 {NAVIGATION.map((item, index) => (
                   <motion.div
@@ -500,11 +463,9 @@ export function Header() {
                             )}
                             className="w-14 py-4 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary border-l border-border"
                           >
-                            <ChevronDown className={`w-5 h-5 transition-transform ${activeMobileSubmenu === item.name ? 'rotate-180' : ''
-                              }`} />
+                            <ChevronDown className={`w-5 h-5 transition-transform ${activeMobileSubmenu === item.name ? 'rotate-180' : ''}`} />
                           </button>
                         </div>
-
                         <AnimatePresence>
                           {activeMobileSubmenu === item.name && item.submenu && (
                             <motion.div
@@ -528,7 +489,6 @@ export function Header() {
                                     </div>
                                     <span className="font-medium">{brand.name}</span>
                                   </Link>
-
                                   {brand.subcategories && (
                                     <div className="ml-12 space-y-1">
                                       {brand.subcategories.map((subcat) => (
@@ -559,7 +519,6 @@ export function Header() {
                 ))}
               </div>
 
-              {/* Enhanced Footer */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -576,10 +535,10 @@ export function Header() {
                       <Phone className="w-8 h-8 text-white" />
                     </motion.div>
                     <h3 className="text-foreground font-bold text-lg mb-2">
-                      ¿Necesitas ayuda?
+                      {t('help_title')}
                     </h3>
                     <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                      Contacta con nosotros para consultas sobre productos o pedidos
+                      {t('help_text')}
                     </p>
 
                     <div className="grid grid-cols-1 gap-3 mb-6">
@@ -591,7 +550,7 @@ export function Header() {
                         <Phone className="w-5 h-5 text-primary" />
                         <div>
                           <div className="text-foreground text-sm font-semibold">968 46 75 146</div>
-                          <div className="text-muted-foreground text-xs">Llamadas y WhatsApp</div>
+                          <div className="text-muted-foreground text-xs">{t('call_cta')}</div>
                         </div>
                       </motion.div>
 
@@ -602,8 +561,8 @@ export function Header() {
                       >
                         <MapPin className="w-5 h-5 text-success" />
                         <div>
-                          <div className="text-foreground text-sm font-semibold">Murcia • Almería</div>
-                          <div className="text-muted-foreground text-xs">Distribución especializada</div>
+                          <div className="text-foreground text-sm font-semibold">{t('top_bar.location')}</div>
+                          <div className="text-muted-foreground text-xs">{t('top_bar.tagline_short')}</div>
                         </div>
                       </motion.div>
                     </div>
@@ -618,7 +577,7 @@ export function Header() {
                         className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg"
                       >
                         <span className="flex items-center gap-2">
-                          Contactar ahora
+                          {t('contact_now')}
                           <ArrowRight className="w-4 h-4" />
                         </span>
                       </Link>
@@ -631,7 +590,7 @@ export function Header() {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.6 }}
                       >
-                        Más de 35 años de excelencia marina
+                        {t('excellence_msg')}
                       </motion.p>
                     </div>
                   </div>
