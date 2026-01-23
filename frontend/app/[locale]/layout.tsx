@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Toaster } from '@/components/ui/toaster'
@@ -39,31 +39,14 @@ export const viewport: Viewport = {
 
 // Generar metadata dinámica por locale
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
+    const t = await getTranslations({ locale, namespace: 'meta' });
     const isSpanish = locale === 'es';
 
     return {
         metadataBase: new URL('https://www.mari-pepa.com'),
-        title: isSpanish
-            ? 'Granja Mari Pepa Lorca | Distribución Alimentaria Murcia y Almería - Desde 1966'
-            : 'Granja Mari Pepa Lorca | Food Distribution Murcia and Almería - Since 1966',
-        description: isSpanish
-            ? 'Granja Mari Pepa en Lorca (Murcia) - Distribuidores de productos congelados, carnes y pescados para hostelería HORECA. Servicio 24h. Polígono Saprelorca. +55 años.'
-            : 'Granja Mari Pepa in Lorca (Murcia) - Distributors of frozen products, meats and fish for HORECA hospitality. 24h service. Saprelorca Industrial Park. +55 years.',
-        keywords: isSpanish ? [
-            'granja mari pepa lorca',
-            'mari pepa lorca',
-            'distribución alimentaria lorca',
-            'polígono saprelorca',
-            'distribución alimentaria murcia',
-            'proveedores hostelería almería',
-            'productos congelados horeca',
-        ] : [
-            'granja mari pepa lorca',
-            'food distribution spain',
-            'frozen products murcia',
-            'horeca suppliers almeria',
-            'frozen food distributors spain',
-        ],
+        title: t('title'),
+        description: t('description'),
+        keywords: t('keywords'),
         authors: [{ name: 'Granja Mari Pepa', url: 'https://www.mari-pepa.com' }],
         creator: 'Grupo Topgel',
         publisher: 'Granja Mari Pepa',
@@ -83,26 +66,22 @@ export async function generateMetadata({ params: { locale } }: { params: { local
             locale: isSpanish ? 'es_ES' : 'en_US',
             url: isSpanish ? 'https://www.mari-pepa.com' : 'https://www.mari-pepa.com/en',
             siteName: 'Granja Mari Pepa',
-            title: isSpanish ? 'Granja Mari Pepa | Distribución Alimentaria Premium' : 'Granja Mari Pepa | Premium Food Distribution',
-            description: isSpanish
-                ? 'Soluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.'
-                : 'Comprehensive food solutions for professionals. Specialists in premium meats, fish and pre-cooked products.',
+            title: t('title'),
+            description: t('description'),
             images: [
                 {
                     url: 'https://www.mari-pepa.com/og-image.jpg',
                     width: 1200,
                     height: 630,
-                    alt: isSpanish ? 'Granja Mari Pepa - Distribución Alimentaria Premium' : 'Granja Mari Pepa - Premium Food Distribution',
+                    alt: t('title'),
                     type: 'image/jpeg',
                 },
             ],
         },
         twitter: {
             card: 'summary_large_image',
-            title: isSpanish ? 'Granja Mari Pepa | Proveedor Líder HORECA' : 'Granja Mari Pepa | Leading HORECA Supplier',
-            description: isSpanish
-                ? 'Distribución de productos alimentarios de alta calidad en Murcia y Almería. Servicio 24h.'
-                : 'High quality food distribution in Murcia and Almería, Spain. 24h service.',
+            title: t('title'),
+            description: t('description'),
             images: ['https://www.mari-pepa.com/og-image.jpg'],
             creator: '@GranjaMaripepa',
         },
