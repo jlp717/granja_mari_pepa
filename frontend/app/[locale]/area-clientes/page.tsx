@@ -133,10 +133,8 @@ export default function CustomerAreaPage() {
 
     setIsLoading(true);
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
       // Verificar si puede cambiar contraseña (restricción 30 días)
-      const checkResponse = await fetch(`${API_URL}/api/auth/v2/verificar-cambio/${forgotPasswordClientCode}`);
+      const checkResponse = await fetch(`/api/auth/v2/verificar-cambio/${forgotPasswordClientCode}`);
       const checkData = await checkResponse.json();
 
       if (!checkData.puedeCambiar && !checkData.esPrimerCambio) {
@@ -160,7 +158,7 @@ export default function CustomerAreaPage() {
       }
 
       // Solicitar código de verificación
-      const response = await fetch(`${API_URL}/api/auth/v2/solicitar-codigo`, {
+      const response = await fetch('/api/auth/v2/solicitar-codigo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ codigoCliente: forgotPasswordClientCode }),
@@ -212,8 +210,7 @@ export default function CustomerAreaPage() {
 
     setIsConfiguringEmail(true);
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${API_URL}/api/auth/v2/configure-email`, {
+      const response = await fetch('/api/auth/v2/configure-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -269,9 +266,7 @@ export default function CustomerAreaPage() {
     setIsLoading(true);
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-      const response = await fetch(`${API_URL}/api/auth/v2/verificar-codigo`, {
+      const response = await fetch('/api/auth/v2/verificar-codigo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1394,8 +1389,7 @@ export default function CustomerAreaPage() {
                               }
                               setIsLoading(true);
                               try {
-                                const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-                                const response = await fetch(`${API_URL}/api/auth/v2/verificar-solo-codigo`, {
+                                const response = await fetch('/api/auth/v2/verificar-solo-codigo', {
                                   method: 'POST',
                                   headers: { 'Content-Type': 'application/json' },
                                   body: JSON.stringify({

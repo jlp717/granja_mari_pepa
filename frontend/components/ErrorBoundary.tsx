@@ -55,9 +55,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   private reportErrorToBackend = async (errorLog: Record<string, unknown>) => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      
-      await fetch(`${API_URL}/api/logs/frontend-error`, {
+      await fetch('/api/logs/frontend-error', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(errorLog),

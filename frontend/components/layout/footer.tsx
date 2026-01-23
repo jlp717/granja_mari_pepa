@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { MapPin, Phone, Mail, ArrowRight, Star, Award, Clock, Package, User, PhoneCall } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';

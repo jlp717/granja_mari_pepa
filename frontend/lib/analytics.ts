@@ -84,9 +84,7 @@ const flushEvents = async (): Promise<void> => {
   const eventsToSend = eventQueue.splice(0, eventQueue.length);
   
   try {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-    
-    await fetch(`${API_URL}/api/analytics/events`, {
+    await fetch('/api/analytics/events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ events: eventsToSend }),

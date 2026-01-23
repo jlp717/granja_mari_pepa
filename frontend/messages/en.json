@@ -209,6 +209,7 @@
         "globe": {
             "title": "Interactive 3D Globe",
             "subtitle": "Click on locations for an immersive experience",
+            "click_points_hint": "Click on the points for an immersive experience",
             "view_maps": "View on Maps",
             "sede_murcia": "Headquarters in Murcia",
             "delegation_andalucia": "Commercial delegation in Andalusia"
@@ -652,6 +653,12 @@
     "footer": {
         "companyName": "GRANJA MARI PEPA",
         "tagline": "Premium food product distributors",
+        "description_short": "Premium food distributors for HORECA",
+        "description_long": "Specialists in distribution of frozen, refrigerated and ambient products for hospitality and catering.",
+        "nestle_distributor": "Official Nestlé Distributor",
+        "founded_text": "Founded in Lorca, 1966",
+        "green_energy": "Green Energy",
+        "quick_access": "Quick Access",
         "copyright": "© {year} Granja Mari Pepa. All rights reserved.",
         "quickLinks": "Quick links",
         "legal": "Legal",
@@ -661,6 +668,20 @@
         "legalNotice": "Legal Notice",
         "contact": "Contact",
         "followUs": "Follow us"
+    },
+    "globe_map": {
+        "badge": "DISTRIBUTION NETWORK",
+        "title_1": "Our",
+        "title_2": "Presence",
+        "subtitle": "Strategic coverage in southeast Spain",
+        "operations_title": "Operations Centers",
+        "select_to_view": "Select to view on map",
+        "status_online": "ONLINE",
+        "status_viewing": "VIEWING",
+        "headquarters": "Headquarters",
+        "regional_coverage": "Regional Coverage",
+        "regional_coverage_desc": "Distribution service in Murcia and Alicante. Delivery in 24-48h.",
+        "go_to": "Go to"
     },
     "errors": {
         "notFound": "Page not found",

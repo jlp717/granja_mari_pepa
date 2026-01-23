@@ -27,7 +27,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
-  trailingSlash: true,
+  trailingSlash: false,
 
   // Optimizaciones de React 18
   reactStrictMode: true,
@@ -53,6 +53,15 @@ const nextConfig = {
 
   // NOTA: Los headers de seguridad están en netlify.toml
   // ya que con output: 'export' no se pueden usar aquí
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:5000/api/:path*',
+      },
+    ];
+  },
 
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {

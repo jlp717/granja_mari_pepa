@@ -628,7 +628,8 @@ class AuthServiceSecure {
             ) VALUES (?, ?, '0', ?, ?, ?)
         `;
 
-        await databaseService.executeQuery(query, [customerId, customerCode, failureReason, ipAddress, userAgent]);
+        const safeCustomerId = customerId || 0;
+        await databaseService.executeQuery(query, [safeCustomerId, customerCode, failureReason, ipAddress, userAgent]);
     }
 
     async saveRefreshToken(customerId, tokenHash, ipAddress, userAgent, expiresAt) {
@@ -702,16 +703,19 @@ class AuthServiceSecure {
         try {
             // Ensure all values are properly formatted and not null where required
             // Fixes ODBC -545 (Check constraint violation) by guaranteeing numeric ID
-            const customerId = !isNaN(Number(event.customerId)) ? Number(event.customerId) : 0;
+            const customerId = !isNaN(Number(event.customerId)) && event.customerId !== null ? Number(event.customerId) : 0;
 
+            // Aggressive truncation to match DB column limits (assuming widely safe defaults)
             const eventType = (event.eventType || 'UNKNOWN').substring(0, 50);
             const eventCategory = (event.eventCategory || 'GENERAL').substring(0, 50);
             const severity = (event.severity || 'INFO').substring(0, 20);
-            const eventDescription = (event.eventDescription || '').substring(0, 500);
-            const ipAddress = (event.ipAddress || '0.0.0.0').substring(0, 50);
-            const userAgent = (event.userAgent || '').substring(0, 500);
+
+            // Description and userAgent might be long, truncate to 500 chars max
+            const eventDescription = (event.eventDescription || '').substring(0, 450); // Leave room
+            const ipAddress = (event.ipAddress || '0.0.0.0').substring(0, 40);
+            const userAgent = (event.userAgent || 'Unknown').substring(0, 450);
             const result = (event.result || 'SUCCESS').substring(0, 20);
-            const errorMessage = (event.errorMessage || '').substring(0, 500);
+            const errorMessage = (event.errorMessage || '').substring(0, 450);
 
             await databaseService.executeQuery(query, [
                 customerId,
@@ -726,7 +730,7 @@ class AuthServiceSecure {
             ]);
         } catch (error) {
             // Never fail the main operation due to audit error
-            console.error('Error auditing security event:', error);
+            console.error('Error auditing security event:', error.message); // Log message only to reduce noise
         }
     }
 

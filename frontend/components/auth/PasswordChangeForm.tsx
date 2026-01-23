@@ -80,9 +80,7 @@ export default function PasswordChangeForm({
 
     const checkPasswordPwned = async (password: string) => {
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-            const response = await fetch(`${API_URL}/api/auth/check-password-pwned`, {
+            const response = await fetch('/api/auth/check-password-pwned', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password })
@@ -166,9 +164,7 @@ export default function PasswordChangeForm({
         setError('');
 
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-            const response = await fetch(`${API_URL}/api/auth/change-password`, {
+            const response = await fetch('/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include', // 🔐 Enviar cookies con token JWT

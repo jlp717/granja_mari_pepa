@@ -26,6 +26,9 @@ const inter = Inter({
     fallback: ['system-ui', 'arial']
 })
 
+// Force dynamic rendering to avoid SSG 404s
+export const dynamic = 'force-dynamic';
+
 // Viewport separado (requerido en Next.js 14+)
 export const viewport: Viewport = {
     width: 'device-width',

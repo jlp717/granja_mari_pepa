@@ -127,9 +127,7 @@ export const useAuthStore = create<AuthStore>()(
        */
       login: async (codigoCliente: string, password: string) => {
         try {
-          const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-          const response = await fetch(`${API_URL}/api/auth/v2/login`, {
+          const response = await fetch('/api/auth/v2/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -195,10 +193,8 @@ export const useAuthStore = create<AuthStore>()(
        */
       logout: async () => {
         try {
-          const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
           try {
-            await fetch(`${API_URL}/api/auth/logout`, {
+            await fetch('/api/auth/logout', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

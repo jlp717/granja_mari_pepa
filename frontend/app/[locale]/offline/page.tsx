@@ -1,7 +1,7 @@
 'use client';
 
 import { WifiOff, RefreshCw, Home } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 
 export default function OfflinePage() {
   return (

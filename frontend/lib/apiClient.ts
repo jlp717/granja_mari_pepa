@@ -14,7 +14,8 @@
 
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+// URL base para API (vacío = rutas relativas que usa Next.js rewrites)
+const API_URL = '';
 
 // 🔐 SECURITY: CSRF token para requests mutantes
 let csrfToken: string | null = null;

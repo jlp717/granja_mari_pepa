@@ -82,9 +82,7 @@ export function useSessionManager(options: SessionManagerOptions = {}) {
     if (!isAuthenticated || !user) return false;
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      
-      const response = await fetch(`${API_URL}/api/auth/perfil`, {
+      const response = await fetch('/api/auth/perfil', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -134,9 +132,7 @@ export function useSessionManager(options: SessionManagerOptions = {}) {
    */
   const refreshToken = useCallback(async (): Promise<boolean> => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      
-      const response = await fetch(`${API_URL}/api/auth/refresh`, {
+      const response = await fetch('/api/auth/refresh', {
         method: 'POST',
         credentials: 'include',
         headers: {

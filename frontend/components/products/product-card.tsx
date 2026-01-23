@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CustomToast } from '@/components/ui/custom-toast';
 import { toast } from 'sonner';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 
 interface ProductCardProps {
   product: Product;
