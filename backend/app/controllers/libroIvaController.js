@@ -213,28 +213,36 @@ async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
     let codigosVinculados = [];
 
     if (codigoCliente) {
-      codigosVinculados = [`'${codigoCliente.trim()}'`];
-      try {
-        // Consultar NIF del cliente
-        const queryNif = `SELECT NIF FROM DSEDAC.CLI WHERE CODIGOCLIENTE = ?`;
-        const resultNif = await odbcPool.query(queryNif, [codigoCliente.trim()]);
+      // VALIDACIÓN CRÍTICA: Prevenir errores de overflow en ODBC (CWB0111)
+      // Si el código es demasiado largo (ej: "TEST_JAVIER"), saltar la búsqueda en DSEDAC.CLI
+      if (codigoCliente.length > 5) { // Asumimos 5 como límite seguro estándar de AS400 para clientes
+        logger.warn(`⚠️ Código cliente demasiado largo (${codigoCliente}), omitiendo búsqueda NIF en DSEDAC.CLI`);
+        // Usar el código directamente sin buscar vinculados
+        codigosVinculados = [`'${codigoCliente.trim()}'`];
+      } else {
+        codigosVinculados = [`'${codigoCliente.trim()}'`];
+        try {
+          // Consultar NIF del cliente
+          const queryNif = `SELECT NIF FROM DSEDAC.CLI WHERE CODIGOCLIENTE = ?`;
+          const resultNif = await odbcPool.query(queryNif, [codigoCliente.trim()]);
 
-        if (resultNif.length > 0 && resultNif[0].NIF) {
-          const nif = resultNif[0].NIF.trim();
-          // Solo unificamos si hay NIF válido
-          if (nif) {
-            // Buscamos TODOS los clientes con ese NIF
-            const queryVinculados = `SELECT CODIGOCLIENTE FROM DSEDAC.CLI WHERE NIF = ?`;
-            const resultVinculados = await odbcPool.query(queryVinculados, [nif]);
+          if (resultNif.length > 0 && resultNif[0].NIF) {
+            const nif = resultNif[0].NIF.trim();
+            // Solo unificamos si hay NIF válido
+            if (nif) {
+              // Buscamos TODOS los clientes con ese NIF
+              const queryVinculados = `SELECT CODIGOCLIENTE FROM DSEDAC.CLI WHERE NIF = ?`;
+              const resultVinculados = await odbcPool.query(queryVinculados, [nif]);
 
-            if (resultVinculados.length > 0) {
-              codigosVinculados = resultVinculados.map(r => `'${r.CODIGOCLIENTE.trim()}'`);
+              if (resultVinculados.length > 0) {
+                codigosVinculados = resultVinculados.map(r => `'${r.CODIGOCLIENTE.trim()}'`);
+              }
             }
           }
+        } catch (errNif) {
+          logger.warn(`⚠️ Error buscando vinculaciones NIF para Libro IVA ${codigoCliente}`, errNif);
+          // Continuamos con el código original si falla la vinculación
         }
-      } catch (errNif) {
-        logger.warn(`⚠️ Error buscando vinculaciones NIF para Libro IVA ${codigoCliente}`, errNif);
-        // Continuamos con el código original si falla la vinculación
       }
     }
 
