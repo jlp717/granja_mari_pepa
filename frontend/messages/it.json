@@ -28,7 +28,7 @@
             "chocolate": "Cioccolato",
             "fresh_fish": "Pesce fresco",
             "seafood_shell": "Crostacei",
-            "seafood": "Mariscos"
+            "seafood": "Frutti di mare"
         }
     },
     "nav": {
@@ -750,93 +750,93 @@
     },
     "categories": {
         "mar": {
-            "name": "Productos del mar",
-            "description": "Pescados y mariscos congelados de la más alta calidad"
+            "name": "Prodotti del mare",
+            "description": "Pesce e frutti di mare surgelati di altissima qualità"
         },
         "carne": {
-            "name": "Carnes",
-            "description": "Carnes selectas congeladas"
+            "name": "Carni",
+            "description": "Carni selezionate surgelate"
         },
         "precocinados": {
-            "name": "Precocinados",
-            "description": "Preparados y verduras congelados"
+            "name": "Piatti Pronti",
+            "description": "Piatti pronti e verdure surgelate"
         },
         "reposteria": {
-            "name": "Repostería",
-            "description": "Dulces y postres congelados"
+            "name": "Pasticceria",
+            "description": "Dolci e dessert surgelati"
         },
         "helados": {
-            "name": "Helados",
-            "description": "Amplia gama de helados Nestlé para hostelería"
+            "name": "Gelati",
+            "description": "Ampia gamma di gelati Nestlé per l'ospitalità"
         },
         "chocolate": {
-            "name": "Chocolate",
-            "description": "Chocolates y productos de cacao de primera calidad"
+            "name": "Cioccolato",
+            "description": "Cioccolato e prodotti a base di cacao di prima qualità"
         },
         "pan": {
-            "name": "Pan Congelado",
-            "description": "Panes y masas congeladas de alta calidad"
+            "name": "Pane Surgelato",
+            "description": "Pane e impasti surgelati di alta qualità"
         }
     },
     "meta": {
-        "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
-        "description": "Líderes en distribución alimentaria premium para hostelería. Congelados, carnes y pescados. Servicio 24h en Murcia y Almería.",
-        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados, lorca"
+        "title": "Granja Mari Pepa | Distribuzione HORECA Murcia e Lorca",
+        "description": "Leader nella distribuzione alimentare premium per l'ospitalità. Surgelati, carni e pesce. Servizio 24h a Murcia e Almería.",
+        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, distribuzione alimentare, surgelati, HORECA, Murcia, Almería, carni, pesce, lorca"
     },
     "legal": {
         "privacy": {
-            "title": "Política de Privacidad",
-            "intro": "En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios.",
+            "title": "Informativa sulla Privacy",
+            "intro": "In Granja Mari Pepa prendiamo molto sul serio la privacy dei nostri clienti e utenti.",
             "sections": {
                 "s1": {
-                    "title": "1. Responsable del Tratamiento",
+                    "title": "1. Titolare del Trattamento",
                     "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
                 },
                 "s2": {
-                    "title": "2. Finalidad del Tratamiento",
-                    "content": "Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios."
+                    "title": "2. Finalità del Trattamento",
+                    "content": "Trattiamo le informazioni fornite al fine di erogare il servizio richiesto, effettuare la fatturazione e inviare comunicazioni commerciali relative ai nostri prodotti e servizi."
                 },
                 "s3": {
-                    "title": "3. Conservación de Datos",
-                    "content": "Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales."
+                    "title": "3. Conservazione dei Dati",
+                    "content": "I dati forniti saranno conservati finché verrà mantenuto il rapporto commerciale o per gli anni necessari per adempiere agli obblighi legali."
                 },
                 "s4": {
-                    "title": "4. Legitimación",
-                    "content": "La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos."
+                    "title": "4. Legittimazione",
+                    "content": "La base giuridica per il trattamento dei vostri dati è l'esecuzione del contratto di prestazione di servizi e/o compravendita di prodotti."
                 },
                 "s5": {
-                    "title": "5. Destinatarios",
-                    "content": "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal."
+                    "title": "5. Destinatari",
+                    "content": "I dati non saranno ceduti a terzi salvo nei casi in cui esista un obbligo legale."
                 },
                 "s6": {
-                    "title": "6. Derechos",
-                    "content": "Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios."
+                    "title": "6. Diritti",
+                    "content": "Avete il diritto di ottenere conferma se in Granja Mari Pepa stiamo trattando i vostri dati personali, pertanto avete diritto ad accedere ai vostri dati personali, rettificare i dati inesatti o richiederne la cancellazione quando i dati non siano più necessari."
                 }
             }
         },
         "terms": {
-            "title": "Términos y Condiciones",
-            "intro": "Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+            "title": "Termini e Condizioni",
+            "intro": "Benvenuti nel sito web di Granja Mari Pepa. Accedendo e utilizzando questo sito, accettate i seguenti termini e condizioni.",
             "sections": {
                 "s1": {
-                    "title": "1. Propiedad Intelectual",
-                    "content": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa."
+                    "title": "1. Proprietà Intellettuale",
+                    "content": "Il codice sorgente, i disegni grafici, le immagini, le fotografie, i suoni, le animazioni, il software, i testi, così come le informazioni e i contenuti raccolti nel presente sito web sono protetti dalla legislazione spagnola sui diritti di proprietà intellettuale e industriale a favore di Granja Mari Pepa."
                 },
                 "s2": {
-                    "title": "2. Uso del Sitio Web",
-                    "content": "El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares."
+                    "title": "2. Uso del Sito Web",
+                    "content": "L'utente si impegna a utilizzare il sito web, i suoi servizi e contenuti in modo diligente, corretto e lecito, e in particolare, si impegna ad astenersi dal sopprimere, eludere o manipolare il copyright e gli altri dati identificativi dei diritti dei suoi titolari."
                 },
                 "s3": {
-                    "title": "3. Responsabilidad",
-                    "content": "Granja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo."
+                    "title": "3. Responsabilità",
+                    "content": "Granja Mari Pepa non si assume la responsabilità dell'inadempimento di qualsiasi norma applicabile in cui possa incorrere l'utente nel suo accesso al sito web e/o nell'uso delle informazioni in esso contenute."
                 },
                 "s4": {
-                    "title": "4. Modificaciones",
-                    "content": "Granja Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web."
+                    "title": "4. Modifiche",
+                    "content": "Granja Mari Pepa si riserva il diritto di modificare o aggiornare in qualsiasi momento le presenti condizioni d'uso, così come qualsiasi tipo di informazione che possa apparire nel sito web."
                 },
                 "s5": {
-                    "title": "5. Ley Aplicable",
-                    "content": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
+                    "title": "5. Legge Applicabile",
+                    "content": "Le presenti condizioni saranno regolate dalla legislazione spagnola. Per qualsiasi controversia che possa derivare dall'accesso o uso di questo sito web, l'utente e Granja Mari Pepa accettano di sottoporsi espressamente alle corti e ai tribunali di Lorca (Murcia)."
                 }
             }
         }
