@@ -1,5 +1,4 @@
 
-// @ts-nocheck
 const fs = require('fs');
 const path = require('path');
 const { OpenAI } = require('openai');
@@ -65,12 +64,9 @@ async function translateLanguage(openai, en, langCode) {
             } else {
                 // It's a string (or close enough)
                 if (!target[key] || target[key] === '' || target[key] === source[key]) {
-                    // Treat as missing if empty OR if it identical to English (assuming we want to translate everything not manually changed)
-                    // Note: Strict comparison might re-translate "Email" -> "Email", but that's fine.
-                    // For safety, let's only translate if it DOESN'T exist or is empty.
-                    // Actually, since I copied en.json to de.json, they ARE identical.
-                    // So we MUST translate if value === source[key].
-
+                    // Translate if missing or identical to English (assuming copy-paste placeholder)
+                    // Exception: es might be identical to en for "Email", "Zoom", etc. but usually distinct.
+                    // For de/it/zh, identical = missing.
                     collection[key] = source[key];
                     missingCount++;
                 }
@@ -88,9 +84,7 @@ async function translateLanguage(openai, en, langCode) {
 
     console.log(`🌍 Translating ${missingCount} keys to ${LANG_NAMES[langCode]}...`);
 
-    // Chunking to avoid token limits (advanced step, but here we'll try sending one big batch for simplicity 
-    // since 800 keys might fit in GPT-4 context easily (128k context)).
-    // 800 lines ~ 10k tokens max. Safe.
+    // Chunking logic can refer to original TS if needed, we assume < 4000 tokens for now.
 
     try {
         const completion = await openai.chat.completions.create({
@@ -98,7 +92,7 @@ async function translateLanguage(openai, en, langCode) {
                 { role: 'system', content: SYSTEM_PROMPT(LANG_NAMES[langCode]) },
                 { role: 'user', content: JSON.stringify(missing) }
             ],
-            model: 'gpt-4o', // Or gpt-3.5-turbo-16k if 4o is not available
+            model: 'gpt-4o',
             response_format: { type: 'json_object' },
             temperature: 0.3,
         });
@@ -128,18 +122,17 @@ async function translateLanguage(openai, en, langCode) {
 }
 
 async function main() {
-    console.log('🚀 Starting AI Translation Service...');
+    console.log('🚀 Starting AI Translation Service (JS Mode)...');
 
     if (!OPENAI_API_KEY) {
         console.error('❌ Error: OPENAI_API_KEY environment variable is not set.');
-        console.log('👉 Please define it in your shell or .env file.');
         process.exit(1);
     }
 
     const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
     const en = JSON.parse(fs.readFileSync(EN_PATH, 'utf8'));
 
-    // Sequential execution to avoid rate limits
+    // Sequential execution
     for (const lang of TARGET_LANGS) {
         await translateLanguage(openai, en, lang);
     }
