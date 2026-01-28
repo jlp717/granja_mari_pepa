@@ -417,13 +417,16 @@ export function Header() {
                       className="w-[140px] sm:w-[160px] h-auto object-contain rounded-xl"
                     />
                   </Link>
-                  <button
-                    onClick={closeMobileMenu}
-                    className="flex-shrink-0 w-14 h-14 rounded-xl bg-white flex items-center justify-center shadow-xl"
-                    aria-label={t('close_menu')}
-                  >
-                    <X className="w-7 h-7 text-primary" strokeWidth={2.5} />
-                  </button>
+                  <div className="flex items-center gap-4">
+                    <LanguageSwitcher variant="minimal" className="text-white" />
+                    <button
+                      onClick={closeMobileMenu}
+                      className="flex-shrink-0 w-14 h-14 rounded-xl bg-white flex items-center justify-center shadow-xl"
+                      aria-label={t('close_menu')}
+                    >
+                      <X className="w-7 h-7 text-primary" strokeWidth={2.5} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
