@@ -107,7 +107,10 @@
         "since": "Since 1966",
         "description": "Comprehensive food solutions for professionals. Specialists in premium meats, fish and pre-cooked products.",
         "viewProducts": "View products",
-        "contactUs": "Contact us"
+        "contactUs": "Contact us",
+        "explore_products": "Explore Products",
+        "contact_us": "Contact Us",
+        "scroll_down": "Scroll Down"
     },
     "products": {
         "title": "OUR PRODUCTS",
@@ -698,7 +701,12 @@
         "cookies": "Cookie Policy",
         "legalNotice": "Legal Notice",
         "contact": "Contact",
-        "followUs": "Follow us"
+        "followUs": "Follow us",
+        "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
+        "delegation": "Murcia Delegation",
+        "catalog": "Catalog",
+        "client_portal": "Client Portal",
+        "rights_reserved": "All rights reserved."
     },
     "globe_map": {
         "badge": "DISTRIBUTION NETWORK",
@@ -772,7 +780,7 @@
     "meta": {
         "title": "Granja Mari Pepa | HORECA Distribution Murcia & Lorca",
         "description": "Premium food distribution leaders for hospitality. Frozen foods, meats, and seafood. 24h service in Murcia and Almería.",
-        "keywords": "food distribution, frozen food, HORECA, Murcia, Almería, meats, seafood, lorca"
+        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, food distribution, frozen food, HORECA, Murcia, Almería, meats, seafood, mari pepa"
     },
     "legal": {
         "privacy": {

@@ -107,7 +107,10 @@
         "since": "Desde 1966",
         "description": "Soluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.",
         "viewProducts": "Ver productos",
-        "contactUs": "Contáctanos"
+        "contactUs": "Contáctanos",
+        "explore_products": "Explorar Productos",
+        "contact_us": "Contactar",
+        "scroll_down": "Desliza hacia abajo"
     },
     "products": {
         "title": "NUESTROS PRODUCTOS",
@@ -698,7 +701,12 @@
         "cookies": "Política de Cookies",
         "legalNotice": "Aviso Legal",
         "contact": "Contacto",
-        "followUs": "Síguenos"
+        "followUs": "Síguenos",
+        "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
+        "delegation": "Delegación Murcia",
+        "catalog": "Catálogo",
+        "client_portal": "Portal Clientes",
+        "rights_reserved": "Todos los derechos reservados."
     },
     "globe_map": {
         "badge": "RED DE DISTRIBUCIÓN",
@@ -772,7 +780,7 @@
     "meta": {
         "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
         "description": "Líderes en distribución alimentaria premium para hostelería. Congelados, carnes y pescados. Servicio 24h en Murcia y Almería.",
-        "keywords": "distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados, lorca"
+        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados, lorca"
     },
     "legal": {
         "privacy": {
