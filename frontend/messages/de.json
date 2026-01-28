@@ -2,269 +2,269 @@
     "header": {
         "top_bar": {
             "location": "Murcia • Almería",
-            "tagline": "Specialized distribution since 1966",
-            "tagline_short": "Specialized distribution",
-            "quality": "Premium Quality"
+            "tagline": "Spezialisierter Vertrieb seit 1966",
+            "tagline_short": "Spezialisierter Vertrieb",
+            "quality": "Premium Qualität"
         },
-        "brands_title": "Our Brands",
-        "view_all_products": "View all products",
-        "cart_label": "Shopping cart ({count})",
-        "close_menu": "Close menu",
-        "open_menu": "Open menu",
-        "you_are_here": "You are at",
-        "browsing": "Browsing",
-        "help_title": "Need help?",
-        "help_text": "Our team of experts is available to advise you on products and orders.",
-        "call_cta": "Calls and WhatsApp",
-        "contact_now": "Contact now",
-        "excellence_msg": "Over 55 years of excellence in HORECA service.",
+        "brands_title": "Unsere Marken",
+        "view_all_products": "Alle Produkte ansehen",
+        "cart_label": "Warenkorb ({count})",
+        "close_menu": "Menü schließen",
+        "open_menu": "Menü öffnen",
+        "you_are_here": "Sie befinden sich hier",
+        "browsing": "Durchsuchen",
+        "help_title": "Brauchen Sie Hilfe?",
+        "help_text": "Unser Expertenteam steht Ihnen zur Verfügung, um Sie bei Produkten und Bestellungen zu beraten.",
+        "call_cta": "Anrufe und WhatsApp",
+        "contact_now": "Jetzt kontaktieren",
+        "excellence_msg": "Über 55 Jahre Exzellenz im HORECA-Service.",
         "categories": {
-            "sea": "Seafood",
-            "meat": "Meat",
-            "precooked": "Pre-cooked",
-            "pastry": "Pastry",
-            "dairy": "Dairy",
-            "cereals": "Cereals",
-            "chocolate": "Chocolate",
-            "fresh_fish": "Fresh Fish",
-            "seafood_shell": "Shellfish"
+            "sea": "Meeresfrüchte",
+            "meat": "Fleisch",
+            "precooked": "Vorgekocht",
+            "pastry": "Gebäck",
+            "dairy": "Molkereiprodukte",
+            "cereals": "Getreide",
+            "chocolate": "Schokolade",
+            "fresh_fish": "Frischer Fisch",
+            "seafood_shell": "Schalentiere"
         }
     },
     "nav": {
-        "home": "Home",
-        "products": "Products",
-        "about": "About Us",
-        "contact": "Contact",
-        "customerArea": "Customer Area",
-        "openMenu": "Open menu",
-        "closeMenu": "Close menu"
+        "home": "Startseite",
+        "products": "Produkte",
+        "about": "Über uns",
+        "contact": "Kontakt",
+        "customerArea": "Kundenbereich",
+        "openMenu": "Menü öffnen",
+        "closeMenu": "Menü schließen"
     },
     "categories_section": {
-        "premium_catalog": "PREMIUM CATALOG",
-        "our_products_1": "OUR",
-        "our_products_2": "PRODUCTS",
-        "description": "Discover our premium selection of food products, carefully chosen to meet the highest quality standards",
-        "featured": "Featured",
-        "view_catalog": "View Catalog",
-        "view_catalog_topgel": "View Catalog Grupo Topgel"
+        "premium_catalog": "PREMIUM KATALOG",
+        "our_products_1": "UNSERE",
+        "our_products_2": "PRODUKTE",
+        "description": "Entdecken Sie unsere Premium-Auswahl an Lebensmitteln, sorgfältig ausgewählt, um höchste Qualitätsstandards zu erfüllen",
+        "featured": "Hervorgehoben",
+        "view_catalog": "Katalog ansehen",
+        "view_catalog_topgel": "Katalog Grupo Topgel ansehen"
     },
     "distributors_section": {
-        "official_partners": "OFFICIAL PARTNERS",
-        "title_part1": "BRANDS WE",
-        "title_part2": "DISTRIBUTE",
-        "partners_description": "We work with the <strong1>food sector leaders</strong1> to offer you products of <strong2>maximum quality</strong2> and prestige.",
-        "interested_text": "Interested in our products?",
-        "request_info": "Request information",
-        "view_products": "View products"
+        "official_partners": "OFFIZIELLE PARTNER",
+        "title_part1": "MARKEN, DIE WIR",
+        "title_part2": "VERTREIBEN",
+        "partners_description": "Wir arbeiten mit den <strong1>Marktführern im Lebensmittelbereich</strong1> zusammen, um Ihnen Produkte von <strong2>höchster Qualität</strong2> und Prestige anzubieten.",
+        "interested_text": "Interessiert an unseren Produkten?",
+        "request_info": "Informationen anfordern",
+        "view_products": "Produkte ansehen"
     },
     "common": {
-        "home": "Home",
-        "products": "Products",
-        "brands": "Brands",
-        "about": "About Us",
-        "contact": "Contact",
-        "customerArea": "Customer Area",
-        "login": "Log In",
-        "logout": "Log Out",
-        "loading": "Loading...",
-        "error": "Error",
-        "success": "Success",
-        "cancel": "Cancel",
-        "confirm": "Confirm",
-        "save": "Save",
-        "back": "Back",
-        "next": "Next",
-        "search": "Search",
-        "noResults": "No results",
-        "viewMore": "View more",
-        "explore": "Explore",
-        "learnMore": "Learn more",
-        "close": "Close",
-        "send": "Send",
-        "download": "Download",
-        "continue": "Continue",
-        "required": "Required",
+        "home": "Startseite",
+        "products": "Produkte",
+        "brands": "Marken",
+        "about": "Über uns",
+        "contact": "Kontakt",
+        "customerArea": "Kundenbereich",
+        "login": "Anmelden",
+        "logout": "Abmelden",
+        "loading": "Laden...",
+        "error": "Fehler",
+        "success": "Erfolg",
+        "cancel": "Abbrechen",
+        "confirm": "Bestätigen",
+        "save": "Speichern",
+        "back": "Zurück",
+        "next": "Weiter",
+        "search": "Suchen",
+        "noResults": "Keine Ergebnisse",
+        "viewMore": "Mehr anzeigen",
+        "explore": "Entdecken",
+        "learnMore": "Mehr erfahren",
+        "close": "Schließen",
+        "send": "Senden",
+        "download": "Herunterladen",
+        "continue": "Weiter",
+        "required": "Erforderlich",
         "optional": "Optional",
         "premium": "PREMIUM",
-        "view_products": "View products",
+        "view_products": "Produkte ansehen",
         "specialties": {
-            "seafood": "Seafood",
-            "meats": "Select meats",
-            "precooked": "Pre-cooked",
-            "pastry": "Pastry",
-            "ice_cream_hospitality": "Hospitality ice cream",
-            "tubs": "Tubs",
-            "frozen_desserts": "Frozen desserts",
-            "frozen_bread": "Frozen bread",
-            "fermented_dough": "Fermented doughs",
-            "specialties": "Specialties"
+            "seafood": "Meeresfrüchte",
+            "meats": "Ausgewähltes Fleisch",
+            "precooked": "Vorgekochte Gerichte",
+            "pastry": "Gebäck",
+            "ice_cream_hospitality": "Gastronomie-Eis",
+            "tubs": "Becher",
+            "frozen_desserts": "Tiefkühldesserts",
+            "frozen_bread": "Tiefkühlbrot",
+            "fermented_dough": "Gärungsteige",
+            "specialties": "Spezialitäten"
         }
     },
     "hero": {
         "title": "GRANJA MARI PEPA",
-        "subtitle": "Frozen, refrigerated and ice cream products for HORECA",
-        "cta": "Contact Us",
-        "since": "Since 1966",
-        "description": "Comprehensive food solutions for professionals. Specialists in premium meats, fish and pre-cooked products.",
-        "viewProducts": "View products",
-        "contactUs": "Contact us",
-        "explore_products": "Explore Products",
-        "contact_us": "Contact Us",
-        "scroll_down": "Scroll Down"
+        "subtitle": "Tiefkühl-, Kühl- und Eisprodukte für HORECA",
+        "cta": "Kontaktieren Sie uns",
+        "since": "Seit 1966",
+        "description": "Umfassende Lebensmittellösungen für Profis. Spezialisten für Premium-Fleisch, Fisch und vorgekochte Produkte.",
+        "viewProducts": "Produkte ansehen",
+        "contactUs": "Kontaktieren Sie uns",
+        "explore_products": "Produkte entdecken",
+        "contact_us": "Kontaktieren Sie uns",
+        "scroll_down": "Nach unten scrollen"
     },
     "products": {
-        "title": "OUR PRODUCTS",
-        "subtitle": "Discover our premium food product selection, carefully chosen to meet the highest quality standards",
+        "title": "UNSERE PRODUKTE",
+        "subtitle": "Entdecken Sie unsere Premium-Lebensmittelauswahl, sorgfältig ausgewählt, um höchste Qualitätsstandards zu erfüllen",
         "premium": "PREMIUM",
-        "seaProducts": "Seafood",
-        "seaDescription": "Premium quality frozen fish and seafood",
-        "meat": "Meat",
-        "meatDescription": "Select frozen meats",
-        "precooked": "Pre-cooked",
-        "precookedDescription": "Prepared and frozen vegetables",
-        "pastry": "Pastry",
-        "pastryDescription": "Frozen sweets and desserts",
-        "viewCatalog": "View Catalog",
-        "explore": "Explore",
-        "categories": "Categories",
-        "allProducts": "All products",
-        "frozen": "Frozen",
-        "refrigerated": "Refrigerated",
-        "iceCream": "Ice cream"
+        "seaProducts": "Meeresfrüchte",
+        "seaDescription": "Tiefkühlfisch und Meeresfrüchte in Premium-Qualität",
+        "meat": "Fleisch",
+        "meatDescription": "Ausgewähltes Tiefkühlfleisch",
+        "precooked": "Vorgekocht",
+        "precookedDescription": "Zubereitetes und tiefgekühltes Gemüse",
+        "pastry": "Gebäck",
+        "pastryDescription": "Tiefgekühlte Süßwaren und Desserts",
+        "viewCatalog": "Katalog ansehen",
+        "explore": "Entdecken",
+        "categories": "Kategorien",
+        "allProducts": "Alle Produkte",
+        "frozen": "Tiefgekühlt",
+        "refrigerated": "Gekühlt",
+        "iceCream": "Eiscreme"
     },
     "brands": {
-        "title": "BRANDS WE DISTRIBUTE",
-        "subtitle": "We work with industry leaders to offer you the highest quality and prestige products.",
-        "viewProducts": "View products",
-        "frozenPremium": "Premium Frozen",
-        "iceCreamPremium": "Premium Ice Cream",
-        "bakery": "Bakery",
+        "title": "MARKEN, DIE WIR VERTREIBEN",
+        "subtitle": "Wir arbeiten mit Branchenführern zusammen, um Ihnen Produkte von höchster Qualität und Prestige anzubieten.",
+        "viewProducts": "Produkte ansehen",
+        "frozenPremium": "Premium Tiefkühlkost",
+        "iceCreamPremium": "Premium Eiscreme",
+        "bakery": "Bäckerei",
         "grupo-topgel": {
             "name": "Grupo Topgel",
-            "category": "Premium Frozen",
-            "detailed": "Leader in frozen product distribution: fish, seafood, meats, pre-cooked and premium quality pastry."
+            "category": "Premium Tiefkühlkost",
+            "detailed": "Führend im Vertrieb von Tiefkühlprodukten: Fisch, Meeresfrüchte, Fleisch, vorgekochte Gerichte und Premium-Gebäck."
         },
         "nestle": {
             "name": "Nestlé",
-            "category": "Premium Ice Cream",
-            "detailed": "Granja Mari Pepa is an official distributor of Nestlé ice creams for hospitality and establishments."
+            "category": "Premium Eiscreme",
+            "detailed": "Granja Mari Pepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
         },
         "panamar": {
             "name": "Panamar",
-            "category": "Bakery",
-            "detailed": "Specialists in high quality frozen bakery for hospitality and restoration."
+            "category": "Bäckerei",
+            "detailed": "Spezialisten für hochwertige Tiefkühlbackwaren für Gastronomie und Restauration."
         },
-        "interested": "Interested in our products?",
-        "requestInfo": "Request information"
+        "interested": "Interessiert an unseren Produkten?",
+        "requestInfo": "Informationen anfordern"
     },
     "contact_page": {
         "hero": {
-            "badge": "Direct Contact",
-            "title": "Let's Talk",
-            "subtitle_1": "We are here to",
-            "subtitle_highlight": "listen",
-            "subtitle_2": "and help you",
-            "description": "Our team of experts is available to answer your questions, customize solutions and accompany you every step of the way to success.",
-            "cta_send": "Send message"
+            "badge": "Direkter Kontakt",
+            "title": "Lassen Sie uns sprechen",
+            "subtitle_1": "Wir sind hier, um",
+            "subtitle_highlight": "zuzuhören",
+            "subtitle_2": "und Ihnen zu helfen",
+            "description": "Unser Expertenteam steht bereit, um Ihre Fragen zu beantworten, Lösungen anzupassen und Sie auf jedem Schritt zum Erfolg zu begleiten.",
+            "cta_send": "Nachricht senden"
         },
         "channels": {
-            "title_1": "Connect",
-            "title_2": "with Us",
-            "description": "Multiple communication channels so you can choose the one that suits you best",
+            "title_1": "Verbinden Sie sich",
+            "title_2": "mit uns",
+            "description": "Mehrere Kommunikationskanäle, damit Sie den wählen können, der am besten zu Ihnen passt",
             "murcia": {
-                "title": "Murcia Delegation",
-                "desc": "Lorca - Headquarters"
+                "title": "Delegation Murcia",
+                "desc": "Lorca - Hauptsitz"
             },
             "email": {
-                "title": "Orders Email",
-                "desc": "Inquiries and orders"
+                "title": "Bestell-E-Mail",
+                "desc": "Anfragen und Bestellungen"
             },
             "almeria": {
-                "title": "Almeria Delegation",
+                "title": "Delegation Almería",
                 "desc": "Viator"
             }
         },
         "schedule": {
-            "title": "Customer Service Hours",
-            "days": "Monday - Friday",
-            "hours": "8:00 - 13:00 and 16:00 - 19:00",
-            "after_hours": "After-hours phones"
+            "title": "Kundenservice-Zeiten",
+            "days": "Montag - Freitag",
+            "hours": "8:00 - 13:00 und 16:00 - 19:00",
+            "after_hours": "Telefone außerhalb der Geschäftszeiten"
         },
         "form_section": {
-            "title_1": "Tell us about",
-            "title_2": "your project",
-            "description": "Every business is unique. Share your needs and we will create a personalized solution that drives your growth.",
+            "title_1": "Erzählen Sie uns von",
+            "title_2": "Ihrem Projekt",
+            "description": "Jedes Unternehmen ist einzigartig. Teilen Sie uns Ihre Bedürfnisse mit und wir erstellen eine personalisierte Lösung, die Ihr Wachstum fördert.",
             "stats": {
-                "delivery": "Guaranteed delivery",
-                "quality": "Certified quality",
-                "foundation": "Foundation year",
-                "experience": "Years experience"
+                "delivery": "Garantierte Lieferung",
+                "quality": "Zertifizierte Qualität",
+                "foundation": "Gründungsjahr",
+                "experience": "Jahre Erfahrung"
             },
-            "form_title": "Send us your message",
-            "form_subtitle": "We will respond as soon as possible",
+            "form_title": "Senden Sie uns Ihre Nachricht",
+            "form_subtitle": "Wir werden so schnell wie möglich antworten",
             "labels": {
-                "name": "Full name *",
-                "company": "Company *",
-                "email": "Email *",
-                "phone": "Phone *",
-                "message": "Message *",
-                "privacy": "I accept the privacy policy *",
-                "privacy_desc": "By sending this form you accept that we process your data to answer your query."
+                "name": "Vollständiger Name *",
+                "company": "Unternehmen *",
+                "email": "E-Mail *",
+                "phone": "Telefon *",
+                "message": "Nachricht *",
+                "privacy": "Ich akzeptiere die Datenschutzrichtlinie *",
+                "privacy_desc": "Mit dem Absenden dieses Formulars akzeptieren Sie, dass wir Ihre Daten bearbeiten, um Ihre Anfrage zu beantworten."
             },
             "placeholders": {
-                "name": "Your name",
-                "company": "Your company name",
-                "email": "you@email.com",
+                "name": "Ihr Name",
+                "company": "Ihr Unternehmensname",
+                "email": "sie@email.com",
                 "phone": "+34 XXX XXX XXX",
-                "message": "Tell us how we can help you..."
+                "message": "Erzählen Sie uns, wie wir Ihnen helfen können..."
             },
             "errors": {
-                "name": "Name must have at least 2 characters",
-                "company": "Company must have at least 2 characters",
-                "email": "Invalid email",
-                "phone": "Invalid phone",
-                "message": "Message must have at least 10 characters",
-                "privacy": "You must accept the privacy policy"
+                "name": "Name muss mindestens 2 Zeichen haben",
+                "company": "Unternehmen muss mindestens 2 Zeichen haben",
+                "email": "Ungültige E-Mail",
+                "phone": "Ungültiges Telefon",
+                "message": "Nachricht muss mindestens 10 Zeichen haben",
+                "privacy": "Sie müssen die Datenschutzrichtlinie akzeptieren"
             },
-            "success": "Message sent successfully! We will contact you soon.",
-            "submit": "Send message",
-            "sending": "Sending..."
+            "success": "Nachricht erfolgreich gesendet! Wir werden Sie bald kontaktieren.",
+            "submit": "Nachricht senden",
+            "sending": "Senden..."
         },
         "locations": {
-            "title_1": "Our",
-            "title_2": "Locations",
-            "description": "Present in the main cities of the southeast of Spain to be closer to you",
-            "main_delegation": "Main Delegation",
-            "active": "Active",
-            "address": "Address",
-            "phone": "Phone",
-            "view_globe": "View on globe"
+            "title_1": "Unsere",
+            "title_2": "Standorte",
+            "description": "Präsent in den wichtigsten Städten Südostspaniens, um näher bei Ihnen zu sein",
+            "main_delegation": "Hauptdelegation",
+            "active": "Aktiv",
+            "address": "Adresse",
+            "phone": "Telefon",
+            "view_globe": "Auf dem Globus anzeigen"
         },
         "globe": {
-            "title": "Interactive 3D Globe",
-            "subtitle": "Click on locations for an immersive experience",
-            "click_points_hint": "Click on the points for an immersive experience",
-            "view_maps": "View on Maps",
-            "sede_murcia": "Headquarters in Murcia",
-            "delegation_andalucia": "Commercial delegation in Andalusia"
+            "title": "Interaktiver 3D-Globus",
+            "subtitle": "Klicken Sie auf Standorte für ein immersives Erlebnis",
+            "click_points_hint": "Klicken Sie auf die Punkte für ein immersives Erlebnis",
+            "view_maps": "Auf Karten anzeigen",
+            "sede_murcia": "Hauptsitz in Murcia",
+            "delegation_andalucia": "Handelsdelegation in Andalusien"
         },
         "cta_final": {
-            "title_1": "Ready to",
-            "title_2": "start?",
-            "description": "Our team is prepared to help you find the best solutions for your business. The first step is as simple as a call.",
+            "title_1": "Bereit zu",
+            "title_2": "starten?",
+            "description": "Unser Team ist bereit, Ihnen zu helfen, die besten Lösungen für Ihr Unternehmen zu finden. Der erste Schritt ist so einfach wie ein Anruf.",
             "whatsapp": "WhatsApp",
             "guarantees": {
                 "delivery": {
-                    "text": "Delivery 24-48h",
-                    "desc": "Cold chain guaranteed"
+                    "text": "Lieferung 24-48h",
+                    "desc": "Kühlkette garantiert"
                 },
                 "support": {
-                    "text": "Personalized attention",
-                    "desc": "HORECA specialists"
+                    "text": "Personalisierte Betreuung",
+                    "desc": "HORECA-Spezialisten"
                 },
                 "quality": {
-                    "text": "ISO 9001 Quality",
-                    "desc": "Certified guarantee"
+                    "text": "ISO 9001 Qualität",
+                    "desc": "Zertifizierte Garantie"
                 }
             }
         }
@@ -272,572 +272,257 @@
     "about_page": {
         "hero": {
             "title": "Granja Maripepa",
-            "subtitle_1": "More than",
-            "subtitle_highlight": "55 years",
-            "subtitle_2": "serving the HORECA sector",
-            "description": "Since 1966 in Lorca (Murcia), we are specialists in the distribution of frozen, refrigerated, and ambient products for hospitality, catering, and food services.",
-            "cta_history": "Discover our history",
-            "cta_contact": "Contact now"
+            "subtitle_1": "Mehr als",
+            "subtitle_highlight": "55 Jahre",
+            "subtitle_2": "im Dienst des HORECA-Sektors",
+            "description": "Seit 1966 in Lorca (Murcia) sind wir Spezialisten für den Vertrieb von tiefgekühlten, gekühlten und ungekühlten Produkten für Gastronomie, Catering und Lebensmitteldienstleistungen.",
+            "cta_history": "Entdecken Sie unsere Geschichte",
+            "cta_contact": "Jetzt kontaktieren"
         },
         "history": {
-            "title_1": "Our",
-            "title_2": "History",
-            "description": "More than five decades of experience and commitment to quality in the food sector",
+            "title_1": "Unsere",
+            "title_2": "Geschichte",
+            "description": "Mehr als fünf Jahrzehnte Erfahrung und Engagement für Qualität im Lebensmittelsektor",
             "milestones": {
                 "1966": {
-                    "title": "Founded in Lorca (Murcia)",
-                    "desc": "Granja Maripepa, S.L. was founded in Lorca (Murcia), specializing from the start in the HORECA market and food channel."
+                    "title": "Gegründet in Lorca (Murcia)",
+                    "desc": "Granja Maripepa, S.L. wurde in Lorca (Murcia) gegründet und spezialisierte sich von Anfang an auf den HORECA-Markt und den Lebensmittelkanal."
                 },
                 "1980s": {
-                    "title": "Regional Consolidation",
-                    "desc": "Expansion of the range of frozen, refrigerated, and ambient products for hospitality and catering."
+                    "title": "Regionale Konsolidierung",
+                    "desc": "Erweiterung des Sortiments an tiefgekühlten, gekühlten und ungekühlten Produkten für Gastronomie und Catering."
                 },
                 "2000s": {
-                    "title": "ISO 9001 Certification",
-                    "desc": "Obtained ISO 9001:2008 certification guaranteeing our Quality Management System."
+                    "title": "ISO 9001 Zertifizierung",
+                    "desc": "Erhalt der ISO 9001:2008 Zertifizierung, die unser Qualitätsmanagementsystem garantiert."
                 },
                 "2020": {
-                    "title": "100% Green Energy",
-                    "desc": "Certification from Feníe Energía and CNMC that our energy is 100% renewable origin."
+                    "title": "100% Grüne Energie",
+                    "desc": "Zertifizierung von Feníe Energía und CNMC, dass unsere Energie zu 100% aus erneuerbaren Quellen stammt."
                 },
                 "today": {
-                    "title": "More than 1,500 references",
-                    "desc": "Currently we have a range of more than 1,500 references in three temperatures, serving Murcia and Alicante."
+                    "title": "Mehr als 1.500 Referenzen",
+                    "desc": "Derzeit haben wir ein Sortiment von mehr als 1.500 Referenzen in drei Temperaturen und bedienen Murcia und Alicante."
                 }
             }
         },
         "delegations": {
-            "title": "Our Delegations",
-            "description": "Below is the official address of our headquarters in Lorca (Murcia).",
-            "view_maps": "View on Google Maps"
+            "title": "Unsere Delegationen",
+            "description": "Nachfolgend finden Sie die offizielle Adresse unseres Hauptsitzes in Lorca (Murcia).",
+            "view_maps": "Auf Google Maps anzeigen"
         },
         "values": {
-            "title_1": "Our",
-            "title_2": "Values",
-            "description": "The pillars that sustain our excellence and define our way of working every day",
+            "title_1": "Unsere",
+            "title_2": "Werte",
+            "description": "Die Säulen, die unsere Exzellenz stützen und unsere Arbeitsweise jeden Tag definieren",
             "items": {
                 "quality": {
-                    "title": "Certified Quality",
-                    "desc": "Quality guarantee backed by ISO 9001 Standard. Traceability of all our products.",
-                    "label": "Quality Certification"
+                    "title": "Zertifizierte Qualität",
+                    "desc": "Qualitätsgarantie unterstützt durch ISO 9001 Standard. Rückverfolgbarkeit aller unserer Produkte.",
+                    "label": "Qualitätszertifizierung"
                 },
                 "service": {
-                    "title": "Fast Service",
-                    "desc": "24-48 hour delivery service respecting the cold chain at all times.",
-                    "label": "Delivery Time"
+                    "title": "Schneller Service",
+                    "desc": "24-48 Stunden Lieferservice unter Einhaltung der Kühlkette zu jeder Zeit.",
+                    "label": "Lieferzeit"
                 },
                 "coverage": {
-                    "title": "Regional Coverage",
-                    "desc": "Service in Murcia and Alicante with strategic delegation in Lorca.",
-                    "label": "Provinces attended"
+                    "title": "Regionale Abdeckung",
+                    "desc": "Service in Murcia und Alicante mit strategischer Delegation in Lorca.",
+                    "label": "Bediente Provinzen"
                 },
                 "attention": {
-                    "title": "Personalized Attention",
-                    "desc": "Highly qualified human team knowledgeable about the market and HORECA product.",
-                    "label": "Years experience"
+                    "title": "Personalisierte Betreuung",
+                    "desc": "Hochqualifiziertes Team, das den Markt und das HORECA-Produkt kennt.",
+                    "label": "Jahre Erfahrung"
                 }
             }
         },
         "commitment": {
-            "title_1": "Our",
-            "title_2": "Commitment",
-            "description": "What differentiates us and makes our clients trust us for more than 55 years",
-            "offer_title": "What We Offer",
+            "title_1": "Unser",
+            "title_2": "Engagement",
+            "description": "Was uns unterscheidet und warum unsere Kunden uns seit mehr als 55 Jahren vertrauen",
+            "offer_title": "Was wir bieten",
             "items": {
-                "quality": "Quality guarantee, backed by ISO 9001 Standard",
-                "traceability": "Traceability of all our products",
-                "delivery": "Delivery service in 24 – 48 hours",
-                "service": "Service in Murcia and Alicante",
-                "attention": "Personalized attention",
-                "capacity": "Refrigerated capacity of 5,000m³"
+                "quality": "Qualitätsgarantie, unterstützt durch ISO 9001 Standard",
+                "traceability": "Rückverfolgbarkeit aller unserer Produkte",
+                "delivery": "Lieferservice in 24 – 48 Stunden",
+                "service": "Service in Murcia und Alicante",
+                "attention": "Personalisierte Betreuung",
+                "capacity": "Kühlkapazität von 5.000m³"
             },
             "stats": {
-                "title": "Granja Maripepa in Figures",
-                "founded_label": "Founding Year",
-                "references_label": "Product References",
-                "capacity_label": "Refrigerated Capacity",
-                "temps_label": "Temperatures (frozen, refrigerated, ambient)"
+                "title": "Granja Maripepa in Zahlen",
+                "founded_label": "Gründungsjahr",
+                "references_label": "Produktreferenzen",
+                "capacity_label": "Kühlkapazität",
+                "temps_label": "Temperaturen (tiefgekühlt, gekühlt, ungekühlt)"
             }
         },
         "certifications": {
-            "title_1": "Certifications",
-            "title_2": "& Quality",
-            "description": "Our commitment to the highest standards of quality and food safety",
+            "title_1": "Zertifizierungen",
+            "title_2": "& Qualität",
+            "description": "Unser Engagement für höchste Standards an Qualität und Lebensmittelsicherheit",
             "items": {
                 "iso": {
                     "name": "ISO 9001:2008",
-                    "desc": "Quality Management System",
-                    "label": "Certified"
+                    "desc": "Qualitätsmanagementsystem",
+                    "label": "Zertifiziert"
                 },
                 "green": {
-                    "name": "100% Green Energy",
+                    "name": "100% Grüne Energie",
                     "desc": "Feníe Energía + CNMC",
-                    "label": "Renewable"
+                    "label": "Erneuerbar"
                 },
                 "traceability": {
-                    "name": "Total Traceability",
-                    "desc": "Product control",
-                    "label": "Guarantee"
+                    "name": "Totale Rückverfolgbarkeit",
+                    "desc": "Produktkontrolle",
+                    "label": "Garantie"
                 },
                 "cold_chain": {
-                    "name": "Cold Chain",
-                    "desc": "5,000m³ refrigerated capacity",
-                    "label": "Certified"
+                    "name": "Kühlkette",
+                    "desc": "5.000m³ Kühlkapazität",
+                    "label": "Zertifiziert"
                 }
             },
             "process": {
-                "title": "Quality Control Process",
-                "description": "From reception to delivery, every step is controlled",
+                "title": "Qualitätskontrollprozess",
+                "description": "Von der Annahme bis zur Lieferung wird jeder Schritt kontrolliert",
                 "steps": {
                     "reception": {
-                        "title": "Reception",
-                        "desc": "Temperature and quality control upon receipt"
+                        "title": "Annahme",
+                        "desc": "Temperatur- und Qualitätskontrolle bei Erhalt"
                     },
                     "inspection": {
-                        "title": "Inspection",
-                        "desc": "Exhaustive verification of all products"
+                        "title": "Inspektion",
+                        "desc": "Umfassende Überprüfung aller Produkte"
                     },
                     "certification": {
-                        "title": "Certification",
-                        "desc": "Labeling and registration according to regulations"
+                        "title": "Zertifizierung",
+                        "desc": "Kennzeichnung und Registrierung gemäß Vorschriften"
                     },
                     "distribution": {
-                        "title": "Distribution",
-                        "desc": "Delivery with guaranteed cold chain"
+                        "title": "Vertrieb",
+                        "desc": "Lieferung mit garantierter Kühlkette"
                     }
                 }
             }
         },
         "strategy": {
-            "title_1": "Our",
-            "title_2": "Business Strategy",
-            "description": "Committed to excellence in service to the HORECA sector",
+            "title_1": "Unsere",
+            "title_2": "Geschäftsstrategie",
+            "description": "Der Exzellenz im Service für den HORECA-Sektor verpflichtet",
             "mission": {
-                "title": "Our Mission",
-                "item_1": "Offer support to the restoration guild through the distribution of selected top quality products.",
-                "item_2": "Always seek innovation to meet the demands of the final customer.",
-                "item_3": "Facilitate the task of the kitchen professional."
+                "title": "Unsere Mission",
+                "item_1": "Unterstützung der Gastronomie durch den Vertrieb ausgewählter Produkte von höchster Qualität.",
+                "item_2": "Stets nach Innovation suchen, um die Anforderungen des Endkunden zu erfüllen.",
+                "item_3": "Die Aufgabe des Küchenprofis erleichtern."
             },
             "vision": {
-                "title": "Our Vision",
-                "item_1": "More demanding and informed clients demanding higher quality in products and services.",
-                "item_2": "Selecting the professional support that covers those expectations can make the difference.",
-                "item_3": "Our purpose is to be that support for the HORECA channel."
+                "title": "Unsere Vision",
+                "item_1": "Anspruchsvollere und informiertere Kunden verlangen höhere Qualität bei Produkten und Dienstleistungen.",
+                "item_2": "Die Auswahl der professionellen Unterstützung, die diese Erwartungen erfüllt, kann den Unterschied ausmachen.",
+                "item_3": "Unser Ziel ist es, diese Unterstützung für den HORECA-Kanal zu sein."
             }
         },
         "reviews": {
-            "badge": "Google Reviews",
-            "title_1": "What",
-            "title_highlight": "our clients say",
-            "description": "The opinion of those who trust Granja Maripepa for their business",
+            "badge": "Google Bewertungen",
+            "title_1": "Was",
+            "title_highlight": "unsere Kunden sagen",
+            "description": "Die Meinung derer, die Granja Maripepa für ihr Geschäft vertrauen",
             "antonio_review": {
-                "text": "This company distributes all kinds of frozen foods, ice creams, and endless products. If you want quality products and exceptional treatment look no further. The best company I know in its sector.",
-                "role": "8 reviews · Local guide"
+                "text": "Dieses Unternehmen vertreibt alle Arten von Tiefkühlkost, Eiscreme und unzählige Produkte. Wenn Sie Qualitätsprodukte und eine außergewöhnliche Behandlung wünschen, suchen Sie nicht weiter. Das beste Unternehmen, das ich in seiner Branche kenne.",
+                "role": "8 Bewertungen · Local Guide"
             },
             "view_all": {
-                "title": "View all reviews",
-                "subtitle": "Read the 18 opinions of our clients on Google Maps",
-                "link": "Open in Google Maps"
+                "title": "Alle Bewertungen ansehen",
+                "subtitle": "Lesen Sie die 18 Meinungen unserer Kunden auf Google Maps",
+                "link": "In Google Maps öffnen"
             },
             "summary": {
-                "rating_label": "Google Rating",
-                "reviews_label": "Customer reviews",
-                "write_review": "Write a review"
+                "rating_label": "Google Bewertung",
+                "reviews_label": "Kundenbewertungen",
+                "write_review": "Bewertung schreiben"
             }
         },
         "cta_final": {
-            "title_1": "Ready to",
-            "title_highlight": "work together",
+            "title_1": "Bereit zur",
+            "title_highlight": "Zusammenarbeit",
             "title_suffix": "?",
-            "description": "Join the HORECA establishments that trust Granja Maripepa to bring certified quality products to their customers in Murcia and Alicante.",
-            "contact": "Contact now",
-            "catalog": "View catalog"
+            "description": "Schließen Sie sich den HORECA-Betrieben an, die Granja Maripepa vertrauen, um ihren Kunden in Murcia und Alicante zertifizierte Qualitätsprodukte zu bringen.",
+            "contact": "Jetzt kontaktieren",
+            "catalog": "Katalog ansehen"
         }
-    },
-    "contact": {
-        "title": "Contact",
-        "subtitle": "We're here to help",
-        "phone": "Phone",
-        "email": "Email",
-        "address": "Address",
-        "schedule": "Schedule",
-        "scheduleWeekdays": "Monday to Friday: 8:00 AM - 6:00 PM",
-        "scheduleSaturday": "Saturday: 9:00 AM - 2:00 PM",
-        "scheduleSunday": "Sunday and holidays: Closed",
-        "form": {
-            "title": "Send us a message",
-            "name": "Name",
-            "namePlaceholder": "Your full name",
-            "email": "Email",
-            "emailPlaceholder": "your@email.com",
-            "phone": "Phone",
-            "phonePlaceholder": "+34 612 345 678",
-            "company": "Company",
-            "companyPlaceholder": "Your company name (optional)",
-            "message": "Message",
-            "messagePlaceholder": "How can we help you?",
-            "submit": "Send message",
-            "sending": "Sending...",
-            "successTitle": "Message sent!",
-            "successMessage": "We will get back to you as soon as possible.",
-            "errorTitle": "Error sending",
-            "errorMessage": "Please try again later."
-        },
-        "location": {
-            "title": "Our location",
-            "mainOffice": "Main Office",
-            "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
-            "city": "30817 - Lorca (Murcia), Spain"
-        }
-    },
-    "products_page": {
-        "title": "Coming Soon",
-        "subtitle_1": "We are preparing something special",
-        "subtitle_2": "Our product catalog is being updated with new features.",
-        "cta_home": "Back to Home",
-        "cta_clients": "Customer Area",
-        "badge": "Available soon"
     },
     "customerArea": {
-        "title": "Customer Area",
-        "welcome": "Welcome to your",
-        "welcomeHighlight": "Personal Area",
-        "description": "Access your personalized control panel to manage orders, download invoices and much more with total convenience.",
-        "exclusiveBadge": "Exclusive Customer Area",
+        "title": "Kundenbereich",
+        "welcome": "Willkommen in Ihrem",
+        "welcomeHighlight": "Persönlichen Bereich",
+        "description": "Greifen Sie auf Ihr personalisiertes Kontrollpanel zu, um Bestellungen zu verwalten, Rechnungen herunterzuladen und vieles mehr mit absolutem Komfort.",
+        "exclusiveBadge": "Exklusiver Kundenbereich",
         "login": {
-            "title": "Log In",
-            "subtitle": "Access with your credentials",
-            "clientCode": "Client Code",
-            "clientCodePlaceholder": "e.g. 0123456789",
-            "password": "Password",
-            "passwordPlaceholder": "Your password",
-            "forgotPassword": "Forgot your password?",
-            "accessButton": "Access",
-            "loggingIn": "Logging in...",
-            "needHelp": "Need help?",
-            "contactSupport": "Contact support",
-            "needAccount": "Need an account?",
-            "contactUs": "Contact us",
-            "contactToast": "📞 Contact us\\n\\nPhone: +34 965 123 456\\nEmail: soporte@granja-mari-pepa.com\\nHours: Mon-Fri 9:00-18:00"
-        },
-        "emailSetup": {
-            "title": "Contact Setup",
-            "subtitle": "For your security, we need your contact details.",
-            "data_usage": "Data usage:",
-            "data_usage_desc": "Only for password recovery and sending invoices. We do not share this information.",
-            "email": "Email",
-            "phone": "Phone",
-            "save": "Save and Continue",
-            "saving": "Saving..."
-        },
-        "features": {
-            "history": "Complete history",
-            "historyDesc": "All your orders organized",
-            "security": "Secure data",
-            "securityDesc": "Guaranteed protection",
-            "priority": "Priority access",
-            "priorityDesc": "Exclusive offers and news"
-        },
-        "dashboard": {
-            "welcome": "Welcome",
-            "invoices": "Invoices",
-            "invoicesDesc": "View and download your invoices",
-            "orders": "Orders",
-            "ordersDesc": "Order history",
-            "profile": "Profile",
-            "profileDesc": "Manage your data",
-            "ivaBook": "VAT Book",
-            "ivaBookDesc": "Quarterly VAT summary",
-            "downloadPdf": "Download PDF",
-            "viewAll": "View all",
-            "noInvoices": "You have no recent invoices",
-            "lastInvoices": "Recent invoices",
-            "totalPending": "Total pending",
-            "logout": "Log out",
-            "tabs": {
-                "facturas": "Invoices",
-                "perfil": "Profile",
-                "favoritos": "Favorites",
-                "pedidos": "Orders"
-            },
-            "status": {
-                "pending": "Pending",
-                "processing": "Processing",
-                "shipped": "Shipped",
-                "delivered": "Delivered",
-                "paid": "Paid",
-                "cancelled": "Cancelled"
-            },
-            "pdf": {
-                "loading": "Loading PDF...",
-                "error": "Error loading PDF",
-                "mobileTitle": "Invoice {serie}-{numero}",
-                "mobileDesc": "To view the full PDF on your mobile device, download it directly.",
-                "download": "Download PDF",
-                "saveInfo": "The PDF will be saved in your downloads folder"
-            }
-        },
-        "publicFeatures": {
-            "badge": "Control Panel",
-            "title": "Everything you need in one place",
-            "subtitle": "Manage your commercial relationship with us easily and efficiently",
-            "items": {
-                "orders": {
-                    "title": "Order Management",
-                    "desc": "Place and track all your orders in real time",
-                    "label": "Available"
-                },
-                "invoices": {
-                    "title": "PDF Invoices",
-                    "desc": "Download and manage your invoices instantly",
-                    "label": "Digital"
-                },
-                "profile": {
-                    "title": "Personal Profile",
-                    "desc": "Update your data and contact preferences",
-                    "label": "Customizable"
-                },
-                "stats": {
-                    "title": "Statistics",
-                    "desc": "Analyze your history and purchasing patterns",
-                    "label": "Insights"
-                }
-            },
-            "cta": {
-                "title": "Don't have an account yet?",
-                "desc": "Contact our sales team to get access",
-                "button": "Contact"
-            }
-        },
-        "invoice": {
-            "number": "Number",
-            "date": "Date",
-            "total": "Total",
-            "base": "Tax base",
-            "vat": "VAT",
-            "surcharge": "Equiv. surcharge",
-            "status": "Status",
-            "paid": "Paid",
-            "pending": "Pending",
-            "overdue": "Overdue",
-            "dueDate": "Due date",
-            "products": "Products",
-            "quantity": "Quantity",
-            "unitPrice": "Unit price",
-            "lineTotal": "Amount"
-        },
-        "password": {
-            "change": "Change password",
-            "current": "Current password",
-            "new": "New password",
-            "confirm": "Confirm password",
-            "requirements": "Minimum 12 characters",
-            "strength": "Strength",
-            "weak": "Weak",
-            "medium": "Medium",
-            "strong": "Strong",
-            "veryStrong": "Very strong",
-            "mismatch": "Passwords don't match",
-            "success": "Password changed successfully"
+            "title": "Anmelden",
+            "subtitle": "Zugang mit Ihren Anmeldedaten",
+            "clientCode": "Kundencode",
+            "clientCodePlaceholder": "z.B. 0123456789",
+            "password": "Passwort",
+            "passwordPlaceholder": "Ihr Passwort",
+            "forgotPassword": "Passwort vergessen?",
+            "accessButton": "Zugreifen",
+            "loggingIn": "Anmelden...",
+            "needHelp": "Brauchen Sie Hilfe?",
+            "contactSupport": "Support kontaktieren",
+            "needAccount": "Brauchen Sie ein Konto?",
+            "contactUs": "Kontaktieren Sie uns",
+            "contactToast": "📞 Kontaktieren Sie uns\\n\\nTelefon: +34 965 123 456\\nE-Mail: soporte@granja-mari-pepa.com\\nÖffnungszeiten: Mo-Fr 9:00-18:00"
         }
     },
     "chatbot": {
         "name": "Pepa",
-        "badge": "AI",
-        "status": "Virtual Assistant",
-        "greeting": "Hi, I'm Pepa",
-        "greetingMorning": "Good morning, I'm Pepa",
-        "greetingAfternoon": "Good afternoon, I'm Pepa",
-        "greetingEvening": "Good evening, I'm Pepa",
-        "subtitle": "Your Granja Mari Pepa virtual assistant. I'm here to help you with products, orders, invoices or any questions.",
-        "placeholder": "Type your message...",
-        "thinking": "Thinking",
-        "send": "Send",
-        "clearChat": "Clear chat",
-        "minimize": "Minimize",
-        "maximize": "Maximize",
-        "close": "Close",
-        "quickActionsTitle": "Quick actions",
-        "orAskMe": "Or ask me directly:",
-        "quickActions": {
-            "invoices": "My invoices",
-            "invoicesQuery": "I want to see my invoices",
-            "order": "Place order",
-            "orderQuery": "How can I place an order?",
-            "contact": "Contact",
-            "contactQuery": "What is the contact phone number?",
-            "schedule": "Schedule",
-            "scheduleQuery": "What are your opening hours?"
-        },
-        "suggestions": "You might be interested in:",
-        "quickQuestions": [
-            "What products do you distribute?",
-            "How do I place an order?",
-            "What are your hours?",
-            "How do I download invoices?"
-        ],
-        "voiceInput": "Voice input",
-        "voiceListening": "Listening...",
-        "voiceNotSupported": "Your browser doesn't support voice input",
-        "connectionError": "Could not connect to the server. Please try again in a few seconds.",
-        "poweredBy": "Pepa AI",
-        "since": "HORECA since 1966",
-        "downloadInvoice": "Download invoice"
+        "badge": "KI",
+        "status": "Virtueller Assistent",
+        "greeting": "Hallo, ich bin Pepa",
+        "greetingMorning": "Guten Morgen, ich bin Pepa",
+        "greetingAfternoon": "Guten Tag, ich bin Pepa",
+        "greetingEvening": "Guten Abend, ich bin Pepa",
+        "subtitle": "Ihr virtueller Assistent von Granja Mari Pepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
+        "placeholder": "Schreiben Sie Ihre Nachricht...",
+        "thinking": "Nachdenken",
+        "send": "Senden",
+        "clearChat": "Chat löschen",
+        "minimize": "Minimieren",
+        "maximize": "Maximieren",
+        "close": "Schließen"
     },
     "footer": {
         "companyName": "GRANJA MARI PEPA",
-        "tagline": "Premium food product distributors",
-        "description_short": "Premium food distributors for HORECA",
-        "description_long": "Specialists in distribution of frozen, refrigerated and ambient products for hospitality and catering.",
-        "nestle_distributor": "Official Nestlé Distributor",
-        "founded_text": "Founded in Lorca, 1966",
-        "green_energy": "Green Energy",
-        "quick_access": "Quick Access",
-        "copyright": "© {year} Granja Mari Pepa. All rights reserved.",
-        "quickLinks": "Quick links",
-        "legal": "Legal",
-        "privacy": "Privacy Policy",
-        "terms": "Terms and Conditions",
-        "cookies": "Cookie Policy",
-        "legalNotice": "Legal Notice",
-        "contact": "Contact",
-        "followUs": "Follow us",
-        "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
-        "delegation": "Murcia Delegation",
-        "catalog": "Catalog",
-        "client_portal": "Client Portal",
-        "rights_reserved": "All rights reserved."
+        "tagline": "Premium Lebensmittelvertrieb",
+        "description_short": "Premium Lebensmittelvertrieb für HORECA",
+        "nestle_distributor": "Offizieller Nestlé Vertriebspartner",
+        "founded_text": "Gegründet in Lorca, 1966",
+        "green_energy": "Grüne Energie",
+        "quick_access": "Schnellzugriff",
+        "copyright": "© {year} Granja Mari Pepa. Alle Rechte vorbehalten.",
+        "rights_reserved": "Alle Rechte vorbehalten."
     },
     "globe_map": {
-        "badge": "DISTRIBUTION NETWORK",
-        "title_1": "Our",
-        "title_2": "Presence",
-        "subtitle": "Strategic coverage in southeast Spain",
-        "operations_title": "Operations Centers",
-        "select_to_view": "Select to view on map",
+        "badge": "VERTRIEBSNETZWERK",
+        "title_1": "Unsere",
+        "title_2": "Präsenz",
+        "subtitle": "Strategische Abdeckung im Südosten Spaniens",
+        "operations_title": "Betriebszentren",
+        "select_to_view": "Zum Auswählen auf Karte klicken",
         "status_online": "ONLINE",
-        "status_viewing": "VIEWING",
-        "headquarters": "Headquarters",
-        "regional_coverage": "Regional Coverage",
-        "regional_coverage_desc": "Distribution service in Murcia and Alicante. Delivery in 24-48h.",
-        "go_to": "Go to"
+        "status_viewing": "ANSICHT",
+        "headquarters": "Hauptsitz",
+        "regional_coverage": "Regionale Abdeckung",
+        "regional_coverage_desc": "Vertriebsservice in Murcia und Alicante. Lieferung in 24-48h.",
+        "go_to": "Gehe zu"
     },
     "errors": {
-        "notFound": "Page not found",
-        "notFoundDesc": "Sorry, the page you're looking for doesn't exist.",
-        "serverError": "Server error",
-        "serverErrorDesc": "An error occurred. Please try again later.",
-        "networkError": "Connection error",
-        "networkErrorDesc": "Could not connect to the server.",
-        "unauthorized": "Unauthorized",
-        "unauthorizedDesc": "You need to log in to access this page.",
-        "forbidden": "Access denied",
-        "forbiddenDesc": "You don't have permission to access this resource.",
-        "tryAgain": "Try again",
-        "goHome": "Go home",
-        "invalidCredentials": "Invalid credentials",
-        "invalidCredentialsDesc": "Please check your client code and password."
-    },
-    "accessibility": {
-        "skipToContent": "Skip to main content",
-        "menuToggle": "Open menu",
-        "languageSwitch": "Change language",
-        "darkMode": "Dark mode",
-        "lightMode": "Light mode",
-        "loading": "Loading content",
-        "newWindow": "Opens in new window"
-    },
-    "categories": {
-        "mar": {
-            "name": "Seafood",
-            "description": "High quality frozen fish and seafood"
-        },
-        "carne": {
-            "name": "Meats",
-            "description": "Selected frozen meats"
-        },
-        "precocinados": {
-            "name": "Pre-cooked",
-            "description": "Frozen prepared dishes and vegetables"
-        },
-        "reposteria": {
-            "name": "Pastry",
-            "description": "Frozen sweets and desserts"
-        },
-        "helados": {
-            "name": "Ice Cream",
-            "description": "Wide range of Nestlé ice creams for hospitality"
-        },
-        "chocolate": {
-            "name": "Chocolate",
-            "description": "Premium quality cocoa and chocolate products"
-        },
-        "pan": {
-            "name": "Frozen Bread",
-            "description": "High quality frozen breads and doughs"
-        }
-    },
-    "meta": {
-        "title": "Granja Mari Pepa | HORECA Distribution Murcia & Lorca",
-        "description": "Premium food distribution leaders for hospitality. Frozen foods, meats, and seafood. 24h service in Murcia and Almería.",
-        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, food distribution, frozen food, HORECA, Murcia, Almería, meats, seafood, mari pepa"
-    },
-    "legal": {
-        "privacy": {
-            "title": "Privacy Policy",
-            "intro": "At Granja Mari Pepa we take the privacy of our customers and users very seriously.",
-            "sections": {
-                "s1": {
-                    "title": "1. Data Controller",
-                    "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
-                },
-                "s2": {
-                    "title": "2. Purpose of Processing",
-                    "content": "We process the information you provide in order to provide the requested service, perform billing and send commercial communications related to our products and services."
-                },
-                "s3": {
-                    "title": "3. Data Retention",
-                    "content": "The data provided will be kept as long as the commercial relationship is maintained or for the years necessary to comply with legal obligations."
-                },
-                "s4": {
-                    "title": "4. Legitimation",
-                    "content": "The legal basis for the processing of your data is the execution of the contract for the provision of services and/or sale of products."
-                },
-                "s5": {
-                    "title": "5. Recipients",
-                    "content": "The data will not be transferred to third parties except in cases where there is a legal obligation."
-                },
-                "s6": {
-                    "title": "6. Rights",
-                    "content": "You have the right to obtain confirmation as to whether Granja Mari Pepa is processing your personal data, therefore you have the right to access your personal data, rectify inaccurate data or request its deletion when the data is no longer necessary."
-                }
-            }
-        },
-        "terms": {
-            "title": "Terms and Conditions",
-            "intro": "Welcome to the Granja Mari Pepa website. By accessing and using this site, you agree to the following terms and conditions.",
-            "sections": {
-                "s1": {
-                    "title": "1. Intellectual Property",
-                    "content": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Granja Mari Pepa."
-                },
-                "s2": {
-                    "title": "2. Use of the Website",
-                    "content": "The user undertakes to use the website, its services and contents diligently, correctly and lawfully, and in particular, undertakes to refrain from suppressing, circumventing or manipulating the copyright and other identifying data of the rights of its holders."
-                },
-                "s3": {
-                    "title": "3. Liability",
-                    "content": "Granja Mari Pepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein."
-                },
-                "s4": {
-                    "title": "4. Modifications",
-                    "content": "Granja Mari Pepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website."
-                },
-                "s5": {
-                    "title": "5. Applicable Law",
-                    "content": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Granja Mari Pepa agree to expressly submit to the courts and tribunals of Lorca (Murcia)."
-                }
-            }
-        }
+        "notFound": "Seite nicht gefunden",
+        "notFoundDesc": "Entschuldigung, die gesuchte Seite existiert nicht.",
+        "serverError": "Serverfehler",
+        "serverErrorDesc": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
     }
 }
