@@ -27,7 +27,8 @@
             "cereals": "Cereals",
             "chocolate": "Chocolate",
             "fresh_fish": "Fresh Fish",
-            "seafood_shell": "Shellfish"
+            "seafood_shell": "Shellfish",
+            "seafood": "Mariscos"
         }
     },
     "nav": {
@@ -288,6 +289,10 @@
                     "title": "Founded in Lorca (Murcia)",
                     "desc": "Granja Maripepa, S.L. was founded in Lorca (Murcia), specializing from the start in the HORECA market and food channel."
                 },
+                "2020": {
+                    "title": "100% Green Energy",
+                    "desc": "Certification from Feníe Energía and CNMC that our energy is 100% renewable origin."
+                },
                 "1980s": {
                     "title": "Regional Consolidation",
                     "desc": "Expansion of the range of frozen, refrigerated, and ambient products for hospitality and catering."
@@ -295,10 +300,6 @@
                 "2000s": {
                     "title": "ISO 9001 Certification",
                     "desc": "Obtained ISO 9001:2008 certification guaranteeing our Quality Management System."
-                },
-                "2020": {
-                    "title": "100% Green Energy",
-                    "desc": "Certification from Feníe Energía and CNMC that our energy is 100% renewable origin."
                 },
                 "today": {
                     "title": "More than 1,500 references",
@@ -670,12 +671,12 @@
             "scheduleQuery": "What are your opening hours?"
         },
         "suggestions": "You might be interested in:",
-        "quickQuestions": [
-            "What products do you distribute?",
-            "How do I place an order?",
-            "What are your hours?",
-            "How do I download invoices?"
-        ],
+        "quickQuestions": {
+            "0": "What products do you distribute?",
+            "1": "How do I place an order?",
+            "2": "What are your hours?",
+            "3": "How do I download invoices?"
+        },
         "voiceInput": "Voice input",
         "voiceListening": "Listening...",
         "voiceNotSupported": "Your browser doesn't support voice input",
