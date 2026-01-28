@@ -10,6 +10,9 @@ import { locales } from '@/i18n';
 const languages = [
     { code: 'es', name: 'Español', flag: '🇪🇸' },
     { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' },
 ] as const;
 
 interface LanguageSwitcherProps {
@@ -39,7 +42,7 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
 
     const switchLocale = (newLocale: string) => {
         setIsOpen(false);
-        
+
         // Usar startTransition para navegación no bloqueante
         startTransition(() => {
             // El pathname de usePathname() de @/lib/navigation ya viene SIN el locale
@@ -61,8 +64,8 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
                         whileTap={{ scale: 0.95 }}
                         onClick={() => switchLocale(lang.code)}
                         className={`text-lg transition-all ${locale === lang.code
-                                ? 'opacity-100 scale-110'
-                                : 'opacity-50 hover:opacity-80'
+                            ? 'opacity-100 scale-110'
+                            : 'opacity-50 hover:opacity-80'
                             }`}
                         aria-label={`Switch to ${lang.name}`}
                         aria-current={locale === lang.code ? 'true' : undefined}
@@ -105,8 +108,8 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
                                 key={lang.code}
                                 onClick={() => switchLocale(lang.code)}
                                 className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm transition-colors ${locale === lang.code
-                                        ? 'bg-emerald-50 text-emerald-700 font-medium'
-                                        : 'text-gray-700 hover:bg-gray-50'
+                                    ? 'bg-emerald-50 text-emerald-700 font-medium'
+                                    : 'text-gray-700 hover:bg-gray-50'
                                     }`}
                                 role="option"
                                 aria-selected={locale === lang.code}
@@ -142,8 +145,8 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
                         whileTap={{ scale: 0.95 }}
                         onClick={() => switchLocale(lang.code)}
                         className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${locale === lang.code
-                                ? 'bg-white text-emerald-700 shadow-sm'
-                                : 'text-white/80 hover:text-white hover:bg-white/10'
+                            ? 'bg-white text-emerald-700 shadow-sm'
+                            : 'text-white/80 hover:text-white hover:bg-white/10'
                             }`}
                         aria-label={`Switch to ${lang.name}`}
                         aria-current={locale === lang.code ? 'true' : undefined}
