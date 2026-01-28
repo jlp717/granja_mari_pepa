@@ -18,6 +18,7 @@ import { AnalyticsProvider } from '@/components/providers/analytics-provider'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { JsonLdSchemas } from '@/components/seo/JsonLdSchemas'
 import { locales, type Locale } from '@/i18n'
+import { TolgeeProvider } from '@/components/providers/tolgee-provider'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -150,40 +151,42 @@ export default async function LocaleLayout({
             </head>
             <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-background`}>
                 <NextIntlClientProvider messages={messages}>
-                    <ErrorBoundary>
-                        <ThemeProvider>
-                            <SessionProvider>
-                                <AnalyticsProvider>
-                                    <PerformanceProvider>
-                                        <LazyLoadingProvider>
-                                            <ScrollToTopProvider />
-                                            {/* Skip to main content para accesibilidad */}
-                                            <a
-                                                href="#main-content"
-                                                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none"
-                                            >
-                                                {locale === 'es' ? 'Ir al contenido principal' : 'Skip to main content'}
-                                            </a>
-                                            <Header />
-                                            {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
-                          sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
-                                            <main
-                                                id="main-content"
-                                                className="pt-32 sm:pt-36 md:pt-40 lg:pt-44 flex-1 bg-background"
-                                                role="main"
-                                            >
-                                                {children}
-                                            </main>
-                                            <Footer />
-                                            <Toaster />
-                                            <Sonner />
-                                            <GlobalChatbot />
-                                        </LazyLoadingProvider>
-                                    </PerformanceProvider>
-                                </AnalyticsProvider>
-                            </SessionProvider>
-                        </ThemeProvider>
-                    </ErrorBoundary>
+                    <TolgeeProvider>
+                        <ErrorBoundary>
+                            <ThemeProvider>
+                                <SessionProvider>
+                                    <AnalyticsProvider>
+                                        <PerformanceProvider>
+                                            <LazyLoadingProvider>
+                                                <ScrollToTopProvider />
+                                                {/* Skip to main content para accesibilidad */}
+                                                <a
+                                                    href="#main-content"
+                                                    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none"
+                                                >
+                                                    {locale === 'es' ? 'Ir al contenido principal' : 'Skip to main content'}
+                                                </a>
+                                                <Header />
+                                                {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
+                              sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
+                                                <main
+                                                    id="main-content"
+                                                    className="pt-32 sm:pt-36 md:pt-40 lg:pt-44 flex-1 bg-background"
+                                                    role="main"
+                                                >
+                                                    {children}
+                                                </main>
+                                                <Footer />
+                                                <Toaster />
+                                                <Sonner />
+                                                <GlobalChatbot />
+                                            </LazyLoadingProvider>
+                                        </PerformanceProvider>
+                                    </AnalyticsProvider>
+                                </SessionProvider>
+                            </ThemeProvider>
+                        </ErrorBoundary>
+                    </TolgeeProvider>
                 </NextIntlClientProvider>
             </body>
         </html>
