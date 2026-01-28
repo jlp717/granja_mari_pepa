@@ -27,7 +27,8 @@
             "cereals": "Cereali",
             "chocolate": "Cioccolato",
             "fresh_fish": "Pesce fresco",
-            "seafood_shell": "Crostacei"
+            "seafood_shell": "Crostacei",
+            "seafood": "Mariscos"
         }
     },
     "nav": {
@@ -288,6 +289,10 @@
                     "title": "Fondata a Lorca (Murcia)",
                     "desc": "Granja Maripepa, S.L. è stata fondata a Lorca (Murcia), specializzandosi fin dall'inizio nel mercato HORECA e nel canale alimentare."
                 },
+                "2020": {
+                    "title": "100% Energia Verde",
+                    "desc": "Certificazione da Feníe Energía e CNMC che la nostra energia è al 100% di origine rinnovabile."
+                },
                 "1980s": {
                     "title": "Consolidamento Regionale",
                     "desc": "Ampliamento della gamma di prodotti surgelati, refrigerati e a temperatura ambiente per ristorazione e catering."
@@ -295,10 +300,6 @@
                 "2000s": {
                     "title": "Certificazione ISO 9001",
                     "desc": "Ottenuta la certificazione ISO 9001:2008 che garantisce il nostro Sistema di Gestione della Qualità."
-                },
-                "2020": {
-                    "title": "100% Energia Verde",
-                    "desc": "Certificazione da Feníe Energía e CNMC che la nostra energia è al 100% di origine rinnovabile."
                 },
                 "today": {
                     "title": "Oltre 1.500 referenze",
@@ -475,6 +476,126 @@
             "needAccount": "Hai bisogno di un account?",
             "contactUs": "Contattaci",
             "contactToast": "📞 Contattaci\\n\\nTelefono: +34 965 123 456\\nEmail: soporte@granja-mari-pepa.com\\nOrario: Lun-Ven 9:00-18:00"
+        },
+        "emailSetup": {
+            "title": "Configuración de Contacto",
+            "subtitle": "Para tu seguridad, necesitamos tus datos de contacto.",
+            "data_usage": "Uso de tus datos:",
+            "data_usage_desc": "Solo para recuperar tu contraseña y enviar facturas. No compartimos esta información.",
+            "email": "Email",
+            "phone": "Teléfono",
+            "save": "Guardar y Continuar",
+            "saving": "Guardando..."
+        },
+        "features": {
+            "history": "Historial completo",
+            "historyDesc": "Todos tus pedidos organizados",
+            "security": "Datos seguros",
+            "securityDesc": "Protección garantizada",
+            "priority": "Acceso prioritario",
+            "priorityDesc": "Ofertas y novedades exclusivas"
+        },
+        "dashboard": {
+            "welcome": "Bienvenido",
+            "invoices": "Facturas",
+            "invoicesDesc": "Consulta y descarga tus facturas",
+            "orders": "Pedidos",
+            "ordersDesc": "Historial de pedidos",
+            "profile": "Perfil",
+            "profileDesc": "Gestiona tus datos",
+            "ivaBook": "Libro IVA",
+            "ivaBookDesc": "Resumen trimestral de IVA",
+            "downloadPdf": "Descargar PDF",
+            "viewAll": "Ver todo",
+            "noInvoices": "No tienes facturas recientes",
+            "lastInvoices": "Últimas facturas",
+            "totalPending": "Total pendiente",
+            "logout": "Cerrar sesión",
+            "tabs": {
+                "facturas": "Facturas",
+                "perfil": "Perfil",
+                "favoritos": "Favoritos",
+                "pedidos": "Pedidos"
+            },
+            "status": {
+                "pending": "Pendiente",
+                "processing": "Procesando",
+                "shipped": "Enviado",
+                "delivered": "Entregado",
+                "paid": "Pagada",
+                "cancelled": "Cancelado"
+            },
+            "pdf": {
+                "loading": "Cargando PDF...",
+                "error": "Error al cargar el PDF",
+                "mobileTitle": "Factura {serie}-{numero}",
+                "mobileDesc": "Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.",
+                "download": "Descargar PDF",
+                "saveInfo": "El PDF se guardará en tu carpeta de descargas"
+            }
+        },
+        "publicFeatures": {
+            "badge": "Panel de Control",
+            "title": "Todo lo que necesitas en un solo lugar",
+            "subtitle": "Gestiona tu relación comercial con nosotros de forma fácil y eficiente",
+            "items": {
+                "orders": {
+                    "title": "Gestión de Pedidos",
+                    "desc": "Realiza y consulta todos tus pedidos en tiempo real",
+                    "label": "Disponible"
+                },
+                "invoices": {
+                    "title": "Facturas PDF",
+                    "desc": "Descarga y gestiona tus facturas al instante",
+                    "label": "Digital"
+                },
+                "profile": {
+                    "title": "Perfil Personal",
+                    "desc": "Actualiza tus datos y preferencias de contacto",
+                    "label": "Personalizable"
+                },
+                "stats": {
+                    "title": "Estadísticas",
+                    "desc": "Analiza tu historial y patrones de compra",
+                    "label": "Insights"
+                }
+            },
+            "cta": {
+                "title": "¿Aún no tienes cuenta?",
+                "desc": "Contacta con nuestro equipo comercial para obtener acceso",
+                "button": "Contactar"
+            }
+        },
+        "invoice": {
+            "number": "Número",
+            "date": "Fecha",
+            "total": "Total",
+            "base": "Base imponible",
+            "vat": "IVA",
+            "surcharge": "Recargo equiv.",
+            "status": "Estado",
+            "paid": "Pagada",
+            "pending": "Pendiente",
+            "overdue": "Vencida",
+            "dueDate": "Fecha vencimiento",
+            "products": "Productos",
+            "quantity": "Cantidad",
+            "unitPrice": "Precio unit.",
+            "lineTotal": "Importe"
+        },
+        "password": {
+            "change": "Cambiar contraseña",
+            "current": "Contraseña actual",
+            "new": "Nueva contraseña",
+            "confirm": "Confirmar contraseña",
+            "requirements": "Mínimo 12 caracteres",
+            "strength": "Fortaleza",
+            "weak": "Débil",
+            "medium": "Media",
+            "strong": "Fuerte",
+            "veryStrong": "Muy fuerte",
+            "mismatch": "Las contraseñas no coinciden",
+            "success": "Contraseña cambiada correctamente"
         }
     },
     "chatbot": {
@@ -492,7 +613,33 @@
         "clearChat": "Cancella chat",
         "minimize": "Minimizza",
         "maximize": "Massimizza",
-        "close": "Chiudi"
+        "close": "Chiudi",
+        "quickActionsTitle": "Acciones rápidas",
+        "orAskMe": "O pregúntame directamente:",
+        "quickActions": {
+            "invoices": "Mis facturas",
+            "invoicesQuery": "Quiero ver mis facturas",
+            "order": "Hacer pedido",
+            "orderQuery": "Cómo puedo hacer un pedido",
+            "contact": "Contacto",
+            "contactQuery": "Cuál es el teléfono de contacto",
+            "schedule": "Horarios",
+            "scheduleQuery": "Cuál es vuestro horario"
+        },
+        "suggestions": "Quizás te interese:",
+        "quickQuestions": {
+            "0": "¿Qué productos distribuís?",
+            "1": "¿Cómo hago un pedido?",
+            "2": "¿Cuál es el horario?",
+            "3": "¿Cómo descargo facturas?"
+        },
+        "voiceInput": "Entrada de voz",
+        "voiceListening": "Escuchando...",
+        "voiceNotSupported": "Tu navegador no soporta entrada de voz",
+        "connectionError": "No se ha podido conectar con el servidor. Por favor, inténtalo de nuevo en unos segundos.",
+        "poweredBy": "Pepa IA",
+        "since": "HORECA desde 1966",
+        "downloadInvoice": "Descargar factura"
     },
     "footer": {
         "companyName": "GRANJA MARI PEPA",
@@ -503,7 +650,20 @@
         "green_energy": "Energia Verde",
         "quick_access": "Accesso Rapido",
         "copyright": "© {year} Granja Mari Pepa. Tutti i diritti riservati.",
-        "rights_reserved": "Tutti i diritti riservati."
+        "rights_reserved": "Tutti i diritti riservati.",
+        "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
+        "quickLinks": "Enlaces rápidos",
+        "legal": "Legal",
+        "privacy": "Política de Privacidad",
+        "terms": "Términos y Condiciones",
+        "cookies": "Política de Cookies",
+        "legalNotice": "Aviso Legal",
+        "contact": "Contacto",
+        "followUs": "Síguenos",
+        "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
+        "delegation": "Delegación Murcia",
+        "catalog": "Catálogo",
+        "client_portal": "Portal Clientes"
     },
     "globe_map": {
         "badge": "RETE DI DISTRIBUZIONE",
@@ -523,6 +683,162 @@
         "notFound": "Pagina non trovata",
         "notFoundDesc": "Ci spiace, la pagina che stai cercando non esiste.",
         "serverError": "Errore del server",
-        "serverErrorDesc": "Si è verificato un errore. Riprova più tardi."
+        "serverErrorDesc": "Si è verificato un errore. Riprova più tardi.",
+        "networkError": "Error de conexión",
+        "networkErrorDesc": "No se pudo conectar con el servidor.",
+        "unauthorized": "No autorizado",
+        "unauthorizedDesc": "Necesitas iniciar sesión para acceder.",
+        "forbidden": "Acceso denegado",
+        "forbiddenDesc": "No tienes permisos para acceder a este recurso.",
+        "tryAgain": "Intentar de nuevo",
+        "goHome": "Ir al inicio",
+        "invalidCredentials": "Credenciales incorrectas",
+        "invalidCredentialsDesc": "Verifica tu código de cliente y contraseña."
+    },
+    "contact": {
+        "title": "Contacto",
+        "subtitle": "Estamos aquí para ayudarte",
+        "phone": "Teléfono",
+        "email": "Email",
+        "address": "Dirección",
+        "schedule": "Horario",
+        "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
+        "scheduleSaturday": "Sábados: 9:00 - 14:00",
+        "scheduleSunday": "Domingos y festivos: Cerrado",
+        "form": {
+            "title": "Envíanos un mensaje",
+            "name": "Nombre",
+            "namePlaceholder": "Tu nombre completo",
+            "email": "Email",
+            "emailPlaceholder": "tu@email.com",
+            "phone": "Teléfono",
+            "phonePlaceholder": "612 345 678",
+            "company": "Empresa",
+            "companyPlaceholder": "Nombre de tu empresa (opcional)",
+            "message": "Mensaje",
+            "messagePlaceholder": "¿En qué podemos ayudarte?",
+            "submit": "Enviar mensaje",
+            "sending": "Enviando...",
+            "successTitle": "¡Mensaje enviado!",
+            "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
+            "errorTitle": "Error al enviar",
+            "errorMessage": "Por favor, inténtalo de nuevo más tarde."
+        },
+        "location": {
+            "title": "Nuestra ubicación",
+            "mainOffice": "Oficina Principal",
+            "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
+            "city": "30817 - Lorca (Murcia)"
+        }
+    },
+    "products_page": {
+        "title": "Próximamente",
+        "subtitle_1": "Estamos preparando algo especial",
+        "subtitle_2": "Nuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.",
+        "cta_home": "Volver al inicio",
+        "cta_clients": "Área de clientes",
+        "badge": "Disponible próximamente"
+    },
+    "accessibility": {
+        "skipToContent": "Ir al contenido principal",
+        "menuToggle": "Abrir menú",
+        "languageSwitch": "Cambiar idioma",
+        "darkMode": "Modo oscuro",
+        "lightMode": "Modo claro",
+        "loading": "Cargando contenido",
+        "newWindow": "Se abre en nueva ventana"
+    },
+    "categories": {
+        "mar": {
+            "name": "Productos del mar",
+            "description": "Pescados y mariscos congelados de la más alta calidad"
+        },
+        "carne": {
+            "name": "Carnes",
+            "description": "Carnes selectas congeladas"
+        },
+        "precocinados": {
+            "name": "Precocinados",
+            "description": "Preparados y verduras congelados"
+        },
+        "reposteria": {
+            "name": "Repostería",
+            "description": "Dulces y postres congelados"
+        },
+        "helados": {
+            "name": "Helados",
+            "description": "Amplia gama de helados Nestlé para hostelería"
+        },
+        "chocolate": {
+            "name": "Chocolate",
+            "description": "Chocolates y productos de cacao de primera calidad"
+        },
+        "pan": {
+            "name": "Pan Congelado",
+            "description": "Panes y masas congeladas de alta calidad"
+        }
+    },
+    "meta": {
+        "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+        "description": "Líderes en distribución alimentaria premium para hostelería. Congelados, carnes y pescados. Servicio 24h en Murcia y Almería.",
+        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, distribución alimentaria, congelados, HORECA, Murcia, Almería, carnes, pescados, lorca"
+    },
+    "legal": {
+        "privacy": {
+            "title": "Política de Privacidad",
+            "intro": "En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios.",
+            "sections": {
+                "s1": {
+                    "title": "1. Responsable del Tratamiento",
+                    "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+                },
+                "s2": {
+                    "title": "2. Finalidad del Tratamiento",
+                    "content": "Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios."
+                },
+                "s3": {
+                    "title": "3. Conservación de Datos",
+                    "content": "Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales."
+                },
+                "s4": {
+                    "title": "4. Legitimación",
+                    "content": "La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos."
+                },
+                "s5": {
+                    "title": "5. Destinatarios",
+                    "content": "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal."
+                },
+                "s6": {
+                    "title": "6. Derechos",
+                    "content": "Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios."
+                }
+            }
+        },
+        "terms": {
+            "title": "Términos y Condiciones",
+            "intro": "Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+            "sections": {
+                "s1": {
+                    "title": "1. Propiedad Intelectual",
+                    "content": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa."
+                },
+                "s2": {
+                    "title": "2. Uso del Sitio Web",
+                    "content": "El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares."
+                },
+                "s3": {
+                    "title": "3. Responsabilidad",
+                    "content": "Granja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo."
+                },
+                "s4": {
+                    "title": "4. Modificaciones",
+                    "content": "Granja Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web."
+                },
+                "s5": {
+                    "title": "5. Ley Aplicable",
+                    "content": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
+                }
+            }
+        }
     }
 }

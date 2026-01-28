@@ -47,7 +47,8 @@ export function LanguageSwitcher({ variant = 'default', className = '' }: Langua
         startTransition(() => {
             // El pathname de usePathname() de @/lib/navigation ya viene SIN el locale
             // Solo necesitamos usar router.replace con el nuevo locale
-            router.replace(pathname, { locale: newLocale as typeof locales[number] });
+            // scroll: false evita que salte al inicio de la página
+            router.replace(pathname, { locale: newLocale as typeof locales[number], scroll: false });
         });
     };
 
