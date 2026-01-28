@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import en from "../../messages/en.json";
 import es from "../../messages/es.json";
+import de from "../../messages/de.json";
+import it from "../../messages/it.json";
+import zh from "../../messages/zh.json";
 
 const tolgee = Tolgee()
     .use(DevTools())
@@ -19,6 +22,9 @@ const tolgee = Tolgee()
         staticData: {
             en: en as any,
             es: es as any,
+            de: de as any,
+            it: it as any,
+            zh: zh as any,
             // Ideally we would load these dynamically or they would be fetched from API in dev
         },
     });
