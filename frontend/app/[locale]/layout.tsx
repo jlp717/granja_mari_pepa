@@ -94,13 +94,13 @@ export async function generateMetadata({ params: { locale } }: { params: { local
         },
         icons: {
             icon: [
-                { url: '/favicon.ico', sizes: '48x48' },
                 { url: '/images/icons/icon.svg', type: 'image/svg+xml' },
+                { url: '/favicon.ico', sizes: 'any' },
             ],
             apple: [
                 { url: '/images/logo.jpeg', sizes: '180x180', type: 'image/jpeg' },
             ],
-            shortcut: '/favicon.ico',
+            shortcut: '/images/icons/icon.svg',
             other: [
                 { rel: 'mask-icon', url: '/images/icons/icon.svg', color: '#0d3d4d' },
             ],
