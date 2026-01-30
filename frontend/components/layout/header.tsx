@@ -259,29 +259,54 @@ export function Header() {
       </div>
 
       {/* ANNOUNCEMENT BAR (Between Top Bar and Header) */}
-      <div className="fixed top-12 left-0 right-0 h-10 bg-warning text-warning-foreground z-[55] flex items-center justify-center overflow-hidden shadow-sm">
-        <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10" />
+      {/* ANNOUNCEMENT BAR (Premium Dark Gradient) */}
+      <div className="fixed top-12 left-0 right-0 h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center overflow-hidden shadow-lg border-b border-white/10">
+        {/* Animated sheen effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
+
         <button
           onClick={() => setIsCatalogOpen(true)}
-          className="relative z-10 flex items-center gap-3 group px-4 w-full justify-center h-full hover:bg-warning/90 transition-colors"
+          className="relative z-10 flex items-center gap-3 group px-4 w-full justify-center h-full transition-all hover:bg-white/5"
         >
+          {/* Animated Badge */}
           <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
+            animate={{
+              scale: [1, 1.1, 1],
+              boxShadow: [
+                "0 0 0 0 rgba(234, 179, 8, 0)",
+                "0 0 0 4px rgba(234, 179, 8, 0.3)",
+                "0 0 0 0 rgba(234, 179, 8, 0)"
+              ]
+            }}
             transition={{ repeat: Infinity, duration: 2 }}
-            className="bg-white text-warning rounded-full p-1"
+            className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200"
           >
-            <BookOpen className="w-3 h-3" />
+            <BookOpen className="w-3.5 h-3.5" />
           </motion.div>
-          <span className="font-bold text-sm tracking-wide uppercase">
-            ¡Ya disponible! Consulta nuestra Revista de Ofertas - Febrero 2026
-          </span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-center sm:text-left">
+            <span className="font-bold text-xs sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
+              ¡Edición Especial!
+            </span>
+            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
+            <span className="text-white/90 text-xs sm:text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
+              Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">Revista TopGel - Febrero 2026</span>
+            </span>
+          </div>
+
+          <motion.div
+            animate={{ x: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            className="ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors"
+          >
+            <ArrowRight className="w-3.5 h-3.5" />
+          </motion.div>
         </button>
       </div>
 
       {/* Main Header */}
-      {/* Main Header - Pushed down by Announcement Bar (Top 12 + 10 = 22) */}
-      <header className={`fixed top-[5.5rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
+      {/* Main Header - Pushed down by Announcement Bar (Top 12 (3rem) + 11 (2.75rem) = 5.75rem) */}
+      <header className={`fixed top-[5.75rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
         <div className="absolute inset-0 bg-card" />
         <nav className="container mx-auto px-4 lg:px-6 xl:px-8 relative z-10">
           <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32">
