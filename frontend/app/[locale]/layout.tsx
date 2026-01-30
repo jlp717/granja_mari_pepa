@@ -169,10 +169,11 @@ export default async function LocaleLayout({
                                                 <Header />
                                                 {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
                               sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
-                                                {/* pt responsive: Top 12 + Announce 11 + Header (Variable) */}
+                                                {/* pt responsive: Adjusted for Header Stack (Top 12 + Announce 11 + Main Header) 
+                                                    Values increased aggressively to prevent any overlap */ }
                                                 <main
                                                     id="main-content"
-                                                    className="pt-44 sm:pt-48 md:pt-52 lg:pt-56 flex-1 bg-background"
+                                                    className="pt-48 sm:pt-52 md:pt-60 lg:pt-64 flex-1 bg-background"
                                                     role="main"
                                                 >
                                                     {children}
