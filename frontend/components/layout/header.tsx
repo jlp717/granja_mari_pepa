@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react'
 import { Link, usePathname } from '@/lib/navigation'
 import Image from 'next/image'
-import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ArrowRight } from 'lucide-react'
+import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ArrowRight, BookOpen } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCartStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { CartDrawer } from '@/components/cart/cart-drawer'
 import { LanguageSwitcher } from '@/components/ui/language-switcher'
+import { CatalogModal } from '@/components/catalog/catalog-modal'
 
 const NAV_STYLES = {
   scrolled: {
@@ -44,6 +45,7 @@ type NavigationItem = {
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
   const [activeMobileSubmenu, setActiveMobileSubmenu] = useState<string | null>(null)
@@ -228,6 +230,20 @@ export function Header() {
               </div>
               <span className="text-primary-foreground/90 font-medium tracking-wide">{t('top_bar.location')}</span>
             </div>
+
+            {/* CATALOG TRIGGER (Desktop) */}
+            <button
+              onClick={() => setIsCatalogOpen(true)}
+              className="hidden lg:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300 cursor-pointer"
+            >
+              <div className="p-1.5 rounded-full bg-warning/20 group-hover:bg-warning/30 transition-colors duration-300">
+                <BookOpen className="w-3.5 h-3.5 text-warning" />
+              </div>
+              <span className="text-warning font-bold tracking-wide group-hover:text-warning-foreground transition-colors uppercase text-[10px] sm:text-xs">
+                Revista Febrero 2026
+              </span>
+            </button>
+
             <a href="tel:968467514" className="hidden sm:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300">
               <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <Phone className="w-3.5 h-3.5 text-primary-foreground/80" />
@@ -449,6 +465,25 @@ export function Header() {
               </div>
 
               <div className="px-4 py-6 space-y-2">
+                {/* Mobile Catalog Trigger */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0 }}
+                >
+                  <button
+                    onClick={() => {
+                      closeMobileMenu()
+                      setIsCatalogOpen(true)
+                    }}
+                    className="w-full flex items-center p-4 bg-gradient-to-r from-warning/20 to-warning/10 border border-warning/30 rounded-xl mb-4 text-warning-dark hover:bg-warning/20 transition-all font-bold"
+                  >
+                    <BookOpen className="w-5 h-5 mr-3 text-warning-700" />
+                    REVISTA FEBRERO 2026
+                    <ArrowRight className="w-4 h-4 ml-auto text-warning-700" />
+                  </button>
+                </motion.div>
+
                 {NAVIGATION.map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -603,6 +638,12 @@ export function Header() {
           )}
         </AnimatePresence>
       </header>
+
+      <CatalogModal
+        isOpen={isCatalogOpen}
+        onClose={() => setIsCatalogOpen(false)}
+        pdfUrl="/catalogs/topgel-febrero-2026.pdf"
+      />
 
       <CartDrawer />
     </div>
