@@ -266,7 +266,7 @@ export function Header() {
 
         <button
           onClick={() => setIsCatalogOpen(true)}
-          className="relative z-10 flex items-center gap-3 group px-4 w-full justify-center h-full transition-all hover:bg-white/5"
+          className="relative z-10 flex items-center gap-5 sm:gap-4 group px-4 w-full justify-center h-full transition-all hover:bg-white/5"
         >
           {/* Animated Badge */}
           <motion.div
