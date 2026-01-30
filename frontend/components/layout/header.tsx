@@ -290,8 +290,13 @@ export function Header() {
               ¡EDICIÓN ESPECIAL!
             </span>
             <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
-            <span className="text-white/95 text-[11px] sm:text-[13px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
+            {/* Mobile: Short text */}
+            <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
               Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">Febrero 2026</span>
+            </span>
+            {/* Desktop: Full text */}
+            <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
+              Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">Revista TopGel - Febrero 2026</span>
             </span>
           </div>
 
