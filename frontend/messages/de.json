@@ -511,6 +511,7 @@
             "lastInvoices": "Letzte Rechnungen",
             "totalPending": "Ausstehender Gesamtbetrag",
             "logout": "Abmelden",
+            "loadingPanel": "Dein Panel wird geladen",
             "logoutConfirm": "Möchten Sie sich wirklich abmelden?",
             "logoutSuccess": "Sitzung erfolgreich beendet",
             "tabs": {
@@ -540,12 +541,15 @@
                 "filterByYear": "Nach Jahr filtern",
                 "filterByMonth": "Nach Monat filtern",
                 "allMonths": "Alle Monate",
+                "allYears": "Alle Jahre",
                 "month": "Monat",
                 "year": "Jahr",
                 "dateRange": "Datumsbereich (optional)",
                 "from": "Von",
                 "to": "Bis",
                 "search": "Nach Rechnungsnummer, Serie oder Lieferschein suchen...",
+                "resetFilters": "Filter zurücksetzen",
+                "clearDateRange": "Datumsbereich löschen",
                 "months": {
                     "1": "Januar",
                     "2": "Februar",
@@ -572,7 +576,8 @@
                 "share": "Teilen",
                 "noResults": "Keine Rechnungen gefunden",
                 "foundCount": "{count} Rechnungen gefunden",
-                "downloadMessage": "Laden Sie Ihre Dokumente als PDF herunter"
+                "downloadMessage": "Laden Sie Ihre Dokumente als PDF herunter",
+                "loadingInvoices": "Rechnungen werden geladen..."
             },
             "sidebar": {
                 "clientArea": "Kundenbereich",
@@ -581,7 +586,8 @@
                 "filterByYear": "Nach Jahr filtern",
                 "filterByMonth": "Nach Monat filtern",
                 "invoicesCount": "Rechnungen",
-                "totalInvoiced": "Gesamtbetrag"
+                "totalInvoiced": "Gesamtbetrag",
+                "quickAccess": "Schnellzugriff"
             },
             "greeting": {
                 "morning": "Guten Morgen",

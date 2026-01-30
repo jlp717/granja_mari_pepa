@@ -511,6 +511,7 @@
             "lastInvoices": "最近发票",
             "totalPending": "待付总额",
             "logout": "退出登录",
+            "loadingPanel": "正在加载您的面板",
             "logoutConfirm": "您确定要退出登录吗？",
             "logoutSuccess": "会话已成功关闭",
             "tabs": {
@@ -540,12 +541,15 @@
                 "filterByYear": "按年份筛选",
                 "filterByMonth": "按月份筛选",
                 "allMonths": "所有月份",
+                "allYears": "所有年份",
                 "month": "月份",
                 "year": "年份",
                 "dateRange": "日期范围（可选）",
                 "from": "从",
                 "to": "到",
                 "search": "按发票号、系列或送货单搜索...",
+                "resetFilters": "重置筛选",
+                "clearDateRange": "清除日期范围",
                 "months": {
                     "1": "一月",
                     "2": "二月",
@@ -572,7 +576,8 @@
                 "share": "分享",
                 "noResults": "未找到发票",
                 "foundCount": "找到 {count} 张发票",
-                "downloadMessage": "下载您的PDF文档"
+                "downloadMessage": "下载您的PDF文档",
+                "loadingInvoices": "正在加载发票..."
             },
             "sidebar": {
                 "clientArea": "客户专区",
@@ -581,7 +586,8 @@
                 "filterByYear": "按年份筛选",
                 "filterByMonth": "按月份筛选",
                 "invoicesCount": "发票",
-                "totalInvoiced": "开票总额"
+                "totalInvoiced": "开票总额",
+                "quickAccess": "快速访问"
             },
             "greeting": {
                 "morning": "早上好",

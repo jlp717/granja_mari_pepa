@@ -511,6 +511,7 @@
             "lastInvoices": "Ultime fatture",
             "totalPending": "Totale in sospeso",
             "logout": "Esci",
+            "loadingPanel": "Caricamento del pannello",
             "logoutConfirm": "Sei sicuro di voler uscire?",
             "logoutSuccess": "Sessione chiusa con successo",
             "tabs": {
@@ -540,12 +541,15 @@
                 "filterByYear": "Filtra per anno",
                 "filterByMonth": "Filtra per mese",
                 "allMonths": "Tutti i mesi",
+                "allYears": "Tutti gli anni",
                 "month": "Mese",
                 "year": "Anno",
                 "dateRange": "Intervallo date (opzionale)",
                 "from": "Da",
                 "to": "A",
                 "search": "Cerca per numero fattura, serie o bolla...",
+                "resetFilters": "Reimposta filtri",
+                "clearDateRange": "Cancella intervallo date",
                 "months": {
                     "1": "Gennaio",
                     "2": "Febbraio",
@@ -572,7 +576,8 @@
                 "share": "Condividi",
                 "noResults": "Nessuna fattura trovata",
                 "foundCount": "{count} fatture trovate",
-                "downloadMessage": "Scarica i tuoi documenti in PDF"
+                "downloadMessage": "Scarica i tuoi documenti in PDF",
+                "loadingInvoices": "Caricamento fatture..."
             },
             "sidebar": {
                 "clientArea": "Area Clienti",
@@ -581,7 +586,8 @@
                 "filterByYear": "Filtra per anno",
                 "filterByMonth": "Filtra per mese",
                 "invoicesCount": "Fatture",
-                "totalInvoiced": "Totale Fatturato"
+                "totalInvoiced": "Totale Fatturato",
+                "quickAccess": "Accesso rapido"
             },
             "greeting": {
                 "morning": "Buongiorno",

@@ -555,6 +555,7 @@
             "lastInvoices": "Recent invoices",
             "totalPending": "Total pending",
             "logout": "Log out",
+            "loadingPanel": "Loading your panel",
             "logoutConfirm": "Are you sure you want to log out?",
             "logoutSuccess": "Session closed successfully",
             "tabs": {
@@ -584,12 +585,15 @@
                 "filterByYear": "Filter by year",
                 "filterByMonth": "Filter by month",
                 "allMonths": "All months",
+                "allYears": "All years",
                 "month": "Month",
                 "year": "Year",
                 "dateRange": "Date range (optional)",
                 "from": "From",
                 "to": "To",
                 "search": "Search by invoice number, series or delivery note...",
+                "resetFilters": "Reset filters",
+                "clearDateRange": "Clear date range",
                 "months": {
                     "1": "January",
                     "2": "February",
@@ -616,7 +620,8 @@
                 "share": "Share",
                 "noResults": "No invoices found",
                 "foundCount": "{count} invoices found",
-                "downloadMessage": "Download your documents in PDF"
+                "downloadMessage": "Download your documents in PDF",
+                "loadingInvoices": "Loading invoices..."
             },
             "sidebar": {
                 "clientArea": "Client Area",
@@ -625,7 +630,8 @@
                 "filterByYear": "Filter by year",
                 "filterByMonth": "Filter by month",
                 "invoicesCount": "Invoices",
-                "totalInvoiced": "Total Invoiced"
+                "totalInvoiced": "Total Invoiced",
+                "quickAccess": "Quick access"
             },
             "greeting": {
                 "morning": "Good morning",
