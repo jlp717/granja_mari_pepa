@@ -232,17 +232,7 @@ export function Header() {
             </div>
 
             {/* CATALOG TRIGGER (Desktop) */}
-            <button
-              onClick={() => setIsCatalogOpen(true)}
-              className="hidden lg:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300 cursor-pointer"
-            >
-              <div className="p-1.5 rounded-full bg-warning/20 group-hover:bg-warning/30 transition-colors duration-300">
-                <BookOpen className="w-3.5 h-3.5 text-warning" />
-              </div>
-              <span className="text-warning font-bold tracking-wide group-hover:text-warning-foreground transition-colors uppercase text-[10px] sm:text-xs">
-                Revista Febrero 2026
-              </span>
-            </button>
+            {/* Button Removed - Moved to Announcement Bar */}
 
             <a href="tel:968467514" className="hidden sm:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300">
               <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
@@ -268,8 +258,30 @@ export function Header() {
         </div>
       </div>
 
+      {/* ANNOUNCEMENT BAR (Between Top Bar and Header) */}
+      <div className="fixed top-12 left-0 right-0 h-10 bg-warning text-warning-foreground z-[55] flex items-center justify-center overflow-hidden shadow-sm">
+        <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10" />
+        <button
+          onClick={() => setIsCatalogOpen(true)}
+          className="relative z-10 flex items-center gap-3 group px-4 w-full justify-center h-full hover:bg-warning/90 transition-colors"
+        >
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="bg-white text-warning rounded-full p-1"
+          >
+            <BookOpen className="w-3 h-3" />
+          </motion.div>
+          <span className="font-bold text-sm tracking-wide uppercase">
+            ¡Ya disponible! Consulta nuestra Revista de Ofertas - Febrero 2026
+          </span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+
       {/* Main Header */}
-      <header className={`fixed top-12 left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
+      {/* Main Header - Pushed down by Announcement Bar (Top 12 + 10 = 22) */}
+      <header className={`fixed top-[5.5rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
         <div className="absolute inset-0 bg-card" />
         <nav className="container mx-auto px-4 lg:px-6 xl:px-8 relative z-10">
           <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32">
