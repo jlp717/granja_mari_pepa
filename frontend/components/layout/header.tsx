@@ -260,8 +260,8 @@ export function Header() {
 
 
       {/* ANNOUNCEMENT BAR (Between Top Bar and Header) */}
-      {/* ANNOUNCEMENT BAR (Premium Dark Gradient) - Mobile: min-h-[5rem] for breathing room */}
-      <div className="fixed top-12 left-0 right-0 min-h-[5rem] sm:h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center shadow-lg border-b border-white/10">
+      {/* ANNOUNCEMENT BAR (Premium Dark Gradient) - Mobile: min-h-[5rem] for breathing room, Desktop: reset to h-11 */}
+      <div className="fixed top-12 left-0 right-0 min-h-[5rem] sm:min-h-0 sm:h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center shadow-lg border-b border-white/10">
         {/* Animated sheen effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
 
