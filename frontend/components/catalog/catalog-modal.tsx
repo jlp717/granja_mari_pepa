@@ -40,7 +40,7 @@ export const CatalogModal = ({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm transition-all"
+                        className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm transition-all"
                     />
 
                     {/* Modal Container */}
@@ -49,7 +49,7 @@ export const CatalogModal = ({
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
                         transition={{ type: "spring", duration: 0.5 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
                     >
                         <div className="relative w-full max-w-6xl h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-border/50">
 
