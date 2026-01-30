@@ -555,11 +555,14 @@
             "lastInvoices": "Recent invoices",
             "totalPending": "Total pending",
             "logout": "Log out",
+            "logoutConfirm": "Are you sure you want to log out?",
+            "logoutSuccess": "Session closed successfully",
             "tabs": {
                 "facturas": "Invoices",
                 "perfil": "Profile",
                 "favoritos": "Favorites",
-                "pedidos": "Orders"
+                "pedidos": "Orders",
+                "dashboard": "Dashboard"
             },
             "status": {
                 "pending": "Pending",
@@ -576,6 +579,92 @@
                 "mobileDesc": "To view the full PDF on your mobile device, download it directly.",
                 "download": "Download PDF",
                 "saveInfo": "The PDF will be saved in your downloads folder"
+            },
+            "filters": {
+                "filterByYear": "Filter by year",
+                "filterByMonth": "Filter by month",
+                "allMonths": "All months",
+                "month": "Month",
+                "year": "Year",
+                "dateRange": "Date range (optional)",
+                "from": "From",
+                "to": "To",
+                "search": "Search by invoice number, series or delivery note...",
+                "months": {
+                    "1": "January",
+                    "2": "February",
+                    "3": "March",
+                    "4": "April",
+                    "5": "May",
+                    "6": "June",
+                    "7": "July",
+                    "8": "August",
+                    "9": "September",
+                    "10": "October",
+                    "11": "November",
+                    "12": "December"
+                }
+            },
+            "table": {
+                "invoice": "Invoice",
+                "deliveryNote": "Delivery Note",
+                "date": "Date",
+                "total": "Total",
+                "actions": "Actions",
+                "view": "View",
+                "download": "Download",
+                "share": "Share",
+                "noResults": "No invoices found",
+                "foundCount": "{count} invoices found",
+                "downloadMessage": "Download your documents in PDF"
+            },
+            "sidebar": {
+                "clientArea": "Client Area",
+                "controlPanel": "Control Panel",
+                "viewProfile": "View profile",
+                "filterByYear": "Filter by year",
+                "filterByMonth": "Filter by month",
+                "invoicesCount": "Invoices",
+                "totalInvoiced": "Total Invoiced"
+            },
+            "greeting": {
+                "morning": "Good morning",
+                "afternoon": "Good afternoon",
+                "evening": "Good evening",
+                "welcomeBack": "Welcome back to your exclusive portal"
+            },
+            "actions": {
+                "repeatOrder": "Repeat last order",
+                "viewCatalog": "View catalog",
+                "myInvoices": "My invoices",
+                "directLine": "Direct line",
+                "contact": "Contact"
+            },
+            "milestones": {
+                "firstInvoice": "First invoice",
+                "invoiced1k": "€1,000 invoiced",
+                "invoiced5k": "€5,000 invoiced",
+                "invoiced10k": "€10,000 invoiced",
+                "invoiced50k": "€50,000 invoiced",
+                "streak3": "3 months streak",
+                "streak6": "6 months streak",
+                "legendClient": "Legend Client"
+            },
+            "metrics": {
+                "thisMonth": "This month",
+                "activeStreak": "Active streak",
+                "months": "months",
+                "avgMonthly": "Monthly average",
+                "totalInvoiced": "Total invoiced"
+            },
+            "tiers": {
+                "starter": "New Client",
+                "bronze": "Bronze Client",
+                "silver": "Silver Client",
+                "gold": "Gold Client",
+                "platinum": "Platinum Client",
+                "strategic": "Strategic Client",
+                "enterprise": "VIP Client"
             }
         },
         "publicFeatures": {

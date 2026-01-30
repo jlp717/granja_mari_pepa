@@ -93,13 +93,13 @@ import { formatCurrency, formatCurrencyNoDecimals } from '@/lib/utils';
 import { secureFetch, secureDownload } from '@/lib/secureFetch'; // 🔐 HttpOnly Cookie Auth
 import apiClient from '@/lib/apiClient'; // 🔐 Cliente API con autenticación automática
 
-const tabs = [
+const tabIds = [
   // Comentado temporalmente: ocultamos Dashboard y Pedidos para que el área de clientes muestre directamente Facturas
-  // { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
-  // { id: 'pedidos', name: 'Pedidos', icon: ShoppingBag },
-  { id: 'facturas', name: 'Facturas', icon: FileText },
-  { id: 'perfil', name: 'Perfil', icon: User },
-  { id: 'favoritos', name: 'Favoritos', icon: Heart }
+  // { id: 'dashboard', icon: BarChart3 },
+  // { id: 'pedidos', icon: ShoppingBag },
+  { id: 'facturas', icon: FileText },
+  { id: 'perfil', icon: User },
+  { id: 'favoritos', icon: Heart }
 ];
 
 const statusColors = {
@@ -240,6 +240,20 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
 }
 
 export function CustomerDashboard() {
+  // ===== TRANSLATIONS =====
+  const t = useTranslations('customerArea.dashboard');
+
+  // Translated tabs - now using translation hook
+  const tabs = useMemo(() => tabIds.map(tab => ({
+    ...tab,
+    name: t(`tabs.${tab.id}`)
+  })), [t]);
+
+  // Translated status labels
+  const getStatusLabel = useCallback((status: string) => {
+    return t(`status.${status}` as any) || status;
+  }, [t]);
+
   // Cambiado para que al cargar el área de clientes se muestre directamente 'facturas'
   const [activeTab, setActiveTab] = useState('facturas');
   const [searchTerm, setSearchTerm] = useState('');

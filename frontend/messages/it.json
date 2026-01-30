@@ -496,42 +496,131 @@
             "priorityDesc": "Ofertas y novedades exclusivas"
         },
         "dashboard": {
-            "welcome": "Bienvenido",
-            "invoices": "Facturas",
-            "invoicesDesc": "Consulta y descarga tus facturas",
-            "orders": "Pedidos",
-            "ordersDesc": "Historial de pedidos",
-            "profile": "Perfil",
-            "profileDesc": "Gestiona tus datos",
-            "ivaBook": "Libro IVA",
-            "ivaBookDesc": "Resumen trimestral de IVA",
-            "downloadPdf": "Descargar PDF",
-            "viewAll": "Ver todo",
-            "noInvoices": "No tienes facturas recientes",
-            "lastInvoices": "Últimas facturas",
-            "totalPending": "Total pendiente",
-            "logout": "Cerrar sesión",
+            "welcome": "Benvenuto",
+            "invoices": "Fatture",
+            "invoicesDesc": "Consulta e scarica le tue fatture",
+            "orders": "Ordini",
+            "ordersDesc": "Storico ordini",
+            "profile": "Profilo",
+            "profileDesc": "Gestisci i tuoi dati",
+            "ivaBook": "Registro IVA",
+            "ivaBookDesc": "Riepilogo IVA trimestrale",
+            "downloadPdf": "Scarica PDF",
+            "viewAll": "Vedi tutto",
+            "noInvoices": "Non hai fatture recenti",
+            "lastInvoices": "Ultime fatture",
+            "totalPending": "Totale in sospeso",
+            "logout": "Esci",
+            "logoutConfirm": "Sei sicuro di voler uscire?",
+            "logoutSuccess": "Sessione chiusa con successo",
             "tabs": {
-                "facturas": "Facturas",
-                "perfil": "Perfil",
-                "favoritos": "Favoritos",
-                "pedidos": "Pedidos"
+                "facturas": "Fatture",
+                "perfil": "Profilo",
+                "favoritos": "Preferiti",
+                "pedidos": "Ordini",
+                "dashboard": "Dashboard"
             },
             "status": {
-                "pending": "Pendiente",
-                "processing": "Procesando",
-                "shipped": "Enviado",
-                "delivered": "Entregado",
-                "paid": "Pagada",
-                "cancelled": "Cancelado"
+                "pending": "In sospeso",
+                "processing": "In elaborazione",
+                "shipped": "Spedito",
+                "delivered": "Consegnato",
+                "paid": "Pagata",
+                "cancelled": "Annullato"
             },
             "pdf": {
-                "loading": "Cargando PDF...",
-                "error": "Error al cargar el PDF",
-                "mobileTitle": "Factura {serie}-{numero}",
-                "mobileDesc": "Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.",
-                "download": "Descargar PDF",
-                "saveInfo": "El PDF se guardará en tu carpeta de descargas"
+                "loading": "Caricamento PDF...",
+                "error": "Errore nel caricamento del PDF",
+                "mobileTitle": "Fattura {serie}-{numero}",
+                "mobileDesc": "Per visualizzare il PDF completo sul tuo dispositivo mobile, scaricalo direttamente.",
+                "download": "Scarica PDF",
+                "saveInfo": "Il PDF verrà salvato nella cartella download"
+            },
+            "filters": {
+                "filterByYear": "Filtra per anno",
+                "filterByMonth": "Filtra per mese",
+                "allMonths": "Tutti i mesi",
+                "month": "Mese",
+                "year": "Anno",
+                "dateRange": "Intervallo date (opzionale)",
+                "from": "Da",
+                "to": "A",
+                "search": "Cerca per numero fattura, serie o bolla...",
+                "months": {
+                    "1": "Gennaio",
+                    "2": "Febbraio",
+                    "3": "Marzo",
+                    "4": "Aprile",
+                    "5": "Maggio",
+                    "6": "Giugno",
+                    "7": "Luglio",
+                    "8": "Agosto",
+                    "9": "Settembre",
+                    "10": "Ottobre",
+                    "11": "Novembre",
+                    "12": "Dicembre"
+                }
+            },
+            "table": {
+                "invoice": "Fattura",
+                "deliveryNote": "Bolla di consegna",
+                "date": "Data",
+                "total": "Totale",
+                "actions": "Azioni",
+                "view": "Visualizza",
+                "download": "Scarica",
+                "share": "Condividi",
+                "noResults": "Nessuna fattura trovata",
+                "foundCount": "{count} fatture trovate",
+                "downloadMessage": "Scarica i tuoi documenti in PDF"
+            },
+            "sidebar": {
+                "clientArea": "Area Clienti",
+                "controlPanel": "Pannello di Controllo",
+                "viewProfile": "Vedi profilo",
+                "filterByYear": "Filtra per anno",
+                "filterByMonth": "Filtra per mese",
+                "invoicesCount": "Fatture",
+                "totalInvoiced": "Totale Fatturato"
+            },
+            "greeting": {
+                "morning": "Buongiorno",
+                "afternoon": "Buon pomeriggio",
+                "evening": "Buonasera",
+                "welcomeBack": "Bentornato nel tuo portale esclusivo"
+            },
+            "actions": {
+                "repeatOrder": "Ripeti ultimo ordine",
+                "viewCatalog": "Vedi catalogo",
+                "myInvoices": "Le mie fatture",
+                "directLine": "Linea diretta",
+                "contact": "Contatta"
+            },
+            "milestones": {
+                "firstInvoice": "Prima fattura",
+                "invoiced1k": "€1.000 fatturati",
+                "invoiced5k": "€5.000 fatturati",
+                "invoiced10k": "€10.000 fatturati",
+                "invoiced50k": "€50.000 fatturati",
+                "streak3": "3 mesi consecutivi",
+                "streak6": "6 mesi consecutivi",
+                "legendClient": "Cliente Leggendario"
+            },
+            "metrics": {
+                "thisMonth": "Questo mese",
+                "activeStreak": "Serie attiva",
+                "months": "mesi",
+                "avgMonthly": "Media mensile",
+                "totalInvoiced": "Totale fatturato"
+            },
+            "tiers": {
+                "starter": "Nuovo Cliente",
+                "bronze": "Cliente Bronzo",
+                "silver": "Cliente Argento",
+                "gold": "Cliente Oro",
+                "platinum": "Cliente Platino",
+                "strategic": "Cliente Strategico",
+                "enterprise": "Cliente VIP"
             }
         },
         "publicFeatures": {

@@ -554,11 +554,14 @@
             "lastInvoices": "Últimas facturas",
             "totalPending": "Total pendiente",
             "logout": "Cerrar sesión",
+            "logoutConfirm": "¿Estás seguro de que quieres cerrar sesión?",
+            "logoutSuccess": "Sesión cerrada correctamente",
             "tabs": {
                 "facturas": "Facturas",
                 "perfil": "Perfil",
                 "favoritos": "Favoritos",
-                "pedidos": "Pedidos"
+                "pedidos": "Pedidos",
+                "dashboard": "Dashboard"
             },
             "status": {
                 "pending": "Pendiente",
@@ -575,6 +578,92 @@
                 "mobileDesc": "Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.",
                 "download": "Descargar PDF",
                 "saveInfo": "El PDF se guardará en tu carpeta de descargas"
+            },
+            "filters": {
+                "filterByYear": "Filtrar por año",
+                "filterByMonth": "Filtrar por mes",
+                "allMonths": "Todos los meses",
+                "month": "Mes",
+                "year": "Año",
+                "dateRange": "Rango de fechas (opcional)",
+                "from": "Desde",
+                "to": "Hasta",
+                "search": "Buscar por número de factura, serie o albarán...",
+                "months": {
+                    "1": "Enero",
+                    "2": "Febrero",
+                    "3": "Marzo",
+                    "4": "Abril",
+                    "5": "Mayo",
+                    "6": "Junio",
+                    "7": "Julio",
+                    "8": "Agosto",
+                    "9": "Septiembre",
+                    "10": "Octubre",
+                    "11": "Noviembre",
+                    "12": "Diciembre"
+                }
+            },
+            "table": {
+                "invoice": "Factura",
+                "deliveryNote": "Albarán",
+                "date": "Fecha",
+                "total": "Total",
+                "actions": "Acciones",
+                "view": "Ver",
+                "download": "Descargar",
+                "share": "Compartir",
+                "noResults": "No se encontraron facturas",
+                "foundCount": "{count} facturas encontradas",
+                "downloadMessage": "Descarga tus documentos en PDF"
+            },
+            "sidebar": {
+                "clientArea": "Área de Clientes",
+                "controlPanel": "Panel de Control",
+                "viewProfile": "Ver perfil",
+                "filterByYear": "Filtrar por año",
+                "filterByMonth": "Filtrar por mes",
+                "invoicesCount": "Facturas",
+                "totalInvoiced": "Total Facturado"
+            },
+            "greeting": {
+                "morning": "Buenos días",
+                "afternoon": "Buenas tardes",
+                "evening": "Buenas noches",
+                "welcomeBack": "Bienvenido a tu portal exclusivo"
+            },
+            "actions": {
+                "repeatOrder": "Repetir último pedido",
+                "viewCatalog": "Ver catálogo",
+                "myInvoices": "Mis facturas",
+                "directLine": "Línea directa",
+                "contact": "Contactar"
+            },
+            "milestones": {
+                "firstInvoice": "Primera factura",
+                "invoiced1k": "1.000€ facturados",
+                "invoiced5k": "5.000€ facturados",
+                "invoiced10k": "10.000€ facturados",
+                "invoiced50k": "50.000€ facturados",
+                "streak3": "3 meses seguidos",
+                "streak6": "6 meses seguidos",
+                "legendClient": "Cliente Leyenda"
+            },
+            "metrics": {
+                "thisMonth": "Este mes",
+                "activeStreak": "Racha activa",
+                "months": "meses",
+                "avgMonthly": "Media mensual",
+                "totalInvoiced": "Total facturado"
+            },
+            "tiers": {
+                "starter": "Nuevo Cliente",
+                "bronze": "Cliente Bronce",
+                "silver": "Cliente Plata",
+                "gold": "Cliente Oro",
+                "platinum": "Cliente Platino",
+                "strategic": "Cliente Estratégico",
+                "enterprise": "Cliente VIP"
             }
         },
         "publicFeatures": {
