@@ -266,7 +266,7 @@ export function Header() {
 
         <button
           onClick={() => setIsCatalogOpen(true)}
-          className="relative z-10 flex items-center gap-5 sm:gap-4 group px-4 w-full justify-center h-full transition-all hover:bg-white/5"
+          className="relative z-10 flex items-center gap-3 group px-4 w-full justify-center h-full transition-all hover:bg-white/5"
         >
           {/* Animated Badge */}
           <motion.div
@@ -305,8 +305,8 @@ export function Header() {
       </div>
 
       {/* Main Header */}
-      {/* Main Header - Pushed down by Announcement Bar (Top 12 (3rem) + 11 (2.75rem) = 5.75rem) */}
-      <header className={`fixed top-[5.75rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
+      {/* Main Header - Mobile: Top 12 (3rem) + 16 (4rem) = 7rem (top-28) | Desktop: Top 12 + 11 = 5.75rem */}
+      <header className={`fixed top-28 sm:top-[5.75rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
         <div className="absolute inset-0 bg-card" />
         <nav className="container mx-auto px-4 lg:px-6 xl:px-8 relative z-10">
           <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32">
