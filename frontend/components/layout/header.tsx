@@ -261,54 +261,56 @@ export function Header() {
 
       {/* ANNOUNCEMENT BAR (Between Top Bar and Header) */}
       {/* ANNOUNCEMENT BAR (Premium Dark Gradient) - Mobile: min-h-[5rem] for breathing room, Desktop: reset to h-11 */}
-      <div className="fixed top-12 left-0 right-0 min-h-[5rem] sm:min-h-0 sm:h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center shadow-lg border-b border-white/10">
-        {/* Animated sheen effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
+      {!isMobileMenuOpen && (
+        <div className="fixed top-12 left-0 right-0 min-h-[5rem] sm:min-h-0 sm:h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center shadow-lg border-b border-white/10">
+          {/* Animated sheen effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
 
-        <button
-          onClick={() => setIsCatalogOpen(true)}
-          className="relative z-10 flex flex-col sm:flex-row items-center gap-1 sm:gap-3 group px-4 py-2 sm:py-0 w-full justify-center h-full transition-all hover:bg-white/5"
-        >
-          {/* Animated Badge */}
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              boxShadow: [
-                "0 0 0 0 rgba(234, 179, 8, 0)",
-                "0 0 0 4px rgba(234, 179, 8, 0.3)",
-                "0 0 0 0 rgba(234, 179, 8, 0)"
-              ]
-            }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200 shrink-0"
+          <button
+            onClick={() => setIsCatalogOpen(true)}
+            className="relative z-10 flex flex-col sm:flex-row items-center gap-1 sm:gap-3 group px-4 py-2 sm:py-0 w-full justify-center h-full transition-all hover:bg-white/5"
           >
-            <BookOpen className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
-          </motion.div>
+            {/* Animated Badge */}
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1],
+                boxShadow: [
+                  "0 0 0 0 rgba(234, 179, 8, 0)",
+                  "0 0 0 4px rgba(234, 179, 8, 0.3)",
+                  "0 0 0 0 rgba(234, 179, 8, 0)"
+                ]
+              }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200 shrink-0"
+            >
+              <BookOpen className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+            </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-0.5 sm:gap-3 text-center sm:text-left w-full max-w-[280px] sm:max-w-none">
-            <span className="font-bold text-[10px] sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
-              ¡EDICIÓN ESPECIAL!
-            </span>
-            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
-            {/* Mobile: Short text */}
-            <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
-              Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">Febrero 2026</span>
-            </span>
-            {/* Desktop: Full text */}
-            <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
-              Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">Revista TopGel - Febrero 2026</span>
-            </span>
-          </div>
+            <div className="flex flex-col sm:flex-row items-center gap-0.5 sm:gap-3 text-center sm:text-left w-full max-w-[280px] sm:max-w-none">
+              <span className="font-bold text-[10px] sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
+                ¡EDICIÓN ESPECIAL!
+              </span>
+              <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
+              {/* Mobile: Short text */}
+              <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
+                Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">Febrero 2026</span>
+              </span>
+              {/* Desktop: Full text */}
+              <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
+                Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">Revista TopGel - Febrero 2026</span>
+              </span>
+            </div>
 
-          <motion.div
-            animate={{ x: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            className="hidden sm:block ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors shrink-0"
-          >
-            <ArrowRight className="w-3.5 h-3.5" />
-          </motion.div>
-        </button>
-      </div>
+            <motion.div
+              animate={{ x: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              className="hidden sm:block ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors shrink-0"
+            >
+              <ArrowRight className="w-3.5 h-3.5" />
+            </motion.div>
+          </button>
+        </div>
+      )}
 
       {/* Main Header */}
       {/* Main Header - Mobile: Top 12 (3rem) + min-h-[5rem] = ~8rem (top-32) | Desktop: Top 12 + 11 = 5.75rem */}
