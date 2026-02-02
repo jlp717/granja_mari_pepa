@@ -161,13 +161,12 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND CAC.EJERCICIOFACTURA = ?
         AND LAC.IMPORTEVENTA <> 0
         AND TRIM(LAC.CODIGOARTICULO) <> ''
       ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
     `;
 
-    const lines = await odbcPool.query(linesQuery, [serie, numero, ejercicio, codigoCliente]);
+    const lines = await odbcPool.query(linesQuery, [serie, numero, ejercicio]);
 
     // NO sobrescribir PORCENTAJEIVAARTICULO: necesitamos soportar multi-IVA.
     // Solo trazamos una muestra de tipos de IVA detectados.
