@@ -117,6 +117,7 @@ export default function CustomerAreaPage() {
         setShowErrorModal(true);
       }
     } catch (error) {
+      console.error('❌ Login error:', error);
       setErrorMessage('Error al iniciar sesión. Por favor, inténtalo más tarde.');
       setShowErrorModal(true);
     } finally {
