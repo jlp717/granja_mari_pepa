@@ -308,10 +308,20 @@ async function enviarFacturaPorEmail(req, res) {
     try {
       facturaDetail = await databaseService.getInvoiceDetail(serie, numero, ejercicio, codigoCliente);
     } catch (err) {
-      logger.warn('Factura no encontrada para email', { serie, numero, ejercicio });
-      return res.status(404).json({
+      logger.warn('Factura no encontrada para email o acceso denegado', {
+        serie,
+        numero,
+        ejercicio,
+        error: err.message,
+        codigoCliente
+      });
+
+      const isAuthError = err.message === 'Factura no encontrada'; // The message we throw in databaseService
+      const statusCode = isAuthError ? 404 : 500;
+
+      return res.status(statusCode).json({
         success: false,
-        message: 'La factura solicitada no existe o no pertenece al cliente'
+        message: 'La factura solicitada no existe, no pertenece al cliente o ocurrió un error.'
       });
     }
 

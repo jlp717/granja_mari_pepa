@@ -60,13 +60,53 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     // Strict security check: Ensure the invoice belongs to the requesting client
     // Compare trimmed strings to be safe
     if (String(dbClientCode).trim() !== String(codigoCliente).trim()) {
-      logger.warn('⛔ Acceso denegado a factura: Cliente no coincide', {
-        solicitante: codigoCliente,
-        propietario: dbClientCode,
-        serie, numero, ejercicio
-      });
-      // Return 404 to avoid leaking existence of other invoices (security best practice)
-      throw new Error('Factura no encontrada');
+      // NIF-based relationship check:
+      // If the requester has the SAME NIF as the invoice owner, allow access.
+      // This handles "Director" accounts, branches, or linked codes.
+
+      const invoiceNif = (facturaFound.CIFCLIENTEFACTURA || '').trim();
+
+      if (invoiceNif) {
+        // Fetch requester's NIF
+        try {
+          const requesterInfo = await odbcPool.query(
+            `SELECT NIF FROM DSEDAC.CLI WHERE TRIM(CODIGOCLIENTE) = ?`,
+            [codigoCliente]
+          );
+
+          const requesterNif = requesterInfo[0]?.NIF?.trim();
+
+          if (requesterNif && requesterNif === invoiceNif) {
+            logger.info('🔓 Acceso autorizado por coincidencia de NIF', {
+              solicitante: codigoCliente,
+              propietario: dbClientCode,
+              nif: requesterNif
+            });
+            // ALLOW ACCESS (Do not throw)
+          } else {
+            // Access denied
+            logger.warn('⛔ Acceso denegado a factura: Cliente no coincide y NIF diferente', {
+              solicitante: codigoCliente,
+              propietario: dbClientCode,
+              nifSolicitante: requesterNif,
+              nifFactura: invoiceNif,
+              serie, numero, ejercicio
+            });
+            throw new Error('Factura no encontrada'); // Return 404 for security
+          }
+        } catch (err) {
+          logger.error('Error verificando relacion de clientes', err);
+          throw new Error('Factura no encontrada');
+        }
+      } else {
+        // No NIF on invoice, strict deny
+        logger.warn('⛔ Acceso denegado a factura: Cliente no coincide (Sin NIF)', {
+          solicitante: codigoCliente,
+          propietario: dbClientCode,
+          serie, numero, ejercicio
+        });
+        throw new Error('Factura no encontrada');
+      }
     }
 
     // Líneas de factura con productos

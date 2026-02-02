@@ -54,7 +54,7 @@ async function getConnection() {
  * Ejecutar query con manejo de errores y RETRY automático
  */
 async function query(sql, params = []) {
-  const MAX_RETRIES = 3;
+  const MAX_RETRIES = 5;
   let retryCount = 0;
   let lastError;
 
@@ -67,52 +67,52 @@ async function query(sql, params = []) {
     } catch (error) {
       lastError = error;
 
+      // Extract error codes safely
+      const errorState = error.odbcErrors?.[0]?.state || '';
+      const errorCode = error.odbcErrors?.[0]?.code || 0;
+      const errorMessage = error.message || '';
+
       // Check for connection errors (Communication link failure, etc.)
-      // 08S01: Link failure
-      // 08003: Connection not open
-      // 10054: Connection reset by peer
-      // 40001: Deadlock (sometimes worth retrying)
       const isConnectionError =
-        (error.odbcErrors && error.odbcErrors.some(e => ['08S01', '08003', '08S02', '40001'].includes(e.state) || e.code === 10054)) ||
-        error.message?.includes('Communication link failure') ||
-        error.message?.includes('Connection reset') ||
-        error.message?.includes('not connected');
+        ['08S01', '08003', '08S02', '40001', 'HYT00'].includes(errorState) ||
+        errorCode === 10054 ||
+        errorMessage.includes('Communication link failure') ||
+        errorMessage.includes('Connection reset') ||
+        errorMessage.includes('not connected') ||
+        errorMessage.includes('Error preparing the SQL statement'); // Often caused by dropped connection
 
       if (isConnectionError) {
         retryCount++;
-        logger.warn(`⚠️ Error de conexión ODBC (intento ${retryCount}/${MAX_RETRIES}):`, error.message);
+        logger.warn(`⚠️ Error de conexión ODBC (intento ${retryCount}/${MAX_RETRIES}): ${errorMessage} [State: ${errorState}, Code: ${errorCode}]`);
 
-        // Always close the bad connection if it exists
+        // Force close/destroy the bad connection
         if (connection) {
           try { await connection.close(); } catch (e) { /* ignore */ }
-          connection = null;
+          connection = null; // Ensure we get a fresh one next time
         }
 
         if (retryCount >= MAX_RETRIES) break;
 
-        // Wait before retry (exponential backoff: 200ms, 400ms, 800ms)
+        // Exponential backoff: 200, 400, 800, 1600, 3200ms
         await new Promise(resolve => setTimeout(resolve, 200 * Math.pow(2, retryCount)));
-
-        // Optional: If pool looks broken, maybe we should try to re-init it?
-        // For now, relying on getting a fresh connection from pool
         continue;
       }
 
-      // If it's not a connection error, throw immediately
-      logger.error('❌ Error ejecutando query (No recuperable):', { sql, error: error.message });
+      // If it's not a connection error (e.g. SQL syntax), throw immediately
+      logger.error('❌ Error ejecutando query (No recuperable):', { sql: sql.substring(0, 50) + '...', error: errorMessage });
       throw error;
     } finally {
       if (connection) {
         try {
           await connection.close();
         } catch (closeError) {
-          logger.warn('⚠️ Error cerrando conexión:', closeError);
+          // Ignore close errors
         }
       }
     }
   }
 
-  logger.error(`❌ Error ejecutando query después de ${MAX_RETRIES} intentos:`, { sql, error: lastError?.message });
+  logger.error(`❌ Error ejecutando query después de ${MAX_RETRIES} intentos:`, { sql: sql.substring(0, 50) + '...', error: lastError?.message });
   throw lastError;
 }
 
