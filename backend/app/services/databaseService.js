@@ -43,15 +43,29 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
       GROUP BY CAC.SERIEFACTURA, CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA, TRIM(CAC.CODIGOCLIENTEFACTURA)
     `;
 
-    const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio, codigoCliente]);
+    // Removing client check from SQL to diagnose if it's a data mismatch
+    const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio]);
 
     if (!header || header.length === 0) {
-      // Intento de diagnóstico: verificar si existe sin el filtro de cliente (para detectar errores de código)
-      logger.warn('⚠️ Factura no encontrada con match exacto. Params:', { serie, numero, ejercicio, codigoCliente });
+      logger.warn('⚠️ Factura no encontrada (ni siquiera sin filtro de cliente). Params:', { serie, numero, ejercicio });
+      throw new Error('Factura no encontrada'); // Genuine 404
+    }
+
+    const facturaFound = header[0];
+    const dbClientCode = facturaFound.CODIGOCLIENTEFACTURA;
+
+    // Strict security check: Ensure the invoice belongs to the requesting client
+    // Compare trimmed strings to be safe
+    if (String(dbClientCode).trim() !== String(codigoCliente).trim()) {
+      logger.warn('⛔ Acceso denegado a factura: Cliente no coincide', {
+        solicitante: codigoCliente,
+        propietario: dbClientCode,
+        serie, numero, ejercicio
+      });
+      // Return 404 to avoid leaking existence of other invoices (security best practice)
       throw new Error('Factura no encontrada');
     }
 
@@ -107,7 +121,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
+        AND CAC.EJERCICIOFACTURA = ?
         AND LAC.IMPORTEVENTA <> 0
         AND TRIM(LAC.CODIGOARTICULO) <> ''
       ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
