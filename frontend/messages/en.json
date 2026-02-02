@@ -594,6 +594,8 @@
                 "search": "Search by invoice number, series or delivery note...",
                 "resetFilters": "Reset filters",
                 "clearDateRange": "Clear date range",
+                "profile_tip": "You can add this data again at any time from your profile.",
+                "logoutConfirm": "Are you sure you want to log out? You will have to log in again to access your account.",
                 "months": {
                     "1": "January",
                     "2": "February",
@@ -802,7 +804,8 @@
         "delegation": "Murcia Delegation",
         "catalog": "Catalog",
         "client_portal": "Client Portal",
-        "rights_reserved": "All rights reserved."
+        "rights_reserved": "All rights reserved.",
+        "location_lorca": "Lorca, Murcia"
     },
     "globe_map": {
         "badge": "DISTRIBUTION NETWORK",

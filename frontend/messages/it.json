@@ -550,6 +550,8 @@
                 "search": "Cerca per numero fattura, serie o bolla...",
                 "resetFilters": "Reimposta filtri",
                 "clearDateRange": "Cancella intervallo date",
+                "profile_tip": "Puoi aggiungere nuovamente questi dati in qualsiasi momento dal tuo profilo.",
+                "logoutConfirm": "Sei sicuro di voler uscire? Dovrai accedere nuovamente per entrare nel tuo account.",
                 "months": {
                     "1": "Gennaio",
                     "2": "Febbraio",
@@ -757,8 +759,9 @@
         "followUs": "Síguenos",
         "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
         "delegation": "Delegación Murcia",
-        "catalog": "Catálogo",
-        "client_portal": "Portal Clientes"
+        "catalog": "Catalogo",
+        "client_portal": "Portale Clienti",
+        "location_lorca": "Lorca, Murcia"
     },
     "globe_map": {
         "badge": "RETE DI DISTRIBUZIONE",

@@ -4874,7 +4874,7 @@ export function CustomerDashboard() {
                   </h2>
 
                   <p className="text-muted-foreground mb-8 leading-relaxed">
-                    ¿Estás seguro de que quieres cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder a tu cuenta.
+                    {t('logoutConfirm')}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -4985,7 +4985,7 @@ export function CustomerDashboard() {
                   {/* Mensaje informativo */}
                   <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
                     <p className="text-sm text-blue-900 dark:text-blue-200">
-                      💡 Podrás volver a agregar estos datos en cualquier momento desde tu perfil.
+                      💡 {t('profile_tip')}
                     </p>
                   </div>
 

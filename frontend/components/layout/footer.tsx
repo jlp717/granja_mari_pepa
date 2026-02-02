@@ -344,7 +344,7 @@ export function Footer() {
                 {t('terms')}
               </Link>
               <span className="text-blue-300 font-medium">
-                🇪🇸 Lorca, Murcia
+                🇪🇸 {t('location_lorca')}
               </span>
             </div>
 

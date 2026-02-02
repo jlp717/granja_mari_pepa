@@ -593,6 +593,8 @@
                 "search": "Buscar por número de factura, serie o albarán...",
                 "resetFilters": "Restablecer filtros",
                 "clearDateRange": "Limpiar rango de fechas",
+                "profile_tip": "Podrás volver a agregar estos datos en cualquier momento desde tu perfil.",
+                "logoutConfirm": "¿Estás seguro de que quieres cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder a tu cuenta.",
                 "months": {
                     "1": "Enero",
                     "2": "Febrero",
@@ -801,7 +803,8 @@
         "delegation": "Delegación Murcia",
         "catalog": "Catálogo",
         "client_portal": "Portal Clientes",
-        "rights_reserved": "Todos los derechos reservados."
+        "rights_reserved": "Todos los derechos reservados.",
+        "location_lorca": "Lorca, Murcia"
     },
     "globe_map": {
         "badge": "RED DE DISTRIBUCIÓN",

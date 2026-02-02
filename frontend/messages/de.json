@@ -550,6 +550,8 @@
                 "search": "Nach Rechnungsnummer, Serie oder Lieferschein suchen...",
                 "resetFilters": "Filter zurücksetzen",
                 "clearDateRange": "Datumsbereich löschen",
+                "profile_tip": "Sie können diese Daten jederzeit in Ihrem Profil erneut hinzufügen.",
+                "logoutConfirm": "Sind Sie sicher, dass Sie sich abmelden möchten? Sie müssen sich erneut anmelden, um auf Ihr Konto zuzugreifen.",
                 "months": {
                     "1": "Januar",
                     "2": "Februar",
@@ -746,6 +748,9 @@
         "quick_access": "Schnellzugriff",
         "copyright": "© {year} Granja Mari Pepa. Alle Rechte vorbehalten.",
         "rights_reserved": "Alle Rechte vorbehalten.",
+        "catalog": "Katalog",
+        "client_portal": "Kundenportal",
+        "location_lorca": "Lorca, Murcia",
         "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
         "quickLinks": "Enlaces rápidos",
         "legal": "Legal",
@@ -756,9 +761,7 @@
         "contact": "Contacto",
         "followUs": "Síguenos",
         "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
-        "delegation": "Delegación Murcia",
-        "catalog": "Catálogo",
-        "client_portal": "Portal Clientes"
+        "delegation": "Delegación Murcia"
     },
     "globe_map": {
         "badge": "VERTRIEBSNETZWERK",
