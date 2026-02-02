@@ -39,7 +39,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
             CAC.IMPORTERECARGO4 + CAC.IMPORTERECARGO5) as RECARGOFACTURA,
         SUM(CAC.IMPORTETOTAL) as TOTALFACTURA
       FROM DSEDAC.CAC CAC
-      INNER JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
+      LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
       WHERE CAC.SERIEFACTURA = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
@@ -50,6 +50,8 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio, codigoCliente]);
 
     if (!header || header.length === 0) {
+      // Intento de diagnóstico: verificar si existe sin el filtro de cliente (para detectar errores de código)
+      logger.warn('⚠️ Factura no encontrada con match exacto. Params:', { serie, numero, ejercicio, codigoCliente });
       throw new Error('Factura no encontrada');
     }
 
