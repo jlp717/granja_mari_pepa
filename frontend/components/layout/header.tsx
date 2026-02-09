@@ -632,7 +632,7 @@ export function Header() {
                       >
                         <Phone className="w-5 h-5 text-primary" />
                         <div>
-                          <div className="text-foreground text-sm font-semibold">968 46 75 146</div>
+                          <div className="text-foreground text-sm font-semibold">968 46 75 14</div>
                           <div className="text-muted-foreground text-xs">{t('call_cta')}</div>
                         </div>
                       </motion.div>
