@@ -1,221 +1,264 @@
 /**
- * CONFIGURACIÓN DE CONEXIÓN ODBC - SENIOR RESILIENT EDITION
- * =========================================================
+ * CONFIGURACIÓN DE CONEXIÓN ODBC - SENIOR RESILIENT EDITION v2
+ * =============================================================
  * Pool de conexiones a IBM i (AS/400) via ODBC con:
- * - Validación automática de conexiones
- * - Heartbeat (Keep-alive) preventivo
- * - Reintento exponencial en fallos de red
- * - Auto-recuperación del pool completo
+ * - Heartbeat keep-alive que FUERZA reinicio del pool si falla
+ * - Reintento exponencial con backoff en fallos de red
+ * - Auto-recuperación completa del pool (destroy + recreate)
+ * - Contadores de salud para diagnóstico externo vía /health
+ * - Protección contra conexiones zombie/colgadas
  */
 
 require('dotenv').config();
 const odbc = require('odbc');
 const logger = require('../utils/logger');
 
-// Configuración desde .env o valores por defecto senior
+// ─── Configuración ───────────────────────────────────────────────
 const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+const HEARTBEAT_INTERVAL_MS = 90_000;     // 90 segundos (antes de cualquier firewall timeout)
+const MAX_CONSECUTIVE_FAILURES = 3;       // Forzar reinicio del pool tras N heartbeats fallidos
+const QUERY_TIMEOUT_MS = 30_000;          // Timeout por query individual
+
 const poolConfig = {
   connectionString,
   initialSize: parseInt(process.env.ODBC_POOL_MIN) || 2,
   maxSize: parseInt(process.env.ODBC_POOL_MAX) || 10,
-  connectionTimeout: parseInt(process.env.ODBC_CONNECTION_TIMEOUT) || 10000,
-  loginTimeout: parseInt(process.env.ODBC_LOGIN_TIMEOUT) || 5000,
+  connectionTimeout: parseInt(process.env.ODBC_CONNECTION_TIMEOUT) || 10,
+  loginTimeout: parseInt(process.env.ODBC_LOGIN_TIMEOUT) || 10,
   reuseConnections: true
 };
 
-let pool;
-let heartbeatInterval;
-let isPoolInErrorState = false;
+// ─── Estado interno ──────────────────────────────────────────────
+let pool = null;
+let heartbeatTimer = null;
+let consecutiveHeartbeatFailures = 0;
+let poolRecreationInProgress = false;
+
+// Métricas de salud (expuestas vía /health)
+const healthMetrics = {
+  poolCreatedAt: null,
+  lastHeartbeatOk: null,
+  lastHeartbeatFail: null,
+  totalPoolRecreations: 0,
+  totalQueryRetries: 0,
+  totalQueriesOk: 0,
+  consecutiveHeartbeatFailures: 0
+};
+
+// ─── Pool Management ─────────────────────────────────────────────
 
 /**
- * Inicializar pool de conexiones
+ * Crear (o recrear) el pool de conexiones ODBC desde cero.
+ * Si ya existe un pool, lo cierra primero de forma segura.
  */
-async function initPool() {
+async function createPool() {
+  // Prevenir recreaciones concurrentes
+  if (poolRecreationInProgress) {
+    logger.warn('⏳ Recreación del pool ya en progreso, esperando...');
+    // Esperar hasta que termine
+    for (let i = 0; i < 30; i++) {
+      await sleep(1000);
+      if (!poolRecreationInProgress) return;
+    }
+    throw new Error('Timeout esperando recreación del pool');
+  }
+
+  poolRecreationInProgress = true;
   try {
+    // 1. Cerrar pool viejo de forma segura
     if (pool) {
-      logger.info('🔄 Cerrando pool existente antes de reinicializar...');
-      try { await pool.close(); } catch (e) { }
+      logger.info('🔄 Cerrando pool ODBC existente...');
+      try { await pool.close(); } catch (_) { }
+      pool = null;
     }
 
-    logger.info('📡 Inicializando pool ODBC con configuración:', {
-      min: poolConfig.initialSize,
-      max: poolConfig.maxSize,
-      timeout: poolConfig.connectionTimeout
+    // 2. Crear pool nuevo
+    logger.info('📡 Creando pool ODBC...', {
+      initialSize: poolConfig.initialSize,
+      maxSize: poolConfig.maxSize
     });
 
     pool = await odbc.pool(poolConfig);
-    isPoolInErrorState = false;
+    consecutiveHeartbeatFailures = 0;
+    healthMetrics.poolCreatedAt = new Date().toISOString();
+    healthMetrics.totalPoolRecreations++;
 
-    // Iniciar heartbeat si no está activo
+    logger.info('✅ Pool ODBC creado correctamente (recreación #' + healthMetrics.totalPoolRecreations + ')');
+
+    // 3. (Re)iniciar heartbeat
     startHeartbeat();
 
-    logger.info('✅ Pool ODBC inicializado correctamente');
-    return pool;
   } catch (error) {
-    isPoolInErrorState = true;
-    logger.error('❌ Error crítico inicializando pool ODBC:', error);
+    pool = null;
+    logger.error('❌ Error creando pool ODBC:', error.message);
     throw error;
+  } finally {
+    poolRecreationInProgress = false;
   }
 }
 
+// ─── Heartbeat (Keep-alive) ──────────────────────────────────────
+
 /**
- * Sistema de Heartbeat (Keep-alive)
- * En AS/400, las conexiones inactivas suelen ser cortadas por el servidor o el firewall.
- * Este intervalo mantiene las conexiones activas y detecta fallos de red antes de que
- * afecten a una petición de usuario real.
+ * Heartbeat periódico que:
+ * 1. Mantiene las conexiones activas (evita que el AS/400 o firewall las cierre)
+ * 2. Detecta pools dañados y los recrea automáticamente
+ * 3. Actualiza métricas de salud para el endpoint /health
  */
 function startHeartbeat() {
-  if (heartbeatInterval) clearInterval(heartbeatInterval);
+  if (heartbeatTimer) clearInterval(heartbeatTimer);
 
-  // Ejecutar cada 2 minutos (ajustado para ser menos agresivo que el timeout típico de 5-15 min)
-  heartbeatInterval = setInterval(async () => {
-    if (!pool || isPoolInErrorState) return;
+  heartbeatTimer = setInterval(async () => {
+    if (!pool) return;
 
+    let conn;
     try {
-      // SYSIBM.SYSDUMMY1 es la tabla de sistema estándar para pruebas en IBM i
-      await query('SELECT 1 FROM SYSIBM.SYSDUMMY1');
-      logger.debug('💓 ODBC Heartbeat: OK');
+      conn = await pool.connect();
+      await conn.query('SELECT 1 FROM SYSIBM.SYSDUMMY1');
+      await conn.close();
+      conn = null;
+
+      // Éxito
+      consecutiveHeartbeatFailures = 0;
+      healthMetrics.lastHeartbeatOk = new Date().toISOString();
+      healthMetrics.consecutiveHeartbeatFailures = 0;
+      logger.debug('💓 Heartbeat OK');
+
     } catch (error) {
-      logger.warn('💔 ODBC Heartbeat fallido. El pool podría estar dañado:', error.message);
-      // Si el heartbeat falla sistemáticamente, marcamos el pool para reinicio
-      if (['08S01', '08003', '10054'].some(code => error.message.includes(code))) {
-        isPoolInErrorState = true;
+      if (conn) { try { await conn.close(); } catch (_) { } }
+
+      consecutiveHeartbeatFailures++;
+      healthMetrics.lastHeartbeatFail = new Date().toISOString();
+      healthMetrics.consecutiveHeartbeatFailures = consecutiveHeartbeatFailures;
+
+      logger.warn(`💔 Heartbeat FAIL #${consecutiveHeartbeatFailures}: ${error.message}`);
+
+      // Si fallan N consecutivos, FORZAR recreación del pool
+      if (consecutiveHeartbeatFailures >= MAX_CONSECUTIVE_FAILURES) {
+        logger.error(`🚨 ${MAX_CONSECUTIVE_FAILURES} heartbeats fallidos consecutivos → Forzando recreación del pool`);
+        try {
+          await createPool();
+        } catch (e) {
+          logger.error('❌ No se pudo recrear el pool:', e.message);
+        }
       }
     }
-  }, 120000); // 2 minutos
+  }, HEARTBEAT_INTERVAL_MS);
 }
 
-/**
- * Obtener conexión del pool con validación
- */
-async function getConnection() {
-  try {
-    if (!pool || isPoolInErrorState) {
-      logger.info('🚀 Pool no disponible o en estado de error, reinicializando...');
-      await initPool();
-    }
-    return await pool.connect();
-  } catch (error) {
-    logger.error('❌ Error crítico obteniendo conexión del pool:', error);
-    isPoolInErrorState = true;
-    throw error;
-  }
-}
+// ─── Error Classification ────────────────────────────────────────
 
-/**
- * Clasificador de errores de conexión ODBC
- */
 function isConnectionError(error) {
-  const errorState = error.odbcErrors?.[0]?.state || '';
-  const errorCode = error.odbcErrors?.[0]?.code || 0;
-  const errorMessage = error.message || '';
+  const state = error.odbcErrors?.[0]?.state || '';
+  const code = error.odbcErrors?.[0]?.code || 0;
+  const msg = error.message || '';
 
   return (
-    ['08S01', '08003', '08S02', '40001', 'HYT00'].includes(errorState) ||
-    [10054, 8405, 10060].includes(errorCode) ||
-    errorMessage.includes('Communication link failure') ||
-    errorMessage.includes('Connection reset') ||
-    errorMessage.includes('not connected') ||
-    errorMessage.includes('Error preparing the SQL statement')
+    ['08S01', '08003', '08S02', '40001', 'HYT00', 'HY000'].includes(state) ||
+    [10054, 8405, 10060, 10053].includes(code) ||
+    msg.includes('Communication link failure') ||
+    msg.includes('Connection reset') ||
+    msg.includes('not connected') ||
+    msg.includes('connection is closed') ||
+    msg.includes('Error preparing the SQL statement')
   );
 }
 
+// ─── Query Execution ─────────────────────────────────────────────
+
 /**
- * Ejecutar query con manejo de errores persistente (SENIOR RETRY LOGIC)
+ * Ejecutar query con retry inteligente y auto-recovery del pool.
+ * 
+ * Estrategia:
+ * - Intentos 1-2: Reintenta con la conexión normal del pool
+ * - Intento 3+: Fuerza recreación del pool y reintenta con pool fresco
  */
 async function query(sql, params = []) {
   const MAX_RETRIES = 5;
-  let retryCount = 0;
   let lastError;
 
-  while (retryCount < MAX_RETRIES) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     let connection;
     try {
-      connection = await getConnection();
-      const result = await connection.query(sql, params);
+      // Si no hay pool o se marcó para recreación, crearlo
+      if (!pool) await createPool();
 
-      // Si la query tiene éxito, nos aseguramos de que el pool esté marcado como sano
-      isPoolInErrorState = false;
+      connection = await pool.connect();
+
+      // Ejecutar con timeout de protección
+      const result = await Promise.race([
+        connection.query(sql, params),
+        rejectAfter(QUERY_TIMEOUT_MS, `Query timeout (${QUERY_TIMEOUT_MS}ms)`)
+      ]);
+
+      healthMetrics.totalQueriesOk++;
       return result;
+
     } catch (error) {
       lastError = error;
 
       if (isConnectionError(error)) {
-        retryCount++;
-        const waitTime = 250 * Math.pow(2, retryCount);
+        healthMetrics.totalQueryRetries++;
+        const waitMs = Math.min(500 * Math.pow(2, attempt - 1), 8000);
 
-        logger.warn(`⚠️ Error de red/conexión (intento ${retryCount}/${MAX_RETRIES}). Reintentando en ${waitTime}ms...`, {
-          code: error.odbcErrors?.[0]?.code,
-          state: error.odbcErrors?.[0]?.state
+        logger.warn(`⚠️ Error de conexión (intento ${attempt}/${MAX_RETRIES}), reintentando en ${waitMs}ms`, {
+          state: error.odbcErrors?.[0]?.state,
+          code: error.odbcErrors?.[0]?.code
         });
 
-        // Invalidar pool si el error persiste
-        if (retryCount >= 2) isPoolInErrorState = true;
+        // Cerrar conexión rota
+        if (connection) { try { await connection.close(); } catch (_) { } connection = null; }
 
-        if (connection) {
-          try { await connection.close(); } catch (e) { }
-          connection = null;
+        // A partir del intento 3, forzar pool nuevo
+        if (attempt >= 3) {
+          logger.warn('🔄 Forzando recreación del pool en intento ' + attempt);
+          try { await createPool(); } catch (_) { }
         }
 
-        if (retryCount >= MAX_RETRIES) break;
-
-        await new Promise(resolve => setTimeout(resolve, waitTime));
-        continue;
+        if (attempt < MAX_RETRIES) {
+          await sleep(waitMs);
+          continue;
+        }
+      } else {
+        // Error de SQL (sintaxis, datos, etc.) → no reintentable
+        logger.error('❌ Error SQL no recuperable:', {
+          sql: sql.substring(0, 80) + '...',
+          error: error.message
+        });
+        throw error;
       }
-
-      // Error de SQL (sintaxis, etc.) - No reintentamos
-      logger.error('❌ Error de SQL no recuperable:', {
-        sql: sql.substring(0, 50) + '...',
-        error: error.message
-      });
-      throw error;
     } finally {
-      if (connection) {
-        try {
-          await connection.close();
-        } catch (closeError) {
-          // Ignorar errores de cierre
-        }
-      }
+      if (connection) { try { await connection.close(); } catch (_) { } }
     }
   }
 
   logger.error(`❌ Fallo definitivo tras ${MAX_RETRIES} intentos:`, {
-    sql: sql.substring(0, 50) + '...',
+    sql: sql.substring(0, 80) + '...',
     error: lastError?.message
   });
-
-  isPoolInErrorState = true; // Marcar pool para reinicio en la próxima llamada
   throw lastError;
 }
 
-/**
- * Inicializar pool (alias de initPool)
- */
-async function initialize() {
-  return await initPool();
+// ─── Helpers ─────────────────────────────────────────────────────
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-/**
- * Cerrar pool y limpiar recursos
- */
-async function close() {
-  if (heartbeatInterval) clearInterval(heartbeatInterval);
-  if (pool) {
-    try {
-      await pool.close();
-      logger.info('✅ Pool ODBC cerrado correctamente');
-    } catch (error) {
-      logger.error('❌ Error cerrando pool ODBC:', error);
-    }
-  }
+function rejectAfter(ms, message) {
+  return new Promise((_, reject) => setTimeout(() => reject(new Error(message)), ms));
 }
+
+// ─── Public API ──────────────────────────────────────────────────
 
 module.exports = {
-  initialize,
-  getConnection,
+  initialize: createPool,
   query,
-  close,
-  // Accessor para el pool crudo si fuera necesario
+  close: async () => {
+    if (heartbeatTimer) clearInterval(heartbeatTimer);
+    if (pool) { try { await pool.close(); } catch (_) { } }
+    logger.info('✅ Pool ODBC cerrado');
+  },
+  getHealthMetrics: () => ({ ...healthMetrics }),
   get pool() { return pool; }
 };
