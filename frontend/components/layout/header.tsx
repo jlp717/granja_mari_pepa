@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Link, usePathname } from '@/lib/navigation'
 import Image from 'next/image'
-import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ArrowRight, BookOpen } from 'lucide-react'
+import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, BookOpen } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCartStore } from '@/lib/store'
@@ -63,7 +63,7 @@ export function Header() {
       url: '/catalogs/topgel-febrero-2026.pdf'
     },
     {
-      title: 'Mari Pepa',
+      title: 'Revista TopGel',
       edition: 'Marzo 2026',
       fullEdition: 'Edición Marzo 2026',
       url: '/catalogs/gmp-marzo-2026.pdf'
@@ -293,61 +293,89 @@ export function Header() {
           {/* Animated sheen effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
 
-          <button
-            onClick={() => {
-              setActiveCatalog({ url: MAGAZINES[currentBannerIndex].url, edition: MAGAZINES[currentBannerIndex].fullEdition })
-              setIsCatalogOpen(true)
-            }}
-            className="relative z-10 flex flex-col sm:flex-row items-center gap-1 sm:gap-3 group px-4 py-2 sm:py-0 w-full justify-center h-full transition-all hover:bg-white/5"
-          >
-            {/* Animated Badge */}
-            <motion.div
-              animate={{
-                scale: [1, 1.1, 1],
-                boxShadow: [
-                  "0 0 0 0 rgba(234, 179, 8, 0)",
-                  "0 0 0 4px rgba(234, 179, 8, 0.3)",
-                  "0 0 0 0 rgba(234, 179, 8, 0)"
-                ]
+          <div className="relative z-10 flex items-center w-full justify-center h-full px-2 sm:px-4">
+            {/* Prev Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setCurrentBannerIndex((prev) => (prev - 1 + MAGAZINES.length) % MAGAZINES.length)
               }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200 shrink-0"
+              className="p-1.5 sm:p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-20 flex-shrink-0"
+              aria-label="Revista anterior"
             >
-              <BookOpen className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
-            </motion.div>
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
 
-            <AnimatePresence mode="wait">
+            <button
+              onClick={() => {
+                setActiveCatalog({ url: MAGAZINES[currentBannerIndex].url, edition: MAGAZINES[currentBannerIndex].fullEdition })
+                setIsCatalogOpen(true)
+              }}
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 group px-2 sm:px-4 py-2 sm:py-0 flex-1 max-w-fit justify-center h-full transition-all hover:bg-white/5 rounded-xl mx-1"
+            >
+              {/* Animated Badge */}
               <motion.div
-                key={currentBannerIndex}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col sm:flex-row items-center gap-0.5 sm:gap-3 text-center sm:text-left w-full max-w-[280px] sm:max-w-none"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  boxShadow: [
+                    "0 0 0 0 rgba(234, 179, 8, 0)",
+                    "0 0 0 4px rgba(234, 179, 8, 0.3)",
+                    "0 0 0 0 rgba(234, 179, 8, 0)"
+                  ]
+                }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200 shrink-0"
               >
-                <span className="font-bold text-[10px] sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
-                  ¡EDICIÓN ESPECIAL!
-                </span>
-                <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
-                {/* Mobile: Short text */}
-                <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
-                  Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">{MAGAZINES[currentBannerIndex].edition}</span>
-                </span>
-                {/* Desktop: Full text */}
-                <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
-                  Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">{MAGAZINES[currentBannerIndex].title} - {MAGAZINES[currentBannerIndex].edition}</span>
-                </span>
+                <BookOpen className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
               </motion.div>
-            </AnimatePresence>
 
-            <motion.div
-              animate={{ x: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-              className="hidden sm:block ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors shrink-0"
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentBannerIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col sm:flex-row items-center gap-0.5 sm:gap-3 text-center sm:text-left w-full max-w-[280px] sm:max-w-none"
+                >
+                  <span className="font-bold text-[10px] sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
+                    ¡EDICIÓN ESPECIAL!
+                  </span>
+                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
+                  {/* Mobile: Short text */}
+                  <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
+                    Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">{MAGAZINES[currentBannerIndex].edition}</span>
+                  </span>
+                  {/* Desktop: Full text */}
+                  <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
+                    Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">{MAGAZINES[currentBannerIndex].title} - {MAGAZINES[currentBannerIndex].edition}</span>
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                className="hidden sm:block ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors shrink-0"
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+              </motion.div>
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setCurrentBannerIndex((prev) => (prev + 1) % MAGAZINES.length)
+              }}
+              className="p-1.5 sm:p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-20 flex-shrink-0"
+              aria-label="Siguiente revista"
             >
-              <ArrowRight className="w-3.5 h-3.5" />
-            </motion.div>
-          </button>
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          </div>
         </div>
       )}
 
