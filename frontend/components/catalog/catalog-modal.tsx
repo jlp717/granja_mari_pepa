@@ -10,6 +10,7 @@ interface CatalogModalProps {
     onClose: () => void;
     pdfUrl: string;
     title?: string;
+    edition?: string;
 }
 
 export const CatalogModal = ({
@@ -17,6 +18,7 @@ export const CatalogModal = ({
     onClose,
     pdfUrl,
     title = "Catálogo - Revista Mensual",
+    edition = "Edición Febrero 2026",
 }: CatalogModalProps) => {
     // Lock body scroll when open
     useEffect(() => {
@@ -62,7 +64,7 @@ export const CatalogModal = ({
                                     <div>
                                         <h3 className="font-bold text-lg leading-tight">{title}</h3>
                                         <p className="text-xs text-primary-foreground/80 font-medium tracking-wide uppercase">
-                                            Edición Febrero 2026
+                                            {edition}
                                         </p>
                                     </div>
                                 </div>
