@@ -83,8 +83,8 @@ const organizationSchema = {
 
     {
       '@type': 'State',
-      name: 'Alicante',
-      '@id': 'https://www.wikidata.org/wiki/Q5765',
+      name: 'Almería',
+      '@id': 'https://www.wikidata.org/wiki/Q10400',
     },
   ],
   knowsAbout: [
@@ -94,6 +94,12 @@ const organizationSchema = {
     'Hostelería',
     'Restauración',
     'Catering',
+    'Congelados para hostelería',
+    'Distribución HORECA Murcia',
+    'Productos congelados Lorca',
+    'Distribuidor alimentario',
+    'Pescados y mariscos congelados',
+    'Helados Nestlé hostelería',
   ],
 };
 
@@ -150,11 +156,19 @@ const websiteSchema = {
   '@id': 'https://www.mari-pepa.com/#website',
   url: 'https://www.mari-pepa.com',
   name: 'Granja Mari Pepa',
-  description: 'Portal de clientes de Granja Mari Pepa - Distribución alimentaria HORECA',
+  description: 'Distribución alimentaria HORECA en Murcia, Almería y Alicante — congelados, refrigerados y ambiente desde 1966',
   publisher: {
     '@id': 'https://www.mari-pepa.com/#organization',
   },
-  inLanguage: 'es-ES',
+  inLanguage: ['es-ES', 'en-US', 'de-DE', 'it-IT', 'zh-CN'],
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://www.mari-pepa.com/productos?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 // Schema de FAQs

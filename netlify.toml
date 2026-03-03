@@ -25,6 +25,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Robots-Tag = "index, follow"
 
 # ============================================
 # CACHE DE ASSETS ESTÁTICOS

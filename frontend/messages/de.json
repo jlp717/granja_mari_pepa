@@ -268,7 +268,8 @@
                     "desc": "Zertifizierte Garantie"
                 }
             }
-        }
+        },
+        "whatsapp_message": "Hallo! Ich möchte weitere Informationen über Ihre Produkte erhalten."
     },
     "about_page": {
         "hero": {
@@ -478,12 +479,12 @@
             "contactToast": "📞 Kontaktieren Sie uns\\n\\nTelefon: +34 965 123 456\\nE-Mail: soporte@granja-mari-pepa.com\\nÖffnungszeiten: Mo-Fr 9:00-18:00"
         },
         "emailSetup": {
-            "title": "Configuración de Contacto",
+            "title": "Kontakteinstellungen",
             "subtitle": "Para tu seguridad, necesitamos tus datos de contacto.",
             "data_usage": "Uso de tus datos:",
-            "data_usage_desc": "Solo para recuperar tu contraseña y enviar facturas. No compartimos esta información.",
+            "data_usage_desc": "Nur zur Passwortwiederherstellung und zum Rechnungsversand. Wir geben diese Informationen nicht weiter.",
             "email": "Email",
-            "phone": "Teléfono",
+            "phone": "Telefon",
             "save": "Guardar y Continuar",
             "saving": "Guardando..."
         },
@@ -491,7 +492,7 @@
             "history": "Historial completo",
             "historyDesc": "Todos tus pedidos organizados",
             "security": "Datos seguros",
-            "securityDesc": "Protección garantizada",
+            "securityDesc": "Garantierter Schutz",
             "priority": "Acceso prioritario",
             "priorityDesc": "Ofertas y novedades exclusivas"
         },
@@ -634,10 +635,10 @@
         "publicFeatures": {
             "badge": "Panel de Control",
             "title": "Todo lo que necesitas en un solo lugar",
-            "subtitle": "Gestiona tu relación comercial con nosotros de forma fácil y eficiente",
+            "subtitle": "Verwalten Sie Ihre Geschäftsbeziehung mit uns einfach und effizient",
             "items": {
                 "orders": {
-                    "title": "Gestión de Pedidos",
+                    "title": "Bestellverwaltung",
                     "desc": "Realiza y consulta todos tus pedidos en tiempo real",
                     "label": "Disponible"
                 },
@@ -652,19 +653,19 @@
                     "label": "Personalizable"
                 },
                 "stats": {
-                    "title": "Estadísticas",
+                    "title": "Statistiken",
                     "desc": "Analiza tu historial y patrones de compra",
                     "label": "Insights"
                 }
             },
             "cta": {
-                "title": "¿Aún no tienes cuenta?",
+                "title": "Noch kein Konto?",
                 "desc": "Contacta con nuestro equipo comercial para obtener acceso",
                 "button": "Contactar"
             }
         },
         "invoice": {
-            "number": "Número",
+            "number": "Nummer",
             "date": "Fecha",
             "total": "Total",
             "base": "Base imponible",
@@ -681,18 +682,18 @@
             "lineTotal": "Importe"
         },
         "password": {
-            "change": "Cambiar contraseña",
-            "current": "Contraseña actual",
-            "new": "Nueva contraseña",
-            "confirm": "Confirmar contraseña",
-            "requirements": "Mínimo 12 caracteres",
+            "change": "Passwort ändern",
+            "current": "Aktuelles Passwort",
+            "new": "Neues Passwort",
+            "confirm": "Passwort bestätigen",
+            "requirements": "Mindestens 12 Zeichen",
             "strength": "Fortaleza",
-            "weak": "Débil",
+            "weak": "Schwach",
             "medium": "Media",
             "strong": "Fuerte",
             "veryStrong": "Muy fuerte",
-            "mismatch": "Las contraseñas no coinciden",
-            "success": "Contraseña cambiada correctamente"
+            "mismatch": "Passwörter stimmen nicht überein",
+            "success": "Passwort erfolgreich geändert"
         }
     },
     "chatbot": {
@@ -711,29 +712,29 @@
         "minimize": "Minimieren",
         "maximize": "Maximieren",
         "close": "Schließen",
-        "quickActionsTitle": "Acciones rápidas",
-        "orAskMe": "O pregúntame directamente:",
+        "quickActionsTitle": "Schnelle Aktionen",
+        "orAskMe": "Oder fragen Sie mich direkt:",
         "quickActions": {
             "invoices": "Mis facturas",
-            "invoicesQuery": "Quiero ver mis facturas",
+            "invoicesQuery": "Ich möchte meine Rechnungen sehen",
             "order": "Hacer pedido",
-            "orderQuery": "Cómo puedo hacer un pedido",
+            "orderQuery": "Wie kann ich eine Bestellung aufgeben",
             "contact": "Contacto",
-            "contactQuery": "Cuál es el teléfono de contacto",
+            "contactQuery": "Wie lautet die Kontakttelefonnummer",
             "schedule": "Horarios",
-            "scheduleQuery": "Cuál es vuestro horario"
+            "scheduleQuery": "Was sind Ihre Öffnungszeiten"
         },
-        "suggestions": "Quizás te interese:",
-        "quickQuestions": {
-            "0": "¿Qué productos distribuís?",
-            "1": "¿Cómo hago un pedido?",
-            "2": "¿Cuál es el horario?",
-            "3": "¿Cómo descargo facturas?"
-        },
-        "voiceInput": "Entrada de voz",
-        "voiceListening": "Escuchando...",
-        "voiceNotSupported": "Tu navegador no soporta entrada de voz",
-        "connectionError": "No se ha podido conectar con el servidor. Por favor, inténtalo de nuevo en unos segundos.",
+        "suggestions": "Das könnte Sie interessieren:",
+        "quickQuestions": [
+            "Welche Produkte vertreiben Sie?",
+            "Wie gebe ich eine Bestellung auf?",
+            "Wie sind die Öffnungszeiten?",
+            "Wie lade ich Rechnungen herunter?"
+        ],
+        "voiceInput": "Spracheingabe",
+        "voiceListening": "Zuhören...",
+        "voiceNotSupported": "Ihr Browser unterstützt keine Spracheingabe",
+        "connectionError": "Es konnte keine Verbindung zum Server hergestellt werden. Bitte versuchen Sie es in einigen Sekunden erneut.",
         "poweredBy": "Pepa IA",
         "since": "HORECA desde 1966",
         "downloadInvoice": "Descargar factura"
@@ -751,17 +752,17 @@
         "catalog": "Katalog",
         "client_portal": "Kundenportal",
         "location_lorca": "Lorca, Murcia",
-        "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
-        "quickLinks": "Enlaces rápidos",
+        "description_long": "Spezialisten für den Vertrieb von Tiefkühl-, Kühl- und Umgebungstemperaturprodukten für Gastronomie und Catering.",
+        "quickLinks": "Schnellzugriff",
         "legal": "Legal",
-        "privacy": "Política de Privacidad",
-        "terms": "Términos y Condiciones",
-        "cookies": "Política de Cookies",
+        "privacy": "Datenschutzrichtlinie",
+        "terms": "Allgemeine Geschäftsbedingungen",
+        "cookies": "Cookie-Richtlinie",
         "legalNotice": "Aviso Legal",
         "contact": "Contacto",
-        "followUs": "Síguenos",
+        "followUs": "Folgen Sie uns",
         "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
-        "delegation": "Delegación Murcia"
+        "delegation": "Delegation Murcia"
     },
     "globe_map": {
         "badge": "VERTRIEBSNETZWERK",
@@ -782,64 +783,64 @@
         "notFoundDesc": "Entschuldigung, die gesuchte Seite existiert nicht.",
         "serverError": "Serverfehler",
         "serverErrorDesc": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
-        "networkError": "Error de conexión",
+        "networkError": "Verbindungsfehler",
         "networkErrorDesc": "No se pudo conectar con el servidor.",
         "unauthorized": "No autorizado",
-        "unauthorizedDesc": "Necesitas iniciar sesión para acceder.",
+        "unauthorizedDesc": "Sie müssen sich anmelden, um darauf zugreifen zu können.",
         "forbidden": "Acceso denegado",
         "forbiddenDesc": "No tienes permisos para acceder a este recurso.",
         "tryAgain": "Intentar de nuevo",
         "goHome": "Ir al inicio",
         "invalidCredentials": "Credenciales incorrectas",
-        "invalidCredentialsDesc": "Verifica tu código de cliente y contraseña."
+        "invalidCredentialsDesc": "Überprüfen Sie Ihren Kundencode und Ihr Passwort."
     },
     "contact": {
         "title": "Contacto",
-        "subtitle": "Estamos aquí para ayudarte",
-        "phone": "Teléfono",
+        "subtitle": "Wir sind für Sie da",
+        "phone": "Telefon",
         "email": "Email",
-        "address": "Dirección",
+        "address": "Adresse",
         "schedule": "Horario",
         "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
-        "scheduleSaturday": "Sábados: 9:00 - 14:00",
+        "scheduleSaturday": "Samstag: 9:00 - 14:00",
         "scheduleSunday": "Domingos y festivos: Cerrado",
         "form": {
-            "title": "Envíanos un mensaje",
+            "title": "Senden Sie uns eine Nachricht",
             "name": "Nombre",
             "namePlaceholder": "Tu nombre completo",
             "email": "Email",
             "emailPlaceholder": "tu@email.com",
-            "phone": "Teléfono",
+            "phone": "Telefon",
             "phonePlaceholder": "612 345 678",
             "company": "Empresa",
             "companyPlaceholder": "Nombre de tu empresa (opcional)",
             "message": "Mensaje",
-            "messagePlaceholder": "¿En qué podemos ayudarte?",
+            "messagePlaceholder": "Wie können wir Ihnen helfen?",
             "submit": "Enviar mensaje",
             "sending": "Enviando...",
-            "successTitle": "¡Mensaje enviado!",
+            "successTitle": "Nachricht gesendet!",
             "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
             "errorTitle": "Error al enviar",
-            "errorMessage": "Por favor, inténtalo de nuevo más tarde."
+            "errorMessage": "Bitte versuchen Sie es später erneut."
         },
         "location": {
-            "title": "Nuestra ubicación",
+            "title": "Unser Standort",
             "mainOffice": "Oficina Principal",
             "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
             "city": "30817 - Lorca (Murcia)"
         }
     },
     "products_page": {
-        "title": "Próximamente",
+        "title": "Demnächst",
         "subtitle_1": "Estamos preparando algo especial",
-        "subtitle_2": "Nuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.",
+        "subtitle_2": "Unser Produktkatalog wird mit neuen Funktionen aktualisiert.",
         "cta_home": "Volver al inicio",
         "cta_clients": "Área de clientes",
-        "badge": "Disponible próximamente"
+        "badge": "Demnächst verfügbar"
     },
     "accessibility": {
         "skipToContent": "Ir al contenido principal",
-        "menuToggle": "Abrir menú",
+        "menuToggle": "Menü öffnen",
         "languageSwitch": "Cambiar idioma",
         "darkMode": "Modo oscuro",
         "lightMode": "Modo claro",

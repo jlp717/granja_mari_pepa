@@ -268,7 +268,8 @@
                     "desc": "Certified guarantee"
                 }
             }
-        }
+        },
+        "whatsapp_message": "Hello! I would like to get more information about your products."
     },
     "about_page": {
         "hero": {
@@ -768,12 +769,12 @@
             "scheduleQuery": "What are your opening hours?"
         },
         "suggestions": "You might be interested in:",
-        "quickQuestions": {
-            "0": "What products do you distribute?",
-            "1": "How do I place an order?",
-            "2": "What are your hours?",
-            "3": "How do I download invoices?"
-        },
+        "quickQuestions": [
+            "What products do you distribute?",
+            "How do I place an order?",
+            "What are your business hours?",
+            "How do I download invoices?"
+        ],
         "voiceInput": "Voice input",
         "voiceListening": "Listening...",
         "voiceNotSupported": "Your browser doesn't support voice input",

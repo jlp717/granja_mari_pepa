@@ -267,7 +267,8 @@
                     "desc": "Certificación garantizada"
                 }
             }
-        }
+        },
+        "whatsapp_message": "¡Hola! Me gustaría obtener más información sobre sus productos."
     },
     "about_page": {
         "hero": {
@@ -288,6 +289,10 @@
                     "title": "Fundación en Lorca (Murcia)",
                     "desc": "Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
                 },
+                "2020": {
+                    "title": "Energía 100% Verde",
+                    "desc": "Certificación de Feníe Energía y la CNMC de que nuestra energía es de origen 100% renovable."
+                },
                 "1980s": {
                     "title": "Consolidación regional",
                     "desc": "Ampliación de la gama de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración."
@@ -295,10 +300,6 @@
                 "2000s": {
                     "title": "Certificación ISO 9001",
                     "desc": "Obtención de la certificación ISO 9001:2008 que garantiza nuestro Sistema de Gestión de la Calidad."
-                },
-                "2020": {
-                    "title": "Energía 100% Verde",
-                    "desc": "Certificación de Feníe Energía y la CNMC de que nuestra energía es de origen 100% renovable."
                 },
                 "today": {
                     "title": "Más de 1.500 referencias",

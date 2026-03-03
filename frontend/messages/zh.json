@@ -268,7 +268,8 @@
                     "desc": "认证保证"
                 }
             }
-        }
+        },
+        "whatsapp_message": "您好！我想了解更多关于您产品的信息。"
     },
     "about_page": {
         "hero": {
@@ -634,10 +635,10 @@
         "publicFeatures": {
             "badge": "Panel de Control",
             "title": "Todo lo que necesitas en un solo lugar",
-            "subtitle": "Gestiona tu relación comercial con nosotros de forma fácil y eficiente",
+            "subtitle": "简单高效地管理您与我们的商业关系",
             "items": {
                 "orders": {
-                    "title": "Gestión de Pedidos",
+                    "title": "订单管理",
                     "desc": "Realiza y consulta todos tus pedidos en tiempo real",
                     "label": "Disponible"
                 },
@@ -652,19 +653,19 @@
                     "label": "Personalizable"
                 },
                 "stats": {
-                    "title": "Estadísticas",
+                    "title": "统计数据",
                     "desc": "Analiza tu historial y patrones de compra",
                     "label": "Insights"
                 }
             },
             "cta": {
-                "title": "¿Aún no tienes cuenta?",
+                "title": "还没有账户？",
                 "desc": "Contacta con nuestro equipo comercial para obtener acceso",
                 "button": "Contactar"
             }
         },
         "invoice": {
-            "number": "Número",
+            "number": "编号",
             "date": "Fecha",
             "total": "Total",
             "base": "Base imponible",
@@ -681,18 +682,18 @@
             "lineTotal": "Importe"
         },
         "password": {
-            "change": "Cambiar contraseña",
-            "current": "Contraseña actual",
-            "new": "Nueva contraseña",
-            "confirm": "Confirmar contraseña",
-            "requirements": "Mínimo 12 caracteres",
+            "change": "修改密码",
+            "current": "当前密码",
+            "new": "新密码",
+            "confirm": "确认密码",
+            "requirements": "最少12个字符",
             "strength": "Fortaleza",
-            "weak": "Débil",
+            "weak": "弱",
             "medium": "Media",
             "strong": "Fuerte",
             "veryStrong": "Muy fuerte",
-            "mismatch": "Las contraseñas no coinciden",
-            "success": "Contraseña cambiada correctamente"
+            "mismatch": "密码不匹配",
+            "success": "密码修改成功"
         }
     },
     "chatbot": {
@@ -711,29 +712,29 @@
         "minimize": "最小化",
         "maximize": "最大化",
         "close": "关闭",
-        "quickActionsTitle": "Acciones rápidas",
-        "orAskMe": "O pregúntame directamente:",
+        "quickActionsTitle": "快速操作",
+        "orAskMe": "或者直接问我：",
         "quickActions": {
             "invoices": "Mis facturas",
-            "invoicesQuery": "Quiero ver mis facturas",
+            "invoicesQuery": "我想查看我的发票",
             "order": "Hacer pedido",
-            "orderQuery": "Cómo puedo hacer un pedido",
+            "orderQuery": "如何下订单",
             "contact": "Contacto",
-            "contactQuery": "Cuál es el teléfono de contacto",
+            "contactQuery": "联系电话是多少",
             "schedule": "Horarios",
-            "scheduleQuery": "Cuál es vuestro horario"
+            "scheduleQuery": "你们的营业时间是什么"
         },
-        "suggestions": "Quizás te interese:",
-        "quickQuestions": {
-            "0": "¿Qué productos distribuís?",
-            "1": "¿Cómo hago un pedido?",
-            "2": "¿Cuál es el horario?",
-            "3": "¿Cómo descargo facturas?"
-        },
-        "voiceInput": "Entrada de voz",
-        "voiceListening": "Escuchando...",
-        "voiceNotSupported": "Tu navegador no soporta entrada de voz",
-        "connectionError": "No se ha podido conectar con el servidor. Por favor, inténtalo de nuevo en unos segundos.",
+        "suggestions": "您可能感兴趣：",
+        "quickQuestions": [
+            "你们分销哪些产品？",
+            "如何下订单？",
+            "营业时间是什么？",
+            "如何下载发票？"
+        ],
+        "voiceInput": "语音输入",
+        "voiceListening": "正在收听...",
+        "voiceNotSupported": "您的浏览器不支持语音输入",
+        "connectionError": "无法连接到服务器。请稍后重试。",
         "poweredBy": "Pepa IA",
         "since": "HORECA desde 1966",
         "downloadInvoice": "Descargar factura"
@@ -795,51 +796,51 @@
     },
     "contact": {
         "title": "Contacto",
-        "subtitle": "Estamos aquí para ayudarte",
-        "phone": "Teléfono",
+        "subtitle": "我们随时为您服务",
+        "phone": "电话",
         "email": "Email",
-        "address": "Dirección",
+        "address": "地址",
         "schedule": "Horario",
         "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
-        "scheduleSaturday": "Sábados: 9:00 - 14:00",
+        "scheduleSaturday": "周六: 9:00 - 14:00",
         "scheduleSunday": "Domingos y festivos: Cerrado",
         "form": {
-            "title": "Envíanos un mensaje",
+            "title": "给我们发送消息",
             "name": "Nombre",
             "namePlaceholder": "Tu nombre completo",
             "email": "Email",
             "emailPlaceholder": "tu@email.com",
-            "phone": "Teléfono",
+            "phone": "电话",
             "phonePlaceholder": "612 345 678",
             "company": "Empresa",
             "companyPlaceholder": "Nombre de tu empresa (opcional)",
             "message": "Mensaje",
-            "messagePlaceholder": "¿En qué podemos ayudarte?",
+            "messagePlaceholder": "我们能帮您什么？",
             "submit": "Enviar mensaje",
             "sending": "Enviando...",
-            "successTitle": "¡Mensaje enviado!",
+            "successTitle": "消息已发送！",
             "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
             "errorTitle": "Error al enviar",
-            "errorMessage": "Por favor, inténtalo de nuevo más tarde."
+            "errorMessage": "请稍后重试。"
         },
         "location": {
-            "title": "Nuestra ubicación",
+            "title": "我们的位置",
             "mainOffice": "Oficina Principal",
             "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
             "city": "30817 - Lorca (Murcia)"
         }
     },
     "products_page": {
-        "title": "Próximamente",
+        "title": "即将推出",
         "subtitle_1": "Estamos preparando algo especial",
-        "subtitle_2": "Nuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.",
+        "subtitle_2": "我们的产品目录正在更新，将推出新功能。",
         "cta_home": "Volver al inicio",
         "cta_clients": "Área de clientes",
-        "badge": "Disponible próximamente"
+        "badge": "即将上线"
     },
     "accessibility": {
         "skipToContent": "Ir al contenido principal",
-        "menuToggle": "Abrir menú",
+        "menuToggle": "打开菜单",
         "languageSwitch": "Cambiar idioma",
         "darkMode": "Modo oscuro",
         "lightMode": "Modo claro",
