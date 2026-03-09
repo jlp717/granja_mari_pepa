@@ -182,7 +182,7 @@ async function getDocuments(options = {}) {
   }
 
   // ── Lines query for all fetched documents ────────────────────────
-  // Build IN clause for the fetched document keys
+  // Build OR clause for each document key (DB2 for i doesn't support tuple IN)
   const docKeys = headers.map(h => ({
     sub: h.SUBEMPRESAALBARAN,
     ej: h.EJERCICIOALBARAN,
@@ -191,8 +191,9 @@ async function getDocuments(options = {}) {
     num: h.NUMEROALBARAN
   }));
 
-  // Use a compound key match via VALUES table
-  const keyPlaceholders = docKeys.map(() => '(?, ?, ?, ?, ?)').join(', ');
+  const orConditions = docKeys.map(() =>
+    '(LAC.SUBEMPRESAALBARAN = ? AND LAC.EJERCICIOALBARAN = ? AND TRIM(LAC.SERIEALBARAN) = ? AND LAC.TERMINALALBARAN = ? AND LAC.NUMEROALBARAN = ?)'
+  ).join(' OR ');
   const keyParams = [];
   docKeys.forEach(k => {
     keyParams.push(k.sub, k.ej, k.ser, k.ter, k.num);
@@ -223,8 +224,7 @@ async function getDocuments(options = {}) {
       AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
     WHERE TRIM(ARTX.FILTRO03) = '${PANAMAR_FILTRO}'
       AND LAC.IMPORTEVENTA <> 0
-      AND (LAC.SUBEMPRESAALBARAN, LAC.EJERCICIOALBARAN, TRIM(LAC.SERIEALBARAN), LAC.TERMINALALBARAN, LAC.NUMEROALBARAN)
-          IN (${keyPlaceholders})
+      AND (${orConditions})
     ORDER BY LAC.SUBEMPRESAALBARAN, LAC.EJERCICIOALBARAN, LAC.SERIEALBARAN,
              LAC.TERMINALALBARAN, LAC.NUMEROALBARAN, LAC.SECUENCIA
   `;
