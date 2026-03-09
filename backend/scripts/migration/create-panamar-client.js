@@ -81,7 +81,7 @@ async function main() {
       const maxId = await odbcPool.query(
         `SELECT MAX(CUSTOMER_ID) AS MAX_ID FROM JAVIER.CUSTOMER_CREDENTIALS`
       );
-      const nextId = (maxId[0]?.MAX_ID || 0) + 1;
+      const nextId = Number(maxId[0]?.MAX_ID || 0) + 1;
 
       await odbcPool.query(
         `INSERT INTO JAVIER.CUSTOMER_CREDENTIALS (
