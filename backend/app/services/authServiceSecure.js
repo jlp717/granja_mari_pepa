@@ -23,7 +23,7 @@ const BCRYPT_ROUNDS = 12;
 // Configuración JWT
 const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || 'CHANGE_THIS_IN_PRODUCTION';
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'CHANGE_REFRESH_SECRET';
-const JWT_ACCESS_EXPIRY = '15m';
+const JWT_ACCESS_EXPIRY = '24h';
 const JWT_REFRESH_EXPIRY = '7d';
 
 // Límites de seguridad
@@ -450,8 +450,106 @@ class AuthServiceSecure {
         return {
             accessToken,
             refreshToken,
-            expiresIn: 900 // 15 minutos en segundos
+            expiresIn: 86400 // 24 horas en segundos
         };
+    }
+
+    /**
+     * REFRESCAR ACCESS TOKEN usando refresh token
+     * Lee el customerId del access token expirado (decode sin verificar),
+     * busca refresh tokens válidos del usuario en DB,
+     * compara con bcrypt y genera nuevo access token.
+     *
+     * @param {string} expiredAccessToken - JWT expirado (para extraer customerId)
+     * @param {string} refreshTokenValue  - Token crudo de la cookie
+     * @returns {Promise<{success: boolean, accessToken?: string, expiresIn?: number, message?: string}>}
+     */
+    async refreshAccessToken(expiredAccessToken, refreshTokenValue) {
+        try {
+            // 1. Decodificar access token expirado (sin verificar firma/expiración)
+            let payload;
+            try {
+                payload = jwt.decode(expiredAccessToken);
+            } catch (e) {
+                // Si no se puede decodificar, intentar verificar (por si no está expirado)
+                try {
+                    payload = jwt.verify(expiredAccessToken, JWT_ACCESS_SECRET);
+                } catch (e2) {
+                    return { success: false, message: 'Token inválido' };
+                }
+            }
+
+            if (!payload || !payload.customerId) {
+                return { success: false, message: 'Token sin datos de usuario' };
+            }
+
+            const customerId = payload.customerId;
+
+            // 2. Buscar refresh tokens válidos (no revocados, no expirados) para este usuario
+            const query = `
+                SELECT TOKEN_HASH, EXPIRES_AT
+                FROM JAVIER.REFRESH_TOKENS
+                WHERE CUSTOMER_ID = ?
+                  AND IS_REVOKED = '0'
+                ORDER BY CREATED_AT DESC
+                FETCH FIRST 5 ROWS ONLY
+            `;
+            const tokens = await databaseService.executeQuery(query, [customerId]);
+
+            if (!tokens || tokens.length === 0) {
+                return { success: false, message: 'No hay refresh tokens válidos' };
+            }
+
+            // 3. Comparar refresh token con los hashes almacenados
+            let matchFound = false;
+            for (const t of tokens) {
+                // Verificar que no haya expirado
+                const expiresAt = new Date(t.EXPIRES_AT);
+                if (expiresAt < new Date()) {
+                    continue; // Token expirado, saltar
+                }
+
+                const isMatch = await bcrypt.compare(refreshTokenValue, t.TOKEN_HASH);
+                if (isMatch) {
+                    matchFound = true;
+                    break;
+                }
+            }
+
+            if (!matchFound) {
+                logger.warn('🔐 Refresh token no coincide', { customerId });
+                return { success: false, message: 'Refresh token inválido o expirado' };
+            }
+
+            // 4. Obtener datos actualizados del cliente
+            const customer = await this.getCustomerById(customerId);
+            if (!customer) {
+                return { success: false, message: 'Cliente no encontrado' };
+            }
+
+            // 5. Generar nuevo access token
+            const newPayload = {
+                customerId: Number(customer.CUSTOMER_ID),
+                customerCode: customer.CUSTOMER_CODE,
+                email: customer.EMAIL || null
+            };
+
+            const newAccessToken = jwt.sign(newPayload, JWT_ACCESS_SECRET, {
+                expiresIn: JWT_ACCESS_EXPIRY
+            });
+
+            logger.info('🔐 Access token renovado correctamente', { customerId });
+
+            return {
+                success: true,
+                accessToken: newAccessToken,
+                expiresIn: 86400
+            };
+
+        } catch (error) {
+            logger.error('❌ Error refrescando access token', error);
+            return { success: false, message: 'Error interno al refrescar token' };
+        }
     }
 
     /**

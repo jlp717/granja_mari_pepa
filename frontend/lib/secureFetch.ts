@@ -25,6 +25,10 @@ export const SESSION_EXPIRED_EVENT = 'session:expired';
 let csrfToken: string | null = null;
 let csrfTokenFetching = false;
 
+// 🔐 Silent refresh state — evitar múltiples refresh simultáneos
+let isRefreshing = false;
+let refreshPromise: Promise<boolean> | null = null;
+
 /**
  * 🔐 Obtener CSRF token del servidor
  */
@@ -64,6 +68,51 @@ function triggerSessionExpired(reason: string = 'token_expired') {
       detail: { reason, timestamp: Date.now() }
     }));
   }
+}
+
+/**
+ * 🔐 Intentar renovar access token silenciosamente usando refresh token
+ * Si hay un refresh en progreso, espera al resultado existente.
+ * @returns true si se renovó correctamente, false si falló
+ */
+async function attemptSilentRefresh(): Promise<boolean> {
+  // Si ya hay un refresh en progreso, esperarlo
+  if (isRefreshing && refreshPromise) {
+    return refreshPromise;
+  }
+
+  isRefreshing = true;
+  refreshPromise = (async () => {
+    try {
+      console.log('🔐 Intentando renovar token silenciosamente...');
+      const response = await fetch(`${API_URL}/api/auth/v2/refresh`, {
+        method: 'POST',
+        credentials: 'include', // Envía cookies HttpOnly (accessToken + refreshToken)
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          console.log('🔐 Token renovado silenciosamente ✅');
+          // Limpiar CSRF token cache (el nuevo cookie podría invalidarlo)
+          csrfToken = null;
+          return true;
+        }
+      }
+
+      console.log('🔐 No se pudo renovar el token:', response.status);
+      return false;
+    } catch (error) {
+      console.error('🔐 Error en silent refresh:', error);
+      return false;
+    } finally {
+      isRefreshing = false;
+      refreshPromise = null;
+    }
+  })();
+
+  return refreshPromise;
 }
 
 export interface SecureFetchOptions extends Omit<RequestInit, 'credentials'> {
@@ -128,16 +177,53 @@ export async function secureFetch<T = unknown>(
     credentials: 'include', // 🔐 Envía cookies HttpOnly
   });
 
-  // 🔐 NUEVO: Detectar sesión expirada (401 Unauthorized)
+  // 🔐 Silent refresh: Si recibimos 401, intentar renovar token y reintentar
   if (response.status === 401 && !skipAuthCheck) {
-    // No disparar evento si es un endpoint de login o refresh
     const isAuthEndpoint = endpoint.includes('/api/auth/login') ||
       endpoint.includes('/api/auth/refresh') ||
-      endpoint.includes('/api/auth/v2/login');
+      endpoint.includes('/api/auth/v2/login') ||
+      endpoint.includes('/api/auth/v2/refresh');
 
     if (!isAuthEndpoint) {
-      console.log('🔐 secureFetch: Respuesta 401 detectada - sesión expirada');
-      triggerSessionExpired('http_401');
+      console.log('🔐 secureFetch: 401 detectado, intentando silent refresh...');
+      const refreshed = await attemptSilentRefresh();
+
+      if (refreshed) {
+        // Reintentar la petición original con el nuevo access token (en cookie)
+        console.log('🔐 Reintentando petición original tras refresh...');
+        const retryResponse = await fetch(url, {
+          ...restOptions,
+          headers,
+          credentials: 'include',
+        });
+
+        // Parsear respuesta del reintento
+        let retryData: T;
+        const retryContentType = retryResponse.headers.get('content-type');
+
+        if (retryContentType?.includes('application/json')) {
+          retryData = await retryResponse.json();
+        } else if (retryContentType?.includes('application/pdf') || retryContentType?.includes('application/zip') || retryContentType?.includes('application/octet-stream')) {
+          retryData = await retryResponse.blob() as unknown as T;
+        } else {
+          retryData = await retryResponse.text() as unknown as T;
+        }
+
+        // Si el reintento también es 401, ahora sí cerrar sesión
+        if (retryResponse.status === 401) {
+          triggerSessionExpired('http_401_after_refresh');
+        }
+
+        return {
+          data: retryData,
+          ok: retryResponse.ok,
+          status: retryResponse.status,
+          statusText: retryResponse.statusText,
+        };
+      } else {
+        // Refresh falló → sesión definitivamente expirada
+        triggerSessionExpired('refresh_failed');
+      }
     }
   }
 

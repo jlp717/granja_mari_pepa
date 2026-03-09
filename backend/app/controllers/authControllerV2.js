@@ -42,7 +42,7 @@ async function loginV2(req, res) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 15 * 60 * 1000 // 15 minutos
+      maxAge: 24 * 60 * 60 * 1000 // 24 horas
     });
 
     // También enviar refreshToken en cookie
@@ -93,27 +93,43 @@ async function loginV2(req, res) {
 }
 
 /**
- * POST /api/v2/auth/refresh
- * Refrescar access token usando refresh token
+ * POST /api/auth/v2/refresh
+ * Refrescar access token usando refresh token (ambos en cookies HttpOnly)
  */
 async function refreshToken(req, res) {
   try {
-    const { refreshToken: token } = req.body;
+    // Leer tokens desde cookies HttpOnly
+    const expiredAccessToken = req.cookies.accessToken || req.cookies.access_token || '';
+    const refreshTokenValue = req.cookies.refreshToken || req.cookies.refresh_token;
 
-    if (!token) {
-      return res.status(400).json({
+    if (!refreshTokenValue) {
+      return res.status(401).json({
         success: false,
-        message: 'Refresh token requerido'
+        message: 'No hay refresh token'
       });
     }
 
-    const result = await authService.refreshAccessToken(token);
+    const result = await authServiceSecure.refreshAccessToken(expiredAccessToken, refreshTokenValue);
 
     if (!result.success) {
+      // Limpiar cookies si el refresh falla
+      res.clearCookie('accessToken');
+      res.clearCookie('refreshToken');
       return res.status(401).json(result);
     }
 
-    return res.json(result);
+    // Establecer nuevo access token en cookie HttpOnly
+    res.cookie('accessToken', result.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000 // 24 horas
+    });
+
+    return res.json({
+      success: true,
+      message: 'Token renovado correctamente'
+    });
   } catch (error) {
     logger.error('❌ Error refrescando token', error);
     return res.status(500).json({

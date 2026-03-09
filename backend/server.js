@@ -331,6 +331,8 @@ app.get('/api/password-reset/health', passwordResetController.healthCheck.bind(p
 // =====================================================
 // PÚBLICO: Login con código de cliente + contraseña
 app.post('/api/auth/v2/login', loginRateLimiter, authControllerV2.login.bind(authControllerV2));
+// PÚBLICO: Refrescar access token usando refresh token (cookies HttpOnly)
+app.post('/api/auth/v2/refresh', refreshRateLimiter, authControllerV2.refreshToken.bind(authControllerV2));
 // PÚBLICO: Solicitar código de verificación (para reset de contraseña)
 app.post('/api/auth/v2/solicitar-codigo', loginRateLimiter, authControllerV2.solicitarCodigo.bind(authControllerV2));
 // PÚBLICO: Verificar código y cambiar contraseña
