@@ -506,7 +506,7 @@ export function PanamarDashboard() {
                       )}
                     </div>
 
-                    {/* Document info */}
+                    {/* Resumen breve del documento */}
                     <div className="px-4 py-2 bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-500">
                       <div><strong>Cliente:</strong> {doc.codigoCliente}</div>
                       <div><strong>NIF:</strong> {doc.nifCliente}</div>
@@ -518,46 +518,6 @@ export function PanamarDashboard() {
                           <strong>Factura:</strong> {doc.serieFactura}-{doc.numeroFactura}/{doc.ejercicioFactura}
                         </div>
                       )}
-                    </div>
-
-                    {/* Lines table */}
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="bg-orange-50 text-xs text-orange-700 font-medium">
-                            <th className="px-3 py-2 text-left">Código</th>
-                            <th className="px-3 py-2 text-left">Descripción</th>
-                            <th className="px-3 py-2 text-left">Lote</th>
-                            <th className="px-3 py-2 text-right">Cajas</th>
-                            <th className="px-3 py-2 text-right">Uds/Kg</th>
-                            <th className="px-3 py-2 text-right">Precio</th>
-                            <th className="px-3 py-2 text-right">% Dto</th>
-                            <th className="px-3 py-2 text-right">Importe</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-50">
-                          {doc.lineas.map((line, idx) => (
-                            <tr key={idx} className="hover:bg-gray-50 transition">
-                              <td className="px-3 py-2 font-mono text-xs text-gray-600">{line.codigoArticulo}</td>
-                              <td className="px-3 py-2 text-gray-800 max-w-xs truncate" title={line.descripcion}>
-                                {line.descripcion}
-                              </td>
-                              <td className="px-3 py-2 text-xs text-gray-500">{line.lote}</td>
-                              <td className="px-3 py-2 text-right text-gray-700">{line.cajas > 0 ? line.cajas : '-'}</td>
-                              <td className="px-3 py-2 text-right text-gray-700">{line.unidades > 0 ? line.unidades : '-'}</td>
-                              <td className="px-3 py-2 text-right font-medium text-gray-700">{line.precioUnitario.toFixed(2)}</td>
-                              <td className="px-3 py-2 text-right text-gray-500">{line.descuento > 0 ? line.descuento.toFixed(2) + '%' : '-'}</td>
-                              <td className="px-3 py-2 text-right font-medium text-gray-900">{line.importe.toFixed(2)}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                        <tfoot>
-                          <tr className="bg-orange-50 font-semibold text-sm">
-                            <td colSpan={7} className="px-3 py-2 text-right text-orange-700">Total PANAMAR:</td>
-                            <td className="px-3 py-2 text-right text-orange-800">{doc.totalImportePanamar.toFixed(2)} &euro;</td>
-                          </tr>
-                        </tfoot>
-                      </table>
                     </div>
                   </div>
                 )}
