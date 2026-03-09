@@ -44,11 +44,16 @@ export function PanamarDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<PanamarSummary | null>(null);
 
-  // Filters - Ejercicio fijado a 2026
-  const [filters, setFilters] = useState<PanamarFilters>({
-    page: 1,
-    pageSize: 25,
-    ejercicio: 2026
+  // Filters - Ejercicio fijado a 2026, meses por defecto hasta el actual
+  const [filters, setFilters] = useState<PanamarFilters>(() => {
+    const currentMonth = new Date().getMonth() + 1; // 1-12
+    const defaultMeses = Array.from({ length: currentMonth }, (_, i) => i + 1);
+    return {
+      page: 1,
+      pageSize: 25,
+      ejercicio: 2026,
+      meses: defaultMeses
+    };
   });
   const [searchInput, setSearchInput] = useState('');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -221,7 +226,7 @@ export function PanamarDashboard() {
       `Fecha: ${doc.fecha}\n` +
       `Total PANAMAR: ${doc.totalImportePanamar.toFixed(2)} €\n` +
       `Líneas: ${doc.totalLineasPanamar}\n\n` +
-      `Granja Mari Pepa · Tarifa 85`
+      `Granja Mari Pepa`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank');
     setShowShareModal(false);
@@ -300,10 +305,10 @@ export function PanamarDashboard() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(blobUrl);
-      toast.success(`ZIP con ${documents.length} albaranes descargado`, { id: toastId });
+      toast.success('Descarga completada correctamente', { id: toastId });
     } catch (err) {
       console.error('Bulk download error:', err);
-      toast.error('Error al descargar los albaranes', { id: toastId });
+      toast.error('Error al generar la descarga masiva', { id: toastId });
     } finally {
       setBulkDownloading(false);
     }
@@ -331,7 +336,7 @@ export function PanamarDashboard() {
               </div>
               <div>
                 <h1 className="text-lg font-bold text-foreground">Modo PANAMAR</h1>
-                <p className="text-xs text-muted-foreground hidden sm:block">Documentos con productos PANAMAR · Tarifa 85</p>
+                <p className="text-xs text-muted-foreground hidden sm:block">Portal de gestión documental</p>
               </div>
             </div>
 
@@ -350,7 +355,7 @@ export function PanamarDashboard() {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground hidden sm:inline font-medium">{user?.name}</span>
+              <span className="text-sm text-muted-foreground hidden sm:inline font-medium">PANAMAR (Modo Especial)</span>
               <Button
                 variant="ghost"
                 size="icon"
@@ -433,15 +438,20 @@ export function PanamarDashboard() {
           <div>
             <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-1">
               <Package className="w-6 h-6 inline-block mr-2 text-orange-500" />
-              Albaranes PANAMAR
+              Gestión Documental PANAMAR
             </h2>
             <p className="text-muted-foreground text-sm">
-              {total} documento{total !== 1 ? 's' : ''} encontrado{total !== 1 ? 's' : ''}
-              {' · Ejercicio 2026'}
-              {filters.meses && filters.meses.length > 0 && (
+              {total.toLocaleString('es-ES')} {total === 1 ? 'registro' : 'registros'} · Ejercicio 2026
+              {filters.meses && filters.meses.length > 0 && filters.meses.length < 12 && (
                 <span className="ml-1">
                   · {filters.meses.map(m => MESES[m - 1]?.label).join(', ')}
                 </span>
+              )}
+              {filters.tipo && (
+                <span className="ml-1">· {filters.tipo === 'factura' ? 'Facturas' : 'Albaranes'}</span>
+              )}
+              {filters.codigoCliente && (
+                <span className="ml-1">· Cliente {filters.codigoCliente}</span>
               )}
             </p>
           </div>
@@ -464,7 +474,7 @@ export function PanamarDashboard() {
                 ) : (
                   <div className="flex items-center gap-2">
                     <Archive className="w-5 h-5" />
-                    Descargar todos ({total})
+                    Descargar todos ({total.toLocaleString('es-ES')})
                   </div>
                 )}
               </Button>
@@ -593,7 +603,7 @@ export function PanamarDashboard() {
         {loading && (
           <div className="flex flex-col items-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mb-4"></div>
-            <p className="text-muted-foreground font-medium">Cargando documentos...</p>
+            <p className="text-muted-foreground font-medium">Cargando registros...</p>
           </div>
         )}
 
@@ -605,8 +615,8 @@ export function PanamarDashboard() {
             className="text-center py-12 bg-white rounded-2xl border-2 border-gray-100 shadow-lg"
           >
             <Package className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
-            <p className="text-lg font-semibold text-muted-foreground">No se encontraron documentos PANAMAR</p>
-            <p className="text-sm text-muted-foreground mt-1">Prueba ajustando los filtros</p>
+            <p className="text-lg font-semibold text-muted-foreground">Sin resultados para los filtros seleccionados</p>
+            <p className="text-sm text-muted-foreground mt-1">Prueba seleccionando otros meses o ajustando los filtros de búsqueda</p>
           </motion.div>
         )}
 
@@ -885,7 +895,7 @@ export function PanamarDashboard() {
           >
             {/* Info */}
             <div className="text-sm text-muted-foreground font-medium">
-              Mostrando <span className="font-bold text-primary">{startIndex + 1}</span> - <span className="font-bold text-primary">{Math.min(endIndex, total)}</span> de <span className="font-bold text-foreground">{total}</span> documentos
+              Mostrando <span className="font-bold text-primary">{startIndex + 1}</span> - <span className="font-bold text-primary">{Math.min(endIndex, total)}</span> de <span className="font-bold text-foreground">{total.toLocaleString('es-ES')}</span> registros
             </div>
 
             {/* Page controls */}
