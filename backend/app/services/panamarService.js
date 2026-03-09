@@ -1,9 +1,14 @@
 /**
- * SERVICIO PANAMAR - Documentos con productos familias 701-705
+ * SERVICIO PANAMAR - Albaranes con productos familias 701-705
  * =============================================================
- * Recupera albaranes/facturas de CUALQUIER cliente que contengan
- * productos de las familias 701 a 705 (tabla ART.CODIGOFAMILIA),
+ * Recupera ALBARANES de clientes 4300x que contengan productos
+ * de las familias 701 a 705 (tabla ART.CODIGOFAMILIA),
  * con precios de TARIFA 85.
+ *
+ * Reglas de negocio:
+ *  - Solo CODIGOCLIENTEFACTURA que empiece por '4300' (excluye 44xx)
+ *  - Caso CONTADO (4300005000): se resuelve a CODIGOCLIENTEALBARAN
+ *  - Todo se muestra como albarán (no hay filtro factura/albarán)
  *
  * Solo accesible para el cliente especial 9999999999.
  * Fijado al ejercicio 2026.
@@ -13,12 +18,34 @@ const odbcPool = require('../config/odbcConfig');
 const logger = require('../utils/logger');
 
 const PANAMAR_CLIENT_CODE = '9999999999';
+const CONTADO_CLIENT_CODE = '4300005000';
 const PANAMAR_FAMILIAS = ['701', '702', '703', '704', '705'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const TARIFA_PANAMAR = 85;
 const EJERCICIO_FIJO = 2026;
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGE_SIZE = 500;
+
+// ── SQL expression: resolved client code (CONTADO → albaran, else → factura) ──
+const RESOLVED_CLIENT_EXPR = `
+  CASE WHEN TRIM(CAC.CODIGOCLIENTEFACTURA) = '${CONTADO_CLIENT_CODE}'
+       THEN TRIM(CAC.CODIGOCLIENTEALBARAN)
+       ELSE TRIM(CAC.CODIGOCLIENTEFACTURA)
+  END`;
+
+// ── Reusable EXISTS sub-query for PANAMAR article filter ──
+const PANAMAR_EXISTS_SQL = `
+  EXISTS (
+    SELECT 1 FROM DSEDAC.LAC LAC
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+      AND LAC.EJERCICIOALBARAN  = CAC.EJERCICIOALBARAN
+      AND LAC.SERIEALBARAN      = CAC.SERIEALBARAN
+      AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
+      AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
+      AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
+      AND LAC.IMPORTEVENTA <> 0
+  )`;
 
 /**
  * Verifica que el código de cliente sea el especial PANAMAR
@@ -28,17 +55,17 @@ function isPanamarClient(codigoCliente) {
 }
 
 /**
- * Obtener documentos PANAMAR con paginación y filtros
+ * Obtener albaranes PANAMAR con paginación y filtros
  *
  * @param {Object} options
  * @param {number} [options.page=1]
  * @param {number} [options.pageSize=50]
- * @param {string} [options.tipo] - 'albaran' | 'factura' | undefined (todos)
  * @param {string} [options.fechaDesde] - YYYY-MM-DD
  * @param {string} [options.fechaHasta] - YYYY-MM-DD
- * @param {string} [options.codigoCliente] - filtrar por cliente destino
+ * @param {string} [options.codigoCliente] - filtrar por cliente destino (resolved)
  * @param {string} [options.busqueda] - búsqueda libre (ref pedido, nombre cliente)
  * @param {number} [options.ejercicio] - filtrar por ejercicio
+ * @param {number[]} [options.meses] - filtrar por meses
  * @returns {Promise<{documents: Array, total: number, page: number, pageSize: number, totalPages: number}>}
  */
 async function getDocuments(options = {}) {
@@ -47,10 +74,9 @@ async function getDocuments(options = {}) {
   const pageSize = Math.min(MAX_PAGE_SIZE, Math.max(1, parseInt(options.pageSize) || DEFAULT_PAGE_SIZE));
   const offset = (page - 1) * pageSize;
 
-  logger.info('📦 PANAMAR: Consultando documentos', {
+  logger.info('📦 PANAMAR: Consultando albaranes', {
     page,
     pageSize,
-    tipo: options.tipo || 'todos',
     fechaDesde: options.fechaDesde,
     fechaHasta: options.fechaHasta,
     codigoCliente: options.codigoCliente,
@@ -61,15 +87,8 @@ async function getDocuments(options = {}) {
   const whereClauses = [];
   const params = [];
 
-  // Siempre: solo documentos que tengan al menos 1 línea PANAMAR con importe
-  // (esta condición se aplica en el EXISTS sub-query abajo)
-
-  // Filtro por tipo de documento
-  if (options.tipo === 'factura') {
-    whereClauses.push('CAC.NUMEROFACTURA > 0');
-  } else if (options.tipo === 'albaran') {
-    whereClauses.push('CAC.NUMEROFACTURA = 0');
-  }
+  // Solo clientes 4300x (excluir 44xx y cualquier otro)
+  whereClauses.push("TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'");
 
   // Filtro por fecha (usando ANODOCUMENTO, MESDOCUMENTO, DIADOCUMENTO)
   if (options.fechaDesde) {
@@ -92,9 +111,9 @@ async function getDocuments(options = {}) {
   whereClauses.push('CAC.EJERCICIOALBARAN = ?');
   params.push(EJERCICIO_FIJO);
 
-  // Filtro por cliente destino
+  // Filtro por cliente destino (resolved: CONTADO → albaran code)
   if (options.codigoCliente) {
-    whereClauses.push('TRIM(CAC.CODIGOCLIENTEFACTURA) = ?');
+    whereClauses.push(`${RESOLVED_CLIENT_EXPR} = ?`);
     params.push(String(options.codigoCliente).trim());
   }
 
@@ -123,18 +142,8 @@ async function getDocuments(options = {}) {
   const countSQL = `
     SELECT COUNT(*) AS TOTAL
     FROM DSEDAC.CAC CAC
-    LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
-    WHERE EXISTS (
-      SELECT 1 FROM DSEDAC.LAC LAC
-      INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
-      WHERE LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
-        AND LAC.EJERCICIOALBARAN  = CAC.EJERCICIOALBARAN
-        AND LAC.SERIEALBARAN      = CAC.SERIEALBARAN
-        AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
-        AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
-        AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-        AND LAC.IMPORTEVENTA <> 0
-    )
+    LEFT JOIN DSEDAC.CLI CLI ON ${RESOLVED_CLIENT_EXPR} = TRIM(CLI.CODIGOCLIENTE)
+    WHERE ${PANAMAR_EXISTS_SQL}
     ${whereSQL}
   `;
 
@@ -158,7 +167,7 @@ async function getDocuments(options = {}) {
       CAC.MESDOCUMENTO,
       CAC.ANODOCUMENTO,
       CAC.HORADOCUMENTO,
-      TRIM(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
+      ${RESOLVED_CLIENT_EXPR}        AS CODIGO_CLIENTE,
       TRIM(CLI.NOMBRECLIENTE)        AS NOMBRE_CLIENTE,
       TRIM(CLI.NIF)                  AS NIF_CLIENTE,
       TRIM(CLI.DIRECCION)            AS DIRECCION_CLIENTE,
@@ -167,23 +176,10 @@ async function getDocuments(options = {}) {
       TRIM(CLI.CODIGOPOSTAL)         AS CP_CLIENTE,
       CAC.NUMEROPEDIDO,
       TRIM(CAC.PEDIDOREFERENCIA)     AS REF_PEDIDO,
-      TRIM(CAC.REFERENCIA)           AS REFERENCIA,
-      TRIM(CAC.SERIEFACTURA)         AS SERIE_FACTURA,
-      CAC.NUMEROFACTURA,
-      CAC.EJERCICIOFACTURA
+      TRIM(CAC.REFERENCIA)           AS REFERENCIA
     FROM DSEDAC.CAC CAC
-    LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
-    WHERE EXISTS (
-      SELECT 1 FROM DSEDAC.LAC LAC
-      INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
-      WHERE LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
-        AND LAC.EJERCICIOALBARAN  = CAC.EJERCICIOALBARAN
-        AND LAC.SERIEALBARAN      = CAC.SERIEALBARAN
-        AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
-        AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
-        AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-        AND LAC.IMPORTEVENTA <> 0
-    )
+    LEFT JOIN DSEDAC.CLI CLI ON ${RESOLVED_CLIENT_EXPR} = TRIM(CLI.CODIGOCLIENTE)
+    WHERE ${PANAMAR_EXISTS_SQL}
     ${whereSQL}
     ORDER BY CAC.ANODOCUMENTO DESC, CAC.MESDOCUMENTO DESC, CAC.DIADOCUMENTO DESC,
              CAC.HORADOCUMENTO DESC, CAC.NUMEROALBARAN DESC
@@ -280,7 +276,6 @@ async function getDocuments(options = {}) {
     const key = `${h.SUBEMPRESAALBARAN}|${h.EJERCICIOALBARAN}|${h.SERIE_ALBARAN}|${h.TERMINALALBARAN}|${h.NUMEROALBARAN}`;
     const docLines = linesByDoc[key] || [];
     const totalImporte = docLines.reduce((sum, l) => sum + l.importe, 0);
-    const isFactura = h.NUMEROFACTURA > 0;
 
     return {
       // Identificadores
@@ -295,7 +290,7 @@ async function getDocuments(options = {}) {
       mes: h.MESDOCUMENTO,
       ano: h.ANODOCUMENTO,
       hora: formatHora(h.HORADOCUMENTO),
-      // Cliente destino
+      // Cliente destino (resolved: CONTADO → albaran code)
       codigoCliente: h.CODIGO_CLIENTE,
       nombreCliente: h.NOMBRE_CLIENTE,
       nifCliente: h.NIF_CLIENTE,
@@ -307,11 +302,6 @@ async function getDocuments(options = {}) {
       numeroPedido: h.NUMEROPEDIDO,
       refPedido: h.REF_PEDIDO,
       referencia: h.REFERENCIA,
-      // Factura (si existe)
-      tipoDocumento: isFactura ? 'factura' : 'albaran',
-      serieFactura: isFactura ? h.SERIE_FACTURA : null,
-      numeroFactura: isFactura ? h.NUMEROFACTURA : null,
-      ejercicioFactura: isFactura ? h.EJERCICIOFACTURA : null,
       // Líneas PANAMAR con tarifa 85
       lineas: docLines,
       totalLineasPanamar: docLines.length,
@@ -360,7 +350,7 @@ async function getDocumentByKey(key) {
       CAC.MESDOCUMENTO,
       CAC.ANODOCUMENTO,
       CAC.HORADOCUMENTO,
-      TRIM(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
+      ${RESOLVED_CLIENT_EXPR}        AS CODIGO_CLIENTE,
       TRIM(CLI.NOMBRECLIENTE)        AS NOMBRE_CLIENTE,
       TRIM(CLI.NIF)                  AS NIF_CLIENTE,
       TRIM(CLI.DIRECCION)            AS DIRECCION_CLIENTE,
@@ -369,28 +359,15 @@ async function getDocumentByKey(key) {
       TRIM(CLI.CODIGOPOSTAL)         AS CP_CLIENTE,
       CAC.NUMEROPEDIDO,
       TRIM(CAC.PEDIDOREFERENCIA)     AS REF_PEDIDO,
-      TRIM(CAC.REFERENCIA)           AS REFERENCIA,
-      TRIM(CAC.SERIEFACTURA)         AS SERIE_FACTURA,
-      CAC.NUMEROFACTURA,
-      CAC.EJERCICIOFACTURA
+      TRIM(CAC.REFERENCIA)           AS REFERENCIA
     FROM DSEDAC.CAC CAC
-    LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
+    LEFT JOIN DSEDAC.CLI CLI ON ${RESOLVED_CLIENT_EXPR} = TRIM(CLI.CODIGOCLIENTE)
     WHERE TRIM(CAC.SUBEMPRESAALBARAN) = ?
       AND CAC.EJERCICIOALBARAN  = ?
       AND TRIM(CAC.SERIEALBARAN) = ?
       AND CAC.TERMINALALBARAN   = ?
       AND CAC.NUMEROALBARAN     = ?
-      AND EXISTS (
-        SELECT 1 FROM DSEDAC.LAC LAC
-        INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
-        WHERE LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
-          AND LAC.EJERCICIOALBARAN  = CAC.EJERCICIOALBARAN
-          AND LAC.SERIEALBARAN      = CAC.SERIEALBARAN
-          AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
-          AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
-          AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-          AND LAC.IMPORTEVENTA <> 0
-      )
+      AND ${PANAMAR_EXISTS_SQL}
   `;
 
   const headers = await odbcPool.query(headerSQL, [
@@ -468,7 +445,6 @@ async function getDocumentByKey(key) {
   });
 
   const totalImporte = docLines.reduce((sum, l) => sum + l.importe, 0);
-  const isFactura = h.NUMEROFACTURA > 0;
 
   const elapsed = Date.now() - startTime;
   logger.info('📦 PANAMAR: Documento obtenido', { elapsed: `${elapsed}ms`, lineas: docLines.length });
@@ -494,10 +470,6 @@ async function getDocumentByKey(key) {
     numeroPedido: h.NUMEROPEDIDO,
     refPedido: h.REF_PEDIDO,
     referencia: h.REFERENCIA,
-    tipoDocumento: isFactura ? 'factura' : 'albaran',
-    serieFactura: isFactura ? h.SERIE_FACTURA : null,
-    numeroFactura: isFactura ? h.NUMEROFACTURA : null,
-    ejercicioFactura: isFactura ? h.EJERCICIOFACTURA : null,
     lineas: docLines,
     totalLineasPanamar: docLines.length,
     totalImportePanamar: round2(totalImporte)
@@ -510,13 +482,16 @@ async function getDocumentByKey(key) {
 async function getSummary(options = {}) {
   const startTime = Date.now();
 
-  logger.info('📊 PANAMAR: Consultando resumen', { meses: options.meses, tipo: options.tipo, codigoCliente: options.codigoCliente });
+  logger.info('📊 PANAMAR: Consultando resumen', { meses: options.meses, codigoCliente: options.codigoCliente });
 
   const ejercicio = EJERCICIO_FIJO; // Siempre 2026
 
-  // Build dynamic WHERE clauses for summary too
+  // Build dynamic WHERE clauses for summary
   const extraClauses = [];
   const extraParams = [];
+
+  // Solo clientes 4300x
+  extraClauses.push("TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'");
 
   if (options.meses && Array.isArray(options.meses) && options.meses.length > 0) {
     const validMeses = options.meses.map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
@@ -527,14 +502,8 @@ async function getSummary(options = {}) {
     }
   }
 
-  if (options.tipo === 'factura') {
-    extraClauses.push('CAC.NUMEROFACTURA > 0');
-  } else if (options.tipo === 'albaran') {
-    extraClauses.push('CAC.NUMEROFACTURA = 0');
-  }
-
   if (options.codigoCliente) {
-    extraClauses.push('TRIM(CAC.CODIGOCLIENTEFACTURA) = ?');
+    extraClauses.push(`${RESOLVED_CLIENT_EXPR} = ?`);
     extraParams.push(String(options.codigoCliente).trim());
   }
 
@@ -543,27 +512,46 @@ async function getSummary(options = {}) {
   const summarySQL = `
     SELECT
       COUNT(DISTINCT CAC.NUMEROALBARAN || '-' || CAC.SERIEALBARAN || '-' || CAC.EJERCICIOALBARAN) AS TOTAL_DOCUMENTOS,
-      COUNT(DISTINCT TRIM(CAC.CODIGOCLIENTEFACTURA)) AS TOTAL_CLIENTES,
-      SUM(CASE WHEN CAC.NUMEROFACTURA > 0 THEN 1 ELSE 0 END) AS TOTAL_FACTURADOS,
-      SUM(CASE WHEN CAC.NUMEROFACTURA = 0 THEN 1 ELSE 0 END) AS TOTAL_PENDIENTES
+      COUNT(DISTINCT ${RESOLVED_CLIENT_EXPR}) AS TOTAL_CLIENTES
     FROM DSEDAC.CAC CAC
     WHERE CAC.EJERCICIOALBARAN = ?
-      AND EXISTS (
-        SELECT 1 FROM DSEDAC.LAC LAC
-        INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
-        WHERE LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
-          AND LAC.EJERCICIOALBARAN  = CAC.EJERCICIOALBARAN
-          AND LAC.SERIEALBARAN      = CAC.SERIEALBARAN
-          AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
-          AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
-          AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-          AND LAC.IMPORTEVENTA <> 0
-      )
+      AND ${PANAMAR_EXISTS_SQL}
       ${extraSQL}
   `;
 
-  const result = await odbcPool.query(summarySQL, [ejercicio, ...extraParams]);
-  const row = result[0] || {};
+  // Importe total (sum of PANAMAR lines with tarifa 85 prices)
+  const importeSQL = `
+    SELECT
+      COALESCE(SUM(
+        CASE WHEN COALESCE(ARA.PRECIOTARIFA, 0) > 0
+          THEN ARA.PRECIOTARIFA * (CASE WHEN LAC.CANTIDADENVASES > 0 THEN LAC.CANTIDADENVASES ELSE LAC.CANTIDADUNIDADES END)
+          ELSE LAC.IMPORTEVENTA
+        END
+      ), 0) AS TOTAL_IMPORTE
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC
+      ON LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+      AND LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN
+      AND LAC.SERIEALBARAN = CAC.SERIEALBARAN
+      AND LAC.TERMINALALBARAN = CAC.TERMINALALBARAN
+      AND LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    LEFT JOIN DSEDAC.ARA ARA
+      ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
+      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
+    WHERE CAC.EJERCICIOALBARAN = ?
+      AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
+      AND LAC.IMPORTEVENTA <> 0
+      ${extraSQL}
+  `;
+
+  const [summaryResult, importeResult] = await Promise.all([
+    odbcPool.query(summarySQL, [ejercicio, ...extraParams]),
+    odbcPool.query(importeSQL, [ejercicio, ...extraParams])
+  ]);
+
+  const row = summaryResult[0] || {};
+  const impRow = importeResult[0] || {};
 
   const elapsed = Date.now() - startTime;
   logger.info('📊 PANAMAR: Resumen completado', { elapsed: `${elapsed}ms` });
@@ -572,9 +560,39 @@ async function getSummary(options = {}) {
     ejercicio,
     totalDocumentos: row.TOTAL_DOCUMENTOS || 0,
     totalClientes: row.TOTAL_CLIENTES || 0,
-    totalFacturados: row.TOTAL_FACTURADOS || 0,
-    totalPendientes: row.TOTAL_PENDIENTES || 0
+    totalImporte: round2(impRow.TOTAL_IMPORTE || 0)
   };
+}
+
+/**
+ * Obtener lista de clientes con albaranes PANAMAR (para selector/dropdown)
+ */
+async function getClients() {
+  const startTime = Date.now();
+
+  logger.info('📊 PANAMAR: Consultando clientes');
+
+  const clientsSQL = `
+    SELECT DISTINCT
+      ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
+      TRIM(CLI.NOMBRECLIENTE) AS NOMBRE_CLIENTE
+    FROM DSEDAC.CAC CAC
+    LEFT JOIN DSEDAC.CLI CLI ON ${RESOLVED_CLIENT_EXPR} = TRIM(CLI.CODIGOCLIENTE)
+    WHERE CAC.EJERCICIOALBARAN = ?
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
+      AND ${PANAMAR_EXISTS_SQL}
+    ORDER BY TRIM(CLI.NOMBRECLIENTE)
+  `;
+
+  const rows = await odbcPool.query(clientsSQL, [EJERCICIO_FIJO]);
+
+  const elapsed = Date.now() - startTime;
+  logger.info('📊 PANAMAR: Clientes obtenidos', { count: rows.length, elapsed: `${elapsed}ms` });
+
+  return (rows || []).map(r => ({
+    codigoCliente: r.CODIGO_CLIENTE,
+    nombreCliente: r.NOMBRE_CLIENTE || r.CODIGO_CLIENTE
+  }));
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────
@@ -606,5 +624,6 @@ module.exports = {
   isPanamarClient,
   getDocuments,
   getDocumentByKey,
-  getSummary
+  getSummary,
+  getClients
 };

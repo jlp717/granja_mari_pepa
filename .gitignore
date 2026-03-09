@@ -187,3 +187,28 @@ backend/analisis-*.js
 backend/basura/
 # Archivos grandes de recuperacion
 archivos_revisar/
+
+# Backups SQL (archivos muy grandes)
+backend/backups/
+
+# Scripts temporales de exploración/debug/test
+backend/backup_*.js
+backend/bisect_*.js
+backend/check_*.js
+backend/create_*_view*.js
+backend/create_medios_objects.js
+backend/create_fact_ventas_final.*
+backend/debug_*.js
+backend/diagnose_*.js
+backend/explore_*.js
+backend/final_fix_*.js
+backend/find_*.js
+backend/generate_table_ddl.js
+backend/get_job_log.js
+backend/get_medios_view_def.js
+backend/inspect_*.js
+backend/investigate_*.js
+backend/optimize_*.js
+backend/recreate_*.js
+backend/test_*.js
+backend/verify_*.js

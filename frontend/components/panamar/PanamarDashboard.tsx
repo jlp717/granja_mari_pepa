@@ -13,9 +13,9 @@ import { toast } from 'sonner';
 import {
   Package, Search, ChevronLeft, ChevronRight,
   ChevronsLeft, ChevronsRight,
-  FileText, Truck, Calendar, Users, BarChart3, LogOut, X,
+  FileText, Truck, Calendar, Users, LogOut, X,
   Download, Eye, Mail, MessageCircle, DollarSign, Settings,
-  Archive, Check
+  Archive, Check, ChevronDown
 } from 'lucide-react';
 
 const MESES = [
@@ -43,6 +43,8 @@ export function PanamarDashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<PanamarSummary | null>(null);
+  const [clientsList, setClientsList] = useState<{ codigoCliente: string; nombreCliente: string }[]>([]);
+  const [clientDropdownOpen, setClientDropdownOpen] = useState(false);
 
   // Filters - Ejercicio fijado a 2026, meses por defecto hasta el actual
   const [filters, setFilters] = useState<PanamarFilters>(() => {
@@ -78,7 +80,6 @@ export function PanamarDashboard() {
       const params = new URLSearchParams();
       if (filters.page) params.set('page', String(filters.page));
       if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
-      if (filters.tipo) params.set('tipo', filters.tipo);
       if (filters.fechaDesde) params.set('fechaDesde', filters.fechaDesde);
       if (filters.fechaHasta) params.set('fechaHasta', filters.fechaHasta);
       if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
@@ -108,12 +109,27 @@ export function PanamarDashboard() {
   // ── Fetch summary ────────────────────────────────────────────────
   const fetchSummary = useCallback(async () => {
     try {
-      const res = await secureFetch<PanamarSummary>(`/api/panamar/summary?ejercicio=2026`);
+      const params = new URLSearchParams({ ejercicio: '2026' });
+      if (filters.meses && filters.meses.length > 0) params.set('meses', filters.meses.join(','));
+      if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
+      const res = await secureFetch<PanamarSummary>(`/api/panamar/summary?${params.toString()}`);
       if (res.ok && res.data.success) {
         setSummary(res.data);
       }
     } catch (err) {
       console.error('PANAMAR summary error:', err);
+    }
+  }, [filters.meses, filters.codigoCliente]);
+
+  // ── Fetch clients list (for dropdown) ────────────────────────────
+  const fetchClients = useCallback(async () => {
+    try {
+      const res = await secureFetch<{ success: boolean; clients: { codigoCliente: string; nombreCliente: string }[] }>('/api/panamar/clients');
+      if (res.ok && res.data.success) {
+        setClientsList(res.data.clients);
+      }
+    } catch (err) {
+      console.error('PANAMAR clients error:', err);
     }
   }, []);
 
@@ -124,6 +140,10 @@ export function PanamarDashboard() {
   useEffect(() => {
     fetchSummary();
   }, [fetchSummary]);
+
+  useEffect(() => {
+    fetchClients();
+  }, [fetchClients]);
 
   // ── Handlers ─────────────────────────────────────────────────────
   const handleSearch = () => {
@@ -285,7 +305,6 @@ export function PanamarDashboard() {
     );
     try {
       const params = new URLSearchParams();
-      if (filters.tipo) params.set('tipo', filters.tipo);
       if (filters.fechaDesde) params.set('fechaDesde', filters.fechaDesde);
       if (filters.fechaHasta) params.set('fechaHasta', filters.fechaHasta);
       if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
@@ -373,7 +392,7 @@ export function PanamarDashboard() {
       <main className="container mx-auto px-4 py-6 space-y-6 relative z-10">
         {/* Summary Cards */}
         {summary && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -409,25 +428,11 @@ export function PanamarDashboard() {
               className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
             >
               <div className="p-2.5 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg">
-                <BarChart3 className="h-5 w-5 text-white" />
+                <DollarSign className="h-5 w-5 text-white" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">{summary.totalFacturados.toLocaleString('es-ES')}</div>
-                <div className="text-xs text-muted-foreground font-medium">Facturados</div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
-            >
-              <div className="p-2.5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-lg">
-                <Truck className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-foreground">{summary.totalPendientes.toLocaleString('es-ES')}</div>
-                <div className="text-xs text-muted-foreground font-medium">Pendientes</div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalImporte.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €</div>
+                <div className="text-xs text-muted-foreground font-medium">Importe Total</div>
               </div>
             </motion.div>
           </div>
@@ -447,11 +452,8 @@ export function PanamarDashboard() {
                   · {filters.meses.map(m => MESES[m - 1]?.label).join(', ')}
                 </span>
               )}
-              {filters.tipo && (
-                <span className="ml-1">· {filters.tipo === 'factura' ? 'Facturas' : 'Albaranes'}</span>
-              )}
               {filters.codigoCliente && (
-                <span className="ml-1">· Cliente {filters.codigoCliente}</span>
+                <span className="ml-1">· {clientsList.find(c => c.codigoCliente === filters.codigoCliente)?.nombreCliente || filters.codigoCliente}</span>
               )}
             </p>
           </div>
@@ -497,7 +499,7 @@ export function PanamarDashboard() {
           </div>
 
           {/* Filters Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Ejercicio (fijado a 2026) */}
             <div className="space-y-2">
               <label className="text-sm font-bold text-orange-600 flex items-center">
@@ -509,36 +511,47 @@ export function PanamarDashboard() {
               </div>
             </div>
 
-            {/* Tipo */}
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-orange-600 flex items-center">
-                <FileText className="w-4 h-4 mr-2" />
-                Tipo documento
-              </label>
-              <select
-                value={filters.tipo || ''}
-                onChange={(e) => handleFilterChange('tipo', e.target.value || undefined)}
-                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-gray-900 font-medium cursor-pointer hover:border-orange-300 transition-colors"
-              >
-                <option value="">Todos</option>
-                <option value="albaran">Albarán</option>
-                <option value="factura">Factura</option>
-              </select>
-            </div>
-
-            {/* Código Cliente */}
-            <div className="space-y-2">
+            {/* Cliente (dropdown from API) */}
+            <div className="space-y-2 relative">
               <label className="text-sm font-bold text-orange-600 flex items-center">
                 <Users className="w-4 h-4 mr-2" />
-                Código Cliente Destino
+                Cliente
               </label>
-              <input
-                type="text"
-                placeholder="Ej: 4300006867"
-                value={filters.codigoCliente || ''}
-                onChange={(e) => handleFilterChange('codigoCliente', e.target.value || undefined)}
-                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-gray-900 font-medium placeholder:text-gray-400 hover:border-orange-300 transition-colors"
-              />
+              <button
+                onClick={() => setClientDropdownOpen(!clientDropdownOpen)}
+                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white flex items-center justify-between text-gray-900 font-medium cursor-pointer hover:border-orange-300 transition-colors"
+              >
+                <span className={filters.codigoCliente ? 'text-gray-900' : 'text-gray-400'}>
+                  {filters.codigoCliente
+                    ? (clientsList.find(c => c.codigoCliente === filters.codigoCliente)?.nombreCliente || filters.codigoCliente)
+                    : 'Todos los clientes'}
+                </span>
+                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${clientDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {clientDropdownOpen && (
+                <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-2xl max-h-64 overflow-y-auto">
+                  <button
+                    onClick={() => { handleFilterChange('codigoCliente', undefined); setClientDropdownOpen(false); }}
+                    className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-orange-50 transition-colors border-b border-gray-100 ${
+                      !filters.codigoCliente ? 'bg-orange-50 text-orange-700' : 'text-gray-700'
+                    }`}
+                  >
+                    Todos los clientes
+                  </button>
+                  {clientsList.map(client => (
+                    <button
+                      key={client.codigoCliente}
+                      onClick={() => { handleFilterChange('codigoCliente', client.codigoCliente); setClientDropdownOpen(false); }}
+                      className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${
+                        filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
+                      }`}
+                    >
+                      <div className="truncate">{client.nombreCliente}</div>
+                      <div className="text-xs text-gray-400">{client.codigoCliente}</div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -636,25 +649,15 @@ export function PanamarDashboard() {
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 ${
-                        doc.tipoDocumento === 'factura'
-                          ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
-                          : 'bg-gradient-to-br from-orange-500 to-orange-600'
-                      }`}>
-                        {doc.tipoDocumento === 'factura'
-                          ? <FileText className="w-6 h-6 text-white" />
-                          : <Truck className="w-6 h-6 text-white" />
-                        }
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 bg-gradient-to-br from-orange-500 to-orange-600">
+                        <Truck className="w-6 h-6 text-white" />
                       </div>
                       <div>
                         <div className="font-bold text-lg text-orange-600">
-                          {doc.tipoDocumento === 'factura'
-                            ? `${doc.serieFactura}-${doc.numeroFactura}`
-                            : `${doc.serieAlbaran}-${doc.numeroAlbaran}`
-                          }
+                          {doc.serieAlbaran}-{doc.numeroAlbaran}
                         </div>
                         <div className="text-xs text-gray-500 font-medium">
-                          {doc.tipoDocumento === 'factura' ? 'Factura' : 'Albarán'}
+                          Albarán{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
                         </div>
                       </div>
                     </div>
@@ -781,26 +784,15 @@ export function PanamarDashboard() {
                         {/* Documento */}
                         <TableCell>
                           <div className="flex items-center space-x-3">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 ${
-                              doc.tipoDocumento === 'factura'
-                                ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
-                                : 'bg-gradient-to-br from-orange-500 to-orange-600'
-                            }`}>
-                              {doc.tipoDocumento === 'factura'
-                                ? <FileText className="w-5 h-5 text-white" />
-                                : <Truck className="w-5 h-5 text-white" />
-                              }
+                            <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 bg-gradient-to-br from-orange-500 to-orange-600">
+                              <Truck className="w-5 h-5 text-white" />
                             </div>
                             <div className="min-w-0">
                               <div className="font-bold text-base text-orange-600">
-                                {doc.tipoDocumento === 'factura'
-                                  ? `${doc.serieFactura}-${doc.numeroFactura}`
-                                  : `${doc.serieAlbaran}-${doc.numeroAlbaran}`
-                                }
+                                {doc.serieAlbaran}-{doc.numeroAlbaran}
                               </div>
                               <div className="text-xs text-gray-500 font-medium">
-                                {doc.tipoDocumento === 'factura' ? 'Factura' : 'Albarán'}
-                                {doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
+                                Albarán{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
                               </div>
                             </div>
                           </div>

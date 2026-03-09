@@ -154,10 +154,6 @@ export interface PanamarDocument {
   numeroPedido: number;
   refPedido: string;
   referencia: string;
-  tipoDocumento: 'albaran' | 'factura';
-  serieFactura: string | null;
-  numeroFactura: number | null;
-  ejercicioFactura: number | null;
   lineas: PanamarLineItem[];
   totalLineasPanamar: number;
   totalImportePanamar: number;
@@ -177,14 +173,12 @@ export interface PanamarSummary {
   ejercicio: number;
   totalDocumentos: number;
   totalClientes: number;
-  totalFacturados: number;
-  totalPendientes: number;
+  totalImporte: number;
 }
 
 export interface PanamarFilters {
   page?: number;
   pageSize?: number;
-  tipo?: 'albaran' | 'factura';
   fechaDesde?: string;
   fechaHasta?: string;
   codigoCliente?: string;

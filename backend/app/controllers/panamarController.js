@@ -15,8 +15,8 @@ const logger = require('../utils/logger');
  * GET /api/panamar/documents
  *
  * Query params:
- *   page, pageSize, tipo (albaran|factura), fechaDesde, fechaHasta,
- *   codigoCliente (del cliente destino), busqueda, ejercicio
+ *   page, pageSize, fechaDesde, fechaHasta,
+ *   codigoCliente (del cliente destino, resolved), busqueda, ejercicio, meses
  */
 async function getDocuments(req, res) {
   try {
@@ -34,7 +34,6 @@ async function getDocuments(req, res) {
     const {
       page,
       pageSize,
-      tipo,
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
@@ -48,14 +47,6 @@ async function getDocuments(req, res) {
     if (meses) {
       mesesArray = (Array.isArray(meses) ? meses : String(meses).split(',')).map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
       if (mesesArray.length === 0) mesesArray = undefined;
-    }
-
-    // Validar tipo si se proporciona
-    if (tipo && !['albaran', 'factura'].includes(tipo)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Tipo de documento inválido. Use "albaran" o "factura".'
-      });
     }
 
     // Validar formato de fechas si se proporcionan
@@ -75,7 +66,6 @@ async function getDocuments(req, res) {
     const result = await panamarService.getDocuments({
       page,
       pageSize,
-      tipo,
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
@@ -89,13 +79,13 @@ async function getDocuments(req, res) {
       ...result
     });
   } catch (error) {
-    logger.error('❌ PANAMAR: Error obteniendo documentos', {
+    logger.error('❌ PANAMAR: Error obteniendo albaranes', {
       error: error.message,
       stack: error.stack
     });
     return res.status(500).json({
       success: false,
-      message: 'Error interno al obtener documentos PANAMAR'
+      message: 'Error interno al obtener albaranes PANAMAR'
     });
   }
 }
@@ -117,7 +107,7 @@ async function getSummary(req, res) {
       });
     }
 
-    const { ejercicio, meses, tipo, codigoCliente: clienteDestino } = req.query;
+    const { ejercicio, meses, codigoCliente: clienteDestino } = req.query;
 
     // Parsear meses para summary
     let mesesArray;
@@ -129,7 +119,6 @@ async function getSummary(req, res) {
     const result = await panamarService.getSummary({
       ejercicio,
       meses: mesesArray,
-      tipo,
       codigoCliente: clienteDestino
     });
 
@@ -305,7 +294,7 @@ async function sendEmail(req, res) {
       <table width="600" cellpadding="0" cellspacing="0" style="background:#FFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
         <tr><td style="background:linear-gradient(135deg,#E67E22 0%,#D35400 100%);padding:28px;text-align:center;">
           <h1 style="color:#FFF;margin:0;font-size:22px;">📦 Albarán PANAMAR</h1>
-          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa · Tarifa 85</p>
+          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa</p>
         </td></tr>
         <tr><td style="padding:28px;">
           <p style="color:#1E293B;font-size:15px;line-height:1.5;margin:0 0 20px;">
@@ -388,7 +377,7 @@ async function bulkDownload(req, res) {
       return res.status(403).json({ success: false, message: 'Acceso denegado.' });
     }
 
-    const { tipo, fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda, meses } = req.query;
+    const { fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda, meses } = req.query;
 
     // Parsear meses para bulk download
     let mesesArray;
@@ -401,7 +390,6 @@ async function bulkDownload(req, res) {
     const result = await panamarService.getDocuments({
       page: 1,
       pageSize: 500,
-      tipo,
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
@@ -462,9 +450,34 @@ async function bulkDownload(req, res) {
   }
 }
 
+/**
+ * GET /api/panamar/clients
+ * Returns distinct clients with PANAMAR albaranes for the dropdown selector.
+ */
+async function getClients(req, res) {
+  try {
+    const codigoCliente = req.user?.codigoCliente;
+
+    if (!panamarService.isPanamarClient(codigoCliente)) {
+      return res.status(403).json({ success: false, message: 'Acceso denegado.' });
+    }
+
+    const clients = await panamarService.getClients();
+
+    return res.json({
+      success: true,
+      clients
+    });
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error obteniendo clientes', { error: error.message });
+    return res.status(500).json({ success: false, message: 'Error interno al obtener clientes' });
+  }
+}
+
 module.exports = {
   getDocuments,
   getSummary,
+  getClients,
   healthCheck,
   downloadPDF,
   previewPDF,
