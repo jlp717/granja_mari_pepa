@@ -154,7 +154,7 @@ function drawFooter(doc, pageNum, totalPages) {
 async function generateAlbaranPDF(panamarDoc) {
   try {
     const lineas = panamarDoc.lineas || [];
-    const docRef = `${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}`;
+    const docRef = `P-${panamarDoc.terminal || ''}-${panamarDoc.numeroAlbaran}`;
     const fecha = `${pad2(panamarDoc.dia)}/${pad2(panamarDoc.mes)}/${panamarDoc.ano}`;
     const hora = panamarDoc.hora || '';
 
@@ -316,6 +316,8 @@ async function generateAlbaranPDF(panamarDoc) {
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       doc.fontSize(7).font('Helvetica').fillColor(COLORS.darkGray);
 
+      let totalCajas = 0;
+
       lineas.forEach((line) => {
         const descripcion = (line.descripcion || '').substring(0, 50);
         const descHeight = doc.heightOfString(descripcion, { width: 170 });
@@ -342,6 +344,7 @@ async function generateAlbaranPDF(panamarDoc) {
 
         // Cajas
         const cajas = line.cajas || 0;
+        totalCajas += Number(cajas) || 0;
         const cajasDisplay = Number(cajas) === 0 ? '-' : formatNumber(cajas, 0);
         doc.text(cajasDisplay, 320, y + 3, { width: 35, align: 'right' });
 
@@ -373,19 +376,17 @@ async function generateAlbaranPDF(panamarDoc) {
       y += 12;
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      // TOTAL (albarán no lleva IVA - mismo estilo caja verde)
+      // TOTAL CAJAS (sumatorio de cajas)
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      const totalImporte = panamarDoc.totalImportePanamar || 0;
-
       doc.rect(350, y, 205, 28)
         .fillAndStroke(COLORS.success, COLORS.success)
         .lineWidth(2);
 
       doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.white)
-        .text('TOTAL', 360, y + 9);
+        .text('TOTAL CAJAS', 360, y + 9);
 
       doc.fontSize(18).font('Helvetica-Bold').fillColor(COLORS.white)
-        .text(formatNumber(totalImporte, 2) + ' €', 450, y + 6, {
+        .text(formatNumber(totalCajas, 0), 450, y + 6, {
           width: 100, align: 'right'
         });
 

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '@/lib/store';
-import { secureFetch } from '@/lib/secureFetch';
+import { secureFetch, secureDownload } from '@/lib/secureFetch';
 import { PanamarDocument, PanamarFilters, PanamarDocumentsResponse, PanamarSummary } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -326,19 +326,10 @@ export function PanamarDashboard() {
       if (filters.busqueda) params.set('busqueda', filters.busqueda);
       if (filters.meses && filters.meses.length > 0) params.set('meses', filters.meses.join(','));
 
-      const res = await secureFetch<Blob>(`/api/panamar/bulk-download?${params.toString()}`);
-      if (!res.ok) throw new Error('Error descargando ZIP');
-
-      const blob = res.data;
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
       const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      a.download = `PANAMAR_Albaranes_${today}.zip`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(blobUrl);
+      const filename = `PANAMAR_Albaranes_${today}.zip`;
+      const ok = await secureDownload(`/api/panamar/bulk-download?${params.toString()}`, filename);
+      if (!ok) throw new Error('Error descargando ZIP');
       toast.success('Descarga completada correctamente', { id: toastId });
     } catch (err) {
       console.error('Bulk download error:', err);
