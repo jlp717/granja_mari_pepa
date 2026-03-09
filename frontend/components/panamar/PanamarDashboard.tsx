@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '@/lib/store';
 import { secureFetch } from '@/lib/secureFetch';
@@ -45,6 +45,21 @@ export function PanamarDashboard() {
   const [summary, setSummary] = useState<PanamarSummary | null>(null);
   const [clientsList, setClientsList] = useState<{ codigoCliente: string; nombreCliente: string }[]>([]);
   const [clientDropdownOpen, setClientDropdownOpen] = useState(false);
+  const [clientSearch, setClientSearch] = useState('');
+  const clientSearchRef = useRef<HTMLInputElement>(null);
+  const clientDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close client dropdown on outside click
+  useEffect(() => {
+    if (!clientDropdownOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (clientDropdownRef.current && !clientDropdownRef.current.contains(e.target as Node)) {
+        setClientDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [clientDropdownOpen]);
 
   // Filters - Ejercicio fijado a 2026, meses por defecto hasta el actual
   const [filters, setFilters] = useState<PanamarFilters>(() => {
@@ -511,14 +526,14 @@ export function PanamarDashboard() {
               </div>
             </div>
 
-            {/* Cliente (dropdown from API) */}
-            <div className="space-y-2 relative">
+            {/* Cliente (searchable dropdown) */}
+            <div className="space-y-2 relative" ref={clientDropdownRef}>
               <label className="text-sm font-bold text-orange-600 flex items-center">
                 <Users className="w-4 h-4 mr-2" />
                 Cliente
               </label>
               <button
-                onClick={() => setClientDropdownOpen(!clientDropdownOpen)}
+                onClick={() => { setClientDropdownOpen(!clientDropdownOpen); setClientSearch(''); setTimeout(() => clientSearchRef.current?.focus(), 50); }}
                 className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white flex items-center justify-between text-gray-900 font-medium cursor-pointer hover:border-orange-300 transition-colors"
               >
                 <span className={filters.codigoCliente ? 'text-gray-900' : 'text-gray-400'}>
@@ -529,27 +544,58 @@ export function PanamarDashboard() {
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${clientDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {clientDropdownOpen && (
-                <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-2xl max-h-64 overflow-y-auto">
-                  <button
-                    onClick={() => { handleFilterChange('codigoCliente', undefined); setClientDropdownOpen(false); }}
-                    className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-orange-50 transition-colors border-b border-gray-100 ${
-                      !filters.codigoCliente ? 'bg-orange-50 text-orange-700' : 'text-gray-700'
-                    }`}
-                  >
-                    Todos los clientes
-                  </button>
-                  {clientsList.map(client => (
+                <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border-2 border-orange-200 rounded-xl shadow-2xl max-h-72 flex flex-col">
+                  {/* Search input */}
+                  <div className="p-2 border-b border-orange-100 sticky top-0 bg-white rounded-t-xl">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input
+                        ref={clientSearchRef}
+                        type="text"
+                        placeholder="Buscar por nombre o código..."
+                        value={clientSearch}
+                        onChange={(e) => setClientSearch(e.target.value)}
+                        className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-200"
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    </div>
+                  </div>
+                  {/* Options list */}
+                  <div className="overflow-y-auto flex-1">
                     <button
-                      key={client.codigoCliente}
-                      onClick={() => { handleFilterChange('codigoCliente', client.codigoCliente); setClientDropdownOpen(false); }}
-                      className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${
-                        filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
+                      onClick={() => { handleFilterChange('codigoCliente', undefined); setClientDropdownOpen(false); }}
+                      className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-orange-50 transition-colors border-b border-gray-100 ${
+                        !filters.codigoCliente ? 'bg-orange-50 text-orange-700' : 'text-gray-700'
                       }`}
                     >
-                      <div className="truncate">{client.nombreCliente}</div>
-                      <div className="text-xs text-gray-400">{client.codigoCliente}</div>
+                      Todos los clientes
                     </button>
-                  ))}
+                    {clientsList
+                      .filter(client => {
+                        if (!clientSearch.trim()) return true;
+                        const q = clientSearch.toLowerCase().trim();
+                        return client.nombreCliente.toLowerCase().includes(q) || client.codigoCliente.toLowerCase().includes(q);
+                      })
+                      .map(client => (
+                        <button
+                          key={client.codigoCliente}
+                          onClick={() => { handleFilterChange('codigoCliente', client.codigoCliente); setClientDropdownOpen(false); }}
+                          className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${
+                            filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
+                          }`}
+                        >
+                          <div className="truncate">{client.nombreCliente}</div>
+                          <div className="text-xs text-gray-400">{client.codigoCliente}</div>
+                        </button>
+                      ))}
+                    {clientsList.filter(client => {
+                      if (!clientSearch.trim()) return true;
+                      const q = clientSearch.toLowerCase().trim();
+                      return client.nombreCliente.toLowerCase().includes(q) || client.codigoCliente.toLowerCase().includes(q);
+                    }).length === 0 && (
+                      <div className="px-4 py-3 text-sm text-gray-400 text-center">Sin resultados</div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
