@@ -153,10 +153,10 @@ async function fetchSingleDocument(req) {
     return { error: 400, message: 'Parámetros incompletos (subempresa, ejercicio, serie, terminal, numero).' };
   }
 
-  // Use the service to get ONE document: filter tightly and get page 1, size 1
-  // We pass the key identifiers as a special option
+  // Use the service to get ONE document by its composite key
+  // NOTE: subempresa is VARCHAR (e.g. 'GMP'), NOT a number — do NOT parseInt
   const result = await panamarService.getDocumentByKey({
-    subempresa: parseInt(subempresa),
+    subempresa: String(subempresa).trim(),
     ejercicio: parseInt(ejercicio),
     serie: serie.trim(),
     terminal: parseInt(terminal),

@@ -149,7 +149,10 @@ async function getDocuments(options = {}) {
       TRIM(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
       TRIM(CLI.NOMBRECLIENTE)        AS NOMBRE_CLIENTE,
       TRIM(CLI.NIF)                  AS NIF_CLIENTE,
+      TRIM(CLI.DIRECCION)            AS DIRECCION_CLIENTE,
       TRIM(CLI.POBLACION)            AS POBLACION_CLIENTE,
+      TRIM(CLI.PROVINCIA)            AS PROVINCIA_CLIENTE,
+      TRIM(CLI.CODIGOPOSTAL)         AS CP_CLIENTE,
       CAC.NUMEROPEDIDO,
       TRIM(CAC.PEDIDOREFERENCIA)     AS REF_PEDIDO,
       TRIM(CAC.REFERENCIA)           AS REFERENCIA,
@@ -284,7 +287,10 @@ async function getDocuments(options = {}) {
       codigoCliente: h.CODIGO_CLIENTE,
       nombreCliente: h.NOMBRE_CLIENTE,
       nifCliente: h.NIF_CLIENTE,
+      direccionCliente: h.DIRECCION_CLIENTE,
       poblacionCliente: h.POBLACION_CLIENTE,
+      provinciaCliente: h.PROVINCIA_CLIENTE,
+      cpCliente: h.CP_CLIENTE,
       // Pedido
       numeroPedido: h.NUMEROPEDIDO,
       refPedido: h.REF_PEDIDO,
@@ -345,7 +351,10 @@ async function getDocumentByKey(key) {
       TRIM(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
       TRIM(CLI.NOMBRECLIENTE)        AS NOMBRE_CLIENTE,
       TRIM(CLI.NIF)                  AS NIF_CLIENTE,
+      TRIM(CLI.DIRECCION)            AS DIRECCION_CLIENTE,
       TRIM(CLI.POBLACION)            AS POBLACION_CLIENTE,
+      TRIM(CLI.PROVINCIA)            AS PROVINCIA_CLIENTE,
+      TRIM(CLI.CODIGOPOSTAL)         AS CP_CLIENTE,
       CAC.NUMEROPEDIDO,
       TRIM(CAC.PEDIDOREFERENCIA)     AS REF_PEDIDO,
       TRIM(CAC.REFERENCIA)           AS REFERENCIA,
@@ -354,7 +363,7 @@ async function getDocumentByKey(key) {
       CAC.EJERCICIOFACTURA
     FROM DSEDAC.CAC CAC
     LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
-    WHERE CAC.SUBEMPRESAALBARAN = ?
+    WHERE TRIM(CAC.SUBEMPRESAALBARAN) = ?
       AND CAC.EJERCICIOALBARAN  = ?
       AND TRIM(CAC.SERIEALBARAN) = ?
       AND CAC.TERMINALALBARAN   = ?
@@ -373,7 +382,7 @@ async function getDocumentByKey(key) {
   `;
 
   const headers = await odbcPool.query(headerSQL, [
-    key.subempresa, key.ejercicio, key.serie, key.terminal, key.numero
+    String(key.subempresa).trim(), key.ejercicio, key.serie, key.terminal, key.numero
   ]);
 
   if (!headers || headers.length === 0) {
@@ -409,7 +418,7 @@ async function getDocumentByKey(key) {
       AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
     WHERE TRIM(ARTX.FILTRO03) = '${PANAMAR_FILTRO}'
       AND LAC.IMPORTEVENTA <> 0
-      AND LAC.SUBEMPRESAALBARAN = ?
+      AND TRIM(LAC.SUBEMPRESAALBARAN) = ?
       AND LAC.EJERCICIOALBARAN  = ?
       AND TRIM(LAC.SERIEALBARAN) = ?
       AND LAC.TERMINALALBARAN   = ?
@@ -418,7 +427,7 @@ async function getDocumentByKey(key) {
   `;
 
   const lines = await odbcPool.query(linesSQL, [
-    key.subempresa, key.ejercicio, key.serie, key.terminal, key.numero
+    String(key.subempresa).trim(), key.ejercicio, key.serie, key.terminal, key.numero
   ]);
 
   // ── Assemble document ────────────────────────────────────────────
@@ -466,7 +475,10 @@ async function getDocumentByKey(key) {
     codigoCliente: h.CODIGO_CLIENTE,
     nombreCliente: h.NOMBRE_CLIENTE,
     nifCliente: h.NIF_CLIENTE,
+    direccionCliente: h.DIRECCION_CLIENTE,
     poblacionCliente: h.POBLACION_CLIENTE,
+    provinciaCliente: h.PROVINCIA_CLIENTE,
+    cpCliente: h.CP_CLIENTE,
     numeroPedido: h.NUMEROPEDIDO,
     refPedido: h.REF_PEDIDO,
     referencia: h.REFERENCIA,
