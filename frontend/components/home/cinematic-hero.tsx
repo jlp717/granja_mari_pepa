@@ -177,7 +177,7 @@ export function CinematicHero() {
     <>
       <section
         ref={heroRef}
-        className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-24 lg:pt-32"
       >
         {/* Spectacular Video Background - FULL PROTAGONIST */}
         <video

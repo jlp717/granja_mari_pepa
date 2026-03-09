@@ -267,7 +267,8 @@
                     "desc": "Certificación garantizada"
                 }
             }
-        }
+        },
+        "whatsapp_message": "¡Hola! Me gustaría obtener más información sobre sus productos."
     },
     "about_page": {
         "hero": {
@@ -288,6 +289,10 @@
                     "title": "Fundación en Lorca (Murcia)",
                     "desc": "Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
                 },
+                "2020": {
+                    "title": "Energía 100% Verde",
+                    "desc": "Certificación de Feníe Energía y la CNMC de que nuestra energía es de origen 100% renovable."
+                },
                 "1980s": {
                     "title": "Consolidación regional",
                     "desc": "Ampliación de la gama de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración."
@@ -295,10 +300,6 @@
                 "2000s": {
                     "title": "Certificación ISO 9001",
                     "desc": "Obtención de la certificación ISO 9001:2008 que garantiza nuestro Sistema de Gestión de la Calidad."
-                },
-                "2020": {
-                    "title": "Energía 100% Verde",
-                    "desc": "Certificación de Feníe Energía y la CNMC de que nuestra energía es de origen 100% renovable."
                 },
                 "today": {
                     "title": "Más de 1.500 referencias",
@@ -554,11 +555,15 @@
             "lastInvoices": "Últimas facturas",
             "totalPending": "Total pendiente",
             "logout": "Cerrar sesión",
+            "loadingPanel": "Cargando tu panel",
+            "logoutConfirm": "¿Estás seguro de que quieres cerrar sesión?",
+            "logoutSuccess": "Sesión cerrada correctamente",
             "tabs": {
                 "facturas": "Facturas",
                 "perfil": "Perfil",
                 "favoritos": "Favoritos",
-                "pedidos": "Pedidos"
+                "pedidos": "Pedidos",
+                "dashboard": "Dashboard"
             },
             "status": {
                 "pending": "Pendiente",
@@ -575,6 +580,99 @@
                 "mobileDesc": "Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.",
                 "download": "Descargar PDF",
                 "saveInfo": "El PDF se guardará en tu carpeta de descargas"
+            },
+            "filters": {
+                "filterByYear": "Filtrar por año",
+                "filterByMonth": "Filtrar por mes",
+                "allMonths": "Todos los meses",
+                "allYears": "Todos los años",
+                "month": "Mes",
+                "year": "Año",
+                "dateRange": "Rango de fechas (opcional)",
+                "from": "Desde",
+                "to": "Hasta",
+                "search": "Buscar por número de factura, serie o albarán...",
+                "resetFilters": "Restablecer filtros",
+                "clearDateRange": "Limpiar rango de fechas",
+                "profile_tip": "Podrás volver a agregar estos datos en cualquier momento desde tu perfil.",
+                "logoutConfirm": "¿Estás seguro de que quieres cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder a tu cuenta.",
+                "months": {
+                    "1": "Enero",
+                    "2": "Febrero",
+                    "3": "Marzo",
+                    "4": "Abril",
+                    "5": "Mayo",
+                    "6": "Junio",
+                    "7": "Julio",
+                    "8": "Agosto",
+                    "9": "Septiembre",
+                    "10": "Octubre",
+                    "11": "Noviembre",
+                    "12": "Diciembre"
+                }
+            },
+            "table": {
+                "invoice": "Factura",
+                "deliveryNote": "Albarán",
+                "date": "Fecha",
+                "total": "Total",
+                "actions": "Acciones",
+                "view": "Ver",
+                "download": "Descargar",
+                "share": "Compartir",
+                "noResults": "No se encontraron facturas",
+                "foundCount": "{count} facturas encontradas",
+                "downloadMessage": "Descarga tus documentos en PDF",
+                "loadingInvoices": "Cargando facturas..."
+            },
+            "sidebar": {
+                "clientArea": "Área de Clientes",
+                "controlPanel": "Panel de Control",
+                "viewProfile": "Ver perfil",
+                "filterByYear": "Filtrar por año",
+                "filterByMonth": "Filtrar por mes",
+                "invoicesCount": "Facturas",
+                "totalInvoiced": "Total Facturado",
+                "quickAccess": "Acceso rápido"
+            },
+            "greeting": {
+                "morning": "Buenos días",
+                "afternoon": "Buenas tardes",
+                "evening": "Buenas noches",
+                "welcomeBack": "Bienvenido a tu portal exclusivo"
+            },
+            "actions": {
+                "repeatOrder": "Repetir último pedido",
+                "viewCatalog": "Ver catálogo",
+                "myInvoices": "Mis facturas",
+                "directLine": "Línea directa",
+                "contact": "Contactar"
+            },
+            "milestones": {
+                "firstInvoice": "Primera factura",
+                "invoiced1k": "1.000€ facturados",
+                "invoiced5k": "5.000€ facturados",
+                "invoiced10k": "10.000€ facturados",
+                "invoiced50k": "50.000€ facturados",
+                "streak3": "3 meses seguidos",
+                "streak6": "6 meses seguidos",
+                "legendClient": "Cliente Leyenda"
+            },
+            "metrics": {
+                "thisMonth": "Este mes",
+                "activeStreak": "Racha activa",
+                "months": "meses",
+                "avgMonthly": "Media mensual",
+                "totalInvoiced": "Total facturado"
+            },
+            "tiers": {
+                "starter": "Nuevo Cliente",
+                "bronze": "Cliente Bronce",
+                "silver": "Cliente Plata",
+                "gold": "Cliente Oro",
+                "platinum": "Cliente Platino",
+                "strategic": "Cliente Estratégico",
+                "enterprise": "Cliente VIP"
             }
         },
         "publicFeatures": {
@@ -706,7 +804,8 @@
         "delegation": "Delegación Murcia",
         "catalog": "Catálogo",
         "client_portal": "Portal Clientes",
-        "rights_reserved": "Todos los derechos reservados."
+        "rights_reserved": "Todos los derechos reservados.",
+        "location_lorca": "Lorca, Murcia"
     },
     "globe_map": {
         "badge": "RED DE DISTRIBUCIÓN",

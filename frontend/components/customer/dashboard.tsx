@@ -93,13 +93,13 @@ import { formatCurrency, formatCurrencyNoDecimals } from '@/lib/utils';
 import { secureFetch, secureDownload } from '@/lib/secureFetch'; // 🔐 HttpOnly Cookie Auth
 import apiClient from '@/lib/apiClient'; // 🔐 Cliente API con autenticación automática
 
-const tabs = [
+const tabIds = [
   // Comentado temporalmente: ocultamos Dashboard y Pedidos para que el área de clientes muestre directamente Facturas
-  // { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
-  // { id: 'pedidos', name: 'Pedidos', icon: ShoppingBag },
-  { id: 'facturas', name: 'Facturas', icon: FileText },
-  { id: 'perfil', name: 'Perfil', icon: User },
-  { id: 'favoritos', name: 'Favoritos', icon: Heart }
+  // { id: 'dashboard', icon: BarChart3 },
+  // { id: 'pedidos', icon: ShoppingBag },
+  { id: 'facturas', icon: FileText },
+  { id: 'perfil', icon: User },
+  { id: 'favoritos', icon: Heart }
 ];
 
 const statusColors = {
@@ -240,6 +240,20 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
 }
 
 export function CustomerDashboard() {
+  // ===== TRANSLATIONS =====
+  const t = useTranslations('customerArea.dashboard');
+
+  // Translated tabs - now using translation hook
+  const tabs = useMemo(() => tabIds.map(tab => ({
+    ...tab,
+    name: t(`tabs.${tab.id}`)
+  })), [t]);
+
+  // Translated status labels
+  const getStatusLabel = useCallback((status: string) => {
+    return t(`status.${status}` as any) || status;
+  }, [t]);
+
   // Cambiado para que al cargar el área de clientes se muestre directamente 'facturas'
   const [activeTab, setActiveTab] = useState('facturas');
   const [searchTerm, setSearchTerm] = useState('');
@@ -1768,7 +1782,7 @@ export function CustomerDashboard() {
             transition={{ duration: 2, repeat: Infinity }}
             className="text-2xl font-bold text-white mb-4"
           >
-            Cargando tu panel
+            {t('loadingPanel')}
           </motion.h2>
 
           {/* Progress bar */}
@@ -1901,8 +1915,8 @@ export function CustomerDashboard() {
                 <Building2 className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </motion.div>
               <div className="min-w-0">
-                <h1 className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white leading-tight">Panel de Control</h1>
-                <p className="text-[10px] sm:text-sm text-gray-600 dark:text-gray-400 leading-tight">Área de Clientes</p>
+                <h1 className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white leading-tight">{t('sidebar.controlPanel')}</h1>
+                <p className="text-[10px] sm:text-sm text-gray-600 dark:text-gray-400 leading-tight">{t('sidebar.clientArea')}</p>
               </div>
             </div>
 
@@ -2064,7 +2078,7 @@ export function CustomerDashboard() {
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
                     {perfilCliente?.empresa || user?.company || 'Cliente'}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Ver perfil</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('sidebar.viewProfile')}</p>
                 </div>
               </motion.button>
 
@@ -2163,14 +2177,14 @@ export function CustomerDashboard() {
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-foreground flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      Filtrar por año
+                      {t('sidebar.filterByYear')}
                     </label>
                     <select
                       value={filterYear}
                       onChange={(e) => setFilterYear(e.target.value)}
                       className="w-full px-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
                     >
-                      <option value="all">Todos los años</option>
+                      <option value="all">{t('filters.allMonths')}</option>
                       {Array.from({ length: 6 }, (_, i) => new Date().getFullYear() - i).map((year) => (
                         <option key={year} value={String(year)}>
                           {year}
@@ -2184,26 +2198,26 @@ export function CustomerDashboard() {
                     <div className="space-y-2">
                       <label className="text-xs font-semibold text-foreground flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        Filtrar por mes
+                        {t('sidebar.filterByMonth')}
                       </label>
                       <select
                         value={filterMonth}
                         onChange={(e) => setFilterMonth(e.target.value)}
                         className="w-full px-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                       >
-                        <option value="all">Todos los meses</option>
-                        <option value="1">Enero</option>
-                        <option value="2">Febrero</option>
-                        <option value="3">Marzo</option>
-                        <option value="4">Abril</option>
-                        <option value="5">Mayo</option>
-                        <option value="6">Junio</option>
-                        <option value="7">Julio</option>
-                        <option value="8">Agosto</option>
-                        <option value="9">Septiembre</option>
-                        <option value="10">Octubre</option>
-                        <option value="11">Noviembre</option>
-                        <option value="12">Diciembre</option>
+                        <option value="all">{t('filters.allMonths')}</option>
+                        <option value="1">{t('filters.months.1')}</option>
+                        <option value="2">{t('filters.months.2')}</option>
+                        <option value="3">{t('filters.months.3')}</option>
+                        <option value="4">{t('filters.months.4')}</option>
+                        <option value="5">{t('filters.months.5')}</option>
+                        <option value="6">{t('filters.months.6')}</option>
+                        <option value="7">{t('filters.months.7')}</option>
+                        <option value="8">{t('filters.months.8')}</option>
+                        <option value="9">{t('filters.months.9')}</option>
+                        <option value="10">{t('filters.months.10')}</option>
+                        <option value="11">{t('filters.months.11')}</option>
+                        <option value="12">{t('filters.months.12')}</option>
                       </select>
                     </div>
                   )}
@@ -2226,7 +2240,7 @@ export function CustomerDashboard() {
                       style={{ background: 'linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)' }}
                     >
                       <X className="w-3 h-3" />
-                      Restablecer filtros
+                      {t('filters.resetFilters')}
                     </motion.button>
                   )}
 
@@ -2272,7 +2286,7 @@ export function CustomerDashboard() {
                     style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
                   >
                     <div className="text-2xl font-bold text-blue-600">{totalFacturasCount}</div>
-                    <div className="text-xs text-blue-700 font-medium mt-1">Facturas</div>
+                    <div className="text-xs text-blue-700 font-medium mt-1">{t('sidebar.invoicesCount')}</div>
                   </div>
 
                   {/* Total Card - Optimizado para mostrar cifra completa */}
@@ -2280,7 +2294,7 @@ export function CustomerDashboard() {
                     className="text-center rounded-xl p-3 border-l-4 border-emerald-500 shadow-sm"
                     style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
                   >
-                    <div className="text-xs text-emerald-700 font-medium mb-1">Total Facturado</div>
+                    <div className="text-xs text-emerald-700 font-medium mb-1">{t('sidebar.totalInvoiced')}</div>
                     <div className="font-bold text-emerald-600" style={{ fontSize: 'clamp(0.9rem, 3.5vw, 1.25rem)', lineHeight: '1.2' }}>
                       {(() => {
                         const formatted = new Intl.NumberFormat('es-ES', {
@@ -2377,7 +2391,7 @@ export function CustomerDashboard() {
                 className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-destructive hover:bg-destructive-soft transition-all duration-300 group"
               >
                 <LogOut className="w-5 h-5" />
-                <span className="font-medium">Cerrar sesión</span>
+                <span className="font-medium">{t('logout')}</span>
               </motion.button>
             </motion.div>
 
@@ -2390,7 +2404,7 @@ export function CustomerDashboard() {
             >
               <h3 className="font-semibold text-foreground mb-4 flex items-center">
                 <Sparkles className="w-5 h-5 mr-2 text-warning" />
-                Acceso rápido
+                {t('sidebar.quickAccess')}
               </h3>
 
               <div className="space-y-3">
@@ -3428,10 +3442,10 @@ export function CustomerDashboard() {
                       className="flex items-center gap-2 text-sm text-muted-foreground"
                     >
                       <Building2 className="w-4 h-4" />
-                      <span className="font-medium">Inicio</span>
+                      <span className="font-medium">{t('sidebar.controlPanel')}</span>
                       <ChevronRight className="w-3 h-3" />
                       <FileText className="w-4 h-4 text-primary" />
-                      <span className="text-primary font-semibold">Facturas</span>
+                      <span className="text-primary font-semibold">{t('tabs.facturas')}</span>
                       {filterYear !== 'all' && (
                         <>
                           <ChevronRight className="w-3 h-3" />
@@ -3444,10 +3458,10 @@ export function CustomerDashboard() {
                       <div>
                         <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
                           <FileText className="w-5 h-5 inline-block mr-2" />
-                          Mis Facturas
+                          {t('invoices')}
                         </h1>
                         <p className="text-muted-foreground">
-                          {filteredFacturas.length} facturas encontradas • Descarga tus documentos en PDF
+                          {filteredFacturas.length} {t('table.foundCount', { count: filteredFacturas.length }).replace('{count}', String(filteredFacturas.length)).replace(`${filteredFacturas.length} `, '')} • {t('table.downloadMessage')}
                         </p>
                       </div>
 
@@ -3459,7 +3473,7 @@ export function CustomerDashboard() {
                         style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #9333EA 100%)' }}
                       >
                         <BookOpen className="w-5 h-5 mr-2" />
-                        Libro de IVA
+                        {t('ivaBook')}
                       </motion.button>
                     </div>
 
@@ -3469,7 +3483,7 @@ export function CustomerDashboard() {
                       <div className="relative">
                         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500" />
                         <Input
-                          placeholder="Buscar por número de factura, serie o albarán..."
+                          placeholder={t('filters.search')}
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
                           className="pl-12 h-14 border-2 border-gray-200 bg-gray-50 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium"
@@ -3483,26 +3497,26 @@ export function CustomerDashboard() {
                           <div className="space-y-2">
                             <label className="text-sm font-bold text-blue-600 flex items-center">
                               <Calendar className="w-4 h-4 mr-2" />
-                              Mes
+                              {t('filters.month')}
                             </label>
                             <select
                               value={filterMonth}
                               onChange={(e) => setFilterMonth(e.target.value)}
                               className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
                             >
-                              <option value="all">Todos los meses</option>
-                              <option value="1">Enero</option>
-                              <option value="2">Febrero</option>
-                              <option value="3">Marzo</option>
-                              <option value="4">Abril</option>
-                              <option value="5">Mayo</option>
-                              <option value="6">Junio</option>
-                              <option value="7">Julio</option>
-                              <option value="8">Agosto</option>
-                              <option value="9">Septiembre</option>
-                              <option value="10">Octubre</option>
-                              <option value="11">Noviembre</option>
-                              <option value="12">Diciembre</option>
+                              <option value="all">{t('filters.allMonths')}</option>
+                              <option value="1">{t('filters.months.1')}</option>
+                              <option value="2">{t('filters.months.2')}</option>
+                              <option value="3">{t('filters.months.3')}</option>
+                              <option value="4">{t('filters.months.4')}</option>
+                              <option value="5">{t('filters.months.5')}</option>
+                              <option value="6">{t('filters.months.6')}</option>
+                              <option value="7">{t('filters.months.7')}</option>
+                              <option value="8">{t('filters.months.8')}</option>
+                              <option value="9">{t('filters.months.9')}</option>
+                              <option value="10">{t('filters.months.10')}</option>
+                              <option value="11">{t('filters.months.11')}</option>
+                              <option value="12">{t('filters.months.12')}</option>
                             </select>
                           </div>
 
@@ -3510,14 +3524,14 @@ export function CustomerDashboard() {
                           <div className="space-y-2">
                             <label className="text-sm font-bold text-blue-600 flex items-center">
                               <Calendar className="w-4 h-4 mr-2" />
-                              Año
+                              {t('filters.year')}
                             </label>
                             <select
                               value={filterYear}
                               onChange={(e) => setFilterYear(e.target.value)}
                               className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
                             >
-                              <option value="all">Todos los años</option>
+                              <option value="all">{t('filters.allMonths')}</option>
                               {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i).map((year) => (
                                 <option key={year} value={String(year)}>
                                   {year}
@@ -3531,11 +3545,11 @@ export function CustomerDashboard() {
                         <div className="border-t-2 border-blue-100 pt-5 mt-5">
                           <label className="text-sm font-bold text-blue-600 flex items-center mb-3">
                             <Calendar className="w-4 h-4 mr-2" />
-                            Rango de fechas (opcional)
+                            {t('filters.dateRange')}
                           </label>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div className="space-y-2">
-                              <label className="text-xs font-semibold text-blue-500">Desde</label>
+                              <label className="text-xs font-semibold text-blue-500">{t('filters.from')}</label>
                               <input
                                 type="date"
                                 value={fechaDesde}
@@ -3544,7 +3558,7 @@ export function CustomerDashboard() {
                               />
                             </div>
                             <div className="space-y-2">
-                              <label className="text-xs font-semibold text-blue-500">Hasta</label>
+                              <label className="text-xs font-semibold text-blue-500">{t('filters.to')}</label>
                               <input
                                 type="date"
                                 value={fechaHasta}
@@ -3561,7 +3575,7 @@ export function CustomerDashboard() {
                               }}
                               className="mt-3 text-sm font-bold text-blue-600 hover:text-blue-700 underline decoration-2 underline-offset-2 transition-colors"
                             >
-                              Limpiar rango de fechas
+                              {t('filters.clearDateRange')}
                             </button>
                           )}
                         </div>
@@ -3573,7 +3587,7 @@ export function CustomerDashboard() {
                       {loadingFacturas ? (
                         <div className="flex flex-col items-center py-12">
                           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-                          <p className="text-gray-500 font-medium">Cargando facturas...</p>
+                          <p className="text-gray-500 font-medium">{t('table.loadingInvoices')}</p>
                         </div>
                       ) : paginatedFacturas.length > 0 ? (
                         paginatedFacturas.map((factura, index) => (
@@ -3692,31 +3706,31 @@ export function CustomerDashboard() {
                               <TableHead className="font-bold text-blue-700 py-4">
                                 <div className="flex items-center gap-2">
                                   <FileText className="w-4 h-4" />
-                                  Factura
+                                  {t('table.invoice')}
                                 </div>
                               </TableHead>
                               <TableHead className="font-bold text-blue-700 text-center">
                                 <div className="flex items-center gap-2 justify-center">
                                   <Package className="w-4 h-4" />
-                                  Albarán
+                                  {t('table.deliveryNote')}
                                 </div>
                               </TableHead>
                               <TableHead className="font-bold text-blue-700">
                                 <div className="flex items-center gap-2">
                                   <Calendar className="w-4 h-4" />
-                                  Fecha
+                                  {t('table.date')}
                                 </div>
                               </TableHead>
                               <TableHead className="font-bold text-blue-700 text-right">
                                 <div className="flex items-center gap-2 justify-end">
                                   <DollarSign className="w-4 h-4" />
-                                  Total
+                                  {t('table.total')}
                                 </div>
                               </TableHead>
                               <TableHead className="font-bold text-blue-700 text-center">
                                 <div className="flex items-center gap-2 justify-center">
                                   <Settings className="w-4 h-4" />
-                                  Acciones
+                                  {t('table.actions')}
                                 </div>
                               </TableHead>
                             </TableRow>
@@ -3727,7 +3741,7 @@ export function CustomerDashboard() {
                                 <TableCell colSpan={5} className="text-center py-12">
                                   <div className="flex flex-col items-center">
                                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-                                    <p className="text-gray-500 font-medium">Cargando facturas...</p>
+                                    <p className="text-gray-500 font-medium">{t('table.loadingInvoices')}</p>
                                   </div>
                                 </TableCell>
                               </TableRow>
@@ -4860,7 +4874,7 @@ export function CustomerDashboard() {
                   </h2>
 
                   <p className="text-muted-foreground mb-8 leading-relaxed">
-                    ¿Estás seguro de que quieres cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder a tu cuenta.
+                    {t('logoutConfirm')}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -4971,7 +4985,7 @@ export function CustomerDashboard() {
                   {/* Mensaje informativo */}
                   <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
                     <p className="text-sm text-blue-900 dark:text-blue-200">
-                      💡 Podrás volver a agregar estos datos en cualquier momento desde tu perfil.
+                      💡 {t('profile_tip')}
                     </p>
                   </div>
 

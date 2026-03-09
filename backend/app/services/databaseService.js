@@ -39,18 +39,74 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
             CAC.IMPORTERECARGO4 + CAC.IMPORTERECARGO5) as RECARGOFACTURA,
         SUM(CAC.IMPORTETOTAL) as TOTALFACTURA
       FROM DSEDAC.CAC CAC
-      INNER JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
-      WHERE CAC.SERIEFACTURA = ?
+      LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
+      WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
       GROUP BY CAC.SERIEFACTURA, CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA, TRIM(CAC.CODIGOCLIENTEFACTURA)
     `;
 
-    const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio, codigoCliente]);
+    // Removing client check from SQL to diagnose if it's a data mismatch
+    const header = await odbcPool.query(headerQuery, [serie, numero, ejercicio]);
 
     if (!header || header.length === 0) {
-      throw new Error('Factura no encontrada');
+      logger.warn('⚠️ Factura no encontrada (ni siquiera sin filtro de cliente). Params:', { serie, numero, ejercicio });
+      throw new Error('Factura no encontrada'); // Genuine 404
+    }
+
+    const facturaFound = header[0];
+    const dbClientCode = facturaFound.CODIGOCLIENTEFACTURA;
+
+    // Strict security check: Ensure the invoice belongs to the requesting client
+    // Compare trimmed strings to be safe
+    if (String(dbClientCode).trim() !== String(codigoCliente).trim()) {
+      // NIF-based relationship check:
+      // If the requester has the SAME NIF as the invoice owner, allow access.
+      // This handles "Director" accounts, branches, or linked codes.
+
+      const invoiceNif = (facturaFound.CIFCLIENTEFACTURA || '').trim();
+
+      if (invoiceNif) {
+        // Fetch requester's NIF
+        try {
+          const requesterInfo = await odbcPool.query(
+            `SELECT NIF FROM DSEDAC.CLI WHERE TRIM(CODIGOCLIENTE) = ?`,
+            [codigoCliente]
+          );
+
+          const requesterNif = requesterInfo[0]?.NIF?.trim();
+
+          if (requesterNif && requesterNif === invoiceNif) {
+            logger.info('🔓 Acceso autorizado por coincidencia de NIF', {
+              solicitante: codigoCliente,
+              propietario: dbClientCode,
+              nif: requesterNif
+            });
+            // ALLOW ACCESS (Do not throw)
+          } else {
+            // Access denied
+            logger.warn('⛔ Acceso denegado a factura: Cliente no coincide y NIF diferente', {
+              solicitante: codigoCliente,
+              propietario: dbClientCode,
+              nifSolicitante: requesterNif,
+              nifFactura: invoiceNif,
+              serie, numero, ejercicio
+            });
+            throw new Error('Factura no encontrada'); // Return 404 for security
+          }
+        } catch (err) {
+          logger.error('Error verificando relacion de clientes', err);
+          throw new Error('Factura no encontrada');
+        }
+      } else {
+        // No NIF on invoice, strict deny
+        logger.warn('⛔ Acceso denegado a factura: Cliente no coincide (Sin NIF)', {
+          solicitante: codigoCliente,
+          propietario: dbClientCode,
+          serie, numero, ejercicio
+        });
+        throw new Error('Factura no encontrada');
+      }
     }
 
     // Líneas de factura con productos
@@ -105,13 +161,12 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND TRIM(CAC.CODIGOCLIENTEFACTURA) = ?
         AND LAC.IMPORTEVENTA <> 0
         AND TRIM(LAC.CODIGOARTICULO) <> ''
       ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
     `;
 
-    const lines = await odbcPool.query(linesQuery, [serie, numero, ejercicio, codigoCliente]);
+    const lines = await odbcPool.query(linesQuery, [serie, numero, ejercicio]);
 
     // NO sobrescribir PORCENTAJEIVAARTICULO: necesitamos soportar multi-IVA.
     // Solo trazamos una muestra de tipos de IVA detectados.
@@ -347,7 +402,18 @@ async function getInvoices(codigoCliente, limit = 10, offset = 0, ejercicio = nu
         TRIM(CAC.SERIEFACTURA) AS SERIE,
         CAC.NUMEROFACTURA AS NUMERO,
         CAC.EJERCICIOFACTURA AS EJERCICIO,
-        CAC.FECHAFACTURA AS FECHA,
+        CAC.EJERCICIOFACTURA AS EJERCICIO,
+        CAST(
+          CASE 
+            WHEN CAC.DIAFACTURA < 10 THEN '0' || CAST(CAC.DIAFACTURA AS VARCHAR(2))
+            ELSE CAST(CAC.DIAFACTURA AS VARCHAR(2))
+          END || '/' ||
+          CASE 
+            WHEN CAC.MESFACTURA < 10 THEN '0' || CAST(CAC.MESFACTURA AS VARCHAR(2))
+            ELSE CAST(CAC.MESFACTURA AS VARCHAR(2))
+          END || '/' ||
+          CAST(CAC.ANOFACTURA AS VARCHAR(4))
+        AS VARCHAR(10)) AS FECHA,
         CAC.IMPORTETOTAL AS TOTAL,
         CAC.IMPORTECOBRADOPENDIENTE AS PENDIENTE,
         CASE WHEN CAC.IMPORTECOBRADOPENDIENTE = 0 THEN 'Pagada' ELSE 'Pendiente' END AS ESTADO

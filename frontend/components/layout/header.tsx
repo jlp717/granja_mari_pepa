@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react'
 import { Link, usePathname } from '@/lib/navigation'
 import Image from 'next/image'
-import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ArrowRight } from 'lucide-react'
+import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, BookOpen } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCartStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { CartDrawer } from '@/components/cart/cart-drawer'
 import { LanguageSwitcher } from '@/components/ui/language-switcher'
+import { CatalogModal } from '@/components/catalog/catalog-modal'
 
 const NAV_STYLES = {
   scrolled: {
@@ -44,9 +45,37 @@ type NavigationItem = {
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false)
+  const [activeCatalog, setActiveCatalog] = useState<{ url: string; edition: string }>({
+    url: '/catalogs/topgel-febrero-2026.pdf',
+    edition: 'Edición Febrero 2026'
+  })
+  const [currentBannerIndex, setCurrentBannerIndex] = useState(0)
   const [isHydrated, setIsHydrated] = useState(false)
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
   const [activeMobileSubmenu, setActiveMobileSubmenu] = useState<string | null>(null)
+
+  const MAGAZINES = [
+    {
+      title: 'Revista TopGel',
+      edition: 'Febrero 2026',
+      fullEdition: 'Edición Febrero 2026',
+      url: '/catalogs/topgel-febrero-2026.pdf'
+    },
+    {
+      title: 'Revista TopGel',
+      edition: 'Marzo 2026',
+      fullEdition: 'Edición Marzo 2026',
+      url: '/catalogs/gmp-marzo-2026.pdf'
+    }
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBannerIndex((prev) => (prev + 1) % MAGAZINES.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
 
   const pathname = usePathname()
   const { getTotalItems, toggleCart } = useCartStore()
@@ -228,6 +257,10 @@ export function Header() {
               </div>
               <span className="text-primary-foreground/90 font-medium tracking-wide">{t('top_bar.location')}</span>
             </div>
+
+            {/* CATALOG TRIGGER (Desktop) */}
+            {/* Button Removed - Moved to Announcement Bar */}
+
             <a href="tel:968467514" className="hidden sm:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300">
               <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <Phone className="w-3.5 h-3.5 text-primary-foreground/80" />
@@ -252,8 +285,103 @@ export function Header() {
         </div>
       </div>
 
+
+      {/* ANNOUNCEMENT BAR (Between Top Bar and Header) */}
+      {/* ANNOUNCEMENT BAR (Premium Dark Gradient) - Mobile: min-h-[5rem] for breathing room, Desktop: reset to h-11 */}
+      {!isMobileMenuOpen && (
+        <div className="fixed top-12 left-0 right-0 min-h-[5rem] sm:min-h-0 sm:h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center shadow-lg border-b border-white/10">
+          {/* Animated sheen effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
+
+          <div className="relative z-10 flex items-center w-full justify-center h-full px-2 sm:px-4">
+            {/* Prev Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setCurrentBannerIndex((prev) => (prev - 1 + MAGAZINES.length) % MAGAZINES.length)
+              }}
+              className="p-1.5 sm:p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-20 flex-shrink-0"
+              aria-label="Revista anterior"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveCatalog({ url: MAGAZINES[currentBannerIndex].url, edition: MAGAZINES[currentBannerIndex].fullEdition })
+                setIsCatalogOpen(true)
+              }}
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 group px-2 sm:px-4 py-2 sm:py-0 flex-1 max-w-fit justify-center h-full transition-all hover:bg-white/5 rounded-xl mx-1"
+            >
+              {/* Animated Badge */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.1, 1],
+                  boxShadow: [
+                    "0 0 0 0 rgba(234, 179, 8, 0)",
+                    "0 0 0 4px rgba(234, 179, 8, 0.3)",
+                    "0 0 0 0 rgba(234, 179, 8, 0)"
+                  ]
+                }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200 shrink-0"
+              >
+                <BookOpen className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+              </motion.div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentBannerIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col sm:flex-row items-center gap-0.5 sm:gap-3 text-center sm:text-left w-full max-w-[280px] sm:max-w-none"
+                >
+                  <span className="font-bold text-[10px] sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
+                    ¡EDICIÓN ESPECIAL!
+                  </span>
+                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
+                  {/* Mobile: Short text */}
+                  <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
+                    Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">{MAGAZINES[currentBannerIndex].edition}</span>
+                  </span>
+                  {/* Desktop: Full text */}
+                  <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
+                    Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">{MAGAZINES[currentBannerIndex].title} - {MAGAZINES[currentBannerIndex].edition}</span>
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                className="hidden sm:block ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors shrink-0"
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+              </motion.div>
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setCurrentBannerIndex((prev) => (prev + 1) % MAGAZINES.length)
+              }}
+              className="p-1.5 sm:p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-20 flex-shrink-0"
+              aria-label="Siguiente revista"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Main Header */}
-      <header className={`fixed top-12 left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
+      {/* Main Header - Mobile: Top 12 (3rem) + min-h-[5rem] = ~8rem (top-32) | Desktop: Top 12 + 11 = 5.75rem */}
+      <header className={`fixed top-32 sm:top-[5.75rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
         <div className="absolute inset-0 bg-card" />
         <nav className="container mx-auto px-4 lg:px-6 xl:px-8 relative z-10">
           <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32">
@@ -449,6 +577,40 @@ export function Header() {
               </div>
 
               <div className="px-4 py-6 space-y-2">
+                {/* Mobile Catalog Trigger */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0 }}
+                  className="flex flex-col gap-2 mb-4"
+                >
+                  <button
+                    onClick={() => {
+                      closeMobileMenu()
+                      setActiveCatalog({ url: MAGAZINES[1].url, edition: MAGAZINES[1].fullEdition })
+                      setIsCatalogOpen(true)
+                    }}
+                    className="w-full flex items-center p-4 bg-gradient-to-r from-success/20 to-success/10 border border-success/30 rounded-xl text-success-dark hover:bg-success/20 transition-all font-bold group"
+                  >
+                    <BookOpen className="w-5 h-5 mr-3 text-success-700" />
+                    REVISTA MARZO 2026
+                    <ArrowRight className="w-4 h-4 ml-auto text-success-700 group-hover:translate-x-1 transition-transform" />
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      closeMobileMenu()
+                      setActiveCatalog({ url: MAGAZINES[0].url, edition: MAGAZINES[0].fullEdition })
+                      setIsCatalogOpen(true)
+                    }}
+                    className="w-full flex items-center p-4 bg-gradient-to-r from-warning/20 to-warning/10 border border-warning/30 rounded-xl text-warning-dark hover:bg-warning/20 transition-all font-bold group"
+                  >
+                    <BookOpen className="w-5 h-5 mr-3 text-warning-700" />
+                    REVISTA FEBRERO 2026
+                    <ArrowRight className="w-4 h-4 ml-auto text-warning-700 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </motion.div>
+
                 {NAVIGATION.map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -552,7 +714,7 @@ export function Header() {
                       >
                         <Phone className="w-5 h-5 text-primary" />
                         <div>
-                          <div className="text-foreground text-sm font-semibold">968 46 75 146</div>
+                          <div className="text-foreground text-sm font-semibold">968 46 75 14</div>
                           <div className="text-muted-foreground text-xs">{t('call_cta')}</div>
                         </div>
                       </motion.div>
@@ -603,6 +765,13 @@ export function Header() {
           )}
         </AnimatePresence>
       </header>
+
+      <CatalogModal
+        isOpen={isCatalogOpen}
+        onClose={() => setIsCatalogOpen(false)}
+        pdfUrl={activeCatalog.url}
+        edition={activeCatalog.edition}
+      />
 
       <CartDrawer />
     </div>

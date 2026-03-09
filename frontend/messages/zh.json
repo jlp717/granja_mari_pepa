@@ -268,7 +268,8 @@
                     "desc": "认证保证"
                 }
             }
-        }
+        },
+        "whatsapp_message": "您好！我想了解更多关于您产品的信息。"
     },
     "about_page": {
         "hero": {
@@ -496,48 +497,148 @@
             "priorityDesc": "独家优惠和新品"
         },
         "dashboard": {
-            "orders": "Pedidos",
-            "ordersDesc": "Historial de pedidos",
-            "profile": "Perfil",
-            "profileDesc": "Gestiona tus datos",
-            "ivaBook": "Libro IVA",
-            "ivaBookDesc": "Resumen trimestral de IVA",
-            "downloadPdf": "Descargar PDF",
-            "viewAll": "Ver todo",
-            "noInvoices": "No tienes facturas recientes",
-            "lastInvoices": "Últimas facturas",
-            "totalPending": "Total pendiente",
-            "logout": "Cerrar sesión",
+            "welcome": "欢迎",
+            "invoices": "发票",
+            "invoicesDesc": "查看和下载您的发票",
+            "orders": "订单",
+            "ordersDesc": "订单历史",
+            "profile": "个人资料",
+            "profileDesc": "管理您的数据",
+            "ivaBook": "增值税簿",
+            "ivaBookDesc": "季度增值税摘要",
+            "downloadPdf": "下载PDF",
+            "viewAll": "查看全部",
+            "noInvoices": "您没有最近的发票",
+            "lastInvoices": "最近发票",
+            "totalPending": "待付总额",
+            "logout": "退出登录",
+            "loadingPanel": "正在加载您的面板",
+            "logoutConfirm": "您确定要退出登录吗？",
+            "logoutSuccess": "会话已成功关闭",
             "tabs": {
-                "facturas": "Facturas",
-                "perfil": "Perfil",
-                "favoritos": "Favoritos",
-                "pedidos": "Pedidos"
+                "facturas": "发票",
+                "perfil": "个人资料",
+                "favoritos": "收藏夹",
+                "pedidos": "订单",
+                "dashboard": "仪表板"
             },
             "status": {
-                "pending": "Pendiente",
-                "processing": "Procesando",
-                "shipped": "Enviado",
-                "delivered": "Entregado",
-                "paid": "Pagada",
-                "cancelled": "Cancelado"
+                "pending": "待处理",
+                "processing": "处理中",
+                "shipped": "已发货",
+                "delivered": "已交付",
+                "paid": "已付款",
+                "cancelled": "已取消"
             },
             "pdf": {
-                "loading": "Cargando PDF...",
-                "error": "Error al cargar el PDF",
-                "mobileTitle": "Factura {serie}-{numero}",
-                "mobileDesc": "Para ver el PDF completo en tu dispositivo móvil, descárgalo directamente.",
-                "download": "Descargar PDF",
-                "saveInfo": "El PDF se guardará en tu carpeta de descargas"
+                "loading": "正在加载PDF...",
+                "error": "加载PDF时出错",
+                "mobileTitle": "发票 {serie}-{numero}",
+                "mobileDesc": "要在移动设备上查看完整的PDF，请直接下载。",
+                "download": "下载PDF",
+                "saveInfo": "PDF将保存到您的下载文件夹"
+            },
+            "filters": {
+                "filterByYear": "按年份筛选",
+                "filterByMonth": "按月份筛选",
+                "allMonths": "所有月份",
+                "allYears": "所有年份",
+                "month": "月份",
+                "year": "年份",
+                "dateRange": "日期范围（可选）",
+                "from": "从",
+                "to": "到",
+                "search": "按发票号、系列或送货单搜索...",
+                "resetFilters": "重置筛选",
+                "clearDateRange": "清除日期范围",
+                "profile_tip": "您可以随时在个人资料中重新添加这些数据。",
+                "logoutConfirm": "您确定要退出吗？您需要重新登录才能访问您的帐户。",
+                "months": {
+                    "1": "一月",
+                    "2": "二月",
+                    "3": "三月",
+                    "4": "四月",
+                    "5": "五月",
+                    "6": "六月",
+                    "7": "七月",
+                    "8": "八月",
+                    "9": "九月",
+                    "10": "十月",
+                    "11": "十一月",
+                    "12": "十二月"
+                }
+            },
+            "table": {
+                "invoice": "发票",
+                "deliveryNote": "送货单",
+                "date": "日期",
+                "total": "总计",
+                "actions": "操作",
+                "view": "查看",
+                "download": "下载",
+                "share": "分享",
+                "noResults": "未找到发票",
+                "foundCount": "找到 {count} 张发票",
+                "downloadMessage": "下载您的PDF文档",
+                "loadingInvoices": "正在加载发票..."
+            },
+            "sidebar": {
+                "clientArea": "客户专区",
+                "controlPanel": "控制面板",
+                "viewProfile": "查看资料",
+                "filterByYear": "按年份筛选",
+                "filterByMonth": "按月份筛选",
+                "invoicesCount": "发票",
+                "totalInvoiced": "开票总额",
+                "quickAccess": "快速访问"
+            },
+            "greeting": {
+                "morning": "早上好",
+                "afternoon": "下午好",
+                "evening": "晚上好",
+                "welcomeBack": "欢迎回到您的专属门户"
+            },
+            "actions": {
+                "repeatOrder": "重复上次订单",
+                "viewCatalog": "查看目录",
+                "myInvoices": "我的发票",
+                "directLine": "直线电话",
+                "contact": "联系我们"
+            },
+            "milestones": {
+                "firstInvoice": "第一张发票",
+                "invoiced1k": "开票€1,000",
+                "invoiced5k": "开票€5,000",
+                "invoiced10k": "开票€10,000",
+                "invoiced50k": "开票€50,000",
+                "streak3": "连续3个月",
+                "streak6": "连续6个月",
+                "legendClient": "传奇客户"
+            },
+            "metrics": {
+                "thisMonth": "本月",
+                "activeStreak": "活跃连续",
+                "months": "月",
+                "avgMonthly": "月平均",
+                "totalInvoiced": "开票总额"
+            },
+            "tiers": {
+                "starter": "新客户",
+                "bronze": "铜牌客户",
+                "silver": "银牌客户",
+                "gold": "金牌客户",
+                "platinum": "白金客户",
+                "strategic": "战略客户",
+                "enterprise": "VIP客户"
             }
         },
         "publicFeatures": {
             "badge": "Panel de Control",
             "title": "Todo lo que necesitas en un solo lugar",
-            "subtitle": "Gestiona tu relación comercial con nosotros de forma fácil y eficiente",
+            "subtitle": "简单高效地管理您与我们的商业关系",
             "items": {
                 "orders": {
-                    "title": "Gestión de Pedidos",
+                    "title": "订单管理",
                     "desc": "Realiza y consulta todos tus pedidos en tiempo real",
                     "label": "Disponible"
                 },
@@ -552,19 +653,19 @@
                     "label": "Personalizable"
                 },
                 "stats": {
-                    "title": "Estadísticas",
+                    "title": "统计数据",
                     "desc": "Analiza tu historial y patrones de compra",
                     "label": "Insights"
                 }
             },
             "cta": {
-                "title": "¿Aún no tienes cuenta?",
+                "title": "还没有账户？",
                 "desc": "Contacta con nuestro equipo comercial para obtener acceso",
                 "button": "Contactar"
             }
         },
         "invoice": {
-            "number": "Número",
+            "number": "编号",
             "date": "Fecha",
             "total": "Total",
             "base": "Base imponible",
@@ -581,18 +682,18 @@
             "lineTotal": "Importe"
         },
         "password": {
-            "change": "Cambiar contraseña",
-            "current": "Contraseña actual",
-            "new": "Nueva contraseña",
-            "confirm": "Confirmar contraseña",
-            "requirements": "Mínimo 12 caracteres",
+            "change": "修改密码",
+            "current": "当前密码",
+            "new": "新密码",
+            "confirm": "确认密码",
+            "requirements": "最少12个字符",
             "strength": "Fortaleza",
-            "weak": "Débil",
+            "weak": "弱",
             "medium": "Media",
             "strong": "Fuerte",
             "veryStrong": "Muy fuerte",
-            "mismatch": "Las contraseñas no coinciden",
-            "success": "Contraseña cambiada correctamente"
+            "mismatch": "密码不匹配",
+            "success": "密码修改成功"
         }
     },
     "chatbot": {
@@ -611,29 +712,29 @@
         "minimize": "最小化",
         "maximize": "最大化",
         "close": "关闭",
-        "quickActionsTitle": "Acciones rápidas",
-        "orAskMe": "O pregúntame directamente:",
+        "quickActionsTitle": "快速操作",
+        "orAskMe": "或者直接问我：",
         "quickActions": {
             "invoices": "Mis facturas",
-            "invoicesQuery": "Quiero ver mis facturas",
+            "invoicesQuery": "我想查看我的发票",
             "order": "Hacer pedido",
-            "orderQuery": "Cómo puedo hacer un pedido",
+            "orderQuery": "如何下订单",
             "contact": "Contacto",
-            "contactQuery": "Cuál es el teléfono de contacto",
+            "contactQuery": "联系电话是多少",
             "schedule": "Horarios",
-            "scheduleQuery": "Cuál es vuestro horario"
+            "scheduleQuery": "你们的营业时间是什么"
         },
-        "suggestions": "Quizás te interese:",
-        "quickQuestions": {
-            "0": "¿Qué productos distribuís?",
-            "1": "¿Cómo hago un pedido?",
-            "2": "¿Cuál es el horario?",
-            "3": "¿Cómo descargo facturas?"
-        },
-        "voiceInput": "Entrada de voz",
-        "voiceListening": "Escuchando...",
-        "voiceNotSupported": "Tu navegador no soporta entrada de voz",
-        "connectionError": "No se ha podido conectar con el servidor. Por favor, inténtalo de nuevo en unos segundos.",
+        "suggestions": "您可能感兴趣：",
+        "quickQuestions": [
+            "你们分销哪些产品？",
+            "如何下订单？",
+            "营业时间是什么？",
+            "如何下载发票？"
+        ],
+        "voiceInput": "语音输入",
+        "voiceListening": "正在收听...",
+        "voiceNotSupported": "您的浏览器不支持语音输入",
+        "connectionError": "无法连接到服务器。请稍后重试。",
         "poweredBy": "Pepa IA",
         "since": "HORECA desde 1966",
         "downloadInvoice": "Descargar factura"
@@ -647,20 +748,21 @@
         "green_energy": "绿色能源",
         "quick_access": "快速访问",
         "copyright": "© {year} Granja Mari Pepa。保留所有权利。",
-        "rights_reserved": "保留所有权利。",
-        "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
-        "quickLinks": "Enlaces rápidos",
-        "legal": "Legal",
-        "privacy": "Política de Privacidad",
-        "terms": "Términos y Condiciones",
-        "cookies": "Política de Cookies",
-        "legalNotice": "Aviso Legal",
-        "contact": "Contacto",
-        "followUs": "Síguenos",
+        "rights_reserved": "版权所有。",
+        "location_lorca": "Lorca, Murcia",
+        "description_long": "HORECA酒店餐饮冷冻、冷藏和常温产品分销专家。",
+        "quickLinks": "快速链接",
+        "legal": "法律",
+        "privacy": "隐私政策",
+        "terms": "条款和条件",
+        "cookies": "Cookie政策",
+        "legalNotice": "法律声明",
+        "contact": "联系方式",
+        "followUs": "关注我们",
         "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
-        "delegation": "Delegación Murcia",
-        "catalog": "Catálogo",
-        "client_portal": "Portal Clientes"
+        "delegation": "穆尔西亚代表处",
+        "catalog": "目录",
+        "client_portal": "客户门户"
     },
     "globe_map": {
         "badge": "分销网络",
@@ -681,64 +783,64 @@
         "notFoundDesc": "抱歉，您要查找的页面不存在。",
         "serverError": "服务器错误",
         "serverErrorDesc": "发生错误。请稍后再试。",
-        "networkError": "Error de conexión",
-        "networkErrorDesc": "No se pudo conectar con el servidor.",
-        "unauthorized": "No autorizado",
-        "unauthorizedDesc": "Necesitas iniciar sesión para acceder.",
-        "forbidden": "Acceso denegado",
-        "forbiddenDesc": "No tienes permisos para acceder a este recurso.",
-        "tryAgain": "Intentar de nuevo",
-        "goHome": "Ir al inicio",
-        "invalidCredentials": "Credenciales incorrectas",
-        "invalidCredentialsDesc": "Verifica tu código de cliente y contraseña."
+        "networkError": "网络错误",
+        "networkErrorDesc": "无法连接到服务器。",
+        "unauthorized": "未授权",
+        "unauthorizedDesc": "您需要登录才能访问此页面。",
+        "forbidden": "拒绝访问",
+        "forbiddenDesc": "您没有权限访问此资源。",
+        "tryAgain": "重试",
+        "goHome": "返回首页",
+        "invalidCredentials": "凭据无效",
+        "invalidCredentialsDesc": "请检查您的客户代码和密码。"
     },
     "contact": {
         "title": "Contacto",
-        "subtitle": "Estamos aquí para ayudarte",
-        "phone": "Teléfono",
+        "subtitle": "我们随时为您服务",
+        "phone": "电话",
         "email": "Email",
-        "address": "Dirección",
+        "address": "地址",
         "schedule": "Horario",
         "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
-        "scheduleSaturday": "Sábados: 9:00 - 14:00",
+        "scheduleSaturday": "周六: 9:00 - 14:00",
         "scheduleSunday": "Domingos y festivos: Cerrado",
         "form": {
-            "title": "Envíanos un mensaje",
+            "title": "给我们发送消息",
             "name": "Nombre",
             "namePlaceholder": "Tu nombre completo",
             "email": "Email",
             "emailPlaceholder": "tu@email.com",
-            "phone": "Teléfono",
+            "phone": "电话",
             "phonePlaceholder": "612 345 678",
             "company": "Empresa",
             "companyPlaceholder": "Nombre de tu empresa (opcional)",
             "message": "Mensaje",
-            "messagePlaceholder": "¿En qué podemos ayudarte?",
+            "messagePlaceholder": "我们能帮您什么？",
             "submit": "Enviar mensaje",
             "sending": "Enviando...",
-            "successTitle": "¡Mensaje enviado!",
+            "successTitle": "消息已发送！",
             "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
             "errorTitle": "Error al enviar",
-            "errorMessage": "Por favor, inténtalo de nuevo más tarde."
+            "errorMessage": "请稍后重试。"
         },
         "location": {
-            "title": "Nuestra ubicación",
+            "title": "我们的位置",
             "mainOffice": "Oficina Principal",
             "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
             "city": "30817 - Lorca (Murcia)"
         }
     },
     "products_page": {
-        "title": "Próximamente",
+        "title": "即将推出",
         "subtitle_1": "Estamos preparando algo especial",
-        "subtitle_2": "Nuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.",
+        "subtitle_2": "我们的产品目录正在更新，将推出新功能。",
         "cta_home": "Volver al inicio",
         "cta_clients": "Área de clientes",
-        "badge": "Disponible próximamente"
+        "badge": "即将上线"
     },
     "accessibility": {
         "skipToContent": "Ir al contenido principal",
-        "menuToggle": "Abrir menú",
+        "menuToggle": "打开菜单",
         "languageSwitch": "Cambiar idioma",
         "darkMode": "Modo oscuro",
         "lightMode": "Modo claro",

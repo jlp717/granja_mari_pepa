@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: ['/private/', '/admin/', '/api/'],
+            disallow: ['/private/', '/admin/', '/api/', '/checkout/'],
         },
-        sitemap: 'https://mari-pepa.com/sitemap.xml',
+        sitemap: 'https://www.mari-pepa.com/sitemap.xml',
     };
 }

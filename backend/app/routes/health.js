@@ -1,7 +1,9 @@
 /**
- * RUTAS DE HEALTH CHECK
- * ======================
- * Endpoints para verificar el estado del sistema
+ * RUTAS DE HEALTH CHECK - SENIOR EDITION
+ * =======================================
+ * Endpoints para verificar el estado del sistema.
+ * Incluye un "deep check" que la DB está realmente accesible.
+ * Las métricas se usan por el watchdog externo para decidir reinicios.
  */
 
 const express = require('express');
@@ -11,34 +13,50 @@ const odbcPool = require('../config/odbcConfig');
 
 /**
  * GET /health
- * Health check básico
+ * Health check con verificación real de la DB.
+ * Retorna HTTP 200 si TODO está bien, HTTP 503 si la DB está caída.
+ * Esto permite que scripts externos (cron watchdog) reinicien PM2 automáticamente.
  */
 router.get('/', async (req, res) => {
-  try {
-    // Verificar conexión a base de datos
-    let dbStatus = 'disconnected';
-    try {
-      // Query compatible con DB2 para AS400
-      await odbcPool.query('SELECT 1 AS test FROM SYSIBM.SYSDUMMY1');
-      dbStatus = 'connected';
-    } catch (dbError) {
-      logger.error('Error en health check DB:', dbError);
-    }
+  const startTime = Date.now();
+  let dbStatus = 'disconnected';
+  let dbLatencyMs = null;
 
-    return res.json({
-      status: 'ok',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-      database: dbStatus,
-      environment: process.env.NODE_ENV || 'development'
-    });
-  } catch (error) {
-    logger.error('Error en health check:', error);
-    return res.status(500).json({
-      status: 'error',
-      message: error.message
-    });
+  try {
+    const dbStart = Date.now();
+    await odbcPool.query('SELECT 1 FROM SYSIBM.SYSDUMMY1');
+    dbLatencyMs = Date.now() - dbStart;
+    dbStatus = 'connected';
+  } catch (dbError) {
+    logger.error('❌ Health check DB failed:', dbError.message);
+    dbStatus = 'error: ' + dbError.message.substring(0, 100);
   }
+
+  // Obtener métricas del pool ODBC
+  let poolMetrics = {};
+  try {
+    poolMetrics = odbcPool.getHealthMetrics();
+  } catch (_) { }
+
+  const isHealthy = dbStatus === 'connected';
+  const statusCode = isHealthy ? 200 : 503;
+
+  return res.status(statusCode).json({
+    status: isHealthy ? 'ok' : 'degraded',
+    timestamp: new Date().toISOString(),
+    uptime: Math.round(process.uptime()),
+    totalLatencyMs: Date.now() - startTime,
+    database: {
+      status: dbStatus,
+      latencyMs: dbLatencyMs,
+      ...poolMetrics
+    },
+    memory: {
+      rss: Math.round(process.memoryUsage().rss / 1024 / 1024) + 'MB',
+      heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'
+    },
+    environment: process.env.NODE_ENV || 'development'
+  });
 });
 
 module.exports = router;

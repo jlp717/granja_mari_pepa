@@ -33,6 +33,7 @@
     "pdf-parse": "^2.4.5",
     "pdfkit": "^0.13.0",
     "sharp": "^0.34.5",
+    "xlsx": "^0.18.5",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

@@ -75,7 +75,7 @@ export default function ContactPage() {
   };
 
   const handleWhatsAppClick = (phone: string, message?: string) => {
-    const encodedMessage = encodeURIComponent(message || '¡Hola! Me gustaría obtener más información sobre sus productos.');
+    const encodedMessage = encodeURIComponent(message || t('whatsapp_message'));
     window.open(`https://wa.me/${phone.replace(/\s+/g, '')}?text=${encodedMessage}`, '_blank');
   };
 

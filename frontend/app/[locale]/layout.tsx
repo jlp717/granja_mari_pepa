@@ -42,6 +42,11 @@ export const viewport: Viewport = {
 export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
     const t = await getTranslations({ locale, namespace: 'meta' });
     const isSpanish = locale === 'es';
+    const localePrefix = isSpanish ? '' : `/${locale}`;
+    const canonicalUrl = `https://www.mari-pepa.com${localePrefix}`;
+    const ogLocaleMap: Record<string, string> = {
+        es: 'es_ES', en: 'en_US', de: 'de_DE', it: 'it_IT', zh: 'zh_CN'
+    };
 
     return {
         metadataBase: new URL('https://www.mari-pepa.com'),
@@ -64,8 +69,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
         },
         openGraph: {
             type: 'website',
-            locale: isSpanish ? 'es_ES' : 'en_US',
-            url: isSpanish ? 'https://www.mari-pepa.com' : 'https://www.mari-pepa.com/en',
+            locale: ogLocaleMap[locale] || 'es_ES',
+            url: canonicalUrl,
             siteName: 'Granja Mari Pepa',
             title: t('title'),
             description: t('description'),
@@ -87,10 +92,13 @@ export async function generateMetadata({ params: { locale } }: { params: { local
             creator: '@GranjaMaripepa',
         },
         alternates: {
-            canonical: isSpanish ? 'https://www.mari-pepa.com' : 'https://www.mari-pepa.com/en',
+            canonical: canonicalUrl,
             languages: {
                 'es': 'https://www.mari-pepa.com',
                 'en': 'https://www.mari-pepa.com/en',
+                'de': 'https://www.mari-pepa.com/de',
+                'it': 'https://www.mari-pepa.com/it',
+                'zh': 'https://www.mari-pepa.com/zh',
             },
         },
         icons: {
@@ -145,6 +153,9 @@ export default async function LocaleLayout({
                 {/* hreflang para SEO multilingüe */}
                 <link rel="alternate" hrefLang="es" href="https://www.mari-pepa.com" />
                 <link rel="alternate" hrefLang="en" href="https://www.mari-pepa.com/en" />
+                <link rel="alternate" hrefLang="de" href="https://www.mari-pepa.com/de" />
+                <link rel="alternate" hrefLang="it" href="https://www.mari-pepa.com/it" />
+                <link rel="alternate" hrefLang="zh" href="https://www.mari-pepa.com/zh" />
                 <link rel="alternate" hrefLang="x-default" href="https://www.mari-pepa.com" />
                 {/* JSON-LD SEO Schemas */}
                 <JsonLdSchemas />
@@ -169,9 +180,11 @@ export default async function LocaleLayout({
                                                 <Header />
                                                 {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
                               sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
+                                                {/* pt responsive: Top 12 + Announce 11 + Header (Variable) */}
+                                                {/* pt responsive: Adjusted for Taller Mobile Announcement (8rem + Height) */}
                                                 <main
                                                     id="main-content"
-                                                    className="pt-32 sm:pt-36 md:pt-40 lg:pt-44 flex-1 bg-background"
+                                                    className="pt-56 sm:pt-48 md:pt-52 lg:pt-56 flex-1 bg-background"
                                                     role="main"
                                                 >
                                                     {children}
