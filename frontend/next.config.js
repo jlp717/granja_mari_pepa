@@ -54,11 +54,6 @@ const nextConfig = {
   // NOTA: Los headers de seguridad están en netlify.toml
   // ya que con output: 'export' no se pueden usar aquí
 
-  // Increase proxy timeout for long-running requests (bulk PDF download)
-  experimental: {
-    proxyTimeout: 300000, // 5 minutes
-  },
-
   httpAgentOptions: {
     keepAlive: true,
   },

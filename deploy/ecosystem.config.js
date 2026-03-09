@@ -63,8 +63,7 @@ module.exports = {
         {
             name: 'mari-pepa-frontend',
             cwd: './frontend',
-            script: 'node_modules/next/dist/bin/next',
-            args: 'start -p 3001',
+            script: 'server.js',
 
             // Cluster mode (2 instancias para mejor rendimiento)
             instances: 2,

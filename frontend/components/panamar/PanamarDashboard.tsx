@@ -187,6 +187,9 @@ export function PanamarDashboard() {
   const getDocKey = (doc: PanamarDocument) =>
     `${doc.subempresa}-${doc.ejercicio}-${doc.serieAlbaran}-${doc.terminal}-${doc.numeroAlbaran}`;
 
+  const getDocRef = (doc: PanamarDocument) =>
+    `${doc.serieAlbaran}-${doc.terminal}-${doc.numeroAlbaran}`;
+
   const getDocPath = (doc: PanamarDocument) =>
     `/api/panamar/documents/${doc.subempresa}/${doc.ejercicio}/${encodeURIComponent(doc.serieAlbaran)}/${doc.terminal}/${doc.numeroAlbaran}`;
 
@@ -197,7 +200,7 @@ export function PanamarDashboard() {
     const toastId = toast.loading(
       <div className="flex items-center space-x-2">
         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-        <span>Descargando albarán {doc.serieAlbaran}-{doc.numeroAlbaran}...</span>
+        <span>Descargando albarán {getDocRef(doc)}...</span>
       </div>
     );
     try {
@@ -207,7 +210,7 @@ export function PanamarDashboard() {
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = blobUrl;
-      a.download = `Albaran_PANAMAR_${doc.serieAlbaran}-${doc.numeroAlbaran}.pdf`;
+      a.download = `Albaran_PANAMAR_${getDocRef(doc)}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -255,7 +258,7 @@ export function PanamarDashboard() {
 
   // ── WhatsApp share ───────────────────────────────────────────────
   const handleWhatsApp = (doc: PanamarDocument) => {
-    const docRef = `${doc.serieAlbaran}-${doc.numeroAlbaran}`;
+    const docRef = getDocRef(doc);
     const text = encodeURIComponent(
       `📦 Albarán PANAMAR ${docRef}\n` +
       `Cliente: ${doc.nombreCliente} (${doc.codigoCliente})\n` +
@@ -715,7 +718,7 @@ export function PanamarDashboard() {
                       </div>
                       <div>
                         <div className="font-bold text-lg text-orange-600">
-                          {doc.serieAlbaran}-{doc.numeroAlbaran}
+                          {getDocRef(doc)}
                         </div>
                         <div className="text-xs text-gray-500 font-medium">
                           Albarán{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
@@ -850,7 +853,7 @@ export function PanamarDashboard() {
                             </div>
                             <div className="min-w-0">
                               <div className="font-bold text-base text-orange-600">
-                                {doc.serieAlbaran}-{doc.numeroAlbaran}
+                                {getDocRef(doc)}
                               </div>
                               <div className="text-xs text-gray-500 font-medium">
                                 Albarán{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
@@ -1136,7 +1139,7 @@ export function PanamarDashboard() {
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                   <div className="min-w-0">
                     <h2 className="text-base sm:text-lg font-bold truncate">
-                      Albarán {previewDoc?.serieAlbaran}-{previewDoc?.numeroAlbaran}
+                      Albarán {previewDoc ? getDocRef(previewDoc) : ''}
                     </h2>
                     <p className="text-white/70 text-xs hidden sm:block">Previsualización PDF · {previewDoc?.nombreCliente}</p>
                   </div>
@@ -1218,7 +1221,7 @@ export function PanamarDashboard() {
                       <Truck className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-bold text-orange-700">{shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran}</div>
+                      <div className="font-bold text-orange-700">{getDocRef(shareDoc)}</div>
                       <div className="text-xs text-orange-600/70">{shareDoc.nombreCliente} · {shareDoc.fecha}</div>
                     </div>
                   </div>
@@ -1294,7 +1297,7 @@ export function PanamarDashboard() {
                   <div className="flex items-center gap-2 bg-orange-50 rounded-xl px-3 py-2 border border-orange-100">
                     <Truck className="w-4 h-4 text-orange-500" />
                     <span className="text-sm font-semibold text-orange-700">
-                      {shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran}
+                      {getDocRef(shareDoc)}
                     </span>
                     <span className="text-xs text-orange-500">· {shareDoc.nombreCliente}</span>
                   </div>
