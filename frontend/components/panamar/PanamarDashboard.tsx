@@ -530,7 +530,8 @@ export function PanamarDashboard() {
                             <th className="px-3 py-2 text-left">Lote</th>
                             <th className="px-3 py-2 text-right">Cajas</th>
                             <th className="px-3 py-2 text-right">Uds/Kg</th>
-                            <th className="px-3 py-2 text-right">Precio T85</th>
+                            <th className="px-3 py-2 text-right">Precio</th>
+                            <th className="px-3 py-2 text-right">% Dto</th>
                             <th className="px-3 py-2 text-right">Importe</th>
                           </tr>
                         </thead>
@@ -544,29 +545,19 @@ export function PanamarDashboard() {
                               <td className="px-3 py-2 text-xs text-gray-500">{line.lote}</td>
                               <td className="px-3 py-2 text-right text-gray-700">{line.cajas > 0 ? line.cajas : '-'}</td>
                               <td className="px-3 py-2 text-right text-gray-700">{line.unidades > 0 ? line.unidades : '-'}</td>
-                              <td className="px-3 py-2 text-right">
-                                {line.usaTarifa85 ? (
-                                  <span className="text-orange-600 font-medium">{line.precioUnitario.toFixed(2)}</span>
-                                ) : (
-                                  <span className="text-gray-400" title="Sin tarifa 85, usando precio venta">
-                                    {line.precioUnitario.toFixed(2)}*
-                                  </span>
-                                )}
-                              </td>
+                              <td className="px-3 py-2 text-right font-medium text-gray-700">{line.precioUnitario.toFixed(2)}</td>
+                              <td className="px-3 py-2 text-right text-gray-500">{line.descuento > 0 ? line.descuento.toFixed(2) + '%' : '-'}</td>
                               <td className="px-3 py-2 text-right font-medium text-gray-900">{line.importe.toFixed(2)}</td>
                             </tr>
                           ))}
                         </tbody>
                         <tfoot>
                           <tr className="bg-orange-50 font-semibold text-sm">
-                            <td colSpan={6} className="px-3 py-2 text-right text-orange-700">Total PANAMAR:</td>
+                            <td colSpan={7} className="px-3 py-2 text-right text-orange-700">Total PANAMAR:</td>
                             <td className="px-3 py-2 text-right text-orange-800">{doc.totalImportePanamar.toFixed(2)} &euro;</td>
                           </tr>
                         </tfoot>
                       </table>
-                    </div>
-                    <div className="px-3 py-1.5 bg-gray-50 text-[10px] text-gray-400">
-                      * Precio de venta original (sin tarifa 85 disponible)
                     </div>
                   </div>
                 )}

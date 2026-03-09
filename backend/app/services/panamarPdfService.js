@@ -250,13 +250,14 @@ async function generateAlbaranPDF(panamarDoc) {
 
     // Column definitions (matching the physical albarán)
     const cols = {
-      ref:   { x: marginL,       w: 35,  label: 'Ref.' },
-      desc:  { x: marginL + 35,  w: 195, label: 'Descripción' },
-      lote:  { x: marginL + 230, w: 55,  label: 'Lote' },
-      cajas: { x: marginL + 285, w: 40,  label: 'Cajas' },
-      uds:   { x: marginL + 325, w: 50,  label: 'Uds/Kg' },
-      precio:{ x: marginL + 375, w: 60,  label: 'Precio T85' },
-      imp:   { x: marginL + 435, w: contentW - 435 + marginL, label: 'Importe' }
+      ref:    { x: marginL,        w: 35,  label: 'Ref.' },
+      desc:   { x: marginL + 35,   w: 175, label: 'Descripción' },
+      lote:   { x: marginL + 210,  w: 48,  label: 'Lote' },
+      cajas:  { x: marginL + 258,  w: 38,  label: 'Cajas' },
+      uds:    { x: marginL + 296,  w: 42,  label: 'Uds/Kg' },
+      precio: { x: marginL + 338,  w: 52,  label: 'Precio' },
+      dto:    { x: marginL + 390,  w: 35,  label: '% Dto' },
+      imp:    { x: marginL + 425,  w: contentW - 425, label: 'Importe' }
     };
 
     function drawTableHeader(doc, yPos) {
@@ -272,6 +273,7 @@ async function generateAlbaranPDF(panamarDoc) {
       doc.text(cols.cajas.label, cols.cajas.x, yPos + 5, { width: cols.cajas.w, align: 'right' });
       doc.text(cols.uds.label, cols.uds.x, yPos + 5, { width: cols.uds.w, align: 'right' });
       doc.text(cols.precio.label, cols.precio.x, yPos + 5, { width: cols.precio.w, align: 'right' });
+      doc.text(cols.dto.label, cols.dto.x, yPos + 5, { width: cols.dto.w, align: 'right' });
       doc.text(cols.imp.label, cols.imp.x, yPos + 5, { width: cols.imp.w, align: 'right' });
 
       return yPos + rowH;
@@ -328,14 +330,13 @@ async function generateAlbaranPDF(panamarDoc) {
       const udsVal = line.unidades > 0 ? fmtNum(line.unidades, 0) : '-';
       doc.text(udsVal, cols.uds.x, y + 4, { width: cols.uds.w, align: 'right' });
 
-      // Precio T85
-      if (line.usaTarifa85) {
-        doc.font('Helvetica-Bold').fillColor(C.darkGray);
-        doc.text(fmtNum(line.precioUnitario, 2), cols.precio.x, y + 4, { width: cols.precio.w, align: 'right' });
-      } else {
-        doc.font('Helvetica').fillColor(C.mediumGray);
-        doc.text(fmtNum(line.precioUnitario, 2) + '*', cols.precio.x, y + 4, { width: cols.precio.w, align: 'right' });
-      }
+      // Precio
+      doc.font('Helvetica').fillColor(C.darkGray);
+      doc.text(fmtNum(line.precioUnitario, 2), cols.precio.x, y + 4, { width: cols.precio.w, align: 'right' });
+
+      // % Descuento
+      const dtoVal = line.descuento > 0 ? fmtNum(line.descuento, 2) + '%' : '-';
+      doc.text(dtoVal, cols.dto.x, y + 4, { width: cols.dto.w, align: 'right' });
 
       // Importe
       doc.font('Helvetica-Bold').fillColor(C.darkGray);
@@ -378,16 +379,6 @@ async function generateAlbaranPDF(panamarDoc) {
       });
 
     y += 34;
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // FOOTNOTE
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    const hasOriginalPrice = lineas.some(l => !l.usaTarifa85);
-    if (hasOriginalPrice) {
-      doc.fontSize(6).font('Helvetica').fillColor(C.mediumGray)
-        .text('* Precio de venta original (sin tarifa 85 disponible)', marginL, y);
-      y += 12;
-    }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // FOOTER on each page
