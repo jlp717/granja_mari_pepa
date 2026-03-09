@@ -75,6 +75,7 @@ export function PanamarDashboard() {
   const [searchInput, setSearchInput] = useState('');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [bulkDownloading, setBulkDownloading] = useState(false);
+  const bulkAbortRef = useRef<AbortController | null>(null);
 
   // Share state
   const [shareDoc, setShareDoc] = useState<PanamarDocument | null>(null);
@@ -311,11 +312,15 @@ export function PanamarDashboard() {
 
   // ── Bulk download (ZIP with all filtered PDFs) ───────────────────
   const handleBulkDownload = async () => {
+    // Create abort controller so user can cancel
+    const abortController = new AbortController();
+    bulkAbortRef.current = abortController;
     setBulkDownloading(true);
+
     const toastId = toast.loading(
       <div className="flex items-center space-x-2">
         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-orange-600"></div>
-        <span>Generando ZIP con todos los albaranes...</span>
+        <span>Generando ZIP con {total} albaranes... (puede tardar)</span>
       </div>
     );
     try {
@@ -328,14 +333,29 @@ export function PanamarDashboard() {
 
       const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
       const filename = `PANAMAR_Albaranes_${today}.zip`;
-      const ok = await secureDownload(`/api/panamar/bulk-download?${params.toString()}`, filename);
+      const ok = await secureDownload(
+        `/api/panamar/bulk-download?${params.toString()}`,
+        filename,
+        abortController.signal
+      );
       if (!ok) throw new Error('Error descargando ZIP');
       toast.success('Descarga completada correctamente', { id: toastId });
     } catch (err) {
-      console.error('Bulk download error:', err);
-      toast.error('Error al generar la descarga masiva', { id: toastId });
+      if ((err as Error).name === 'AbortError') {
+        toast.info('Descarga cancelada', { id: toastId });
+      } else {
+        console.error('Bulk download error:', err);
+        toast.error('Error al generar la descarga masiva', { id: toastId });
+      }
     } finally {
       setBulkDownloading(false);
+      bulkAbortRef.current = null;
+    }
+  };
+
+  const handleCancelBulkDownload = () => {
+    if (bulkAbortRef.current) {
+      bulkAbortRef.current.abort();
     }
   };
 
@@ -469,23 +489,27 @@ export function PanamarDashboard() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <Button
-                onClick={handleBulkDownload}
-                disabled={bulkDownloading}
-                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-xl h-12 px-6 font-bold"
-              >
-                {bulkDownloading ? (
+              {bulkDownloading ? (
+                <Button
+                  onClick={handleCancelBulkDownload}
+                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-xl h-12 px-6 font-bold"
+                >
                   <div className="flex items-center gap-2">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    Generando ZIP...
+                    <X className="w-5 h-5" />
+                    Cancelar descarga
                   </div>
-                ) : (
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleBulkDownload}
+                  className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-xl h-12 px-6 font-bold"
+                >
                   <div className="flex items-center gap-2">
                     <Archive className="w-5 h-5" />
                     Descargar todos ({total.toLocaleString('es-ES')})
                   </div>
-                )}
-              </Button>
+                </Button>
+              )}
             </motion.div>
           )}
         </div>

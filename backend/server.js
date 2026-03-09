@@ -589,8 +589,8 @@ async function initializeServer() {
       logger.info(`=================================================`);
     });
 
-    // Configurar timeouts
-    server.timeout = 120000; // 2 minutos
+    // Configurar timeouts (5 min para soportar bulk download de PDFs)
+    server.timeout = 300000; // 5 minutos
     server.keepAliveTimeout = 65000;
     server.headersTimeout = 66000;
 

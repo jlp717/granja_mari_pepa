@@ -249,21 +249,39 @@ export async function secureFetch<T = unknown>(
 }
 
 /**
- * 🔐 Fetch para descargar archivos (PDF, etc.) con autenticación
+ * 🔐 Fetch para descargar archivos (PDF, ZIP, etc.) con autenticación
+ * Soporta silent refresh en 401 y AbortSignal para cancelación.
  */
 export async function secureDownload(
   endpoint: string,
-  filename: string
+  filename: string,
+  signal?: AbortSignal
 ): Promise<boolean> {
   try {
     const url = endpoint.startsWith('http')
       ? endpoint
       : `${API_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
 
-    const response = await fetch(url, {
+    let response = await fetch(url, {
       method: 'GET',
-      credentials: 'include', // 🔐 Envía cookies HttpOnly
+      credentials: 'include',
+      signal,
     });
+
+    // Silent refresh on 401
+    if (response.status === 401) {
+      const refreshed = await attemptSilentRefresh();
+      if (refreshed) {
+        response = await fetch(url, {
+          method: 'GET',
+          credentials: 'include',
+          signal,
+        });
+      } else {
+        triggerSessionExpired('download_401_refresh_failed');
+        return false;
+      }
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -272,7 +290,6 @@ export async function secureDownload(
     const blob = await response.blob();
     const blobUrl = window.URL.createObjectURL(blob);
 
-    // Crear link temporal y disparar descarga
     const link = document.createElement('a');
     link.href = blobUrl;
     link.download = filename;
@@ -280,11 +297,14 @@ export async function secureDownload(
     link.click();
     document.body.removeChild(link);
 
-    // Limpiar blob URL
     window.URL.revokeObjectURL(blobUrl);
 
     return true;
   } catch (error) {
+    if ((error as Error).name === 'AbortError') {
+      console.log('Descarga cancelada por el usuario');
+      return false;
+    }
     console.error('Error en descarga segura:', error);
     return false;
   }
