@@ -1,13 +1,20 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '@/lib/store';
 import { secureFetch } from '@/lib/secureFetch';
 import { PanamarDocument, PanamarFilters, PanamarDocumentsResponse, PanamarSummary } from '@/lib/types';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { toast } from 'sonner';
 import {
-  Package, Search, Filter, ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
-  FileText, Truck, Calendar, Users, BarChart3, RefreshCw, LogOut, X,
-  Download, Eye, Mail, Share2, MessageCircle
+  Package, Search, ChevronLeft, ChevronRight,
+  ChevronsLeft, ChevronsRight,
+  FileText, Truck, Calendar, Users, BarChart3, LogOut, X,
+  Download, Eye, Mail, MessageCircle, DollarSign, Settings
 } from 'lucide-react';
 
 export function PanamarDashboard() {
@@ -20,16 +27,16 @@ export function PanamarDashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<PanamarSummary | null>(null);
-  const [expandedDoc, setExpandedDoc] = useState<string | null>(null);
 
   // Filters
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
   const [filters, setFilters] = useState<PanamarFilters>({
     page: 1,
     pageSize: 25,
-    ejercicio: new Date().getFullYear()
+    ejercicio: currentYear
   });
   const [searchInput, setSearchInput] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // Share state
@@ -40,7 +47,8 @@ export function PanamarDashboard() {
   const [sendingEmail, setSendingEmail] = useState(false);
   const [emailResult, setEmailResult] = useState<{ ok: boolean; msg: string } | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [loadingPdf, setLoadingPdf] = useState<string | null>(null); // key of doc loading
+  const [previewDoc, setPreviewDoc] = useState<PanamarDocument | null>(null);
+  const [loadingPdf, setLoadingPdf] = useState<string | null>(null);
 
   // ── Fetch documents ──────────────────────────────────────────────
   const fetchDocuments = useCallback(async () => {
@@ -108,26 +116,26 @@ export function PanamarDashboard() {
     setFilters(prev => ({ ...prev, page: 1, [key]: value || undefined }));
   };
 
-  const toggleDocument = (key: string) => {
-    setExpandedDoc(prev => (prev === key ? null : key));
-  };
-
   const getDocKey = (doc: PanamarDocument) =>
     `${doc.subempresa}-${doc.ejercicio}-${doc.serieAlbaran}-${doc.terminal}-${doc.numeroAlbaran}`;
 
   const getDocPath = (doc: PanamarDocument) =>
     `/api/panamar/documents/${doc.subempresa}/${doc.ejercicio}/${encodeURIComponent(doc.serieAlbaran)}/${doc.terminal}/${doc.numeroAlbaran}`;
 
-  // ── PDF Download ─────────────────────────────────────────────────
+  // ── PDF Download (via secureFetch – relative URL through Next.js rewrite) ──
   const handleDownload = async (doc: PanamarDocument) => {
     const key = getDocKey(doc);
     setLoadingPdf(key);
+    const toastId = toast.loading(
+      <div className="flex items-center space-x-2">
+        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+        <span>Descargando albarán {doc.serieAlbaran}-{doc.numeroAlbaran}...</span>
+      </div>
+    );
     try {
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
-      const url = `${backendUrl}${getDocPath(doc)}/pdf`;
-      const res = await fetch(url, { credentials: 'include' });
+      const res = await secureFetch<Blob>(`${getDocPath(doc)}/pdf`);
       if (!res.ok) throw new Error('Error descargando PDF');
-      const blob = await res.blob();
+      const blob = res.data;
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = blobUrl;
@@ -136,29 +144,30 @@ export function PanamarDashboard() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(blobUrl);
+      toast.success('Albarán descargado correctamente', { id: toastId });
     } catch (err) {
       console.error('Download error:', err);
-      alert('Error al descargar el PDF');
+      toast.error('Error al descargar el PDF', { id: toastId });
     } finally {
       setLoadingPdf(null);
     }
   };
 
-  // ── PDF Preview ──────────────────────────────────────────────────
+  // ── PDF Preview (via secureFetch – relative URL through Next.js rewrite) ──
   const handlePreview = async (doc: PanamarDocument) => {
     const key = getDocKey(doc);
     setLoadingPdf(key);
+    setPreviewDoc(doc);
     try {
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
-      const url = `${backendUrl}${getDocPath(doc)}/preview`;
-      const res = await fetch(url, { credentials: 'include' });
+      const res = await secureFetch<Blob>(`${getDocPath(doc)}/preview`);
       if (!res.ok) throw new Error('Error previsualizando PDF');
-      const blob = await res.blob();
+      const blob = res.data;
       const blobUrl = URL.createObjectURL(blob);
       setPreviewUrl(blobUrl);
     } catch (err) {
       console.error('Preview error:', err);
-      alert('Error al previsualizar el PDF');
+      toast.error('Error al previsualizar el PDF');
+      setPreviewDoc(null);
     } finally {
       setLoadingPdf(null);
     }
@@ -167,6 +176,7 @@ export function PanamarDashboard() {
   const closePreview = () => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(null);
+    setPreviewDoc(null);
   };
 
   // ── Share modal ──────────────────────────────────────────────────
@@ -214,11 +224,14 @@ export function PanamarDashboard() {
       );
       if (res.ok && res.data.success) {
         setEmailResult({ ok: true, msg: res.data.message || 'Email enviado correctamente' });
+        toast.success('Email enviado correctamente');
       } else {
         setEmailResult({ ok: false, msg: res.data.message || 'Error al enviar' });
+        toast.error('Error al enviar email');
       }
     } catch (err) {
       setEmailResult({ ok: false, msg: 'Error de conexión al enviar email' });
+      toast.error('Error de conexión al enviar email');
     } finally {
       setSendingEmail(false);
     }
@@ -229,506 +242,958 @@ export function PanamarDashboard() {
     setShowLogoutConfirm(false);
   };
 
-  // ── Current years for filter ─────────────────────────────────────
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+  // ── Pagination helpers ───────────────────────────────────────────
+  const startIndex = ((filters.page || 1) - 1) * (filters.pageSize || 25);
+  const endIndex = startIndex + (filters.pageSize || 25);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-orange-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="min-h-screen bg-background">
+      {/* Decorative background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
+
+      {/* Sticky Header */}
+      <header className="bg-card border-b border-border shadow-sm sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <Package className="h-6 w-6 text-orange-600" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
+                <Package className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Modo PANAMAR</h1>
-                <p className="text-sm text-gray-500">Documentos con productos PANAMAR &middot; Tarifa 85</p>
+                <h1 className="text-lg font-bold text-foreground">Modo PANAMAR</h1>
+                <p className="text-xs text-muted-foreground hidden sm:block">Documentos con productos PANAMAR · Tarifa 85</p>
               </div>
             </div>
+
+            {/* Desktop search */}
+            <div className="hidden md:flex flex-1 max-w-md mx-8">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar por referencia, cliente o pedido..."
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  className="pl-10 bg-gray-50/50 focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+            </div>
+
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-500 hidden sm:inline">{user?.name}</span>
-              <button
+              <span className="text-sm text-muted-foreground hidden sm:inline font-medium">{user?.name}</span>
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => setShowLogoutConfirm(true)}
-                className="p-2 text-gray-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50"
+                className="text-muted-foreground hover:text-red-500 hover:bg-red-50"
                 title="Cerrar sesión"
               >
                 <LogOut className="h-5 w-5" />
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="container mx-auto px-4 py-6 space-y-6 relative z-10">
         {/* Summary Cards */}
         {summary && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <SummaryCard
-              icon={<FileText className="h-5 w-5 text-orange-600" />}
-              label="Documentos"
-              value={summary.totalDocumentos}
-              bg="bg-orange-50"
-            />
-            <SummaryCard
-              icon={<Users className="h-5 w-5 text-blue-600" />}
-              label="Clientes"
-              value={summary.totalClientes}
-              bg="bg-blue-50"
-            />
-            <SummaryCard
-              icon={<BarChart3 className="h-5 w-5 text-green-600" />}
-              label="Facturados"
-              value={summary.totalFacturados}
-              bg="bg-green-50"
-            />
-            <SummaryCard
-              icon={<Truck className="h-5 w-5 text-amber-600" />}
-              label="Pendientes"
-              value={summary.totalPendientes}
-              bg="bg-amber-50"
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg">
+                <FileText className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalDocumentos.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Documentos</div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg">
+                <Users className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalClientes.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Clientes</div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg">
+                <BarChart3 className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalFacturados.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Facturados</div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-lg">
+                <Truck className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalPendientes.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Pendientes</div>
+              </div>
+            </motion.div>
           </div>
         )}
 
-        {/* Search & Filters */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-4">
-          <div className="flex flex-col sm:flex-row gap-3">
-            {/* Search */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Buscar por referencia, cliente o pedido..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-400 text-sm"
-              />
-            </div>
-            <button
-              onClick={handleSearch}
-              className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition text-sm font-medium"
-            >
-              Buscar
-            </button>
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition text-sm flex items-center gap-2"
-            >
-              <Filter className="h-4 w-4" />
-              Filtros
-              {showFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-            </button>
-            <button
-              onClick={() => { setFilters({ page: 1, pageSize: 25, ejercicio: currentYear }); setSearchInput(''); }}
-              className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition text-sm"
-              title="Limpiar filtros"
-            >
-              <RefreshCw className="h-4 w-4" />
-            </button>
+        {/* Header Row */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-1">
+              <Package className="w-6 h-6 inline-block mr-2 text-orange-500" />
+              Albaranes PANAMAR
+            </h2>
+            <p className="text-muted-foreground text-sm">
+              {total} documento{total !== 1 ? 's' : ''} encontrado{total !== 1 ? 's' : ''}
+              {filters.ejercicio ? ` · Ejercicio ${filters.ejercicio}` : ''}
+            </p>
+          </div>
+        </div>
+
+        {/* Filter Panel - Premium Design */}
+        <div className="bg-white rounded-2xl border-2 border-orange-100 p-6 space-y-5 shadow-lg">
+          {/* Search (mobile) */}
+          <div className="md:hidden relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-500" />
+            <Input
+              placeholder="Buscar por referencia, cliente o pedido..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              className="pl-12 h-14 border-2 border-gray-200 bg-gray-50 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium"
+            />
           </div>
 
-          {/* Filter Panel */}
-          {showFilters && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-gray-100">
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Ejercicio</label>
-                <select
-                  value={filters.ejercicio || ''}
-                  onChange={(e) => handleFilterChange('ejercicio', e.target.value ? parseInt(e.target.value) : undefined)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
-                >
-                  <option value="">Todos</option>
-                  {years.map(y => <option key={y} value={y}>{y}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Tipo</label>
-                <select
-                  value={filters.tipo || ''}
-                  onChange={(e) => handleFilterChange('tipo', e.target.value || undefined)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
-                >
-                  <option value="">Todos</option>
-                  <option value="albaran">Albarán</option>
-                  <option value="factura">Factura</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Desde</label>
+          {/* Filters Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Ejercicio */}
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-orange-600 flex items-center">
+                <Calendar className="w-4 h-4 mr-2" />
+                Ejercicio
+              </label>
+              <select
+                value={filters.ejercicio || ''}
+                onChange={(e) => handleFilterChange('ejercicio', e.target.value ? parseInt(e.target.value) : undefined)}
+                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-gray-900 font-medium cursor-pointer hover:border-orange-300 transition-colors"
+              >
+                <option value="">Todos</option>
+                {years.map(y => <option key={y} value={y}>{y}</option>)}
+              </select>
+            </div>
+
+            {/* Tipo */}
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-orange-600 flex items-center">
+                <FileText className="w-4 h-4 mr-2" />
+                Tipo documento
+              </label>
+              <select
+                value={filters.tipo || ''}
+                onChange={(e) => handleFilterChange('tipo', e.target.value || undefined)}
+                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-gray-900 font-medium cursor-pointer hover:border-orange-300 transition-colors"
+              >
+                <option value="">Todos</option>
+                <option value="albaran">Albarán</option>
+                <option value="factura">Factura</option>
+              </select>
+            </div>
+
+            {/* Código Cliente */}
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-orange-600 flex items-center">
+                <Users className="w-4 h-4 mr-2" />
+                Código Cliente Destino
+              </label>
+              <input
+                type="text"
+                placeholder="Ej: 4300006867"
+                value={filters.codigoCliente || ''}
+                onChange={(e) => handleFilterChange('codigoCliente', e.target.value || undefined)}
+                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-gray-900 font-medium placeholder:text-gray-400 hover:border-orange-300 transition-colors"
+              />
+            </div>
+          </div>
+
+          {/* Date Range */}
+          <div className="border-t-2 border-orange-100 pt-5 mt-5">
+            <label className="text-sm font-bold text-orange-600 flex items-center mb-3">
+              <Calendar className="w-4 h-4 mr-2" />
+              Rango de fechas
+            </label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-orange-500">Desde</label>
                 <input
                   type="date"
                   value={filters.fechaDesde || ''}
                   onChange={(e) => handleFilterChange('fechaDesde', e.target.value || undefined)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                  className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all duration-200 text-gray-900 font-medium cursor-pointer hover:border-orange-300"
                 />
               </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Hasta</label>
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-orange-500">Hasta</label>
                 <input
                   type="date"
                   value={filters.fechaHasta || ''}
                   onChange={(e) => handleFilterChange('fechaHasta', e.target.value || undefined)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-gray-500 mb-1">Código Cliente Destino</label>
-                <input
-                  type="text"
-                  placeholder="Ej: 4300006867"
-                  value={filters.codigoCliente || ''}
-                  onChange={(e) => handleFilterChange('codigoCliente', e.target.value || undefined)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                  className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all duration-200 text-gray-900 font-medium cursor-pointer hover:border-orange-300"
                 />
               </div>
             </div>
-          )}
-        </div>
-
-        {/* Results */}
-        <div className="space-y-3">
-          {/* Status bar */}
-          <div className="flex items-center justify-between text-sm text-gray-500">
-            <span>
-              {loading ? 'Cargando...' : `${total} documento${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''}`}
-            </span>
-            {totalPages > 1 && (
-              <span>Página {filters.page} de {totalPages}</span>
+            {(filters.fechaDesde || filters.fechaHasta) && (
+              <button
+                onClick={() => setFilters(prev => ({ ...prev, page: 1, fechaDesde: undefined, fechaHasta: undefined }))}
+                className="mt-3 text-sm font-bold text-orange-600 hover:text-orange-700 underline decoration-2 underline-offset-2 transition-colors"
+              >
+                Limpiar rango de fechas
+              </button>
             )}
           </div>
+        </div>
 
-          {/* Error */}
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
+        {/* Error */}
+        {error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-red-50 border-2 border-red-200 text-red-700 px-6 py-4 rounded-2xl text-sm font-medium shadow-sm"
+          >
+            {error}
+          </motion.div>
+        )}
 
-          {/* Loading */}
-          {loading && (
-            <div className="flex justify-center py-12">
-              <RefreshCw className="h-8 w-8 text-orange-400 animate-spin" />
-            </div>
-          )}
+        {/* Loading */}
+        {loading && (
+          <div className="flex flex-col items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mb-4"></div>
+            <p className="text-muted-foreground font-medium">Cargando documentos...</p>
+          </div>
+        )}
 
-          {/* Document List */}
-          {!loading && documents.length === 0 && !error && (
-            <div className="text-center py-12 text-gray-400">
-              <Package className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>No se encontraron documentos PANAMAR</p>
-              <p className="text-xs mt-1">Prueba ajustando los filtros</p>
-            </div>
-          )}
+        {/* Empty State */}
+        {!loading && documents.length === 0 && !error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-12 bg-white rounded-2xl border-2 border-gray-100 shadow-lg"
+          >
+            <Package className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
+            <p className="text-lg font-semibold text-muted-foreground">No se encontraron documentos PANAMAR</p>
+            <p className="text-sm text-muted-foreground mt-1">Prueba ajustando los filtros</p>
+          </motion.div>
+        )}
 
-          {!loading && documents.map((doc) => {
-            const key = getDocKey(doc);
-            const isExpanded = expandedDoc === key;
-
-            return (
-              <div key={key} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                {/* Document Header */}
-                <button
-                  onClick={() => toggleDocument(key)}
-                  className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition"
+        {/* Mobile Cards View */}
+        {!loading && documents.length > 0 && (
+          <div className="block lg:hidden space-y-4">
+            {documents.map((doc, index) => {
+              const key = getDocKey(doc);
+              return (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="bg-white rounded-2xl border-2 border-gray-100 p-4 shadow-lg space-y-4"
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className={`p-1.5 rounded-lg ${doc.tipoDocumento === 'factura' ? 'bg-green-100' : 'bg-blue-100'}`}>
-                      {doc.tipoDocumento === 'factura'
-                        ? <FileText className="h-4 w-4 text-green-600" />
-                        : <Truck className="h-4 w-4 text-blue-600" />
-                      }
-                    </div>
-                    <div className="text-left min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-medium text-sm text-gray-900">
+                  {/* Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 ${
+                        doc.tipoDocumento === 'factura'
+                          ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
+                          : 'bg-gradient-to-br from-orange-500 to-orange-600'
+                      }`}>
+                        {doc.tipoDocumento === 'factura'
+                          ? <FileText className="w-6 h-6 text-white" />
+                          : <Truck className="w-6 h-6 text-white" />
+                        }
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg text-orange-600">
                           {doc.tipoDocumento === 'factura'
-                            ? `Factura ${doc.serieFactura}-${doc.numeroFactura}`
-                            : `Albarán ${doc.serieAlbaran}-${doc.numeroAlbaran}`
+                            ? `${doc.serieFactura}-${doc.numeroFactura}`
+                            : `${doc.serieAlbaran}-${doc.numeroAlbaran}`
                           }
-                        </span>
-                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${doc.tipoDocumento === 'factura' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
-                          {doc.tipoDocumento === 'factura' ? 'Facturado' : 'Pendiente'}
-                        </span>
+                        </div>
+                        <div className="text-xs text-gray-500 font-medium">
+                          {doc.tipoDocumento === 'factura' ? 'Factura' : 'Albarán'}
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-500 truncate">
-                        {doc.nombreCliente} &middot; {doc.fecha}
-                        {doc.numeroPedido ? ` &middot; Ped. ${doc.numeroPedido}` : ''}
-                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 flex-shrink-0">
-                    <div className="text-right hidden sm:block">
-                      <div className="text-sm font-semibold text-gray-900">
-                        {doc.totalImportePanamar.toFixed(2)} &euro;
+                    <div className="text-right">
+                      <div className="font-bold text-xl text-emerald-600">
+                        {doc.totalImportePanamar.toFixed(2)} €
                       </div>
-                      <div className="text-xs text-gray-400">
+                      <div className="text-xs text-gray-500 font-medium">
                         {doc.totalLineasPanamar} línea{doc.totalLineasPanamar !== 1 ? 's' : ''}
                       </div>
                     </div>
-                    {isExpanded ? <ChevronUp className="h-5 w-5 text-gray-400" /> : <ChevronDown className="h-5 w-5 text-gray-400" />}
                   </div>
-                </button>
 
-                {/* Expanded Lines */}
-                {isExpanded && (
-                  <div className="border-t border-gray-100">
-                    {/* Action buttons */}
-                    <div className="px-4 py-2 bg-white border-b border-gray-100 flex items-center gap-2 flex-wrap">
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handlePreview(doc); }}
-                        disabled={loadingPdf === key}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 transition disabled:opacity-50"
-                      >
-                        <Eye className="h-3.5 w-3.5" />
-                        Previsualizar
-                      </button>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handleDownload(doc); }}
-                        disabled={loadingPdf === key}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-green-700 bg-green-50 rounded-lg hover:bg-green-100 transition disabled:opacity-50"
-                      >
-                        <Download className="h-3.5 w-3.5" />
-                        Descargar PDF
-                      </button>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); openShare(doc); }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-purple-700 bg-purple-50 rounded-lg hover:bg-purple-100 transition"
-                      >
-                        <Share2 className="h-3.5 w-3.5" />
-                        Compartir
-                      </button>
-                      {loadingPdf === key && (
-                        <RefreshCw className="h-4 w-4 text-orange-400 animate-spin ml-1" />
-                      )}
+                  {/* Info row */}
+                  <div className="flex items-center justify-between text-sm bg-gray-50 rounded-xl p-3">
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-gray-400" />
+                      <span className="text-gray-600 truncate max-w-[150px]">
+                        {doc.nombreCliente}
+                      </span>
                     </div>
-
-                    {/* Resumen breve del documento */}
-                    <div className="px-4 py-2 bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-500">
-                      <div><strong>Cliente:</strong> {doc.codigoCliente}</div>
-                      <div><strong>NIF:</strong> {doc.nifCliente}</div>
-                      <div><strong>Población:</strong> {doc.poblacionCliente}</div>
-                      <div><strong>Hora:</strong> {doc.hora || '-'}</div>
-                      {doc.refPedido && <div className="col-span-2"><strong>Ref. Pedido:</strong> {doc.refPedido}</div>}
-                      {doc.tipoDocumento === 'factura' && (
-                        <div className="col-span-2">
-                          <strong>Factura:</strong> {doc.serieFactura}-{doc.numeroFactura}/{doc.ejercicioFactura}
-                        </div>
-                      )}
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-orange-500" />
+                      <span className="font-semibold text-gray-700">{doc.fecha}</span>
                     </div>
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+
+                  {/* Action buttons 2x2 */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button
+                      size="sm"
+                      onClick={() => handlePreview(doc)}
+                      disabled={loadingPdf === key}
+                      className="bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      Ver PDF
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => handleDownload(doc)}
+                      disabled={loadingPdf === key}
+                      className="bg-violet-100 text-violet-600 hover:bg-violet-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Descargar
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => openShare(doc)}
+                      className="bg-emerald-100 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      WhatsApp
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => openEmailModal(doc)}
+                      className="bg-rose-100 text-rose-600 hover:bg-rose-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Email
+                    </Button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Desktop Table View */}
+        {!loading && documents.length > 0 && (
+          <div className="hidden lg:block bg-white rounded-2xl border-2 border-gray-100 overflow-hidden shadow-xl">
+            <div className="overflow-x-auto">
+              <Table className="w-full">
+                <TableHeader>
+                  <TableRow className="bg-gradient-to-r from-orange-50 to-amber-50 border-b-2 border-orange-100">
+                    <TableHead className="font-bold text-orange-700 py-4">
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-4 h-4" />
+                        Documento
+                      </div>
+                    </TableHead>
+                    <TableHead className="font-bold text-orange-700">
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        Cliente
+                      </div>
+                    </TableHead>
+                    <TableHead className="font-bold text-orange-700">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        Fecha
+                      </div>
+                    </TableHead>
+                    <TableHead className="font-bold text-orange-700 text-center">
+                      <div className="flex items-center gap-2 justify-center">
+                        <Package className="w-4 h-4" />
+                        Líneas
+                      </div>
+                    </TableHead>
+                    <TableHead className="font-bold text-orange-700 text-right">
+                      <div className="flex items-center gap-2 justify-end">
+                        <DollarSign className="w-4 h-4" />
+                        Total
+                      </div>
+                    </TableHead>
+                    <TableHead className="font-bold text-orange-700 text-center">
+                      <div className="flex items-center gap-2 justify-center">
+                        <Settings className="w-4 h-4" />
+                        Acciones
+                      </div>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {documents.map((doc) => {
+                    const key = getDocKey(doc);
+                    return (
+                      <tr
+                        key={key}
+                        className="relative hover:bg-orange-50 transition-colors duration-150 border-b border-gray-100 group"
+                      >
+                        {/* Documento */}
+                        <TableCell>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 ${
+                              doc.tipoDocumento === 'factura'
+                                ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
+                                : 'bg-gradient-to-br from-orange-500 to-orange-600'
+                            }`}>
+                              {doc.tipoDocumento === 'factura'
+                                ? <FileText className="w-5 h-5 text-white" />
+                                : <Truck className="w-5 h-5 text-white" />
+                              }
+                            </div>
+                            <div className="min-w-0">
+                              <div className="font-bold text-base text-orange-600">
+                                {doc.tipoDocumento === 'factura'
+                                  ? `${doc.serieFactura}-${doc.numeroFactura}`
+                                  : `${doc.serieAlbaran}-${doc.numeroAlbaran}`
+                                }
+                              </div>
+                              <div className="text-xs text-gray-500 font-medium">
+                                {doc.tipoDocumento === 'factura' ? 'Factura' : 'Albarán'}
+                                {doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
+                              </div>
+                            </div>
+                          </div>
+                        </TableCell>
+
+                        {/* Cliente */}
+                        <TableCell>
+                          <div className="min-w-0">
+                            <div className="text-sm font-semibold text-gray-700 truncate max-w-[200px]">
+                              {doc.nombreCliente}
+                            </div>
+                            <div className="text-xs text-gray-400">{doc.codigoCliente}</div>
+                          </div>
+                        </TableCell>
+
+                        {/* Fecha */}
+                        <TableCell>
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                            <span className="font-semibold text-gray-700 text-sm">{doc.fecha}</span>
+                          </div>
+                        </TableCell>
+
+                        {/* Líneas */}
+                        <TableCell className="text-center">
+                          <Badge variant="outline" className="font-semibold">
+                            {doc.totalLineasPanamar}
+                          </Badge>
+                        </TableCell>
+
+                        {/* Total */}
+                        <TableCell className="text-right">
+                          <div className="font-bold text-lg text-emerald-600">
+                            {doc.totalImportePanamar.toFixed(2)} €
+                          </div>
+                        </TableCell>
+
+                        {/* Acciones */}
+                        <TableCell>
+                          <div className="flex justify-center gap-2">
+                            <Button
+                              size="sm"
+                              onClick={() => handlePreview(doc)}
+                              disabled={loadingPdf === key}
+                              className="bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+                              title="Previsualizar PDF"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              onClick={() => handleDownload(doc)}
+                              disabled={loadingPdf === key}
+                              className="bg-violet-100 text-violet-600 hover:bg-violet-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+                              title="Descargar PDF"
+                            >
+                              <Download className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              onClick={() => openShare(doc)}
+                              className="bg-emerald-100 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+                              title="Compartir por WhatsApp"
+                            >
+                              <MessageCircle className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              onClick={() => openEmailModal(doc)}
+                              className="bg-rose-100 text-rose-600 hover:bg-rose-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+                              title="Enviar por email"
+                            >
+                              <Mail className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </tr>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 pt-4">
-            <button
-              onClick={() => setFilters(prev => ({ ...prev, page: Math.max(1, (prev.page || 1) - 1) }))}
-              disabled={filters.page === 1}
-              className="p-2 rounded-lg border border-gray-200 disabled:opacity-30 hover:bg-gray-50 transition"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            {/* Page numbers */}
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              const start = Math.max(1, Math.min((filters.page || 1) - 2, totalPages - 4));
-              const pageNum = start + i;
-              if (pageNum > totalPages) return null;
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => setFilters(prev => ({ ...prev, page: pageNum }))}
-                  className={`w-9 h-9 rounded-lg text-sm font-medium transition ${
-                    pageNum === filters.page
-                      ? 'bg-orange-500 text-white'
-                      : 'border border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-            <button
-              onClick={() => setFilters(prev => ({ ...prev, page: Math.min(totalPages, (prev.page || 1) + 1) }))}
-              disabled={filters.page === totalPages}
-              className="p-2 rounded-lg border border-gray-200 disabled:opacity-30 hover:bg-gray-50 transition"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-6 px-4 py-4 bg-secondary rounded-2xl border border-border flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            {/* Info */}
+            <div className="text-sm text-muted-foreground font-medium">
+              Mostrando <span className="font-bold text-primary">{startIndex + 1}</span> - <span className="font-bold text-primary">{Math.min(endIndex, total)}</span> de <span className="font-bold text-foreground">{total}</span> documentos
+            </div>
+
+            {/* Page controls */}
+            <div className="flex items-center gap-2">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilters(prev => ({ ...prev, page: 1 }))}
+                disabled={filters.page === 1}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
+                  filters.page === 1
+                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                }`}
+                title="Primera página"
+              >
+                <ChevronsLeft className="w-4 h-4" />
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilters(prev => ({ ...prev, page: Math.max(1, (prev.page || 1) - 1) }))}
+                disabled={filters.page === 1}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
+                  filters.page === 1
+                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                }`}
+                title="Página anterior"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </motion.button>
+
+              <div className="flex items-center gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  const page = filters.page || 1;
+                  let pageNum: number;
+                  if (totalPages <= 5) {
+                    pageNum = i + 1;
+                  } else if (page <= 3) {
+                    pageNum = i + 1;
+                  } else if (page >= totalPages - 2) {
+                    pageNum = totalPages - 4 + i;
+                  } else {
+                    pageNum = page - 2 + i;
+                  }
+                  if (pageNum > totalPages) return null;
+                  return (
+                    <motion.button
+                      key={pageNum}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => setFilters(prev => ({ ...prev, page: pageNum }))}
+                      className={`w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${
+                        pageNum === page
+                          ? 'bg-primary text-primary-foreground shadow-lg'
+                          : 'bg-card text-foreground hover:bg-secondary hover:text-primary shadow-md'
+                      }`}
+                    >
+                      {pageNum}
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilters(prev => ({ ...prev, page: Math.min(totalPages, (prev.page || 1) + 1) }))}
+                disabled={filters.page === totalPages}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
+                  filters.page === totalPages
+                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                }`}
+                title="Página siguiente"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilters(prev => ({ ...prev, page: totalPages }))}
+                disabled={filters.page === totalPages}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
+                  filters.page === totalPages
+                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                }`}
+                title="Última página"
+              >
+                <ChevronsRight className="w-4 h-4" />
+              </motion.button>
+            </div>
+
+            {/* Items per page */}
+            <div className="flex items-center gap-3">
+              <label className="text-sm text-muted-foreground font-medium whitespace-nowrap">
+                Por página:
+              </label>
+              <select
+                value={filters.pageSize || 25}
+                onChange={(e) => setFilters(prev => ({ ...prev, page: 1, pageSize: Number(e.target.value) }))}
+                className="px-3 py-2 rounded-lg border-2 border-border bg-card text-foreground font-semibold focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 cursor-pointer hover:border-primary/50"
+              >
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </select>
+            </div>
+          </motion.div>
         )}
       </main>
 
-      {/* Logout confirm modal */}
-      {showLogoutConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-xl">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Cerrar sesión</h3>
-            <p className="text-sm text-gray-500 mb-6">¿Estás seguro de que quieres salir del modo PANAMAR?</p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowLogoutConfirm(false)}
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition text-sm"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleLogout}
-                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm"
-              >
-                Cerrar sesión
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* ═══════════════ MODALS ═══════════════ */}
 
-      {/* PDF Preview modal */}
-      {previewUrl && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-50">
-              <h3 className="text-sm font-semibold text-gray-700">Previsualización del Albarán</h3>
-              <button
-                onClick={closePreview}
-                className="p-1.5 rounded-lg hover:bg-gray-200 transition"
-              >
-                <X className="h-5 w-5 text-gray-500" />
-              </button>
-            </div>
-            <div className="flex-1">
-              <iframe
-                src={previewUrl}
-                className="w-full h-full border-0"
-                title="PDF Preview"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Share options modal */}
-      {showShareModal && shareDoc && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-xl">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900">Compartir albarán</h3>
-              <button onClick={() => setShowShareModal(false)} className="p-1 hover:bg-gray-100 rounded-lg">
-                <X className="h-5 w-5 text-gray-400" />
-              </button>
-            </div>
-            <p className="text-sm text-gray-500 mb-4">
-              {shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran} · {shareDoc.nombreCliente}
-            </p>
-            <div className="space-y-2">
-              <button
-                onClick={() => openEmailModal(shareDoc)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition text-left"
-              >
-                <Mail className="h-5 w-5 text-blue-600" />
-                <div>
-                  <div className="text-sm font-medium text-gray-900">Email</div>
-                  <div className="text-xs text-gray-400">Enviar PDF adjunto por correo</div>
+      {/* Logout Confirm Modal */}
+      <AnimatePresence>
+        {showLogoutConfirm && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowLogoutConfirm(false)}
+              className="fixed inset-0 bg-black/60 z-50"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
+            >
+              <div className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border pointer-events-auto text-center">
+                <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-4">
+                  <LogOut className="w-8 h-8 text-destructive" />
                 </div>
-              </button>
-              <button
-                onClick={() => handleWhatsApp(shareDoc)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:bg-green-50 hover:border-green-200 transition text-left"
-              >
-                <MessageCircle className="h-5 w-5 text-green-600" />
-                <div>
-                  <div className="text-sm font-medium text-gray-900">WhatsApp</div>
-                  <div className="text-xs text-gray-400">Compartir resumen por WhatsApp</div>
+                <h3 className="text-xl font-bold text-foreground mb-2">Cerrar sesión</h3>
+                <p className="text-sm text-muted-foreground mb-6">¿Estás seguro de que quieres salir del modo PANAMAR?</p>
+                <div className="flex gap-3">
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowLogoutConfirm(false)}
+                    className="flex-1 rounded-2xl h-12"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={handleLogout}
+                    className="flex-1 rounded-2xl h-12"
+                  >
+                    Sí, cerrar sesión
+                  </Button>
                 </div>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Email modal */}
-      {showEmailModal && shareDoc && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900">Enviar por email</h3>
-              <button onClick={() => setShowEmailModal(false)} className="p-1 hover:bg-gray-100 rounded-lg">
-                <X className="h-5 w-5 text-gray-400" />
-              </button>
-            </div>
-            <p className="text-sm text-gray-500 mb-4">
-              Albarán {shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran} · {shareDoc.nombreCliente}
-            </p>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Email destinatario</label>
-                <input
-                  type="email"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendEmail()}
-                  placeholder="ejemplo@correo.com"
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-400 text-sm"
-                  disabled={sendingEmail}
-                />
               </div>
-              {emailResult && (
-                <div className={`text-sm px-3 py-2 rounded-lg ${emailResult.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
-                  {emailResult.msg}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* PDF Preview Modal */}
+      <AnimatePresence>
+        {(previewUrl || (previewDoc && loadingPdf)) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 sm:p-4"
+            onClick={closePreview}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-card rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-3 sm:p-4 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                  <div className="min-w-0">
+                    <h2 className="text-base sm:text-lg font-bold truncate">
+                      Albarán {previewDoc?.serieAlbaran}-{previewDoc?.numeroAlbaran}
+                    </h2>
+                    <p className="text-white/70 text-xs hidden sm:block">Previsualización PDF · {previewDoc?.nombreCliente}</p>
+                  </div>
                 </div>
-              )}
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setShowEmailModal(false)}
-                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition text-sm"
-                >
-                  Cancelar
-                </button>
-                <button
-                  onClick={handleSendEmail}
-                  disabled={sendingEmail || !emailInput}
-                  className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2"
-                >
-                  {sendingEmail ? (
-                    <>
-                      <RefreshCw className="h-4 w-4 animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Mail className="h-4 w-4" />
-                      Enviar
-                    </>
+                <div className="flex items-center justify-end gap-2">
+                  {previewDoc && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => previewDoc && handleDownload(previewDoc)}
+                      className="text-white hover:bg-white/20 h-9 sm:h-10 px-3 sm:px-4"
+                    >
+                      <Download className="w-4 h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Descargar</span>
+                    </Button>
                   )}
-                </button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={closePreview}
+                    className="text-white hover:bg-white/20 h-9 w-9 sm:h-10 sm:w-10"
+                  >
+                    <X className="w-5 h-5" />
+                  </Button>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+
+              {/* PDF Content */}
+              <div className="flex-1 bg-secondary p-2 sm:p-4 relative overflow-auto">
+                {loadingPdf ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-secondary">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                      <p className="text-muted-foreground text-sm sm:text-base">Generando PDF...</p>
+                    </div>
+                  </div>
+                ) : previewUrl ? (
+                  <iframe
+                    src={previewUrl}
+                    className="w-full h-full rounded-lg border-0"
+                    title="PDF Preview"
+                  />
+                ) : null}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Share Options Modal */}
+      <AnimatePresence>
+        {showShareModal && shareDoc && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowShareModal(false)}
+              className="fixed inset-0 bg-black/60 z-50"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
+            >
+              <div className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border pointer-events-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-foreground">Compartir albarán</h3>
+                  <Button variant="ghost" size="icon" onClick={() => setShowShareModal(false)} className="rounded-xl">
+                    <X className="h-5 w-5" />
+                  </Button>
+                </div>
+
+                {/* Document info card */}
+                <div className="bg-orange-50 rounded-2xl p-4 border border-orange-100 mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                      <Truck className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-orange-700">{shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran}</div>
+                      <div className="text-xs text-orange-600/70">{shareDoc.nombreCliente} · {shareDoc.fecha}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => openEmailModal(shareDoc)}
+                    className="w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 border-gray-100 hover:border-purple-200 hover:bg-purple-50 transition-all text-left"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                      <Mail className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-foreground">Email</div>
+                      <div className="text-xs text-muted-foreground">Enviar PDF adjunto por correo</div>
+                    </div>
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleWhatsApp(shareDoc)}
+                    className="w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 border-gray-100 hover:border-emerald-200 hover:bg-emerald-50 transition-all text-left"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg">
+                      <MessageCircle className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-foreground">WhatsApp</div>
+                      <div className="text-xs text-muted-foreground">Compartir resumen por WhatsApp</div>
+                    </div>
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Email Modal */}
+      <AnimatePresence>
+        {showEmailModal && shareDoc && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => !sendingEmail && setShowEmailModal(false)}
+              className="fixed inset-0 bg-black/60 z-50"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
+            >
+              <div className="bg-card rounded-3xl shadow-2xl max-w-md w-full border border-border pointer-events-auto overflow-hidden">
+                {/* Header gradient */}
+                <div className="p-6" style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #EC4899 100%)' }}>
+                  <div className="flex items-center gap-3 text-white">
+                    <Mail className="w-6 h-6" />
+                    <div>
+                      <h3 className="text-lg font-bold">Enviar por email</h3>
+                      <p className="text-white/70 text-xs">Se adjuntará el PDF del albarán</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-4">
+                  {/* Document badge */}
+                  <div className="flex items-center gap-2 bg-orange-50 rounded-xl px-3 py-2 border border-orange-100">
+                    <Truck className="w-4 h-4 text-orange-500" />
+                    <span className="text-sm font-semibold text-orange-700">
+                      {shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran}
+                    </span>
+                    <span className="text-xs text-orange-500">· {shareDoc.nombreCliente}</span>
+                  </div>
+
+                  {/* Email input */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-gray-600">Email destinatario</label>
+                    <Input
+                      type="email"
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleSendEmail()}
+                      placeholder="ejemplo@correo.com"
+                      className="h-12 border-2 rounded-xl focus:border-purple-400 focus:ring-4 focus:ring-purple-100"
+                      disabled={sendingEmail}
+                    />
+                  </div>
+
+                  {emailResult && (
+                    <div className={`text-sm px-4 py-3 rounded-xl font-medium ${
+                      emailResult.ok
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        : 'bg-red-50 text-red-700 border border-red-200'
+                    }`}>
+                      {emailResult.msg}
+                    </div>
+                  )}
+
+                  <div className="flex gap-3 pt-2">
+                    <Button
+                      variant="secondary"
+                      onClick={() => setShowEmailModal(false)}
+                      disabled={sendingEmail}
+                      className="flex-1 rounded-xl h-12"
+                    >
+                      Cancelar
+                    </Button>
+                    <Button
+                      onClick={handleSendEmail}
+                      disabled={sendingEmail || !emailInput}
+                      className="flex-1 rounded-xl h-12 text-white"
+                      style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #EC4899 100%)' }}
+                    >
+                      {sendingEmail ? (
+                        <div className="flex items-center gap-2">
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                          Enviando...
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <Mail className="h-4 w-4" />
+                          Enviar
+                        </div>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-// ── Sub-components ───────────────────────────────────────────────────
-
-function SummaryCard({ icon, label, value, bg }: { icon: React.ReactNode; label: string; value: number; bg: string }) {
-  return (
-    <div className={`${bg} rounded-xl p-4 flex items-center gap-3`}>
-      <div className="p-2 bg-white rounded-lg shadow-sm">
-        {icon}
-      </div>
-      <div>
-        <div className="text-2xl font-bold text-gray-900">{value.toLocaleString('es-ES')}</div>
-        <div className="text-xs text-gray-500">{label}</div>
-      </div>
-    </div>
-  );
-}
