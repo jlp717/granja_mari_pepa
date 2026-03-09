@@ -18,7 +18,7 @@ const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const TARIFA_PANAMAR = 85;
 const EJERCICIO_FIJO = 2026;
 const DEFAULT_PAGE_SIZE = 50;
-const MAX_PAGE_SIZE = 200;
+const MAX_PAGE_SIZE = 500;
 
 /**
  * Verifica que el código de cliente sea el especial PANAMAR
@@ -96,6 +96,16 @@ async function getDocuments(options = {}) {
   if (options.codigoCliente) {
     whereClauses.push('TRIM(CAC.CODIGOCLIENTEFACTURA) = ?');
     params.push(String(options.codigoCliente).trim());
+  }
+
+  // Filtro por meses (multi-selección)
+  if (options.meses && Array.isArray(options.meses) && options.meses.length > 0) {
+    const validMeses = options.meses.map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
+    if (validMeses.length > 0) {
+      const mesesPlaceholders = validMeses.map(() => '?').join(', ');
+      whereClauses.push(`CAC.MESDOCUMENTO IN (${mesesPlaceholders})`);
+      params.push(...validMeses);
+    }
   }
 
   // Búsqueda libre (ref pedido o nombre cliente)
@@ -500,9 +510,35 @@ async function getDocumentByKey(key) {
 async function getSummary(options = {}) {
   const startTime = Date.now();
 
-  logger.info('📊 PANAMAR: Consultando resumen');
+  logger.info('📊 PANAMAR: Consultando resumen', { meses: options.meses, tipo: options.tipo, codigoCliente: options.codigoCliente });
 
   const ejercicio = EJERCICIO_FIJO; // Siempre 2026
+
+  // Build dynamic WHERE clauses for summary too
+  const extraClauses = [];
+  const extraParams = [];
+
+  if (options.meses && Array.isArray(options.meses) && options.meses.length > 0) {
+    const validMeses = options.meses.map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
+    if (validMeses.length > 0) {
+      const mesesPlaceholders = validMeses.map(() => '?').join(', ');
+      extraClauses.push(`CAC.MESDOCUMENTO IN (${mesesPlaceholders})`);
+      extraParams.push(...validMeses);
+    }
+  }
+
+  if (options.tipo === 'factura') {
+    extraClauses.push('CAC.NUMEROFACTURA > 0');
+  } else if (options.tipo === 'albaran') {
+    extraClauses.push('CAC.NUMEROFACTURA = 0');
+  }
+
+  if (options.codigoCliente) {
+    extraClauses.push('TRIM(CAC.CODIGOCLIENTEFACTURA) = ?');
+    extraParams.push(String(options.codigoCliente).trim());
+  }
+
+  const extraSQL = extraClauses.length > 0 ? 'AND ' + extraClauses.join(' AND ') : '';
 
   const summarySQL = `
     SELECT
@@ -523,9 +559,10 @@ async function getSummary(options = {}) {
           AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
           AND LAC.IMPORTEVENTA <> 0
       )
+      ${extraSQL}
   `;
 
-  const result = await odbcPool.query(summarySQL, [ejercicio]);
+  const result = await odbcPool.query(summarySQL, [ejercicio, ...extraParams]);
   const row = result[0] || {};
 
   const elapsed = Date.now() - startTime;

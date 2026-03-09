@@ -190,4 +190,5 @@ export interface PanamarFilters {
   codigoCliente?: string;
   busqueda?: string;
   ejercicio?: number;
+  meses?: number[];
 }

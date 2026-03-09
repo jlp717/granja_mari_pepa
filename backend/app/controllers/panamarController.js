@@ -39,8 +39,16 @@ async function getDocuments(req, res) {
       fechaHasta,
       codigoCliente: clienteDestino,
       busqueda,
-      ejercicio
+      ejercicio,
+      meses
     } = req.query;
+
+    // Parsear meses (viene como "1,3,5" o como array)
+    let mesesArray;
+    if (meses) {
+      mesesArray = (Array.isArray(meses) ? meses : String(meses).split(',')).map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
+      if (mesesArray.length === 0) mesesArray = undefined;
+    }
 
     // Validar tipo si se proporciona
     if (tipo && !['albaran', 'factura'].includes(tipo)) {
@@ -72,7 +80,8 @@ async function getDocuments(req, res) {
       fechaHasta,
       codigoCliente: clienteDestino,
       busqueda,
-      ejercicio
+      ejercicio,
+      meses: mesesArray
     });
 
     return res.json({
@@ -108,8 +117,21 @@ async function getSummary(req, res) {
       });
     }
 
-    const { ejercicio } = req.query;
-    const result = await panamarService.getSummary({ ejercicio });
+    const { ejercicio, meses, tipo, codigoCliente: clienteDestino } = req.query;
+
+    // Parsear meses para summary
+    let mesesArray;
+    if (meses) {
+      mesesArray = (Array.isArray(meses) ? meses : String(meses).split(',')).map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
+      if (mesesArray.length === 0) mesesArray = undefined;
+    }
+
+    const result = await panamarService.getSummary({
+      ejercicio,
+      meses: mesesArray,
+      tipo,
+      codigoCliente: clienteDestino
+    });
 
     return res.json({
       success: true,
@@ -366,17 +388,25 @@ async function bulkDownload(req, res) {
       return res.status(403).json({ success: false, message: 'Acceso denegado.' });
     }
 
-    const { tipo, fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda } = req.query;
+    const { tipo, fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda, meses } = req.query;
 
-    // Fetch ALL matching documents (page=1, pageSize=200 – max)
+    // Parsear meses para bulk download
+    let mesesArray;
+    if (meses) {
+      mesesArray = (Array.isArray(meses) ? meses : String(meses).split(',')).map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);
+      if (mesesArray.length === 0) mesesArray = undefined;
+    }
+
+    // Fetch ALL matching documents (pageSize=500 max per batch)
     const result = await panamarService.getDocuments({
       page: 1,
-      pageSize: 200,
+      pageSize: 500,
       tipo,
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
-      busqueda
+      busqueda,
+      meses: mesesArray
     });
 
     if (!result.documents || result.documents.length === 0) {

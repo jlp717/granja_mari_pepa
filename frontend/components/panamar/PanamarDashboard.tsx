@@ -15,8 +15,23 @@ import {
   ChevronsLeft, ChevronsRight,
   FileText, Truck, Calendar, Users, BarChart3, LogOut, X,
   Download, Eye, Mail, MessageCircle, DollarSign, Settings,
-  Archive
+  Archive, Check
 } from 'lucide-react';
+
+const MESES = [
+  { value: 1, label: 'Ene', full: 'Enero' },
+  { value: 2, label: 'Feb', full: 'Febrero' },
+  { value: 3, label: 'Mar', full: 'Marzo' },
+  { value: 4, label: 'Abr', full: 'Abril' },
+  { value: 5, label: 'May', full: 'Mayo' },
+  { value: 6, label: 'Jun', full: 'Junio' },
+  { value: 7, label: 'Jul', full: 'Julio' },
+  { value: 8, label: 'Ago', full: 'Agosto' },
+  { value: 9, label: 'Sep', full: 'Septiembre' },
+  { value: 10, label: 'Oct', full: 'Octubre' },
+  { value: 11, label: 'Nov', full: 'Noviembre' },
+  { value: 12, label: 'Dic', full: 'Diciembre' },
+];
 
 export function PanamarDashboard() {
   const { user, logout } = useAuthStore();
@@ -64,6 +79,7 @@ export function PanamarDashboard() {
       if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
       if (filters.busqueda) params.set('busqueda', filters.busqueda);
       if (filters.ejercicio) params.set('ejercicio', String(filters.ejercicio));
+      if (filters.meses && filters.meses.length > 0) params.set('meses', filters.meses.join(','));
 
       const res = await secureFetch<PanamarDocumentsResponse>(
         `/api/panamar/documents?${params.toString()}`
@@ -111,6 +127,20 @@ export function PanamarDashboard() {
 
   const handleFilterChange = (key: keyof PanamarFilters, value: string | number | undefined) => {
     setFilters(prev => ({ ...prev, page: 1, [key]: value || undefined }));
+  };
+
+  const toggleMonth = (month: number) => {
+    setFilters(prev => {
+      const current = prev.meses || [];
+      const updated = current.includes(month)
+        ? current.filter(m => m !== month)
+        : [...current, month].sort((a, b) => a - b);
+      return { ...prev, page: 1, meses: updated.length > 0 ? updated : undefined };
+    });
+  };
+
+  const clearMonths = () => {
+    setFilters(prev => ({ ...prev, page: 1, meses: undefined }));
   };
 
   const getDocKey = (doc: PanamarDocument) =>
@@ -255,6 +285,7 @@ export function PanamarDashboard() {
       if (filters.fechaHasta) params.set('fechaHasta', filters.fechaHasta);
       if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
       if (filters.busqueda) params.set('busqueda', filters.busqueda);
+      if (filters.meses && filters.meses.length > 0) params.set('meses', filters.meses.join(','));
 
       const res = await secureFetch<Blob>(`/api/panamar/bulk-download?${params.toString()}`);
       if (!res.ok) throw new Error('Error descargando ZIP');
@@ -349,7 +380,7 @@ export function PanamarDashboard() {
               </div>
               <div>
                 <div className="text-2xl font-bold text-foreground">{summary.totalDocumentos.toLocaleString('es-ES')}</div>
-                <div className="text-xs text-muted-foreground font-medium">Documentos</div>
+                <div className="text-xs text-muted-foreground font-medium">Albaranes</div>
               </div>
             </motion.div>
             <motion.div
@@ -407,6 +438,11 @@ export function PanamarDashboard() {
             <p className="text-muted-foreground text-sm">
               {total} documento{total !== 1 ? 's' : ''} encontrado{total !== 1 ? 's' : ''}
               {' · Ejercicio 2026'}
+              {filters.meses && filters.meses.length > 0 && (
+                <span className="ml-1">
+                  · {filters.meses.map(m => MESES[m - 1]?.label).join(', ')}
+                </span>
+              )}
             </p>
           </div>
           {/* Bulk download button */}
@@ -496,40 +532,49 @@ export function PanamarDashboard() {
             </div>
           </div>
 
-          {/* Date Range */}
+          {/* Month Multi-Select */}
           <div className="border-t-2 border-orange-100 pt-5 mt-5">
-            <label className="text-sm font-bold text-orange-600 flex items-center mb-3">
-              <Calendar className="w-4 h-4 mr-2" />
-              Rango de fechas
-            </label>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-orange-500">Desde</label>
-                <input
-                  type="date"
-                  value={filters.fechaDesde || ''}
-                  onChange={(e) => handleFilterChange('fechaDesde', e.target.value || undefined)}
-                  className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all duration-200 text-gray-900 font-medium cursor-pointer hover:border-orange-300"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-orange-500">Hasta</label>
-                <input
-                  type="date"
-                  value={filters.fechaHasta || ''}
-                  onChange={(e) => handleFilterChange('fechaHasta', e.target.value || undefined)}
-                  className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all duration-200 text-gray-900 font-medium cursor-pointer hover:border-orange-300"
-                />
-              </div>
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-sm font-bold text-orange-600 flex items-center">
+                <Calendar className="w-4 h-4 mr-2" />
+                Filtrar por meses
+                {filters.meses && filters.meses.length > 0 && (
+                  <span className="ml-2 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {filters.meses.length}
+                  </span>
+                )}
+              </label>
+              {filters.meses && filters.meses.length > 0 && (
+                <button
+                  onClick={clearMonths}
+                  className="text-xs font-bold text-orange-600 hover:text-orange-700 underline decoration-2 underline-offset-2 transition-colors"
+                >
+                  Limpiar selección
+                </button>
+              )}
             </div>
-            {(filters.fechaDesde || filters.fechaHasta) && (
-              <button
-                onClick={() => setFilters(prev => ({ ...prev, page: 1, fechaDesde: undefined, fechaHasta: undefined }))}
-                className="mt-3 text-sm font-bold text-orange-600 hover:text-orange-700 underline decoration-2 underline-offset-2 transition-colors"
-              >
-                Limpiar rango de fechas
-              </button>
-            )}
+            <div className="flex flex-wrap gap-2">
+              {MESES.map((mes) => {
+                const isSelected = filters.meses?.includes(mes.value) ?? false;
+                return (
+                  <button
+                    key={mes.value}
+                    onClick={() => toggleMonth(mes.value)}
+                    className={`
+                      relative px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 border-2
+                      ${isSelected
+                        ? 'bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-200 scale-105'
+                        : 'bg-white text-gray-600 border-gray-200 hover:border-orange-300 hover:text-orange-600 hover:bg-orange-50'
+                      }
+                    `}
+                    title={mes.full}
+                  >
+                    {isSelected && <Check className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />}
+                    {mes.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
