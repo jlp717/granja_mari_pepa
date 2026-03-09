@@ -466,12 +466,13 @@ app.post('/api/chatbot', optionalAuth, generalLimiter, chatbotController.process
 app.get('/api/chatbot/health', chatbotController.healthCheck);
 
 // =====================================================
-// � PANAMAR - Documentos con productos CODIGOFILTRO=40
+// 📦 PANAMAR - Documentos con productos familias 701-705
 // =====================================================
 // Modo especial para cliente 9999999999: consulta documentos cross-client
 // con productos PANAMAR y precios de TARIFA 85
 app.get('/api/panamar/documents', requireAuth, generalLimiter, panamarController.getDocuments);
 app.get('/api/panamar/summary', requireAuth, generalLimiter, panamarController.getSummary);
+app.get('/api/panamar/bulk-download', requireAuth, generalLimiter, panamarController.bulkDownload);
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf', requireAuth, generalLimiter, panamarController.downloadPDF);
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview', requireAuth, generalLimiter, panamarController.previewPDF);
 app.post('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email', requireAuth, generalLimiter, panamarController.sendEmail);

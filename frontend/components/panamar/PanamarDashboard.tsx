@@ -14,7 +14,8 @@ import {
   Package, Search, ChevronLeft, ChevronRight,
   ChevronsLeft, ChevronsRight,
   FileText, Truck, Calendar, Users, BarChart3, LogOut, X,
-  Download, Eye, Mail, MessageCircle, DollarSign, Settings
+  Download, Eye, Mail, MessageCircle, DollarSign, Settings,
+  Archive
 } from 'lucide-react';
 
 export function PanamarDashboard() {
@@ -28,16 +29,15 @@ export function PanamarDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<PanamarSummary | null>(null);
 
-  // Filters
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+  // Filters - Ejercicio fijado a 2026
   const [filters, setFilters] = useState<PanamarFilters>({
     page: 1,
     pageSize: 25,
-    ejercicio: currentYear
+    ejercicio: 2026
   });
   const [searchInput, setSearchInput] = useState('');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [bulkDownloading, setBulkDownloading] = useState(false);
 
   // Share state
   const [shareDoc, setShareDoc] = useState<PanamarDocument | null>(null);
@@ -87,17 +87,14 @@ export function PanamarDashboard() {
   // ── Fetch summary ────────────────────────────────────────────────
   const fetchSummary = useCallback(async () => {
     try {
-      const params = filters.ejercicio
-        ? `?ejercicio=${filters.ejercicio}`
-        : '';
-      const res = await secureFetch<PanamarSummary>(`/api/panamar/summary${params}`);
+      const res = await secureFetch<PanamarSummary>(`/api/panamar/summary?ejercicio=2026`);
       if (res.ok && res.data.success) {
         setSummary(res.data);
       }
     } catch (err) {
       console.error('PANAMAR summary error:', err);
     }
-  }, [filters.ejercicio]);
+  }, []);
 
   useEffect(() => {
     fetchDocuments();
@@ -242,6 +239,45 @@ export function PanamarDashboard() {
     setShowLogoutConfirm(false);
   };
 
+  // ── Bulk download (ZIP with all filtered PDFs) ───────────────────
+  const handleBulkDownload = async () => {
+    setBulkDownloading(true);
+    const toastId = toast.loading(
+      <div className="flex items-center space-x-2">
+        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-orange-600"></div>
+        <span>Generando ZIP con todos los albaranes...</span>
+      </div>
+    );
+    try {
+      const params = new URLSearchParams();
+      if (filters.tipo) params.set('tipo', filters.tipo);
+      if (filters.fechaDesde) params.set('fechaDesde', filters.fechaDesde);
+      if (filters.fechaHasta) params.set('fechaHasta', filters.fechaHasta);
+      if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
+      if (filters.busqueda) params.set('busqueda', filters.busqueda);
+
+      const res = await secureFetch<Blob>(`/api/panamar/bulk-download?${params.toString()}`);
+      if (!res.ok) throw new Error('Error descargando ZIP');
+
+      const blob = res.data;
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      a.download = `PANAMAR_Albaranes_${today}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+      toast.success(`ZIP con ${documents.length} albaranes descargado`, { id: toastId });
+    } catch (err) {
+      console.error('Bulk download error:', err);
+      toast.error('Error al descargar los albaranes', { id: toastId });
+    } finally {
+      setBulkDownloading(false);
+    }
+  };
+
   // ── Pagination helpers ───────────────────────────────────────────
   const startIndex = ((filters.page || 1) - 1) * (filters.pageSize || 25);
   const endIndex = startIndex + (filters.pageSize || 25);
@@ -370,9 +406,34 @@ export function PanamarDashboard() {
             </h2>
             <p className="text-muted-foreground text-sm">
               {total} documento{total !== 1 ? 's' : ''} encontrado{total !== 1 ? 's' : ''}
-              {filters.ejercicio ? ` · Ejercicio ${filters.ejercicio}` : ''}
+              {' · Ejercicio 2026'}
             </p>
           </div>
+          {/* Bulk download button */}
+          {documents.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <Button
+                onClick={handleBulkDownload}
+                disabled={bulkDownloading}
+                className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-xl h-12 px-6 font-bold"
+              >
+                {bulkDownloading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    Generando ZIP...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Archive className="w-5 h-5" />
+                    Descargar todos ({total})
+                  </div>
+                )}
+              </Button>
+            </motion.div>
+          )}
         </div>
 
         {/* Filter Panel - Premium Design */}
@@ -391,20 +452,15 @@ export function PanamarDashboard() {
 
           {/* Filters Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {/* Ejercicio */}
+            {/* Ejercicio (fijado a 2026) */}
             <div className="space-y-2">
               <label className="text-sm font-bold text-orange-600 flex items-center">
                 <Calendar className="w-4 h-4 mr-2" />
                 Ejercicio
               </label>
-              <select
-                value={filters.ejercicio || ''}
-                onChange={(e) => handleFilterChange('ejercicio', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-gray-900 font-medium cursor-pointer hover:border-orange-300 transition-colors"
-              >
-                <option value="">Todos</option>
-                {years.map(y => <option key={y} value={y}>{y}</option>)}
-              </select>
+              <div className="w-full h-12 px-4 border-2 border-orange-200 rounded-xl bg-orange-50 flex items-center text-orange-700 font-bold text-lg">
+                2026
+              </div>
             </div>
 
             {/* Tipo */}

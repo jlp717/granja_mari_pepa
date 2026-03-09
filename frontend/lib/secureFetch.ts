@@ -147,8 +147,8 @@ export async function secureFetch<T = unknown>(
 
   if (contentType?.includes('application/json')) {
     data = await response.json();
-  } else if (contentType?.includes('application/pdf')) {
-    // Para PDFs, devolver el blob
+  } else if (contentType?.includes('application/pdf') || contentType?.includes('application/zip') || contentType?.includes('application/octet-stream')) {
+    // Para PDFs, ZIPs y binarios, devolver el blob
     data = await response.blob() as unknown as T;
   } else {
     data = await response.text() as unknown as T;

@@ -351,11 +351,93 @@ async function sendEmail(req, res) {
   }
 }
 
+/**
+ * GET /api/panamar/bulk-download
+ * Download a ZIP with all PDFs matching the current filters (max 200 documents).
+ *
+ * Query params: same as getDocuments (tipo, fechaDesde, fechaHasta, codigoCliente, busqueda)
+ * Exercise is always forced to 2026 by the service.
+ */
+async function bulkDownload(req, res) {
+  try {
+    const codigoCliente = req.user?.codigoCliente;
+
+    if (!panamarService.isPanamarClient(codigoCliente)) {
+      return res.status(403).json({ success: false, message: 'Acceso denegado.' });
+    }
+
+    const { tipo, fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda } = req.query;
+
+    // Fetch ALL matching documents (page=1, pageSize=200 – max)
+    const result = await panamarService.getDocuments({
+      page: 1,
+      pageSize: 200,
+      tipo,
+      fechaDesde,
+      fechaHasta,
+      codigoCliente: clienteDestino,
+      busqueda
+    });
+
+    if (!result.documents || result.documents.length === 0) {
+      return res.status(404).json({ success: false, message: 'No hay documentos para descargar.' });
+    }
+
+    const archiver = require('archiver');
+    const archive = archiver('zip', { zlib: { level: 5 } });
+
+    const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const zipFilename = `PANAMAR_Albaranes_${timestamp}.zip`;
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${zipFilename}"`);
+
+    archive.on('error', (err) => {
+      logger.error('❌ PANAMAR: Error ZIP bulk', { error: err.message });
+      if (!res.headersSent) {
+        res.status(500).json({ success: false, message: 'Error generando ZIP' });
+      }
+    });
+
+    archive.pipe(res);
+
+    let pdfCount = 0;
+    for (const doc of result.documents) {
+      try {
+        const pdfBuffer = await panamarPdfService.generateAlbaranPDF(doc);
+        const clientName = (doc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_').substring(0, 20);
+        const pdfName = `Albaran_${doc.serieAlbaran}-${doc.numeroAlbaran}_${clientName}.pdf`;
+        archive.append(pdfBuffer, { name: pdfName });
+        pdfCount++;
+      } catch (pdfErr) {
+        logger.warn('⚠️ PANAMAR: Error generando PDF individual en bulk', {
+          ref: `${doc.serieAlbaran}-${doc.numeroAlbaran}`,
+          error: pdfErr.message
+        });
+      }
+    }
+
+    await archive.finalize();
+
+    logger.info('📦 PANAMAR: Bulk download completado', {
+      totalDocs: result.documents.length,
+      pdfCount,
+      zipFilename
+    });
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error bulk download', { error: error.message, stack: error.stack });
+    if (!res.headersSent) {
+      return res.status(500).json({ success: false, message: 'Error interno en descarga masiva' });
+    }
+  }
+}
+
 module.exports = {
   getDocuments,
   getSummary,
   healthCheck,
   downloadPDF,
   previewPDF,
-  sendEmail
+  sendEmail,
+  bulkDownload
 };
