@@ -2,7 +2,9 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartItem, Product, UserProfile } from './types';
+import { CartItem, Product, UserProfile, PanamarDocument, PanamarFilters, PanamarDocumentsResponse, PanamarSummary } from './types';
+
+const PANAMAR_CLIENT_CODE = '9999999999';
 
 interface CartStore {
   items: CartItem[];
@@ -27,6 +29,7 @@ interface LoginResult {
 interface AuthStore {
   user: UserProfile | null;
   isAuthenticated: boolean;
+  isPanamarMode: boolean;
   login: (codigoCliente: string, password: string) => Promise<LoginResult>;
   logout: () => void;
   updateProfile: (data: Partial<UserProfile>) => void;
@@ -120,6 +123,7 @@ export const useAuthStore = create<AuthStore>()(
     (set, get) => ({
       user: null,
       isAuthenticated: false,
+      isPanamarMode: false,
 
       /**
        * Login seguro - Los tokens se reciben como HttpOnly cookies
@@ -159,7 +163,7 @@ export const useAuthStore = create<AuthStore>()(
               localStorage.removeItem('refresh_token');
             }
 
-            set({ user, isAuthenticated: true });
+            set({ user, isAuthenticated: true, isPanamarMode: user.id === PANAMAR_CLIENT_CODE });
 
             // ✅ Devolver objeto completo
             return {
@@ -213,7 +217,7 @@ export const useAuthStore = create<AuthStore>()(
           }
 
           // Limpiar estado de autenticación
-          set({ user: null, isAuthenticated: false });
+          set({ user: null, isAuthenticated: false, isPanamarMode: false });
         } catch (error) {
           console.error('Error en logout:', error);
           // 🔐 Forzar limpieza completa en caso de error
@@ -221,7 +225,7 @@ export const useAuthStore = create<AuthStore>()(
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
           }
-          set({ user: null, isAuthenticated: false });
+          set({ user: null, isAuthenticated: false, isPanamarMode: false });
         }
       },
 
@@ -234,7 +238,8 @@ export const useAuthStore = create<AuthStore>()(
       // 🔐 Solo persistir user info, nunca tokens
       partialize: (state) => ({
         user: state.user,
-        isAuthenticated: state.isAuthenticated
+        isAuthenticated: state.isAuthenticated,
+        isPanamarMode: state.isPanamarMode
       }),
     }
   )

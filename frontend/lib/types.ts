@@ -118,3 +118,76 @@ export interface UserProfile {
   company: string;
   phone: string;
 }
+
+// ── PANAMAR Mode Types ──────────────────────────────────────────────
+
+export interface PanamarLineItem {
+  secuencia: number;
+  codigoArticulo: string;
+  descripcion: string;
+  lote: string;
+  cajas: number;
+  unidades: number;
+  precioUnitario: number;
+  descuento: number;
+  importe: number;
+  precioTarifa85: number;
+  precioOriginal: number;
+  usaTarifa85: boolean;
+}
+
+export interface PanamarDocument {
+  subempresa: number;
+  ejercicio: number;
+  serieAlbaran: string;
+  terminal: number;
+  numeroAlbaran: number;
+  fecha: string;
+  dia: number;
+  mes: number;
+  ano: number;
+  hora: string | null;
+  codigoCliente: string;
+  nombreCliente: string;
+  nifCliente: string;
+  poblacionCliente: string;
+  numeroPedido: number;
+  refPedido: string;
+  referencia: string;
+  tipoDocumento: 'albaran' | 'factura';
+  serieFactura: string | null;
+  numeroFactura: number | null;
+  ejercicioFactura: number | null;
+  lineas: PanamarLineItem[];
+  totalLineasPanamar: number;
+  totalImportePanamar: number;
+}
+
+export interface PanamarDocumentsResponse {
+  success: boolean;
+  documents: PanamarDocument[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
+export interface PanamarSummary {
+  success: boolean;
+  ejercicio: number;
+  totalDocumentos: number;
+  totalClientes: number;
+  totalFacturados: number;
+  totalPendientes: number;
+}
+
+export interface PanamarFilters {
+  page?: number;
+  pageSize?: number;
+  tipo?: 'albaran' | 'factura';
+  fechaDesde?: string;
+  fechaHasta?: string;
+  codigoCliente?: string;
+  busqueda?: string;
+  ejercicio?: number;
+}

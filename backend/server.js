@@ -39,6 +39,7 @@ const pedidoController = require('./app/controllers/pedidoController');
 const productsController = require('./app/controllers/productsController');
 const chatbotController = require('./app/controllers/chatbotController'); // 🤖 Chatbot IA
 const libroIvaController = require('./app/controllers/libroIvaController'); // 📊 Libro IVA
+const panamarController = require('./app/controllers/panamarController'); // 📦 PANAMAR
 const { generalLimiter, pdfLimiter } = require('./app/middleware/rateLimiter');
 const { notFoundHandler, errorHandler, requestLogger } = require('./app/middleware/errorHandler');
 
@@ -465,7 +466,16 @@ app.post('/api/chatbot', optionalAuth, generalLimiter, chatbotController.process
 app.get('/api/chatbot/health', chatbotController.healthCheck);
 
 // =====================================================
-// 🔒 SISTEMA DE AUTENTICACIÓN SEGURA (NIVEL BANCARIO)
+// � PANAMAR - Documentos con productos CODIGOFILTRO=40
+// =====================================================
+// Modo especial para cliente 9999999999: consulta documentos cross-client
+// con productos PANAMAR y precios de TARIFA 85
+app.get('/api/panamar/documents', requireAuth, generalLimiter, panamarController.getDocuments);
+app.get('/api/panamar/summary', requireAuth, generalLimiter, panamarController.getSummary);
+app.get('/api/panamar/health', panamarController.healthCheck);
+
+// =====================================================
+// �🔒 SISTEMA DE AUTENTICACIÓN SEGURA (NIVEL BANCARIO)
 // =====================================================
 // Implementa: bcrypt, zxcvbn, HaveIBeenPwned, JWT, historial de contraseñas
 const authSecureRoutes = require('./app/routes/authSecureRoutes');

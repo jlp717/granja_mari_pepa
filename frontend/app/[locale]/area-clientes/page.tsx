@@ -14,6 +14,7 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import toast from 'react-hot-toast';
 import { CustomerDashboard } from '@/components/customer/dashboard';
+import { PanamarDashboard } from '@/components/panamar/PanamarDashboard';
 import { useTranslations } from 'next-intl';
 import AuthFlowManager from '@/components/auth/AuthFlowManager';
 import { secureFetch } from '@/lib/secureFetch';
@@ -53,7 +54,7 @@ export default function CustomerAreaPage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
   const [codeVerified, setCodeVerified] = useState(false);
-  const { isAuthenticated, login, user } = useAuthStore();
+  const { isAuthenticated, login, user, isPanamarMode } = useAuthStore();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
@@ -374,6 +375,11 @@ export default function CustomerAreaPage() {
   };
 
   if (isAuthenticated) {
+    // Modo PANAMAR: dashboard especial para cliente 9999999999
+    if (isPanamarMode) {
+      return <PanamarDashboard />;
+    }
+
     return (
       <>
         <CustomerDashboard />
