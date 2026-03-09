@@ -320,6 +320,167 @@ async function getDocuments(options = {}) {
 }
 
 /**
+ * Obtener UN solo documento PANAMAR por su clave compuesta
+ *
+ * @param {Object} key - { subempresa, ejercicio, serie, terminal, numero }
+ * @returns {Promise<Object|null>} documento con líneas, o null si no existe
+ */
+async function getDocumentByKey(key) {
+  const startTime = Date.now();
+
+  logger.info('📦 PANAMAR: Obteniendo documento por clave', key);
+
+  // ── Header query ──────────────────────────────────────────────────
+  const headerSQL = `
+    SELECT
+      CAC.SUBEMPRESAALBARAN,
+      CAC.EJERCICIOALBARAN,
+      TRIM(CAC.SERIEALBARAN)       AS SERIE_ALBARAN,
+      CAC.TERMINALALBARAN,
+      CAC.NUMEROALBARAN,
+      CAC.DIADOCUMENTO,
+      CAC.MESDOCUMENTO,
+      CAC.ANODOCUMENTO,
+      CAC.HORADOCUMENTO,
+      TRIM(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
+      TRIM(CLI.NOMBRECLIENTE)        AS NOMBRE_CLIENTE,
+      TRIM(CLI.NIF)                  AS NIF_CLIENTE,
+      TRIM(CLI.POBLACION)            AS POBLACION_CLIENTE,
+      CAC.NUMEROPEDIDO,
+      TRIM(CAC.PEDIDOREFERENCIA)     AS REF_PEDIDO,
+      TRIM(CAC.REFERENCIA)           AS REFERENCIA,
+      TRIM(CAC.SERIEFACTURA)         AS SERIE_FACTURA,
+      CAC.NUMEROFACTURA,
+      CAC.EJERCICIOFACTURA
+    FROM DSEDAC.CAC CAC
+    LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
+    WHERE CAC.SUBEMPRESAALBARAN = ?
+      AND CAC.EJERCICIOALBARAN  = ?
+      AND TRIM(CAC.SERIEALBARAN) = ?
+      AND CAC.TERMINALALBARAN   = ?
+      AND CAC.NUMEROALBARAN     = ?
+      AND EXISTS (
+        SELECT 1 FROM DSEDAC.LAC LAC
+        INNER JOIN DSEDAC.ARTX ARTX ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARTX.CODIGOARTICULO)
+        WHERE LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+          AND LAC.EJERCICIOALBARAN  = CAC.EJERCICIOALBARAN
+          AND LAC.SERIEALBARAN      = CAC.SERIEALBARAN
+          AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
+          AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
+          AND TRIM(ARTX.FILTRO03)   = '${PANAMAR_FILTRO}'
+          AND LAC.IMPORTEVENTA <> 0
+      )
+  `;
+
+  const headers = await odbcPool.query(headerSQL, [
+    key.subempresa, key.ejercicio, key.serie, key.terminal, key.numero
+  ]);
+
+  if (!headers || headers.length === 0) {
+    logger.warn('📦 PANAMAR: Documento no encontrado', key);
+    return null;
+  }
+
+  const h = headers[0];
+
+  // ── Lines query ──────────────────────────────────────────────────
+  const linesSQL = `
+    SELECT
+      LAC.SUBEMPRESAALBARAN,
+      LAC.EJERCICIOALBARAN,
+      TRIM(LAC.SERIEALBARAN)     AS SERIE_ALBARAN,
+      LAC.TERMINALALBARAN,
+      LAC.NUMEROALBARAN,
+      LAC.SECUENCIA,
+      TRIM(LAC.CODIGOARTICULO)   AS CODIGO_ARTICULO,
+      TRIM(LAC.DESCRIPCION)      AS DESCRIPCION,
+      TRIM(LAC.CODIGOLOTE)       AS LOTE,
+      LAC.CANTIDADENVASES         AS CAJAS,
+      LAC.CANTIDADUNIDADES        AS UNIDADES,
+      LAC.PRECIOVENTA,
+      LAC.PORCENTAJEDESCUENTO     AS DESCUENTO,
+      LAC.IMPORTEVENTA,
+      COALESCE(ARA.PRECIOTARIFA, 0) AS PRECIO_TARIFA_85,
+      TRIM(ARTX.FILTRO03)        AS FILTRO03
+    FROM DSEDAC.LAC LAC
+    INNER JOIN DSEDAC.ARTX ARTX ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARTX.CODIGOARTICULO)
+    LEFT JOIN DSEDAC.ARA ARA
+      ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
+      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
+    WHERE TRIM(ARTX.FILTRO03) = '${PANAMAR_FILTRO}'
+      AND LAC.IMPORTEVENTA <> 0
+      AND LAC.SUBEMPRESAALBARAN = ?
+      AND LAC.EJERCICIOALBARAN  = ?
+      AND TRIM(LAC.SERIEALBARAN) = ?
+      AND LAC.TERMINALALBARAN   = ?
+      AND LAC.NUMEROALBARAN     = ?
+    ORDER BY LAC.SECUENCIA
+  `;
+
+  const lines = await odbcPool.query(linesSQL, [
+    key.subempresa, key.ejercicio, key.serie, key.terminal, key.numero
+  ]);
+
+  // ── Assemble document ────────────────────────────────────────────
+  const docLines = (lines || []).map(line => {
+    const precioTarifa85 = line.PRECIO_TARIFA_85 || 0;
+    const precioUnitario = precioTarifa85 > 0 ? precioTarifa85 : line.PRECIOVENTA;
+    const cantidad = line.CAJAS > 0 ? line.CAJAS : line.UNIDADES;
+    const importeCalculado = precioTarifa85 > 0
+      ? precioTarifa85 * cantidad
+      : line.IMPORTEVENTA;
+
+    return {
+      secuencia: line.SECUENCIA,
+      codigoArticulo: line.CODIGO_ARTICULO,
+      descripcion: line.DESCRIPCION,
+      lote: line.LOTE,
+      cajas: line.CAJAS,
+      unidades: line.UNIDADES,
+      precioUnitario: round2(precioUnitario),
+      descuento: line.DESCUENTO,
+      importe: round2(importeCalculado),
+      precioTarifa85: round2(precioTarifa85),
+      precioOriginal: round2(line.PRECIOVENTA),
+      usaTarifa85: precioTarifa85 > 0
+    };
+  });
+
+  const totalImporte = docLines.reduce((sum, l) => sum + l.importe, 0);
+  const isFactura = h.NUMEROFACTURA > 0;
+
+  const elapsed = Date.now() - startTime;
+  logger.info('📦 PANAMAR: Documento obtenido', { elapsed: `${elapsed}ms`, lineas: docLines.length });
+
+  return {
+    subempresa: h.SUBEMPRESAALBARAN,
+    ejercicio: h.EJERCICIOALBARAN,
+    serieAlbaran: h.SERIE_ALBARAN,
+    terminal: h.TERMINALALBARAN,
+    numeroAlbaran: h.NUMEROALBARAN,
+    fecha: formatDate(h.DIADOCUMENTO, h.MESDOCUMENTO, h.ANODOCUMENTO),
+    dia: h.DIADOCUMENTO,
+    mes: h.MESDOCUMENTO,
+    ano: h.ANODOCUMENTO,
+    hora: formatHora(h.HORADOCUMENTO),
+    codigoCliente: h.CODIGO_CLIENTE,
+    nombreCliente: h.NOMBRE_CLIENTE,
+    nifCliente: h.NIF_CLIENTE,
+    poblacionCliente: h.POBLACION_CLIENTE,
+    numeroPedido: h.NUMEROPEDIDO,
+    refPedido: h.REF_PEDIDO,
+    referencia: h.REFERENCIA,
+    tipoDocumento: isFactura ? 'factura' : 'albaran',
+    serieFactura: isFactura ? h.SERIE_FACTURA : null,
+    numeroFactura: isFactura ? h.NUMEROFACTURA : null,
+    ejercicioFactura: isFactura ? h.EJERCICIOFACTURA : null,
+    lineas: docLines,
+    totalLineasPanamar: docLines.length,
+    totalImportePanamar: round2(totalImporte)
+  };
+}
+
+/**
  * Obtener resumen/estadísticas PANAMAR
  */
 async function getSummary(options = {}) {
@@ -392,5 +553,6 @@ module.exports = {
   PANAMAR_CLIENT_CODE,
   isPanamarClient,
   getDocuments,
+  getDocumentByKey,
   getSummary
 };

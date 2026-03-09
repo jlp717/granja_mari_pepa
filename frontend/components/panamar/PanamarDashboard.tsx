@@ -6,7 +6,8 @@ import { secureFetch } from '@/lib/secureFetch';
 import { PanamarDocument, PanamarFilters, PanamarDocumentsResponse, PanamarSummary } from '@/lib/types';
 import {
   Package, Search, Filter, ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
-  FileText, Truck, Calendar, Users, BarChart3, RefreshCw, LogOut, X
+  FileText, Truck, Calendar, Users, BarChart3, RefreshCw, LogOut, X,
+  Download, Eye, Mail, Share2, MessageCircle
 } from 'lucide-react';
 
 export function PanamarDashboard() {
@@ -30,6 +31,16 @@ export function PanamarDashboard() {
   const [searchInput, setSearchInput] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  // Share state
+  const [shareDoc, setShareDoc] = useState<PanamarDocument | null>(null);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
+  const [sendingEmail, setSendingEmail] = useState(false);
+  const [emailResult, setEmailResult] = useState<{ ok: boolean; msg: string } | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [loadingPdf, setLoadingPdf] = useState<string | null>(null); // key of doc loading
 
   // ── Fetch documents ──────────────────────────────────────────────
   const fetchDocuments = useCallback(async () => {
@@ -103,6 +114,115 @@ export function PanamarDashboard() {
 
   const getDocKey = (doc: PanamarDocument) =>
     `${doc.subempresa}-${doc.ejercicio}-${doc.serieAlbaran}-${doc.terminal}-${doc.numeroAlbaran}`;
+
+  const getDocPath = (doc: PanamarDocument) =>
+    `/api/panamar/documents/${doc.subempresa}/${doc.ejercicio}/${encodeURIComponent(doc.serieAlbaran)}/${doc.terminal}/${doc.numeroAlbaran}`;
+
+  // ── PDF Download ─────────────────────────────────────────────────
+  const handleDownload = async (doc: PanamarDocument) => {
+    const key = getDocKey(doc);
+    setLoadingPdf(key);
+    try {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
+      const url = `${backendUrl}${getDocPath(doc)}/pdf`;
+      const res = await fetch(url, { credentials: 'include' });
+      if (!res.ok) throw new Error('Error descargando PDF');
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = `Albaran_PANAMAR_${doc.serieAlbaran}-${doc.numeroAlbaran}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error('Download error:', err);
+      alert('Error al descargar el PDF');
+    } finally {
+      setLoadingPdf(null);
+    }
+  };
+
+  // ── PDF Preview ──────────────────────────────────────────────────
+  const handlePreview = async (doc: PanamarDocument) => {
+    const key = getDocKey(doc);
+    setLoadingPdf(key);
+    try {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
+      const url = `${backendUrl}${getDocPath(doc)}/preview`;
+      const res = await fetch(url, { credentials: 'include' });
+      if (!res.ok) throw new Error('Error previsualizando PDF');
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      setPreviewUrl(blobUrl);
+    } catch (err) {
+      console.error('Preview error:', err);
+      alert('Error al previsualizar el PDF');
+    } finally {
+      setLoadingPdf(null);
+    }
+  };
+
+  const closePreview = () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(null);
+  };
+
+  // ── Share modal ──────────────────────────────────────────────────
+  const openShare = (doc: PanamarDocument) => {
+    setShareDoc(doc);
+    setShowShareModal(true);
+  };
+
+  // ── WhatsApp share ───────────────────────────────────────────────
+  const handleWhatsApp = (doc: PanamarDocument) => {
+    const docRef = `${doc.serieAlbaran}-${doc.numeroAlbaran}`;
+    const text = encodeURIComponent(
+      `📦 Albarán PANAMAR ${docRef}\n` +
+      `Cliente: ${doc.nombreCliente} (${doc.codigoCliente})\n` +
+      `Fecha: ${doc.fecha}\n` +
+      `Total PANAMAR: ${doc.totalImportePanamar.toFixed(2)} €\n` +
+      `Líneas: ${doc.totalLineasPanamar}\n\n` +
+      `Granja Mari Pepa · Tarifa 85`
+    );
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    setShowShareModal(false);
+  };
+
+  // ── Email share ──────────────────────────────────────────────────
+  const openEmailModal = (doc: PanamarDocument) => {
+    setShareDoc(doc);
+    setShowShareModal(false);
+    setEmailInput('');
+    setEmailResult(null);
+    setShowEmailModal(true);
+  };
+
+  const handleSendEmail = async () => {
+    if (!shareDoc || !emailInput) return;
+    setSendingEmail(true);
+    setEmailResult(null);
+    try {
+      const res = await secureFetch<{ success: boolean; message: string }>(
+        `${getDocPath(shareDoc)}/email`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ destinatario: emailInput })
+        }
+      );
+      if (res.ok && res.data.success) {
+        setEmailResult({ ok: true, msg: res.data.message || 'Email enviado correctamente' });
+      } else {
+        setEmailResult({ ok: false, msg: res.data.message || 'Error al enviar' });
+      }
+    } catch (err) {
+      setEmailResult({ ok: false, msg: 'Error de conexión al enviar email' });
+    } finally {
+      setSendingEmail(false);
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -356,6 +476,36 @@ export function PanamarDashboard() {
                 {/* Expanded Lines */}
                 {isExpanded && (
                   <div className="border-t border-gray-100">
+                    {/* Action buttons */}
+                    <div className="px-4 py-2 bg-white border-b border-gray-100 flex items-center gap-2 flex-wrap">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handlePreview(doc); }}
+                        disabled={loadingPdf === key}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 transition disabled:opacity-50"
+                      >
+                        <Eye className="h-3.5 w-3.5" />
+                        Previsualizar
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleDownload(doc); }}
+                        disabled={loadingPdf === key}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-green-700 bg-green-50 rounded-lg hover:bg-green-100 transition disabled:opacity-50"
+                      >
+                        <Download className="h-3.5 w-3.5" />
+                        Descargar PDF
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); openShare(doc); }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-purple-700 bg-purple-50 rounded-lg hover:bg-purple-100 transition"
+                      >
+                        <Share2 className="h-3.5 w-3.5" />
+                        Compartir
+                      </button>
+                      {loadingPdf === key && (
+                        <RefreshCw className="h-4 w-4 text-orange-400 animate-spin ml-1" />
+                      )}
+                    </div>
+
                     {/* Document info */}
                     <div className="px-4 py-2 bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-500">
                       <div><strong>Cliente:</strong> {doc.codigoCliente}</div>
@@ -484,6 +634,130 @@ export function PanamarDashboard() {
               >
                 Cerrar sesión
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PDF Preview modal */}
+      {previewUrl && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-50">
+              <h3 className="text-sm font-semibold text-gray-700">Previsualización del Albarán</h3>
+              <button
+                onClick={closePreview}
+                className="p-1.5 rounded-lg hover:bg-gray-200 transition"
+              >
+                <X className="h-5 w-5 text-gray-500" />
+              </button>
+            </div>
+            <div className="flex-1">
+              <iframe
+                src={previewUrl}
+                className="w-full h-full border-0"
+                title="PDF Preview"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Share options modal */}
+      {showShareModal && shareDoc && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900">Compartir albarán</h3>
+              <button onClick={() => setShowShareModal(false)} className="p-1 hover:bg-gray-100 rounded-lg">
+                <X className="h-5 w-5 text-gray-400" />
+              </button>
+            </div>
+            <p className="text-sm text-gray-500 mb-4">
+              {shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran} · {shareDoc.nombreCliente}
+            </p>
+            <div className="space-y-2">
+              <button
+                onClick={() => openEmailModal(shareDoc)}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition text-left"
+              >
+                <Mail className="h-5 w-5 text-blue-600" />
+                <div>
+                  <div className="text-sm font-medium text-gray-900">Email</div>
+                  <div className="text-xs text-gray-400">Enviar PDF adjunto por correo</div>
+                </div>
+              </button>
+              <button
+                onClick={() => handleWhatsApp(shareDoc)}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-gray-200 hover:bg-green-50 hover:border-green-200 transition text-left"
+              >
+                <MessageCircle className="h-5 w-5 text-green-600" />
+                <div>
+                  <div className="text-sm font-medium text-gray-900">WhatsApp</div>
+                  <div className="text-xs text-gray-400">Compartir resumen por WhatsApp</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Email modal */}
+      {showEmailModal && shareDoc && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900">Enviar por email</h3>
+              <button onClick={() => setShowEmailModal(false)} className="p-1 hover:bg-gray-100 rounded-lg">
+                <X className="h-5 w-5 text-gray-400" />
+              </button>
+            </div>
+            <p className="text-sm text-gray-500 mb-4">
+              Albarán {shareDoc.serieAlbaran}-{shareDoc.numeroAlbaran} · {shareDoc.nombreCliente}
+            </p>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Email destinatario</label>
+                <input
+                  type="email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendEmail()}
+                  placeholder="ejemplo@correo.com"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-400 text-sm"
+                  disabled={sendingEmail}
+                />
+              </div>
+              {emailResult && (
+                <div className={`text-sm px-3 py-2 rounded-lg ${emailResult.ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                  {emailResult.msg}
+                </div>
+              )}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowEmailModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition text-sm"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleSendEmail}
+                  disabled={sendingEmail || !emailInput}
+                  className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {sendingEmail ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="h-4 w-4" />
+                      Enviar
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -472,6 +472,9 @@ app.get('/api/chatbot/health', chatbotController.healthCheck);
 // con productos PANAMAR y precios de TARIFA 85
 app.get('/api/panamar/documents', requireAuth, generalLimiter, panamarController.getDocuments);
 app.get('/api/panamar/summary', requireAuth, generalLimiter, panamarController.getSummary);
+app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf', requireAuth, generalLimiter, panamarController.downloadPDF);
+app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview', requireAuth, generalLimiter, panamarController.previewPDF);
+app.post('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email', requireAuth, generalLimiter, panamarController.sendEmail);
 app.get('/api/panamar/health', panamarController.healthCheck);
 
 // =====================================================

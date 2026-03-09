@@ -3,9 +3,12 @@
  * ====================
  * Endpoint para consultar documentos con productos PANAMAR (FILTRO03=40)
  * usando precios de TARIFA 85. Solo accesible por cliente 9999999999.
+ *
+ * Incluye: listado, resumen, PDF (descarga/preview), envío por email
  */
 
 const panamarService = require('../services/panamarService');
+const panamarPdfService = require('../services/panamarPdfService');
 const logger = require('../utils/logger');
 
 /**
@@ -136,8 +139,223 @@ async function healthCheck(req, res) {
   });
 }
 
+// ── Helper: fetch a single PANAMAR document by its key ──────────────
+async function fetchSingleDocument(req) {
+  const codigoCliente = req.user?.codigoCliente;
+
+  if (!panamarService.isPanamarClient(codigoCliente)) {
+    return { error: 403, message: 'Acceso denegado. Este endpoint es exclusivo para el modo PANAMAR.' };
+  }
+
+  const { subempresa, ejercicio, serie, terminal, numero } = req.params;
+
+  if (!subempresa || !ejercicio || !serie || !terminal || !numero) {
+    return { error: 400, message: 'Parámetros incompletos (subempresa, ejercicio, serie, terminal, numero).' };
+  }
+
+  // Use the service to get ONE document: filter tightly and get page 1, size 1
+  // We pass the key identifiers as a special option
+  const result = await panamarService.getDocumentByKey({
+    subempresa: parseInt(subempresa),
+    ejercicio: parseInt(ejercicio),
+    serie: serie.trim(),
+    terminal: parseInt(terminal),
+    numero: parseInt(numero)
+  });
+
+  if (!result) {
+    return { error: 404, message: 'Documento no encontrado.' };
+  }
+
+  return { doc: result };
+}
+
+/**
+ * GET /api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf
+ * Download PDF for a PANAMAR albaran
+ */
+async function downloadPDF(req, res) {
+  try {
+    const result = await fetchSingleDocument(req);
+    if (result.error) {
+      return res.status(result.error).json({ success: false, message: result.message });
+    }
+
+    const panamarDoc = result.doc;
+    const pdfBuffer = await panamarPdfService.generateAlbaranPDF(panamarDoc);
+
+    const clientName = (panamarDoc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+    const filename = `Albaran_PANAMAR_${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}_${clientName}.pdf`;
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    logger.info('📥 PANAMAR: PDF descargado', { ref: `${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}` });
+
+    return res.send(pdfBuffer);
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error generando PDF', { error: error.message, stack: error.stack });
+    return res.status(500).json({ success: false, message: 'Error generando PDF del albarán PANAMAR' });
+  }
+}
+
+/**
+ * GET /api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview
+ * Preview PDF inline (Content-Disposition: inline)
+ */
+async function previewPDF(req, res) {
+  try {
+    const result = await fetchSingleDocument(req);
+    if (result.error) {
+      return res.status(result.error).json({ success: false, message: result.message });
+    }
+
+    const panamarDoc = result.doc;
+    const pdfBuffer = await panamarPdfService.generateAlbaranPDF(panamarDoc);
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline');
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    return res.send(pdfBuffer);
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error previsualizando PDF', { error: error.message });
+    return res.status(500).json({ success: false, message: 'Error previsualizando PDF' });
+  }
+}
+
+/**
+ * POST /api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email
+ * Send albaran PDF via email
+ * Body: { destinatario: string }
+ */
+async function sendEmail(req, res) {
+  try {
+    const result = await fetchSingleDocument(req);
+    if (result.error) {
+      return res.status(result.error).json({ success: false, message: result.message });
+    }
+
+    const { destinatario } = req.body;
+
+    if (!destinatario) {
+      return res.status(400).json({ success: false, message: 'Se requiere el email destinatario.' });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(destinatario)) {
+      return res.status(400).json({ success: false, message: 'El email proporcionado no es válido.' });
+    }
+
+    const panamarDoc = result.doc;
+    const pdfBuffer = await panamarPdfService.generateAlbaranPDF(panamarDoc);
+
+    const clientName = (panamarDoc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+    const filename = `Albaran_PANAMAR_${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}_${clientName}.pdf`;
+    const docRef = `${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}`;
+    const totalStr = (panamarDoc.totalImportePanamar || 0).toFixed(2);
+
+    // Send email using nodemailer
+    const nodemailer = require('nodemailer');
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || '_dc-mx.bef93564e202.mari-pepa.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
+        pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
+      },
+      tls: { rejectUnauthorized: false, minVersion: 'TLSv1.2' },
+      connectionTimeout: 20000,
+      greetingTimeout: 10000,
+      socketTimeout: 20000
+    });
+
+    const htmlTemplate = `
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif;background:#F1F5F9;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F1F5F9;padding:24px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#FFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+        <tr><td style="background:linear-gradient(135deg,#E67E22 0%,#D35400 100%);padding:28px;text-align:center;">
+          <h1 style="color:#FFF;margin:0;font-size:22px;">📦 Albarán PANAMAR</h1>
+          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa · Tarifa 85</p>
+        </td></tr>
+        <tr><td style="padding:28px;">
+          <p style="color:#1E293B;font-size:15px;line-height:1.5;margin:0 0 20px;">
+            Adjunto encontrarás el albarán <strong>${docRef}</strong> del cliente 
+            <strong>${panamarDoc.nombreCliente}</strong>.
+          </p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;margin-bottom:20px;">
+            <tr>
+              <td style="padding:14px;border-bottom:1px solid #FDBA74;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Albarán</span><br>
+                <span style="color:#1E293B;font-size:15px;font-weight:600;">${docRef}</span>
+              </td>
+              <td style="padding:14px;border-bottom:1px solid #FDBA74;text-align:right;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Fecha</span><br>
+                <span style="color:#1E293B;font-size:15px;font-weight:600;">${panamarDoc.fecha}</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding:14px;text-align:center;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Total PANAMAR</span><br>
+                <span style="color:#D35400;font-size:22px;font-weight:700;">${totalStr} €</span>
+              </td>
+            </tr>
+          </table>
+          <p style="color:#64748B;font-size:12px;line-height:1.4;padding:12px;background:#EFF6FF;border-radius:6px;border-left:4px solid #3B82F6;">
+            📎 El PDF del albarán está adjunto a este email.
+          </p>
+        </td></tr>
+        <tr><td style="background:#F8FAFC;padding:20px;border-top:1px solid #E2E8F0;text-align:center;">
+          <p style="color:#64748B;font-size:12px;margin:0;">
+            <strong>Granja Mari Pepa</strong> · Tel: 639 77 86 56 · www.mari-pepa.com
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+    const mailOptions = {
+      from: '"Granja Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
+      to: destinatario,
+      subject: `Albarán PANAMAR ${docRef} - Granja Mari Pepa`,
+      html: htmlTemplate,
+      attachments: [{ filename, content: pdfBuffer, contentType: 'application/pdf' }]
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+
+    logger.info('📧 PANAMAR: Albarán enviado por email', {
+      ref: docRef, destinatario, messageId: info.messageId
+    });
+
+    return res.json({
+      success: true,
+      message: `Albarán enviado correctamente a ${destinatario}`,
+      messageId: info.messageId
+    });
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error enviando email', { error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: 'Error enviando email: ' + (error.message || 'Error desconocido')
+    });
+  }
+}
+
 module.exports = {
   getDocuments,
   getSummary,
-  healthCheck
+  healthCheck,
+  downloadPDF,
+  previewPDF,
+  sendEmail
 };
