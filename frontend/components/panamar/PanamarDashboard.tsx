@@ -399,7 +399,6 @@ export function PanamarDashboard() {
     filename?: string
   } | null>(null);
   const [isBulkInitializing, setIsBulkInitializing] = useState(false);
-  const [isBulkDownloading, setIsBulkDownloading] = useState(false);
   // Guard ref to prevent concurrent poll handling
   const isPollingRef = useRef(false);
   const bulkTaskRef = useRef<BulkTaskState | null>(null);
@@ -432,25 +431,31 @@ export function PanamarDashboard() {
   }, [bulkTask?.status, bulkTask?.id]);
 
   /**
-   * Trigger the actual file download using secureDownload (handles auth + blob)
+   * Trigger the actual file download using native browser download.
+   * IMPORTANT: No fetch/blob — the ZIP can be 1GB+, must stream via browser.
+   * Uses <a> click which goes through Next.js rewrite proxy (same-origin, cookies sent automatically).
    */
-  const triggerBulkFileDownload = async (taskId: string, filename: string) => {
-    setIsBulkDownloading(true);
-    const toastId = toast.loading('Descargando archivo ZIP...', { duration: Infinity });
-    try {
-      const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
-      const success = await secureDownload(downloadUrl, filename);
-      if (success) {
-        toast.success(`✅ ¡${filename} descargado correctamente!`, { id: toastId, duration: 8000 });
-      } else {
-        toast.error('Error al descargar el archivo. Use el botón "Descargar" para reintentar.', { id: toastId, duration: 10000 });
-      }
-    } catch (err) {
-      console.error('Bulk file download error:', err);
-      toast.error('Error al descargar el archivo ZIP. Use el botón "Descargar" para reintentar.', { id: toastId, duration: 10000 });
-    } finally {
-      setIsBulkDownloading(false);
-    }
+  const triggerBulkFileDownload = (taskId: string, filename: string) => {
+    const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
+    console.log(`📥 Triggering native browser download: ${downloadUrl} → ${filename}`);
+
+    // Method 1: Hidden <a> with download attribute
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup the element after a short delay
+    setTimeout(() => {
+      try { document.body.removeChild(link); } catch (e) { /* already removed */ }
+    }, 2000);
+
+    toast.success(
+      '📥 Descarga iniciada. El archivo es grande, puede tardar unos minutos. Compruebe las descargas de su navegador.',
+      { duration: 12000 }
+    );
   };
 
   const checkBulkStatus = async (taskId: string) => {
@@ -476,7 +481,7 @@ export function PanamarDashboard() {
             filename
           });
 
-          // Auto-download using secureDownload (handles auth, blob, retries)
+          // Auto-download using native browser download (no fetch/blob — streams 1GB+ files)
           triggerBulkFileDownload(taskId, filename);
 
         } else if (data.status === 'error') {
@@ -1685,32 +1690,23 @@ export function PanamarDashboard() {
                 <p className={`text-sm font-semibold leading-tight ${taskResult.status === 'completed' ? 'text-emerald-800' : 'text-red-700'
                   }`}>
                   {taskResult.status === 'completed'
-                    ? (isBulkDownloading
-                      ? 'Descargando archivo ZIP... Por favor espere.'
-                      : 'Preparación completa. El archivo ZIP se ha descargado (o use el botón).')
+                    ? 'Preparación completa. La descarga debería haber comenzado. Si no, pulse el botón.'
                     : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
                 </p>
                 <div className="mt-4 flex gap-2">
                   {taskResult.status === 'completed' && taskResult.downloadUrl && (
                     <Button
                       size="sm"
-                      disabled={isBulkDownloading}
-                      onClick={async () => {
-                        if (taskResult.downloadUrl && taskResult.filename) {
-                          await triggerBulkFileDownload(
-                            taskResult.downloadUrl.split('/').pop()!,
-                            taskResult.filename
-                          );
+                      onClick={() => {
+                        if (taskResult.downloadUrl) {
+                          const taskId = taskResult.downloadUrl.split('/').pop()!;
+                          triggerBulkFileDownload(taskId, taskResult.filename || 'PANAMAR_Massive.zip');
                         }
                       }}
                       className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl shadow-md border-b-2 border-emerald-800 active:translate-y-0.5 transition-all"
                     >
-                      {isBulkDownloading ? (
-                        <Settings className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Download className="w-4 h-4" />
-                      )}
-                      {isBulkDownloading ? 'Descargando...' : 'Descargar de nuevo'}
+                      <Download className="w-4 h-4" />
+                      Descargar de nuevo
                     </Button>
                   )}
                   <Button
