@@ -33,6 +33,82 @@ const MESES = [
   { value: 12, label: 'Dic', full: 'Diciembre' },
 ];
 
+interface BulkTaskState {
+  id: string;
+  status: 'processing' | 'completed' | 'error';
+  processed: number;
+  total: number;
+  startTime: number;
+  error: string | null;
+}
+
+const BulkProgressOverlay = ({ processed, total, remainingTime, onCancel }: {
+  processed: number,
+  total: number,
+  remainingTime: string,
+  onCancel: () => void
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 50 }}
+    className="fixed bottom-6 right-6 z-[60] w-full max-w-sm"
+  >
+    <div className="bg-white rounded-3xl shadow-2xl border-2 border-orange-100 p-6 overflow-hidden relative">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg">
+              <Archive className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900">Preparando ZIP</h4>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-black">
+                {processed} de {total}
+              </p>
+            </div>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onCancel}
+            className="h-8 w-8 text-gray-400 hover:text-orange-500 rounded-lg"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+        <div className="space-y-3">
+          <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-50 p-0.5">
+            <motion.div
+              className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${(processed / total) * 100}%` }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            />
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <div className="flex items-center gap-1.5 text-orange-600 font-bold">
+              <Settings className="w-3.5 h-3.5 animate-spin-slow" />
+              {Math.round((processed / total) * 100)}% Completado
+            </div>
+            <div className="flex items-center gap-1.5 text-gray-500 font-medium">
+              <Calendar className="w-3.5 h-3.5" />
+              Restante: <span className="text-gray-900 font-bold">{remainingTime}</span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-5 p-3 bg-orange-50 rounded-2xl border border-orange-100 flex items-start gap-3">
+          <Box className="w-4 h-4 text-orange-500 mt-0.5" />
+          <p className="text-[10px] leading-relaxed text-orange-700 font-medium">
+            Estamos generando los PDFs y comprimiéndolos. Puedes navegar por la aplicación, la descarga se iniciará automáticamente al terminar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 export function PanamarDashboard() {
   const { user, logout } = useAuthStore();
 
@@ -314,52 +390,112 @@ export function PanamarDashboard() {
   };
 
   // ── Bulk download (ZIP with all filtered PDFs) ───────────────────
-  const handleBulkDownload = async () => {
-    // Create abort controller so user can cancel
-    const abortController = new AbortController();
-    bulkAbortRef.current = abortController;
-    setBulkDownloading(true);
+  // Bulk Download Task State
+  const [bulkTask, setBulkTask] = useState<BulkTaskState | null>(null);
+  const [isBulkInitializing, setIsBulkInitializing] = useState(false);
 
-    const toastId = toast.loading(
-      <div className="flex items-center space-x-2">
-        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-orange-600"></div>
-        <span>Generando ZIP con {total} albaranes... (puede tardar)</span>
-      </div>
-    );
+  // Persistence: Restore task from localStorage on mount
+  useEffect(() => {
+    const savedTaskId = localStorage.getItem('panamar_bulk_task_id');
+    if (savedTaskId) {
+      checkBulkStatus(savedTaskId);
+    }
+  }, []);
+
+  // Polling logic
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (bulkTask && bulkTask.status === 'processing') {
+      interval = setInterval(() => {
+        checkBulkStatus(bulkTask.id);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [bulkTask?.status, bulkTask?.id]);
+
+  const checkBulkStatus = async (taskId: string) => {
     try {
-      const params = new URLSearchParams();
-      if (filters.fechaDesde) params.set('fechaDesde', filters.fechaDesde);
-      if (filters.fechaHasta) params.set('fechaHasta', filters.fechaHasta);
-      if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
-      if (filters.busqueda) params.set('busqueda', filters.busqueda);
-      if (filters.meses && filters.meses.length > 0) params.set('meses', filters.meses.join(','));
+      const { data, ok } = await secureFetch<any>(`/api/panamar/bulk-download/status/${taskId}`);
 
-      const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      const filename = `PANAMAR_Albaranes_${today}.zip`;
-      const ok = await secureDownload(
-        `/api/panamar/bulk-download?${params.toString()}`,
-        filename,
-        abortController.signal
-      );
-      if (!ok) throw new Error('Error descargando ZIP');
-      toast.success('Descarga completada correctamente', { id: toastId });
-    } catch (err) {
-      if ((err as Error).name === 'AbortError') {
-        toast.info('Descarga cancelada', { id: toastId });
+      if (ok && data.success) {
+        setBulkTask({
+          id: data.id,
+          status: data.status,
+          processed: data.processed,
+          total: data.total,
+          startTime: data.startTime,
+          error: data.error
+        });
+
+        if (data.status === 'completed') {
+          localStorage.removeItem('panamar_bulk_task_id');
+          // Use our secureDownload helper to trigger the final download
+          const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
+          const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+          secureDownload(downloadUrl, `PANAMAR_Massive_${timestamp}.zip`);
+        } else if (data.status === 'error') {
+          localStorage.removeItem('panamar_bulk_task_id');
+          toast.error(`Error en descarga: ${data.error || 'Desconocido'}`);
+        }
       } else {
-        console.error('Bulk download error:', err);
-        toast.error('Error al generar la descarga masiva', { id: toastId });
+        localStorage.removeItem('panamar_bulk_task_id');
+        setBulkTask(null);
       }
-    } finally {
-      setBulkDownloading(false);
-      bulkAbortRef.current = null;
+    } catch (err) {
+      console.error('Error polling bulk status:', err);
     }
   };
 
-  const handleCancelBulkDownload = () => {
-    if (bulkAbortRef.current) {
-      bulkAbortRef.current.abort();
+  const handleBulkDownloadInit = async () => {
+    if (isBulkInitializing || bulkTask?.status === 'processing') return;
+    setIsBulkInitializing(true);
+
+    try {
+      const { data, ok } = await secureFetch<any>('/api/panamar/bulk-download/init', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(filters)
+      });
+
+      if (ok && data.success && data.taskId) {
+        localStorage.setItem('panamar_bulk_task_id', data.taskId);
+        setBulkTask({
+          id: data.taskId,
+          status: 'processing',
+          processed: 0,
+          total: data.total,
+          startTime: Date.now(),
+          error: null
+        });
+        toast.success('Iniciando generación de descarga masiva...');
+      } else {
+        toast.error(data.message || 'Error al iniciar la descarga.');
+      }
+    } catch (err) {
+      console.error('Bulk init error:', err);
+      toast.error('Error de conexión al iniciar la descarga.');
+    } finally {
+      setIsBulkInitializing(false);
     }
+  };
+
+  const cancelBulkTask = () => {
+    localStorage.removeItem('panamar_bulk_task_id');
+    setBulkTask(null);
+  };
+
+  // Helper: Format remaining time
+  const getRemainingTime = () => {
+    if (!bulkTask || bulkTask.processed === 0) return '--:--';
+    const elapsed = (Date.now() - bulkTask.startTime) / 1000;
+    const rate = bulkTask.processed / elapsed;
+    const remaining = (bulkTask.total - bulkTask.processed) / rate;
+
+    if (remaining <= 0) return '00:00';
+
+    const mins = Math.floor(remaining / 60);
+    const secs = Math.floor(remaining % 60);
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   // ── Pagination helpers ───────────────────────────────────────────
@@ -373,6 +509,16 @@ export function PanamarDashboard() {
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
       </div>
+
+      {/* Bulk Download Progress Overlay */}
+      {bulkTask && bulkTask.status === 'processing' && (
+        <BulkProgressOverlay
+          processed={bulkTask.processed}
+          total={bulkTask.total}
+          remainingTime={getRemainingTime()}
+          onCancel={cancelBulkTask}
+        />
+      )}
 
       {/* Sticky Header */}
       <header className="bg-card border-b border-border shadow-sm sticky top-0 z-40">
@@ -534,9 +680,9 @@ export function PanamarDashboard() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              {bulkDownloading ? (
+              {bulkTask?.status === 'processing' ? (
                 <Button
-                  onClick={handleCancelBulkDownload}
+                  onClick={cancelBulkTask}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-xl h-12 px-6 font-bold"
                 >
                   <div className="flex items-center gap-2">
@@ -546,12 +692,17 @@ export function PanamarDashboard() {
                 </Button>
               ) : (
                 <Button
-                  onClick={handleBulkDownload}
+                  onClick={handleBulkDownloadInit}
+                  disabled={loading || isBulkInitializing}
                   className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-xl h-12 px-6 font-bold"
                 >
                   <div className="flex items-center gap-2">
-                    <Archive className="w-5 h-5" />
-                    Descargar todos ({total.toLocaleString('es-ES')})
+                    {isBulkInitializing ? (
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    ) : (
+                      <Archive className="w-5 h-5" />
+                    )}
+                    {isBulkInitializing ? 'Iniciando...' : `Descargar todos (${total.toLocaleString('es-ES')})`}
                   </div>
                 </Button>
               )}
@@ -624,9 +775,8 @@ export function PanamarDashboard() {
                   <div className="overflow-y-auto flex-1">
                     <button
                       onClick={() => { handleFilterChange('codigoCliente', undefined); setClientDropdownOpen(false); }}
-                      className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-orange-50 transition-colors border-b border-gray-100 ${
-                        !filters.codigoCliente ? 'bg-orange-50 text-orange-700' : 'text-gray-700'
-                      }`}
+                      className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-orange-50 transition-colors border-b border-gray-100 ${!filters.codigoCliente ? 'bg-orange-50 text-orange-700' : 'text-gray-700'
+                        }`}
                     >
                       Todos los clientes
                     </button>
@@ -640,9 +790,8 @@ export function PanamarDashboard() {
                         <button
                           key={client.codigoCliente}
                           onClick={() => { handleFilterChange('codigoCliente', client.codigoCliente); setClientDropdownOpen(false); }}
-                          className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${
-                            filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
-                          }`}
+                          className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
+                            }`}
                         >
                           <div className="truncate">{client.nombreCliente}</div>
                           <div className="text-xs text-gray-400">{client.codigoCliente}</div>
@@ -653,8 +802,8 @@ export function PanamarDashboard() {
                       const q = clientSearch.toLowerCase().trim();
                       return client.nombreCliente.toLowerCase().includes(q) || client.codigoCliente.toLowerCase().includes(q);
                     }).length === 0 && (
-                      <div className="px-4 py-3 text-sm text-gray-400 text-center">Sin resultados</div>
-                    )}
+                        <div className="px-4 py-3 text-sm text-gray-400 text-center">Sin resultados</div>
+                      )}
                   </div>
                 </div>
               )}
@@ -971,6 +1120,49 @@ export function PanamarDashboard() {
           </div>
         )}
 
+        {/* Cumulative Totals Banner (Orange) */}
+        {summary && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mt-8 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 rounded-3xl p-6 shadow-2xl border-4 border-white/20 text-white relative overflow-hidden group"
+          >
+            {/* Decorative background elements */}
+            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
+            <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-24 h-24 bg-black/10 rounded-full blur-xl" />
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-5 text-center md:text-left">
+                <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-inner">
+                  <Package className="w-9 h-9 text-white drop-shadow-md" />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-wider mb-1">Total Acumulado</h3>
+                  <p className="text-orange-100 text-sm font-bold uppercase tracking-widest opacity-90 italic">
+                    {total.toLocaleString('es-ES')} Albaranes Detectados
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-8">
+                <div className="text-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                  <div className="text-3xl md:text-4xl font-black drop-shadow-sm">
+                    {summary.totalCajas.toLocaleString('es-ES')}
+                  </div>
+                  <div className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-orange-100/80">Cajas Totales</div>
+                </div>
+
+                <div className="text-center px-6 py-3 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 shadow-lg scale-105">
+                  <div className="text-3xl md:text-4xl font-black drop-shadow-md">
+                    {summary.totalImporte.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
+                  </div>
+                  <div className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white">Importe Acumulado</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Pagination */}
         {totalPages > 1 && (
           <motion.div
@@ -990,11 +1182,10 @@ export function PanamarDashboard() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setFilters(prev => ({ ...prev, page: 1 }))}
                 disabled={filters.page === 1}
-                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                  filters.page === 1
-                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                }`}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${filters.page === 1
+                  ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                  : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                  }`}
                 title="Primera página"
               >
                 <ChevronsLeft className="w-4 h-4" />
@@ -1005,11 +1196,10 @@ export function PanamarDashboard() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setFilters(prev => ({ ...prev, page: Math.max(1, (prev.page || 1) - 1) }))}
                 disabled={filters.page === 1}
-                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                  filters.page === 1
-                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                }`}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${filters.page === 1
+                  ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                  : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                  }`}
                 title="Página anterior"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -1035,11 +1225,10 @@ export function PanamarDashboard() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => setFilters(prev => ({ ...prev, page: pageNum }))}
-                      className={`w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${
-                        pageNum === page
-                          ? 'bg-primary text-primary-foreground shadow-lg'
-                          : 'bg-card text-foreground hover:bg-secondary hover:text-primary shadow-md'
-                      }`}
+                      className={`w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${pageNum === page
+                        ? 'bg-primary text-primary-foreground shadow-lg'
+                        : 'bg-card text-foreground hover:bg-secondary hover:text-primary shadow-md'
+                        }`}
                     >
                       {pageNum}
                     </motion.button>
@@ -1052,11 +1241,10 @@ export function PanamarDashboard() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setFilters(prev => ({ ...prev, page: Math.min(totalPages, (prev.page || 1) + 1) }))}
                 disabled={filters.page === totalPages}
-                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                  filters.page === totalPages
-                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                }`}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${filters.page === totalPages
+                  ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                  : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                  }`}
                 title="Página siguiente"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -1067,11 +1255,10 @@ export function PanamarDashboard() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setFilters(prev => ({ ...prev, page: totalPages }))}
                 disabled={filters.page === totalPages}
-                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${
-                  filters.page === totalPages
-                    ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                    : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                }`}
+                className={`p-2 rounded-lg font-semibold transition-all duration-200 ${filters.page === totalPages
+                  ? 'bg-secondary text-muted-foreground cursor-not-allowed'
+                  : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
+                  }`}
                 title="Última página"
               >
                 <ChevronsRight className="w-4 h-4" />
@@ -1346,11 +1533,10 @@ export function PanamarDashboard() {
                   </div>
 
                   {emailResult && (
-                    <div className={`text-sm px-4 py-3 rounded-xl font-medium ${
-                      emailResult.ok
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                        : 'bg-red-50 text-red-700 border border-red-200'
-                    }`}>
+                    <div className={`text-sm px-4 py-3 rounded-xl font-medium ${emailResult.ok
+                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                      : 'bg-red-50 text-red-700 border border-red-200'
+                      }`}>
                       {emailResult.msg}
                     </div>
                   )}
@@ -1387,6 +1573,77 @@ export function PanamarDashboard() {
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* ═══════════════ BULK PROGRESS OVERLAY ═══════════════ */}
+      <AnimatePresence>
+        {bulkTask && bulkTask.status === 'processing' && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-6 right-6 z-[60] w-full max-w-sm"
+          >
+            <div className="bg-white rounded-3xl shadow-2xl border-2 border-orange-100 p-6 overflow-hidden relative">
+              {/* Decorative background for premium feel */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg">
+                      <Archive className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900">Preparando ZIP</h4>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest font-black">
+                        {bulkTask.processed} de {bulkTask.total}
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={cancelBulkTask}
+                    className="h-8 w-8 text-gray-400 hover:text-orange-500 rounded-lg"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+
+                {/* Progress Bar Container */}
+                <div className="space-y-3">
+                  <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-50 p-0.5">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(bulkTask.processed / bulkTask.total) * 100}%` }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-1.5 text-orange-600 font-bold">
+                      <Settings className="w-3.5 h-3.5 animate-spin-slow" />
+                      {Math.round((bulkTask.processed / bulkTask.total) * 100)}% Completado
+                    </div>
+                    <div className="flex items-center gap-1.5 text-gray-500 font-medium">
+                      <Calendar className="w-3.5 h-3.5" />
+                      Restante: <span className="text-gray-900 font-bold">{getRemainingTime()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 p-3 bg-orange-50 rounded-2xl border border-orange-100 flex items-start gap-3">
+                  <Box className="w-4 h-4 text-orange-500 mt-0.5" />
+                  <p className="text-[10px] leading-relaxed text-orange-700 font-medium">
+                    Estamos generando los PDFs y comprimiéndolos. Puedes navegar por la aplicación, la descarga se iniciará automáticamente al terminar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

@@ -22,7 +22,7 @@ const CONTADO_CLIENT_CODE = '4300005000';
 const PANAMAR_FAMILIAS = ['700', '701', '702', '703', '704', '705', '706'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const PANAMAR_CLASES_LINEA_SQL = "'AB', 'RG', 'VT'";
-const TARIFA_PANAMAR = 85;
+const TARIFA_PANAMAR_SQL = "CASE WHEN CAC.MESDOCUMENTO = 1 THEN 84 ELSE 85 END";
 const ANO_FIJO = 2026;
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGE_SIZE = 500;
@@ -73,7 +73,8 @@ function isPanamarClient(codigoCliente) {
 async function getDocuments(options = {}) {
   const startTime = Date.now();
   const page = Math.max(1, parseInt(options.page) || 1);
-  const pageSize = Math.min(MAX_PAGE_SIZE, Math.max(1, parseInt(options.pageSize) || DEFAULT_PAGE_SIZE));
+  const maxLimit = options.bypassMaxLimit ? 10000 : MAX_PAGE_SIZE;
+  const pageSize = Math.min(maxLimit, Math.max(1, parseInt(options.pageSize) || DEFAULT_PAGE_SIZE));
   const offset = (page - 1) * pageSize;
 
   logger.info('📦 PANAMAR: Consultando albaranes', {
@@ -229,13 +230,19 @@ async function getDocuments(options = {}) {
       LAC.PORCENTAJEDESCUENTO     AS DESCUENTO,
       LAC.IMPORTEVENTA,
       TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
-      COALESCE(ARA.PRECIOTARIFA, 0) AS PRECIO_TARIFA_85,
+      COALESCE(ARA.PRECIOTARIFA, 0) AS PRECIO_TARIFA_PANAMAR,
       ART.CODIGOFAMILIA           AS FAMILIA
     FROM DSEDAC.LAC LAC
+    INNER JOIN DSEDAC.CAC CAC
+      ON LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+      AND LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN
+      AND LAC.SERIEALBARAN = CAC.SERIEALBARAN
+      AND LAC.TERMINALALBARAN = CAC.TERMINALALBARAN
+      AND LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
     INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
     LEFT JOIN DSEDAC.ARA ARA
       ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
-      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
+      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR_SQL}
     WHERE TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
       AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
       AND (${orConditions})
@@ -252,11 +259,11 @@ async function getDocuments(options = {}) {
     const key = `${line.SUBEMPRESAALBARAN}|${line.EJERCICIOALBARAN}|${line.SERIE_ALBARAN}|${line.TERMINALALBARAN}|${line.NUMEROALBARAN}`;
     if (!linesByDoc[key]) linesByDoc[key] = [];
 
-    const precioTarifa85 = line.PRECIO_TARIFA_85 || 0;
-    const precioUnitario = precioTarifa85 > 0 ? precioTarifa85 : line.PRECIOVENTA;
+    const precioTarifa = line.PRECIO_TARIFA_PANAMAR || 0;
+    const precioUnitario = precioTarifa > 0 ? precioTarifa : line.PRECIOVENTA;
     const cantidad = line.CAJAS > 0 ? line.CAJAS : line.UNIDADES;
-    const importeCalculado = precioTarifa85 > 0
-      ? precioTarifa85 * cantidad
+    const importeCalculado = precioTarifa > 0
+      ? precioTarifa * cantidad
       : line.IMPORTEVENTA;
 
     linesByDoc[key].push({
@@ -269,9 +276,9 @@ async function getDocuments(options = {}) {
       precioUnitario: round2(precioUnitario),
       descuento: line.DESCUENTO,
       importe: round2(importeCalculado),
-      precioTarifa85: round2(precioTarifa85),
+      precioTarifa: round2(precioTarifa),
       precioOriginal: round2(line.PRECIOVENTA),
-      usaTarifa85: precioTarifa85 > 0,
+      usaTarifaEspecial: precioTarifa > 0,
       tipoVenta: line.TIPO_VENTA || ''
     });
   }
@@ -547,7 +554,7 @@ async function getSummary(options = {}) {
     INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
     LEFT JOIN DSEDAC.ARA ARA
       ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
-      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
+      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR_SQL}
     WHERE CAC.ANODOCUMENTO = ?
       AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
       AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
@@ -665,10 +672,10 @@ async function getDiagnostics() {
 
   // 3) Verificar posibles duplicados por ARA (si un articulo tiene >1 fila en ARA para tarifa 85)
   const araDuplicados = `
-    SELECT TRIM(ARA.CODIGOARTICULO) AS ARTICULO, COUNT(*) AS FILAS_ARA
+    SELECT TRIM(ARA.CODIGOARTICULO) AS ARTICULO, ARA.CODIGOTARIFA, COUNT(*) AS FILAS_ARA
     FROM DSEDAC.ARA ARA
-    WHERE ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
-    GROUP BY TRIM(ARA.CODIGOARTICULO)
+    WHERE ARA.CODIGOTARIFA IN (84, 85)
+    GROUP BY TRIM(ARA.CODIGOARTICULO), ARA.CODIGOTARIFA
     HAVING COUNT(*) > 1
   `;
 

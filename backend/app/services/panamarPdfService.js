@@ -298,13 +298,12 @@ async function generateAlbaranPDF(panamarDoc) {
         doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
 
         doc.text('CÓDIGO', 42, yPos + 5, { width: 50 });
-        doc.text('DESCRIPCIÓN', 95, yPos + 5, { width: 170 });
-        doc.text('LOTE', 270, yPos + 5, { width: 45 });
-        doc.text('CAJAS', 320, yPos + 5, { width: 35, align: 'right' });
-        doc.text('CANT.', 360, yPos + 5, { width: 38, align: 'right' });
-        doc.text('PRECIO', 403, yPos + 5, { width: 42, align: 'right' });
-        doc.text('% DTO', 450, yPos + 5, { width: 30, align: 'center' });
-        doc.text('IMPORTE', 515, yPos + 5, { width: 40, align: 'right' });
+        doc.text('DESCRIPCIÓN', 95, yPos + 5, { width: 210 });
+        doc.text('LOTE', 310, yPos + 5, { width: 45 });
+        doc.text('CAJAS', 360, yPos + 5, { width: 35, align: 'right' });
+        doc.text('CANT.', 405, yPos + 5, { width: 38, align: 'right' });
+        doc.text('PRECIO', 450, yPos + 5, { width: 45, align: 'right' });
+        doc.text('% DTO', 515, yPos + 5, { width: 35, align: 'right' });
 
         return yPos + 18;
       }
@@ -336,34 +335,30 @@ async function generateAlbaranPDF(panamarDoc) {
         const codigo = String(line.codigoArticulo || '').substring(0, 12);
         doc.text(codigo, 42, y + 3, { width: 50 });
 
-        doc.text(descripcion, 95, y + 3, { width: 170 });
+        doc.text(descripcion, 95, y + 3, { width: 210 });
 
         // Lote
         const lote = String(line.lote || '-').substring(0, 10);
-        doc.text(lote, 270, y + 3, { width: 45 });
+        doc.text(lote, 310, y + 3, { width: 45 });
 
         // Cajas
         const cajas = line.cajas || 0;
         totalCajas += Number(cajas) || 0;
         const cajasDisplay = Number(cajas) === 0 ? '-' : formatNumber(cajas, 0);
-        doc.text(cajasDisplay, 320, y + 3, { width: 35, align: 'right' });
+        doc.text(cajasDisplay, 360, y + 3, { width: 35, align: 'right' });
 
         // Cantidad (Uds/Kg)
         const cantidad = line.unidades || 0;
-        doc.text(formatNumber(cantidad, 3), 360, y + 3, { width: 38, align: 'right' });
+        doc.text(formatNumber(cantidad, 3), 405, y + 3, { width: 38, align: 'right' });
 
         // Precio
         const precio = line.precioUnitario || 0;
-        doc.text(formatNumber(precio, 3) + ' €', 403, y + 3, { width: 42, align: 'right' });
+        doc.text(formatNumber(precio, 3) + ' €', 450, y + 3, { width: 45, align: 'right' });
 
         // % Descuento
         const dto = line.descuento || 0;
-        doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 450, y + 3, { width: 30, align: 'center' });
+        doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 515, y + 3, { width: 35, align: 'right' });
 
-        // Importe
-        const importe = line.importe || 0;
-        doc.font('Helvetica-Bold');
-        doc.text(formatNumber(importe, 2) + ' €', 515, y + 3, { width: 40, align: 'right' });
         doc.font('Helvetica');
 
         y += rowHeight;

@@ -9,6 +9,7 @@
 
 const panamarService = require('../services/panamarService');
 const panamarPdfService = require('../services/panamarPdfService');
+const panamarBulkService = require('../services/panamarBulkService');
 const logger = require('../utils/logger');
 
 /**
@@ -394,32 +395,17 @@ async function sendEmail(req, res) {
 }
 
 /**
- * GET /api/panamar/bulk-download
- * Download a ZIP with all PDFs matching the current filters.
- * Streams the ZIP directly to the client with parallel PDF generation.
+ * POST /api/panamar/bulk-download/init
+ * Inicia una tarea asíncrona de generación de ZIP
  */
-async function bulkDownload(req, res) {
-  const startTime = Date.now();
-  let pdfCount = 0;
-  let failCount = 0;
-  let aborted = false;
-
+async function initBulkDownload(req, res) {
   try {
     const codigoCliente = req.user?.codigoCliente;
-
     if (!panamarService.isPanamarClient(codigoCliente)) {
       return res.status(403).json({ success: false, message: 'Acceso denegado.' });
     }
 
-    // Disable all timeouts for this long-running streaming operation
-    if (req.socket) req.socket.setTimeout(0);
-    req.setTimeout(0);
-    res.setTimeout(0);
-
-    // Detect client disconnect to stop wasting resources
-    req.on('close', () => { aborted = true; });
-
-    const { fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda, meses } = req.query;
+    const { fechaDesde, fechaHasta, codigoCliente: clienteDestino, busqueda, meses } = req.body;
 
     let mesesArray;
     if (meses) {
@@ -427,9 +413,11 @@ async function bulkDownload(req, res) {
       if (mesesArray.length === 0) mesesArray = undefined;
     }
 
+    // Obtener TODOS los documentos (bypass limit)
     const result = await panamarService.getDocuments({
       page: 1,
-      pageSize: 500,
+      pageSize: 10000,
+      bypassMaxLimit: true,
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
@@ -441,101 +429,73 @@ async function bulkDownload(req, res) {
       return res.status(404).json({ success: false, message: 'No hay documentos para descargar.' });
     }
 
-    const docs = result.documents;
-    logger.info('📦 PANAMAR: Iniciando bulk download', { totalDocs: docs.length });
+    const taskId = panamarBulkService.createTask(result.documents, codigoCliente);
 
-    const archiver = require('archiver');
-    const archive = archiver('zip', { zlib: { level: 3 } }); // level 3 = faster compression
-
-    const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const zipFilename = `PANAMAR_Albaranes_${timestamp}.zip`;
-
-    res.setHeader('Content-Type', 'application/zip');
-    res.setHeader('Content-Disposition', `attachment; filename="${zipFilename}"`);
-
-    // Handle stream errors: if archive or response fails, abort cleanly
-    archive.on('error', (err) => {
-      logger.error('❌ PANAMAR: Error ZIP bulk', { error: err.message });
-      aborted = true;
-      if (!res.headersSent) {
-        res.status(500).json({ success: false, message: 'Error generando ZIP' });
-      } else {
-        res.destroy();
-      }
+    return res.json({
+      success: true,
+      taskId,
+      total: result.documents.length
     });
 
-    res.on('close', () => {
-      if (!archive.finalized) {
-        aborted = true;
-        archive.abort();
-        logger.warn('⚠️ PANAMAR: Cliente desconectado durante bulk download');
-      }
-    });
-
-    archive.pipe(res);
-
-    // Generate PDFs in parallel batches of 10 for speed
-    const BATCH_SIZE = 10;
-
-    for (let i = 0; i < docs.length; i += BATCH_SIZE) {
-      // Stop generating if client disconnected
-      if (aborted) {
-        logger.warn('⚠️ PANAMAR: Bulk download abortado', { generated: pdfCount, remaining: docs.length - i });
-        break;
-      }
-
-      const batch = docs.slice(i, i + BATCH_SIZE);
-      const results = await Promise.allSettled(
-        batch.map(async (doc) => {
-          const pdfBuffer = await panamarPdfService.generateAlbaranPDF(doc);
-          const clientName = (doc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_').substring(0, 20);
-          const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
-          return { pdfBuffer, pdfName };
-        })
-      );
-
-      for (const r of results) {
-        if (r.status === 'fulfilled') {
-          archive.append(r.value.pdfBuffer, { name: r.value.pdfName });
-          pdfCount++;
-        } else {
-          failCount++;
-          logger.warn('⚠️ PANAMAR: Error generando PDF individual en bulk', { error: r.reason?.message });
-        }
-      }
-    }
-
-    if (!aborted) {
-      // Wait for archive to fully flush to client before returning
-      await new Promise((resolve, reject) => {
-        archive.on('end', resolve);
-        archive.on('error', reject);
-        archive.finalize();
-      });
-    }
-
-    const duration = ((Date.now() - startTime) / 1000).toFixed(1);
-    logger.info('📦 PANAMAR: Bulk download completado', {
-      totalDocs: docs.length,
-      pdfCount,
-      failCount,
-      duration: `${duration}s`,
-      aborted,
-      zipFilename
-    });
   } catch (error) {
-    logger.error('❌ PANAMAR: Error bulk download', {
-      error: error.message,
-      stack: error.stack,
-      pdfCount,
-      duration: `${((Date.now() - startTime) / 1000).toFixed(1)}s`
-    });
-    if (!res.headersSent) {
-      return res.status(500).json({ success: false, message: 'Error interno en descarga masiva' });
-    }
+    logger.error('❌ PANAMAR: Error init bulk', { error: error.message });
+    return res.status(500).json({ success: false, message: 'Error al iniciar descarga masiva' });
   }
 }
 
+/**
+ * GET /api/panamar/bulk-download/status/:taskId
+ */
+async function getBulkStatus(req, res) {
+  try {
+    const { taskId } = req.params;
+    const status = panamarBulkService.getTaskStatus(taskId);
+
+    if (!status) {
+      return res.status(404).json({ success: false, message: 'Tarea no encontrada' });
+    }
+
+    return res.json({ success: true, ...status });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Error al consultar estado' });
+  }
+}
+
+/**
+ * GET /api/panamar/bulk-download/retrieve/:taskId
+ * Descarga el archivo final
+ */
+async function retrieveBulkZip(req, res) {
+  try {
+    const { taskId } = req.params;
+    const task = panamarBulkService.tasks.get(taskId);
+
+    if (!task || task.status !== 'completed') {
+      return res.status(404).json({ success: false, message: 'Archivo no listo o tarea inexistente' });
+    }
+
+    const fs = require('fs');
+    if (!fs.existsSync(task.zipPath)) {
+      return res.status(404).json({ success: false, message: 'El archivo ya no existe en el servidor' });
+    }
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${task.zipFilename}"`);
+
+    const stream = fs.createReadStream(task.zipPath);
+    stream.pipe(res);
+
+    stream.on('end', () => {
+      // Opcional: limpiar después de descargar (o esperar al autocleanup de 1h)
+      // panamarBulkService.cleanupTask(taskId);
+    });
+
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error retrieve bulk', { error: error.message });
+    return res.status(500).json({ success: false, message: 'Error al descargar archivo' });
+  }
+}
+}
 /**
  * GET /api/panamar/clients
  * Returns distinct clients with PANAMAR albaranes for the dropdown selector.
@@ -568,6 +528,8 @@ module.exports = {
   downloadPDF,
   previewPDF,
   sendEmail,
-  bulkDownload,
-  diagnostics
+  diagnostics,
+  initBulkDownload,
+  getBulkStatus,
+  retrieveBulkZip
 };
