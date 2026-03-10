@@ -447,9 +447,15 @@ export function PanamarDashboard() {
             filename: `PANAMAR_Massive_${timestamp}.zip`
           });
 
-          // Attempt automatic download using location.assign for streaming reliability
+          // Attempt automatic download using a hidden link (more reliable than assign)
           setTimeout(() => {
-            window.location.assign(downloadUrl);
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `PANAMAR_Massive_${timestamp}.zip`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            toast.success('Descarga iniciada');
           }, 1000);
 
         } else if (data.status === 'error') {
@@ -468,26 +474,9 @@ export function PanamarDashboard() {
     }
   };
 
-  // Tab-aware notification cleanup
+  // No auto-cleanup for taskResult to ensure user sees it
   useEffect(() => {
-    if (!taskResult) return;
-
-    let timer: NodeJS.Timeout;
-    const cleanup = () => {
-      // Solo empezamos la cuenta atrás si la pestaña está activa
-      if (document.visibilityState === 'visible') {
-        timer = setTimeout(() => {
-          setTaskResult(null);
-        }, 5000); // Dar 5 segundos al usuario para verlo
-      }
-    };
-
-    cleanup();
-    document.addEventListener('visibilitychange', cleanup);
-    return () => {
-      document.removeEventListener('visibilitychange', cleanup);
-      if (timer) clearTimeout(timer);
-    };
+    // We let the user close the success notification manually
   }, [taskResult]);
 
   const handleBulkDownloadInit = async () => {
@@ -1641,7 +1630,7 @@ export function PanamarDashboard() {
             className="fixed bottom-6 right-6 z-[70] w-full max-w-sm"
           >
             <div className={`p-6 rounded-3xl shadow-2xl border-2 flex items-start gap-4 ${taskResult.status === 'completed'
-              ? 'bg-emerald-50 border-emerald-100'
+              ? 'bg-emerald-100 border-emerald-200'
               : 'bg-red-50 border-red-100'
               }`}>
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${taskResult.status === 'completed' ? 'bg-emerald-500' : 'bg-red-500'
@@ -1657,21 +1646,25 @@ export function PanamarDashboard() {
                   }`}>
                   {taskResult.status === 'completed' ? '¡Descarga Lista!' : 'Error en Descarga'}
                 </h4>
-                <p className={`text-sm font-medium leading-tight ${taskResult.status === 'completed' ? 'text-emerald-700' : 'text-red-700'
+                <p className={`text-sm font-semibold leading-tight ${taskResult.status === 'completed' ? 'text-emerald-800' : 'text-red-700'
                   }`}>
                   {taskResult.status === 'completed'
-                    ? 'El archivo ZIP ha sido generado y la descarga se ha iniciado.'
+                    ? 'Preparación completa. Su archivo ZIP se está descargando ahora mismo.'
                     : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
                 </p>
-                <div className="mt-3 flex gap-2">
+                <div className="mt-4 flex gap-2">
                   {taskResult.status === 'completed' && taskResult.downloadUrl && (
                     <Button
                       size="sm"
-                      onClick={() => window.location.assign(taskResult.downloadUrl!)}
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl"
+                      onClick={() => {
+                        const link = document.createElement('a');
+                        link.href = taskResult.downloadUrl!;
+                        link.click();
+                      }}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl shadow-md border-b-2 border-emerald-800 active:translate-y-0.5 transition-all"
                     >
                       <Download className="w-4 h-4" />
-                      {taskResult.status === 'completed' ? 'Descargar de nuevo' : 'Descargar ahora'}
+                      Descargar de nuevo
                     </Button>
                   )}
                   <Button
