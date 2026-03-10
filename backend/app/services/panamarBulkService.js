@@ -4,11 +4,14 @@ const archiver = require('archiver');
 const crypto = require('crypto');
 const logger = require('../utils/logger');
 const panamarPdfService = require('./panamarPdfService');
+const panamarService = require('./panamarService');
 
 /**
- * SERVICIO DE DESCARGAS MASIVAS PANAMAR
- * =====================================
- * Gestiona tareas asíncronas para generar ZIPs con miles de PDFs.
+ * SERVICIO DE DESCARGAS MASIVAS PANAMAR (OPTIMIZADO)
+ * ==================================================
+ * Gestiona tareas asíncronas para generar ZIPs.
+ * Ahora recupera los documentos por páginas en segundo plano
+ * para evitar bloqueos en la base de datos al iniciar.
  */
 
 // Mapa de tareas en memoria
@@ -21,42 +24,47 @@ if (!fs.existsSync(TMP_DIR)) {
 }
 
 /**
- * Inicia una nueva tarea de descarga masiva
+ * Inicia una nueva tarea de descarga masiva basándose en filtros
  */
-function createTask(docs, codigoCliente) {
+async function createTask(filters, codigoCliente) {
     const taskId = crypto.randomUUID();
     const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
     const zipFilename = `PANAMAR_${timestamp}_${taskId.slice(0, 8)}.zip`;
     const zipPath = path.join(TMP_DIR, zipFilename);
 
+    // Primero calculamos el total rápido
+    const initialResult = await panamarService.getDocuments({ ...filters, page: 1, pageSize: 1 });
+    const total = initialResult.total || 0;
+
     const task = {
         id: taskId,
         status: 'processing',
-        total: docs.length,
+        total,
         processed: 0,
         startTime: Date.now(),
         zipPath,
         zipFilename,
         error: null,
-        codigoCliente
+        codigoCliente,
+        filters
     };
 
     tasks.set(taskId, task);
 
     // Iniciar proceso en background
-    processTask(taskId, docs).catch(err => {
+    processTask(taskId).catch(err => {
         logger.error(`❌ Bulk Task Error [${taskId}]:`, err);
         task.status = 'error';
         task.error = err.message;
     });
 
-    return taskId;
+    return { taskId, total };
 }
 
 /**
- * Proceso en segundo plano para generar el ZIP
+ * Proceso en segundo plano: Pagina documentos, genera PDFs y comprime
  */
-async function processTask(taskId, docs) {
+async function processTask(taskId) {
     const task = tasks.get(taskId);
     if (!task) return;
 
@@ -78,34 +86,66 @@ async function processTask(taskId, docs) {
 
         archive.pipe(output);
 
-        // Procesar en lotes para no saturar CPU/Memoria ni conexiones BD
-        const BATCH_SIZE = 15;
-
         (async () => {
-            for (let i = 0; i < docs.length; i += BATCH_SIZE) {
-                // Verificar si la tarea sigue existiendo (no cancelada/limpiada)
+            const DOC_PAGE_SIZE = 50; // Tamaño de página de documentos a recuperar
+            const PDF_BATCH_SIZE = 8; // Cuántos PDFs generar en paralelo para no saturar ODBC
+
+            let page = 1;
+            let hasMore = true;
+
+            while (hasMore) {
+                // Verificar si la tarea sigue existiendo
                 if (!tasks.has(taskId)) {
                     archive.abort();
                     return;
                 }
 
-                const batch = docs.slice(i, i + BATCH_SIZE);
-                const results = await Promise.allSettled(
-                    batch.map(async (doc) => {
-                        const pdfBuffer = await panamarPdfService.generateAlbaranPDF(doc);
-                        const clientName = (doc.nombreCliente || 'Cliente')
-                            .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
-                            .substring(0, 20);
-                        const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
-                        return { pdfBuffer, pdfName };
-                    })
-                );
+                // Recuperar un lote de documentos
+                const result = await panamarService.getDocuments({
+                    ...task.filters,
+                    page,
+                    pageSize: DOC_PAGE_SIZE,
+                    bypassMaxLimit: true
+                });
 
-                for (const r of results) {
-                    if (r.status === 'fulfilled') {
-                        archive.append(r.value.pdfBuffer, { name: r.value.pdfName });
-                        task.processed++;
+                const docs = result.documents || [];
+                if (docs.length === 0) {
+                    hasMore = false;
+                    break;
+                }
+
+                // Procesar los documentos de este lote en sub-lotes para los PDFs
+                for (let i = 0; i < docs.length; i += PDF_BATCH_SIZE) {
+                    if (!tasks.has(taskId)) {
+                        archive.abort();
+                        return;
                     }
+
+                    const subBatch = docs.slice(i, i + PDF_BATCH_SIZE);
+                    const results = await Promise.allSettled(
+                        subBatch.map(async (doc) => {
+                            const pdfBuffer = await panamarPdfService.generateAlbaranPDF(doc);
+                            const clientName = (doc.nombreCliente || 'Cliente')
+                                .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
+                                .substring(0, 20);
+                            const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
+                            return { pdfBuffer, pdfName };
+                        })
+                    );
+
+                    for (const r of results) {
+                        if (r.status === 'fulfilled') {
+                            archive.append(r.value.pdfBuffer, { name: r.value.pdfName });
+                            task.processed++;
+                        }
+                    }
+                }
+
+                // Siguiente página
+                if (docs.length < DOC_PAGE_SIZE || task.processed >= task.total) {
+                    hasMore = false;
+                } else {
+                    page++;
                 }
             }
 
@@ -161,11 +201,11 @@ setInterval(() => {
             cleanupTask(id);
         }
     }
-}, 600000); // Cada 10 min
+}, 600000);
 
 module.exports = {
     createTask,
     getTaskStatus,
     cleanupTask,
-    tasks // Exportamos para que el controller pueda acceder al path del file
+    tasks
 };

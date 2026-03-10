@@ -477,6 +477,7 @@ app.get('/api/panamar/summary', requireAuth, generalLimiter, panamarController.g
 app.get('/api/panamar/clients', requireAuth, generalLimiter, panamarController.getClients);
 app.post('/api/panamar/bulk-download/init', requireAuth, generalLimiter, panamarController.initBulkDownload);
 app.get('/api/panamar/bulk-download/status/:taskId', requireAuth, generalLimiter, panamarController.getBulkStatus);
+app.delete('/api/panamar/bulk-download/status/:taskId/cancel', requireAuth, generalLimiter, panamarController.cancelBulkTask);
 app.get('/api/panamar/bulk-download/retrieve/:taskId', requireAuth, generalLimiter, panamarController.retrieveBulkZip);
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf', requireAuth, generalLimiter, panamarController.downloadPDF);
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview', requireAuth, generalLimiter, panamarController.previewPDF);

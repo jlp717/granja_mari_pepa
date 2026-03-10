@@ -413,28 +413,18 @@ async function initBulkDownload(req, res) {
       if (mesesArray.length === 0) mesesArray = undefined;
     }
 
-    // Obtener TODOS los documentos (bypass limit)
-    const result = await panamarService.getDocuments({
-      page: 1,
-      pageSize: 10000,
-      bypassMaxLimit: true,
+    const { taskId, total } = await panamarBulkService.createTask({
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
       busqueda,
       meses: mesesArray
-    });
-
-    if (!result.documents || result.documents.length === 0) {
-      return res.status(404).json({ success: false, message: 'No hay documentos para descargar.' });
-    }
-
-    const taskId = panamarBulkService.createTask(result.documents, codigoCliente);
+    }, codigoCliente);
 
     return res.json({
       success: true,
       taskId,
-      total: result.documents.length
+      total
     });
 
   } catch (error) {
@@ -519,6 +509,20 @@ async function getClients(req, res) {
   }
 }
 
+/**
+ * DELETE /api/panamar/bulk-download/status/:taskId/cancel
+ * Cancela y limpia una tarea
+ */
+async function cancelBulkTask(req, res) {
+  try {
+    const { taskId } = req.params;
+    const removed = panamarBulkService.cleanupTask(taskId);
+    return res.json({ success: true, removed });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Error al cancelar' });
+  }
+}
+
 module.exports = {
   getDocuments,
   getSummary,
@@ -530,5 +534,6 @@ module.exports = {
   diagnostics,
   initBulkDownload,
   getBulkStatus,
+  cancelBulkTask,
   retrieveBulkZip
 };

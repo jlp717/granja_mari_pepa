@@ -463,7 +463,7 @@ export function PanamarDashboard() {
           id: data.taskId,
           status: 'processing',
           processed: 0,
-          total: data.total,
+          total: data.total || 0,
           startTime: Date.now(),
           error: null
         });
@@ -486,15 +486,17 @@ export function PanamarDashboard() {
 
   // Helper: Format remaining time
   const getRemainingTime = () => {
-    if (!bulkTask || bulkTask.processed === 0) return '--:--';
+    if (!bulkTask || bulkTask.processed < 5) return 'Calculando...';
     const elapsed = (Date.now() - bulkTask.startTime) / 1000;
-    const rate = bulkTask.processed / elapsed;
-    const remaining = (bulkTask.total - bulkTask.processed) / rate;
+    const rate = bulkTask.processed / elapsed; // docs per second
+    const remainingDocs = bulkTask.total - bulkTask.processed;
+    if (rate === 0) return 'Calculando...';
+    const remainingSecs = remainingDocs / rate;
 
-    if (remaining <= 0) return '00:00';
+    if (remainingSecs < 0) return 'Todo listo';
 
-    const mins = Math.floor(remaining / 60);
-    const secs = Math.floor(remaining % 60);
+    const mins = Math.floor(remainingSecs / 60);
+    const secs = Math.floor(remainingSecs % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
@@ -1579,71 +1581,12 @@ export function PanamarDashboard() {
       {/* ═══════════════ BULK PROGRESS OVERLAY ═══════════════ */}
       <AnimatePresence>
         {bulkTask && bulkTask.status === 'processing' && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-6 right-6 z-[60] w-full max-w-sm"
-          >
-            <div className="bg-white rounded-3xl shadow-2xl border-2 border-orange-100 p-6 overflow-hidden relative">
-              {/* Decorative background for premium feel */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
-
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg">
-                      <Archive className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900">Preparando ZIP</h4>
-                      <p className="text-xs text-muted-foreground uppercase tracking-widest font-black">
-                        {bulkTask.processed} de {bulkTask.total}
-                      </p>
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={cancelBulkTask}
-                    className="h-8 w-8 text-gray-400 hover:text-orange-500 rounded-lg"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-
-                {/* Progress Bar Container */}
-                <div className="space-y-3">
-                  <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-50 p-0.5">
-                    <motion.div
-                      className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${(bulkTask.processed / bulkTask.total) * 100}%` }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1.5 text-orange-600 font-bold">
-                      <Settings className="w-3.5 h-3.5 animate-spin-slow" />
-                      {Math.round((bulkTask.processed / bulkTask.total) * 100)}% Completado
-                    </div>
-                    <div className="flex items-center gap-1.5 text-gray-500 font-medium">
-                      <Calendar className="w-3.5 h-3.5" />
-                      Restante: <span className="text-gray-900 font-bold">{getRemainingTime()}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-5 p-3 bg-orange-50 rounded-2xl border border-orange-100 flex items-start gap-3">
-                  <Box className="w-4 h-4 text-orange-500 mt-0.5" />
-                  <p className="text-[10px] leading-relaxed text-orange-700 font-medium">
-                    Estamos generando los PDFs y comprimiéndolos. Puedes navegar por la aplicación, la descarga se iniciará automáticamente al terminar.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <BulkProgressOverlay
+            processed={bulkTask.processed}
+            total={bulkTask.total}
+            remainingTime={getRemainingTime()}
+            onCancel={cancelBulkTask}
+          />
         )}
       </AnimatePresence>
     </div>
