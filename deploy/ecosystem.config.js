@@ -33,7 +33,7 @@ module.exports = {
             restart_delay: 4000,
 
             // Límites de memoria (reinicia si excede)
-            max_memory_restart: '500M',
+            max_memory_restart: '1G',
 
             // Graceful shutdown
             kill_timeout: 5000,

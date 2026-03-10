@@ -165,27 +165,22 @@ async function processTask(taskId) {
                     }
 
                     const subBatch = docs.slice(i, i + PDF_BATCH_SIZE);
-                    const results = await Promise.allSettled(
-                        subBatch.map(async (doc) => {
-                            const pdfBuffer = await panamarPdfService.generateAlbaranPDF(doc);
-                            const clientName = (doc.nombreCliente || 'Cliente')
-                                .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
-                                .substring(0, 20);
-                            const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
-                            return { pdfBuffer, pdfName };
-                        })
-                    );
 
-                    for (const r of results) {
-                        if (r.status === 'fulfilled') {
-                            archive.append(r.value.pdfBuffer, { name: r.value.pdfName });
-                            task.processed++;
-                        }
+                    for (const doc of subBatch) {
+                        const pdfStream = panamarPdfService.generateAlbaranPDFStream(doc);
+                        const clientName = (doc.nombreCliente || 'Cliente')
+                            .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
+                            .substring(0, 20);
+                        const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
+
+                        archive.append(pdfStream, { name: pdfName });
+                        task.processed++;
                     }
 
-                    // Guardar progreso periódicamente
-                    if (task.processed % (DOC_PAGE_SIZE * 2) === 0) {
+                    // Dar respiro al event loop y guardar progreso
+                    if (task.processed % DOC_PAGE_SIZE === 0) {
                         saveTasksToDisk();
+                        await new Promise(resolve => setTimeout(resolve, 50));
                     }
                 }
 

@@ -423,7 +423,7 @@ export function PanamarDashboard() {
     try {
       const { data, ok } = await secureFetch<any>(`/api/panamar/bulk-download/status/${taskId}`);
 
-      if (ok && data.success) {
+      if (ok && data && data.success) {
         setBulkTask({
           id: data.id,
           status: data.status,
