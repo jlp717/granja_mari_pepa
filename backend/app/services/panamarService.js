@@ -19,10 +19,11 @@ const logger = require('../utils/logger');
 
 const PANAMAR_CLIENT_CODE = '9999999999';
 const CONTADO_CLIENT_CODE = '4300005000';
-const PANAMAR_FAMILIAS = ['701', '702', '703', '704', '705'];
+const PANAMAR_FAMILIAS = ['700', '701', '702', '703', '704', '705', '706'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
+const PANAMAR_CLASES_LINEA_SQL = "'AB', 'RG', 'VT'";
 const TARIFA_PANAMAR = 85;
-const EJERCICIO_FIJO = 2026;
+const ANO_FIJO = 2026;
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGE_SIZE = 500;
 
@@ -44,8 +45,9 @@ const PANAMAR_EXISTS_SQL = `
       AND LAC.TERMINALALBARAN   = CAC.TERMINALALBARAN
       AND LAC.NUMEROALBARAN     = CAC.NUMEROALBARAN
       AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-      AND LAC.IMPORTEVENTA <> 0
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
   )`;
+
 
 /**
  * Verifica que el código de cliente sea el especial PANAMAR
@@ -107,9 +109,9 @@ async function getDocuments(options = {}) {
     }
   }
 
-  // Ejercicio fijo 2026 (siempre)
-  whereClauses.push('CAC.EJERCICIOALBARAN = ?');
-  params.push(EJERCICIO_FIJO);
+  // Filtro fijo por Año del Calendario 2026
+  whereClauses.push('CAC.ANODOCUMENTO = ?');
+  params.push(ANO_FIJO);
 
   // Filtro por cliente destino (resolved: CONTADO → albaran code)
   if (options.codigoCliente) {
@@ -235,7 +237,7 @@ async function getDocuments(options = {}) {
       ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
       AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
     WHERE TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-      AND LAC.IMPORTEVENTA <> 0
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
       AND (${orConditions})
     ORDER BY LAC.SUBEMPRESAALBARAN, LAC.EJERCICIOALBARAN, LAC.SERIEALBARAN,
              LAC.TERMINALALBARAN, LAC.NUMEROALBARAN, LAC.SECUENCIA
@@ -409,7 +411,7 @@ async function getDocumentByKey(key) {
       ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
       AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
     WHERE TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-      AND LAC.IMPORTEVENTA <> 0
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
       AND TRIM(LAC.SUBEMPRESAALBARAN) = ?
       AND LAC.EJERCICIOALBARAN  = ?
       AND TRIM(LAC.SERIEALBARAN) = ?
@@ -488,7 +490,7 @@ async function getSummary(options = {}) {
 
   logger.info('📊 PANAMAR: Consultando resumen', { meses: options.meses, codigoCliente: options.codigoCliente });
 
-  const ejercicio = EJERCICIO_FIJO; // Siempre 2026
+  const ano = ANO_FIJO; // Siempre 2026
 
   // Build dynamic WHERE clauses for summary
   const extraClauses = [];
@@ -518,7 +520,7 @@ async function getSummary(options = {}) {
       COUNT(DISTINCT CAC.NUMEROALBARAN || '-' || CAC.SERIEALBARAN || '-' || CAC.TERMINALALBARAN || '-' || CAC.EJERCICIOALBARAN) AS TOTAL_DOCUMENTOS,
       COUNT(DISTINCT ${RESOLVED_CLIENT_EXPR}) AS TOTAL_CLIENTES
     FROM DSEDAC.CAC CAC
-    WHERE CAC.EJERCICIOALBARAN = ?
+    WHERE CAC.ANODOCUMENTO = ?
       AND ${PANAMAR_EXISTS_SQL}
       ${extraSQL}
   `;
@@ -546,15 +548,15 @@ async function getSummary(options = {}) {
     LEFT JOIN DSEDAC.ARA ARA
       ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
       AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
-    WHERE CAC.EJERCICIOALBARAN = ?
+    WHERE CAC.ANODOCUMENTO = ?
       AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
-      AND LAC.IMPORTEVENTA <> 0
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
       ${extraSQL}
   `;
 
   const [summaryResult, aggregateResult] = await Promise.all([
-    odbcPool.query(summarySQL, [ejercicio, ...extraParams]),
-    odbcPool.query(aggregateSQL, [ejercicio, ...extraParams])
+    odbcPool.query(summarySQL, [ano, ...extraParams]),
+    odbcPool.query(aggregateSQL, [ano, ...extraParams])
   ]);
 
   const row = summaryResult[0] || {};
@@ -564,7 +566,7 @@ async function getSummary(options = {}) {
   logger.info('📊 PANAMAR: Resumen completado', { elapsed: `${elapsed}ms` });
 
   return {
-    ejercicio,
+    ano,
     totalDocumentos: row.TOTAL_DOCUMENTOS || 0,
     totalClientes: row.TOTAL_CLIENTES || 0,
     totalImporte: round2(aggRow.TOTAL_IMPORTE || 0),
@@ -588,13 +590,13 @@ async function getClients() {
       TRIM(CLI.NOMBREALTERNATIVO) AS NOMBRE_CLIENTE
     FROM DSEDAC.CAC CAC
     LEFT JOIN DSEDAC.CLI CLI ON ${RESOLVED_CLIENT_EXPR} = TRIM(CLI.CODIGOCLIENTE)
-    WHERE CAC.EJERCICIOALBARAN = ?
+    WHERE CAC.ANODOCUMENTO = ?
       AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
       AND ${PANAMAR_EXISTS_SQL}
     ORDER BY TRIM(CLI.NOMBREALTERNATIVO)
   `;
 
-  const rows = await odbcPool.query(clientsSQL, [EJERCICIO_FIJO]);
+  const rows = await odbcPool.query(clientsSQL, [ANO_FIJO]);
 
   const elapsed = Date.now() - startTime;
   logger.info('📊 PANAMAR: Clientes obtenidos', { count: rows.length, elapsed: `${elapsed}ms` });
@@ -603,6 +605,170 @@ async function getClients() {
     codigoCliente: r.CODIGO_CLIENTE,
     nombreCliente: r.NOMBRE_CLIENTE || r.CODIGO_CLIENTE
   }));
+}
+
+/**
+ * Diagnóstico detallado de cajas PANAMAR - desglose por mes y filtros
+ * Sirve para verificar que los datos coinciden con lo esperado
+ */
+async function getDiagnostics() {
+  const startTime = Date.now();
+  logger.info('🔍 PANAMAR DIAGNOSTICS: Iniciando análisis exhaustivo');
+
+  // 1) Desglose de cajas por mes (con y sin filtro IMPORTEVENTA <> 0)
+  const cajasDesglose = `
+    SELECT
+      CAC.MESDOCUMENTO AS MES,
+      COUNT(DISTINCT CAC.NUMEROALBARAN || '-' || CAC.SERIEALBARAN || '-' || CAC.TERMINALALBARAN || '-' || CAC.EJERCICIOALBARAN) AS DOCS,
+      COALESCE(SUM(LAC.CANTIDADENVASES), 0) AS CAJAS_ENVASES,
+      COALESCE(SUM(LAC.CANTIDADUNIDADES), 0) AS CAJAS_UNIDADES,
+      COUNT(*) AS TOTAL_LINEAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC
+      ON LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+      AND LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN
+      AND LAC.SERIEALBARAN = CAC.SERIEALBARAN
+      AND LAC.TERMINALALBARAN = CAC.TERMINALALBARAN
+      AND LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = ${ANO_FIJO}
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
+      AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
+      AND LAC.IMPORTEVENTA <> 0
+    GROUP BY CAC.MESDOCUMENTO
+    ORDER BY CAC.MESDOCUMENTO
+  `;
+
+  // 2) Lo mismo SIN el filtro IMPORTEVENTA <> 0 (para ver si hay lineas excluidas)
+  const cajasSinFiltroImporte = `
+    SELECT
+      CAC.MESDOCUMENTO AS MES,
+      COALESCE(SUM(LAC.CANTIDADENVASES), 0) AS CAJAS_ENVASES,
+      COALESCE(SUM(LAC.CANTIDADUNIDADES), 0) AS CAJAS_UNIDADES,
+      COUNT(*) AS TOTAL_LINEAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC
+      ON LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+      AND LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN
+      AND LAC.SERIEALBARAN = CAC.SERIEALBARAN
+      AND LAC.TERMINALALBARAN = CAC.TERMINALALBARAN
+      AND LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = ${ANO_FIJO}
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
+      AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
+    GROUP BY CAC.MESDOCUMENTO
+    ORDER BY CAC.MESDOCUMENTO
+  `;
+
+  // 3) Verificar posibles duplicados por ARA (si un articulo tiene >1 fila en ARA para tarifa 85)
+  const araDuplicados = `
+    SELECT TRIM(ARA.CODIGOARTICULO) AS ARTICULO, COUNT(*) AS FILAS_ARA
+    FROM DSEDAC.ARA ARA
+    WHERE ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
+    GROUP BY TRIM(ARA.CODIGOARTICULO)
+    HAVING COUNT(*) > 1
+  `;
+
+  // 4) Verificar nombre real de columna TIPOVENTA
+  const tipodventaCheck = `
+    SELECT COLUMN_NAME
+    FROM QSYS2.SYSCOLUMNS
+    WHERE TABLE_SCHEMA = 'DSEDAC' AND TABLE_NAME = 'LAC'
+      AND COLUMN_NAME LIKE '%TIPO%'
+  `;
+
+  // 5) Desglose CC/SC por mes
+  const ccScDesglose = `
+    SELECT
+      CAC.MESDOCUMENTO AS MES,
+      TRIM(LAC.TIPOVENTA) AS TIPO,
+      COALESCE(SUM(LAC.CANTIDADENVASES), 0) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC
+      ON LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+      AND LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN
+      AND LAC.SERIEALBARAN = CAC.SERIEALBARAN
+      AND LAC.TERMINALALBARAN = CAC.TERMINALALBARAN
+      AND LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = ${ANO_FIJO}
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
+      AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
+      AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
+      AND LAC.IMPORTEVENTA <> 0
+    GROUP BY CAC.MESDOCUMENTO, TRIM(LAC.TIPOVENTA)
+    ORDER BY CAC.MESDOCUMENTO, TRIM(LAC.TIPOVENTA)
+  `;
+
+  try {
+    const [desglose, sinFiltro, duplicados, columnas, ccsc] = await Promise.all([
+      odbcPool.query(cajasDesglose),
+      odbcPool.query(cajasSinFiltroImporte),
+      odbcPool.query(araDuplicados).catch(e => ({ error: e.message })),
+      odbcPool.query(tipodventaCheck).catch(e => ({ error: e.message })),
+      odbcPool.query(ccScDesglose).catch(e => ({ error: e.message }))
+    ]);
+
+    const elapsed = Date.now() - startTime;
+
+    const result = {
+      info: 'Diagnóstico exhaustivo de cajas PANAMAR',
+      elapsed: `${elapsed}ms`,
+      anoFijo: ANO_FIJO,
+      filtros: `Familias: ${PANAMAR_FAMILIAS.join(', ')}, Clientes: 4300%, Tarifa: ${TARIFA_PANAMAR}`,
+
+      // Desglose por mes CON filtro IMPORTEVENTA <> 0
+      cajasConFiltroImporte: desglose.map ? desglose.map(r => ({
+        mes: r.MES,
+        documentos: r.DOCS,
+        cajasEnvases: r.CAJAS_ENVASES,
+        cajasUnidades: r.CAJAS_UNIDADES,
+        totalLineas: r.TOTAL_LINEAS
+      })) : desglose,
+
+      // Desglose por mes SIN filtro IMPORTEVENTA <> 0
+      cajasSinFiltroImporte: sinFiltro.map ? sinFiltro.map(r => ({
+        mes: r.MES,
+        cajasEnvases: r.CAJAS_ENVASES,
+        cajasUnidades: r.CAJAS_UNIDADES,
+        totalLineas: r.TOTAL_LINEAS
+      })) : sinFiltro,
+
+      // Diferencia por mes (lineas excluidas por IMPORTEVENTA = 0)
+      diferenciaPorMes: sinFiltro.map && desglose.map ? sinFiltro.map(sf => {
+        const cf = desglose.find(d => d.MES === sf.MES) || { CAJAS_ENVASES: 0, TOTAL_LINEAS: 0 };
+        return {
+          mes: sf.MES,
+          lineasExcluidas: sf.TOTAL_LINEAS - (cf.TOTAL_LINEAS || 0),
+          cajasExcluidas: sf.CAJAS_ENVASES - (cf.CAJAS_ENVASES || 0)
+        };
+      }) : 'N/A',
+
+      // ARA duplicados (si hay, podrían inflar el SUM)
+      araDuplicados: duplicados.length !== undefined
+        ? (duplicados.length === 0 ? 'Sin duplicados - OK' : duplicados)
+        : duplicados,
+
+      // Columnas TIPO* en LAC
+      columnasLAC_TIPO: columnas.map ? columnas.map(c => c.COLUMN_NAME) : columnas,
+
+      // Desglose CC/SC por mes
+      ccScPorMes: ccsc.map ? ccsc.map(r => ({
+        mes: r.MES,
+        tipo: r.TIPO,
+        cajas: r.CAJAS
+      })) : ccsc
+    };
+
+    logger.info('🔍 PANAMAR DIAGNOSTICS:', JSON.stringify(result, null, 2));
+    return result;
+  } catch (error) {
+    logger.error('🔍 PANAMAR DIAGNOSTICS ERROR:', error.message);
+    throw error;
+  }
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────
@@ -630,10 +796,11 @@ function round2(n) {
 
 module.exports = {
   PANAMAR_CLIENT_CODE,
-  EJERCICIO_FIJO,
+  ANO_FIJO,
   isPanamarClient,
   getDocuments,
   getDocumentByKey,
   getSummary,
-  getClients
+  getClients,
+  getDiagnostics
 };

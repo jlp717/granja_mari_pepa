@@ -139,6 +139,25 @@ async function getSummary(req, res) {
 }
 
 /**
+ * GET /api/panamar/diagnostics
+ * Devuelve diagnóstico exhaustivo de cajas, desglose por mes, etc.
+ */
+async function diagnostics(req, res) {
+  try {
+    const codigoCliente = req.user?.codigoCliente;
+    if (!panamarService.isPanamarClient(codigoCliente)) {
+      return res.status(403).json({ success: false, message: 'Acceso denegado.' });
+    }
+
+    const result = await panamarService.getDiagnostics();
+    return res.json({ success: true, ...result });
+  } catch (error) {
+    logger.error('❌ PANAMAR DIAGNOSTICS error:', error.message);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+/**
  * Health check para endpoint PANAMAR
  */
 async function healthCheck(req, res) {
@@ -549,5 +568,6 @@ module.exports = {
   downloadPDF,
   previewPDF,
   sendEmail,
-  bulkDownload
+  bulkDownload,
+  diagnostics
 };

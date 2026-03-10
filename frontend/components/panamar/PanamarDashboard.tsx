@@ -460,7 +460,7 @@ export function PanamarDashboard() {
                 <DollarSign className="h-5 w-5 text-white" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">{summary.totalImporte.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} &euro;</div>
+                <div className="text-lg font-bold text-foreground whitespace-nowrap">{summary.totalImporte.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €</div>
                 <div className="text-xs text-muted-foreground font-medium">Importe Total</div>
               </div>
             </motion.div>

@@ -479,6 +479,7 @@ app.get('/api/panamar/bulk-download', requireAuth, generalLimiter, panamarContro
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf', requireAuth, generalLimiter, panamarController.downloadPDF);
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview', requireAuth, generalLimiter, panamarController.previewPDF);
 app.post('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email', requireAuth, generalLimiter, panamarController.sendEmail);
+app.get('/api/panamar/diagnostics', requireAuth, generalLimiter, panamarController.diagnostics);
 app.get('/api/panamar/health', panamarController.healthCheck);
 
 // =====================================================
