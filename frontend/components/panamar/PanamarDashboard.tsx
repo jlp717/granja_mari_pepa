@@ -447,15 +447,10 @@ export function PanamarDashboard() {
             filename: `PANAMAR_Massive_${timestamp}.zip`
           });
 
-          // Attempt automatic download
-          setTimeout(async () => {
-            const success = await secureDownload(downloadUrl, `PANAMAR_Massive_${timestamp}.zip`);
-            if (success) {
-              toast.success('Descarga iniciada automáticamente');
-            } else {
-              toast.error('La descarga automática falló. Use el botón "Descargar ahora".');
-            }
-          }, 500);
+          // Attempt automatic download using location.assign for streaming reliability
+          setTimeout(() => {
+            window.location.assign(downloadUrl);
+          }, 1000);
 
         } else if (data.status === 'error') {
           console.error(`❌ Bulk task ${taskId} failed:`, data.error);
@@ -1672,11 +1667,11 @@ export function PanamarDashboard() {
                   {taskResult.status === 'completed' && taskResult.downloadUrl && (
                     <Button
                       size="sm"
-                      onClick={() => secureDownload(taskResult.downloadUrl!, taskResult.filename!)}
+                      onClick={() => window.location.assign(taskResult.downloadUrl!)}
                       className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl"
                     >
                       <Download className="w-4 h-4" />
-                      Descargar ahora
+                      {taskResult.status === 'completed' ? 'Descargar de nuevo' : 'Descargar ahora'}
                     </Button>
                   )}
                   <Button
