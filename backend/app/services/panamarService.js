@@ -391,6 +391,8 @@ async function getDocumentByKey(key) {
   }
 
   const h = headers[0];
+  const month = h.MESDOCUMENTO;
+  const tariff = (month === 1) ? 84 : 85;
 
   // ── Lines query ──────────────────────────────────────────────────
   const linesSQL = `
@@ -416,7 +418,7 @@ async function getDocumentByKey(key) {
     INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
     LEFT JOIN DSEDAC.ARA ARA
       ON TRIM(LAC.CODIGOARTICULO) = TRIM(ARA.CODIGOARTICULO)
-      AND ARA.CODIGOTARIFA = ${TARIFA_PANAMAR}
+      AND ARA.CODIGOTARIFA = ${tariff}
     WHERE TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
       AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
       AND TRIM(LAC.SUBEMPRESAALBARAN) = ?

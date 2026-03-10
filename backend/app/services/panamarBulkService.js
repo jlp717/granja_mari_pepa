@@ -196,9 +196,12 @@ async function processTask(taskId) {
                 }
             }
 
-            archive.finalize();
+            await archive.finalize();
         })().catch(err => {
             archive.abort();
+            task.status = 'error';
+            task.error = err.message;
+            saveTasksToDisk();
             reject(err);
         });
     });

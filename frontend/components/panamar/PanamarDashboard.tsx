@@ -392,7 +392,12 @@ export function PanamarDashboard() {
   // ── Bulk download (ZIP with all filtered PDFs) ───────────────────
   // Bulk Download Task State
   const [bulkTask, setBulkTask] = useState<BulkTaskState | null>(null);
-  const [taskResult, setTaskResult] = useState<{ status: 'completed' | 'error', error?: string } | null>(null);
+  const [taskResult, setTaskResult] = useState<{
+    status: 'completed' | 'error',
+    error?: string,
+    downloadUrl?: string,
+    filename?: string
+  } | null>(null);
   const [isBulkInitializing, setIsBulkInitializing] = useState(false);
 
   // Persistence: Restore task from localStorage on mount
@@ -429,19 +434,37 @@ export function PanamarDashboard() {
         });
 
         if (data.status === 'completed') {
-          localStorage.removeItem('panamar_bulk_task_id');
-          // Use our secureDownload helper to trigger the final download
+          console.log(`📦 Bulk task ${taskId} completed. Triggering download...`);
           const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
           const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-          secureDownload(downloadUrl, `PANAMAR_Massive_${timestamp}.zip`);
+
+          localStorage.removeItem('panamar_bulk_task_id');
+
           setBulkTask(null);
-          setTaskResult({ status: 'completed' });
+          setTaskResult({
+            status: 'completed',
+            downloadUrl,
+            filename: `PANAMAR_Massive_${timestamp}.zip`
+          });
+
+          // Attempt automatic download
+          setTimeout(async () => {
+            const success = await secureDownload(downloadUrl, `PANAMAR_Massive_${timestamp}.zip`);
+            if (success) {
+              toast.success('Descarga iniciada automáticamente');
+            } else {
+              toast.error('La descarga automática falló. Use el botón "Descargar ahora".');
+            }
+          }, 500);
+
         } else if (data.status === 'error') {
+          console.error(`❌ Bulk task ${taskId} failed:`, data.error);
           localStorage.removeItem('panamar_bulk_task_id');
           setBulkTask(null);
           setTaskResult({ status: 'error', error: data.error });
         }
       } else {
+        console.warn(`⚠️ Unexpected status response for task ${taskId}`, data);
         localStorage.removeItem('panamar_bulk_task_id');
         setBulkTask(null);
       }
@@ -1623,8 +1646,8 @@ export function PanamarDashboard() {
             className="fixed bottom-6 right-6 z-[70] w-full max-w-sm"
           >
             <div className={`p-6 rounded-3xl shadow-2xl border-2 flex items-start gap-4 ${taskResult.status === 'completed'
-                ? 'bg-emerald-50 border-emerald-100'
-                : 'bg-red-50 border-red-100'
+              ? 'bg-emerald-50 border-emerald-100'
+              : 'bg-red-50 border-red-100'
               }`}>
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${taskResult.status === 'completed' ? 'bg-emerald-500' : 'bg-red-500'
                 }`}>
@@ -1646,13 +1669,23 @@ export function PanamarDashboard() {
                     : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
                 </p>
                 <div className="mt-3 flex gap-2">
+                  {taskResult.status === 'completed' && taskResult.downloadUrl && (
+                    <Button
+                      size="sm"
+                      onClick={() => secureDownload(taskResult.downloadUrl!, taskResult.filename!)}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl"
+                    >
+                      <Download className="w-4 h-4" />
+                      Descargar ahora
+                    </Button>
+                  )}
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => setTaskResult(null)}
-                    className={taskResult.status === 'completed' ? 'text-emerald-700 hover:bg-emerald-100' : 'text-red-700 hover:bg-red-100'}
+                    className={`rounded-xl ${taskResult.status === 'completed' ? 'text-emerald-700 hover:bg-emerald-100' : 'text-red-700 hover:bg-red-100 w-full'}`}
                   >
-                    Entendido
+                    {taskResult.status === 'completed' ? 'Cerrar' : 'Entendido'}
                   </Button>
                 </div>
               </div>

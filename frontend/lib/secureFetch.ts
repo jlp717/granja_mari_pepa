@@ -316,6 +316,24 @@ export async function secureDownload(
       }
     }
 
+    // 🔐 CSRF Retry on 403
+    if (response.status === 403) {
+      const dataText = await response.clone().text();
+      if (dataText.includes('CSRF') || dataText.includes('token')) {
+        console.log('🔐 secureDownload: 403 CSRF detectado, reintentando...');
+        csrfToken = null;
+        const newToken = await getCSRFToken();
+        if (newToken) {
+          response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'X-CSRF-Token': newToken },
+            signal,
+          });
+        }
+      }
+    }
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
