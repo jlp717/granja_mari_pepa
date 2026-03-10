@@ -107,13 +107,17 @@ async function createTask(filters, codigoCliente) {
 
 /**
  * Proceso en segundo plano: Pagina documentos, genera PDFs y comprime
+ * v3.0 - PROCESAMIENTO ESTRICTAMENTE SECUENCIAL PARA AHORRO DE MEMORIA
  */
 async function processTask(taskId) {
     const task = tasks.get(taskId);
     if (!task) return;
 
+    logger.info(`🚀 Starting Bulk Task [${taskId}] - Total: ${task.total}`);
+
     const output = fs.createWriteStream(task.zipPath);
-    const archive = archiver('zip', { zlib: { level: 3 } });
+    // Usamos compresión más baja (1) para reducir CPU y latencia
+    const archive = archiver('zip', { zlib: { level: 1 } });
 
     return new Promise((resolve, reject) => {
         output.on('close', () => {
@@ -124,6 +128,7 @@ async function processTask(taskId) {
         });
 
         archive.on('error', (err) => {
+            logger.error(`❌ Archiver Error [${taskId}]:`, err);
             task.status = 'error';
             task.error = err.message;
             saveTasksToDisk();
@@ -134,12 +139,12 @@ async function processTask(taskId) {
 
         (async () => {
             const DOC_PAGE_SIZE = 50;
-            const PDF_BATCH_SIZE = 8;
 
             let page = 1;
             let hasMore = true;
 
             while (hasMore) {
+                // Verificar si la tarea sigue activa
                 if (!tasks.has(taskId) || tasks.get(taskId).status === 'error') {
                     archive.abort();
                     return;
@@ -158,31 +163,44 @@ async function processTask(taskId) {
                     break;
                 }
 
-                for (let i = 0; i < docs.length; i += PDF_BATCH_SIZE) {
+                // PROCESAMIENTO SECUENCIAL: Esperamos a que cada PDF se procese
+                for (const doc of docs) {
                     if (!tasks.has(taskId)) {
                         archive.abort();
                         return;
                     }
 
-                    const subBatch = docs.slice(i, i + PDF_BATCH_SIZE);
+                    await new Promise((resolvePdf, rejectPdf) => {
+                        try {
+                            const pdfStream = panamarPdfService.generateAlbaranPDFStream(doc);
 
-                    for (const doc of subBatch) {
-                        const pdfStream = panamarPdfService.generateAlbaranPDFStream(doc);
-                        const clientName = (doc.nombreCliente || 'Cliente')
-                            .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
-                            .substring(0, 20);
-                        const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
+                            const clientName = (doc.nombreCliente || 'Cliente')
+                                .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
+                                .substring(0, 20);
+                            const pdfName = `Albaran_P-${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
 
-                        archive.append(pdfStream, { name: pdfName });
-                        task.processed++;
-                    }
+                            // Esperar a que el stream sea consumido completamente por archiver
+                            pdfStream.on('end', resolvePdf);
+                            pdfStream.on('error', (e) => {
+                                logger.error(`❌ PDF Stream Error [${taskId}]:`, e);
+                                rejectPdf(e);
+                            });
 
-                    // Dar respiro al event loop y guardar progreso
-                    if (task.processed % DOC_PAGE_SIZE === 0) {
-                        saveTasksToDisk();
-                        await new Promise(resolve => setTimeout(resolve, 50));
+                            archive.append(pdfStream, { name: pdfName });
+                            task.processed++;
+                        } catch (err) {
+                            rejectPdf(err);
+                        }
+                    });
+
+                    // Cada pocos documentos, permitimos que el GC limpie un poco
+                    if (task.processed % 25 === 0) {
+                        await new Promise(res => setTimeout(res, 10));
                     }
                 }
+
+                // Guardar progreso tras cada página de cabeceras
+                saveTasksToDisk();
 
                 if (docs.length < DOC_PAGE_SIZE || task.processed >= task.total) {
                     hasMore = false;
