@@ -392,6 +392,7 @@ export function PanamarDashboard() {
   // ── Bulk download (ZIP with all filtered PDFs) ───────────────────
   // Bulk Download Task State
   const [bulkTask, setBulkTask] = useState<BulkTaskState | null>(null);
+  const [taskResult, setTaskResult] = useState<{ status: 'completed' | 'error', error?: string } | null>(null);
   const [isBulkInitializing, setIsBulkInitializing] = useState(false);
 
   // Persistence: Restore task from localStorage on mount
@@ -433,9 +434,12 @@ export function PanamarDashboard() {
           const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
           const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
           secureDownload(downloadUrl, `PANAMAR_Massive_${timestamp}.zip`);
+          setBulkTask(null);
+          setTaskResult({ status: 'completed' });
         } else if (data.status === 'error') {
           localStorage.removeItem('panamar_bulk_task_id');
-          toast.error(`Error en descarga: ${data.error || 'Desconocido'}`);
+          setBulkTask(null);
+          setTaskResult({ status: 'error', error: data.error });
         }
       } else {
         localStorage.removeItem('panamar_bulk_task_id');
@@ -445,6 +449,28 @@ export function PanamarDashboard() {
       console.error('Error polling bulk status:', err);
     }
   };
+
+  // Tab-aware notification cleanup
+  useEffect(() => {
+    if (!taskResult) return;
+
+    let timer: NodeJS.Timeout;
+    const cleanup = () => {
+      // Solo empezamos la cuenta atrás si la pestaña está activa
+      if (document.visibilityState === 'visible') {
+        timer = setTimeout(() => {
+          setTaskResult(null);
+        }, 5000); // Dar 5 segundos al usuario para verlo
+      }
+    };
+
+    cleanup();
+    document.addEventListener('visibilitychange', cleanup);
+    return () => {
+      document.removeEventListener('visibilitychange', cleanup);
+      if (timer) clearTimeout(timer);
+    };
+  }, [taskResult]);
 
   const handleBulkDownloadInit = async () => {
     if (isBulkInitializing || bulkTask?.status === 'processing') return;
@@ -1578,7 +1604,7 @@ export function PanamarDashboard() {
         )}
       </AnimatePresence>
 
-      {/* ═══════════════ BULK PROGRESS OVERLAY ═══════════════ */}
+      {/* ═══════════════ BULK PROGRESS / RESULT OVERLAY ═══════════════ */}
       <AnimatePresence>
         {bulkTask && bulkTask.status === 'processing' && (
           <BulkProgressOverlay
@@ -1587,6 +1613,51 @@ export function PanamarDashboard() {
             remainingTime={getRemainingTime()}
             onCancel={cancelBulkTask}
           />
+        )}
+
+        {taskResult && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="fixed bottom-6 right-6 z-[70] w-full max-w-sm"
+          >
+            <div className={`p-6 rounded-3xl shadow-2xl border-2 flex items-start gap-4 ${taskResult.status === 'completed'
+                ? 'bg-emerald-50 border-emerald-100'
+                : 'bg-red-50 border-red-100'
+              }`}>
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${taskResult.status === 'completed' ? 'bg-emerald-500' : 'bg-red-500'
+                }`}>
+                {taskResult.status === 'completed' ? (
+                  <Check className="w-7 h-7 text-white" />
+                ) : (
+                  <X className="w-7 h-7 text-white" />
+                )}
+              </div>
+              <div className="flex-1">
+                <h4 className={`font-bold mb-1 ${taskResult.status === 'completed' ? 'text-emerald-900' : 'text-red-900'
+                  }`}>
+                  {taskResult.status === 'completed' ? '¡Descarga Lista!' : 'Error en Descarga'}
+                </h4>
+                <p className={`text-sm font-medium leading-tight ${taskResult.status === 'completed' ? 'text-emerald-700' : 'text-red-700'
+                  }`}>
+                  {taskResult.status === 'completed'
+                    ? 'El archivo ZIP ha sido generado y la descarga se ha iniciado.'
+                    : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setTaskResult(null)}
+                    className={taskResult.status === 'completed' ? 'text-emerald-700 hover:bg-emerald-100' : 'text-red-700 hover:bg-red-100'}
+                  >
+                    Entendido
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

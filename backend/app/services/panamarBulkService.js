@@ -7,21 +7,63 @@ const panamarPdfService = require('./panamarPdfService');
 const panamarService = require('./panamarService');
 
 /**
- * SERVICIO DE DESCARGAS MASIVAS PANAMAR (OPTIMIZADO)
+ * SERVICIO DE DESCARGAS MASIVAS PANAMAR (PERSISTENTE)
  * ==================================================
  * Gestiona tareas asíncronas para generar ZIPs.
- * Ahora recupera los documentos por páginas en segundo plano
- * para evitar bloqueos en la base de datos al iniciar.
+ * Ahora persiste el estado en disco para sobrevivir a reinicios.
  */
 
-// Mapa de tareas en memoria
-const tasks = new Map();
-
-// Directorio temporal para los ZIPs
+// Directorio temporal
 const TMP_DIR = path.join(__dirname, '../../temp/bulk-downloads');
+const TASKS_FILE = path.join(TMP_DIR, 'tasks.json');
+
 if (!fs.existsSync(TMP_DIR)) {
     fs.mkdirSync(TMP_DIR, { recursive: true });
 }
+
+// Mapa de tareas en memoria, sincronizado con disco
+let tasks = new Map();
+
+/**
+ * Persistencia: Cargar y Guardar en disco
+ */
+function saveTasksToDisk() {
+    try {
+        const data = JSON.stringify(Array.from(tasks.entries()), null, 2);
+        fs.writeFileSync(TASKS_FILE, data);
+    } catch (err) {
+        logger.error('❌ Error saving tasks to disk:', err);
+    }
+}
+
+function loadTasksFromDisk() {
+    try {
+        if (fs.existsSync(TASKS_FILE)) {
+            const data = fs.readFileSync(TASKS_FILE, 'utf8');
+            const entries = JSON.parse(data);
+            tasks = new Map(entries);
+
+            // Limpiar tareas que se quedaron "processing" tras un crash/reinicio
+            let changed = false;
+            for (const [id, task] of tasks.entries()) {
+                if (task.status === 'processing') {
+                    task.status = 'error';
+                    task.error = 'Servidor reiniciado durante el proceso';
+                    changed = true;
+                }
+            }
+            if (changed) saveTasksToDisk();
+
+            logger.info(`📦 Loaded ${tasks.size} tasks from disk`);
+        }
+    } catch (err) {
+        logger.error('❌ Error loading tasks from disk:', err);
+        tasks = new Map();
+    }
+}
+
+// Cargar al iniciar el módulo
+loadTasksFromDisk();
 
 /**
  * Inicia una nueva tarea de descarga masiva basándose en filtros
@@ -50,12 +92,14 @@ async function createTask(filters, codigoCliente) {
     };
 
     tasks.set(taskId, task);
+    saveTasksToDisk();
 
     // Iniciar proceso en background
     processTask(taskId).catch(err => {
         logger.error(`❌ Bulk Task Error [${taskId}]:`, err);
         task.status = 'error';
         task.error = err.message;
+        saveTasksToDisk();
     });
 
     return { taskId, total };
@@ -74,6 +118,7 @@ async function processTask(taskId) {
     return new Promise((resolve, reject) => {
         output.on('close', () => {
             task.status = 'completed';
+            saveTasksToDisk();
             logger.info(`✅ Bulk Task Completed [${taskId}]: ${task.processed} docs`);
             resolve();
         });
@@ -81,26 +126,25 @@ async function processTask(taskId) {
         archive.on('error', (err) => {
             task.status = 'error';
             task.error = err.message;
+            saveTasksToDisk();
             reject(err);
         });
 
         archive.pipe(output);
 
         (async () => {
-            const DOC_PAGE_SIZE = 50; // Tamaño de página de documentos a recuperar
-            const PDF_BATCH_SIZE = 8; // Cuántos PDFs generar en paralelo para no saturar ODBC
+            const DOC_PAGE_SIZE = 50;
+            const PDF_BATCH_SIZE = 8;
 
             let page = 1;
             let hasMore = true;
 
             while (hasMore) {
-                // Verificar si la tarea sigue existiendo
-                if (!tasks.has(taskId)) {
+                if (!tasks.has(taskId) || tasks.get(taskId).status === 'error') {
                     archive.abort();
                     return;
                 }
 
-                // Recuperar un lote de documentos
                 const result = await panamarService.getDocuments({
                     ...task.filters,
                     page,
@@ -114,7 +158,6 @@ async function processTask(taskId) {
                     break;
                 }
 
-                // Procesar los documentos de este lote en sub-lotes para los PDFs
                 for (let i = 0; i < docs.length; i += PDF_BATCH_SIZE) {
                     if (!tasks.has(taskId)) {
                         archive.abort();
@@ -139,9 +182,13 @@ async function processTask(taskId) {
                             task.processed++;
                         }
                     }
+
+                    // Guardar progreso periódicamente
+                    if (task.processed % (DOC_PAGE_SIZE * 2) === 0) {
+                        saveTasksToDisk();
+                    }
                 }
 
-                // Siguiente página
                 if (docs.length < DOC_PAGE_SIZE || task.processed >= task.total) {
                     hasMore = false;
                 } else {
@@ -184,23 +231,30 @@ function cleanupTask(taskId) {
             try { fs.unlinkSync(task.zipPath); } catch (e) { }
         }
         tasks.delete(taskId);
+        saveTasksToDisk();
         return true;
     }
     return false;
 }
 
 /**
- * Limpieza automática de tareas viejas (> 1 hora)
+ * Limpieza automática mejorada
  */
 setInterval(() => {
     const now = Date.now();
     const ONE_HOUR = 3600000;
+    let changed = false;
     for (const [id, task] of tasks.entries()) {
         if (now - task.startTime > ONE_HOUR) {
             logger.info(`🧹 Autocleaning old bulk task: ${id}`);
-            cleanupTask(id);
+            if (fs.existsSync(task.zipPath)) {
+                try { fs.unlinkSync(task.zipPath); } catch (e) { }
+            }
+            tasks.delete(id);
+            changed = true;
         }
     }
+    if (changed) saveTasksToDisk();
 }, 600000);
 
 module.exports = {

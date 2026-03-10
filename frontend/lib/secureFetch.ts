@@ -177,6 +177,39 @@ export async function secureFetch<T = unknown>(
     credentials: 'include', // 🔐 Envía cookies HttpOnly
   });
 
+  // 🔐 CSRF: Si recibimos 403 (Forbidden), podría ser un CSRF token expirado
+  if (response.status === 403 && !skipAuthCheck) {
+    const dataText = await response.clone().text();
+    if (dataText.includes('CSRF') || dataText.includes('token')) {
+      console.log('🔐 secureFetch: 403 CSRF detectado, reintentando con nuevo token...');
+      csrfToken = null; // Forzar obtención de nuevo token
+      const newToken = await getCSRFToken();
+      if (newToken) {
+        headers['X-CSRF-Token'] = newToken;
+        const retryResponse = await fetch(url, {
+          ...restOptions,
+          headers,
+          credentials: 'include',
+        });
+
+        let retryData: T;
+        const retryContentType = retryResponse.headers.get('content-type');
+        if (retryContentType?.includes('application/json')) {
+          retryData = await retryResponse.json();
+        } else {
+          retryData = await retryResponse.text() as unknown as T;
+        }
+
+        return {
+          data: retryData,
+          ok: retryResponse.ok,
+          status: retryResponse.status,
+          statusText: retryResponse.statusText,
+        };
+      }
+    }
+  }
+
   // 🔐 Silent refresh: Si recibimos 401, intentar renovar token y reintentar
   if (response.status === 401 && !skipAuthCheck) {
     const isAuthEndpoint = endpoint.includes('/api/auth/login') ||
