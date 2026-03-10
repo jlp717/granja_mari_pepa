@@ -120,6 +120,16 @@ async function getDocuments(options = {}) {
     params.push(String(options.codigoCliente).trim());
   }
 
+  // Filtro por rango de código cliente (para descarga por tramos)
+  if (options.codigoClienteDesde) {
+    whereClauses.push(`${RESOLVED_CLIENT_EXPR} >= ?`);
+    params.push(String(options.codigoClienteDesde).trim());
+  }
+  if (options.codigoClienteHasta) {
+    whereClauses.push(`${RESOLVED_CLIENT_EXPR} <= ?`);
+    params.push(String(options.codigoClienteHasta).trim());
+  }
+
   // Filtro por meses (multi-selección)
   if (options.meses && Array.isArray(options.meses) && options.meses.length > 0) {
     const validMeses = options.meses.map(m => parseInt(m)).filter(m => m >= 1 && m <= 12);

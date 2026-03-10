@@ -33,81 +33,141 @@ const MESES = [
   { value: 12, label: 'Dic', full: 'Diciembre' },
 ];
 
+interface BulkChunkState {
+  index: number;
+  label: string;
+  status: 'pending' | 'processing' | 'completed' | 'skipped' | 'error';
+  total: number;
+  processed: number;
+  zipFilename: string;
+  downloaded: boolean; // ya descargado por el navegador
+}
+
 interface BulkTaskState {
   id: string;
   status: 'processing' | 'completed' | 'error';
-  processed: number;
-  total: number;
+  totalGeneral: number;
+  totalProcessed: number;
   startTime: number;
   error: string | null;
+  chunks: BulkChunkState[];
 }
 
-const BulkProgressOverlay = ({ processed, total, remainingTime, onCancel }: {
-  processed: number,
-  total: number,
-  remainingTime: string,
+const CHUNK_COLORS = [
+  'from-orange-500 to-amber-500',
+  'from-blue-500 to-cyan-500',
+  'from-emerald-500 to-teal-500',
+  'from-violet-500 to-purple-500',
+  'from-pink-500 to-rose-500',
+  'from-yellow-500 to-orange-400',
+];
+
+const BulkProgressOverlay = ({ task, onCancel }: {
+  task: BulkTaskState,
   onCancel: () => void
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 50 }}
-    className="fixed bottom-6 right-6 z-[60] w-full max-w-sm"
-  >
-    <div className="bg-white rounded-3xl shadow-2xl border-2 border-orange-100 p-6 overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg">
-              <Archive className="w-6 h-6 text-white" />
+}) => {
+  const completedChunks = task.chunks.filter(c => c.status === 'completed' || c.status === 'skipped').length;
+  const activeChunks = task.chunks.filter(c => c.status !== 'skipped');
+  const totalProcessed = task.chunks.reduce((sum, c) => sum + c.processed, 0);
+  const totalDocs = task.totalGeneral;
+  const pct = totalDocs > 0 ? Math.round((totalProcessed / totalDocs) * 100) : 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      className="fixed bottom-6 right-6 z-[60] w-full max-w-md"
+    >
+      <div className="bg-white rounded-3xl shadow-2xl border-2 border-orange-100 p-6 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg">
+                <Archive className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h4 className="font-bold text-gray-900">Descarga por tramos</h4>
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-black">
+                  {completedChunks}/{activeChunks.length} tramos · {totalProcessed} docs
+                </p>
+              </div>
             </div>
-            <div>
-              <h4 className="font-bold text-gray-900">Preparando ZIP</h4>
-              <p className="text-xs text-muted-foreground uppercase tracking-widest font-black">
-                {processed} de {total}
-              </p>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onCancel}
+              className="h-8 w-8 text-gray-400 hover:text-orange-500 rounded-lg"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Barra de progreso general */}
+          <div className="mb-4">
+            <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-50 p-0.5">
+              <motion.div
+                className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${pct}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            </div>
+            <div className="flex items-center justify-between text-xs mt-1.5">
+              <span className="text-orange-600 font-bold flex items-center gap-1">
+                <Settings className="w-3.5 h-3.5 animate-spin" />
+                {pct}%
+              </span>
+              <span className="text-gray-500 font-medium">{totalProcessed} de {totalDocs} documentos</span>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onCancel}
-            className="h-8 w-8 text-gray-400 hover:text-orange-500 rounded-lg"
-          >
-            <X className="w-4 h-4" />
-          </Button>
-        </div>
-        <div className="space-y-3">
-          <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-50 p-0.5">
-            <motion.div
-              className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: `${(processed / total) * 100}%` }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            />
+
+          {/* Tramos individuales */}
+          <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+            {task.chunks.map((chunk, i) => {
+              if (chunk.status === 'skipped') return null;
+              const chunkPct = chunk.total > 0 ? Math.round((chunk.processed / chunk.total) * 100) : 0;
+              const isActive = chunk.status === 'processing';
+              const isDone = chunk.status === 'completed';
+
+              return (
+                <div key={i} className={`p-2.5 rounded-xl border transition-all ${isDone ? 'bg-emerald-50 border-emerald-200' : isActive ? 'bg-orange-50 border-orange-200' : 'bg-gray-50 border-gray-100'}`}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`text-xs font-bold ${isDone ? 'text-emerald-700' : isActive ? 'text-orange-700' : 'text-gray-400'}`}>
+                      {isDone ? <Check className="w-3 h-3 inline mr-1" /> : null}
+                      {chunk.label.replace(/_/g, ' ')}
+                    </span>
+                    <span className="text-[10px] font-mono text-gray-500">
+                      {isDone && chunk.downloaded ? 'Descargado' : isDone ? 'Listo' : isActive ? `${chunk.processed}/${chunk.total}` : chunk.total > 0 ? `${chunk.total} docs` : 'Pendiente'}
+                    </span>
+                  </div>
+                  {(isActive || isDone) && chunk.total > 0 && (
+                    <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+                      <motion.div
+                        className={`h-full rounded-full bg-gradient-to-r ${isDone ? 'from-emerald-400 to-emerald-500' : CHUNK_COLORS[i % CHUNK_COLORS.length]}`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${isDone ? 100 : chunkPct}%` }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-          <div className="flex items-center justify-between text-xs">
-            <div className="flex items-center gap-1.5 text-orange-600 font-bold">
-              <Settings className="w-3.5 h-3.5 animate-spin-slow" />
-              {Math.round((processed / total) * 100)}% Completado
-            </div>
-            <div className="flex items-center gap-1.5 text-gray-500 font-medium">
-              <Calendar className="w-3.5 h-3.5" />
-              Restante: <span className="text-gray-900 font-bold">{remainingTime}</span>
-            </div>
+
+          <div className="mt-4 p-3 bg-orange-50 rounded-2xl border border-orange-100 flex items-start gap-3">
+            <Box className="w-4 h-4 text-orange-500 mt-0.5 shrink-0" />
+            <p className="text-[10px] leading-relaxed text-orange-700 font-medium">
+              Cada tramo se descarga automáticamente al completarse. Puedes seguir navegando.
+            </p>
           </div>
-        </div>
-        <div className="mt-5 p-3 bg-orange-50 rounded-2xl border border-orange-100 flex items-start gap-3">
-          <Box className="w-4 h-4 text-orange-500 mt-0.5" />
-          <p className="text-[10px] leading-relaxed text-orange-700 font-medium">
-            Estamos generando los PDFs y comprimiéndolos. Puedes navegar por la aplicación, la descarga se iniciará automáticamente al terminar.
-          </p>
         </div>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 export function PanamarDashboard() {
   const { user, logout } = useAuthStore();
@@ -150,8 +210,8 @@ export function PanamarDashboard() {
   });
   const [searchInput, setSearchInput] = useState('');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const [bulkDownloading, setBulkDownloading] = useState(false);
-  const bulkAbortRef = useRef<AbortController | null>(null);
+  const [bulkDownloading, setBulkDownloading] = useState(false); // legacy, kept for compat
+  const bulkAbortRef = useRef<AbortController | null>(null); // legacy
 
   // Share state
   const [shareDoc, setShareDoc] = useState<PanamarDocument | null>(null);
@@ -389,39 +449,36 @@ export function PanamarDashboard() {
     setShowLogoutConfirm(false);
   };
 
-  // ── Bulk download (ZIP with all filtered PDFs) ───────────────────
-  // Bulk Download Task State
+  // ── Bulk download por tramos (6 ZIPs por rango de cliente) ────────
   const [bulkTask, setBulkTask] = useState<BulkTaskState | null>(null);
   const [taskResult, setTaskResult] = useState<{
     status: 'completed' | 'error',
     error?: string,
-    downloadUrl?: string,
-    filename?: string
   } | null>(null);
   const [isBulkInitializing, setIsBulkInitializing] = useState(false);
-  // Guard ref to prevent concurrent poll handling
   const isPollingRef = useRef(false);
   const bulkTaskRef = useRef<BulkTaskState | null>(null);
+  // Track which chunks we've already triggered download for
+  const downloadedChunksRef = useRef<Set<number>>(new Set());
 
-  // Keep ref in sync with state
   useEffect(() => {
     bulkTaskRef.current = bulkTask;
   }, [bulkTask]);
 
-  // Persistence: Restore task from localStorage on mount
+  // Restore task from localStorage on mount
   useEffect(() => {
     const savedTaskId = localStorage.getItem('panamar_bulk_task_id');
     if (savedTaskId) {
+      downloadedChunksRef.current = new Set();
       checkBulkStatus(savedTaskId);
     }
   }, []);
 
-  // Polling logic with ref-based guard
+  // Polling: 2s interval while processing
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (bulkTask && bulkTask.status === 'processing') {
       interval = setInterval(() => {
-        // Only poll if not already processing a poll
         if (!isPollingRef.current && bulkTaskRef.current?.status === 'processing') {
           checkBulkStatus(bulkTaskRef.current.id);
         }
@@ -430,36 +487,25 @@ export function PanamarDashboard() {
     return () => clearInterval(interval);
   }, [bulkTask?.status, bulkTask?.id]);
 
-  /**
-   * Trigger the actual file download using native browser download.
-   * IMPORTANT: No fetch/blob — the ZIP can be 1GB+, must stream via browser.
-   * Uses <a> click which goes through Next.js rewrite proxy (same-origin, cookies sent automatically).
-   */
-  const triggerBulkFileDownload = (taskId: string, filename: string) => {
-    const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
-    console.log(`📥 Triggering native browser download: ${downloadUrl} → ${filename}`);
+  /** Trigger native browser download for a specific chunk */
+  const triggerChunkDownload = (taskId: string, chunkIndex: number, filename: string) => {
+    const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}/${chunkIndex}`;
+    console.log(`📥 Downloading chunk ${chunkIndex}: ${downloadUrl} → ${filename}`);
 
-    // Method 1: Hidden <a> with download attribute
     const link = document.createElement('a');
     link.href = downloadUrl;
     link.download = filename;
     link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
-
-    // Cleanup the element after a short delay
     setTimeout(() => {
-      try { document.body.removeChild(link); } catch (e) { /* already removed */ }
+      try { document.body.removeChild(link); } catch (e) { /* */ }
     }, 2000);
 
-    toast.success(
-      '📥 Descarga iniciada. El archivo es grande, puede tardar unos minutos. Compruebe las descargas de su navegador.',
-      { duration: 12000 }
-    );
+    toast.success(`Descargando tramo: ${filename.replace('PANAMAR_', '').replace('.zip', '')}`, { duration: 5000 });
   };
 
   const checkBulkStatus = async (taskId: string) => {
-    // Prevent concurrent polling
     if (isPollingRef.current) return;
     isPollingRef.current = true;
 
@@ -467,53 +513,61 @@ export function PanamarDashboard() {
       const { data, ok } = await secureFetch<any>(`/api/panamar/bulk-download/status/${taskId}`);
 
       if (ok && data && data.success) {
-        if (data.status === 'completed') {
-          console.log(`📦 Bulk task ${taskId} completed. Triggering download...`);
-          const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
-          const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-          const filename = `PANAMAR_Massive_${timestamp}.zip`;
+        // Map chunks from server
+        const serverChunks: BulkChunkState[] = (data.chunks || []).map((c: any) => ({
+          index: c.index,
+          label: c.label,
+          status: c.status,
+          total: c.total,
+          processed: c.processed,
+          zipFilename: c.zipFilename,
+          downloaded: downloadedChunksRef.current.has(c.index),
+        }));
 
+        // Auto-download newly completed chunks
+        for (const chunk of serverChunks) {
+          if (chunk.status === 'completed' && !downloadedChunksRef.current.has(chunk.index)) {
+            downloadedChunksRef.current.add(chunk.index);
+            triggerChunkDownload(taskId, chunk.index, chunk.zipFilename);
+            // Update downloaded flag
+            chunk.downloaded = true;
+          }
+        }
+
+        if (data.status === 'completed') {
           localStorage.removeItem('panamar_bulk_task_id');
           setBulkTask(null);
-          setTaskResult({
-            status: 'completed',
-            downloadUrl,
-            filename
-          });
-
-          // Auto-download using native browser download (no fetch/blob — streams 1GB+ files)
-          triggerBulkFileDownload(taskId, filename);
+          setTaskResult({ status: 'completed' });
+          toast.success('Todos los tramos descargados correctamente.', { duration: 8000 });
+          downloadedChunksRef.current = new Set();
 
         } else if (data.status === 'error') {
-          console.error(`❌ Bulk task ${taskId} failed:`, data.error);
           localStorage.removeItem('panamar_bulk_task_id');
           setBulkTask(null);
-          setTaskResult({ status: 'error', error: data.error || 'Error desconocido en el servidor' });
+          setTaskResult({ status: 'error', error: data.error || 'Error desconocido' });
           toast.error(`Error en descarga masiva: ${data.error || 'Error desconocido'}`);
+          downloadedChunksRef.current = new Set();
+
         } else {
-          // Still processing — update progress
+          // Still processing
           setBulkTask({
             id: data.id,
             status: data.status,
-            processed: data.processed,
-            total: data.total,
+            totalGeneral: data.totalGeneral,
+            totalProcessed: data.totalProcessed,
             startTime: data.startTime,
-            error: data.error
+            error: data.error,
+            chunks: serverChunks,
           });
         }
       } else if (ok && data && !data.success) {
-        // Task not found (404 from backend returns success: false)
-        console.warn(`⚠️ Task ${taskId} not found on server`, data);
         localStorage.removeItem('panamar_bulk_task_id');
         setBulkTask(null);
-        setTaskResult({ status: 'error', error: data.message || 'La tarea ya no existe en el servidor. Intente de nuevo.' });
-      } else {
-        // Network ok but unexpected response — keep polling, don't break
-        console.warn(`⚠️ Unexpected status response for task ${taskId}`, data);
+        setTaskResult({ status: 'error', error: data.message || 'La tarea ya no existe.' });
+        downloadedChunksRef.current = new Set();
       }
     } catch (err) {
       console.error('Error polling bulk status:', err);
-      // Don't clear state on network error — keep polling
     } finally {
       isPollingRef.current = false;
     }
@@ -522,7 +576,8 @@ export function PanamarDashboard() {
   const handleBulkDownloadInit = async () => {
     if (isBulkInitializing || bulkTask?.status === 'processing') return;
     setIsBulkInitializing(true);
-    setTaskResult(null); // Clear previous result
+    setTaskResult(null);
+    downloadedChunksRef.current = new Set();
 
     try {
       const { data, ok } = await secureFetch<any>('/api/panamar/bulk-download/init', {
@@ -536,12 +591,13 @@ export function PanamarDashboard() {
         setBulkTask({
           id: data.taskId,
           status: 'processing',
-          processed: 0,
-          total: data.total || 0,
+          totalGeneral: data.total || 0,
+          totalProcessed: 0,
           startTime: Date.now(),
-          error: null
+          error: null,
+          chunks: [],
         });
-        toast.success(`Iniciando generación de ${data.total || 0} documentos...`);
+        toast.success(`Generando ${data.totalChunks} tramos con ${data.total || 0} documentos...`);
       } else {
         toast.error(data?.message || 'Error al iniciar la descarga.');
       }
@@ -556,22 +612,7 @@ export function PanamarDashboard() {
   const cancelBulkTask = () => {
     localStorage.removeItem('panamar_bulk_task_id');
     setBulkTask(null);
-  };
-
-  // Helper: Format remaining time
-  const getRemainingTime = () => {
-    if (!bulkTask || bulkTask.processed < 5) return 'Calculando...';
-    const elapsed = (Date.now() - bulkTask.startTime) / 1000;
-    const rate = bulkTask.processed / elapsed; // docs per second
-    const remainingDocs = bulkTask.total - bulkTask.processed;
-    if (rate === 0) return 'Calculando...';
-    const remainingSecs = remainingDocs / rate;
-
-    if (remainingSecs < 0) return 'Todo listo';
-
-    const mins = Math.floor(remainingSecs / 60);
-    const secs = Math.floor(remainingSecs % 60);
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    downloadedChunksRef.current = new Set();
   };
 
   // ── Pagination helpers ───────────────────────────────────────────
@@ -587,11 +628,9 @@ export function PanamarDashboard() {
       </div>
 
       {/* Bulk Download Progress Overlay */}
-      {bulkTask && bulkTask.status === 'processing' && (
+      {bulkTask && bulkTask.status === 'processing' && bulkTask.chunks.length > 0 && (
         <BulkProgressOverlay
-          processed={bulkTask.processed}
-          total={bulkTask.total}
-          remainingTime={getRemainingTime()}
+          task={bulkTask}
           onCancel={cancelBulkTask}
         />
       )}
@@ -778,7 +817,7 @@ export function PanamarDashboard() {
                     ) : (
                       <Archive className="w-5 h-5" />
                     )}
-                    {isBulkInitializing ? 'Iniciando...' : `Descargar todos (${total.toLocaleString('es-ES')})`}
+                    {isBulkInitializing ? 'Iniciando...' : `Descargar por tramos (${total.toLocaleString('es-ES')})`}
                   </div>
                 </Button>
               )}
@@ -1654,11 +1693,9 @@ export function PanamarDashboard() {
 
       {/* ═══════════════ BULK PROGRESS / RESULT OVERLAY ═══════════════ */}
       <AnimatePresence>
-        {bulkTask && bulkTask.status === 'processing' && (
+        {bulkTask && bulkTask.status === 'processing' && bulkTask.chunks.length > 0 && (
           <BulkProgressOverlay
-            processed={bulkTask.processed}
-            total={bulkTask.total}
-            remainingTime={getRemainingTime()}
+            task={bulkTask}
             onCancel={cancelBulkTask}
           />
         )}
@@ -1685,35 +1722,20 @@ export function PanamarDashboard() {
               <div className="flex-1">
                 <h4 className={`font-bold mb-1 ${taskResult.status === 'completed' ? 'text-emerald-900' : 'text-red-900'
                   }`}>
-                  {taskResult.status === 'completed' ? '¡Descarga Lista!' : 'Error en Descarga'}
+                  {taskResult.status === 'completed' ? 'Todos los tramos descargados' : 'Error en Descarga'}
                 </h4>
                 <p className={`text-sm font-semibold leading-tight ${taskResult.status === 'completed' ? 'text-emerald-800' : 'text-red-700'
                   }`}>
                   {taskResult.status === 'completed'
-                    ? 'Preparación completa. La descarga debería haber comenzado. Si no, pulse el botón.'
+                    ? 'Los 6 tramos se han descargado correctamente. Revise su carpeta de descargas.'
                     : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
                 </p>
-                <div className="mt-4 flex gap-2">
-                  {taskResult.status === 'completed' && taskResult.downloadUrl && (
-                    <Button
-                      size="sm"
-                      onClick={() => {
-                        if (taskResult.downloadUrl) {
-                          const taskId = taskResult.downloadUrl.split('/').pop()!;
-                          triggerBulkFileDownload(taskId, taskResult.filename || 'PANAMAR_Massive.zip');
-                        }
-                      }}
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl shadow-md border-b-2 border-emerald-800 active:translate-y-0.5 transition-all"
-                    >
-                      <Download className="w-4 h-4" />
-                      Descargar de nuevo
-                    </Button>
-                  )}
+                <div className="mt-4">
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => setTaskResult(null)}
-                    className={`rounded-xl ${taskResult.status === 'completed' ? 'text-emerald-700 hover:bg-emerald-100' : 'text-red-700 hover:bg-red-100 w-full'}`}
+                    className={`rounded-xl w-full ${taskResult.status === 'completed' ? 'text-emerald-700 hover:bg-emerald-100' : 'text-red-700 hover:bg-red-100'}`}
                   >
                     {taskResult.status === 'completed' ? 'Cerrar' : 'Entendido'}
                   </Button>

@@ -396,7 +396,7 @@ async function sendEmail(req, res) {
 
 /**
  * POST /api/panamar/bulk-download/init
- * Inicia una tarea asíncrona de generación de ZIP
+ * Inicia descarga masiva por tramos de código de cliente (6 ZIPs)
  */
 async function initBulkDownload(req, res) {
   try {
@@ -413,7 +413,7 @@ async function initBulkDownload(req, res) {
       if (mesesArray.length === 0) mesesArray = undefined;
     }
 
-    const { taskId, total } = await panamarBulkService.createTask({
+    const { taskId, total, totalChunks } = await panamarBulkService.createTask({
       fechaDesde,
       fechaHasta,
       codigoCliente: clienteDestino,
@@ -424,7 +424,8 @@ async function initBulkDownload(req, res) {
     return res.json({
       success: true,
       taskId,
-      total
+      total,
+      totalChunks
     });
 
   } catch (error) {
@@ -435,6 +436,7 @@ async function initBulkDownload(req, res) {
 
 /**
  * GET /api/panamar/bulk-download/status/:taskId
+ * Devuelve estado general + estado de cada chunk (para polling progresivo)
  */
 async function getBulkStatus(req, res) {
   try {
@@ -452,42 +454,41 @@ async function getBulkStatus(req, res) {
 }
 
 /**
- * GET /api/panamar/bulk-download/retrieve/:taskId
- * Descarga el archivo final
+ * GET /api/panamar/bulk-download/retrieve/:taskId/:chunkIndex
+ * Descarga el ZIP de un tramo específico
  */
 async function retrieveBulkZip(req, res) {
   try {
-    const { taskId } = req.params;
-    const task = panamarBulkService.tasks.get(taskId);
+    const { taskId, chunkIndex } = req.params;
+    const idx = parseInt(chunkIndex);
 
-    logger.info('📥 PANAMAR: Retrieve bulk ZIP requested', { taskId, taskStatus: task?.status });
-
-    if (!task || task.status !== 'completed') {
-      logger.warn('⚠️ PANAMAR: Retrieve - task not ready', { taskId, exists: !!task, status: task?.status });
-      return res.status(404).json({ success: false, message: 'Archivo no listo o tarea inexistente' });
+    if (isNaN(idx) || idx < 0) {
+      return res.status(400).json({ success: false, message: 'Índice de tramo inválido' });
     }
 
-    const fs = require('fs');
-    if (!fs.existsSync(task.zipPath)) {
-      logger.error('❌ PANAMAR: Retrieve - ZIP file missing from disk', { taskId, zipPath: task.zipPath });
-      return res.status(404).json({ success: false, message: 'El archivo ya no existe en el servidor' });
+    const zipInfo = panamarBulkService.getChunkZipInfo(taskId, idx);
+
+    if (!zipInfo) {
+      return res.status(404).json({ success: false, message: 'Tramo no disponible o no completado' });
     }
 
-    // Get file size for Content-Length header
-    const stat = fs.statSync(task.zipPath);
-    logger.info('📥 PANAMAR: Sending ZIP file', { taskId, filename: task.zipFilename, sizeBytes: stat.size, sizeMB: (stat.size / 1024 / 1024).toFixed(2) });
+    logger.info('📥 PANAMAR: Sending chunk ZIP', {
+      taskId, chunkIndex: idx,
+      filename: zipInfo.zipFilename,
+      sizeMB: (zipInfo.size / 1024 / 1024).toFixed(2)
+    });
 
     res.setHeader('Content-Type', 'application/zip');
-    res.setHeader('Content-Disposition', `attachment; filename="${task.zipFilename}"`);
-    res.setHeader('Content-Length', stat.size);
-    // Prevent proxy buffering issues
+    res.setHeader('Content-Disposition', `attachment; filename="${zipInfo.zipFilename}"`);
+    res.setHeader('Content-Length', zipInfo.size);
     res.setHeader('X-Accel-Buffering', 'no');
     res.setHeader('Cache-Control', 'no-cache');
 
-    const stream = fs.createReadStream(task.zipPath);
+    const fs = require('fs');
+    const stream = fs.createReadStream(zipInfo.zipPath);
 
     stream.on('error', (err) => {
-      logger.error('❌ PANAMAR: Error reading ZIP file stream', { taskId, error: err.message });
+      logger.error('❌ PANAMAR: Error reading chunk ZIP', { taskId, chunkIndex: idx, error: err.message });
       if (!res.headersSent) {
         return res.status(500).json({ success: false, message: 'Error leyendo archivo ZIP' });
       }
@@ -495,13 +496,13 @@ async function retrieveBulkZip(req, res) {
     });
 
     stream.on('end', () => {
-      logger.info('✅ PANAMAR: ZIP file sent successfully', { taskId, filename: task.zipFilename });
+      logger.info('✅ PANAMAR: Chunk ZIP sent', { taskId, chunkIndex: idx, filename: zipInfo.zipFilename });
     });
 
     stream.pipe(res);
 
   } catch (error) {
-    logger.error('❌ PANAMAR: Error retrieve bulk', { error: error.message, stack: error.stack });
+    logger.error('❌ PANAMAR: Error retrieve chunk', { error: error.message, stack: error.stack });
     if (!res.headersSent) {
       return res.status(500).json({ success: false, message: 'Error al descargar archivo' });
     }
