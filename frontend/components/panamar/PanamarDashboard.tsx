@@ -399,6 +399,15 @@ export function PanamarDashboard() {
     filename?: string
   } | null>(null);
   const [isBulkInitializing, setIsBulkInitializing] = useState(false);
+  const [isBulkDownloading, setIsBulkDownloading] = useState(false);
+  // Guard ref to prevent concurrent poll handling
+  const isPollingRef = useRef(false);
+  const bulkTaskRef = useRef<BulkTaskState | null>(null);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    bulkTaskRef.current = bulkTask;
+  }, [bulkTask]);
 
   // Persistence: Restore task from localStorage on mount
   useEffect(() => {
@@ -408,80 +417,107 @@ export function PanamarDashboard() {
     }
   }, []);
 
-  // Polling logic
+  // Polling logic with ref-based guard
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (bulkTask && bulkTask.status === 'processing') {
       interval = setInterval(() => {
-        checkBulkStatus(bulkTask.id);
+        // Only poll if not already processing a poll
+        if (!isPollingRef.current && bulkTaskRef.current?.status === 'processing') {
+          checkBulkStatus(bulkTaskRef.current.id);
+        }
       }, 2000);
     }
     return () => clearInterval(interval);
   }, [bulkTask?.status, bulkTask?.id]);
 
+  /**
+   * Trigger the actual file download using secureDownload (handles auth + blob)
+   */
+  const triggerBulkFileDownload = async (taskId: string, filename: string) => {
+    setIsBulkDownloading(true);
+    const toastId = toast.loading('Descargando archivo ZIP...', { duration: Infinity });
+    try {
+      const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
+      const success = await secureDownload(downloadUrl, filename);
+      if (success) {
+        toast.success(`✅ ¡${filename} descargado correctamente!`, { id: toastId, duration: 8000 });
+      } else {
+        toast.error('Error al descargar el archivo. Use el botón "Descargar" para reintentar.', { id: toastId, duration: 10000 });
+      }
+    } catch (err) {
+      console.error('Bulk file download error:', err);
+      toast.error('Error al descargar el archivo ZIP. Use el botón "Descargar" para reintentar.', { id: toastId, duration: 10000 });
+    } finally {
+      setIsBulkDownloading(false);
+    }
+  };
+
   const checkBulkStatus = async (taskId: string) => {
+    // Prevent concurrent polling
+    if (isPollingRef.current) return;
+    isPollingRef.current = true;
+
     try {
       const { data, ok } = await secureFetch<any>(`/api/panamar/bulk-download/status/${taskId}`);
 
       if (ok && data && data.success) {
-        setBulkTask({
-          id: data.id,
-          status: data.status,
-          processed: data.processed,
-          total: data.total,
-          startTime: data.startTime,
-          error: data.error
-        });
-
         if (data.status === 'completed') {
           console.log(`📦 Bulk task ${taskId} completed. Triggering download...`);
           const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}`;
           const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+          const filename = `PANAMAR_Massive_${timestamp}.zip`;
 
           localStorage.removeItem('panamar_bulk_task_id');
-
           setBulkTask(null);
           setTaskResult({
             status: 'completed',
             downloadUrl,
-            filename: `PANAMAR_Massive_${timestamp}.zip`
+            filename
           });
 
-          // Attempt automatic download using a hidden link (more reliable than assign)
-          setTimeout(() => {
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = `PANAMAR_Massive_${timestamp}.zip`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            toast.success('Descarga iniciada');
-          }, 1000);
+          // Auto-download using secureDownload (handles auth, blob, retries)
+          triggerBulkFileDownload(taskId, filename);
 
         } else if (data.status === 'error') {
           console.error(`❌ Bulk task ${taskId} failed:`, data.error);
           localStorage.removeItem('panamar_bulk_task_id');
           setBulkTask(null);
-          setTaskResult({ status: 'error', error: data.error });
+          setTaskResult({ status: 'error', error: data.error || 'Error desconocido en el servidor' });
+          toast.error(`Error en descarga masiva: ${data.error || 'Error desconocido'}`);
+        } else {
+          // Still processing — update progress
+          setBulkTask({
+            id: data.id,
+            status: data.status,
+            processed: data.processed,
+            total: data.total,
+            startTime: data.startTime,
+            error: data.error
+          });
         }
-      } else {
-        console.warn(`⚠️ Unexpected status response for task ${taskId}`, data);
+      } else if (ok && data && !data.success) {
+        // Task not found (404 from backend returns success: false)
+        console.warn(`⚠️ Task ${taskId} not found on server`, data);
         localStorage.removeItem('panamar_bulk_task_id');
         setBulkTask(null);
+        setTaskResult({ status: 'error', error: data.message || 'La tarea ya no existe en el servidor. Intente de nuevo.' });
+      } else {
+        // Network ok but unexpected response — keep polling, don't break
+        console.warn(`⚠️ Unexpected status response for task ${taskId}`, data);
       }
     } catch (err) {
       console.error('Error polling bulk status:', err);
+      // Don't clear state on network error — keep polling
+    } finally {
+      isPollingRef.current = false;
     }
   };
-
-  // No auto-cleanup for taskResult to ensure user sees it
-  useEffect(() => {
-    // We let the user close the success notification manually
-  }, [taskResult]);
 
   const handleBulkDownloadInit = async () => {
     if (isBulkInitializing || bulkTask?.status === 'processing') return;
     setIsBulkInitializing(true);
+    setTaskResult(null); // Clear previous result
 
     try {
       const { data, ok } = await secureFetch<any>('/api/panamar/bulk-download/init', {
@@ -500,9 +536,9 @@ export function PanamarDashboard() {
           startTime: Date.now(),
           error: null
         });
-        toast.success('Iniciando generación de descarga masiva...');
+        toast.success(`Iniciando generación de ${data.total || 0} documentos...`);
       } else {
-        toast.error(data.message || 'Error al iniciar la descarga.');
+        toast.error(data?.message || 'Error al iniciar la descarga.');
       }
     } catch (err) {
       console.error('Bulk init error:', err);
@@ -1649,22 +1685,32 @@ export function PanamarDashboard() {
                 <p className={`text-sm font-semibold leading-tight ${taskResult.status === 'completed' ? 'text-emerald-800' : 'text-red-700'
                   }`}>
                   {taskResult.status === 'completed'
-                    ? 'Preparación completa. Su archivo ZIP se está descargando ahora mismo.'
+                    ? (isBulkDownloading
+                      ? 'Descargando archivo ZIP... Por favor espere.'
+                      : 'Preparación completa. El archivo ZIP se ha descargado (o use el botón).')
                     : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
                 </p>
                 <div className="mt-4 flex gap-2">
                   {taskResult.status === 'completed' && taskResult.downloadUrl && (
                     <Button
                       size="sm"
-                      onClick={() => {
-                        const link = document.createElement('a');
-                        link.href = taskResult.downloadUrl!;
-                        link.click();
+                      disabled={isBulkDownloading}
+                      onClick={async () => {
+                        if (taskResult.downloadUrl && taskResult.filename) {
+                          await triggerBulkFileDownload(
+                            taskResult.downloadUrl.split('/').pop()!,
+                            taskResult.filename
+                          );
+                        }
                       }}
                       className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2 flex-1 rounded-xl shadow-md border-b-2 border-emerald-800 active:translate-y-0.5 transition-all"
                     >
-                      <Download className="w-4 h-4" />
-                      Descargar de nuevo
+                      {isBulkDownloading ? (
+                        <Settings className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Download className="w-4 h-4" />
+                      )}
+                      {isBulkDownloading ? 'Descargando...' : 'Descargar de nuevo'}
                     </Button>
                   )}
                   <Button
