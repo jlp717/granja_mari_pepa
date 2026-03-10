@@ -454,6 +454,8 @@ export function PanamarDashboard() {
   const [taskResult, setTaskResult] = useState<{
     status: 'completed' | 'error',
     error?: string,
+    taskId?: string,
+    chunks?: BulkChunkState[],
   } | null>(null);
   const [isBulkInitializing, setIsBulkInitializing] = useState(false);
   const isPollingRef = useRef(false);
@@ -524,22 +526,26 @@ export function PanamarDashboard() {
           downloaded: downloadedChunksRef.current.has(c.index),
         }));
 
-        // Auto-download newly completed chunks
+        // Auto-download newly completed chunks (skip empty/skipped chunks)
         for (const chunk of serverChunks) {
-          if (chunk.status === 'completed' && !downloadedChunksRef.current.has(chunk.index)) {
+          if (chunk.status === 'completed' && chunk.total > 0 && !downloadedChunksRef.current.has(chunk.index)) {
             downloadedChunksRef.current.add(chunk.index);
             triggerChunkDownload(taskId, chunk.index, chunk.zipFilename);
-            // Update downloaded flag
             chunk.downloaded = true;
+          }
+          // Mark skipped chunks as "downloaded" so they don't block completion
+          if (chunk.status === 'skipped' && !downloadedChunksRef.current.has(chunk.index)) {
+            downloadedChunksRef.current.add(chunk.index);
           }
         }
 
         if (data.status === 'completed') {
           localStorage.removeItem('panamar_bulk_task_id');
           setBulkTask(null);
-          setTaskResult({ status: 'completed' });
-          toast.success('Todos los tramos descargados correctamente.', { duration: 8000 });
-          downloadedChunksRef.current = new Set();
+          // Keep chunks + taskId for retry buttons
+          const downloadableChunks = serverChunks.filter(c => c.status === 'completed' && c.total > 0);
+          setTaskResult({ status: 'completed', taskId, chunks: downloadableChunks });
+          toast.success(`${downloadableChunks.length} tramos descargados correctamente.`, { duration: 8000 });
 
         } else if (data.status === 'error') {
           localStorage.removeItem('panamar_bulk_task_id');
@@ -1705,42 +1711,63 @@ export function PanamarDashboard() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed bottom-6 right-6 z-[70] w-full max-w-sm"
+            className="fixed bottom-6 right-6 z-[70] w-full max-w-md"
           >
-            <div className={`p-6 rounded-3xl shadow-2xl border-2 flex items-start gap-4 ${taskResult.status === 'completed'
-              ? 'bg-emerald-100 border-emerald-200'
+            <div className={`p-6 rounded-3xl shadow-2xl border-2 ${taskResult.status === 'completed'
+              ? 'bg-emerald-50 border-emerald-200'
               : 'bg-red-50 border-red-100'
               }`}>
-              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${taskResult.status === 'completed' ? 'bg-emerald-500' : 'bg-red-500'
-                }`}>
-                {taskResult.status === 'completed' ? (
-                  <Check className="w-7 h-7 text-white" />
-                ) : (
-                  <X className="w-7 h-7 text-white" />
-                )}
-              </div>
-              <div className="flex-1">
-                <h4 className={`font-bold mb-1 ${taskResult.status === 'completed' ? 'text-emerald-900' : 'text-red-900'
+              <div className="flex items-start gap-4 mb-4">
+                <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${taskResult.status === 'completed' ? 'bg-emerald-500' : 'bg-red-500'
                   }`}>
-                  {taskResult.status === 'completed' ? 'Todos los tramos descargados' : 'Error en Descarga'}
-                </h4>
-                <p className={`text-sm font-semibold leading-tight ${taskResult.status === 'completed' ? 'text-emerald-800' : 'text-red-700'
-                  }`}>
-                  {taskResult.status === 'completed'
-                    ? 'Los 6 tramos se han descargado correctamente. Revise su carpeta de descargas.'
-                    : `Hubo un problema: ${taskResult.error || 'Intente de nuevo.'}`}
-                </p>
-                <div className="mt-4">
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => setTaskResult(null)}
-                    className={`rounded-xl w-full ${taskResult.status === 'completed' ? 'text-emerald-700 hover:bg-emerald-100' : 'text-red-700 hover:bg-red-100'}`}
-                  >
-                    {taskResult.status === 'completed' ? 'Cerrar' : 'Entendido'}
-                  </Button>
+                  {taskResult.status === 'completed' ? (
+                    <Check className="w-6 h-6 text-white" />
+                  ) : (
+                    <X className="w-6 h-6 text-white" />
+                  )}
                 </div>
+                <div className="flex-1">
+                  <h4 className={`font-bold ${taskResult.status === 'completed' ? 'text-emerald-900' : 'text-red-900'}`}>
+                    {taskResult.status === 'completed' ? 'Tramos completados' : 'Error en Descarga'}
+                  </h4>
+                  <p className={`text-xs mt-0.5 ${taskResult.status === 'completed' ? 'text-emerald-700' : 'text-red-700'}`}>
+                    {taskResult.status === 'completed'
+                      ? 'Si alguno falla, pulse su boton para reintentar.'
+                      : `${taskResult.error || 'Intente de nuevo.'}`}
+                  </p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => { setTaskResult(null); downloadedChunksRef.current = new Set(); }}
+                  className="h-8 w-8 text-gray-400 hover:text-gray-600 shrink-0"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
               </div>
+
+              {/* Retry buttons per chunk */}
+              {taskResult.status === 'completed' && taskResult.chunks && taskResult.taskId && (
+                <div className="space-y-1.5 max-h-52 overflow-y-auto">
+                  {taskResult.chunks.map((chunk) => (
+                    <button
+                      key={chunk.index}
+                      onClick={() => {
+                        if (taskResult.taskId) {
+                          triggerChunkDownload(taskResult.taskId, chunk.index, chunk.zipFilename);
+                        }
+                      }}
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all group"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Download className="w-3.5 h-3.5 text-emerald-600 group-hover:text-emerald-700" />
+                        <span className="text-xs font-semibold text-gray-700">{chunk.label.replace(/_/g, ' ')}</span>
+                      </div>
+                      <span className="text-[10px] font-mono text-gray-400">{chunk.total} docs</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         )}

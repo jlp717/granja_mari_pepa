@@ -478,14 +478,20 @@ async function retrieveBulkZip(req, res) {
       sizeMB: (zipInfo.size / 1024 / 1024).toFixed(2)
     });
 
+    // Disable Express request timeout for this long transfer
+    req.setTimeout(0);
+    res.setTimeout(0);
+
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename="${zipInfo.zipFilename}"`);
     res.setHeader('Content-Length', zipInfo.size);
     res.setHeader('X-Accel-Buffering', 'no');
     res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
 
     const fs = require('fs');
-    const stream = fs.createReadStream(zipInfo.zipPath);
+    // 1MB buffer reduces syscalls for large files (default is 64KB)
+    const stream = fs.createReadStream(zipInfo.zipPath, { highWaterMark: 1024 * 1024 });
 
     stream.on('error', (err) => {
       logger.error('❌ PANAMAR: Error reading chunk ZIP', { taskId, chunkIndex: idx, error: err.message });
@@ -497,6 +503,14 @@ async function retrieveBulkZip(req, res) {
 
     stream.on('end', () => {
       logger.info('✅ PANAMAR: Chunk ZIP sent', { taskId, chunkIndex: idx, filename: zipInfo.zipFilename });
+    });
+
+    // Handle client disconnect (user cancels download)
+    res.on('close', () => {
+      if (!res.writableFinished) {
+        stream.destroy();
+        logger.warn('⚠️ PANAMAR: Client disconnected during chunk download', { taskId, chunkIndex: idx });
+      }
     });
 
     stream.pipe(res);

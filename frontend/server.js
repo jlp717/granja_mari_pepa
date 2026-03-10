@@ -17,10 +17,10 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl);
   });
 
-  // Extended timeouts for long-running operations (bulk PDF download)
-  server.timeout = 300000;          // 5 minutes
-  server.keepAliveTimeout = 120000;  // 2 minutes
-  server.headersTimeout = 305000;    // slightly above timeout
+  // Extended timeouts for long-running operations (bulk ZIP download 200MB+)
+  server.timeout = 720000;          // 12 minutes (must exceed Nginx's 600s)
+  server.keepAliveTimeout = 620000;  // ~10 minutes (keep connections alive during transfers)
+  server.headersTimeout = 725000;    // slightly above timeout
 
   server.listen(port, () => {
     console.log(`> Next.js ready on http://localhost:${port}`);
