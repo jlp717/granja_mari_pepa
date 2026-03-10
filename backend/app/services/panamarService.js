@@ -226,6 +226,7 @@ async function getDocuments(options = {}) {
       LAC.PRECIOVENTA,
       LAC.PORCENTAJEDESCUENTO     AS DESCUENTO,
       LAC.IMPORTEVENTA,
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
       COALESCE(ARA.PRECIOTARIFA, 0) AS PRECIO_TARIFA_85,
       ART.CODIGOFAMILIA           AS FAMILIA
     FROM DSEDAC.LAC LAC
@@ -268,7 +269,8 @@ async function getDocuments(options = {}) {
       importe: round2(importeCalculado),
       precioTarifa85: round2(precioTarifa85),
       precioOriginal: round2(line.PRECIOVENTA),
-      usaTarifa85: precioTarifa85 > 0
+      usaTarifa85: precioTarifa85 > 0,
+      tipoVenta: line.TIPO_VENTA || ''
     });
   }
 
@@ -398,6 +400,7 @@ async function getDocumentByKey(key) {
       LAC.PRECIOVENTA,
       LAC.PORCENTAJEDESCUENTO     AS DESCUENTO,
       LAC.IMPORTEVENTA,
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
       COALESCE(ARA.PRECIOTARIFA, 0) AS PRECIO_TARIFA_85,
       ART.CODIGOFAMILIA           AS FAMILIA
     FROM DSEDAC.LAC LAC
@@ -440,7 +443,8 @@ async function getDocumentByKey(key) {
       importe: round2(importeCalculado),
       precioTarifa85: round2(precioTarifa85),
       precioOriginal: round2(line.PRECIOVENTA),
-      usaTarifa85: precioTarifa85 > 0
+      usaTarifa85: precioTarifa85 > 0,
+      tipoVenta: line.TIPO_VENTA || ''
     };
   });
 
@@ -511,7 +515,7 @@ async function getSummary(options = {}) {
 
   const summarySQL = `
     SELECT
-      COUNT(DISTINCT CAC.NUMEROALBARAN || '-' || CAC.SERIEALBARAN || '-' || CAC.EJERCICIOALBARAN) AS TOTAL_DOCUMENTOS,
+      COUNT(DISTINCT CAC.NUMEROALBARAN || '-' || CAC.SERIEALBARAN || '-' || CAC.TERMINALALBARAN || '-' || CAC.EJERCICIOALBARAN) AS TOTAL_DOCUMENTOS,
       COUNT(DISTINCT ${RESOLVED_CLIENT_EXPR}) AS TOTAL_CLIENTES
     FROM DSEDAC.CAC CAC
     WHERE CAC.EJERCICIOALBARAN = ?
@@ -519,15 +523,18 @@ async function getSummary(options = {}) {
       ${extraSQL}
   `;
 
-  // Importe total (sum of PANAMAR lines with tarifa 85 prices)
-  const importeSQL = `
+  // Importe total + cajas aggregation (CC / SC / total)
+  const aggregateSQL = `
     SELECT
       COALESCE(SUM(
         CASE WHEN COALESCE(ARA.PRECIOTARIFA, 0) > 0
           THEN ARA.PRECIOTARIFA * (CASE WHEN LAC.CANTIDADENVASES > 0 THEN LAC.CANTIDADENVASES ELSE LAC.CANTIDADUNIDADES END)
           ELSE LAC.IMPORTEVENTA
         END
-      ), 0) AS TOTAL_IMPORTE
+      ), 0) AS TOTAL_IMPORTE,
+      COALESCE(SUM(LAC.CANTIDADENVASES), 0) AS TOTAL_CAJAS,
+      COALESCE(SUM(CASE WHEN TRIM(LAC.TIPOVENTA) = 'CC' THEN LAC.CANTIDADENVASES ELSE 0 END), 0) AS TOTAL_CAJAS_CC,
+      COALESCE(SUM(CASE WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN LAC.CANTIDADENVASES ELSE 0 END), 0) AS TOTAL_CAJAS_SC
     FROM DSEDAC.CAC CAC
     INNER JOIN DSEDAC.LAC LAC
       ON LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
@@ -545,13 +552,13 @@ async function getSummary(options = {}) {
       ${extraSQL}
   `;
 
-  const [summaryResult, importeResult] = await Promise.all([
+  const [summaryResult, aggregateResult] = await Promise.all([
     odbcPool.query(summarySQL, [ejercicio, ...extraParams]),
-    odbcPool.query(importeSQL, [ejercicio, ...extraParams])
+    odbcPool.query(aggregateSQL, [ejercicio, ...extraParams])
   ]);
 
   const row = summaryResult[0] || {};
-  const impRow = importeResult[0] || {};
+  const aggRow = aggregateResult[0] || {};
 
   const elapsed = Date.now() - startTime;
   logger.info('📊 PANAMAR: Resumen completado', { elapsed: `${elapsed}ms` });
@@ -560,7 +567,10 @@ async function getSummary(options = {}) {
     ejercicio,
     totalDocumentos: row.TOTAL_DOCUMENTOS || 0,
     totalClientes: row.TOTAL_CLIENTES || 0,
-    totalImporte: round2(impRow.TOTAL_IMPORTE || 0)
+    totalImporte: round2(aggRow.TOTAL_IMPORTE || 0),
+    totalCajas: aggRow.TOTAL_CAJAS || 0,
+    totalCajasCC: aggRow.TOTAL_CAJAS_CC || 0,
+    totalCajasSC: aggRow.TOTAL_CAJAS_SC || 0
   };
 }
 

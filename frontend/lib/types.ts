@@ -174,6 +174,9 @@ export interface PanamarSummary {
   totalDocumentos: number;
   totalClientes: number;
   totalImporte: number;
+  totalCajas: number;
+  totalCajasCC: number;
+  totalCajasSC: number;
 }
 
 export interface PanamarFilters {

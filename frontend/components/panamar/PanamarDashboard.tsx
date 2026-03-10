@@ -15,7 +15,7 @@ import {
   ChevronsLeft, ChevronsRight,
   FileText, Truck, Calendar, Users, LogOut, X,
   Download, Eye, Mail, MessageCircle, DollarSign, Settings,
-  Archive, Check, ChevronDown
+  Archive, Check, ChevronDown, Box
 } from 'lucide-react';
 
 const MESES = [
@@ -421,7 +421,7 @@ export function PanamarDashboard() {
       <main className="container mx-auto px-4 py-6 space-y-6 relative z-10">
         {/* Summary Cards */}
         {summary && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -460,8 +460,50 @@ export function PanamarDashboard() {
                 <DollarSign className="h-5 w-5 text-white" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">{summary.totalImporte.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €</div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalImporte.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} &euro;</div>
                 <div className="text-xs text-muted-foreground font-medium">Importe Total</div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg">
+                <Box className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalCajas.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Total Cajas</div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl shadow-lg">
+                <Box className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalCajasCC.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Cajas CC</div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              className="bg-card rounded-2xl p-4 shadow-lg border border-border flex items-center gap-3"
+            >
+              <div className="p-2.5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-lg">
+                <Box className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-foreground">{summary.totalCajasSC.toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Cajas SC</div>
               </div>
             </motion.div>
           </div>
@@ -823,12 +865,6 @@ export function PanamarDashboard() {
                         Líneas
                       </div>
                     </TableHead>
-                    <TableHead className="font-bold text-orange-700 text-right">
-                      <div className="flex items-center gap-2 justify-end">
-                        <DollarSign className="w-4 h-4" />
-                        Total
-                      </div>
-                    </TableHead>
                     <TableHead className="font-bold text-orange-700 text-center">
                       <div className="flex items-center gap-2 justify-center">
                         <Settings className="w-4 h-4" />
@@ -885,13 +921,6 @@ export function PanamarDashboard() {
                           <Badge variant="outline" className="font-semibold">
                             {doc.totalLineasPanamar}
                           </Badge>
-                        </TableCell>
-
-                        {/* Total */}
-                        <TableCell className="text-right">
-                          <div className="font-bold text-lg text-emerald-600">
-                            {doc.totalImportePanamar.toFixed(2)} €
-                          </div>
                         </TableCell>
 
                         {/* Acciones */}
