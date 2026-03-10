@@ -495,7 +495,6 @@ async function retrieveBulkZip(req, res) {
     return res.status(500).json({ success: false, message: 'Error al descargar archivo' });
   }
 }
-}
 /**
  * GET /api/panamar/clients
  * Returns distinct clients with PANAMAR albaranes for the dropdown selector.
