@@ -139,19 +139,18 @@ const BulkProgressOverlay = ({ task, onCancel, chunkDownloadStatus }: {
                       {isDone ? <Check className="w-3 h-3 inline mr-1" /> : null}
                       {chunk.label.replace(/_/g, ' ')}
                     </span>
-                    <span className={`text-[10px] font-mono ${
-                      chunkDownloadStatus[chunk.index] === 'failed' ? 'text-red-600 font-bold' :
-                      chunkDownloadStatus[chunk.index] === 'retrying' ? 'text-amber-600 font-bold animate-pulse' :
-                      chunkDownloadStatus[chunk.index] === 'downloading' ? 'text-blue-600 animate-pulse' :
-                      'text-gray-500'
-                    }`}>
+                    <span className={`text-[10px] font-mono ${chunkDownloadStatus[chunk.index] === 'failed' ? 'text-red-600 font-bold' :
+                        chunkDownloadStatus[chunk.index] === 'retrying' ? 'text-amber-600 font-bold animate-pulse' :
+                          chunkDownloadStatus[chunk.index] === 'downloading' ? 'text-blue-600 animate-pulse' :
+                            'text-gray-500'
+                      }`}>
                       {chunkDownloadStatus[chunk.index] === 'downloaded' ? '✅ Descargado' :
-                       chunkDownloadStatus[chunk.index] === 'downloading' ? '⬇️ Descargando...' :
-                       chunkDownloadStatus[chunk.index] === 'retrying' ? '🔄 Reintentando...' :
-                       chunkDownloadStatus[chunk.index] === 'failed' ? '❌ Error' :
-                       isDone ? '⏳ En cola...' :
-                       isActive ? `${chunk.processed}/${chunk.total}` :
-                       chunk.total > 0 ? `${chunk.total} docs` : 'Pendiente'}
+                        chunkDownloadStatus[chunk.index] === 'downloading' ? '⬇️ Descargando...' :
+                          chunkDownloadStatus[chunk.index] === 'retrying' ? '🔄 Reintentando...' :
+                            chunkDownloadStatus[chunk.index] === 'failed' ? '❌ Error' :
+                              isDone ? '⏳ En cola...' :
+                                isActive ? `${chunk.processed}/${chunk.total}` :
+                                  chunk.total > 0 ? `${chunk.total} docs` : 'Pendiente'}
                     </span>
                   </div>
                   {(isActive || isDone) && chunk.total > 0 && (
@@ -506,19 +505,22 @@ export function PanamarDashboard() {
     return () => clearInterval(interval);
   }, [bulkTask?.status, bulkTask?.id]);
 
-  /** 🔒 Descarga robusta con fetch+Blob y reintentos automaticos (IMPOSIBLE que falle silenciosamente) */
+  /** 🔒 Descarga robusta con fetch+Blob, reintentos automaticos, timeout, y verificación de integridad */
   const doSingleDownloadWithRetry = async (taskId: string, chunkIndex: number, filename: string): Promise<boolean> => {
-    const MAX_RETRIES = 3;
+    const MAX_RETRIES = 5;
     const endpoint = `/api/panamar/bulk-download/retrieve/${taskId}/${chunkIndex}`;
+    const shortName = filename.replace('PANAMAR_', '').replace('.zip', '');
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
         setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: attempt > 1 ? 'retrying' : 'downloading' }));
 
         if (attempt > 1) {
-          toast.info(`🔄 Reintento ${attempt}/${MAX_RETRIES}: ${filename.replace('PANAMAR_', '').replace('.zip', '')}`, { duration: 3000 });
-          // Exponential backoff: 2s, 4s, 6s
-          await new Promise(r => setTimeout(r, 2000 * attempt));
+          toast.info(`🔄 Reintento ${attempt}/${MAX_RETRIES}: ${shortName}`, { duration: 3000 });
+          // Exponential backoff: 3s, 6s, 12s, 24s
+          const backoffMs = 3000 * Math.pow(2, attempt - 2);
+          console.log(`⏳ Backoff ${backoffMs / 1000}s antes de reintento ${attempt}...`);
+          await new Promise(r => setTimeout(r, backoffMs));
         }
 
         console.log(`📥 [Intento ${attempt}/${MAX_RETRIES}] Descargando chunk ${chunkIndex}: ${endpoint} → ${filename}`);
@@ -526,19 +528,20 @@ export function PanamarDashboard() {
 
         if (success) {
           setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: 'downloaded' }));
-          toast.success(`✅ Descargado: ${filename.replace('PANAMAR_', '').replace('.zip', '')}`, { duration: 4000 });
+          toast.success(`✅ Descargado: ${shortName}`, { duration: 4000 });
           return true;
         }
 
-        console.warn(`⚠️ Intento ${attempt} fallido para chunk ${chunkIndex} (secureDownload devolvio false)`);
+        console.warn(`⚠️ Intento ${attempt}/${MAX_RETRIES} fallido para chunk ${chunkIndex} (secureDownload devolvió false)`);
       } catch (err) {
-        console.error(`❌ Intento ${attempt} error para chunk ${chunkIndex}:`, err);
+        console.error(`❌ Intento ${attempt}/${MAX_RETRIES} error para chunk ${chunkIndex}:`, err);
       }
     }
 
-    // Todos los reintentos fallaron
+    // Todos los reintentos fallaron → marcar como failed Y liberar del ref para permitir reintento manual
     setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: 'failed' }));
-    toast.error(`❌ Error descargando ${filename.replace('PANAMAR_', '').replace('.zip', '')} tras ${MAX_RETRIES} intentos. Use el botón para reintentar.`, { duration: 10000 });
+    downloadedChunksRef.current.delete(chunkIndex); // Permitir reintento automático en próximo poll
+    toast.error(`❌ Error descargando ${shortName} tras ${MAX_RETRIES} intentos. Use el botón para reintentar.`, { duration: 10000 });
     return false;
   };
 
@@ -550,9 +553,9 @@ export function PanamarDashboard() {
     while (downloadQueueRef.current.length > 0) {
       const next = downloadQueueRef.current.shift()!;
       await doSingleDownloadWithRetry(next.taskId, next.index, next.filename);
-      // Pausa entre descargas para no saturar el navegador
+      // Pausa entre descargas: 2.5s para dar tiempo a que la conexión se estabilice
       if (downloadQueueRef.current.length > 0) {
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise(r => setTimeout(r, 2500));
       }
     }
 
@@ -584,14 +587,17 @@ export function PanamarDashboard() {
           downloaded: downloadedChunksRef.current.has(c.index),
         }));
 
-        // Auto-download newly completed chunks (skip empty/skipped chunks)
+        // Auto-download newly completed chunks (skip empty/skipped ones)
         for (const chunk of serverChunks) {
           if (chunk.status === 'completed' && chunk.total > 0 && !downloadedChunksRef.current.has(chunk.index)) {
-            downloadedChunksRef.current.add(chunk.index);
-            triggerChunkDownload(taskId, chunk.index, chunk.zipFilename);
-            // downloaded se actualizara via chunkDownloadStatus cuando realmente se descargue
+            // Solo encolar si no está ya descargado ni en proceso
+            const currentDlStatus = chunkDownloadStatus[chunk.index];
+            if (currentDlStatus !== 'downloaded' && currentDlStatus !== 'downloading' && currentDlStatus !== 'retrying') {
+              downloadedChunksRef.current.add(chunk.index);
+              triggerChunkDownload(taskId, chunk.index, chunk.zipFilename);
+            }
           }
-          // Mark skipped chunks as "downloaded" so they don't block completion
+          // Mark skipped chunks so they don't block completion
           if (chunk.status === 'skipped' && !downloadedChunksRef.current.has(chunk.index)) {
             downloadedChunksRef.current.add(chunk.index);
           }
@@ -1825,12 +1831,11 @@ export function PanamarDashboard() {
                             triggerChunkDownload(taskResult.taskId, chunk.index, chunk.zipFilename);
                           }
                         }}
-                        className={`w-full flex items-center justify-between p-2.5 rounded-xl border transition-all group ${
-                          isDownloaded ? 'bg-emerald-50 border-emerald-300' :
-                          isFailed ? 'bg-red-50 border-red-200 hover:border-red-400' :
-                          isDownloading ? 'bg-blue-50 border-blue-200 opacity-70 cursor-wait' :
-                          'bg-white border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50'
-                        }`}
+                        className={`w-full flex items-center justify-between p-2.5 rounded-xl border transition-all group ${isDownloaded ? 'bg-emerald-50 border-emerald-300' :
+                            isFailed ? 'bg-red-50 border-red-200 hover:border-red-400' :
+                              isDownloading ? 'bg-blue-50 border-blue-200 opacity-70 cursor-wait' :
+                                'bg-white border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50'
+                          }`}
                       >
                         <div className="flex items-center gap-2">
                           {isDownloading ? (
@@ -1844,17 +1849,16 @@ export function PanamarDashboard() {
                           )}
                           <span className="text-xs font-semibold text-gray-700">{chunk.label.replace(/_/g, ' ')}</span>
                         </div>
-                        <span className={`text-[10px] font-mono ${
-                          isDownloaded ? 'text-emerald-600 font-bold' :
-                          isFailed ? 'text-red-500 font-bold' :
-                          isDownloading ? 'text-blue-500 animate-pulse' :
-                          'text-gray-400'
-                        }`}>
+                        <span className={`text-[10px] font-mono ${isDownloaded ? 'text-emerald-600 font-bold' :
+                            isFailed ? 'text-red-500 font-bold' :
+                              isDownloading ? 'text-blue-500 animate-pulse' :
+                                'text-gray-400'
+                          }`}>
                           {isDownloaded ? '✅ Descargado' :
-                           dlStatus === 'downloading' ? '⬇️ Descargando...' :
-                           dlStatus === 'retrying' ? '🔄 Reintentando...' :
-                           isFailed ? '❌ Reintentar' :
-                           `${chunk.total} docs`}
+                            dlStatus === 'downloading' ? '⬇️ Descargando...' :
+                              dlStatus === 'retrying' ? '🔄 Reintentando...' :
+                                isFailed ? '❌ Reintentar' :
+                                  `${chunk.total} docs`}
                         </span>
                       </button>
                     );

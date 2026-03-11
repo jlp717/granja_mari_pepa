@@ -456,6 +456,7 @@ async function getBulkStatus(req, res) {
 /**
  * GET /api/panamar/bulk-download/retrieve/:taskId/:chunkIndex
  * Descarga el ZIP de un tramo específico
+ * v2.0: Validación de integridad + headers anti-range + re-check existencia
  */
 async function retrieveBulkZip(req, res) {
   try {
@@ -472,6 +473,19 @@ async function retrieveBulkZip(req, res) {
       return res.status(404).json({ success: false, message: 'Tramo no disponible o no completado' });
     }
 
+    // ✅ Verificar tamaño mínimo (protección contra ZIPs corruptos/vacíos)
+    if (zipInfo.size < 100) {
+      logger.error('❌ PANAMAR: ZIP corrupto o vacío', { taskId, chunkIndex: idx, size: zipInfo.size });
+      return res.status(500).json({ success: false, message: 'El archivo ZIP está corrupto o vacío' });
+    }
+
+    // ✅ Re-verificar existencia justo antes del streaming (race condition con auto-cleanup)
+    const fs = require('fs');
+    if (!fs.existsSync(zipInfo.zipPath)) {
+      logger.error('❌ PANAMAR: ZIP ya no existe', { taskId, chunkIndex: idx, path: zipInfo.zipPath });
+      return res.status(410).json({ success: false, message: 'El archivo ZIP ha expirado. Reinicie la descarga.' });
+    }
+
     logger.info('📥 PANAMAR: Sending chunk ZIP', {
       taskId, chunkIndex: idx,
       filename: zipInfo.zipFilename,
@@ -486,10 +500,10 @@ async function retrieveBulkZip(req, res) {
     res.setHeader('Content-Disposition', `attachment; filename="${zipInfo.zipFilename}"`);
     res.setHeader('Content-Length', zipInfo.size);
     res.setHeader('X-Accel-Buffering', 'no');
-    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Connection', 'keep-alive');
+    res.setHeader('Accept-Ranges', 'none'); // Impedir range requests del browser (evita descargas parciales)
 
-    const fs = require('fs');
     // 1MB buffer reduces syscalls for large files (default is 64KB)
     const stream = fs.createReadStream(zipInfo.zipPath, { highWaterMark: 1024 * 1024 });
 

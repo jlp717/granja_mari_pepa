@@ -280,6 +280,16 @@ async function generateChunkZip(taskId, chunk) {
       }
 
       await archive.finalize();
+
+      // ✅ Verificar integridad: el ZIP debe tener tamaño > 0
+      await new Promise(r => setTimeout(r, 100)); // Esperar a que el write stream cierre
+      if (fs.existsSync(chunk.zipPath)) {
+        const zipSize = fs.statSync(chunk.zipPath).size;
+        if (zipSize === 0) {
+          throw new Error(`ZIP vacío generado para chunk ${chunk.index} [${chunk.label}]`);
+        }
+        logger.info(`📦 Chunk ${chunk.index} [${chunk.label}]: ZIP generado (${(zipSize / 1024 / 1024).toFixed(1)}MB)`);
+      }
     })().catch(err => {
       archive.abort();
       chunk.status = 'error';
@@ -347,10 +357,10 @@ function cleanupTask(taskId) {
 // ── Auto-limpieza cada 10 min ───────────────────────────────────────
 setInterval(() => {
   const now = Date.now();
-  const ONE_HOUR = 3600000;
+  const THREE_HOURS = 10800000; // 3 horas para dar margen a descargas lentas
   let changed = false;
   for (const [id, task] of tasks.entries()) {
-    if (now - task.startTime > ONE_HOUR) {
+    if (now - task.startTime > THREE_HOURS) {
       logger.info(`🧹 Autocleaning old bulk task: ${id}`);
       for (const chunk of (task.chunks || [])) {
         if (chunk.zipPath && fs.existsSync(chunk.zipPath)) {

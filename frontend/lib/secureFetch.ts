@@ -283,13 +283,26 @@ export async function secureFetch<T = unknown>(
 
 /**
  * 🔐 Fetch para descargar archivos (PDF, ZIP, etc.) con autenticación
- * Soporta silent refresh en 401 y AbortSignal para cancelación.
+ * Soporta silent refresh en 401, AbortSignal para cancelación,
+ * timeout de 10 min, y verificación de integridad por Content-Length.
+ *
+ * @version 4.0.0 - Production-ready: timeout + size verification + explicit errors
  */
 export async function secureDownload(
   endpoint: string,
   filename: string,
   signal?: AbortSignal
 ): Promise<boolean> {
+  // Timeout de 10 minutos para archivos grandes (ZIPs de 200MB+)
+  const DOWNLOAD_TIMEOUT_MS = 600_000;
+  const timeoutController = new AbortController();
+  const timeoutId = setTimeout(() => timeoutController.abort(), DOWNLOAD_TIMEOUT_MS);
+
+  // Combinar signal externo con nuestro timeout
+  const combinedSignal = signal
+    ? combineAbortSignals(signal, timeoutController.signal)
+    : timeoutController.signal;
+
   try {
     const url = endpoint.startsWith('http')
       ? endpoint
@@ -298,7 +311,7 @@ export async function secureDownload(
     let response = await fetch(url, {
       method: 'GET',
       credentials: 'include',
-      signal,
+      signal: combinedSignal,
     });
 
     // Silent refresh on 401
@@ -308,7 +321,7 @@ export async function secureDownload(
         response = await fetch(url, {
           method: 'GET',
           credentials: 'include',
-          signal,
+          signal: combinedSignal,
         });
       } else {
         triggerSessionExpired('download_401_refresh_failed');
@@ -328,7 +341,7 @@ export async function secureDownload(
             method: 'GET',
             credentials: 'include',
             headers: { 'X-CSRF-Token': newToken },
-            signal,
+            signal: combinedSignal,
           });
         }
       }
@@ -338,27 +351,72 @@ export async function secureDownload(
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
-    const blob = await response.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
+    // Leer Content-Length para verificar integridad
+    const expectedSize = parseInt(response.headers.get('Content-Length') || '0', 10);
 
+    // Descargar el blob completo
+    const blob = await response.blob();
+
+    // ✅ Verificar integridad: el blob debe tener el tamaño esperado
+    if (expectedSize > 0 && blob.size < expectedSize * 0.99) {
+      // Tolerancia del 1% por diferencias de encoding
+      throw new Error(
+        `Descarga incompleta: recibido ${(blob.size / 1024 / 1024).toFixed(1)}MB ` +
+        `de ${(expectedSize / 1024 / 1024).toFixed(1)}MB esperados`
+      );
+    }
+
+    // ✅ Verificar que el blob no esté vacío
+    if (blob.size === 0) {
+      throw new Error('Descarga vacía: el servidor devolvió 0 bytes');
+    }
+
+    // Crear enlace de descarga
+    const blobUrl = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = blobUrl;
     link.download = filename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
     window.URL.revokeObjectURL(blobUrl);
 
+    console.log(`✅ secureDownload OK: ${filename} (${(blob.size / 1024 / 1024).toFixed(1)}MB)`);
     return true;
   } catch (error) {
-    if ((error as Error).name === 'AbortError') {
-      console.log('Descarga cancelada por el usuario');
+    const err = error as Error;
+    if (err.name === 'AbortError') {
+      // Distinguir timeout interno vs cancelación del usuario
+      if (timeoutController.signal.aborted && !(signal?.aborted)) {
+        console.error(`⏰ secureDownload TIMEOUT (${DOWNLOAD_TIMEOUT_MS / 1000}s): ${filename}`);
+      } else {
+        console.log('Descarga cancelada por el usuario');
+      }
       return false;
     }
-    console.error('Error en descarga segura:', error);
+    console.error(`❌ secureDownload ERROR [${filename}]:`, err.message);
     return false;
+  } finally {
+    clearTimeout(timeoutId);
   }
+}
+
+/**
+ * Combina dos AbortSignals: aborta cuando cualquiera de los dos se aborta
+ */
+function combineAbortSignals(signal1: AbortSignal, signal2: AbortSignal): AbortSignal {
+  const controller = new AbortController();
+  const onAbort = () => controller.abort();
+
+  if (signal1.aborted || signal2.aborted) {
+    controller.abort();
+    return controller.signal;
+  }
+
+  signal1.addEventListener('abort', onAbort, { once: true });
+  signal2.addEventListener('abort', onAbort, { once: true });
+
+  return controller.signal;
 }
 
 /**
