@@ -172,21 +172,27 @@ async function processTask(taskId) {
     if (!tasks.has(taskId) || tasks.get(taskId).status === 'error') return;
 
     const batch = pendingChunks.slice(i, i + CHUNK_PIPELINE);
-    // Process CHUNK_PIPELINE chunks in parallel
+    // Process CHUNK_PIPELINE chunks in parallel with ERROR ISOLATION
     await Promise.all(batch.map(async (chunk) => {
       if (!tasks.has(taskId) || tasks.get(taskId).status === 'error') return;
 
-      chunk.status = 'processing';
-      saveTasksToDisk();
+      try {
+        chunk.status = 'processing';
+        saveTasksToDisk();
 
-      logger.info(`📦 Chunk ${chunk.index} [${chunk.label}]: Iniciando (${chunk.total} docs)`);
+        logger.info(`📦 Chunk ${chunk.index} [${chunk.label}]: Iniciando (${chunk.total} docs)`);
 
-      await generateChunkZip(taskId, chunk);
+        await generateChunkZip(taskId, chunk);
 
-      if (chunk.status !== 'error') {
-        chunk.status = 'completed';
-        task.totalProcessed += chunk.processed;
-        logger.info(`✅ Chunk ${chunk.index} [${chunk.label}]: Completado (${chunk.processed} docs)`);
+        if (chunk.status !== 'error') {
+          chunk.status = 'completed';
+          task.totalProcessed += chunk.processed;
+          logger.info(`✅ Chunk ${chunk.index} [${chunk.label}]: Completado (${chunk.processed} docs)`);
+        }
+      } catch (err) {
+        // Error isolation: one chunk failing doesn't kill the other
+        logger.error(`❌ Chunk ${chunk.index} [${chunk.label}]: Error:`, err.message);
+        chunk.status = 'error';
       }
       saveTasksToDisk();
     }));
@@ -202,35 +208,42 @@ async function processTask(taskId) {
   }
 }
 
-// 🚀 Opt 1: Count all chunks in a single batch (parallel queries)
+// 🚀 Opt 1: Count all chunks in batches (max 3 concurrent to not exhaust ODBC pool)
 async function batchCountChunks(task) {
-  const countPromises = task.chunks.map(async (chunk) => {
-    const countResult = await panamarService.getDocuments({
-      ...task.filters,
-      codigoClienteDesde: chunk.desde,
-      codigoClienteHasta: chunk.hasta,
-      page: 1,
-      pageSize: 1,
-    });
-    chunk.total = countResult.total || 0;
-    if (chunk.total === 0) {
-      chunk.status = 'skipped';
-      logger.info(`⏭️ Chunk ${chunk.index} [${chunk.label}]: 0 documentos, saltando`);
-    } else {
-      logger.info(`📦 Chunk ${chunk.index} [${chunk.label}]: ${chunk.total} documentos`);
-    }
-  });
-
-  // Execute all COUNT queries in parallel (uses pool)
-  await Promise.all(countPromises);
+  const COUNT_BATCH = 3; // ODBC pool has 10 conn, leave room for generation
+  for (let i = 0; i < task.chunks.length; i += COUNT_BATCH) {
+    const batch = task.chunks.slice(i, i + COUNT_BATCH);
+    await Promise.all(batch.map(async (chunk) => {
+      try {
+        const countResult = await panamarService.getDocuments({
+          ...task.filters,
+          codigoClienteDesde: chunk.desde,
+          codigoClienteHasta: chunk.hasta,
+          page: 1,
+          pageSize: 1,
+        });
+        chunk.total = countResult.total || 0;
+        if (chunk.total === 0) {
+          chunk.status = 'skipped';
+          logger.info(`⏭️ Chunk ${chunk.index} [${chunk.label}]: 0 documentos, saltando`);
+        } else {
+          logger.info(`📦 Chunk ${chunk.index} [${chunk.label}]: ${chunk.total} documentos`);
+        }
+      } catch (err) {
+        logger.error(`❌ Error counting chunk ${chunk.index}:`, err.message);
+        chunk.total = 0;
+        chunk.status = 'error';
+      }
+    }));
+  }
 }
 
 // ── 🚀 Generación de ZIP optimizada ─────────────────────────────────
 async function generateChunkZip(taskId, chunk) {
   return new Promise((resolve, reject) => {
     const output = fs.createWriteStream(chunk.zipPath);
-    // 🚀 Opt 7: store mode — PDFs already compressed, skip re-compression
-    const archive = archiver('zip', { store: true });
+    // zlib level 1: minimal compression (keeps ZIPs smaller for faster Cloudflare transfer)
+    const archive = archiver('zip', { zlib: { level: 1 } });
 
     output.on('close', resolve);
     archive.on('error', (err) => {

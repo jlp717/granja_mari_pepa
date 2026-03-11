@@ -547,22 +547,20 @@ export function PanamarDashboard() {
     return false;
   };
 
-  /** 🚀 Procesa la cola de descargas: 2 paralelas para máxima velocidad */
+  /** Procesa la cola de descargas secuencialmente (1 a la vez — paralelo causa timeouts en Cloudflare) */
   const processDownloadQueue = async () => {
     if (isProcessingQueueRef.current) return;
     isProcessingQueueRef.current = true;
 
-    const PARALLEL_DOWNLOADS = 2;
+    // ⚠️ MUST be sequential: parallel downloads split Cloudflare Tunnel bandwidth
+    // causing BOTH to exceed the ~100s timeout and disconnect.
+    // Sequential ensures full bandwidth goes to 1 file at a time.
     while (downloadQueueRef.current.length > 0) {
-      // Take up to PARALLEL_DOWNLOADS items from the queue
-      const batch = downloadQueueRef.current.splice(0, PARALLEL_DOWNLOADS);
-      // Download them in parallel
-      await Promise.all(batch.map(item =>
-        doSingleDownloadWithRetry(item.taskId, item.index, item.filename)
-      ));
-      // 500ms breathing room between batches (less than before, downloads are batched)
+      const next = downloadQueueRef.current.shift()!;
+      await doSingleDownloadWithRetry(next.taskId, next.index, next.filename);
+      // 1s pause between downloads for connection cleanup
       if (downloadQueueRef.current.length > 0) {
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 1000));
       }
     }
 
