@@ -473,11 +473,13 @@ export function PanamarDashboard() {
   const bulkTaskRef = useRef<BulkTaskState | null>(null);
   // Track which chunks we've already triggered download for
   const downloadedChunksRef = useRef<Set<number>>(new Set());
-  // Queue for staggered downloads (browsers block rapid multiple downloads)
+  // Queue for staggered downloads (browsers block rapid multiple multiple downloads)
   const downloadQueueRef = useRef<Array<{ taskId: string; index: number; filename: string }>>([]);
   const isProcessingQueueRef = useRef(false);
   // Track real download status per chunk (downloading, retrying, downloaded, failed)
   const [chunkDownloadStatus, setChunkDownloadStatus] = useState<Record<number, 'downloading' | 'retrying' | 'downloaded' | 'failed'>>({});
+  // ✅ FIX: Use ref mirror of chunkDownloadStatus to avoid stale closures in setInterval/callbacks
+  const chunkDlStatusRef = useRef<Record<number, 'downloading' | 'retrying' | 'downloaded' | 'failed'>>({});
 
   useEffect(() => {
     bulkTaskRef.current = bulkTask;
@@ -515,7 +517,9 @@ export function PanamarDashboard() {
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
-        setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: attempt > 1 ? 'retrying' : 'downloading' }));
+        const status = attempt > 1 ? 'retrying' : 'downloading';
+        chunkDlStatusRef.current[chunkIndex] = status;
+        setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: status }));
 
         if (attempt > 1) {
           toast.info(`🔄 Reintento ${attempt}/${MAX_RETRIES}: ${shortName}`, { duration: 3000 });
@@ -529,6 +533,7 @@ export function PanamarDashboard() {
         const success = await secureDownload(endpoint, filename);
 
         if (success) {
+          chunkDlStatusRef.current[chunkIndex] = 'downloaded';
           setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: 'downloaded' }));
           toast.success(`✅ Descargado: ${shortName}`, { duration: 4000 });
           return true;
@@ -540,9 +545,11 @@ export function PanamarDashboard() {
       }
     }
 
-    // Todos los reintentos fallaron → marcar como failed Y liberar del ref para permitir reintento manual
+    // ✅ FIX: Todos los reintentos fallaron → marcar como failed.
+    // NO borrar de downloadedChunksRef — esto previene el bucle infinito de auto-retry.
+    // Solo el botón manual de retry puede volver a intentar.
+    chunkDlStatusRef.current[chunkIndex] = 'failed';
     setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: 'failed' }));
-    downloadedChunksRef.current.delete(chunkIndex); // Permitir reintento automático en próximo poll
     toast.error(`❌ Error descargando ${shortName} tras ${MAX_RETRIES} intentos. Use el botón para reintentar.`, { duration: 10000 });
     return false;
   };
@@ -595,9 +602,10 @@ export function PanamarDashboard() {
         // Auto-download newly completed chunks (skip empty/skipped ones)
         for (const chunk of serverChunks) {
           if (chunk.status === 'completed' && chunk.total > 0 && !downloadedChunksRef.current.has(chunk.index)) {
-            // Solo encolar si no está ya descargado ni en proceso
-            const currentDlStatus = chunkDownloadStatus[chunk.index];
-            if (currentDlStatus !== 'downloaded' && currentDlStatus !== 'downloading' && currentDlStatus !== 'retrying') {
+            // ✅ FIX: Use ref (not React state) to check status — avoids stale closure
+            const currentDlStatus = chunkDlStatusRef.current[chunk.index];
+            // Never auto-retry failed chunks — only manual retry button
+            if (!currentDlStatus || currentDlStatus === undefined) {
               downloadedChunksRef.current.add(chunk.index);
               triggerChunkDownload(taskId, chunk.index, chunk.zipFilename);
             }
@@ -1812,7 +1820,7 @@ export function PanamarDashboard() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => { setTaskResult(null); downloadedChunksRef.current = new Set(); setChunkDownloadStatus({}); }}
+                  onClick={() => { setTaskResult(null); downloadedChunksRef.current = new Set(); setChunkDownloadStatus({}); chunkDlStatusRef.current = {}; }}
                   className="h-8 w-8 text-gray-400 hover:text-gray-600 shrink-0"
                 >
                   <X className="w-4 h-4" />
@@ -1833,6 +1841,14 @@ export function PanamarDashboard() {
                         disabled={isDownloading}
                         onClick={() => {
                           if (taskResult.taskId && !isDownloading) {
+                            // ✅ FIX: Clear tracking so download can be re-triggered
+                            downloadedChunksRef.current.delete(chunk.index);
+                            delete chunkDlStatusRef.current[chunk.index];
+                            setChunkDownloadStatus(prev => {
+                              const next = { ...prev };
+                              delete next[chunk.index];
+                              return next;
+                            });
                             triggerChunkDownload(taskResult.taskId, chunk.index, chunk.zipFilename);
                           }
                         }}
