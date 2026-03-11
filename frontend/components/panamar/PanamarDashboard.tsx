@@ -62,9 +62,10 @@ const CHUNK_COLORS = [
   'from-yellow-500 to-orange-400',
 ];
 
-const BulkProgressOverlay = ({ task, onCancel }: {
+const BulkProgressOverlay = ({ task, onCancel, chunkDownloadStatus }: {
   task: BulkTaskState,
-  onCancel: () => void
+  onCancel: () => void,
+  chunkDownloadStatus: Record<number, 'downloading' | 'retrying' | 'downloaded' | 'failed'>
 }) => {
   const completedChunks = task.chunks.filter(c => c.status === 'completed' || c.status === 'skipped').length;
   const activeChunks = task.chunks.filter(c => c.status !== 'skipped');
@@ -138,8 +139,19 @@ const BulkProgressOverlay = ({ task, onCancel }: {
                       {isDone ? <Check className="w-3 h-3 inline mr-1" /> : null}
                       {chunk.label.replace(/_/g, ' ')}
                     </span>
-                    <span className="text-[10px] font-mono text-gray-500">
-                      {isDone && chunk.downloaded ? 'Descargado' : isDone ? 'Listo' : isActive ? `${chunk.processed}/${chunk.total}` : chunk.total > 0 ? `${chunk.total} docs` : 'Pendiente'}
+                    <span className={`text-[10px] font-mono ${
+                      chunkDownloadStatus[chunk.index] === 'failed' ? 'text-red-600 font-bold' :
+                      chunkDownloadStatus[chunk.index] === 'retrying' ? 'text-amber-600 font-bold animate-pulse' :
+                      chunkDownloadStatus[chunk.index] === 'downloading' ? 'text-blue-600 animate-pulse' :
+                      'text-gray-500'
+                    }`}>
+                      {chunkDownloadStatus[chunk.index] === 'downloaded' ? '✅ Descargado' :
+                       chunkDownloadStatus[chunk.index] === 'downloading' ? '⬇️ Descargando...' :
+                       chunkDownloadStatus[chunk.index] === 'retrying' ? '🔄 Reintentando...' :
+                       chunkDownloadStatus[chunk.index] === 'failed' ? '❌ Error' :
+                       isDone ? '⏳ En cola...' :
+                       isActive ? `${chunk.processed}/${chunk.total}` :
+                       chunk.total > 0 ? `${chunk.total} docs` : 'Pendiente'}
                     </span>
                   </div>
                   {(isActive || isDone) && chunk.total > 0 && (
@@ -462,6 +474,11 @@ export function PanamarDashboard() {
   const bulkTaskRef = useRef<BulkTaskState | null>(null);
   // Track which chunks we've already triggered download for
   const downloadedChunksRef = useRef<Set<number>>(new Set());
+  // Queue for staggered downloads (browsers block rapid multiple downloads)
+  const downloadQueueRef = useRef<Array<{ taskId: string; index: number; filename: string }>>([]);
+  const isProcessingQueueRef = useRef(false);
+  // Track real download status per chunk (downloading, retrying, downloaded, failed)
+  const [chunkDownloadStatus, setChunkDownloadStatus] = useState<Record<number, 'downloading' | 'retrying' | 'downloaded' | 'failed'>>({});
 
   useEffect(() => {
     bulkTaskRef.current = bulkTask;
@@ -489,22 +506,63 @@ export function PanamarDashboard() {
     return () => clearInterval(interval);
   }, [bulkTask?.status, bulkTask?.id]);
 
-  /** Trigger native browser download for a specific chunk */
+  /** 🔒 Descarga robusta con fetch+Blob y reintentos automaticos (IMPOSIBLE que falle silenciosamente) */
+  const doSingleDownloadWithRetry = async (taskId: string, chunkIndex: number, filename: string): Promise<boolean> => {
+    const MAX_RETRIES = 3;
+    const endpoint = `/api/panamar/bulk-download/retrieve/${taskId}/${chunkIndex}`;
+
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: attempt > 1 ? 'retrying' : 'downloading' }));
+
+        if (attempt > 1) {
+          toast.info(`🔄 Reintento ${attempt}/${MAX_RETRIES}: ${filename.replace('PANAMAR_', '').replace('.zip', '')}`, { duration: 3000 });
+          // Exponential backoff: 2s, 4s, 6s
+          await new Promise(r => setTimeout(r, 2000 * attempt));
+        }
+
+        console.log(`📥 [Intento ${attempt}/${MAX_RETRIES}] Descargando chunk ${chunkIndex}: ${endpoint} → ${filename}`);
+        const success = await secureDownload(endpoint, filename);
+
+        if (success) {
+          setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: 'downloaded' }));
+          toast.success(`✅ Descargado: ${filename.replace('PANAMAR_', '').replace('.zip', '')}`, { duration: 4000 });
+          return true;
+        }
+
+        console.warn(`⚠️ Intento ${attempt} fallido para chunk ${chunkIndex} (secureDownload devolvio false)`);
+      } catch (err) {
+        console.error(`❌ Intento ${attempt} error para chunk ${chunkIndex}:`, err);
+      }
+    }
+
+    // Todos los reintentos fallaron
+    setChunkDownloadStatus(prev => ({ ...prev, [chunkIndex]: 'failed' }));
+    toast.error(`❌ Error descargando ${filename.replace('PANAMAR_', '').replace('.zip', '')} tras ${MAX_RETRIES} intentos. Use el botón para reintentar.`, { duration: 10000 });
+    return false;
+  };
+
+  /** Procesa la cola de descargas secuencialmente con reintentos */
+  const processDownloadQueue = async () => {
+    if (isProcessingQueueRef.current) return;
+    isProcessingQueueRef.current = true;
+
+    while (downloadQueueRef.current.length > 0) {
+      const next = downloadQueueRef.current.shift()!;
+      await doSingleDownloadWithRetry(next.taskId, next.index, next.filename);
+      // Pausa entre descargas para no saturar el navegador
+      if (downloadQueueRef.current.length > 0) {
+        await new Promise(r => setTimeout(r, 1500));
+      }
+    }
+
+    isProcessingQueueRef.current = false;
+  };
+
+  /** Encola una descarga de chunk (con reintentos automaticos) */
   const triggerChunkDownload = (taskId: string, chunkIndex: number, filename: string) => {
-    const downloadUrl = `/api/panamar/bulk-download/retrieve/${taskId}/${chunkIndex}`;
-    console.log(`📥 Downloading chunk ${chunkIndex}: ${downloadUrl} → ${filename}`);
-
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = filename;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    setTimeout(() => {
-      try { document.body.removeChild(link); } catch (e) { /* */ }
-    }, 2000);
-
-    toast.success(`Descargando tramo: ${filename.replace('PANAMAR_', '').replace('.zip', '')}`, { duration: 5000 });
+    downloadQueueRef.current.push({ taskId, index: chunkIndex, filename });
+    processDownloadQueue();
   };
 
   const checkBulkStatus = async (taskId: string) => {
@@ -531,7 +589,7 @@ export function PanamarDashboard() {
           if (chunk.status === 'completed' && chunk.total > 0 && !downloadedChunksRef.current.has(chunk.index)) {
             downloadedChunksRef.current.add(chunk.index);
             triggerChunkDownload(taskId, chunk.index, chunk.zipFilename);
-            chunk.downloaded = true;
+            // downloaded se actualizara via chunkDownloadStatus cuando realmente se descargue
           }
           // Mark skipped chunks as "downloaded" so they don't block completion
           if (chunk.status === 'skipped' && !downloadedChunksRef.current.has(chunk.index)) {
@@ -584,6 +642,7 @@ export function PanamarDashboard() {
     setIsBulkInitializing(true);
     setTaskResult(null);
     downloadedChunksRef.current = new Set();
+    setChunkDownloadStatus({});
 
     try {
       const { data, ok } = await secureFetch<any>('/api/panamar/bulk-download/init', {
@@ -619,6 +678,7 @@ export function PanamarDashboard() {
     localStorage.removeItem('panamar_bulk_task_id');
     setBulkTask(null);
     downloadedChunksRef.current = new Set();
+    setChunkDownloadStatus({});
   };
 
   // ── Pagination helpers ───────────────────────────────────────────
@@ -638,6 +698,7 @@ export function PanamarDashboard() {
         <BulkProgressOverlay
           task={bulkTask}
           onCancel={cancelBulkTask}
+          chunkDownloadStatus={chunkDownloadStatus}
         />
       )}
 
@@ -1703,6 +1764,7 @@ export function PanamarDashboard() {
           <BulkProgressOverlay
             task={bulkTask}
             onCancel={cancelBulkTask}
+            chunkDownloadStatus={chunkDownloadStatus}
           />
         )}
 
@@ -1739,7 +1801,7 @@ export function PanamarDashboard() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => { setTaskResult(null); downloadedChunksRef.current = new Set(); }}
+                  onClick={() => { setTaskResult(null); downloadedChunksRef.current = new Set(); setChunkDownloadStatus({}); }}
                   className="h-8 w-8 text-gray-400 hover:text-gray-600 shrink-0"
                 >
                   <X className="w-4 h-4" />
@@ -1749,23 +1811,54 @@ export function PanamarDashboard() {
               {/* Retry buttons per chunk */}
               {taskResult.status === 'completed' && taskResult.chunks && taskResult.taskId && (
                 <div className="space-y-1.5 max-h-52 overflow-y-auto">
-                  {taskResult.chunks.map((chunk) => (
-                    <button
-                      key={chunk.index}
-                      onClick={() => {
-                        if (taskResult.taskId) {
-                          triggerChunkDownload(taskResult.taskId, chunk.index, chunk.zipFilename);
-                        }
-                      }}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Download className="w-3.5 h-3.5 text-emerald-600 group-hover:text-emerald-700" />
-                        <span className="text-xs font-semibold text-gray-700">{chunk.label.replace(/_/g, ' ')}</span>
-                      </div>
-                      <span className="text-[10px] font-mono text-gray-400">{chunk.total} docs</span>
-                    </button>
-                  ))}
+                  {taskResult.chunks.map((chunk) => {
+                    const dlStatus = chunkDownloadStatus[chunk.index];
+                    const isDownloading = dlStatus === 'downloading' || dlStatus === 'retrying';
+                    const isDownloaded = dlStatus === 'downloaded';
+                    const isFailed = dlStatus === 'failed';
+                    return (
+                      <button
+                        key={chunk.index}
+                        disabled={isDownloading}
+                        onClick={() => {
+                          if (taskResult.taskId && !isDownloading) {
+                            triggerChunkDownload(taskResult.taskId, chunk.index, chunk.zipFilename);
+                          }
+                        }}
+                        className={`w-full flex items-center justify-between p-2.5 rounded-xl border transition-all group ${
+                          isDownloaded ? 'bg-emerald-50 border-emerald-300' :
+                          isFailed ? 'bg-red-50 border-red-200 hover:border-red-400' :
+                          isDownloading ? 'bg-blue-50 border-blue-200 opacity-70 cursor-wait' :
+                          'bg-white border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          {isDownloading ? (
+                            <div className="w-3.5 h-3.5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                          ) : isDownloaded ? (
+                            <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          ) : isFailed ? (
+                            <Download className="w-3.5 h-3.5 text-red-500" />
+                          ) : (
+                            <Download className="w-3.5 h-3.5 text-emerald-600 group-hover:text-emerald-700" />
+                          )}
+                          <span className="text-xs font-semibold text-gray-700">{chunk.label.replace(/_/g, ' ')}</span>
+                        </div>
+                        <span className={`text-[10px] font-mono ${
+                          isDownloaded ? 'text-emerald-600 font-bold' :
+                          isFailed ? 'text-red-500 font-bold' :
+                          isDownloading ? 'text-blue-500 animate-pulse' :
+                          'text-gray-400'
+                        }`}>
+                          {isDownloaded ? '✅ Descargado' :
+                           dlStatus === 'downloading' ? '⬇️ Descargando...' :
+                           dlStatus === 'retrying' ? '🔄 Reintentando...' :
+                           isFailed ? '❌ Reintentar' :
+                           `${chunk.total} docs`}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
