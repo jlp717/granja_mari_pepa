@@ -9,9 +9,28 @@ const logger = require('../utils/logger');
 const path = require('path');
 const fs = require('fs');
 
-// ── Assets ──────────────────────────────────────────────────────────
+// ── Assets (cached in RAM on module load for bulk performance) ──
 const HEADER_PNG_PATH = path.join(__dirname, '../../assets/header.png');
 const HEADER_PATH = path.join(__dirname, '../../assets/header.webp');
+
+// 🚀 Pre-load header image into RAM buffer once (avoids 1800× disk reads in bulk)
+let HEADER_BUFFER = null;
+let HEADER_FORMAT = null; // 'png' or 'webp'
+try {
+  if (fs.existsSync(HEADER_PNG_PATH)) {
+    HEADER_BUFFER = fs.readFileSync(HEADER_PNG_PATH);
+    HEADER_FORMAT = 'png';
+    logger.info(`📦 PDF: Header PNG cached in RAM (${(HEADER_BUFFER.length / 1024).toFixed(0)}KB)`);
+  } else if (fs.existsSync(HEADER_PATH)) {
+    HEADER_BUFFER = fs.readFileSync(HEADER_PATH);
+    HEADER_FORMAT = 'webp';
+    logger.info(`📦 PDF: Header WEBP cached in RAM (${(HEADER_BUFFER.length / 1024).toFixed(0)}KB)`);
+  } else {
+    logger.warn('⚠️ PDF: No header image found, using text fallback');
+  }
+} catch (e) {
+  logger.warn('⚠️ PDF: Error loading header image:', e.message);
+}
 
 // ── Paleta corporativa ─────────────────────────────────────────────
 const COLORS = {
@@ -56,27 +75,26 @@ function drawHeader(doc, yStart = 10) {
   doc.rect(0, 0, 595.28, 5).fillAndStroke(COLORS.secondary, COLORS.secondary);
   yPos += 5;
 
-  let logoLoaded = false;
-  if (fs.existsSync(HEADER_PNG_PATH)) {
-    try { doc.image(HEADER_PNG_PATH, 40, yPos, { width: 515, height: 140 }); logoLoaded = true; return yPos + 150; }
-    catch (e) { logger.warn('⚠️ Error header.png'); }
-  }
-  if (!logoLoaded && fs.existsSync(HEADER_PATH)) {
-    try { doc.image(HEADER_PATH, 40, yPos, { width: 515, height: 140 }); logoLoaded = true; return yPos + 150; }
-    catch (e) { logger.warn('⚠️ Error header.webp'); }
+  // 🚀 Use cached RAM buffer instead of disk read
+  if (HEADER_BUFFER) {
+    try {
+      doc.image(HEADER_BUFFER, 40, yPos, { width: 515, height: 140 });
+      return yPos + 150;
+    } catch (e) {
+      logger.warn('⚠️ Error rendering cached header');
+    }
   }
 
-  if (!logoLoaded) {
-    doc.rect(40, yPos, 515, 120).fillAndStroke(COLORS.ultraLight, COLORS.lightGray);
-    yPos += 18;
-    doc.fontSize(36).font('Helvetica-Bold').fillColor(COLORS.primary).text(EMPRESA.nombre, 50, yPos);
-    yPos += 45;
-    doc.fontSize(14).fillColor(COLORS.darkGray).font('Helvetica').text(EMPRESA.slogan.toUpperCase(), 50, yPos);
-    yPos += 18;
-    doc.fontSize(9).fillColor(COLORS.mediumGray).text(EMPRESA.descripcion, 50, yPos);
-    doc.fontSize(9).fillColor(COLORS.secondary).text(EMPRESA.web, 450, yPos, { align: 'right', width: 95 });
-    yPos += 10;
-  }
+  // Fallback: text-based header
+  doc.rect(40, yPos, 515, 120).fillAndStroke(COLORS.ultraLight, COLORS.lightGray);
+  yPos += 18;
+  doc.fontSize(36).font('Helvetica-Bold').fillColor(COLORS.primary).text(EMPRESA.nombre, 50, yPos);
+  yPos += 45;
+  doc.fontSize(14).fillColor(COLORS.darkGray).font('Helvetica').text(EMPRESA.slogan.toUpperCase(), 50, yPos);
+  yPos += 18;
+  doc.fontSize(9).fillColor(COLORS.mediumGray).text(EMPRESA.descripcion, 50, yPos);
+  doc.fontSize(9).fillColor(COLORS.secondary).text(EMPRESA.web, 450, yPos, { align: 'right', width: 95 });
+  yPos += 10;
   return yPos + 5;
 }
 

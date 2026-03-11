@@ -140,9 +140,9 @@ const BulkProgressOverlay = ({ task, onCancel, chunkDownloadStatus }: {
                       {chunk.label.replace(/_/g, ' ')}
                     </span>
                     <span className={`text-[10px] font-mono ${chunkDownloadStatus[chunk.index] === 'failed' ? 'text-red-600 font-bold' :
-                        chunkDownloadStatus[chunk.index] === 'retrying' ? 'text-amber-600 font-bold animate-pulse' :
-                          chunkDownloadStatus[chunk.index] === 'downloading' ? 'text-blue-600 animate-pulse' :
-                            'text-gray-500'
+                      chunkDownloadStatus[chunk.index] === 'retrying' ? 'text-amber-600 font-bold animate-pulse' :
+                        chunkDownloadStatus[chunk.index] === 'downloading' ? 'text-blue-600 animate-pulse' :
+                          'text-gray-500'
                       }`}>
                       {chunkDownloadStatus[chunk.index] === 'downloaded' ? '✅ Descargado' :
                         chunkDownloadStatus[chunk.index] === 'downloading' ? '⬇️ Descargando...' :
@@ -492,18 +492,20 @@ export function PanamarDashboard() {
     }
   }, []);
 
-  // Polling: 2s interval while processing
+  // 🚀 Polling: adaptive interval (2s normal, 1s when almost done)
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (bulkTask && bulkTask.status === 'processing') {
+      const completedCount = bulkTask.chunks.filter(c => c.status === 'completed' || c.status === 'skipped').length;
+      const pollInterval = completedCount >= 4 ? 1000 : 2000; // Faster when almost done
       interval = setInterval(() => {
         if (!isPollingRef.current && bulkTaskRef.current?.status === 'processing') {
           checkBulkStatus(bulkTaskRef.current.id);
         }
-      }, 2000);
+      }, pollInterval);
     }
     return () => clearInterval(interval);
-  }, [bulkTask?.status, bulkTask?.id]);
+  }, [bulkTask?.status, bulkTask?.id, bulkTask?.chunks?.filter(c => c.status === 'completed' || c.status === 'skipped').length]);
 
   /** 🔒 Descarga robusta con fetch+Blob, reintentos automaticos, timeout, y verificación de integridad */
   const doSingleDownloadWithRetry = async (taskId: string, chunkIndex: number, filename: string): Promise<boolean> => {
@@ -545,17 +547,22 @@ export function PanamarDashboard() {
     return false;
   };
 
-  /** Procesa la cola de descargas secuencialmente con reintentos */
+  /** 🚀 Procesa la cola de descargas: 2 paralelas para máxima velocidad */
   const processDownloadQueue = async () => {
     if (isProcessingQueueRef.current) return;
     isProcessingQueueRef.current = true;
 
+    const PARALLEL_DOWNLOADS = 2;
     while (downloadQueueRef.current.length > 0) {
-      const next = downloadQueueRef.current.shift()!;
-      await doSingleDownloadWithRetry(next.taskId, next.index, next.filename);
-      // Pausa entre descargas: 2.5s para dar tiempo a que la conexión se estabilice
+      // Take up to PARALLEL_DOWNLOADS items from the queue
+      const batch = downloadQueueRef.current.splice(0, PARALLEL_DOWNLOADS);
+      // Download them in parallel
+      await Promise.all(batch.map(item =>
+        doSingleDownloadWithRetry(item.taskId, item.index, item.filename)
+      ));
+      // 500ms breathing room between batches (less than before, downloads are batched)
       if (downloadQueueRef.current.length > 0) {
-        await new Promise(r => setTimeout(r, 2500));
+        await new Promise(r => setTimeout(r, 500));
       }
     }
 
@@ -1832,9 +1839,9 @@ export function PanamarDashboard() {
                           }
                         }}
                         className={`w-full flex items-center justify-between p-2.5 rounded-xl border transition-all group ${isDownloaded ? 'bg-emerald-50 border-emerald-300' :
-                            isFailed ? 'bg-red-50 border-red-200 hover:border-red-400' :
-                              isDownloading ? 'bg-blue-50 border-blue-200 opacity-70 cursor-wait' :
-                                'bg-white border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50'
+                          isFailed ? 'bg-red-50 border-red-200 hover:border-red-400' :
+                            isDownloading ? 'bg-blue-50 border-blue-200 opacity-70 cursor-wait' :
+                              'bg-white border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50'
                           }`}
                       >
                         <div className="flex items-center gap-2">
@@ -1850,9 +1857,9 @@ export function PanamarDashboard() {
                           <span className="text-xs font-semibold text-gray-700">{chunk.label.replace(/_/g, ' ')}</span>
                         </div>
                         <span className={`text-[10px] font-mono ${isDownloaded ? 'text-emerald-600 font-bold' :
-                            isFailed ? 'text-red-500 font-bold' :
-                              isDownloading ? 'text-blue-500 animate-pulse' :
-                                'text-gray-400'
+                          isFailed ? 'text-red-500 font-bold' :
+                            isDownloading ? 'text-blue-500 animate-pulse' :
+                              'text-gray-400'
                           }`}>
                           {isDownloaded ? '✅ Descargado' :
                             dlStatus === 'downloading' ? '⬇️ Descargando...' :
