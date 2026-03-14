@@ -557,9 +557,15 @@ class AuthServiceSecure {
      */
     async getCustomerByCode(customerCode) {
         const query = `
-            SELECT *
-            FROM JAVIER.CUSTOMER_CREDENTIALS
-            WHERE CUSTOMER_CODE = ?
+            SELECT CC.*,
+              COALESCE(
+                CASE WHEN LENGTH(TRIM(CLI.NOMBRECLIENTE)) > 1 THEN TRIM(CLI.NOMBRECLIENTE) END,
+                CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
+                CC.FULL_NAME
+              ) AS FULL_NAME
+            FROM JAVIER.CUSTOMER_CREDENTIALS CC
+            LEFT JOIN DSEDAC.CLI CLI ON TRIM(CC.CUSTOMER_CODE) = TRIM(CLI.CODIGOCLIENTE)
+            WHERE CC.CUSTOMER_CODE = ?
         `;
         try {
             const results = await databaseService.executeQuery(query, [customerCode]);

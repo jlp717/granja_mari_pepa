@@ -34,6 +34,14 @@ const RESOLVED_CLIENT_EXPR = `
        ELSE TRIM(CAC.CODIGOCLIENTEFACTURA)
   END`;
 
+// ── SQL expression: resolved client name (NOMBREALTERNATIVO → fallback NOMBRECLIENTE) ──
+// Some clients have NOMBREALTERNATIVO set to '+' or empty; use NOMBRECLIENTE as fallback
+const RESOLVED_CLIENT_NAME_EXPR = `
+  COALESCE(
+    CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
+    TRIM(CLI.NOMBRECLIENTE)
+  )`;
+
 // ── Reusable EXISTS sub-query for PANAMAR article filter ──
 const PANAMAR_EXISTS_SQL = `
   EXISTS (
@@ -144,7 +152,7 @@ async function getDocuments(options = {}) {
   if (options.busqueda) {
     const searchTerm = `%${options.busqueda.trim().toUpperCase()}%`;
     whereClauses.push(
-      '(UPPER(TRIM(CAC.PEDIDOREFERENCIA)) LIKE ? OR UPPER(TRIM(CLI.NOMBREALTERNATIVO)) LIKE ? OR CAST(CAC.NUMEROPEDIDO AS VARCHAR(20)) LIKE ?)'
+      `(UPPER(TRIM(CAC.PEDIDOREFERENCIA)) LIKE ? OR UPPER(${RESOLVED_CLIENT_NAME_EXPR}) LIKE ? OR CAST(CAC.NUMEROPEDIDO AS VARCHAR(20)) LIKE ?)`
     );
     params.push(searchTerm, searchTerm, searchTerm);
   }
@@ -181,7 +189,7 @@ async function getDocuments(options = {}) {
       CAC.ANODOCUMENTO,
       CAC.HORADOCUMENTO,
       ${RESOLVED_CLIENT_EXPR}        AS CODIGO_CLIENTE,
-      TRIM(CLI.NOMBREALTERNATIVO)        AS NOMBRE_CLIENTE,
+      ${RESOLVED_CLIENT_NAME_EXPR}        AS NOMBRE_CLIENTE,
       TRIM(CLI.NIF)                  AS NIF_CLIENTE,
       TRIM(CLI.DIRECCION)            AS DIRECCION_CLIENTE,
       TRIM(CLI.POBLACION)            AS POBLACION_CLIENTE,
@@ -372,7 +380,7 @@ async function getDocumentByKey(key) {
       CAC.ANODOCUMENTO,
       CAC.HORADOCUMENTO,
       ${RESOLVED_CLIENT_EXPR}        AS CODIGO_CLIENTE,
-      TRIM(CLI.NOMBREALTERNATIVO)        AS NOMBRE_CLIENTE,
+      ${RESOLVED_CLIENT_NAME_EXPR}        AS NOMBRE_CLIENTE,
       TRIM(CLI.NIF)                  AS NIF_CLIENTE,
       TRIM(CLI.DIRECCION)            AS DIRECCION_CLIENTE,
       TRIM(CLI.POBLACION)            AS POBLACION_CLIENTE,
@@ -606,13 +614,13 @@ async function getClients() {
   const clientsSQL = `
     SELECT DISTINCT
       ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
-      TRIM(CLI.NOMBREALTERNATIVO) AS NOMBRE_CLIENTE
+      ${RESOLVED_CLIENT_NAME_EXPR} AS NOMBRE_CLIENTE
     FROM DSEDAC.CAC CAC
     LEFT JOIN DSEDAC.CLI CLI ON ${RESOLVED_CLIENT_EXPR} = TRIM(CLI.CODIGOCLIENTE)
     WHERE CAC.ANODOCUMENTO = ?
       AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
       AND ${PANAMAR_EXISTS_SQL}
-    ORDER BY TRIM(CLI.NOMBREALTERNATIVO)
+    ORDER BY ${RESOLVED_CLIENT_NAME_EXPR}
   `;
 
   const rows = await odbcPool.query(clientsSQL, [ANO_FIJO]);
