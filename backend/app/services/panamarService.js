@@ -961,6 +961,10 @@ function formatHora(horaNum) {
   return `${str.slice(0, 2)}:${str.slice(2, 4)}`;
 }
 
+function pad2(n) {
+  return String(n || 0).padStart(2, '0');
+}
+
 function toNumber(value) {
   const n = Number(value);
   return Number.isFinite(n) ? n : 0;
