@@ -69,6 +69,7 @@ PANAMAR_LINEAS AS (
     TRIM(CAC.PEDIDOREFERENCIA) AS REF_PEDIDO,
     TRIM(CAC.REFERENCIA) AS REFERENCIA,
     LAC.SECUENCIA,
+    TRIM(LAC.REFERENCIA) AS LINE_REF,
     TRIM(LAC.CODIGOARTICULO) AS CODIGO_ARTICULO,
     TRIM(LAC.DESCRIPCION) AS DESCRIPCION,
     TRIM(LAC.CODIGOLOTE) AS LOTE,
@@ -251,7 +252,8 @@ function normalizePanamarLine(line) {
     dia: toInt(line.DIA_ALBARAN),
     mes: toInt(line.MES_ALBARAN),
     ano: toInt(line.ANO_ALBARAN),
-    fechaAlbaran: `${pad2(line.DIA_ALBARAN)}.${pad2(line.MES_ALBARAN)}.${line.ANO_ALBARAN}`
+    fechaAlbaran: `${pad2(line.DIA_ALBARAN)}.${pad2(line.MES_ALBARAN)}.${line.ANO_ALBARAN}`,
+    lineRef: line.LINE_REF || ''
   };
 }
 
@@ -366,9 +368,7 @@ async function getDocuments(options = {}) {
       GROUP BY
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA
+        PL.ANO_FACTURA
     ) FACTURAS
   `;
 
@@ -418,9 +418,7 @@ async function getDocuments(options = {}) {
       GROUP BY
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA
+        PL.ANO_FACTURA
     ) H
     ORDER BY
       H.ANO_FACTURA DESC,
@@ -713,9 +711,7 @@ async function getSummary(options = {}) {
       GROUP BY
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA
+        PL.ANO_FACTURA
     ) F
   `;
 

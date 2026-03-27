@@ -147,7 +147,11 @@ function buildDocumentContent(doc, panamarDoc) {
 
   doc.rect(430, y, 125, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('REF', 435, y + 3);
-  const refStr = panamarDoc.referencia || panamarDoc.refPedido || '-';
+  
+  // Usar referencia de cabecera o la primera referencia de linea disponible
+  const firstLineRef = (panamarDoc.lineas && panamarDoc.lineas.length > 0) ? panamarDoc.lineas[0].lineRef : '';
+  const refStr = panamarDoc.referencia || panamarDoc.refPedido || firstLineRef || '-';
+  
   doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.dark)
     .text(String(refStr).substring(0, 20), 435, y + 11);
   y += 26;
