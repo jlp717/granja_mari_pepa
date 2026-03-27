@@ -190,7 +190,7 @@ export function PanamarDashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<PanamarSummary | null>(null);
-  const [clientsList, setClientsList] = useState<{ codigoCliente: string; nombreCliente: string }[]>([]);
+  const [clientsList, setClientsList] = useState<{ codigoCliente: string; nombreCliente: string; nombreFiscal?: string }[]>([]);
   const [clientDropdownOpen, setClientDropdownOpen] = useState(false);
   const [clientSearch, setClientSearch] = useState('');
   const clientSearchRef = useRef<HTMLInputElement>(null);
@@ -287,7 +287,7 @@ export function PanamarDashboard() {
   // ── Fetch clients list (for dropdown) ────────────────────────────
   const fetchClients = useCallback(async () => {
     try {
-      const res = await secureFetch<{ success: boolean; clients: { codigoCliente: string; nombreCliente: string }[] }>('/api/panamar/clients');
+      const res = await secureFetch<{ success: boolean; clients: { codigoCliente: string; nombreCliente: string; nombreFiscal?: string }[] }>('/api/panamar/clients');
       if (res.ok && res.data.success) {
         setClientsList(res.data.clients);
       }
@@ -741,7 +741,7 @@ export function PanamarDashboard() {
               <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
-                  placeholder="Buscar por referencia, cliente o pedido..."
+                  placeholder="Buscar por albarán, factura, cliente o pedido..."
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -918,7 +918,7 @@ export function PanamarDashboard() {
           <div className="md:hidden relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-500" />
             <Input
-              placeholder="Buscar por referencia, cliente o pedido..."
+              placeholder="Buscar por albarán, factura, cliente o pedido..."
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -986,7 +986,11 @@ export function PanamarDashboard() {
                       .filter(client => {
                         if (!clientSearch.trim()) return true;
                         const q = clientSearch.toLowerCase().trim();
-                        return client.nombreCliente.toLowerCase().includes(q) || client.codigoCliente.toLowerCase().includes(q);
+                        return (
+                          client.nombreCliente.toLowerCase().includes(q) ||
+                          (client.nombreFiscal && client.nombreFiscal.toLowerCase().includes(q)) ||
+                          client.codigoCliente.toLowerCase().includes(q)
+                        );
                       })
                       .map(client => (
                         <button
@@ -995,14 +999,21 @@ export function PanamarDashboard() {
                           className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
                             }`}
                         >
-                          <div className="truncate">{client.nombreCliente}</div>
-                          <div className="text-xs text-gray-400">{client.codigoCliente}</div>
+                          <div className="flex items-center justify-between">
+                            <div className="truncate font-bold text-gray-900">{client.nombreCliente}</div>
+                            <div className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-mono">{client.codigoCliente}</div>
+                          </div>
+                          {client.nombreFiscal && client.nombreFiscal !== client.nombreCliente && (
+                            <div className="text-xs text-gray-400 italic truncate mt-0.5">
+                              {client.nombreFiscal}
+                            </div>
+                          )}
                         </button>
                       ))}
                     {clientsList.filter(client => {
                       if (!clientSearch.trim()) return true;
                       const q = clientSearch.toLowerCase().trim();
-                      return client.nombreCliente.toLowerCase().includes(q) || client.codigoCliente.toLowerCase().includes(q);
+                      return client.nombreCliente.toLowerCase().includes(q) || (client.nombreFiscal && client.nombreFiscal.toLowerCase().includes(q)) || client.codigoCliente.toLowerCase().includes(q);
                     }).length === 0 && (
                         <div className="px-4 py-3 text-sm text-gray-400 text-center">Sin resultados</div>
                       )}

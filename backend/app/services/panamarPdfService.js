@@ -101,32 +101,33 @@ function drawLineHeader(doc, y) {
   doc.rect(40, y, 515, 16).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
 
-  doc.text('CODIGO', 42, y + 5, { width: 54 });
-  doc.text('DESCRIPCION', 98, y + 5, { width: 168 });
-  doc.text('LOTE', 270, y + 5, { width: 45 });
-  doc.text('CAJAS', 320, y + 5, { width: 44, align: 'right' });
-  doc.text('UNID.', 368, y + 5, { width: 44, align: 'right' });
-  doc.text('PRECIO', 416, y + 5, { width: 60, align: 'right' });
-  doc.text('IMPORTE', 480, y + 5, { width: 72, align: 'right' });
+  doc.text('CODIGO', 42, y + 5, { width: 45 });
+  doc.text('DESCRIPCION', 90, y + 5, { width: 155 });
+  doc.text('LOTE', 248, y + 5, { width: 45 });
+  doc.text('CAJAS', 295, y + 5, { width: 35, align: 'right' });
+  doc.text('UNID.', 335, y + 5, { width: 40, align: 'right' });
+  doc.text('PRECIO', 380, y + 5, { width: 45, align: 'right' });
+  doc.text('% DTO.', 430, y + 5, { width: 35, align: 'right' });
+  doc.text('IMPORTE', 470, y + 5, { width: 50, align: 'right' });
+  doc.text('IVA', 525, y + 5, { width: 25, align: 'right' });
 
   return y + 18;
 }
 
 function buildDocumentContent(doc, panamarDoc) {
   const lineas = panamarDoc.lineas || [];
-  const refFactura = `${panamarDoc.serieFactura || panamarDoc.serieAlbaran || ''}-${panamarDoc.numeroFactura || panamarDoc.numeroAlbaran || ''}`;
   const fecha = `${pad2(panamarDoc.dia)}/${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`;
   const hora = panamarDoc.hora || '-';
 
   let y = drawHeader(doc, 10);
   y += 10;
 
-  // Banner principal
+  // Banner principal - Sin la palabra "PANAMAR"
   doc.rect(40, y, 515, 34).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(16).font('Helvetica-Bold').fillColor(COLORS.white)
-    .text('FACTURA PANAMAR', 50, y + 10);
-  doc.fontSize(15).font('Helvetica-Bold')
-    .text(refFactura, 390, y + 10, { width: 160, align: 'right' });
+    .text('FACTURA RECOPILADA', 50, y + 10);
+  doc.fontSize(12).font('Helvetica-Bold')
+    .text(`MES: ${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`, 390, y + 10, { width: 160, align: 'right' });
   y += 40;
 
   // Fila de datos de cabecera
@@ -135,7 +136,7 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(panamarDoc.codigoCliente || '', 45, y + 11);
 
   doc.rect(210, y, 120, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FECHA FACTURA', 215, y + 3);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FECHA INFORME', 215, y + 3);
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(fecha, 215, y + 11);
 
   doc.rect(335, y, 90, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
@@ -143,10 +144,10 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(hora, 340, y + 11);
 
   doc.rect(430, y, 125, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('PEDIDO / REF', 435, y + 3);
-  const pedidoStr = panamarDoc.numeroPedido ? `Ped. ${panamarDoc.numeroPedido}` : (panamarDoc.refPedido || '-');
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('REF', 435, y + 3);
+  const refStr = panamarDoc.referencia || panamarDoc.refPedido || '-';
   doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.dark)
-    .text(String(pedidoStr).substring(0, 20), 435, y + 11);
+    .text(String(refStr).substring(0, 20), 435, y + 11);
   y += 26;
 
   // Negocio
@@ -158,47 +159,87 @@ function buildDocumentContent(doc, panamarDoc) {
     .text((panamarDoc.nombreCliente || panamarDoc.codigoCliente || '').toUpperCase(), 45, y, { width: 500 });
   y += 18;
   doc.fontSize(8).font('Helvetica').fillColor(COLORS.medium)
-    .text('Informe de consumo PANAMAR por factura (sin datos personales)', 45, y, { width: 500 });
+    .text('Informe de consumo mensual (sin datos personales)', 45, y, { width: 500 });
   y += 18;
 
   // Tabla de lineas
   y = drawLineHeader(doc, y);
 
+  // Group lines by Albaran
+  const albaranes = [];
+  const lineasPorAlbaran = {};
+
+  lineas.forEach(l => {
+    const key = `${l.serieAlbaran || ''}-${l.numeroAlbaran || ''}`;
+    if (!lineasPorAlbaran[key]) {
+      lineasPorAlbaran[key] = [];
+      albaranes.push(key);
+    }
+    lineasPorAlbaran[key].push(l);
+  });
+
   let totalCajas = 0;
   let totalImporte = 0;
 
-  lineas.forEach((linea) => {
-    const descripcion = String(linea.descripcion || '').substring(0, 42);
-    const rowHeight = Math.max(20, doc.heightOfString(descripcion, { width: 165 }) + 10);
+  albaranes.forEach(albKey => {
+    const albLines = lineasPorAlbaran[albKey];
+    let totalAlb = 0;
+    const firstLine = albLines[0];
+    const fechaAlb = firstLine.fechaAlbaran || fecha;
 
-    if (y + rowHeight > 700) {
+    albLines.forEach((linea) => {
+      const descripcion = String(linea.descripcion || '').substring(0, 42);
+      const rowHeight = 15;
+
+      if (y + rowHeight > 730) {
+        doc.addPage();
+        y = drawHeader(doc, 10) + 10;
+        y = drawLineHeader(doc, y);
+      }
+
+      const cajas = Number(linea.cajas) || 0;
+      const unidades = Number(linea.unidades) || 0;
+      const precio = Number(linea.precioCobro ?? linea.precioUnitario ?? 0) || 0;
+      const importe = Number(linea.importe) || 0;
+      const dto = Number(linea.descuento) || 0;
+      const iva = Number(linea.iva || 4); // Panamar es mayormente 4%
+
+      totalCajas += cajas;
+      totalImporte += importe;
+      totalAlb += importe * (1 + iva / 100);
+
+      doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
+      doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 45 });
+      doc.text(descripcion, 90, y + 3, { width: 155 });
+      doc.text(String(linea.lote || '-').substring(0, 10), 248, y + 3, { width: 45 });
+      doc.text(cajas ? formatNumber(cajas, 0) : '-', 295, y + 3, { width: 35, align: 'right' });
+      doc.text(unidades ? formatNumber(unidades, 3) : '-', 335, y + 3, { width: 40, align: 'right' });
+      doc.text(formatNumber(precio, 3), 380, y + 3, { width: 45, align: 'right' });
+      doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 430, y + 3, { width: 35, align: 'right' });
+      doc.text(formatNumber(importe, 2), 470, y + 3, { width: 50, align: 'right' });
+      doc.text(formatNumber(iva, 0), 525, y + 3, { width: 25, align: 'right' });
+
+      y += rowHeight;
+    });
+
+    // Sub-header de Albarán (estilo screenshot)
+    if (y + 15 > 730) {
       doc.addPage();
       y = drawHeader(doc, 10) + 10;
       y = drawLineHeader(doc, y);
     }
-
-    const cajas = Number(linea.cajas) || 0;
-    const unidades = Number(linea.unidades) || 0;
-    const precio = Number(linea.precioCobro ?? linea.precioUnitario ?? 0) || 0;
-    const importe = Number(linea.importe) || 0;
-
-    totalCajas += cajas;
-    totalImporte += importe;
-
-    doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
-    doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 54 });
-    doc.text(descripcion, 98, y + 3, { width: 168 });
-    doc.text(String(linea.lote || '-').substring(0, 10), 270, y + 3, { width: 45 });
-    doc.text(cajas ? formatNumber(cajas, 0) : '-', 320, y + 3, { width: 44, align: 'right' });
-    doc.text(unidades ? formatNumber(unidades, 3) : '-', 368, y + 3, { width: 44, align: 'right' });
-    doc.text(`${formatNumber(precio, 3)} €`, 416, y + 3, { width: 60, align: 'right' });
-    doc.text(`${formatNumber(importe, 2)} €`, 480, y + 3, { width: 72, align: 'right' });
-
-    y += rowHeight;
+    
+    doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
+    doc.text(`Albarán  ${albKey}     Fecha ${fechaAlb}`, 100, y + 2);
+    doc.text(`Total Albarán`, 410, y + 2);
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)}`, 470, y + 2, { width: 50, align: 'right' });
+    
+    y += 15;
+    doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
+    y += 5;
   });
 
-  doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(1).stroke();
-  y += 12;
+  y += 10;
 
   // Totales
   doc.rect(40, y, 250, 34).fillAndStroke(COLORS.success, COLORS.success);
@@ -206,7 +247,7 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 220, y + 6, { width: 60, align: 'right' });
 
   doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('IMPORTE TOTAL PANAMAR', 313, y + 8);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('IMPORTE TOTAL', 313, y + 8);
   doc.fontSize(17).font('Helvetica-Bold')
     .text(`${formatNumber(totalImporte, 2)} €`, 445, y + 6, { width: 105, align: 'right' });
 

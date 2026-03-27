@@ -18,7 +18,7 @@ const CONTADO_CLIENT_CODE = '4300005000';
 const PANAMAR_FAMILIAS = ['700', '701', '702', '703', '704', '705', '706'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const PANAMAR_CLASES_LINEA_SQL = "'AB', 'RG', 'VT'";
-const TARIFA_PANAMAR_SQL = 'CASE WHEN CAC.MESDOCUMENTO = 1 THEN 84 ELSE 85 END';
+const TARIFA_PANAMAR_SQL = 'CASE WHEN CAC.MESFACTURA = 1 THEN 84 ELSE 85 END';
 const ANO_FIJO = 2026;
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGE_SIZE = 500;
@@ -30,12 +30,9 @@ const RESOLVED_CLIENT_EXPR = `
        ELSE TRIM(CAC.CODIGOCLIENTEFACTURA)
   END`;
 
-// Nombre comercial del negocio (sin exponer datos personales).
-const RESOLVED_CLIENT_NAME_EXPR = `
-  COALESCE(
-    CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
-    TRIM(CLI.NOMBRECLIENTE)
-  )`;
+// Nombres del negocio (comercial y fiscal).
+const RESOLVED_CLIENT_NAME_EXPR = `TRIM(CLI.NOMBRECLIENTE)`;
+const RESOLVED_FISCAL_NAME_EXPR = `TRIM(CLI.NOMBREALTERNATIVO)`;
 
 // CTE central: lineas PANAMAR deduplicadas y con precio de cobro.
 const PANAMAR_LINEAS_CTE = `
@@ -64,6 +61,7 @@ PANAMAR_LINEAS AS (
     CAC.HORADOCUMENTO AS HORA_DOCUMENTO,
     ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
     ${RESOLVED_CLIENT_NAME_EXPR} AS NOMBRE_CLIENTE,
+    ${RESOLVED_FISCAL_NAME_EXPR} AS NOMBRE_FISCAL,
     CAC.NUMEROPEDIDO,
     TRIM(CAC.PEDIDOREFERENCIA) AS REF_PEDIDO,
     TRIM(CAC.REFERENCIA) AS REFERENCIA,
@@ -75,6 +73,14 @@ PANAMAR_LINEAS AS (
     LAC.CANTIDADUNIDADES AS UNIDADES,
     LAC.PRECIOVENTA,
     LAC.PORCENTAJEDESCUENTO AS DESCUENTO,
+    CASE LAC.CODIGOIVA
+      WHEN 1 THEN 10
+      WHEN 2 THEN 21
+      WHEN 3 THEN 4
+      WHEN 4 THEN 0
+      WHEN 5 THEN 10
+      ELSE 4
+    END AS IVA,
     LAC.IMPORTEVENTA,
     TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
     COALESCE(TP.PRECIOTARIFA, 0) AS PRECIO_TARIFA_PANAMAR
@@ -171,11 +177,13 @@ function buildLineFilters(options = {}, alias = 'PL') {
     clauses.push(`(
       UPPER(COALESCE(${alias}.REF_PEDIDO, '')) LIKE ?
       OR UPPER(COALESCE(${alias}.NOMBRE_CLIENTE, '')) LIKE ?
+      OR UPPER(COALESCE(${alias}.NOMBRE_FISCAL, '')) LIKE ?
       OR CAST(${alias}.NUMEROPEDIDO AS VARCHAR(20)) LIKE ?
       OR CAST(${alias}.NUMERO_FACTURA AS VARCHAR(20)) LIKE ?
+      OR CAST(${alias}.NUMERO_ALBARAN AS VARCHAR(20)) LIKE ?
       OR UPPER(COALESCE(${alias}.SERIE_FACTURA, '')) LIKE ?
     )`);
-    params.push(searchTerm, searchTerm, searchTerm, searchTerm, searchTerm);
+    params.push(searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm);
   }
 
   return {
@@ -187,10 +195,13 @@ function buildLineFilters(options = {}, alias = 'PL') {
 function buildInvoiceKey(codigoCliente, ejercicioFactura, serieFactura, numeroFactura) {
   return [
     String(codigoCliente || '').trim(),
-    String(ejercicioFactura || '').trim(),
-    String(serieFactura || '').trim(),
-    String(numeroFactura || '').trim()
+    String(mesFactura || '').trim(),
+    String(anoFactura || '').trim()
   ].join('|');
+}
+
+function buildInvoiceKeyFromLine(line) {
+  return buildInvoiceKey(line.CODIGO_CLIENTE, line.MES_FACTURA, line.ANO_FACTURA);
 }
 
 function normalizePanamarLine(line) {
@@ -226,7 +237,8 @@ function normalizePanamarLine(line) {
     precioOriginal: round3(precioOriginal),
     usaTarifaEspecial: precioTarifa > 0,
     usaTarifa85: precioTarifa > 0,
-    tipoVenta: line.TIPO_VENTA || ''
+    tipoVenta: line.TIPO_VENTA || '',
+    iva: toNumber(line.IVA)
   };
 }
 
@@ -234,12 +246,7 @@ function assembleInvoiceDocuments(headers, lines) {
   const linesByInvoice = new Map();
 
   for (const line of (lines || [])) {
-    const key = buildInvoiceKey(
-      line.CODIGO_CLIENTE,
-      line.EJERCICIO_FACTURA,
-      line.SERIE_FACTURA,
-      line.NUMERO_FACTURA
-    );
+    const key = buildInvoiceKeyFromLine(line);
 
     if (!linesByInvoice.has(key)) {
       linesByInvoice.set(key, []);
@@ -250,9 +257,8 @@ function assembleInvoiceDocuments(headers, lines) {
   return (headers || []).map(header => {
     const key = buildInvoiceKey(
       header.CODIGO_CLIENTE,
-      header.EJERCICIO_FACTURA,
-      header.SERIE_FACTURA,
-      header.NUMERO_FACTURA
+      header.MES_FACTURA,
+      header.ANO_FACTURA
     );
 
     const docLines = linesByInvoice.get(key) || [];
@@ -294,6 +300,7 @@ function assembleInvoiceDocuments(headers, lines) {
       // Negocio
       codigoCliente: header.CODIGO_CLIENTE,
       nombreCliente: header.NOMBRE_CLIENTE || header.CODIGO_CLIENTE,
+      nombreFiscal: header.NOMBRE_FISCAL || '',
 
       // Pedido / referencia
       numeroPedido: toInt(header.NUMERO_PEDIDO),
@@ -341,9 +348,8 @@ async function getDocuments(options = {}) {
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA,
-        PL.EJERCICIO_FACTURA
+        PL.MES_FACTURA,
+        PL.ANO_FACTURA
     ) FACTURAS
   `;
 
@@ -367,12 +373,13 @@ async function getDocuments(options = {}) {
         MIN(PL.NUMERO_ALBARAN) AS NUMERO_ALBARAN,
         PL.CODIGO_CLIENTE,
         MAX(PL.NOMBRE_CLIENTE) AS NOMBRE_CLIENTE,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA,
-        PL.EJERCICIO_FACTURA,
+        MAX(PL.NOMBRE_FISCAL) AS NOMBRE_FISCAL,
+        MAX(PL.SERIE_FACTURA) AS SERIE_FACTURA,
+        MAX(PL.NUMERO_FACTURA) AS NUMERO_FACTURA,
+        MAX(PL.EJERCICIO_FACTURA) AS EJERCICIO_FACTURA,
         MAX(PL.DIA_FACTURA) AS DIA_FACTURA,
-        MAX(PL.MES_FACTURA) AS MES_FACTURA,
-        MAX(PL.ANO_FACTURA) AS ANO_FACTURA,
+        PL.MES_FACTURA,
+        PL.ANO_FACTURA,
         MAX(PL.HORA_DOCUMENTO) AS HORA_DOCUMENTO,
         MAX(PL.NUMEROPEDIDO) AS NUMERO_PEDIDO,
         MAX(PL.REF_PEDIDO) AS REF_PEDIDO,
@@ -391,9 +398,8 @@ async function getDocuments(options = {}) {
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA,
-        PL.EJERCICIO_FACTURA
+        PL.MES_FACTURA,
+        PL.ANO_FACTURA
     ) H
     ORDER BY
       H.ANO_FACTURA DESC,
@@ -412,18 +418,17 @@ async function getDocuments(options = {}) {
 
   const invoiceKeys = headers.map(h => ({
     codigoCliente: String(h.CODIGO_CLIENTE).trim(),
-    serieFactura: String(h.SERIE_FACTURA).trim(),
-    numeroFactura: toInt(h.NUMERO_FACTURA),
-    ejercicioFactura: toInt(h.EJERCICIO_FACTURA)
+    mesFactura: toInt(h.MES_FACTURA),
+    anoFactura: toInt(h.ANO_FACTURA)
   }));
 
   const invoiceConditions = invoiceKeys.map(() =>
-    '(PL.CODIGO_CLIENTE = ? AND PL.SERIE_FACTURA = ? AND PL.NUMERO_FACTURA = ? AND PL.EJERCICIO_FACTURA = ?)'
+    '(PL.CODIGO_CLIENTE = ? AND PL.MES_FACTURA = ? AND PL.ANO_FACTURA = ?)'
   ).join(' OR ');
 
   const lineParams = [];
   for (const key of invoiceKeys) {
-    lineParams.push(key.codigoCliente, key.serieFactura, key.numeroFactura, key.ejercicioFactura);
+    lineParams.push(key.codigoCliente, key.mesFactura, key.anoFactura);
   }
 
   const linesSQL = `
@@ -453,9 +458,8 @@ async function getDocuments(options = {}) {
     WHERE (${invoiceConditions})
     ORDER BY
       PL.CODIGO_CLIENTE,
-      PL.EJERCICIO_FACTURA,
-      PL.SERIE_FACTURA,
-      PL.NUMERO_FACTURA,
+      PL.ANO_FACTURA,
+      PL.MES_FACTURA,
       PL.EJERCICIO_ALBARAN,
       PL.SERIE_ALBARAN,
       PL.TERMINAL_ALBARAN,
@@ -487,16 +491,14 @@ async function getDocuments(options = {}) {
 async function getInvoiceByIdentity(identity) {
   const params = [
     String(identity.codigoCliente).trim(),
-    toInt(identity.ejercicioFactura),
-    String(identity.serieFactura).trim(),
-    toInt(identity.numeroFactura)
+    toInt(identity.mes),
+    toInt(identity.ano)
   ];
 
   const invoiceWhereSQL = `
     WHERE PL.CODIGO_CLIENTE = ?
-      AND PL.EJERCICIO_FACTURA = ?
-      AND PL.SERIE_FACTURA = ?
-      AND PL.NUMERO_FACTURA = ?
+      AND PL.MES_FACTURA = ?
+      AND PL.ANO_FACTURA = ?
   `;
 
   const headerSQL = `
@@ -533,9 +535,8 @@ async function getInvoiceByIdentity(identity) {
     ${invoiceWhereSQL}
     GROUP BY
       PL.CODIGO_CLIENTE,
-      PL.SERIE_FACTURA,
-      PL.NUMERO_FACTURA,
-      PL.EJERCICIO_FACTURA
+      PL.MES_FACTURA,
+      PL.ANO_FACTURA
   `;
 
   const linesSQL = `
@@ -558,12 +559,15 @@ async function getInvoiceByIdentity(identity) {
       PL.UNIDADES,
       PL.PRECIOVENTA,
       PL.DESCUENTO,
+      PL.IVA,
       PL.IMPORTEVENTA,
       PL.TIPO_VENTA,
       PL.PRECIO_TARIFA_PANAMAR
     FROM PANAMAR_LINEAS PL
     ${invoiceWhereSQL}
     ORDER BY
+      PL.ANO_FACTURA,
+      PL.MES_FACTURA,
       PL.EJERCICIO_ALBARAN,
       PL.SERIE_ALBARAN,
       PL.TERMINAL_ALBARAN,
@@ -588,9 +592,8 @@ async function getDocumentByKey(key) {
   const resolverSQL = `
     SELECT
       ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
-      TRIM(CAC.SERIEFACTURA) AS SERIE_FACTURA,
-      CAC.NUMEROFACTURA AS NUMERO_FACTURA,
-      CAC.EJERCICIOFACTURA AS EJERCICIO_FACTURA
+      MAX(CAC.MESFACTURA) AS MES_FACTURA,
+      MAX(CAC.ANOFACTURA) AS ANO_FACTURA
     FROM DSEDAC.CAC CAC
     WHERE TRIM(CAC.SUBEMPRESAALBARAN) = ?
       AND CAC.EJERCICIOALBARAN = ?
@@ -618,9 +621,8 @@ async function getDocumentByKey(key) {
 
   const invoiceIdentity = {
     codigoCliente: ref[0].CODIGO_CLIENTE,
-    serieFactura: ref[0].SERIE_FACTURA,
-    numeroFactura: ref[0].NUMERO_FACTURA,
-    ejercicioFactura: ref[0].EJERCICIO_FACTURA
+    mes: ref[0].MES_FACTURA,
+    ano: ref[0].ANO_FACTURA
   };
 
   const doc = await getInvoiceByIdentity(invoiceIdentity);
@@ -722,7 +724,8 @@ async function getClients() {
     ${PANAMAR_LINEAS_CTE}
     SELECT
       PL.CODIGO_CLIENTE,
-      MAX(PL.NOMBRE_CLIENTE) AS NOMBRE_CLIENTE
+      MAX(PL.NOMBRE_CLIENTE) AS NOMBRE_CLIENTE,
+      MAX(PL.NOMBRE_FISCAL) AS NOMBRE_FISCAL
     FROM PANAMAR_LINEAS PL
     WHERE PL.ANO_FACTURA = ?
     GROUP BY PL.CODIGO_CLIENTE
@@ -736,7 +739,8 @@ async function getClients() {
 
   return (rows || []).map(r => ({
     codigoCliente: String(r.CODIGO_CLIENTE).trim(),
-    nombreCliente: r.NOMBRE_CLIENTE || String(r.CODIGO_CLIENTE).trim()
+    nombreCliente: r.NOMBRE_CLIENTE || String(r.CODIGO_CLIENTE).trim(),
+    nombreFiscal: r.NOMBRE_FISCAL || ''
   }));
 }
 
