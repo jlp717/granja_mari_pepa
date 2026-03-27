@@ -347,7 +347,7 @@ async function getDocuments(options = {}) {
     ) FACTURAS
   `;
 
-  const countResult = await odbcPool.query(countSQL, params);
+  const countResult = await odbcPool.panamarQuery(countSQL, params);
   const total = toInt(countResult[0]?.TOTAL);
 
   if (total === 0) {
@@ -404,7 +404,7 @@ async function getDocuments(options = {}) {
     OFFSET ${offset} ROWS FETCH FIRST ${pageSize} ROWS ONLY
   `;
 
-  const headers = await odbcPool.query(headersSQL, params);
+  const headers = await odbcPool.panamarQuery(headersSQL, params);
 
   if (!headers || headers.length === 0) {
     return { documents: [], total, page, pageSize, totalPages: Math.ceil(total / pageSize) };
@@ -463,7 +463,7 @@ async function getDocuments(options = {}) {
       PL.SECUENCIA
   `;
 
-  const lines = await odbcPool.query(linesSQL, lineParams);
+  const lines = await odbcPool.panamarQuery(linesSQL, lineParams);
   const documents = assembleInvoiceDocuments(headers, lines);
 
   const elapsed = Date.now() - startTime;
@@ -572,8 +572,8 @@ async function getInvoiceByIdentity(identity) {
   `;
 
   const [headers, lines] = await Promise.all([
-    odbcPool.query(headerSQL, params),
-    odbcPool.query(linesSQL, params)
+    odbcPool.panamarQuery(headerSQL, params),
+    odbcPool.panamarQuery(linesSQL, params)
   ]);
 
   const docs = assembleInvoiceDocuments(headers, lines);
@@ -603,7 +603,7 @@ async function getDocumentByKey(key) {
     FETCH FIRST 1 ROWS ONLY
   `;
 
-  const ref = await odbcPool.query(resolverSQL, [
+  const ref = await odbcPool.panamarQuery(resolverSQL, [
     String(key.subempresa).trim(),
     toInt(key.ejercicio),
     String(key.serie).trim(),
@@ -689,8 +689,8 @@ async function getSummary(options = {}) {
   `;
 
   const [summaryResult, aggregateResult] = await Promise.all([
-    odbcPool.query(summarySQL, params),
-    odbcPool.query(aggregateSQL, params)
+    odbcPool.panamarQuery(summarySQL, params),
+    odbcPool.panamarQuery(aggregateSQL, params)
   ]);
 
   const row = summaryResult[0] || {};
@@ -729,7 +729,7 @@ async function getClients() {
     ORDER BY MAX(PL.NOMBRE_CLIENTE)
   `;
 
-  const rows = await odbcPool.query(clientsSQL, [ANO_FIJO]);
+  const rows = await odbcPool.panamarQuery(clientsSQL, [ANO_FIJO]);
   const elapsed = Date.now() - startTime;
 
   logger.info('PANAMAR: Clientes obtenidos', { count: rows.length, elapsed: `${elapsed}ms` });
@@ -848,11 +848,11 @@ async function getDiagnostics() {
   `;
 
   const [monthly, duplicatedCAC, lineDupes, araDupes, missingBusiness] = await Promise.all([
-    odbcPool.query(monthlySQL, [ANO_FIJO]),
-    odbcPool.query(duplicatedCACSQL, [ANO_FIJO]),
-    odbcPool.query(lineDupesSQL, [ANO_FIJO]),
-    odbcPool.query(araDupesSQL).catch(e => ({ error: e.message })),
-    odbcPool.query(missingBusinessNameSQL, [ANO_FIJO])
+    odbcPool.panamarQuery(monthlySQL, [ANO_FIJO]),
+    odbcPool.panamarQuery(duplicatedCACSQL, [ANO_FIJO]),
+    odbcPool.panamarQuery(lineDupesSQL, [ANO_FIJO]),
+    odbcPool.panamarQuery(araDupesSQL).catch(e => ({ error: e.message })),
+    odbcPool.panamarQuery(missingBusinessNameSQL, [ANO_FIJO])
   ]);
 
   const lineStats = lineDupes[0] || {};

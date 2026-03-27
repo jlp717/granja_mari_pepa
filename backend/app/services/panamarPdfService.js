@@ -191,8 +191,8 @@ function buildDocumentContent(doc, panamarDoc) {
     doc.text(String(linea.lote || '-').substring(0, 10), 270, y + 3, { width: 45 });
     doc.text(cajas ? formatNumber(cajas, 0) : '-', 320, y + 3, { width: 44, align: 'right' });
     doc.text(unidades ? formatNumber(unidades, 3) : '-', 368, y + 3, { width: 44, align: 'right' });
-    doc.text(`${formatNumber(precio, 3)} EUR`, 416, y + 3, { width: 60, align: 'right' });
-    doc.text(`${formatNumber(importe, 2)} EUR`, 480, y + 3, { width: 72, align: 'right' });
+    doc.text(`${formatNumber(precio, 3)} €`, 416, y + 3, { width: 60, align: 'right' });
+    doc.text(`${formatNumber(importe, 2)} €`, 480, y + 3, { width: 72, align: 'right' });
 
     y += rowHeight;
   });
@@ -208,7 +208,7 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('IMPORTE TOTAL PANAMAR', 313, y + 8);
   doc.fontSize(17).font('Helvetica-Bold')
-    .text(`${formatNumber(totalImporte, 2)} EUR`, 445, y + 6, { width: 105, align: 'right' });
+    .text(`${formatNumber(totalImporte, 2)} €`, 445, y + 6, { width: 105, align: 'right' });
 
   // Footer en todas las paginas
   const pages = doc.bufferedPageRange();
