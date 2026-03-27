@@ -358,9 +358,7 @@ async function getDocuments(options = {}) {
       SELECT
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA
+        PL.ANO_FACTURA
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
@@ -701,9 +699,7 @@ async function getSummary(options = {}) {
       SELECT
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA
+        PL.ANO_FACTURA
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
