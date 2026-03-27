@@ -332,10 +332,10 @@ export function PanamarDashboard() {
   };
 
   const getDocKey = (doc: PanamarDocument) =>
-    `${doc.subempresa}-${doc.ejercicio}-${doc.serieAlbaran}-${doc.terminal}-${doc.numeroAlbaran}`;
+    `${doc.codigoCliente}-${doc.ejercicioFactura}-${doc.serieFactura}-${doc.numeroFactura}`;
 
   const getDocRef = (doc: PanamarDocument) =>
-    `${doc.serieAlbaran}-${doc.terminal}-${doc.numeroAlbaran}`;
+    `${doc.serieFactura}-${doc.numeroFactura}`;
 
   const getDocPath = (doc: PanamarDocument) =>
     `/api/panamar/documents/${doc.subempresa}/${doc.ejercicio}/${encodeURIComponent(doc.serieAlbaran)}/${doc.terminal}/${doc.numeroAlbaran}`;
@@ -347,7 +347,7 @@ export function PanamarDashboard() {
     const toastId = toast.loading(
       <div className="flex items-center space-x-2">
         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-        <span>Descargando albarán {getDocRef(doc)}...</span>
+        <span>Descargando factura {getDocRef(doc)}...</span>
       </div>
     );
     try {
@@ -357,12 +357,12 @@ export function PanamarDashboard() {
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = blobUrl;
-      a.download = `Albaran_PANAMAR_${getDocRef(doc)}.pdf`;
+      a.download = `Factura_PANAMAR_${getDocRef(doc)}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(blobUrl);
-      toast.success('Albarán descargado correctamente', { id: toastId });
+      toast.success('Factura descargada correctamente', { id: toastId });
     } catch (err) {
       console.error('Download error:', err);
       toast.error('Error al descargar el PDF', { id: toastId });
@@ -407,10 +407,11 @@ export function PanamarDashboard() {
   const handleWhatsApp = (doc: PanamarDocument) => {
     const docRef = getDocRef(doc);
     const text = encodeURIComponent(
-      `📦 Albarán PANAMAR ${docRef}\n` +
+      `📦 Factura PANAMAR ${docRef}\n` +
       `Cliente: ${doc.nombreCliente} (${doc.codigoCliente})\n` +
       `Fecha: ${doc.fecha}\n` +
-      `Total PANAMAR: ${doc.totalImportePanamar.toFixed(2)} €\n` +
+      `Consumo (cajas): ${(doc.totalCajasPanamar || 0).toFixed(3)}\n` +
+      `Importe PANAMAR: ${doc.totalImportePanamar.toFixed(2)} €\n` +
       `Líneas: ${doc.totalLineasPanamar}\n\n` +
       `Granja Mari Pepa`
     );
@@ -779,8 +780,8 @@ export function PanamarDashboard() {
                 <FileText className="h-5 w-5 text-white" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">{summary.totalDocumentos.toLocaleString('es-ES')}</div>
-                <div className="text-xs text-muted-foreground font-medium">Albaranes</div>
+                <div className="text-2xl font-bold text-foreground">{(summary.totalFacturas ?? summary.totalDocumentos ?? 0).toLocaleString('es-ES')}</div>
+                <div className="text-xs text-muted-foreground font-medium">Facturas</div>
               </div>
             </motion.div>
             <motion.div
@@ -861,7 +862,7 @@ export function PanamarDashboard() {
           <div>
             <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-1">
               <Package className="w-6 h-6 inline-block mr-2 text-orange-500" />
-              Gestión Documental PANAMAR
+              Gestión de Facturas PANAMAR
             </h2>
             <p className="text-muted-foreground text-sm">
               {total.toLocaleString('es-ES')} {total === 1 ? 'registro' : 'registros'} · Ejercicio 2026
@@ -1113,7 +1114,7 @@ export function PanamarDashboard() {
                           {getDocRef(doc)}
                         </div>
                         <div className="text-xs text-gray-500 font-medium">
-                          Albarán{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
+                          Factura{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
                         </div>
                       </div>
                     </div>
@@ -1194,7 +1195,7 @@ export function PanamarDashboard() {
                     <TableHead className="font-bold text-orange-700 py-4">
                       <div className="flex items-center gap-2">
                         <FileText className="w-4 h-4" />
-                        Documento
+                        Factura
                       </div>
                     </TableHead>
                     <TableHead className="font-bold text-orange-700">
@@ -1231,7 +1232,7 @@ export function PanamarDashboard() {
                         key={key}
                         className="relative hover:bg-orange-50 transition-colors duration-150 border-b border-gray-100 group"
                       >
-                        {/* Documento */}
+                        {/* Factura */}
                         <TableCell>
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 bg-gradient-to-br from-orange-500 to-orange-600">
@@ -1242,7 +1243,7 @@ export function PanamarDashboard() {
                                 {getDocRef(doc)}
                               </div>
                               <div className="text-xs text-gray-500 font-medium">
-                                Albarán{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
+                                Factura{doc.numeroPedido ? ` · Ped. ${doc.numeroPedido}` : ''}
                               </div>
                             </div>
                           </div>
@@ -1340,7 +1341,7 @@ export function PanamarDashboard() {
                 <div>
                   <h3 className="text-xl md:text-2xl font-black uppercase tracking-wider mb-1">Total Acumulado</h3>
                   <p className="text-orange-100 text-sm font-bold uppercase tracking-widest opacity-90 italic">
-                    {total.toLocaleString('es-ES')} Albaranes Detectados
+                    {total.toLocaleString('es-ES')} Facturas Detectadas
                   </p>
                 </div>
               </div>
@@ -1556,7 +1557,7 @@ export function PanamarDashboard() {
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                   <div className="min-w-0">
                     <h2 className="text-base sm:text-lg font-bold truncate">
-                      Albarán {previewDoc ? getDocRef(previewDoc) : ''}
+                      Factura {previewDoc ? getDocRef(previewDoc) : ''}
                     </h2>
                     <p className="text-white/70 text-xs hidden sm:block">Previsualización PDF · {previewDoc?.nombreCliente}</p>
                   </div>
@@ -1625,7 +1626,7 @@ export function PanamarDashboard() {
             >
               <div className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border pointer-events-auto">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-foreground">Compartir albarán</h3>
+                  <h3 className="text-xl font-bold text-foreground">Compartir factura</h3>
                   <Button variant="ghost" size="icon" onClick={() => setShowShareModal(false)} className="rounded-xl">
                     <X className="h-5 w-5" />
                   </Button>
@@ -1704,7 +1705,7 @@ export function PanamarDashboard() {
                     <Mail className="w-6 h-6" />
                     <div>
                       <h3 className="text-lg font-bold">Enviar por email</h3>
-                      <p className="text-white/70 text-xs">Se adjuntará el PDF del albarán</p>
+                      <p className="text-white/70 text-xs">Se adjuntará el PDF de la factura</p>
                     </div>
                   </div>
                 </div>

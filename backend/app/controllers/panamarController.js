@@ -80,13 +80,13 @@ async function getDocuments(req, res) {
       ...result
     });
   } catch (error) {
-    logger.error('❌ PANAMAR: Error obteniendo albaranes', {
+    logger.error('❌ PANAMAR: Error obteniendo facturas', {
       error: error.message,
       stack: error.stack
     });
     return res.status(500).json({
       success: false,
-      message: 'Error interno al obtener albaranes PANAMAR'
+      message: 'Error interno al obtener facturas PANAMAR'
     });
   }
 }
@@ -211,7 +211,7 @@ async function fetchSingleDocument(req) {
 
 /**
  * GET /api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf
- * Download PDF for a PANAMAR albaran
+ * Download PDF for a PANAMAR invoice
  */
 async function downloadPDF(req, res) {
   try {
@@ -221,21 +221,22 @@ async function downloadPDF(req, res) {
     }
 
     const panamarDoc = result.doc;
-    const pdfBuffer = await panamarPdfService.generateAlbaranPDF(panamarDoc);
+    const pdfBuffer = await panamarPdfService.generateFacturaPDF(panamarDoc);
 
+    const docRef = `${panamarDoc.serieFactura || panamarDoc.serieAlbaran}-${panamarDoc.numeroFactura || panamarDoc.numeroAlbaran}`;
     const clientName = (panamarDoc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
-    const filename = `Albaran_PANAMAR_${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}_${clientName}.pdf`;
+    const filename = `Factura_PANAMAR_${docRef}_${clientName}.pdf`;
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     res.setHeader('Content-Length', pdfBuffer.length);
 
-    logger.info('📥 PANAMAR: PDF descargado', { ref: `${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}` });
+    logger.info('📥 PANAMAR: PDF de factura descargado', { ref: docRef });
 
     return res.send(pdfBuffer);
   } catch (error) {
     logger.error('❌ PANAMAR: Error generando PDF', { error: error.message, stack: error.stack });
-    return res.status(500).json({ success: false, message: 'Error generando PDF del albarán PANAMAR' });
+    return res.status(500).json({ success: false, message: 'Error generando PDF de la factura PANAMAR' });
   }
 }
 
@@ -251,7 +252,7 @@ async function previewPDF(req, res) {
     }
 
     const panamarDoc = result.doc;
-    const pdfBuffer = await panamarPdfService.generateAlbaranPDF(panamarDoc);
+    const pdfBuffer = await panamarPdfService.generateFacturaPDF(panamarDoc);
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'inline');
@@ -266,7 +267,7 @@ async function previewPDF(req, res) {
 
 /**
  * POST /api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email
- * Send albaran PDF via email
+ * Send PANAMAR invoice PDF via email
  * Body: { destinatario: string }
  */
 async function sendEmail(req, res) {
@@ -288,12 +289,13 @@ async function sendEmail(req, res) {
     }
 
     const panamarDoc = result.doc;
-    const pdfBuffer = await panamarPdfService.generateAlbaranPDF(panamarDoc);
+    const pdfBuffer = await panamarPdfService.generateFacturaPDF(panamarDoc);
 
+    const docRef = `${panamarDoc.serieFactura || panamarDoc.serieAlbaran}-${panamarDoc.numeroFactura || panamarDoc.numeroAlbaran}`;
     const clientName = (panamarDoc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
-    const filename = `Albaran_PANAMAR_${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}_${clientName}.pdf`;
-    const docRef = `${panamarDoc.serieAlbaran}-${panamarDoc.numeroAlbaran}`;
+    const filename = `Factura_PANAMAR_${docRef}_${clientName}.pdf`;
     const totalStr = (panamarDoc.totalImportePanamar || 0).toFixed(2);
+    const totalCajas = Number(panamarDoc.totalCajasPanamar || 0).toFixed(3);
 
     // Send email using nodemailer
     const nodemailer = require('nodemailer');
@@ -325,18 +327,18 @@ async function sendEmail(req, res) {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background:#FFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
         <tr><td style="background:linear-gradient(135deg,#E67E22 0%,#D35400 100%);padding:28px;text-align:center;">
-          <h1 style="color:#FFF;margin:0;font-size:22px;">📦 Albarán PANAMAR</h1>
+          <h1 style="color:#FFF;margin:0;font-size:22px;">📄 Factura PANAMAR</h1>
           <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa</p>
         </td></tr>
         <tr><td style="padding:28px;">
           <p style="color:#1E293B;font-size:15px;line-height:1.5;margin:0 0 20px;">
-            Adjunto encontrarás el albarán <strong>${docRef}</strong> del cliente 
+            Adjunto encontrarás la factura <strong>${docRef}</strong> del negocio 
             <strong>${panamarDoc.nombreCliente}</strong>.
           </p>
           <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;margin-bottom:20px;">
             <tr>
               <td style="padding:14px;border-bottom:1px solid #FDBA74;">
-                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Albarán</span><br>
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Factura</span><br>
                 <span style="color:#1E293B;font-size:15px;font-weight:600;">${docRef}</span>
               </td>
               <td style="padding:14px;border-bottom:1px solid #FDBA74;text-align:right;">
@@ -346,13 +348,19 @@ async function sendEmail(req, res) {
             </tr>
             <tr>
               <td colspan="2" style="padding:14px;text-align:center;">
-                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Total PANAMAR</span><br>
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Importe PANAMAR</span><br>
                 <span style="color:#D35400;font-size:22px;font-weight:700;">${totalStr} €</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding:0 14px 14px;text-align:center;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Consumo total (cajas)</span><br>
+                <span style="color:#1E293B;font-size:16px;font-weight:700;">${totalCajas}</span>
               </td>
             </tr>
           </table>
           <p style="color:#64748B;font-size:12px;line-height:1.4;padding:12px;background:#EFF6FF;border-radius:6px;border-left:4px solid #3B82F6;">
-            📎 El PDF del albarán está adjunto a este email.
+            📎 El PDF de la factura está adjunto a este email.
           </p>
         </td></tr>
         <tr><td style="background:#F8FAFC;padding:20px;border-top:1px solid #E2E8F0;text-align:center;">
@@ -369,20 +377,20 @@ async function sendEmail(req, res) {
     const mailOptions = {
       from: '"Granja Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
       to: destinatario,
-      subject: `Albarán PANAMAR ${docRef} - Granja Mari Pepa`,
+      subject: `Factura PANAMAR ${docRef} - Granja Mari Pepa`,
       html: htmlTemplate,
       attachments: [{ filename, content: pdfBuffer, contentType: 'application/pdf' }]
     };
 
     const info = await transporter.sendMail(mailOptions);
 
-    logger.info('📧 PANAMAR: Albarán enviado por email', {
+    logger.info('📧 PANAMAR: Factura enviada por email', {
       ref: docRef, destinatario, messageId: info.messageId
     });
 
     return res.json({
       success: true,
-      message: `Albarán enviado correctamente a ${destinatario}`,
+      message: `Factura enviada correctamente a ${destinatario}`,
       messageId: info.messageId
     });
   } catch (error) {
@@ -538,7 +546,7 @@ async function retrieveBulkZip(req, res) {
 }
 /**
  * GET /api/panamar/clients
- * Returns distinct clients with PANAMAR albaranes for the dropdown selector.
+ * Returns distinct clients with PANAMAR invoices for the dropdown selector.
  */
 async function getClients(req, res) {
   try {

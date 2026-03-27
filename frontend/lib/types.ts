@@ -122,26 +122,43 @@ export interface UserProfile {
 // ── PANAMAR Mode Types ──────────────────────────────────────────────
 
 export interface PanamarLineItem {
+  subempresaAlbaran?: string;
+  ejercicioAlbaran?: number;
+  serieAlbaran?: string;
+  terminalAlbaran?: number;
+  numeroAlbaran?: number;
   secuencia: number;
   codigoArticulo: string;
   descripcion: string;
   lote: string;
   cajas: number;
   unidades: number;
+  precioCobro?: number;
   precioUnitario: number;
   descuento: number;
   importe: number;
+  precioTarifa?: number;
   precioTarifa85: number;
   precioOriginal: number;
+  usaTarifaEspecial?: boolean;
   usaTarifa85: boolean;
+  tipoVenta?: string;
 }
 
 export interface PanamarDocument {
-  subempresa: number;
+  // Clave interna usada por endpoints PDF/email (albaran representativo)
+  subempresa: string;
   ejercicio: number;
   serieAlbaran: string;
   terminal: number;
   numeroAlbaran: number;
+
+  // Identidad visible de factura
+  serieFactura: string;
+  numeroFactura: number;
+  ejercicioFactura: number;
+  refFactura?: string;
+
   fecha: string;
   dia: number;
   mes: number;
@@ -149,13 +166,13 @@ export interface PanamarDocument {
   hora: string | null;
   codigoCliente: string;
   nombreCliente: string;
-  nifCliente: string;
-  poblacionCliente: string;
   numeroPedido: number;
   refPedido: string;
   referencia: string;
   lineas: PanamarLineItem[];
   totalLineasPanamar: number;
+  totalCajasPanamar?: number;
+  totalUnidadesPanamar?: number;
   totalImportePanamar: number;
 }
 
@@ -170,8 +187,10 @@ export interface PanamarDocumentsResponse {
 
 export interface PanamarSummary {
   success: boolean;
+  ano?: number;
   ejercicio: number;
-  totalDocumentos: number;
+  totalFacturas?: number;
+  totalDocumentos?: number; // compatibilidad con versiones anteriores
   totalClientes: number;
   totalImporte: number;
   totalCajas: number;

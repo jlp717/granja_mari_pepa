@@ -311,11 +311,12 @@ async function generateChunkZip(taskId, chunk) {
           const batch = docs.slice(i, i + PDF_CONCURRENCY);
           await Promise.all(batch.map(doc => new Promise((resolvePdf) => {
             try {
-              const pdfStream = panamarPdfService.generateAlbaranPDFStream(doc);
+              const pdfStream = panamarPdfService.generateFacturaPDFStream(doc);
               const clientName = (doc.nombreCliente || 'Cliente')
                 .replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ ]/g, '_')
                 .substring(0, 20);
-              const pdfName = `${doc.codigoCliente}_Albaran_${doc.terminal || ''}-${doc.numeroAlbaran}_${clientName}.pdf`;
+              const facturaRef = `${doc.serieFactura || doc.serieAlbaran || ''}-${doc.numeroFactura || doc.numeroAlbaran || ''}`;
+              const pdfName = `${doc.codigoCliente}_Factura_${facturaRef}_${clientName}.pdf`;
 
               pdfStream.on('end', () => {
                 chunk.processed++;

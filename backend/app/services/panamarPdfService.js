@@ -1,7 +1,12 @@
 /**
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 📦 PANAMAR - SERVICIO DE GENERACIÓN DE PDF DE ALBARANES v2.1
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * PANAMAR PDF SERVICE
+ * ===================
+ * Genera PDF de factura PANAMAR orientado a:
+ * - Nombre de negocio
+ * - Consumo (cajas/unidades)
+ * - Precio e importe de cobro
+ *
+ * Sin exponer datos personales del cliente (NIF, direccion, etc.).
  */
 
 const PDFDocument = require('pdfkit');
@@ -9,235 +14,241 @@ const logger = require('../utils/logger');
 const path = require('path');
 const fs = require('fs');
 
-// ── Assets (cached in RAM on module load for bulk performance) ──
 const HEADER_PNG_PATH = path.join(__dirname, '../../assets/header.png');
-const HEADER_PATH = path.join(__dirname, '../../assets/header.webp');
+const HEADER_WEBP_PATH = path.join(__dirname, '../../assets/header.webp');
 
-// 🚀 Pre-load header image into RAM buffer once (avoids 1800× disk reads in bulk)
 let HEADER_BUFFER = null;
-let HEADER_FORMAT = null; // 'png' or 'webp'
 try {
   if (fs.existsSync(HEADER_PNG_PATH)) {
     HEADER_BUFFER = fs.readFileSync(HEADER_PNG_PATH);
-    HEADER_FORMAT = 'png';
-    logger.info(`📦 PDF: Header PNG cached in RAM (${(HEADER_BUFFER.length / 1024).toFixed(0)}KB)`);
-  } else if (fs.existsSync(HEADER_PATH)) {
-    HEADER_BUFFER = fs.readFileSync(HEADER_PATH);
-    HEADER_FORMAT = 'webp';
-    logger.info(`📦 PDF: Header WEBP cached in RAM (${(HEADER_BUFFER.length / 1024).toFixed(0)}KB)`);
+    logger.info(`PANAMAR PDF: Header PNG cargado en memoria (${(HEADER_BUFFER.length / 1024).toFixed(0)}KB)`);
+  } else if (fs.existsSync(HEADER_WEBP_PATH)) {
+    HEADER_BUFFER = fs.readFileSync(HEADER_WEBP_PATH);
+    logger.info(`PANAMAR PDF: Header WEBP cargado en memoria (${(HEADER_BUFFER.length / 1024).toFixed(0)}KB)`);
   } else {
-    logger.warn('⚠️ PDF: No header image found, using text fallback');
+    logger.warn('PANAMAR PDF: No se encontro header de imagen, se usara encabezado de texto');
   }
-} catch (e) {
-  logger.warn('⚠️ PDF: Error loading header image:', e.message);
+} catch (error) {
+  logger.warn('PANAMAR PDF: Error cargando header de imagen', { error: error.message });
 }
 
-// ── Paleta corporativa ─────────────────────────────────────────────
 const COLORS = {
-  primary: '#003d7a',
-  secondary: '#1a5490',
-  accent: '#28a745',
-  success: '#28a745',
-  darkGray: '#2c3e50',
-  mediumGray: '#6c757d',
-  lightGray: '#E8E8E8',
-  ultraLight: '#f8f9fa',
-  border: '#dee2e6',
+  primary: '#0F4C81',
+  secondary: '#1B6CA8',
+  accent: '#E67E22',
+  success: '#2E8B57',
+  dark: '#1F2937',
+  medium: '#6B7280',
+  light: '#E5E7EB',
+  ultraLight: '#F8FAFC',
   white: '#FFFFFF'
 };
 
 const EMPRESA = {
   nombre: 'MARI PEPA',
-  slogan: 'Food & Frozen',
-  descripcion: 'Congelados y refrigerados para hostelería',
   web: 'www.mari-pepa.com',
-  telefono: '639778655',
-  registro: 'Inscrita en el registro mercantil de Murcia. Libro 140, Sección 3ª, Folio 142, Hoja 5657, Inscripción 2ª. CIF: B04008710'
+  telefono: '639 77 86 56',
+  registro: 'Registro Mercantil de Murcia. Hoja 5657. CIF: B04008710'
 };
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// FUNCIONES PRIVADAS DE DIBUJO (Compartidas)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 function formatNumber(num, decimals = 2) {
-  if (num === null || num === undefined || isNaN(num)) return '0,00';
-  const fixed = Math.abs(num).toFixed(decimals);
+  if (num === null || num === undefined || Number.isNaN(Number(num))) return decimals > 0 ? '0,00' : '0';
+  const fixed = Math.abs(Number(num)).toFixed(decimals);
   const parts = fixed.split('.');
-  const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  const result = parts[1] ? integerPart + ',' + parts[1] : integerPart;
-  return num < 0 ? '-' + result : result;
+  const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const res = decimals > 0 ? `${intPart},${parts[1]}` : intPart;
+  return Number(num) < 0 ? `-${res}` : res;
 }
 
-function pad2(n) { return String(n || '').padStart(2, '0'); }
+function pad2(n) {
+  return String(n || '').padStart(2, '0');
+}
 
 function drawHeader(doc, yStart = 10) {
-  let yPos = yStart;
+  let y = yStart;
   doc.rect(0, 0, 595.28, 5).fillAndStroke(COLORS.secondary, COLORS.secondary);
-  yPos += 5;
+  y += 5;
 
-  // 🚀 Use cached RAM buffer instead of disk read
   if (HEADER_BUFFER) {
     try {
-      doc.image(HEADER_BUFFER, 40, yPos, { width: 515, height: 140 });
-      return yPos + 150;
-    } catch (e) {
-      logger.warn('⚠️ Error rendering cached header');
+      doc.image(HEADER_BUFFER, 40, y, { width: 515, height: 138 });
+      return y + 148;
+    } catch (error) {
+      logger.warn('PANAMAR PDF: Error renderizando header de imagen', { error: error.message });
     }
   }
 
-  // Fallback: text-based header
-  doc.rect(40, yPos, 515, 120).fillAndStroke(COLORS.ultraLight, COLORS.lightGray);
-  yPos += 18;
-  doc.fontSize(36).font('Helvetica-Bold').fillColor(COLORS.primary).text(EMPRESA.nombre, 50, yPos);
-  yPos += 45;
-  doc.fontSize(14).fillColor(COLORS.darkGray).font('Helvetica').text(EMPRESA.slogan.toUpperCase(), 50, yPos);
-  yPos += 18;
-  doc.fontSize(9).fillColor(COLORS.mediumGray).text(EMPRESA.descripcion, 50, yPos);
-  doc.fontSize(9).fillColor(COLORS.secondary).text(EMPRESA.web, 450, yPos, { align: 'right', width: 95 });
-  yPos += 10;
-  return yPos + 5;
+  doc.rect(40, y, 515, 118).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  y += 16;
+  doc.fontSize(34).font('Helvetica-Bold').fillColor(COLORS.primary).text(EMPRESA.nombre, 50, y);
+  y += 42;
+  doc.fontSize(11).font('Helvetica').fillColor(COLORS.dark).text('Food & Frozen para Hosteleria', 50, y);
+  doc.fontSize(9).fillColor(COLORS.secondary).text(EMPRESA.web, 435, y, { align: 'right', width: 110 });
+  y += 18;
+  return y + 8;
 }
 
 function drawFooter(doc, pageNum, totalPages) {
   const footerY = 770;
-  doc.moveTo(40, footerY).lineTo(555, footerY).strokeColor(COLORS.lightGray).lineWidth(0.5).stroke();
-  doc.fontSize(6).font('Helvetica').fillColor(COLORS.mediumGray).text(EMPRESA.registro, 40, footerY + 5, { align: 'center', width: 515 });
-  doc.fontSize(7).fillColor(COLORS.mediumGray).text(`Página ${pageNum} de ${totalPages}`, 40, footerY + 13, { align: 'center', width: 515 });
+  doc.moveTo(40, footerY).lineTo(555, footerY).strokeColor(COLORS.light).lineWidth(0.5).stroke();
+  doc.fontSize(6).font('Helvetica').fillColor(COLORS.medium)
+    .text(EMPRESA.registro, 40, footerY + 5, { align: 'center', width: 515 });
+  doc.fontSize(7).fillColor(COLORS.medium)
+    .text(`Pagina ${pageNum} de ${totalPages}`, 40, footerY + 13, { align: 'center', width: 515 });
 }
 
-function drawProductHeader(doc, yPos) {
-  doc.rect(40, yPos, 515, 16).fillAndStroke(COLORS.secondary, COLORS.secondary);
+function drawLineHeader(doc, y) {
+  doc.rect(40, y, 515, 16).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
-  doc.text('CÓDIGO', 42, yPos + 5, { width: 50 });
-  doc.text('DESCRIPCIÓN', 95, yPos + 5, { width: 210 });
-  doc.text('LOTE', 310, yPos + 5, { width: 45 });
-  doc.text('CAJAS', 360, yPos + 5, { width: 35, align: 'right' });
-  doc.text('CANT.', 405, yPos + 5, { width: 38, align: 'right' });
-  doc.text('PRECIO', 450, yPos + 5, { width: 45, align: 'right' });
-  doc.text('% DTO', 515, yPos + 5, { width: 35, align: 'right' });
-  return yPos + 18;
+
+  doc.text('CODIGO', 42, y + 5, { width: 54 });
+  doc.text('DESCRIPCION', 98, y + 5, { width: 168 });
+  doc.text('LOTE', 270, y + 5, { width: 45 });
+  doc.text('CAJAS', 320, y + 5, { width: 44, align: 'right' });
+  doc.text('UNID.', 368, y + 5, { width: 44, align: 'right' });
+  doc.text('PRECIO', 416, y + 5, { width: 60, align: 'right' });
+  doc.text('IMPORTE', 480, y + 5, { width: 72, align: 'right' });
+
+  return y + 18;
 }
 
-/**
- * Lógica central de construcción del PDF
- */
 function buildDocumentContent(doc, panamarDoc) {
   const lineas = panamarDoc.lineas || [];
-  const docRef = `P-${panamarDoc.terminal || ''}-${panamarDoc.numeroAlbaran}`;
-  const fecha = `${pad2(panamarDoc.dia)}/${pad2(panamarDoc.mes)}/${panamarDoc.ano}`;
-  const hora = panamarDoc.hora || '';
+  const refFactura = `${panamarDoc.serieFactura || panamarDoc.serieAlbaran || ''}-${panamarDoc.numeroFactura || panamarDoc.numeroAlbaran || ''}`;
+  const fecha = `${pad2(panamarDoc.dia)}/${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`;
+  const hora = panamarDoc.hora || '-';
 
   let y = drawHeader(doc, 10);
   y += 10;
 
-  // Banner Albarán
-  doc.rect(40, y, 515, 32).fillAndStroke(COLORS.secondary, COLORS.secondary);
-  doc.fontSize(18).font('Helvetica-Bold').fillColor(COLORS.white).text('ALBARÁN', 50, y + 10);
-  doc.fontSize(16).text(docRef, 400, y + 10, { width: 145, align: 'right' });
-  y += 38;
+  // Banner principal
+  doc.rect(40, y, 515, 34).fillAndStroke(COLORS.secondary, COLORS.secondary);
+  doc.fontSize(16).font('Helvetica-Bold').fillColor(COLORS.white)
+    .text('FACTURA PANAMAR', 50, y + 10);
+  doc.fontSize(15).font('Helvetica-Bold')
+    .text(refFactura, 390, y + 10, { width: 160, align: 'right' });
+  y += 40;
 
-  // Fila Info
-  doc.rect(40, y, 160, 20).fillAndStroke(COLORS.lightGray, COLORS.border);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.mediumGray).text('CÓDIGO CLIENTE', 45, y + 3);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.darkGray).text(panamarDoc.codigoCliente || '', 45, y + 11);
+  // Fila de datos de cabecera
+  doc.rect(40, y, 165, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('CODIGO CLIENTE', 45, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(panamarDoc.codigoCliente || '', 45, y + 11);
 
-  doc.rect(205, y, 120, 20).fillAndStroke(COLORS.lightGray, COLORS.border);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.mediumGray).text('FECHA', 210, y + 3);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.darkGray).text(fecha, 210, y + 11);
+  doc.rect(210, y, 120, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FECHA FACTURA', 215, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(fecha, 215, y + 11);
 
-  doc.rect(330, y, 100, 20).fillAndStroke(COLORS.lightGray, COLORS.border);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.mediumGray).text('HORA', 335, y + 3);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.darkGray).text(hora || '-', 335, y + 11);
+  doc.rect(335, y, 90, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('HORA', 340, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(hora, 340, y + 11);
 
+  doc.rect(430, y, 125, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('PEDIDO / REF', 435, y + 3);
   const pedidoStr = panamarDoc.numeroPedido ? `Ped. ${panamarDoc.numeroPedido}` : (panamarDoc.refPedido || '-');
-  doc.rect(435, y, 120, 20).fillAndStroke(COLORS.lightGray, COLORS.border);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.mediumGray).text('PEDIDO', 440, y + 3);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.darkGray).text(pedidoStr, 440, y + 11);
+  doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.dark)
+    .text(String(pedidoStr).substring(0, 20), 435, y + 11);
   y += 26;
 
-  // Datos Cliente
-  const clienteBoxY = y;
-  doc.rect(40, y, 515, 75).fillAndStroke(COLORS.ultraLight, COLORS.lightGray);
+  // Negocio
+  doc.rect(40, y, 515, 52).fillAndStroke(COLORS.ultraLight, COLORS.light);
   y += 8;
-  doc.fontSize(8).font('Helvetica-Bold').fillColor(COLORS.secondary).text('DATOS DEL CLIENTE', 45, y);
-  y += 15;
-  doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.darkGray).text((panamarDoc.nombreCliente || '').toUpperCase(), 45, y, { width: 500 });
+  doc.fontSize(8).font('Helvetica-Bold').fillColor(COLORS.secondary).text('NEGOCIO', 45, y);
+  y += 14;
+  doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.dark)
+    .text((panamarDoc.nombreCliente || panamarDoc.codigoCliente || '').toUpperCase(), 45, y, { width: 500 });
   y += 18;
-  doc.fontSize(9).font('Helvetica').fillColor(COLORS.darkGray);
-  if (panamarDoc.direccionCliente) { doc.text(panamarDoc.direccionCliente, 45, y); y += 12; }
-  let loc = `${panamarDoc.cpCliente || ''} ${panamarDoc.poblacionCliente || ''} (${panamarDoc.provinciaCliente || ''})`.trim();
-  if (loc !== '()') { doc.text(loc, 45, y); y += 12; }
-  if (panamarDoc.nifCliente) doc.fontSize(9).font('Helvetica-Bold').text(`NIF/CIF: ${panamarDoc.nifCliente}`, 45, y);
-  y = clienteBoxY + 82;
+  doc.fontSize(8).font('Helvetica').fillColor(COLORS.medium)
+    .text('Informe de consumo PANAMAR por factura (sin datos personales)', 45, y, { width: 500 });
+  y += 18;
 
-  // Tabla
-  y = drawProductHeader(doc, y);
+  // Tabla de lineas
+  y = drawLineHeader(doc, y);
+
   let totalCajas = 0;
+  let totalImporte = 0;
 
-  lineas.forEach((line) => {
-    const desc = (line.descripcion || '').substring(0, 50);
-    const rowH = Math.max(20, doc.heightOfString(desc, { width: 170 }) + 12);
-    if (y + rowH > 700) { doc.addPage(); y = drawHeader(doc, 10) + 10; y = drawProductHeader(doc, y); }
-    doc.fontSize(7).font('Helvetica').fillColor(COLORS.darkGray);
-    doc.text(String(line.codigoArticulo || '').substring(0, 12), 42, y + 3, { width: 50 });
-    doc.text(desc, 95, y + 3, { width: 210 });
-    doc.text(String(line.lote || '-').substring(0, 10), 310, y + 3, { width: 45 });
-    totalCajas += Number(line.cajas) || 0;
-    doc.text(line.cajas ? formatNumber(line.cajas, 0) : '-', 360, y + 3, { width: 35, align: 'right' });
-    doc.text(formatNumber(line.unidades || 0, 3), 405, y + 3, { width: 38, align: 'right' });
-    doc.text(formatNumber(line.precioUnitario || 0, 3) + ' €', 450, y + 3, { width: 45, align: 'right' });
-    doc.text(line.descuento > 0 ? formatNumber(line.descuento, 2) : '-', 515, y + 3, { width: 35, align: 'right' });
-    y += rowH;
+  lineas.forEach((linea) => {
+    const descripcion = String(linea.descripcion || '').substring(0, 42);
+    const rowHeight = Math.max(20, doc.heightOfString(descripcion, { width: 165 }) + 10);
+
+    if (y + rowHeight > 700) {
+      doc.addPage();
+      y = drawHeader(doc, 10) + 10;
+      y = drawLineHeader(doc, y);
+    }
+
+    const cajas = Number(linea.cajas) || 0;
+    const unidades = Number(linea.unidades) || 0;
+    const precio = Number(linea.precioCobro ?? linea.precioUnitario ?? 0) || 0;
+    const importe = Number(linea.importe) || 0;
+
+    totalCajas += cajas;
+    totalImporte += importe;
+
+    doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
+    doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 54 });
+    doc.text(descripcion, 98, y + 3, { width: 168 });
+    doc.text(String(linea.lote || '-').substring(0, 10), 270, y + 3, { width: 45 });
+    doc.text(cajas ? formatNumber(cajas, 0) : '-', 320, y + 3, { width: 44, align: 'right' });
+    doc.text(unidades ? formatNumber(unidades, 3) : '-', 368, y + 3, { width: 44, align: 'right' });
+    doc.text(`${formatNumber(precio, 3)} EUR`, 416, y + 3, { width: 60, align: 'right' });
+    doc.text(`${formatNumber(importe, 2)} EUR`, 480, y + 3, { width: 72, align: 'right' });
+
+    y += rowHeight;
   });
 
-  doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.lightGray).lineWidth(1).stroke();
+  doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(1).stroke();
   y += 12;
 
-  // Total
-  doc.rect(350, y, 205, 28).fillAndStroke(COLORS.success, COLORS.success).lineWidth(2);
-  doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.white).text('TOTAL CAJAS', 360, y + 9);
-  doc.fontSize(18).font('Helvetica-Bold').fillColor(COLORS.white).text(formatNumber(totalCajas, 0), 450, y + 6, { width: 100, align: 'right' });
+  // Totales
+  doc.rect(40, y, 250, 34).fillAndStroke(COLORS.success, COLORS.success);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('CONSUMO TOTAL (CAJAS)', 48, y + 8);
+  doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 220, y + 6, { width: 60, align: 'right' });
 
-  // Footer en cada página
-  const range = doc.bufferedPageRange();
-  for (let i = 0; i < range.count; i++) {
+  doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('IMPORTE TOTAL PANAMAR', 313, y + 8);
+  doc.fontSize(17).font('Helvetica-Bold')
+    .text(`${formatNumber(totalImporte, 2)} EUR`, 445, y + 6, { width: 105, align: 'right' });
+
+  // Footer en todas las paginas
+  const pages = doc.bufferedPageRange();
+  for (let i = 0; i < pages.count; i++) {
     doc.switchToPage(i);
-    drawFooter(doc, i + 1, range.count);
+    drawFooter(doc, i + 1, pages.count);
   }
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// EXPORTED FUNCTIONS
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-/**
- * Genera PDF y devuelve un Buffer (para descargas individuales)
- */
-async function generateAlbaranPDF(panamarDoc) {
+async function generateFacturaPDF(panamarDoc) {
   return new Promise((resolve, reject) => {
     try {
       const doc = new PDFDocument({ size: 'A4', margin: 40, bufferPages: true });
       const chunks = [];
-      doc.on('data', c => chunks.push(c));
+      doc.on('data', chunk => chunks.push(chunk));
       doc.on('end', () => resolve(Buffer.concat(chunks)));
       doc.on('error', reject);
       buildDocumentContent(doc, panamarDoc);
       doc.end();
-    } catch (e) { reject(e); }
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
-/**
- * Genera PDF y lo devuelve como Stream (para descargas masivas)
- */
-function generateAlbaranPDFStream(panamarDoc) {
+function generateFacturaPDFStream(panamarDoc) {
   const doc = new PDFDocument({ size: 'A4', margin: 40, bufferPages: true });
   buildDocumentContent(doc, panamarDoc);
   doc.end();
-  return doc; // doc is a Readable stream
+  return doc;
 }
 
+// Alias de compatibilidad para no romper llamadas existentes.
+const generateAlbaranPDF = generateFacturaPDF;
+const generateAlbaranPDFStream = generateFacturaPDFStream;
+
 module.exports = {
+  generateFacturaPDF,
+  generateFacturaPDFStream,
   generateAlbaranPDF,
   generateAlbaranPDFStream
 };
+
