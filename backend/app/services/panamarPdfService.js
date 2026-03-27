@@ -147,11 +147,7 @@ function buildDocumentContent(doc, panamarDoc) {
 
   doc.rect(430, y, 125, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('REF', 435, y + 3);
-  
-  // Usar referencia de cabecera o la primera referencia de linea disponible
-  const firstLineRef = (panamarDoc.lineas && panamarDoc.lineas.length > 0) ? panamarDoc.lineas[0].lineRef : '';
-  const refStr = panamarDoc.referencia || panamarDoc.refPedido || firstLineRef || '-';
-  
+  const refStr = panamarDoc.referencia || panamarDoc.refPedido || panamarDoc.numeroPedido || '-';
   doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.dark)
     .text(String(refStr).substring(0, 20), 435, y + 11);
   y += 26;
@@ -220,9 +216,9 @@ function buildDocumentContent(doc, panamarDoc) {
       doc.text(String(linea.lote || '-').substring(0, 10), 248, y + 3, { width: 45 });
       doc.text(cajas ? formatNumber(cajas, 0) : '-', 295, y + 3, { width: 35, align: 'right' });
       doc.text(unidades ? formatNumber(unidades, 3) : '-', 335, y + 3, { width: 40, align: 'right' });
-      doc.text(formatNumber(precio, 3), 380, y + 3, { width: 45, align: 'right' });
+      doc.text(`${formatNumber(precio, 3)} €`, 380, y + 3, { width: 45, align: 'right' });
       doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 430, y + 3, { width: 35, align: 'right' });
-      doc.text(formatNumber(importe, 2), 470, y + 3, { width: 50, align: 'right' });
+      doc.text(`${formatNumber(importe, 2)} €`, 470, y + 3, { width: 50, align: 'right' });
       doc.text(formatNumber(iva, 0), 525, y + 3, { width: 25, align: 'right' });
 
       y += rowHeight;
@@ -238,7 +234,7 @@ function buildDocumentContent(doc, panamarDoc) {
     doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
     doc.text(`Albarán  ${albKey}     Fecha ${fechaAlb}`, 100, y + 2);
     doc.text(`Total Albarán`, 410, y + 2);
-    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)}`, 470, y + 2, { width: 50, align: 'right' });
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)} €`, 470, y + 2, { width: 50, align: 'right' });
     
     y += 15;
     doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
