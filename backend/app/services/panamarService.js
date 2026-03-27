@@ -15,7 +15,7 @@ const logger = require('../utils/logger');
 
 const PANAMAR_CLIENT_CODE = '9999999999';
 const CONTADO_CLIENT_CODE = '4300005000';
-const PANAMAR_FAMILIAS = ['700', '701', '702', '703', '704', '705', '706'];
+const PANAMAR_FAMILIAS = ['700', '701', '702'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const PANAMAR_CLASES_LINEA_SQL = "'AB', 'RG', 'VT'";
 const TARIFA_PANAMAR_SQL = 'CASE WHEN CAC.MESFACTURA = 1 THEN 84 ELSE 85 END';
@@ -196,16 +196,18 @@ function buildLineFilters(options = {}, alias = 'PL') {
   };
 }
 
-function buildInvoiceKey(codigoCliente, mesFactura, anoFactura) {
+function buildInvoiceKey(codigoCliente, mesFactura, anoFactura, serieFactura, numeroFactura) {
   return [
     String(codigoCliente || '').trim(),
     String(mesFactura || '').trim(),
-    String(anoFactura || '').trim()
+    String(anoFactura || '').trim(),
+    String(serieFactura || '').trim(),
+    String(numeroFactura || '').trim()
   ].join('|');
 }
 
 function buildInvoiceKeyFromLine(line) {
-  return buildInvoiceKey(line.CODIGO_CLIENTE, line.MES_FACTURA, line.ANO_FACTURA);
+  return buildInvoiceKey(line.CODIGO_CLIENTE, line.MES_FACTURA, line.ANO_FACTURA, line.SERIE_FACTURA, line.NUMERO_FACTURA);
 }
 
 function normalizePanamarLine(line) {
@@ -262,7 +264,9 @@ function assembleInvoiceDocuments(headers, lines) {
     const key = buildInvoiceKey(
       header.CODIGO_CLIENTE,
       header.MES_FACTURA,
-      header.ANO_FACTURA
+      header.ANO_FACTURA,
+      header.SERIE_FACTURA,
+      header.NUMERO_FACTURA
     );
 
     const docLines = linesByInvoice.get(key) || [];
@@ -293,6 +297,7 @@ function assembleInvoiceDocuments(headers, lines) {
       numeroFactura: toInt(header.NUMERO_FACTURA),
       ejercicioFactura: toInt(header.EJERCICIO_FACTURA),
       refFactura: `${header.SERIE_FACTURA}-${toInt(header.NUMERO_FACTURA)}`,
+      identity: key,
 
       // Fecha factura
       fecha: formatDate(dia, mes, ano),
@@ -352,7 +357,9 @@ async function getDocuments(options = {}) {
       GROUP BY
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.ANO_FACTURA,
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA
     ) FACTURAS
   `;
 
@@ -402,7 +409,9 @@ async function getDocuments(options = {}) {
       GROUP BY
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.ANO_FACTURA,
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA
     ) H
     ORDER BY
       H.ANO_FACTURA DESC,
@@ -422,16 +431,18 @@ async function getDocuments(options = {}) {
   const invoiceKeys = headers.map(h => ({
     codigoCliente: String(h.CODIGO_CLIENTE).trim(),
     mesFactura: toInt(h.MES_FACTURA),
-    anoFactura: toInt(h.ANO_FACTURA)
+    anoFactura: toInt(h.ANO_FACTURA),
+    serieFactura: String(h.SERIE_FACTURA).trim(),
+    numeroFactura: toInt(h.NUMERO_FACTURA)
   }));
 
-  const invoiceConditions = invoiceKeys.map(() =>
-    '(PL.CODIGO_CLIENTE = ? AND PL.MES_FACTURA = ? AND PL.ANO_FACTURA = ?)'
+  const invoiceConditions = invoiceKeys.map(() => 
+    '(PL.CODIGO_CLIENTE = ? AND PL.MES_FACTURA = ? AND PL.ANO_FACTURA = ? AND PL.SERIE_FACTURA = ? AND PL.NUMERO_FACTURA = ?)'
   ).join(' OR ');
 
   const lineParams = [];
   for (const key of invoiceKeys) {
-    lineParams.push(key.codigoCliente, key.mesFactura, key.anoFactura);
+    lineParams.push(key.codigoCliente, key.mesFactura, key.anoFactura, key.serieFactura, key.numeroFactura);
   }
 
   const linesSQL = `
@@ -497,13 +508,17 @@ async function getInvoiceByIdentity(identity) {
   const params = [
     String(identity.codigoCliente).trim(),
     toInt(identity.mes),
-    toInt(identity.ano)
+    toInt(identity.ano),
+    String(identity.serie || '').trim(),
+    toInt(identity.numero || 0)
   ];
 
   const invoiceWhereSQL = `
     WHERE PL.CODIGO_CLIENTE = ?
       AND PL.MES_FACTURA = ?
       AND PL.ANO_FACTURA = ?
+      AND PL.SERIE_FACTURA = ?
+      AND PL.NUMERO_FACTURA = ?
   `;
 
   const headerSQL = `
@@ -541,7 +556,9 @@ async function getInvoiceByIdentity(identity) {
     GROUP BY
       PL.CODIGO_CLIENTE,
       PL.MES_FACTURA,
-      PL.ANO_FACTURA
+      PL.ANO_FACTURA,
+      PL.SERIE_FACTURA,
+      PL.NUMERO_FACTURA
   `;
 
   const linesSQL = `
@@ -600,7 +617,9 @@ async function getDocumentByKey(key) {
     SELECT
       ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
       MAX(CAC.MESFACTURA) AS MES_FACTURA,
-      MAX(CAC.ANOFACTURA) AS ANO_FACTURA
+      MAX(CAC.ANOFACTURA) AS ANO_FACTURA,
+      TRIM(CAC.SERIEFACTURA) AS SERIE_FACTURA,
+      MAX(CAC.NUMEROFACTURA) AS NUMERO_FACTURA
     FROM DSEDAC.CAC CAC
     WHERE TRIM(CAC.SUBEMPRESAALBARAN) = ?
       AND CAC.EJERCICIOALBARAN = ?
@@ -610,7 +629,7 @@ async function getDocumentByKey(key) {
       AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
       AND CAC.NUMEROFACTURA > 0
       AND TRIM(CAC.SERIEFACTURA) <> ''
-    GROUP BY ${RESOLVED_CLIENT_EXPR}
+    GROUP BY ${RESOLVED_CLIENT_EXPR}, TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA
     FETCH FIRST 1 ROWS ONLY
   `;
 
@@ -630,7 +649,9 @@ async function getDocumentByKey(key) {
   const invoiceIdentity = {
     codigoCliente: ref[0].CODIGO_CLIENTE,
     mes: ref[0].MES_FACTURA,
-    ano: ref[0].ANO_FACTURA
+    ano: ref[0].ANO_FACTURA,
+    serie: ref[0].SERIE_FACTURA,
+    numero: ref[0].NUMERO_FACTURA
   };
 
   const doc = await getInvoiceByIdentity(invoiceIdentity);

@@ -229,20 +229,15 @@ async function generateInvoicePDF(facturaData) {
          y += 10;
 
          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         // TÍTULO DE FACTURA - BANNER DESTACADO
+         // TÍTULO DE FACTURAR - BANNER DESTACADO
          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
          doc.rect(40, y, 515, 32)
             .fillAndStroke(COLORS.secondary, COLORS.secondary);
 
-         // Determinar si es una factura recopilada (típico de Panamar o resúmenes mensuales)
-         const numFacturaRaw = (header.NUMEROFACTURA || '').toString();
-         const isRecopilada = numFacturaRaw.includes('MES:') || header.SERIEFACTURA === 'R' || header.ES_RECOPILADA;
-         const tituloDoc = isRecopilada ? 'FACTURA RECOPILADA' : 'FACTURA';
-
-         doc.fontSize(isRecopilada ? 14 : 18)
+         doc.fontSize(18)
             .font('Helvetica-Bold')
             .fillColor(COLORS.white)
-            .text(tituloDoc, 50, y + 10);
+            .text('FACTURA', 50, y + 10);
 
          const numFactura = header.SERIEFACTURA ? `${header.SERIEFACTURA}-${header.NUMEROFACTURA}` : header.NUMEROFACTURA;
          doc.fontSize(16)
