@@ -58,6 +58,9 @@ PANAMAR_LINEAS AS (
     CAC.DIAFACTURA AS DIA_FACTURA,
     CAC.MESFACTURA AS MES_FACTURA,
     CAC.ANOFACTURA AS ANO_FACTURA,
+    CAC.DIA AS DIA_ALBARAN,
+    CAC.MES AS MES_ALBARAN,
+    CAC.ANO AS ANO_ALBARAN,
     CAC.HORADOCUMENTO AS HORA_DOCUMENTO,
     ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
     ${RESOLVED_CLIENT_NAME_EXPR} AS NOMBRE_CLIENTE,
@@ -244,7 +247,11 @@ function normalizePanamarLine(line) {
     usaTarifaEspecial: precioTarifa > 0,
     usaTarifa85: precioTarifa > 0,
     tipoVenta: line.TIPO_VENTA || '',
-    iva: toNumber(line.IVA)
+    iva: toNumber(line.IVA),
+    dia: toInt(line.DIA_ALBARAN),
+    mes: toInt(line.MES_ALBARAN),
+    ano: toInt(line.ANO_ALBARAN),
+    fechaAlbaran: `${pad2(line.DIA_ALBARAN)}.${pad2(line.MES_ALBARAN)}.${line.ANO_ALBARAN}`
   };
 }
 
@@ -469,7 +476,10 @@ async function getDocuments(options = {}) {
       PL.DESCUENTO,
       PL.IMPORTEVENTA,
       PL.TIPO_VENTA,
-      PL.PRECIO_TARIFA_PANAMAR
+      PL.PRECIO_TARIFA_PANAMAR,
+      PL.DIA_ALBARAN,
+      PL.MES_ALBARAN,
+      PL.ANO_ALBARAN
     FROM PANAMAR_LINEAS PL
     WHERE (${invoiceConditions})
     ORDER BY
@@ -586,7 +596,10 @@ async function getInvoiceByIdentity(identity) {
       PL.IVA,
       PL.IMPORTEVENTA,
       PL.TIPO_VENTA,
-      PL.PRECIO_TARIFA_PANAMAR
+      PL.PRECIO_TARIFA_PANAMAR,
+      PL.DIA_ALBARAN,
+      PL.MES_ALBARAN,
+      PL.ANO_ALBARAN
     FROM PANAMAR_LINEAS PL
     ${invoiceWhereSQL}
     ORDER BY
@@ -690,13 +703,17 @@ async function getSummary(options = {}) {
       SELECT
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.ANO_FACTURA,
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
         PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.ANO_FACTURA,
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA
     ) F
   `;
 

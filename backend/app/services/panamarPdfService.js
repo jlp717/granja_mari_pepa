@@ -64,93 +64,110 @@ function pad2(n) {
   return String(n || '').padStart(2, '0');
 }
 
-function drawHeader(doc, yStart = 20) {
+function drawHeader(doc, yStart = 10) {
   let y = yStart;
-
-  // Franja superior azul corporativa
-  doc.rect(0, 0, 595.28, 4).fillAndStroke('#003d7a', '#003d7a');
+  doc.rect(0, 0, 595.28, 5).fillAndStroke(COLORS.secondary, COLORS.secondary);
   y += 5;
 
   if (HEADER_BUFFER) {
     try {
-      // Diseño tradicional: El logo ocupa un espacio rectangular a la izquierda
-      // y la información de distribución está al lado.
-      // Usamos la imagen disponible pero ajustada para que parezca el diseño tradicional.
-      doc.image(HEADER_BUFFER, 40, y, { width: 515, height: 100 });
-      return y + 110;
+      doc.image(HEADER_BUFFER, 40, y, { width: 515, height: 138 });
+      return y + 148;
     } catch (error) {
       logger.warn('PANAMAR PDF: Error renderizando header de imagen', { error: error.message });
     }
   }
 
-  // Fallback de texto si falla la imagen
-  doc.fontSize(24).font('Helvetica-Bold').fillColor('#003d7a').text('MARI PEPA', 40, y);
-  doc.fontSize(10).fillColor('#333').text('Food & Frozen', 40, y + 25);
-  return y + 50;
+  doc.rect(40, y, 515, 118).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  y += 16;
+  doc.fontSize(34).font('Helvetica-Bold').fillColor(COLORS.primary).text(EMPRESA.nombre, 50, y);
+  y += 42;
+  doc.fontSize(11).font('Helvetica').fillColor(COLORS.dark).text('Food & Frozen para Hosteleria', 50, y);
+  doc.fontSize(9).fillColor(COLORS.secondary).text(EMPRESA.web, 435, y, { align: 'right', width: 110 });
+  y += 18;
+  return y + 8;
+}
+
+function drawFooter(doc, pageNum, totalPages) {
+  const footerY = 770;
+  doc.moveTo(40, footerY).lineTo(555, footerY).strokeColor(COLORS.light).lineWidth(0.5).stroke();
+  doc.fontSize(6).font('Helvetica').fillColor(COLORS.medium)
+    .text(EMPRESA.registro, 40, footerY + 5, { align: 'center', width: 515 });
+  doc.fontSize(7).fillColor(COLORS.medium)
+    .text(`Pagina ${pageNum} de ${totalPages}`, 40, footerY + 13, { align: 'center', width: 515 });
+}
+
+function drawLineHeader(doc, y) {
+  doc.rect(40, y, 515, 16).fillAndStroke(COLORS.secondary, COLORS.secondary);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
+
+  doc.text('CODIGO', 42, y + 5, { width: 45 });
+  doc.text('DESCRIPCION', 90, y + 5, { width: 155 });
+  doc.text('LOTE', 248, y + 5, { width: 45 });
+  doc.text('CAJAS', 295, y + 5, { width: 35, align: 'right' });
+  doc.text('UNID.', 335, y + 5, { width: 40, align: 'right' });
+  doc.text('PRECIO', 380, y + 5, { width: 45, align: 'right' });
+  doc.text('% DTO.', 430, y + 5, { width: 35, align: 'right' });
+  doc.text('IMPORTE', 470, y + 5, { width: 50, align: 'right' });
+  doc.text('IVA', 525, y + 5, { width: 25, align: 'right' });
+
+  return y + 18;
 }
 
 function buildDocumentContent(doc, panamarDoc) {
   const lineas = panamarDoc.lineas || [];
-  const fecha = `${pad2(panamarDoc.dia)}.${pad2(panamarDoc.mes)}.${panamarDoc.ano || ''}`;
+  const fecha = `${pad2(panamarDoc.dia)}/${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`;
+  const hora = panamarDoc.hora || '-';
 
-  let y = drawHeader(doc, 20);
-
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // CUADRO DE INFORMACIÓN (CLIENTE, FACTURA, FECHA) - Imagen 2
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  const gridY = y;
-  const col1 = 40, col2 = 210, col3 = 380;
-  const rowH = 15;
-
-  // Dibujar tabla de cabecera (Grid)
-  doc.lineWidth(0.5).strokeColor('#000');
-  doc.rect(col1, gridY, col3 - col1, rowH * 2).stroke();
-  doc.moveTo(210, gridY).lineTo(210, gridY + rowH * 2).stroke();
-  doc.moveTo(380, gridY).lineTo(380, gridY + rowH * 2).stroke();
-  doc.moveTo(col1, gridY + rowH).lineTo(col3, gridY + rowH).stroke();
-
-  // Textos del Grid
-  doc.fontSize(9).font('Helvetica-Bold').fillColor('#000');
-  doc.text('CLIENTE', col1 + 5, gridY + 3);
-  doc.text('FACTURA', col2 + 5, gridY + 3);
-  doc.text('FECHA', col3 + 5, gridY + 3);
-
-  doc.font('Helvetica');
-  doc.text(panamarDoc.codigoCliente || '', col1 + 5, gridY + rowH + 3);
-  const refFactura = panamarDoc.refFactura || '-';
-  doc.text(refFactura, col2 + 5, gridY + rowH + 3);
-  doc.text(fecha, col3 + 5, gridY + rowH + 3);
-
-  // Cuadro de dirección y nombre a la derecha
-  doc.rect(col3, gridY - 20, 175, rowH * 5 + 5).stroke();
-  doc.fontSize(9).font('Helvetica-Bold').text((panamarDoc.nombreCliente || '').toUpperCase(), col3 + 5, gridY - 15, { width: 165 });
-  
-  y = gridY + (rowH * 5) + 15;
-
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // CABECERA DE TABLA DE PRODUCTOS
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  doc.lineWidth(0.5).moveTo(40, y).lineTo(555, y).stroke();
-  y += 2;
-  doc.fontSize(7).font('Helvetica-Bold');
-  doc.text('Lote', 45, y);
-  doc.text('Ref.', 110, y);
-  doc.text('Descripción', 160, y);
-  doc.text('Cajas', 350, y, { width: 35, align: 'right' });
-  doc.text('Uds./Kgs.', 395, y, { width: 45, align: 'right' });
-  doc.text('Precio', 450, y, { width: 40, align: 'right' });
-  doc.text('% Dto.', 495, y, { width: 30, align: 'right' });
-  doc.text('Importe', 530, y, { width: 40, align: 'right' });
-  doc.text('IVA', 575, y, { width: 20 }); 
-  
-  // Reajuste de columnas para que quepan
+  let y = drawHeader(doc, 10);
   y += 10;
-  doc.moveTo(40, y).lineTo(555, y).stroke();
-  y += 5;
 
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // LÍNEAS DE PRODUCTOS - Agrupadas por albarán
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // Banner principal - Sin la palabra "PANAMAR"
+  doc.rect(40, y, 515, 34).fillAndStroke(COLORS.secondary, COLORS.secondary);
+  doc.fontSize(16).font('Helvetica-Bold').fillColor(COLORS.white)
+    .text('FACTURA RECOPILADA', 50, y + 10);
+  
+  const headerRightText = panamarDoc.refFactura ? `FACTURA: ${panamarDoc.refFactura}` : `MES: ${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`;
+  doc.fontSize(12).font('Helvetica-Bold')
+    .text(headerRightText, 390, y + 10, { width: 160, align: 'right' });
+  y += 40;
+
+  // Fila de datos de cabecera
+  doc.rect(40, y, 165, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('CODIGO CLIENTE', 45, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(panamarDoc.codigoCliente || '', 45, y + 11);
+
+  doc.rect(210, y, 120, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FECHA INFORME', 215, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(fecha, 215, y + 11);
+
+  doc.rect(335, y, 90, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('HORA', 340, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(hora, 340, y + 11);
+
+  doc.rect(430, y, 125, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('REF', 435, y + 3);
+  const refStr = panamarDoc.referencia || panamarDoc.refPedido || '-';
+  doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.dark)
+    .text(String(refStr).substring(0, 20), 435, y + 11);
+  y += 26;
+
+  // Negocio
+  doc.rect(40, y, 515, 52).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  y += 8;
+  doc.fontSize(8).font('Helvetica-Bold').fillColor(COLORS.secondary).text('NEGOCIO', 45, y);
+  y += 14;
+  doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.dark)
+    .text((panamarDoc.nombreCliente || panamarDoc.codigoCliente || '').toUpperCase(), 45, y, { width: 500 });
+  y += 18;
+  doc.fontSize(8).font('Helvetica').fillColor(COLORS.medium)
+    .text('Informe de consumo mensual (sin datos personales)', 45, y, { width: 500 });
+  y += 18;
+
+  // Tabla de lineas
+  y = drawLineHeader(doc, y);
+
+  // Group lines by Albaran
   const albaranes = [];
   const lineasPorAlbaran = {};
 
@@ -164,94 +181,84 @@ function buildDocumentContent(doc, panamarDoc) {
   });
 
   let totalCajas = 0;
-  let totalImporteSinIva = 0;
+  let totalImporte = 0;
 
   albaranes.forEach(albKey => {
     const albLines = lineasPorAlbaran[albKey];
-    let subtotalAlbSinIva = 0;
-    let subtotalAlbConIva = 0;
+    let totalAlb = 0;
+    const firstLine = albLines[0];
+    const fechaAlb = firstLine.fechaAlbaran || fecha;
 
-    albLines.forEach(line => {
-      if (y > 750) {
+    albLines.forEach((linea) => {
+      const descripcion = String(linea.descripcion || '').substring(0, 42);
+      const rowHeight = 15;
+
+      if (y + rowHeight > 730) {
         doc.addPage();
-        y = drawHeader(doc, 20) + 10;
+        y = drawHeader(doc, 10) + 10;
+        y = drawLineHeader(doc, y);
       }
 
-      const cajas = Number(line.cajas) || 0;
-      const unidades = Number(line.unidades) || 0;
-      const precio = Number(line.precioCobro ?? line.precioUnitario ?? 0) || 0;
-      const importe = Number(line.importe) || 0;
-      const dto = Number(line.descuento) || 0;
-      const iva = Number(line.iva) || 4;
+      const cajas = Number(linea.cajas) || 0;
+      const unidades = Number(linea.unidades) || 0;
+      const precio = Number(linea.precioCobro ?? linea.precioUnitario ?? 0) || 0;
+      const importe = Number(linea.importe) || 0;
+      const dto = Number(linea.descuento) || 0;
+      const iva = Number(linea.iva || 4); // Panamar es mayormente 4%
 
       totalCajas += cajas;
-      totalImporteSinIva += importe;
-      subtotalAlbSinIva += importe;
-      subtotalAlbConIva += importe * (1 + iva / 100);
+      totalImporte += importe;
+      totalAlb += importe * (1 + iva / 100);
 
-      doc.fontSize(7).font('Helvetica').fillColor('#000');
-      doc.text(String(line.lote || '-').substring(0, 15), 45, y);
-      doc.text(String(line.codigoArticulo || ''), 110, y);
-      doc.text(String(line.descripcion || '').substring(0, 50), 160, y);
-      doc.text(cajas ? formatNumber(cajas, 2) : '0,00', 350, y, { width: 35, align: 'right' });
-      doc.text(formatNumber(unidades, 3), 395, y, { width: 45, align: 'right' });
-      doc.text(formatNumber(precio, 4), 450, y, { width: 40, align: 'right' });
-      doc.text(dto > 0 ? formatNumber(dto, 2) : '', 495, y, { width: 30, align: 'right' });
-      doc.text(formatNumber(importe, 2), 530, y, { width: 40, align: 'right' });
-      doc.text(formatNumber(iva, 0), 575, y, { width: 20 });
+      doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
+      doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 45 });
+      doc.text(descripcion, 90, y + 3, { width: 155 });
+      doc.text(String(linea.lote || '-').substring(0, 10), 248, y + 3, { width: 45 });
+      doc.text(cajas ? formatNumber(cajas, 0) : '-', 295, y + 3, { width: 35, align: 'right' });
+      doc.text(unidades ? formatNumber(unidades, 3) : '-', 335, y + 3, { width: 40, align: 'right' });
+      doc.text(formatNumber(precio, 3), 380, y + 3, { width: 45, align: 'right' });
+      doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 430, y + 3, { width: 35, align: 'right' });
+      doc.text(formatNumber(importe, 2), 470, y + 3, { width: 50, align: 'right' });
+      doc.text(formatNumber(iva, 0), 525, y + 3, { width: 25, align: 'right' });
 
-      y += 10;
+      y += rowHeight;
     });
 
-    // Línea de referencia del albarán debajo (Imagen 2)
-    const first = albLines[0];
-    const fechaAlb = `${pad2(first.dia)}.${pad2(first.mes)}.${first.ano}`;
-    doc.fontSize(7).font('Helvetica-Bold').fillColor('#333');
-    doc.text('Albarán', 110, y);
-    doc.font('Helvetica').text(`${albKey}`, 160, y);
-    doc.font('Helvetica-Bold').text('Fecha', 220, y);
-    doc.font('Helvetica').text(fechaAlb, 260, y);
-
-    // Total del albarán (con IVA como en Imagen 2)
-    doc.fontSize(8).font('Helvetica-Bold').fillColor('#000');
-    doc.text('Total Albarán', 440, y);
-    doc.text(formatNumber(subtotalAlbConIva, 2), 530, y, { width: 40, align: 'right' });
+    // Sub-header de Albarán (estilo screenshot)
+    if (y + 15 > 730) {
+      doc.addPage();
+      y = drawHeader(doc, 10) + 10;
+      y = drawLineHeader(doc, y);
+    }
+    
+    doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
+    doc.text(`Albarán  ${albKey}     Fecha ${fechaAlb}`, 100, y + 2);
+    doc.text(`Total Albarán`, 410, y + 2);
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)}`, 470, y + 2, { width: 50, align: 'right' });
     
     y += 15;
-    doc.moveTo(40, y).lineTo(555, y).lineWidth(0.2).stroke();
+    doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
     y += 5;
   });
 
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // BLOQUE DE TOTALES FINALES (Consumo e Importe)
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  y = Math.max(y, 700);
-  
-  // Cuadro Consumo
-  doc.rect(40, y, 250, 40).fillAndStroke('#2E8B57', '#2E8B57');
-  doc.fontSize(11).font('Helvetica-Bold').fillColor('#FFF').text('CONSUMO TOTAL (CAJAS)', 50, y + 15);
-  doc.fontSize(18).text(formatNumber(totalCajas, 0), 220, y + 12, { width: 60, align: 'right' });
+  y += 10;
 
-  // Cuadro Importe
-  doc.rect(305, y, 250, 40).fillAndStroke('#E67E22', '#E67E22');
-  doc.fontSize(11).font('Helvetica-Bold').fillColor('#FFF').text('IMPORTE TOTAL (SIN IVA)', 315, y + 15);
-  doc.fontSize(18).text(`${formatNumber(totalImporteSinIva, 2)} €`, 440, y + 12, { width: 105, align: 'right' });
+  // Totales
+  doc.rect(40, y, 250, 34).fillAndStroke(COLORS.success, COLORS.success);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('CONSUMO TOTAL (CAJAS)', 48, y + 8);
+  doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 220, y + 6, { width: 60, align: 'right' });
 
-  // Paginación y footer
+  doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('IMPORTE TOTAL', 313, y + 8);
+  doc.fontSize(17).font('Helvetica-Bold')
+    .text(`${formatNumber(totalImporte, 2)} €`, 445, y + 6, { width: 105, align: 'right' });
+
+  // Footer en todas las paginas
   const pages = doc.bufferedPageRange();
   for (let i = 0; i < pages.count; i++) {
     doc.switchToPage(i);
     drawFooter(doc, i + 1, pages.count);
   }
-}
-
-function drawFooter(doc, pageNum, totalPages) {
-  const footerY = 770;
-  doc.lineWidth(0.5).moveTo(40, footerY).lineTo(555, footerY).strokeColor('#ccc').stroke();
-  doc.fontSize(6).font('Helvetica').fillColor('#666')
-    .text(EMPRESA.registro, 40, footerY + 5, { align: 'center', width: 515 });
-  doc.fontSize(7)
-    .text(`Página ${pageNum} de ${totalPages}`, 40, footerY + 13, { align: 'center', width: 515 });
 }
 
 async function generateFacturaPDF(panamarDoc) {
