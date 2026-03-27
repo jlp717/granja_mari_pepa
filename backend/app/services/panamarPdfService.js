@@ -219,7 +219,7 @@ function buildDocumentContent(doc, panamarDoc) {
       doc.text(`${formatNumber(precio, 3)} €`, 380, y + 3, { width: 45, align: 'right' });
       doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 430, y + 3, { width: 35, align: 'right' });
       doc.text(`${formatNumber(importe, 2)} €`, 470, y + 3, { width: 50, align: 'right' });
-      doc.text(formatNumber(iva, 0), 525, y + 3, { width: 25, align: 'right' });
+      doc.text(`${formatNumber(iva, 0)} %`, 525, y + 3, { width: 25, align: 'right' });
 
       y += rowHeight;
     });
