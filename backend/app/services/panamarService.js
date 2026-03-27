@@ -192,7 +192,7 @@ function buildLineFilters(options = {}, alias = 'PL') {
   };
 }
 
-function buildInvoiceKey(codigoCliente, ejercicioFactura, serieFactura, numeroFactura) {
+function buildInvoiceKey(codigoCliente, mesFactura, anoFactura) {
   return [
     String(codigoCliente || '').trim(),
     String(mesFactura || '').trim(),
@@ -341,9 +341,8 @@ async function getDocuments(options = {}) {
     FROM (
       SELECT
         PL.CODIGO_CLIENTE,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA,
-        PL.EJERCICIO_FACTURA
+        PL.MES_FACTURA,
+        PL.ANO_FACTURA
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
