@@ -309,9 +309,13 @@ export function PanamarDashboard() {
   }, [fetchClients]);
 
   // ── Handlers ─────────────────────────────────────────────────────
-  const handleSearch = () => {
-    setFilters(prev => ({ ...prev, page: 1, busqueda: searchInput || undefined }));
-  };
+  // Debounce para búsqueda automática mientras se escribe
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFilters(prev => ({ ...prev, page: 1, busqueda: searchInput || undefined }));
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
   const handleFilterChange = (key: keyof PanamarFilters, value: string | number | undefined) => {
     setFilters(prev => ({ ...prev, page: 1, [key]: value || undefined }));
@@ -744,7 +748,7 @@ export function PanamarDashboard() {
                   placeholder="Buscar por albarán, factura, cliente o pedido..."
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  onKeyDown={(e) => e.key === 'Enter' && setSearchInput(e.currentTarget.value)}
                   className="pl-10 bg-gray-50/50 focus:ring-2 focus:ring-orange-500"
                 />
               </div>
@@ -1028,19 +1032,13 @@ export function PanamarDashboard() {
               />
               <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                 {searchInput && (
-                  <button 
-                    onClick={() => { setSearchInput(''); setFilters(prev => ({ ...prev, busqueda: undefined })); }}
+                  <button
+                    onClick={() => { setSearchInput(''); }}
                     className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 )}
-                <Button 
-                  onClick={handleSearch}
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold h-10 px-4 rounded-lg shadow-sm"
-                >
-                  Buscar
-                </Button>
               </div>
             </div>
           </div>

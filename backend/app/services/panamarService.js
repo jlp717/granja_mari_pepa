@@ -174,6 +174,8 @@ function buildLineFilters(options = {}, alias = 'PL') {
 
   if (options.busqueda && String(options.busqueda).trim()) {
     const searchTerm = `%${String(options.busqueda).trim().toUpperCase()}%`;
+    const searchClean = String(options.busqueda).trim().toUpperCase().replace(/[-\s]/g, '');
+    
     clauses.push(`(
       UPPER(COALESCE(${alias}.REF_PEDIDO, '')) LIKE ?
       OR UPPER(COALESCE(${alias}.NOMBRE_CLIENTE, '')) LIKE ?
@@ -182,8 +184,10 @@ function buildLineFilters(options = {}, alias = 'PL') {
       OR CAST(${alias}.NUMERO_FACTURA AS VARCHAR(20)) LIKE ?
       OR CAST(${alias}.NUMERO_ALBARAN AS VARCHAR(20)) LIKE ?
       OR UPPER(COALESCE(${alias}.SERIE_FACTURA, '')) LIKE ?
+      OR UPPER(CONCAT(${alias}.SERIE_FACTURA, ${alias}.NUMERO_FACTURA)) LIKE ?
+      OR REPLACE(REPLACE(UPPER(CONCAT(${alias}.SERIE_FACTURA, ${alias}.NUMERO_FACTURA)), '-', ''), ' ', '') LIKE ?
     )`);
-    params.push(searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm);
+    params.push(searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, `%${searchClean}%`);
   }
 
   return {
