@@ -438,6 +438,8 @@ async function getDocuments(options = {}) {
     ${PANAMAR_LINEAS_CTE}
     SELECT
       PL.CODIGO_CLIENTE,
+      PL.MES_FACTURA,
+      PL.ANO_FACTURA,
       PL.SERIE_FACTURA,
       PL.NUMERO_FACTURA,
       PL.EJERCICIO_FACTURA,
@@ -546,6 +548,8 @@ async function getInvoiceByIdentity(identity) {
     ${PANAMAR_LINEAS_CTE}
     SELECT
       PL.CODIGO_CLIENTE,
+      PL.MES_FACTURA,
+      PL.ANO_FACTURA,
       PL.SERIE_FACTURA,
       PL.NUMERO_FACTURA,
       PL.EJERCICIO_FACTURA,

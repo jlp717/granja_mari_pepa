@@ -126,8 +126,10 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.rect(40, y, 515, 34).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(16).font('Helvetica-Bold').fillColor(COLORS.white)
     .text('FACTURA RECOPILADA', 50, y + 10);
+  
+  const headerRightText = panamarDoc.refFactura ? `FACTURA: ${panamarDoc.refFactura}` : `MES: ${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`;
   doc.fontSize(12).font('Helvetica-Bold')
-    .text(`MES: ${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`, 390, y + 10, { width: 160, align: 'right' });
+    .text(headerRightText, 390, y + 10, { width: 160, align: 'right' });
   y += 40;
 
   // Fila de datos de cabecera
