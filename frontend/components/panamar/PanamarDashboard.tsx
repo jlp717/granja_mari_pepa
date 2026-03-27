@@ -914,18 +914,6 @@ export function PanamarDashboard() {
 
         {/* Filter Panel - Premium Design */}
         <div className="bg-white rounded-2xl border-2 border-orange-100 p-6 space-y-5 shadow-lg">
-          {/* Search (mobile) */}
-          <div className="md:hidden relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-500" />
-            <Input
-              placeholder="Buscar por albarán, factura, cliente o pedido..."
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="pl-12 h-14 border-2 border-gray-200 bg-gray-50 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium"
-            />
-          </div>
-
           {/* Filters Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Ejercicio (fijado a 2026) */}
@@ -996,15 +984,15 @@ export function PanamarDashboard() {
                         <button
                           key={client.codigoCliente}
                           onClick={() => { handleFilterChange('codigoCliente', client.codigoCliente); setClientDropdownOpen(false); }}
-                          className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 ${filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
+                          className={`w-full text-left px-4 py-3 text-sm hover:bg-orange-50 transition-colors border-b border-gray-50 group ${filters.codigoCliente === client.codigoCliente ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-700 font-medium'
                             }`}
                         >
                           <div className="flex items-center justify-between">
-                            <div className="truncate font-bold text-gray-900">{client.nombreCliente}</div>
-                            <div className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-mono">{client.codigoCliente}</div>
+                            <div className="truncate">{client.nombreCliente}</div>
+                            <div className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-mono ml-2 group-hover:bg-orange-100 transition-colors">{client.codigoCliente}</div>
                           </div>
                           {client.nombreFiscal && client.nombreFiscal !== client.nombreCliente && (
-                            <div className="text-xs text-gray-400 italic truncate mt-0.5">
+                            <div className="text-[11px] text-gray-400 italic truncate mt-0.5 opacity-80">
                               {client.nombreFiscal}
                             </div>
                           )}
@@ -1020,6 +1008,40 @@ export function PanamarDashboard() {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Unified Search Bar (Now between filters and months) */}
+          <div className="relative group">
+            <label className="text-sm font-bold text-orange-600 flex items-center mb-2">
+              <Search className="w-4 h-4 mr-2" />
+              Buscador Dinámico (Albarán, Factura, Pedido...)
+            </label>
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-400 group-focus-within:text-orange-600 transition-colors" />
+              <Input
+                placeholder="Introduzca el número de albarán o factura..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                className="pl-12 pr-32 h-14 border-2 border-gray-100 bg-gray-50/50 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium transition-all"
+              />
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                {searchInput && (
+                  <button 
+                    onClick={() => { setSearchInput(''); setFilters(prev => ({ ...prev, busqueda: undefined })); }}
+                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                )}
+                <Button 
+                  onClick={handleSearch}
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold h-10 px-4 rounded-lg shadow-sm"
+                >
+                  Buscar
+                </Button>
+              </div>
             </div>
           </div>
 

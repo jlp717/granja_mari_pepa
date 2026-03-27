@@ -325,7 +325,8 @@ async function obtenerPerfil(req, res) {
 async function obtenerFacturas(req, res) {
   try {
     const { codigoCliente } = req.params;
-    const { search } = req.query;
+    const { search, busqueda } = req.query;
+    const searchParam = search || busqueda;
 
     // 1. OBTENER CÓDIGOS VINCULADOS (POR NIF)
     let codigosVinculados = [`'${codigoCliente}'`]; // Por defecto, solo el propio código
@@ -357,8 +358,8 @@ async function obtenerFacturas(req, res) {
     // 2. APLICAR FILTROS ESPECÍFICOS
     // Búsqueda dinámica (opcional si se pasa por query)
     let searchFilter = "";
-    if (search && search.trim()) {
-      const s = search.trim().toUpperCase();
+    if (searchParam && searchParam.trim()) {
+      const s = searchParam.trim().toUpperCase();
       searchFilter = `AND (
         UPPER(CAC.SERIEFACTURA) LIKE '%${s}%' 
         OR CAST(CAC.NUMEROFACTURA AS CHAR(20)) LIKE '%${s}%'
