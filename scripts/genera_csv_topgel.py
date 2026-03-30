@@ -2,10 +2,11 @@ import requests
 import csv
 from datetime import date, timedelta
 
-# ==================== CREDENCIALES ====================
-ACTIVITY_UID = "ASOC-B04008710"
-USERNAME     = "B04008710@asociado.topgel.es"
-PASSWORD     = "0019-B04008710"
+# ==================== CREDENCIALES (usar variables de entorno) ====================
+import os
+ACTIVITY_UID = os.getenv("TOPGEL_ACTIVITY_UID", "TU_ACTIVITY_UID")
+USERNAME     = os.getenv("TOPGEL_USERNAME", "TU_USERNAME")
+PASSWORD     = os.getenv("TOPGEL_PASSWORD", "TU_PASSWORD")
 
 # ==================== URL ====================
 BASE_URL = "https://api.b2bgrupotopgel.es"
