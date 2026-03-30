@@ -46,7 +46,7 @@ WITH TARIFAS_PANAMAR AS (
   GROUP BY TRIM(ARA.CODIGOARTICULO), ARA.CODIGOTARIFA
 ),
 PANAMAR_LINEAS AS (
-  SELECT DISTINCT
+  SELECT
     TRIM(CAC.SUBEMPRESAALBARAN) AS SUBEMPRESA_ALBARAN,
     CAC.EJERCICIOALBARAN AS EJERCICIO_ALBARAN,
     TRIM(CAC.SERIEALBARAN) AS SERIE_ALBARAN,
@@ -117,8 +117,8 @@ function buildLineFilters(options = {}, alias = 'PL') {
   const clauses = [];
   const params = [];
 
-  // El panel PANAMAR trabaja sobre ano calendario fijo.
-  clauses.push(`${alias}.ANO_FACTURA = ?`);
+  // El panel PANAMAR trabaja sobre ejercicio de albarán (consumo).
+  clauses.push(`${alias}.ANO_ALBARAN = ?`);
   params.push(ANO_FIJO);
 
   if (options.fechaDesde) {
@@ -178,7 +178,7 @@ function buildLineFilters(options = {}, alias = 'PL') {
   if (options.busqueda && String(options.busqueda).trim()) {
     const searchTerm = `%${String(options.busqueda).trim().toUpperCase()}%`;
     const searchClean = String(options.busqueda).trim().toUpperCase().replace(/[-\s]/g, '');
-    
+
     clauses.push(`(
       UPPER(COALESCE(${alias}.REF_PEDIDO, '')) LIKE ?
       OR UPPER(COALESCE(${alias}.NOMBRE_CLIENTE, '')) LIKE ?
@@ -441,7 +441,7 @@ async function getDocuments(options = {}) {
     numeroFactura: toInt(h.NUMERO_FACTURA)
   }));
 
-  const invoiceConditions = invoiceKeys.map(() => 
+  const invoiceConditions = invoiceKeys.map(() =>
     '(PL.CODIGO_CLIENTE = ? AND PL.MES_FACTURA = ? AND PL.ANO_FACTURA = ? AND PL.SERIE_FACTURA = ? AND PL.NUMERO_FACTURA = ?)'
   ).join(' OR ');
 
@@ -717,11 +717,11 @@ async function getSummary(options = {}) {
       COALESCE(SUM(
         CASE
           WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
+            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) <> 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
           ELSE PL.IMPORTEVENTA
         END
       ), 0) AS TOTAL_IMPORTE,
-      COALESCE(SUM(CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE 0 END), 0) AS TOTAL_CAJAS,
+      COALESCE(SUM(COALESCE(PL.CAJAS, 0)), 0) AS TOTAL_CAJAS,
       COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'CC' THEN COALESCE(PL.CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_CC,
       COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN COALESCE(PL.CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_SC
     FROM PANAMAR_LINEAS PL
