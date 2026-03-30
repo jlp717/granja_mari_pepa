@@ -15,7 +15,7 @@ const logger = require('../utils/logger');
 
 const PANAMAR_CLIENT_CODE = '9999999999';
 const CONTADO_CLIENT_CODE = '4300005000';
-const PANAMAR_FAMILIAS = ['700', '701', '702'];
+const PANAMAR_FAMILIAS = ['700', '701', '702', '703', '704', '705', '706'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const PANAMAR_CLASES_LINEA_SQL = "'AB', 'RG', 'VT'";
 const TARIFA_PANAMAR_SQL = 'CASE WHEN CAC.MESFACTURA = 1 THEN 84 ELSE 85 END';
@@ -58,9 +58,9 @@ PANAMAR_LINEAS AS (
     CAC.DIAFACTURA AS DIA_FACTURA,
     CAC.MESFACTURA AS MES_FACTURA,
     CAC.ANOFACTURA AS ANO_FACTURA,
-    CAC.DIAFACTURA AS DIA_ALBARAN,
-    CAC.MESFACTURA AS MES_ALBARAN,
-    CAC.ANOFACTURA AS ANO_ALBARAN,
+    CAC.DIADOCUMENTO AS DIA_ALBARAN,
+    CAC.MESDOCUMENTO AS MES_ALBARAN,
+    CAC.ANODOCUMENTO AS ANO_ALBARAN,
     CAC.HORADOCUMENTO AS HORA_DOCUMENTO,
     ${RESOLVED_CLIENT_EXPR} AS CODIGO_CLIENTE,
     ${RESOLVED_CLIENT_NAME_EXPR} AS NOMBRE_CLIENTE,
@@ -101,7 +101,7 @@ PANAMAR_LINEAS AS (
   LEFT JOIN TARIFAS_PANAMAR TP
     ON TRIM(LAC.CODIGOARTICULO) = TP.CODIGO_ARTICULO
     AND TP.CODIGOTARIFA = ${TARIFA_PANAMAR_SQL}
-  WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
+  WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
     AND CAC.NUMEROFACTURA > 0
     AND TRIM(CAC.SERIEFACTURA) <> ''
     AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
@@ -132,7 +132,7 @@ function buildLineFilters(options = {}, alias = 'PL') {
   if (options.fechaHasta) {
     const fh = parseDate(options.fechaHasta);
     if (fh) {
-      clauses.push(`(${alias}.ANO_FACTURA * 10000 + ${alias}.MES_FACTURA * 100 + ${alias}.DIA_FACTURA) <= ?`);
+      clauses.push(`(${alias}.ANO_ALBARAN * 10000 + ${alias}.MES_ALBARAN * 100 + ${alias}.DIA_ALBARAN) <= ?`);
       params.push(fh.year * 10000 + fh.month * 100 + fh.day);
     }
   }
@@ -158,19 +158,19 @@ function buildLineFilters(options = {}, alias = 'PL') {
 
   if (validMeses.length > 0) {
     const placeholders = validMeses.map(() => '?').join(', ');
-    clauses.push(`${alias}.MES_FACTURA IN (${placeholders})`);
+    clauses.push(`${alias}.MES_ALBARAN IN (${placeholders})`);
     params.push(...validMeses);
   } else {
     // Proteccion de rendimiento: por defecto, ano en curso hasta mes actual.
     const currentMonth = Math.min(12, Math.max(1, new Date().getMonth() + 1));
-    clauses.push(`${alias}.MES_FACTURA <= ?`);
+    clauses.push(`${alias}.MES_ALBARAN <= ?`);
     params.push(currentMonth);
   }
 
   if (options.ejercicio) {
     const ejercicioNum = parseInt(options.ejercicio, 10);
     if (!Number.isNaN(ejercicioNum)) {
-      clauses.push(`${alias}.EJERCICIO_FACTURA = ?`);
+      clauses.push(`${alias}.EJERCICIO_ALBARAN = ?`);
       params.push(ejercicioNum);
     }
   }
@@ -357,14 +357,14 @@ async function getDocuments(options = {}) {
     FROM (
       SELECT
         PL.CODIGO_CLIENTE,
-        PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.MES_ALBARAN,
+        PL.ANO_ALBARAN
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
-        PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.MES_ALBARAN,
+        PL.ANO_ALBARAN
     ) FACTURAS
   `;
 
@@ -393,8 +393,10 @@ async function getDocuments(options = {}) {
         MAX(PL.NUMERO_FACTURA) AS NUMERO_FACTURA,
         MAX(PL.EJERCICIO_FACTURA) AS EJERCICIO_FACTURA,
         MAX(PL.DIA_FACTURA) AS DIA_FACTURA,
-        PL.MES_FACTURA,
-        PL.ANO_FACTURA,
+        MAX(PL.MES_FACTURA) AS MES_FACTURA,
+        MAX(PL.ANO_FACTURA) AS ANO_FACTURA,
+        PL.MES_ALBARAN,
+        PL.ANO_ALBARAN,
         MAX(PL.HORA_DOCUMENTO) AS HORA_DOCUMENTO,
         MAX(PL.NUMEROPEDIDO) AS NUMERO_PEDIDO,
         MAX(PL.REF_PEDIDO) AS REF_PEDIDO,
@@ -413,12 +415,12 @@ async function getDocuments(options = {}) {
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
-        PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.MES_ALBARAN,
+        PL.ANO_ALBARAN
     ) H
     ORDER BY
-      H.ANO_FACTURA DESC,
-      H.MES_FACTURA DESC,
+      H.ANO_ALBARAN DESC,
+      H.MES_ALBARAN DESC,
       H.DIA_FACTURA DESC,
       H.SERIE_FACTURA DESC,
       H.NUMERO_FACTURA DESC
@@ -698,14 +700,14 @@ async function getSummary(options = {}) {
     FROM (
       SELECT
         PL.CODIGO_CLIENTE,
-        PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.MES_ALBARAN,
+        PL.ANO_ALBARAN
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
-        PL.MES_FACTURA,
-        PL.ANO_FACTURA
+        PL.MES_ALBARAN,
+        PL.ANO_ALBARAN
     ) F
   `;
 
