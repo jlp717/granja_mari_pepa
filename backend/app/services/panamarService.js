@@ -170,7 +170,7 @@ function buildLineFilters(options = {}, alias = 'PL') {
   if (options.ejercicio) {
     const ejercicioNum = parseInt(options.ejercicio, 10);
     if (!Number.isNaN(ejercicioNum)) {
-      clauses.push(`${alias}.EJERCICIO_ALBARAN = ?`);
+      clauses.push(`${alias}.ANO_ALBARAN = ?`);
       params.push(ejercicioNum);
     }
   }
