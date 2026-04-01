@@ -199,18 +199,35 @@ function buildLineFilters(options = {}, alias = 'PL') {
   };
 }
 
-function buildInvoiceKey(codigoCliente, mesFactura, anoFactura, serieFactura, numeroFactura) {
+/**
+ * CLAVE DE FACTURA - Versión Robusta
+ * ===================================
+ * La clave debe identificar UNICAMENTE la factura, no el periodo de consumo.
+ * 
+ * PROBLEMA ANTERIOR: Se usaba MES_FACTURA/ANO_FACTURA en la clave, lo que causaba
+ * que una misma factura con albaranes de diferentes meses se dividiera en múltiples
+ * "facturas" separadas.
+ * 
+ * SOLUCIÓN: La clave se basa únicamente en SERIE_FACTURA + NUMERO_FACTURA + EJERCICIO_FACTURA
+ * El cliente se usa para filtrar pero NO para diferenciar facturas.
+ */
+function buildInvoiceKey(codigoCliente, mesFactura, anoFactura, serieFactura, numeroFactura, ejercicioFactura) {
   return [
-    String(codigoCliente || '').trim(),
-    String(mesFactura || '').trim(),
-    String(anoFactura || '').trim(),
     String(serieFactura || '').trim(),
-    String(numeroFactura || '').trim()
+    String(numeroFactura || '').trim(),
+    String(ejercicioFactura || '').trim()
   ].join('|');
 }
 
 function buildInvoiceKeyFromLine(line) {
-  return buildInvoiceKey(line.CODIGO_CLIENTE, line.MES_FACTURA, line.ANO_FACTURA, line.SERIE_FACTURA, line.NUMERO_FACTURA);
+  return buildInvoiceKey(
+    line.CODIGO_CLIENTE,
+    line.MES_FACTURA,
+    line.ANO_FACTURA,
+    line.SERIE_FACTURA,
+    line.NUMERO_FACTURA,
+    line.EJERCICIO_FACTURA
+  );
 }
 
 function normalizePanamarLine(line) {
@@ -255,9 +272,22 @@ function normalizePanamarLine(line) {
   };
 }
 
+/**
+ * ASAMBLAR DOCUMENTOS DE FACTURA - Versión Robusta
+ * =================================================
+ * Agrupa las líneas POR FACTURA REAL (serie + número + ejercicio),
+ * no por mes de albarán. Esto asegura que todas las líneas de una
+ * factura estén juntas, independientemente de cuándo se consumieron.
+ * 
+ * Estructura de agrupación:
+ * 1. Las líneas se agrupan por clave de factura (serie-numero-ejercicio)
+ * 2. Las cabeceras representan facturas únicas (no grupos por mes)
+ * 3. Todas las líneas de una factura se incluyen en el mismo documento
+ */
 function assembleInvoiceDocuments(headers, lines) {
   const linesByInvoice = new Map();
 
+  // Agrupar todas las líneas por clave de factura (serie-numero-ejercicio)
   for (const line of (lines || [])) {
     const key = buildInvoiceKeyFromLine(line);
 
@@ -267,16 +297,20 @@ function assembleInvoiceDocuments(headers, lines) {
     linesByInvoice.get(key).push(normalizePanamarLine(line));
   }
 
+  // Procesar cabeceras - cada cabecera es una factura única
   return (headers || []).map(header => {
     const key = buildInvoiceKey(
       header.CODIGO_CLIENTE,
       header.MES_FACTURA,
       header.ANO_FACTURA,
       header.SERIE_FACTURA,
-      header.NUMERO_FACTURA
+      header.NUMERO_FACTURA,
+      header.EJERCICIO_FACTURA
     );
 
     const docLines = linesByInvoice.get(key) || [];
+    
+    // Calcular totales basados en las líneas reales
     const totalImporte = docLines.length > 0
       ? round2(docLines.reduce((sum, l) => sum + toNumber(l.importe), 0))
       : round2(toNumber(header.TOTAL_IMPORTE_PANAMAR));
@@ -292,21 +326,21 @@ function assembleInvoiceDocuments(headers, lines) {
     const ano = toInt(header.ANO_FACTURA);
 
     return {
-      // Clave interna para endpoints (albaran representativo)
+      // Clave interna para endpoints (albaran representativo - el primero de la factura)
       subempresa: header.SUBEMPRESA_ALBARAN,
       ejercicio: toInt(header.EJERCICIO_ALBARAN),
       serieAlbaran: header.SERIE_ALBARAN,
       terminal: toInt(header.TERMINAL_ALBARAN),
       numeroAlbaran: toInt(header.NUMERO_ALBARAN),
 
-      // Identidad de factura (visible en UI)
+      // Identidad de factura (visible en UI) - CLAVE REAL
       serieFactura: header.SERIE_FACTURA,
       numeroFactura: toInt(header.NUMERO_FACTURA),
       ejercicioFactura: toInt(header.EJERCICIO_FACTURA),
       refFactura: `${header.SERIE_FACTURA}-${toInt(header.NUMERO_FACTURA)}`,
       identity: key,
 
-      // Fecha factura
+      // Fecha factura (la más reciente de todos los albaranes)
       fecha: formatDate(dia, mes, ano),
       dia,
       mes,
@@ -323,9 +357,9 @@ function assembleInvoiceDocuments(headers, lines) {
       refPedido: header.REF_PEDIDO,
       referencia: header.REFERENCIA,
 
-      // Lineas de consumo PANAMAR
+      // Líneas de consumo PANAMAR - TODAS las líneas de la factura
       lineas: docLines,
-      totalLineasPanamar: docLines.length || toInt(header.TOTAL_LINEAS_PANAMAR),
+      totalLineasPanamar: docLines.length,
       totalCajasPanamar: totalCajas,
       totalUnidadesPanamar: totalUnidades,
       totalImportePanamar: totalImporte
@@ -351,20 +385,22 @@ async function getDocuments(options = {}) {
     ejercicio: options.ejercicio
   });
 
+  /**
+   * COUNT DE FACTURAS - Agrupado por factura REAL
+   * ===============================================
+   * Se agrupa por SERIE_FACTURA + NUMERO_FACTURA + EJERCICIO_FACTURA
+   * No por MES_ALBARAN, para evitar contar la misma factura múltiples veces
+   */
   const countSQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT COUNT(*) AS TOTAL
     FROM (
-      SELECT
-        PL.CODIGO_CLIENTE,
-        PL.MES_ALBARAN,
-        PL.ANO_ALBARAN
+      SELECT DISTINCT
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA,
+        PL.EJERCICIO_FACTURA
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
-      GROUP BY
-        PL.CODIGO_CLIENTE,
-        PL.MES_ALBARAN,
-        PL.ANO_ALBARAN
     ) FACTURAS
   `;
 
@@ -376,6 +412,12 @@ async function getDocuments(options = {}) {
     return { documents: [], total: 0, page, pageSize, totalPages: 0 };
   }
 
+  /**
+   * CABECERAS DE FACTURA - Agrupado por factura REAL
+   * =================================================
+   * Cada fila representa una factura única (serie + número + ejercicio)
+   * Todos los campos agregados toman el valor representativo (MIN/MAX) de todos los albaranes
+   */
   const headersSQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT *
@@ -389,14 +431,12 @@ async function getDocuments(options = {}) {
         PL.CODIGO_CLIENTE,
         MAX(PL.NOMBRE_CLIENTE) AS NOMBRE_CLIENTE,
         MAX(PL.NOMBRE_FISCAL) AS NOMBRE_FISCAL,
-        MAX(PL.SERIE_FACTURA) AS SERIE_FACTURA,
-        MAX(PL.NUMERO_FACTURA) AS NUMERO_FACTURA,
-        MAX(PL.EJERCICIO_FACTURA) AS EJERCICIO_FACTURA,
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA,
+        PL.EJERCICIO_FACTURA,
         MAX(PL.DIA_FACTURA) AS DIA_FACTURA,
         MAX(PL.MES_FACTURA) AS MES_FACTURA,
         MAX(PL.ANO_FACTURA) AS ANO_FACTURA,
-        PL.MES_ALBARAN,
-        PL.ANO_ALBARAN,
         MAX(PL.HORA_DOCUMENTO) AS HORA_DOCUMENTO,
         MAX(PL.NUMEROPEDIDO) AS NUMERO_PEDIDO,
         MAX(PL.REF_PEDIDO) AS REF_PEDIDO,
@@ -415,12 +455,13 @@ async function getDocuments(options = {}) {
       ${whereSQL}
       GROUP BY
         PL.CODIGO_CLIENTE,
-        PL.MES_ALBARAN,
-        PL.ANO_ALBARAN
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA,
+        PL.EJERCICIO_FACTURA
     ) H
     ORDER BY
-      H.ANO_ALBARAN DESC,
-      H.MES_ALBARAN DESC,
+      H.ANO_FACTURA DESC,
+      H.MES_FACTURA DESC,
       H.DIA_FACTURA DESC,
       H.SERIE_FACTURA DESC,
       H.NUMERO_FACTURA DESC
@@ -433,21 +474,26 @@ async function getDocuments(options = {}) {
     return { documents: [], total, page, pageSize, totalPages: Math.ceil(total / pageSize) };
   }
 
+  /**
+   * Claves para obtener líneas - basadas en factura REAL
+   * =====================================================
+   * Se filtra por SERIE_FACTURA + NUMERO_FACTURA + EJERCICIO_FACTURA
+   * No se usa MES_FACTURA/ANO_FACTURA para evitar perder líneas
+   */
   const invoiceKeys = headers.map(h => ({
     codigoCliente: String(h.CODIGO_CLIENTE).trim(),
-    mesFactura: toInt(h.MES_FACTURA),
-    anoFactura: toInt(h.ANO_FACTURA),
     serieFactura: String(h.SERIE_FACTURA).trim(),
-    numeroFactura: toInt(h.NUMERO_FACTURA)
+    numeroFactura: toInt(h.NUMERO_FACTURA),
+    ejercicioFactura: toInt(h.EJERCICIO_FACTURA)
   }));
 
   const invoiceConditions = invoiceKeys.map(() =>
-    '(PL.CODIGO_CLIENTE = ? AND PL.MES_FACTURA = ? AND PL.ANO_FACTURA = ? AND PL.SERIE_FACTURA = ? AND PL.NUMERO_FACTURA = ?)'
+    '(PL.CODIGO_CLIENTE = ? AND PL.SERIE_FACTURA = ? AND PL.NUMERO_FACTURA = ? AND PL.EJERCICIO_FACTURA = ?)'
   ).join(' OR ');
 
   const lineParams = [];
   for (const key of invoiceKeys) {
-    lineParams.push(key.codigoCliente, key.mesFactura, key.anoFactura, key.serieFactura, key.numeroFactura);
+    lineParams.push(key.codigoCliente, key.serieFactura, key.numeroFactura, key.ejercicioFactura);
   }
 
   const linesSQL = `
@@ -512,21 +558,25 @@ async function getDocuments(options = {}) {
   };
 }
 
+/**
+ * OBTENER FACTURA POR IDENTIDAD - Versión Robusta
+ * ================================================
+ * Obtiene una factura completa por serie + número + ejercicio
+ * Sin filtrar por MES_FACTURA/ANO_FACTURA para incluir TODAS las líneas
+ */
 async function getInvoiceByIdentity(identity) {
   const params = [
     String(identity.codigoCliente).trim(),
-    toInt(identity.mes),
-    toInt(identity.ano),
     String(identity.serie || '').trim(),
-    toInt(identity.numero || 0)
+    toInt(identity.numero || 0),
+    toInt(identity.ejercicio || 0)
   ];
 
   const invoiceWhereSQL = `
     WHERE PL.CODIGO_CLIENTE = ?
-      AND PL.MES_FACTURA = ?
-      AND PL.ANO_FACTURA = ?
       AND PL.SERIE_FACTURA = ?
       AND PL.NUMERO_FACTURA = ?
+      AND PL.EJERCICIO_FACTURA = ?
   `;
 
   const headerSQL = `
@@ -539,9 +589,10 @@ async function getInvoiceByIdentity(identity) {
       MIN(PL.NUMERO_ALBARAN) AS NUMERO_ALBARAN,
       PL.CODIGO_CLIENTE,
       MAX(PL.NOMBRE_CLIENTE) AS NOMBRE_CLIENTE,
-      MAX(PL.SERIE_FACTURA) AS SERIE_FACTURA,
-      MAX(PL.NUMERO_FACTURA) AS NUMERO_FACTURA,
-      MAX(PL.EJERCICIO_FACTURA) AS EJERCICIO_FACTURA,
+      MAX(PL.NOMBRE_FISCAL) AS NOMBRE_FISCAL,
+      PL.SERIE_FACTURA,
+      PL.NUMERO_FACTURA,
+      PL.EJERCICIO_FACTURA,
       MAX(PL.DIA_FACTURA) AS DIA_FACTURA,
       MAX(PL.MES_FACTURA) AS MES_FACTURA,
       MAX(PL.ANO_FACTURA) AS ANO_FACTURA,
@@ -563,10 +614,9 @@ async function getInvoiceByIdentity(identity) {
     ${invoiceWhereSQL}
     GROUP BY
       PL.CODIGO_CLIENTE,
-      PL.MES_FACTURA,
-      PL.ANO_FACTURA,
       PL.SERIE_FACTURA,
-      PL.NUMERO_FACTURA
+      PL.NUMERO_FACTURA,
+      PL.EJERCICIO_FACTURA
   `;
 
   const linesSQL = `
@@ -630,7 +680,8 @@ async function getDocumentByKey(key) {
       MAX(CAC.MESFACTURA) AS MES_FACTURA,
       MAX(CAC.ANOFACTURA) AS ANO_FACTURA,
       TRIM(CAC.SERIEFACTURA) AS SERIE_FACTURA,
-      MAX(CAC.NUMEROFACTURA) AS NUMERO_FACTURA
+      MAX(CAC.NUMEROFACTURA) AS NUMERO_FACTURA,
+      MAX(CAC.EJERCICIOFACTURA) AS EJERCICIO_FACTURA
     FROM DSEDAC.CAC CAC
     WHERE TRIM(CAC.SUBEMPRESAALBARAN) = ?
       AND CAC.EJERCICIOALBARAN = ?
@@ -640,7 +691,7 @@ async function getDocumentByKey(key) {
       AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '4300%'
       AND CAC.NUMEROFACTURA > 0
       AND TRIM(CAC.SERIEFACTURA) <> ''
-    GROUP BY ${RESOLVED_CLIENT_EXPR}, TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA
+    GROUP BY ${RESOLVED_CLIENT_EXPR}, TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
     FETCH FIRST 1 ROWS ONLY
   `;
 
@@ -659,10 +710,9 @@ async function getDocumentByKey(key) {
 
   const invoiceIdentity = {
     codigoCliente: ref[0].CODIGO_CLIENTE,
-    mes: ref[0].MES_FACTURA,
-    ano: ref[0].ANO_FACTURA,
     serie: ref[0].SERIE_FACTURA,
-    numero: ref[0].NUMERO_FACTURA
+    numero: ref[0].NUMERO_FACTURA,
+    ejercicio: ref[0].EJERCICIO_FACTURA
   };
 
   const doc = await getInvoiceByIdentity(invoiceIdentity);
@@ -692,23 +742,23 @@ async function getSummary(options = {}) {
     codigoCliente: options.codigoCliente
   });
 
+  /**
+   * RESUMEN - Conteo de facturas REALES
+   * ====================================
+   * Agrupado por SERIE_FACTURA + NUMERO_FACTURA + EJERCICIO_FACTURA
+   * No por MES_ALBARAN, para evitar contar la misma factura múltiples veces
+   */
   const summarySQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT
-      COUNT(*) AS TOTAL_FACTURAS,
-      COUNT(DISTINCT F.CODIGO_CLIENTE) AS TOTAL_CLIENTES
-    FROM (
-      SELECT
-        PL.CODIGO_CLIENTE,
-        PL.MES_ALBARAN,
-        PL.ANO_ALBARAN
-      FROM PANAMAR_LINEAS PL
-      ${whereSQL}
-      GROUP BY
-        PL.CODIGO_CLIENTE,
-        PL.MES_ALBARAN,
-        PL.ANO_ALBARAN
-    ) F
+      COUNT(DISTINCT 
+        TRIM(PL.SERIE_FACTURA) || '|' || 
+        CAST(PL.NUMERO_FACTURA AS VARCHAR(20)) || '|' ||
+        CAST(PL.EJERCICIO_FACTURA AS VARCHAR(10))
+      ) AS TOTAL_FACTURAS,
+      COUNT(DISTINCT PL.CODIGO_CLIENTE) AS TOTAL_CLIENTES
+    FROM PANAMAR_LINEAS PL
+    ${whereSQL}
   `;
 
   const aggregateSQL = `
