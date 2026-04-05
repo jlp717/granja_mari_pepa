@@ -166,7 +166,7 @@ function isConnectionError(error) {
 
   return (
     ['08S01', '08003', '08S02', '40001', 'HYT00', 'HY000'].includes(state) ||
-    [10054, 8405, 10060, 10053].includes(code) ||
+    [10054, 8405, 10060, 10053, 10065].includes(code) ||
     msg.includes('Communication link failure') ||
     msg.includes('Connection reset') ||
     msg.includes('not connected') ||

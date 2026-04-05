@@ -559,19 +559,23 @@ app.use(errorHandler);
 // ===================================
 
 async function initializeServer() {
+  let dbConnected = false;
+
   try {
     logger.info('Iniciando servidor de facturación...');
 
-    // Inicializar pool ODBC
+    // Inicializar pool ODBC (modo degradado si falla)
     try {
       logger.info('Intentando inicializar pool de conexiones ODBC...');
       await odbcPool.initialize();
       logger.info('✅ Pool ODBC inicializado correctamente');
+      dbConnected = true;
     } catch (odbcError) {
-      logger.error('❌ Error crítico: No se pudo conectar a la base de datos');
-      logger.error(`Error ODBC: ${odbcError.message}`);
-      logger.error('El servidor requiere conexión a la base de datos para funcionar');
-      throw odbcError;
+      logger.error('⚠️ No se pudo conectar a la base de datos ODBC - Modo DEGRADADO activado');
+      logger.error(`   Error ODBC: ${odbcError.message}`);
+      logger.error('   El servidor iniciará sin DB. Las rutas que requieran DB fallarán.');
+      logger.error('   El pool reintentará conectar automáticamente cada 90 segundos.');
+      // No throw - allow server to start in degraded mode
     }
 
     // Verificar secretos JWT
@@ -584,12 +588,16 @@ async function initializeServer() {
     // Iniciar servidor HTTP
     const server = app.listen(PORT, HOST, () => {
       logger.info(`=================================================`);
-      logger.info(`🚀 Servidor iniciado exitosamente`);
+      logger.info(`🚀 Servidor iniciado ${dbConnected ? 'exitosamente' : 'en MODO DEGRADADO'}`);
       logger.info(`=================================================`);
       logger.info(`Entorno: ${process.env.NODE_ENV || 'development'}`);
       logger.info(`Host: ${HOST}`);
       logger.info(`Puerto: ${PORT}`);
       logger.info(`URL: http://${HOST}:${PORT}`);
+      if (!dbConnected) {
+        logger.info(`⚠️  DB: DESCONECTADA - El pool reintentará auto-conectar`);
+        logger.info(`   Ver /health para estado, o arregla la conexión ODBC`);
+      }
       logger.info(`=================================================`);
     });
 
