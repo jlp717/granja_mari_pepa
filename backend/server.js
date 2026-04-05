@@ -599,6 +599,10 @@ async function initializeServer() {
         logger.info(`   Ver /health para estado, o arregla la conexión ODBC`);
       }
       logger.info(`=================================================`);
+      // Signal PM2 that the app is ready (required when wait_ready: true in ecosystem config)
+      if (typeof process.send === 'function') {
+        process.send('ready');
+      }
     });
 
     // Configurar timeouts (10 min para soportar bulk download de ZIPs de 1GB+)

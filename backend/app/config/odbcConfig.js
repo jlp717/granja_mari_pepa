@@ -194,6 +194,10 @@ async function query(sql, params = []) {
       // Si no hay pool o se marcó para recreación, crearlo
       if (!pool) await createPool();
 
+      if (!pool) {
+        throw new Error('ODBC pool creation failed - pool is still null after createPool()');
+      }
+
       connection = await pool.connect();
 
       // Ejecutar con timeout de protección
@@ -268,12 +272,18 @@ function rejectAfter(ms, message) {
 async function panamarQuery(sql, params = []) {
   if (!panamarPool) {
     logger.info('📡 Inicializando pool PANAMAR (CCSID=1208)...');
-    panamarPool = await odbc.pool({
-      ...poolConfig,
-      connectionString: panamarConnectionString,
-      initialSize: 1, // Pool más pequeño para Panamar
-      maxSize: 5
-    });
+    try {
+      panamarPool = await odbc.pool({
+        ...poolConfig,
+        connectionString: panamarConnectionString,
+        initialSize: 1, // Pool más pequeño para Panamar
+        maxSize: 5
+      });
+    } catch (err) {
+      panamarPool = null;
+      logger.error('❌ Error creando pool PANAMAR:', err.message);
+      throw err;
+    }
   }
 
   const MAX_RETRIES = 3;
@@ -282,6 +292,9 @@ async function panamarQuery(sql, params = []) {
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     let connection;
     try {
+      if (!panamarPool) {
+        throw new Error('Panamar pool is null - cannot obtain connection');
+      }
       connection = await panamarPool.connect();
       const result = await connection.query(sql, params);
       return result;

@@ -24,5 +24,9 @@ app.prepare().then(() => {
 
   server.listen(port, () => {
     console.log(`> Next.js ready on http://localhost:${port}`);
+    // Signal PM2 that the app is ready (required when wait_ready: true in ecosystem config)
+    if (typeof process.send === 'function') {
+      process.send('ready');
+    }
   });
 });
