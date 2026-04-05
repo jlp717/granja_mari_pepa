@@ -106,8 +106,9 @@ module.exports = {
         // ============================================
         {
             name: 'mari-pepa-tunnel',
-            script: 'cloudflared',
-            args: 'tunnel run mari-pepa',
+            script: '/usr/local/bin/cloudflared',
+            args: 'tunnel --config /home/gmp/.cloudflared/config-mari-pepa.yml run',
+            interpreter: 'none',
 
             // Fork mode (proceso único)
             instances: 1,
