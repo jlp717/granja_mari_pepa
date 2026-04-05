@@ -46,10 +46,10 @@ check_backend() {
 check_frontend() {
     HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 10 --max-time 15 http://localhost:3001 2>/dev/null || echo "000")
 
-    if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "302" ] || [ "$HTTP_CODE" = "308" ]; then
+    if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "302" ] || [ "$HTTP_CODE" = "307" ] || [ "$HTTP_CODE" = "308" ]; then
         return 0  # OK
     else
-        log "⚠️  Frontend responde HTTP $HTTP_CODE (esperado: 200/302/308)"
+        log "⚠️  Frontend responde HTTP $HTTP_CODE (esperado: 200/302/307/308)"
         return 1  # FALLO
     fi
 }
