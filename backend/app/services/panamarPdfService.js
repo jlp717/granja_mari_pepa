@@ -101,12 +101,12 @@ function drawLineHeader(doc, y) {
   doc.rect(40, y, 515, 16).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
 
-  doc.text('CODIGO', 42, y + 5, { width: 45 });
-  doc.text('DESCRIPCION', 90, y + 5, { width: 155 });
+  doc.text('CÓDIGO', 42, y + 5, { width: 45 });
+  doc.text('DESCRIPCIÓN', 90, y + 5, { width: 155 });
   doc.text('LOTE', 248, y + 5, { width: 45 });
   doc.text('CAJAS', 295, y + 5, { width: 35, align: 'right' });
-  doc.text('UNID.', 335, y + 5, { width: 40, align: 'right' });
-  doc.text('PRECIO', 380, y + 5, { width: 45, align: 'right' });
+  doc.text('UDES.', 335, y + 5, { width: 40, align: 'right' });
+  doc.text('P. UNIT.', 380, y + 5, { width: 45, align: 'right' });
   doc.text('% DTO.', 430, y + 5, { width: 35, align: 'right' });
   doc.text('IMPORTE', 470, y + 5, { width: 50, align: 'right' });
   doc.text('IVA', 525, y + 5, { width: 25, align: 'right' });
@@ -122,10 +122,10 @@ function buildDocumentContent(doc, panamarDoc) {
   let y = drawHeader(doc, 10);
   y += 10;
 
-  // Banner principal - Sin la palabra "PANAMAR"
+  // Banner principal - Título profesional del documento
   doc.rect(40, y, 515, 34).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(16).font('Helvetica-Bold').fillColor(COLORS.white)
-    .text('FACTURA RECOPILADA', 50, y + 10);
+    .text('DOCUMENTO DE FACTURACIÓN', 50, y + 10);
   
   const headerRightText = panamarDoc.refFactura ? `FACTURA: ${panamarDoc.refFactura}` : `MES: ${pad2(panamarDoc.mes)}/${panamarDoc.ano || ''}`;
   doc.fontSize(12).font('Helvetica-Bold')
@@ -155,13 +155,13 @@ function buildDocumentContent(doc, panamarDoc) {
   // Negocio
   doc.rect(40, y, 515, 52).fillAndStroke(COLORS.ultraLight, COLORS.light);
   y += 8;
-  doc.fontSize(8).font('Helvetica-Bold').fillColor(COLORS.secondary).text('NEGOCIO', 45, y);
+  doc.fontSize(8).font('Helvetica-Bold').fillColor(COLORS.secondary).text('CLIENTE', 45, y);
   y += 14;
   doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.dark)
-    .text((panamarDoc.nombreCliente || panamarDoc.codigoCliente || '').toUpperCase(), 45, y, { width: 500 });
+    .text(panamarDoc.nombreCliente || panamarDoc.codigoCliente || 'N/A', 45, y, { width: 500 });
   y += 18;
   doc.fontSize(8).font('Helvetica').fillColor(COLORS.medium)
-    .text('Informe de consumo mensual (sin datos personales)', 45, y, { width: 500 });
+    .text('Detalle de consumo y facturación del período', 45, y, { width: 500 });
   y += 18;
 
   // Tabla de lineas
@@ -216,25 +216,25 @@ function buildDocumentContent(doc, panamarDoc) {
       doc.text(String(linea.lote || '-').substring(0, 10), 248, y + 3, { width: 45 });
       doc.text(cajas ? formatNumber(cajas, 0) : '-', 295, y + 3, { width: 35, align: 'right' });
       doc.text(unidades ? formatNumber(unidades, 3) : '-', 335, y + 3, { width: 40, align: 'right' });
-      doc.text(`${formatNumber(precio, 3)} €`, 380, y + 3, { width: 45, align: 'right' });
+      doc.text(`${formatNumber(precio, 3)}`, 380, y + 3, { width: 45, align: 'right' });
       doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 430, y + 3, { width: 35, align: 'right' });
-      doc.text(`${formatNumber(importe, 2)} €`, 470, y + 3, { width: 50, align: 'right' });
-      doc.text(`${formatNumber(iva, 0)} %`, 525, y + 3, { width: 25, align: 'right' });
+      doc.text(`${formatNumber(importe, 2)}`, 470, y + 3, { width: 50, align: 'right' });
+      doc.text(`${formatNumber(iva, 0)}%`, 525, y + 3, { width: 25, align: 'right' });
 
       y += rowHeight;
     });
 
-    // Sub-header de Albarán (estilo screenshot)
+    // Sub-header de Albarán (estilo profesional)
     if (y + 15 > 730) {
       doc.addPage();
       y = drawHeader(doc, 10) + 10;
       y = drawLineHeader(doc, y);
     }
-    
+
     doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
-    doc.text(`Albarán  ${albKey}     Fecha ${fechaAlb}`, 100, y + 2);
-    doc.text(`Total Albarán`, 410, y + 2);
-    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)} €`, 470, y + 2, { width: 50, align: 'right' });
+    doc.text(`Albarán: ${albKey}    Fecha: ${fechaAlb}`, 100, y + 2);
+    doc.text(`SUBTOTAL ALBARÁN`, 410, y + 2);
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)}`, 470, y + 2, { width: 50, align: 'right' });
     
     y += 15;
     doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
@@ -243,15 +243,15 @@ function buildDocumentContent(doc, panamarDoc) {
 
   y += 10;
 
-  // Totales
+  // Totales - Estilo profesional
   doc.rect(40, y, 250, 34).fillAndStroke(COLORS.success, COLORS.success);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('CONSUMO TOTAL (CAJAS)', 48, y + 8);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('TOTAL UDS. CONSUMIDAS', 48, y + 8);
   doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 220, y + 6, { width: 60, align: 'right' });
 
   doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('IMPORTE TOTAL', 313, y + 8);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('BASE IMPONIBLE', 313, y + 8);
   doc.fontSize(17).font('Helvetica-Bold')
-    .text(`${formatNumber(totalImporte, 2)} €`, 445, y + 6, { width: 105, align: 'right' });
+    .text(`${formatNumber(totalImporte, 2)}`, 445, y + 6, { width: 105, align: 'right' });
 
   // Footer en todas las paginas
   const pages = doc.bufferedPageRange();
