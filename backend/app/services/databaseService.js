@@ -117,9 +117,9 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     // IMPORTANTE: La tabla DSEDAC.IVA tiene valores obsoletos (7%, 16%).
     // Usamos un CASE para mapear los códigos de IVA a los valores vigentes (10%, 21%, 4%).
     // 
-    // FIX 2026-04-07: Líneas "sin cargo" (dto 100%) deben tener IMPORTE = 0.
-    // El ERP almacena IMPORTEVENTA > 0 en líneas con descuento 100%, pero no deben
-    // computar en la base imponible. Se fuerza IMPORTEVENTA a 0 en estos casos.
+    // FIX 2026-04-07: Líneas "Sin Cargo" (TIPOVENTA = 'SC') deben tener IMPORTE = 0.
+    // El ERP marca estas líneas con TIPOVENTA = 'SC' en la tabla LAC.
+    // Se fuerza IMPORTEVENTA a 0 para estas líneas para que no sumen al total del PDF.
     const linesQuery = `
       SELECT
         LAC.SECUENCIA as NUMEROLINEA,
@@ -128,6 +128,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         COALESCE(LAC.CANTIDADUNIDADES, 0) as CANTIDADARTICULO,
         LAC.PRECIOVENTA as PRECIOARTICULO,
         LAC.PORCENTAJEDESCUENTO as PORCENTAJEDESCUENTOARTICULO,
+        LAC.TIPOVENTA,
         CASE LAC.CODIGOIVA
           WHEN 1 THEN 10.00
           WHEN 2 THEN 21.00
@@ -140,14 +141,14 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
           WHEN 5 THEN 1.40 -- Recargo de equivalencia para tipo 5 (10% + 1.4%)
           ELSE 0.00
         END as PORCENTAJERECARGOARTICULO,
-        -- FIX: Si descuento >= 100%, el importe es 0 (línea sin cargo)
+        -- FIX: Si TIPOVENTA = 'SC' (Sin Cargo), el importe es 0
         CASE 
-          WHEN LAC.PORCENTAJEDESCUENTO >= 100 THEN 0
+          WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN 0
           ELSE LAC.IMPORTEVENTA
         END as IMPORTENETOARTICULO,
         -- El IVA también debe ser 0 para líneas sin cargo
         (CASE 
-          WHEN LAC.PORCENTAJEDESCUENTO >= 100 THEN 0
+          WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN 0
           ELSE LAC.IMPORTEVENTA
         END * CASE LAC.CODIGOIVA
           WHEN 1 THEN 0.10
@@ -159,7 +160,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         END) as IMPORTEIVAARTICULO,
         -- El recargo también debe ser 0 para líneas sin cargo
         (CASE 
-          WHEN LAC.PORCENTAJEDESCUENTO >= 100 THEN 0
+          WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN 0
           ELSE LAC.IMPORTEVENTA
         END * CASE LAC.CODIGOIVA
           WHEN 5 THEN 0.014
