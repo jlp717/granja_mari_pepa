@@ -378,12 +378,14 @@ export function CustomerDashboard() {
   const { addItem } = useCartStore();
 
   // Usar el hook optimizado para cargar facturas y pedidos
+  // FIX 2026-04-07: Eliminar searchTerm de facturasEndpoint para evitar re-fetch al escribir.
+  // El filtrado por búsqueda se hace 100% client-side en filteredFacturas.
   const facturasEndpoint = useMemo(() => {
     const params = new URLSearchParams();
-    if (searchTerm) params.set('busqueda', searchTerm);
+    // Eliminado: if (searchTerm) params.set('busqueda', searchTerm);
     if (selectedCliente) params.set('codigoCliente', selectedCliente);
     return `/api/auth/facturas/${user?.id}?${params.toString()}`;
-  }, [user?.id, searchTerm, selectedCliente]);
+  }, [user?.id, selectedCliente]);
 
   const {
     data: facturasRaw,
