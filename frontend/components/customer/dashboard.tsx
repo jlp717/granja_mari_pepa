@@ -523,12 +523,14 @@ export function CustomerDashboard() {
   // Header scroll logic removed - keeping header always visible
 
   // Cargar facturas, pedidos, perfil y productos cuando se monta el componente
+  // FIX 2026-04-07: Eliminar searchTerm de dependencias para evitar recarga al buscar
+  // El filtrado es 100% client-side vía useMemo en filteredFacturas
   useEffect(() => {
     const timer = setTimeout(() => {
       cargarFacturas();
     }, 500);
     return () => clearTimeout(timer);
-  }, [searchTerm, selectedCliente, cargarFacturas]);
+  }, [selectedCliente, cargarFacturas]);
 
   useEffect(() => {
     if (user?.id) {
@@ -603,12 +605,13 @@ export function CustomerDashboard() {
   };
 
   // Cargar datos de contacto cuando se monta el componente
+  // FIX 2026-04-07: Eliminar searchTerm de dependencias
   useEffect(() => {
     const timer = setTimeout(() => {
-      cargarFacturas();
+      cargarDatosContacto();
     }, 500);
     return () => clearTimeout(timer);
-  }, [searchTerm, selectedCliente, cargarFacturas]);
+  }, [selectedCliente]);
 
   useEffect(() => {
     if (user?.id) {
