@@ -273,16 +273,9 @@ async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
 
     // Usar CAC (Cabecera de Albaranes de Cliente) que es donde están las facturas
     // IMPORTANTE: CAC puede tener MÚLTIPLES registros para la MISMA factura (uno por albarán)
-    //
-    // FIX CRÍTICO (2026-04-06): Se ha detectado que el cálculo anterior del IVA era incorrecto.
-    // El código previo RECÁLCULABA el IVA multiplicando IMPORTEBASEIMPONIBLEn * porcentaje,
-    // asumiendo que Base1=10%, Base2=21%, Base3=4%, etc. Esta suposición es FALSA:
-    // el ERP no garantiza un orden fijo de tipos de IVA en las columnas Base1-5.
-    //
-    // SOLUCIÓN: Usar directamente los campos IMPORTEIVA1-5 que el ERP ya calcula correctamente,
-    // igual que hace pdfService.js al generar facturas individuales.
-    //
-    // Mapeo de códigos CODIGOIVA (tabla LAC): 1->10%, 2->21%, 3->4%, 4->0%, 5->10%+recargo
+    // FIX IVA: Recalculamos el IVA usando los porcentajes vigentes (10%, 21%, 4%)
+    // ignorando los porcentajes obsoletos (7%, 16%) guardados en la BD.
+    // Mapeo: 1->10%, 2->21%, 3->4%, 4->0%, 5->10%
     const query = `
       SELECT
         TRIM(C.SERIEFACTURA) as SERIEFACTURA,
@@ -309,20 +302,35 @@ async function obtenerIVARepercutido(fechaInicio, fechaFin, codigoCliente) {
         )) as NOMBRECLIENTE,
         MAX(CLI.NIF) as CIFCLIENTE,
 
-        -- Base Imponible: suma directa de todas las bases (CORRECTO, sin cambios)
+        -- Base Imponible (Suma directa)
         SUM(C.IMPORTEBASEIMPONIBLE1 + C.IMPORTEBASEIMPONIBLE2 + C.IMPORTEBASEIMPONIBLE3 +
             C.IMPORTEBASEIMPONIBLE4 + C.IMPORTEBASEIMPONIBLE5) as BASE_IMPONIBLE,
 
-        -- IVA: USAR valores ya calculados por el ERP (IMPORTEIVA1-5), NO recalcular
-        -- FIX: Antes se hacía BASE1 * 0.10 + BASE2 * 0.21 + ... lo cual era incorrecto
-        SUM(C.IMPORTEIVA1 + C.IMPORTEIVA2 + C.IMPORTEIVA3 + C.IMPORTEIVA4 + C.IMPORTEIVA5) as IVA,
+        -- IVA Recalculado (Aplicando % correctos sobre las bases)
+        SUM(
+          (C.IMPORTEBASEIMPONIBLE1 * CASE WHEN C.PORCENTAJEIVA1 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA1 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA1 IN (4, 3) THEN 0.04 ELSE 0 END) +
+          (C.IMPORTEBASEIMPONIBLE2 * CASE WHEN C.PORCENTAJEIVA2 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA2 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA2 IN (4, 3) THEN 0.04 ELSE 0 END) +
+          (C.IMPORTEBASEIMPONIBLE3 * CASE WHEN C.PORCENTAJEIVA3 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA3 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA3 IN (4, 3) THEN 0.04 ELSE 0 END) +
+          (C.IMPORTEBASEIMPONIBLE4 * CASE WHEN C.PORCENTAJEIVA4 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA4 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA4 IN (4, 3) THEN 0.04 ELSE 0 END) +
+          (C.IMPORTEBASEIMPONIBLE5 * CASE WHEN C.PORCENTAJEIVA5 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA5 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA5 IN (4, 3) THEN 0.04 ELSE 0 END)
+        ) as IVA,
 
-        -- Recargo: USAR valores ya calculados por el ERP (IMPORTERECARGO1-5)
+        -- Recargo (Sin cambios significativos, asumimos corrección)
         SUM(C.IMPORTERECARGO1 + C.IMPORTERECARGO2 + C.IMPORTERECARGO3 +
             C.IMPORTERECARGO4 + C.IMPORTERECARGO5) as RECARGO,
 
-        -- Total: Base + IVA + Recargo (todos valores del ERP, sin recálculo)
-        SUM(C.IMPORTETOTAL) as TOTAL
+        -- Total Recalculado (Base + IVA Recalculado + Recargo Original)
+        SUM(
+          (C.IMPORTEBASEIMPONIBLE1 + C.IMPORTEBASEIMPONIBLE2 + C.IMPORTEBASEIMPONIBLE3 + C.IMPORTEBASEIMPONIBLE4 + C.IMPORTEBASEIMPONIBLE5) +
+
+          ((C.IMPORTEBASEIMPONIBLE1 * CASE WHEN C.PORCENTAJEIVA1 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA1 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA1 IN (4, 3) THEN 0.04 ELSE 0 END) +
+           (C.IMPORTEBASEIMPONIBLE2 * CASE WHEN C.PORCENTAJEIVA2 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA2 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA2 IN (4, 3) THEN 0.04 ELSE 0 END) +
+           (C.IMPORTEBASEIMPONIBLE3 * CASE WHEN C.PORCENTAJEIVA3 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA3 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA3 IN (4, 3) THEN 0.04 ELSE 0 END) +
+           (C.IMPORTEBASEIMPONIBLE4 * CASE WHEN C.PORCENTAJEIVA4 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA4 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA4 IN (4, 3) THEN 0.04 ELSE 0 END) +
+           (C.IMPORTEBASEIMPONIBLE5 * CASE WHEN C.PORCENTAJEIVA5 IN (7, 10, 1) THEN 0.10 WHEN C.PORCENTAJEIVA5 IN (16, 21, 2) THEN 0.21 WHEN C.PORCENTAJEIVA5 IN (4, 3) THEN 0.04 ELSE 0 END)) +
+
+          (C.IMPORTERECARGO1 + C.IMPORTERECARGO2 + C.IMPORTERECARGO3 + C.IMPORTERECARGO4 + C.IMPORTERECARGO5)
+        ) as TOTAL
 
       FROM DSEDAC.CAC C
       INNER JOIN DSEDAC.CLI CLI ON TRIM(C.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)

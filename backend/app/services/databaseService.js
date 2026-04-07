@@ -116,6 +116,10 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     // Líneas de factura con productos
     // IMPORTANTE: La tabla DSEDAC.IVA tiene valores obsoletos (7%, 16%).
     // Usamos un CASE para mapear los códigos de IVA a los valores vigentes (10%, 21%, 4%).
+    // 
+    // FIX 2026-04-07: Líneas "sin cargo" (dto 100%) deben tener IMPORTE = 0.
+    // El ERP almacena IMPORTEVENTA > 0 en líneas con descuento 100%, pero no deben
+    // computar en la base imponible. Se fuerza IMPORTEVENTA a 0 en estos casos.
     const linesQuery = `
       SELECT
         LAC.SECUENCIA as NUMEROLINEA,
@@ -136,8 +140,16 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
           WHEN 5 THEN 1.40 -- Recargo de equivalencia para tipo 5 (10% + 1.4%)
           ELSE 0.00
         END as PORCENTAJERECARGOARTICULO,
-        LAC.IMPORTEVENTA as IMPORTENETOARTICULO,
-        (LAC.IMPORTEVENTA * CASE LAC.CODIGOIVA
+        -- FIX: Si descuento >= 100%, el importe es 0 (línea sin cargo)
+        CASE 
+          WHEN LAC.PORCENTAJEDESCUENTO >= 100 THEN 0
+          ELSE LAC.IMPORTEVENTA
+        END as IMPORTENETOARTICULO,
+        -- El IVA también debe ser 0 para líneas sin cargo
+        (CASE 
+          WHEN LAC.PORCENTAJEDESCUENTO >= 100 THEN 0
+          ELSE LAC.IMPORTEVENTA
+        END * CASE LAC.CODIGOIVA
           WHEN 1 THEN 0.10
           WHEN 2 THEN 0.21
           WHEN 3 THEN 0.04
@@ -145,7 +157,11 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
           WHEN 5 THEN 0.10
           ELSE 0.10
         END) as IMPORTEIVAARTICULO,
-        (LAC.IMPORTEVENTA * CASE LAC.CODIGOIVA
+        -- El recargo también debe ser 0 para líneas sin cargo
+        (CASE 
+          WHEN LAC.PORCENTAJEDESCUENTO >= 100 THEN 0
+          ELSE LAC.IMPORTEVENTA
+        END * CASE LAC.CODIGOIVA
           WHEN 5 THEN 0.014
           ELSE 0.00
         END) as IMPORTERECARGOARTICULO,
@@ -165,7 +181,6 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND LAC.IMPORTEVENTA <> 0
         AND TRIM(LAC.CODIGOARTICULO) <> ''
       ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
     `;
