@@ -3540,32 +3540,22 @@ export function CustomerDashboard() {
                           <Search className="w-4 h-4 mr-2" />
                           {t('filters.search')}
                         </label>
-                        <div className="flex gap-2">
-                          <div className="relative flex-1 group">
-                            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" />
-                            <Input
-                              placeholder={t('filters.search')}
-                              value={searchTerm}
-                              onChange={(e) => setSearchTerm(e.target.value)}
-                              onKeyDown={(e) => e.key === 'Enter' && cargarFacturas()}
-                              className="pl-12 pr-10 h-14 border-2 border-gray-200 bg-gray-50 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium transition-all"
-                            />
-                            {searchTerm && (
-                              <button
-                                onClick={() => { setSearchTerm(''); setTimeout(() => cargarFacturas(), 0); }}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-200 rounded-full transition-colors"
-                              >
-                                <X className="w-4 h-4 text-gray-400" />
-                              </button>
-                            )}
-                          </div>
-                          <Button 
-                            onClick={() => cargarFacturas()}
-                            className="h-14 px-6 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
-                          >
-                            <Search className="w-5 h-5 sm:mr-2" />
-                            <span className="hidden sm:inline">Buscar</span>
-                          </Button>
+                        <div className="relative group">
+                          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" />
+                          <Input
+                            placeholder={t('filters.search')}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="pl-12 pr-10 h-14 border-2 border-gray-200 bg-gray-50 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium transition-all"
+                          />
+                          {searchTerm && (
+                            <button
+                              onClick={() => setSearchTerm('')}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-200 rounded-full transition-colors"
+                            >
+                              <X className="w-4 h-4 text-gray-400" />
+                            </button>
+                          )}
                         </div>
                       </div>
 
