@@ -1,6 +1,6 @@
 import '../globals.css'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
@@ -17,14 +17,22 @@ import { GlobalChatbot } from '@/components/ui/global-chatbot'
 import { AnalyticsProvider } from '@/components/providers/analytics-provider'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { JsonLdSchemas } from '@/components/seo/JsonLdSchemas'
+import { LenisProvider } from '@/components/providers/lenis-provider'
 import { locales, type Locale } from '@/i18n'
 import { TolgeeProvider } from '@/components/providers/tolgee-provider'
 
-const inter = Inter({
-    subsets: ['latin'],
+const jobyDisplay = localFont({
+    src: '../../public/clone/fonts/JobySans_Display_Variable.woff2',
+    variable: '--font-joby-display',
     display: 'swap',
-    preload: true,
-    fallback: ['system-ui', 'arial']
+    weight: '100 900'
+})
+
+const jobyText = localFont({
+    src: '../../public/clone/fonts/JobySans_Text_Variable.woff2',
+    variable: '--font-joby-text',
+    display: 'swap',
+    weight: '100 900'
 })
 
 // Force dynamic rendering to avoid SSG 404s
@@ -140,12 +148,11 @@ export default async function LocaleLayout({
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className="scroll-smooth">
+        <html
+            lang={locale}
+            className={`scroll-smooth ${jobyDisplay.variable} ${jobyText.variable}`}
+        >
             <head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-                <link rel="dns-prefetch" href="//fonts.gstatic.com" />
                 {/* PWA Manifest */}
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="apple-touch-icon" href="/images/logo.jpeg" />
@@ -160,45 +167,43 @@ export default async function LocaleLayout({
                 {/* JSON-LD SEO Schemas */}
                 <JsonLdSchemas />
             </head>
-            <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-background`}>
+            <body className="font-text antialiased flex min-h-screen flex-col bg-background">
                 <NextIntlClientProvider messages={messages}>
                     <TolgeeProvider>
-                        <ErrorBoundary>
-                            <ThemeProvider>
-                                <SessionProvider>
-                                    <AnalyticsProvider>
-                                        <PerformanceProvider>
-                                            <LazyLoadingProvider>
-                                                <ScrollToTopProvider />
-                                                {/* Skip to main content para accesibilidad */}
-                                                <a
-                                                    href="#main-content"
-                                                    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none"
-                                                >
-                                                    {locale === 'es' ? 'Ir al contenido principal' : 'Skip to main content'}
-                                                </a>
-                                                <Header />
-                                                {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
-                              sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
-                                                {/* pt responsive: Top 12 + Announce 11 + Header (Variable) */}
-                                                {/* pt responsive: Adjusted for Taller Mobile Announcement (8rem + Height) */}
-                                                <main
-                                                    id="main-content"
-                                                    className="pt-56 sm:pt-48 md:pt-52 lg:pt-56 flex-1 bg-background"
-                                                    role="main"
-                                                >
-                                                    {children}
-                                                </main>
-                                                <Footer />
-                                                <Toaster />
-                                                <Sonner />
-                                                <GlobalChatbot />
-                                            </LazyLoadingProvider>
-                                        </PerformanceProvider>
-                                    </AnalyticsProvider>
-                                </SessionProvider>
-                            </ThemeProvider>
-                        </ErrorBoundary>
+                        <LenisProvider>
+                            <ErrorBoundary>
+                                <ThemeProvider>
+                                    <SessionProvider>
+                                        <AnalyticsProvider>
+                                            <PerformanceProvider>
+                                                <LazyLoadingProvider>
+                                                    <ScrollToTopProvider />
+                                                    {/* Skip to main content para accesibilidad */}
+                                                    <a
+                                                        href="#main-content"
+                                                        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none"
+                                                    >
+                                                        {locale === 'es' ? 'Ir al contenido principal' : 'Skip to main content'}
+                                                    </a>
+                                                    <Header />
+                                                    <main
+                                                        id="main-content"
+                                                        className="pt-20 flex-1 bg-background"
+                                                        role="main"
+                                                    >
+                                                        {children}
+                                                    </main>
+                                                    <Footer />
+                                                    <Toaster />
+                                                    <Sonner />
+                                                    <GlobalChatbot />
+                                                </LazyLoadingProvider>
+                                            </PerformanceProvider>
+                                        </AnalyticsProvider>
+                                    </SessionProvider>
+                                </ThemeProvider>
+                            </ErrorBoundary>
+                        </LenisProvider>
                     </TolgeeProvider>
                 </NextIntlClientProvider>
             </body>

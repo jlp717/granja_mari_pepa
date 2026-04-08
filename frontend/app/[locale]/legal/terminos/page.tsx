@@ -3,32 +3,28 @@
 import { useTranslations } from 'next-intl';
 
 export default function TerminosPage() {
-    const t = useTranslations('legal.terms');
+  const t = useTranslations('legal.terms');
 
-    return (
-        <div className="container mx-auto py-12 px-4">
-            <div className="prose prose-lg max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold mb-8">{t('title')}</h1>
+  return (
+    <section className="px-6 py-20 md:px-10 md:py-24" style={{ backgroundColor: 'var(--color-beige)' }}>
+      <div className="mx-auto max-w-4xl rounded-[28px] border bg-white p-8 md:p-12" style={{ borderColor: 'rgba(14,22,32,0.12)' }}>
+        <h1 style={{ color: 'var(--color-black)' }}>{t('title')}</h1>
+        <p className="mt-6" style={{ fontFamily: 'var(--font-text)', color: 'rgba(14,22,32,0.74)', lineHeight: 1.6 }}>
+          {t('intro')}
+        </p>
 
-                <p className="lead">
-                    {t('intro')}
-                </p>
-
-                <h3>{t('sections.s1.title')}</h3>
-                <p dangerouslySetInnerHTML={{ __html: t('sections.s1.content') }} />
-
-                <h3>{t('sections.s2.title')}</h3>
-                <p dangerouslySetInnerHTML={{ __html: t('sections.s2.content') }} />
-
-                <h3>{t('sections.s3.title')}</h3>
-                <p dangerouslySetInnerHTML={{ __html: t('sections.s3.content') }} />
-
-                <h3>{t('sections.s4.title')}</h3>
-                <p dangerouslySetInnerHTML={{ __html: t('sections.s4.content') }} />
-
-                <h3>{t('sections.s5.title')}</h3>
-                <p dangerouslySetInnerHTML={{ __html: t('sections.s5.content') }} />
-            </div>
-        </div>
-    );
+        {['s1', 's2', 's3', 's4', 's5'].map((section) => (
+          <article key={section} className="mt-10">
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: 'var(--color-black)', marginBottom: '0.6rem' }}>
+              {t(`sections.${section}.title`)}
+            </h3>
+            <p
+              style={{ fontFamily: 'var(--font-text)', color: 'rgba(14,22,32,0.74)', lineHeight: 1.65 }}
+              dangerouslySetInnerHTML={{ __html: t(`sections.${section}.content`) }}
+            />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }

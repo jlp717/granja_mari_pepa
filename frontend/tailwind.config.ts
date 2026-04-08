@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['var(--font-display)', 'Arial', 'sans-serif'],
+        text: ['var(--font-text)', 'Arial', 'sans-serif'],
+        sans: ['var(--font-text)', 'Arial', 'sans-serif'],
+      },
       screens: {
         'xs': '475px',
         '3xl': '1600px',
