@@ -604,8 +604,9 @@ async function fetchSingleDocumentByIdentity(req) {
   }
 
   // Use the service to get document by invoice identity
+  // NOTA: No pasamos codigoCliente porque '9999999999' no existe en la BD
+  // La identidad SERIE+NUMERO+EJERCICIO ya es única
   const result = await panamarService.getInvoiceByIdentity({
-    codigoCliente: codigoCliente, // Will be overridden by query
     serie: String(serieFactura).trim(),
     numero: numeroFacturaNum,
     ejercicio: ejercicioFacturaNum

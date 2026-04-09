@@ -562,19 +562,21 @@ async function getDocuments(options = {}) {
  * OBTENER FACTURA POR IDENTIDAD - Versión Robusta
  * ================================================
  * Obtiene una factura completa por serie + número + ejercicio
- * Sin filtrar por MES_FACTURA/ANO_FACTURA para incluir TODAS las líneas
+ * Sin filtrar por cliente ni MES_FACTURA/ANO_FACTURA para incluir TODAS las líneas
+ * 
+ * NOTA: La identidad SERIE+NUMERO+EJERCICIO es única, no necesitamos filtrar por cliente.
+ * El codigoCliente='9999999999' es virtual y no existe en la tabla CAC.
  */
 async function getInvoiceByIdentity(identity) {
   const params = [
-    String(identity.codigoCliente).trim(),
     String(identity.serie || '').trim(),
     toInt(identity.numero || 0),
     toInt(identity.ejercicio || 0)
   ];
 
+  // Sin filtro de CODIGO_CLIENTE - la identidad de factura ya es única
   const invoiceWhereSQL = `
-    WHERE PL.CODIGO_CLIENTE = ?
-      AND PL.SERIE_FACTURA = ?
+    WHERE PL.SERIE_FACTURA = ?
       AND PL.NUMERO_FACTURA = ?
       AND PL.EJERCICIO_FACTURA = ?
   `;
