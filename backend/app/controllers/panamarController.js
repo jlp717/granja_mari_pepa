@@ -582,6 +582,235 @@ async function cancelBulkTask(req, res) {
   }
 }
 
+// ── Helper: fetch a single PANAMAR document by invoice identity ──────
+async function fetchSingleDocumentByIdentity(req) {
+  const codigoCliente = req.user?.codigoCliente;
+
+  if (!panamarService.isPanamarClient(codigoCliente)) {
+    return { error: 403, message: 'Acceso denegado. Este endpoint es exclusivo para el modo PANAMAR.' };
+  }
+
+  const { serieFactura, numeroFactura, ejercicioFactura } = req.params;
+
+  if (!serieFactura || !numeroFactura || !ejercicioFactura) {
+    return { error: 400, message: 'Parámetros incompletos (serieFactura, numeroFactura, ejercicioFactura).' };
+  }
+
+  const numeroFacturaNum = parseInt(numeroFactura);
+  const ejercicioFacturaNum = parseInt(ejercicioFactura);
+
+  if (isNaN(numeroFacturaNum) || isNaN(ejercicioFacturaNum)) {
+    return { error: 400, message: 'Parámetros numéricos inválidos.' };
+  }
+
+  // Use the service to get document by invoice identity
+  const result = await panamarService.getInvoiceByIdentity({
+    codigoCliente: codigoCliente, // Will be overridden by query
+    serie: String(serieFactura).trim(),
+    numero: numeroFacturaNum,
+    ejercicio: ejercicioFacturaNum
+  });
+
+  if (!result) {
+    return { error: 404, message: 'Documento no encontrado.' };
+  }
+
+  return { doc: result };
+}
+
+/**
+ * GET /api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/pdf
+ * Download PDF for a PANAMAR invoice by invoice identity (not albaran)
+ */
+async function downloadPDFByIdentity(req, res) {
+  try {
+    const result = await fetchSingleDocumentByIdentity(req);
+    if (result.error) {
+      return res.status(result.error).json({ success: false, message: result.message });
+    }
+
+    const panamarDoc = result.doc;
+    const pdfBuffer = await panamarPdfService.generateFacturaPDF(panamarDoc);
+
+    const docRef = `${panamarDoc.serieFactura}-${panamarDoc.numeroFactura}`;
+    const clientName = (panamarDoc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+    const filename = `Factura_PANAMAR_${docRef}_${clientName}.pdf`;
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    logger.info('📥 PANAMAR: PDF de factura descargado (por identidad)', { ref: docRef });
+
+    return res.send(pdfBuffer);
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error generando PDF', { error: error.message, stack: error.stack });
+    return res.status(500).json({ success: false, message: 'Error generando PDF de la factura PANAMAR' });
+  }
+}
+
+/**
+ * GET /api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/preview
+ * Preview PDF inline by invoice identity (not albaran)
+ */
+async function previewPDFByIdentity(req, res) {
+  try {
+    const result = await fetchSingleDocumentByIdentity(req);
+    if (result.error) {
+      return res.status(result.error).json({ success: false, message: result.message });
+    }
+
+    const panamarDoc = result.doc;
+    const pdfBuffer = await panamarPdfService.generateFacturaPDF(panamarDoc);
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline');
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    return res.send(pdfBuffer);
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error previsualizando PDF', { error: error.message });
+    return res.status(500).json({ success: false, message: 'Error previsualizando PDF' });
+  }
+}
+
+/**
+ * POST /api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/email
+ * Send PANAMAR invoice PDF via email by invoice identity
+ * Body: { destinatario: string }
+ */
+async function sendEmailByIdentity(req, res) {
+  try {
+    const result = await fetchSingleDocumentByIdentity(req);
+    if (result.error) {
+      return res.status(result.error).json({ success: false, message: result.message });
+    }
+
+    const { destinatario } = req.body;
+
+    if (!destinatario) {
+      return res.status(400).json({ success: false, message: 'Se requiere el email destinatario.' });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(destinatario)) {
+      return res.status(400).json({ success: false, message: 'El email proporcionado no es válido.' });
+    }
+
+    const panamarDoc = result.doc;
+    const pdfBuffer = await panamarPdfService.generateFacturaPDF(panamarDoc);
+
+    const docRef = `${panamarDoc.serieFactura}-${panamarDoc.numeroFactura}`;
+    const clientName = (panamarDoc.nombreCliente || 'Cliente').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+    const filename = `Factura_PANAMAR_${docRef}_${clientName}.pdf`;
+    const totalStr = (panamarDoc.totalImportePanamar || 0).toFixed(2);
+    const totalCajas = Number(panamarDoc.totalCajasPanamar || 0).toFixed(3);
+
+    // Send email using nodemailer
+    const nodemailer = require('nodemailer');
+
+    if (!process.env.SMTP_PASSWORD) {
+      return res.status(500).json({ success: false, message: 'Servicio de email no configurado.' });
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || '_dc-mx.bef93564e202.mari-pepa.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
+        pass: process.env.SMTP_PASSWORD
+      },
+      tls: { rejectUnauthorized: false, minVersion: 'TLSv1.2' },
+      connectionTimeout: 20000,
+      greetingTimeout: 10000,
+      socketTimeout: 20000
+    });
+
+    const htmlTemplate = `
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif;background:#F1F5F9;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F1F5F9;padding:24px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#FFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+        <tr><td style="background:linear-gradient(135deg,#E67E22 0%,#D35400 100%);padding:28px;text-align:center;">
+          <h1 style="color:#FFF;margin:0;font-size:22px;">📄 Factura PANAMAR</h1>
+          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa</p>
+        </td></tr>
+        <tr><td style="padding:28px;">
+          <p style="color:#1E293B;font-size:15px;line-height:1.5;margin:0 0 20px;">
+            Adjunto encontrarás la factura <strong>${docRef}</strong> del negocio
+            <strong>${panamarDoc.nombreCliente}</strong>.
+          </p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;margin-bottom:20px;">
+            <tr>
+              <td style="padding:14px;border-bottom:1px solid #FDBA74;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Factura</span><br>
+                <span style="color:#1E293B;font-size:15px;font-weight:600;">${docRef}</span>
+              </td>
+              <td style="padding:14px;border-bottom:1px solid #FDBA74;text-align:right;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Fecha</span><br>
+                <span style="color:#1E293B;font-size:15px;font-weight:600;">${panamarDoc.fecha}</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding:14px;text-align:center;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Importe PANAMAR</span><br>
+                <span style="color:#D35400;font-size:22px;font-weight:700;">${totalStr} €</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding:0 14px 14px;text-align:center;">
+                <span style="color:#9A3412;font-size:11px;text-transform:uppercase;">Consumo total (cajas)</span><br>
+                <span style="color:#1E293B;font-size:16px;font-weight:700;">${totalCajas}</span>
+              </td>
+            </tr>
+          </table>
+          <p style="color:#64748B;font-size:12px;line-height:1.4;padding:12px;background:#EFF6FF;border-radius:6px;border-left:4px solid #3B82F6;">
+            📎 El PDF de la factura está adjunto a este email.
+          </p>
+        </td></tr>
+        <tr><td style="background:#F8FAFC;padding:20px;border-top:1px solid #E2E8F0;text-align:center;">
+          <p style="color:#64748B;font-size:12px;margin:0;">
+            <strong>Granja Mari Pepa</strong> · Tel: 639 77 86 56 · www.mari-pepa.com
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+    const mailOptions = {
+      from: '"Granja Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
+      to: destinatario,
+      subject: `Factura PANAMAR ${docRef} - Granja Mari Pepa`,
+      html: htmlTemplate,
+      attachments: [{ filename, content: pdfBuffer, contentType: 'application/pdf' }]
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+
+    logger.info('📧 PANAMAR: Factura enviada por email (por identidad)', {
+      ref: docRef, destinatario, messageId: info.messageId
+    });
+
+    return res.json({
+      success: true,
+      message: `Factura enviada correctamente a ${destinatario}`,
+      messageId: info.messageId
+    });
+  } catch (error) {
+    logger.error('❌ PANAMAR: Error enviando email', { error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: 'Error enviando email: ' + (error.message || 'Error desconocido')
+    });
+  }
+}
+
 module.exports = {
   getDocuments,
   getSummary,
@@ -594,5 +823,8 @@ module.exports = {
   initBulkDownload,
   getBulkStatus,
   cancelBulkTask,
-  retrieveBulkZip
+  retrieveBulkZip,
+  downloadPDFByIdentity,
+  previewPDFByIdentity,
+  sendEmailByIdentity
 };

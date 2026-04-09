@@ -482,6 +482,12 @@ app.get('/api/panamar/bulk-download/retrieve/:taskId/:chunkIndex', requireAuth, 
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf', requireAuth, generalLimiter, panamarController.downloadPDF);
 app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview', requireAuth, generalLimiter, panamarController.previewPDF);
 app.post('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email', requireAuth, generalLimiter, panamarController.sendEmail);
+
+// Nuevos endpoints para acceder por identidad de factura directamente
+app.get('/api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/pdf', requireAuth, generalLimiter, panamarController.downloadPDFByIdentity);
+app.get('/api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/preview', requireAuth, generalLimiter, panamarController.previewPDFByIdentity);
+app.post('/api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/email', requireAuth, generalLimiter, panamarController.sendEmailByIdentity);
+
 app.get('/api/panamar/diagnostics', requireAuth, generalLimiter, panamarController.diagnostics);
 app.get('/api/panamar/health', panamarController.healthCheck);
 

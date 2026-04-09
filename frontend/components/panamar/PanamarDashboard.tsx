@@ -344,6 +344,10 @@ export function PanamarDashboard() {
   const getDocPath = (doc: PanamarDocument) =>
     `/api/panamar/documents/${doc.subempresa}/${doc.ejercicio}/${encodeURIComponent(doc.serieAlbaran)}/${doc.terminal}/${doc.numeroAlbaran}`;
 
+  // Nuevo endpoint que usa la identidad de factura directamente (no del albarán)
+  const getInvoicePath = (doc: PanamarDocument) =>
+    `/api/panamar/invoices/${encodeURIComponent(doc.serieFactura)}/${doc.numeroFactura}/${doc.ejercicioFactura}`;
+
   // ── PDF Download (via secureFetch – relative URL through Next.js rewrite) ──
   const handleDownload = async (doc: PanamarDocument) => {
     const key = getDocKey(doc);
@@ -355,7 +359,7 @@ export function PanamarDashboard() {
       </div>
     );
     try {
-      const res = await secureFetch<Blob>(`${getDocPath(doc)}/pdf`);
+      const res = await secureFetch<Blob>(`${getInvoicePath(doc)}/pdf`);
       if (!res.ok) throw new Error('Error descargando PDF');
       const blob = res.data;
       const blobUrl = URL.createObjectURL(blob);
@@ -381,7 +385,7 @@ export function PanamarDashboard() {
     setLoadingPdf(key);
     setPreviewDoc(doc);
     try {
-      const res = await secureFetch<Blob>(`${getDocPath(doc)}/preview`);
+      const res = await secureFetch<Blob>(`${getInvoicePath(doc)}/preview`);
       if (!res.ok) throw new Error('Error previsualizando PDF');
       const blob = res.data;
       const blobUrl = URL.createObjectURL(blob);
@@ -438,7 +442,7 @@ export function PanamarDashboard() {
     setEmailResult(null);
     try {
       const res = await secureFetch<{ success: boolean; message: string }>(
-        `${getDocPath(shareDoc)}/email`,
+        `${getInvoicePath(shareDoc)}/email`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
