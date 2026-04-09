@@ -1031,6 +1031,7 @@ module.exports = {
   isPanamarClient,
   getDocuments,
   getDocumentByKey,
+  getInvoiceByIdentity,
   getSummary,
   getClients,
   getDiagnostics
