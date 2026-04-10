@@ -246,12 +246,12 @@ function normalizePanamarLine(line) {
   const precioCobro = precioTarifa > 0 ? precioTarifa : precioOriginal;
 
   // ✅ FIX: Si es SC, el importe es 0 (sin cargo para el cliente)
-  // Si hay tarifa especial, calcular importe = precioCobro * cantidad
-  // Si no hay tarifa, usar importe venta directo de BD
+  // Si hay tarifa especial, calcular importe = precioCobro * cantidad * (1 - descuento/100)
+  // Si no hay tarifa, usar importe venta directo de BD (ya viene con descuento aplicado)
   const importeCobro = isSinCargo
     ? 0
     : (precioTarifa > 0
-        ? precioCobro * cantidadCobro
+        ? precioCobro * cantidadCobro * (1 - toNumber(line.DESCUENTO) / 100)
         : toNumber(line.IMPORTEVENTA));
 
   return {
