@@ -252,9 +252,9 @@ function buildDocumentContent(doc, panamarDoc) {
     // ✅ FIX: Mostrar referencia de albarán en formato P-93-25
     doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
     doc.text(`Albarán: ${albaranRef}    Fecha: ${fechaAlb}`, 100, y + 2);
-    doc.text(`SUBTOTAL ALBARÁN`, 410, y + 2);
+    doc.text(`SUBTOTAL ALBARÁN`, 400, y + 2);
     // ✅ FIX: Subtotal con IVA sumado
-    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(subtotalAlb + totalIvaAlb, 2)} €`, 470, y + 2, { width: 50, align: 'right' });
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(subtotalAlb + totalIvaAlb, 2)} €`, 451, y + 2, { width: 52, align: 'right' });
 
     y += 15;
     doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
