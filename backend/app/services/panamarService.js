@@ -241,13 +241,16 @@ function normalizePanamarLine(line) {
   const tipoVenta = String(line.TIPO_VENTA || '').trim().toUpperCase();
   const isSinCargo = tipoVenta === 'SC';
 
-  const precioCobro = precioTarifa > 0 ? precioTarifa : precioOriginal;
-  // ✅ FIX: Si es SC, el importe es 0 (sin cargo para el cliente)
+  // ✅ FIX: Usar PRECIOVENTA (precio lista) como precio unitario
+  // No usar tarifa Panamar para el precio unitario mostrado
+  const precioUnitario = precioOriginal > 0 ? precioOriginal : precioTarifa;
+
+  // ✅ FIX: Calcular importe aplicando descuento sobre precio original
+  const descuento = toNumber(line.DESCUENTO);
+  const importeSinDescuento = precioUnitario * cantidadCobro;
   const importeCobro = isSinCargo
     ? 0
-    : (precioTarifa > 0
-        ? precioCobro * cantidadCobro
-        : toNumber(line.IMPORTEVENTA));
+    : round2(importeSinDescuento * (1 - descuento / 100));
 
   return {
     subempresaAlbaran: line.SUBEMPRESA_ALBARAN,
@@ -261,10 +264,10 @@ function normalizePanamarLine(line) {
     lote: line.LOTE,
     cajas,
     unidades,
-    precioCobro: round3(precioCobro),
-    precioUnitario: round3(precioCobro), // compatibilidad con frontend actual
-    descuento: round2(toNumber(line.DESCUENTO)),
-    importe: round2(importeCobro),
+    precioCobro: round3(precioUnitario), // ✅ Precio unitario = precio original
+    precioUnitario: round3(precioUnitario),
+    descuento: round2(descuento),
+    importe: round2(importeCobro), // ✅ Importe con descuento aplicado
     precioTarifa: round3(precioTarifa),
     precioTarifa85: round3(precioTarifa),
     precioOriginal: round3(precioOriginal),

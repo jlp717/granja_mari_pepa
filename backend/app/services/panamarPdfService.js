@@ -102,14 +102,14 @@ function drawLineHeader(doc, y) {
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
 
   doc.text('CÓDIGO', 42, y + 5, { width: 45 });
-  doc.text('DESCRIPCIÓN', 90, y + 5, { width: 155 });
-  doc.text('LOTE', 248, y + 5, { width: 45 });
-  doc.text('CAJAS', 295, y + 5, { width: 35, align: 'right' });
-  doc.text('UDES.', 335, y + 5, { width: 40, align: 'right' });
-  doc.text('P. UNIT.', 380, y + 5, { width: 45, align: 'right' });
-  doc.text('% DTO.', 430, y + 5, { width: 35, align: 'right' });
-  doc.text('IMPORTE', 470, y + 5, { width: 50, align: 'right' });
-  doc.text('IVA', 525, y + 5, { width: 25, align: 'right' });
+  doc.text('DESCRIPCIÓN', 90, y + 5, { width: 165 });
+  doc.text('LOTE', 258, y + 5, { width: 45 });
+  doc.text('CAJAS', 305, y + 5, { width: 35, align: 'right' });
+  doc.text('UDES.', 345, y + 5, { width: 40, align: 'right' });
+  doc.text('P. UNIT.', 390, y + 5, { width: 48, align: 'right' });
+  doc.text('% DTO.', 443, y + 5, { width: 35, align: 'right' });
+  doc.text('IMPORTE', 483, y + 5, { width: 50, align: 'right' });
+  doc.text('IVA', 538, y + 5, { width: 25, align: 'right' });
 
   return y + 18;
 }
@@ -188,12 +188,12 @@ function buildDocumentContent(doc, panamarDoc) {
     let totalIvaAlb = 0;
     const firstLine = albLines[0];
     const fechaAlb = firstLine.fechaAlbaran || fecha;
-    // ✅ FIX: Formato de albarán = TIPOVENTA-TERMINAL-NUMERO (ej: P-93-25)
-    const albaranRef = `${firstLine.tipoVenta || 'P'}-${firstLine.terminalAlbaran || ''}-${firstLine.numeroAlbaran || ''}`;
+    // ✅ FIX: Formato de albarán = SERIE-TERMINAL-NUMERO (ej: P-93-25)
+    // SERIE_ALBARAN es 'P' (no TIPO_VENTA que es 'CC' o 'SC')
+    const albaranRef = `${firstLine.serieAlbaran || 'P'}-${firstLine.terminalAlbaran || ''}-${firstLine.numeroAlbaran || ''}`;
 
     albLines.forEach((linea) => {
-      const descripcion = String(linea.descripcion || '').substring(0, 42);
-      const rowHeight = 15;
+      const rowHeight = 16;
 
       if (y + rowHeight > 730) {
         doc.addPage();
@@ -203,7 +203,8 @@ function buildDocumentContent(doc, panamarDoc) {
 
       const cajas = Number(linea.cajas) || 0;
       const unidades = Number(linea.unidades) || 0;
-      const precio = Number(linea.precioCobro ?? linea.precioUnitario ?? 0) || 0;
+      // ✅ FIX: Usar precioUnitario (PRECIOVENTA original) no tarifa especial
+      const precio = Number(linea.precioUnitario ?? 0) || 0;
       // ✅ FIX: Las líneas SC tienen importe 0
       const importe = linea.isSinCargo ? 0 : (Number(linea.importe) || 0);
       const dto = Number(linea.descuento) || 0;
@@ -216,18 +217,25 @@ function buildDocumentContent(doc, panamarDoc) {
       subtotalAlb += importeSinIva;
       totalIvaAlb += importe - importeSinIva;
 
+      // ✅ FIX: Descripción más ancha con truncamiento elegante
+      const descripcion = String(linea.descripcion || '');
+      const maxDescLength = 38;
+      const descripcionTruncada = descripcion.length > maxDescLength
+        ? descripcion.substring(0, maxDescLength - 2) + '...'
+        : descripcion;
+
       doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
       doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 45 });
-      doc.text(descripcion, 90, y + 3, { width: 155 });
-      doc.text(String(linea.lote || '-').substring(0, 10), 248, y + 3, { width: 45 });
-      doc.text(cajas ? formatNumber(cajas, 0) : '-', 295, y + 3, { width: 35, align: 'right' });
-      doc.text(unidades ? formatNumber(unidades, 3) : '-', 335, y + 3, { width: 40, align: 'right' });
-      doc.text(`${formatNumber(precio, 3)} €`, 380, y + 3, { width: 45, align: 'right' });
-      // ✅ FIX: Mostrar descuento
-      doc.text(dto > 0 ? `${formatNumber(dto, 0)}%` : '-', 430, y + 3, { width: 35, align: 'right' });
+      doc.text(descripcionTruncada, 90, y + 3, { width: 165 });
+      doc.text(String(linea.lote || '-').substring(0, 10), 258, y + 3, { width: 45 });
+      doc.text(cajas ? formatNumber(cajas, 0) : '-', 305, y + 3, { width: 35, align: 'right' });
+      doc.text(unidades ? formatNumber(unidades, 3) : '-', 345, y + 3, { width: 40, align: 'right' });
+      doc.text(`${formatNumber(precio, 3)} €`, 390, y + 3, { width: 48, align: 'right' });
+      // ✅ FIX: Mostrar descuento como porcentaje entero
+      doc.text(dto > 0 ? `${formatNumber(dto, 0)}%` : '-', 443, y + 3, { width: 35, align: 'right' });
       // ✅ FIX: Las líneas SC muestran 0,00 €
-      doc.text(linea.isSinCargo ? '0,00 €' : `${formatNumber(importe, 2)} €`, 470, y + 3, { width: 50, align: 'right' });
-      doc.text(`${formatNumber(iva, 0)}%`, 525, y + 3, { width: 25, align: 'right' });
+      doc.text(linea.isSinCargo ? '0,00 €' : `${formatNumber(importe, 2)} €`, 483, y + 3, { width: 50, align: 'right' });
+      doc.text(`${formatNumber(iva, 0)}%`, 538, y + 3, { width: 25, align: 'right' });
 
       y += rowHeight;
     });
