@@ -101,15 +101,17 @@ function drawLineHeader(doc, y) {
   doc.rect(40, y, 515, 16).fillAndStroke(COLORS.secondary, COLORS.secondary);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.white);
 
+  // ✅ FIX: Ajustar anchos para que IVA sea visible
+  // Total: 45+145+45+32+38+48+35+52+30 = 470pt dentro de 515pt disponibles
   doc.text('CÓDIGO', 42, y + 5, { width: 45 });
-  doc.text('DESCRIPCIÓN', 90, y + 5, { width: 165 });
-  doc.text('LOTE', 258, y + 5, { width: 45 });
-  doc.text('CAJAS', 305, y + 5, { width: 35, align: 'right' });
-  doc.text('UDES.', 345, y + 5, { width: 40, align: 'right' });
-  doc.text('P. UNIT.', 390, y + 5, { width: 48, align: 'right' });
-  doc.text('% DTO.', 443, y + 5, { width: 35, align: 'right' });
-  doc.text('IMPORTE', 483, y + 5, { width: 50, align: 'right' });
-  doc.text('IVA', 538, y + 5, { width: 25, align: 'right' });
+  doc.text('DESCRIPCIÓN', 90, y + 5, { width: 145 });
+  doc.text('LOTE', 238, y + 5, { width: 45 });
+  doc.text('CAJAS', 286, y + 5, { width: 32, align: 'right' });
+  doc.text('UDES.', 321, y + 5, { width: 38, align: 'right' });
+  doc.text('P. UNIT.', 362, y + 5, { width: 48, align: 'right' });
+  doc.text('% DTO.', 413, y + 5, { width: 35, align: 'right' });
+  doc.text('IMPORTE', 451, y + 5, { width: 52, align: 'right' });
+  doc.text('IVA', 506, y + 5, { width: 30, align: 'right' });
 
   return y + 18;
 }
@@ -219,23 +221,23 @@ function buildDocumentContent(doc, panamarDoc) {
 
       // ✅ FIX: Descripción más ancha con truncamiento elegante
       const descripcion = String(linea.descripcion || '');
-      const maxDescLength = 38;
+      const maxDescLength = 35;
       const descripcionTruncada = descripcion.length > maxDescLength
         ? descripcion.substring(0, maxDescLength - 2) + '...'
         : descripcion;
 
       doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
       doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 45 });
-      doc.text(descripcionTruncada, 90, y + 3, { width: 165 });
-      doc.text(String(linea.lote || '-').substring(0, 10), 258, y + 3, { width: 45 });
-      doc.text(cajas ? formatNumber(cajas, 0) : '-', 305, y + 3, { width: 35, align: 'right' });
-      doc.text(unidades ? formatNumber(unidades, 3) : '-', 345, y + 3, { width: 40, align: 'right' });
-      doc.text(`${formatNumber(precio, 3)} €`, 390, y + 3, { width: 48, align: 'right' });
+      doc.text(descripcionTruncada, 90, y + 3, { width: 145 });
+      doc.text(String(linea.lote || '-').substring(0, 10), 238, y + 3, { width: 45 });
+      doc.text(cajas ? formatNumber(cajas, 0) : '-', 286, y + 3, { width: 32, align: 'right' });
+      doc.text(unidades ? formatNumber(unidades, 3) : '-', 321, y + 3, { width: 38, align: 'right' });
+      doc.text(`${formatNumber(precio, 3)} €`, 362, y + 3, { width: 48, align: 'right' });
       // ✅ FIX: Mostrar descuento como porcentaje entero
-      doc.text(dto > 0 ? `${formatNumber(dto, 0)}%` : '-', 443, y + 3, { width: 35, align: 'right' });
+      doc.text(dto > 0 ? `${formatNumber(dto, 0)}%` : '-', 413, y + 3, { width: 35, align: 'right' });
       // ✅ FIX: Las líneas SC muestran 0,00 €
-      doc.text(linea.isSinCargo ? '0,00 €' : `${formatNumber(importe, 2)} €`, 483, y + 3, { width: 50, align: 'right' });
-      doc.text(`${formatNumber(iva, 0)}%`, 538, y + 3, { width: 25, align: 'right' });
+      doc.text(linea.isSinCargo ? '0,00 €' : `${formatNumber(importe, 2)} €`, 451, y + 3, { width: 52, align: 'right' });
+      doc.text(`${formatNumber(iva, 0)}%`, 506, y + 3, { width: 30, align: 'right' });
 
       y += rowHeight;
     });
