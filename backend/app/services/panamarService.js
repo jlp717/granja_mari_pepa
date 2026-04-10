@@ -459,8 +459,12 @@ async function getDocuments(options = {}) {
         COALESCE(SUM(CASE WHEN COALESCE(PL.UNIDADES, 0) > 0 THEN PL.UNIDADES ELSE 0 END), 0) AS TOTAL_UNIDADES_PANAMAR,
         COALESCE(SUM(
           CASE
+            -- ✅ FIX: Líneas SC = 0€
+            WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
+            -- ✅ FIX: Con tarifa especial, aplicar descuento
             WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-              THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
+              THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
+            -- Sin tarifa: usar importe venta directo
             ELSE PL.IMPORTEVENTA
           END
         ), 0) AS TOTAL_IMPORTE_PANAMAR
@@ -620,8 +624,12 @@ async function getInvoiceByIdentity(identity) {
       COALESCE(SUM(CASE WHEN COALESCE(PL.UNIDADES, 0) > 0 THEN PL.UNIDADES ELSE 0 END), 0) AS TOTAL_UNIDADES_PANAMAR,
       COALESCE(SUM(
         CASE
+          -- ✅ FIX: Líneas SC = 0€
+          WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
+          -- ✅ FIX: Con tarifa especial, aplicar descuento
           WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
+            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
+          -- Sin tarifa: usar importe venta directo
           ELSE PL.IMPORTEVENTA
         END
       ), 0) AS TOTAL_IMPORTE_PANAMAR
@@ -781,8 +789,12 @@ async function getSummary(options = {}) {
     SELECT
       COALESCE(SUM(
         CASE
+          -- ✅ FIX: Líneas SC (Sin Cargo) = 0€
+          WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
+          -- ✅ FIX: Con tarifa especial, aplicar descuento
           WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) <> 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
+            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) <> 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
+          -- Sin tarifa: usar importe venta directo
           ELSE PL.IMPORTEVENTA
         END
       ), 0) AS TOTAL_IMPORTE,
@@ -864,8 +876,12 @@ async function getDiagnostics() {
       COALESCE(SUM(CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE 0 END), 0) AS TOTAL_CAJAS,
       COALESCE(SUM(
         CASE
+          -- ✅ FIX: Líneas SC = 0€
+          WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
+          -- ✅ FIX: Con tarifa especial, aplicar descuento
           WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
+            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
+          -- Sin tarifa: usar importe venta directo
           ELSE PL.IMPORTEVENTA
         END
       ), 0) AS TOTAL_IMPORTE
