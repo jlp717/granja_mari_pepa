@@ -210,12 +210,10 @@ function buildDocumentContent(doc, panamarDoc) {
       const importe = linea.isSinCargo ? 0 : (Number(linea.importe) || 0);
       const dto = Number(linea.descuento) || 0;
       const iva = Number(linea.iva || 4); // Panamar es mayormente 4%
-      // ✅ FIX: Calcular subtotal SIN IVA para acumular
-      const importeSinIva = importe / (1 + iva / 100);
 
       totalCajas += cajas;
-      totalImporte += importeSinIva;
-      subtotalAlb += importeSinIva;
+      totalImporte += importe;
+      subtotalAlb += importe;
 
       // ✅ FIX: Descripción más ancha con truncamiento elegante
       const descripcion = String(linea.descripcion || '');
@@ -267,7 +265,7 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('TOTAL UDS. CONSUMIDAS', 48, y + 8);
   doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 220, y + 6, { width: 60, align: 'right' });
 
-  // Naranja: Base imponible (sin IVA)
+  // Naranja: Base imponible (suma de todos los subtotales)
   doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('BASE IMPONIBLE', 313, y + 8);
   doc.fontSize(17).font('Helvetica-Bold')
