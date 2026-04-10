@@ -249,12 +249,13 @@ function buildDocumentContent(doc, panamarDoc) {
       y = drawLineHeader(doc, y);
     }
 
-    // ✅ FIX: Mostrar referencia de albarán en formato P-93-25
+    // ✅ FIX: Sub-header de albarán - alineación correcta para importes >= 100€
+    const subtotalConIva = subtotalAlb + totalIvaAlb;
     doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
     doc.text(`Albarán: ${albaranRef}    Fecha: ${fechaAlb}`, 100, y + 2);
-    doc.text(`SUBTOTAL ALBARÁN`, 400, y + 2);
-    // ✅ FIX: Subtotal con IVA sumado
-    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(subtotalAlb + totalIvaAlb, 2)} €`, 451, y + 2, { width: 52, align: 'right' });
+    doc.text(`SUBTOTAL ALBARÁN`, 350, y + 2, { width: 90 });
+    // ✅ FIX: Subtotal con IVA sumado, alineado a la derecha del todo
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(subtotalConIva, 2)} €`, 455, y + 2, { width: 60, align: 'right' });
 
     y += 15;
     doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
@@ -263,15 +264,21 @@ function buildDocumentContent(doc, panamarDoc) {
 
   y += 10;
 
-  // Totales - Estilo profesional
-  doc.rect(40, y, 250, 34).fillAndStroke(COLORS.success, COLORS.success);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('TOTAL UDS. CONSUMIDAS', 48, y + 8);
-  doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 220, y + 6, { width: 60, align: 'right' });
+  // ✅ FIX: Totales - Dos recuadros separados: SIN IVA y CON IVA
+  // Recuadro verde: Total unidades
+  doc.rect(40, y, 170, 34).fillAndStroke(COLORS.success, COLORS.success);
+  doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.white).text('TOTAL UDS.', 48, y + 7);
+  doc.fontSize(17).font('Helvetica-Bold').text(formatNumber(totalCajas, 0), 48, y + 18, { width: 150 });
 
-  doc.rect(305, y, 250, 34).fillAndStroke(COLORS.accent, COLORS.accent);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.white).text('BASE IMPONIBLE', 313, y + 8);
-  doc.fontSize(17).font('Helvetica-Bold')
-    .text(`${formatNumber(totalImporte, 2)} €`, 445, y + 6, { width: 105, align: 'right' });
+  // Recuadro azul: Base imponible SIN IVA
+  doc.rect(220, y, 160, 34).fillAndStroke('#1B6CA8', '#1B6CA8');
+  doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.white).text('BASE SIN IVA', 228, y + 7);
+  doc.fontSize(17).font('Helvetica-Bold').text(`${formatNumber(totalImporte, 2)} €`, 228, y + 18, { width: 140 });
+
+  // Recuadro naranja: Total CON IVA
+  doc.rect(390, y, 165, 34).fillAndStroke(COLORS.accent, COLORS.accent);
+  doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.white).text('TOTAL CON IVA', 398, y + 7);
+  doc.fontSize(17).font('Helvetica-Bold').text(`${formatNumber(totalImporte + (totalImporte * 0.10), 2)} €`, 398, y + 18, { width: 145 });
 
   // Footer en todas las paginas
   const pages = doc.bufferedPageRange();
