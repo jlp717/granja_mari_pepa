@@ -791,11 +791,8 @@ async function getSummary(options = {}) {
         CASE
           -- ✅ FIX: Líneas SC (Sin Cargo) = 0€
           WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
-          -- ✅ FIX: Con tarifa especial, aplicar descuento
-          WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) <> 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
-          -- Sin tarifa: usar importe venta directo
-          ELSE PL.IMPORTEVENTA
+          -- Para el resto, usar IMPORTEVENTA que ya viene calculado desde la BD
+          ELSE COALESCE(PL.IMPORTEVENTA, 0)
         END
       ), 0) AS TOTAL_IMPORTE,
       COALESCE(SUM(COALESCE(PL.CAJAS, 0)), 0) AS TOTAL_CAJAS,
