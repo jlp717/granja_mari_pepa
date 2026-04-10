@@ -160,8 +160,7 @@ function buildDocumentContent(doc, panamarDoc) {
   doc.fontSize(12).font('Helvetica-Bold').fillColor(COLORS.dark)
     .text(panamarDoc.nombreCliente || panamarDoc.codigoCliente || 'N/A', 45, y, { width: 500 });
   y += 18;
-  doc.fontSize(8).font('Helvetica').fillColor(COLORS.medium)
-    .text('Detalle de consumo y facturación del período', 45, y, { width: 500 });
+  // ✅ FIX: Eliminar frase "Detalle de consumo y facturación del período"
   y += 18;
 
   // Tabla de lineas
@@ -185,9 +184,12 @@ function buildDocumentContent(doc, panamarDoc) {
 
   albaranes.forEach(albKey => {
     const albLines = lineasPorAlbaran[albKey];
-    let totalAlb = 0;
+    let subtotalAlb = 0;
+    let totalIvaAlb = 0;
     const firstLine = albLines[0];
     const fechaAlb = firstLine.fechaAlbaran || fecha;
+    // ✅ FIX: Formato de albarán = TIPOVENTA-TERMINAL-NUMERO (ej: P-93-25)
+    const albaranRef = `${firstLine.tipoVenta || 'P'}-${firstLine.terminalAlbaran || ''}-${firstLine.numeroAlbaran || ''}`;
 
     albLines.forEach((linea) => {
       const descripcion = String(linea.descripcion || '').substring(0, 42);
@@ -202,13 +204,17 @@ function buildDocumentContent(doc, panamarDoc) {
       const cajas = Number(linea.cajas) || 0;
       const unidades = Number(linea.unidades) || 0;
       const precio = Number(linea.precioCobro ?? linea.precioUnitario ?? 0) || 0;
-      const importe = Number(linea.importe) || 0;
+      // ✅ FIX: Las líneas SC tienen importe 0
+      const importe = linea.isSinCargo ? 0 : (Number(linea.importe) || 0);
       const dto = Number(linea.descuento) || 0;
       const iva = Number(linea.iva || 4); // Panamar es mayormente 4%
+      // ✅ FIX: Calcular subtotal SIN IVA para acumular
+      const importeSinIva = importe / (1 + iva / 100);
 
       totalCajas += cajas;
-      totalImporte += importe;
-      totalAlb += importe * (1 + iva / 100);
+      totalImporte += importeSinIva;
+      subtotalAlb += importeSinIva;
+      totalIvaAlb += importe - importeSinIva;
 
       doc.fontSize(7).font('Helvetica').fillColor(COLORS.dark);
       doc.text(String(linea.codigoArticulo || '').substring(0, 11), 42, y + 3, { width: 45 });
@@ -217,8 +223,10 @@ function buildDocumentContent(doc, panamarDoc) {
       doc.text(cajas ? formatNumber(cajas, 0) : '-', 295, y + 3, { width: 35, align: 'right' });
       doc.text(unidades ? formatNumber(unidades, 3) : '-', 335, y + 3, { width: 40, align: 'right' });
       doc.text(`${formatNumber(precio, 3)} €`, 380, y + 3, { width: 45, align: 'right' });
-      doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 430, y + 3, { width: 35, align: 'right' });
-      doc.text(`${formatNumber(importe, 2)} €`, 470, y + 3, { width: 50, align: 'right' });
+      // ✅ FIX: Mostrar descuento
+      doc.text(dto > 0 ? `${formatNumber(dto, 0)}%` : '-', 430, y + 3, { width: 35, align: 'right' });
+      // ✅ FIX: Las líneas SC muestran 0,00 €
+      doc.text(linea.isSinCargo ? '0,00 €' : `${formatNumber(importe, 2)} €`, 470, y + 3, { width: 50, align: 'right' });
       doc.text(`${formatNumber(iva, 0)}%`, 525, y + 3, { width: 25, align: 'right' });
 
       y += rowHeight;
@@ -231,11 +239,13 @@ function buildDocumentContent(doc, panamarDoc) {
       y = drawLineHeader(doc, y);
     }
 
+    // ✅ FIX: Mostrar referencia de albarán en formato P-93-25
     doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium);
-    doc.text(`Albarán: ${albKey}    Fecha: ${fechaAlb}`, 100, y + 2);
+    doc.text(`Albarán: ${albaranRef}    Fecha: ${fechaAlb}`, 100, y + 2);
     doc.text(`SUBTOTAL ALBARÁN`, 410, y + 2);
-    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(totalAlb, 2)} €`, 470, y + 2, { width: 50, align: 'right' });
-    
+    // ✅ FIX: Subtotal con IVA sumado
+    doc.fontSize(8).fillColor(COLORS.dark).text(`${formatNumber(subtotalAlb + totalIvaAlb, 2)} €`, 470, y + 2, { width: 50, align: 'right' });
+
     y += 15;
     doc.moveTo(40, y).lineTo(555, y).strokeColor(COLORS.light).lineWidth(0.5).stroke();
     y += 5;

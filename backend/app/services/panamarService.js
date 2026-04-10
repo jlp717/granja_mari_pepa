@@ -237,10 +237,17 @@ function normalizePanamarLine(line) {
   const unidades = toNumber(line.UNIDADES);
   const cantidadCobro = cajas > 0 ? cajas : unidades;
 
+  // ✅ FIX: Detectar líneas SC (Sin Cargo) - su importe debe ser 0
+  const tipoVenta = String(line.TIPO_VENTA || '').trim().toUpperCase();
+  const isSinCargo = tipoVenta === 'SC';
+
   const precioCobro = precioTarifa > 0 ? precioTarifa : precioOriginal;
-  const importeCobro = precioTarifa > 0
-    ? precioCobro * cantidadCobro
-    : toNumber(line.IMPORTEVENTA);
+  // ✅ FIX: Si es SC, el importe es 0 (sin cargo para el cliente)
+  const importeCobro = isSinCargo
+    ? 0
+    : (precioTarifa > 0
+        ? precioCobro * cantidadCobro
+        : toNumber(line.IMPORTEVENTA));
 
   return {
     subempresaAlbaran: line.SUBEMPRESA_ALBARAN,
@@ -263,7 +270,8 @@ function normalizePanamarLine(line) {
     precioOriginal: round3(precioOriginal),
     usaTarifaEspecial: precioTarifa > 0,
     usaTarifa85: precioTarifa > 0,
-    tipoVenta: line.TIPO_VENTA || '',
+    tipoVenta: tipoVenta,
+    isSinCargo, // ✅ FIX: Flag para identificar líneas SC
     iva: toNumber(line.IVA),
     dia: toInt(line.DIA_ALBARAN),
     mes: toInt(line.MES_ALBARAN),
