@@ -802,18 +802,16 @@ async function getSummary(options = {}) {
   const elapsed = Date.now() - startTime;
   logger.info('PANAMAR: Resumen completado', { elapsed: `${elapsed}ms` });
 
-  const totalFacturas = toInt(row.TOTAL_FACTURAS);
-
   return {
     ano: ANO_FIJO,
     ejercicio: ANO_FIJO,
-    totalFacturas,
-    totalDocumentos: totalFacturas, // compatibilidad con frontend anterior
+    totalFacturas: toInt(row.TOTAL_FACTURAS),
+    totalDocumentos: toInt(row.TOTAL_FACTURAS),
     totalClientes: toInt(row.TOTAL_CLIENTES),
-    totalImporte: round2(toNumber(aggRow.TOTAL_IMPORTE)),
-    totalCajas: round3(toNumber(aggRow.TOTAL_CAJAS)),
-    totalCajasCC: round3(toNumber(aggRow.TOTAL_CAJAS_CC)),
-    totalCajasSC: round3(toNumber(aggRow.TOTAL_CAJAS_SC))
+    totalImporte: round2(toNumber(row.TOTAL_IMPORTE)),
+    totalCajas: round3(toNumber(row.TOTAL_CAJAS)),
+    totalCajasCC: round3(toNumber(row.TOTAL_CAJAS_CC)),
+    totalCajasSC: round3(toNumber(row.TOTAL_CAJAS_SC))
   };
 }
 
