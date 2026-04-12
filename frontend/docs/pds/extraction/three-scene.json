@@ -1,0 +1,4 @@
+{
+  "detected": false,
+  "reason": "No WebGL/Three.js scene detected in mapped source pages during extraction."
+}

@@ -1,0 +1,2635 @@
+[
+  {
+    "name": "home",
+    "url": "http://localhost:3001/es",
+    "height": 35965,
+    "text": "Ir al contenido principal\nInicio\nMari Pepa\nÁrea Clientes ↗\nGRANJA MARI PEPA\n\nCongelados, refrigerados y helados para HORECA\n\nSoluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.\n\nExplorar Productos\nContactar\nCATÁLOGO PREMIUM\nNUESTROS\nPRODUCTOS\n\nDescubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad\n\nVer Catálogo Grupo Topgel\n01\nProductos del mar\n\nPescados y mariscos congelados de la más alta calidad\n\n01\nCarnes\n\nCarnes selectas congeladas\n\n01\nPrecocinados\n\nPreparados y verduras congelados\n\nDESDE 1966\nCongelados, refrigerados y helados para HORECA\n\nSoluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.\n\nContactar\nDESTACADOS\nDescubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad\n\nSoluciones int",
+    "videos": [
+      {
+        "src": "compressed-home-intro-desktop-r3.mp4",
+        "currentTime": 20.087,
+        "duration": 20.087,
+        "paused": true,
+        "autoplay": false,
+        "loop": false,
+        "rect": {
+          "x": -4,
+          "y": -19767,
+          "w": 1447,
+          "h": 1206
+        }
+      }
+    ],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "DESLIZA HACIA ABAJO GRANJA MARI PEPA",
+        "cls": "pds-dream-gallery",
+        "rect": {
+          "x": 0,
+          "y": -2871,
+          "w": 1440,
+          "h": 4672
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgb(245, 244, 223)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "IMG",
+        "text": "",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 64,
+          "w": 426,
+          "h": 1072
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "IMG",
+        "text": "",
+        "cls": "",
+        "rect": {
+          "x": 515,
+          "y": 64,
+          "w": 896,
+          "h": 1072
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "IMG",
+        "text": "",
+        "cls": "",
+        "rect": {
+          "x": 1437,
+          "y": 64,
+          "w": 896,
+          "h": 1072
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "productos",
+    "url": "http://localhost:3001/es/productos",
+    "height": 29003,
+    "text": "Ir al contenido principal\nProductos\nMari Pepa\nÁrea Clientes ↗\nDISPONIBLE PRÓXIMAMENTE\nPróximamente\n\nEstamos preparando algo especial\n\nNuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.\n\nVolver al inicio\nÁrea de clientes\n1\nDISPONIBLE PRÓXIMAMENTE\nNUESTROS\n\nDescubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad\n\nDISPONIBLE PRÓXIMAMENTE\nEstamos preparando algo especial\n\nNuestro catálogo de productos está siendo actualizado con nuevas funcionalidades.\n\nÁrea de clientes\n2\nLOS PILARES QUE SOSTIENEN NUESTRA EXCELENCIA Y DEFINEN NUESTRA MANERA DE TRABAJAR CADA DÍA\nNuestros\n\nGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos.\n\n3\nNUESTRO\nCompromiso\n\nLo que nos diferencia y hace que nuestros clientes confíen en nosotros desde hace más de 55 años\n\nDESDE 1966\nServicio Rápido\n\nServicio de entrega en 24-48 horas respetando en todo momento la cad",
+    "videos": [
+      {
+        "src": "compressed-technology-intro-desktop.mp4",
+        "currentTime": 10,
+        "duration": 10,
+        "paused": true,
+        "autoplay": false,
+        "loop": false,
+        "rect": {
+          "x": -4,
+          "y": -22609,
+          "w": 1447,
+          "h": 1206
+        }
+      }
+    ],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "Congelados, refrigerados y helados para HORECA Soluciones integrales de alimentación para profesiona",
+        "cls": "pds-source-band pds-dark",
+        "rect": {
+          "x": 0,
+          "y": -823,
+          "w": 1440,
+          "h": 1220
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgb(14, 22, 32)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "IMG",
+        "text": "",
+        "cls": "",
+        "rect": {
+          "x": 0,
+          "y": -823,
+          "w": 1440,
+          "h": 1220
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H2",
+        "text": "Congelados, refrigerados y helados para HORECA",
+        "cls": "pds-title",
+        "rect": {
+          "x": 64,
+          "y": -271,
+          "w": 58,
+          "h": 604
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, jobyText, Arial, sans-serif",
+        "size": "109.44px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Soluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precoc",
+        "cls": "pds-copy mb-6",
+        "rect": {
+          "x": 148,
+          "y": -93,
+          "w": 58,
+          "h": 350
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contactar",
+        "cls": "pds-button",
+        "rect": {
+          "x": 148,
+          "y": 281,
+          "w": 162,
+          "h": 52
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgb(245, 244, 223)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "cls": "mb-8 inline-flex",
+        "rect": {
+          "x": 64,
+          "y": 461,
+          "w": 392,
+          "h": 171
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para host",
+        "cls": "pds-copy mb-8 max-w-sm text-white/80",
+        "rect": {
+          "x": 64,
+          "y": 664,
+          "w": 384,
+          "h": 93
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "pds-button pds-button--ghost",
+        "rect": {
+          "x": 64,
+          "y": 790,
+          "w": 157,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "ACCESO RÁPIDO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 900,
+          "y": 461,
+          "w": 109,
+          "h": 25
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Productos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 506,
+          "w": 88,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Quiénes somos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 542,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 602,
+          "w": 80,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 638,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "CONTACTO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1041,
+          "y": 468,
+          "w": 76,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 500,
+          "w": 109,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 536,
+          "w": 258,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Lorca, Murcia",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 572,
+          "w": 58,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "LEGAL",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1183,
+          "y": 468,
+          "w": 43,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Política de Privacidad",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 500,
+          "w": 88,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Términos y Condiciones",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 560,
+          "w": 107,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "contacto",
+    "url": "http://localhost:3001/es/contacto",
+    "height": 27521,
+    "text": "Ir al contenido principal\nContacto\nMari Pepa\nÁrea Clientes ↗\nCONTACTO DIRECTO\nHablemos\n\nEstamos aquí para escucharte y ayudarte\n\nNuestro equipo de expertos está disponible para resolver tus dudas, personalizar soluciones y acompañarte en cada paso hacia el éxito.\n\nEnviar mensaje\nMÚLTIPLES CANALES DE COMUNICACIÓN PARA QUE ELIJAS EL QUE MEJOR SE ADAPTE A TI\nConecta\ncon Nosotros\n\nNuestro equipo de expertos está disponible para resolver tus dudas, personalizar soluciones y acompañarte en cada paso hacia el éxito.\n\n01\nDelegación Murcia\n\nLorca - Sede central\n\n01\nEmail de Pedidos\n\nConsultas y pedidos\n\n01\nHorarios de Atención al Cliente\n\nLunes - Viernes · 8:00 - 13:00 y 16:00 - 19:00\n\nCADA NEGOCIO ES ÚNICO. COMPARTE TUS NECESIDADES Y CREAREMOS UNA SOLUCIÓN PERSONALIZADA QUE IMPULSE TU CRECIMIENTO.\nCuéntanos\ntu proyecto\n24-48h\nENTREGA GARANTIZADA\n\nCadena de frío garantizada\n\nISO\nCALIDAD CERTIFICADA\n\nCertificación garantizada\n\n1966\nAÑO DE FUNDACIÓN\n\nDesde 1966\n\n+55\nAÑOS EXPERIENCIA\n\nEspecialista",
+    "videos": [
+      {
+        "src": "compressed-experience-desktop-r2.mp4",
+        "currentTime": 29.967,
+        "duration": 29.967,
+        "paused": true,
+        "autoplay": false,
+        "loop": false,
+        "rect": {
+          "x": -4,
+          "y": -9265,
+          "w": 1447,
+          "h": 1206
+        }
+      }
+    ],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "CADA NEGOCIO ES ÚNICO. COMPARTE TUS NECESIDADES Y CREAREMOS UNA SOLUCIÓN PERSONALIZADA QUE IMPULSE T",
+        "cls": "pds-section pds-cream",
+        "rect": {
+          "x": 0,
+          "y": -654,
+          "w": 1440,
+          "h": 941
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgb(245, 244, 223)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Cadena de frío garantizada",
+        "cls": "text-base leading-tight text-[#0e1620]/70",
+        "rect": {
+          "x": 96,
+          "y": 43,
+          "w": 263,
+          "h": 20
+        },
+        "color": "rgba(14, 22, 32, 0.7)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "MÚLTIPLES CANALES DE COMUNICACIÓN PARA QUE ELIJAS EL QUE MEJOR SE ADAPTE A TI Conecta con Nosotros 9",
+        "cls": "pds-section pds-dark",
+        "rect": {
+          "x": 0,
+          "y": 287,
+          "w": 1440,
+          "h": 1172
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgb(14, 22, 32)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H2",
+        "text": "Conecta con Nosotros",
+        "cls": "pds-title mb-8",
+        "rect": {
+          "x": 64,
+          "y": 520,
+          "w": 392,
+          "h": 302
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, jobyText, Arial, sans-serif",
+        "size": "109.44px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "flex items-center gap-3 text-xl text-white",
+        "rect": {
+          "x": 64,
+          "y": 854,
+          "w": 392,
+          "h": 44
+        },
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "20px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "flex items-center gap-3 text-xl text-white",
+        "rect": {
+          "x": 64,
+          "y": 918,
+          "w": 392,
+          "h": 44
+        },
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "20px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Lorca - Sede central",
+        "cls": "flex items-center gap-3 text-xl text-white",
+        "rect": {
+          "x": 64,
+          "y": 982,
+          "w": 392,
+          "h": 28
+        },
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "20px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "Horarios de Atención al Cliente",
+        "cls": "mb-2 text-2xl font-medium tracking-[-0.03em]",
+        "rect": {
+          "x": 64,
+          "y": 1054,
+          "w": 392,
+          "h": 32
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "24px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Lunes - Viernes",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1094,
+          "w": 392,
+          "h": 24
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "8:00 - 13:00 y 16:00 - 19:00",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1118,
+          "w": 392,
+          "h": 24
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H2",
+        "text": "Envíanos tu mensaje",
+        "cls": "pds-title mb-6 text-[clamp(2.5rem,5vw,5rem)]",
+        "rect": {
+          "x": 688,
+          "y": 549,
+          "w": 566,
+          "h": 201
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, jobyText, Arial, sans-serif",
+        "size": "109.44px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Enviar mensaje",
+        "cls": "pds-button pds-button--dark",
+        "rect": {
+          "x": 688,
+          "y": 1177,
+          "w": 201,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgb(14, 22, 32)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "acerca",
+    "url": "http://localhost:3001/es/acerca",
+    "height": 9196,
+    "text": "Ir al contenido principal\nQuiénes somos\nMari Pepa\nÁrea Clientes ↗\n\nMÁS DE 55 AÑOS AL SERVICIO DEL SECTOR HORECA\n\nGranja Maripepa\n\nDesde 1966 en Lorca (Murcia), somos especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería, restauración y catering.\n\nDescubre nuestra historia\nContactar ahora\nA CONTINUACIÓN LA DIRECCIÓN OFICIAL DE NUESTRA SEDE EN LORCA (MURCIA).\nNuestra\nHistoria\n\nMás de cinco décadas de experiencia y compromiso con la calidad en el sector alimentario\n\nMÁS DE CINCO DÉCADAS DE EXPERIENCIA Y COMPROMISO CON LA CALIDAD EN EL SECTOR ALIMENTARIO\nNuestra\nHistoria\n1966\nFundación en Lorca (Murcia)\n\nGranja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación.\n\n1980s\nConsolidación regional\n\nAmpliación de la gama de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.\n\n2000s\nCertificación ISO 9001\n\nObtención de la certificación ISO 90",
+    "videos": [],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "LOS PILARES QUE SOSTIENEN NUESTRA EXCELENCIA Y DEFINEN NUESTRA MANERA DE TRABAJAR CADA DÍA Nuestros ",
+        "cls": "pds-section pds-cream",
+        "rect": {
+          "x": 0,
+          "y": -951,
+          "w": 1440,
+          "h": 981
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgb(245, 244, 223)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "cls": "mb-8 inline-flex",
+        "rect": {
+          "x": 64,
+          "y": 94,
+          "w": 392,
+          "h": 171
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para host",
+        "cls": "pds-copy mb-8 max-w-sm text-white/80",
+        "rect": {
+          "x": 64,
+          "y": 297,
+          "w": 384,
+          "h": 93
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "pds-button pds-button--ghost",
+        "rect": {
+          "x": 64,
+          "y": 423,
+          "w": 157,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "ACCESO RÁPIDO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 900,
+          "y": 94,
+          "w": 109,
+          "h": 25
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Productos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 139,
+          "w": 88,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Quiénes somos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 175,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 235,
+          "w": 80,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 271,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "CONTACTO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1041,
+          "y": 101,
+          "w": 76,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 134,
+          "w": 109,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 170,
+          "w": 258,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Lorca, Murcia",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 206,
+          "w": 58,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "LEGAL",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1183,
+          "y": 101,
+          "w": 43,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Política de Privacidad",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 134,
+          "w": 88,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Términos y Condiciones",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 194,
+          "w": 107,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "© 2025 Granja Maripepa, S.L. Todos los derechos reservados.",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1191,
+          "w": 403,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Distribuidor Oficial Nestlé",
+        "cls": "",
+        "rect": {
+          "x": 1208,
+          "y": 1191,
+          "w": 168,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "privacidad",
+    "url": "http://localhost:3001/es/legal/privacidad",
+    "height": 3005,
+    "text": "Ir al contenido principal\nMari Pepa\nÁrea Clientes ↗\nLEGAL\nPolítica de Privacidad\n\nEn Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios.\n\n1. Responsable del Tratamiento\n\nGranja Mari Pepa S.L.\nPol. Ind. Saprelorca - Parcela D-3\n30817 Lorca, Murcia\nEmail: pedidos@mari-pepa.com\n\n2. Finalidad del Tratamiento\n\nTratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios.\n\n3. Conservación de Datos\n\nLos datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales.\n\n4. Legitimación\n\nLa base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos.\n\n5. Destinatarios\n\nLos datos no se cederán a terceros salvo en los casos en que exista una obligación legal.\n\n6.",
+    "videos": [],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "LEGAL Política de Privacidad En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros ",
+        "cls": "pds-section pds-cream min-h-[1200px] pt-40",
+        "rect": {
+          "x": 0,
+          "y": -1805,
+          "w": 1440,
+          "h": 1805
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgb(245, 244, 223)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "cls": "mb-8 inline-flex",
+        "rect": {
+          "x": 64,
+          "y": 64,
+          "w": 392,
+          "h": 171
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para host",
+        "cls": "pds-copy mb-8 max-w-sm text-white/80",
+        "rect": {
+          "x": 64,
+          "y": 268,
+          "w": 384,
+          "h": 93
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "pds-button pds-button--ghost",
+        "rect": {
+          "x": 64,
+          "y": 393,
+          "w": 157,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "ACCESO RÁPIDO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 900,
+          "y": 64,
+          "w": 109,
+          "h": 25
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Productos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 109,
+          "w": 88,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Quiénes somos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 145,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 205,
+          "w": 80,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 241,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "CONTACTO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1041,
+          "y": 71,
+          "w": 76,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 104,
+          "w": 109,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 140,
+          "w": 258,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Lorca, Murcia",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 176,
+          "w": 58,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "LEGAL",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1183,
+          "y": 71,
+          "w": 43,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Política de Privacidad",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 104,
+          "w": 88,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Términos y Condiciones",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 164,
+          "w": 107,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "© 2025 Granja Maripepa, S.L. Todos los derechos reservados.",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1161,
+          "w": 403,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Distribuidor Oficial Nestlé",
+        "cls": "",
+        "rect": {
+          "x": 1208,
+          "y": 1161,
+          "w": 168,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "terminos",
+    "url": "http://localhost:3001/es/legal/terminos",
+    "height": 2914,
+    "text": "Ir al contenido principal\nMari Pepa\nÁrea Clientes ↗\nLEGAL\nTérminos y Condiciones\n\nBienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.\n\n1. Propiedad Intelectual\n\nEl código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa.\n\n2. Uso del Sitio Web\n\nEl usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares.\n\n3. Responsabilidad\n\nGranja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el us",
+    "videos": [],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "text": "LEGAL Términos y Condiciones Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este",
+        "cls": "pds-section pds-cream min-h-[1200px] pt-40",
+        "rect": {
+          "x": 0,
+          "y": -1714,
+          "w": 1440,
+          "h": 1714
+        },
+        "color": "rgb(14, 22, 32)",
+        "bg": "rgb(245, 244, 223)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "cls": "mb-8 inline-flex",
+        "rect": {
+          "x": 64,
+          "y": 64,
+          "w": 392,
+          "h": 171
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para host",
+        "cls": "pds-copy mb-8 max-w-sm text-white/80",
+        "rect": {
+          "x": 64,
+          "y": 268,
+          "w": 384,
+          "h": 93
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "pds-button pds-button--ghost",
+        "rect": {
+          "x": 64,
+          "y": 393,
+          "w": 157,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "ACCESO RÁPIDO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 900,
+          "y": 64,
+          "w": 109,
+          "h": 25
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Productos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 109,
+          "w": 88,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Quiénes somos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 145,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 205,
+          "w": 80,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 241,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "CONTACTO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1041,
+          "y": 71,
+          "w": 76,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 104,
+          "w": 109,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 140,
+          "w": 258,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Lorca, Murcia",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 176,
+          "w": 58,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "LEGAL",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1183,
+          "y": 71,
+          "w": 43,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Política de Privacidad",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 104,
+          "w": 88,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Términos y Condiciones",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 164,
+          "w": 107,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "© 2025 Granja Maripepa, S.L. Todos los derechos reservados.",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1161,
+          "w": 403,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Distribuidor Oficial Nestlé",
+        "cls": "",
+        "rect": {
+          "x": 1208,
+          "y": 1161,
+          "w": 168,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "area-clientes",
+    "url": "http://localhost:3001/es/area-clientes",
+    "height": 2861,
+    "text": "Ir al contenido principal\nÁrea Clientes\nMari Pepa\nÁrea Clientes ↗\nÁrea Exclusiva para Clientes\nBienvenido a tu\nÁrea Personal\n\nAccede a tu panel de control personalizado para gestionar pedidos, descargar facturas y mucho más con total comodidad.\n\nHistorial completo\n\nTodos tus pedidos organizados\n\nDatos seguros\n\nProtección garantizada\n\nAcceso prioritario\n\nOfertas y novedades exclusivas\n\nIniciar Sesión\n\nAccede con tus credenciales\n\nCódigo de Cliente\nContraseña\nAcceder\n¿Olvidaste tu contraseña?\n¿Necesitas una cuenta? Contacta con nosotros\nPanel de Control\nTodo lo que necesitas en un solo lugar\n\nGestiona tu relación comercial con nosotros de forma fácil y eficiente\n\nGestión de Pedidos\n\nRealiza y consulta todos tus pedidos en tiempo real\n\n24/7\nDISPONIBLE\nFacturas PDF\n\nDescarga y gestiona tus facturas al instante\n\n100%\nDIGITAL\nPerfil Personal\n\nActualiza tus datos y preferencias de contacto\n\n∞\nPERSONALIZABLE\nEstadísticas\n\nAnaliza tu historial y patrones de compra\n\n📊\nINSIGHTS\n¿Aún no tienes cu",
+    "videos": [],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "cls": "mb-8 inline-flex",
+        "rect": {
+          "x": 64,
+          "y": 64,
+          "w": 392,
+          "h": 171
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para host",
+        "cls": "pds-copy mb-8 max-w-sm text-white/80",
+        "rect": {
+          "x": 64,
+          "y": 267,
+          "w": 384,
+          "h": 93
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "pds-button pds-button--ghost",
+        "rect": {
+          "x": 64,
+          "y": 392,
+          "w": 157,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "ACCESO RÁPIDO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 900,
+          "y": 64,
+          "w": 109,
+          "h": 25
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Productos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 108,
+          "w": 88,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Quiénes somos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 144,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 204,
+          "w": 80,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 240,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "CONTACTO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1041,
+          "y": 71,
+          "w": 76,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 103,
+          "w": 109,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 139,
+          "w": 258,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Lorca, Murcia",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 175,
+          "w": 58,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "LEGAL",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1183,
+          "y": 71,
+          "w": 43,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Política de Privacidad",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 103,
+          "w": 88,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Términos y Condiciones",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 163,
+          "w": 107,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "© 2025 Granja Maripepa, S.L. Todos los derechos reservados.",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1161,
+          "w": 403,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Distribuidor Oficial Nestlé",
+        "cls": "",
+        "rect": {
+          "x": 1208,
+          "y": 1161,
+          "w": 168,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  },
+  {
+    "name": "checkout",
+    "url": "http://localhost:3001/es/checkout",
+    "height": 2400,
+    "text": "Ir al contenido principal\nMari Pepa\nÁrea Clientes ↗\nFinalizar Compra\n\nCompleta tu pedido de forma segura y rápida\n\nCarrito\nEnvío\nPago\nConfirmación\nTu carrito (0 productos)\nTu carrito está vacío\n\nExplora nuestros productos y añade algunos artículos a tu carrito\n\nVer productos\nResumen del pedido\nCódigo promocional\nAplicar\nSubtotal\n€0.00\nEnvío\n€5.99\nIVA (21%)\n€0.00\nTotal\n€5.99\nContinuar\nPago seguro\nGarantía total\n\nEspecialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.\n\nContacto\nACCESO RÁPIDO\nProductos\nQuiénes somos\nContacto\nÁrea Clientes\nCONTACTO\n968 46 75 14\npedidos@granjamaripepa.com\nLorca, Murcia\nLEGAL\nPolítica de Privacidad\nTérminos y Condiciones\n\n© 2025 Granja Maripepa, S.L. Todos los derechos reservados.\n\nDistribuidor Oficial Nestlé",
+    "videos": [],
+    "visible": [
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "cls": "pds-menu-button",
+        "rect": {
+          "x": 40,
+          "y": 18,
+          "w": 34,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Mari Pepa",
+        "cls": "pds-logo",
+        "rect": {
+          "x": 620,
+          "y": 18,
+          "w": 200,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyDisplay, Arial, sans-serif",
+        "size": "43.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes ↗",
+        "cls": "pds-nav-link",
+        "rect": {
+          "x": 1280,
+          "y": 18,
+          "w": 120,
+          "h": 44
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "cls": "mb-8 inline-flex",
+        "rect": {
+          "x": 64,
+          "y": 64,
+          "w": 392,
+          "h": 171
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "16px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para host",
+        "cls": "pds-copy mb-8 max-w-sm text-white/80",
+        "rect": {
+          "x": 64,
+          "y": 267,
+          "w": 384,
+          "h": 93
+        },
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "21.6px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "pds-button pds-button--ghost",
+        "rect": {
+          "x": 64,
+          "y": 393,
+          "w": 157,
+          "h": 52
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "15.2px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "ACCESO RÁPIDO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 900,
+          "y": 64,
+          "w": 109,
+          "h": 25
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Productos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 109,
+          "w": 88,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Quiénes somos",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 145,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Contacto",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 205,
+          "w": 80,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Área Clientes",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 900,
+          "y": 241,
+          "w": 70,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "CONTACTO",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1041,
+          "y": 71,
+          "w": 76,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "968 46 75 14",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 103,
+          "w": 109,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "pedidos@granjamaripepa.com",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 139,
+          "w": 258,
+          "h": 21
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Lorca, Murcia",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1041,
+          "y": 175,
+          "w": 58,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "H3",
+        "text": "LEGAL",
+        "cls": "pds-eyebrow mb-5 text-white/55",
+        "rect": {
+          "x": 1183,
+          "y": 71,
+          "w": 43,
+          "h": 12
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, Arial, sans-serif",
+        "size": "12.48px",
+        "opacity": "0.78",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Política de Privacidad",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 103,
+          "w": 88,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "A",
+        "text": "Términos y Condiciones",
+        "cls": "text-lg leading-tight text-white",
+        "rect": {
+          "x": 1183,
+          "y": 163,
+          "w": 107,
+          "h": 45
+        },
+        "color": "rgb(245, 244, 223)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "18px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "© 2025 Granja Maripepa, S.L. Todos los derechos reservados.",
+        "cls": "",
+        "rect": {
+          "x": 64,
+          "y": 1161,
+          "w": 403,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "text": "Distribuidor Oficial Nestlé",
+        "cls": "",
+        "rect": {
+          "x": 1208,
+          "y": 1161,
+          "w": 168,
+          "h": 20
+        },
+        "color": "rgba(255, 255, 255, 0.6)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "jobyText, \"jobyText Fallback\", Arial, sans-serif",
+        "size": "14px",
+        "opacity": "1",
+        "transform": "none"
+      }
+    ]
+  }
+]

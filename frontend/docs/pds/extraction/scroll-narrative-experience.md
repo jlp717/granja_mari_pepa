@@ -1,0 +1,169 @@
+# Scroll Narrative: /experience
+
+## 0%
+- ScrollY: 0
+- BUTTON: Toggle menu | 33x33 @ 40,30 | opacity 1
+- BUTTON: Close | 43x14 @ 77,39 | opacity 0
+- A: Go to homepage | 51x32 @ 695,30 | opacity 1
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Investors | 70x14 @ 1311,39 | opacity 1
+- A: Investors | 70x14 @ 1311,55 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Take the high road Take the highroad Your city, elevated. Lift off and leave the gridlock  | 1440x16800 @ 0,0 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,263 | opacity 1
+
+## 10%
+- ScrollY: 3806
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Take the high road Take the highroad Your city, elevated. Lift off and leave the gridlock  | 1440x16800 @ 0,-3806 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
+- H1: Take the high road | 1359x119 @ 40,-84 | opacity 1
+- H1: Take the highroad | 0x0 @ 0,0 | opacity 1
+- P: (media) | 0x0 @ 720,502 | opacity 1
+- P: Your city, elevated. Lift off and leave the gridlock and your stress behind. | 406x46 @ 64,1085 | opacity 1
+- P: Distance feels different up here. Minutes pass like moments. | 406x46 @ 64,1085 | opacity 1
+
+## 25%
+- ScrollY: 9515
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Take the high road Take the highroad Your city, elevated. Lift off and leave the gridlock  | 1440x16800 @ 0,-9515 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
+- H1: Take the high road | 1359x119 @ 40,-84 | opacity 1
+- H1: Take the highroad | 0x0 @ 0,0 | opacity 1
+- P: (media) | 0x0 @ 720,502 | opacity 1
+- P: Your city, elevated. Lift off and leave the gridlock and your stress behind. | 406x46 @ 64,1085 | opacity 1
+- P: Distance feels different up here. Minutes pass like moments. | 406x46 @ 64,1085 | opacity 1
+
+## 50%
+- ScrollY: 19029
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- H1: Take the highroad | 0x0 @ 0,0 | opacity 1
+- SECTION: Fig. 1 — Panoramic windowsFig. 2 — Seating in the AircraftFig. 3 — Rideshare integration i | 1440x7850 @ 0,-685 | opacity 1
+- IMG: A front-row seat for everyone. | 956x1351 @ -53,-76 | opacity 1
+- IMG: A front-row seat for everyone. | 956x1351 @ -53,-76 | opacity 1
+- IMG: Comfortable room for your crew and carry-on. | 976x1380 @ -64,-90 | opacity 1
+- IMG: Comfortable room for your crew and carry-on. | 976x1380 @ -64,-90 | opacity 1
+- IMG: Every leg of your journey, seamlessly orchestrated. | 976x1380 @ -64,-90 | opacity 1
+
+## 75%
+- ScrollY: 28544
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- H1: Take the highroad | 0x0 @ 0,0 | opacity 1
+- SECTION: Be there inminutes.JFKManhattan43 min faster by air*New YorkDXBPalm Jumeirah33 min faster  | 1440x4800 @ 0,-2350 | opacity 1
+- H2: Be there inminutes. | 374x109 @ 40,40 | opacity 1
+- P: *Based on peak travel times in representative markets. | 272x32 @ 40,1104 | opacity 1
+- P: min | 0x0 @ 605,499 | opacity 1
+- P: min | 0x0 @ 669,531 | opacity 1
+- P: min | 0x0 @ 964,496 | opacity 1
+
+## 100%
+- ScrollY: 38058
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- H1: Take the highroad | 0x0 @ 0,0 | opacity 1
+- IMG: Car Service | 0x0 @ 0,0 | opacity 1
+- IMG: Car Service | 0x0 @ 0,0 | opacity 0
+- IMG: Airlines | 0x0 @ 0,0 | opacity 1
+- IMG: Airlines | 0x0 @ 0,0 | opacity 0
+- IMG: Infrastructure | 0x0 @ 0,0 | opacity 1
+- IMG: Infrastructure | 0x0 @ 0,0 | opacity 0

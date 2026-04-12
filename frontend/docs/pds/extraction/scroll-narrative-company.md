@@ -1,0 +1,169 @@
+# Scroll Narrative: /company
+
+## 0%
+- ScrollY: 0
+- BUTTON: Toggle menu | 33x33 @ 40,30 | opacity 1
+- BUTTON: Close | 43x14 @ 77,39 | opacity 0
+- A: Go to homepage | 51x32 @ 695,30 | opacity 1
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Investors | 70x14 @ 1311,39 | opacity 1
+- A: Investors | 70x14 @ 1311,55 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: It’s time to dream bigger. Our vision is to save a billion people an hour a day. | 1440x3000 @ 0,0 | opacity 1
+- H1: It’s time to dream bigger. Our vision is to save a billion people an hour a day. | 1360x136 @ 40,895 | opacity 1
+
+## 10%
+- ScrollY: 2262
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: It’s time to dream bigger. Our vision is to save a billion people an hour a day. | 1440x3000 @ 0,-2262 | opacity 1
+- IMG: (media) | 720x600 @ 360,1038 | opacity 1
+- IMG: (media) | 720x600 @ 360,1038 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+
+## 25%
+- ScrollY: 5655
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+
+## 50%
+- ScrollY: 11310
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+
+## 75%
+- ScrollY: 16964
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+
+## 100%
+- ScrollY: 22619
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: (media) | 0x0 @ 0,0 | opacity 1

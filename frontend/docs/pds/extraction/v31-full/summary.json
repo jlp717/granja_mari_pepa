@@ -1,0 +1,286 @@
+{
+  "_metadata": {
+    "version": "v3.1",
+    "source": "https://jobyaviation.com",
+    "page": "summary",
+    "url": "https://www.jobyaviation.com",
+    "timestamp": "2026-04-12T16:21:44.453Z",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "playwright-chromium"
+  },
+  "pages": [
+    {
+      "name": "home",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "url": "https://www.jobyaviation.com/",
+      "height": 37931,
+      "sections": 11,
+      "images": 123,
+      "videos": 1,
+      "canvases": 0,
+      "links": 52,
+      "title": "Joby Aviation | Electric Air Taxi for Zero-Emission Travel | Joby Aviation"
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "url": "https://www.jobyaviation.com/",
+      "height": 34682,
+      "sections": 11,
+      "images": 123,
+      "videos": 1,
+      "canvases": 0,
+      "links": 50,
+      "title": "Joby Aviation | Electric Air Taxi for Zero-Emission Travel | Joby Aviation"
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "url": "https://www.jobyaviation.com/",
+      "height": 22616,
+      "sections": 11,
+      "images": 123,
+      "videos": 1,
+      "canvases": 0,
+      "links": 50,
+      "title": "Joby Aviation | Electric Air Taxi for Zero-Emission Travel | Joby Aviation"
+    },
+    {
+      "name": "experience",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "url": "https://www.jobyaviation.com/experience",
+      "height": 39258,
+      "sections": 9,
+      "images": 73,
+      "videos": 1,
+      "canvases": 0,
+      "links": 40,
+      "title": "Experience | Joby Aviation – All‑Electric Air Taxi with Breathtaking Views & Seamless Journeys | Joby Aviation"
+    },
+    {
+      "name": "experience",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "url": "https://www.jobyaviation.com/experience",
+      "height": 33076,
+      "sections": 9,
+      "images": 73,
+      "videos": 1,
+      "canvases": 0,
+      "links": 40,
+      "title": "Experience | Joby Aviation – All‑Electric Air Taxi with Breathtaking Views & Seamless Journeys | Joby Aviation"
+    },
+    {
+      "name": "experience",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "url": "https://www.jobyaviation.com/experience",
+      "height": 25195,
+      "sections": 9,
+      "images": 73,
+      "videos": 1,
+      "canvases": 0,
+      "links": 40,
+      "title": "Experience | Joby Aviation – All‑Electric Air Taxi with Breathtaking Views & Seamless Journeys | Joby Aviation"
+    },
+    {
+      "name": "technology",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "url": "https://www.jobyaviation.com/technology",
+      "height": 51423,
+      "sections": 13,
+      "images": 57,
+      "videos": 8,
+      "canvases": 5,
+      "links": 41,
+      "title": "Technology | Joby Aviation – Safe, Quiet, All‑Electric Air Taxi | Joby Aviation"
+    },
+    {
+      "name": "technology",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "url": "https://www.jobyaviation.com/technology",
+      "height": 51720,
+      "sections": 13,
+      "images": 57,
+      "videos": 8,
+      "canvases": 5,
+      "links": 41,
+      "title": "Technology | Joby Aviation – Safe, Quiet, All‑Electric Air Taxi | Joby Aviation"
+    },
+    {
+      "name": "technology",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "url": "https://www.jobyaviation.com/technology",
+      "height": 36099,
+      "sections": 13,
+      "images": 57,
+      "videos": 8,
+      "canvases": 5,
+      "links": 41,
+      "title": "Technology | Joby Aviation – Safe, Quiet, All‑Electric Air Taxi | Joby Aviation"
+    },
+    {
+      "name": "company",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "url": "https://www.jobyaviation.com/company",
+      "height": 23819,
+      "sections": 8,
+      "images": 47,
+      "videos": 4,
+      "canvases": 0,
+      "links": 42,
+      "title": "Company | Joby Aviation – Building the Future of Electric Air Taxi Travel | Joby Aviation"
+    },
+    {
+      "name": "company",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "url": "https://www.jobyaviation.com/company",
+      "height": 24745,
+      "sections": 8,
+      "images": 47,
+      "videos": 4,
+      "canvases": 0,
+      "links": 42,
+      "title": "Company | Joby Aviation – Building the Future of Electric Air Taxi Travel | Joby Aviation"
+    },
+    {
+      "name": "company",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "url": "https://www.jobyaviation.com/company",
+      "height": 16560,
+      "sections": 8,
+      "images": 47,
+      "videos": 4,
+      "canvases": 0,
+      "links": 42,
+      "title": "Company | Joby Aviation – Building the Future of Electric Air Taxi Travel | Joby Aviation"
+    },
+    {
+      "name": "privacy-policy",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "url": "https://www.jobyaviation.com/privacy-policy",
+      "height": 4805,
+      "sections": 4,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "links": 39,
+      "title": "Privacy Policy | Joby Aviation – Data Collection & Use | Joby Aviation"
+    },
+    {
+      "name": "privacy-policy",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "url": "https://www.jobyaviation.com/privacy-policy",
+      "height": 9216,
+      "sections": 4,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "links": 39,
+      "title": "Privacy Policy | Joby Aviation – Data Collection & Use | Joby Aviation"
+    },
+    {
+      "name": "privacy-policy",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "url": "https://www.jobyaviation.com/privacy-policy",
+      "height": 4624,
+      "sections": 4,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "links": 39,
+      "title": "Privacy Policy | Joby Aviation – Data Collection & Use | Joby Aviation"
+    },
+    {
+      "name": "terms-of-use",
+      "viewport": {
+        "width": 1440,
+        "height": 1200
+      },
+      "url": "https://www.jobyaviation.com/terms-of-use",
+      "height": 7239,
+      "sections": 4,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "links": 40,
+      "title": "Terms of Use | Joby Aviation – Website Terms & Conditions | Joby Aviation"
+    },
+    {
+      "name": "terms-of-use",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "url": "https://www.jobyaviation.com/terms-of-use",
+      "height": 19042,
+      "sections": 4,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "links": 40,
+      "title": "Terms of Use | Joby Aviation – Website Terms & Conditions | Joby Aviation"
+    },
+    {
+      "name": "terms-of-use",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "url": "https://www.jobyaviation.com/terms-of-use",
+      "height": 9411,
+      "sections": 4,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "links": 40,
+      "title": "Terms of Use | Joby Aviation – Website Terms & Conditions | Joby Aviation"
+    }
+  ]
+}

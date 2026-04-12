@@ -1,0 +1,782 @@
+[
+  {
+    "name": "home",
+    "url": "http://localhost:3001/es",
+    "height": 35965,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [
+          {
+            "src": "compressed-home-intro-desktop-r3.mp4",
+            "currentTime": 0,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "GRANJA MARI PEPA",
+            "rect": {
+              "x": 240,
+              "y": 1002,
+              "w": 960,
+              "h": 79
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "86.4px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 8325,
+        "videos": [
+          {
+            "src": "compressed-home-intro-desktop-r3.mp4",
+            "currentTime": 12.668,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "GRANJA MARI PEPA",
+            "rect": {
+              "x": 240,
+              "y": 1002,
+              "w": 960,
+              "h": 79
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "86.4px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 15688,
+        "videos": [
+          {
+            "src": "compressed-home-intro-desktop-r3.mp4",
+            "currentTime": 20.087,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -2491,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": []
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 24966,
+        "videos": [
+          {
+            "src": "compressed-home-intro-desktop-r3.mp4",
+            "currentTime": 20.087,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -11769,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "MARCAS QUE\nDISTRIBUIMOS",
+            "rect": {
+              "x": 64,
+              "y": 525,
+              "w": 718,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 1,
+        "scrollY": 33146,
+        "videos": [
+          {
+            "src": "compressed-home-intro-desktop-r3.mp4",
+            "currentTime": 20.087,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -19949,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": []
+      }
+    ]
+  },
+  {
+    "name": "productos",
+    "url": "http://localhost:3001/es/productos",
+    "height": 29003,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [
+          {
+            "src": "compressed-technology-intro-desktop.mp4",
+            "currentTime": 0,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Próximamente",
+            "rect": {
+              "x": 240,
+              "y": 1002,
+              "w": 960,
+              "h": 79
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "86.4px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 6619,
+        "videos": [
+          {
+            "src": "compressed-technology-intro-desktop.mp4",
+            "currentTime": 10,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -1822,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "NUESTROS",
+            "rect": {
+              "x": 148,
+              "y": 136,
+              "w": 392,
+              "h": 101
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(14, 22, 32)"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 13045,
+        "videos": [
+          {
+            "src": "compressed-technology-intro-desktop.mp4",
+            "currentTime": 10,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -8248,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Estamos preparando algo especial",
+            "rect": {
+              "x": 64,
+              "y": 608,
+              "w": 58,
+              "h": 403
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 19556,
+        "videos": [
+          {
+            "src": "compressed-technology-intro-desktop.mp4",
+            "currentTime": 10,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -14759,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Compromiso",
+            "rect": {
+              "x": 148,
+              "y": 136,
+              "w": 392,
+              "h": 101
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(14, 22, 32)"
+          }
+        ]
+      },
+      {
+        "pct": 1,
+        "scrollY": 27538,
+        "videos": [
+          {
+            "src": "compressed-technology-intro-desktop.mp4",
+            "currentTime": 10,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -22741,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Congelados, refrigerados y helados para HORECA",
+            "rect": {
+              "x": 64,
+              "y": -403,
+              "w": 58,
+              "h": 604
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "contacto",
+    "url": "http://localhost:3001/es/contacto",
+    "height": 27521,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [
+          {
+            "src": "compressed-experience-desktop-r2.mp4",
+            "currentTime": 0,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Hablemos",
+            "rect": {
+              "x": 240,
+              "y": 1002,
+              "w": 960,
+              "h": 79
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "86.4px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 6556,
+        "videos": [
+          {
+            "src": "compressed-experience-desktop-r2.mp4",
+            "currentTime": 12.582,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Hablemos",
+            "rect": {
+              "x": 240,
+              "y": 1002,
+              "w": 960,
+              "h": 79
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "86.4px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 13083,
+        "videos": [
+          {
+            "src": "compressed-experience-desktop-r2.mp4",
+            "currentTime": 25.109,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Hablemos",
+            "rect": {
+              "x": 240,
+              "y": 1002,
+              "w": 960,
+              "h": 79
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "86.4px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 19008,
+        "videos": [
+          {
+            "src": "compressed-experience-desktop-r2.mp4",
+            "currentTime": 29.967,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3411,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": []
+      },
+      {
+        "pct": 1,
+        "scrollY": 25403,
+        "videos": [
+          {
+            "src": "compressed-experience-desktop-r2.mp4",
+            "currentTime": 29.967,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -9806,
+              "w": 1447,
+              "h": 1206
+            }
+          }
+        ],
+        "h1": [
+          {
+            "text": "Conecta\ncon Nosotros",
+            "rect": {
+              "x": 64,
+              "y": -21,
+              "w": 392,
+              "h": 302
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          },
+          {
+            "text": "Envíanos tu mensaje",
+            "rect": {
+              "x": 688,
+              "y": 8,
+              "w": 566,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(14, 22, 32)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "acerca",
+    "url": "http://localhost:3001/es/acerca",
+    "height": 9196,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Granja Maripepa",
+            "rect": {
+              "x": 64,
+              "y": 801,
+              "w": 1440,
+              "h": 99
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "105.12px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 1999,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Granja Maripepa",
+            "rect": {
+              "x": 64,
+              "y": 602,
+              "w": 1440,
+              "h": 99
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "105.12px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 3998,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Nuestra\nHistoria",
+            "rect": {
+              "x": 64,
+              "y": -43,
+              "w": 58,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          },
+          {
+            "text": "Nuestra\nHistoria",
+            "rect": {
+              "x": 482,
+              "y": 414,
+              "w": 810,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 5997,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Nuestro\nCompromiso",
+            "rect": {
+              "x": 64,
+              "y": 752,
+              "w": 58,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(245, 244, 223)"
+          }
+        ]
+      },
+      {
+        "pct": 1,
+        "scrollY": 7996,
+        "videos": [],
+        "h1": []
+      }
+    ]
+  },
+  {
+    "name": "privacidad",
+    "url": "http://localhost:3001/es/legal/privacidad",
+    "height": 3005,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Política de Privacidad",
+            "rect": {
+              "x": 566,
+              "y": 192,
+              "w": 643,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(14, 22, 32)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 451,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 903,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 1354,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 1,
+        "scrollY": 1805,
+        "videos": [],
+        "h1": []
+      }
+    ]
+  },
+  {
+    "name": "terminos",
+    "url": "http://localhost:3001/es/legal/terminos",
+    "height": 2914,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Términos y Condiciones",
+            "rect": {
+              "x": 566,
+              "y": 192,
+              "w": 643,
+              "h": 201
+            },
+            "font": "jobyDisplay, jobyText, Arial, sans-serif",
+            "size": "109.44px",
+            "color": "rgb(14, 22, 32)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 429,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 857,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 1286,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 1,
+        "scrollY": 1714,
+        "videos": [],
+        "h1": []
+      }
+    ]
+  },
+  {
+    "name": "checkout",
+    "url": "http://localhost:3001/es/checkout",
+    "height": 2400,
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Finalizar Compra",
+            "rect": {
+              "x": 80,
+              "y": 128,
+              "w": 1280,
+              "h": 48
+            },
+            "font": "jobyText, Arial, sans-serif",
+            "size": "48px",
+            "color": "rgb(17, 24, 39)"
+          },
+          {
+            "text": "Tu carrito (0 productos)",
+            "rect": {
+              "x": 113,
+              "y": 397,
+              "w": 327,
+              "h": 32
+            },
+            "font": "jobyText, Arial, sans-serif",
+            "size": "24px",
+            "color": "rgb(17, 24, 39)"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 300,
+        "videos": [],
+        "h1": [
+          {
+            "text": "Tu carrito (0 productos)",
+            "rect": {
+              "x": 113,
+              "y": 97,
+              "w": 327,
+              "h": 32
+            },
+            "font": "jobyText, Arial, sans-serif",
+            "size": "24px",
+            "color": "rgb(17, 24, 39)"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 600,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 900,
+        "videos": [],
+        "h1": []
+      },
+      {
+        "pct": 1,
+        "scrollY": 1200,
+        "videos": [],
+        "h1": []
+      }
+    ]
+  }
+]

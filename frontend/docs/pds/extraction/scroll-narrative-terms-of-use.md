@@ -1,0 +1,169 @@
+# Scroll Narrative: /terms-of-use
+
+## 0%
+- ScrollY: 0
+- BUTTON: Toggle menu | 33x33 @ 40,30 | opacity 1
+- BUTTON: Close | 43x14 @ 77,39 | opacity 0
+- A: Go to homepage | 51x32 @ 695,30 | opacity 1
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Investors | 70x14 @ 1311,39 | opacity 1
+- A: Investors | 70x14 @ 1311,55 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,0 | opacity 1
+- H1: Terms of Use | 1360x402 @ 40,40 | opacity 1
+
+## 10%
+- ScrollY: 604
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-604 | opacity 1
+- P: JOBY WEBSITE TERMS OF SERVICE | 672x19 @ 384,163 | opacity 1
+- P: Last revised on July 29, 2024. | 672x19 @ 384,192 | opacity 1
+- P: Welcome to the Terms of Service (these “Terms”) for access to and use of the website locat | 672x76 @ 384,221 | opacity 1
+- P: These Terms govern your access to and use of the Website. Please read these Terms carefull | 672x76 @ 384,307 | opacity 1
+- P: For purposes of these Terms, “you” and “your” means you as the user of the Website. If you | 672x95 @ 384,393 | opacity 1
+- P: Please note that Section 9 contains an arbitration clause and class action waiver. By agre | 672x114 @ 384,498 | opacity 1
+
+## 25%
+- ScrollY: 1510
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-1510 | opacity 1
+- P: 3.1 Rights. Subject to your compliance with these Terms, the Joby hereby grants to you, a  | 672x114 @ 384,-44 | opacity 1
+- P: 3.2 Restrictions. You may not do any of the following, unless applicable laws or regulatio | 672x494 @ 384,80 | opacity 1
+- P: 4. OWNERSHIP AND CONTENT | 672x19 @ 384,584 | opacity 1
+- P: 4.1 Ownership of the Website. The Website, including content, information, trademarks and  | 672x114 @ 384,613 | opacity 1
+- P: 4.2 Ownership of Trademarks. The Joby’s name, the Joby’s logo and all related names, logos | 672x95 @ 384,737 | opacity 1
+- P: 4.3 Unsolicited Idea Submission Policy | 672x19 @ 384,842 | opacity 1
+
+## 50%
+- ScrollY: 3020
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-3020 | opacity 1
+- P: 5.2 Limitations of Liability. TO THE EXTENT NOT PROHIBITED BY LAW, YOU AGREE THAT IN NO EV | 672x304 @ 384,-20 | opacity 1
+- P: 6. ARBITRATION AND CLASS ACTION WAIVER | 672x19 @ 384,294 | opacity 1
+- P: 6.1 Informal Process First. You agree that in the event of any dispute between you and the | 672x76 @ 384,323 | opacity 1
+- P: 6.2 Arbitration Agreement and Class Action Waiver. After the informal dispute resolution p | 672x361 @ 384,409 | opacity 1
+- P: 6.3 Costs of Arbitration. Payment for any and all reasonable JAMS filing, administrative a | 672x114 @ 384,780 | opacity 1
+- P: 6.4 Opt-Out. You have the right to opt-out and not be bound by the arbitration provisions  | 672x152 @ 384,904 | opacity 1
+
+## 75%
+- ScrollY: 4529
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-4529 | opacity 1
+- P: 7.4 Miscellaneous. If any provision of these Terms shall be unlawful, void or for any reas | 672x228 @ 384,-4 | opacity 1
+- P: 7.5 How to Contact Us. You may contact us regarding the Website or these Terms at: 333 Enc | 672x38 @ 384,234 | opacity 1
+- SECTION: Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby | 1440x2248 @ 0,462 | opacity 1
+- A: Privacy Policy | 79x14 @ 40,42 | opacity 1
+- A: Terms of Use | 73x14 @ 40,61 | opacity 1
+- A: Impact Reporting | 97x14 @ 40,80 | opacity 1
+
+## 100%
+- ScrollY: 6039
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby | 1440x2248 @ 0,-1048 | opacity 1
+- A: Privacy Policy | 79x14 @ 40,42 | opacity 1
+- A: Terms of Use | 73x14 @ 40,61 | opacity 1
+- A: Impact Reporting | 97x14 @ 40,80 | opacity 1
+- A: Health Plan Transparency | 142x14 @ 40,99 | opacity 1
+- A: Safety Policy | 74x14 @ 40,118 | opacity 1
+- A: Experience | 94x21 @ 900,91 | opacity 1

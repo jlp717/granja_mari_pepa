@@ -1,0 +1,169 @@
+# Scroll Narrative: /
+
+## 0%
+- ScrollY: 0
+- BUTTON: Toggle menu | 33x33 @ 40,30 | opacity 1
+- BUTTON: Close | 43x14 @ 77,39 | opacity 0
+- A: Go to homepage | 51x32 @ 695,30 | opacity 1
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 1
+- A: Investors | 70x14 @ 1311,39 | opacity 1
+- A: Investors | 70x14 @ 1311,55 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Skip traffic.Time to fly. The future of aviation is coming soon.Elevate your commute with  | 1440x14400 @ 0,0 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
+
+## 10%
+- ScrollY: 3673
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Skip traffic.Time to fly. The future of aviation is coming soon.Elevate your commute with  | 1440x14400 @ 0,-3673 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
+- H1: Skip traffic.Time to fly. | 393x136 @ 524,978 | opacity 1
+- P: The future of aviation is coming soon. | 246x10 @ 597,1150 | opacity 1
+- P: Elevate your commute with our all-electric air taxi, soon to be bookable at the tap of a b | 344x75 @ 64,1085 | opacity 1
+- P: Zero traffic. Zero operating emissions. Just the space and time your day deserves. | 344x75 @ 64,1085 | opacity 1
+- IMG: Seamless door to door travel, all from a few taps on our app. | 0x0 @ 0,0 | opacity 1
+
+## 25%
+- ScrollY: 9183
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Skip traffic.Time to fly. The future of aviation is coming soon.Elevate your commute with  | 1440x14400 @ 0,-9183 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
+- H1: Skip traffic.Time to fly. | 393x136 @ 524,978 | opacity 1
+- P: The future of aviation is coming soon. | 246x10 @ 597,1150 | opacity 1
+- P: Elevate your commute with our all-electric air taxi, soon to be bookable at the tap of a b | 344x75 @ 64,1085 | opacity 1
+- P: Zero traffic. Zero operating emissions. Just the space and time your day deserves. | 344x75 @ 64,1085 | opacity 1
+- IMG: Seamless door to door travel, all from a few taps on our app. | 0x0 @ 0,0 | opacity 1
+
+## 50%
+- ScrollY: 18366
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Nowhere to go but UpLet's fly1Leave city congestion behind and choose a stress-free commut | 1440x7408 @ 0,-3966 | opacity 1
+- IMG: Leave city congestion behind and choose a stress-free commute through the clouds. | 142x251 @ 204,5 | opacity 1
+- IMG: Leave city congestion behind and choose a stress-free commute through the clouds. | 142x251 @ 204,5 | opacity 1
+- A: 1Leave city congestion behind and choose a stress-free commute through the clouds.Discover | 242x125 @ 1072,538 | opacity 0
+- P: Leave city congestion behind and choose a stress-free commute through the clouds. | 242x77 @ 1072,538 | opacity 1
+- IMG: Sit back and enjoy. Breathtaking views come standard with every seat. | 572x1008 @ 321,3 | opacity 1
+- IMG: Sit back and enjoy. Breathtaking views come standard with every seat. | 572x1008 @ 321,3 | opacity 1
+
+## 75%
+- ScrollY: 27548
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- IMG: Seamless door to door travel, all from a few taps on our app. | 0x0 @ 0,0 | opacity 1
+- IMG: Seamless door to door travel, all from a few taps on our app. | 0x0 @ 0,0 | opacity 0
+- IMG: Technology that makes the dream possible | 0x0 @ 0,0 | opacity 1
+- IMG: Technology that makes the dream possible | 0x0 @ 0,0 | opacity 0
+- SECTION: With partners like this,there’s nowhere to go but up.Car ServiceAirlinesInfrastructureR&DT | 1440x4625 @ 0,-2553 | opacity 1
+- P: Car Service | 124x17 @ 212,489 | opacity 0.3
+- P: Airlines | 78x17 @ 212,530 | opacity 0.3
+
+## 100%
+- ScrollY: 36731
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- IMG: Seamless door to door travel, all from a few taps on our app. | 0x0 @ 0,0 | opacity 1
+- IMG: Seamless door to door travel, all from a few taps on our app. | 0x0 @ 0,0 | opacity 0
+- IMG: Technology that makes the dream possible | 0x0 @ 0,0 | opacity 1
+- IMG: Technology that makes the dream possible | 0x0 @ 0,0 | opacity 0
+- IMG: Car Service | 0x0 @ 0,0 | opacity 1
+- IMG: Car Service | 0x0 @ 0,0 | opacity 0
+- IMG: Airlines | 0x0 @ 0,0 | opacity 1

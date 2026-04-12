@@ -1,0 +1,106 @@
+{
+  "url": "http://localhost:3001/es/acerca",
+  "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+  "viewport": {
+    "width": 1440,
+    "height": 1200
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "pageHeight": 5699,
+      "videos": [],
+      "heroProgress": null,
+      "titleProgress": "0.0000",
+      "firstChar": {
+        "opacity": "0.18",
+        "transform": "matrix(1, 0, 0, 1, 0, 44)"
+      },
+      "lastChar": {
+        "opacity": "0.18",
+        "transform": "matrix(1, 0, 0, 1, 0, 44)"
+      }
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 450,
+      "pageHeight": 5699,
+      "videos": [],
+      "heroProgress": null,
+      "titleProgress": "0.2500",
+      "firstChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "lastChar": {
+        "opacity": "0.18",
+        "transform": "matrix(1, 0, 0, 1, 0, 44)"
+      }
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 1125,
+      "pageHeight": 5699,
+      "videos": [],
+      "heroProgress": null,
+      "titleProgress": "0.6250",
+      "firstChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "lastChar": {
+        "opacity": "0.18",
+        "transform": "matrix(1, 0, 0, 1, 0, 44)"
+      }
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 2250,
+      "pageHeight": 5699,
+      "videos": [],
+      "heroProgress": null,
+      "titleProgress": "1.0000",
+      "firstChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "lastChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 3374,
+      "pageHeight": 5696,
+      "videos": [],
+      "heroProgress": null,
+      "titleProgress": "1.0000",
+      "firstChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "lastChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    },
+    {
+      "pct": 1,
+      "scrollY": 4496,
+      "pageHeight": 5696,
+      "videos": [],
+      "heroProgress": null,
+      "titleProgress": "1.0000",
+      "firstChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "lastChar": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    }
+  ]
+}

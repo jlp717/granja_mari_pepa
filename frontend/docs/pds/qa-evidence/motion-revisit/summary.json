@@ -1,0 +1,562 @@
+[
+  {
+    "name": "home",
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 0,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-home-intro-desktop-r3.mp4"
+          }
+        ],
+        "heroProgress": "0.0000",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.1,
+        "scrollY": 1697,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 2.552,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-home-intro-desktop-r3.mp4"
+          }
+        ],
+        "heroProgress": "0.1286",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 4190,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 6.376,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-home-intro-desktop-r3.mp4"
+          }
+        ],
+        "heroProgress": "0.3174",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 7960,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 12.113,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-home-intro-desktop-r3.mp4"
+          }
+        ],
+        "heroProgress": "0.6030",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 12244,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 18.632,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-home-intro-desktop-r3.mp4"
+          }
+        ],
+        "heroProgress": "0.9276",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 1,
+        "scrollY": 16524,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 20.087,
+            "duration": 20.087,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3327,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-home-intro-desktop-r3.mp4"
+          }
+        ],
+        "heroProgress": "1.0000",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      }
+    ]
+  },
+  {
+    "name": "productos",
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 0,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-technology-intro-desktop.mp4"
+          }
+        ],
+        "heroProgress": "0.0000",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.1,
+        "scrollY": 714,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 1.182,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-technology-intro-desktop.mp4"
+          }
+        ],
+        "heroProgress": "0.1190",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 1785,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 2.975,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-technology-intro-desktop.mp4"
+          }
+        ],
+        "heroProgress": "0.2975",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 3569,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 5.947,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-technology-intro-desktop.mp4"
+          }
+        ],
+        "heroProgress": "0.5948",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 5352,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 8.88,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-technology-intro-desktop.mp4"
+          }
+        ],
+        "heroProgress": "0.8920",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 1,
+        "scrollY": 7130,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 9.968,
+            "duration": 10,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -1133,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-technology-intro-desktop.mp4"
+          }
+        ],
+        "heroProgress": "1.0000",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      }
+    ]
+  },
+  {
+    "name": "contacto",
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 0,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-experience-desktop-r2.mp4"
+          }
+        ],
+        "heroProgress": "0.0000",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.1,
+        "scrollY": 1718,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 3.262,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-experience-desktop-r2.mp4"
+          }
+        ],
+        "heroProgress": "0.1101",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 4241,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 8.126,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-experience-desktop-r2.mp4"
+          }
+        ],
+        "heroProgress": "0.2719",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 8274,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 15.894,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-experience-desktop-r2.mp4"
+          }
+        ],
+        "heroProgress": "0.5304",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 12523,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 24.056,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-experience-desktop-r2.mp4"
+          }
+        ],
+        "heroProgress": "0.8028",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      },
+      {
+        "pct": 1,
+        "scrollY": 16803,
+        "videos": [
+          {
+            "index": 0,
+            "currentTime": 29.967,
+            "duration": 29.967,
+            "paused": true,
+            "autoplay": false,
+            "loop": false,
+            "rect": {
+              "x": -4,
+              "y": -1206,
+              "width": 1447,
+              "height": 1206
+            },
+            "src": "compressed-experience-desktop-r2.mp4"
+          }
+        ],
+        "heroProgress": "1.0000",
+        "titleProgress": null,
+        "firstChar": null,
+        "lastChar": null
+      }
+    ]
+  },
+  {
+    "name": "acerca",
+    "samples": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "videos": [],
+        "heroProgress": null,
+        "titleProgress": "0.0000",
+        "firstChar": {
+          "opacity": "0.18",
+          "transform": "matrix(1, 0, 0, 1, 0, 44)"
+        },
+        "lastChar": {
+          "opacity": "0.18",
+          "transform": "matrix(1, 0, 0, 1, 0, 44)"
+        }
+      },
+      {
+        "pct": 0.1,
+        "scrollY": 450,
+        "videos": [],
+        "heroProgress": null,
+        "titleProgress": "0.2500",
+        "firstChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "lastChar": {
+          "opacity": "0.18",
+          "transform": "matrix(1, 0, 0, 1, 0, 44)"
+        }
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 1125,
+        "videos": [],
+        "heroProgress": null,
+        "titleProgress": "0.6250",
+        "firstChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "lastChar": {
+          "opacity": "0.18",
+          "transform": "matrix(1, 0, 0, 1, 0, 44)"
+        }
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 2250,
+        "videos": [],
+        "heroProgress": null,
+        "titleProgress": "1.0000",
+        "firstChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "lastChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        }
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 3374,
+        "videos": [],
+        "heroProgress": null,
+        "titleProgress": "1.0000",
+        "firstChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "lastChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        }
+      },
+      {
+        "pct": 1,
+        "scrollY": 4496,
+        "videos": [],
+        "heroProgress": null,
+        "titleProgress": "1.0000",
+        "firstChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "lastChar": {
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        }
+      }
+    ]
+  }
+]

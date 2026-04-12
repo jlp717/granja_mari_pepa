@@ -1,0 +1,20 @@
+[
+  {
+    "targetY": 0,
+    "scrollY": 0,
+    "navColor": "rgb(14, 22, 32)",
+    "activeText": "1966Fundación en Lorca (Murcia)Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
+  },
+  {
+    "targetY": 3000,
+    "scrollY": 3000,
+    "navColor": "rgb(245, 244, 223)",
+    "activeText": "1966Fundación en Lorca (Murcia)Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
+  },
+  {
+    "targetY": 4700,
+    "scrollY": 4700,
+    "navColor": "rgb(245, 244, 223)",
+    "activeText": "1980sConsolidación regionalAmpliación de la gama de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración."
+  }
+]

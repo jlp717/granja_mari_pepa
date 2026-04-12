@@ -1,0 +1,169 @@
+# Scroll Narrative: /technology
+
+## 0%
+- ScrollY: 0
+- BUTTON: Toggle menu | 33x33 @ 40,29 | opacity 1
+- BUTTON: TechnologyTechnology | 151x41 @ 99,26 | opacity 1
+- BUTTON: Close | 43x14 @ 77,39 | opacity 0
+- A: Go to homepage | 51x32 @ 695,30 | opacity 1
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Investors | 70x14 @ 1311,39 | opacity 1
+- A: Investors | 70x14 @ 1311,55 | opacity 1
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassenge | 1440x6000 @ 0,0 | opacity 1
+
+## 10%
+- ScrollY: 5022
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassenge | 1440x6000 @ 0,-5022 | opacity 1
+- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
+- H1: Cruise, controlled. | 630x56 @ 405,1028 | opacity 0
+- P: Technology that makes thedream possible | 179x28 @ 631,1132 | opacity 0
+- SECTION: 1Electric Vertical Take-offand Landing (eVTOL)Joby AircraftFast, Flexible TravelTaking off | 1440x6900 @ 0,978 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+
+## 25%
+- ScrollY: 12556
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- SECTION: 1Electric Vertical Take-offand Landing (eVTOL)Joby AircraftFast, Flexible TravelTaking off | 1440x6900 @ 0,-6556 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- P: In the horizontal position, our propellers allow for efficient and fast cruising during wi | 465x75 @ 728,77 | opacity 1
+- P: In the vertical position, our propellers generate upward thrust for takeoff and landing, e | 465x103 @ 728,75 | opacity 1
+
+## 50%
+- ScrollY: 25112
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 1
+- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 0
+- IMG: Intuitive piloting with integrated controls | 734x1120 @ 80,-1102 | opacity 1
+
+## 75%
+- ScrollY: 37667
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 1
+- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 0
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+
+## 100%
+- ScrollY: 50223
+- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
+- A: Experience | 0x0 @ 0,0 | opacity 1
+- A: Technology | 0x0 @ 0,0 | opacity 1
+- A: Company | 0x0 @ 0,0 | opacity 1
+- A: News | 0x0 @ 0,0 | opacity 1
+- A: Careers | 0x0 @ 0,0 | opacity 1
+- A: Investors | 0x0 @ 0,0 | opacity 1
+- A: Fly Blade | 0x0 @ 0,0 | opacity 1
+- A: Joby Shop | 0x0 @ 0,0 | opacity 1
+- A: YouTube | 0x0 @ 0,0 | opacity 1
+- A: Instagram | 0x0 @ 0,0 | opacity 1
+- A: LinkedIn | 0x0 @ 0,0 | opacity 1
+- A: X | 0x0 @ 0,0 | opacity 1
+- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
+- A: Terms of Use | 0x0 @ 0,0 | opacity 1
+- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
+- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
+- A: Safety Policy | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 1
+- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 0
+- VIDEO: (media) | 0x0 @ 0,0 | opacity 1

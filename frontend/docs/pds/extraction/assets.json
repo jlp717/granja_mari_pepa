@@ -1,0 +1,4755 @@
+{
+  "/": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp?v=1775989265822",
+        "srcset": "",
+        "alt": "Joby Aviation Animated Logo",
+        "width": 512,
+        "height": 288,
+        "loading": "auto",
+        "classes": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/a0cc53073d2e2741323b19bcc392b9b3fc5ea888-1444x1700.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Leave city congestion behind and choose a stress-free commute through the clouds.",
+        "width": 20,
+        "height": 24,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Leave city congestion behind and choose a stress-free commute through the clouds.",
+        "width": 652,
+        "height": 1150,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/050c5279f4a679a956a0e3d341f45723e624a5a0-1444x1700.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Sit back and enjoy.\nBreathtaking views come standard with every seat.",
+        "width": 20,
+        "height": 24,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Sit back and enjoy.\nBreathtaking views come standard with every seat.",
+        "width": 652,
+        "height": 1150,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/7fe8973f1288a16f20520b22e08b67c5f5ac6e2b-1444x1700.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Enjoy seamless travel with a choreographed rideshare to the vertiport.",
+        "width": 20,
+        "height": 24,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Enjoy seamless travel with a choreographed rideshare to the vertiport.",
+        "width": 652,
+        "height": 1150,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/896d4d7e05eb68acd3a49e98a0ff6f9804601e84-2248x1450.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Seamless door to door travel, all from a few taps on our app.",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Seamless door to door travel, all from a few taps on our app.",
+        "width": 1016,
+        "height": 655,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b3c6200a3053e3e70ece01b29cd0f58604fa692b-515x747.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Seamless door to door travel, all from a few taps on our app.",
+        "width": 20,
+        "height": 29,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Seamless door to door travel, all from a few taps on our app.",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/86c8943db1672031c0b73ddbf16932e3aed15a4b-552x552.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Our app coordinates your end-to-end commute, including an Uber to and from our vertiport.",
+        "width": 20,
+        "height": 20,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Our app coordinates your end-to-end commute, including an Uber to and from our vertiport.",
+        "width": 328,
+        "height": 328,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/fe892333d4c9a9934032f2ee33da32ac0f61211f-3200x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Technology that makes\nthe dream possible",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Technology that makes\nthe dream possible",
+        "width": 1440,
+        "height": 1220,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/bb2f1438061f5e799944e0ba4659720790d63bf2-1125x2250.jpg?rect=0,0,914,2250&w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Technology that makes\nthe dream possible",
+        "width": 20,
+        "height": 50,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Technology that makes\nthe dream possible",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/9d0764b417418fd1c74f84ceffb1197d861b40fa-6000x4000.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Joby Completes Piloted Electric Air Taxi Flight Across San Francisco Bay and Around the Golden Gate",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Joby Completes Piloted Electric Air Taxi Flight Across San Francisco Bay and Around the Golden Gate",
+        "width": 527,
+        "height": 374,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/6f800281b68a999fc7fac710d5abf199282530df-3000x2000.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": " Joby’s First FAA-Conforming Aircraft Takes Flight",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": " Joby’s First FAA-Conforming Aircraft Takes Flight",
+        "width": 426,
+        "height": 298,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/411a712308f1858194b3efd9368aa51dad54a599-6000x4000.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Joby to Begin U.S. Operations in 2026 Under White House Air Taxi Program",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Joby to Begin U.S. Operations in 2026 Under White House Air Taxi Program",
+        "width": 327,
+        "height": 218,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/08c1cc4c2b2f84e81af5a811a077423dbf1a82d5-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/08c1cc4c2b2f84e81af5a811a077423dbf1a82d5-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/63e7e05a6a30a30f436156a8cb269a9bf9462a41-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/23228f427bf25ff3c6a7436eb2f10a3bebc1aff0-1500x1892.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/58843994032d8c021e582ce1ce7ce1cd3de3743d-4800x6000.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0478fe6e587c2e8fb1ac677e0cf1ea3332083e6f-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/af456faf9640de0bdd711f84e45d958cc636ab8a-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/af456faf9640de0bdd711f84e45d958cc636ab8a-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e139fbac7c088eda6c77b752cea28f4ca66fa420-1500x1892.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e139fbac7c088eda6c77b752cea28f4ca66fa420-1500x1892.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/bb92b433868cdbe3608420f4e69de82d3a952d7d-1120x1412.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Government",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Government",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/bb92b433868cdbe3608420f4e69de82d3a952d7d-1120x1412.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Government",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Government",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/ae1c4e28f2e64113163a11688e9491eaced07734-76x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Uber",
+        "width": 76,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Uber",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/3668a86d6101741073f98b390a355183e6a7521a-480x180.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Delta",
+        "width": 20,
+        "height": 8,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Delta",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/045aa354beeb7b18c26ecc75a71d274340c6da04-993x231.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Virgin Atlantic",
+        "width": 20,
+        "height": 5,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Virgin Atlantic",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/5ba090dd2266b6ea85978ba2a62d482482a94740-92x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "ANA",
+        "width": 92,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "ANA",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/703ef7455889d41a12b2750e5c0891426fa7b142-112x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Skyports",
+        "width": 112,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Skyports",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/52a92a0193c660628053cbfcb60c24a21bf14608-102x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Vertiports by Atlantic",
+        "width": 102,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Vertiports by Atlantic",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b01675566cfe8d9377f546874496f8b7afdd98b6-122x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Signature Flight Support",
+        "width": 122,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Signature Flight Support",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/f7e02666c110899b16a7df086f9b7daa1bb6e446-90x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Jetex",
+        "width": 90,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Jetex",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c0a0a44e718ac7c11a58fc941ee54231367bf8b0-122x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Clay Lacy",
+        "width": 122,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Clay Lacy",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/d3a3de92285f5ba0e49e504675e3475f63948e13-74x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Helo Holdings, Inc.",
+        "width": 74,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Helo Holdings, Inc.",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e2e469f991528ca2c648fd9455142a6388ea2e16-122x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Toyota",
+        "width": 122,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Toyota",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/fb4aa83f7c38f23fbc0fbbf56e0559534b9a9e7e-510x198.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "NASA",
+        "width": 20,
+        "height": 8,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "NASA",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/65c47bff04766eeb14a3e794cbfcf3939c3d0f23-112x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Garmin",
+        "width": 112,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Garmin",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/41e28c69c10d417477200ee5be7f29fa01429fc3-66x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "CAE",
+        "width": 66,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "CAE",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/de462f3594507f8d71cc7820510d8b5493830083-2520x1580.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 1440,
+        "height": 1220,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/336ae41e52f6f4e93e9a0c4a4236893f6892d8a6-1125x2250.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 20,
+        "height": 40,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c87e7474a50bc61d572909da05aee1647cd8f082-2400x6045.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 50,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 3618,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0a69932fb2b24e757fa9d1704eea6fc29cee4870-563x3527.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 125,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e5d6f302a057dc33abc3047e611edd9b8c74bcf0-2400x1518.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 911,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e11f4b40ca3ec460076dfd86179082352303c8c5-563x600.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 21,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/dd2fb834986e5aace151c61fa2243743ba9d442b-2400x975.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 8,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 585,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/95884b5d5467b36a6da04505fe3ac615a7f01a4f-563x380.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/f534edec7bf7bc54afc1ece9f54f507eed0dcff1-2400x1616.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 969,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/712a9bdb835cf1beff518e2bac704dce0e1b68ce-563x735.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 26,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b2ec77696825a0ef40f54f85f2ef75ec4905dcd5-2400x195.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 2,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 117,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/eda6bcbd653bedc6290bdbdba46d10da721b646c-563x83.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 3,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/7bf0b0a519093b043b8a870943a16fbc521eed5a-2400x407.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 3,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 244,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0d5a8981595b62f8c583687d8934a963c87204fd-563x158.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 6,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/ee46d244254cb61608942005e383662740c383cb-2400x1811.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 15,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 1086,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/d8429b57b9a567d4bc25915ac2156803e2f2710e-563x983.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 35,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/3c8db3fa82c0be25fa06d318f49c40bdeacba13e-2400x819.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 7,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 491,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/a5fc6f536db0c35bae0ebbcb1cd0598a7ad09f69-563x305.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c29987660ed88a308e3daae091da628a4d0b1232-2400x1202.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 10,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 721,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0c55594d3bd511382dca2eba0026203a76d410ec-563x653.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 23,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/237e8abbc506011492066bd3ac9a4e5390ea99f4-2400x1233.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 10,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 740,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/15c5e6df328a8621f9110ba5495c5019e845daf9-563x519.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 18,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/786bb4bbf59d8b1866595d98f7db505cd2f9d456-2400x890.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 7,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 1440,
+        "height": 534,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/db3331bd1630601194a67a87c39482e2648c9fda-563x330.webp?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Dream \nof Flight",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      }
+    ],
+    "videos": [
+      {
+        "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+        "sources": [],
+        "poster": "",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": false,
+        "playsInline": true,
+        "controls": false
+      }
+    ],
+    "svgInline": [
+      {
+        "index": 0,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 1,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 88 40"
+      },
+      {
+        "index": 2,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 3,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 4,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 144 42"
+      },
+      {
+        "index": 5,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 6,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 13 12"
+      },
+      {
+        "index": 7,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 737"
+      },
+      {
+        "index": 8,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 568"
+      }
+    ],
+    "svgExternal": [],
+    "fonts": [
+      {
+        "family": "jobyText",
+        "src": "url(\"../media/JobySans_Text_Variable-s.p.5174080c.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyText Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      },
+      {
+        "family": "jobyDisplay",
+        "src": "url(\"../media/JobySans_Display_Variable-s.p.cdf48502.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyDisplay Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      }
+    ],
+    "backgroundImages": [],
+    "icons": [],
+    "preloads": [
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Text_Variable-s.p.5174080c.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Display_Variable-s.p.cdf48502.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/6f406898556e37a4.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/9dc9743c97e2e460.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/3df39882fdd33c97.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/52ecff12c7e5b6c0.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/f7666c75f196c995.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/a0cc53073d2e2741323b19bcc392b9b3fc5ea888-1444x1700.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/050c5279f4a679a956a0e3d341f45723e624a5a0-1444x1700.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/7fe8973f1288a16f20520b22e08b67c5f5ac6e2b-1444x1700.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/896d4d7e05eb68acd3a49e98a0ff6f9804601e84-2248x1450.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/b3c6200a3053e3e70ece01b29cd0f58604fa692b-515x747.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/86c8943db1672031c0b73ddbf16932e3aed15a4b-552x552.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/fe892333d4c9a9934032f2ee33da32ac0f61211f-3200x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/bb2f1438061f5e799944e0ba4659720790d63bf2-1125x2250.jpg?rect=0,0,914,2250&w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/9d0764b417418fd1c74f84ceffb1197d861b40fa-6000x4000.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/6f800281b68a999fc7fac710d5abf199282530df-3000x2000.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/411a712308f1858194b3efd9368aa51dad54a599-6000x4000.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/08c1cc4c2b2f84e81af5a811a077423dbf1a82d5-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/63e7e05a6a30a30f436156a8cb269a9bf9462a41-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/23228f427bf25ff3c6a7436eb2f10a3bebc1aff0-1500x1892.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/58843994032d8c021e582ce1ce7ce1cd3de3743d-4800x6000.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0478fe6e587c2e8fb1ac677e0cf1ea3332083e6f-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/af456faf9640de0bdd711f84e45d958cc636ab8a-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e139fbac7c088eda6c77b752cea28f4ca66fa420-1500x1892.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/bb92b433868cdbe3608420f4e69de82d3a952d7d-1120x1412.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/ae1c4e28f2e64113163a11688e9491eaced07734-76x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/3668a86d6101741073f98b390a355183e6a7521a-480x180.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/045aa354beeb7b18c26ecc75a71d274340c6da04-993x231.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/5ba090dd2266b6ea85978ba2a62d482482a94740-92x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/703ef7455889d41a12b2750e5c0891426fa7b142-112x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/52a92a0193c660628053cbfcb60c24a21bf14608-102x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/b01675566cfe8d9377f546874496f8b7afdd98b6-122x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/f7e02666c110899b16a7df086f9b7daa1bb6e446-90x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c0a0a44e718ac7c11a58fc941ee54231367bf8b0-122x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/d3a3de92285f5ba0e49e504675e3475f63948e13-74x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e2e469f991528ca2c648fd9455142a6388ea2e16-122x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/fb4aa83f7c38f23fbc0fbbf56e0559534b9a9e7e-510x198.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/65c47bff04766eeb14a3e794cbfcf3939c3d0f23-112x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/41e28c69c10d417477200ee5be7f29fa01429fc3-66x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/de462f3594507f8d71cc7820510d8b5493830083-2520x1580.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/336ae41e52f6f4e93e9a0c4a4236893f6892d8a6-1125x2250.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c87e7474a50bc61d572909da05aee1647cd8f082-2400x6045.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0a69932fb2b24e757fa9d1704eea6fc29cee4870-563x3527.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e5d6f302a057dc33abc3047e611edd9b8c74bcf0-2400x1518.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e11f4b40ca3ec460076dfd86179082352303c8c5-563x600.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/dd2fb834986e5aace151c61fa2243743ba9d442b-2400x975.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/95884b5d5467b36a6da04505fe3ac615a7f01a4f-563x380.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/f534edec7bf7bc54afc1ece9f54f507eed0dcff1-2400x1616.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/712a9bdb835cf1beff518e2bac704dce0e1b68ce-563x735.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/b2ec77696825a0ef40f54f85f2ef75ec4905dcd5-2400x195.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/eda6bcbd653bedc6290bdbdba46d10da721b646c-563x83.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/7bf0b0a519093b043b8a870943a16fbc521eed5a-2400x407.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0d5a8981595b62f8c583687d8934a963c87204fd-563x158.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/ee46d244254cb61608942005e383662740c383cb-2400x1811.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/d8429b57b9a567d4bc25915ac2156803e2f2710e-563x983.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/3c8db3fa82c0be25fa06d318f49c40bdeacba13e-2400x819.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/a5fc6f536db0c35bae0ebbcb1cd0598a7ad09f69-563x305.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c29987660ed88a308e3daae091da628a4d0b1232-2400x1202.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0c55594d3bd511382dca2eba0026203a76d410ec-563x653.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/237e8abbc506011492066bd3ac9a4e5390ea99f4-2400x1233.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/15c5e6df328a8621f9110ba5495c5019e845daf9-563x519.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/786bb4bbf59d8b1866595d98f7db505cd2f9d456-2400x890.webp?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/db3331bd1630601194a67a87c39482e2648c9fda-563x330.webp?w=20&blur=10&q=20",
+        "type": ""
+      }
+    ]
+  },
+  "/experience": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "srcset": "",
+        "alt": "Joby Aviation Animated Logo",
+        "width": 512,
+        "height": 288,
+        "loading": "auto",
+        "classes": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c3e51f6df54314b3643821c76520a1c69b7fde5d-2172x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "A front-row seat for everyone.",
+        "width": 20,
+        "height": 17,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "A front-row seat for everyone.",
+        "width": 849,
+        "height": 1200,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/232cbec3fcbf9b5b78748e36d354288e7caf27ee-2172x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Comfortable room for your crew and carry-on.",
+        "width": 20,
+        "height": 17,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Comfortable room for your crew and carry-on.",
+        "width": 849,
+        "height": 1200,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/10d341acdbdbf468f02058345e80c29d3b5e5e40-2172x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Every leg of your journey, seamlessly orchestrated.",
+        "width": 20,
+        "height": 17,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Every leg of your journey, seamlessly orchestrated.",
+        "width": 849,
+        "height": 1200,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/1546ac3bccf6cd592836a330bc892dbca9972d57-2172x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "All-electric flight for clear skies ahead.",
+        "width": 20,
+        "height": 17,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "All-electric flight for clear skies ahead.",
+        "width": 849,
+        "height": 1200,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "A front-row seat for everyone.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "A front-row seat for everyone.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Comfortable room for your crew and carry-on.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Comfortable room for your crew and carry-on.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Every leg of your journey, seamlessly orchestrated.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Every leg of your journey, seamlessly orchestrated.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "All-electric flight for clear skies ahead.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "All-electric flight for clear skies ahead.",
+        "width": 240,
+        "height": 240,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/08c1cc4c2b2f84e81af5a811a077423dbf1a82d5-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/08c1cc4c2b2f84e81af5a811a077423dbf1a82d5-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Car Service",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/63e7e05a6a30a30f436156a8cb269a9bf9462a41-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/23228f427bf25ff3c6a7436eb2f10a3bebc1aff0-1500x1892.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Airlines",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/58843994032d8c021e582ce1ce7ce1cd3de3743d-4800x6000.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0478fe6e587c2e8fb1ac677e0cf1ea3332083e6f-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Infrastructure",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/af456faf9640de0bdd711f84e45d958cc636ab8a-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/af456faf9640de0bdd711f84e45d958cc636ab8a-1500x1892.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "R&D",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e139fbac7c088eda6c77b752cea28f4ca66fa420-1500x1892.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e139fbac7c088eda6c77b752cea28f4ca66fa420-1500x1892.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Technology",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/bb92b433868cdbe3608420f4e69de82d3a952d7d-1120x1412.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Government",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Government",
+        "width": 500,
+        "height": 1040,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/bb92b433868cdbe3608420f4e69de82d3a952d7d-1120x1412.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Government",
+        "width": 20,
+        "height": 25,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Government",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/ae1c4e28f2e64113163a11688e9491eaced07734-76x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Uber",
+        "width": 76,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Uber",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/3668a86d6101741073f98b390a355183e6a7521a-480x180.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Delta",
+        "width": 20,
+        "height": 8,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Delta",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/045aa354beeb7b18c26ecc75a71d274340c6da04-993x231.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Virgin Atlantic",
+        "width": 20,
+        "height": 5,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Virgin Atlantic",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/5ba090dd2266b6ea85978ba2a62d482482a94740-92x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "ANA",
+        "width": 92,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "ANA",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/703ef7455889d41a12b2750e5c0891426fa7b142-112x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Skyports",
+        "width": 112,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Skyports",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/52a92a0193c660628053cbfcb60c24a21bf14608-102x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Vertiports by Atlantic",
+        "width": 102,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Vertiports by Atlantic",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b01675566cfe8d9377f546874496f8b7afdd98b6-122x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Signature Flight Support",
+        "width": 122,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Signature Flight Support",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/f7e02666c110899b16a7df086f9b7daa1bb6e446-90x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Jetex",
+        "width": 90,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Jetex",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c0a0a44e718ac7c11a58fc941ee54231367bf8b0-122x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Clay Lacy",
+        "width": 122,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Clay Lacy",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/d3a3de92285f5ba0e49e504675e3475f63948e13-74x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Helo Holdings, Inc.",
+        "width": 74,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Helo Holdings, Inc.",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e2e469f991528ca2c648fd9455142a6388ea2e16-122x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Toyota",
+        "width": 122,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Toyota",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/fb4aa83f7c38f23fbc0fbbf56e0559534b9a9e7e-510x198.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "NASA",
+        "width": 20,
+        "height": 8,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "NASA",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/65c47bff04766eeb14a3e794cbfcf3939c3d0f23-112x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Garmin",
+        "width": 112,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Garmin",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/41e28c69c10d417477200ee5be7f29fa01429fc3-66x45.svg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "CAE",
+        "width": 66,
+        "height": 45,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "CAE",
+        "width": 99,
+        "height": 34,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/2793fd52d935f7c5da6a2ac763e49defa93c700b-3200x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 1440,
+        "height": 1220,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0dece5fdd9e5ea1d86baa0607912460dee287c15-1125x2250.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 20,
+        "height": 40,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "The sky was never the limit.",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      }
+    ],
+    "videos": [
+      {
+        "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-experience-desktop-r2.mp4",
+        "sources": [],
+        "poster": "",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": false,
+        "playsInline": true,
+        "controls": false
+      }
+    ],
+    "svgInline": [
+      {
+        "index": 0,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 1,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 88 40"
+      },
+      {
+        "index": 2,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 3,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 4,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 25 16"
+      },
+      {
+        "index": 5,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 25 16"
+      },
+      {
+        "index": 6,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 25 16"
+      },
+      {
+        "index": 7,
+        "classes": "SectionMap-module-scss-module__jqO-4q__mapDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1076 821"
+      },
+      {
+        "index": 8,
+        "classes": "SectionMap-module-scss-module__jqO-4q__mapMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 582 501"
+      },
+      {
+        "index": 9,
+        "classes": "SectionMap-module-scss-module__jqO-4q__mapDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1176 852"
+      },
+      {
+        "index": 10,
+        "classes": "SectionMap-module-scss-module__jqO-4q__mapMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 525 403"
+      },
+      {
+        "index": 11,
+        "classes": "SectionMap-module-scss-module__jqO-4q__mapDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1121 845"
+      },
+      {
+        "index": 12,
+        "classes": "SectionMap-module-scss-module__jqO-4q__mapMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 524 501"
+      },
+      {
+        "index": 13,
+        "classes": "[object SVGAnimatedString]",
+        "width": "100%",
+        "height": "100%",
+        "viewBox": null
+      },
+      {
+        "index": 14,
+        "classes": "[object SVGAnimatedString]",
+        "width": "100%",
+        "height": "100%",
+        "viewBox": null
+      },
+      {
+        "index": 15,
+        "classes": "[object SVGAnimatedString]",
+        "width": "100%",
+        "height": "100%",
+        "viewBox": null
+      },
+      {
+        "index": 16,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 144 42"
+      },
+      {
+        "index": 17,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 18,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 13 12"
+      },
+      {
+        "index": 19,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 737"
+      },
+      {
+        "index": 20,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 568"
+      }
+    ],
+    "svgExternal": [],
+    "fonts": [
+      {
+        "family": "jobyText",
+        "src": "url(\"../media/JobySans_Text_Variable-s.p.5174080c.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyText Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      },
+      {
+        "family": "jobyDisplay",
+        "src": "url(\"../media/JobySans_Display_Variable-s.p.cdf48502.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyDisplay Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      }
+    ],
+    "backgroundImages": [],
+    "icons": [],
+    "preloads": [
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Text_Variable-s.p.5174080c.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Display_Variable-s.p.cdf48502.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/6f406898556e37a4.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/9dc9743c97e2e460.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/3df39882fdd33c97.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/52ecff12c7e5b6c0.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/69eba97b748886a6.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c3e51f6df54314b3643821c76520a1c69b7fde5d-2172x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/232cbec3fcbf9b5b78748e36d354288e7caf27ee-2172x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/10d341acdbdbf468f02058345e80c29d3b5e5e40-2172x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/1546ac3bccf6cd592836a330bc892dbca9972d57-2172x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/08c1cc4c2b2f84e81af5a811a077423dbf1a82d5-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/63e7e05a6a30a30f436156a8cb269a9bf9462a41-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/23228f427bf25ff3c6a7436eb2f10a3bebc1aff0-1500x1892.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/58843994032d8c021e582ce1ce7ce1cd3de3743d-4800x6000.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0478fe6e587c2e8fb1ac677e0cf1ea3332083e6f-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/af456faf9640de0bdd711f84e45d958cc636ab8a-1500x1892.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e139fbac7c088eda6c77b752cea28f4ca66fa420-1500x1892.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/bb92b433868cdbe3608420f4e69de82d3a952d7d-1120x1412.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/ae1c4e28f2e64113163a11688e9491eaced07734-76x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/3668a86d6101741073f98b390a355183e6a7521a-480x180.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/045aa354beeb7b18c26ecc75a71d274340c6da04-993x231.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/5ba090dd2266b6ea85978ba2a62d482482a94740-92x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/703ef7455889d41a12b2750e5c0891426fa7b142-112x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/52a92a0193c660628053cbfcb60c24a21bf14608-102x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/b01675566cfe8d9377f546874496f8b7afdd98b6-122x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/f7e02666c110899b16a7df086f9b7daa1bb6e446-90x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c0a0a44e718ac7c11a58fc941ee54231367bf8b0-122x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/d3a3de92285f5ba0e49e504675e3475f63948e13-74x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e2e469f991528ca2c648fd9455142a6388ea2e16-122x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/fb4aa83f7c38f23fbc0fbbf56e0559534b9a9e7e-510x198.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/65c47bff04766eeb14a3e794cbfcf3939c3d0f23-112x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/41e28c69c10d417477200ee5be7f29fa01429fc3-66x45.svg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/2793fd52d935f7c5da6a2ac763e49defa93c700b-3200x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0dece5fdd9e5ea1d86baa0607912460dee287c15-1125x2250.jpg?w=20&blur=10&q=20",
+        "type": ""
+      }
+    ]
+  },
+  "/technology": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "srcset": "",
+        "alt": "Joby Aviation Animated Logo",
+        "width": 512,
+        "height": 288,
+        "loading": "auto",
+        "classes": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/efdaf237ec499c9731dd89205127792fbb20bf8f-2122x1194.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Safely soaring skyward",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Safely soaring skyward",
+        "width": 1440,
+        "height": 1220,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/efdaf237ec499c9731dd89205127792fbb20bf8f-2122x1194.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Safely soaring skyward",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Safely soaring skyward",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/4cdce047e61c99dde940e537e57ce1a3ecd7590e-2001x2003.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Nearly a decade of certification work with FAA",
+        "width": 20,
+        "height": 20,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Nearly a decade of certification work with FAA",
+        "width": 734,
+        "height": 1120,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/9dfd136df938212acbf21454c7ea04f86bc597bd-2001x2003.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Thousands of testing hours for each part",
+        "width": 20,
+        "height": 20,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Thousands of testing hours for each part",
+        "width": 734,
+        "height": 1120,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/a0c8080aa19771444f92d41cd87410246c548fce-2048x2048.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Redundancy built in",
+        "width": 20,
+        "height": 20,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Redundancy built in",
+        "width": 734,
+        "height": 1120,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e681f1aa1760df0457a47f6f2041cef58d48fb0a-2001x2003.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Intuitive piloting with integrated controls",
+        "width": 20,
+        "height": 20,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Intuitive piloting with integrated controls",
+        "width": 734,
+        "height": 1120,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c5428bf864f113e61212b8860974f0a73f672cf4-2048x1366.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 884,
+        "height": 1200,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c5428bf864f113e61212b8860974f0a73f672cf4-2048x1366.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/fe3af7129d304499bff4bdf9bea97de672de205f-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-0",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-0",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/fe3af7129d304499bff4bdf9bea97de672de205f-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-0",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-0",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/9da8f76da2593a04f95db82831af28e07ff1dc16-2160x1286.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-1",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-1",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/9da8f76da2593a04f95db82831af28e07ff1dc16-2160x1286.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-1",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-1",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/6bbca106ad4824183f874e8e780dcbb201d89ee2-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-2",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-2",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/6bbca106ad4824183f874e8e780dcbb201d89ee2-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-2",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-2",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/197b82ad591341921f04e6d6e1f3cfcb6b1da8da-4000x2667.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-3",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-3",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/197b82ad591341921f04e6d6e1f3cfcb6b1da8da-4000x2667.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-3",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-3",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0577810349fc0c17f1e5fa843ad443ecf74e20ef-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-4",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-4",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/0577810349fc0c17f1e5fa843ad443ecf74e20ef-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-4",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-4",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b6f7485c5606d4e89b503b1e3780544dd5fdaeb6-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-5",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-5",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b6f7485c5606d4e89b503b1e3780544dd5fdaeb6-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-5",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-5",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/626cb6719b69a16e2573c40c3d5547fde4dc4000-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-6",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-6",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/626cb6719b69a16e2573c40c3d5547fde4dc4000-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-6",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-6",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/f72ab8923545b9455d10d55147f154168ad8bb31-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-7",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-7",
+        "width": 981,
+        "height": 581,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/f72ab8923545b9455d10d55147f154168ad8bb31-3240x1929.png?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "video-7",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "video-7",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/aa0a93fdc1c9737c4fc33c3238c4d066ecb303d9-2500x5938.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Nothing but clear\nskies ahead.",
+        "width": 20,
+        "height": 48,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Nothing but clear\nskies ahead.",
+        "width": 1440,
+        "height": 3859,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/bf73d645074cc86c1fce412d7429a88ca0e2bfdc-1000x3946.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Nothing but clear\nskies ahead.",
+        "width": 20,
+        "height": 79,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Nothing but clear\nskies ahead.",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/2b619d49bbf13550af464d85d2e077135d9a33c9-3200x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Bringing back the wonder of flight to your daily commute",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Bringing back the wonder of flight to your daily commute",
+        "width": 1440,
+        "height": 1220,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/06931f02a6d83ad98531c6c9877e745a4ebb6a5d-1125x2250.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Bringing back the wonder of flight to your daily commute",
+        "width": 20,
+        "height": 40,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Bringing back the wonder of flight to your daily commute",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      }
+    ],
+    "videos": [
+      {
+        "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+        "sources": [],
+        "poster": "",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": false,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+        "sources": [],
+        "poster": "",
+        "width": 0,
+        "height": 0,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+        "sources": [],
+        "poster": "",
+        "width": 0,
+        "height": 0,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+        "sources": [],
+        "poster": "",
+        "width": 0,
+        "height": 0,
+        "muted": true,
+        "autoplay": false,
+        "loop": false,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+        "sources": [],
+        "poster": "",
+        "width": 0,
+        "height": 0,
+        "muted": true,
+        "autoplay": false,
+        "loop": false,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "",
+        "sources": [],
+        "poster": "",
+        "width": 0,
+        "height": 0,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "",
+        "sources": [],
+        "poster": "https://www.jobyaviation.com/technology",
+        "width": 1440,
+        "height": 1202,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "",
+        "sources": [],
+        "poster": "https://www.jobyaviation.com/technology",
+        "width": 0,
+        "height": 0,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      }
+    ],
+    "svgInline": [
+      {
+        "index": 0,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 17 9"
+      },
+      {
+        "index": 1,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 17 9"
+      },
+      {
+        "index": 2,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 17 9"
+      },
+      {
+        "index": 3,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 4,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 88 40"
+      },
+      {
+        "index": 5,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 6,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 7,
+        "classes": "SectionAircraft-module-scss-module__P2eaWG__fixedIntroMediaDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 900"
+      },
+      {
+        "index": 8,
+        "classes": "SectionAircraft-module-scss-module__P2eaWG__fixedIntroMediaMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 812"
+      },
+      {
+        "index": 9,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 17"
+      },
+      {
+        "index": 10,
+        "classes": "SectionSpecs-module-scss-module__qHNuCq__contentMediaSummaryDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1040 754"
+      },
+      {
+        "index": 11,
+        "classes": "SectionSpecs-module-scss-module__qHNuCq__contentMediaSummaryMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 360 350"
+      },
+      {
+        "index": 12,
+        "classes": "SectionSpecs-module-scss-module__qHNuCq__contentMediaFleetDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1040 754"
+      },
+      {
+        "index": 13,
+        "classes": "SectionSpecs-module-scss-module__qHNuCq__contentMediaFleetMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 360 350"
+      },
+      {
+        "index": 14,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 40 40"
+      },
+      {
+        "index": 15,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 144 42"
+      },
+      {
+        "index": 16,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 17,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 13 12"
+      },
+      {
+        "index": 18,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 737"
+      },
+      {
+        "index": 19,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 568"
+      }
+    ],
+    "svgExternal": [],
+    "fonts": [
+      {
+        "family": "jobyText",
+        "src": "url(\"../media/JobySans_Text_Variable-s.p.5174080c.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyText Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      },
+      {
+        "family": "jobyDisplay",
+        "src": "url(\"../media/JobySans_Display_Variable-s.p.cdf48502.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyDisplay Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      }
+    ],
+    "backgroundImages": [],
+    "icons": [],
+    "preloads": [
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Text_Variable-s.p.5174080c.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Display_Variable-s.p.cdf48502.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/6f406898556e37a4.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/9dc9743c97e2e460.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/3df39882fdd33c97.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/52ecff12c7e5b6c0.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/69eba97b748886a6.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/efdaf237ec499c9731dd89205127792fbb20bf8f-2122x1194.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/4cdce047e61c99dde940e537e57ce1a3ecd7590e-2001x2003.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/9dfd136df938212acbf21454c7ea04f86bc597bd-2001x2003.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/a0c8080aa19771444f92d41cd87410246c548fce-2048x2048.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e681f1aa1760df0457a47f6f2041cef58d48fb0a-2001x2003.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c5428bf864f113e61212b8860974f0a73f672cf4-2048x1366.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/fe3af7129d304499bff4bdf9bea97de672de205f-3240x1929.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/9da8f76da2593a04f95db82831af28e07ff1dc16-2160x1286.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/6bbca106ad4824183f874e8e780dcbb201d89ee2-3240x1929.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/197b82ad591341921f04e6d6e1f3cfcb6b1da8da-4000x2667.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/0577810349fc0c17f1e5fa843ad443ecf74e20ef-3240x1929.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/b6f7485c5606d4e89b503b1e3780544dd5fdaeb6-3240x1929.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/626cb6719b69a16e2573c40c3d5547fde4dc4000-3240x1929.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/f72ab8923545b9455d10d55147f154168ad8bb31-3240x1929.png?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/aa0a93fdc1c9737c4fc33c3238c4d066ecb303d9-2500x5938.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/bf73d645074cc86c1fce412d7429a88ca0e2bfdc-1000x3946.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/2b619d49bbf13550af464d85d2e077135d9a33c9-3200x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/06931f02a6d83ad98531c6c9877e745a4ebb6a5d-1125x2250.jpg?w=20&blur=10&q=20",
+        "type": ""
+      }
+    ]
+  },
+  "/company": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "srcset": "",
+        "alt": "Joby Aviation Animated Logo",
+        "width": 512,
+        "height": 288,
+        "loading": "auto",
+        "classes": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/e512f17e9cfc1e8178e637e3519ef2a5a319473f-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 1440,
+        "height": 1200,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c761953ab8eee09507d04579152c234cb6686c80-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/a6838b0d5dcabc0825980b496f84e53f7efcb1f2-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/180862b8ea9f046936c5851115e8fa905bd38d38-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/30e687ad3a4ea882f89030b43f7d5779991686ab-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/45acf2f7e3be392fc205ed9e2aa70c3970819b94-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/eeeee64628a9e8bdbe569ee32edcfcbf4a13a5df-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/577595ff84965f3e5fa87710999ba12cb9b6da40-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/d36a18b5292e692e9f4105d489908f1b35ab7251-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/c735bb1b77c1f2f079ade845dc72e7e5ed0f186b-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/deebf72478f31b617e99a99522e79762a2cfbbbc-1440x991.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/8f7b3be770870fd44bc65085680fd2efe96587a8-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/97c7890114494fbddc6efeda24ee445ae5f7cda5-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/ed9155e339bed598d0f336dcea66c7bbdd0717c0-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/1575167b78bff582425b20d77104688394a712a0-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/fbd721c74cb18f381321d59880ed5fbb211c1a25-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/84b7f35f1f17c671c1ec16669e96567ec88ccbef-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/abf115fa93d7c558d0243b42c8ae0e1c8d701a77-1920x1321.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 14,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/b98cc3dd82d8342db04ac1cbbfca13d269893dca-10670x7113.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "",
+        "width": 20,
+        "height": 13,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/5516a3e6dae9dad0e7951e0afa6acb76a6d5d4ab-1600x988.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Join our crew",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Join our crew",
+        "width": 672,
+        "height": 415,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/f22efa42473ad1842fbb476918dfd7559c49a16f-1600x988.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Backed by vision",
+        "width": 20,
+        "height": 12,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Backed by vision",
+        "width": 672,
+        "height": 415,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/2d63ec7352e2a6938dcb11f485244bc156ed003a-3200x1800.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Designing cleaner flight for people and the planet.",
+        "width": 20,
+        "height": 11,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Designing cleaner flight for people and the planet.",
+        "width": 1440,
+        "height": 1220,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      },
+      {
+        "src": "https://cdn.sanity.io/images/h5mp19kq/production/a5d1c28586ec8b552beb477811dbcb13f998ab44-1125x2250.jpg?w=20&blur=10&q=20",
+        "srcset": "",
+        "alt": "Designing cleaner flight for people and the planet.",
+        "width": 20,
+        "height": 40,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image Image-module-scss-module__AQlTRG__placeholder placeholder"
+      },
+      {
+        "src": "",
+        "srcset": "",
+        "alt": "Designing cleaner flight for people and the planet.",
+        "width": 0,
+        "height": 0,
+        "loading": "auto",
+        "classes": "Image-module-scss-module__AQlTRG__image"
+      }
+    ],
+    "videos": [
+      {
+        "src": "",
+        "sources": [],
+        "poster": "https://www.jobyaviation.com/company",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "",
+        "sources": [],
+        "poster": "https://www.jobyaviation.com/company",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "",
+        "sources": [],
+        "poster": "https://www.jobyaviation.com/company",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      },
+      {
+        "src": "",
+        "sources": [],
+        "poster": "https://www.jobyaviation.com/company",
+        "width": 1440,
+        "height": 1200,
+        "muted": true,
+        "autoplay": false,
+        "loop": true,
+        "playsInline": true,
+        "controls": false
+      }
+    ],
+    "svgInline": [
+      {
+        "index": 0,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 1,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 88 40"
+      },
+      {
+        "index": 2,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 3,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 4,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 5,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 6,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 7,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 8,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 144 42"
+      },
+      {
+        "index": 9,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 10,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 13 12"
+      },
+      {
+        "index": 11,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 737"
+      },
+      {
+        "index": 12,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 568"
+      }
+    ],
+    "svgExternal": [],
+    "fonts": [
+      {
+        "family": "jobyText",
+        "src": "url(\"../media/JobySans_Text_Variable-s.p.5174080c.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyText Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      },
+      {
+        "family": "jobyDisplay",
+        "src": "url(\"../media/JobySans_Display_Variable-s.p.cdf48502.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyDisplay Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      }
+    ],
+    "backgroundImages": [],
+    "icons": [],
+    "preloads": [
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Text_Variable-s.p.5174080c.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Display_Variable-s.p.cdf48502.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/6f406898556e37a4.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/9dc9743c97e2e460.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/3df39882fdd33c97.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/52ecff12c7e5b6c0.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/69eba97b748886a6.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/e512f17e9cfc1e8178e637e3519ef2a5a319473f-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c761953ab8eee09507d04579152c234cb6686c80-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/a6838b0d5dcabc0825980b496f84e53f7efcb1f2-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/180862b8ea9f046936c5851115e8fa905bd38d38-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/30e687ad3a4ea882f89030b43f7d5779991686ab-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/45acf2f7e3be392fc205ed9e2aa70c3970819b94-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/eeeee64628a9e8bdbe569ee32edcfcbf4a13a5df-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/577595ff84965f3e5fa87710999ba12cb9b6da40-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/d36a18b5292e692e9f4105d489908f1b35ab7251-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/c735bb1b77c1f2f079ade845dc72e7e5ed0f186b-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/deebf72478f31b617e99a99522e79762a2cfbbbc-1440x991.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/8f7b3be770870fd44bc65085680fd2efe96587a8-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/97c7890114494fbddc6efeda24ee445ae5f7cda5-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/ed9155e339bed598d0f336dcea66c7bbdd0717c0-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/1575167b78bff582425b20d77104688394a712a0-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/fbd721c74cb18f381321d59880ed5fbb211c1a25-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/84b7f35f1f17c671c1ec16669e96567ec88ccbef-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/abf115fa93d7c558d0243b42c8ae0e1c8d701a77-1920x1321.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/b98cc3dd82d8342db04ac1cbbfca13d269893dca-10670x7113.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/5516a3e6dae9dad0e7951e0afa6acb76a6d5d4ab-1600x988.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/f22efa42473ad1842fbb476918dfd7559c49a16f-1600x988.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/2d63ec7352e2a6938dcb11f485244bc156ed003a-3200x1800.jpg?w=20&blur=10&q=20",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://cdn.sanity.io/images/h5mp19kq/production/a5d1c28586ec8b552beb477811dbcb13f998ab44-1125x2250.jpg?w=20&blur=10&q=20",
+        "type": ""
+      }
+    ]
+  },
+  "/privacy-policy": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "srcset": "",
+        "alt": "Joby Aviation Animated Logo",
+        "width": 512,
+        "height": 288,
+        "loading": "auto",
+        "classes": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      }
+    ],
+    "videos": [],
+    "svgInline": [
+      {
+        "index": 0,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 1,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 88 40"
+      },
+      {
+        "index": 2,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 3,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 4,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 144 42"
+      },
+      {
+        "index": 5,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 6,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 13 12"
+      },
+      {
+        "index": 7,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 737"
+      },
+      {
+        "index": 8,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 568"
+      }
+    ],
+    "svgExternal": [],
+    "fonts": [
+      {
+        "family": "jobyText",
+        "src": "url(\"../media/JobySans_Text_Variable-s.p.5174080c.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyText Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      },
+      {
+        "family": "jobyDisplay",
+        "src": "url(\"../media/JobySans_Display_Variable-s.p.cdf48502.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyDisplay Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      }
+    ],
+    "backgroundImages": [],
+    "icons": [],
+    "preloads": [
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Text_Variable-s.p.5174080c.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Display_Variable-s.p.cdf48502.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/6f406898556e37a4.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/9dc9743c97e2e460.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/3df39882fdd33c97.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/52ecff12c7e5b6c0.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/69eba97b748886a6.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "type": ""
+      }
+    ]
+  },
+  "/terms-of-use": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "srcset": "",
+        "alt": "Joby Aviation Animated Logo",
+        "width": 512,
+        "height": 288,
+        "loading": "auto",
+        "classes": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      }
+    ],
+    "videos": [],
+    "svgInline": [
+      {
+        "index": 0,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 1,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 88 40"
+      },
+      {
+        "index": 2,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 3,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 9 8"
+      },
+      {
+        "index": 4,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 144 42"
+      },
+      {
+        "index": 5,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 52 32"
+      },
+      {
+        "index": 6,
+        "classes": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 13 12"
+      },
+      {
+        "index": 7,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGDesktop",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 1600 737"
+      },
+      {
+        "index": 8,
+        "classes": "Footer-module-scss-module__eAgNQG__footerCreativeSVGMobile",
+        "width": null,
+        "height": null,
+        "viewBox": "0 0 375 568"
+      }
+    ],
+    "svgExternal": [],
+    "fonts": [
+      {
+        "family": "jobyText",
+        "src": "url(\"../media/JobySans_Text_Variable-s.p.5174080c.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyText Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      },
+      {
+        "family": "jobyDisplay",
+        "src": "url(\"../media/JobySans_Display_Variable-s.p.cdf48502.woff2\") format(\"woff2\")",
+        "weight": "100 900",
+        "style": "normal",
+        "display": "swap"
+      },
+      {
+        "family": "jobyDisplay Fallback",
+        "src": "local(\"Arial\")",
+        "weight": "",
+        "style": "",
+        "display": ""
+      }
+    ],
+    "backgroundImages": [],
+    "icons": [],
+    "preloads": [
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Text_Variable-s.p.5174080c.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "font",
+        "href": "https://www.jobyaviation.com/_next/static/media/JobySans_Display_Variable-s.p.cdf48502.woff2",
+        "type": "font/woff2"
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/6f406898556e37a4.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/9dc9743c97e2e460.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/3df39882fdd33c97.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/52ecff12c7e5b6c0.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "style",
+        "href": "https://www.jobyaviation.com/_next/static/chunks/69eba97b748886a6.css?dpl=dpl_BodJKXVSjC236crBM8aSuZiZn4NC",
+        "type": ""
+      },
+      {
+        "rel": "preload",
+        "as": "image",
+        "href": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "type": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,1152 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "slug": "home",
+    "shots": [
+      {
+        "file": "home-1440x1200-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es",
+          "scrollY": 0,
+          "pageHeight": 35965,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "GRANJA MARI PEPA",
+            "x": 240,
+            "y": 1002,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 64,
+              "y": 22461,
+              "width": 643,
+              "height": 503,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad",
+              "x": 64,
+              "y": 22875,
+              "width": 643,
+              "height": 1309,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Granja Maripepa",
+              "x": 64,
+              "y": 29828,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+              "currentTime": 0,
+              "duration": 20.087,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      },
+      {
+        "file": "home-1440x1200-25.png",
+        "pct": 0.25,
+        "y": 8691,
+        "metrics": {
+          "url": "http://localhost:3001/es",
+          "scrollY": 8690,
+          "pageHeight": 35965,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "GRANJA MARI PEPA",
+            "x": 240,
+            "y": 1002,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 64,
+              "y": 13771,
+              "width": 643,
+              "height": 503,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad",
+              "x": 64,
+              "y": 14185,
+              "width": 643,
+              "height": 1309,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Granja Maripepa",
+              "x": 64,
+              "y": 21138,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+              "currentTime": 13.196,
+              "duration": 20.087,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "slug": "productos",
+    "shots": [
+      {
+        "file": "productos-1440x1200-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/productos",
+          "scrollY": 0,
+          "pageHeight": 29003,
+          "nav": {
+            "text": "ProductosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Próximamente",
+            "x": 240,
+            "y": 1002,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Estamos preparando algo especial",
+              "x": 64,
+              "y": 13754,
+              "width": 643,
+              "height": 302,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Servicio Rápido",
+              "x": 64,
+              "y": 25475,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 64,
+              "y": 27236,
+              "width": 643,
+              "height": 503,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+              "currentTime": 0,
+              "duration": 10,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      },
+      {
+        "file": "productos-1440x1200-25.png",
+        "pct": 0.25,
+        "y": 6951,
+        "metrics": {
+          "url": "http://localhost:3001/es/productos",
+          "scrollY": 6949,
+          "pageHeight": 29003,
+          "nav": {
+            "text": "ProductosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Próximamente",
+            "x": 240,
+            "y": -1147,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Estamos preparando algo especial",
+              "x": 64,
+              "y": 6805,
+              "width": 643,
+              "height": 302,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Servicio Rápido",
+              "x": 64,
+              "y": 18526,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 64,
+              "y": 20287,
+              "width": 643,
+              "height": 503,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+              "currentTime": 10,
+              "duration": 10,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -2152,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      },
+      {
+        "file": "productos-1440x1200-50.png",
+        "pct": 0.5,
+        "y": 13902,
+        "metrics": {
+          "url": "http://localhost:3001/es/productos",
+          "scrollY": 13902,
+          "pageHeight": 29003,
+          "nav": {
+            "text": "ProductosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Próximamente",
+            "x": 240,
+            "y": -8100,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Estamos preparando algo especial",
+              "x": 64,
+              "y": -148,
+              "width": 643,
+              "height": 302,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Servicio Rápido",
+              "x": 64,
+              "y": 11573,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 64,
+              "y": 13334,
+              "width": 643,
+              "height": 503,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+              "currentTime": 10,
+              "duration": 10,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -9105,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "slug": "contacto",
+    "shots": [
+      {
+        "file": "contacto-1440x1200-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/contacto",
+          "scrollY": 0,
+          "pageHeight": 27521,
+          "nav": {
+            "text": "ContactoMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Hablemos",
+            "x": 240,
+            "y": 1002,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-experience-desktop-r2.mp4",
+              "currentTime": 0,
+              "duration": 29.967,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      },
+      {
+        "file": "contacto-1440x1200-25.png",
+        "pct": 0.25,
+        "y": 6580,
+        "metrics": {
+          "url": "http://localhost:3001/es/contacto",
+          "scrollY": 6580,
+          "pageHeight": 27521,
+          "nav": {
+            "text": "ContactoMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Hablemos",
+            "x": 240,
+            "y": 1002,
+            "width": 960,
+            "height": 79,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "86.4px",
+            "lineHeight": "79.488px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-experience-desktop-r2.mp4",
+              "currentTime": 12.615,
+              "duration": 29.967,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -4,
+              "y": -3,
+              "width": 1447,
+              "height": 1206,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "slug": "acerca",
+    "shots": [
+      {
+        "file": "acerca-1440x1200-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/acerca",
+          "scrollY": 0,
+          "pageHeight": 9196,
+          "nav": {
+            "text": "Quiénes somosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Granja Maripepa",
+            "x": 64,
+            "y": 801,
+            "width": 1440,
+            "height": 99,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "105.12px",
+            "lineHeight": "98.8128px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "NuestraHistoria",
+              "x": 64,
+              "y": 3955,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "NuestroCompromiso",
+              "x": 64,
+              "y": 6749,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      },
+      {
+        "file": "acerca-1440x1200-25.png",
+        "pct": 0.25,
+        "y": 1999,
+        "metrics": {
+          "url": "http://localhost:3001/es/acerca",
+          "scrollY": 1999,
+          "pageHeight": 9196,
+          "nav": {
+            "text": "Quiénes somosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Granja Maripepa",
+            "x": 64,
+            "y": 602,
+            "width": 1440,
+            "height": 99,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "105.12px",
+            "lineHeight": "98.8128px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "NuestraHistoria",
+              "x": 64,
+              "y": 1956,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "NuestroCompromiso",
+              "x": 64,
+              "y": 4750,
+              "width": 643,
+              "height": 201,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "109.44px",
+              "lineHeight": "100.685px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "slug": "privacidad",
+    "shots": [
+      {
+        "file": "privacidad-1440x1200-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/legal/privacidad",
+          "scrollY": 0,
+          "pageHeight": 3757,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Política de Privacidad",
+            "x": 40,
+            "y": 364,
+            "width": 736,
+            "height": 181,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "100.8px",
+            "lineHeight": "90.72px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "slug": "terminos",
+    "shots": [
+      {
+        "file": "terminos-1440x1200-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/legal/terminos",
+          "scrollY": 0,
+          "pageHeight": 3757,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Términos y Condiciones",
+            "x": 40,
+            "y": 364,
+            "width": 736,
+            "height": 181,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "100.8px",
+            "lineHeight": "90.72px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "slug": "home",
+    "shots": [
+      {
+        "file": "home-375x812-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es",
+          "scrollY": 0,
+          "pageHeight": 27237,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "GRANJA MARI PEPA",
+            "x": 22,
+            "y": 582,
+            "width": 330,
+            "height": 118,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "64px",
+            "lineHeight": "58.88px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 22,
+              "y": 13716,
+              "width": 330,
+              "height": 331,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad",
+              "x": 22,
+              "y": 14273,
+              "width": 330,
+              "height": 994,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Granja Maripepa",
+              "x": 22,
+              "y": 20960,
+              "width": 330,
+              "height": 132,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+              "currentTime": 0,
+              "duration": 20.087,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -1,
+              "y": -2,
+              "width": 377,
+              "height": 816,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "slug": "productos",
+    "shots": [
+      {
+        "file": "productos-375x812-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/productos",
+          "scrollY": 0,
+          "pageHeight": 27883,
+          "nav": {
+            "text": "ProductosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Próximamente",
+            "x": 22,
+            "y": 641,
+            "width": 330,
+            "height": 59,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "64px",
+            "lineHeight": "58.88px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "Estamos preparando algo especial",
+              "x": 22,
+              "y": 11703,
+              "width": 330,
+              "height": 265,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Servicio Rápido",
+              "x": 22,
+              "y": 23455,
+              "width": 330,
+              "height": 132,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "Congelados, refrigerados y helados para HORECA",
+              "x": 22,
+              "y": 26099,
+              "width": 330,
+              "height": 331,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+              "currentTime": 0,
+              "duration": 10,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -1,
+              "y": -2,
+              "width": 377,
+              "height": 816,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "slug": "contacto",
+    "shots": [
+      {
+        "file": "contacto-375x812-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/contacto",
+          "scrollY": 0,
+          "pageHeight": 19693,
+          "nav": {
+            "text": "ContactoMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 80,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Hablemos",
+            "x": 22,
+            "y": 641,
+            "width": 330,
+            "height": 59,
+            "color": "rgb(245, 244, 223)",
+            "fontSize": "64px",
+            "lineHeight": "58.88px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [
+            {
+              "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-experience-desktop-r2.mp4",
+              "currentTime": 0,
+              "duration": 29.967,
+              "paused": true,
+              "autoplay": false,
+              "loop": false,
+              "x": -1,
+              "y": -2,
+              "width": 377,
+              "height": 816,
+              "objectFit": "cover"
+            }
+          ],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "slug": "acerca",
+    "shots": [
+      {
+        "file": "acerca-375x812-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/acerca",
+          "scrollY": 0,
+          "pageHeight": 10813,
+          "nav": {
+            "text": "Quiénes somosMari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Granja Maripepa",
+            "x": 20,
+            "y": 342,
+            "width": 375,
+            "height": 128,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "68px",
+            "lineHeight": "63.92px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [
+            {
+              "text": "NuestraHistoria",
+              "x": 22,
+              "y": 3927,
+              "width": 330,
+              "height": 132,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "NuestroCompromiso",
+              "x": 22,
+              "y": 7613,
+              "width": 330,
+              "height": 132,
+              "color": "rgb(245, 244, 223)",
+              "fontSize": "72px",
+              "lineHeight": "66.24px",
+              "background": "rgba(0, 0, 0, 0)"
+            }
+          ],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "slug": "privacidad",
+    "shots": [
+      {
+        "file": "privacidad-375x812-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/legal/privacidad",
+          "scrollY": 0,
+          "pageHeight": 3778,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Política de Privacidad",
+            "x": 40,
+            "y": 364,
+            "width": 295,
+            "height": 190,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "70.4px",
+            "lineHeight": "63.36px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "slug": "terminos",
+    "shots": [
+      {
+        "file": "terminos-375x812-0.png",
+        "pct": 0,
+        "y": 0,
+        "metrics": {
+          "url": "http://localhost:3001/es/legal/terminos",
+          "scrollY": 0,
+          "pageHeight": 3778,
+          "nav": {
+            "text": "Mari PepaÁrea Clientes ↗",
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 80,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "16px",
+            "lineHeight": "24px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "h1": {
+            "text": "Términos y Condiciones",
+            "x": 40,
+            "y": 364,
+            "width": 295,
+            "height": 190,
+            "color": "rgb(14, 22, 32)",
+            "fontSize": "70.4px",
+            "lineHeight": "63.36px",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "bands": [],
+          "videos": [],
+          "bodyBackground": "rgb(245, 244, 223)"
+        }
+      }
+    ]
+  }
+]

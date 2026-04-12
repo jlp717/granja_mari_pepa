@@ -1,0 +1,88 @@
+[
+  {
+    "name": "home",
+    "url": "https://www.jobyaviation.com/",
+    "pageHeight": 37931,
+    "videos": 1,
+    "sections": 80,
+    "headings": [
+      "Skip traffic.Time to fly.",
+      "Nowhere to go but UpLet's fly",
+      "Technology that makesthe dream possible",
+      "News from above",
+      "With partners like this,there’s nowhere to go but up.",
+      "The sky was never the limit.",
+      "Dream of Flight",
+      "Dream ofFlight"
+    ]
+  },
+  {
+    "name": "experience",
+    "url": "https://www.jobyaviation.com/experience",
+    "pageHeight": 39258,
+    "videos": 1,
+    "sections": 80,
+    "headings": [
+      "Take the high road",
+      "Take the highroad",
+      "Be there inminutes.",
+      "With partners like this,there’s nowhere to go but up.",
+      "The sky was never the limit."
+    ]
+  },
+  {
+    "name": "technology",
+    "url": "https://www.jobyaviation.com/technology",
+    "pageHeight": 51423,
+    "videos": 8,
+    "sections": 80,
+    "headings": [
+      "Cruise, controlled.",
+      "Joby Aircraft",
+      "Fast, Flexible Travel",
+      "Quiet by design",
+      "Zero operating emissions",
+      "Six electric motors",
+      "Safely soaring skyward",
+      "Designed to be quiet"
+    ]
+  },
+  {
+    "name": "company",
+    "url": "https://www.jobyaviation.com/company",
+    "pageHeight": 23819,
+    "videos": 4,
+    "sections": 80,
+    "headings": [
+      "It’s time to dream bigger. Our vision is to save a billion people an hour a day.",
+      "Our story starts",
+      "in Santa Cruz, CA",
+      "back in 2025",
+      "We’re a community of engineers and visionaries bringing the dream of everyday flight to life through world-class manufacturing and technology.",
+      "Designing cleaner flight for people and the planet."
+    ]
+  },
+  {
+    "name": "privacy-policy",
+    "url": "https://www.jobyaviation.com/privacy-policy",
+    "pageHeight": 4805,
+    "videos": 0,
+    "sections": 7,
+    "headings": [
+      "Privacy Policy",
+      "1. Modifications of Privacy policy",
+      "2. Information we collect",
+      "3. Cookies and other tracking technologies"
+    ]
+  },
+  {
+    "name": "terms-of-use",
+    "url": "https://www.jobyaviation.com/terms-of-use",
+    "pageHeight": 7239,
+    "videos": 0,
+    "sections": 7,
+    "headings": [
+      "Terms of Use"
+    ]
+  }
+]

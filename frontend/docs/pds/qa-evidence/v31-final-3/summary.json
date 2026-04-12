@@ -1,0 +1,163 @@
+[
+  {
+    "slug": "productos",
+    "pct": 0,
+    "file": "productos-1440x1200-0.png",
+    "metrics": {
+      "scrollY": 0,
+      "pageHeight": 36443,
+      "videosTotal": 6,
+      "activeVideos": [
+        {
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "w": 1440,
+          "h": 1200,
+          "y": 6000,
+          "opacity": "1",
+          "currentTime": 0,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "01Calidad CertificadaGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos."
+    }
+  },
+  {
+    "slug": "productos",
+    "pct": 0.16,
+    "file": "productos-1440x1200-16.png",
+    "metrics": {
+      "scrollY": 0,
+      "pageHeight": 36443,
+      "videosTotal": 6,
+      "activeVideos": [
+        {
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "w": 1440,
+          "h": 1200,
+          "y": 6000,
+          "opacity": "1",
+          "currentTime": 0,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "01Calidad CertificadaGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos."
+    }
+  },
+  {
+    "slug": "productos",
+    "pct": 0.25,
+    "file": "productos-1440x1200-25.png",
+    "metrics": {
+      "scrollY": 0,
+      "pageHeight": 36443,
+      "videosTotal": 6,
+      "activeVideos": [
+        {
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "w": 1440,
+          "h": 1200,
+          "y": 6000,
+          "opacity": "1",
+          "currentTime": 0,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "01Calidad CertificadaGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos."
+    }
+  },
+  {
+    "slug": "productos",
+    "pct": 0.36,
+    "file": "productos-1440x1200-36.png",
+    "metrics": {
+      "scrollY": 0,
+      "pageHeight": 36443,
+      "videosTotal": 6,
+      "activeVideos": [
+        {
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "w": 1440,
+          "h": 1200,
+          "y": 6000,
+          "opacity": "1",
+          "currentTime": 0,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "01Calidad CertificadaGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos."
+    }
+  },
+  {
+    "slug": "acerca",
+    "pct": 0,
+    "file": "acerca-1440x1200-0.png",
+    "metrics": {
+      "scrollY": 0,
+      "pageHeight": 15916,
+      "videosTotal": 4,
+      "activeVideos": [
+        {
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "w": 1440,
+          "h": 1200,
+          "y": 3000,
+          "opacity": "1",
+          "currentTime": 0,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "1966Fundación en Lorca (Murcia)Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
+    }
+  },
+  {
+    "slug": "acerca",
+    "pct": 0.18,
+    "file": "acerca-1440x1200-18.png",
+    "metrics": {
+      "scrollY": 2649,
+      "pageHeight": 15916,
+      "videosTotal": 4,
+      "activeVideos": [
+        {
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "w": 1440,
+          "h": 1200,
+          "y": 351,
+          "opacity": "1",
+          "currentTime": 1.755,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "1966Fundación en Lorca (Murcia)Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
+    }
+  },
+  {
+    "slug": "acerca",
+    "pct": 0.32,
+    "file": "acerca-1440x1200-32.png",
+    "metrics": {
+      "scrollY": 4709,
+      "pageHeight": 15916,
+      "videosTotal": 4,
+      "activeVideos": [
+        {
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "w": 1440,
+          "h": 1200,
+          "y": 0,
+          "opacity": "1",
+          "currentTime": 4.173,
+          "loop": true,
+          "autoplay": true
+        }
+      ],
+      "activeText": "1980sConsolidación regionalAmpliación de la gama de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración."
+    }
+  }
+]

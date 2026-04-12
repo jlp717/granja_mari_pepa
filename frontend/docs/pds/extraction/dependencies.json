@@ -1,0 +1,34 @@
+{
+  "/": {
+    "detected": [
+      "sanity-cdn"
+    ],
+    "confidence": {}
+  },
+  "/experience": {
+    "detected": [
+      "sanity-cdn"
+    ],
+    "confidence": {}
+  },
+  "/technology": {
+    "detected": [
+      "sanity-cdn"
+    ],
+    "confidence": {}
+  },
+  "/company": {
+    "detected": [
+      "sanity-cdn"
+    ],
+    "confidence": {}
+  },
+  "/privacy-policy": {
+    "detected": [],
+    "confidence": {}
+  },
+  "/terms-of-use": {
+    "detected": [],
+    "confidence": {}
+  }
+}

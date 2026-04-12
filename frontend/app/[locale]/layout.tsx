@@ -1,6 +1,5 @@
 import '../globals.css'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
@@ -13,19 +12,11 @@ import { PerformanceProvider } from '@/components/providers/performance-provider
 import { LazyLoadingProvider } from '@/components/providers/lazy-loading-provider'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { SessionProvider } from '@/contexts/SessionContext'
-import { GlobalChatbot } from '@/components/ui/global-chatbot'
 import { AnalyticsProvider } from '@/components/providers/analytics-provider'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { JsonLdSchemas } from '@/components/seo/JsonLdSchemas'
 import { locales, type Locale } from '@/i18n'
 import { TolgeeProvider } from '@/components/providers/tolgee-provider'
-
-const inter = Inter({
-    subsets: ['latin'],
-    display: 'swap',
-    preload: true,
-    fallback: ['system-ui', 'arial']
-})
 
 // Force dynamic rendering to avoid SSG 404s
 export const dynamic = 'force-dynamic';
@@ -35,7 +26,7 @@ export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 5,
-    themeColor: '#16a34a',
+    themeColor: '#0e1620',
 };
 
 // Generar metadata dinámica por locale
@@ -160,7 +151,7 @@ export default async function LocaleLayout({
                 {/* JSON-LD SEO Schemas */}
                 <JsonLdSchemas />
             </head>
-            <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-background`}>
+            <body className="antialiased flex flex-col min-h-screen bg-background">
                 <NextIntlClientProvider messages={messages}>
                     <TolgeeProvider>
                         <ErrorBoundary>
@@ -184,7 +175,7 @@ export default async function LocaleLayout({
                                                 {/* pt responsive: Adjusted for Taller Mobile Announcement (8rem + Height) */}
                                                 <main
                                                     id="main-content"
-                                                    className="pt-56 sm:pt-48 md:pt-52 lg:pt-56 flex-1 bg-background"
+                                                    className="flex-1 bg-background"
                                                     role="main"
                                                 >
                                                     {children}
@@ -192,7 +183,6 @@ export default async function LocaleLayout({
                                                 <Footer />
                                                 <Toaster />
                                                 <Sonner />
-                                                <GlobalChatbot />
                                             </LazyLoadingProvider>
                                         </PerformanceProvider>
                                     </AnalyticsProvider>

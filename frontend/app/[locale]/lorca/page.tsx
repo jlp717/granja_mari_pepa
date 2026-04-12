@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function LorcaPage() {
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <main className="pds-page pds-dark">
             {/* Hero Section */}
             <section className="relative py-20 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-teal-600/20" />

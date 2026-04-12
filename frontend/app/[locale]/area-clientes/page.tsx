@@ -493,7 +493,7 @@ export default function CustomerAreaPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8 overflow-hidden relative">
+    <div className="pds-page pds-cream min-h-screen overflow-hidden py-24 relative">
       {/* Background Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

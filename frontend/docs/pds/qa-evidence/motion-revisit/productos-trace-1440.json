@@ -1,0 +1,166 @@
+{
+  "url": "http://localhost:3001/es/productos",
+  "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+  "viewport": {
+    "width": 1440,
+    "height": 1200
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "pageHeight": 8339,
+      "videos": [
+        {
+          "index": 0,
+          "currentTime": 0,
+          "duration": 10,
+          "paused": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "width": 1447,
+            "height": 1206
+          },
+          "src": "compressed-technology-intro-desktop.mp4"
+        }
+      ],
+      "heroProgress": "0.0000",
+      "titleProgress": null,
+      "firstChar": null,
+      "lastChar": null
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 714,
+      "pageHeight": 8339,
+      "videos": [
+        {
+          "index": 0,
+          "currentTime": 1.182,
+          "duration": 10,
+          "paused": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "width": 1447,
+            "height": 1206
+          },
+          "src": "compressed-technology-intro-desktop.mp4"
+        }
+      ],
+      "heroProgress": "0.1190",
+      "titleProgress": null,
+      "firstChar": null,
+      "lastChar": null
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 1785,
+      "pageHeight": 8339,
+      "videos": [
+        {
+          "index": 0,
+          "currentTime": 2.975,
+          "duration": 10,
+          "paused": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "width": 1447,
+            "height": 1206
+          },
+          "src": "compressed-technology-intro-desktop.mp4"
+        }
+      ],
+      "heroProgress": "0.2975",
+      "titleProgress": null,
+      "firstChar": null,
+      "lastChar": null
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 3569,
+      "pageHeight": 8339,
+      "videos": [
+        {
+          "index": 0,
+          "currentTime": 5.947,
+          "duration": 10,
+          "paused": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "width": 1447,
+            "height": 1206
+          },
+          "src": "compressed-technology-intro-desktop.mp4"
+        }
+      ],
+      "heroProgress": "0.5948",
+      "titleProgress": null,
+      "firstChar": null,
+      "lastChar": null
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 5352,
+      "pageHeight": 8336,
+      "videos": [
+        {
+          "index": 0,
+          "currentTime": 8.88,
+          "duration": 10,
+          "paused": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "width": 1447,
+            "height": 1206
+          },
+          "src": "compressed-technology-intro-desktop.mp4"
+        }
+      ],
+      "heroProgress": "0.8920",
+      "titleProgress": null,
+      "firstChar": null,
+      "lastChar": null
+    },
+    {
+      "pct": 1,
+      "scrollY": 7130,
+      "pageHeight": 8336,
+      "videos": [
+        {
+          "index": 0,
+          "currentTime": 9.968,
+          "duration": 10,
+          "paused": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": -4,
+            "y": -1133,
+            "width": 1447,
+            "height": 1206
+          },
+          "src": "compressed-technology-intro-desktop.mp4"
+        }
+      ],
+      "heroProgress": "1.0000",
+      "titleProgress": null,
+      "firstChar": null,
+      "lastChar": null
+    }
+  ]
+}
