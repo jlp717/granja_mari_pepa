@@ -765,30 +765,33 @@ async function getSummary(options = {}) {
     codigoCliente: options.codigoCliente
   });
 
-  /**
-   * RESUMEN - Conteo de facturas REALES + agregados en UNA SOLA CONSULTA
-   * =====================================================================
-   * Se combina todo en una sola query para evitar errores de preparacion SQL
-   * con CTEs multiples en DB2
-   */
-  const summarySQL = `
+  const countSQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT
-      (SELECT COUNT(*) FROM (
-        SELECT DISTINCT
-          PL2.SERIE_FACTURA,
-          PL2.NUMERO_FACTURA,
-          PL2.EJERCICIO_FACTURA
-        FROM PANAMAR_LINEAS PL2
-        ${whereSQL}
-      )) AS TOTAL_FACTURAS,
-      COUNT(DISTINCT PL.CODIGO_CLIENTE) AS TOTAL_CLIENTES,
-      COALESCE(SUM(
-        CASE
-          WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
-          ELSE COALESCE(PL.IMPORTEVENTA, 0)
-        END
-      ), 0) AS TOTAL_IMPORTE,
+      COUNT(*) AS TOTAL_FACTURAS
+    FROM (
+      SELECT
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA,
+        PL.EJERCICIO_FACTURA
+      FROM PANAMAR_LINEAS PL
+      ${whereSQL}
+      GROUP BY PL.SERIE_FACTURA, PL.NUMERO_FACTURA, PL.EJERCICIO_FACTURA
+    ) T
+  `;
+
+  const countClientsSQL = `
+    ${PANAMAR_LINEAS_CTE}
+    SELECT
+      COUNT(DISTINCT PL.CODIGO_CLIENTE) AS TOTAL_CLIENTES
+    FROM PANAMAR_LINEAS PL
+    ${whereSQL}
+  `;
+
+  const aggSQL = `
+    ${PANAMAR_LINEAS_CTE}
+    SELECT
+      COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0 ELSE COALESCE(PL.IMPORTEVENTA, 0) END), 0) AS TOTAL_IMPORTE,
       COALESCE(SUM(COALESCE(PL.CAJAS, 0)), 0) AS TOTAL_CAJAS,
       COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'CC' THEN COALESCE(PL.CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_CC,
       COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN COALESCE(PL.CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_SC
@@ -796,8 +799,13 @@ async function getSummary(options = {}) {
     ${whereSQL}
   `;
 
-  const summaryResult = await odbcPool.panamarQuery(summarySQL, params);
-  const row = summaryResult[0] || {};
+  const countResult = await odbcPool.panamarQuery(countSQL, params);
+  const countClientsResult = await odbcPool.panamarQuery(countClientsSQL, params);
+  const aggResult = await odbcPool.panamarQuery(aggSQL, params);
+
+  const countRow = countResult[0] || {};
+  const countClientsRow = countClientsResult[0] || {};
+  const aggRow = aggResult[0] || {};
 
   const elapsed = Date.now() - startTime;
   logger.info('PANAMAR: Resumen completado', { elapsed: `${elapsed}ms` });
@@ -805,13 +813,13 @@ async function getSummary(options = {}) {
   return {
     ano: ANO_FIJO,
     ejercicio: ANO_FIJO,
-    totalFacturas: toInt(row.TOTAL_FACTURAS),
-    totalDocumentos: toInt(row.TOTAL_FACTURAS),
-    totalClientes: toInt(row.TOTAL_CLIENTES),
-    totalImporte: round2(toNumber(row.TOTAL_IMPORTE)),
-    totalCajas: round3(toNumber(row.TOTAL_CAJAS)),
-    totalCajasCC: round3(toNumber(row.TOTAL_CAJAS_CC)),
-    totalCajasSC: round3(toNumber(row.TOTAL_CAJAS_SC))
+    totalFacturas: toInt(countRow.TOTAL_FACTURAS),
+    totalDocumentos: toInt(countRow.TOTAL_FACTURAS),
+    totalClientes: toInt(countClientsRow.TOTAL_CLIENTES),
+    totalImporte: round2(toNumber(aggRow.TOTAL_IMPORTE)),
+    totalCajas: round3(toNumber(aggRow.TOTAL_CAJAS)),
+    totalCajasCC: round3(toNumber(aggRow.TOTAL_CAJAS_CC)),
+    totalCajasSC: round3(toNumber(aggRow.TOTAL_CAJAS_SC))
   };
 }
 

@@ -134,24 +134,19 @@ function buildDocumentContent(doc, panamarDoc) {
     .text(headerRightText, 390, y + 10, { width: 160, align: 'right' });
   y += 40;
 
-  // Fila de datos de cabecera
-  doc.rect(40, y, 165, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  // Fila de datos de cabecera - 3 campos (sin Hora ni Ref)
+  doc.rect(40, y, 200, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
   doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('CODIGO CLIENTE', 45, y + 3);
   doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(panamarDoc.codigoCliente || '', 45, y + 11);
 
-  doc.rect(210, y, 120, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FECHA INFORME', 215, y + 3);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(fecha, 215, y + 11);
+  doc.rect(245, y, 150, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FECHA', 250, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(fecha, 250, y + 11);
 
-  doc.rect(335, y, 90, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('HORA', 340, y + 3);
-  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark).text(hora, 340, y + 11);
-
-  doc.rect(430, y, 125, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
-  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('REF', 435, y + 3);
-  const refStr = panamarDoc.referencia || panamarDoc.refPedido || panamarDoc.numeroPedido || '-';
-  doc.fontSize(9).font('Helvetica-Bold').fillColor(COLORS.dark)
-    .text(String(refStr).substring(0, 20), 435, y + 11);
+  doc.rect(400, y, 155, 20).fillAndStroke(COLORS.ultraLight, COLORS.light);
+  doc.fontSize(7).font('Helvetica-Bold').fillColor(COLORS.medium).text('FACTURA', 405, y + 3);
+  doc.fontSize(10).font('Helvetica-Bold').fillColor(COLORS.dark)
+    .text(panamarDoc.refFactura || '-', 405, y + 11);
   y += 26;
 
   // Negocio
