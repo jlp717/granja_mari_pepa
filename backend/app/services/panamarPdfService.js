@@ -184,9 +184,11 @@ function buildDocumentContent(doc, panamarDoc) {
     let subtotalAlb = 0;
     const firstLine = albLines[0];
     const fechaAlb = firstLine.fechaAlbaran || fecha;
-    // ✅ FIX: Formato de albarán = SERIE-TERMINAL-NUMERO (ej: P-93-25)
-    // SERIE_ALBARAN es 'P' (no TIPO_VENTA que es 'CC' o 'SC')
-    const albaranRef = `${firstLine.serieAlbaran || 'P'}-${firstLine.terminalAlbaran || ''}-${firstLine.numeroAlbaran || ''}`;
+    // Formato de albarán: SERIE-TERMINAL-NUMERO si hay terminal, sino SERIE-NUMERO
+    const serie = firstLine.serieAlbaran || 'P';
+    const terminal = firstLine.terminalAlbaran;
+    const numero = firstLine.numeroAlbaran || '';
+    const albaranRef = terminal ? `${serie}-${terminal}-${numero}` : `${serie}-${numero}`;
 
     albLines.forEach((linea) => {
       const rowHeight = 16;
