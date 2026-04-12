@@ -766,35 +766,26 @@ async function getSummary(options = {}) {
   });
 
   /**
-   * RESUMEN - Conteo de facturas REALES
-   * ====================================
-   * Agrupado por SERIE_FACTURA + NUMERO_FACTURA + EJERCICIO_FACTURA
-   * No por MES_ALBARAN, para evitar contar la misma factura múltiples veces
+   * RESUMEN - Conteo de facturas REALES + agregados en UNA SOLA CONSULTA
+   * =====================================================================
+   * Se combina todo en una sola query para evitar errores de preparacion SQL
+   * con CTEs multiples en DB2
    */
   const summarySQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT
-      COUNT(*) AS TOTAL_FACTURAS,
-      COUNT(DISTINCT PL.CODIGO_CLIENTE) AS TOTAL_CLIENTES
-    FROM (
-      SELECT DISTINCT
-        PL.CODIGO_CLIENTE,
-        PL.SERIE_FACTURA,
-        PL.NUMERO_FACTURA,
-        PL.EJERCICIO_FACTURA
-      FROM PANAMAR_LINEAS PL
-      ${whereSQL}
-    ) FACTURAS_DISTINTAS
-  `;
-
-  const aggregateSQL = `
-    ${PANAMAR_LINEAS_CTE}
-    SELECT
+      (SELECT COUNT(*) FROM (
+        SELECT DISTINCT
+          PL2.SERIE_FACTURA,
+          PL2.NUMERO_FACTURA,
+          PL2.EJERCICIO_FACTURA
+        FROM PANAMAR_LINEAS PL2
+        ${whereSQL}
+      )) AS TOTAL_FACTURAS,
+      COUNT(DISTINCT PL.CODIGO_CLIENTE) AS TOTAL_CLIENTES,
       COALESCE(SUM(
         CASE
-          -- ✅ FIX: Líneas SC (Sin Cargo) = 0€
           WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
-          -- Para el resto, usar IMPORTEVENTA que ya viene calculado desde la BD
           ELSE COALESCE(PL.IMPORTEVENTA, 0)
         END
       ), 0) AS TOTAL_IMPORTE,
@@ -805,13 +796,8 @@ async function getSummary(options = {}) {
     ${whereSQL}
   `;
 
-  const [summaryResult, aggregateResult] = await Promise.all([
-    odbcPool.panamarQuery(summarySQL, params),
-    odbcPool.panamarQuery(aggregateSQL, params)
-  ]);
-
+  const summaryResult = await odbcPool.panamarQuery(summarySQL, params);
   const row = summaryResult[0] || {};
-  const aggRow = aggregateResult[0] || {};
 
   const elapsed = Date.now() - startTime;
   logger.info('PANAMAR: Resumen completado', { elapsed: `${elapsed}ms` });
