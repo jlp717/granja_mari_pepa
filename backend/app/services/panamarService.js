@@ -774,14 +774,17 @@ async function getSummary(options = {}) {
   const summarySQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT
-      COUNT(DISTINCT 
-        TRIM(PL.SERIE_FACTURA) || '|' || 
-        CAST(PL.NUMERO_FACTURA AS VARCHAR(20)) || '|' ||
-        CAST(PL.EJERCICIO_FACTURA AS VARCHAR(10))
-      ) AS TOTAL_FACTURAS,
+      COUNT(*) AS TOTAL_FACTURAS,
       COUNT(DISTINCT PL.CODIGO_CLIENTE) AS TOTAL_CLIENTES
-    FROM PANAMAR_LINEAS PL
-    ${whereSQL}
+    FROM (
+      SELECT DISTINCT
+        PL.CODIGO_CLIENTE,
+        PL.SERIE_FACTURA,
+        PL.NUMERO_FACTURA,
+        PL.EJERCICIO_FACTURA
+      FROM PANAMAR_LINEAS PL
+      ${whereSQL}
+    ) FACTURAS_DISTINTAS
   `;
 
   const aggregateSQL = `
