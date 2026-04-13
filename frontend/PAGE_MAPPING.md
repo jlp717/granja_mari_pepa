@@ -1,26 +1,46 @@
-# PAGE_MAPPING
+# PAGE_MAPPING v3.3
 
 Source visual reference: `https://www.jobyaviation.com/`
 
-Generated from v3.1 extraction and target QA. The target keeps Granja Mari Pepa visible text and business logic; the source remains the visual truth.
+Generated after MCP-REF discovery on `2026-04-12`.
 
-| Target route | Source page | Reason | Estado v3.1 |
+## Source Routes Considered
+
+Primary discovered routes:
+
+- `/`
+- `/experience`
+- `/technology`
+- `/company`
+- `/news`
+- `/careers`
+- `/privacy-policy`
+- `/terms-of-use`
+- `/impact-reporting`
+- `/transparency`
+- `/safety-policy`
+
+The sitemap contains a large `/news/*` archive. The target has no news-detail route, so individual news articles are not mapped for implementation.
+
+## Target Route Mapping
+
+| Target route | Source page | Razon | Estado v3.3 |
 |---|---|---|---|
-| `/[locale]` | `/` | Home cinematic hero, fixed nav, sticky video scrub, editorial image bands, partner/gallery sections | PASS parcial: hero/video/nav verified at 1440/375; lower sections rebuilt source-like but not yet pixel-delta approved section by section |
-| `/[locale]/productos` | `/technology` | Product/catalog page mapped to technology page structure | PASS parcial: hero video scrub plus aircraft-style interior video sequence verified; source canvas/WebGL surfaces still pending |
-| `/[locale]/contacto` | `/experience` | Contact/service page mapped to experience flow | PASS parcial: hero video scrub and source-like sections verified; full lower-page pixel comparison pending |
-| `/[locale]/acerca` | `/company` | Company/history page mapped to company page | PASS parcial: scroll title reveal plus rounded company video timeline verified; exact full-page pixel delta still pending |
-| `/[locale]/legal/privacidad` | `/privacy-policy` | Legal document equivalent | PASS: source legal layout, cream background, left title, right body column and current-page nav verified |
-| `/[locale]/legal/terminos` | `/terms-of-use` | Legal document equivalent | PASS: source legal layout reused with target terms text |
-| `/[locale]/area-clientes` | `/experience` | Client portal has no direct source equivalent; mapped to structured experience/form flow | PENDING exact QA: shell styling exists, but page was not rebuilt pixel-by-pixel against a full source page |
-| `/[locale]/checkout` | `/experience` | Transactional flow has no direct source equivalent; mapped to experience/form flow | PENDING exact QA: business checkout preserved, full source-equivalent visual pass pending |
-| `/[locale]/login-secure-example` | `/experience` | Auth form mapped to source form/editorial treatment | PENDING exact QA |
-| `/[locale]/lorca` | `/company` | Local/institutional route mapped to company content | PENDING exact QA |
-| `/[locale]/offline` | `/company` | Offline state mapped to simple institutional state | PENDING exact QA |
-| `/[locale]/productos/_disabled_id` | `/technology` | Disabled/protected product detail state mapped to technology shell | PENDING exact QA |
+| `/[locale]` | `/` | Home cinematic landing: fullscreen hero, fixed nav, long scroll narrative, editorial bands and footer | PENDING extraction + QA |
+| `/[locale]/productos` | `/technology` | Product/catalog content maps to source technology structure and technical media sequence | PENDING extraction + QA |
+| `/[locale]/productos/_disabled_id` | `/technology` | Disabled product detail state maps to technology shell while preserving target business state | PENDING extraction + QA |
+| `/[locale]/contacto` | `/experience` | Contact/service page maps to experience flow and form/editorial sections | PENDING extraction + QA |
+| `/[locale]/area-clientes` | `/experience` | Client portal has no source equivalent; use the closest source form/editorial structure | PENDING extraction + QA |
+| `/[locale]/checkout` | `/experience` | Checkout has no source equivalent; use source experience/form treatment while preserving business logic | PENDING extraction + QA |
+| `/[locale]/login-secure-example` | `/experience` | Auth flow maps to source experience/form treatment | PENDING extraction + QA |
+| `/[locale]/acerca` | `/company` | Company/history page maps to source company structure | PENDING extraction + QA |
+| `/[locale]/lorca` | `/company` | Local/institutional route maps to company-style editorial structure | PENDING extraction + QA |
+| `/[locale]/offline` | `/company` | Offline state maps to simple company/institutional source treatment | PENDING extraction + QA |
+| `/[locale]/legal/privacidad` | `/privacy-policy` | Legal document equivalent | PENDING extraction + QA |
+| `/[locale]/legal/terminos` | `/terms-of-use` | Legal document equivalent | PENDING extraction + QA |
 
 ## Blocking Notes
 
-- The previous pass was not acceptable as a literal Joby port. This mapping now separates verified work from pending exact QA.
-- Main visual evidence for the current pass is under `docs/pds/qa-evidence/v31-final-2/`, `docs/pds/qa-evidence/v31-final-3/` and `docs/pds/qa-evidence/v31-final-4/`.
-- Source extraction evidence is under `docs/pds/extraction/v31-full/`.
+- All previous PASS labels are intentionally invalidated for v3.3.
+- No component implementation is approved until current MCP extraction, `recordScrollBehavior()`, `compareScrollBehavior()`, computed-style comparison, and final 3-viewport recorrido pass.
+- Backend, API, auth, middleware, server actions and database files remain out of scope.

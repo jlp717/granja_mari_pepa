@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { X, BookOpen, Download } from "lucide-react"; // Icons
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "@/lib/native-motion";
 
 interface CatalogModalProps {
     isOpen: boolean;

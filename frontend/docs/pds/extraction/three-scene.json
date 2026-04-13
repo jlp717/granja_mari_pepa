@@ -1,4 +1,141 @@
 {
-  "detected": false,
-  "reason": "No WebGL/Three.js scene detected in mapped source pages during extraction."
+  "_metadata": {
+    "kind": "threeScene",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": {
+    "home": {
+      "_metadata": {
+        "scriptName": "extractThreeJSScene",
+        "extractedAt": "2026-04-12T21:59:41.612Z",
+        "sourceUrl": "https://www.jobyaviation.com/",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 37931,
+        "skillVersion": "3.3"
+      },
+      "detected": false,
+      "version": "unknown",
+      "scenes": []
+    },
+    "experience": {
+      "_metadata": {
+        "scriptName": "extractThreeJSScene",
+        "extractedAt": "2026-04-12T22:00:20.543Z",
+        "sourceUrl": "https://www.jobyaviation.com/experience",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 39258,
+        "skillVersion": "3.3"
+      },
+      "detected": false,
+      "version": "unknown",
+      "scenes": []
+    },
+    "technology": {
+      "_metadata": {
+        "scriptName": "extractThreeJSScene",
+        "extractedAt": "2026-04-12T22:01:01.067Z",
+        "sourceUrl": "https://www.jobyaviation.com/technology",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 51423,
+        "skillVersion": "3.3"
+      },
+      "detected": false,
+      "version": "unknown",
+      "scenes": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "classes": "SectionAircraft-module-scss-module__P2eaWG__aircraftVideo",
+          "hasFiberStore": false
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "classes": "DualAlphaVideoPlayer-module-scss-module__6ggoxG__canvas",
+          "hasFiberStore": false
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "classes": "",
+          "hasFiberStore": false
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "classes": "",
+          "hasFiberStore": false
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "classes": "",
+          "hasFiberStore": false
+        }
+      ]
+    },
+    "company": {
+      "_metadata": {
+        "scriptName": "extractThreeJSScene",
+        "extractedAt": "2026-04-12T22:01:39.894Z",
+        "sourceUrl": "https://www.jobyaviation.com/company",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 23819,
+        "skillVersion": "3.3"
+      },
+      "detected": false,
+      "version": "unknown",
+      "scenes": []
+    },
+    "privacy-policy": {
+      "_metadata": {
+        "scriptName": "extractThreeJSScene",
+        "extractedAt": "2026-04-12T22:02:18.197Z",
+        "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 4805,
+        "skillVersion": "3.3"
+      },
+      "detected": false,
+      "version": "unknown",
+      "scenes": []
+    },
+    "terms-of-use": {
+      "_metadata": {
+        "scriptName": "extractThreeJSScene",
+        "extractedAt": "2026-04-12T22:02:56.046Z",
+        "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 7239,
+        "skillVersion": "3.3"
+      },
+      "detected": false,
+      "version": "unknown",
+      "scenes": []
+    }
+  }
 }

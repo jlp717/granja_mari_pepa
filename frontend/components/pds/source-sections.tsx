@@ -32,11 +32,34 @@ type SourceBandProps = {
   copy?: ReactNode
   action?: ReactNode
   dark?: boolean
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
+  sectionId?: string
 }
 
-export function SourceImageBand({ image, eyebrow, title, copy, action, dark = true }: SourceBandProps) {
+export function SourceImageBand({
+  image,
+  eyebrow,
+  title,
+  copy,
+  action,
+  dark = true,
+  height,
+  tabletHeight,
+  mobileHeight,
+  sectionId
+}: SourceBandProps) {
   return (
-    <section className={`pds-source-band ${dark ? 'pds-dark' : 'pds-cream'}`}>
+    <section
+      id={sectionId}
+      className={`pds-source-band ${dark ? 'pds-dark' : 'pds-cream'}`}
+      style={{
+        '--pds-band-height': height ? `${height}px` : undefined,
+        '--pds-band-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-band-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <img src={image} alt="" loading="lazy" />
       <div className="pds-source-band__content">
         <div>
@@ -63,16 +86,32 @@ export function SourceFeatureMosaic({
   title,
   copy,
   features,
-  action
+  action,
+  height,
+  tabletHeight,
+  mobileHeight,
+  sectionId
 }: {
   eyebrow: string
   title: ReactNode
   copy: string
   features: Feature[]
   action?: ReactNode
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
+  sectionId?: string
 }) {
   return (
-    <section className="pds-editorial">
+    <section
+      id={sectionId}
+      className="pds-editorial"
+      style={{
+        '--pds-editorial-height': height ? `${height}px` : undefined,
+        '--pds-editorial-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-editorial-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-grid">
         <div className="pds-editorial__label">
           <span className="pds-eyebrow">{eyebrow}</span>
@@ -107,18 +146,31 @@ export function SourcePartnersSection({
   title,
   copy,
   labels,
-  action
+  action,
+  height,
+  tabletHeight,
+  mobileHeight
 }: {
   eyebrow: string
   title: ReactNode
   copy: string
   labels: string[]
   action?: ReactNode
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
 }) {
   const visuals = [PDS_ASSETS.partnerCar, PDS_ASSETS.partnerAir, PDS_ASSETS.partnerInfrastructure]
 
   return (
-    <section className="pds-partners">
+    <section
+      className="pds-partners"
+      style={{
+        '--pds-partners-height': height ? `${height}px` : undefined,
+        '--pds-partners-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-partners-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-partners__sticky">
         <div>
           <span className="pds-eyebrow mb-8">{eyebrow}</span>
@@ -141,9 +193,28 @@ export function SourcePartnersSection({
   )
 }
 
-export function SourceDreamGallery({ title, copy }: { title: ReactNode; copy: string }) {
+export function SourceDreamGallery({
+  title,
+  copy,
+  height,
+  tabletHeight,
+  mobileHeight
+}: {
+  title: ReactNode
+  copy: string
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
+}) {
   return (
-    <section className="pds-dream-gallery">
+    <section
+      className="pds-dream-gallery"
+      style={{
+        '--pds-dream-height': height ? `${height}px` : undefined,
+        '--pds-dream-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-dream-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-grid mb-12">
         <div className="col-span-5 max-md:col-span-full">
           <span className="pds-eyebrow">{copy}</span>
@@ -163,6 +234,86 @@ export function SourceDreamGallery({ title, copy }: { title: ReactNode; copy: st
   )
 }
 
+export function SourceNewsSection({
+  eyebrow,
+  title,
+  items,
+  action,
+  height = 905,
+  tabletHeight,
+  mobileHeight
+}: {
+  eyebrow: string
+  title: ReactNode
+  items: { label: string; copy: string }[]
+  action?: ReactNode
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
+}) {
+  return (
+    <section
+      id="news"
+      className="pds-news-section"
+      style={{
+        '--pds-news-height': `${height}px`,
+        '--pds-news-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-news-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
+      <div className="pds-grid">
+        <div className="col-span-4 max-md:col-span-full">
+          <span className="pds-eyebrow">{eyebrow}</span>
+        </div>
+        <div className="col-span-7 col-start-7 max-md:col-span-full">
+          <h2 className="pds-title">{title}</h2>
+        </div>
+      </div>
+      <div className="pds-news-section__items">
+        {items.map((item) => (
+          <article key={item.label}>
+            <span className="pds-eyebrow">{item.label}</span>
+            <p>{item.copy}</p>
+          </article>
+        ))}
+      </div>
+      {action ? <div className="pds-news-section__action">{action}</div> : null}
+    </section>
+  )
+}
+
+export function SourceFooterBridge({
+  title,
+  copy,
+  height = 1048,
+  tabletHeight,
+  mobileHeight
+}: {
+  title: ReactNode
+  copy: string
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
+}) {
+  return (
+    <section
+      id="footer"
+      className="pds-footer-bridge"
+      style={{
+        '--pds-footer-bridge-height': `${height}px`,
+        '--pds-footer-bridge-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-footer-bridge-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
+      <div className="pds-footer-bridge__mark" aria-hidden="true" />
+      <div className="pds-footer-bridge__copy">
+        <h2 className="pds-title">{title}</h2>
+        <p className="pds-copy">{copy}</p>
+      </div>
+    </section>
+  )
+}
+
 export function SourceTechBlock({
   index,
   eyebrow,
@@ -170,7 +321,9 @@ export function SourceTechBlock({
   copy,
   image,
   dark,
-  height
+  height,
+  tabletHeight,
+  mobileHeight
 }: {
   index: string
   eyebrow: string
@@ -179,9 +332,18 @@ export function SourceTechBlock({
   image: string
   dark?: boolean
   height?: number
+  tabletHeight?: number
+  mobileHeight?: number
 }) {
   return (
-    <section className={`pds-tech-section ${dark ? 'pds-tech-section--dark' : ''}`} style={{ '--pds-tech-height': `${height ?? 5200}px` } as React.CSSProperties}>
+    <section
+      className={`pds-tech-section ${dark ? 'pds-tech-section--dark' : ''}`}
+      style={{
+        '--pds-tech-height': `${height ?? 5200}px`,
+        '--pds-tech-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-tech-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-tech-sticky">
         <span className="pds-tech-index">{index}</span>
         <div className="pds-tech-copy">
@@ -200,14 +362,27 @@ export function SourceTechBlock({
 export function SourceStatsSection({
   eyebrow,
   title,
-  stats
+  stats,
+  height,
+  tabletHeight,
+  mobileHeight
 }: {
   eyebrow: string
   title: ReactNode
   stats: { value: string; label: string; copy: string }[]
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
 }) {
   return (
-    <section className="pds-section pds-cream">
+    <section
+      className="pds-section pds-cream pds-stats-section"
+      style={{
+        '--pds-stats-height': height ? `${height}px` : undefined,
+        '--pds-stats-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-stats-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-grid mb-16">
         <div className="col-span-4 max-md:col-span-full">
           <span className="pds-eyebrow">{eyebrow}</span>
@@ -232,14 +407,27 @@ export function SourceStatsSection({
 export function SourceCompanyTimeline({
   eyebrow,
   title,
-  items
+  items,
+  height,
+  tabletHeight,
+  mobileHeight
 }: {
   eyebrow: string
   title: ReactNode
   items: { year: string; title: string; copy: string }[]
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
 }) {
   return (
-    <section className="pds-section pds-dark">
+    <section
+      className="pds-section pds-dark pds-company-timeline"
+      style={{
+        '--pds-company-timeline-height': height ? `${height}px` : undefined,
+        '--pds-company-timeline-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-company-timeline-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-grid mb-20">
         <div className="col-span-4 max-md:col-span-full">
           <span className="pds-eyebrow">{eyebrow}</span>
@@ -267,15 +455,28 @@ export function SourceUtilityPage({
   eyebrow,
   title,
   copy,
-  children
+  children,
+  height,
+  tabletHeight,
+  mobileHeight
 }: {
   eyebrow: string
   title: ReactNode
   copy: string
   children?: ReactNode
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
 }) {
   return (
-    <section className="pds-legal-source pds-cream">
+    <section
+      className="pds-legal-source pds-cream"
+      style={{
+        '--pds-legal-height': height ? `${height}px` : undefined,
+        '--pds-legal-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-legal-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as React.CSSProperties}
+    >
       <div className="pds-legal-source__title">
         <span className="pds-eyebrow">{eyebrow}</span>
         <h1 className="pds-title">{title}</h1>

@@ -1,169 +1,152 @@
-# Scroll Narrative: /technology
+# Scroll Narrative: technology
 
-## 0%
-- ScrollY: 0
-- BUTTON: Toggle menu | 33x33 @ 40,29 | opacity 1
-- BUTTON: TechnologyTechnology | 151x41 @ 99,26 | opacity 1
-- BUTTON: Close | 43x14 @ 77,39 | opacity 0
-- A: Go to homepage | 51x32 @ 695,30 | opacity 1
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Investors | 70x14 @ 1311,39 | opacity 1
-- A: Investors | 70x14 @ 1311,55 | opacity 1
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassenge | 1440x6000 @ 0,0 | opacity 1
+Page: https://www.jobyaviation.com/technology
+Altura total: 51423px
+Viewport: 1440x1200
 
-## 10%
-- ScrollY: 5022
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassenge | 1440x6000 @ 0,-5022 | opacity 1
-- VIDEO: (media) | 1440x1200 @ 0,0 | opacity 1
-- H1: Cruise, controlled. | 630x56 @ 405,1028 | opacity 0
-- P: Technology that makes thedream possible | 179x28 @ 631,1132 | opacity 0
-- SECTION: 1Electric Vertical Take-offand Landing (eVTOL)Joby AircraftFast, Flexible TravelTaking off | 1440x6900 @ 0,978 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+## 0% (0px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=0.077s paused=true rect=1440x1200@0; video1 time=0.117s paused=true rect=0x0@0; video2 time=0s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=5.687s paused=false rect=328x205@31480; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__tec top=26 opacity=1; page-wrapper top=0 opacity=1; technology top=0 opacity=1; SectionHeroTechnology-module-scss-module__NZSjcq__sectionHeroTechnology top=0 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=7974; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=13050; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=14370; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=24590; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=30670; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=40545; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=47935; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=49175; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
 
-## 25%
-- ScrollY: 12556
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: 1Electric Vertical Take-offand Landing (eVTOL)Joby AircraftFast, Flexible TravelTaking off | 1440x6900 @ 0,-6556 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- P: In the horizontal position, our propellers allow for efficient and fast cruising during wi | 465x75 @ 728,77 | opacity 1
-- P: In the vertical position, our propellers generate upward thrust for takeoff and landing, e | 465x103 @ 728,75 | opacity 1
+## 5% (2511px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=3.435s paused=false rect=1440x1200@0; video1 time=0.117s paused=true rect=0x0@0; video2 time=0s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=6.154s paused=false rect=328x205@28969; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__tec top=-39 opacity=1; page-wrapper top=-2511 opacity=1; technology top=-2511 opacity=1; SectionHeroTechnology-module-scss-module__NZSjcq__sectionHeroTechnology top=-2511 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=5463; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=10539; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=11859; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=22079; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=28159; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=38034; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=45424; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=46664; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2
 
-## 50%
-- ScrollY: 25112
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 1
-- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 0
-- IMG: Intuitive piloting with integrated controls | 734x1120 @ 80,-1102 | opacity 1
+## 10% (5022px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=6.171s paused=false rect=1440x1200@0; video1 time=0.117s paused=true rect=0x0@0; video2 time=0s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0.437s paused=false rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=6.617s paused=false rect=328x205@26458; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-5022 opacity=1; technology top=-5022 opacity=1; SectionHeroTechnology-module-scss-module__NZSjcq__sectionHeroTechnology top=-5022 opacity=1; introduction top=978 opacity=1; SectionAircraft-module-scss-module__P2eaWG__sectionAircraft top=978 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=2952; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=8028; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=9348; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=19568; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=25648; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=35523; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=42913; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=44153; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
 
-## 75%
-- ScrollY: 37667
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 1
-- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 0
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+## 15% (7533px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.387s paused=false rect=1440x1200@-1533; video1 time=0s paused=false rect=0x0@0; video2 time=0s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=7.078s paused=false rect=328x205@23947; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-7533 opacity=1; introduction top=-1533 opacity=1; SectionAircraft-module-scss-module__P2eaWG__sectionAircraft top=-1533 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=441; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=5517; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=6837; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=17057; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=23137; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=33012; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=40402; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=41642; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 3
 
-## 100%
-- ScrollY: 50223
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
-- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 1
-- IMG: Safely soaring skyward | 0x0 @ 0,0 | opacity 0
-- VIDEO: (media) | 0x0 @ 0,0 | opacity 1
+## 20% (10045px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-4045; video1 time=0s paused=true rect=0x0@0; video2 time=0s paused=true rect=0x0@0; video3 time=0.412s paused=false rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=7.542s paused=false rect=328x205@21435; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-10045 opacity=1; introduction top=-4045 opacity=1; SectionAircraft-module-scss-module__P2eaWG__sectionAircraft top=-4045 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=40; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=3005; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=4325; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=14545; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=20625; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=30500; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=37890; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=39130; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 5
+
+## 25% (12556px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-6556; video1 time=0s paused=true rect=0x0@0; video2 time=0.037s paused=false rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=7.996s paused=false rect=328x205@18924; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-12556 opacity=1; introduction top=-6556 opacity=1; SectionAircraft-module-scss-module__P2eaWG__sectionAircraft top=-6556 opacity=1; safety top=344 opacity=1; SectionEntry-module-scss-module__FfUzAa__sectionEntry top=344 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-942; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=494; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1814; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=12034; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=18114; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=27989; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=35379; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=36619; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2
+
+## 30% (15067px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-9067; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=8.455s paused=false rect=328x205@16413; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-15067 opacity=1; safety-in top=-777 opacity=1; SectionSafetySlider-module-scss-module__acPOQW__sectionSafetySlider top=-777 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-3453; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-1827; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=9523; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=15603; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=25478; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=32868; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=34108; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 35% (17578px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-11578; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=8.916s paused=false rect=328x205@13902; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-17578 opacity=1; safety-in top=-3288 opacity=1; SectionSafetySlider-module-scss-module__acPOQW__sectionSafetySlider top=-3288 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-5964; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-4338; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=7012; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=13092; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=22967; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=30357; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=31597; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 40% (20089px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-14089; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=9.381s paused=false rect=328x205@11391; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-20089 opacity=1; safety-in top=-5799 opacity=1; SectionSafetySlider-module-scss-module__acPOQW__sectionSafetySlider top=-5799 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-8475; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-6849; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=4501; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=10581; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=20456; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=27846; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=29086; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 45% (22600px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-16600; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.074s paused=true rect=0x0@0; video6 time=9.839s paused=false rect=328x205@8880; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-22600 opacity=1; safety-in top=-8310 opacity=1; SectionSafetySlider-module-scss-module__acPOQW__sectionSafetySlider top=-8310 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-10986; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-9360; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1990; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=8070; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=17945; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=25335; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=26575; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 50% (25112px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-19112; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=1.898s paused=false rect=0x0@0; video6 time=10.376s paused=false rect=328x205@6368; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-25112 opacity=1; sound top=-522 opacity=1; SectionSound-module-scss-module__rtbrcG__sectionSound top=-522 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav undefined  Naviga top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-13498; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-11872; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-1742; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=5558; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=15433; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=22823; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=24063; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 55% (27623px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-21623; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=2.546s paused=false rect=0x0@0; video6 time=10.863s paused=false rect=328x205@3857; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-27623 opacity=1; sound top=-3033 opacity=1; SectionSound-module-scss-module__rtbrcG__sectionSound top=-3033 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav undefined  Naviga top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-16009; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-14383; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-4253; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=3047; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=12922; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=20312; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=21552; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 60% (30134px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-24134; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.272s paused=false rect=0x0@0; video6 time=11.396s paused=false rect=328x205@1346; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-30134 opacity=1; sound top=-5544 opacity=1; SectionSound-module-scss-module__rtbrcG__sectionSound top=-5544 opacity=1; engineering top=536 opacity=1; SectionEngineering-module-scss-module__V2l7FW__sectionEngineering top=536 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav undefined  Naviga top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-18520; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-16894; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-6764; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-744; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=536; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=10411; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=17801; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=19041; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 65% (32645px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-26645; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=11.859s paused=false rect=328x205@0; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-32645 opacity=1; engineering top=-1975 opacity=1; SectionEngineering-module-scss-module__V2l7FW__sectionEngineering top=-1975 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-21031; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-19405; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-9275; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-3255; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-1015; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=7900; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=15290; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=16530; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 3
+
+## 70% (35156px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-29156; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=12.315s paused=false rect=328x205@-2084; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-35156 opacity=1; engineering top=-4486 opacity=1; SectionEngineering-module-scss-module__V2l7FW__sectionEngineering top=-4486 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper top=-103 opacity=1; sustainability top=774 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-23542; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-21916; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-11786; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-5766; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-3526; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=5389; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=12779; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=14019; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 75% (37667px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-31667; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=12.771s paused=false rect=328x205@-4595; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-37667 opacity=1; sustainability top=-1737 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav undefined  Naviga top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-26053; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-24427; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-14297; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-8277; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-6037; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=2878; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=10268; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=11508; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 80% (40178px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-34178; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=13.227s paused=false rect=328x205@-7106; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-40178 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-388 opacity=1; SectionSpecs-module-scss-module__qHNuCq__sectionSpecs top=-388 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-28564; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-26938; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-16808; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-10788; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-8548; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=367; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=7757; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=8997; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 85% (42690px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-36690; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=13.69s paused=false rect=328x205@-9618; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-42690 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-2900 opacity=1; SectionSpecs-module-scss-module__qHNuCq__sectionSpecs top=-2900 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-31076; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-29450; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-19320; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-13300; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-11060; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=40; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=5245; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=6485; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2
+
+## 90% (45201px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-39201; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=14.152s paused=false rect=328x205@-12129; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-45201 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-5411 opacity=1; SectionSpecs-module-scss-module__qHNuCq__sectionSpecs top=-5411 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-33587; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-31961; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-21831; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-15811; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-13571; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=40; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=2734; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=3974; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2
+
+## 95% (47712px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-41712; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=14.608s paused=false rect=328x205@-14640; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; page-wrapper top=-47712 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-7922 opacity=1; SectionSpecs-module-scss-module__qHNuCq__sectionSpecs top=-7922 opacity=1; explore top=73 opacity=1; SectionEntry-module-scss-module__FfUzAa__sectionEntry top=73 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-36098; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-34472; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-24342; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-18322; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-16082; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-1127; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=500; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1463; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 100% (50223px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: video0 time=9.913s paused=true rect=1440x1200@-44223; video1 time=0s paused=true rect=0x0@0; video2 time=0.052s paused=true rect=0x0@0; video3 time=0s paused=true rect=0x0@0; video4 time=0s paused=true rect=0x0@0; video5 time=3.472s paused=true rect=0x0@0; video6 time=15.065s paused=false rect=328x205@-17151; video7 time=0s paused=true rect=0x0@0
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; footer top=-1048 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-38609; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-36983; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-26853; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-20833; DIV.StickyJSElement-module-scss-module__HTNM2q__stickyElement St top=-18593; DIV.SliderTechnology-module-scss-module__MAPmgG__cursor top=573; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-3638; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-1281; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-448; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2

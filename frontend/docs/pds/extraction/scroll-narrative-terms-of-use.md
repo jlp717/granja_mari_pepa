@@ -1,169 +1,152 @@
-# Scroll Narrative: /terms-of-use
+# Scroll Narrative: terms-of-use
 
-## 0%
-- ScrollY: 0
-- BUTTON: Toggle menu | 33x33 @ 40,30 | opacity 1
-- BUTTON: Close | 43x14 @ 77,39 | opacity 0
-- A: Go to homepage | 51x32 @ 695,30 | opacity 1
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Investors | 70x14 @ 1311,39 | opacity 1
-- A: Investors | 70x14 @ 1311,55 | opacity 1
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,0 | opacity 1
-- H1: Terms of Use | 1360x402 @ 40,40 | opacity 1
+Page: https://www.jobyaviation.com/terms-of-use
+Altura total: 7239px
+Viewport: 1440x1200
 
-## 10%
-- ScrollY: 604
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-604 | opacity 1
-- P: JOBY WEBSITE TERMS OF SERVICE | 672x19 @ 384,163 | opacity 1
-- P: Last revised on July 29, 2024. | 672x19 @ 384,192 | opacity 1
-- P: Welcome to the Terms of Service (these “Terms”) for access to and use of the website locat | 672x76 @ 384,221 | opacity 1
-- P: These Terms govern your access to and use of the Website. Please read these Terms carefull | 672x76 @ 384,307 | opacity 1
-- P: For purposes of these Terms, “you” and “your” means you as the user of the Website. If you | 672x95 @ 384,393 | opacity 1
-- P: Please note that Section 9 contains an arbitration clause and class action waiver. By agre | 672x114 @ 384,498 | opacity 1
+## 0% (0px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=0 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=0 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=4991; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
 
-## 25%
-- ScrollY: 1510
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-1510 | opacity 1
-- P: 3.1 Rights. Subject to your compliance with these Terms, the Joby hereby grants to you, a  | 672x114 @ 384,-44 | opacity 1
-- P: 3.2 Restrictions. You may not do any of the following, unless applicable laws or regulatio | 672x494 @ 384,80 | opacity 1
-- P: 4. OWNERSHIP AND CONTENT | 672x19 @ 384,584 | opacity 1
-- P: 4.1 Ownership of the Website. The Website, including content, information, trademarks and  | 672x114 @ 384,613 | opacity 1
-- P: 4.2 Ownership of Trademarks. The Joby’s name, the Joby’s logo and all related names, logos | 672x95 @ 384,737 | opacity 1
-- P: 4.3 Unsolicited Idea Submission Policy | 672x19 @ 384,842 | opacity 1
+## 5% (302px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-302 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-302 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=4689; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2
 
-## 50%
-- ScrollY: 3020
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-3020 | opacity 1
-- P: 5.2 Limitations of Liability. TO THE EXTENT NOT PROHIBITED BY LAW, YOU AGREE THAT IN NO EV | 672x304 @ 384,-20 | opacity 1
-- P: 6. ARBITRATION AND CLASS ACTION WAIVER | 672x19 @ 384,294 | opacity 1
-- P: 6.1 Informal Process First. You agree that in the event of any dispute between you and the | 672x76 @ 384,323 | opacity 1
-- P: 6.2 Arbitration Agreement and Class Action Waiver. After the informal dispute resolution p | 672x361 @ 384,409 | opacity 1
-- P: 6.3 Costs of Arbitration. Payment for any and all reasonable JAMS filing, administrative a | 672x114 @ 384,780 | opacity 1
-- P: 6.4 Opt-Out. You have the right to opt-out and not be bound by the arbitration provisions  | 672x152 @ 384,904 | opacity 1
+## 10% (604px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-604 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-604 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=4387; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
 
-## 75%
-- ScrollY: 4529
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Term | 1440x4991 @ 0,-4529 | opacity 1
-- P: 7.4 Miscellaneous. If any provision of these Terms shall be unlawful, void or for any reas | 672x228 @ 384,-4 | opacity 1
-- P: 7.5 How to Contact Us. You may contact us regarding the Website or these Terms at: 333 Enc | 672x38 @ 384,234 | opacity 1
-- SECTION: Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby | 1440x2248 @ 0,462 | opacity 1
-- A: Privacy Policy | 79x14 @ 40,42 | opacity 1
-- A: Terms of Use | 73x14 @ 40,61 | opacity 1
-- A: Impact Reporting | 97x14 @ 40,80 | opacity 1
+## 15% (906px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-906 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-906 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=4085; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
 
-## 100%
-- ScrollY: 6039
-- IMG: Joby Aviation Animated Logo | 0x0 @ 0,0 | opacity 0
-- A: Experience | 0x0 @ 0,0 | opacity 1
-- A: Technology | 0x0 @ 0,0 | opacity 1
-- A: Company | 0x0 @ 0,0 | opacity 1
-- A: News | 0x0 @ 0,0 | opacity 1
-- A: Careers | 0x0 @ 0,0 | opacity 1
-- A: Investors | 0x0 @ 0,0 | opacity 1
-- A: Fly Blade | 0x0 @ 0,0 | opacity 1
-- A: Joby Shop | 0x0 @ 0,0 | opacity 1
-- A: YouTube | 0x0 @ 0,0 | opacity 1
-- A: Instagram | 0x0 @ 0,0 | opacity 1
-- A: LinkedIn | 0x0 @ 0,0 | opacity 1
-- A: X | 0x0 @ 0,0 | opacity 1
-- A: Privacy Policy | 0x0 @ 0,0 | opacity 1
-- A: Terms of Use | 0x0 @ 0,0 | opacity 1
-- A: Impact Reporting | 0x0 @ 0,0 | opacity 1
-- A: Health Plan Transparency | 0x0 @ 0,0 | opacity 1
-- A: Safety Policy | 0x0 @ 0,0 | opacity 1
-- SECTION: Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby | 1440x2248 @ 0,-1048 | opacity 1
-- A: Privacy Policy | 79x14 @ 40,42 | opacity 1
-- A: Terms of Use | 73x14 @ 40,61 | opacity 1
-- A: Impact Reporting | 97x14 @ 40,80 | opacity 1
-- A: Health Plan Transparency | 142x14 @ 40,99 | opacity 1
-- A: Safety Policy | 74x14 @ 40,118 | opacity 1
-- A: Experience | 94x21 @ 900,91 | opacity 1
+## 20% (1208px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-1208 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-1208 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=3783; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 25% (1510px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-1510 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-1510 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=3481; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 30% (1812px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-1812 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-1812 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=3179; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 35% (2114px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-2114 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-2114 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=2877; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 40% (2416px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-2416 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-2416 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=2575; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 45% (2718px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-2718 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-2718 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=2273; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 50% (3020px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-3020 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-3020 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1971; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 55% (3321px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-3321 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-3321 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1670; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 60% (3623px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-3623 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-3623 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1368; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 65% (3925px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-3925 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-3925 opacity=1; footer top=1066 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=1066; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 70% (4227px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-4227 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-4227 opacity=1; footer top=764 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=764; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 75% (4529px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-4529 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-4529 opacity=1; footer top=462 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=462; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 80% (4831px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq top=0 opacity=1; page-wrapper top=-4831 opacity=1; SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module- top=-4831 opacity=1; footer top=160 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=160; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1
+
+## 85% (5133px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; footer top=-142 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 4
+
+## 90% (5435px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; footer top=-444 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=0; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 3
+
+## 95% (5737px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; footer top=-746 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-146; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 2
+
+## 100% (6039px)
+- Nav: bg=rgba(0, 0, 0, 0), opacity=1, transform=none
+- Videos: none
+- Visible sections: CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138 opacity=1; footer top=-1048 opacity=1; PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay top=0 opacity=0
+- Pinned elements: DIV.CookieConsent-module-scss-module__ciNfcW__cookieConsent top=1138; NAV.Navigation-module-scss-module__9NlFDq__nav Navigation-module top=0; DIV.StickyCSSElement-module-scss-module__WsLz-q__stickyElement S top=-448; DIV.PageTransition-module-scss-module__yGw4-W__pageTransition top=1260; DIV.PageTransition-module-scss-module__yGw4-W__pageTransitionOve top=0
+- Active animations: 1

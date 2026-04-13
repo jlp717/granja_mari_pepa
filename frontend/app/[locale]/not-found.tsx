@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from '@/lib/native-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Home, ShoppingBag, Search } from 'lucide-react'
 import { Link, useRouter } from '@/lib/navigation'

@@ -1,0 +1,803 @@
+{
+  "_metadata": {
+    "kind": "intersectionObservers",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": {
+    "home": {
+      "_metadata": {
+        "scriptName": "captureIntersectionObserverConfigs",
+        "extractedAt": "2026-04-12T21:59:38.872Z",
+        "sourceUrl": "https://www.jobyaviation.com/",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 37931,
+        "skillVersion": "3.3"
+      },
+      "configs": [
+        {
+          "rootMargin": "200px",
+          "root": null,
+          "callbackSource": "e=>{e.forEach(e=>{let i=r.get(e.target),t=e.isIntersecting||e.intersectionRatio>0;i&&t&&i(t)})}",
+          "timestamp": 1776031144392
+        },
+        {
+          "rootMargin": "0% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144409
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144409
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144409
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144417
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144417
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144417
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144424
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144424
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144424
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144427
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144427
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144427
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144431
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144431
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144440
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144440
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144440
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144443
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144443
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144443
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031144451
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144451
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144451
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031144455
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031144455
+        }
+      ]
+    },
+    "experience": {
+      "_metadata": {
+        "scriptName": "captureIntersectionObserverConfigs",
+        "extractedAt": "2026-04-12T22:00:17.827Z",
+        "sourceUrl": "https://www.jobyaviation.com/experience",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 39258,
+        "skillVersion": "3.3"
+      },
+      "configs": [
+        {
+          "rootMargin": "200px",
+          "root": null,
+          "callbackSource": "e=>{e.forEach(e=>{let i=r.get(e.target),t=e.isIntersecting||e.intersectionRatio>0;i&&t&&i(t)})}",
+          "timestamp": 1776031182566
+        },
+        {
+          "rootMargin": "0% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031182582
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031182582
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182582
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031182584
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182584
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031182591
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182591
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031182594
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182594
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031182604
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031182604
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182604
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031182608
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031182608
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182608
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031182610
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031182610
+        }
+      ]
+    },
+    "technology": {
+      "_metadata": {
+        "scriptName": "captureIntersectionObserverConfigs",
+        "extractedAt": "2026-04-12T22:00:58.221Z",
+        "sourceUrl": "https://www.jobyaviation.com/technology",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 51423,
+        "skillVersion": "3.3"
+      },
+      "configs": [
+        {
+          "rootMargin": "200px",
+          "root": null,
+          "callbackSource": "e=>{e.forEach(e=>{let i=r.get(e.target),t=e.isIntersecting||e.intersectionRatio>0;i&&t&&i(t)})}",
+          "timestamp": 1776031221453
+        },
+        {
+          "rootMargin": "0% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221470
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221470
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221470
+        },
+        {
+          "rootMargin": "0% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221481
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221481
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221481
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221486
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221486
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221486
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221493
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221493
+        },
+        {
+          "rootMargin": "250% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221498
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221498
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221498
+        },
+        {
+          "rootMargin": "100% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221555
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221555
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221555
+        },
+        {
+          "rootMargin": "100% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221556
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221556
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221556
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221576
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221576
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221576
+        },
+        {
+          "rootMargin": "0% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221602
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221602
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221602
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&eM.currentSectionService.setCurrentSection(e?.anchor||\"specifications\")})}",
+          "timestamp": 1776031221602
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031221603
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221603
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221603
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031221606
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031221606
+        },
+        {
+          "root": null,
+          "callbackSource": "function(t){t.forEach(function(t){var m=e.elementsMap.get(t.target);m&&m(t)})}",
+          "timestamp": 1776031221689
+        }
+      ]
+    },
+    "company": {
+      "_metadata": {
+        "scriptName": "captureIntersectionObserverConfigs",
+        "extractedAt": "2026-04-12T22:01:37.174Z",
+        "sourceUrl": "https://www.jobyaviation.com/company",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 23819,
+        "skillVersion": "3.3"
+      },
+      "configs": [
+        {
+          "rootMargin": "200px",
+          "root": null,
+          "callbackSource": "e=>{e.forEach(e=>{let i=r.get(e.target),t=e.isIntersecting||e.intersectionRatio>0;i&&t&&i(t)})}",
+          "timestamp": 1776031262748
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031262769
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031262769
+        },
+        {
+          "rootMargin": "100% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031262770
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031262770
+        },
+        {
+          "rootMargin": "200% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031262816
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031262816
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031262816
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px 0px -20% 0px",
+          "root": null,
+          "callbackSource": "m=>{m.forEach(m=>{m.isIntersecting&&(e.get(m.target)?.(),t.unobserve(m.target))})}",
+          "timestamp": 1776031262818
+        },
+        {
+          "rootMargin": "100% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031262826
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031262826
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031262826
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px 0px -20% 0px",
+          "root": null,
+          "callbackSource": "m=>{m.forEach(m=>{m.isIntersecting&&(e.get(m.target)?.(),t.unobserve(m.target))})}",
+          "timestamp": 1776031262827
+        },
+        {
+          "rootMargin": "150% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031262827
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031262827
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031262827
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031262830
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031262830
+        }
+      ]
+    },
+    "privacy-policy": {
+      "_metadata": {
+        "scriptName": "captureIntersectionObserverConfigs",
+        "extractedAt": "2026-04-12T22:02:15.477Z",
+        "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 4805,
+        "skillVersion": "3.3"
+      },
+      "configs": [
+        {
+          "rootMargin": "200px",
+          "root": null,
+          "callbackSource": "e=>{e.forEach(e=>{let i=r.get(e.target),t=e.isIntersecting||e.intersectionRatio>0;i&&t&&i(t)})}",
+          "timestamp": 1776031301083
+        },
+        {
+          "rootMargin": "100% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031301084
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031301084
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031301095
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031301095
+        }
+      ]
+    },
+    "terms-of-use": {
+      "_metadata": {
+        "scriptName": "captureIntersectionObserverConfigs",
+        "extractedAt": "2026-04-12T22:02:53.328Z",
+        "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 7239,
+        "skillVersion": "3.3"
+      },
+      "configs": [
+        {
+          "rootMargin": "200px",
+          "root": null,
+          "callbackSource": "e=>{e.forEach(e=>{let i=r.get(e.target),t=e.isIntersecting||e.intersectionRatio>0;i&&t&&i(t)})}",
+          "timestamp": 1776031338896
+        },
+        {
+          "rootMargin": "100% 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&_()})}",
+          "timestamp": 1776031338897
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031338897
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting?a?.():l?.()})}",
+          "timestamp": 1776031338904
+        },
+        {
+          "threshold": 0,
+          "rootMargin": "-40px 0px -1159px 0px",
+          "root": null,
+          "callbackSource": "t=>{t.forEach(t=>{t.isIntersecting&&(i.themeService.setTheme(p),c&&n.currentSectionService.setCurrentSection(c))})}",
+          "timestamp": 1776031338904
+        }
+      ]
+    }
+  }
+}

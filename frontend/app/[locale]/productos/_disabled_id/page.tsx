@@ -9,7 +9,7 @@ import ProductDetailClient from './ProductDetailClient';
 import { useAuthStore } from '@/lib/store';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Lock } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import toast from 'react-hot-toast';
 
 interface ProductDetailPageProps {

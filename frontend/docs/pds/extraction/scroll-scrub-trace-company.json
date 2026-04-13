@@ -1,0 +1,622 @@
+{
+  "_metadata": {
+    "scriptName": "extractScrollScrubTrace",
+    "extractedAt": "2026-04-12T22:01:39.882Z",
+    "sourceUrl": "https://www.jobyaviation.com/company",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewportWidth": 1440,
+    "viewportHeight": 1200,
+    "scrollHeight": 23819,
+    "skillVersion": "3.3"
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "bodyHeight": 23819,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "currentTime": 5.769,
+          "duration": 8.033,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 3000,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "currentTime": 2.912,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 3000,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/48a2e0220cde5f7ed39a5ec4bbf986f0f60c4fec.mp4",
+          "currentTime": 1.352,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 3000,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/f4cdc51e04066e6a72cca202d7fdb0a88963fb24.mp4",
+          "currentTime": 5.825,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 3000,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 2262,
+      "bodyHeight": 23819,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "currentTime": 5.769,
+          "duration": 8.033,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 738,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "currentTime": 2.912,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 738,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/48a2e0220cde5f7ed39a5ec4bbf986f0f60c4fec.mp4",
+          "currentTime": 1.352,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 738,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/f4cdc51e04066e6a72cca202d7fdb0a88963fb24.mp4",
+          "currentTime": 5.825,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 738,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 5655,
+      "bodyHeight": 23819,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "currentTime": 5.769,
+          "duration": 8.033,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "currentTime": 2.912,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/48a2e0220cde5f7ed39a5ec4bbf986f0f60c4fec.mp4",
+          "currentTime": 1.352,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/f4cdc51e04066e6a72cca202d7fdb0a88963fb24.mp4",
+          "currentTime": 6.254,
+          "duration": 7.007,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 11310,
+      "bodyHeight": 23819,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "currentTime": 5.769,
+          "duration": 8.033,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "currentTime": 3.348,
+          "duration": 7.007,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/48a2e0220cde5f7ed39a5ec4bbf986f0f60c4fec.mp4",
+          "currentTime": 1.352,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/f4cdc51e04066e6a72cca202d7fdb0a88963fb24.mp4",
+          "currentTime": 6.271,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 16964,
+      "bodyHeight": 23819,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "currentTime": 5.769,
+          "duration": 8.033,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -82,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "currentTime": 3.361,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -82,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/48a2e0220cde5f7ed39a5ec4bbf986f0f60c4fec.mp4",
+          "currentTime": 1.352,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -82,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/f4cdc51e04066e6a72cca202d7fdb0a88963fb24.mp4",
+          "currentTime": 6.708,
+          "duration": 7.007,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -79,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 1,
+      "scrollY": 22619,
+      "bodyHeight": 23819,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+          "currentTime": 5.769,
+          "duration": 8.033,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -5737,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+          "currentTime": 3.361,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -5737,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/48a2e0220cde5f7ed39a5ec4bbf986f0f60c4fec.mp4",
+          "currentTime": 1.352,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -5737,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/f4cdc51e04066e6a72cca202d7fdb0a88963fb24.mp4",
+          "currentTime": 6.727,
+          "duration": 7.007,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": -5377,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    }
+  ],
+  "videoScrubDetected": true,
+  "fullscreenMediaDetected": true
+}

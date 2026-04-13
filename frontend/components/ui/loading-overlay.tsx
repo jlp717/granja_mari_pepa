@@ -20,7 +20,7 @@
 
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { Loader2, Package, TrendingUp, DollarSign, FileText } from 'lucide-react';
 
 interface LoadingOverlayProps {

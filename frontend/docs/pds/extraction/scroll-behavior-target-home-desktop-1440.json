@@ -1,0 +1,4918 @@
+{
+  "_metadata": {
+    "kind": "recordScrollBehaviorTarget",
+    "version": "v3.3",
+    "url": "http://localhost:3001/es",
+    "timestamp": "2026-04-13T06:11:44.386Z",
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "totalHeight": 37931,
+  "viewportHeight": 1200,
+  "viewportWidth": 1440,
+  "sectionCount": 10,
+  "sections": [
+    {
+      "index": 0,
+      "tag": "SECTION",
+      "id": null,
+      "classes": "pds-hero pds-hero--scrub",
+      "height": 14400,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    },
+    {
+      "index": 1,
+      "tag": "SECTION",
+      "id": "experience-highlights",
+      "classes": "pds-editorial",
+      "height": 7408,
+      "backgroundColor": "rgb(245, 244, 223)",
+      "layout": "block"
+    },
+    {
+      "index": 2,
+      "tag": "SECTION",
+      "id": "app",
+      "classes": "pds-source-band pds-dark",
+      "height": 893,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    },
+    {
+      "index": 3,
+      "tag": "SECTION",
+      "id": "technology",
+      "classes": "pds-source-band pds-dark",
+      "height": 1390,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    },
+    {
+      "index": 4,
+      "tag": "SECTION",
+      "id": "news",
+      "classes": "pds-news-section",
+      "height": 905,
+      "backgroundColor": "rgb(245, 244, 223)",
+      "layout": "block"
+    },
+    {
+      "index": 5,
+      "tag": "SECTION",
+      "id": null,
+      "classes": "pds-partners",
+      "height": 4625,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    },
+    {
+      "index": 6,
+      "tag": "SECTION",
+      "id": "story",
+      "classes": "pds-source-band pds-dark",
+      "height": 1390,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    },
+    {
+      "index": 7,
+      "tag": "SECTION",
+      "id": null,
+      "classes": "pds-dream-gallery",
+      "height": 4672,
+      "backgroundColor": "rgb(245, 244, 223)",
+      "layout": "block"
+    },
+    {
+      "index": 8,
+      "tag": "SECTION",
+      "id": "footer",
+      "classes": "pds-footer-bridge",
+      "height": 1048,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    },
+    {
+      "index": 9,
+      "tag": "FOOTER",
+      "id": null,
+      "classes": "pds-footer",
+      "height": 1200,
+      "backgroundColor": "rgb(14, 22, 32)",
+      "layout": "block"
+    }
+  ],
+  "videos": [
+    {
+      "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+      "autoplay": false,
+      "loop": false,
+      "duration": 20.086733
+    }
+  ],
+  "canvases": 0,
+  "frames": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 0
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 14400,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 21808,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 22701,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 24091,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 24996,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 29621,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 31011,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 35683,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 36731,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.05,
+      "scrollY": 1832,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 2.768012
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -1832,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 12568,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 19976,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 20869,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 22259,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 23164,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 27789,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 29179,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 33851,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 34899,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 3660,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 5.561894
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -3660,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 10740,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 18148,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 19041,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 20431,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 21336,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 25961,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 27351,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 32023,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 33071,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.15,
+      "scrollY": 5501,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 8.357298
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -5501,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 8899,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 16307,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 17200,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 18590,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 19495,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 24120,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 25510,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 30182,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 31230,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.2,
+      "scrollY": 7343,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 11.164875
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -7343,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 7057,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 14465,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 15358,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 16748,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 17653,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 22278,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 23668,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 28340,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 29388,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 9178,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 13.946583
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -9178,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 5222,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 12630,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 13523,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 14913,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 15818,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 20443,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 21833,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 26505,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 27553,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.3,
+      "scrollY": 11014,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 16.740465
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -11014,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 3386,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 10794,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 11687,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 13077,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 13982,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 18607,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 19997,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 24669,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 25717,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.35,
+      "scrollY": 12851,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 19.549565
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -12851,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": 1549,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 8957,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 9850,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 11240,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 12145,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 16770,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 18160,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 22832,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 23880,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.4,
+      "scrollY": 14687,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -14687,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -1490,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -287,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 7121,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 8014,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 9404,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 10309,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 14934,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 16324,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 20996,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 22044,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.45,
+      "scrollY": 16529,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -16529,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -3332,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -2129,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 5279,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 6172,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 7562,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 8467,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 13092,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 14482,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 19154,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 20202,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 18365,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -18365,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -5168,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -3965,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 3443,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 4336,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 5726,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 6631,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 11256,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 12646,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 17318,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 18366,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.55,
+      "scrollY": 20202,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -20202,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -7005,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -5802,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 1606,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 2499,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 3889,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 4794,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 9419,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 10809,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 15481,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 16529,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.6,
+      "scrollY": 22038,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -22038,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -8841,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -7638,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -230,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 663,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 2053,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 2958,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 7583,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 8973,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 13645,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 14693,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.65,
+      "scrollY": 23874,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -23874,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -10677,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -9474,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -2066,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -1173,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": 217,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": 1122,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 5747,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 7137,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 11809,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 12857,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.7,
+      "scrollY": 25712,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -25712,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -12515,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -11312,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -3904,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -3011,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -1621,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -716,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 3909,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 5299,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 9971,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 11019,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 27547,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -27547,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -14350,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -13147,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -5739,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -4846,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -3456,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -2551,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 2074,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 3464,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 8136,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 9184,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.8,
+      "scrollY": 29385,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -29385,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -16188,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -14985,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -7577,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -6684,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -5294,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -4389,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": 236,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": 1626,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 6298,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 7346,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.85,
+      "scrollY": 31220,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -31220,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -18023,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -16820,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -9412,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -8519,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -7129,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -6224,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -1599,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": -209,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 4463,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 5511,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.9,
+      "scrollY": 33057,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -33057,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -19860,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -18657,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -11249,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -10356,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -8966,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -8061,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -3436,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": -2046,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 2626,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 3674,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 0.95,
+      "scrollY": 34894,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -34894,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -21697,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -20494,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -13086,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -12193,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -10803,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -9898,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -5273,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": -3883,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": 789,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 1837,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    },
+    {
+      "pct": 1,
+      "scrollY": 36730,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 11,
+      "stickyCount": 0,
+      "videos": [
+        {
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "autoplay": false,
+          "loop": false,
+          "paused": true,
+          "duration": 20.086733,
+          "currentTime": 20.086733
+        }
+      ],
+      "elements": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-hero pds-hero--scrub",
+          "rect": {
+            "x": 0,
+            "y": -36730,
+            "w": 1440,
+            "h": 14400
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 1,
+          "tag": "VIDEO",
+          "id": null,
+          "classes": "",
+          "rect": {
+            "x": -4,
+            "y": -23533,
+            "w": 1447,
+            "h": 1206
+          },
+          "opacity": "1",
+          "transform": "matrix(1.005, 0, 0, 1.005, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(245, 244, 223)",
+          "position": "absolute",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "pds-editorial",
+          "rect": {
+            "x": 0,
+            "y": -22330,
+            "w": 1440,
+            "h": 7408
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -14922,
+            "w": 1440,
+            "h": 893
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -14029,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "pds-news-section",
+          "rect": {
+            "x": 0,
+            "y": -12639,
+            "w": 1440,
+            "h": 905
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-partners",
+          "rect": {
+            "x": 0,
+            "y": -11734,
+            "w": 1440,
+            "h": 4625
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "pds-source-band pds-dark",
+          "rect": {
+            "x": 0,
+            "y": -7109,
+            "w": 1440,
+            "h": 1390
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "pds-dream-gallery",
+          "rect": {
+            "x": 0,
+            "y": -5719,
+            "w": 1440,
+            "h": 4672
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(245, 244, 223)",
+          "color": "rgb(14, 22, 32)",
+          "position": "static",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "pds-footer-bridge",
+          "rect": {
+            "x": 0,
+            "y": -1047,
+            "w": 1440,
+            "h": 1048
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        },
+        {
+          "index": 10,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "pds-footer",
+          "rect": {
+            "x": 0,
+            "y": 1,
+            "w": 1440,
+            "h": 1200
+          },
+          "opacity": "1",
+          "transform": "none",
+          "backgroundColor": "rgb(14, 22, 32)",
+          "color": "rgb(245, 244, 223)",
+          "position": "relative",
+          "zIndex": "auto",
+          "visibility": "visible"
+        }
+      ]
+    }
+  ],
+  "progressCheck": {
+    "maxScroll": 36731,
+    "finalScroll": 36730,
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    }
+  }
+}

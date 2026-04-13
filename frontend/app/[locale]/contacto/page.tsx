@@ -10,9 +10,12 @@ import * as z from 'zod'
 import { ScrollScrubHero } from '@/components/pds/scroll-scrub-hero'
 import {
   PDS_ASSETS,
+  SourceFooterBridge,
   SourceFeatureMosaic,
+  SourceImageBand,
+  SourcePartnersSection,
   SourceStatsSection
-} from '@/components/pds/joby-sections'
+} from '@/components/pds/source-sections'
 
 type ContactFormData = {
   nombre: string
@@ -25,6 +28,36 @@ type ContactFormData = {
 
 const EXPERIENCE_VIDEO =
   'https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-experience-desktop-r2.mp4'
+const EXPERIENCE_SCRUB_TRACE = [
+  [0, 0],
+  [0.05, 0.05],
+  [0.1, 0.115],
+  [0.15, 0.185],
+  [0.2, 0.263],
+  [0.25, 0.34],
+  [0.3, 0.44],
+  [0.35, 0.54],
+  [0.4, 0.625],
+  [0.45, 0.78],
+  [0.5, 0.952],
+  [0.55, 0.997],
+  [1, 0.997]
+] as const
+const EXPERIENCE_MOBILE_SCRUB_TRACE = [
+  [0, 0],
+  [0.05, 0.06],
+  [0.1, 0.085],
+  [0.15, 0.1],
+  [0.2, 0.14],
+  [0.25, 0.205],
+  [0.3, 0.23],
+  [0.35, 0.31],
+  [0.4, 0.39],
+  [0.45, 0.505],
+  [0.5, 0.7],
+  [0.55, 0.975],
+  [1, 0.997]
+] as const
 
 export default function ContactPage() {
   const t = useTranslations('contact_page')
@@ -65,6 +98,8 @@ export default function ContactPage() {
       <ScrollScrubHero
         videoSrc={EXPERIENCE_VIDEO}
         scrollVh={1400}
+        scrubProgressMap={EXPERIENCE_SCRUB_TRACE}
+        mobileScrubProgressMap={EXPERIENCE_MOBILE_SCRUB_TRACE}
         eyebrow={t('hero.badge')}
         title={t('hero.title')}
         subtitle={`${t('hero.subtitle_1')} ${t('hero.subtitle_highlight')} ${t('hero.subtitle_2')}`}
@@ -78,6 +113,9 @@ export default function ContactPage() {
       />
 
       <SourceFeatureMosaic
+        height={1544}
+        tabletHeight={904}
+        mobileHeight={544}
         eyebrow={t('channels.description')}
         title={
           <>
@@ -93,7 +131,20 @@ export default function ContactPage() {
         ]}
       />
 
+      <SourceImageBand
+        height={7850}
+        tabletHeight={6758}
+        mobileHeight={5328}
+        image={PDS_ASSETS.experienceViews}
+        eyebrow={t('hero.badge')}
+        title={`${t('hero.subtitle_1')} ${t('hero.subtitle_highlight')}`}
+        copy={t('hero.description')}
+      />
+
       <SourceStatsSection
+        height={1390}
+        tabletHeight={1239}
+        mobileHeight={933}
         eyebrow={t('form_section.description')}
         title={
           <>
@@ -109,7 +160,15 @@ export default function ContactPage() {
         ]}
       />
 
-      <section id="contact-form" className="pds-section pds-dark">
+      <section
+        id="contact-form"
+        className="pds-section pds-dark pds-contact-form-section"
+        style={{
+          '--pds-contact-form-height': '4800px',
+          '--pds-contact-form-height-tablet': '4096px',
+          '--pds-contact-form-height-mobile': '3248px'
+        } as React.CSSProperties}
+      >
         <div className="pds-grid gap-y-10">
           <div className="col-span-5 max-md:col-span-full">
             <span className="pds-eyebrow mb-4">{t('channels.description')}</span>
@@ -192,6 +251,22 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <SourcePartnersSection
+        tabletHeight={3178}
+        mobileHeight={2394}
+        eyebrow={t('channels.description')}
+        title={
+          <>
+            <span className="block">{t('channels.title_1')}</span>
+            <span className="block">{t('channels.title_2')}</span>
+          </>
+        }
+        copy={t('cta_final.description')}
+        labels={[t('channels.murcia.title'), t('channels.email.title'), t('schedule.title')]}
+      />
+
+      <SourceFooterBridge title={t('hero.title')} copy={t('hero.description')} tabletHeight={1163} mobileHeight={568} />
     </main>
   )
 }

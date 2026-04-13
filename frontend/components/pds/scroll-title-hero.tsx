@@ -8,9 +8,12 @@ type ScrollTitleHeroProps = {
   eyebrow?: string
   description?: string
   actions?: ReactNode
+  height?: number
+  tabletHeight?: number
+  mobileHeight?: number
 }
 
-export function ScrollTitleHero({ title, eyebrow, description, actions }: ScrollTitleHeroProps) {
+export function ScrollTitleHero({ title, eyebrow, description, actions, height, tabletHeight, mobileHeight }: ScrollTitleHeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const charsRef = useRef<HTMLSpanElement[]>([])
   const chars = useMemo(() => Array.from(title), [title])
@@ -54,7 +57,16 @@ export function ScrollTitleHero({ title, eyebrow, description, actions }: Scroll
   }, [])
 
   return (
-    <section ref={sectionRef} className="pds-scroll-title" style={{ '--pds-title-progress': 0 } as CSSProperties}>
+    <section
+      ref={sectionRef}
+      className="pds-scroll-title"
+      style={{
+        '--pds-title-progress': 0,
+        '--pds-scroll-title-height': height ? `${height}px` : undefined,
+        '--pds-scroll-title-height-tablet': tabletHeight ? `${tabletHeight}px` : undefined,
+        '--pds-scroll-title-height-mobile': mobileHeight ? `${mobileHeight}px` : undefined
+      } as CSSProperties}
+    >
       <div className="pds-scroll-title__sticky">
         <div className="pds-scroll-title__content">
           {eyebrow ? <p className="pds-eyebrow pds-scroll-title__eyebrow">{eyebrow}</p> : null}

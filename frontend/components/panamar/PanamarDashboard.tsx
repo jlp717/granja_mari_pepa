@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { useAuthStore } from '@/lib/store';
 import { secureFetch, secureDownload } from '@/lib/secureFetch';
 import { PanamarDocument, PanamarFilters, PanamarDocumentsResponse, PanamarSummary } from '@/lib/types';
@@ -319,6 +319,10 @@ export function PanamarDashboard() {
 
   const handleFilterChange = (key: keyof PanamarFilters, value: string | number | undefined) => {
     setFilters(prev => ({ ...prev, page: 1, [key]: value || undefined }));
+  };
+
+  const handleSearch = () => {
+    setFilters(prev => ({ ...prev, page: 1, busqueda: searchInput.trim() || undefined }));
   };
 
   const toggleMonth = (month: number) => {
@@ -1583,7 +1587,7 @@ export function PanamarDashboard() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
               className="bg-card rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
             >
               {/* Header */}

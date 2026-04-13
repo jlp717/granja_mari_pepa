@@ -1,0 +1,40 @@
+{
+  "_metadata": {
+    "kind": "compareScrollBehavior",
+    "version": "v3.3",
+    "url": "https://www.jobyaviation.com/experience -> http://localhost:3001/es/contacto",
+    "timestamp": "2026-04-13T06:12:18.584Z",
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "page": {
+    "name": "experience-contacto",
+    "source": "/experience",
+    "target": "/es/contacto"
+  },
+  "sourceUrl": "https://www.jobyaviation.com/experience",
+  "targetUrl": "http://localhost:3001/es/contacto",
+  "console": {
+    "sourceErrors": [],
+    "targetErrors": [],
+    "pass": true
+  },
+  "score": {
+    "heightSimilarity": 0.9999745274848438,
+    "sectionSimilarity": 1,
+    "canvasSimilarity": 1,
+    "videoStructure": 1,
+    "targetVideoContract": 1,
+    "videoScrub": 1,
+    "avgFrame": 0.9950507014693228,
+    "worstFrame": 0.9456184967116964,
+    "avgSimilarity": 0.999252001267064,
+    "worstSimilarity": 0.9456184967116964,
+    "passRate": 1,
+    "pass": true
+  }
+}

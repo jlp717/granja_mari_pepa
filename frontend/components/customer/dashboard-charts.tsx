@@ -15,7 +15,7 @@ import {
   Filler
 } from 'chart.js';
 import { Bar, Line, Doughnut } from 'react-chartjs-2';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { TrendingUp, Package, BarChart3, PieChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { secureFetch } from '@/lib/secureFetch'; // 🔐 HttpOnly Cookie Auth

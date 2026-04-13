@@ -1,57 +1,34 @@
-'use client';
+'use client'
 
-import { useEffect, useCallback } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useCallback, useEffect } from 'react'
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+export function useNativeScrollRefresh() {
+  const refresh = useCallback(() => {
+    if (typeof window === 'undefined') return
 
-export function useScrollTrigger() {
-  // Force ScrollTrigger refresh after navigation
-  const refreshScrollTrigger = useCallback(() => {
-    if (typeof window !== 'undefined' && ScrollTrigger) {
-      // Small delay to ensure DOM is ready
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100);
-    }
-  }, []);
+    window.requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('resize'))
+    })
+  }, [])
 
-  // Cleanup function
-  const cleanupScrollTrigger = useCallback(() => {
-    if (typeof window !== 'undefined' && ScrollTrigger) {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    }
-  }, []);
+  const cleanup = useCallback(() => {}, [])
 
-  // Auto-refresh on route changes and window resize
   useEffect(() => {
-    const handleRouteChange = () => {
-      refreshScrollTrigger();
-    };
+    const handleRouteChange = () => refresh()
+    const handleResize = () => refresh()
 
-    const handleResize = () => {
-      refreshScrollTrigger();
-    };
-
-    // Listen for Next.js route changes
-    window.addEventListener('popstate', handleRouteChange);
-    window.addEventListener('resize', handleResize);
-
-    // Initial refresh
-    refreshScrollTrigger();
+    window.addEventListener('popstate', handleRouteChange)
+    window.addEventListener('resize', handleResize)
+    refresh()
 
     return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [refreshScrollTrigger]);
+      window.removeEventListener('popstate', handleRouteChange)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [refresh])
 
   return {
-    refreshScrollTrigger,
-    cleanupScrollTrigger
-  };
+    refresh,
+    cleanup
+  }
 }

@@ -29,6 +29,7 @@ export function CinematicHero() {
     video.muted = true
     video.playsInline = true
     video.pause()
+    video.load()
 
     let frame = 0
 
@@ -71,7 +72,7 @@ export function CinematicHero() {
     <section
       ref={sectionRef}
       className="pds-hero pds-hero--scrub"
-      style={{ '--pds-hero-progress': 0, '--pds-hero-scroll-height': '1800svh' } as React.CSSProperties}
+      style={{ '--pds-hero-progress': 0, '--pds-hero-scroll-height': '1200svh' } as React.CSSProperties}
     >
       <div className="pds-hero__sticky">
         <div className="pds-hero__media">

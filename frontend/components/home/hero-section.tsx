@@ -6,14 +6,7 @@ import { Button } from '@/components/ui/button';
 import ResponsiveVideo from '@/components/ui/responsive-video';
 import ResponsiveImage from '@/components/ui/responsive-image';
 import { Link } from '@/lib/navigation';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
-
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { motion } from '@/lib/native-motion';
 
 export function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -59,67 +52,49 @@ export function HeroSection() {
     const squid = squidRef.current;
     const ink = inkRef.current;
     const title = titleRef.current;
+    const animations: Animation[] = [];
+    let frame = 0;
 
-    // Professional parallax effects with ScrollTrigger
-    const parallaxTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1
+    const clamp = (value: number) => Math.max(0, Math.min(1, value));
+
+    const updateScrollState = () => {
+      frame = 0;
+      const rect = hero.getBoundingClientRect();
+      const progress = clamp(-rect.top / Math.max(1, hero.offsetHeight));
+
+      if (title) {
+        title.style.transform = `translate3d(0, ${progress * -50}px, 0)`;
+        title.style.opacity = String(1 - progress * 0.3);
       }
-    });
 
-    // Smooth title parallax
-    if (title) {
-      parallaxTl.to(title, {
-        y: -50,
-        opacity: 0.7,
-        ease: 'none'
-      });
-    }
+      const inkCore = ink?.querySelector('div') as HTMLDivElement | null;
+      if (inkCore) {
+        inkCore.style.transform = `scale(${progress * 8})`;
+        inkCore.style.opacity = String(progress * 0.6);
+      }
 
-    // Professional ink expansion effect
-    if (ink) {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top 80%',
-          end: 'bottom 20%',
-          scrub: 2
-        }
-      }).to(ink.querySelector('div'), {
-        scale: 8,
-        opacity: 0.6,
-        ease: 'power2.out'
-      });
-    }
+      if (squid) {
+        squid.style.opacity = String(0.8 - progress * 0.4);
+      }
+    };
 
-    // Smooth squid rotation
+    const requestUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(updateScrollState);
+    };
+
     if (squid) {
-      gsap.to(squid, {
-        rotation: 360,
-        duration: 25,
-        ease: 'none',
-        repeat: -1
-      });
-
-      // Squid parallax effect
-      gsap.to(squid, {
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.5
-        },
-        scale: 1.1,
-        opacity: 0.4,
-        ease: 'none'
-      });
+      animations.push(squid.animate([
+        { transform: 'rotate(0deg)' },
+        { transform: 'rotate(360deg)' }
+      ], {
+        duration: 25000,
+        iterations: Infinity,
+        easing: 'linear'
+      }));
     }
 
     // Create deterministic floating particles
-    FLOATING_PARTICLES.forEach((particle, i) => {
+    FLOATING_PARTICLES.forEach((particle) => {
       const particleEl = document.createElement('div');
       particleEl.className = 'floating-particle';
       particleEl.style.cssText = `
@@ -135,19 +110,27 @@ export function HeroSection() {
       `;
       hero.appendChild(particleEl);
 
-      gsap.to(particleEl, {
-        x: (particle.left > 50 ? -100 : 100),
-        y: (particle.top > 50 ? -80 : 80),
-        duration: particle.duration,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: particle.delay
-      });
+      animations.push(particleEl.animate([
+        { transform: 'translate3d(0, 0, 0)' },
+        { transform: `translate3d(${particle.left > 50 ? -100 : 100}px, ${particle.top > 50 ? -80 : 80}px, 0)` }
+      ], {
+        duration: particle.duration * 1000,
+        iterations: Infinity,
+        direction: 'alternate',
+        easing: 'ease-in-out',
+        delay: particle.delay * 1000
+      }));
     });
 
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    updateScrollState();
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+      if (frame) cancelAnimationFrame(frame);
+      animations.forEach((animation) => animation.cancel());
       // Clean up particles
       hero.querySelectorAll('.floating-particle').forEach(p => p.remove());
     };

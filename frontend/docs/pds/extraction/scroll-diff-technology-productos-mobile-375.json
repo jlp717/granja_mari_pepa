@@ -1,0 +1,40 @@
+{
+  "_metadata": {
+    "kind": "compareScrollBehavior",
+    "version": "v3.3",
+    "url": "https://www.jobyaviation.com/technology -> http://localhost:3001/es/productos",
+    "timestamp": "2026-04-13T06:20:52.243Z",
+    "viewport": {
+      "name": "mobile-375",
+      "width": 375,
+      "height": 812
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "page": {
+    "name": "technology-productos",
+    "source": "/technology",
+    "target": "/es/productos"
+  },
+  "sourceUrl": "https://www.jobyaviation.com/technology",
+  "targetUrl": "http://localhost:3001/es/productos",
+  "console": {
+    "sourceErrors": [],
+    "targetErrors": [],
+    "pass": true
+  },
+  "score": {
+    "heightSimilarity": 0.9716831310058949,
+    "sectionSimilarity": 1,
+    "canvasSimilarity": 1,
+    "videoStructure": 1,
+    "targetVideoContract": 1,
+    "videoScrub": 1,
+    "avgFrame": 0.9723688466015529,
+    "worstFrame": 0.9247567324462369,
+    "avgSimilarity": 0.9896256158115297,
+    "worstSimilarity": 0.9247567324462369,
+    "passRate": 1,
+    "pass": true
+  }
+}

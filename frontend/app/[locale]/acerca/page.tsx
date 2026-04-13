@@ -10,7 +10,7 @@ import {
   SourceCompanyTimeline,
   SourceImageBand,
   SourceStatsSection
-} from '@/components/pds/joby-sections'
+} from '@/components/pds/source-sections'
 
 const COMPANY_SEQUENCE = [
   'https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4',
@@ -45,6 +45,9 @@ export default function AboutPage() {
   return (
     <main className="pds-page">
       <ScrollTitleHero
+        height={3000}
+        tabletHeight={2048}
+        mobileHeight={1624}
         eyebrow={`${t('hero.subtitle_1')} ${t('hero.subtitle_highlight')} ${t('hero.subtitle_2')}`}
         title={t('hero.title')}
         description={t('hero.description')}
@@ -62,7 +65,9 @@ export default function AboutPage() {
       />
 
       <SourceCompanyTimelineMedia
-        heightVh={560}
+        heightVh={200}
+        tabletHeightVh={250}
+        mobileHeightVh={250}
         items={milestones.slice(0, 4).map((item, index) => ({
           label: item.year,
           title: item.title,
@@ -72,6 +77,9 @@ export default function AboutPage() {
       />
 
       <SourceImageBand
+        height={12682}
+        tabletHeight={12344}
+        mobileHeight={8644}
         image={PDS_ASSETS.companyOrigin}
         eyebrow={t('delegations.description')}
         title={
@@ -84,6 +92,9 @@ export default function AboutPage() {
       />
 
       <SourceCompanyTimeline
+        height={2099}
+        tabletHeight={3989}
+        mobileHeight={1949}
         eyebrow={t('history.description')}
         title={
           <>
@@ -95,6 +106,9 @@ export default function AboutPage() {
       />
 
       <SourceImageBand
+        height={1390}
+        tabletHeight={1239}
+        mobileHeight={933}
         image={PDS_ASSETS.companyWorkshop}
         eyebrow={t('commitment.description')}
         title={
@@ -107,6 +121,9 @@ export default function AboutPage() {
       />
 
       <SourceStatsSection
+        height={1048}
+        tabletHeight={1163}
+        mobileHeight={568}
         eyebrow={t('values.description')}
         title={
           <>

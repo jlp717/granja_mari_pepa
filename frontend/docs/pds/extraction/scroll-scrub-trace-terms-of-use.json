@@ -1,0 +1,64 @@
+{
+  "_metadata": {
+    "scriptName": "extractScrollScrubTrace",
+    "extractedAt": "2026-04-12T22:02:56.041Z",
+    "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewportWidth": 1440,
+    "viewportHeight": 1200,
+    "scrollHeight": 7239,
+    "skillVersion": "3.3"
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "bodyHeight": 7239,
+      "viewportHeight": 1200,
+      "videos": [],
+      "canvases": []
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 604,
+      "bodyHeight": 7239,
+      "viewportHeight": 1200,
+      "videos": [],
+      "canvases": []
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 1510,
+      "bodyHeight": 7239,
+      "viewportHeight": 1200,
+      "videos": [],
+      "canvases": []
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 3020,
+      "bodyHeight": 7239,
+      "viewportHeight": 1200,
+      "videos": [],
+      "canvases": []
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 4529,
+      "bodyHeight": 7239,
+      "viewportHeight": 1200,
+      "videos": [],
+      "canvases": []
+    },
+    {
+      "pct": 1,
+      "scrollY": 6039,
+      "bodyHeight": 7239,
+      "viewportHeight": 1200,
+      "videos": [],
+      "canvases": []
+    }
+  ],
+  "videoScrubDetected": false,
+  "fullscreenMediaDetected": false
+}

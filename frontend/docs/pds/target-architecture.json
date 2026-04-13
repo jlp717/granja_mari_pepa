@@ -1,0 +1,35 @@
+{
+  "_metadata": {
+    "generatedAt": "2026-04-12T22:05:00.000Z",
+    "skillVersion": "3.3",
+    "targetPath": "C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\frontend"
+  },
+  "monorepo": true,
+  "rootPath": "frontend/",
+  "backendPath": "../backend/",
+  "backendTouchPolicy": "DO_NOT_TOUCH",
+  "appPath": "frontend/app/[locale]/",
+  "componentsPath": "frontend/components/",
+  "hasI18n": true,
+  "i18nLib": "next-intl",
+  "nextIntlVersion": "4.7.0",
+  "locales": ["es", "en", "de", "it", "zh"],
+  "defaultLocale": "es",
+  "localeRouting": "[locale]",
+  "tailwindVersion": "3.3.3",
+  "tailwindConfig": "tailwind.config.ts",
+  "useThemeDirective": false,
+  "nextVersion": "14.2.15",
+  "appRouter": true,
+  "packageManager": "npm",
+  "hasUILibrary": "shadcn/radix-ui",
+  "uiLibraryPaths": ["components/ui", "components.json"],
+  "sourceAnimationImplementation": {
+    "gsap": false,
+    "lenis": false,
+    "framerMotion": false,
+    "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+    "revealSystem": "CSS_INTERSECTION_OBSERVER",
+    "videoScrub": "NATIVE_RAF_OR_SCROLL"
+  }
+}

@@ -1,40 +1,48 @@
-# ANIMATION_MANIFEST
-
-MANIFEST_TOTAL=17
+# ANIMATION_MANIFEST v3.3
 
 Source visual reference: `https://www.jobyaviation.com`
 
-| Estado | ID | Target | Source | Tipo | Trigger | Behavior | Evidence |
-|---|---|---|---|---|---|---|---|
-| PASS | ANIM-001 | `/[locale]` | `/` | VIDEO_SCRUB | Hero scroll | Fullscreen video is paused, `autoplay=false`, `loop=false`, and `currentTime` advances with scroll | `docs/pds/qa-evidence/v31-final-2/summary.json` |
-| PASS | ANIM-002 | `/[locale]` | `/` | STICKY_PIN | Hero scroll | Hero media remains sticky/fullscreen through long scroll section | `docs/pds/qa-evidence/v31-final-2/home-1440x1200-0.png` |
-| PASS | ANIM-003 | `/[locale]` | `/` | CSS_TRANSITION | Hero scroll vars | Title/subtitle/copy/CTA opacity is controlled by `--pds-hero-progress` | `components/home/cinematic-hero.tsx` |
-| PASS | ANIM-004 | `/[locale]/productos` | `/technology` | VIDEO_SCRUB | Hero scroll | Technology intro video scrubbed from `0 -> 10s` | `docs/pds/qa-evidence/v31-final-2/summary.json` |
-| PASS | ANIM-005 | `/[locale]/productos` | `/technology` | STICKY_PIN | Hero scroll | Technology hero uses fullscreen sticky media | `docs/pds/qa-evidence/v31-final-2/productos-1440x1200-0.png` |
-| PASS | ANIM-006 | `/[locale]/contacto` | `/experience` | VIDEO_SCRUB | Hero scroll | Experience video scrubbed from `0 -> 29.967s` | `docs/pds/qa-evidence/v31-final-2/summary.json` |
-| PASS | ANIM-007 | `/[locale]/contacto` | `/experience` | STICKY_PIN | Hero scroll | Experience hero pinned fullscreen | `docs/pds/qa-evidence/v31-final-2/contacto-1440x1200-0.png` |
-| PASS | ANIM-008 | `/[locale]/acerca` | `/company` | SCROLL_TEXT_REVEAL | Scroll | Company-style title reveals character by character with opacity/translateY | `components/pds/scroll-title-hero.tsx` |
-| PASS | ANIM-009 | Global | Source nav | DATA_ATTR/CSS_TRANSITION | Route + menu state | Transparent fixed nav; cream on dark pages, black on cream pages, black menu label on legal pages | `docs/pds/qa-evidence/v31-final-2/privacidad-1440x1200-0-after-header.png` |
-| PASS | ANIM-010 | Global | Source nav | CSS_TRANSITION | Mobile menu | Fullscreen dark menu panel with menu-button morph | `components/layout/header.tsx` |
-| PASS | ANIM-011 | Legal pages | `/privacy-policy`, `/terms-of-use` | STICKY_LAYOUT | Document scroll | Source legal composition with left title and body column | `docs/pds/qa-evidence/v31-final-2/privacidad-1440x1200-0-after-header.png` |
-| PASS parcial | ANIM-012 | Home lower page | `/` | SCROLL_GALLERY | Scroll | Dream/gallery section moves horizontally via scroll progress variable, but exact source timing still needs delta QA | `components/pds/joby-sections.tsx` |
-| PASS parcial | ANIM-013 | Home partners | `/` | STICKY_PIN | Scroll | Partner section is sticky and source-like; exact source list/media timing pending | `components/pds/joby-sections.tsx` |
-| PASS parcial | ANIM-014 | `/[locale]/productos` interior | `/technology` | MULTI_VIDEO_SEQUENCE | Long technical scroll | Aircraft-style source video sequence is ported with 5 extracted videos; exact source timing and every hidden video state still pending | `docs/pds/qa-evidence/v31-final-4/summary.json` |
-| PENDING | ANIM-015 | `/[locale]/productos` interior | `/technology` | CANVAS_SCROLL/WEBGL | Long technical scroll | Source extraction found 5 canvases; target does not yet recreate them | `docs/pds/extraction/v31-full/technology-1440.json` |
-| PASS parcial | ANIM-016 | `/[locale]/acerca` interior | `/company` | VIDEO_SEQUENCE | Company page scroll | Rounded company timeline media section uses the 4 extracted source videos and scroll-driven active label | `docs/pds/qa-evidence/v31-final-4/summary.json` |
-| PENDING | ANIM-017 | All pages | All source pages | PIXEL_DELTA_QA | 375/768/1440 visual QA | Need final per-section screenshots and diff thresholds before calling complete | `docs/pds/qa-evidence/v31-final-2/summary.json` |
+Generated from `docs/pds/extraction/v33/summary.json`.
 
-## Current Video Scrub QA
+MANIFEST_TOTAL=20
 
-- Home: `currentTime 0 -> 13.196s` at 25% page scroll, `paused=true`, `autoplay=false`, `loop=false`, fullscreen cover.
-- Productos: `currentTime 0 -> 10s` at 25% page scroll, `paused=true`, `autoplay=false`, `loop=false`, fullscreen cover.
-- Contacto: `currentTime 0 -> 12.615s` at 25% page scroll, `paused=true`, `autoplay=false`, `loop=false`, fullscreen cover.
-- Acerca: no hero video; title reveal is scroll-driven and nav color is black on cream.
-- Productos interior: active source videos verified at scroll `6200`, `8200` and `10400` with viewport-wide media.
-- Acerca interior: 4 source company videos present; active source video verified at scroll `3000` and `4700` with rounded source-style media frame.
+## Implementation Decision
 
-## Stop Condition Status
+- GSAP: `false`
+- Lenis: `false`
+- Framer Motion: `false`
+- Scroll handler: `NATIVE_SCROLL_OR_RAF`
+- Reveal system: `CSS_INTERSECTION_OBSERVER`
+- Video scrub: `NATIVE_RAF_OR_SCROLL`
+- Page transition capability detected: `VIEW_TRANSITIONS`
 
-- `ScrollTrigger.getAll()` is not used in the target implementation; scroll effects are implemented with native RAF + CSS variables.
-- Source visible text is not copied into target UI except allowed target English legal strings.
-- This manifest does not mark the migration complete because technology canvas/WebGL surfaces, every mapped route and final pixel-delta QA remain pending.
+The target must not use GSAP, Lenis or Framer Motion for the ported source motion.
+
+| Estado | ID | Source page | Tipo | Trigger | Comportamiento source | Evidencia |
+|---|---|---|---|---|---|---|
+| PENDING | A001 | `/` | NATIVE_RAF_VIDEO_SCRUB | Scroll hero `0-100%` section progress | Fullscreen hero video currentTime is tied to scroll; no GSAP target | `docs/pds/extraction/scroll-scrub-trace-home.json` |
+| PENDING | A002 | `/` | STICKY_ELEMENT | Hero scroll | Hero media remains fixed/sticky through long `14400px` source section | `docs/pds/extraction/scroll-behavior-home.json` |
+| PENDING | A003 | `/` | CSS_IO_REVEAL | IntersectionObserver + CSS classes | Hero/text/editorial elements reveal using source CSS modules/keyframes | `docs/pds/extraction/animations.json` |
+| PENDING | A004 | `/` | SCROLL_INDICATOR | Initial hero scroll | Source hero has scroll/title movement state over scroll frames | `docs/pds/extraction/scroll-snapshots-home.json` |
+| PENDING | A005 | `/` | STICKY_ELEMENT | Partner/gallery scroll | Source partners and illustration sections use long scroll/sticky visual treatment | `docs/pds/extraction/structure.json` |
+| PENDING | A006 | `/experience` | NATIVE_RAF_VIDEO_SCRUB | Scroll hero `0-100%` section progress | Experience fullscreen hero video currentTime is tied to scroll | `docs/pds/extraction/scroll-scrub-trace-experience.json` |
+| PENDING | A007 | `/experience` | CSS_IO_REVEAL | Section entry | Experience intro/highlights and map content reveal with native IO/CSS | `docs/pds/extraction/animation-implementation.json` |
+| PENDING | A008 | `/experience` | STICKY_ELEMENT | Experience long media/map scroll | Source experience route has long pinned/visible section states across scroll | `docs/pds/extraction/scroll-behavior-experience.json` |
+| PENDING | A009 | `/technology` | NATIVE_RAF_VIDEO_SCRUB | Technology hero scroll | Technology hero video currentTime is scroll-controlled | `docs/pds/extraction/scroll-scrub-trace-technology.json` |
+| PENDING | A010 | `/technology` | CANVAS_SCROLL | Introduction, sound, technical breakdown | Source technology includes 5 canvas surfaces captured in extraction | `docs/pds/extraction/three-scene.json` |
+| PENDING | A011 | `/technology` | NATIVE_RAF_VIDEO_SCRUB | Technical sections scroll | Source technology includes 8 videos and native scroll/RAF media state | `docs/pds/extraction/animations.json` |
+| PENDING | A012 | `/technology` | CSS_IO_REVEAL | Technical section entries | Source technical subsections use CSS module reveals and transitions | `docs/pds/extraction/css-rules.json` |
+| PENDING | A013 | `/technology` | STICKY_ELEMENT | Long technical sections | Safety/sound/technical sections maintain sticky/pinned geometry over long scroll | `docs/pds/extraction/scroll-behavior-technology.json` |
+| PENDING | A014 | `/company` | CSS_IO_REVEAL | Intro title scroll | Company title/story sections reveal using CSS modules/native scroll state | `docs/pds/extraction/scroll-behavior-company.json` |
+| PENDING | A015 | `/company` | NATIVE_RAF_VIDEO_SCRUB | Company media timeline | Source company route has 4 videos with scroll-observed state | `docs/pds/extraction/scroll-scrub-trace-company.json` |
+| PENDING | A016 | `/company` | STICKY_ELEMENT | Mythology/story scroll | Long mythology section has source scroll geometry and reveal timing | `docs/pds/extraction/structure.json` |
+| PENDING | A017 | `/privacy-policy` | STICKY_LAYOUT | Legal document scroll | Legal page uses source cream legal layout and fixed nav/footer state | `docs/pds/extraction/scroll-behavior-privacy-policy.json` |
+| PENDING | A018 | `/terms-of-use` | STICKY_LAYOUT | Legal document scroll | Terms page uses source legal layout and dark nav variant | `docs/pds/extraction/scroll-behavior-terms-of-use.json` |
+| PENDING | A019 | Global | VIEW_TRANSITION | Route navigation | Browser View Transitions API capability detected; target may use native fallback only | `docs/pds/extraction/animation-implementation.json` |
+| PENDING | A020 | Global | CSS_MODULE_ANIMATION | Page load, hover, menu states | Source uses CSS Modules/keyframes and CSS transitions for nav/menu/buttons | `docs/pds/extraction/css-rules.json` |
+
+## Verification Rules
+
+- Mark an item complete only after source and target both pass `recordScrollBehavior()` and `compareScrollBehavior()` for the mapped target route.
+- Do not add GSAP, Lenis or Framer Motion for source-equivalent visual effects.
+- Any target route mapped to `/technology` must address source canvas/media states, not only the first hero video.

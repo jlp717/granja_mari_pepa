@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import {
   Search,
   Filter,
@@ -25,7 +25,9 @@ interface Producto {
   familia: {
     codigo: string;
     descripcion: string;
+    nombre?: string;
   };
+  activo?: boolean;
   codigoIva: number;
   unidadMedida: string;
   unidadesCaja: number;
@@ -381,7 +383,7 @@ export default function ProductsCatalog() {
 
                     <div className="flex items-center gap-2">
                       {[...Array(Math.min(5, totalPaginas))].map((_, i) => {
-                        let pageNum;
+                        let pageNum: number;
                         if (totalPaginas <= 5) {
                           pageNum = i + 1;
                         } else if (paginaActual <= 3) {

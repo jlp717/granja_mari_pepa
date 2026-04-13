@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { CheckCircle, ShoppingCart, X, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';

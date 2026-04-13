@@ -1,0 +1,221 @@
+{
+  "_metadata": {
+    "kind": "recordScrollBehaviorTarget",
+    "version": "v3.3",
+    "url": "http://localhost:3001/es/acerca",
+    "timestamp": "2026-04-13T06:13:58.386Z",
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "totalHeight": 1200,
+  "viewportHeight": 1200,
+  "viewportWidth": 1440,
+  "sectionCount": 0,
+  "sections": [],
+  "videos": [],
+  "canvases": 0,
+  "frames": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.05,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.15,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.2,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.3,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.35,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.4,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.45,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.55,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.6,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.65,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.7,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.8,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.85,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.9,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 0.95,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    },
+    {
+      "pct": 1,
+      "scrollY": 0,
+      "bodyBackground": "rgb(245, 244, 223)",
+      "elementCount": 0,
+      "stickyCount": 0,
+      "videos": [],
+      "elements": []
+    }
+  ],
+  "progressCheck": {
+    "maxScroll": 0,
+    "finalScroll": 0,
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    }
+  }
+}

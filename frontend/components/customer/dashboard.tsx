@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { CustomToast } from '@/components/ui/custom-toast';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
 import {
   User,
+  Users,
   FileText,
   ShoppingBag,
   Settings,
@@ -18,6 +19,7 @@ import {
   CreditCard,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   ChevronsRight,
   ChevronsLeft,
   TrendingUp,
@@ -3318,7 +3320,7 @@ export function CustomerDashboard() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.5 }}
                       >
-                        <DashboardCharts codigoCliente={user.id} />
+                        <DashboardCharts codigoCliente={user!.id} />
                       </motion.div>
                     )}
                   </div>
@@ -3594,7 +3596,7 @@ export function CustomerDashboard() {
                                     value={clientSearch}
                                     onChange={(e) => setClientSearch(e.target.value)}
                                     className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
-                                    onClick={(e) => e.stopPropagation()}
+                                    onClick={(e: any) => e.stopPropagation()}
                                   />
                                 </div>
                               </div>
@@ -4707,7 +4709,7 @@ export function CustomerDashboard() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
               className="bg-card rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
             >
               {/* Header - Responsive */}
@@ -4900,7 +4902,7 @@ export function CustomerDashboard() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
               className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
             >
               <div className="flex items-center gap-4 mb-6">
@@ -5009,7 +5011,7 @@ export function CustomerDashboard() {
                   damping: 30
                 }}
                 className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: any) => e.stopPropagation()}
               >
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-destructive/10 flex items-center justify-center">
@@ -5187,7 +5189,7 @@ export function CustomerDashboard() {
                   damping: 30
                 }}
                 className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: any) => e.stopPropagation()}
               >
                 <div className="space-y-6">
                   {/* Header */}

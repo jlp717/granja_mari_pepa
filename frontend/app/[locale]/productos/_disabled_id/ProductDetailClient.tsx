@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -35,8 +35,6 @@ import { cn } from '@/lib/utils';
 import { useCartStore, useFavoritesStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Mock reviews data
 const mockReviews = [
@@ -69,8 +67,6 @@ const mockReviews = [
   }
 ];
 
-gsap.registerPlugin(ScrollTrigger);
-
 interface ProductDetailClientProps {
   product: Product;
   currentBrand?: any;
@@ -101,49 +97,52 @@ export default function ProductDetailClient({ product, currentBrand, relatedProd
   const reviewsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Hero animation
-      gsap.fromTo(heroRef.current, {
-        opacity: 0,
-        y: 50
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const timers: Array<ReturnType<typeof setTimeout>> = [];
 
-      // Details animation
-      gsap.fromTo(detailsRef.current?.children || [], {
-        opacity: 0,
-        y: 30
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        delay: 0.3,
-        ease: 'power2.out'
-      });
+    const reveal = (element: HTMLElement | null | undefined, delay = 0) => {
+      if (!element) return;
 
-      // Reviews animation on scroll
-      gsap.fromTo(reviewsRef.current, {
-        opacity: 0,
-        y: 40
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: reviewsRef.current,
-          start: 'top 80%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none reverse'
-        }
-      });
+      if (prefersReduced) {
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+        return;
+      }
+
+      element.style.opacity = '0';
+      element.style.transform = 'translate3d(0, 2.5rem, 0)';
+      element.style.transition = 'opacity .8s cubic-bezier(.165,.84,.44,1), transform .8s cubic-bezier(.165,.84,.44,1)';
+
+      timers.push(setTimeout(() => {
+        element.style.opacity = '1';
+        element.style.transform = 'translate3d(0, 0, 0)';
+      }, delay));
+    };
+
+    reveal(heroRef.current, 0);
+    Array.from(detailsRef.current?.children ?? []).forEach((child, index) => {
+      reveal(child as HTMLElement, 250 + index * 80);
     });
 
-    return () => ctx.revert();
+    const reviews = reviewsRef.current;
+    let observer: IntersectionObserver | null = null;
+
+    if (reviews && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          reveal(reviews, 0);
+          observer?.disconnect();
+        }
+      }, { rootMargin: '0px 0px -20% 0px' });
+      observer.observe(reviews);
+    } else {
+      reveal(reviews, 500);
+    }
+
+    return () => {
+      timers.forEach(clearTimeout);
+      observer?.disconnect();
+    };
   }, []);
 
   const handleImageZoom = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -238,7 +237,7 @@ export default function ProductDetailClient({ product, currentBrand, relatedProd
           productName={productToAdd.name || 'Producto'}
           productImage={productToAdd.image}
           quantity={quantityToAdd}
-          onDismiss={() => toast.dismiss(t.id)}
+          onDismiss={() => toast.dismiss(t)}
         />
       ), {
         duration: 4000,
