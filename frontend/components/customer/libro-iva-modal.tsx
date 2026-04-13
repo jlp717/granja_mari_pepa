@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { X, FileText, Download, Mail, MessageCircle, Send, Phone, Check, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { toast } from 'sonner';
 import apiClient, { handleApiError } from '@/lib/apiClient';
 import { Button } from '@/components/ui/button';

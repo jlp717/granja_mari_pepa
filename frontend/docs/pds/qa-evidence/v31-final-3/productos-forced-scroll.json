@@ -1,0 +1,75 @@
+{
+  "height": 36443,
+  "samples": [
+    {
+      "targetY": 0,
+      "scrollY": 0,
+      "documentTop": 0,
+      "bodyTop": 0,
+      "activeText": "01Calidad CertificadaGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos.",
+      "activeVideo": {
+        "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+        "y": 6000,
+        "w": 1440,
+        "h": 1200,
+        "opacity": "1"
+      }
+    },
+    {
+      "targetY": 6200,
+      "scrollY": 6200,
+      "documentTop": 6200,
+      "bodyTop": 0,
+      "activeText": "01Calidad CertificadaGarantía de calidad respaldada por la Norma ISO 9001. Trazabilidad de todos nuestros productos.",
+      "activeVideo": {
+        "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+        "y": 0,
+        "w": 1440,
+        "h": 1200,
+        "opacity": "1"
+      }
+    },
+    {
+      "targetY": 8200,
+      "scrollY": 8200,
+      "documentTop": 8200,
+      "bodyTop": 0,
+      "activeText": "02Servicio RápidoServicio de entrega en 24-48 horas respetando en todo momento la cadena de frío.",
+      "activeVideo": {
+        "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+        "y": 0,
+        "w": 1440,
+        "h": 1200,
+        "opacity": "1"
+      }
+    },
+    {
+      "targetY": 10400,
+      "scrollY": 10400,
+      "documentTop": 10400,
+      "bodyTop": 0,
+      "activeText": "04NuestroLo que nos diferencia y hace que nuestros clientes confíen en nosotros desde hace más de 55 años",
+      "activeVideo": {
+        "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+        "y": 0,
+        "w": 1440,
+        "h": 1200,
+        "opacity": "1"
+      }
+    },
+    {
+      "targetY": 12800,
+      "scrollY": 12800,
+      "documentTop": 12800,
+      "bodyTop": 0,
+      "activeText": "05Congelados, refrigerados y helados para HORECASoluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.",
+      "activeVideo": {
+        "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+        "y": -560,
+        "w": 1440,
+        "h": 1200,
+        "opacity": "1"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { cn } from '@/lib/utils';
 import { ShineBorder } from './shine-border';
 
@@ -190,7 +190,7 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
                 background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.3), transparent 40%)`,
                 transition: 'opacity 0.3s ease',
               }}
-              onMouseMove={(e) => {
+              onMouseMove={(e: any) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 const x = ((e.clientX - rect.left) / rect.width) * 100;
                 const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -216,7 +216,7 @@ export const LayoutGrid = ({ cards, className }: LayoutGridProps) => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e: any) => e.stopPropagation()}
           >
             <button
               onClick={handleOutsideClick}

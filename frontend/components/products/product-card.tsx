@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { ShoppingCart, Eye, Tag, Star, Zap } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { useCartStore } from '@/lib/store';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { Lock, Mail, Key, Eye, EyeOff, X, AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -133,7 +133,7 @@ export function AuthModal({
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: "spring", duration: 0.5 }}
           className="relative w-full max-w-md"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e: any) => e.stopPropagation()}
         >
           <div
             className="relative rounded-3xl p-8 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden"

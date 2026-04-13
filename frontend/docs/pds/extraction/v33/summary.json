@@ -1,0 +1,189 @@
+{
+  "_metadata": {
+    "kind": "summary",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "url": "https://www.jobyaviation.com/",
+      "height": 37931,
+      "sections": 26,
+      "images": 123,
+      "videos": 1,
+      "canvases": 0,
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      },
+      "scrub": {
+        "videoScrubDetected": true,
+        "fullscreenMediaDetected": true
+      }
+    },
+    {
+      "name": "experience",
+      "route": "/experience",
+      "url": "https://www.jobyaviation.com/experience",
+      "height": 39258,
+      "sections": 20,
+      "images": 73,
+      "videos": 1,
+      "canvases": 0,
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      },
+      "scrub": {
+        "videoScrubDetected": true,
+        "fullscreenMediaDetected": true
+      }
+    },
+    {
+      "name": "technology",
+      "route": "/technology",
+      "url": "https://www.jobyaviation.com/technology",
+      "height": 51423,
+      "sections": 27,
+      "images": 57,
+      "videos": 8,
+      "canvases": 5,
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      },
+      "scrub": {
+        "videoScrubDetected": true,
+        "fullscreenMediaDetected": true
+      }
+    },
+    {
+      "name": "company",
+      "route": "/company",
+      "url": "https://www.jobyaviation.com/company",
+      "height": 23819,
+      "sections": 14,
+      "images": 47,
+      "videos": 4,
+      "canvases": 0,
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      },
+      "scrub": {
+        "videoScrubDetected": true,
+        "fullscreenMediaDetected": true
+      }
+    },
+    {
+      "name": "privacy-policy",
+      "route": "/privacy-policy",
+      "url": "https://www.jobyaviation.com/privacy-policy",
+      "height": 4805,
+      "sections": 8,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "NONE",
+        "smoothScroll": "NONE",
+        "videoScrub": "NONE",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": false,
+        "nativeVideoScrub": false
+      },
+      "scrub": {
+        "videoScrubDetected": false,
+        "fullscreenMediaDetected": false
+      }
+    },
+    {
+      "name": "terms-of-use",
+      "route": "/terms-of-use",
+      "url": "https://www.jobyaviation.com/terms-of-use",
+      "height": 7239,
+      "sections": 8,
+      "images": 1,
+      "videos": 0,
+      "canvases": 0,
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "NONE",
+        "smoothScroll": "NONE",
+        "videoScrub": "NONE",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": false,
+        "nativeVideoScrub": false
+      },
+      "scrub": {
+        "videoScrubDetected": false,
+        "fullscreenMediaDetected": false
+      }
+    }
+  ]
+}

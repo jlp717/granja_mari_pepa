@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { CustomToast } from '@/components/ui/custom-toast';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
 import {
   User,
+  Users,
   FileText,
   ShoppingBag,
   Settings,
@@ -18,6 +19,7 @@ import {
   CreditCard,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   ChevronsRight,
   ChevronsLeft,
   TrendingUp,
@@ -261,6 +263,25 @@ export function CustomerDashboard() {
   const [filterMonth, setFilterMonth] = useState('all');
   const [filterYear, setFilterYear] = useState(String(new Date().getFullYear())); // Año actual dinámico
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [clientsList, setClientsList] = useState<{ codigoCliente: string; nombreCliente: string; nombreFiscal?: string }[]>([]);
+  const [selectedCliente, setSelectedCliente] = useState<string | undefined>(undefined);
+  const [clientDropdownOpen, setClientDropdownOpen] = useState(false);
+  const [clientSearch, setClientSearch] = useState('');
+  const clientSearchRef = useRef<HTMLInputElement>(null);
+  const clientDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close client dropdown on outside click
+  useEffect(() => {
+    if (!clientDropdownOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (clientDropdownRef.current && !clientDropdownRef.current.contains(e.target as Node)) {
+        setClientDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [clientDropdownOpen]);
+
 
   // Ref para el contenido principal (scroll en móvil)
   const mainContentRef = useRef<HTMLDivElement>(null);
@@ -359,12 +380,21 @@ export function CustomerDashboard() {
   const { addItem } = useCartStore();
 
   // Usar el hook optimizado para cargar facturas y pedidos
+  // FIX 2026-04-07: Eliminar searchTerm de facturasEndpoint para evitar re-fetch al escribir.
+  // El filtrado por búsqueda se hace 100% client-side en filteredFacturas.
+  const facturasEndpoint = useMemo(() => {
+    const params = new URLSearchParams();
+    // Eliminado: if (searchTerm) params.set('busqueda', searchTerm);
+    if (selectedCliente) params.set('codigoCliente', selectedCliente);
+    return `/api/auth/facturas/${user?.id}?${params.toString()}`;
+  }, [user?.id, selectedCliente]);
+
   const {
     data: facturasRaw,
     loading: loadingFacturas,
     fetchData: cargarFacturas
   } = useApiData<FacturaBackend>({
-    endpoint: `/api/auth/facturas/${user?.id}`,
+    endpoint: facturasEndpoint,
     dataKey: 'facturas',
     errorMessage: 'Error al cargar facturas',
     showErrorToast: true,
@@ -497,6 +527,15 @@ export function CustomerDashboard() {
   // Header scroll logic removed - keeping header always visible
 
   // Cargar facturas, pedidos, perfil y productos cuando se monta el componente
+  // FIX 2026-04-07: Eliminar searchTerm de dependencias para evitar recarga al buscar
+  // El filtrado es 100% client-side vía useMemo en filteredFacturas
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      cargarFacturas();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [selectedCliente, cargarFacturas]);
+
   useEffect(() => {
     if (user?.id) {
       cargarFacturas();
@@ -526,6 +565,21 @@ export function CustomerDashboard() {
   }, []);
 
   // Cargar datos de contacto del usuario (email y teléfono)
+  const fetchClients = useCallback(async () => {
+    try {
+      const res = await secureFetch<{ success: boolean; clients: any[] }>('/api/panamar/clients');
+      if (res.ok && res.data.success) {
+        setClientsList(res.data.clients);
+      }
+    } catch (err) {
+      console.error('Error fetching clients:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user?.id) fetchClients();
+  }, [user?.id, fetchClients]);
+
   const cargarDatosContacto = async () => {
     if (!user?.id) return;
 
@@ -555,6 +609,14 @@ export function CustomerDashboard() {
   };
 
   // Cargar datos de contacto cuando se monta el componente
+  // FIX 2026-04-07: Eliminar searchTerm de dependencias
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      cargarDatosContacto();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [selectedCliente]);
+
   useEffect(() => {
     if (user?.id) {
       cargarDatosContacto();
@@ -3258,7 +3320,7 @@ export function CustomerDashboard() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.5 }}
                       >
-                        <DashboardCharts codigoCliente={user.id} />
+                        <DashboardCharts codigoCliente={user!.id} />
                       </motion.div>
                     )}
                   </div>
@@ -3479,16 +3541,103 @@ export function CustomerDashboard() {
 
                     {/* Filtros Mejorados con Diseño Premium */}
                     <div className="bg-white rounded-2xl border-2 border-blue-100 p-6 space-y-5 shadow-lg">
-                      {/* Búsqueda */}
-                      <div className="relative">
-                        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500" />
-                        <Input
-                          placeholder={t('filters.search')}
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          className="pl-12 h-14 border-2 border-gray-200 bg-gray-50 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium"
-                        />
+                      {/* Búsqueda Dinámica Premium (Siempre Visible) */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-bold text-blue-600 flex items-center">
+                          <Search className="w-4 h-4 mr-2" />
+                          {t('filters.search')}
+                        </label>
+                        <div className="relative group">
+                          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" />
+                          <Input
+                            placeholder={t('filters.search')}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="pl-12 pr-10 h-14 border-2 border-gray-200 bg-gray-50 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium transition-all"
+                          />
+                          {searchTerm && (
+                            <button
+                              onClick={() => setSearchTerm('')}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-200 rounded-full transition-colors"
+                            >
+                              <X className="w-4 h-4 text-gray-400" />
+                            </button>
+                          )}
+                        </div>
                       </div>
+
+                      {/* Selector de Cliente (NIF unificado) */}
+                      {clientsList.length > 1 && (
+                        <div className="space-y-2 relative" ref={clientDropdownRef}>
+                          <label className="text-sm font-bold text-blue-600 flex items-center">
+                            <Users className="w-4 h-4 mr-2" />
+                            Seleccionar Cuenta (Cliente)
+                          </label>
+                          <button
+                            onClick={() => { setClientDropdownOpen(!clientDropdownOpen); setClientSearch(''); setTimeout(() => clientSearchRef.current?.focus(), 50); }}
+                            className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white flex items-center justify-between text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
+                          >
+                            <span className={selectedCliente ? 'text-gray-900' : 'text-gray-400'}>
+                              {selectedCliente
+                                ? (clientsList.find(c => c.codigoCliente === selectedCliente)?.nombreCliente || selectedCliente)
+                                : 'Todas mis cuentas'}
+                            </span>
+                            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${clientDropdownOpen ? 'rotate-180' : ''}`} />
+                          </button>
+                          {clientDropdownOpen && (
+                            <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border-2 border-blue-200 rounded-xl shadow-2xl max-h-72 flex flex-col">
+                              <div className="p-2 border-b border-blue-100 sticky top-0 bg-white rounded-t-xl">
+                                <div className="relative">
+                                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                  <input
+                                    ref={clientSearchRef}
+                                    type="text"
+                                    placeholder="Buscar por nombre o código..."
+                                    value={clientSearch}
+                                    onChange={(e) => setClientSearch(e.target.value)}
+                                    className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
+                                    onClick={(e: any) => e.stopPropagation()}
+                                  />
+                                </div>
+                              </div>
+                              <div className="overflow-y-auto flex-1">
+                                <button
+                                  onClick={() => { setSelectedCliente(undefined); setClientDropdownOpen(false); }}
+                                  className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-blue-50 transition-colors border-b border-gray-100 ${!selectedCliente ? 'bg-blue-50 text-blue-700' : 'text-gray-700'}`}
+                                >
+                                  Todas mis cuentas
+                                </button>
+                                {clientsList
+                                  .filter(client => {
+                                    if (!clientSearch.trim()) return true;
+                                    const q = clientSearch.toLowerCase().trim();
+                                    return (
+                                      client.nombreCliente.toLowerCase().includes(q) ||
+                                      (client.nombreFiscal && client.nombreFiscal.toLowerCase().includes(q)) ||
+                                      client.codigoCliente.toLowerCase().includes(q)
+                                    );
+                                  })
+                                  .map(client => (
+                                    <button
+                                      key={client.codigoCliente}
+                                      onClick={() => { setSelectedCliente(client.codigoCliente); setClientDropdownOpen(false); }}
+                                      className={`w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition-colors border-b border-gray-50 ${selectedCliente === client.codigoCliente ? 'bg-blue-50 text-blue-700 font-bold' : 'text-gray-700 font-medium'}`}
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <div className="truncate font-bold text-gray-900">{client.nombreCliente}</div>
+                                        <div className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-mono">{client.codigoCliente}</div>
+                                      </div>
+                                      {client.nombreFiscal && client.nombreFiscal !== client.nombreCliente && (
+                                        <div className="text-xs text-gray-400 italic truncate mt-0.5">{client.nombreFiscal}</div>
+                                      )}
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
 
                       {/* Filtros Adicionales */}
                       <div className="space-y-5">
@@ -4560,7 +4709,7 @@ export function CustomerDashboard() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
               className="bg-card rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
             >
               {/* Header - Responsive */}
@@ -4753,7 +4902,7 @@ export function CustomerDashboard() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
               className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
             >
               <div className="flex items-center gap-4 mb-6">
@@ -4862,7 +5011,7 @@ export function CustomerDashboard() {
                   damping: 30
                 }}
                 className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: any) => e.stopPropagation()}
               >
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-destructive/10 flex items-center justify-center">
@@ -5040,7 +5189,7 @@ export function CustomerDashboard() {
                   damping: 30
                 }}
                 className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: any) => e.stopPropagation()}
               >
                 <div className="space-y-6">
                   {/* Header */}

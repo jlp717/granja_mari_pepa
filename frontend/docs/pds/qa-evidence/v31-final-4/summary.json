@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "productos",
+    "targetY": 6200,
+    "file": "productos-6200.png",
+    "scrollY": 6200,
+    "navColor": "rgb(245, 244, 223)",
+    "activeVideo": {
+      "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+      "currentTime": 0.104,
+      "opacity": "1",
+      "x": 0,
+      "y": 348,
+      "w": 1440,
+      "h": 852
+    },
+    "lineText": null,
+    "aircraftTitle": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad"
+  },
+  {
+    "slug": "productos",
+    "targetY": 8200,
+    "file": "productos-8200.png",
+    "scrollY": 8200,
+    "navColor": "rgb(245, 244, 223)",
+    "activeVideo": {
+      "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+      "currentTime": 0,
+      "opacity": "1",
+      "x": 0,
+      "y": 348,
+      "w": 1440,
+      "h": 852
+    },
+    "lineText": null,
+    "aircraftTitle": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad"
+  },
+  {
+    "slug": "productos",
+    "targetY": 10400,
+    "file": "productos-10400.png",
+    "scrollY": 10400,
+    "navColor": "rgb(245, 244, 223)",
+    "activeVideo": {
+      "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+      "currentTime": 0,
+      "opacity": "1",
+      "x": 0,
+      "y": 348,
+      "w": 1440,
+      "h": 852
+    },
+    "lineText": null,
+    "aircraftTitle": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad"
+  },
+  {
+    "slug": "acerca",
+    "targetY": 3000,
+    "file": "acerca-3000.png",
+    "scrollY": 3000,
+    "navColor": "rgb(245, 244, 223)",
+    "activeVideo": {
+      "src": "https://cdn.sanity.io/files/h5mp19kq/production/5f8590dd516c7fc724107a44f394679488a72473.mp4",
+      "currentTime": 2.74,
+      "opacity": "1",
+      "x": 0,
+      "y": 38,
+      "w": 1440,
+      "h": 1094
+    },
+    "lineText": "Fundación en Lorca (Murcia)",
+    "aircraftTitle": null
+  },
+  {
+    "slug": "acerca",
+    "targetY": 4700,
+    "file": "acerca-4700.png",
+    "scrollY": 4700,
+    "navColor": "rgb(245, 244, 223)",
+    "activeVideo": {
+      "src": "https://cdn.sanity.io/files/h5mp19kq/production/b12e40689c919eea44411a7424d260206e5f5be9.mp4",
+      "currentTime": 5.773,
+      "opacity": "1",
+      "x": 0,
+      "y": 38,
+      "w": 1440,
+      "h": 1094
+    },
+    "lineText": "Consolidación regional",
+    "aircraftTitle": null
+  }
+]

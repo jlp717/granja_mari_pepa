@@ -1,0 +1,2938 @@
+{
+  "_metadata": {
+    "kind": "recorrido-final-21-positions",
+    "version": "v3.3",
+    "url": "https://www.jobyaviation.com/terms-of-use -> http://localhost:3001/es/legal/terminos",
+    "timestamp": "2026-04-13T06:22:40.017Z",
+    "viewport": {
+      "name": "mobile-375",
+      "width": 375,
+      "height": 812
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "source": {
+    "totalHeight": 9411,
+    "viewportHeight": 812,
+    "viewportWidth": 375,
+    "sectionCount": 3,
+    "sections": [
+      {
+        "index": 0,
+        "tag": "SECTION",
+        "id": null,
+        "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+        "height": 8031,
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "layout": "block"
+      },
+      {
+        "index": 1,
+        "tag": "SECTION",
+        "id": "footer",
+        "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+        "height": 1380,
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "layout": "block"
+      },
+      {
+        "index": 2,
+        "tag": "FOOTER",
+        "id": null,
+        "classes": "Footer-module-scss-module__eAgNQG__footer",
+        "height": 812,
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "layout": "grid"
+      }
+    ],
+    "videos": [],
+    "canvases": 0,
+    "frames": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 8031,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 7219,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.05,
+        "scrollY": 430,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -430,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 7601,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 6789,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.1,
+        "scrollY": 860,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -860,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 7171,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 6359,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.15,
+        "scrollY": 1290,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -1290,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 6741,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 5929,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.2,
+        "scrollY": 1720,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -1720,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 6311,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 5499,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 2150,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -2150,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 5881,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 5069,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.3,
+        "scrollY": 2580,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -2580,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 5451,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 4639,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.35,
+        "scrollY": 3010,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -3010,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 5021,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 4209,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.4,
+        "scrollY": 3440,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -3440,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 4591,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 3779,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.45,
+        "scrollY": 3870,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -3870,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 4161,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 3349,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 4300,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -4300,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 3731,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 2919,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.55,
+        "scrollY": 4729,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -4729,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 3302,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 2490,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.6,
+        "scrollY": 5159,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -5159,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 2872,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 2060,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.65,
+        "scrollY": 5589,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -5589,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 2442,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 1630,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.7,
+        "scrollY": 6019,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -6019,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 2012,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 1200,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 6449,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -6449,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 1582,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 770,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.8,
+        "scrollY": 6879,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -6879,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 1152,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 340,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -812)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.85,
+        "scrollY": 7309,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -7309,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 722,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -722)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.9,
+        "scrollY": 7739,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -7739,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": 292,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, -292)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.95,
+        "scrollY": 8169,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -8169,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -138,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": -138,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 1,
+        "scrollY": 8599,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -8599,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+            "rect": {
+              "x": 0,
+              "y": -568,
+              "w": 375,
+              "h": 1380
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(14, 22, 32)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "Footer-module-scss-module__eAgNQG__footer",
+            "rect": {
+              "x": 0,
+              "y": -568,
+              "w": 375,
+              "h": 812
+            },
+            "opacity": "1",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      }
+    ],
+    "progressCheck": {
+      "maxScroll": 8599,
+      "finalScroll": 8599,
+      "viewport": {
+        "name": "mobile-375",
+        "width": 375,
+        "height": 812
+      }
+    }
+  },
+  "target": {
+    "totalHeight": 9561,
+    "viewportHeight": 812,
+    "viewportWidth": 375,
+    "sectionCount": 3,
+    "sections": [
+      {
+        "index": 0,
+        "tag": "SECTION",
+        "id": null,
+        "classes": "pds-legal-source pds-cream",
+        "height": 8031,
+        "backgroundColor": "rgb(245, 244, 223)",
+        "layout": "block"
+      },
+      {
+        "index": 1,
+        "tag": "SECTION",
+        "id": "footer",
+        "classes": "pds-footer-bridge",
+        "height": 568,
+        "backgroundColor": "rgb(14, 22, 32)",
+        "layout": "block"
+      },
+      {
+        "index": 2,
+        "tag": "FOOTER",
+        "id": null,
+        "classes": "pds-footer",
+        "height": 962,
+        "backgroundColor": "rgb(14, 22, 32)",
+        "layout": "block"
+      }
+    ],
+    "videos": [],
+    "canvases": 0,
+    "frames": [
+      {
+        "pct": 0,
+        "scrollY": 0,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 8031,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 8599,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.05,
+        "scrollY": 437,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -437,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 7594,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 8162,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.1,
+        "scrollY": 875,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -875,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 7156,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 7724,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.15,
+        "scrollY": 1312,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -1312,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 6719,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 7287,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.2,
+        "scrollY": 1750,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -1750,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 6281,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 6849,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.25,
+        "scrollY": 2187,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -2187,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 5844,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 6412,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.3,
+        "scrollY": 2625,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -2625,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 5406,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 5974,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.35,
+        "scrollY": 3062,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -3062,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 4969,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 5537,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.4,
+        "scrollY": 3500,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -3500,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 4531,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 5099,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.45,
+        "scrollY": 3937,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -3937,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 4094,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 4662,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.5,
+        "scrollY": 4375,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -4375,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 3656,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 4224,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.55,
+        "scrollY": 4812,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -4812,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 3219,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 3787,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.6,
+        "scrollY": 5249,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -5249,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 2782,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 3350,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.65,
+        "scrollY": 5687,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -5687,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 2344,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 2912,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.7,
+        "scrollY": 6124,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -6124,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 1907,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 2475,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.75,
+        "scrollY": 6562,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -6562,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 1469,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 2037,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.8,
+        "scrollY": 6999,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -6999,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 1032,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 1600,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.85,
+        "scrollY": 7437,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -7437,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 594,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 1162,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.9,
+        "scrollY": 7874,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -7874,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": 157,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 725,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 0.95,
+        "scrollY": 8312,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -8312,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": -281,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": 287,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "pct": 1,
+        "scrollY": 8749,
+        "bodyBackground": "rgb(245, 244, 223)",
+        "elementCount": 3,
+        "stickyCount": 0,
+        "videos": [],
+        "elements": [
+          {
+            "index": 0,
+            "tag": "SECTION",
+            "id": null,
+            "classes": "pds-legal-source pds-cream",
+            "rect": {
+              "x": 0,
+              "y": -8749,
+              "w": 375,
+              "h": 8031
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "color": "rgb(14, 22, 32)",
+            "position": "static",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 1,
+            "tag": "SECTION",
+            "id": "footer",
+            "classes": "pds-footer-bridge",
+            "rect": {
+              "x": 0,
+              "y": -718,
+              "w": 375,
+              "h": 568
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          },
+          {
+            "index": 2,
+            "tag": "FOOTER",
+            "id": null,
+            "classes": "pds-footer",
+            "rect": {
+              "x": 0,
+              "y": -150,
+              "w": 375,
+              "h": 962
+            },
+            "opacity": "1",
+            "transform": "none",
+            "backgroundColor": "rgb(14, 22, 32)",
+            "color": "rgb(245, 244, 223)",
+            "position": "relative",
+            "zIndex": "auto",
+            "visibility": "visible"
+          }
+        ]
+      }
+    ],
+    "progressCheck": {
+      "maxScroll": 8749,
+      "finalScroll": 8749,
+      "viewport": {
+        "name": "mobile-375",
+        "width": 375,
+        "height": 812
+      }
+    }
+  },
+  "diff": {
+    "heightSimilarity": 0.9843112645120803,
+    "sectionSimilarity": 1,
+    "canvasSimilarity": 1,
+    "videoStructure": 1,
+    "targetVideoContract": 1,
+    "videoScrub": 1,
+    "avgFrame": 1,
+    "worstFrame": 1,
+    "avgSimilarity": 0.9965484781926577,
+    "worstSimilarity": 0.9843112645120803,
+    "passRate": 1,
+    "pass": true
+  }
+}

@@ -79,6 +79,7 @@ export interface FacturaBackend {
   // Datos de la factura (para mostrar)
   serieFactura: string;
   numeroFactura: number;
+  numero?: number;
   tipoDocumento: string;
   // Fecha
   fecha: string; // Formato DD/MM/YYYY
@@ -112,7 +113,10 @@ export interface LoginForm {
 
 export interface UserProfile {
   id: string;
-  customerId?: number; // ID numérico para operaciones de backend
+  customerId?: number; // ID numerico para operaciones de backend
+  codigoCliente?: string;
+  customerCode?: string;
+  code?: string;
   name: string;
   email: string;
   company: string;
@@ -122,26 +126,44 @@ export interface UserProfile {
 // ── PANAMAR Mode Types ──────────────────────────────────────────────
 
 export interface PanamarLineItem {
+  subempresaAlbaran?: string;
+  ejercicioAlbaran?: number;
+  serieAlbaran?: string;
+  terminalAlbaran?: number;
+  numeroAlbaran?: number;
   secuencia: number;
   codigoArticulo: string;
   descripcion: string;
   lote: string;
   cajas: number;
   unidades: number;
+  precioCobro?: number;
   precioUnitario: number;
   descuento: number;
   importe: number;
+  precioTarifa?: number;
   precioTarifa85: number;
   precioOriginal: number;
+  usaTarifaEspecial?: boolean;
   usaTarifa85: boolean;
+  tipoVenta?: string;
 }
 
 export interface PanamarDocument {
-  subempresa: number;
+  // Clave interna usada por endpoints PDF/email (albaran representativo)
+  subempresa: string;
   ejercicio: number;
   serieAlbaran: string;
   terminal: number;
   numeroAlbaran: number;
+
+  // Identidad visible de factura
+  serieFactura: string;
+  numeroFactura: number;
+  numero?: number;
+  ejercicioFactura: number;
+  refFactura?: string;
+
   fecha: string;
   dia: number;
   mes: number;
@@ -149,17 +171,13 @@ export interface PanamarDocument {
   hora: string | null;
   codigoCliente: string;
   nombreCliente: string;
-  nifCliente: string;
-  poblacionCliente: string;
   numeroPedido: number;
   refPedido: string;
   referencia: string;
-  tipoDocumento: 'albaran' | 'factura';
-  serieFactura: string | null;
-  numeroFactura: number | null;
-  ejercicioFactura: number | null;
   lineas: PanamarLineItem[];
   totalLineasPanamar: number;
+  totalCajasPanamar?: number;
+  totalUnidadesPanamar?: number;
   totalImportePanamar: number;
 }
 
@@ -174,20 +192,24 @@ export interface PanamarDocumentsResponse {
 
 export interface PanamarSummary {
   success: boolean;
+  ano?: number;
   ejercicio: number;
-  totalDocumentos: number;
+  totalFacturas?: number;
+  totalDocumentos?: number; // compatibilidad con versiones anteriores
   totalClientes: number;
-  totalFacturados: number;
-  totalPendientes: number;
+  totalImporte: number;
+  totalCajas: number;
+  totalCajasCC: number;
+  totalCajasSC: number;
 }
 
 export interface PanamarFilters {
   page?: number;
   pageSize?: number;
-  tipo?: 'albaran' | 'factura';
   fechaDesde?: string;
   fechaHasta?: string;
   codigoCliente?: string;
   busqueda?: string;
   ejercicio?: number;
+  meses?: number[];
 }

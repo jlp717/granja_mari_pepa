@@ -1,0 +1,1569 @@
+{
+  "_metadata": {
+    "scriptName": "extractScrollSnapshot",
+    "extractedAt": "2026-04-12T22:02:00.257Z",
+    "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewportWidth": 1440,
+    "viewportHeight": 1200,
+    "scrollHeight": 4805,
+    "skillVersion": "3.3"
+  },
+  "totalSnapshots": 21,
+  "snapshots": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2557
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 5,
+      "scrollY": 180,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -180
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -180
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2377
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 2
+    },
+    {
+      "pct": 10,
+      "scrollY": 361,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -361
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -361
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2196
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 15,
+      "scrollY": 541,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -541
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -541
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2016
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 20,
+      "scrollY": 721,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -721
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -721
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1836
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 25,
+      "scrollY": 901,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -901
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -901
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1656
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 30,
+      "scrollY": 1082,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1082
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1082
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1475
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 35,
+      "scrollY": 1262,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1262
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1262
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1295
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 40,
+      "scrollY": 1442,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1442
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1442
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 1115
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1115
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 45,
+      "scrollY": 1622,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1622
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1622
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 935
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 935
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 50,
+      "scrollY": 1803,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1803
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1803
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 754
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 754
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 55,
+      "scrollY": 1983,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1983
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1983
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 574
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 574
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 60,
+      "scrollY": 2163,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2163
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2163
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 394
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 394
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 65,
+      "scrollY": 2343,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2343
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2343
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 214
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 214
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 70,
+      "scrollY": 2524,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2524
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2524
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 33
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 33
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 4
+    },
+    {
+      "pct": 75,
+      "scrollY": 2704,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -147
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 3
+    },
+    {
+      "pct": 80,
+      "scrollY": 2884,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -327
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 2
+    },
+    {
+      "pct": 85,
+      "scrollY": 3064,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -507
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 90,
+      "scrollY": 3245,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -688
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -88
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 95,
+      "scrollY": 3425,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -868
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -268
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 100,
+      "scrollY": 3605,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1048
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -448
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    }
+  ]
+}

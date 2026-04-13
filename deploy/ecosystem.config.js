@@ -33,7 +33,7 @@ module.exports = {
             restart_delay: 4000,
 
             // Límites de memoria (reinicia si excede)
-            max_memory_restart: '500M',
+            max_memory_restart: '1G',
 
             // Graceful shutdown
             kill_timeout: 5000,
@@ -63,12 +63,11 @@ module.exports = {
         {
             name: 'mari-pepa-frontend',
             cwd: './frontend',
-            script: 'node_modules/next/dist/bin/next',
-            args: 'start -p 3001',
+            script: 'server.js',
 
-            // Cluster mode (2 instancias para mejor rendimiento)
-            instances: 2,
-            exec_mode: 'cluster',
+            // Fork mode (más fiable con custom server.js + process.send('ready'))
+            instances: 1,
+            exec_mode: 'fork',
 
             // Auto-restart
             autorestart: true,
@@ -83,7 +82,7 @@ module.exports = {
             // Graceful shutdown
             kill_timeout: 5000,
             wait_ready: true,
-            listen_timeout: 10000,
+            listen_timeout: 15000,
 
             // Entorno de producción
             env: {
@@ -100,6 +99,38 @@ module.exports = {
 
             // Backoff exponencial en reinicios
             exp_backoff_restart_delay: 100
+        },
+
+        // ============================================
+        // CLOUDFLARE TUNNEL
+        // ============================================
+        {
+            name: 'mari-pepa-tunnel',
+            script: '/usr/local/bin/cloudflared',
+            args: 'tunnel --config /home/gmp/.cloudflared/config-mari-pepa.yml run',
+            interpreter: 'none',
+
+            // Fork mode (proceso único)
+            instances: 1,
+            exec_mode: 'fork',
+
+            // Auto-restart
+            autorestart: true,
+            watch: false,
+            max_restarts: 20,
+            min_uptime: '30s',
+            restart_delay: 5000,
+
+            // No necesita wait_ready (cloudflared gestiona su propia conexión)
+            wait_ready: false,
+
+            // Logging
+            error_file: '/var/log/mari-pepa/tunnel-error.log',
+            out_file: '/var/log/mari-pepa/tunnel-out.log',
+            log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS Z',
+            merge_logs: true,
+
+            exp_backoff_restart_delay: 1000
         }
     ],
 

@@ -1,0 +1,1690 @@
+{
+  "_metadata": {
+    "scriptName": "extractScrollScrubTrace",
+    "extractedAt": "2026-04-12T22:01:01.045Z",
+    "sourceUrl": "https://www.jobyaviation.com/technology",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewportWidth": 1440,
+    "viewportHeight": 1200,
+    "scrollHeight": 51423,
+    "skillVersion": "3.3"
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "bodyHeight": 51423,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+          "currentTime": 0.086,
+          "duration": 10,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "currentTime": 0.12,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+          "currentTime": 0.13,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+          "currentTime": 0.57,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 5,
+          "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+          "currentTime": 3.805,
+          "duration": 4.017,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 6,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+          "currentTime": 31.77,
+          "duration": 39.691,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 40,
+            "y": 31480,
+            "width": 328,
+            "height": 205
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 7,
+          "src": "",
+          "currentTime": 0,
+          "duration": 0,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "0",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "rect": {
+            "x": 40,
+            "y": 7990,
+            "width": 1360,
+            "height": 1000
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "rect": {
+            "x": 285,
+            "y": 23975,
+            "width": 1350,
+            "height": 1350
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "rect": {
+            "x": 448,
+            "y": 40585,
+            "width": 952,
+            "height": 1120
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "rect": {
+            "x": 470,
+            "y": 40983,
+            "width": 930,
+            "height": 682
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "rect": {
+            "x": 196,
+            "y": 40998,
+            "width": 1204,
+            "height": 667
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 5022,
+      "bodyHeight": 51423,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+          "currentTime": 3.008,
+          "duration": 10,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "currentTime": 0.006,
+          "duration": 0.166,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+          "currentTime": 0.13,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 5,
+          "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+          "currentTime": 3.805,
+          "duration": 4.017,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 6,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+          "currentTime": 32.226,
+          "duration": 39.691,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 40,
+            "y": 26458,
+            "width": 328,
+            "height": 205
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 7,
+          "src": "",
+          "currentTime": 0,
+          "duration": 0,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "0",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "rect": {
+            "x": 40,
+            "y": 2968,
+            "width": 1360,
+            "height": 1000
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "rect": {
+            "x": 285,
+            "y": 18953,
+            "width": 1350,
+            "height": 1350
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "rect": {
+            "x": 448,
+            "y": 35563,
+            "width": 952,
+            "height": 1120
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "rect": {
+            "x": 470,
+            "y": 35961,
+            "width": 930,
+            "height": 682
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "rect": {
+            "x": 196,
+            "y": 35976,
+            "width": 1204,
+            "height": 667
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 12556,
+      "bodyHeight": 51423,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+          "currentTime": 8.638,
+          "duration": 10,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -6556,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "currentTime": 0.026,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+          "currentTime": 0.13,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+          "currentTime": 0.437,
+          "duration": 0.833,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 5,
+          "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+          "currentTime": 3.805,
+          "duration": 4.017,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 6,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+          "currentTime": 32.685,
+          "duration": 39.691,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 40,
+            "y": 18924,
+            "width": 328,
+            "height": 205
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 7,
+          "src": "",
+          "currentTime": 0,
+          "duration": 0,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "0",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "rect": {
+            "x": 40,
+            "y": -926,
+            "width": 1360,
+            "height": 1000
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "rect": {
+            "x": 285,
+            "y": 11419,
+            "width": 1350,
+            "height": 1350
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "rect": {
+            "x": 448,
+            "y": 28029,
+            "width": 952,
+            "height": 1120
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "rect": {
+            "x": 470,
+            "y": 28427,
+            "width": 930,
+            "height": 682
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "rect": {
+            "x": 196,
+            "y": 28442,
+            "width": 1204,
+            "height": 667
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 25112,
+      "bodyHeight": 51423,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+          "currentTime": 10,
+          "duration": 10,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -19112,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "currentTime": 0.026,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+          "currentTime": 0.13,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+          "currentTime": 0.497,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 5,
+          "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+          "currentTime": 0.295,
+          "duration": 4.017,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 6,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+          "currentTime": 33.229,
+          "duration": 39.691,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 40,
+            "y": 6368,
+            "width": 328,
+            "height": 205
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 7,
+          "src": "",
+          "currentTime": 0,
+          "duration": 0,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "0",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "rect": {
+            "x": 40,
+            "y": -13482,
+            "width": 1360,
+            "height": 1000
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "rect": {
+            "x": 278,
+            "y": -435,
+            "width": 1423,
+            "height": 1423
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "rect": {
+            "x": 448,
+            "y": 15473,
+            "width": 952,
+            "height": 1120
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "rect": {
+            "x": 470,
+            "y": 15871,
+            "width": 930,
+            "height": 682
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "rect": {
+            "x": 196,
+            "y": 15886,
+            "width": 1204,
+            "height": 667
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 37667,
+      "bodyHeight": 51423,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+          "currentTime": 10,
+          "duration": 10,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -31667,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "currentTime": 0.026,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+          "currentTime": 0.13,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+          "currentTime": 0.497,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 5,
+          "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+          "currentTime": 0.45,
+          "duration": 4.017,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 6,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+          "currentTime": 33.68,
+          "duration": 39.691,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 40,
+            "y": -4595,
+            "width": 328,
+            "height": 205
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 7,
+          "src": "",
+          "currentTime": 0,
+          "duration": 0,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "0",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "rect": {
+            "x": 40,
+            "y": -26037,
+            "width": 1360,
+            "height": 1000
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "rect": {
+            "x": 204,
+            "y": -8697,
+            "width": 1440,
+            "height": 1440
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "rect": {
+            "x": 448,
+            "y": 2918,
+            "width": 952,
+            "height": 1120
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "rect": {
+            "x": 470,
+            "y": 3316,
+            "width": 930,
+            "height": 682
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "rect": {
+            "x": 196,
+            "y": 3331,
+            "width": 1204,
+            "height": 667
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 1,
+      "scrollY": 50223,
+      "bodyHeight": 51423,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-technology-intro-desktop.mp4",
+          "currentTime": 10,
+          "duration": 10,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -44223,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "src": "https://www.jobyaviation.com/videos/vertical-v2.webm",
+          "currentTime": 0.026,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "src": "https://www.jobyaviation.com/videos/cruise-v2.webm",
+          "currentTime": 0.13,
+          "duration": 0.166,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "src": "https://www.jobyaviation.com/videos/transition-v2.webm",
+          "currentTime": 0.497,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "src": "https://www.jobyaviation.com/videos/transition-reverse-v2.webm",
+          "currentTime": 0,
+          "duration": 0.833,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 5,
+          "src": "https://www.jobyaviation.com/videos/technology/duo-120-new.webm",
+          "currentTime": 0.45,
+          "duration": 4.017,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "contain",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 6,
+          "src": "https://cdn.sanity.io/files/h5mp19kq/production/40d1946052e15f7e3fa6d5ed49834a78d332056a.mp4",
+          "currentTime": 34.134,
+          "duration": 39.691,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 40,
+            "y": -17151,
+            "width": 328,
+            "height": 205
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 7,
+          "src": "",
+          "currentTime": 0,
+          "duration": 0,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": true,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "style": {
+            "position": "absolute",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "0",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": [
+        {
+          "index": 0,
+          "width": 2000,
+          "height": 1125,
+          "rect": {
+            "x": 40,
+            "y": -38593,
+            "width": 1360,
+            "height": 1000
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 1,
+          "width": 1800,
+          "height": 1800,
+          "rect": {
+            "x": 204,
+            "y": -21253,
+            "width": 1440,
+            "height": 1440
+          },
+          "style": {
+            "position": "absolute",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 2,
+          "width": 952,
+          "height": 1120,
+          "rect": {
+            "x": 448,
+            "y": -3598,
+            "width": 952,
+            "height": 1120
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 3,
+          "width": 930,
+          "height": 682,
+          "rect": {
+            "x": 470,
+            "y": -3200,
+            "width": 930,
+            "height": 682
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "index": 4,
+          "width": 1204,
+          "height": 667,
+          "rect": {
+            "x": 196,
+            "y": -3185,
+            "width": 1204,
+            "height": 667
+          },
+          "style": {
+            "position": "static",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    }
+  ],
+  "videoScrubDetected": true,
+  "fullscreenMediaDetected": true
+}

@@ -1,0 +1,93 @@
+{
+  "_metadata": {
+    "kind": "crossOriginCSS",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": {
+    "home": {
+      "_metadata": {
+        "scriptName": "fetchCrossOriginCSS",
+        "extractedAt": "2026-04-12T21:59:14.040Z",
+        "sourceUrl": "https://www.jobyaviation.com/",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 37931,
+        "skillVersion": "3.3"
+      },
+      "results": []
+    },
+    "experience": {
+      "_metadata": {
+        "scriptName": "fetchCrossOriginCSS",
+        "extractedAt": "2026-04-12T21:59:52.981Z",
+        "sourceUrl": "https://www.jobyaviation.com/experience",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 39258,
+        "skillVersion": "3.3"
+      },
+      "results": []
+    },
+    "technology": {
+      "_metadata": {
+        "scriptName": "fetchCrossOriginCSS",
+        "extractedAt": "2026-04-12T22:00:32.147Z",
+        "sourceUrl": "https://www.jobyaviation.com/technology",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 51423,
+        "skillVersion": "3.3"
+      },
+      "results": []
+    },
+    "company": {
+      "_metadata": {
+        "scriptName": "fetchCrossOriginCSS",
+        "extractedAt": "2026-04-12T22:01:12.369Z",
+        "sourceUrl": "https://www.jobyaviation.com/company",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 23819,
+        "skillVersion": "3.3"
+      },
+      "results": []
+    },
+    "privacy-policy": {
+      "_metadata": {
+        "scriptName": "fetchCrossOriginCSS",
+        "extractedAt": "2026-04-12T22:01:50.719Z",
+        "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 4805,
+        "skillVersion": "3.3"
+      },
+      "results": []
+    },
+    "terms-of-use": {
+      "_metadata": {
+        "scriptName": "fetchCrossOriginCSS",
+        "extractedAt": "2026-04-12T22:02:28.540Z",
+        "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 7239,
+        "skillVersion": "3.3"
+      },
+      "results": []
+    }
+  }
+}

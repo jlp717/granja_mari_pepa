@@ -26,7 +26,11 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         MAX(CAC.MESFACTURA) as MESFACTURA,
         MAX(CAC.ANOFACTURA) as ANOFACTURA,
         TRIM(CAC.CODIGOCLIENTEFACTURA) as CODIGOCLIENTEFACTURA,
-        MAX(CLI.NOMBRECLIENTE) as NOMBRECLIENTEFACTURA,
+        MAX(COALESCE(
+          CASE WHEN LENGTH(TRIM(CLI.NOMBRECLIENTE)) > 1 THEN TRIM(CLI.NOMBRECLIENTE) END,
+          CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
+          TRIM(CLI.NOMBRECLIENTE)
+        )) as NOMBRECLIENTEFACTURA,
         MAX(CLI.DIRECCION) as DIRECCIONCLIENTEFACTURA,
         MAX(CLI.POBLACION) as POBLACIONCLIENTEFACTURA,
         MAX(CLI.PROVINCIA) as PROVINCIACLIENTEFACTURA,
@@ -112,6 +116,10 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     // Líneas de factura con productos
     // IMPORTANTE: La tabla DSEDAC.IVA tiene valores obsoletos (7%, 16%).
     // Usamos un CASE para mapear los códigos de IVA a los valores vigentes (10%, 21%, 4%).
+    // 
+    // FIX 2026-04-07: Líneas "Sin Cargo" (TIPOVENTA = 'SC') deben tener IMPORTE = 0.
+    // El ERP marca estas líneas con TIPOVENTA = 'SC' en la tabla LAC.
+    // Se fuerza IMPORTEVENTA a 0 para estas líneas para que no sumen al total del PDF.
     const linesQuery = `
       SELECT
         LAC.SECUENCIA as NUMEROLINEA,
@@ -120,6 +128,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         COALESCE(LAC.CANTIDADUNIDADES, 0) as CANTIDADARTICULO,
         LAC.PRECIOVENTA as PRECIOARTICULO,
         LAC.PORCENTAJEDESCUENTO as PORCENTAJEDESCUENTOARTICULO,
+        LAC.TIPOVENTA,
         CASE LAC.CODIGOIVA
           WHEN 1 THEN 10.00
           WHEN 2 THEN 21.00
@@ -132,8 +141,16 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
           WHEN 5 THEN 1.40 -- Recargo de equivalencia para tipo 5 (10% + 1.4%)
           ELSE 0.00
         END as PORCENTAJERECARGOARTICULO,
-        LAC.IMPORTEVENTA as IMPORTENETOARTICULO,
-        (LAC.IMPORTEVENTA * CASE LAC.CODIGOIVA
+        -- FIX: Si TIPOVENTA = 'SC' (Sin Cargo), el importe es 0
+        CASE 
+          WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN 0
+          ELSE LAC.IMPORTEVENTA
+        END as IMPORTENETOARTICULO,
+        -- El IVA también debe ser 0 para líneas sin cargo
+        (CASE 
+          WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN 0
+          ELSE LAC.IMPORTEVENTA
+        END * CASE LAC.CODIGOIVA
           WHEN 1 THEN 0.10
           WHEN 2 THEN 0.21
           WHEN 3 THEN 0.04
@@ -141,7 +158,11 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
           WHEN 5 THEN 0.10
           ELSE 0.10
         END) as IMPORTEIVAARTICULO,
-        (LAC.IMPORTEVENTA * CASE LAC.CODIGOIVA
+        -- El recargo también debe ser 0 para líneas sin cargo
+        (CASE 
+          WHEN TRIM(LAC.TIPOVENTA) = 'SC' THEN 0
+          ELSE LAC.IMPORTEVENTA
+        END * CASE LAC.CODIGOIVA
           WHEN 5 THEN 0.014
           ELSE 0.00
         END) as IMPORTERECARGOARTICULO,
@@ -161,7 +182,6 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?
-        AND LAC.IMPORTEVENTA <> 0
         AND TRIM(LAC.CODIGOARTICULO) <> ''
       ORDER BY LAC.NUMEROALBARAN, LAC.SECUENCIA
     `;

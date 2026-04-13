@@ -1,0 +1,123 @@
+{
+  "_metadata": {
+    "kind": "darkMode",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": {
+    "home": {
+      "_metadata": {
+        "scriptName": "extractDarkMode",
+        "extractedAt": "2026-04-12T21:59:41.612Z",
+        "sourceUrl": "https://www.jobyaviation.com/",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 37931,
+        "skillVersion": "3.3"
+      },
+      "mechanism": "none",
+      "tokens": {
+        "light": {},
+        "dark": {}
+      },
+      "prefersColorScheme": false
+    },
+    "experience": {
+      "_metadata": {
+        "scriptName": "extractDarkMode",
+        "extractedAt": "2026-04-12T22:00:20.544Z",
+        "sourceUrl": "https://www.jobyaviation.com/experience",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 39258,
+        "skillVersion": "3.3"
+      },
+      "mechanism": "none",
+      "tokens": {
+        "light": {},
+        "dark": {}
+      },
+      "prefersColorScheme": false
+    },
+    "technology": {
+      "_metadata": {
+        "scriptName": "extractDarkMode",
+        "extractedAt": "2026-04-12T22:01:01.067Z",
+        "sourceUrl": "https://www.jobyaviation.com/technology",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 51423,
+        "skillVersion": "3.3"
+      },
+      "mechanism": "none",
+      "tokens": {
+        "light": {},
+        "dark": {}
+      },
+      "prefersColorScheme": false
+    },
+    "company": {
+      "_metadata": {
+        "scriptName": "extractDarkMode",
+        "extractedAt": "2026-04-12T22:01:39.894Z",
+        "sourceUrl": "https://www.jobyaviation.com/company",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 23819,
+        "skillVersion": "3.3"
+      },
+      "mechanism": "none",
+      "tokens": {
+        "light": {},
+        "dark": {}
+      },
+      "prefersColorScheme": false
+    },
+    "privacy-policy": {
+      "_metadata": {
+        "scriptName": "extractDarkMode",
+        "extractedAt": "2026-04-12T22:02:18.197Z",
+        "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 4805,
+        "skillVersion": "3.3"
+      },
+      "mechanism": "none",
+      "tokens": {
+        "light": {},
+        "dark": {}
+      },
+      "prefersColorScheme": false
+    },
+    "terms-of-use": {
+      "_metadata": {
+        "scriptName": "extractDarkMode",
+        "extractedAt": "2026-04-12T22:02:56.046Z",
+        "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 7239,
+        "skillVersion": "3.3"
+      },
+      "mechanism": "none",
+      "tokens": {
+        "light": {},
+        "dark": {}
+      },
+      "prefersColorScheme": false
+    }
+  }
+}

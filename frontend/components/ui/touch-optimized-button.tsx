@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { Button as UIButton, ButtonProps } from '@/components/ui/button';
 import { useHapticFeedback, useTouchGestures, mobileAnimationConfig, getTouchClasses } from '@/lib/mobile-utils';
 import { cn } from '@/lib/utils';

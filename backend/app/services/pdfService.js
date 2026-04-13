@@ -229,7 +229,7 @@ async function generateInvoicePDF(facturaData) {
          y += 10;
 
          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         // TÍTULO DE FACTURA - BANNER DESTACADO
+         // TÍTULO DE FACTURAR - BANNER DESTACADO
          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
          doc.rect(40, y, 515, 32)
             .fillAndStroke(COLORS.secondary, COLORS.secondary);
@@ -239,7 +239,7 @@ async function generateInvoicePDF(facturaData) {
             .fillColor(COLORS.white)
             .text('FACTURA', 50, y + 10);
 
-         const numFactura = `${header.SERIEFACTURA}-${header.NUMEROFACTURA}`;
+         const numFactura = header.SERIEFACTURA ? `${header.SERIEFACTURA}-${header.NUMEROFACTURA}` : header.NUMEROFACTURA;
          doc.fontSize(16)
             .text(numFactura, 400, y + 10, { width: 145, align: 'right' });
 
@@ -388,7 +388,9 @@ async function generateInvoicePDF(facturaData) {
          let alternateRow = true;
 
          lines.forEach((line, index) => {
-            const descripcion = (line.DESCRIPCIONARTICULO || '').substring(0, 50);
+            // Fallbacks para campos que pueden venir con nombres distintos en facturas recopiladas o de Panamar
+            const descripcion = (line.DESCRIPCIONARTICULO || line.DESCRIPCION || line.NOMBREARTICULO || line.CONCEPTO || '').substring(0, 50);
+            
             // Calcular altura dinámica basada en la descripción (ancho 170)
             // Añadimos un margen generoso (+12) para que se vea "en líneas únicas" y espaciado
             const descHeight = doc.heightOfString(descripcion, { width: 170 });
@@ -426,33 +428,33 @@ async function generateInvoicePDF(facturaData) {
                .font('Helvetica')
                .fillColor(COLORS.darkGray);
 
-            const codigo = (line.CODIGOARTICULO || '').substring(0, 12);
+            const codigo = (line.CODIGOARTICULO || line.CODIGO || line.REFERENCIA || '').substring(0, 12);
             doc.text(codigo, 42, y + 3, { width: 50 });
 
             doc.text(descripcion, 95, y + 3, { width: 170 });
 
             // COLUMNA LOTE
-            const lote = (line.LOTEARTICULO || line.LOTE || '').substring(0, 10);
+            const lote = (line.LOTEARTICULO || line.LOTE || line.LOTEDETALLE || '-').toString().substring(0, 10);
             doc.text(lote || '-', 270, y + 3, { width: 45 });
 
             // COLUMNA CAJAS
-            const cajas = line.CAJASARTICULO ?? line.NUMEROCAJAS ?? 0;
+            const cajas = line.CAJASARTICULO ?? line.NUMEROCAJAS ?? line.CAJAS ?? 0;
             const cajasDisplay = Number(cajas) === 0 ? '-' : formatNumber(cajas, 0);
             doc.text(cajasDisplay, 320, y + 3, { width: 35, align: 'right' });
 
-            const cantidad = line.CANTIDADARTICULO || 0;
+            const cantidad = line.CANTIDADARTICULO || line.CANTIDAD || line.UNIDADES || line.CANTIDAD_ALBARAN || 0;
             doc.text(formatNumber(cantidad, 3), 360, y + 3, { width: 38, align: 'right' });
 
-            const precio = line.PRECIOARTICULO || 0;
+            const precio = line.PRECIOARTICULO || line.PRECIO || line.PRECIO_VENTA || line.PVP || 0;
             doc.text(formatNumber(precio, 3) + ' €', 403, y + 3, { width: 42, align: 'right' });
 
-            const dto = line.PORCENTAJEDESCUENTOARTICULO || 0;
+            const dto = line.PORCENTAJEDESCUENTOARTICULO || line.DTO || line.DESCUENTO || 0;
             doc.text(dto > 0 ? formatNumber(dto, 2) : '-', 450, y + 3, { width: 30, align: 'center' });
 
-            const iva = line.PORCENTAJEIVAARTICULO || 0;
+            const iva = line.PORCENTAJEIVAARTICULO || line.PORCENTAJEIVA || line.IVA || 0;
             doc.text(formatNumber(iva, 2), 485, y + 3, { width: 25, align: 'center' });
 
-            const importe = line.IMPORTENETOARTICULO || 0;
+            const importe = line.IMPORTENETOARTICULO || line.IMPORTENETO || line.TOTAL_LINEA || line.IMPORTE || 0;
             doc.font('Helvetica-Bold');
             doc.text(formatNumber(importe, 2) + ' €', 515, y + 3, { width: 40, align: 'right' });
             doc.font('Helvetica');
@@ -479,8 +481,8 @@ async function generateInvoicePDF(facturaData) {
          const gruposIVA = {};
 
          lines.forEach(line => {
-            const porcIVA = parseFloat(line.PORCENTAJEIVAARTICULO) || 0;
-            const porcRec = parseFloat(line.PORCENTAJERECARGOARTICULO) || 0;
+            const porcIVA = parseFloat(line.PORCENTAJEIVAARTICULO || line.PORCENTAJEIVA || line.IVA) || 0;
+            const porcRec = parseFloat(line.PORCENTAJERECARGOARTICULO || line.PORCENTAJERECARGO || line.RE || line.RECARGO) || 0;
             const key = `${porcIVA.toFixed(2)}_${porcRec.toFixed(2)}`;
 
             if (!gruposIVA[key]) {
@@ -494,13 +496,13 @@ async function generateInvoicePDF(facturaData) {
             }
 
             // Usar importes directos si vienen de BD; si no, calcularlos desde %.
-            const importe = parseFloat(line.IMPORTENETOARTICULO) || 0;
+            const importe = parseFloat(line.IMPORTENETOARTICULO || line.IMPORTENETO || line.TOTAL_LINEA || line.IMPORTE) || 0;
             const ivaLinea = line.IMPORTEIVAARTICULO !== undefined && line.IMPORTEIVAARTICULO !== null
                ? (parseFloat(line.IMPORTEIVAARTICULO) || 0)
-               : (importe * (porcIVA / 100));
+               : (line.IMPORTEIVA !== undefined ? parseFloat(line.IMPORTEIVA) : (importe * (porcIVA / 100)));
             const recargoLinea = line.IMPORTERECARGOARTICULO !== undefined && line.IMPORTERECARGOARTICULO !== null
                ? (parseFloat(line.IMPORTERECARGOARTICULO) || 0)
-               : (importe * (porcRec / 100));
+               : (line.IMPORTERECARGO !== undefined ? parseFloat(line.IMPORTERECARGO) : (importe * (porcRec / 100)));
 
             gruposIVA[key].baseImponible += importe;
             gruposIVA[key].iva += ivaLinea;

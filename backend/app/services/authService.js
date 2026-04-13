@@ -34,7 +34,11 @@ async function authenticateClient(codigoCliente, password, nif = null, req = nul
     const clienteQuery = `
       SELECT 
         CLI.CODIGOCLIENTE,
-        CLI.NOMBRECLIENTE,
+        COALESCE(
+          CASE WHEN LENGTH(TRIM(CLI.NOMBRECLIENTE)) > 1 THEN TRIM(CLI.NOMBRECLIENTE) END,
+          CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
+          TRIM(CLI.NOMBRECLIENTE)
+        ) AS NOMBRECLIENTE,
         CLI.NIF,
         CLI.DIRECCION,
         CLI.POBLACION,

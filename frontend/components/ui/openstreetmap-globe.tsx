@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { MapPin, Navigation, Building2, Phone, ExternalLink, Zap, Satellite, Globe2, Map, ArrowUpRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 

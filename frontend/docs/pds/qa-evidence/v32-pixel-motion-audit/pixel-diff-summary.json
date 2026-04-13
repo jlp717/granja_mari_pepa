@@ -1,0 +1,299 @@
+[
+  {
+    "slug": "acerca",
+    "viewport": "desktop",
+    "avgSimilarity": 0.6144,
+    "worstSimilarity": 0.5034,
+    "worstPct": 0.25,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "acerca",
+    "viewport": "mobile",
+    "avgSimilarity": 0.6693,
+    "worstSimilarity": 0.5151,
+    "worstPct": 0,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "acerca",
+    "viewport": "tablet",
+    "avgSimilarity": 0.6281,
+    "worstSimilarity": 0.2807,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "area-clientes",
+    "viewport": "desktop",
+    "avgSimilarity": 0.5727,
+    "worstSimilarity": 0.5255,
+    "worstPct": 0,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "area-clientes",
+    "viewport": "mobile",
+    "avgSimilarity": 0.5826,
+    "worstSimilarity": 0.5317,
+    "worstPct": 0.25,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "area-clientes",
+    "viewport": "tablet",
+    "avgSimilarity": 0.5883,
+    "worstSimilarity": 0.5272,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "checkout",
+    "viewport": "desktop",
+    "avgSimilarity": 0.5974,
+    "worstSimilarity": 0.5226,
+    "worstPct": 0,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "checkout",
+    "viewport": "mobile",
+    "avgSimilarity": 0.5528,
+    "worstSimilarity": 0.4306,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "checkout",
+    "viewport": "tablet",
+    "avgSimilarity": 0.5667,
+    "worstSimilarity": 0.3641,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "contacto",
+    "viewport": "desktop",
+    "avgSimilarity": 0.5334,
+    "worstSimilarity": 0.5042,
+    "worstPct": 1,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "contacto",
+    "viewport": "mobile",
+    "avgSimilarity": 0.6221,
+    "worstSimilarity": 0.4813,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "contacto",
+    "viewport": "tablet",
+    "avgSimilarity": 0.6265,
+    "worstSimilarity": 0.5548,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "home",
+    "viewport": "desktop",
+    "avgSimilarity": 0.6642,
+    "worstSimilarity": 0.4488,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "home",
+    "viewport": "mobile",
+    "avgSimilarity": 0.641,
+    "worstSimilarity": 0.5639,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "home",
+    "viewport": "tablet",
+    "avgSimilarity": 0.6366,
+    "worstSimilarity": 0.597,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "login",
+    "viewport": "desktop",
+    "avgSimilarity": 0.5937,
+    "worstSimilarity": 0.5195,
+    "worstPct": 0,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "login",
+    "viewport": "mobile",
+    "avgSimilarity": 0.5612,
+    "worstSimilarity": 0.3749,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "login",
+    "viewport": "tablet",
+    "avgSimilarity": 0.5483,
+    "worstSimilarity": 0.2905,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "lorca",
+    "viewport": "desktop",
+    "avgSimilarity": 0.6555,
+    "worstSimilarity": 0.4747,
+    "worstPct": 0.25,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "lorca",
+    "viewport": "mobile",
+    "avgSimilarity": 0.6579,
+    "worstSimilarity": 0.5724,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "lorca",
+    "viewport": "tablet",
+    "avgSimilarity": 0.5947,
+    "worstSimilarity": 0.2274,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "offline",
+    "viewport": "desktop",
+    "avgSimilarity": 0.5958,
+    "worstSimilarity": 0.5016,
+    "worstPct": 0,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "offline",
+    "viewport": "mobile",
+    "avgSimilarity": 0.4977,
+    "worstSimilarity": 0.2104,
+    "worstPct": 0.25,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "offline",
+    "viewport": "tablet",
+    "avgSimilarity": 0.4861,
+    "worstSimilarity": 0.2937,
+    "worstPct": 0.25,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "privacidad",
+    "viewport": "desktop",
+    "avgSimilarity": 0.7779,
+    "worstSimilarity": 0.5564,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "privacidad",
+    "viewport": "mobile",
+    "avgSimilarity": 0.8114,
+    "worstSimilarity": 0.6455,
+    "worstPct": 1,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "privacidad",
+    "viewport": "tablet",
+    "avgSimilarity": 0.8454,
+    "worstSimilarity": 0.6646,
+    "worstPct": 1,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "productos",
+    "viewport": "desktop",
+    "avgSimilarity": 0.6739,
+    "worstSimilarity": 0.5459,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "productos",
+    "viewport": "mobile",
+    "avgSimilarity": 0.7218,
+    "worstSimilarity": 0.6514,
+    "worstPct": 1,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "productos",
+    "viewport": "tablet",
+    "avgSimilarity": 0.6738,
+    "worstSimilarity": 0.5683,
+    "worstPct": 0.5,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "terminos",
+    "viewport": "desktop",
+    "avgSimilarity": 0.8354,
+    "worstSimilarity": 0.6164,
+    "worstPct": 1,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "terminos",
+    "viewport": "mobile",
+    "avgSimilarity": 0.765,
+    "worstSimilarity": 0.5382,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  },
+  {
+    "slug": "terminos",
+    "viewport": "tablet",
+    "avgSimilarity": 0.7925,
+    "worstSimilarity": 0.5835,
+    "worstPct": 0.75,
+    "pass90AllScrolls": false,
+    "samples": 5
+  }
+]

@@ -36,7 +36,6 @@ const nextConfig = {
     optimizeCss: false, // Deshabilitado para evitar error de critters en build
     optimizePackageImports: [
       'lucide-react',
-      'framer-motion',
       '@radix-ui/react-dialog',
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-toast',
@@ -53,6 +52,10 @@ const nextConfig = {
 
   // NOTA: Los headers de seguridad están en netlify.toml
   // ya que con output: 'export' no se pueden usar aquí
+
+  httpAgentOptions: {
+    keepAlive: true,
+  },
 
   async rewrites() {
     return [
@@ -78,7 +81,7 @@ const nextConfig = {
           },
           ui: {
             name: 'ui',
-            test: /[\\/]node_modules[\\/](@radix-ui|framer-motion|lucide-react)[\\/]/,
+            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react)[\\/]/,
             priority: 40,
             enforce: true,
           },

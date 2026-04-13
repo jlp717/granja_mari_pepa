@@ -9,7 +9,7 @@ import ProductDetailClient from './ProductDetailClient';
 import { useAuthStore } from '@/lib/store';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Lock } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import toast from 'react-hot-toast';
 
 interface ProductDetailPageProps {
@@ -164,16 +164,17 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   // Pantalla de carga
   if (!authChecked || isLoading) {
     return (
-      <div className="min-h-screen pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 relative overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-        <div className="text-center space-y-6">
+      <div className="pds-page pds-cream min-h-screen relative overflow-hidden flex items-center justify-center px-6 py-28">
+        <div className="pds-form-surface max-w-md text-center space-y-6">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, type: "spring" }}
-            className="w-20 h-20 mx-auto bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center"
+            className="w-20 h-20 mx-auto rounded-full flex items-center justify-center"
+            style={{ background: 'var(--pds-blue)', color: 'var(--pds-white)' }}
           >
             {!authChecked ? (
-              <Lock className="w-10 h-10 text-white" />
+              <Lock className="w-10 h-10" />
             ) : (
               <LoadingSpinner size="lg" />
             )}
@@ -183,10 +184,10 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="pds-title mb-2" style={{ fontSize: '2.75rem', color: 'var(--pds-black)' }}>
               {!authChecked ? 'Verificando acceso...' : 'Cargando producto...'}
             </h2>
-            <p className="text-gray-600">
+            <p className="pds-copy" style={{ color: 'rgb(14 22 32 / .72)' }}>
               {!authChecked ? 'Comprobando autenticación' : 'Obteniendo detalles del producto'}
             </p>
           </motion.div>

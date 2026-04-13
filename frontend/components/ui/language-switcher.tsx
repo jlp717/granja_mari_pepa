@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/lib/navigation';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { Globe, ChevronDown } from 'lucide-react';
 import { useState, useRef, useEffect, useTransition } from 'react';
 import { locales } from '@/i18n';

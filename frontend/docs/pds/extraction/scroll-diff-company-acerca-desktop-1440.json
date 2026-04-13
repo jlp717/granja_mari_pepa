@@ -1,0 +1,43 @@
+{
+  "_metadata": {
+    "kind": "compareScrollBehavior",
+    "version": "v3.3",
+    "url": "https://www.jobyaviation.com/company -> http://localhost:3001/es/acerca",
+    "timestamp": "2026-04-13T06:13:58.386Z",
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "page": {
+    "name": "company-acerca",
+    "source": "/company",
+    "target": "/es/acerca"
+  },
+  "sourceUrl": "https://www.jobyaviation.com/company",
+  "targetUrl": "http://localhost:3001/es/acerca",
+  "console": {
+    "sourceErrors": [],
+    "targetErrors": [
+      "Failed to fetch RSC payload for http://localhost:3001/es/productos. Falling back to browser navigation. TypeError: Failed to fetch\n    at fetchServerResponse (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/fetch-server-response.js:58:27)\n    at fastRefreshReducerImpl (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/reducers/fast-refresh-reducer.js:33:67)\n    at clientReducer (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/router-reducer.js:41:67)\n    at Object.action (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:150:55)\n    at runAction (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:56:38)\n    at dispatchAction (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:113:9)\n    at Object.dispatch (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:145:40)\n    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/use-reducer-with-devtools.js:130:21)\n    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:304:25)\n    at startTransition (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react/cjs/react.development.js:2597:25)\n    at Object.fastRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:303:48)\n    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:277:28)\n    at startTransition (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react/cjs/react.development.js:2597:25)\n    at processMessage (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:276:44)\n    at WebSocket.handler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:395:17)",
+      "Invalid or unexpected token"
+    ],
+    "pass": false
+  },
+  "score": {
+    "heightSimilarity": 0.05037994878038541,
+    "sectionSimilarity": 0,
+    "canvasSimilarity": 1,
+    "videoStructure": 0,
+    "targetVideoContract": 1,
+    "videoScrub": 0,
+    "avgFrame": 0.6500000000000001,
+    "worstFrame": 0.65,
+    "avgSimilarity": 0.3285835887316848,
+    "worstSimilarity": 0,
+    "passRate": 0.2857142857142857,
+    "pass": false
+  }
+}

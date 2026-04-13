@@ -331,6 +331,8 @@ app.get('/api/password-reset/health', passwordResetController.healthCheck.bind(p
 // =====================================================
 // PÚBLICO: Login con código de cliente + contraseña
 app.post('/api/auth/v2/login', loginRateLimiter, authControllerV2.login.bind(authControllerV2));
+// PÚBLICO: Refrescar access token usando refresh token (cookies HttpOnly)
+app.post('/api/auth/v2/refresh', refreshRateLimiter, authControllerV2.refreshToken.bind(authControllerV2));
 // PÚBLICO: Solicitar código de verificación (para reset de contraseña)
 app.post('/api/auth/v2/solicitar-codigo', loginRateLimiter, authControllerV2.solicitarCodigo.bind(authControllerV2));
 // PÚBLICO: Verificar código y cambiar contraseña
@@ -466,12 +468,27 @@ app.post('/api/chatbot', optionalAuth, generalLimiter, chatbotController.process
 app.get('/api/chatbot/health', chatbotController.healthCheck);
 
 // =====================================================
-// � PANAMAR - Documentos con productos CODIGOFILTRO=40
+// 📦 PANAMAR - Documentos con productos familias 701-705
 // =====================================================
 // Modo especial para cliente 9999999999: consulta documentos cross-client
 // con productos PANAMAR y precios de TARIFA 85
 app.get('/api/panamar/documents', requireAuth, generalLimiter, panamarController.getDocuments);
 app.get('/api/panamar/summary', requireAuth, generalLimiter, panamarController.getSummary);
+app.get('/api/panamar/clients', requireAuth, generalLimiter, panamarController.getClients);
+app.post('/api/panamar/bulk-download/init', requireAuth, generalLimiter, panamarController.initBulkDownload);
+app.get('/api/panamar/bulk-download/status/:taskId', requireAuth, generalLimiter, panamarController.getBulkStatus);
+app.delete('/api/panamar/bulk-download/status/:taskId/cancel', requireAuth, generalLimiter, panamarController.cancelBulkTask);
+app.get('/api/panamar/bulk-download/retrieve/:taskId/:chunkIndex', requireAuth, generalLimiter, panamarController.retrieveBulkZip);
+app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/pdf', requireAuth, generalLimiter, panamarController.downloadPDF);
+app.get('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/preview', requireAuth, generalLimiter, panamarController.previewPDF);
+app.post('/api/panamar/documents/:subempresa/:ejercicio/:serie/:terminal/:numero/email', requireAuth, generalLimiter, panamarController.sendEmail);
+
+// Nuevos endpoints para acceder por identidad de factura directamente
+app.get('/api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/pdf', requireAuth, generalLimiter, panamarController.downloadPDFByIdentity);
+app.get('/api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/preview', requireAuth, generalLimiter, panamarController.previewPDFByIdentity);
+app.post('/api/panamar/invoices/:serieFactura/:numeroFactura/:ejercicioFactura/email', requireAuth, generalLimiter, panamarController.sendEmailByIdentity);
+
+app.get('/api/panamar/diagnostics', requireAuth, generalLimiter, panamarController.diagnostics);
 app.get('/api/panamar/health', panamarController.healthCheck);
 
 // =====================================================
@@ -548,19 +565,23 @@ app.use(errorHandler);
 // ===================================
 
 async function initializeServer() {
+  let dbConnected = false;
+
   try {
     logger.info('Iniciando servidor de facturación...');
 
-    // Inicializar pool ODBC
+    // Inicializar pool ODBC (modo degradado si falla)
     try {
       logger.info('Intentando inicializar pool de conexiones ODBC...');
       await odbcPool.initialize();
       logger.info('✅ Pool ODBC inicializado correctamente');
+      dbConnected = true;
     } catch (odbcError) {
-      logger.error('❌ Error crítico: No se pudo conectar a la base de datos');
-      logger.error(`Error ODBC: ${odbcError.message}`);
-      logger.error('El servidor requiere conexión a la base de datos para funcionar');
-      throw odbcError;
+      logger.error('⚠️ No se pudo conectar a la base de datos ODBC - Modo DEGRADADO activado');
+      logger.error(`   Error ODBC: ${odbcError.message}`);
+      logger.error('   El servidor iniciará sin DB. Las rutas que requieran DB fallarán.');
+      logger.error('   El pool reintentará conectar automáticamente cada 90 segundos.');
+      // No throw - allow server to start in degraded mode
     }
 
     // Verificar secretos JWT
@@ -573,17 +594,25 @@ async function initializeServer() {
     // Iniciar servidor HTTP
     const server = app.listen(PORT, HOST, () => {
       logger.info(`=================================================`);
-      logger.info(`🚀 Servidor iniciado exitosamente`);
+      logger.info(`🚀 Servidor iniciado ${dbConnected ? 'exitosamente' : 'en MODO DEGRADADO'}`);
       logger.info(`=================================================`);
       logger.info(`Entorno: ${process.env.NODE_ENV || 'development'}`);
       logger.info(`Host: ${HOST}`);
       logger.info(`Puerto: ${PORT}`);
       logger.info(`URL: http://${HOST}:${PORT}`);
+      if (!dbConnected) {
+        logger.info(`⚠️  DB: DESCONECTADA - El pool reintentará auto-conectar`);
+        logger.info(`   Ver /health para estado, o arregla la conexión ODBC`);
+      }
       logger.info(`=================================================`);
+      // Signal PM2 that the app is ready (required when wait_ready: true in ecosystem config)
+      if (typeof process.send === 'function') {
+        process.send('ready');
+      }
     });
 
-    // Configurar timeouts
-    server.timeout = 120000; // 2 minutos
+    // Configurar timeouts (10 min para soportar bulk download de ZIPs de 1GB+)
+    server.timeout = 600000; // 10 minutos
     server.keepAliveTimeout = 65000;
     server.headersTimeout = 66000;
 

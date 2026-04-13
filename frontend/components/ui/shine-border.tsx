@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "@/lib/native-motion";
 import React from "react";
 
 interface ShineBorderProps {

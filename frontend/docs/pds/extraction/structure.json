@@ -1,0 +1,3067 @@
+{
+  "_metadata": {
+    "kind": "structure",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": {
+    "home": {
+      "_metadata": {
+        "scriptName": "extractDOMStructure",
+        "extractedAt": "2026-04-12T21:59:41.605Z",
+        "sourceUrl": "https://www.jobyaviation.com/",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 37931,
+        "skillVersion": "3.3"
+      },
+      "sections": [
+        {
+          "index": 0,
+          "tag": "DIV",
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "rect": {
+            "width": 934,
+            "height": 42,
+            "top": 1138
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "8px",
+            "padding": "8px 10px 8px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAccept"
+        },
+        {
+          "index": 1,
+          "tag": "NAV",
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__navHidden  Navigation-module-scss-module__9NlFDq__disable ",
+          "rect": {
+            "width": 1440,
+            "height": 80,
+            "top": 0
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "CloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYouTubeInstagramL"
+        },
+        {
+          "index": 2,
+          "tag": "DIV",
+          "id": null,
+          "classes": "page-wrapper",
+          "rect": {
+            "width": 1440,
+            "height": 35682,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Skip traffic.Time to fly. The future of aviation is coming soon.Elevate your commute with our all-electric air taxi, soo"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 14400,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Skip traffic.Time to fly. The future of aviation is coming soon.Elevate your commute with our all-electric air taxi, soo"
+        },
+        {
+          "index": 4,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia-home-page",
+          "rect": {
+            "width": 1440,
+            "height": 14400,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px 0px 1200px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Skip traffic.Time to fly. The future of aviation is coming soon.Elevate your commute with our all-electric air taxi, soo"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "experience-highlights",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 7408,
+            "top": 14400
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Nowhere to go but UpLet's fly1Leave city congestion behind and choose a stress-free commute through the clouds.Discover "
+        },
+        {
+          "index": 6,
+          "tag": "SPAN",
+          "id": null,
+          "classes": "Typography-module-scss-module__fAfHiq__captionSmall ExperienceHighlights-module-scss-module__fR1D2a__sectionLabel",
+          "rect": {
+            "width": 122,
+            "height": 8,
+            "top": 15572
+          },
+          "styles": {
+            "display": "block",
+            "position": "absolute",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Experience Highlights"
+        },
+        {
+          "index": 7,
+          "tag": "DIV",
+          "id": null,
+          "classes": "ExperienceHighlights-module-scss-module__fR1D2a__sectionEnd",
+          "rect": {
+            "width": 1360,
+            "height": 288,
+            "top": 21332
+          },
+          "styles": {
+            "display": "grid",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Imagine looking forward to your commute. And forgetting what gridlock feels like. When flight is a part of everyday life"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": "app",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 893,
+            "top": 21808
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Our app coordinates your end-to-end commute, including an Uber to and from our vertiport.Coming soonSeamless door to doo"
+        },
+        {
+          "index": 9,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionApp-module-scss-module__E1gRYW__sectionApp",
+          "rect": {
+            "width": 1440,
+            "height": 893,
+            "top": 21808
+          },
+          "styles": {
+            "display": "grid",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "0px 40px 121px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Our app coordinates your end-to-end commute, including an Uber to and from our vertiport.Coming soonSeamless door to doo"
+        },
+        {
+          "index": 10,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionApp-module-scss-module__E1gRYW__sectionEnd",
+          "rect": {
+            "width": 672,
+            "height": 84,
+            "top": 22495
+          },
+          "styles": {
+            "display": "flex",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "32px",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "auto"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Seamless door to door travel, all from a few taps on our app."
+        },
+        {
+          "index": 11,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 22700
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Technology that makesthe dream possibleExploreExploreVertical take-off and landing200 mph top speedZero operating emissi"
+        },
+        {
+          "index": 12,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 22700
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "150px 40px 40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Technology that makesthe dream possibleExploreExploreVertical take-off and landing200 mph top speedZero operating emissi"
+        },
+        {
+          "index": 13,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__features",
+          "rect": {
+            "width": 242,
+            "height": 54,
+            "top": 22850
+          },
+          "styles": {
+            "display": "flex",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "12px",
+            "padding": "0px 0px 0px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "auto"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Vertical take-off and landing200 mph top speedZero operating emissions"
+        },
+        {
+          "index": 14,
+          "tag": "SECTION",
+          "id": "news",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 905,
+            "top": 24090
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "News from aboveView all NewsView all NewsMar 13, 2026Joby Completes Piloted Electric Air Taxi Flight Across San Francisc"
+        },
+        {
+          "index": 15,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionNews-module-scss-module__Y0MXZa__sectionNews undefined",
+          "rect": {
+            "width": 1440,
+            "height": 905,
+            "top": 24090
+          },
+          "styles": {
+            "display": "grid",
+            "position": "static",
+            "overflow": "hidden",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "120px 40px 57px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "News from aboveView all NewsView all NewsMar 13, 2026Joby Completes Piloted Electric Air Taxi Flight Across San Francisc"
+        },
+        {
+          "index": 16,
+          "tag": "SECTION",
+          "id": "section-partners",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 4625,
+            "top": 24995
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "With partners like this,there’s nowhere to go but up.Car ServiceAirlinesInfrastructureR&DTechnologyGovernmentWe’re partn"
+        },
+        {
+          "index": 17,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionPartners-module-scss-module__b7bNla__sectionPartners",
+          "rect": {
+            "width": 1440,
+            "height": 4625,
+            "top": 24995
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "127px 40px 37px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "With partners like this,there’s nowhere to go but up.Car ServiceAirlinesInfrastructureR&DTechnologyGovernmentWe’re partn"
+        },
+        {
+          "index": 18,
+          "tag": "SECTION",
+          "id": "story",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 29620
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "The sky was never the limit.Discover our StoryDiscover our StoryWork at JobyWork at JobyIn 2009, a small team of Joby en"
+        },
+        {
+          "index": 19,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 29620
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "150px 40px 40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "The sky was never the limit.Discover our StoryDiscover our StoryWork at JobyWork at JobyIn 2009, a small team of Joby en"
+        },
+        {
+          "index": 20,
+          "tag": "SECTION",
+          "id": "illustration",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 4672,
+            "top": 31010
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Our future visionNew wave aviationDream of Flight Dream ofFlightFuture Vision — 1Imagine a world where every cross-town "
+        },
+        {
+          "index": 21,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionIllustration-module-scss-module__MI8vIq__sectionIllustration",
+          "rect": {
+            "width": 1440,
+            "height": 4672,
+            "top": 31010
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Our future visionNew wave aviationDream of Flight Dream ofFlightFuture Vision — 1Imagine a world where every cross-town "
+        },
+        {
+          "index": 22,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2248,
+            "top": 35682
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 23,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "Footer-module-scss-module__eAgNQG__footer",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 35682
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "38px 40px 89px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 24,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 1260
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        },
+        {
+          "index": 25,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        }
+      ],
+      "navInfo": {
+        "position": "fixed",
+        "top": "0px",
+        "zIndex": "100",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "transition": "all",
+        "height": 80,
+        "isTransparent": true,
+        "isFixed": true
+      },
+      "totalSections": 26,
+      "pageHeight": 37931,
+      "viewportHeight": 1200
+    },
+    "experience": {
+      "_metadata": {
+        "scriptName": "extractDOMStructure",
+        "extractedAt": "2026-04-12T22:00:20.533Z",
+        "sourceUrl": "https://www.jobyaviation.com/experience",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 39258,
+        "skillVersion": "3.3"
+      },
+      "sections": [
+        {
+          "index": 0,
+          "tag": "DIV",
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "rect": {
+            "width": 934,
+            "height": 42,
+            "top": 1138
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "8px",
+            "padding": "8px 10px 8px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAccept"
+        },
+        {
+          "index": 1,
+          "tag": "NAV",
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__navHidden  Navigation-module-scss-module__9NlFDq__disable ",
+          "rect": {
+            "width": 1440,
+            "height": 80,
+            "top": 0
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "ExperienceCloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYouTube"
+        },
+        {
+          "index": 2,
+          "tag": "DIV",
+          "id": null,
+          "classes": "page-wrapper",
+          "rect": {
+            "width": 1440,
+            "height": 37010,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Take the high road Take the highroad Your city, elevated. Lift off and leave the gridlock and your stress behind.Distanc"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 16800,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Take the high road Take the highroad Your city, elevated. Lift off and leave the gridlock and your stress behind.Distanc"
+        },
+        {
+          "index": 4,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia-experience-page",
+          "rect": {
+            "width": 1440,
+            "height": 16800,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px 0px 1200px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Take the high road Take the highroad Your city, elevated. Lift off and leave the gridlock and your stress behind.Distanc"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "intro",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1544,
+            "top": 16800
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Take the high roadExperience featuresBreathtaking ViewsSpacious ComfortSeamless JourneyAll-electric Flight"
+        },
+        {
+          "index": 6,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionScrollyText-module-scss-module__T1x4XG__sectionScrollyText previousBackgroundExperience",
+          "rect": {
+            "width": 1440,
+            "height": 1544,
+            "top": 16800
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "40px 40px 0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Take the high roadExperience featuresBreathtaking ViewsSpacious ComfortSeamless JourneyAll-electric Flight"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "experience",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 7850,
+            "top": 18344
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Fig. 1 — Panoramic windowsFig. 2 — Seating in the AircraftFig. 3 — Rideshare integration into the journeyFig. 4 — Electr"
+        },
+        {
+          "index": 8,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionSlider-module-scss-module__JIvtxa__sectionSlider",
+          "rect": {
+            "width": 1440,
+            "height": 7850,
+            "top": 18344
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "30px 0px 20px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Fig. 1 — Panoramic windowsFig. 2 — Seating in the AircraftFig. 3 — Rideshare integration into the journeyFig. 4 — Electr"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "id": "map",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 4800,
+            "top": 26194
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Be there inminutes.JFKManhattan43 min faster by air*New YorkDXBPalm Jumeirah33 min faster by air*DubaiLAXDowntown LA33 m"
+        },
+        {
+          "index": 10,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionMap-module-scss-module__jqO-4q__sectionMap",
+          "rect": {
+            "width": 1440,
+            "height": 4800,
+            "top": 26194
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Be there inminutes.JFKManhattan43 min faster by air*New YorkDXBPalm Jumeirah33 min faster by air*DubaiLAXDowntown LA33 m"
+        },
+        {
+          "index": 11,
+          "tag": "SECTION",
+          "id": "section-partners",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 4625,
+            "top": 30994
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "With partners like this,there’s nowhere to go but up.Car ServiceAirlinesInfrastructureR&DTechnologyGovernmentWe’re partn"
+        },
+        {
+          "index": 12,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionPartners-module-scss-module__b7bNla__sectionPartners",
+          "rect": {
+            "width": 1440,
+            "height": 4625,
+            "top": 30994
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "127px 40px 37px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "With partners like this,there’s nowhere to go but up.Car ServiceAirlinesInfrastructureR&DTechnologyGovernmentWe’re partn"
+        },
+        {
+          "index": 13,
+          "tag": "SECTION",
+          "id": "page-entry",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 35620
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "The sky was never the limit.ExploreExploreVertical take-off and landing200 mph top speedZero operating emissions"
+        },
+        {
+          "index": 14,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 35620
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "150px 40px 40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "The sky was never the limit.ExploreExploreVertical take-off and landing200 mph top speedZero operating emissions"
+        },
+        {
+          "index": 15,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__features",
+          "rect": {
+            "width": 242,
+            "height": 54,
+            "top": 35770
+          },
+          "styles": {
+            "display": "flex",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "12px",
+            "padding": "0px 0px 0px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "auto"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Vertical take-off and landing200 mph top speedZero operating emissions"
+        },
+        {
+          "index": 16,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2248,
+            "top": 37010
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 17,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "Footer-module-scss-module__eAgNQG__footer",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 37010
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "38px 40px 89px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 18,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 1260
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        },
+        {
+          "index": 19,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        }
+      ],
+      "navInfo": {
+        "position": "fixed",
+        "top": "0px",
+        "zIndex": "100",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "transition": "all",
+        "height": 80,
+        "isTransparent": true,
+        "isFixed": true
+      },
+      "totalSections": 20,
+      "pageHeight": 39258,
+      "viewportHeight": 1200
+    },
+    "technology": {
+      "_metadata": {
+        "scriptName": "extractDOMStructure",
+        "extractedAt": "2026-04-12T22:01:01.051Z",
+        "sourceUrl": "https://www.jobyaviation.com/technology",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 51423,
+        "skillVersion": "3.3"
+      },
+      "sections": [
+        {
+          "index": 0,
+          "tag": "DIV",
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "rect": {
+            "width": 934,
+            "height": 42,
+            "top": 1138
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "8px",
+            "padding": "8px 10px 8px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAccept"
+        },
+        {
+          "index": 1,
+          "tag": "NAV",
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__navHidden  Navigation-module-scss-module__9NlFDq__disable ",
+          "rect": {
+            "width": 1440,
+            "height": 80,
+            "top": 0
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "TechnologySustainabilitySustainabilityTechnology IntroductionSafetySoundEngineeringSustainabilitySpecificationsCloseInve"
+        },
+        {
+          "index": 2,
+          "tag": "BUTTON",
+          "id": null,
+          "classes": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__technology-dropdown-hero-dark Navigation-module-scss-module__9N",
+          "rect": {
+            "width": 163,
+            "height": 41,
+            "top": -63
+          },
+          "styles": {
+            "display": "flex",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "auto"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "SustainabilitySustainability"
+        },
+        {
+          "index": 3,
+          "tag": "DIV",
+          "id": null,
+          "classes": "page-wrapper",
+          "rect": {
+            "width": 1440,
+            "height": 49175,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": true,
+          "hasSVG": true,
+          "textSnippet": "Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassengersPilot + 4 passengersSpeedUp "
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "technology",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 6000,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassengersPilot + 4 passengersSpeedUp "
+        },
+        {
+          "index": 5,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionHeroTechnology-module-scss-module__NZSjcq__sectionHeroTechnology",
+          "rect": {
+            "width": 1440,
+            "height": 6000,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Cruise, controlled.Technology that makes thedream possibleMaking dreamstake flightPassengersPilot + 4 passengersSpeedUp "
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": "introduction",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 6900,
+            "top": 6000
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": true,
+          "hasSVG": true,
+          "textSnippet": "1Electric Vertical Take-offand Landing (eVTOL)Joby AircraftFast, Flexible TravelTaking off and landing vertically allows"
+        },
+        {
+          "index": 7,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionAircraft-module-scss-module__P2eaWG__sectionAircraft",
+          "rect": {
+            "width": 1440,
+            "height": 6900,
+            "top": 6000
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "0px 40px 126px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": true,
+          "hasSVG": true,
+          "textSnippet": "1Electric Vertical Take-offand Landing (eVTOL)Joby AircraftFast, Flexible TravelTaking off and landing vertically allows"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "id": "safety",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 12900
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "2Safety LayersSafely soaring skyward"
+        },
+        {
+          "index": 9,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 12900
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "150px 40px 40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "2Safety LayersSafely soaring skyward"
+        },
+        {
+          "index": 10,
+          "tag": "SECTION",
+          "id": "safety-in",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 10300,
+            "top": 14290
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "SafetyNearly a decade of certification work with FAAOur aircraft is in the final stage of the same design certification "
+        },
+        {
+          "index": 11,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionSafetySlider-module-scss-module__acPOQW__sectionSafetySlider",
+          "rect": {
+            "width": 1440,
+            "height": 10300,
+            "top": 14290
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "80px 0px 20px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "SafetyNearly a decade of certification work with FAAOur aircraft is in the final stage of the same design certification "
+        },
+        {
+          "index": 12,
+          "tag": "SECTION",
+          "id": "sound",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 6080,
+            "top": 24590
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": true,
+          "hasSVG": false,
+          "textSnippet": "3SoundDesigned to be quietPropeller DesignBlade tip geometry was designed to reduce vortex-interaction noise in transiti"
+        },
+        {
+          "index": 13,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionSound-module-scss-module__rtbrcG__sectionSound",
+          "rect": {
+            "width": 1440,
+            "height": 6080,
+            "top": 24590
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px 0px 80px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": true,
+          "hasCanvas": true,
+          "hasSVG": false,
+          "textSnippet": "3SoundDesigned to be quietPropeller DesignBlade tip geometry was designed to reduce vortex-interaction noise in transiti"
+        },
+        {
+          "index": 14,
+          "tag": "SECTION",
+          "id": "engineering",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 5260,
+            "top": 30670
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "World-class facilityMarina, CA4EngineeringMaking Dreams Take FlightWe design, engineer and manufacture our critical airc"
+        },
+        {
+          "index": 15,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEngineering-module-scss-module__V2l7FW__sectionEngineering",
+          "rect": {
+            "width": 1440,
+            "height": 5260,
+            "top": 30670
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "World-class facilityMarina, CA4EngineeringMaking Dreams Take FlightWe design, engineer and manufacture our critical airc"
+        },
+        {
+          "index": 16,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 765,
+            "top": 35053
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We’re redefining aerospace manufacturing with advanced techniques and innovative materials. Our titanium-aluminum-carbon"
+        },
+        {
+          "index": 17,
+          "tag": "SECTION",
+          "id": "sustainability",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 3859,
+            "top": 35930
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "5Sustainable technologyNothing but clearskies ahead.5.1Operating emissionsZerooperating emissions during flight5.2Joby v"
+        },
+        {
+          "index": 18,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 7995,
+            "top": 39790
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": true,
+          "hasSVG": true,
+          "textSnippet": "6Technical BreakdownJoby Aircraft SpecificationsA technical overview of the Joby Aircraft, detailing core specifications"
+        },
+        {
+          "index": 19,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionSpecs-module-scss-module__qHNuCq__sectionSpecs",
+          "rect": {
+            "width": 1440,
+            "height": 7995,
+            "top": 39790
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": true,
+          "hasSVG": true,
+          "textSnippet": "6Technical BreakdownJoby Aircraft SpecificationsA technical overview of the Joby Aircraft, detailing core specifications"
+        },
+        {
+          "index": 20,
+          "tag": "SECTION",
+          "id": "explore",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 47785
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Bringing back the wonder of flight to your daily commuteExploreExploreBreathtaking city viewsSeating for four passengers"
+        },
+        {
+          "index": 21,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 47785
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "150px 40px 40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Bringing back the wonder of flight to your daily commuteExploreExploreBreathtaking city viewsSeating for four passengers"
+        },
+        {
+          "index": 22,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__features",
+          "rect": {
+            "width": 242,
+            "height": 54,
+            "top": 47935
+          },
+          "styles": {
+            "display": "flex",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "12px",
+            "padding": "0px 0px 0px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "auto"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Breathtaking city viewsSeating for four passengersAll-electric flight"
+        },
+        {
+          "index": 23,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2248,
+            "top": 49175
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 24,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "Footer-module-scss-module__eAgNQG__footer",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 49175
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "38px 40px 89px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 25,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 1260
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        },
+        {
+          "index": 26,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        }
+      ],
+      "navInfo": {
+        "position": "fixed",
+        "top": "0px",
+        "zIndex": "100",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "transition": "all",
+        "height": 80,
+        "isTransparent": true,
+        "isFixed": true
+      },
+      "totalSections": 27,
+      "pageHeight": 51423,
+      "viewportHeight": 1200
+    },
+    "company": {
+      "_metadata": {
+        "scriptName": "extractDOMStructure",
+        "extractedAt": "2026-04-12T22:01:39.884Z",
+        "sourceUrl": "https://www.jobyaviation.com/company",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 23819,
+        "skillVersion": "3.3"
+      },
+      "sections": [
+        {
+          "index": 0,
+          "tag": "DIV",
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "rect": {
+            "width": 934,
+            "height": 42,
+            "top": 1138
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "8px",
+            "padding": "8px 10px 8px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAccept"
+        },
+        {
+          "index": 1,
+          "tag": "NAV",
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__navHidden  Navigation-module-scss-module__9NlFDq__disable ",
+          "rect": {
+            "width": 1440,
+            "height": 80,
+            "top": 0
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "CompanyCloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYouTubeIns"
+        },
+        {
+          "index": 2,
+          "tag": "DIV",
+          "id": null,
+          "classes": "page-wrapper",
+          "rect": {
+            "width": 1440,
+            "height": 21571,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": true,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "It’s time to dream bigger. Our vision is to save a billion people an hour a day.36º 59’ 10.536” N122º 2’ 12.696” WOur st"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 3000,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "It’s time to dream bigger. Our vision is to save a billion people an hour a day."
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "intro",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "rect": {
+            "width": 1440,
+            "height": 2400,
+            "top": 3000
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "36º 59’ 10.536” N122º 2’ 12.696” WOur story startsin Santa Cruz, CAback in 2009"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "id": "mythology",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 12682,
+            "top": 5400
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Origins2009The BeginningRedwoods, Santa CruzTucked in the misty redwoods above Santa Cruz, seven engineers gathered in a"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "id": "about",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2099,
+            "top": 18082
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Joby todayWe’re a community of engineers and visionaries bringing the dream of everyday flight to life through world-cla"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "id": "explore",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 20181
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Designing cleaner flight for people and the planet.Joby Impact Report 2024Joby Impact Report 202490% fewer emissions tha"
+        },
+        {
+          "index": 8,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "rect": {
+            "width": 1440,
+            "height": 1390,
+            "top": 20181
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "clip",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "150px 40px 40px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Designing cleaner flight for people and the planet.Joby Impact Report 2024Joby Impact Report 202490% fewer emissions tha"
+        },
+        {
+          "index": 9,
+          "tag": "DIV",
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__features",
+          "rect": {
+            "width": 242,
+            "height": 65,
+            "top": 20331
+          },
+          "styles": {
+            "display": "flex",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "12px",
+            "padding": "0px 0px 0px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "auto"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "90% fewer emissions than a helicopter40% fewer emissions than an average car"
+        },
+        {
+          "index": 10,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2248,
+            "top": 21571
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 11,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "Footer-module-scss-module__eAgNQG__footer",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 21571
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "38px 40px 89px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 12,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 1260
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        },
+        {
+          "index": 13,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        }
+      ],
+      "navInfo": {
+        "position": "fixed",
+        "top": "0px",
+        "zIndex": "100",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "transition": "all",
+        "height": 80,
+        "isTransparent": true,
+        "isFixed": true
+      },
+      "totalSections": 14,
+      "pageHeight": 23819,
+      "viewportHeight": 1200
+    },
+    "privacy-policy": {
+      "_metadata": {
+        "scriptName": "extractDOMStructure",
+        "extractedAt": "2026-04-12T22:02:18.193Z",
+        "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 4805,
+        "skillVersion": "3.3"
+      },
+      "sections": [
+        {
+          "index": 0,
+          "tag": "DIV",
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "rect": {
+            "width": 934,
+            "height": 42,
+            "top": 1138
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "8px",
+            "padding": "8px 10px 8px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAccept"
+        },
+        {
+          "index": 1,
+          "tag": "NAV",
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__navHidden  Navigation-module-scss-module__9NlFDq__disable ",
+          "rect": {
+            "width": 1440,
+            "height": 80,
+            "top": 0
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyCloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYou"
+        },
+        {
+          "index": 2,
+          "tag": "DIV",
+          "id": null,
+          "classes": "page-wrapper",
+          "rect": {
+            "width": 1440,
+            "height": 2557,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Privacy PolicyLast revised on December 4, 2020This privacy policy (this “Privacy Policy”) explains how Joby Aero, Inc. ("
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2557,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Privacy PolicyLast revised on December 4, 2020This privacy policy (this “Privacy Policy”) explains how Joby Aero, Inc. ("
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2248,
+            "top": 2557
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 5,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "Footer-module-scss-module__eAgNQG__footer",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 2557
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "38px 40px 89px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 6,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 1260
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        },
+        {
+          "index": 7,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        }
+      ],
+      "navInfo": {
+        "position": "fixed",
+        "top": "0px",
+        "zIndex": "100",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "transition": "all",
+        "height": 80,
+        "isTransparent": true,
+        "isFixed": true
+      },
+      "totalSections": 8,
+      "pageHeight": 4805,
+      "viewportHeight": 1200
+    },
+    "terms-of-use": {
+      "_metadata": {
+        "scriptName": "extractDOMStructure",
+        "extractedAt": "2026-04-12T22:02:56.042Z",
+        "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 7239,
+        "skillVersion": "3.3"
+      },
+      "sections": [
+        {
+          "index": 0,
+          "tag": "DIV",
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "rect": {
+            "width": 934,
+            "height": 42,
+            "top": 1138
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(245, 244, 223)",
+            "gridTemplateColumns": null,
+            "flexDirection": "row",
+            "gap": "8px",
+            "padding": "8px 10px 8px 16px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAccept"
+        },
+        {
+          "index": 1,
+          "tag": "NAV",
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__navHidden  Navigation-module-scss-module__9NlFDq__disable ",
+          "rect": {
+            "width": 1440,
+            "height": 80,
+            "top": 0
+          },
+          "styles": {
+            "display": "flex",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": "column",
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Terms of UseCloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYouTu"
+        },
+        {
+          "index": 2,
+          "tag": "DIV",
+          "id": null,
+          "classes": "page-wrapper",
+          "rect": {
+            "width": 1440,
+            "height": 4991,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "static",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Terms of Service (these “Terms”) f"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 4991,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": "Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Terms of Service (these “Terms”) f"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+          "rect": {
+            "width": 1440,
+            "height": 2248,
+            "top": 4991
+          },
+          "styles": {
+            "display": "block",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 5,
+          "tag": "FOOTER",
+          "id": null,
+          "classes": "Footer-module-scss-module__eAgNQG__footer",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 4991
+          },
+          "styles": {
+            "display": "grid",
+            "position": "relative",
+            "overflow": "visible",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "gridTemplateColumns": "70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px",
+            "flexDirection": null,
+            "gap": "0px 16px",
+            "padding": "38px 40px 89px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "1200px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": true,
+          "textSnippet": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceT"
+        },
+        {
+          "index": 6,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 1260
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 122, 229)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        },
+        {
+          "index": 7,
+          "tag": "DIV",
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "rect": {
+            "width": 1440,
+            "height": 1200,
+            "top": 0
+          },
+          "styles": {
+            "display": "block",
+            "position": "fixed",
+            "overflow": "visible",
+            "backgroundColor": "rgb(0, 0, 0)",
+            "gridTemplateColumns": null,
+            "flexDirection": null,
+            "gap": "normal",
+            "padding": "0px",
+            "margin": "0px",
+            "maxWidth": "none",
+            "minHeight": "0px"
+          },
+          "hasVideo": false,
+          "hasCanvas": false,
+          "hasSVG": false,
+          "textSnippet": ""
+        }
+      ],
+      "navInfo": {
+        "position": "fixed",
+        "top": "0px",
+        "zIndex": "100",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "transition": "all",
+        "height": 80,
+        "isTransparent": true,
+        "isFixed": true
+      },
+      "totalSections": 8,
+      "pageHeight": 7239,
+      "viewportHeight": 1200
+    }
+  }
+}

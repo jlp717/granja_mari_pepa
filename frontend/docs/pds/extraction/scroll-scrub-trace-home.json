@@ -1,0 +1,208 @@
+{
+  "_metadata": {
+    "scriptName": "extractScrollScrubTrace",
+    "extractedAt": "2026-04-12T21:59:41.601Z",
+    "sourceUrl": "https://www.jobyaviation.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewportWidth": 1440,
+    "viewportHeight": 1200,
+    "scrollHeight": 37931,
+    "skillVersion": "3.3"
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "bodyHeight": 37931,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "currentTime": 0.099,
+          "duration": 20.087,
+          "paused": true,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 3673,
+      "bodyHeight": 37931,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "currentTime": 2.921,
+          "duration": 20.087,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 9183,
+      "bodyHeight": 37931,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "currentTime": 6.526,
+          "duration": 20.087,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 18366,
+      "bodyHeight": 37931,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "currentTime": 13.648,
+          "duration": 20.087,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -5016,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 27548,
+      "bodyHeight": 37931,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "currentTime": 18.93,
+          "duration": 20.087,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -14198,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    },
+    {
+      "pct": 1,
+      "scrollY": 36731,
+      "bodyHeight": 37931,
+      "viewportHeight": 1200,
+      "videos": [
+        {
+          "index": 0,
+          "src": "https://pub-c3f399360b0b4437b233f8cc0505582a.r2.dev/videos/compressed-home-intro-desktop-r3.mp4",
+          "currentTime": 19.918,
+          "duration": 20.087,
+          "paused": false,
+          "muted": true,
+          "autoplay": false,
+          "loop": false,
+          "rect": {
+            "x": 0,
+            "y": -23381,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "static",
+            "objectFit": "cover",
+            "transform": "none",
+            "opacity": "1",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "canvases": []
+    }
+  ],
+  "videoScrubDetected": true,
+  "fullscreenMediaDetected": true
+}

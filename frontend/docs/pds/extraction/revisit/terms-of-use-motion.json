@@ -1,0 +1,3718 @@
+{
+  "url": "https://www.jobyaviation.com/terms-of-use",
+  "title": "Terms of Use | Joby Aviation – Website Terms & Conditions | Joby Aviation",
+  "viewport": {
+    "width": 1440,
+    "height": 1200
+  },
+  "pageHeight": 7239,
+  "headings": [
+    {
+      "tag": "H1",
+      "className": "Typography-module-scss-module__fAfHiq__heading1 PolicyPage-module-scss-module__3JNiaq__title",
+      "text": "Terms of Use",
+      "rect": {
+        "x": 40,
+        "y": 40,
+        "width": 1360,
+        "height": 402
+      },
+      "style": {
+        "position": "static",
+        "display": "block",
+        "overflow": "visible",
+        "height": "402.062px",
+        "minHeight": "auto",
+        "transform": "none",
+        "opacity": "1",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontFamily": "jobyDisplay, \"jobyDisplay Fallback\"",
+        "fontSize": "64px",
+        "fontWeight": "550",
+        "lineHeight": "64px",
+        "letterSpacing": "-1.92px",
+        "zIndex": "auto"
+      }
+    }
+  ],
+  "nav": {
+    "tag": "NAV",
+    "className": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__hero-dark   ",
+    "text": "Terms of UseCloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYouTubeInstagramLinkedInXPrivacy PolicyTerms of UseImpact Reporti",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 80
+    },
+    "style": {
+      "position": "fixed",
+      "display": "flex",
+      "overflow": "visible",
+      "height": "80px",
+      "minHeight": "0px",
+      "transform": "none",
+      "opacity": "1",
+      "color": "rgb(245, 244, 223)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "fontFamily": "jobyText, \"jobyText Fallback\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "zIndex": "100"
+    }
+  },
+  "sections": [
+    {
+      "tag": "DIV",
+      "className": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+      "text": "We use cookies to improve user experience and analyze traffic. See our Privacy Policy and Terms for details.AcceptAcceptDeclineDecline",
+      "rect": {
+        "x": 486,
+        "y": 1138,
+        "width": 934,
+        "height": 42
+      },
+      "style": {
+        "position": "fixed",
+        "display": "flex",
+        "overflow": "visible",
+        "height": "42.2656px",
+        "minHeight": "0px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "opacity": "1",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgb(245, 244, 223)",
+        "fontFamily": "jobyDisplay, \"jobyDisplay Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "1000"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 0
+    },
+    {
+      "tag": "NAV",
+      "className": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq__hero-dark   ",
+      "text": "Terms of UseCloseInvestorsInvestorsDiscoverExperienceTechnologyCompanyNewsCareersInvestorsConnectFly BladeJoby ShopYouTubeInstagramLinkedInXPrivacy PolicyTerms of UseImpact Reporti",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 80
+      },
+      "style": {
+        "position": "fixed",
+        "display": "flex",
+        "overflow": "visible",
+        "height": "80px",
+        "minHeight": "0px",
+        "transform": "none",
+        "opacity": "1",
+        "color": "rgb(245, 244, 223)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontFamily": "jobyText, \"jobyText Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "100"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 1
+    },
+    {
+      "tag": "DIV",
+      "className": "page-wrapper",
+      "text": "Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Terms of Service (these “Terms”) for access to and use of the website located at www.jobyaviat",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 4991
+      },
+      "style": {
+        "position": "static",
+        "display": "block",
+        "overflow": "visible",
+        "height": "4991.06px",
+        "minHeight": "0px",
+        "transform": "none",
+        "opacity": "1",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontFamily": "jobyText, \"jobyText Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "auto"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 0
+    },
+    {
+      "tag": "SECTION",
+      "className": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+      "text": "Terms of UseJOBY WEBSITE TERMS OF SERVICELast revised on July 29, 2024.Welcome to the Terms of Service (these “Terms”) for access to and use of the website located at www.jobyaviat",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 4991
+      },
+      "style": {
+        "position": "relative",
+        "display": "block",
+        "overflow": "visible",
+        "height": "4991.06px",
+        "minHeight": "0px",
+        "transform": "none",
+        "opacity": "1",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontFamily": "jobyText, \"jobyText Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "auto"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 0
+    },
+    {
+      "tag": "SECTION",
+      "className": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-scss-module__OdgXhq__sectionWrapperContain",
+      "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+      "rect": {
+        "x": 0,
+        "y": 4991,
+        "width": 1440,
+        "height": 2248
+      },
+      "style": {
+        "position": "relative",
+        "display": "block",
+        "overflow": "visible",
+        "height": "2248.19px",
+        "minHeight": "0px",
+        "transform": "none",
+        "opacity": "1",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontFamily": "jobyText, \"jobyText Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "auto"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 0
+    },
+    {
+      "tag": "DIV",
+      "className": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+      "text": "",
+      "rect": {
+        "x": 0,
+        "y": 1260,
+        "width": 1440,
+        "height": 1200
+      },
+      "style": {
+        "position": "fixed",
+        "display": "block",
+        "overflow": "visible",
+        "height": "1200px",
+        "minHeight": "0px",
+        "transform": "matrix(1, 0, 0, 1, 0, 1260)",
+        "opacity": "1",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgb(0, 122, 229)",
+        "fontFamily": "jobyText, \"jobyText Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "9999"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 0
+    },
+    {
+      "tag": "DIV",
+      "className": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+      "text": "",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 1200
+      },
+      "style": {
+        "position": "fixed",
+        "display": "block",
+        "overflow": "visible",
+        "height": "1200px",
+        "minHeight": "0px",
+        "transform": "none",
+        "opacity": "0",
+        "color": "rgb(14, 22, 32)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "fontFamily": "jobyText, \"jobyText Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "zIndex": "99"
+      },
+      "hasVideo": false,
+      "hasCanvas": false,
+      "imageCount": 0
+    }
+  ],
+  "media": {
+    "images": [
+      {
+        "src": "https://www.jobyaviation.com/images/logo-animated-256.webp",
+        "alt": "Joby Aviation Animated Logo",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "className": "Navigation-module-scss-module__9NlFDq__logoAnimated"
+      }
+    ],
+    "videos": []
+  },
+  "samples": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "videos": [],
+      "sticky": [
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyWrapper StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 4991,
+            "width": 1440,
+            "height": 1800
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1800px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement StickyCSSElement-module-scss-module__WsLz-q__stickyTop StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 4991,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "sticky",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1200px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "visibleHeadings": [
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 973,
+            "y": 1151,
+            "width": 94,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms",
+          "rect": {
+            "x": 1098,
+            "y": 1151,
+            "width": 42,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "AcceptAccept",
+          "rect": {
+            "x": 1221,
+            "y": 1146,
+            "width": 73,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "DeclineDecline",
+          "rect": {
+            "x": 1302,
+            "y": 1146,
+            "width": 74,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button undefined CookieConsent-module-scss-module__ciNfcW__declineButton",
+          "text": "",
+          "rect": {
+            "x": 1384,
+            "y": 1146,
+            "width": 26,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "26.2656px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Navigation-module-scss-module__9NlFDq__menuOpener",
+          "text": "",
+          "rect": {
+            "x": 40,
+            "y": 30,
+            "width": 33,
+            "height": 33
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "33px",
+            "minHeight": "auto",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Navigation-module-scss-module__9NlFDq__menuClose",
+          "text": "Close",
+          "rect": {
+            "x": 77,
+            "y": 39,
+            "width": 43,
+            "height": 14
+          },
+          "style": {
+            "position": "absolute",
+            "display": "block",
+            "overflow": "visible",
+            "height": "14.2344px",
+            "minHeight": "0px",
+            "transform": "matrix(1, 0, 0, 1, -20, 0)",
+            "opacity": "0",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "500",
+            "lineHeight": "14.24px",
+            "letterSpacing": "-0.32px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "",
+          "rect": {
+            "x": 695,
+            "y": 30,
+            "width": 51,
+            "height": 32
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Investors",
+          "rect": {
+            "x": 1311,
+            "y": 39,
+            "width": 70,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "14.2344px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "500",
+            "lineHeight": "14.24px",
+            "letterSpacing": "-0.32px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Investors",
+          "rect": {
+            "x": 1311,
+            "y": 55,
+            "width": 70,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "14.2344px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "500",
+            "lineHeight": "14.24px",
+            "letterSpacing": "-0.32px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "H1",
+          "className": "Typography-module-scss-module__fAfHiq__heading1 PolicyPage-module-scss-module__3JNiaq__title",
+          "text": "Terms of Use",
+          "rect": {
+            "x": 40,
+            "y": 40,
+            "width": 1360,
+            "height": 402
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "402.062px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyDisplay, \"jobyDisplay Fallback\"",
+            "fontSize": "64px",
+            "fontWeight": "550",
+            "lineHeight": "64px",
+            "letterSpacing": "-1.92px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "JOBY WEBSITE TERMS OF SERVICE",
+          "rect": {
+            "x": 384,
+            "y": 767,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Last revised on July 29, 2024.",
+          "rect": {
+            "x": 384,
+            "y": 796,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Welcome to the Terms of Service (these “Terms”) for access to and use of the website located at www.jobyaviation.com and www.joby.aero and its subdomains, including all data, conte",
+          "rect": {
+            "x": 384,
+            "y": 825,
+            "width": 672,
+            "height": 76
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "76px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "These Terms govern your access to and use of the Website. Please read these Terms carefully, as they include important information about your legal rights. By accessing and/or usin",
+          "rect": {
+            "x": 384,
+            "y": 911,
+            "width": 672,
+            "height": 76
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "76px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "For purposes of these Terms, “you” and “your” means you as the user of the Website. If you use the Website on behalf of a company or other entity then “you” includes you and that e",
+          "rect": {
+            "x": 384,
+            "y": 997,
+            "width": 672,
+            "height": 95
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "95px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Please note that Section 9 contains an arbitration clause and class action waiver. By agreeing to these Terms, you agree (a) to resolve all disputes with us through binding individ",
+          "rect": {
+            "x": 384,
+            "y": 1102,
+            "width": 672,
+            "height": 114
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "114px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.1,
+      "scrollY": 604,
+      "videos": [],
+      "sticky": [
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyWrapper StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 4387,
+            "width": 1440,
+            "height": 1800
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1800px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement StickyCSSElement-module-scss-module__WsLz-q__stickyTop StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 4387,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "sticky",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1200px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "visibleHeadings": [
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 973,
+            "y": 1151,
+            "width": 94,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms",
+          "rect": {
+            "x": 1098,
+            "y": 1151,
+            "width": 42,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "AcceptAccept",
+          "rect": {
+            "x": 1221,
+            "y": 1146,
+            "width": 73,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "DeclineDecline",
+          "rect": {
+            "x": 1302,
+            "y": 1146,
+            "width": 74,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button undefined CookieConsent-module-scss-module__ciNfcW__declineButton",
+          "text": "",
+          "rect": {
+            "x": 1384,
+            "y": 1146,
+            "width": 26,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "26.2656px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "JOBY WEBSITE TERMS OF SERVICE",
+          "rect": {
+            "x": 384,
+            "y": 163,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Last revised on July 29, 2024.",
+          "rect": {
+            "x": 384,
+            "y": 192,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Welcome to the Terms of Service (these “Terms”) for access to and use of the website located at www.jobyaviation.com and www.joby.aero and its subdomains, including all data, conte",
+          "rect": {
+            "x": 384,
+            "y": 221,
+            "width": 672,
+            "height": 76
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "76px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "These Terms govern your access to and use of the Website. Please read these Terms carefully, as they include important information about your legal rights. By accessing and/or usin",
+          "rect": {
+            "x": 384,
+            "y": 307,
+            "width": 672,
+            "height": 76
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "76px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "For purposes of these Terms, “you” and “your” means you as the user of the Website. If you use the Website on behalf of a company or other entity then “you” includes you and that e",
+          "rect": {
+            "x": 384,
+            "y": 393,
+            "width": 672,
+            "height": 95
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "95px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Please note that Section 9 contains an arbitration clause and class action waiver. By agreeing to these Terms, you agree (a) to resolve all disputes with us through binding individ",
+          "rect": {
+            "x": 384,
+            "y": 498,
+            "width": 672,
+            "height": 114
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "114px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "1. WHO MAY USE THE WEBSITE",
+          "rect": {
+            "x": 384,
+            "y": 622,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "You must be 18 years of age or older and reside in the United States or any of its territories to use the Website. By using the Website you represent and warrant that you meet thes",
+          "rect": {
+            "x": 384,
+            "y": 651,
+            "width": 672,
+            "height": 57
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "57px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "2. Location of our Privacy Policy",
+          "rect": {
+            "x": 384,
+            "y": 718,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Privacy Policy. Our Privacy Policy describes how we handle the information you provide to us when you use the Website. For an explanation of our privacy practices, please visit our",
+          "rect": {
+            "x": 384,
+            "y": 747,
+            "width": 672,
+            "height": 76
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "76px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "https://www.jobyaviation.com/privacy-policy/",
+          "rect": {
+            "x": 384,
+            "y": 785,
+            "width": 616,
+            "height": 38
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "3. RIGHTS WE GRANT YOU",
+          "rect": {
+            "x": 384,
+            "y": 833,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "3.1 Rights. Subject to your compliance with these Terms, the Joby hereby grants to you, a personal, worldwide, royalty-free, non-assignable, non-sublicensable, non-transferrable, a",
+          "rect": {
+            "x": 384,
+            "y": 862,
+            "width": 672,
+            "height": 114
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "114px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "3.2 Restrictions. You may not do any of the following, unless applicable laws or regulations prohibit these restrictions or you have our written permission to do so: (a) download, ",
+          "rect": {
+            "x": 384,
+            "y": 986,
+            "width": 672,
+            "height": 494
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "494px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.25,
+      "scrollY": 1510,
+      "videos": [],
+      "sticky": [
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyWrapper StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 3481,
+            "width": 1440,
+            "height": 1800
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1800px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement StickyCSSElement-module-scss-module__WsLz-q__stickyTop StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 3481,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "sticky",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1200px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "visibleHeadings": [
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 973,
+            "y": 1151,
+            "width": 94,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms",
+          "rect": {
+            "x": 1098,
+            "y": 1151,
+            "width": 42,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "AcceptAccept",
+          "rect": {
+            "x": 1221,
+            "y": 1146,
+            "width": 73,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "DeclineDecline",
+          "rect": {
+            "x": 1302,
+            "y": 1146,
+            "width": 74,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button undefined CookieConsent-module-scss-module__ciNfcW__declineButton",
+          "text": "",
+          "rect": {
+            "x": 1384,
+            "y": 1146,
+            "width": 26,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "26.2656px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "3.1 Rights. Subject to your compliance with these Terms, the Joby hereby grants to you, a personal, worldwide, royalty-free, non-assignable, non-sublicensable, non-transferrable, a",
+          "rect": {
+            "x": 384,
+            "y": -44,
+            "width": 672,
+            "height": 114
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "114px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "3.2 Restrictions. You may not do any of the following, unless applicable laws or regulations prohibit these restrictions or you have our written permission to do so: (a) download, ",
+          "rect": {
+            "x": 384,
+            "y": 80,
+            "width": 672,
+            "height": 494
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "494px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "4. OWNERSHIP AND CONTENT",
+          "rect": {
+            "x": 384,
+            "y": 584,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "4.1 Ownership of the Website. The Website, including content, information, trademarks and other materials, are protected under copyright, trademark and other intellectual property ",
+          "rect": {
+            "x": 384,
+            "y": 613,
+            "width": 672,
+            "height": 114
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "114px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "4.2 Ownership of Trademarks. The Joby’s name, the Joby’s logo and all related names, logos, product and service names, designs and slogans are trademarks of the Joby or its affilia",
+          "rect": {
+            "x": 384,
+            "y": 737,
+            "width": 672,
+            "height": 95
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "95px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "4.3 Unsolicited Idea Submission Policy",
+          "rect": {
+            "x": 384,
+            "y": 842,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "Joby does not accept or consider unsolicited ideas or suggestions from you or other third parties so as to avoid any potential misunderstandings or disputes in the event that Joby’",
+          "rect": {
+            "x": 384,
+            "y": 871,
+            "width": 672,
+            "height": 418
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "418px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.5,
+      "scrollY": 3020,
+      "videos": [],
+      "sticky": [
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyWrapper StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 1971,
+            "width": 1440,
+            "height": 1800
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1800px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement StickyCSSElement-module-scss-module__WsLz-q__stickyTop StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 1971,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "sticky",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1200px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "visibleHeadings": [
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 973,
+            "y": 1151,
+            "width": 94,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms",
+          "rect": {
+            "x": 1098,
+            "y": 1151,
+            "width": 42,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "AcceptAccept",
+          "rect": {
+            "x": 1221,
+            "y": 1146,
+            "width": 73,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "DeclineDecline",
+          "rect": {
+            "x": 1302,
+            "y": 1146,
+            "width": 74,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button undefined CookieConsent-module-scss-module__ciNfcW__declineButton",
+          "text": "",
+          "rect": {
+            "x": 1384,
+            "y": 1146,
+            "width": 26,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "26.2656px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "5.2 Limitations of Liability. TO THE EXTENT NOT PROHIBITED BY LAW, YOU AGREE THAT IN NO EVENT WILL THE JOBY ENTITIES BE LIABLE (A) FOR DAMAGES OF ANY KIND, INCLUDING DIRECT, INDIRE",
+          "rect": {
+            "x": 384,
+            "y": -20,
+            "width": 672,
+            "height": 304
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "304px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "6. ARBITRATION AND CLASS ACTION WAIVER",
+          "rect": {
+            "x": 384,
+            "y": 294,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "6.1 Informal Process First. You agree that in the event of any dispute between you and the Joby Entities, you will first contact the Joby and make a good faith sustained effort to ",
+          "rect": {
+            "x": 384,
+            "y": 323,
+            "width": 672,
+            "height": 76
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "76px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "6.2 Arbitration Agreement and Class Action Waiver. After the informal dispute resolution process, any remaining dispute, controversy, or claim (collectively, “Claim”) relating in a",
+          "rect": {
+            "x": 384,
+            "y": 409,
+            "width": 672,
+            "height": 361
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "361px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "6.3 Costs of Arbitration. Payment for any and all reasonable JAMS filing, administrative and arbitrator fees will be in accordance with the JAMS Rules. If the value of your claim d",
+          "rect": {
+            "x": 384,
+            "y": 780,
+            "width": 672,
+            "height": 114
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "114px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "6.4 Opt-Out. You have the right to opt-out and not be bound by the arbitration provisions set forth in these Terms by sending written notice of your decision to opt-out to legal@jo",
+          "rect": {
+            "x": 384,
+            "y": 904,
+            "width": 672,
+            "height": 152
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "152px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "7. ADDITIONAL PROVISIONS",
+          "rect": {
+            "x": 384,
+            "y": 1066,
+            "width": 672,
+            "height": 19
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "19px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "7.1 Updating These Terms. We may modify these Terms from time to time in which case we will update the “Last Revised” date at the top of these Terms. If we make changes that are ma",
+          "rect": {
+            "x": 384,
+            "y": 1095,
+            "width": 672,
+            "height": 171
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "171px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 40,
+            "y": 813,
+            "width": 79,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms of Use",
+          "rect": {
+            "x": 40,
+            "y": 832,
+            "width": 73,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Impact Reporting",
+          "rect": {
+            "x": 40,
+            "y": 851,
+            "width": 97,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Health Plan Transparency",
+          "rect": {
+            "x": 40,
+            "y": 870,
+            "width": 142,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Safety Policy",
+          "rect": {
+            "x": 40,
+            "y": 889,
+            "width": 74,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Experience",
+          "rect": {
+            "x": 900,
+            "y": 862,
+            "width": 94,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Technology",
+          "rect": {
+            "x": 900,
+            "y": 887,
+            "width": 100,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 0.75,
+      "scrollY": 4529,
+      "videos": [],
+      "sticky": [
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyWrapper StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 462,
+            "width": 1440,
+            "height": 1800
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1800px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement StickyCSSElement-module-scss-module__WsLz-q__stickyTop StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": 462,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "sticky",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1200px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "visibleHeadings": [
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 973,
+            "y": 1151,
+            "width": 94,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms",
+          "rect": {
+            "x": 1098,
+            "y": 1151,
+            "width": 42,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "AcceptAccept",
+          "rect": {
+            "x": 1221,
+            "y": 1146,
+            "width": 73,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "DeclineDecline",
+          "rect": {
+            "x": 1302,
+            "y": 1146,
+            "width": 74,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button undefined CookieConsent-module-scss-module__ciNfcW__declineButton",
+          "text": "",
+          "rect": {
+            "x": 1384,
+            "y": 1146,
+            "width": 26,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "26.2656px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "7.4 Miscellaneous. If any provision of these Terms shall be unlawful, void or for any reason unenforceable, then that provision shall be deemed severable from these Terms and shall",
+          "rect": {
+            "x": 384,
+            "y": -4,
+            "width": 672,
+            "height": 228
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "228px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "P",
+          "className": "",
+          "text": "7.5 How to Contact Us. You may contact us regarding the Website or these Terms at: 333 Encinal St, Santa Cruz, CA 95060 or by e-mail at info@jobyaviation.com.",
+          "rect": {
+            "x": 384,
+            "y": 234,
+            "width": 672,
+            "height": 38
+          },
+          "style": {
+            "position": "static",
+            "display": "block",
+            "overflow": "visible",
+            "height": "38px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 40,
+            "y": 42,
+            "width": 79,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms of Use",
+          "rect": {
+            "x": 40,
+            "y": 61,
+            "width": 73,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Impact Reporting",
+          "rect": {
+            "x": 40,
+            "y": 80,
+            "width": 97,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Health Plan Transparency",
+          "rect": {
+            "x": 40,
+            "y": 99,
+            "width": 142,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Safety Policy",
+          "rect": {
+            "x": 40,
+            "y": 118,
+            "width": 74,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Experience",
+          "rect": {
+            "x": 900,
+            "y": 91,
+            "width": 94,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Technology",
+          "rect": {
+            "x": 900,
+            "y": 116,
+            "width": 100,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Company",
+          "rect": {
+            "x": 900,
+            "y": 141,
+            "width": 82,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "News",
+          "rect": {
+            "x": 900,
+            "y": 167,
+            "width": 47,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Careers",
+          "rect": {
+            "x": 900,
+            "y": 192,
+            "width": 66,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "For Investors",
+          "rect": {
+            "x": 1072,
+            "y": 91,
+            "width": 109,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Fly Blade",
+          "rect": {
+            "x": 1072,
+            "y": 116,
+            "width": 76,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Joby Shop",
+          "rect": {
+            "x": 1072,
+            "y": 141,
+            "width": 90,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "pct": 1,
+      "scrollY": 6039,
+      "videos": [],
+      "sticky": [
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyWrapper StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": -1048,
+            "width": 1440,
+            "height": 1800
+          },
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1800px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement StickyCSSElement-module-scss-module__WsLz-q__stickyTop StickyCSSElement-module-scss-module__WsLz-q__skipMobile",
+          "text": "Privacy PolicyTerms of UseImpact ReportingHealth Plan TransparencySafety Policy© 2026 Joby Aero, Inc.DiscoverExperienceTechnologyCompanyNewsCareersExploreFor InvestorsFly BladeJoby",
+          "rect": {
+            "x": 0,
+            "y": -448,
+            "width": 1440,
+            "height": 1200
+          },
+          "style": {
+            "position": "sticky",
+            "display": "block",
+            "overflow": "visible",
+            "height": "1200px",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        }
+      ],
+      "visibleHeadings": [
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 973,
+            "y": 1151,
+            "width": 94,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms",
+          "rect": {
+            "x": 1098,
+            "y": 1151,
+            "width": 42,
+            "height": 16
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "14px",
+            "fontWeight": "550",
+            "lineHeight": "15.4px",
+            "letterSpacing": "-0.28px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "AcceptAccept",
+          "rect": {
+            "x": 1221,
+            "y": 1146,
+            "width": 73,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+          "text": "DeclineDecline",
+          "rect": {
+            "x": 1302,
+            "y": 1146,
+            "width": 74,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "25.8594px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "className": "Button-module-scss-module__n0x4Aa__button undefined CookieConsent-module-scss-module__ciNfcW__declineButton",
+          "text": "",
+          "rect": {
+            "x": 1384,
+            "y": 1146,
+            "width": 26,
+            "height": 26
+          },
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "overflow": "hidden",
+            "height": "26.2656px",
+            "minHeight": "auto",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(14, 22, 32)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "Arial",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "letterSpacing": "normal",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Privacy Policy",
+          "rect": {
+            "x": 40,
+            "y": 42,
+            "width": 79,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Terms of Use",
+          "rect": {
+            "x": 40,
+            "y": 61,
+            "width": 73,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Impact Reporting",
+          "rect": {
+            "x": 40,
+            "y": 80,
+            "width": 97,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Health Plan Transparency",
+          "rect": {
+            "x": 40,
+            "y": 99,
+            "width": 142,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Safety Policy",
+          "rect": {
+            "x": 40,
+            "y": 118,
+            "width": 74,
+            "height": 14
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "12px",
+            "fontWeight": "450",
+            "lineHeight": "14.4px",
+            "letterSpacing": "-0.24px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Experience",
+          "rect": {
+            "x": 900,
+            "y": 91,
+            "width": 94,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Technology",
+          "rect": {
+            "x": 900,
+            "y": 116,
+            "width": 100,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Company",
+          "rect": {
+            "x": 900,
+            "y": 141,
+            "width": 82,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "News",
+          "rect": {
+            "x": 900,
+            "y": 167,
+            "width": 47,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Careers",
+          "rect": {
+            "x": 900,
+            "y": 192,
+            "width": 66,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "For Investors",
+          "rect": {
+            "x": 1072,
+            "y": 91,
+            "width": 109,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Fly Blade",
+          "rect": {
+            "x": 1072,
+            "y": 116,
+            "width": 76,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Joby Shop",
+          "rect": {
+            "x": 1072,
+            "y": 141,
+            "width": 90,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "YouTube",
+          "rect": {
+            "x": 1244,
+            "y": 91,
+            "width": 77,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        },
+        {
+          "tag": "A",
+          "className": "",
+          "text": "Instagram",
+          "rect": {
+            "x": 1244,
+            "y": 116,
+            "width": 84,
+            "height": 21
+          },
+          "style": {
+            "position": "static",
+            "display": "inline",
+            "overflow": "visible",
+            "height": "auto",
+            "minHeight": "0px",
+            "transform": "none",
+            "opacity": "1",
+            "color": "rgb(245, 244, 223)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontFamily": "jobyText, \"jobyText Fallback\"",
+            "fontSize": "18px",
+            "fontWeight": "450",
+            "lineHeight": "25.2px",
+            "letterSpacing": "-0.36px",
+            "zIndex": "auto"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -149,8 +149,8 @@ export default function LoginSecureExample() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
+        <div className="pds-page pds-cream min-h-screen flex items-center justify-center p-4 py-28">
+            <div className="pds-form-surface max-w-md w-full">
                 {/* Logo y título */}
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-800 mb-2">

@@ -15,9 +15,10 @@ export function PerformanceProvider({ children }: PerformanceProviderProps) {
             if (entry.isIntersecting) {
               const element = entry.target as HTMLElement
 
-              if (element.dataset.src) {
+              const src = element.dataset.src
+              if (src) {
                 const img = element as HTMLImageElement
-                img.src = img.dataset.src
+                img.src = src
                 img.onload = () => {
                   img.classList.add('loaded')
                   observer.unobserve(img)

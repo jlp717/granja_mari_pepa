@@ -1,0 +1,2465 @@
+{
+  "_metadata": {
+    "scriptName": "extractScrollSnapshot",
+    "extractedAt": "2026-04-12T21:59:23.597Z",
+    "sourceUrl": "https://www.jobyaviation.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewportWidth": 1440,
+    "viewportHeight": 1200,
+    "scrollHeight": 37931,
+    "skillVersion": "3.3"
+  },
+  "totalSnapshots": 21,
+  "snapshots": [
+    {
+      "pct": 0,
+      "scrollY": 0,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 16.628,
+          "paused": true,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 14432
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 22850
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 25263
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 25753
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 29770
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 35682
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 5,
+      "scrollY": 1837,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 2.867,
+          "paused": true,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1837
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1837
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1837
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 12595
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 21013
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 23426
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 23916
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 27933
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 33845
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 2
+    },
+    {
+      "pct": 10,
+      "scrollY": 3673,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 5.108,
+          "paused": false,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -3673
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -3673
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -3673
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 10759
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 19177
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 21590
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 22080
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 26097
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 32009
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 15,
+      "scrollY": 5510,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 7.726,
+          "paused": false,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -5510
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -5510
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -5510
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 8922
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 17340
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 19753
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 20243
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 24260
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 30172
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 20,
+      "scrollY": 7346,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 10.593,
+          "paused": false,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -7346
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -7346
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -7346
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 7086
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 15504
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 17917
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 18407
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 22424
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 28336
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 25,
+      "scrollY": 9183,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 13.358,
+          "paused": false,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -9183
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -9183
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -9183
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 5249
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 13667
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 16080
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 16570
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 20587
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 26499
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 30,
+      "scrollY": 11019,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 16.128,
+          "paused": false,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -11019
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -11019
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -11019
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 3413
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 11831
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 14244
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 14734
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 18751
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 24663
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 35,
+      "scrollY": 12856,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 18.847,
+          "paused": false,
+          "rect": {
+            "y": 0,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module-scss-module__9NlFDq",
+          "opacity": "1",
+          "transform": "none",
+          "top": 0
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -12856
+        },
+        {
+          "id": null,
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -12856
+        },
+        {
+          "id": null,
+          "classes": "SectionHeroMedia-module-scss-module__tbV5WW__sectionHeroMedia SectionHeroMedia-m",
+          "opacity": "1",
+          "transform": "none",
+          "top": -12856
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1576
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 9994
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 12407
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 12897
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 16914
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 22826
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 40,
+      "scrollY": 14692,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 19.899,
+          "paused": false,
+          "rect": {
+            "y": -1342,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -14692
+        },
+        {
+          "id": "experience-highlights",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -292
+        },
+        {
+          "id": null,
+          "classes": "Typography-module-scss-module__fAfHiq__captionSmall ExperienceHighlights-module-",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -8.45312)",
+          "top": 1165
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 25
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 8158
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 10571
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 11061
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 15078
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 20990
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 3
+    },
+    {
+      "pct": 45,
+      "scrollY": 16529,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -3179,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -16529
+        },
+        {
+          "id": "experience-highlights",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2129
+        },
+        {
+          "id": null,
+          "classes": "Typography-module-scss-module__fAfHiq__captionSmall ExperienceHighlights-module-",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -8.45312)",
+          "top": 1165
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 25
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 6321
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 8734
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 9224
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 13241
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 19153
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 3
+    },
+    {
+      "pct": 50,
+      "scrollY": 18366,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -5016,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -18366
+        },
+        {
+          "id": "experience-highlights",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -3966
+        },
+        {
+          "id": null,
+          "classes": "Typography-module-scss-module__fAfHiq__captionSmall ExperienceHighlights-module-",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -8.45312)",
+          "top": 1165
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 25
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 4484
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 6897
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 7387
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 11404
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 17316
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 2
+    },
+    {
+      "pct": 55,
+      "scrollY": 20202,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -6852,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -20202
+        },
+        {
+          "id": "experience-highlights",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -5802
+        },
+        {
+          "id": null,
+          "classes": "Typography-module-scss-module__fAfHiq__captionSmall ExperienceHighlights-module-",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -8.45312)",
+          "top": 1120
+        },
+        {
+          "id": null,
+          "classes": "ExperienceHighlights-module-scss-module__fR1D2a__sectionEnd",
+          "opacity": "1",
+          "transform": "none",
+          "top": 1130
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -20
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2648
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 5061
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 5551
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 9568
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 15480
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 60,
+      "scrollY": 22039,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -8689,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -22039
+        },
+        {
+          "id": "app",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -231
+        },
+        {
+          "id": null,
+          "classes": "SectionApp-module-scss-module__E1gRYW__sectionApp",
+          "opacity": "1",
+          "transform": "none",
+          "top": -231
+        },
+        {
+          "id": null,
+          "classes": "SectionApp-module-scss-module__E1gRYW__sectionEnd",
+          "opacity": "1",
+          "transform": "none",
+          "top": 456
+        },
+        {
+          "id": "technology",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 661
+        },
+        {
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "opacity": "1",
+          "transform": "none",
+          "top": 661
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -1857
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 811
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 3224
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 3714
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 7731
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 13643
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 65,
+      "scrollY": 23875,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -10525,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -23875
+        },
+        {
+          "id": "technology",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1175
+        },
+        {
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1175
+        },
+        {
+          "id": "news",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 215
+        },
+        {
+          "id": null,
+          "classes": "SectionNews-module-scss-module__Y0MXZa__sectionNews undefined",
+          "opacity": "1",
+          "transform": "none",
+          "top": 215
+        },
+        {
+          "id": "section-partners",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 1120
+        },
+        {
+          "id": null,
+          "classes": "SectionPartners-module-scss-module__b7bNla__sectionPartners",
+          "opacity": "1",
+          "transform": "none",
+          "top": 1120
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav undefined  Naviga",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -3693
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -17
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 1388
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 1878
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 5895
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 11807
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 70,
+      "scrollY": 25712,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -12362,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -25712
+        },
+        {
+          "id": "section-partners",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -717
+        },
+        {
+          "id": null,
+          "classes": "SectionPartners-module-scss-module__b7bNla__sectionPartners",
+          "opacity": "1",
+          "transform": "none",
+          "top": -717
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -5530
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -1854
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 489
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 4058
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 9970
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 75,
+      "scrollY": 27548,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -14198,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -27548
+        },
+        {
+          "id": "section-partners",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2553
+        },
+        {
+          "id": null,
+          "classes": "SectionPartners-module-scss-module__b7bNla__sectionPartners",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2553
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -7366
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -3690
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": 489
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2222
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 8134
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 80,
+      "scrollY": 29385,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -16035,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -29385
+        },
+        {
+          "id": "section-partners",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -4390
+        },
+        {
+          "id": null,
+          "classes": "SectionPartners-module-scss-module__b7bNla__sectionPartners",
+          "opacity": "1",
+          "transform": "none",
+          "top": -4390
+        },
+        {
+          "id": "story",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 235
+        },
+        {
+          "id": null,
+          "classes": "SectionEntry-module-scss-module__FfUzAa__sectionEntry",
+          "opacity": "1",
+          "transform": "none",
+          "top": 235
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -9203
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -5527
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -1002
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": -512
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 500
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 6297
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 85,
+      "scrollY": 31221,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -17871,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -31221
+        },
+        {
+          "id": "illustration",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -211
+        },
+        {
+          "id": null,
+          "classes": "SectionIllustration-module-scss-module__MI8vIq__sectionIllustration",
+          "opacity": "1",
+          "transform": "none",
+          "top": -211
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav undefined  Naviga",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -11039
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -7363
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -2838
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": -2348
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -395
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 4461
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 90,
+      "scrollY": 33058,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -19708,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -33058
+        },
+        {
+          "id": "illustration",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2048
+        },
+        {
+          "id": null,
+          "classes": "SectionIllustration-module-scss-module__MI8vIq__sectionIllustration",
+          "opacity": "1",
+          "transform": "none",
+          "top": -2048
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav undefined  Naviga",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -12876
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -9200
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -4675
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": -4185
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -2232
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 2624
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 95,
+      "scrollY": 34894,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -21544,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": null,
+          "classes": "page-wrapper",
+          "opacity": "1",
+          "transform": "none",
+          "top": -34894
+        },
+        {
+          "id": "illustration",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -3884
+        },
+        {
+          "id": null,
+          "classes": "SectionIllustration-module-scss-module__MI8vIq__sectionIllustration",
+          "opacity": "1",
+          "transform": "none",
+          "top": -3884
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": 788
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav undefined  Naviga",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -14712
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -11036
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -6511
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": -6021
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -4068
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": 788
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 1
+    },
+    {
+      "pct": 100,
+      "scrollY": 36731,
+      "nav": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "opacity": "1",
+        "backdropFilter": "none",
+        "transform": "none"
+      },
+      "videos": [
+        {
+          "currentTime": 20.002,
+          "paused": true,
+          "rect": {
+            "y": -23381,
+            "h": 1200,
+            "w": 1440
+          }
+        }
+      ],
+      "visibleSections": [
+        {
+          "id": null,
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "top": 1138
+        },
+        {
+          "id": "footer",
+          "classes": "SectionWrapper-module-scss-module__OdgXhq__sectionWrapper SectionWrapper-module-",
+          "opacity": "1",
+          "transform": "none",
+          "top": -1049
+        },
+        {
+          "id": null,
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOverlay",
+          "opacity": "0",
+          "transform": "none",
+          "top": 0
+        }
+      ],
+      "pinnedEls": [
+        {
+          "tag": "DIV",
+          "classes": "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+          "top": 1138
+        },
+        {
+          "tag": "NAV",
+          "classes": "Navigation-module-scss-module__9NlFDq__nav Navigation-module",
+          "top": 0
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -16549
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -12873
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -8348
+        },
+        {
+          "tag": "DIV",
+          "classes": "SectionPartners-module-scss-module__b7bNla__categories",
+          "top": -7858
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -5905
+        },
+        {
+          "tag": "DIV",
+          "classes": "StickyCSSElement-module-scss-module__WsLz-q__stickyElement S",
+          "top": -449
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransition",
+          "top": 1260
+        },
+        {
+          "tag": "DIV",
+          "classes": "PageTransition-module-scss-module__yGw4-W__pageTransitionOve",
+          "top": 0
+        }
+      ],
+      "activeAnimations": 2
+    }
+  ]
+}

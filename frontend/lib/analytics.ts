@@ -82,6 +82,13 @@ const flushEvents = async (): Promise<void> => {
   if (eventQueue.length === 0) return;
   
   const eventsToSend = eventQueue.splice(0, eventQueue.length);
+
+  if (
+    process.env.NODE_ENV === 'development' &&
+    process.env.NEXT_PUBLIC_ENABLE_DEV_ANALYTICS !== 'true'
+  ) {
+    return;
+  }
   
   try {
     await fetch('/api/analytics/events', {

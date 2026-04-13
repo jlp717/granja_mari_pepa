@@ -153,7 +153,8 @@ export function useServiceWorker(): UseServiceWorkerReturn {
 
   // Limpiar cache
   const clearCache = useCallback(async (): Promise<boolean> => {
-    if (!navigator.serviceWorker.controller) return false;
+    const controller = navigator.serviceWorker.controller;
+    if (!controller) return false;
 
     return new Promise((resolve) => {
       const messageChannel = new MessageChannel();
@@ -162,7 +163,7 @@ export function useServiceWorker(): UseServiceWorkerReturn {
         resolve(event.data?.success || false);
       };
 
-      navigator.serviceWorker.controller.postMessage(
+      controller.postMessage(
         { type: 'CLEAR_CACHE' },
         [messageChannel.port2]
       );
@@ -171,7 +172,8 @@ export function useServiceWorker(): UseServiceWorkerReturn {
 
   // Obtener tamaño de cache
   const getCacheSize = useCallback(async (): Promise<number> => {
-    if (!navigator.serviceWorker.controller) return 0;
+    const controller = navigator.serviceWorker.controller;
+    if (!controller) return 0;
 
     return new Promise((resolve) => {
       const messageChannel = new MessageChannel();
@@ -180,7 +182,7 @@ export function useServiceWorker(): UseServiceWorkerReturn {
         resolve(event.data?.size || 0);
       };
 
-      navigator.serviceWorker.controller.postMessage(
+      controller.postMessage(
         { type: 'GET_CACHE_SIZE' },
         [messageChannel.port2]
       );

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/native-motion';
 import { MapPin, Phone, Navigation } from 'lucide-react';
 import { delegations } from '@/lib/data';
 import { Button } from '@/components/ui/button';

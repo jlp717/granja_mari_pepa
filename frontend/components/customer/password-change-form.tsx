@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { X, Eye, EyeOff, Lock, AlertCircle, CheckCircle, Shield, Clock, Key } from 'lucide-react';
 import { toast } from 'sonner';
 import { secureFetch } from '@/lib/secureFetch';
@@ -258,7 +258,7 @@ export function PasswordChangeForm({ isOpen, onClose }: PasswordChangeFormProps)
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="relative overflow-hidden">

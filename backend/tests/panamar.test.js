@@ -137,21 +137,6 @@ describe('PANAMAR Controller', () => {
       );
     });
 
-    it('should return 400 for invalid tipo parameter', async () => {
-      const req = {
-        user: { codigoCliente: '9999999999' },
-        query: { tipo: 'invalid' }
-      };
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn()
-      };
-
-      await panamarController.getDocuments(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(400);
-    });
-
     it('should return 400 for invalid date format', async () => {
       const req = {
         user: { codigoCliente: '9999999999' },

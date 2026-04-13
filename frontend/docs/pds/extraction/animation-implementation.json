@@ -1,0 +1,285 @@
+{
+  "_metadata": {
+    "kind": "animationImplementation",
+    "version": "v3.3",
+    "sourceUrl": "https://www.jobyaviation.com",
+    "generatedAt": "2026-04-12T21:59:03.495Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  "pages": {
+    "home": {
+      "_metadata": {
+        "scriptName": "detectAnimationImplementation",
+        "extractedAt": "2026-04-12T21:59:41.639Z",
+        "sourceUrl": "https://www.jobyaviation.com/",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 37931,
+        "skillVersion": "3.3"
+      },
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "evidence": {
+        "revealSystem": "61 reveal-like elements",
+        "videoScrub": "video exists and no GSAP video target"
+      },
+      "usesCSSModules": true,
+      "cssModulePatterns": [
+        "jobytext_dc20cbd-module__wU62sG__className",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsentText",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "CookieConsent-module-scss-module__ciNfcW__btnContainer",
+        "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+        "Button-module-scss-module__n0x4Aa__buttonIn",
+        "Typography-module-scss-module__fAfHiq__captionButton",
+        "Button-module-scss-module__n0x4Aa__buttonOut"
+      ],
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      }
+    },
+    "experience": {
+      "_metadata": {
+        "scriptName": "detectAnimationImplementation",
+        "extractedAt": "2026-04-12T22:00:20.572Z",
+        "sourceUrl": "https://www.jobyaviation.com/experience",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 39258,
+        "skillVersion": "3.3"
+      },
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "evidence": {
+        "revealSystem": "38 reveal-like elements",
+        "videoScrub": "video exists and no GSAP video target"
+      },
+      "usesCSSModules": true,
+      "cssModulePatterns": [
+        "jobytext_dc20cbd-module__wU62sG__className",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsentText",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "CookieConsent-module-scss-module__ciNfcW__btnContainer",
+        "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+        "Button-module-scss-module__n0x4Aa__buttonIn",
+        "Typography-module-scss-module__fAfHiq__captionButton",
+        "Button-module-scss-module__n0x4Aa__buttonOut"
+      ],
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      }
+    },
+    "technology": {
+      "_metadata": {
+        "scriptName": "detectAnimationImplementation",
+        "extractedAt": "2026-04-12T22:01:01.133Z",
+        "sourceUrl": "https://www.jobyaviation.com/technology",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 51423,
+        "skillVersion": "3.3"
+      },
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "evidence": {
+        "revealSystem": "123 reveal-like elements",
+        "videoScrub": "video exists and no GSAP video target"
+      },
+      "usesCSSModules": true,
+      "cssModulePatterns": [
+        "jobytext_dc20cbd-module__wU62sG__className",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsentText",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "CookieConsent-module-scss-module__ciNfcW__btnContainer",
+        "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+        "Button-module-scss-module__n0x4Aa__buttonIn",
+        "Typography-module-scss-module__fAfHiq__captionButton",
+        "Button-module-scss-module__n0x4Aa__buttonOut"
+      ],
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      }
+    },
+    "company": {
+      "_metadata": {
+        "scriptName": "detectAnimationImplementation",
+        "extractedAt": "2026-04-12T22:01:39.930Z",
+        "sourceUrl": "https://www.jobyaviation.com/company",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 23819,
+        "skillVersion": "3.3"
+      },
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "CSS_INTERSECTION_OBSERVER",
+        "smoothScroll": "NONE",
+        "videoScrub": "NATIVE_RAF_OR_SCROLL",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "evidence": {
+        "revealSystem": "52 reveal-like elements",
+        "videoScrub": "video exists and no GSAP video target"
+      },
+      "usesCSSModules": true,
+      "cssModulePatterns": [
+        "jobytext_dc20cbd-module__wU62sG__className",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsentText",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "CookieConsent-module-scss-module__ciNfcW__btnContainer",
+        "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+        "Button-module-scss-module__n0x4Aa__buttonIn",
+        "Typography-module-scss-module__fAfHiq__captionButton",
+        "Button-module-scss-module__n0x4Aa__buttonOut"
+      ],
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": true,
+        "nativeVideoScrub": true
+      }
+    },
+    "privacy-policy": {
+      "_metadata": {
+        "scriptName": "detectAnimationImplementation",
+        "extractedAt": "2026-04-12T22:02:18.220Z",
+        "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 4805,
+        "skillVersion": "3.3"
+      },
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "NONE",
+        "smoothScroll": "NONE",
+        "videoScrub": "NONE",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "evidence": {},
+      "usesCSSModules": true,
+      "cssModulePatterns": [
+        "jobytext_dc20cbd-module__wU62sG__className",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsentText",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "CookieConsent-module-scss-module__ciNfcW__btnContainer",
+        "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+        "Button-module-scss-module__n0x4Aa__buttonIn",
+        "Typography-module-scss-module__fAfHiq__captionButton",
+        "Button-module-scss-module__n0x4Aa__buttonOut"
+      ],
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": false,
+        "nativeVideoScrub": false
+      }
+    },
+    "terms-of-use": {
+      "_metadata": {
+        "scriptName": "detectAnimationImplementation",
+        "extractedAt": "2026-04-12T22:02:56.068Z",
+        "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "viewportWidth": 1440,
+        "viewportHeight": 1200,
+        "scrollHeight": 7239,
+        "skillVersion": "3.3"
+      },
+      "implementation": {
+        "scrollHandler": "NATIVE_SCROLL_OR_RAF",
+        "revealSystem": "NONE",
+        "smoothScroll": "NONE",
+        "videoScrub": "NONE",
+        "pageTransition": "VIEW_TRANSITIONS"
+      },
+      "evidence": {},
+      "usesCSSModules": true,
+      "cssModulePatterns": [
+        "jobytext_dc20cbd-module__wU62sG__className",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsent",
+        "CookieConsent-module-scss-module__ciNfcW__cookieConsentText",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "Typography-module-scss-module__fAfHiq__body3",
+        "Typography-module-scss-module__fAfHiq__captionLink",
+        "CookieConsent-module-scss-module__ciNfcW__btnContainer",
+        "Button-module-scss-module__n0x4Aa__button Button-module-scss-module__n0x4Aa__cookie-button undefined",
+        "Button-module-scss-module__n0x4Aa__buttonIn",
+        "Typography-module-scss-module__fAfHiq__captionButton",
+        "Button-module-scss-module__n0x4Aa__buttonOut"
+      ],
+      "targetShouldUse": {
+        "gsap": false,
+        "lenis": false,
+        "framerMotion": false,
+        "nativeScrollHandler": true,
+        "cssKeyframesForReveals": false,
+        "nativeVideoScrub": false
+      }
+    }
+  }
+}

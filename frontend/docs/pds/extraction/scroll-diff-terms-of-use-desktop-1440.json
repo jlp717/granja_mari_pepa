@@ -1,0 +1,40 @@
+{
+  "_metadata": {
+    "kind": "compareScrollBehavior",
+    "version": "v3.3",
+    "url": "https://www.jobyaviation.com/terms-of-use -> http://localhost:3001/es/legal/terminos",
+    "timestamp": "2026-04-13T06:15:12.202Z",
+    "viewport": {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "page": {
+    "name": "terms-of-use",
+    "source": "/terms-of-use",
+    "target": "/es/legal/terminos"
+  },
+  "sourceUrl": "https://www.jobyaviation.com/terms-of-use",
+  "targetUrl": "http://localhost:3001/es/legal/terminos",
+  "console": {
+    "sourceErrors": [],
+    "targetErrors": [],
+    "pass": true
+  },
+  "score": {
+    "heightSimilarity": 1,
+    "sectionSimilarity": 1,
+    "canvasSimilarity": 1,
+    "videoStructure": 1,
+    "targetVideoContract": 1,
+    "videoScrub": 1,
+    "avgFrame": 1,
+    "worstFrame": 1,
+    "avgSimilarity": 1,
+    "worstSimilarity": 1,
+    "passRate": 1,
+    "pass": true
+  }
+}

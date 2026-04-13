@@ -45,6 +45,17 @@ const healthMetrics = {
   consecutiveHeartbeatFailures: 0
 };
 
+// ─── Panamar Pool (UTF-8) ────────────────────────────────────────
+// User requested CCSID=1208 only for Panamar
+const panamarConnectionString = connectionString.includes('CCSID=')
+  ? connectionString
+  : `${connectionString}${connectionString.endsWith(';') ? '' : ';'}CCSID=1208;NAM=1;`;
+
+let panamarPool = null;
+const panamarHealthMetrics = { ...healthMetrics };
+let panamarHeartbeatTimer = null;
+let panamarConsecutiveFailures = 0;
+
 // ─── Pool Management ─────────────────────────────────────────────
 
 /**
@@ -155,7 +166,7 @@ function isConnectionError(error) {
 
   return (
     ['08S01', '08003', '08S02', '40001', 'HYT00', 'HY000'].includes(state) ||
-    [10054, 8405, 10060, 10053].includes(code) ||
+    [10054, 8405, 10060, 10053, 10065].includes(code) ||
     msg.includes('Communication link failure') ||
     msg.includes('Connection reset') ||
     msg.includes('not connected') ||
@@ -182,6 +193,10 @@ async function query(sql, params = []) {
     try {
       // Si no hay pool o se marcó para recreación, crearlo
       if (!pool) await createPool();
+
+      if (!pool) {
+        throw new Error('ODBC pool creation failed - pool is still null after createPool()');
+      }
 
       connection = await pool.connect();
 
@@ -249,16 +264,70 @@ function rejectAfter(ms, message) {
   return new Promise((_, reject) => setTimeout(() => reject(new Error(message)), ms));
 }
 
+// ─── Panamar Query Execution ─────────────────────────────────────
+
+/**
+ * Ejecutar query específico para Panamar con CCSID=1208 (UTF-8)
+ */
+async function panamarQuery(sql, params = []) {
+  if (!panamarPool) {
+    logger.info('📡 Inicializando pool PANAMAR (CCSID=1208)...');
+    try {
+      panamarPool = await odbc.pool({
+        ...poolConfig,
+        connectionString: panamarConnectionString,
+        initialSize: 1, // Pool más pequeño para Panamar
+        maxSize: 5
+      });
+    } catch (err) {
+      panamarPool = null;
+      logger.error('❌ Error creando pool PANAMAR:', err.message);
+      throw err;
+    }
+  }
+
+  const MAX_RETRIES = 3;
+  let lastError;
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    let connection;
+    try {
+      if (!panamarPool) {
+        throw new Error('Panamar pool is null - cannot obtain connection');
+      }
+      connection = await panamarPool.connect();
+      const result = await connection.query(sql, params);
+      return result;
+    } catch (error) {
+      lastError = error;
+      if (isConnectionError(error)) {
+        if (connection) { try { await connection.close(); } catch (_) { } }
+        if (attempt < MAX_RETRIES) {
+          await sleep(1000 * attempt);
+          continue;
+        }
+      }
+      throw error;
+    } finally {
+      if (connection) { try { await connection.close(); } catch (_) { } }
+    }
+  }
+  throw lastError;
+}
+
 // ─── Public API ──────────────────────────────────────────────────
 
 module.exports = {
   initialize: createPool,
   query,
+  panamarQuery, // Nueva exportación para Panamar
   close: async () => {
     if (heartbeatTimer) clearInterval(heartbeatTimer);
+    if (panamarHeartbeatTimer) clearInterval(panamarHeartbeatTimer);
     if (pool) { try { await pool.close(); } catch (_) { } }
-    logger.info('✅ Pool ODBC cerrado');
+    if (panamarPool) { try { await panamarPool.close(); } catch (_) { } }
+    logger.info('✅ Pools ODBC cerrados');
   },
-  getHealthMetrics: () => ({ ...healthMetrics }),
+  getHealthMetrics: () => ({ ...healthMetrics, panamar: panamarHealthMetrics }),
   get pool() { return pool; }
 };

@@ -193,7 +193,11 @@ async function obtenerPerfil(req, res) {
       const queryCliente = `
         SELECT 
           TRIM(CLI.CODIGOCLIENTE) AS CODIGOCLIENTE,
-          TRIM(CLI.NOMBRECLIENTE) AS NOMBRECLIENTE,
+          COALESCE(
+            CASE WHEN LENGTH(TRIM(CLI.NOMBRECLIENTE)) > 1 THEN TRIM(CLI.NOMBRECLIENTE) END,
+            CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
+            TRIM(CLI.NOMBRECLIENTE)
+          ) AS NOMBRECLIENTE,
           TRIM(CLI.NIF) AS NIF,
           TRIM(CLI.DIRECCION) AS DIRECCION,
           TRIM(CLI.POBLACION) AS POBLACION,
@@ -321,6 +325,8 @@ async function obtenerPerfil(req, res) {
 async function obtenerFacturas(req, res) {
   try {
     const { codigoCliente } = req.params;
+    const { search, busqueda } = req.query;
+    const searchParam = search || busqueda;
 
     // 1. OBTENER CÓDIGOS VINCULADOS (POR NIF)
     let codigosVinculados = [`'${codigoCliente}'`]; // Por defecto, solo el propio código
@@ -350,6 +356,18 @@ async function obtenerFacturas(req, res) {
     const codigosInClause = codigosVinculados.join(', ');
 
     // 2. APLICAR FILTROS ESPECÍFICOS
+    // Búsqueda dinámica (opcional si se pasa por query)
+    let searchFilter = "";
+    if (searchParam && searchParam.trim()) {
+      const s = searchParam.trim().toUpperCase();
+      searchFilter = `AND (
+        UPPER(CAC.SERIEFACTURA) LIKE '%${s}%' 
+        OR CAST(CAC.NUMEROFACTURA AS CHAR(20)) LIKE '%${s}%'
+        OR CAST(CAC.NUMEROALBARAN AS CHAR(20)) LIKE '%${s}%'
+        OR TRIM(CAC.PEDIDOREFERENCIA) LIKE '%${s}%'
+      )`;
+    }
+
     // FIX ESPECÍFICO PARA CLIENTE 4300013449: Alinear con Libro IVA (Cierre 12/12/2025)
     let dateFilter = "";
     if (codigosInClause.includes("'4300013449'")) {
@@ -367,12 +385,14 @@ async function obtenerFacturas(req, res) {
           MAX(CAC.ANOFACTURA) AS ANO,
           MAX(CAC.MESFACTURA) AS MES,
           MAX(CAC.DIAFACTURA) AS DIA,
-          MAX(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE,
+          CAC.CODIGOCLIENTEFACTURA AS CODIGO_CLIENTE,
+          TRIM(MAX(CLI.NOMBRECLIENTE)) AS NOMBRE_COMERCIAL,
+          TRIM(MAX(CLI.NOMBREALTERNATIVO)) AS NOMBRE_FISCAL,
           
           -- Base Imponible: SUMA de todos los albaranes de la factura
           SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 +
            CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) AS BASE_IMPONIBLE,
-          
+
           -- IVA Recalculado: SUMA de todos los albaranes
           SUM(
             (CAC.IMPORTEBASEIMPONIBLE1 * CASE WHEN CAC.PORCENTAJEIVA1 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA1 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA1 IN (4, 3) THEN 0.04 ELSE 0 END) +
@@ -381,7 +401,7 @@ async function obtenerFacturas(req, res) {
             (CAC.IMPORTEBASEIMPONIBLE4 * CASE WHEN CAC.PORCENTAJEIVA4 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA4 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA4 IN (4, 3) THEN 0.04 ELSE 0 END) +
             (CAC.IMPORTEBASEIMPONIBLE5 * CASE WHEN CAC.PORCENTAJEIVA5 IN (7, 10, 1) THEN 0.10 WHEN CAC.PORCENTAJEIVA5 IN (16, 21, 2) THEN 0.21 WHEN CAC.PORCENTAJEIVA5 IN (4, 3) THEN 0.04 ELSE 0 END)
           ) AS IVA,
-          
+
           -- Total: SUMA de Base + IVA + Recargo de todos los albaranes
           SUM(
             (CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 + CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) +
@@ -408,10 +428,12 @@ async function obtenerFacturas(req, res) {
             TRIM(CAST(MAX(CAC.ANOFACTURA) AS CHAR(4)))
           AS VARCHAR(10)) AS FECHA
         FROM DSEDAC.CAC CAC
+        LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
         WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) IN (${codigosInClause})
           AND CAC.NUMEROFACTURA > 0
           ${dateFilter}
-        GROUP BY TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
+          ${searchFilter}
+        GROUP BY TRIM(CAC.SERIEFACTURA), CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA, CAC.CODIGOCLIENTEFACTURA
       ),
       AlbaranesFactura AS (
         SELECT
@@ -471,12 +493,32 @@ async function obtenerFacturas(req, res) {
       estado: f.PENDIENTE === 0 ? 'Pagada' : 'Pendiente',
       numeroProductos: f.NUM_PRODUCTOS || 0,
       albaranes: f.ALBARANES || '',
-      numAlbaranes: f.NUM_ALBARANES || 0
+      numAlbaranes: f.NUM_ALBARANES || 0,
+      codigoCliente: (f.CODIGO_CLIENTE || '').trim(),
+      nombreComercial: f.NOMBRE_COMERCIAL || '',
+      nombreFiscal: f.NOMBRE_FISCAL || ''
     }));
 
-    logger.info(`✅ Facturas obtenidas (Unificación NIF): ${facturas.length} docs para clientes [${codigosInClause}]`);
+    // 4. OBTENER LISTA DE CLIENTES ÚNICOS PARA EL SELECTOR
+    const queryClientes = `
+      SELECT 
+        TRIM(CODIGOCLIENTE) AS CODIGO,
+        TRIM(NOMBRECLIENTE) AS COMERCIAL,
+        TRIM(NOMBREALTERNATIVO) AS FISCAL
+      FROM DSEDAC.CLI
+      WHERE TRIM(CODIGOCLIENTE) IN (${codigosInClause})
+      ORDER BY NOMBRECLIENTE
+    `;
+    const clientesRaw = await odbcPool.query(queryClientes);
+    const clientes = (clientesRaw || []).map(c => ({
+      codigoCliente: c.CODIGO,
+      nombreComercial: c.COMERCIAL || c.CODIGO,
+      nombreFiscal: c.FISCAL || ''
+    }));
 
-    return res.json({ success: true, facturas });
+    logger.info(`✅ Facturas obtenidas (Unificación NIF): ${facturas.length} docs. Clientes vinculados: ${clientes.length}`);
+
+    return res.json({ success: true, facturas, clientes });
   } catch (error) {
     logger.error('❌ Error obteniendo facturas', error);
     return res.status(500).json({ success: false, message: 'Error obteniendo facturas', error: error.message });

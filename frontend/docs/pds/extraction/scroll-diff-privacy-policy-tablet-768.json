@@ -1,0 +1,40 @@
+{
+  "_metadata": {
+    "kind": "compareScrollBehavior",
+    "version": "v3.3",
+    "url": "https://www.jobyaviation.com/privacy-policy -> http://localhost:3001/es/legal/privacidad",
+    "timestamp": "2026-04-13T06:18:22.782Z",
+    "viewport": {
+      "name": "tablet-768",
+      "width": 768,
+      "height": 1024
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  },
+  "page": {
+    "name": "privacy-policy",
+    "source": "/privacy-policy",
+    "target": "/es/legal/privacidad"
+  },
+  "sourceUrl": "https://www.jobyaviation.com/privacy-policy",
+  "targetUrl": "http://localhost:3001/es/legal/privacidad",
+  "console": {
+    "sourceErrors": [],
+    "targetErrors": [],
+    "pass": true
+  },
+  "score": {
+    "heightSimilarity": 1,
+    "sectionSimilarity": 1,
+    "canvasSimilarity": 1,
+    "videoStructure": 1,
+    "targetVideoContract": 1,
+    "videoScrub": 1,
+    "avgFrame": 1,
+    "worstFrame": 1,
+    "avgSimilarity": 1,
+    "worstSimilarity": 1,
+    "passRate": 1,
+    "pass": true
+  }
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useLayoutEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '@/lib/native-motion';
 import { User, Lock, Eye, EyeOff, Mail, Shield, Star, ArrowRight, Sparkles, Crown, TrendingUp, AlertCircle, X, Clipboard, FileText, BarChart3, Phone, CheckCircle, Check } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,6 +25,12 @@ const loginFormSchema = z.object({
 });
 
 type LoginFormData = z.infer<typeof loginFormSchema>;
+type PendingLoginData = {
+  customerId: number;
+  password: string;
+  codigoCliente?: string;
+  needsEmailSetup?: boolean;
+};
 
 export default function CustomerAreaPage() {
   const t = useTranslations('customerArea');
@@ -45,7 +51,7 @@ export default function CustomerAreaPage() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showPasswordChangeFlow, setShowPasswordChangeFlow] = useState(false);
-  const [loginData, setLoginData] = useState<{ customerId: number; password: string } | null>(null);
+  const [loginData, setLoginData] = useState<PendingLoginData | null>(null);
   const [needsEmail, setNeedsEmail] = useState(false);
   const [tempEmail, setTempEmail] = useState('');
   const [tempPhone, setTempPhone] = useState('');
@@ -355,7 +361,9 @@ export default function CustomerAreaPage() {
         }),
       });
 
-      if (response.ok && (response.data?.success || response.data?.ok)) {
+      const responseData = response.data as { success?: boolean; ok?: boolean; message?: string } | undefined;
+
+      if (response.ok && (responseData?.success || responseData?.ok)) {
         toast.success('Email y teléfono configurados correctamente');
         setShowEmailSetupModal(false);
         setTempEmail('');
@@ -364,7 +372,7 @@ export default function CustomerAreaPage() {
         // Reload to refresh user data
         window.location.reload();
       } else {
-        toast.error(response.data?.message || 'Error al guardar email');
+        toast.error(responseData?.message || 'Error al guardar email');
       }
     } catch (error) {
       console.error('Error guardando email:', error);
@@ -493,7 +501,7 @@ export default function CustomerAreaPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8 overflow-hidden relative">
+    <div className="pds-page pds-cream min-h-screen overflow-hidden py-24 relative">
       {/* Background Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -1007,7 +1015,7 @@ export default function CustomerAreaPage() {
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="relative bg-white rounded-3xl p-8 shadow-2xl border border-red-100 max-w-md w-full mx-auto"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: any) => e.stopPropagation()}
               >
                 {/* Close button */}
                 <Button
@@ -1085,7 +1093,7 @@ export default function CustomerAreaPage() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: any) => e.stopPropagation()}
               className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
             >
               {/* Header */}
