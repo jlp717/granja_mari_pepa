@@ -530,19 +530,48 @@ async function generateInvoicePDF(facturaData) {
             grupos[0].porcRec = baseH !== 0 ? (recH / baseH) * 100 : 0;
          }
 
+         // Determinar si hay algún recargo real en la factura
+         const hayRecargo = grupos.some(g => g.recargo > 0.001);
+
          // Si tenemos grupos, mostrar tabla de totales
          if (grupos.length > 0) {
             const numFilas = Math.max(grupos.length, 1);
             const alturaTabla = 16 + (numFilas * 14);
 
+            // Configuración de columnas según si hay recargo o no
+            const anchoTotal = 515;
+            let columnas, headers, posicionesX;
+
+            if (hayRecargo) {
+               // CON recargo: 6 columnas completas
+               columnas = [
+                  { label: 'Base Imponible', x: 42, width: 65 },
+                  { label: '% I.V.A.', x: 112, width: 85 },
+                  { label: 'Importe I.V.A.', x: 202, width: 85 },
+                  { label: '% Recargo', x: 292, width: 65 },
+                  { label: 'Importe Rec.', x: 362, width: 65 },
+                  { label: 'Total', x: 432, width: 115 }
+               ];
+               posicionesX = [110, 200, 290, 360, 430, 490];
+            } else {
+               // SIN recargo: 4 columnas (sin columnas de recargo)
+               columnas = [
+                  { label: 'Base Imponible', x: 42, width: 120 },
+                  { label: '% I.V.A.', x: 170, width: 70 },
+                  { label: 'Importe I.V.A.', x: 250, width: 100 },
+                  { label: 'Total', x: 365, width: 180 }
+               ];
+               posicionesX = [165, 245, 355];
+            }
+
             // Tabla de totales
-            doc.rect(40, y, 515, alturaTabla)
+            doc.rect(40, y, anchoTotal, alturaTabla)
                .strokeColor(COLORS.border)
                .lineWidth(1)
                .stroke();
 
             // Líneas verticales
-            [110, 200, 290, 360, 430, 490].forEach(x => {
+            posicionesX.forEach(x => {
                doc.moveTo(x, y).lineTo(x, y + alturaTabla).stroke();
             });
 
@@ -550,19 +579,16 @@ async function generateInvoicePDF(facturaData) {
             doc.moveTo(40, y + 16).lineTo(555, y + 16).stroke();
 
             // Headers
-            doc.rect(40, y, 515, 16)
+            doc.rect(40, y, anchoTotal, 16)
                .fillAndStroke(COLORS.lightGray, COLORS.border);
 
             doc.fontSize(7)
                .font('Helvetica-Bold')
                .fillColor(COLORS.darkGray);
 
-            doc.text('Base Imponible', 42, y + 5, { width: 65, align: 'center' });
-            doc.text('% I.V.A.', 112, y + 5, { width: 85, align: 'center' });
-            doc.text('Importe I.V.A.', 202, y + 5, { width: 85, align: 'center' });
-            doc.text('% Recargo', 292, y + 5, { width: 65, align: 'center' });
-            doc.text('Importe Rec.', 362, y + 5, { width: 65, align: 'center' });
-            doc.text('Total', 432, y + 5, { width: 55, align: 'center' });
+            columnas.forEach(col => {
+               doc.text(col.label, col.x, y + 5, { width: col.width, align: col.label === 'Total' ? 'right' : 'center' });
+            });
 
             // Valores
             let yValor = y + 20;
@@ -574,16 +600,19 @@ async function generateInvoicePDF(facturaData) {
                // CORRECCIÓN CRÍTICA: Solo sumar recargo si es REALMENTE mayor que 0
                const totalGrupo = grupo.baseImponible + grupo.iva + grupo.recargo;
 
-               doc.text(formatNumber(grupo.baseImponible, 2) + ' €', 42, yValor, { width: 65, align: 'right' });
-               doc.text(formatNumber(grupo.porcIVA, 2) + ' %', 112, yValor, { width: 85, align: 'center' });
-               doc.text(formatNumber(grupo.iva, 2) + ' €', 202, yValor, { width: 85, align: 'right' });
+               doc.text(formatNumber(grupo.baseImponible, 2) + ' €', columnas[0].x, yValor, { width: columnas[0].width, align: 'right' });
+               doc.text(formatNumber(grupo.porcIVA, 2) + ' %', columnas[1].x, yValor, { width: columnas[1].width, align: 'center' });
+               doc.text(formatNumber(grupo.iva, 2) + ' €', columnas[2].x, yValor, { width: columnas[2].width, align: 'right' });
 
-               // CORRECCIÓN: Mostrar recargo SOLO si existe
-               doc.text(grupo.porcRec > 0.001 ? formatNumber(grupo.porcRec, 2) + ' %' : '0,00 %', 292, yValor, { width: 65, align: 'center' });
-               doc.text(grupo.recargo > 0.001 ? formatNumber(grupo.recargo, 2) + ' €' : '0,00 €', 362, yValor, { width: 65, align: 'right' });
-
-               doc.font('Helvetica-Bold');
-               doc.text(formatNumber(totalGrupo, 2) + ' €', 432, yValor, { width: 115, align: 'right' });
+               if (hayRecargo) {
+                  doc.text(formatNumber(grupo.porcRec, 2) + ' %', columnas[3].x, yValor, { width: columnas[3].width, align: 'center' });
+                  doc.text(formatNumber(grupo.recargo, 2) + ' €', columnas[4].x, yValor, { width: columnas[4].width, align: 'right' });
+                  doc.font('Helvetica-Bold');
+                  doc.text(formatNumber(totalGrupo, 2) + ' €', columnas[5].x, yValor, { width: columnas[5].width, align: 'right' });
+               } else {
+                  doc.font('Helvetica-Bold');
+                  doc.text(formatNumber(totalGrupo, 2) + ' €', columnas[3].x, yValor, { width: columnas[3].width, align: 'right' });
+               }
                doc.font('Helvetica');
 
                yValor += 14;
