@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useAuthStore } from '@/lib/store';
 import { secureFetch } from '@/lib/secureFetch'; // 🔐 HttpOnly Cookie Auth
+import { useSessionManager } from '@/hooks/useSessionManager'; // 🔐 Session manager
 
 interface Cliente {
   codigo: string;
@@ -33,6 +34,10 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [cliente, setCliente] = useState<Cliente | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { isAuthenticated, user } = useAuthStore();
+
+  // 🔐 CRÍTICO: Activar session manager para TODA la app
+  // Esto detecta token expirado, monitorea inactividad, y hace logout automático
+  useSessionManager({ enabled: true });
 
   const refreshSession = useCallback(async () => {
     // 🔐 SEGURIDAD: Ya no verificamos localStorage, usamos estado de auth store
