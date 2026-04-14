@@ -319,27 +319,19 @@ function buildDocumentContent(doc, panamarDoc) {
 async function generateFacturaPDF(panamarDoc) {
   return new Promise((resolve, reject) => {
     try {
-      // 🗜️ compress: true + info mínima + autoFirstPage: false
+      // 🗜️ compress: true + autoFirstPage: false
+      // NOTA: NO pasar info con undefined (PDFKit llama .getTime() y peta)
       const doc = new PDFDocument({
         size: 'A4',
         margin: 40,
         bufferPages: true,
         compress: true,
-        autoFirstPage: false,
-        // Metadata mínima (reduce overhead de XMP)
-        info: {
-          Producer: '',
-          Creator: '',
-          Author: '',
-          CreationDate: undefined,
-          ModDate: undefined
-        }
+        autoFirstPage: false
       });
       const chunks = [];
       doc.on('data', chunk => chunks.push(chunk));
       doc.on('end', () => resolve(Buffer.concat(chunks)));
       doc.on('error', reject);
-      // Crear primera página explícitamente
       doc.addPage();
       buildDocumentContent(doc, panamarDoc);
       doc.end();
@@ -350,22 +342,14 @@ async function generateFacturaPDF(panamarDoc) {
 }
 
 function generateFacturaPDFStream(panamarDoc) {
-  // 🗜️ compress: true + info mínima + autoFirstPage: false
+  // 🗜️ compress: true + autoFirstPage: false
   const doc = new PDFDocument({
     size: 'A4',
     margin: 40,
     bufferPages: true,
     compress: true,
-    autoFirstPage: false,
-    info: {
-      Producer: '',
-      Creator: '',
-      Author: '',
-      CreationDate: undefined,
-      ModDate: undefined
-    }
+    autoFirstPage: false
   });
-  // Crear primera página explícitamente
   doc.addPage();
   buildDocumentContent(doc, panamarDoc);
   doc.end();
