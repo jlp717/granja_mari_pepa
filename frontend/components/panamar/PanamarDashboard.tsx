@@ -236,20 +236,6 @@ export function PanamarDashboard() {
   const [loadingPdf, setLoadingPdf] = useState<string | null>(null);
   const [isReloading, setIsReloading] = useState(false);
 
-  // ── Reload handler ───────────────────────────────────────────────
-  const handleReload = useCallback(async () => {
-    setIsReloading(true);
-    try {
-      await Promise.all([fetchDocuments(), fetchSummary(), fetchClients()]);
-      toast.success('Datos actualizados correctamente');
-    } catch (err) {
-      console.error('PANAMAR reload error:', err);
-      toast.error('Error al actualizar los datos');
-    } finally {
-      setIsReloading(false);
-    }
-  }, [fetchDocuments, fetchSummary, fetchClients]);
-
   // ── Fetch documents ──────────────────────────────────────────────
   const fetchDocuments = useCallback(async () => {
     setLoading(true);
@@ -310,6 +296,20 @@ export function PanamarDashboard() {
       console.error('PANAMAR clients error:', err);
     }
   }, []);
+
+  // ── Reload handler ───────────────────────────────────────────────
+  const handleReload = useCallback(async () => {
+    setIsReloading(true);
+    try {
+      await Promise.all([fetchDocuments(), fetchSummary(), fetchClients()]);
+      toast.success('Datos actualizados correctamente');
+    } catch (err) {
+      console.error('PANAMAR reload error:', err);
+      toast.error('Error al actualizar los datos');
+    } finally {
+      setIsReloading(false);
+    }
+  }, [fetchDocuments, fetchSummary, fetchClients]);
 
   useEffect(() => {
     fetchDocuments();
