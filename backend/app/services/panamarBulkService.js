@@ -7,17 +7,17 @@ const panamarPdfService = require('./panamarPdfService');
 const panamarService = require('./panamarService');
 
 /**
- * SERVICIO DE DESCARGAS MASIVAS PANAMAR - v7.0 (NUCLEAR COMPRESSION)
- * ==================================================================
+ * SERVICIO DE DESCARGAS MASIVAS PANAMAR - v7.1 (NUCLEAR COMPRESSION - FIXED)
+ * ========================================================================
  * Genera 6 ZIPs separados por rangos de código de cliente,
  * descargándose progresivamente conforme cada tramo termina.
  *
- * v7.0 Compresión Nuclear:
- *  - 🗜️ Header JPEG ultra-comprimido (400KB PNG → ~12KB = 97% menos)
- *    - Sharp + mozjpeg + trellisQuant + quantTable:8 + resize exacto
+ * v7.1 Compresión Nuclear (FIXED):
+ *  - 🗜️ Header JPEG optimizado (400KB PNG → ~15-20KB = 95% menos)
+ *    - Conversión SÍNCRONA con Sharp durante require()
+ *    - quality: 75 + mozjpeg + progressive
  *  - 🗜️ PDFKit compress: true (DEFLATE/FlateDecode máximo)
  *  - 🗜️ PDF metadata vacía (sin XMP, sin datos de creación)
- *  - 🗜️ fit: [w,h] en imagen → sin resolución extra incrustada
  *  - 🗜️ Helvetica estándar (no embebida, 0KB fuentes)
  *  - 🗜️ ZIP zlib level 9 (máxima compresión DEFLATE)
  *  - 🗜️ stat: false + forceZip64 para overhead mínimo
@@ -28,8 +28,8 @@ const panamarService = require('./panamarService');
  *  - 🚀 Batch COUNT de todos los chunks en 1 query
  *  - 🚀 Persistencia throttled (cada 200 docs)
  *
- * Reducción esperada vs v5.0 original: ~92-96%
- * Ejemplo: tramo de 120MB → ~5-10MB
+ * Reducción esperada vs v5.0 original: ~90-94%
+ * Ejemplo: tramo de 120MB → ~7-12MB
  *
  * Rangos definidos por Diego:
  *   1) 4300000000 – 4300007000
@@ -336,19 +336,23 @@ async function generateChunkZip(taskId, chunk) {
               const facturaRef = `${doc.serieFactura || doc.serieAlbaran || ''}-${doc.numeroFactura || doc.numeroAlbaran || ''}`;
               const pdfName = `${doc.codigoCliente}_Factura_${facturaRef}_${clientName}.pdf`;
 
+              // 🗜️ Log PDF generation for debugging
               pdfStream.on('end', () => {
                 chunk.processed++;
+                if (chunk.processed === 1) {
+                  logger.info(`🗜️ PANAMAR Bulk: Primer PDF generado correctamente para chunk ${chunk.index}`);
+                }
                 resolvePdf();
               });
               pdfStream.on('error', (e) => {
-                logger.error(`❌ PDF Error [${taskId}] chunk ${chunk.index}:`, e);
+                logger.error(`❌ PANAMAR Bulk PDF Error [taskId=${taskId}] chunk ${chunk.index} doc ${facturaRef}:`, e.message);
                 chunk.processed++;
                 resolvePdf(); // No romper el ZIP entero por 1 PDF fallido
               });
 
               archive.append(pdfStream, { name: pdfName });
             } catch (err) {
-              logger.error(`❌ PDF Error [${taskId}] chunk ${chunk.index}:`, err);
+              logger.error(`❌ PANAMAR Bulk PDF Exception [taskId=${taskId}] chunk ${chunk.index}:`, err.message);
               chunk.processed++;
               resolvePdf(); // Continuar
             }
