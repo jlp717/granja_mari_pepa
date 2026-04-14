@@ -15,7 +15,7 @@ import {
   ChevronsLeft, ChevronsRight,
   FileText, Truck, Calendar, Users, LogOut, X,
   Download, Eye, Mail, MessageCircle, DollarSign, Settings,
-  Archive, Check, ChevronDown, Box
+  Archive, Check, ChevronDown, Box, RefreshCw
 } from 'lucide-react';
 
 const MESES = [
@@ -234,6 +234,21 @@ export function PanamarDashboard() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewDoc, setPreviewDoc] = useState<PanamarDocument | null>(null);
   const [loadingPdf, setLoadingPdf] = useState<string | null>(null);
+  const [isReloading, setIsReloading] = useState(false);
+
+  // ── Reload handler ───────────────────────────────────────────────
+  const handleReload = useCallback(async () => {
+    setIsReloading(true);
+    try {
+      await Promise.all([fetchDocuments(), fetchSummary(), fetchClients()]);
+      toast.success('Datos actualizados correctamente');
+    } catch (err) {
+      console.error('PANAMAR reload error:', err);
+      toast.error('Error al actualizar los datos');
+    } finally {
+      setIsReloading(false);
+    }
+  }, [fetchDocuments, fetchSummary, fetchClients]);
 
   // ── Fetch documents ──────────────────────────────────────────────
   const fetchDocuments = useCallback(async () => {
@@ -760,6 +775,16 @@ export function PanamarDashboard() {
 
             <div className="flex items-center gap-3">
               <span className="text-sm text-muted-foreground hidden sm:inline font-medium">PANAMAR (Modo Especial)</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleReload}
+                disabled={isReloading}
+                className="text-muted-foreground hover:text-orange-500 hover:bg-orange-50"
+                title="Actualizar datos"
+              >
+                <RefreshCw className={`h-5 w-5 ${isReloading ? 'animate-spin' : ''}`} />
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"
