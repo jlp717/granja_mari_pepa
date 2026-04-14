@@ -477,12 +477,22 @@ async function generateInvoicePDF(facturaData) {
          // TABLA DE TOTALES POR TIPO DE IVA
          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+         // Obtener el recargo real de la cabecera (fuente de verdad del ERP)
+         const recargoHeader = parseFloat(header?.RECARGOFACTURA) || 0;
+
          // Agrupar líneas por % IVA y % Recargo
          const gruposIVA = {};
 
          lines.forEach(line => {
             const porcIVA = parseFloat(line.PORCENTAJEIVAARTICULO || line.PORCENTAJEIVA || line.IVA) || 0;
-            const porcRec = parseFloat(line.PORCENTAJERECARGOARTICULO || line.PORCENTAJERECARGO || line.RE || line.RECARGO) || 0;
+            
+            // CRÍTICO: Si el header dice que NO hay recargo (RECARGOFACTURA = 0),
+            // entonces forzar recargo = 0 para TODAS las líneas, ignorando cálculos erróneos.
+            // Esto evita que clientes sin R.E. (como BAR CRISTOBAL) vean recargo fantasma.
+            const porcRec = recargoHeader === 0 
+               ? 0  // Si la factura no tiene recargo en el ERP, forzar 0
+               : (parseFloat(line.PORCENTAJERECARGOARTICULO || line.PORCENTAJERECARGO || line.RE || line.RECARGO) || 0);
+            
             const key = `${porcIVA.toFixed(2)}_${porcRec.toFixed(2)}`;
 
             if (!gruposIVA[key]) {
@@ -500,9 +510,13 @@ async function generateInvoicePDF(facturaData) {
             const ivaLinea = line.IMPORTEIVAARTICULO !== undefined && line.IMPORTEIVAARTICULO !== null
                ? (parseFloat(line.IMPORTEIVAARTICULO) || 0)
                : (line.IMPORTEIVA !== undefined ? parseFloat(line.IMPORTEIVA) : (importe * (porcIVA / 100)));
-            const recargoLinea = line.IMPORTERECARGOARTICULO !== undefined && line.IMPORTERECARGOARTICULO !== null
-               ? (parseFloat(line.IMPORTERECARGOARTICULO) || 0)
-               : (line.IMPORTERECARGO !== undefined ? parseFloat(line.IMPORTERECARGO) : (importe * (porcRec / 100)));
+            
+            // CRÍTICO: Si el header dice que NO hay recargo, forzar recargo de línea = 0
+            const recargoLinea = recargoHeader === 0
+               ? 0  // La factura NO tiene recargo según el ERP
+               : (line.IMPORTERECARGOARTICULO !== undefined && line.IMPORTERECARGOARTICULO !== null
+                  ? (parseFloat(line.IMPORTERECARGOARTICULO) || 0)
+                  : (line.IMPORTERECARGO !== undefined ? parseFloat(line.IMPORTERECARGO) : (importe * (porcRec / 100))));
 
             gruposIVA[key].baseImponible += importe;
             gruposIVA[key].iva += ivaLinea;
