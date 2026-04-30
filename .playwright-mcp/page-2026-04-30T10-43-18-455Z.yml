@@ -1,0 +1,157 @@
+- main [ref=e3]:
+  - navigation [ref=e4]:
+    - generic:
+      - generic [ref=e5]:
+        - button "Toggle menu" [ref=e6] [cursor=pointer]
+        - generic [ref=e7]: Careers
+      - link "Go to homepage" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e10]:
+          - img [ref=e11]
+          - img [ref=e14]
+      - generic [ref=e21] [cursor=pointer]:
+        - link "Investors" [ref=e22]:
+          - /url: https://ir.jobyaviation.com/
+        - img [ref=e23]
+  - generic [ref=e26]:
+    - generic [ref=e31]:
+      - heading "We're hiring. Makers, dreamers, doers. You." [level=1] [ref=e32]:
+        - generic "We're hiring. Makers, dreamers, doers. You." [ref=e33]
+      - link [ref=e35] [cursor=pointer]:
+        - /url: https://careers-jobyaviation.icims.com/jobs
+    - generic [ref=e42]:
+      - img "Careers section media" [ref=e43]
+      - img "Careers section media" [ref=e44]
+    - generic [ref=e46]:
+      - generic [ref=e50]:
+        - generic [ref=e51]: Bringing back the golden age of flight.
+        - heading "Aviation that inspires." [level=2] [ref=e52]
+      - generic:
+        - generic [ref=e54]:
+          - img "Careers culture image 1" [ref=e55]
+          - img "Careers culture image 1" [ref=e56]
+        - generic [ref=e58]:
+          - img "Careers culture image 2" [ref=e59]
+          - img "Careers culture image 2" [ref=e60]
+        - generic [ref=e62]:
+          - img "Careers culture image 3" [ref=e63]
+          - img "Careers culture image 3" [ref=e64]
+        - generic [ref=e66]:
+          - img "Careers culture image 4" [ref=e67]
+          - img "Careers culture image 4" [ref=e68]
+        - generic [ref=e70]:
+          - img "Careers culture image 5" [ref=e71]
+          - img "Careers culture image 5" [ref=e72]
+    - generic [ref=e74]:
+      - generic [ref=e78]:
+        - img "Become a dreamer" [ref=e79]
+        - img "Become a dreamer" [ref=e80]
+      - generic [ref=e84]:
+        - generic "Become a dreamer" [ref=e86]
+        - paragraph [ref=e87]:
+          - generic "Our culture is grounded in real collaboration, where no one builds alone, and every voice helps to shape our process. We move fast, stay kind, and solve problems without ego." [ref=e88]
+    - region "Technology slider" [ref=e90]:
+      - generic [ref=e98] [cursor=pointer]:
+        - generic [ref=e99]:
+          - img [ref=e100]
+          - generic [ref=e102]: Watch
+        - generic [ref=e103]: People of Joby
+        - generic [ref=e104]: 1:15
+    - generic [ref=e107]:
+      - generic [ref=e111]:
+        - img "Shape the future of aviation at Joby." [ref=e112]
+        - img "Shape the future of aviation at Joby." [ref=e113]
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - heading "Shape the future of aviation at Joby." [level=3] [ref=e118]:
+            - generic "Shape the future of aviation at Joby." [ref=e119]
+          - link "View open roles View open roles" [ref=e121] [cursor=pointer]:
+            - /url: https://careers-jobyaviation.icims.com/jobs
+            - button "View open roles View open roles" [ref=e122]:
+              - generic [ref=e123]:
+                - generic [ref=e124]: View open roles
+                - img [ref=e125]
+              - generic [ref=e128]:
+                - generic [ref=e129]: View open roles
+                - img [ref=e130]
+        - generic [ref=e133]:
+          - generic [ref=e134]: "'World's Most Innovative Company'"
+          - generic [ref=e135]: Fast Company, 2021
+  - generic [ref=e136]:
+    - generic [ref=e140]:
+      - list [ref=e141]:
+        - listitem [ref=e142]:
+          - link "Privacy Policy" [ref=e144] [cursor=pointer]:
+            - /url: /privacy-policy
+        - listitem [ref=e145]:
+          - link "Terms of Use" [ref=e147] [cursor=pointer]:
+            - /url: /terms-of-use
+        - listitem [ref=e148]:
+          - link "Impact Reporting" [ref=e150] [cursor=pointer]:
+            - /url: /impact-reporting
+        - listitem [ref=e151]:
+          - link "Health Plan Transparency" [ref=e153] [cursor=pointer]:
+            - /url: /transparency
+        - listitem [ref=e154]:
+          - link "Safety Policy" [ref=e156] [cursor=pointer]:
+            - /url: /safety-policy
+        - listitem [ref=e157]: © 2026 Joby Aero, Inc.
+      - list [ref=e158]:
+        - listitem [ref=e159]: Discover
+        - listitem [ref=e160]:
+          - link "Experience" [ref=e162] [cursor=pointer]:
+            - /url: /experience
+        - listitem [ref=e163]:
+          - link "Technology" [ref=e165] [cursor=pointer]:
+            - /url: /technology
+        - listitem [ref=e166]:
+          - link "Company" [ref=e168] [cursor=pointer]:
+            - /url: /company
+        - listitem [ref=e169]:
+          - link "News" [ref=e171] [cursor=pointer]:
+            - /url: /news
+        - listitem [ref=e172]:
+          - link "Careers" [ref=e174] [cursor=pointer]:
+            - /url: /careers
+      - list [ref=e175]:
+        - listitem [ref=e176]: Explore
+        - listitem [ref=e177]:
+          - link "For Investors" [ref=e179] [cursor=pointer]:
+            - /url: https://ir.jobyaviation.com/
+        - listitem [ref=e180]:
+          - link "Fly Blade" [ref=e182] [cursor=pointer]:
+            - /url: https://blade.com/
+        - listitem [ref=e183]:
+          - link "Joby Shop" [ref=e185] [cursor=pointer]:
+            - /url: https://shop.jobyaviation.com/
+      - list [ref=e186]:
+        - listitem [ref=e187]: Connect
+        - listitem [ref=e188]:
+          - link "YouTube" [ref=e190] [cursor=pointer]:
+            - /url: https://www.youtube.com/@JobyAviation
+        - listitem [ref=e191]:
+          - link "Instagram" [ref=e193] [cursor=pointer]:
+            - /url: https://www.instagram.com/jobyaviation/
+        - listitem [ref=e194]:
+          - link "LinkedIn" [ref=e196] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/jobyaviation/
+        - listitem [ref=e197]:
+          - link "X" [ref=e199] [cursor=pointer]:
+            - /url: https://x.com/jobyaviation
+      - link "Go to homepage" [ref=e200] [cursor=pointer]:
+        - /url: /
+        - img [ref=e202]
+      - generic [ref=e208]:
+        - generic [ref=e209]: Sign up for updates
+        - generic [ref=e210]:
+          - textbox "Sign up for updates" [ref=e211]:
+            - /placeholder: Enter e-mail address
+          - button "Submit newsletter":
+            - img
+        - generic:
+          - generic:
+            - text: By entering your email address you agree to receive newsletters, updates, and marketing information. You can opt out at any time.
+            - link "See our Privacy Policy.":
+              - /url: /privacy-policy
+    - generic:
+      - img

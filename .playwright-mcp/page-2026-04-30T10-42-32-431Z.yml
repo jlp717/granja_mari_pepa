@@ -1,0 +1,258 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e6]:
+        - text: We use cookies to improve user experience and analyze traffic. See our
+        - link "Privacy Policy" [ref=e8] [cursor=pointer]:
+          - /url: /privacy-policy
+        - text: and
+        - link "Terms" [ref=e10] [cursor=pointer]:
+          - /url: /terms-of-use
+        - text: for details.
+      - generic [ref=e11]:
+        - button "Accept" [ref=e12] [cursor=pointer]:
+          - generic [ref=e14]: Accept
+          - generic [ref=e16]: Accept
+        - button "Decline" [ref=e17] [cursor=pointer]:
+          - generic [ref=e19]: Decline
+          - generic [ref=e21]: Decline
+        - button "Decline" [ref=e22] [cursor=pointer]:
+          - img [ref=e24]
+          - img [ref=e28]
+    - navigation [ref=e31]:
+      - generic:
+        - generic [ref=e32]:
+          - button "Toggle menu" [ref=e33] [cursor=pointer]
+          - generic [ref=e34]: Company
+        - link "Go to homepage" [ref=e36] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e37]:
+            - img [ref=e38]
+            - img [ref=e41]
+        - generic [ref=e48] [cursor=pointer]:
+          - link "Investors" [ref=e49]:
+            - /url: https://ir.jobyaviation.com/
+          - img [ref=e50]
+    - generic [ref=e53]:
+      - heading "It’s time to dream bigger. Our vision is to save a billion people an hour a day." [level=1] [ref=e58]:
+        - generic "It’s time to dream bigger. Our vision is to save a billion people an hour a day." [ref=e59]
+      - generic [ref=e62]:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - img
+                  - img
+        - generic [ref=e66]:
+          - generic [ref=e67]: 36º 59’ 10.536” N
+          - generic [ref=e68]: 122º 2’ 12.696” W
+          - heading "Our story starts" [level=2] [ref=e71]
+          - heading "in Santa Cruz, CA" [level=2] [ref=e74]
+        - generic [ref=e77]:
+          - generic [ref=e81]:
+            - generic "Origins" [ref=e84]
+            - generic "2009" [ref=e87]
+            - generic "The Beginning" [ref=e90]
+            - generic "Redwoods, Santa Cruz" [ref=e93]
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - generic "Tucked in the misty redwoods above Santa Cruz, seven engineers gathered in a workshop." [ref=e97]
+              - generic "They weren’t just building an aircraft. They were chasing a dream. What if flight could be quiet, clean, convenient — a part of everyday life?" [ref=e99]
+            - generic [ref=e100]:
+              - generic "Origins" [ref=e103]
+              - generic "2009" [ref=e106]
+              - generic [ref=e107]:
+                - generic "Imagine getting to work without traffic. Seeing your city from the clouds. Saying “yes” to dinner across town." [ref=e109]
+                - generic "The sky shouldn’t be off limits. It should be a shortcut. A sigh of relief. A daily moment of awe. Because when you lift above the noise, everything shifts — your view, your pace, your possibilities." [ref=e111]
+            - generic "From the electric motors to airframes and propellers, the aircraft was designed from the ground up. It was slow, hands-on, and humbling. They started over again and again. Relentlessly refining for reliability, performance, and precision." [ref=e114]
+            - generic [ref=e115]:
+              - generic "Origins" [ref=e118]
+              - generic [ref=e119]:
+                - 'generic "This wasn’t just a technical challenge. It meant designing an entire ecosystem: infrastructure, software, and service, all working in sync with the cities we love." [ref=e121]'
+                - generic "The vision? To choreograph entire trips with just a few taps, from ride-share to skyport to destination. No gridlock. No stress. Just time, reclaimed." [ref=e123]
+              - generic "Redwoods" [ref=e126]
+            - generic "What began as a dream in the trees has since grown into a global effort to bring electric flight to life. Because cleaner skies mean a healthier planet. Less traffic means more time. And future generations deserve both." [ref=e129]
+            - generic [ref=e130]:
+              - generic "Origins" [ref=e133]
+              - generic "Redwoods" [ref=e136]
+              - generic "Santa Cruz" [ref=e139]
+              - generic "California" [ref=e142]
+            - generic [ref=e145]:
+              - generic "Breakthroughs" [ref=e148]
+              - generic [ref=e149]:
+                - heading "2009" [level=6] [ref=e150]:
+                  - generic "2009" [ref=e151]
+                - heading "2015" [level=6] [ref=e152]:
+                  - generic "2015" [ref=e153]
+                - heading "2017" [level=6] [ref=e154]:
+                  - generic "2017" [ref=e155]
+                - heading "2019" [level=6] [ref=e156]:
+                  - generic "2019" [ref=e157]
+                - heading "2020" [level=6] [ref=e158]:
+                  - generic "2020" [ref=e159]
+                - heading "2021" [level=6] [ref=e160]:
+                  - generic "2021" [ref=e161]
+                - heading "2022" [level=6] [ref=e162]:
+                  - generic "2022" [ref=e163]
+                - heading "2023" [level=6] [ref=e164]:
+                  - generic "2023" [ref=e165]
+                - heading "2024" [level=6] [ref=e166]:
+                  - generic "2024" [ref=e167]
+                - heading "2025" [level=6] [ref=e168]:
+                  - generic "2025" [ref=e169]
+              - paragraph [ref=e172]:
+                - generic "The Beginning" [ref=e173]
+              - paragraph [ref=e175]:
+                - generic "Day and night, a small team of seven engineers work out of “The Barn,” our workshop in the redwoods above Santa Cruz. We explore the frontiers of technologies like electric motors, flight software, and lithium-ion batteries, engineering almost every component from the ground up." [ref=e176]
+      - generic [ref=e177]:
+        - generic [ref=e178]:
+          - generic [ref=e179]: Joby today
+          - heading "We’re a community of engineers and visionaries bringing the dream of everyday flight to life through world-class manufacturing and technology." [level=2] [ref=e180]:
+            - generic "We’re a community of engineers and visionaries bringing the dream of everyday flight to life through world-class manufacturing and technology." [ref=e181]
+          - generic [ref=e182]:
+            - generic [ref=e183]:
+              - generic "Team members on board" [ref=e185]
+              - paragraph [ref=e186]: 2500+
+            - generic [ref=e187]:
+              - generic "Year founded" [ref=e189]
+              - paragraph [ref=e190]: "2009"
+            - generic [ref=e191]:
+              - generic "Joby locations worldwide" [ref=e193]
+              - paragraph [ref=e194]: 15+
+            - generic [ref=e195]:
+              - generic "Operating emissions during flight" [ref=e197]
+              - paragraph [ref=e198]: "0"
+        - generic [ref=e199]:
+          - generic "Careers" [ref=e201]
+          - generic [ref=e202]:
+            - heading "Join our crew" [level=4] [ref=e203]:
+              - generic "Join our crew" [ref=e204]
+            - paragraph [ref=e205]:
+              - generic "If you're as excited about the future of flight as we are, and ready to pair hard work with innovative thinking, join our crew." [ref=e206]
+            - link "Work at Joby Work at Joby" [ref=e207] [cursor=pointer]:
+              - /url: /careers
+              - button "Work at Joby Work at Joby" [ref=e208]:
+                - generic [ref=e210]: Work at Joby
+                - generic [ref=e212]: Work at Joby
+          - generic [ref=e217]:
+            - img "Join our crew" [ref=e218]
+            - img "Join our crew" [ref=e219]
+        - generic [ref=e220]:
+          - generic "For Investors" [ref=e222]
+          - generic [ref=e223]:
+            - heading "Backed by vision" [level=4] [ref=e224]:
+              - generic "Backed by vision" [ref=e225]
+            - paragraph [ref=e226]:
+              - generic "Discover more about our organizational structure, financial results, and governance." [ref=e227]
+            - link "Investor Portal Investor Portal" [ref=e228] [cursor=pointer]:
+              - /url: https://ir.jobyaviation.com/
+              - button "Investor Portal Investor Portal" [ref=e229]:
+                - generic [ref=e230]:
+                  - generic [ref=e231]: Investor Portal
+                  - img [ref=e232]
+                - generic [ref=e235]:
+                  - generic [ref=e236]: Investor Portal
+                  - img [ref=e237]
+          - generic [ref=e244]:
+            - img "Backed by vision" [ref=e245]
+            - img "Backed by vision" [ref=e246]
+      - generic [ref=e248]:
+        - generic [ref=e252]:
+          - img "Designing cleaner flight for people and the planet." [ref=e253]
+          - img "Designing cleaner flight for people and the planet." [ref=e254]
+        - generic [ref=e257]:
+          - generic [ref=e258]:
+            - heading "Designing cleaner flight for people and the planet." [level=3] [ref=e259]:
+              - generic "Designing cleaner flight for people and the planet." [ref=e260]
+            - link "Joby Impact Report 2024 Joby Impact Report 2024" [ref=e262] [cursor=pointer]:
+              - /url: https://joby-site.cdn.prismic.io/joby-site/aH-801GsbswqTJbL_JobyAviation-2024ImpactReport.pdf
+              - button "Joby Impact Report 2024 Joby Impact Report 2024" [ref=e263]:
+                - generic [ref=e264]:
+                  - generic [ref=e265]: Joby Impact Report 2024
+                  - img [ref=e266]
+                - generic [ref=e269]:
+                  - generic [ref=e270]: Joby Impact Report 2024
+                  - img [ref=e271]
+          - generic [ref=e274]:
+            - generic [ref=e275]: 90% fewer emissions than a helicopter
+            - generic [ref=e276]: 40% fewer emissions than an average car
+    - generic [ref=e277]:
+      - generic [ref=e281]:
+        - list [ref=e282]:
+          - listitem [ref=e283]:
+            - link "Privacy Policy" [ref=e285] [cursor=pointer]:
+              - /url: /privacy-policy
+          - listitem [ref=e286]:
+            - link "Terms of Use" [ref=e288] [cursor=pointer]:
+              - /url: /terms-of-use
+          - listitem [ref=e289]:
+            - link "Impact Reporting" [ref=e291] [cursor=pointer]:
+              - /url: /impact-reporting
+          - listitem [ref=e292]:
+            - link "Health Plan Transparency" [ref=e294] [cursor=pointer]:
+              - /url: /transparency
+          - listitem [ref=e295]:
+            - link "Safety Policy" [ref=e297] [cursor=pointer]:
+              - /url: /safety-policy
+          - listitem [ref=e298]: © 2026 Joby Aero, Inc.
+        - list [ref=e299]:
+          - listitem [ref=e300]: Discover
+          - listitem [ref=e301]:
+            - link "Experience" [ref=e303] [cursor=pointer]:
+              - /url: /experience
+          - listitem [ref=e304]:
+            - link "Technology" [ref=e306] [cursor=pointer]:
+              - /url: /technology
+          - listitem [ref=e307]:
+            - link "Company" [ref=e309] [cursor=pointer]:
+              - /url: /company
+          - listitem [ref=e310]:
+            - link "News" [ref=e312] [cursor=pointer]:
+              - /url: /news
+          - listitem [ref=e313]:
+            - link "Careers" [ref=e315] [cursor=pointer]:
+              - /url: /careers
+        - list [ref=e316]:
+          - listitem [ref=e317]: Explore
+          - listitem [ref=e318]:
+            - link "For Investors" [ref=e320] [cursor=pointer]:
+              - /url: https://ir.jobyaviation.com/
+          - listitem [ref=e321]:
+            - link "Fly Blade" [ref=e323] [cursor=pointer]:
+              - /url: https://blade.com/
+          - listitem [ref=e324]:
+            - link "Joby Shop" [ref=e326] [cursor=pointer]:
+              - /url: https://shop.jobyaviation.com/
+        - list [ref=e327]:
+          - listitem [ref=e328]: Connect
+          - listitem [ref=e329]:
+            - link "YouTube" [ref=e331] [cursor=pointer]:
+              - /url: https://www.youtube.com/@JobyAviation
+          - listitem [ref=e332]:
+            - link "Instagram" [ref=e334] [cursor=pointer]:
+              - /url: https://www.instagram.com/jobyaviation/
+          - listitem [ref=e335]:
+            - link "LinkedIn" [ref=e337] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/jobyaviation/
+          - listitem [ref=e338]:
+            - link "X" [ref=e340] [cursor=pointer]:
+              - /url: https://x.com/jobyaviation
+        - link "Go to homepage" [ref=e341] [cursor=pointer]:
+          - /url: /
+          - img [ref=e343]
+        - generic [ref=e349]:
+          - generic [ref=e350]: Sign up for updates
+          - generic [ref=e351]:
+            - textbox "Sign up for updates" [ref=e352]:
+              - /placeholder: Enter e-mail address
+            - button "Submit newsletter":
+              - img
+          - generic:
+            - generic:
+              - text: By entering your email address you agree to receive newsletters, updates, and marketing information. You can opt out at any time.
+              - link "See our Privacy Policy.":
+                - /url: /privacy-policy
+      - generic:
+        - img
+  - alert [ref=e353]

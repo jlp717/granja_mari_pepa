@@ -1,0 +1,342 @@
+{
+  "$schema": "./page_map.schema.json",
+  "generatedAt": "2026-04-30",
+  "source": "Verified via Playwright MCP navigation + frontend/app/[locale]/ filesystem audit. See .opencode/DESIGN.md §2.4.",
+  "notes": [
+    "This file replaces the routes section in CONTEXT.md, which described routes (e.g. /catalogos, /panamar, /area-clientes/dashboard) that do not exist on disk under frontend/app/[locale]/ as of audit date.",
+    "Backend contracts in CONTEXT.md are still valid and unchanged.",
+    "Status legend: live = deployed and working; live-broken = deployed but broken UX (e.g. Próximamente lock); 404 = exists in repo but returns 404 in production; planned = should exist after redesign; on-disk-untested = file exists but not visited in this audit.",
+    "Action legend: keep-redesign = preserve URL, redesign visual; keep = preserve as-is; rebuild = preserve URL, rebuild content; remove = delete from repo; create = new route in redesign."
+  ],
+  "current": [
+    {
+      "path": "/",
+      "file": "frontend/app/[locale]/page.tsx",
+      "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+      "status": "live",
+      "audit": {
+        "viewportsTested": [1440, 390],
+        "issues": [
+          "P0: dark cinematic hero conflicts with light body bg",
+          "P0: H1 'GRANJAMARI PEPA' Inter Black 128px uppercase",
+          "P0: tagline plano 'Congelados, refrigerados y helados para HORECA'",
+          "P0: primary CTA 'Ver Catálogo Grupo Topgel' jumps to third party",
+          "P1: blue->purple->pink gradient on h1",
+          "P1: section 'Nuestros Productos' generic 4-card grid",
+          "P1: pildora '✨ CATÁLOGO PREMIUM ⚡' with sparkles",
+          "P1: triple chrome (locale + promo + header) ~152px on mobile = 18% viewport"
+        ]
+      },
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["HeaderEditorial","UtilityBar","HeroPinned","CategoryEditorial","BrandsEditorial","HistoryStory","CoverageMap","TestimonialEditorial","CTABand","FooterEditorial","CookiePill"],
+        "jobyReference": "/ + /experience (pinned hero pattern, color block journalism)"
+      }
+    },
+    {
+      "path": "/productos",
+      "file": "frontend/app/[locale]/productos/page.tsx",
+      "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+      "status": "live-broken",
+      "audit": {
+        "viewportsTested": [1440],
+        "issues": [
+          "P0: page is 'Próximamente' with purple lock icon — blocks the primary CTA of the entire site",
+          "P0: dead-end CTAs 'Volver al inicio' / 'Área de clientes'",
+          "P1: folder contains 7 backup files (page.tsx.bak, page_old.tsx, page_broken.tsx, page_with_errors.tsx.bak, etc.) indicating abandoned iterations"
+        ]
+      },
+      "action": "rebuild",
+      "redesignTarget": {
+        "components": ["HeroPinned","CategoryEditorial","ProductFamilyGrid","EmptyState","CTABand","FooterEditorial"],
+        "jobyReference": "/news (archive style) + /experience (chapter intro)"
+      }
+    },
+    {
+      "path": "/productos/[categoria]",
+      "file": "frontend/app/[locale]/productos/[categoria]/page.tsx (CONTEXT.md says exists; not verified)",
+      "title": "Categoría de Productos",
+      "status": "on-disk-untested",
+      "action": "rebuild",
+      "redesignTarget": {
+        "components": ["ColorBlockHero (color of family)","ProductFamilyGrid","FilterSidebar","ProductCard","Pagination","FooterEditorial"]
+      }
+    },
+    {
+      "path": "/productos/[categoria]/[producto]",
+      "file": "frontend/app/[locale]/productos/[categoria]/[producto]/page.tsx (CONTEXT.md says exists; not verified)",
+      "title": "Detalle de Producto",
+      "status": "on-disk-untested",
+      "action": "rebuild",
+      "redesignTarget": {
+        "components": ["ProductHero","ProductSpecsTable","CTAPrimary (Soy cliente / Pedir)","RelatedProducts (variant of ProductFamilyGrid)","FooterEditorial"]
+      }
+    },
+    {
+      "path": "/acerca",
+      "file": "frontend/app/[locale]/acerca/page.tsx",
+      "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+      "status": "live",
+      "audit": {
+        "viewportsTested": [1440],
+        "issues": [
+          "P0: math error '55 años' (1966 -> 2026 = 60)",
+          "P0: H1 'Granja Maripepa' with rainbow gradient (blue->purple->pink)",
+          "P1: every h3 in narrative section is duplicated in the DOM (Fundación, Consolidación, ISO 9001, Energía Verde, 1.500 referencias)",
+          "P1: hero photo (truck depot) too dark from overlay"
+        ],
+        "preserves": [
+          "Solid narrative structure: Fundación -> Consolidación -> ISO -> Energía -> Cifras -> Delegaciones"
+        ]
+      },
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["TypographicHero (terracotta)","Timeline","EditorialMosaic","MetricGrid","BadgeRow","CTABand","FooterEditorial"],
+        "jobyReference": "/company (typographic oversized hero)"
+      }
+    },
+    {
+      "path": "/contacto",
+      "file": "frontend/app/[locale]/contacto/page.tsx",
+      "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+      "status": "live",
+      "audit": {
+        "viewportsTested": [1440],
+        "issues": [
+          "P0: H1 'Hablemos' rainbow gradient",
+          "P0: AI-corporate body 'equipo de expertos... acompañarte en cada paso hacia el éxito'",
+          "P1: 'Globo Interactivo 3D' loads R3F with no functional return for a contact page"
+        ],
+        "preserves": [
+          "Form with correct fields: nombre, empresa, email, telefono, mensaje, checkbox",
+          "Real headings: Delegación Murcia, Delegación Almería, Email de Pedidos, Horarios"
+        ]
+      },
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["TypographicHero","ContactBlock","FormContact","CoverageMap (lightweight)","FooterEditorial"],
+        "removeAssets": ["Globo Interactivo 3D R3F"],
+        "jobyReference": "no direct equivalent — typographic hero pattern from /company"
+      }
+    },
+    {
+      "path": "/lorca",
+      "file": "frontend/app/[locale]/lorca/page.tsx",
+      "title": "Distribución Alimentaria en Lorca | Granja Mari Pepa - Polígono Saprelorca",
+      "status": "live",
+      "audit": {
+        "viewportsTested": [1440],
+        "issues": [
+          "P0: math error '+55 Años de Experiencia'",
+          "P1: dark cinematic hero pattern generic"
+        ],
+        "preserves": [
+          "Specific copy 'Polígono Industrial Saprelorca'",
+          "'Entrega en 24-48h'",
+          "'Murcia y Almería' coverage claim",
+          "Title preserves SEO keyword 'Saprelorca'"
+        ]
+      },
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["HeroPinned (local photo)","MetricGrid","BadgeRow","CTABand","FooterEditorial"],
+        "jobyReference": "/experience (pinned hero with rotating subtitles)"
+      }
+    },
+    {
+      "path": "/area-clientes",
+      "file": "frontend/app/[locale]/area-clientes/page.tsx",
+      "title": "Granja Mari Pepa | Distribución HORECA Murcia y Lorca",
+      "status": "live",
+      "audit": {
+        "viewportsTested": [1440],
+        "notes": "Best current page — light theme, functional login, sane h1, clean form.",
+        "issues": [
+          "P1: H1 with blue->purple gradient on 'Área Personal'",
+          "P1: pildora '👑 Área Exclusiva para Clientes ✨' unnecessary"
+        ],
+        "preserves": [
+          "Inputs name='codigoCliente' + name='password' (matches backend `login` contract — DO NOT change names)",
+          "Single-column form layout",
+          "Feature list (Historial, Datos seguros, Acceso prioritario)"
+        ]
+      },
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["TypographicHero","FormLogin","FeatureCardGrid","FooterEditorial (reduced)"],
+        "preserveBackendContract": "login: POST { username, password } -> { token, user }. Map UI 'codigoCliente' to backend 'username' as-is.",
+        "jobyReference": "no direct equivalent — typographic hero + sober form"
+      }
+    },
+    {
+      "path": "/checkout",
+      "file": "frontend/app/[locale]/checkout/page.tsx",
+      "title": "(not audited)",
+      "status": "on-disk-untested",
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "notes": "Audit before redesign. Likely B2B order summary."
+      }
+    },
+    {
+      "path": "/legal/privacidad",
+      "file": "frontend/app/[locale]/legal/privacidad/page.tsx",
+      "status": "on-disk-untested",
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["TypographicHero (cream)","ProseBlock"],
+        "notes": "Visual only — legal copy must be preserved verbatim."
+      }
+    },
+    {
+      "path": "/legal/terminos",
+      "file": "frontend/app/[locale]/legal/terminos/page.tsx",
+      "status": "on-disk-untested",
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["TypographicHero (cream)","ProseBlock"]
+      }
+    },
+    {
+      "path": "/offline",
+      "file": "frontend/app/[locale]/offline/page.tsx",
+      "title": "(PWA fallback)",
+      "status": "on-disk-untested",
+      "action": "keep-redesign",
+      "redesignTarget": {
+        "components": ["EmptyState","CTAGhost (back home)"]
+      }
+    },
+    {
+      "path": "/login-secure-example",
+      "file": "frontend/app/[locale]/login-secure-example/page.tsx",
+      "status": "on-disk-untested",
+      "action": "remove",
+      "reason": "Example/demo route, not production."
+    },
+    {
+      "path": "/experience",
+      "file": "frontend/app/[locale]/experience/ (on disk, returns 404)",
+      "status": "404",
+      "action": "remove",
+      "redirect301": "/calidad-y-frio",
+      "reason": "Joby imitation by route name, never deployed. Replace with own narrative content."
+    },
+    {
+      "path": "/technology",
+      "file": "frontend/app/[locale]/technology/ (on disk, returns 404)",
+      "status": "404",
+      "action": "remove",
+      "redirect301": "/calidad-y-frio",
+      "reason": "Joby imitation by route name."
+    },
+    {
+      "path": "/company",
+      "file": "frontend/app/[locale]/company/ (on disk, returns 404)",
+      "status": "404",
+      "action": "remove",
+      "redirect301": "/acerca",
+      "reason": "Joby imitation; /acerca is the canonical 'about' route in Spanish."
+    },
+    {
+      "path": "/sostenibilidad",
+      "file": "frontend/app/[locale]/sostenibilidad/ (on disk, returns 404)",
+      "status": "404",
+      "action": "remove",
+      "redirect301": "/calidad-y-frio#energia-verde",
+      "reason": "Sustainability gets its own anchor in the new /calidad-y-frio chapter."
+    },
+    {
+      "path": "/noticias",
+      "file": "frontend/app/[locale]/noticias/ (on disk, returns 404)",
+      "status": "404",
+      "action": "remove",
+      "redirect301": "/diario",
+      "reason": "Renamed to /diario for editorial voice."
+    },
+    {
+      "path": "/trabajo",
+      "file": "frontend/app/[locale]/trabajo/ (on disk, returns 404)",
+      "status": "404",
+      "action": "remove",
+      "redirect301": "/contacto",
+      "reason": "No active careers content. Redirect to contact while /equipo phase comes later."
+    }
+  ],
+  "planned": [
+    {
+      "path": "/marcas",
+      "purpose": "Index of distributed brands (Nestlé, Topgel, Panamar, ...)",
+      "status": "planned",
+      "action": "create",
+      "components": ["HeroEditorial","BrandsEditorial (extended)","BrandCard","FooterEditorial"],
+      "jobyReference": "no direct — adapted from /experience asymmetric editorial pattern"
+    },
+    {
+      "path": "/marcas/[marca]",
+      "purpose": "Brand-specific page (claim, photo, products distributed)",
+      "status": "planned",
+      "action": "create",
+      "components": ["ColorBlockHero (brand color, controlled)","ProductFamilyGrid (filtered by brand)","FooterEditorial"]
+    },
+    {
+      "path": "/calidad-y-frio",
+      "purpose": "Cold chain, ISO 9001, renewable energy as a chapter, not a badge",
+      "status": "planned",
+      "action": "create",
+      "components": ["HeroFullBleed (refrigeration photo)","ChapterIntro","MetricGrid","BadgeRow","EditorialMosaic","FooterEditorial"],
+      "jobyReference": "/technology (full-bleed media + caption)"
+    },
+    {
+      "path": "/casos",
+      "purpose": "Customer cases / testimonials",
+      "status": "planned",
+      "action": "create",
+      "components": ["TypographicHero","TestimonialEditorial (xN)","EditorialMosaic","CTABand","FooterEditorial"],
+      "jobyReference": "/experience (Experience Highlights section)"
+    },
+    {
+      "path": "/diario",
+      "purpose": "Editorial archive: brand launches, recipes, operational notices",
+      "status": "planned",
+      "action": "create",
+      "components": ["ArchiveHeader","FilterSidebar","ArticleCard","Pagination","FooterEditorial"],
+      "jobyReference": "/news (Newsroom)"
+    },
+    {
+      "path": "/diario/[slug]",
+      "purpose": "Article detail",
+      "status": "planned",
+      "action": "create",
+      "components": ["ArticleHero","ProseBlock","RelatedArticles","FooterEditorial"]
+    },
+    {
+      "path": "/almeria",
+      "purpose": "SEO landing for Almería delegation (sister to /lorca)",
+      "status": "planned",
+      "action": "create",
+      "components": ["HeroPinned (Almería photo)","MetricGrid","BadgeRow","CTABand","FooterEditorial"],
+      "jobyReference": "/experience (pinned hero pattern)"
+    },
+    {
+      "path": "/equipo",
+      "purpose": "Team + culture (Phase 3 optional)",
+      "status": "planned",
+      "action": "create",
+      "components": ["ColorBlockHero (paprika or olive)","TeamGrid","RoleList","FooterEditorial"],
+      "jobyReference": "/careers"
+    }
+  ],
+  "redirects301": [
+    {"from": "/experience", "to": "/calidad-y-frio"},
+    {"from": "/technology", "to": "/calidad-y-frio"},
+    {"from": "/company", "to": "/acerca"},
+    {"from": "/sostenibilidad", "to": "/calidad-y-frio#energia-verde"},
+    {"from": "/noticias", "to": "/diario"},
+    {"from": "/trabajo", "to": "/contacto"}
+  ],
+  "preservedSEO": [
+    "/lorca title 'Distribución Alimentaria en Lorca | Granja Mari Pepa - Polígono Saprelorca'",
+    "All locale prefixes (/es, /en, /de, /it, /zh)"
+  ]
+}

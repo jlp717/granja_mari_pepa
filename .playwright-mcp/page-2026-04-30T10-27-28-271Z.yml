@@ -1,0 +1,284 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e2]
+  - link "Ir al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - generic [ref=e14]: Murcia • Almería
+        - link "968 46 75 14" [ref=e15] [cursor=pointer]:
+          - /url: tel:968467514
+          - img [ref=e17]
+          - generic [ref=e19]: 968 46 75 14
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - img [ref=e22]
+          - generic [ref=e25]:
+            - button "Switch to Español" [ref=e26] [cursor=pointer]: 🇪🇸ES
+            - button "Switch to English" [ref=e27] [cursor=pointer]: 🇬🇧EN
+            - button "Switch to Deutsch" [ref=e28] [cursor=pointer]: 🇩🇪DE
+            - button "Switch to Italiano" [ref=e29] [cursor=pointer]: 🇮🇹IT
+            - button "Switch to 中文" [ref=e30] [cursor=pointer]: 🇨🇳ZH
+        - generic [ref=e31]: Distribución especializada desde 1966
+      - generic [ref=e34]: Calidad Premium
+    - generic [ref=e37]:
+      - button "Revista anterior" [ref=e38] [cursor=pointer]:
+        - img [ref=e39]
+      - button "¡EDICIÓN ESPECIAL! Descubre las ofertas exclusivas de la Revista TopGel - Marzo 2026" [ref=e467] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e468]:
+          - generic [ref=e469]: ¡EDICIÓN ESPECIAL!
+          - generic [ref=e471]:
+            - text: Descubre las ofertas exclusivas de la
+            - generic [ref=e472]: Revista TopGel - Marzo 2026
+        - img [ref=e51]
+      - button "Siguiente revista" [ref=e53] [cursor=pointer]:
+        - img [ref=e54]
+    - banner [ref=e56]:
+      - navigation [ref=e58]:
+        - generic [ref=e59]:
+          - link "Granja Mari Pepa" [ref=e60] [cursor=pointer]:
+            - /url: /es
+            - img "Granja Mari Pepa" [ref=e62]
+          - generic [ref=e63]:
+            - generic [ref=e65]:
+              - link "Productos" [ref=e473] [cursor=pointer]:
+                - /url: /es/productos
+              - button [ref=e68] [cursor=pointer]:
+                - img [ref=e69]
+            - link "Quiénes somos" [ref=e474] [cursor=pointer]:
+              - /url: /es/acerca
+            - link "Contacto" [ref=e475] [cursor=pointer]:
+              - /url: /es/contacto
+            - link "Área Clientes" [ref=e476] [cursor=pointer]:
+              - /url: /es/area-clientes
+              - img [ref=e477]
+              - text: Área Clientes
+          - button "Carrito de compra (0)" [ref=e82] [cursor=pointer]:
+            - img [ref=e84]
+  - main [ref=e88]:
+    - main [ref=e89]:
+      - generic [ref=e91]:
+        - generic [ref=e92]: Your browser does not support the video tag.
+        - generic [ref=e94]:
+          - img "Granja Maripepa Logo" [ref=e465]
+          - generic [ref=e95]:
+            - heading "GRANJA MARI PEPA" [level=1] [ref=e96]:
+              - generic [ref=e97]: GRANJA
+              - generic [ref=e98]: MARI PEPA
+            - paragraph [ref=e99]: Congelados, refrigerados y helados para HORECA
+          - generic [ref=e100]:
+            - button "Explorar Productos" [ref=e101] [cursor=pointer]:
+              - generic [ref=e102]: Explorar Productos
+              - img [ref=e103]
+            - link "Contactar" [ref=e105] [cursor=pointer]:
+              - /url: /es/contacto
+              - button "Contactar" [ref=e106]:
+                - generic [ref=e107]: Contactar
+        - generic [ref=e109] [cursor=pointer]:
+          - generic [ref=e110]: Desliza hacia abajo
+          - img [ref=e113]
+      - generic [ref=e117]:
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - img [ref=e120]
+            - generic [ref=e122]: CATÁLOGO PREMIUM
+            - img [ref=e123]
+          - heading "NUESTROS PRODUCTOS" [level=2] [ref=e125]:
+            - generic [ref=e126]: NUESTROS
+            - generic [ref=e127]: PRODUCTOS
+          - paragraph [ref=e128]: Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad
+        - generic [ref=e129]:
+          - link "Productos del mar PREMIUM Productos del mar Pescados y mariscos congelados de la más alta calidad Explorar" [ref=e130] [cursor=pointer]:
+            - /url: /es/productos?brand=grupo-topgel&category=mar
+            - generic [ref=e133]:
+              - generic [ref=e134]:
+                - img "Productos del mar" [ref=e136]
+                - img [ref=e140]
+                - generic [ref=e147]: PREMIUM
+              - generic [ref=e148]:
+                - heading "Productos del mar" [level=3] [ref=e149]
+                - paragraph [ref=e150]: Pescados y mariscos congelados de la más alta calidad
+                - button "Explorar" [ref=e152]:
+                  - generic [ref=e153]: Explorar
+                  - img [ref=e154]
+          - link "Carnes PREMIUM Carnes Carnes selectas congeladas Explorar" [ref=e158] [cursor=pointer]:
+            - /url: /es/productos?brand=grupo-topgel&category=carne
+            - generic [ref=e161]:
+              - generic [ref=e162]:
+                - img "Carnes" [ref=e164]
+                - img [ref=e168]
+                - generic [ref=e173]: PREMIUM
+              - generic [ref=e174]:
+                - heading "Carnes" [level=3] [ref=e175]
+                - paragraph [ref=e176]: Carnes selectas congeladas
+                - button "Explorar" [ref=e178]:
+                  - generic [ref=e179]: Explorar
+                  - img [ref=e180]
+          - link "Precocinados PREMIUM Precocinados Preparados y verduras congelados Explorar" [ref=e184] [cursor=pointer]:
+            - /url: /es/productos?brand=grupo-topgel&category=precocinados
+            - generic [ref=e187]:
+              - generic [ref=e188]:
+                - img "Precocinados" [ref=e191]
+                - img [ref=e195]
+                - generic [ref=e201]: PREMIUM
+              - generic [ref=e202]:
+                - heading "Precocinados" [level=3] [ref=e203]
+                - paragraph [ref=e204]: Preparados y verduras congelados
+                - button "Explorar" [ref=e206]:
+                  - generic [ref=e207]: Explorar
+                  - img [ref=e208]
+          - link "Repostería PREMIUM Repostería Dulces y postres congelados Explorar" [ref=e212] [cursor=pointer]:
+            - /url: /es/productos?brand=grupo-topgel&category=reposteria
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - img "Repostería" [ref=e219]
+                - img [ref=e223]
+                - generic [ref=e227]: PREMIUM
+              - generic [ref=e228]:
+                - heading "Repostería" [level=3] [ref=e229]
+                - paragraph [ref=e230]: Dulces y postres congelados
+                - button "Explorar" [ref=e232]:
+                  - generic [ref=e233]: Explorar
+                  - img [ref=e234]
+        - link "Ver Catálogo Grupo Topgel" [ref=e239] [cursor=pointer]:
+          - /url: /es/productos?brand=grupo-topgel
+          - button "Ver Catálogo Grupo Topgel" [ref=e240]:
+            - generic [ref=e241]: Ver Catálogo Grupo Topgel
+            - img [ref=e242]
+      - generic [ref=e245]:
+        - generic [ref=e246]:
+          - generic [ref=e247]:
+            - img [ref=e248]
+            - generic [ref=e252]: PARTNERS OFICIALES
+            - img [ref=e253]
+          - heading "MARCAS QUE DISTRIBUIMOS" [level=2] [ref=e256]:
+            - generic [ref=e257]: MARCAS QUE
+            - generic [ref=e258]: DISTRIBUIMOS
+          - paragraph [ref=e259]: Trabajamos con los líderes del sector alimentario para ofrecerte productos de máxima calidad y prestigio.
+        - generic [ref=e260]:
+          - 'link "Logo Grupo Topgel Congelados Premium Grupo Topgel Líder en distribución de productos congelados: pescados, mariscos, carnes, precocinados y repostería de primera calidad. Productos del mar Carnes selectas Precocinados Ver productos" [ref=e262] [cursor=pointer]':
+            - /url: http://www.grupotopgel.es/
+            - generic [ref=e266]:
+              - generic [ref=e267]:
+                - img "Logo Grupo Topgel" [ref=e270]
+                - generic [ref=e271]: Congelados Premium
+              - generic [ref=e272]:
+                - heading "Grupo Topgel" [level=3] [ref=e273]
+                - paragraph [ref=e274]: "Líder en distribución de productos congelados: pescados, mariscos, carnes, precocinados y repostería de primera calidad."
+                - generic [ref=e275]:
+                  - generic [ref=e276]: Productos del mar
+                  - generic [ref=e277]: Carnes selectas
+                  - generic [ref=e278]: Precocinados
+              - generic [ref=e279]:
+                - generic [ref=e280]: Ver productos
+                - img [ref=e282]
+          - link "Logo Nestlé Helados Premium Nestlé Granja Mari Pepa es distribuidor oficial de helados Nestlé para hostelería y establecimientos. Helados hostelería Tarinas Postres helados Ver productos" [ref=e287] [cursor=pointer]:
+            - /url: https://www.helados.nestle.es/
+            - generic [ref=e291]:
+              - generic [ref=e292]:
+                - img "Logo Nestlé" [ref=e295]
+                - generic [ref=e296]: Helados Premium
+              - generic [ref=e297]:
+                - heading "Nestlé" [level=3] [ref=e298]
+                - paragraph [ref=e299]: Granja Mari Pepa es distribuidor oficial de helados Nestlé para hostelería y establecimientos.
+                - generic [ref=e300]:
+                  - generic [ref=e301]: Helados hostelería
+                  - generic [ref=e302]: Tarinas
+                  - generic [ref=e303]: Postres helados
+              - generic [ref=e304]:
+                - generic [ref=e305]: Ver productos
+                - img [ref=e307]
+          - link "Logo Panamar Panadería Panamar Especialistas en panadería congelada de alta calidad para hostelería y restauración. Pan congelado Masas fermentadas Repostería Ver productos" [ref=e312] [cursor=pointer]:
+            - /url: http://www.panamar.es/
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - img "Logo Panamar" [ref=e320]
+                - generic [ref=e321]: Panadería
+              - generic [ref=e322]:
+                - heading "Panamar" [level=3] [ref=e323]
+                - paragraph [ref=e324]: Especialistas en panadería congelada de alta calidad para hostelería y restauración.
+                - generic [ref=e325]:
+                  - generic [ref=e326]: Pan congelado
+                  - generic [ref=e327]: Masas fermentadas
+                  - generic [ref=e328]: Repostería
+              - generic [ref=e329]:
+                - generic [ref=e330]: Ver productos
+                - img [ref=e332]
+        - generic [ref=e336]:
+          - paragraph [ref=e337]: ¿Interesado en nuestros productos?
+          - link "Solicitar información" [ref=e338] [cursor=pointer]:
+            - /url: /es/contacto
+            - button "Solicitar información" [ref=e339]:
+              - text: Solicitar información
+              - img [ref=e340]
+  - contentinfo [ref=e342]:
+    - img [ref=e344]
+    - img [ref=e347]
+    - generic [ref=e349]:
+      - generic [ref=e350]:
+        - generic [ref=e351]:
+          - generic [ref=e352]:
+            - heading "GRANJA MARIPEPA" [level=3] [ref=e353]
+            - paragraph [ref=e356]: Distribuidor Oficial Nestlé
+            - generic [ref=e357]:
+              - generic [ref=e358]: 🏭
+              - paragraph [ref=e359]: Fundada en Lorca, 1966
+          - paragraph [ref=e360]: Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.
+          - generic [ref=e361]:
+            - generic [ref=e362]:
+              - img [ref=e363]
+              - generic [ref=e366]: ISO 9001
+            - generic [ref=e367]:
+              - img [ref=e368]
+              - generic [ref=e370]: Energía Verde
+        - generic [ref=e371]:
+          - heading "Acceso Rápido" [level=4] [ref=e372]
+          - generic [ref=e373]:
+            - link "Catálogo" [ref=e375] [cursor=pointer]:
+              - /url: /es/productos
+              - img [ref=e376]
+              - generic [ref=e380]: Catálogo
+              - img [ref=e381]
+            - link "Portal Clientes" [ref=e384] [cursor=pointer]:
+              - /url: /es/area-clientes
+              - img [ref=e385]
+              - generic [ref=e388]: Portal Clientes
+              - img [ref=e389]
+            - link "Contacto" [ref=e392] [cursor=pointer]:
+              - /url: /es/contacto
+              - img [ref=e393]
+              - generic [ref=e397]: Contacto
+              - img [ref=e398]
+        - generic [ref=e400]:
+          - heading "Contacto" [level=4] [ref=e401]
+          - generic [ref=e402]:
+            - generic [ref=e403]:
+              - generic [ref=e404]:
+                - img [ref=e405]
+                - generic [ref=e407]: Delegación Murcia
+              - paragraph [ref=e408]: 968 46 75 14 / 639 77 86 55
+            - generic [ref=e409]:
+              - generic [ref=e410]:
+                - img [ref=e411]
+                - generic [ref=e414]: Email
+              - paragraph [ref=e415]: pedidos@granjamaripepa.com
+            - generic [ref=e416]:
+              - generic [ref=e417]:
+                - img [ref=e418]
+                - generic [ref=e421]: footer.schedule
+              - paragraph [ref=e422]: 08:00 - 13:00 / 16:00 - 19:00
+      - generic [ref=e424]:
+        - paragraph [ref=e425]: © 2025 Granja Maripepa, S.L. Todos los derechos reservados.
+        - generic [ref=e426]:
+          - link "Política de Privacidad" [ref=e427] [cursor=pointer]:
+            - /url: /es/legal/privacidad
+          - link "Términos y Condiciones" [ref=e428] [cursor=pointer]:
+            - /url: /es/legal/terminos
+          - generic [ref=e429]: 🇪🇸 Lorca, Murcia
+  - region "Notifications (F8)":
+    - list
+  - button [ref=e431] [cursor=pointer]:
+    - img [ref=e434]

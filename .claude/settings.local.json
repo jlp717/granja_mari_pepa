@@ -37,7 +37,11 @@
       "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(if not exist backendassets mkdir backendassets)",
-      "Bash(if not exist \"C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\backend\\app\\services\" mkdir \"C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\backend\\app\\services\")"
+      "Bash(if not exist \"C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\backend\\app\\services\" mkdir \"C:\\Users\\Javier\\Desktop\\Repositorios\\granja_mari_pepa\\backend\\app\\services\")",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_navigate"
     ],
     "deny": [],
     "ask": []
