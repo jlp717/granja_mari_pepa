@@ -17,7 +17,7 @@
         "help_text": "Nuestro equipo de expertos está disponible para asesorarte en productos y pedidos.",
         "call_cta": "Llamadas y WhatsApp",
         "contact_now": "Contactar ahora",
-        "excellence_msg": "Más de 55 años de excelencia en el servicio HORECA.",
+        "excellence_msg": "Distribución especializada desde 1966",
         "categories": {
             "sea": "Productos del mar",
             "meat": "Carne",
@@ -274,7 +274,7 @@
         "hero": {
             "title": "Granja Maripepa",
             "subtitle_1": "Más de",
-            "subtitle_highlight": "55 años",
+            "subtitle_highlight": "Desde 1966",
             "subtitle_2": "al servicio del sector HORECA",
             "description": "Desde 1966 en Lorca (Murcia), somos especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería, restauración y catering.",
             "cta_history": "Descubre nuestra historia",
@@ -342,7 +342,7 @@
         "commitment": {
             "title_1": "Nuestro",
             "title_2": "Compromiso",
-            "description": "Lo que nos diferencia y hace que nuestros clientes confíen en nosotros desde hace más de 55 años",
+            "description": "Lo que nos diferencia y hace que nuestros clientes confíen en nosotros desde 1966",
             "offer_title": "Qué Ofrecemos",
             "items": {
                 "quality": "Garantía de calidad, respaldada por la Norma ISO 9001",
@@ -801,6 +801,7 @@
         "contact": "Contacto",
         "followUs": "Síguenos",
         "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
+        "schedule": "Horario",
         "delegation": "Delegación Murcia",
         "catalog": "Catálogo",
         "client_portal": "Portal Clientes",

@@ -249,7 +249,7 @@ export default function AboutPage() {
       description: t('values.items.attention.desc'),
       icon: Heart,
       color: "from-rose-500 to-rose-600",
-      stat: "+55",
+      stat: "Desde 1966",
       statLabel: t('values.items.attention.label')
     }
   ];

@@ -169,7 +169,7 @@ export default function LorcaPage() {
                             <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
                                 <Users className="w-8 h-8 text-purple-400" />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">+55 Años de Experiencia</h3>
+                            <h3 className="text-xl font-bold text-white mb-2">Desde 1966</h3>
                             <p className="text-white/70">Sirviendo a la hostelería de Murcia y Almería desde 1966.</p>
                         </div>
                     </div>

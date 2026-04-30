@@ -298,7 +298,7 @@ export function ProductCategories() {
               }}
             >
               <span className="group-hover:scale-110 transition-transform duration-300">
-                <span className="hidden sm:inline">{t('view_catalog_topgel')}</span>
+                <span className="hidden sm:inline">{t('view_catalog')}</span>
                 <span className="sm:hidden">{t('view_catalog')}</span>
               </span>
               <ArrowRight className="ml-2 sm:ml-3 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 sm:group-hover:translate-x-2 transition-transform duration-300" />
