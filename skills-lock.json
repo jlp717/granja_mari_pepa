@@ -6,10 +6,22 @@
       "sourceType": "github",
       "computedHash": "44722c0ec8698cc0b57b7e1813e4e4c18db22a8015b243c03d06c1c7a02606e0"
     },
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "computedHash": "c19a532a3777698b80b35270939a1dc559da451381971b3e1e78174d1ab54863"
+    },
     "animate": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "computedHash": "49ccc3eccb47ab302fc5de3ef9f772dcdee1cab03c548012eb2998255a23171b"
+    },
+    "animejs": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/animejs/SKILL.md",
+      "computedHash": "87b7202252c808da0e63a82c85c2d1933c7fd2c11877be4e7851cd5ee58589e3"
     },
     "audit": {
       "source": "pbakaus/impeccable",
@@ -36,6 +48,12 @@
       "sourceType": "github",
       "computedHash": "659e79835cc453341b5de302d9f91fa1e372d1de840ad0f4faabcc6138f80f4e"
     },
+    "css-animations": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/css-animations/SKILL.md",
+      "computedHash": "91be631006d3670ac18c6d35cf4709bb33118d8ef8524ee31baa3217f67acaca"
+    },
     "delight": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
@@ -46,15 +64,46 @@
       "sourceType": "github",
       "computedHash": "15645c6dccfebd541e5a7934fc0741a12c951ee306d61454708ae1f75c99d10e"
     },
+    "gsap": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/gsap/SKILL.md",
+      "computedHash": "8b212228e747c03450551fed20aafd07306ea20feb391098b14397e1f3019bcc"
+    },
+    "hyperframes": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/hyperframes/SKILL.md",
+      "computedHash": "1e0e8ae9da9dae9900696d61b6830c7715e54b1dc5201c4247c5c8487d11cbaf"
+    },
+    "hyperframes-cli": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/hyperframes-cli/SKILL.md",
+      "computedHash": "816caaca77caae6bbf32f78dc3e93f54fc61bac4139d4425bd00cb077b5849e5"
+    },
+    "hyperframes-registry": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/hyperframes-registry/SKILL.md",
+      "computedHash": "187cb9060bc904c44e9a5f525ef2489b9750d398f7b82efd06568726db4fa2a4"
+    },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "2e9a16d34daceeb43ba48f64538bd7035ae68c685ffac8a168ab16f290180c51"
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "e2dba713f87180d0a8cf982d4f1664fadc155a13e1e5aa3d79c48f44b0f9c3a9"
     },
     "layout": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "computedHash": "746432275018adb16be89276afa95cd6f868a38598cf7075294973ce0e757919"
+    },
+    "lottie": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/lottie/SKILL.md",
+      "computedHash": "63dc4bcf80ec7f3c38560e811115eda7fb436190205c6fbc14089b423e658939"
     },
     "optimize": {
       "source": "pbakaus/impeccable",
@@ -76,15 +125,45 @@
       "sourceType": "github",
       "computedHash": "c2b06cf395b04471bdd4cb07b71b49e3bce50800acdfa773a824d1c46d0661d3"
     },
+    "remotion-to-hyperframes": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/remotion-to-hyperframes/SKILL.md",
+      "computedHash": "9988b32a8b15ea30824ba36b8549e336eddeba48786c063a8057eb96f421d4a8"
+    },
     "shape": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "computedHash": "45e5bb82c573fb95a86ef86f358d744575f0abe35e57d9e10143cf8d16a1aa2d"
     },
+    "tailwind": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/tailwind/SKILL.md",
+      "computedHash": "528e205c2453c9fbfc9c41b5bb0d7b1278195e09536b3f8ebb76eb7bc5326e75"
+    },
+    "three": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/three/SKILL.md",
+      "computedHash": "9be3cc37c69221363c00461b34df4165be72163250b6e6de0e9ade27692367e2"
+    },
     "typeset": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "computedHash": "26f31a4cbe25cbe70a3bc95ce4f229767bf1dce2f59e049fadde13fc56bfc815"
+    },
+    "waapi": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/waapi/SKILL.md",
+      "computedHash": "f7438b7b45048c41d28a3c16e5f25a2547d2bd3ee67335a1ec8695f66ad17850"
+    },
+    "website-to-hyperframes": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/website-to-hyperframes/SKILL.md",
+      "computedHash": "19cac4db1463f0b670ca903c13e61ef62974d1578cf3432a44835d353540dce6"
     }
   }
 }
