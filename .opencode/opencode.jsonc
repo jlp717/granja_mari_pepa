@@ -1,0 +1,16 @@
+// GRANJA MARI PEPA — OpenCode project config
+// Stack: Next.js 14 + Tailwind CSS v4 + GSAP/Framer/Lenis + R3F + Express
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode-go/glm-5.1",
+  "default_agent": "developer",
+  "instructions": ["./.opencode/AGENTS.md"],
+  "mcp": {
+    "context7": { "enabled": true },
+    "playwright": { "enabled": true },
+    "git": { "enabled": true },
+    "sequential-thinking": { "enabled": true },
+    "memory": { "enabled": true },
+    "fetch": { "enabled": true }
+  }
+}
