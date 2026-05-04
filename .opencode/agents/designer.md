@@ -1,3 +1,6 @@
+---
+name: designer
+---
 # Agente Designer - Diseño UI/UX
 
 ## Rol

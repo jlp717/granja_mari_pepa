@@ -1,3 +1,6 @@
+---
+name: auditor
+---
 # Agente Auditor - Detector de AI Slop
 
 ## Rol

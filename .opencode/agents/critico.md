@@ -1,3 +1,6 @@
+---
+name: critico
+---
 # Agente Crítico - Auto-crítica Visual
 
 ## Rol

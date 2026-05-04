@@ -1,3 +1,6 @@
+---
+name: seo
+---
 # Agente SEO - Optimización para Buscadores
 
 ## Rol
