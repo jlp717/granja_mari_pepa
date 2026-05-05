@@ -108,7 +108,7 @@ async function getSummary(req, res) {
       });
     }
 
-    const { ejercicio, meses, codigoCliente: clienteDestino } = req.query;
+    const { ejercicio, meses, codigoCliente: clienteDestino, busqueda } = req.query;
 
     // Parsear meses para summary
     let mesesArray;
@@ -120,7 +120,8 @@ async function getSummary(req, res) {
     const result = await panamarService.getSummary({
       ejercicio,
       meses: mesesArray,
-      codigoCliente: clienteDestino
+      codigoCliente: clienteDestino,
+      busqueda
     });
 
     return res.json({
