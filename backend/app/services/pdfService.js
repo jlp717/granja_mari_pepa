@@ -251,13 +251,18 @@ y += 38;
           const fecha = formatDate(header.DIAFACTURA, header.MESFACTURA, header.ANOFACTURA);
 
           // -----------------------------------------------------------
-          // LÓGICA: Si cliente factura es "4300005000" (CONTADO), usar cliente ALBARÁN
-          // El sistema ya tiene lógica para resolver: CONTADO -> cliente albarán
+          // LÓGICA: Usar cliente del ALBARÁN cuando:
+          // - Cliente factura es CONTADO (4300005000) O CONTADOS VARIOS (4300005001)
+          // - O cuando el cliente del albarán es diferente al de factura
+          // Esto asegura que siempre se muestre el cliente real del servicio
           // -----------------------------------------------------------
           const codigoClienteFactura = (header.CODIGOCLIENTEFACTURA || '').trim();
-          const esContado = codigoClienteFactura === '4300005000';
+          const codigoClienteAlbaran = (header.CODIGOCLIENTEALBARAN || '').trim();
+          const clientesContado = ['4300005000', '4300005001'];
+          const esContado = clientesContado.includes(codigoClienteFactura);
+          const clienteDiferente = codigoClienteAlbaran && codigoClienteAlbaran !== codigoClienteFactura;
           const tieneClienteAlbaran = header.NOMBRECLIENTEALBARAN && header.NOMBRECLIENTEALBARAN.trim().length > 0;
-          const usarClienteAlbaran = esContado && tieneClienteAlbaran;
+          const usarClienteAlbaran = (esContado || clienteDiferente) && tieneClienteAlbaran;
 
           // Determinar datos del cliente a mostrar (usar albarán solo si es CONTADO y hay datos)
           const nombreClienteMostrar = usarClienteAlbaran ? header.NOMBRECLIENTEALBARAN : (header.NOMBRECLIENTEFACTURA || '');

@@ -1,0 +1,58 @@
+/**
+ * Test con filtros de MES_ALBARAN (mes del documento)
+ */
+const db = require('../app/config/odbcConfig');
+
+(async () => {
+  await db.initialize();
+  console.log('TEST CON FILTRO MES_ALBARAN\n');
+
+  const F = "'700', '701', '702', '703', '704', '705', '706'";
+  const C = "'AB', 'RG', 'VT'";
+
+  // Con filtros ano=2026, mes_albaran=4 (el mes del documento/albarán)
+  const aggSQL = `
+    WITH TARIFAS_PANAMAR AS (
+      SELECT TRIM(ARA.CODIGOARTICULO) AS CODIGO_ARTICULO, ARA.CODIGOTARIFA,
+             MAX(ARA.PRECIOTARIFA) AS PRECIOTARIFA
+      FROM DSEDAC.ARA ARA WHERE ARA.CODIGOTARIFA IN (84, 85)
+      GROUP BY TRIM(ARA.CODIGOARTICULO), ARA.CODIGOTARIFA
+    ),
+    PANAMAR_LINEAS AS (
+      SELECT 
+        TRIM(LAC.TIPOVENTA) AS TIPOVENTA, 
+        LAC.CANTIDADENVASES AS CAJAS,
+        CAC.ANODOCUMENTO AS ANO_ALBARAN,
+        CAC.MESDOCUMENTO AS MES_ALBARAN
+      FROM DSEDAC.CAC CAC
+      INNER JOIN DSEDAC.LAC LAC ON 
+        LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN
+        AND LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN
+        AND LAC.SERIEALBARAN = CAC.SERIEALBARAN
+        AND LAC.TERMINALALBARAN = CAC.TERMINALALBARAN
+        AND LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+      INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+      WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+        AND TRIM(ART.CODIGOFAMILIA) IN (${F})
+        AND TRIM(LAC.CLASELINEA) IN (${C})
+    )
+    SELECT 
+      COALESCE(SUM(CASE WHEN TRIM(TIPOVENTA) = 'CC' THEN COALESCE(CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_CC,
+      COALESCE(SUM(CASE WHEN TRIM(TIPOVENTA) = 'SC' THEN COALESCE(CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_SC
+    FROM PANAMAR_LINEAS
+    WHERE ANO_ALBARAN = 2026 AND MES_ALBARAN = 4
+  `;
+
+  const result = await db.query(aggSQL);
+  console.log('Con filtros ano=2026, mes_albaran=4:', result[0]);
+
+  console.log('\n=== RESUMEN ===');
+  console.log('Con filtros MES_ALBARAN: CC=' + result[0].TOTAL_CAJAS_CC + ', SC=' + result[0].TOTAL_CAJAS_SC);
+  console.log('Objetivo: CC=3865, SC=11');
+
+  if (result[0].TOTAL_CAJAS_CC === 3865 && result[0].TOTAL_CAJAS_SC === 11) {
+    console.log('\n✅ COINCIDE CON EL JEFE!');
+  }
+
+  process.exit(0);
+})();
