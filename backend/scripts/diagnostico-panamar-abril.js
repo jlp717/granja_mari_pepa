@@ -1,0 +1,180 @@
+/**
+ * Diagnóstico profundo de Panamar Abril 2026
+ * Ejecutar: node scripts/diagnostico-panamar-abril.js
+ */
+const db = require('../app/config/odbcConfig');
+
+const FAMILIAS = "'700', '701', '702', '703', '704', '705', '706'";
+const CLASES_LINEA = "'AB', 'RG', 'VT'";
+
+async function run() {
+  await db.initialize();
+  console.log('🔍 DIAGNÓSTICO PROFUNDO: Panamar Abril 2026\n');
+  console.log('='.repeat(60));
+
+  // 1) Ver diferencia entre MESDOCUMENTO y MESFACTURA
+  console.log('\n1️⃣ Comparando MESDOCUMENTO vs MESFACTURA:');
+  const comp = await db.query(`
+    SELECT 
+      CAC.MESDOCUMENTO AS MES_ALBARAN,
+      CAC.MESFACTURA AS MES_FACTURA,
+      COUNT(*) AS NUM_FACTURAS,
+      COUNT(DISTINCT CAC.NUMEROALBARAN) AS NUM_ALBARANES
+    FROM DSEDAC.CAC CAC
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND CAC.ANOFACTURA = 2026
+      AND CAC.MESFACTURA = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+    GROUP BY CAC.MESDOCUMENTO, CAC.MESFACTURA
+  `);
+  console.table(comp);
+
+  // 2) Ver todos los tipos de venta
+  console.log('\n2️⃣ Todos los TIPOVENTA en abril:');
+  const tipos = await db.query(`
+    SELECT
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
+      COUNT(*) AS LINEAS,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+    ORDER BY CAJAS DESC
+  `);
+  console.table(tipos);
+
+  // 3) Ver todas las familias
+  console.log('\n3️⃣ Cajas por familia:');
+  const familias = await db.query(`
+    SELECT
+      TRIM(ART.CODIGOFAMILIA) AS FAMILIA,
+      COUNT(*) AS LINEAS,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+    GROUP BY TRIM(ART.CODIGOFAMILIA)
+    ORDER BY CAJAS DESC
+  `);
+  console.table(familias);
+
+  // 4) Ver todas las clases de linea
+  console.log('\n4️⃣ Cajas por CLASELINEA:');
+  const clases = await db.query(`
+    SELECT
+      TRIM(LAC.CLASELINEA) AS CLASELINEA,
+      TRIM(LAC.TIPOVENTA) AS TIPOVENTA,
+      COUNT(*) AS LINEAS,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+    GROUP BY TRIM(LAC.CLASELINEA), TRIM(LAC.TIPOVENTA)
+    ORDER BY CLASELINEA, CAJAS DESC
+  `);
+  console.table(clases);
+
+  // 5) Total sin filtros de familia ni clase linea
+  console.log('\n5️⃣ TOTAL sin filtros (solo cliente 43% y con factura):');
+  const sinFiltros = await db.query(`
+    SELECT
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
+      COUNT(*) AS LINEAS,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  console.table(sinFiltros);
+
+  // 6) Ver qué pasa si uso MES_FACTURA = 4 pero MESDOCUMENTO = 3 (albaranes de marzo facturados en abril)
+  console.log('\n6️⃣ Albaranes de marzo (MESDOCUMENTO=3) facturados en abril (MESFACTURA=4):');
+  const albaranesMarzo = await db.query(`
+    SELECT
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
+      COUNT(*) AS LINEAS,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 3  -- Marzo
+      AND CAC.ANOFACTURA = 2026
+      AND CAC.MESFACTURA = 4   -- Facturado en abril
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+      AND TRIM(LAC.CLASELINEA) IN (${CLASES_LINEA})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  console.table(albaranesMarzo);
+
+  let totalCC_marzo = 0, totalSC_marzo = 0;
+  albaranesMarzo.forEach(r => {
+    const cajas = Number(r.CAJAS) || 0;
+    if ((r.TIPO_VENTA || '').trim() === 'CC') totalCC_marzo = cajas;
+    if ((r.TIPO_VENTA || '').trim() === 'SC') totalSC_marzo = cajas;
+  });
+  console.log(`\n➡️ Albaranes de marzo->abril: CC=${totalCC_marzo}, SC=${totalSC_marzo}`);
+
+  console.log('\n' + '='.repeat(60));
+  console.log('📌 RESUMEN:');
+  console.log('   WEB actual (MES_ALBARAN=4): CC=3792, SC=9');
+  console.log('   MI cambio (MES_FACTURA=4): CC=3792, SC=9');
+  console.log('   Jefe reporta: CC=3865, SC=11');
+  console.log('   Diferencia: CC +73, SC +2');
+
+  process.exit(0);
+}
+
+run().catch(err => {
+  console.error('Error:', err.message);
+  process.exit(1);
+});

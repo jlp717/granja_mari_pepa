@@ -17,6 +17,8 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
     // Cabecera de factura con JOIN a CLI para datos del cliente
     // IMPORTANTE: CAC tiene múltiples registros por factura (uno por albarán)
     // Por eso usamos GROUP BY y SUM para obtener los totales correctos
+    // Query para obtener datos de la factura
+    // Incluye cliente de albarán para casos de CONTADO (5001)
     const headerQuery = `
       SELECT
         CAC.SERIEFACTURA,
@@ -36,6 +38,15 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         MAX(CLI.PROVINCIA) as PROVINCIACLIENTEFACTURA,
         MAX(CLI.CODIGOPOSTAL) as CPCLIENTEFACTURA,
         MAX(CLI.NIF) as CIFCLIENTEFACTURA,
+        -- Cliente del albarán (para CONTADO y otros casos)
+        MAX(TRIM(CAC.CODIGOCLIENTEALBARAN)) as CODIGOCLIENTEALBARAN,
+        MAX(COALESCE(
+          CASE WHEN LENGTH(TRIM(CLI_ALB.NOMBRECLIENTE)) > 1 THEN TRIM(CLI_ALB.NOMBRECLIENTE) END,
+          CASE WHEN LENGTH(TRIM(CLI_ALB.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI_ALB.NOMBREALTERNATIVO) END,
+          TRIM(CLI_ALB.NOMBRECLIENTE)
+        )) as NOMBRECLIENTEALBARAN,
+        MAX(CLI_ALB.DIRECCION) as DIRECCIONCLIENTEALBARAN,
+        MAX(CLI_ALB.POBLACION) as POBLACIONCLIENTEALBARAN,
         SUM(CAC.IMPORTEBASEIMPONIBLE1 + CAC.IMPORTEBASEIMPONIBLE2 + CAC.IMPORTEBASEIMPONIBLE3 +
             CAC.IMPORTEBASEIMPONIBLE4 + CAC.IMPORTEBASEIMPONIBLE5) as BASEFACTURA,
         SUM(CAC.IMPORTEIVA1 + CAC.IMPORTEIVA2 + CAC.IMPORTEIVA3 + CAC.IMPORTEIVA4 + CAC.IMPORTEIVA5) as IVAFACTURA,
@@ -44,6 +55,7 @@ async function getInvoiceDetail(serie, numero, ejercicio, codigoCliente) {
         SUM(CAC.IMPORTETOTAL) as TOTALFACTURA
       FROM DSEDAC.CAC CAC
       LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
+      LEFT JOIN DSEDAC.CLI CLI_ALB ON TRIM(CAC.CODIGOCLIENTEALBARAN) = TRIM(CLI_ALB.CODIGOCLIENTE)
       WHERE TRIM(CAC.SERIEFACTURA) = ?
         AND CAC.NUMEROFACTURA = ?
         AND CAC.EJERCICIOFACTURA = ?

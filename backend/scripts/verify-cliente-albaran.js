@@ -1,0 +1,108 @@
+/**
+ * VERIFICACIÓN: Cliente del albarán en facturas PDF
+ * Busca facturas con cliente CONTADO (4300005000) y verifica datos
+ * Ejecutar: node scripts/verify-cliente-albaran.js
+ */
+const db = require('../app/config/odbcConfig');
+
+async function run() {
+  await db.initialize();
+  console.log('🔍 VERIFICACIÓN: Cliente del Albarán en Facturas');
+  console.log('='.repeat(60));
+
+  // Buscar facturas de CONTADO (4300005000)
+  console.log('\n📋 Buscando facturas de CONTADO...');
+  const result = await db.query(`
+    SELECT 
+      CAC.SERIEFACTURA,
+      CAC.NUMEROFACTURA,
+      CAC.EJERCICIOFACTURA,
+      TRIM(CAC.CODIGOCLIENTEFACTURA) AS CODIGO_CLIENTE_FACTURA,
+      TRIM(CAC.CODIGOCLIENTEALBARAN) AS CODIGO_CLIENTE_ALBARAN,
+      CLI_FACT.NOMBRECLIENTE AS NOMBRE_CLIENTE_FACTURA,
+      CLI_ALB.NOMBRECLIENTE AS NOMBRE_CLIENTE_ALBARAN,
+      CAC.MESFACTURA,
+      CAC.ANOFACTURA
+    FROM DSEDAC.CAC CAC
+    LEFT JOIN DSEDAC.CLI CLI_FACT ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI_FACT.CODIGOCLIENTE)
+    LEFT JOIN DSEDAC.CLI CLI_ALB ON TRIM(CAC.CODIGOCLIENTEALBARAN) = TRIM(CLI_ALB.CODIGOCLIENTE)
+    WHERE CAC.ANOFACTURA = 2026
+      AND CAC.MESFACTURA = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) = '4300005000'
+      AND CAC.NUMEROFACTURA > 0
+    GROUP BY CAC.SERIEFACTURA, CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA, 
+             TRIM(CAC.CODIGOCLIENTEFACTURA), TRIM(CAC.CODIGOCLIENTEALBARAN),
+             CLI_FACT.NOMBRECLIENTE, CLI_ALB.NOMBRECLIENTE,
+             CAC.MESFACTURA, CAC.ANOFACTURA
+    ORDER BY CAC.NUMEROFACTURA DESC
+    FETCH FIRST 10 ROWS ONLY
+  `);
+  
+  console.log(`\n📋 Encontradas ${result.length} facturas de CONTADO en abril:\n`);
+  
+  if (result.length === 0) {
+    console.log('⚠️ No hay facturas de CONTADO en abril 2026');
+  } else {
+    result.forEach(r => {
+      console.log(`  F-${r.SERIEFACTURA}${r.NUMEROFACTURA}`);
+      console.log(`    Cliente FACTURA: ${r.CODIGO_CLIENTE_FACTURA} -> ${r.NOMBRE_CLIENTE_FACTURA}`);
+      console.log(`    Cliente ALBARÁN: ${r.CODIGO_CLIENTE_ALBARAN} -> ${r.NOMBRE_CLIENTE_ALBARAN}`);
+      console.log('');
+    });
+  }
+
+  // Verificar query del PDF
+  console.log('\n' + '='.repeat(60));
+  console.log('📌 Verificando query del PDF...\n');
+  
+  const pdfResult = await db.query(`
+    SELECT
+      CAC.SERIEFACTURA,
+      CAC.NUMEROFACTURA,
+      CAC.EJERCICIOFACTURA,
+      MAX(TRIM(CAC.CODIGOCLIENTEFACTURA)) as CODIGOCLIENTEFACTURA,
+      MAX(TRIM(CAC.CODIGOCLIENTEALBARAN)) as CODIGOCLIENTEALBARAN,
+      MAX(COALESCE(
+        CASE WHEN LENGTH(TRIM(CLI.NOMBRECLIENTE)) > 1 THEN TRIM(CLI.NOMBRECLIENTE) END,
+        CASE WHEN LENGTH(TRIM(CLI.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI.NOMBREALTERNATIVO) END,
+        TRIM(CLI.NOMBRECLIENTE)
+      )) as NOMBRECLIENTEFACTURA,
+      MAX(COALESCE(
+        CASE WHEN LENGTH(TRIM(CLI_ALB.NOMBRECLIENTE)) > 1 THEN TRIM(CLI_ALB.NOMBRECLIENTE) END,
+        CASE WHEN LENGTH(TRIM(CLI_ALB.NOMBREALTERNATIVO)) > 1 THEN TRIM(CLI_ALB.NOMBREALTERNATIVO) END,
+        TRIM(CLI_ALB.NOMBRECLIENTE)
+      )) as NOMBRECLIENTEALBARAN,
+      MAX(CLI.DIRECCION) as DIRECCIONCLIENTEFACTURA,
+      MAX(CLI_ALB.DIRECCION) as DIRECCIONCLIENTEALBARAN,
+      MAX(CLI_ALB.POBLACION) as POBLACIONCLIENTEALBARAN
+    FROM DSEDAC.CAC CAC
+    LEFT JOIN DSEDAC.CLI CLI ON TRIM(CAC.CODIGOCLIENTEFACTURA) = TRIM(CLI.CODIGOCLIENTE)
+    LEFT JOIN DSEDAC.CLI CLI_ALB ON TRIM(CAC.CODIGOCLIENTEALBARAN) = TRIM(CLI_ALB.CODIGOCLIENTE)
+    WHERE CAC.ANOFACTURA = 2026
+      AND CAC.MESFACTURA = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) = '4300005000'
+      AND CAC.NUMEROFACTURA > 0
+    GROUP BY CAC.SERIEFACTURA, CAC.NUMEROFACTURA, CAC.EJERCICIOFACTURA
+    ORDER BY CAC.NUMEROFACTURA DESC
+  `);
+  
+  console.log(`✅ Query del PDF devuelve ${pdfResult.length} registros`);
+  
+  if (pdfResult.length > 0) {
+    const r = pdfResult[0];
+    console.log('\n📄 Datos que llegarían al PDF:');
+    console.log(`   CODIGOCLIENTEFACTURA: ${r.CODIGOCLIENTEFACTURA}`);
+    console.log(`   CODIGOCLIENTEALBARAN: ${r.CODIGOCLIENTEALBARAN}`);
+    console.log(`   NOMBRECLIENTEFACTURA: ${r.NOMBRECLIENTEFACTURA}`);
+    console.log(`   NOMBRECLIENTEALBARAN: ${r.NOMBRECLIENTEALBARAN}`);
+    console.log(`   DIRECCIONCLIENTEALBARAN: ${r.DIRECCIONCLIENTEALBARAN}`);
+    console.log(`   POBLACIONCLIENTEALBARAN: ${r.POBLACIONCLIENTEALBARAN}`);
+  }
+
+  process.exit(0);
+}
+
+run().catch(err => {
+  console.error('Error:', err.message);
+  process.exit(1);
+});

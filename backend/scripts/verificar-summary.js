@@ -1,0 +1,67 @@
+/**
+ * Verificar summary con filtros actualizados
+ */
+const db = require('../app/config/odbcConfig');
+
+(async () => {
+  await db.initialize();
+  console.log('VERIFICANDO SUMMARY ACTUALIZADO\n');
+
+  const F = "'700', '701', '702', '703', '704', '705', '706'";
+  const C = "'AB', 'RG', 'VT'";
+
+  // Mi actual (con NUMEROFACTURA > 0) - what it was
+  const r1 = await db.query(`
+    SELECT TRIM(LAC.TIPOVENTA) AS TV, SUM(COALESCE(LAC.CANTIDADENVASES,0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(CAC.SERIEFACTURA) <> ''
+      AND TRIM(ART.CODIGOFAMILIA) IN (${F})
+      AND TRIM(LAC.CLASELINEA) IN (${C})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  let cc1=0, sc1=0; r1.forEach(x=>{if(x.TV==='CC')cc1=x.CAJAS;if(x.TV==='SC')sc1=x.CAJAS;});
+  console.log('ANTES (con NUM>0): CC=' + cc1 + ', SC=' + sc1);
+
+  // Nuevo (sin NUMEROFACTURA > 0, solo SERIEFACTURA <> '')
+  const r2 = await db.query(`
+    SELECT TRIM(LAC.TIPOVENTA) AS TV, SUM(COALESCE(LAC.CANTIDADENVASES,0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND TRIM(CAC.SERIEFACTURA) <> ''
+      AND TRIM(ART.CODIGOFAMILIA) IN (${F})
+      AND TRIM(LAC.CLASELINEA) IN (${C})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  let cc2=0, sc2=0; r2.forEach(x=>{if(x.TV==='CC')cc2=x.CAJAS;if(x.TV==='SC')sc2=x.CAJAS;});
+  console.log('NUEVO (sin NUM>0): CC=' + cc2 + ', SC=' + sc2);
+
+  console.log('\n=== RESULTADO ===');
+  console.log('Web muestra ahora: CC=' + cc2 + ', SC=' + sc2);
+  console.log('Jefe espera: CC=3865, SC=11');
+  
+  if (cc2 === 3865 && sc2 === 11) {
+    console.log('\n✅ COINCIDE CON EL JEFE!');
+  } else {
+    console.log('\n❌ DIFERENCIA: CC=' + (3865-cc2) + ', SC=' + (11-sc2));
+  }
+
+  process.exit(0);
+})();

@@ -243,26 +243,41 @@ async function generateInvoicePDF(facturaData) {
          doc.fontSize(16)
             .text(numFactura, 400, y + 10, { width: 145, align: 'right' });
 
-         y += 38;
+y += 38;
 
-         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         // INFORMACIÓN DE FACTURA (FECHA Y EJERCICIO)
-         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         const fecha = formatDate(header.DIAFACTURA, header.MESFACTURA, header.ANOFACTURA);
+          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          // INFORMACIÓN DE FACTURA (FECHA Y EJERCICIO)
+          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          const fecha = formatDate(header.DIAFACTURA, header.MESFACTURA, header.ANOFACTURA);
 
-         // Caja izquierda: Código Cliente
-         doc.rect(40, y, 160, 20)
-            .fillAndStroke(COLORS.lightGray, COLORS.border);
+          // -----------------------------------------------------------
+          // LÓGICA: Si cliente factura es "4300005000" (CONTADO), usar cliente ALBARÁN
+          // El sistema ya tiene lógica para resolver: CONTADO -> cliente albarán
+          // -----------------------------------------------------------
+          const codigoClienteFactura = (header.CODIGOCLIENTEFACTURA || '').trim();
+          const esContado = codigoClienteFactura === '4300005000';
+          const tieneClienteAlbaran = header.NOMBRECLIENTEALBARAN && header.NOMBRECLIENTEALBARAN.trim().length > 0;
+          const usarClienteAlbaran = esContado && tieneClienteAlbaran;
 
-         doc.fontSize(7)
-            .font('Helvetica-Bold')
-            .fillColor(COLORS.mediumGray)
-            .text('CÓDIGO CLIENTE', 45, y + 5);
+          // Determinar datos del cliente a mostrar (usar albarán solo si es CONTADO y hay datos)
+          const nombreClienteMostrar = usarClienteAlbaran ? header.NOMBRECLIENTEALBARAN : (header.NOMBRECLIENTEFACTURA || '');
+          const codigoClienteMostrar = usarClienteAlbaran ? (header.CODIGOCLIENTEALBARAN || header.CODIGOCLIENTEFACTURA) : header.CODIGOCLIENTEFACTURA;
+          const direccionClienteMostrar = usarClienteAlbaran ? (header.DIRECCIONCLIENTEALBARAN || header.DIRECCIONCLIENTEFACTURA) : header.DIRECCIONCLIENTEFACTURA;
+          const poblacionClienteMostrar = usarClienteAlbaran ? header.POBLACIONCLIENTEALBARAN : header.POBLACIONCLIENTEFACTURA;
 
-         doc.fontSize(10)
-            .font('Helvetica-Bold')
-            .fillColor(COLORS.darkGray)
-            .text(header.CODIGOCLIENTEFACTURA || '', 45, y + 13);
+          // Caja izquierda: Código Cliente
+          doc.rect(40, y, 160, 20)
+             .fillAndStroke(COLORS.lightGray, COLORS.border);
+
+          doc.fontSize(7)
+             .font('Helvetica-Bold')
+             .fillColor(COLORS.mediumGray)
+             .text('CÓDIGO CLIENTE', 45, y + 5);
+
+          doc.fontSize(10)
+             .font('Helvetica-Bold')
+             .fillColor(COLORS.darkGray)
+             .text(codigoClienteMostrar || '', 45, y + 13);
 
          // Caja centro: Fecha
          doc.rect(205, y, 180, 20)
@@ -294,54 +309,55 @@ async function generateInvoicePDF(facturaData) {
 
          y += 26;
 
-         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         // INFORMACIÓN DEL CLIENTE - TARJETA ELEGANTE
-         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         const clienteBoxStartY = y;
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          // INFORMACIÓN DEL CLIENTE - TARJETA ELEGANTE
+          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          const clienteBoxStartY = y;
 
-         // Fondo de la tarjeta
-         doc.rect(40, y, 515, 85)
-            .fillAndStroke(COLORS.ultraLight, COLORS.lightGray)
-            .lineWidth(1);
+          // Fondo de la tarjeta
+          doc.rect(40, y, 515, 85)
+             .fillAndStroke(COLORS.ultraLight, COLORS.lightGray)
+.lineWidth(1);
 
-         y += 8;
+           // Las variables ya fueron definidas arriba para toda la función
+           y += 8;
 
-         // Etiqueta
-         doc.fontSize(8)
-            .font('Helvetica-Bold')
-            .fillColor(COLORS.secondary)
-            .text('FACTURAR A', 45, y);
+          // Etiqueta
+          doc.fontSize(8)
+             .font('Helvetica-Bold')
+             .fillColor(COLORS.secondary)
+             .text('FACTURAR A', 45, y);
 
-         y += 15;
+          y += 15;
 
-         // Nombre del cliente - DESTACADO
-         doc.fontSize(12)
-            .font('Helvetica-Bold')
-            .fillColor(COLORS.darkGray)
-            .text((header.NOMBRECLIENTEFACTURA || '').toUpperCase(), 45, y, {
-               width: 500
-            });
+          // Nombre del cliente - DESTACADO
+          doc.fontSize(12)
+             .font('Helvetica-Bold')
+             .fillColor(COLORS.darkGray)
+             .text(nombreClienteMostrar.toUpperCase(), 45, y, {
+                width: 500
+             });
 
-         y += 18;
+          y += 18;
 
-         // Dirección
-         doc.fontSize(9)
-            .font('Helvetica')
-            .fillColor(COLORS.darkGray);
+          // Dirección
+          doc.fontSize(9)
+             .font('Helvetica')
+             .fillColor(COLORS.darkGray);
 
-         if (header.DIRECCIONCLIENTEFACTURA) {
-            doc.text(header.DIRECCIONCLIENTEFACTURA, 45, y);
-            y += 12;
-         }
+          if (direccionClienteMostrar) {
+             doc.text(direccionClienteMostrar, 45, y);
+             y += 12;
+          }
 
-         // CP, Población y Provincia
-         if (header.CPCLIENTEFACTURA || header.POBLACIONCLIENTEFACTURA) {
-            let localidad = '';
-            if (header.CPCLIENTEFACTURA) localidad += header.CPCLIENTEFACTURA + ' ';
-            if (header.POBLACIONCLIENTEFACTURA) localidad += header.POBLACIONCLIENTEFACTURA;
-            if (header.PROVINCIACLIENTEFACTURA) localidad += ' (' + header.PROVINCIACLIENTEFACTURA + ')';
+          // CP, Población y Provincia
+          if (header.CPCLIENTEFACTURA || poblacionClienteMostrar) {
+             let localidad = '';
+             if (header.CPCLIENTEFACTURA) localidad += header.CPCLIENTEFACTURA + ' ';
+             if (poblacionClienteMostrar) localidad += poblacionClienteMostrar;
+             if (header.PROVINCIACLIENTEFACTURA && !usarClienteAlbaran) localidad += ' (' + header.PROVINCIACLIENTEFACTURA + ')';
 
-            doc.text(localidad.trim(), 45, y);
+             doc.text(localidad.trim(), 45, y);
             y += 12;
          }
 

@@ -1,0 +1,92 @@
+/**
+ * Test exclusión 44
+ * Ejecutar: node scripts/test-excluir-44.js
+ */
+const db = require('../app/config/odbcConfig');
+
+(async () => {
+  await db.initialize();
+  console.log('TEST EXCLUIR 44\n');
+
+  const F = "'700', '701', '702', '703', '704', '705', '706'";
+  const C = "'AB', 'RG', 'VT'";
+
+  // Mi actual: LIKE '43%'
+  const r1 = await db.query(`
+    SELECT TRIM(LAC.TIPOVENTA) AS TV, SUM(COALESCE(LAC.CANTIDADENVASES,0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${F})
+      AND TRIM(LAC.CLASELINEA) IN (${C})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  let cc1=0, sc1=0; r1.forEach(x=>{if(x.TV==='CC')cc1=x.CAJAS;if(x.TV==='SC')sc1=x.CAJAS;});
+  console.log('LIKE 43%: CC=' + cc1 + ', SC=' + sc1);
+
+  // Excluir 44
+  const r2 = await db.query(`
+    SELECT TRIM(LAC.TIPOVENTA) AS TV, SUM(COALESCE(LAC.CANTIDADENVASES,0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) NOT LIKE '44%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${F})
+      AND TRIM(LAC.CLASELINEA) IN (${C})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  let cc2=0, sc2=0; r2.forEach(x=>{if(x.TV==='CC')cc2=x.CAJAS;if(x.TV==='SC')sc2=x.CAJAS;});
+  console.log('LIKE 43% NOT LIKE 44%: CC=' + cc2 + ', SC=' + sc2);
+
+  // Ver clientes 44 que hay
+  const cli44 = await db.query(`
+    SELECT TRIM(CAC.CODIGOCLIENTEFACTURA) AS CLI, COUNT(*) AS N
+    FROM DSEDAC.CAC CAC
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '44%'
+      AND CAC.NUMEROFACTURA > 0
+    GROUP BY TRIM(CAC.CODIGOCLIENTEFACTURA)
+    ORDER BY N DESC
+    FETCH FIRST 10 ROWS ONLY
+  `);
+  console.log('\nClientes 44xx:');
+  cli44.forEach(x => console.log('  ' + x.CLI + ': ' + x.N));
+
+  // Ver cuántos clientes distintos hay en 43%
+  const totalCli = await db.query(`
+    SELECT COUNT(DISTINCT TRIM(CAC.CODIGOCLIENTEFACTURA)) AS N
+    FROM DSEDAC.CAC CAC
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+  `);
+  console.log('\nTotal clientes 43%: ' + totalCli[0].N);
+
+  // Ahora excluir exactamente 4300005000 (CONTADO)
+  const r3 = await db.query(`
+    SELECT TRIM(LAC.TIPOVENTA) AS TV, SUM(COALESCE(LAC.CANTIDADENVASES,0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) NOT IN ('4300005000')
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${F})
+      AND TRIM(LAC.CLASELINEA) IN (${C})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  let cc3=0, sc3=0; r3.forEach(x=>{if(x.TV==='CC')cc3=x.CAJAS;if(x.TV==='SC')sc3=x.CAJAS;});
+  console.log('\nSIN CONTADO (5000): CC=' + cc3 + ', SC=' + sc3);
+
+  // Diferencia = lo que tiene CONTADO
+  console.log('CONTADO tiene: CC=' + (cc1-cc3) + ', SC=' + (sc1-sc3));
+
+  process.exit(0);
+})();

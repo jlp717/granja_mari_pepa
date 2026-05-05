@@ -1,0 +1,171 @@
+/**
+ * Prueba simple de filtros específicos
+ * Ejecutar: node scripts/test-filtros-simples.js
+ */
+const db = require('../app/config/odbcConfig');
+
+const FAMILIAS = "'700', '701', '702', '703', '704', '705', '706'";
+const CLASES = "'AB', 'RG', 'VT'";
+
+async function run() {
+  await db.initialize();
+  console.log('🔍 PRUEBA DE FILTROS - Abril 2026');
+  console.log('='.repeat(60));
+
+  // 1) Ver si hay diferencia entre usar COUNT(DISTINCT) vs SUM
+  console.log('\n1️⃣ Contar por albarán vs línea directa:');
+  
+  // Con GROUP BY factura
+  const porFactura = await db.query(`
+    SELECT 
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+      AND TRIM(LAC.CLASELINEA) IN (${CLASES})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  let cc = 0, sc = 0;
+  porFactura.forEach(r => {
+    if ((r.TIPO_VENTA || '').trim() === 'CC') cc = Number(r.CAJAS) || 0;
+    if ((r.TIPO_VENTA || '').trim() === 'SC') sc = Number(r.CAJAS) || 0;
+  });
+  console.log(`   Directo: CC=${cc}, SC=${sc}`);
+
+  // 2) Ver si el jefe filtra por ejercicio de FACTURA en vez de ALBARAN
+  console.log('\n2️⃣ Por ejercicio FACTURA vs ALBARAN:');
+  const porFact = await db.query(`
+    SELECT 
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANOFACTURA = 2026
+      AND CAC.MESFACTURA = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+      AND TRIM(LAC.CLASELINEA) IN (${CLASES})
+    GROUP BY TRIM(LAC.TIPOVENTA)
+  `);
+  cc = 0; sc = 0;
+  porFact.forEach(r => {
+    if ((r.TIPO_VENTA || '').trim() === 'CC') cc = Number(r.CAJAS) || 0;
+    if ((r.TIPO_VENTA || '').trim() === 'SC') sc = Number(r.CAJAS) || 0;
+  });
+  console.log(`   ANOFACTURA/MESFACTURA: CC=${cc}, SC=${sc}`);
+
+  // 3) Ver qué pasa con MESDOCUMENTO = NULL o vacío
+  console.log('\n3️⃣ Ver MESDOCUMENTO = NULL:');
+  const conNull = await db.query(`
+    SELECT 
+      COUNT(*) AS CUANTOS,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    WHERE CAC.ANOFACTURA = 2026
+      AND CAC.MESFACTURA = 4
+      AND (CAC.MESDOCUMENTO IS NULL OR CAC.MESDOCUMENTO = 0)
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+  `);
+  console.log(`   Con MESDOCUMENTO null: ${conNull[0].CUANTOS} líneas, ${conNull[0].CAJAS} cajas`);
+
+  // 4) Diferentes maneras de contar cajas
+  console.log('\n4️⃣ Distintas formas de contar CAJAS:');
+  
+  // CANTIDADENVASES
+  const env = await db.query(`
+    SELECT SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS TOTAL
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+  `);
+  
+  // CANTIDADUNIDADES
+  const und = await db.query(`
+    SELECT SUM(COALESCE(LAC.CANTIDADUNIDADES, 0)) AS TOTAL
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+  `);
+  
+  // CAC.CAJAS (campo de cabecera)
+  const cab = await db.query(`
+    SELECT SUM(COALESCE(CAC.CAJAS, 0)) AS TOTAL
+    FROM DSEDAC.CAC CAC
+    WHERE CAC.ANODOCUMENTO = 2026 AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+  `);
+  
+  console.log(`   LAC.CANTIDADENVASES: ${env[0].TOTAL}`);
+  console.log(`   LAC.CANTIDADUNIDADES: ${und[0].TOTAL}`);
+  console.log(`   CAC.CAJAS: ${cab[0].TOTAL}`);
+
+  // 5) Ver si hay clientes específicos que explican la diferencia
+  console.log('\n5️⃣ Principales clientes por CC/SC:');
+  const topCli = await db.query(`
+    SELECT 
+      TRIM(CAC.CODIGOCLIENTEFACTURA) AS CLIENTE,
+      TRIM(LAC.TIPOVENTA) AS TIPO_VENTA,
+      SUM(COALESCE(LAC.CANTIDADENVASES, 0)) AS CAJAS
+    FROM DSEDAC.CAC CAC
+    INNER JOIN DSEDAC.LAC LAC ON 
+      LAC.SUBEMPRESAALBARAN = CAC.SUBEMPRESAALBARAN AND
+      LAC.EJERCICIOALBARAN = CAC.EJERCICIOALBARAN AND
+      LAC.SERIEALBARAN = CAC.SERIEALBARAN AND
+      LAC.TERMINALALBARAN = CAC.TERMINALALBARAN AND
+      LAC.NUMEROALBARAN = CAC.NUMEROALBARAN
+    INNER JOIN DSEDAC.ART ART ON TRIM(LAC.CODIGOARTICULO) = TRIM(ART.CODIGOARTICULO)
+    WHERE CAC.ANODOCUMENTO = 2026
+      AND CAC.MESDOCUMENTO = 4
+      AND TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
+      AND CAC.NUMEROFACTURA > 0
+      AND TRIM(ART.CODIGOFAMILIA) IN (${FAMILIAS})
+      AND TRIM(LAC.CLASELINEA) IN (${CLASES})
+      AND TRIM(LAC.TIPOVENTA) = 'CC'
+    GROUP BY TRIM(CAC.CODIGOCLIENTEFACTURA), TRIM(LAC.TIPOVENTA)
+    ORDER BY CAJAS DESC
+    FETCH FIRST 15 ROWS ONLY
+  `);
+  console.table(topCli);
+
+  console.log('\n' + '='.repeat(60));
+  console.log('📌 RESUMEN:');
+  console.log('   WEB actual: CC=3792, SC=9');
+  console.log('   JEFE: CC=3865, SC=11');
+  console.log('   Diferencia: CC +73, SC +2');
+
+  process.exit(0);
+}
+
+run().catch(err => {
+  console.error('Error:', err.message);
+  process.exit(1);
+});

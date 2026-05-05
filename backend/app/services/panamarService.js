@@ -102,8 +102,6 @@ PANAMAR_LINEAS AS (
     ON TRIM(LAC.CODIGOARTICULO) = TP.CODIGO_ARTICULO
     AND TP.CODIGOTARIFA = ${TARIFA_PANAMAR_SQL}
   WHERE TRIM(CAC.CODIGOCLIENTEFACTURA) LIKE '43%'
-    AND CAC.NUMEROFACTURA > 0
-    AND TRIM(CAC.SERIEFACTURA) <> ''
     AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
     AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
 )
@@ -126,6 +124,7 @@ function buildLineFilters(options = {}, alias = 'PL') {
   if (options.fechaDesde) {
     const fd = parseDate(options.fechaDesde);
     if (fd) {
+      // Usar fecha de FACTURA para filtrado
       clauses.push(`(${alias}.ANO_FACTURA * 10000 + ${alias}.MES_FACTURA * 100 + ${alias}.DIA_FACTURA) >= ?`);
       params.push(fd.year * 10000 + fd.month * 100 + fd.day);
     }
@@ -134,7 +133,8 @@ function buildLineFilters(options = {}, alias = 'PL') {
   if (options.fechaHasta) {
     const fh = parseDate(options.fechaHasta);
     if (fh) {
-      clauses.push(`(${alias}.ANO_ALBARAN * 10000 + ${alias}.MES_ALBARAN * 100 + ${alias}.DIA_ALBARAN) <= ?`);
+      // Usar fecha de FACTURA para filtrado
+      clauses.push(`(${alias}.ANO_FACTURA * 10000 + ${alias}.MES_FACTURA * 100 + ${alias}.DIA_FACTURA) <= ?`);
       params.push(fh.year * 10000 + fh.month * 100 + fh.day);
     }
   }
@@ -158,14 +158,17 @@ function buildLineFilters(options = {}, alias = 'PL') {
     ? options.meses.map(m => parseInt(m, 10)).filter(m => m >= 1 && m <= 12)
     : [];
 
+  // IMPORTANTE: Usar MES_FACTURA (mes de facturación) en vez de MES_ALBARAN (mes del albarán)
+  // Esto hace que las líneas se agrupen por el mes en que se facturaron, no por cuando se creó el albarán
+  // Ejemplo: Albarán de marzo facturado en abril -> cuenta como abril
   if (validMeses.length > 0) {
     const placeholders = validMeses.map(() => '?').join(', ');
-    clauses.push(`${alias}.MES_ALBARAN IN (${placeholders})`);
+    clauses.push(`${alias}.MES_FACTURA IN (${placeholders})`);
     params.push(...validMeses);
   } else {
     // Proteccion de rendimiento: por defecto, ano en curso hasta mes actual.
     const currentMonth = Math.min(12, Math.max(1, new Date().getMonth() + 1));
-    clauses.push(`${alias}.MES_ALBARAN <= ?`);
+    clauses.push(`${alias}.MES_FACTURA <= ?`);
     params.push(currentMonth);
   }
 
