@@ -117,9 +117,11 @@ function buildLineFilters(options = {}, alias = 'PL') {
   const clauses = [];
   const params = [];
 
-  // El panel PANAMAR trabaja sobre ejercicio de albarán (consumo).
+  // Ejercicio base: usar el de options si se pasa, si no ANO_FIJO
+  const ejercicioNum = options.ejercicio ? parseInt(options.ejercicio, 10) : NaN;
+  const anoBase = !Number.isNaN(ejercicioNum) ? ejercicioNum : ANO_FIJO;
   clauses.push(`${alias}.ANO_ALBARAN = ?`);
-  params.push(ANO_FIJO);
+  params.push(anoBase);
 
   if (options.fechaDesde) {
     const fd = parseDate(options.fechaDesde);
@@ -165,14 +167,6 @@ function buildLineFilters(options = {}, alias = 'PL') {
     const currentMonth = Math.min(12, Math.max(1, new Date().getMonth() + 1));
     clauses.push(`${alias}.MES_ALBARAN <= ?`);
     params.push(currentMonth);
-  }
-
-  if (options.ejercicio) {
-    const ejercicioNum = parseInt(options.ejercicio, 10);
-    if (!Number.isNaN(ejercicioNum)) {
-      clauses.push(`${alias}.ANO_ALBARAN = ?`);
-      params.push(ejercicioNum);
-    }
   }
 
   if (options.busqueda && String(options.busqueda).trim()) {
@@ -537,6 +531,7 @@ async function getDocuments(options = {}) {
       PL.DESCUENTO,
       PL.IMPORTEVENTA,
       PL.TIPO_VENTA,
+      PL.IVA,
       PL.PRECIO_TARIFA_PANAMAR,
       PL.DIA_ALBARAN,
       PL.MES_ALBARAN,

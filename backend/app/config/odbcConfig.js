@@ -264,26 +264,99 @@ function rejectAfter(ms, message) {
   return new Promise((_, reject) => setTimeout(() => reject(new Error(message)), ms));
 }
 
+// ─── Panamar Pool Management ──────────────────────────────────────
+
+let panamarPoolRecreating = false;
+
+/**
+ * Crear (o recrear) el pool PANAMAR desde cero e iniciar su heartbeat.
+ */
+async function createPanamarPool() {
+  if (panamarPoolRecreating) {
+    for (let i = 0; i < 15; i++) {
+      await sleep(1000);
+      if (!panamarPoolRecreating) return;
+    }
+    throw new Error('Timeout esperando recreación del pool PANAMAR');
+  }
+
+  panamarPoolRecreating = true;
+  try {
+    if (panamarPool) {
+      try { await panamarPool.close(); } catch (_) { }
+      panamarPool = null;
+    }
+
+    logger.info('📡 Creando pool PANAMAR (CCSID=1208)...');
+    panamarPool = await odbc.pool({
+      ...poolConfig,
+      connectionString: panamarConnectionString,
+      initialSize: 1,
+      maxSize: 5
+    });
+    panamarConsecutiveFailures = 0;
+    panamarHealthMetrics.poolCreatedAt = new Date().toISOString();
+    logger.info('✅ Pool PANAMAR creado correctamente');
+
+    startPanamarHeartbeat();
+  } catch (err) {
+    panamarPool = null;
+    logger.error('❌ Error creando pool PANAMAR:', err.message);
+    throw err;
+  } finally {
+    panamarPoolRecreating = false;
+  }
+}
+
+/**
+ * Heartbeat periódico para el pool PANAMAR.
+ * Mantiene las conexiones vivas ante timeouts del AS/400 o firewall.
+ */
+function startPanamarHeartbeat() {
+  if (panamarHeartbeatTimer) clearInterval(panamarHeartbeatTimer);
+
+  panamarHeartbeatTimer = setInterval(async () => {
+    if (!panamarPool) return;
+
+    let conn;
+    try {
+      conn = await panamarPool.connect();
+      await conn.query('SELECT 1 FROM SYSIBM.SYSDUMMY1');
+      await conn.close();
+      conn = null;
+
+      panamarConsecutiveFailures = 0;
+      panamarHealthMetrics.lastHeartbeatOk = new Date().toISOString();
+      panamarHealthMetrics.consecutiveHeartbeatFailures = 0;
+      logger.debug('💓 PANAMAR Heartbeat OK');
+    } catch (error) {
+      if (conn) { try { await conn.close(); } catch (_) { } }
+
+      panamarConsecutiveFailures++;
+      panamarHealthMetrics.lastHeartbeatFail = new Date().toISOString();
+      panamarHealthMetrics.consecutiveHeartbeatFailures = panamarConsecutiveFailures;
+
+      logger.warn(`💔 PANAMAR Heartbeat FAIL #${panamarConsecutiveFailures}: ${error.message}`);
+
+      if (panamarConsecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+        logger.error(`🚨 ${MAX_CONSECUTIVE_FAILURES} heartbeats PANAMAR fallidos → Forzando recreación`);
+        try { await createPanamarPool(); } catch (e) {
+          logger.error('❌ No se pudo recrear el pool PANAMAR:', e.message);
+        }
+      }
+    }
+  }, HEARTBEAT_INTERVAL_MS);
+}
+
 // ─── Panamar Query Execution ─────────────────────────────────────
 
 /**
- * Ejecutar query específico para Panamar con CCSID=1208 (UTF-8)
+ * Ejecutar query específico para Panamar con CCSID=1208 (UTF-8).
+ * Incluye auto-recovery del pool ante conexiones muertas.
  */
 async function panamarQuery(sql, params = []) {
   if (!panamarPool) {
-    logger.info('📡 Inicializando pool PANAMAR (CCSID=1208)...');
-    try {
-      panamarPool = await odbc.pool({
-        ...poolConfig,
-        connectionString: panamarConnectionString,
-        initialSize: 1, // Pool más pequeño para Panamar
-        maxSize: 5
-      });
-    } catch (err) {
-      panamarPool = null;
-      logger.error('❌ Error creando pool PANAMAR:', err.message);
-      throw err;
-    }
+    await createPanamarPool();
   }
 
   const MAX_RETRIES = 3;
@@ -296,14 +369,30 @@ async function panamarQuery(sql, params = []) {
         throw new Error('Panamar pool is null - cannot obtain connection');
       }
       connection = await panamarPool.connect();
-      const result = await connection.query(sql, params);
+      const result = await Promise.race([
+        connection.query(sql, params),
+        rejectAfter(QUERY_TIMEOUT_MS, `Panamar query timeout (${QUERY_TIMEOUT_MS}ms)`)
+      ]);
       return result;
     } catch (error) {
       lastError = error;
       if (isConnectionError(error)) {
-        if (connection) { try { await connection.close(); } catch (_) { } }
+        if (connection) { try { await connection.close(); } catch (_) { } connection = null; }
+
+        const waitMs = Math.min(500 * Math.pow(2, attempt - 1), 4000);
+        logger.warn(`⚠️ PANAMAR conexión caída (intento ${attempt}/${MAX_RETRIES}), reintentando en ${waitMs}ms`, {
+          state: error.odbcErrors?.[0]?.state,
+          code: error.odbcErrors?.[0]?.code
+        });
+
+        // A partir del intento 2, recrear el pool entero (las conexiones están muertas)
+        if (attempt >= 2) {
+          logger.warn('🔄 Recreando pool PANAMAR en intento ' + attempt);
+          try { await createPanamarPool(); } catch (_) { }
+        }
+
         if (attempt < MAX_RETRIES) {
-          await sleep(1000 * attempt);
+          await sleep(waitMs);
           continue;
         }
       }
@@ -312,6 +401,7 @@ async function panamarQuery(sql, params = []) {
       if (connection) { try { await connection.close(); } catch (_) { } }
     }
   }
+
   throw lastError;
 }
 
@@ -319,8 +409,9 @@ async function panamarQuery(sql, params = []) {
 
 module.exports = {
   initialize: createPool,
+  initializePanamar: createPanamarPool,
   query,
-  panamarQuery, // Nueva exportación para Panamar
+  panamarQuery,
   close: async () => {
     if (heartbeatTimer) clearInterval(heartbeatTimer);
     if (panamarHeartbeatTimer) clearInterval(panamarHeartbeatTimer);

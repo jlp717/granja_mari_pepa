@@ -584,6 +584,16 @@ async function initializeServer() {
       // No throw - allow server to start in degraded mode
     }
 
+    // Inicializar pool PANAMAR (con heartbeat propio para mantener conexiones vivas)
+    try {
+      logger.info('Intentando inicializar pool PANAMAR (CCSID=1208)...');
+      await odbcPool.initializePanamar();
+      logger.info('✅ Pool PANAMAR inicializado correctamente');
+    } catch (panamarError) {
+      logger.warn('⚠️ Pool PANAMAR no disponible al inicio - se reintentará en primer uso');
+      logger.warn(`   Error: ${panamarError.message}`);
+    }
+
     // Verificar secretos JWT
     if (!process.env.JWT_ACCESS_SECRET || !process.env.JWT_REFRESH_SECRET) {
       logger.error('❌ Error crítico: Secretos JWT no configurados en .env');
