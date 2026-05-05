@@ -276,6 +276,7 @@ export function PanamarDashboard() {
       const params = new URLSearchParams({ ejercicio: '2026' });
       if (filters.meses && filters.meses.length > 0) params.set('meses', filters.meses.join(','));
       if (filters.codigoCliente) params.set('codigoCliente', filters.codigoCliente);
+      if (filters.busqueda) params.set('busqueda', filters.busqueda);
       const res = await secureFetch<PanamarSummary>(`/api/panamar/summary?${params.toString()}`);
       if (res.ok && res.data.success) {
         setSummary(res.data);
@@ -283,7 +284,7 @@ export function PanamarDashboard() {
     } catch (err) {
       console.error('PANAMAR summary error:', err);
     }
-  }, [filters.meses, filters.codigoCliente]);
+  }, [filters.meses, filters.codigoCliente, filters.busqueda]);
 
   // ── Fetch clients list (for dropdown) ────────────────────────────
   const fetchClients = useCallback(async () => {
