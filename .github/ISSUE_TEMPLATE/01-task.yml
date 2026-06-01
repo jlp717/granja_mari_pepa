@@ -1,0 +1,33 @@
+name: 🎯 Nueva Tarea
+description: Solicitar cualquier cambio (frontend, backend, bug, seguridad, etc.)
+title: "[Tarea]: "
+labels: ["tarea", "automated"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: ¿Qué necesitas?
+      description: Describe lo que quieres hacer. Puede ser vago o detallado, el sistema lo procesará.
+      placeholder: "Ej: Cambiar el color del header a azul, o: Hay un bug en el login que no deja entrar, o: Rediseñar la home con animaciones..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad
+      options:
+        - Baja
+        - Normal
+        - Alta
+        - Crítica
+      default: 1
+    validations:
+      required: true
+
+  - type: input
+    id: branch
+    attributes:
+      label: Rama (opcional)
+      description: Si sabes en qué rama trabajar, indícalo. Si no, se usará la rama por defecto.
+      placeholder: "redesign-2026"

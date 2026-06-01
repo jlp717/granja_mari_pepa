@@ -1,0 +1,150 @@
+﻿{
+    "$schema":  "https://opencode.ai/config.json",
+    "model":  "openai/gpt-5.5",
+    "small_model":  "openai/gpt-5.4-mini",
+    "default_agent":  "Granja-Orchestrator",
+    "instructions":  [
+                         "./.opencode/AGENTS.md",
+                         "./.opencode/CLAUDE.md"
+                     ],
+    "server":  {
+                   "cors":  [
+                                "http://localhost:3091",
+                                "http://100.107.11.80:3091",
+                                "app://opencode.ai"
+                            ]
+               },
+    "experimental":  {
+                         "mcp_timeout":  30000,
+                         "policies":  [
+                                          {
+                                              "effect":  "deny",
+                                              "action":  "provider.use",
+                                              "resource":  "*"
+                                          },
+                                          {
+                                              "effect":  "allow",
+                                              "action":  "provider.use",
+                                              "resource":  "openai"
+                                          },
+                                          {
+                                              "effect":  "allow",
+                                              "action":  "provider.use",
+                                              "resource":  "cursor-acp"
+                                          },
+                                          {
+                                              "effect":  "allow",
+                                              "action":  "provider.use",
+                                              "resource":  "opencode-go"
+                                          }
+                                      ]
+                     },
+    "agent":  {
+                  "build":  {
+                                "disable":  true
+                            },
+                  "plan":  {
+                               "disable":  true
+                           },
+                  "general":  {
+                                  "disable":  true
+                              },
+                  "explore":  {
+                                  "disable":  true
+                              },
+                  "summary":  {
+                                  "disable":  true
+                              },
+                  "title":  {
+                                "disable":  true
+                            },
+                  "compaction":  {
+                                     "disable":  true
+                                 }
+              },
+    "mcp":  {
+                "context7":  {
+                                 "enabled":  true
+                             },
+                "filesystem":  {
+                                   "enabled":  true
+                               },
+                "ddg-search":  {
+                                   "enabled":  true
+                               },
+                "fetch":  {
+                              "enabled":  true
+                          },
+                "git":  {
+                            "enabled":  true
+                        },
+                "beads":  {
+                              "enabled":  true
+                          },
+                "telegram":  {
+                                 "enabled":  true
+                             },
+                "time":  {
+                             "enabled":  true
+                         },
+                "dart-flutter-mcp":  {
+                                         "enabled":  false
+                                     },
+                "pub-mcp":  {
+                                "enabled":  false
+                            },
+                "ibm-db2-mcp":  {
+                                    "enabled":  true
+                                },
+                "gmp-deploy-ssh":  {
+                                       "enabled":  true
+                                   },
+                "playwright":  {
+                                   "enabled":  true
+                               },
+                "chrome-devtools":  {
+                                        "enabled":  true
+                                    },
+                "github":  {
+                               "enabled":  false
+                           },
+                "firecrawl":  {
+                                  "enabled":  false
+                              },
+                "supabase":  {
+                                 "enabled":  false
+                             },
+                "sentry":  {
+                               "enabled":  false
+                           },
+                "gh_grep":  {
+                                "enabled":  true
+                            },
+                "postgres":  {
+                                 "enabled":  false
+                             },
+                "claude-flow":  {
+                                    "enabled":  true
+                                },
+                "guardvibe":  {
+                                  "enabled":  true
+                              }
+            },
+    "permission":  {
+                       "skill":  {
+                                     "*":  "allow"
+                                 },
+                       "lsp":  "allow"
+                   },
+    "lsp":  true,
+    "enabled_providers":  [
+                              "openai",
+                              "cursor-acp",
+                              "opencode-go"
+                          ],
+    "disabled_providers":  [
+                               "nvidia",
+                               "google",
+                               "amazon-bedrock"
+                           ]
+}

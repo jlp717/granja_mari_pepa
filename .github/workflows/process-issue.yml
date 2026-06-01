@@ -1,0 +1,93 @@
+name: Process Issue — Auto-Branch + PR
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  process:
+    if: |
+      (github.event.action == 'opened') ||
+      (github.event.action == 'labeled' && contains(github.event.issue.labels.*.name, 'automatizar'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Auto-respond to issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title;
+            const body = issue.body || '';
+            const priority = body.includes('Crítica') ? 'CRITICAL' : 
+                            body.includes('Alta') ? 'HIGH' : 'NORMAL';
+            
+            // Extract the actual request (first paragraph after template)
+            const requestMatch = body.match(/### ¿Qué necesitas\?\s*\n\s*([^#]+)/);
+            const request = requestMatch ? requestMatch[1].trim() : body.substring(0, 200);
+            
+            // Post acknowledgment with automated processing info
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: `## ✅ Tarea recibida — Prioridad: ${priority}
+
+            **Tu petición**: ${request.substring(0, 200)}${request.length > 200 ? '...' : ''}
+
+            El sistema va a procesar tu solicitud automáticamente:
+
+            1. 🔍 **Analizando** tipo de tarea (frontend, backend, bug, etc.)
+            2. 🤖 **Asignando** agentes especializados
+            3. 🌿 **Creando** rama de trabajo
+            4. ⚙️ **Implementando** cambios
+            5. ✅ **Verificando** calidad
+            6. 📬 **Creando** Pull Request
+
+            ⏱ Tiempo estimado: 5-30 min (dependiendo de complejidad)
+
+            Mientras tanto, puedes:
+            - Seguir el progreso en los PRs que se crearán
+            - Añadir más detalles en este issue
+            - Usar \`/oc continuar\` para forzar el procesamiento inmediato
+
+            ---
+            *Sistema automatizado — @orchestrator*
+            `,
+              labels: ['processing', `priority-${priority.toLowerCase()}`]
+            });
+
+      - name: Create branch from issue
+        id: branch
+        run: |
+          # Extract issue number and create safe branch name
+          ISSUE_NUM=${{ github.event.issue.number }}
+          TITLE="${{ github.event.issue.title }}"
+          SAFE_NAME=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//' | cut -c1-40)
+          BRANCH="issue-${ISSUE_NUM}/${SAFE_NAME}"
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          
+          # Create branch from default
+          git fetch origin
+          git checkout -b "$BRANCH" origin/main 2>/dev/null || git checkout -b "$BRANCH" origin/redesign-2026 2>/dev/null || git checkout -b "$BRANCH" main
+          git push origin "$BRANCH"
+          echo "Branch created: $BRANCH"
+
+      - name: Update issue with branch info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = '${{ steps.branch.outputs.branch }}';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `🌿 **Rama creada**: \`${branch}\`\n\nLos cambios se implementarán en esta rama. Se creará un PR cuando esté listo.`
+            });

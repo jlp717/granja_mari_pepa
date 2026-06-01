@@ -1,0 +1,58 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# ═══════════════════════════════════════════════════════════════
+# PRE-PUSH QUALITY GATES
+# Se ejecutan ANTES de hacer push al remoto
+# Más exhaustivo que pre-commit — corre la suite completa
+# ═══════════════════════════════════════════════════════════════
+
+echo "🔍 Running pre-push quality gates..."
+
+# Gate 1: Full TypeScript check
+echo "  ├─ TypeScript strict check..."
+cd frontend && npm run typecheck 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "  ❌ TypeScript errors found. Fix before pushing."
+  exit 1
+fi
+cd ..
+
+# Gate 2: Lint (zero warnings)
+echo "  ├─ ESLint (strict — zero warnings)..."
+cd frontend && npx eslint --max-warnings 0 . 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "  ❌ ESLint warnings found. Fix before pushing."
+  exit 1
+fi
+cd ..
+
+# Gate 3: Unit tests
+echo "  ├─ Unit tests..."
+cd frontend && npm test -- --watchAll=false --passWithNoTests 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "  ❌ Tests failed. Fix before pushing."
+  exit 1
+fi
+cd ..
+
+# Gate 4: Production build
+echo "  ├─ Production build..."
+cd frontend && npm run build 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "  ❌ Build failed. Fix before pushing."
+  exit 1
+fi
+cd ..
+
+# Gate 5: Verify no debug artifacts
+echo "  ├─ Debug artifact check..."
+DEBUG_ARTIFACTS=$(find frontend/app frontend/components -type f \( -name "*.bak" -o -name "*.backup" -o -name "*_backup.*" -o -name "*.log" \) 2>/dev/null)
+if [ -n "$DEBUG_ARTIFACTS" ]; then
+  echo "  ❌ Debug artifacts found:"
+  echo "$DEBUG_ARTIFACTS"
+  exit 1
+fi
+echo "  ✅ No debug artifacts"
+
+echo "  ✅ All pre-push gates passed!"

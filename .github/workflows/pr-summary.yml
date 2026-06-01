@@ -1,0 +1,102 @@
+name: PR Summary — Auto-Comment
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Generate summary
+        id: summary
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_BODY="${{ github.event.pull_request.body }}"
+          
+          # Get changed files
+          CHANGED_FILES=$(git diff --name-only origin/main..HEAD 2>/dev/null | head -20)
+          FILE_COUNT=$(echo "$CHANGED_FILES" | wc -l)
+          
+          # Get additions and deletions
+          STATS=$(git diff --shortstat origin/main..HEAD 2>/dev/null)
+          
+          # Detect type of change
+          if echo "$PR_TITLE" | grep -qi "F0\|quick\|fix"; then
+            TYPE="🐛 Bug fix / Quick win"
+          elif echo "$PR_TITLE" | grep -qi "F1\|token\|style\|tailwind"; then
+            TYPE="🎨 Sistema visual"
+          elif echo "$PR_TITLE" | grep -qi "F2\|home\|header\|footer"; then
+            TYPE="🏠 Home page"
+          elif echo "$PR_TITLE" | grep -qi "F3\|pagina\|page\|existing"; then
+            TYPE="📄 Páginas existentes"
+          elif echo "$PR_TITLE" | grep -qi "F4\|nuev\|new\|catalog"; then
+            TYPE="🆕 Páginas nuevas"
+          elif echo "$PR_TITLE" | grep -qi "F5\|motion\|animacion\|animation"; then
+            TYPE="🎬 Motion"
+          elif echo "$PR_TITLE" | grep -qi "F6\|qa\|test\|quality\|a11y"; then
+            TYPE="✅ QA / Testing"
+          elif echo "$PR_TITLE" | grep -qi "dependabot\|dep"; then
+            TYPE="📦 Dependencias"
+          elif echo "$PR_TITLE" | grep -qi "security\|seguridad\|auth"; then
+            TYPE="🔒 Seguridad"
+          else
+            TYPE="🛠 Mejora general"
+          fi
+
+          cat << 'SUMMARY' > summary.md
+          ## 📋 Resumen Automático
+
+          **Tipo**: $TYPE
+          **Archivos modificados**: $FILE_COUNT
+          **Estadísticas**: $STATS
+
+          **Archivos**:
+          $CHANGED_FILES
+
+          ---
+          _Resumen generado automáticamente — @orchestrator_
+          SUMMARY
+
+      - name: Post comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('summary.md', 'utf8');
+            
+            // Check if we already posted a summary (delete old one)
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const botComment = comments.find(c => 
+              c.body.includes('Resumen Automático') && 
+              c.user.type === 'Bot'
+            );
+            
+            if (botComment) {
+              await github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id
+              });
+            }
+            
+            // Post new summary
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: summary
+            });

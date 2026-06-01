@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.4"
+  },
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "frontend/**/*.{ts,tsx}": [
+      "eslint --fix --max-warnings 0",
+      "prettier --write --ignore-unknown"
+    ],
+    "frontend/**/*.{css,scss}": [
+      "prettier --write"
+    ],
+    "frontend/**/*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}

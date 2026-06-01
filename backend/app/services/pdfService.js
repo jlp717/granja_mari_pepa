@@ -75,6 +75,65 @@ function formatDate(dia, mes, ano) {
    return `${d}/${m}/${a}`;
 }
 
+const TAX_SLOTS = [1, 2, 3, 4, 5];
+
+function toNumber(value) {
+   const parsed = parseFloat(value);
+   return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function buildHeaderTaxGroups(header = {}) {
+   return TAX_SLOTS
+      .map(slot => {
+         const baseImponible = toNumber(header[`IMPORTEBASEIMPONIBLE${slot}`]);
+         const iva = toNumber(header[`IMPORTEIVA${slot}`]);
+         const recargo = toNumber(header[`IMPORTERECARGO${slot}`]);
+         const porcIVA = toNumber(header[`PORCENTAJEIVA${slot}`]) || (baseImponible !== 0 ? (iva / baseImponible) * 100 : 0);
+         const porcRec = baseImponible !== 0 ? (recargo / baseImponible) * 100 : 0;
+
+         return { porcIVA, porcRec, baseImponible, iva, recargo };
+      })
+      .filter(group => group.baseImponible !== 0 || group.iva !== 0 || group.recargo !== 0);
+}
+
+function buildLineTaxGroups(lines = [], recargoHeader = 0) {
+   const gruposIVA = {};
+
+   lines.forEach(line => {
+      const porcIVA = parseFloat(line.PORCENTAJEIVAARTICULO || line.PORCENTAJEIVA || line.IVA) || 0;
+      const porcRec = recargoHeader === 0
+         ? 0
+         : (parseFloat(line.PORCENTAJERECARGOARTICULO || line.PORCENTAJERECARGO || line.RE || line.RECARGO) || 0);
+      const key = `${porcIVA.toFixed(2)}_${porcRec.toFixed(2)}`;
+
+      if (!gruposIVA[key]) {
+         gruposIVA[key] = {
+            porcIVA,
+            porcRec,
+            baseImponible: 0,
+            iva: 0,
+            recargo: 0
+         };
+      }
+
+      const importe = parseFloat(line.IMPORTENETOARTICULO || line.IMPORTENETO || line.TOTAL_LINEA || line.IMPORTE) || 0;
+      const ivaLinea = line.IMPORTEIVAARTICULO !== undefined && line.IMPORTEIVAARTICULO !== null
+         ? (parseFloat(line.IMPORTEIVAARTICULO) || 0)
+         : (line.IMPORTEIVA !== undefined ? parseFloat(line.IMPORTEIVA) : (importe * (porcIVA / 100)));
+      const recargoLinea = recargoHeader === 0
+         ? 0
+         : (line.IMPORTERECARGOARTICULO !== undefined && line.IMPORTERECARGOARTICULO !== null
+            ? (parseFloat(line.IMPORTERECARGOARTICULO) || 0)
+            : (line.IMPORTERECARGO !== undefined ? parseFloat(line.IMPORTERECARGO) : (importe * (porcRec / 100))));
+
+      gruposIVA[key].baseImponible += importe;
+      gruposIVA[key].iva += ivaLinea;
+      gruposIVA[key].recargo += recargoLinea;
+   });
+
+   return Object.values(gruposIVA);
+}
+
 /**
  * Dibujar header corporativo profesional
  */
@@ -501,50 +560,13 @@ y += 38;
          // Obtener el recargo real de la cabecera (fuente de verdad del ERP)
          const recargoHeader = parseFloat(header?.RECARGOFACTURA) || 0;
 
-         // Agrupar líneas por % IVA y % Recargo
-         const gruposIVA = {};
+         // Preferir tramos fiscales de cabecera. Las lineas pueden arrastrar
+         // redondeos por albaran que no coinciden con el total oficial.
+         let grupos = buildHeaderTaxGroups(header);
 
-         lines.forEach(line => {
-            const porcIVA = parseFloat(line.PORCENTAJEIVAARTICULO || line.PORCENTAJEIVA || line.IVA) || 0;
-            
-            // CRÍTICO: Si el header dice que NO hay recargo (RECARGOFACTURA = 0),
-            // entonces forzar recargo = 0 para TODAS las líneas, ignorando cálculos erróneos.
-            // Esto evita que clientes sin R.E. (como BAR CRISTOBAL) vean recargo fantasma.
-            const porcRec = recargoHeader === 0 
-               ? 0  // Si la factura no tiene recargo en el ERP, forzar 0
-               : (parseFloat(line.PORCENTAJERECARGOARTICULO || line.PORCENTAJERECARGO || line.RE || line.RECARGO) || 0);
-            
-            const key = `${porcIVA.toFixed(2)}_${porcRec.toFixed(2)}`;
-
-            if (!gruposIVA[key]) {
-               gruposIVA[key] = {
-                  porcIVA,
-                  porcRec,
-                  baseImponible: 0,
-                  iva: 0,
-                  recargo: 0
-               };
-            }
-
-            // Usar importes directos si vienen de BD; si no, calcularlos desde %.
-            const importe = parseFloat(line.IMPORTENETOARTICULO || line.IMPORTENETO || line.TOTAL_LINEA || line.IMPORTE) || 0;
-            const ivaLinea = line.IMPORTEIVAARTICULO !== undefined && line.IMPORTEIVAARTICULO !== null
-               ? (parseFloat(line.IMPORTEIVAARTICULO) || 0)
-               : (line.IMPORTEIVA !== undefined ? parseFloat(line.IMPORTEIVA) : (importe * (porcIVA / 100)));
-            
-            // CRÍTICO: Si el header dice que NO hay recargo, forzar recargo de línea = 0
-            const recargoLinea = recargoHeader === 0
-               ? 0  // La factura NO tiene recargo según el ERP
-               : (line.IMPORTERECARGOARTICULO !== undefined && line.IMPORTERECARGOARTICULO !== null
-                  ? (parseFloat(line.IMPORTERECARGOARTICULO) || 0)
-                  : (line.IMPORTERECARGO !== undefined ? parseFloat(line.IMPORTERECARGO) : (importe * (porcRec / 100))));
-
-            gruposIVA[key].baseImponible += importe;
-            gruposIVA[key].iva += ivaLinea;
-            gruposIVA[key].recargo += recargoLinea;
-         });
-
-         const grupos = Object.values(gruposIVA);
+         if (grupos.length === 0) {
+            grupos = buildLineTaxGroups(lines, recargoHeader);
+         }
 
          // Si solo hay un grupo, forzar el desglose con datos de cabecera (fuente de verdad).
          // Esto evita casos donde la tabla IVA devuelve % erróneos (p.ej. 7%/1%) pero la cabecera es 10%/0%.
@@ -665,7 +687,8 @@ y += 38;
          const totalBase = grupos.reduce((sum, g) => sum + g.baseImponible, 0);
          const totalIVA = grupos.reduce((sum, g) => sum + g.iva, 0);
          const totalRecargo = grupos.reduce((sum, g) => sum + g.recargo, 0);
-         const totalConIVA = totalBase + totalIVA + totalRecargo;
+         const totalHeader = parseFloat(header.TOTALFACTURA);
+         const totalConIVA = Number.isFinite(totalHeader) ? totalHeader : totalBase + totalIVA + totalRecargo;
 
          // TOTAL SIN IVA
          doc.rect(350, y, 205, 22)
@@ -725,5 +748,9 @@ y += 38;
 }
 
 module.exports = {
-   generateInvoicePDF
+   generateInvoicePDF,
+   __private: {
+      buildHeaderTaxGroups,
+      buildLineTaxGroups
+   }
 };

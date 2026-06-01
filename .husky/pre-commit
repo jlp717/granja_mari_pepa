@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# ═══════════════════════════════════════════════════════════════
+# PRE-COMMIT QUALITY GATES
+# Se ejecutan SOLO sobre los archivos staged (cambios a commitear)
+# ═══════════════════════════════════════════════════════════════
+
+echo "🔍 Running pre-commit quality gates..."
+
+# Gate 1: Lint staged files (solo los que se van a commitear)
+echo "  ├─ ESLint (staged files)..."
+cd frontend && npx lint-staged --allow-empty 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "  ❌ ESLint failed. Fix warnings before committing."
+  exit 1
+fi
+cd ..
+
+# Gate 2: TypeScript check (rápido, solo proyectos con cambios)
+if git diff --cached --name-only | grep -q "^frontend/"; then
+  echo "  ├─ TypeScript check (frontend)..."
+  cd frontend && npm run typecheck 2>/dev/null
+  if [ $? -ne 0 ]; then
+    echo "  ❌ TypeScript errors found. Fix before committing."
+    exit 1
+  fi
+  cd ..
+fi
+
+# Gate 3: Unit tests (solo si hay cambios en frontend)
+if git diff --cached --name-only | grep -q "^frontend/"; then
+  echo "  ├─ Unit tests (frontend)..."
+  cd frontend && npm run test -- --watchAll=false --passWithNoTests 2>/dev/null
+  if [ $? -ne 0 ]; then
+    echo "  ❌ Tests failed. Fix before committing."
+    exit 1
+  fi
+  cd ..
+fi
+
+echo "  ✅ All pre-commit gates passed!"

@@ -188,6 +188,10 @@ backend/basura/
 # Archivos grandes de recuperacion
 archivos_revisar/
 
+# AcouZ — voice dictation tool (standalone, not tracked)
+acouz/
+.acouz/
+
 # Backups SQL (archivos muy grandes)
 backend/backups/
 
@@ -212,3 +216,5 @@ backend/optimize_*.js
 backend/recreate_*.js
 backend/test_*.js
 backend/verify_*.js
+.opencode/
+.swarm/

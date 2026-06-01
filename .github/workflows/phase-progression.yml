@@ -1,0 +1,128 @@
+name: Auto Phase Progression
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  progress:
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'phase-complete')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Determine next phase
+        id: phases
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          echo "PR merged: $PR_TITLE"
+          
+          # Phase progression mapping
+          if echo "$PR_TITLE" | grep -qi "F0"; then
+            echo "current=F0" >> $GITHUB_OUTPUT
+            echo "next=F1" >> $GITHUB_OUTPUT
+            echo "next_name=Sistema visual" >> $GITHUB_OUTPUT
+          elif echo "$PR_TITLE" | grep -qi "F1"; then
+            echo "current=F1" >> $GITHUB_OUTPUT
+            echo "next=F2" >> $GITHUB_OUTPUT
+            echo "next_name=Home + Header + Footer" >> $GITHUB_OUTPUT
+          elif echo "$PR_TITLE" | grep -qi "F2"; then
+            echo "current=F2" >> $GITHUB_OUTPUT
+            echo "next=F3" >> $GITHUB_OUTPUT
+            echo "next_name=Páginas existentes" >> $GITHUB_OUTPUT
+          elif echo "$PR_TITLE" | grep -qi "F3"; then
+            echo "current=F3" >> $GITHUB_OUTPUT
+            echo "next=F4" >> $GITHUB_OUTPUT
+            echo "next_name=Páginas nuevas + catálogo" >> $GITHUB_OUTPUT
+          elif echo "$PR_TITLE" | grep -qi "F4"; then
+            echo "current=F4" >> $GITHUB_OUTPUT
+            echo "next=F5" >> $GITHUB_OUTPUT
+            echo "next_name=Motion + microinteracciones" >> $GITHUB_OUTPUT
+          elif echo "$PR_TITLE" | grep -qi "F5"; then
+            echo "current=F5" >> $GITHUB_OUTPUT
+            echo "next=F6" >> $GITHUB_OUTPUT
+            echo "next_name=QA + perf + a11y + SEO" >> $GITHUB_OUTPUT
+          elif echo "$PR_TITLE" | grep -qi "F6"; then
+            echo "current=F6" >> $GITHUB_OUTPUT
+            echo "next=complete" >> $GITHUB_OUTPUT
+            echo "next_name=Rediseño completado" >> $GITHUB_OUTPUT
+          else
+            echo "current=unknown" >> $GITHUB_OUTPUT
+            echo "next=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create next phase issue
+        if: steps.phases.outputs.next != 'unknown' && steps.phases.outputs.next != 'complete'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const nextPhase = '${{ steps.phases.outputs.next }}';
+            const nextName = '${{ steps.phases.outputs.next_name }}';
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚀 Fase ${nextPhase}: ${nextName}`,
+              body: `## Fase ${nextPhase} — ${nextName}
+
+            La fase anterior se ha completado y mergeado. La siguiente fase está lista para comenzar.
+
+            ### Para empezar:
+            \`\`\`
+            powershell -File scripts/start-phase.ps1 -Phase "${nextPhase}" -Description "${nextName}"
+            \`\`\`
+
+            ### Detalles:
+            Ver \`.opencode/REDESIGN_EXECUTION.md §${nextPhase}\` para el plan completo.
+
+            ### Checklist:
+            - [ ] Leer REDESIGN_EXECUTION.md §${nextPhase}
+            - [ ] Ejecutar start-phase.ps1
+            - [ ] Implementar cambios
+            - [ ] Correr quality gates
+            - [ ] Crear PR
+
+            ---
+            *Generado automáticamente al mergear fase anterior*
+            `,
+              labels: ['phase', 'automated', `phase-${nextPhase.toLowerCase()}`]
+            });
+
+      - name: Notify completion (all phases done)
+        if: steps.phases.outputs.next == 'complete'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🎉 Rediseño completado — Todas las fases mergeadas',
+              body: `## 🎉 Rediseño Completado
+
+            Todas las 7 fases del rediseño han sido mergeadas a \`main\`.
+
+            ### Resumen:
+            - F0: Quick wins
+            - F1: Sistema visual
+            - F2: Home + Header + Footer
+            - F3: Páginas existentes
+            - F4: Páginas nuevas
+            - F5: Motion
+            - F6: QA
+
+            ### Próximos pasos:
+            1. Verificar deploy en producción
+            2. Monitorear errores
+            3. Recoger feedback
+
+            ---
+            *Generado automáticamente*
+            `,
+              labels: ['redesign-complete']
+            });

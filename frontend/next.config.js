@@ -12,12 +12,7 @@ const withNextIntl = require('next-intl/plugin')('./i18n.ts');
 const nextConfig = {
   // SSR mode for production (no output: 'export')
   // This enables 'npm run start' with Node.js server
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // NOTE: eslint/typescript checks enforced — no ignore flags
   images: {
     unoptimized: true,
     formats: ['image/webp', 'image/avif'],

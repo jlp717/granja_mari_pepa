@@ -1,0 +1,97 @@
+name: Auto PR — Phase Completion
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Phase completed (e.g., F0, F1, F2)'
+        required: true
+        type: string
+      branch:
+        description: 'Branch to create PR from'
+        required: true
+        type: string
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+
+      - name: Generate PR body
+        id: pr_body
+        run: |
+          # Get changes since branching from main
+          COMMITS=$(git log main..HEAD --oneline --no-decorate 2>/dev/null || echo "Initial changes")
+          FILES=$(git diff --name-only main..HEAD 2>/dev/null | head -30)
+          
+          # Check if phase report exists
+          PHASE_REPORT=""
+          if [ -f ".opencode/phase-report-template.md" ]; then
+            PHASE_REPORT="See attached phase report for details."
+          fi
+          
+          cat << 'EOF' > pr_body.md
+          ## Phase ${{ inputs.phase }} — Complete
+
+          ### Summary
+          Automated PR for Phase ${{ inputs.phase }} completion.
+
+          ### Changes
+          $COMMITS
+
+          ### Files Modified
+          $FILES
+
+          ### Quality Gates
+          - [ ] CI passes (typecheck + lint + test + build)
+          - [ ] Code review completed
+          - [ ] Anti-AI-loop verified
+          - [ ] No .bak/debug artifacts
+          - [ ] $PHASE_REPORT
+
+          ### Next Steps
+          After merge, the next phase can begin.
+          See `.opencode/REDESIGN_EXECUTION.md` for the full plan.
+
+          ---
+          _Automated PR by Auto-PR workflow_
+          EOF
+
+      - name: Create Pull Request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('pr_body.md', 'utf8');
+            
+            const { data: pr } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Phase ${{ inputs.phase }}: Implementation Complete',
+              head: '${{ inputs.branch }}',
+              base: 'main',
+              body: body,
+              draft: false
+            });
+            
+            console.log(`PR created: ${pr.html_url}`);
+            
+            // Add labels
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: ['phase-complete', 'automated']
+            });
+            
+            // Request review from code owners
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              reviewers: ['Javier']
+            });

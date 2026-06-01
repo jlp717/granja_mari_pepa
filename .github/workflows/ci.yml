@@ -1,0 +1,216 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, redesign-2026]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════
+  # QUALITY GATE 1: TypeScript + Lint + Unit Tests
+  # ═══════════════════════════════════════════════════════════════
+  quality:
+    name: 'QG-1: TypeCheck + Lint + Unit'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check (strict mode)
+        run: npm run typecheck
+        # @todo: cuando F1 esté completo, quitar ignoreBuildErrors de next.config.js
+
+      - name: ESLint (current baseline)
+        run: npm run lint -- --max-warnings 50
+        # @todo: reducir a 0 cuando F1 esté completo y el código esté limpio
+
+      - name: Unit tests
+        run: npm run test -- --coverage
+        # @todo: en F6, añadir --coverageThreshold
+
+  # ═══════════════════════════════════════════════════════════════
+  # QUALITY GATE 2: Build verification
+  # ═══════════════════════════════════════════════════════════════
+  build:
+    name: 'QG-2: Build'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Production build
+        run: npm run build
+        env:
+          CI: true
+
+  # ═══════════════════════════════════════════════════════════════
+  # QUALITY GATE 3: Lighthouse Performance (post-redesign)
+  # Activar cuando el rediseño esté en marcha (F2+)
+  # ═══════════════════════════════════════════════════════════════
+  lighthouse:
+    name: 'QG-3: Lighthouse (opt-in)'
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: false  # @todo: activar cuando F2 esté completo y haya server corriendo
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse CI
+        run: lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  # ═══════════════════════════════════════════════════════════════
+  # QUALITY GATE 3b: Bundle Size Check
+  # ═══════════════════════════════════════════════════════════════
+  bundle-size:
+    name: 'QG-3b: Bundle Size'
+    runs-on: ubuntu-latest
+    needs: [build]
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with stats
+        run: npm run build
+        env:
+          CI: true
+          ANALYZE: false
+
+      - name: Check bundle size
+        run: |
+          if [ -d ".next" ]; then
+            TOTAL_SIZE=$(du -sh .next 2>/dev/null | cut -f1)
+            echo "📦 Total .next size: $TOTAL_SIZE"
+            
+            # Check if any JS chunk exceeds 300KB
+            LARGE_FILES=$(find .next -name "*.js" -size +300k 2>/dev/null | head -5)
+            if [ -n "$LARGE_FILES" ]; then
+              echo "⚠️  Large JS chunks found:"
+              du -sh $LARGE_FILES 2>/dev/null
+            else
+              echo "✅ No JS chunks >300KB"
+            fi
+          else
+            echo "ℹ️  .next directory not found (build may use different output)"
+          fi
+
+  # ═══════════════════════════════════════════════════════════════
+  # QUALITY GATE 3c: i18n Validation
+  # ═══════════════════════════════════════════════════════════════
+  i18n-validation:
+    name: 'QG-3c: i18n Validation'
+    runs-on: ubuntu-latest
+    needs: [quality]
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Validate translations
+        run: |
+          if [ -f "scripts/validate-i18n.ps1" ]; then
+            pwsh -File scripts/validate-i18n.ps1
+          else
+            echo "ℹ️  i18n validation script not found, skipping"
+          fi
+
+  # ═══════════════════════════════════════════════════════════════
+  # QUALITY GATE 4: Production-Grade 50-Point Checklist
+  # ═══════════════════════════════════════════════════════════════
+  production-checklist:
+    name: 'QG-4: Production-Grade Checklist'
+    runs-on: ubuntu-latest
+    needs: [quality, build]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Verify no .bak / backup files in src
+        run: |
+          if find frontend/app frontend/components -name '*.bak' -o -name '*_backup*' -o -name '*.backup' | grep -q .; then
+            echo "❌ Backup files found in source!"
+            find frontend/app frontend/components -name '*.bak' -o -name '*_backup*' -o -name '*.backup'
+            exit 1
+          fi
+          echo "✅ No backup files in source"
+
+      - name: Verify no console.log in production code
+        run: |
+          if grep -r "console\.log" frontend/app frontend/components --include="*.ts" --include="*.tsx" | grep -v "__tests__" | grep -v "node_modules"; then
+            echo "⚠️  Console.log found in production code (may be intentional)"
+          else
+            echo "✅ No console.log in production code"
+          fi
+
+      - name: Verify no any/dynamic types (soft check)
+        run: |
+          COUNT=$(grep -r ":\s*any\b" frontend/app frontend/components --include="*.ts" --include="*.tsx" | grep -v "node_modules" | grep -v ".d.ts" | wc -l)
+          if [ "$COUNT" -gt 5 ]; then
+            echo "⚠️  Found $COUNT `any` types (target: <5)"
+          else
+            echo "✅ $COUNT `any` types (acceptable)"
+          fi
+
+      - name: Verify file sizes < 500 LOC
+        run: |
+          cd frontend
+          for f in $(find app components -name '*.tsx' -o -name '*.ts' | grep -v node_modules | grep -v __tests__); do
+            lines=$(wc -l < "$f")
+            if [ "$lines" -gt 500 ]; then
+              echo "❌ $f: $lines lines (exceeds 500)"
+              exit 1
+            fi
+          done
+          echo "✅ All files under 500 LOC"

@@ -552,30 +552,31 @@ async function obtenerFacturasCliente(req, res) {
     const { ejercicio, mes } = req.query;
 
     let query = `
-      SELECT 
+      SELECT
         TRIM(SERIEFACTURA) AS SERIE,
         NUMEROFACTURA AS NUMERO,
         EJERCICIOFACTURA AS EJERCICIO,
-        ANOFACTURA AS ANO,
-        MESFACTURA AS MES,
-        DIAFACTURA AS DIA,
-        IMPORTEBASEIMPONIBLE1 + IMPORTEBASEIMPONIBLE2 + IMPORTEBASEIMPONIBLE3 + 
-        IMPORTEBASEIMPONIBLE4 + IMPORTEBASEIMPONIBLE5 AS BASE_IMPONIBLE,
-        IMPORTEIVA1 + IMPORTEIVA2 + IMPORTEIVA3 + IMPORTEIVA4 + IMPORTEIVA5 AS IVA,
+        ANODOCUMENTO AS ANO,
+        MESDOCUMENTO AS MES,
+        DIADOCUMENTO AS DIA,
+        IMPORTEBASEIMPONIBLE AS BASE_IMPONIBLE,
+        IMPORTEIVA AS IVA,
         IMPORTETOTAL AS TOTAL,
         CAST(
           CASE 
-            WHEN DIAFACTURA < 10 THEN '0' || TRIM(CAST(DIAFACTURA AS CHAR(2)))
-            ELSE TRIM(CAST(DIAFACTURA AS CHAR(2)))
+            WHEN DIADOCUMENTO < 10 THEN '0' || TRIM(CAST(DIADOCUMENTO AS CHAR(2)))
+            ELSE TRIM(CAST(DIADOCUMENTO AS CHAR(2)))
           END || '/' ||
           CASE 
-            WHEN MESFACTURA < 10 THEN '0' || TRIM(CAST(MESFACTURA AS CHAR(2)))
-            ELSE TRIM(CAST(MESFACTURA AS CHAR(2)))
+            WHEN MESDOCUMENTO < 10 THEN '0' || TRIM(CAST(MESDOCUMENTO AS CHAR(2)))
+            ELSE TRIM(CAST(MESDOCUMENTO AS CHAR(2)))
           END || '/' ||
-          TRIM(CAST(ANOFACTURA AS CHAR(4)))
+          TRIM(CAST(ANODOCUMENTO AS CHAR(4)))
         AS VARCHAR(10)) AS FECHA
-      FROM DSEDAC.CAC
-      WHERE CODIGOCLIENTE = ?
+      FROM DSEDAC.CFC
+      WHERE TRIM(CODIGOCLIENTE) = ?
+        AND NUMEROFACTURA > 0
+        AND NUMEROFACTURA < 900000
     `;
 
     const params = [codigoCliente];
@@ -586,11 +587,11 @@ async function obtenerFacturasCliente(req, res) {
     }
 
     if (mes) {
-      query += ' AND MESFACTURA = ?';
+      query += ' AND MESDOCUMENTO = ?';
       params.push(parseInt(mes));
     }
 
-    query += ' ORDER BY ANOFACTURA DESC, MESFACTURA DESC, DIAFACTURA DESC, NUMEROFACTURA DESC';
+    query += ' ORDER BY ANODOCUMENTO DESC, MESDOCUMENTO DESC, DIADOCUMENTO DESC, NUMEROFACTURA DESC';
 
     const facturas = await odbcPool.query(query, params);
 
@@ -621,49 +622,31 @@ async function obtenerDashboard(req, res) {
     const añoActual = new Date().getFullYear();
     const mesActual = new Date().getMonth() + 1;
 
-    // Obtener totales del año actual
-    // Agrupar por factura única para evitar contar albaranes como facturas
+    // Obtener totales oficiales del año actual desde cabecera fiscal CFC.
     const queryTotales = `
-      WITH FacturasUnicas AS (
-        SELECT
-          TRIM(SERIEFACTURA) AS SERIE,
-          NUMEROFACTURA AS NUMERO,
-          EJERCICIOFACTURA AS YEAR,
-          SUM(IMPORTEBASEIMPONIBLE1 + IMPORTEBASEIMPONIBLE2 + IMPORTEBASEIMPONIBLE3 + 
-              IMPORTEBASEIMPONIBLE4 + IMPORTEBASEIMPONIBLE5) AS BASE_FACTURA,
-          SUM(IMPORTEIVA1 + IMPORTEIVA2 + IMPORTEIVA3 + IMPORTEIVA4 + IMPORTEIVA5) AS IVA_FACTURA,
-          SUM(IMPORTETOTAL) AS TOTAL_FACTURA
-        FROM DSEDAC.CAC
-        WHERE CODIGOCLIENTE = ? AND EJERCICIOFACTURA = ?
-        GROUP BY TRIM(SERIEFACTURA), NUMEROFACTURA, EJERCICIOFACTURA
-      )
       SELECT
         COUNT(*) AS NUM_FACTURAS,
-        SUM(BASE_FACTURA) AS BASE_TOTAL,
-        SUM(IVA_FACTURA) AS IVA_TOTAL,
-        SUM(TOTAL_FACTURA) AS TOTAL
-      FROM FacturasUnicas
+        SUM(IMPORTEBASEIMPONIBLE) AS BASE_TOTAL,
+        SUM(IMPORTEIVA) AS IVA_TOTAL,
+        SUM(IMPORTETOTAL) AS TOTAL
+      FROM DSEDAC.CFC
+      WHERE TRIM(CODIGOCLIENTE) = ?
+        AND EJERCICIOFACTURA = ?
+        AND NUMEROFACTURA > 0
+        AND NUMEROFACTURA < 900000
     `;
 
-    // Obtener totales del mes actual (agrupando por factura única y filtrando por mes)
+    // Obtener totales del mes actual desde la misma fuente fiscal.
     const queryMesActual = `
-      WITH FacturasUnicas AS (
-        SELECT
-          TRIM(SERIEFACTURA) AS SERIE,
-          NUMEROFACTURA AS NUMERO,
-          EJERCICIOFACTURA AS YEAR,
-          MAX(MESFACTURA) AS MES,
-          SUM(IMPORTETOTAL) AS TOTAL_FACTURA
-        FROM DSEDAC.CAC
-        WHERE CODIGOCLIENTE = ? 
-          AND EJERCICIOFACTURA = ? 
-        GROUP BY TRIM(SERIEFACTURA), NUMEROFACTURA, EJERCICIOFACTURA
-      )
-      SELECT 
+      SELECT
         COUNT(*) AS NUM_FACTURAS,
-        SUM(TOTAL_FACTURA) AS TOTAL
-      FROM FacturasUnicas
-      WHERE MES = ?
+        SUM(IMPORTETOTAL) AS TOTAL
+      FROM DSEDAC.CFC
+      WHERE TRIM(CODIGOCLIENTE) = ?
+        AND EJERCICIOFACTURA = ?
+        AND MESDOCUMENTO = ?
+        AND NUMEROFACTURA > 0
+        AND NUMEROFACTURA < 900000
     `;
 
     const [totalesAno, totalesMes] = await Promise.all([

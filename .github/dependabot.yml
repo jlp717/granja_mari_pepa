@@ -1,0 +1,105 @@
+# Dependabot — Automated dependency updates
+# https://docs.github.com/en/code-security/dependabot
+#
+# Configuración para mantener las dependencias actualizadas automáticamente.
+# Crea PRs semanales con actualizaciones de seguridad y versiones.
+
+version: 2
+updates:
+  # ─── Frontend (Next.js, React, Tailwind, etc.) ───
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    # Agrupar actualizaciones no-críticas para reducir ruido
+    groups:
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+          - "next*"
+          - "@types/node"
+        update-types:
+          - "minor"
+          - "patch"
+      testing:
+        patterns:
+          - "jest*"
+          - "@testing-library/*"
+          - "@playwright/*"
+          - "playwright*"
+        update-types:
+          - "minor"
+          - "patch"
+      radix:
+        patterns:
+          - "@radix-ui/*"
+        update-types:
+          - "minor"
+          - "patch"
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint/*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Límite de PRs abiertos simultáneamente
+    open-pull-requests-limit: 10
+    # Etiquetas para identificar PRs de dependencias
+    labels:
+      - "dependencies"
+      - "automated"
+    reviewers:
+      - "Javier"
+    # Estrategia de versionado
+    versioning-strategy: increase
+    # Ignorar actualizaciones mayores (pueden requerir migración manual)
+    ignore:
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+    # Seguridad: check de vulnerabilidades
+    allow:
+      - dependency-type: "direct"
+    # Security updates always on
+    rebase-strategy: "auto"
+
+  # ─── Backend (Express, etc.) ───
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "automated"
+      - "backend"
+    versioning-strategy: increase
+    ignore:
+      - dependency-name: "express"
+        update-types: ["version-update:semver-major"]
+
+  # ─── GitHub Actions ───
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    labels:
+      - "dependencies"
+      - "automated"
+      - "ci"
