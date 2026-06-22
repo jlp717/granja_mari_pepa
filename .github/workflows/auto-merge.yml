@@ -18,7 +18,7 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Wait for CI
         uses: lewagon/wait-on-check-action@v1.3.4
