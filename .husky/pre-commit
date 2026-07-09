@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # ═══════════════════════════════════════════════════════════════
 # PRE-COMMIT QUALITY GATES
 # Se ejecutan SOLO sobre los archivos staged (cambios a commitear)
@@ -10,12 +7,11 @@ echo "🔍 Running pre-commit quality gates..."
 
 # Gate 1: Lint staged files (solo los que se van a commitear)
 echo "  ├─ ESLint (staged files)..."
-cd frontend && npx lint-staged --allow-empty 2>/dev/null
+npx lint-staged --allow-empty 2>/dev/null
 if [ $? -ne 0 ]; then
   echo "  ❌ ESLint failed. Fix warnings before committing."
   exit 1
 fi
-cd ..
 
 # Gate 2: TypeScript check (rápido, solo proyectos con cambios)
 if git diff --cached --name-only | grep -q "^frontend/"; then

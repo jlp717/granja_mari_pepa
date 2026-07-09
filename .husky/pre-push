@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # ═══════════════════════════════════════════════════════════════
 # PRE-PUSH QUALITY GATES
 # Se ejecutan ANTES de hacer push al remoto
