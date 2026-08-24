@@ -65,7 +65,7 @@ export default function PasswordChangeForm({
 
         setStrength({
             score: result.score,
-            crackTimeDisplay: result.crack_times_display.offline_slow_hashing_1e4_per_second,
+            crackTimeDisplay: String(result.crack_times_display.offline_slow_hashing_1e4_per_second),
             feedback: {
                 warning: result.feedback.warning || '',
                 suggestions: result.feedback.suggestions || []

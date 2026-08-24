@@ -337,6 +337,10 @@ export function PanamarDashboard() {
     setFilters(prev => ({ ...prev, page: 1, [key]: value || undefined }));
   };
 
+  const handleSearch = useCallback(() => {
+    setFilters(prev => ({ ...prev, page: 1, busqueda: searchInput || undefined }));
+  }, [searchInput]);
+
   const toggleMonth = (month: number) => {
     setFilters(prev => {
       const current = prev.meses || [];

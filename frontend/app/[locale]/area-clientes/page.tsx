@@ -25,6 +25,12 @@ const loginFormSchema = z.object({
 });
 
 type LoginFormData = z.infer<typeof loginFormSchema>;
+type PendingLoginData = {
+  customerId: number;
+  password: string;
+  codigoCliente?: string;
+  needsEmailSetup?: boolean;
+};
 
 export default function CustomerAreaPage() {
   const t = useTranslations('customerArea');
@@ -45,7 +51,7 @@ export default function CustomerAreaPage() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showPasswordChangeFlow, setShowPasswordChangeFlow] = useState(false);
-  const [loginData, setLoginData] = useState<{ customerId: number; password: string } | null>(null);
+  const [loginData, setLoginData] = useState<PendingLoginData | null>(null);
   const [needsEmail, setNeedsEmail] = useState(false);
   const [tempEmail, setTempEmail] = useState('');
   const [tempPhone, setTempPhone] = useState('');
@@ -354,8 +360,9 @@ export default function CustomerAreaPage() {
           telefono: tempPhone
         }),
       });
+      const data = response.data as { success?: boolean; ok?: boolean; message?: string } | undefined;
 
-      if (response.ok && (response.data?.success || response.data?.ok)) {
+      if (response.ok && (data?.success || data?.ok)) {
         toast.success('Email y teléfono configurados correctamente');
         setShowEmailSetupModal(false);
         setTempEmail('');
@@ -364,7 +371,7 @@ export default function CustomerAreaPage() {
         // Reload to refresh user data
         window.location.reload();
       } else {
-        toast.error(response.data?.message || 'Error al guardar email');
+        toast.error(data?.message || 'Error al guardar email');
       }
     } catch (error) {
       console.error('Error guardando email:', error);

@@ -134,8 +134,8 @@ export default function ProductsCatalog() {
       name: producto.descripcionCorta || producto.descripcion,
       price: precio,
       image: '/placeholder-product.jpg', // TODO: Añadir imágenes reales
-      inStock: producto.activo,
-      category: producto.familia?.nombre || 'Otros'
+      inStock: true,
+      category: producto.familia?.descripcion || 'Otros'
     };
     addToCart(productToAdd, 1);
   };
@@ -381,7 +381,7 @@ export default function ProductsCatalog() {
 
                     <div className="flex items-center gap-2">
                       {[...Array(Math.min(5, totalPaginas))].map((_, i) => {
-                        let pageNum;
+                        let pageNum: number;
                         if (totalPaginas <= 5) {
                           pageNum = i + 1;
                         } else if (paginaActual <= 3) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, type ComponentProps } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, MessageSquare, Send, Star, Building2, Users, Globe as GlobeIcon, ArrowRight, ExternalLink, Zap, Truck } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -17,18 +17,9 @@ import { delegations } from '@/lib/data';
 import Globe from '@/components/ui/openstreetmap-globe';
 import { useTranslations } from 'next-intl';
 
-// Definir la interfaz Location localmente para coincidir con el Globe component
-interface Location {
-  id: string;
-  name: string;
-  region: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-  color: string;
-  description: string;
-}
+type GlobeLocation = Parameters<
+  NonNullable<ComponentProps<typeof Globe>['onLocationClick']>
+>[0];
 
 type ContactFormData = {
   nombre: string;
@@ -84,7 +75,7 @@ export default function ContactPage() {
     window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
   };
 
-  const handleLocationClick = (location: Location) => {
+  const handleLocationClick = (location: GlobeLocation) => {
     setSelectedLocation(location.id);
     setSelectedLocationData({
       id: location.id,

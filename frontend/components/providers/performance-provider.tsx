@@ -17,7 +17,9 @@ export function PerformanceProvider({ children }: PerformanceProviderProps) {
 
               if (element.dataset.src) {
                 const img = element as HTMLImageElement
-                img.src = img.dataset.src
+                const src = img.dataset.src
+                if (!src) return
+                img.src = src
                 img.onload = () => {
                   img.classList.add('loaded')
                   observer.unobserve(img)

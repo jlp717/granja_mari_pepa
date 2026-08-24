@@ -69,12 +69,14 @@ import {
   CircleDot,
   Gauge,
   UserPlus,
+  Users,
   Lock,
   Pencil,
   Info,
   Shield,
   Key,
-  AlertTriangle
+  AlertTriangle,
+  ChevronDown
 } from 'lucide-react';
 import { useAuthStore, useFavoritesStore, useCartStore } from '@/lib/store';
 import LibroIvaModal from './libro-iva-modal';
@@ -407,7 +409,7 @@ export function CustomerDashboard() {
 
     // Corregir casos especiales de totales si es necesario (legacy logic)
     const processedFacturas = facturasRaw.map(f => {
-      let fCopy = { ...f };
+      const fCopy = { ...f };
       if (String(f.subempresa).endsWith('9900')) {
         if (f.totalFactura > 1900 && f.totalFactura < 2000) {
           fCopy.totalFactura = 1900.00;
@@ -3318,7 +3320,7 @@ export function CustomerDashboard() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.5 }}
                       >
-                        <DashboardCharts codigoCliente={user.id} />
+                        <DashboardCharts codigoCliente={user?.id || ''} />
                       </motion.div>
                     )}
                   </div>

@@ -79,6 +79,7 @@ export interface FacturaBackend {
   // Datos de la factura (para mostrar)
   serieFactura: string;
   numeroFactura: number;
+  numero?: number;
   tipoDocumento: string;
   // Fecha
   fecha: string; // Formato DD/MM/YYYY
@@ -113,6 +114,9 @@ export interface LoginForm {
 export interface UserProfile {
   id: string;
   customerId?: number; // ID numérico para operaciones de backend
+  codigoCliente?: string;
+  customerCode?: string;
+  code?: string;
   name: string;
   email: string;
   company: string;
