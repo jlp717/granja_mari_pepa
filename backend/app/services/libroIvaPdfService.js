@@ -71,6 +71,21 @@ function safeText(v) {
   return (v ?? '').toString();
 }
 
+function serieDescripcion(serie) {
+  switch (String(serie || '').trim().toUpperCase()) {
+    case 'A':
+      return 'FACTURAS DIRECTAS TERMINALES';
+    case 'F':
+      return 'FACTURAS VENTAS';
+    case 'O':
+      return 'FACTURAS EMITIDAS DIVERSAS';
+    case 'Q':
+      return 'FACTURAS EMIT.ARRENDAMIENTOS';
+    default:
+      return 'OTRAS';
+  }
+}
+
 function formatFacturaId(reg) {
   // Formato tipo: 2025-F-000-000616
   const year = String(reg.ANOFACTURA || reg.ANO || '').padStart(4, '0');
@@ -276,11 +291,7 @@ function drawResumenPorSerie(doc, y, resumen, opts = {}) {
     // Add subtle border to row
     doc.rect(40, y, tableW, rowH).strokeColor(COLORS.border).lineWidth(0.5).stroke();
 
-    const desc = serie === 'A'
-      ? 'FACTURAS DIRECTAS TERMINALES'
-      : (serie === 'F'
-        ? 'FACTURAS VENTAS'
-        : 'OTRAS');
+    const desc = serieDescripcion(serie);
 
     doc.text(serie, c.serie, y + 6, { width: 40 });
     doc.text(`${desc} (${formatNumber(porcIva, 2)}%)`, c.desc, y + 6, { width: 230 });
