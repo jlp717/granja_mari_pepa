@@ -94,9 +94,9 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.15",
-    "@playwright/test": "^1.48.0",
+    "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.2",
     "@types/google.maps": "^3.58.1",
     "@types/jest": "^29.5.13",
     "cross-env": "^7.0.3",
