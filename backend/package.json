@@ -28,7 +28,7 @@
     "express": "^4.18.2",
     "groq-sdk": "^0.37.0",
     "helmet": "^7.0.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.3",
     "nodemailer": "^7.0.11",
     "odbc": "^2.4.6",
     "pdf-parse": "^2.4.5",
