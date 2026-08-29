@@ -59,7 +59,7 @@ jobs:
 
       - name: Create next phase issue
         if: steps.phases.outputs.next != 'unknown' && steps.phases.outputs.next != 'complete'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const nextPhase = '${{ steps.phases.outputs.next }}';
@@ -96,7 +96,7 @@ jobs:
 
       - name: Notify completion (all phases done)
         if: steps.phases.outputs.next == 'complete'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             await github.rest.issues.create({
