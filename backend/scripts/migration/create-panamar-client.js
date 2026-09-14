@@ -135,7 +135,7 @@ async function main() {
 📝 NOTAS:
    - El cliente 9999999999 activa el "modo PANAMAR"
    - Ve documentos de TODOS los clientes con productos PANAMAR
-   - Precios siempre de TARIFA 85
+   - Precios de TARIFA 84/85, o el precio real de venta si es menor
    - No muestra totales ni IVA (solo cabecera + líneas)
 `);
   } catch (error) {

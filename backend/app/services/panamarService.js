@@ -3,6 +3,8 @@
  * ===========================================================
  * Devuelve facturas (no albaranes) de clientes 4300x con lineas PANAMAR
  * (familias 700-706), aplicando tarifa especial 84/85 cuando existe.
+ * Si el precio real de venta (LAC.PRECIOVENTA) es menor que la tarifa,
+ * se usa ese importe menor en todas las lineas (sin excepciones por articulo).
  *
  * Objetivo funcional:
  * - Mostrar negocio + consumo + precio/importe de cobro.
@@ -12,6 +14,7 @@
 
 const odbcPool = require('../config/odbcConfig');
 const logger = require('../utils/logger');
+const { resolvePrecioCobro, resolveImporteCobro } = require('./panamarPricing');
 
 const PANAMAR_CLIENT_CODE = '9999999999';
 const CONTADO_CLIENT_CODES = ['4300005000', '4300005001']; // CONTADO y CONTADOS VARIOS
@@ -111,6 +114,24 @@ PANAMAR_LINEAS AS (
     AND TRIM(ART.CODIGOFAMILIA) IN (${PANAMAR_FAMILIAS_SQL})
     AND TRIM(LAC.CLASELINEA) IN (${PANAMAR_CLASES_LINEA_SQL})
 )
+`;
+
+// Importe de cobro: tarifa 84/85, o PRECIOVENTA si es > 0 y menor que la tarifa. SC = 0.
+const IMPORTE_COBRO_SQL = `
+  CASE
+    WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
+    WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
+      THEN (
+        CASE
+          WHEN COALESCE(PL.PRECIOVENTA, 0) > 0
+               AND PL.PRECIOVENTA < PL.PRECIO_TARIFA_PANAMAR
+            THEN PL.PRECIOVENTA
+          ELSE PL.PRECIO_TARIFA_PANAMAR
+        END
+      ) * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END)
+        * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
+    ELSE PL.IMPORTEVENTA
+  END
 `;
 
 function isPanamarClient(codigoCliente) {
@@ -238,24 +259,16 @@ function normalizePanamarLine(line) {
   const precioOriginal = toNumber(line.PRECIOVENTA);
   const cajas = toNumber(line.CAJAS);
   const unidades = toNumber(line.UNIDADES);
-  const cantidadCobro = cajas > 0 ? cajas : unidades;
-
-  // ✅ FIX: Detectar líneas SC (Sin Cargo) - su importe debe ser 0
   const tipoVenta = String(line.TIPO_VENTA || '').trim().toUpperCase();
-  const isSinCargo = tipoVenta === 'SC';
-
-  // ✅ RESTAURADO: Lógica original de precio de cobro
-  // Si existe tarifa Panamar (84/85), usarla. Si no, usar precio venta.
-  const precioCobro = precioTarifa > 0 ? precioTarifa : precioOriginal;
-
-  // ✅ FIX: Si es SC, el importe es 0 (sin cargo para el cliente)
-  // Si hay tarifa especial, calcular importe = precioCobro * cantidad * (1 - descuento/100)
-  // Si no hay tarifa, usar importe venta directo de BD (ya viene con descuento aplicado)
-  const importeCobro = isSinCargo
-    ? 0
-    : (precioTarifa > 0
-        ? precioCobro * cantidadCobro * (1 - toNumber(line.DESCUENTO) / 100)
-        : toNumber(line.IMPORTEVENTA));
+  const { precioCobro, importeCobro, isSinCargo } = resolveImporteCobro({
+    precioTarifa,
+    precioVenta: precioOriginal,
+    cajas,
+    unidades,
+    descuento: line.DESCUENTO,
+    importeVenta: line.IMPORTEVENTA,
+    tipoVenta
+  });
 
   return {
     subempresaAlbaran: line.SUBEMPRESA_ALBARAN,
@@ -276,10 +289,10 @@ function normalizePanamarLine(line) {
     precioTarifa: round3(precioTarifa),
     precioTarifa85: round3(precioTarifa),
     precioOriginal: round3(precioOriginal),
-    usaTarifaEspecial: precioTarifa > 0,
-    usaTarifa85: precioTarifa > 0,
+    usaTarifaEspecial: precioTarifa > 0 && !(precioOriginal > 0 && precioOriginal < precioTarifa),
+    usaTarifa85: precioTarifa > 0 && !(precioOriginal > 0 && precioOriginal < precioTarifa),
     tipoVenta: tipoVenta,
-    isSinCargo, // ✅ FIX: Flag para identificar líneas SC
+    isSinCargo,
     iva: toNumber(line.IVA),
     dia: toInt(line.DIA_ALBARAN),
     mes: toInt(line.MES_ALBARAN),
@@ -460,17 +473,7 @@ async function getDocuments(options = {}) {
         COUNT(*) AS TOTAL_LINEAS_PANAMAR,
         COALESCE(SUM(CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE 0 END), 0) AS TOTAL_CAJAS_PANAMAR,
         COALESCE(SUM(CASE WHEN COALESCE(PL.UNIDADES, 0) > 0 THEN PL.UNIDADES ELSE 0 END), 0) AS TOTAL_UNIDADES_PANAMAR,
-        COALESCE(SUM(
-          CASE
-            -- ✅ FIX: Líneas SC = 0€
-            WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
-            -- ✅ FIX: Con tarifa especial, aplicar descuento
-            WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-              THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
-            -- Sin tarifa: usar importe venta directo
-            ELSE PL.IMPORTEVENTA
-          END
-        ), 0) AS TOTAL_IMPORTE_PANAMAR
+        COALESCE(SUM(${IMPORTE_COBRO_SQL}), 0) AS TOTAL_IMPORTE_PANAMAR
       FROM PANAMAR_LINEAS PL
       ${whereSQL}
       GROUP BY
@@ -626,17 +629,7 @@ async function getInvoiceByIdentity(identity) {
       COUNT(*) AS TOTAL_LINEAS_PANAMAR,
       COALESCE(SUM(CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE 0 END), 0) AS TOTAL_CAJAS_PANAMAR,
       COALESCE(SUM(CASE WHEN COALESCE(PL.UNIDADES, 0) > 0 THEN PL.UNIDADES ELSE 0 END), 0) AS TOTAL_UNIDADES_PANAMAR,
-      COALESCE(SUM(
-        CASE
-          -- ✅ FIX: Líneas SC = 0€
-          WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
-          -- ✅ FIX: Con tarifa especial, aplicar descuento
-          WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
-          -- Sin tarifa: usar importe venta directo
-          ELSE PL.IMPORTEVENTA
-        END
-      ), 0) AS TOTAL_IMPORTE_PANAMAR
+      COALESCE(SUM(${IMPORTE_COBRO_SQL}), 0) AS TOTAL_IMPORTE_PANAMAR
     FROM PANAMAR_LINEAS PL
     ${invoiceWhereSQL}
     GROUP BY
@@ -795,7 +788,7 @@ async function getSummary(options = {}) {
   const aggSQL = `
     ${PANAMAR_LINEAS_CTE}
     SELECT
-      COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0 ELSE COALESCE(PL.IMPORTEVENTA, 0) END), 0) AS TOTAL_IMPORTE,
+      COALESCE(SUM(${IMPORTE_COBRO_SQL}), 0) AS TOTAL_IMPORTE,
       COALESCE(SUM(COALESCE(PL.CAJAS, 0)), 0) AS TOTAL_CAJAS,
       COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'CC' THEN COALESCE(PL.CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_CC,
       COALESCE(SUM(CASE WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN COALESCE(PL.CAJAS, 0) ELSE 0 END), 0) AS TOTAL_CAJAS_SC
@@ -870,17 +863,7 @@ async function getDiagnostics() {
       ) AS FACTURAS,
       COUNT(*) AS LINEAS,
       COALESCE(SUM(CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE 0 END), 0) AS TOTAL_CAJAS,
-      COALESCE(SUM(
-        CASE
-          -- ✅ FIX: Líneas SC = 0€
-          WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
-          -- ✅ FIX: Con tarifa especial, aplicar descuento
-          WHEN COALESCE(PL.PRECIO_TARIFA_PANAMAR, 0) > 0
-            THEN PL.PRECIO_TARIFA_PANAMAR * (CASE WHEN COALESCE(PL.CAJAS, 0) > 0 THEN PL.CAJAS ELSE PL.UNIDADES END) * (1 - COALESCE(PL.DESCUENTO, 0) / 100)
-          -- Sin tarifa: usar importe venta directo
-          ELSE PL.IMPORTEVENTA
-        END
-      ), 0) AS TOTAL_IMPORTE
+      COALESCE(SUM(${IMPORTE_COBRO_SQL}), 0) AS TOTAL_IMPORTE
     FROM PANAMAR_LINEAS PL
     WHERE PL.ANO_FACTURA = ?
     GROUP BY PL.MES_FACTURA
@@ -1056,6 +1039,8 @@ module.exports = {
   PANAMAR_CLIENT_CODE,
   ANO_FIJO,
   isPanamarClient,
+  resolvePrecioCobro,
+  resolveImporteCobro,
   getDocuments,
   getDocumentByKey,
   getInvoiceByIdentity,

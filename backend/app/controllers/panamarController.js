@@ -2,7 +2,8 @@
  * CONTROLADOR PANAMAR
  * ====================
  * Endpoint para consultar documentos con productos PANAMAR (FILTRO03=40)
- * usando precios de TARIFA 85. Solo accesible por cliente 9999999999.
+ * usando precios de TARIFA 84/85, o el precio real de venta si es menor.
+ * Solo accesible por cliente 9999999999.
  *
  * Incluye: listado, resumen, PDF (descarga/preview), envío por email
  */

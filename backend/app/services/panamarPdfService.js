@@ -241,7 +241,7 @@ function buildDocumentContent(doc, panamarDoc) {
 
       const cajas = Number(linea.cajas) || 0;
       const unidades = Number(linea.unidades) || 0;
-      // ✅ FIX: Usar precioUnitario (PRECIOVENTA original) no tarifa especial
+      // Precio de cobro: min(tarifa Panamar, precio real de venta)
       const precio = Number(linea.precioUnitario ?? 0) || 0;
       // ✅ FIX: Las líneas SC tienen importe 0
       const importe = linea.isSinCargo ? 0 : (Number(linea.importe) || 0);

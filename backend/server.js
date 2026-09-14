@@ -471,7 +471,7 @@ app.get('/api/chatbot/health', chatbotController.healthCheck);
 // 📦 PANAMAR - Documentos con productos familias 701-705
 // =====================================================
 // Modo especial para cliente 9999999999: consulta documentos cross-client
-// con productos PANAMAR y precios de TARIFA 85
+// con productos PANAMAR y precios de TARIFA 84/85 (o el de venta si es menor)
 app.get('/api/panamar/documents', requireAuth, generalLimiter, panamarController.getDocuments);
 app.get('/api/panamar/summary', requireAuth, generalLimiter, panamarController.getSummary);
 app.get('/api/panamar/clients', requireAuth, generalLimiter, panamarController.getClients);
