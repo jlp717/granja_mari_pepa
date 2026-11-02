@@ -1,8 +1,30 @@
 /**
  * Precio de cobro Panamar.
- * Tarifa 84/85 por defecto; si hay precio real de venta > 0 y es menor, se usa ese.
+ * La tarifa de valoración sale del albarán: 84 en enero y 85 el resto,
+ * hasta el 31/10/2026. Desde el 01/11/2026 la valoración es la tarifa 86.
+ * Si hay precio real de venta > 0 y es menor, se usa ese.
  * Aplica a cualquier artículo: no hay excepciones por código.
  */
+
+const TARIFA_ENERO = 84;
+const TARIFA_RESTO = 85;
+const TARIFA_DESDE_NOVIEMBRE_2026 = 86;
+const TARIFA_VALORACION_DESDE_YMD = 20261101;
+
+const TARIFAS_VALORACION_SQL = `${TARIFA_ENERO}, ${TARIFA_RESTO}, ${TARIFA_DESDE_NOVIEMBRE_2026}`;
+const TARIFA_PANAMAR_SQL =
+  'CASE WHEN (CAC.ANODOCUMENTO * 10000 + CAC.MESDOCUMENTO * 100 + CAC.DIADOCUMENTO) >= ' +
+  TARIFA_VALORACION_DESDE_YMD +
+  ' THEN ' + TARIFA_DESDE_NOVIEMBRE_2026 +
+  ' WHEN CAC.MESDOCUMENTO = 1 THEN ' + TARIFA_ENERO +
+  ' ELSE ' + TARIFA_RESTO +
+  ' END';
+
+function resolveCodigoTarifaValoracion({ year, month, day }) {
+  const ymd = toNumber(year) * 10000 + toNumber(month) * 100 + toNumber(day);
+  if (ymd >= TARIFA_VALORACION_DESDE_YMD) return TARIFA_DESDE_NOVIEMBRE_2026;
+  return toNumber(month) === 1 ? TARIFA_ENERO : TARIFA_RESTO;
+}
 
 function toNumber(value) {
   const n = Number(value);
@@ -43,5 +65,8 @@ function resolveImporteCobro({
 
 module.exports = {
   resolvePrecioCobro,
-  resolveImporteCobro
+  resolveImporteCobro,
+  resolveCodigoTarifaValoracion,
+  TARIFA_PANAMAR_SQL,
+  TARIFAS_VALORACION_SQL
 };

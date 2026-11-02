@@ -2,7 +2,8 @@
  * CONTROLADOR PANAMAR
  * ====================
  * Endpoint para consultar documentos con productos PANAMAR (FILTRO03=40)
- * usando precios de TARIFA 84/85, o el precio real de venta si es menor.
+ * usando la tarifa de valoración (84/85 hasta el 31/10/2026, 86 desde el 01/11/2026),
+ * o el precio real de venta si es menor.
  * Solo accesible por cliente 9999999999.
  *
  * Incluye: listado, resumen, PDF (descarga/preview), envío por email

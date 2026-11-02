@@ -2,7 +2,15 @@
  * TESTS: precio de cobro Panamar (tarifa vs venta real)
  */
 
-const { resolvePrecioCobro, resolveImporteCobro } = require('../app/services/panamarPricing');
+const fs = require('fs');
+const path = require('path');
+const {
+  resolvePrecioCobro,
+  resolveImporteCobro,
+  resolveCodigoTarifaValoracion,
+  TARIFA_PANAMAR_SQL,
+  TARIFAS_VALORACION_SQL
+} = require('../app/services/panamarPricing');
 
 describe('PANAMAR pricing', () => {
   const round2 = (n) => Math.round((n || 0) * 100) / 100;
@@ -101,5 +109,42 @@ describe('PANAMAR pricing', () => {
     expect(isSinCargo).toBe(true);
     expect(precioCobro).toBe(49.25);
     expect(importeCobro).toBe(0);
+  });
+});
+
+describe('PANAMAR valuation tariff from 2026-11-01', () => {
+  it('keeps January sales before the cutoff on tariff 84', () => {
+    expect(resolveCodigoTarifaValoracion({ year: 2026, month: 1, day: 15 })).toBe(84);
+    expect(resolveCodigoTarifaValoracion({ year: 2025, month: 1, day: 1 })).toBe(84);
+  });
+
+  it('keeps the other months before the cutoff on tariff 85', () => {
+    expect(resolveCodigoTarifaValoracion({ year: 2026, month: 2, day: 1 })).toBe(85);
+    expect(resolveCodigoTarifaValoracion({ year: 2026, month: 10, day: 31 })).toBe(85);
+  });
+
+  it('uses tariff 86 from 1 November 2026 inclusive, including later Januaries', () => {
+    expect(resolveCodigoTarifaValoracion({ year: 2026, month: 11, day: 1 })).toBe(86);
+    expect(resolveCodigoTarifaValoracion({ year: 2026, month: 12, day: 31 })).toBe(86);
+    expect(resolveCodigoTarifaValoracion({ year: 2027, month: 1, day: 1 })).toBe(86);
+  });
+
+  it('builds the invoice SQL with the same cutoff and still loads tariffs 84, 85 and 86', () => {
+    expect(TARIFA_PANAMAR_SQL).toBe(
+      'CASE WHEN (CAC.ANODOCUMENTO * 10000 + CAC.MESDOCUMENTO * 100 + CAC.DIADOCUMENTO) >= 20261101 THEN 86 WHEN CAC.MESDOCUMENTO = 1 THEN 84 ELSE 85 END'
+    );
+    expect(TARIFAS_VALORACION_SQL).toBe('84, 85, 86');
+  });
+
+  it('wires that SQL into the live Panamar invoice query', () => {
+    const serviceSource = fs.readFileSync(
+      path.join(__dirname, '../app/services/panamarService.js'),
+      'utf8'
+    );
+
+    expect(serviceSource).toContain('${TARIFA_PANAMAR_SQL}');
+    expect(serviceSource).toContain('IN (${TARIFAS_VALORACION_SQL})');
+    expect(serviceSource).not.toMatch(/CODIGOTARIFA IN \(84,\s*85\)/);
+    expect(serviceSource).not.toContain('CASE WHEN CAC.MESDOCUMENTO = 1 THEN 84 ELSE 85 END');
   });
 });

@@ -2,7 +2,8 @@
  * SERVICIO PANAMAR - FACTURAS CON CONSUMO Y PRECIOS DE COBRO
  * ===========================================================
  * Devuelve facturas (no albaranes) de clientes 4300x con lineas PANAMAR
- * (familias 700-706), aplicando tarifa especial 84/85 cuando existe.
+ * (familias 700-706), aplicando la tarifa de valoración cuando existe.
+ * Hasta el 31/10/2026: 84 en enero y 85 el resto. Desde el 01/11/2026: 86.
  * Si el precio real de venta (LAC.PRECIOVENTA) es menor que la tarifa,
  * se usa ese importe menor en todas las lineas (sin excepciones por articulo).
  *
@@ -14,14 +15,18 @@
 
 const odbcPool = require('../config/odbcConfig');
 const logger = require('../utils/logger');
-const { resolvePrecioCobro, resolveImporteCobro } = require('./panamarPricing');
+const {
+  resolvePrecioCobro,
+  resolveImporteCobro,
+  TARIFA_PANAMAR_SQL,
+  TARIFAS_VALORACION_SQL
+} = require('./panamarPricing');
 
 const PANAMAR_CLIENT_CODE = '9999999999';
 const CONTADO_CLIENT_CODES = ['4300005000', '4300005001']; // CONTADO y CONTADOS VARIOS
 const PANAMAR_FAMILIAS = ['700', '701', '702', '703', '704', '705', '706'];
 const PANAMAR_FAMILIAS_SQL = PANAMAR_FAMILIAS.map(f => `'${f}'`).join(', ');
 const PANAMAR_CLASES_LINEA_SQL = "'AB', 'RG', 'VT'";
-const TARIFA_PANAMAR_SQL = 'CASE WHEN CAC.MESDOCUMENTO = 1 THEN 84 ELSE 85 END';
 const ANO_FIJO = 2026;
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGE_SIZE = 500;
@@ -51,7 +56,7 @@ WITH TARIFAS_PANAMAR AS (
     ARA.CODIGOTARIFA,
     MAX(ARA.PRECIOTARIFA) AS PRECIOTARIFA
   FROM DSEDAC.ARA ARA
-  WHERE ARA.CODIGOTARIFA IN (84, 85)
+  WHERE ARA.CODIGOTARIFA IN (${TARIFAS_VALORACION_SQL})
   GROUP BY TRIM(ARA.CODIGOARTICULO), ARA.CODIGOTARIFA
 ),
 PANAMAR_LINEAS AS (
@@ -116,7 +121,7 @@ PANAMAR_LINEAS AS (
 )
 `;
 
-// Importe de cobro: tarifa 84/85, o PRECIOVENTA si es > 0 y menor que la tarifa. SC = 0.
+// Importe de cobro: tarifa de valoración, o PRECIOVENTA si es > 0 y menor. SC = 0.
 const IMPORTE_COBRO_SQL = `
   CASE
     WHEN TRIM(PL.TIPO_VENTA) = 'SC' THEN 0
@@ -929,7 +934,7 @@ async function getDiagnostics() {
       ARA.CODIGOTARIFA,
       COUNT(*) AS FILAS_ARA
     FROM DSEDAC.ARA ARA
-    WHERE ARA.CODIGOTARIFA IN (84, 85)
+    WHERE ARA.CODIGOTARIFA IN (${TARIFAS_VALORACION_SQL})
     GROUP BY TRIM(ARA.CODIGOARTICULO), ARA.CODIGOTARIFA
     HAVING COUNT(*) > 1
   `;
@@ -965,7 +970,7 @@ async function getDiagnostics() {
     info: 'Diagnostico PANAMAR sobre facturas (sin datos personales)',
     anoFijo: ANO_FIJO,
     elapsed: `${Date.now() - startTime}ms`,
-    filtros: `Familias: ${PANAMAR_FAMILIAS.join(', ')}, Clientes: 4300%, Clases linea: ${PANAMAR_CLASES_LINEA_SQL}, Tarifa: 84/85`,
+    filtros: `Familias: ${PANAMAR_FAMILIAS.join(', ')}, Clientes: 4300%, Clases linea: ${PANAMAR_CLASES_LINEA_SQL}, Tarifa: 84/85 hasta el 31/10/2026, 86 desde el 01/11/2026`,
     resumenIntegridad: {
       duplicadosCabeceraCAC: toInt(duplicatedCAC[0]?.DUPLICADOS),
       lineasTotales: totalLineas,
@@ -981,7 +986,7 @@ async function getDiagnostics() {
       totalImporte: round2(toNumber(r.TOTAL_IMPORTE))
     })),
     araDuplicados: Array.isArray(araDupes)
-      ? (araDupes.length > 0 ? araDupes : 'Sin duplicados en ARA 84/85')
+      ? (araDupes.length > 0 ? araDupes : 'Sin duplicados en ARA 84/85/86')
       : araDupes
   };
 
