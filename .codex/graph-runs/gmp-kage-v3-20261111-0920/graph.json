@@ -1,0 +1,662 @@
+{
+  "version": "1",
+  "run_id": "gmp-kage-v3-20261111-0920",
+  "goal": "From updated main reproduce licensed Kage literally, then port its complete system to every GMP route without V2 reuse. User explicitly waived old auditors at09:36; validate actual source/runtime instead.",
+  "settings": {
+    "max_concurrent": 8,
+    "max_rounds": 3,
+    "empty_rounds_to_stop": 2
+  },
+  "nodes": [
+    {
+      "id": "motion",
+      "kind": "agent",
+      "role": "motion",
+      "model_tier": "premium",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "tokens",
+      "kind": "agent",
+      "role": "tokens",
+      "model_tier": "standard",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "navigation",
+      "kind": "agent",
+      "role": "navigation",
+      "model_tier": "standard",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "art",
+      "kind": "agent",
+      "role": "art",
+      "model_tier": "premium",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "public",
+      "kind": "agent",
+      "role": "public",
+      "model_tier": "standard",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "editorial",
+      "kind": "agent",
+      "role": "editorial",
+      "model_tier": "standard",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "application",
+      "kind": "agent",
+      "role": "application",
+      "model_tier": "standard",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "critic",
+      "kind": "agent",
+      "role": "critic",
+      "model_tier": "premium",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "scope",
+          "sources",
+          "constraints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": false
+    },
+    {
+      "id": "integrate",
+      "kind": "code",
+      "role": "root-integration-and-plan",
+      "model_tier": "standard",
+      "input_schema": {
+        "type": "array"
+      },
+      "output_schema": {
+        "type": "object"
+      },
+      "writes": [
+        "reference/kage-verbatim/**"
+      ],
+      "requires_all_inputs": true
+    },
+    {
+      "id": "verify",
+      "kind": "agent",
+      "role": "independent-verifier",
+      "model_tier": "premium",
+      "input_schema": {
+        "type": "object"
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "node_id",
+          "summary",
+          "facts",
+          "artifacts",
+          "risks",
+          "confidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "blocked"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array"
+          },
+          "artifacts": {
+            "type": "array"
+          },
+          "risks": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "writes": [],
+      "requires_all_inputs": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "motion",
+      "to": "integrate",
+      "data": "motion-source-evidence"
+    },
+    {
+      "from": "tokens",
+      "to": "integrate",
+      "data": "tokens-source-evidence"
+    },
+    {
+      "from": "navigation",
+      "to": "integrate",
+      "data": "navigation-source-evidence"
+    },
+    {
+      "from": "art",
+      "to": "integrate",
+      "data": "art-source-evidence"
+    },
+    {
+      "from": "public",
+      "to": "integrate",
+      "data": "public-source-evidence"
+    },
+    {
+      "from": "editorial",
+      "to": "integrate",
+      "data": "editorial-source-evidence"
+    },
+    {
+      "from": "application",
+      "to": "integrate",
+      "data": "application-source-evidence"
+    },
+    {
+      "from": "critic",
+      "to": "integrate",
+      "data": "critic-source-evidence"
+    },
+    {
+      "from": "integrate",
+      "to": "verify",
+      "data": "integrated-plan-and-runtime"
+    }
+  ]
+}

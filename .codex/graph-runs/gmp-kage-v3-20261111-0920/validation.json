@@ -1,0 +1,46 @@
+{
+  "valid": true,
+  "node_count": 10,
+  "edge_count": 9,
+  "stages": [
+    [
+      "application",
+      "art",
+      "critic",
+      "editorial",
+      "motion",
+      "navigation",
+      "public",
+      "tokens"
+    ],
+    [
+      "integrate"
+    ],
+    [
+      "verify"
+    ]
+  ],
+  "parallel_frontiers": [
+    [
+      "application",
+      "art",
+      "critic",
+      "editorial",
+      "motion",
+      "navigation",
+      "public",
+      "tokens"
+    ]
+  ],
+  "max_frontier": 8,
+  "writer_paths": {
+    "reference/kage-verbatim/**": [
+      "integrate"
+    ]
+  },
+  "settings": {
+    "max_concurrent": 8,
+    "max_rounds": 3,
+    "empty_rounds_to_stop": 2
+  }
+}
