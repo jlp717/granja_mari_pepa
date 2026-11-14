@@ -330,6 +330,114 @@ async function getClientOrders(codigoCliente, limit = 10) {
 }
 
 /**
+ * Pedidos reales del cliente desde las lineas de pedido (LPC),
+ * igual que la pantalla de pedidos del area de clientes.
+ */
+async function getClientOrdersFromLines(codigoCliente, limit = 10) {
+  const safeLimit = Math.max(1, Math.min(50, Number(limit) || 10));
+  try {
+    return await odbcPool.query(
+      `SELECT
+         SUBEMPRESAPEDIDO AS SUBEMPRESA,
+         EJERCICIOPEDIDO AS EJERCICIO,
+         TRIM(SERIEPEDIDO) AS SERIE,
+         TERMINALPEDIDO AS TERMINAL,
+         NUMEROPEDIDO AS NUMERO,
+         DIADOCUMENTO AS DIA,
+         MESDOCUMENTO AS MES,
+         ANODOCUMENTO AS ANO,
+         SUM(IMPORTEVENTA) AS TOTAL,
+         COUNT(DISTINCT SECUENCIAPEDIDO) AS LINEAS
+       FROM DSEDAC.LPC
+       WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
+       GROUP BY
+         SUBEMPRESAPEDIDO, EJERCICIOPEDIDO, SERIEPEDIDO, TERMINALPEDIDO,
+         NUMEROPEDIDO, DIADOCUMENTO, MESDOCUMENTO, ANODOCUMENTO
+       ORDER BY ANODOCUMENTO DESC, MESDOCUMENTO DESC, DIADOCUMENTO DESC, NUMEROPEDIDO DESC
+       FETCH FIRST ${safeLimit} ROWS ONLY`,
+      [codigoCliente],
+    );
+  } catch (error) {
+    logger.error('Error obteniendo pedidos del cliente (LPC)', error);
+    throw error;
+  }
+}
+
+/**
+ * Lineas de un pedido concreto del cliente.
+ */
+async function getOrderDetail(codigoCliente, filters = {}) {
+  const serie = String(filters.serie || '').trim().toUpperCase();
+  const numero = Number(filters.numero);
+  const ejercicio = Number(filters.ejercicio);
+  if (!serie || !Number.isFinite(numero) || !Number.isFinite(ejercicio)) {
+    return null;
+  }
+  const params = [codigoCliente, serie, numero, ejercicio];
+  let extra = '';
+  if (filters.subempresa) {
+    extra += ' AND SUBEMPRESAPEDIDO = ?';
+    params.push(Number(filters.subempresa));
+  }
+  if (filters.terminal) {
+    extra += ' AND TERMINALPEDIDO = ?';
+    params.push(Number(filters.terminal));
+  }
+  try {
+    return await odbcPool.query(
+      `SELECT
+         SECUENCIAPEDIDO AS SECUENCIA,
+         TRIM(CODIGOARTICULO) AS ARTICULO,
+         DESCRIPCION AS DESCRIPCION,
+         CANTIDADUNIDADES AS UNIDADES,
+         PRECIOVENTA AS PRECIO,
+         PORCENTAJEDESCUENTO AS DESCUENTO,
+         IMPORTEVENTA AS IMPORTE
+       FROM DSEDAC.LPC
+       WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
+         AND TRIM(SERIEPEDIDO) = ?
+         AND NUMEROPEDIDO = ?
+         AND EJERCICIOPEDIDO = ?
+         ${extra}
+       ORDER BY SECUENCIAPEDIDO
+       FETCH FIRST 80 ROWS ONLY`,
+      params,
+    );
+  } catch (error) {
+    logger.error('Error obteniendo detalle de pedido', error);
+    throw error;
+  }
+}
+
+/**
+ * Ficha del cliente en el ERP (direccion, poblacion, ruta, alta).
+ */
+async function getClientProfile(codigoCliente) {
+  try {
+    const rows = await odbcPool.query(
+      `SELECT
+         TRIM(CODIGOCLIENTE) AS CODIGO,
+         TRIM(NOMBRECLIENTE) AS NOMBRE,
+         TRIM(NOMBREALTERNATIVO) AS ALTERNATIVO,
+         TRIM(DIRECCION) AS DIRECCION,
+         TRIM(POBLACION) AS POBLACION,
+         TRIM(PROVINCIA) AS PROVINCIA,
+         TRIM(TELEFONO1) AS TELEFONO,
+         TRIM(CODIGORUTA) AS RUTA,
+         DIAALTA, MESALTA, ANOALTA
+       FROM DSEDAC.CLI
+       WHERE TRIM(CODIGOCLIENTE) = ?
+       FETCH FIRST 1 ROW ONLY`,
+      [codigoCliente],
+    );
+    return (rows && rows[0]) || null;
+  } catch (error) {
+    logger.error('Error obteniendo ficha del cliente', error);
+    throw error;
+  }
+}
+
+/**
  * Obtener resumen de facturación del cliente (total agregado)
  */
 async function getClientSummary(codigoCliente, ejercicio) {
@@ -628,6 +736,9 @@ module.exports = {
   countInvoices,
   getClientProducts,
   getClientOrders,
+  getClientOrdersFromLines,
+  getOrderDetail,
+  getClientProfile,
   getClientSummary,
   getClientSummaryByYear,
   getAvailableYears,

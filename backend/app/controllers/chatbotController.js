@@ -661,7 +661,9 @@ function requiresLogin(message, user) {
         WHO_AM_I.test(normalized) ||
         SEND_INTENT.test(normalized) ||
         (ACCOUNT_SUMMARY_HINT.test(normalized) &&
-          PERSONAL_REF_HINT.test(normalized))),
+          PERSONAL_REF_HINT.test(normalized)) ||
+        (PROFILE_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) ||
+        (ORDERS_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized))),
   );
 }
 
@@ -678,6 +680,8 @@ function needsAccountTools(message, user) {
         INVOICE_HINT.test(normalized) ||
         (ACCOUNT_SUMMARY_HINT.test(normalized) &&
           PERSONAL_REF_HINT.test(normalized)) ||
+        (PROFILE_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) ||
+        (ORDERS_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) ||
         (MONTH_HINT.test(normalized) &&
           /\b(facturas?|pedidos?|albaranes?)\b/.test(normalized))),
   );
@@ -688,11 +692,18 @@ const MONTH_HINT =
 const ACCOUNT_SUMMARY_HINT =
   /\b(productos?|articulos?|compro|compra|compras|gast\w*|consum\w*|facturad\w*|pendiente|deuda|saldo|estrella|resumen)\b/;
 const PERSONAL_REF_HINT =
-  /\b(mi|mis|me|yo|he|tengo|llevo|debo|suelo|compro|gasto|gaste|gastado|consumo)\b/;
+  /\b(mi|mis|me|yo|he|tengo|llevo|debo|suelo|soy|era|compro|gasto|gaste|gastado|consumo|pedi|pague|deje)\b/;
+const PROFILE_HINT =
+  /\b(direccion|domicilio|ruta|reparto|alta|antiguedad|poblacion|provincia|ficha|perfil|desde cuando|soy cliente|cliente desde)\b/;
+const ORDERS_HINT = /\b(pedidos?|albaranes?|entregas?)\b/;
 
 function forcedToolChoice(message) {
   const normalized = normalizeIntentText(message);
   if (MONTH_HINT.test(normalized)) return 'auto';
+  if (ORDERS_HINT.test(normalized)) return 'auto';
+  if (PROFILE_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) {
+    return { type: 'function', function: { name: 'consultar_perfil' } };
+  }
   if (ACCOUNT_SUMMARY_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) {
     return { type: 'function', function: { name: 'consultar_resumen_cuenta' } };
   }
@@ -776,8 +787,11 @@ function systemPrompt({ locale, toolsEnabled, identity }) {
         '- Si la pregunta toca SU cuenta, DEBES invocar la herramienta antes de responder. Nunca inventes ni estimes cifras.',
         '- Es obligatorio invocar consultar_resumen_cuenta cuando pregunten por productos que compra o que mas compra, "mi producto estrella", "que me llevo mas", gasto, consumo, total facturado, pendiente o deuda. No respondas "no tengo esa informacion" sin haberla invocado primero.',
         '- consultar_resumen_cuenta: total facturado, gasto del mes en curso, gasto de los ultimos 12 meses, totales por ano, pendiente, ultimas facturas y productos mas comprados. Usala para "cuanto he gastado", "cuanto llevo este mes", "que compro mas", "cual es mi producto estrella", "cuanto gaste el ano pasado", "que tengo pendiente".',
-        '- consultar_factura: una factura concreta por numero o referencia, o el listado de facturas de un mes y ejercicio ("facturas de enero", "facturas de 2025"). Si el cliente da solo el mes, usa el ejercicio en curso salvo que indique otro.',
-        '- consultar_pedidos: ultimos albaranes/pedidos con importe y situacion ("mis pedidos", "mi ultimo pedido", "que pedi").',
+        '- consultar_factura: una factura concreta por numero o referencia, o el listado de facturas de un mes y ejercicio ("facturas de enero", "facturas de 2025"). Si el cliente da solo el mes, busca en los ultimos ejercicios.',
+        '- consultar_pedidos: pedidos del cliente con fecha, importe y numero de lineas ("mis pedidos", "mi ultimo pedido", "que pedi en enero", "cuantos pedidos tengo").',
+        '- consultar_detalle_pedido: lineas de un pedido concreto con articulo, unidades, precio y descuento ("que lleva mi pedido", "detalle del pedido P-982", "que articulos pedi"). Necesita serie, numero y ejercicio.',
+        '- consultar_albaranes: albaranes o entregas con importe y situacion. Solo si preguntan por albaranes o entregas.',
+        '- consultar_perfil: direccion de entrega, poblacion, provincia, ruta de reparto y fecha de alta ("cual es mi direccion", "mi ruta", "desde cuando soy cliente", "mis datos").',
         '- Si una herramienta devuelve listas vacias, dilo con claridad y ofrece alternativas. No rellenes huecos con suposiciones.',
       ].join('\n')
     : '- No tienes acceso a datos de cuenta en esta peticion. Si piden facturas, pedidos o saldo, indica que deben iniciar sesion con su codigo de cliente y contrasena.';
