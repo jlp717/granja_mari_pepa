@@ -44,6 +44,9 @@ function createLimiter(windowMs, maxRequests) {
 
 const generalLimiter = createLimiter(15 * 60 * 1000, 200); // 200 req/15min (más generoso)
 const pdfLimiter = createLimiter(60 * 1000, 30); // 30 PDFs/min (aumentado de 10)
+// Cada mensaje del chatbot consume cuota de un proveedor externo. Límite
+// propio para que un anónimo no pueda agotar la cuota desde una sola IP.
+const chatbotLimiter = createLimiter(15 * 60 * 1000, 60); // 60 mensajes/15min
 
 // Limpiar registros antiguos cada 30 minutos para evitar fugas de memoria
 setInterval(() => {
@@ -58,5 +61,6 @@ setInterval(() => {
 
 module.exports = {
   generalLimiter,
-  pdfLimiter
+  pdfLimiter,
+  chatbotLimiter
 };

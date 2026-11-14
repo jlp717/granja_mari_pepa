@@ -17,5 +17,8 @@
     "frontend/**/*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "sharp": "^0.35.5"
   }
 }

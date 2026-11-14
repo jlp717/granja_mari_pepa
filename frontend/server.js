@@ -11,6 +11,29 @@ const port = parseInt(process.env.PORT || '3001', 10);
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+// El proxy de /api puede recibir ECONNREFUSED si el backend se reinicia. Ese
+// fallo debe devolver un 502, no tumbar el proceso que sirve la web pública.
+process.on('uncaughtException', (error) => {
+  const code = error && error.code;
+  const message = String((error && error.message) || '');
+  // Bug conocido de Next 16 con pestañas antiguas tras un despliegue: el
+  // cliente envía un router-state con formato viejo. La petición RSC falla,
+  // pero el servidor debe seguir vivo y dejar que el cliente recargue.
+  if (message.includes('router state header')) {
+    console.error('[router] estado de cliente antiguo ignorado:', message);
+    return;
+  }
+  if (code === 'ECONNREFUSED' || code === 'ECONNRESET' || code === 'ETIMEDOUT') {
+    console.error('[proxy] backend no disponible:', error.message);
+    return;
+  }
+  console.error('[fatal]', error);
+  process.exit(1);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[unhandledRejection]', reason);
+});
+
 app.prepare().then(() => {
   const server = createServer((req, res) => {
     const parsedUrl = parse(req.url, true);

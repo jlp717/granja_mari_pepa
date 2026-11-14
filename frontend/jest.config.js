@@ -22,6 +22,7 @@ const customJestConfig = {
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
     '<rootDir>/out/',
+    '<rootDir>/e2e/',
   ],
   
   // Transformar archivos

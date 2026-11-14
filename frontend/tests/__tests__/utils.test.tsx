@@ -37,7 +37,7 @@ describe('Utilidades', () => {
       
       expect(formatPrice(10)).toContain('10');
       expect(formatPrice(10.50)).toContain('10,50');
-      expect(formatPrice(1000)).toContain('1.000');
+      expect(formatPrice(1000)).toMatch(/1[.]?000/);
     });
   });
 

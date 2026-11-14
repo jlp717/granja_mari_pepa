@@ -112,7 +112,7 @@ export default function FinalSecurityWarningModal({
                             Aviso Legal
                         </h4>
                         <p className="leading-relaxed text-gray-200">
-                            <strong>Granja Mari Pepa</strong> no se hace responsable de accesos no autorizados
+                            <strong>Granja Maripepa</strong> no se hace responsable de accesos no autorizados
                             o filtraciones de datos por mantener una contraseña insegura.
                         </p>
                     </div>

@@ -1,67 +1,54 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { X, Plus, Minus, ShoppingBag, Trash2, Edit, Check, AlertCircle, CheckCircle2, TrendingUp, TrendingDown, Package, Sparkles, ArrowRight, AlertTriangle } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from '@/lib/navigation';
+import { ArrowRight, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+import { isolateBackground } from '@/components/kage/navigation/inert';
+import styles from './cart-drawer.module.css';
+
+const price = (value: number) => `${value.toFixed(2).replace('.', ',')} €`;
 
 export function CartDrawer() {
   const router = useRouter();
+  const closeRef = useRef<HTMLButtonElement>(null);
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [tempQuantity, setTempQuantity] = useState<number>(0);
   const [isAnimatingRemove, setIsAnimatingRemove] = useState<string | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showClearDialog, setShowClearDialog] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState<{id: string, name: string} | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<{ id: string; name: string } | null>(null);
   const [notificationMessage, setNotificationMessage] = useState<string | null>(null);
-  const [lastAction, setLastAction] = useState<{type: string, message: string} | null>(null);
-  
-  const { 
-    items, 
-    isOpen, 
-    toggleCart, 
-    updateQuantity, 
-    removeItem, 
-    clearCart, 
-    getTotalPrice, 
-    getTotalItems 
+  const [lastAction, setLastAction] = useState<{ type: string; message: string } | null>(null);
+
+  const {
+    items,
+    isOpen,
+    toggleCart,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    getTotalPrice,
+    getTotalItems,
   } = useCartStore();
 
-  // Efecto para añadir/quitar clase CSS cuando el carrito se abre/cierra
   useEffect(() => {
     if (isOpen) {
-      // Guardar la posición actual del scroll
       const scrollY = window.scrollY;
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.classList.add('cart-open');
     } else {
-      // Restaurar el scroll
       const scrollY = document.body.style.top;
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.classList.remove('cart-open');
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
+      if (scrollY) window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
-    
+
     return () => {
-      // Cleanup al desmontar
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
@@ -69,14 +56,42 @@ export function CartDrawer() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      if (showDeleteDialog) {
+        setShowDeleteDialog(false);
+        setItemToDelete(null);
+      } else if (showClearDialog) {
+        setShowClearDialog(false);
+      } else {
+        toggleCart();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, showDeleteDialog, showClearDialog, toggleCart]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    return () => previous?.focus();
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const background = [
+      document.querySelector('main'),
+      document.querySelector('footer.foot'),
+    ].filter((element): element is HTMLElement => Boolean(element));
+    return isolateBackground(background);
+  }, [isOpen]);
+
   const handleProceedToCheckout = () => {
-    // Cerrar carrito primero
     toggleCart();
-    
-    // Navegar a checkout después de que se cierre el carrito
-    setTimeout(() => {
-      router.push('/checkout');
-    }, 300);
+    setTimeout(() => router.push('/checkout'), 300);
   };
 
   const startEditing = (itemId: string, currentQuantity: number) => {
@@ -85,9 +100,7 @@ export function CartDrawer() {
   };
 
   const saveQuantity = (itemId: string) => {
-    if (tempQuantity > 0) {
-      updateQuantity(itemId, tempQuantity);
-    }
+    if (tempQuantity > 0) updateQuantity(itemId, tempQuantity);
     setEditingItem(null);
   };
 
@@ -96,12 +109,9 @@ export function CartDrawer() {
     setTempQuantity(0);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent, itemId: string) => {
-    if (e.key === 'Enter') {
-      saveQuantity(itemId);
-    } else if (e.key === 'Escape') {
-      cancelEditing();
-    }
+  const handleKeyPress = (event: React.KeyboardEvent, itemId: string) => {
+    if (event.key === 'Enter') saveQuantity(itemId);
+    else if (event.key === 'Escape') cancelEditing();
   };
 
   const handleRemoveItem = (itemId: string, productName: string) => {
@@ -110,628 +120,293 @@ export function CartDrawer() {
   };
 
   const confirmRemoveItem = () => {
-    if (itemToDelete) {
-      setIsAnimatingRemove(itemToDelete.id);
-      setTimeout(() => {
-        removeItem(itemToDelete.id);
-        setIsAnimatingRemove(null);
-        setNotificationMessage(`Producto eliminado del carrito`);
-        setTimeout(() => setNotificationMessage(null), 3000);
-      }, 300);
-    }
+    if (!itemToDelete) return;
+    setIsAnimatingRemove(itemToDelete.id);
+    setTimeout(() => {
+      removeItem(itemToDelete.id);
+      setIsAnimatingRemove(null);
+      setNotificationMessage('Producto eliminado del pedido');
+      setTimeout(() => setNotificationMessage(null), 3000);
+    }, 240);
     setShowDeleteDialog(false);
     setItemToDelete(null);
   };
 
-  const handleClearCart = () => {
-    setShowClearDialog(true);
-  };
+  const handleClearCart = () => setShowClearDialog(true);
 
   const confirmClearCart = () => {
-    const itemCount = getTotalItems();
+    const count = getTotalItems();
     clearCart();
-    setNotificationMessage(`Carrito vaciado - ${itemCount === 1 ? '1 producto eliminado' : `${itemCount} productos eliminados`}`);
+    setNotificationMessage(
+      count === 1 ? 'Producto eliminado del pedido' : `${count} productos eliminados del pedido`,
+    );
     setTimeout(() => setNotificationMessage(null), 4000);
     setShowClearDialog(false);
   };
 
   const handleQuantityChange = (itemId: string, newQuantity: number, productName: string) => {
-    const oldQuantity = items.find(item => item.product.id === itemId)?.quantity || 0;
-    
-    // Si la cantidad se reduce a 0, mostrar modal de confirmación en lugar de eliminar automáticamente
+    const oldQuantity = items.find((item) => item.product.id === itemId)?.quantity || 0;
+
     if (newQuantity <= 0) {
       setItemToDelete({ id: itemId, name: productName });
       setShowDeleteDialog(true);
       return;
     }
-    
+
     updateQuantity(itemId, newQuantity);
-    
-    // Sistema de notificación mejorado - no invasivo
+
     if (newQuantity > oldQuantity) {
-      setLastAction({
-        type: 'increase',
-        message: `${productName}: ${oldQuantity} → ${newQuantity} unidades`
-      });
-    } else if (newQuantity < oldQuantity && newQuantity > 0) {
-      setLastAction({
-        type: 'decrease', 
-        message: `${productName}: ${oldQuantity} → ${newQuantity} unidades`
-      });
+      setLastAction({ type: 'increase', message: `${productName}: ${newQuantity} unidades` });
+    } else if (newQuantity < oldQuantity) {
+      setLastAction({ type: 'decrease', message: `${productName}: ${newQuantity} unidades` });
     }
-    
-    // Limpiar la notificación después de 3.5 segundos
-    setTimeout(() => setLastAction(null), 3500);
+
+    setTimeout(() => setLastAction(null), 3200);
   };
 
   const handleExploreProducts = () => {
-    toggleCart(); // Cerrar el carrito
-    router.push('/productos'); // Navegar a la página de productos
+    toggleCart();
+    router.push('/productos');
   };
+
+  const notice = notificationMessage || lastAction?.message;
 
   return (
     <>
       {isOpen && (
-        <>
-          <div
+        <div className={styles.root}>
+          <button
+            type="button"
+            className={styles.scrim}
+            aria-label="Cerrar carrito"
             onClick={toggleCart}
-            className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[9000] transition-opacity duration-300 ease-in-out"
           />
-          
-          <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-white shadow-2xl z-[9001] flex flex-col transform transition-all duration-300 ease-premium animate-slide-in-right">
-            {/* ✨ Premium Header with gradient */}
-            <div className="relative overflow-hidden">
-              {/* Gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600" />
-              
-              {/* Subtle pattern overlay */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{ 
-                  backgroundImage: `radial-gradient(circle at 25% 25%, white 1px, transparent 1px)`,
-                  backgroundSize: '20px 20px'
-                }} />
+
+          <aside
+            className={styles.panel}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-title"
+          >
+            <header className={styles.head}>
+              <div>
+                <span className={styles.kicker}>Pedido</span>
+                <h2 className={styles.title} id="cart-title">
+                  Carrito{' '}
+                  <span className={styles.count}>
+                    {getTotalItems() === 0
+                      ? 'Vacío'
+                      : getTotalItems() === 1
+                        ? '1 artículo'
+                        : `${getTotalItems()} artículos`}
+                  </span>
+                </h2>
               </div>
-              
-              {/* Header content */}
-              <div className="relative flex items-center justify-between p-6 text-white">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <ShoppingBag className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold tracking-tight">Tu Carrito</h2>
-                    <p className="text-blue-100 text-sm">
-                      {getTotalItems() === 0 
-                        ? 'Vacío' 
-                        : `${getTotalItems()} ${getTotalItems() === 1 ? 'producto' : 'productos'}`
-                      }
-                    </p>
-                  </div>
-                </div>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={toggleCart}
-                  className="text-white hover:bg-white/20 transition-all duration-200 rounded-xl h-10 w-10"
-                  aria-label="Cerrar carrito"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-            <div className="flex-1 overflow-y-auto p-6">
+              <button
+                type="button"
+                ref={closeRef}
+                className={styles.close}
+                onClick={toggleCart}
+                aria-label="Cerrar carrito"
+              >
+                <X size={18} aria-hidden="true" />
+              </button>
+            </header>
+
+            <div className={styles.body}>
               {items.length === 0 ? (
-                /* ✨ PREMIUM EMPTY STATE - Emotional & Delightful */
-                <div className="flex flex-col items-center justify-center h-full text-center px-4">
-                  {/* Animated illustration container */}
-                  <div className="relative mb-8">
-                    {/* Glow effect behind icon */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-400/10 to-transparent rounded-full blur-2xl scale-150 animate-pulse" />
-                    
-                    {/* Main icon with premium animation */}
-                    <div className="relative">
-                      <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200/80 shadow-lg flex items-center justify-center animate-float">
-                        {/* Shopping bag icon with gradient */}
-                        <svg 
-                          className="w-14 h-14 text-slate-400"
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <defs>
-                            <linearGradient id="bagGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" stopColor="#94a3b8" />
-                              <stop offset="100%" stopColor="#64748b" />
-                            </linearGradient>
-                          </defs>
-                          <path 
-                            d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" 
-                            stroke="url(#bagGradient)" 
-                            strokeWidth="2" 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round"
-                          />
-                          <path 
-                            d="M3 6H21" 
-                            stroke="url(#bagGradient)" 
-                            strokeWidth="2" 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round"
-                          />
-                          <path 
-                            d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" 
-                            stroke="url(#bagGradient)" 
-                            strokeWidth="2" 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round"
-                          />
-                          {/* Smile inside the bag */}
-                          <path 
-                            d="M9.5 16.5C10.3 17.3 11.1 17.5 12 17.5C12.9 17.5 13.7 17.3 14.5 16.5" 
-                            stroke="url(#bagGradient)" 
-                            strokeWidth="1.5" 
-                            strokeLinecap="round"
-                            className="opacity-60"
-                          />
-                        </svg>
-                      </div>
-                      
-                      {/* Decorative sparkles */}
-                      <div className="absolute -top-2 -right-2 w-4 h-4 text-yellow-400 animate-pulse">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                        </svg>
-                      </div>
-                      <div className="absolute -bottom-1 -left-1 w-3 h-3 text-blue-400 animate-pulse delay-300">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Text content with premium typography */}
-                  <h3 className="text-2xl font-bold text-slate-800 mb-3 tracking-tight">
-                    Tu carrito está vacío
-                  </h3>
-                  <p className="text-slate-500 mb-6 text-base leading-relaxed max-w-xs">
-                    Explora nuestro catálogo y añade productos de calidad a tu pedido
+                <div className={styles.empty}>
+                  <span className={styles.emptyIcon}>
+                    <ShoppingBag size={22} aria-hidden="true" />
+                  </span>
+                  <h3>Tu carrito está vacío</h3>
+                  <p>
+                    Añade referencias del catálogo para preparar el pedido. Puedes revisarlo
+                    antes de confirmarlo.
                   </p>
-                  
-                  {/* Feature pills - sin emojis */}
-                  <div className="flex flex-wrap justify-center gap-2 mb-8">
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
-                      <Package className="w-3.5 h-3.5 text-slate-400" />
-                      Productos frescos
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
-                      <Sparkles className="w-3.5 h-3.5 text-slate-400" />
-                      Calidad premium
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
-                      Envío incluido
-                    </div>
-                  </div>
-                  
-                  {/* Premium CTA Button */}
-                  <Button 
-                    onClick={handleExploreProducts}
-                    size="lg"
-                    className="group relative overflow-hidden bg-slate-900 hover:bg-slate-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    {/* Shimmer effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                    
-                    <span className="relative flex items-center gap-2">
-                      <Package className="w-5 h-5" />
-                      Ver Catálogo
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </span>
-                  </Button>
-                  
-                  {/* Stats - más profesionales */}
-                  <div className="mt-10 pt-6 border-t border-slate-100 w-full">
-                    <div className="flex items-center justify-center gap-8 text-xs text-slate-400">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-slate-600">+500</div>
-                        <div>Productos</div>
-                      </div>
-                      <div className="w-px h-8 bg-slate-200" />
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-slate-600">24h</div>
-                        <div>Entrega</div>
-                      </div>
-                      <div className="w-px h-8 bg-slate-200" />
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-slate-600">+35</div>
-                        <div>Años</div>
-                      </div>
-                    </div>
-                  </div>
+                  <button type="button" className={styles.primary} onClick={handleExploreProducts}>
+                    Abrir catálogo
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </button>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <ul className={styles.items}>
                   {items.map((item) => (
-                    <div
+                    <li
                       key={item.product.id}
-                      className={`bg-gradient-to-r from-slate-50 to-white rounded-xl p-3 md:p-4 border border-slate-200 shadow-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-blue-200 ${
-                        isAnimatingRemove === item.product.id ? 'scale-95 opacity-0' : ''
+                      className={`${styles.item} ${
+                        isAnimatingRemove === item.product.id ? styles.itemOut : ''
                       }`}
                     >
-                      {/* Two-Row Layout: Product info on top, controls below */}
-                      <div className="space-y-3">
-
-                        {/* Product Info Row - Full width for complete names */}
-                        <div className="flex space-x-3">
-                          <div className="relative flex-shrink-0">
-                            <img
-                              src={item.product.image}
-                              alt={item.product.name}
-                              className="w-16 h-16 object-cover rounded-lg shadow-md border border-slate-200 hover:scale-105 transition-transform duration-200"
-                            />
-                            <div className="absolute -top-1 -right-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg border-2 border-white">
-                              {item.quantity}
-                            </div>
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-bold text-slate-800 mb-1 text-base md:text-lg leading-tight">{item.product.name}</h4>
-                            <p className="text-slate-600 text-sm">
-                              {item.product.price ? `${item.product.price.toFixed(2)}€/ud` : 'Precio no disponible'}
-                            </p>
-                          </div>
+                      <div className={styles.thumb}>
+                        {/* eslint-disable-next-line @next/next/no-img-element -- catalogue images are runtime URLs */}
+                        <img src={item.product.image} alt={item.product.name} />
+                      </div>
+                      <div className={styles.itemBody}>
+                        <div className={styles.itemTop}>
+                          <h3>{item.product.name}</h3>
+                          <button
+                            type="button"
+                            className={styles.remove}
+                            onClick={() => handleRemoveItem(item.product.id, item.product.name)}
+                            aria-label={`Eliminar ${item.product.name} del pedido`}
+                          >
+                            <Trash2 size={14} aria-hidden="true" />
+                          </button>
                         </div>
-
-                        {/* Controls Row - Quantity, Price, Delete */}
-                        <div className="flex items-center justify-between gap-4">
-                          {/* Quantity Selector */}
-                          <div className="flex-shrink-0">
-                            {editingItem === item.product.id ? (
-                              <div className="flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-indigo-50 p-2 rounded-lg border-2 border-blue-200 animate-fade-in shadow-md">
-                                <Input
-                                  type="number"
-                                  min="1"
-                                  max="99"
-                                  value={tempQuantity}
-                                  onChange={(e) => setTempQuantity(parseInt(e.target.value) || 0)}
-                                  onKeyDown={(e) => handleKeyPress(e, item.product.id)}
-                                  className="w-16 h-10 text-center font-bold text-lg border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                                  autoFocus
-                                />
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => saveQuantity(item.product.id)}
-                                  className="h-10 px-3 bg-green-50 text-green-700 border-green-300 hover:bg-green-100 hover:border-green-400 transition-all duration-200"
-                                >
-                                  <Check className="w-4 h-4 mr-1" />
-                                  Guardar
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={cancelEditing}
-                                  className="h-10 px-3 bg-red-50 text-red-700 border-red-300 hover:bg-red-100 hover:border-red-400 transition-all duration-200"
-                                >
-                                  <X className="w-4 h-4 mr-1" />
-                                  Cancelar
-                                </Button>
-                              </div>
-                            ) : (
-                              <div className="flex items-center space-x-2 bg-white p-1 md:p-2 rounded-lg border border-slate-200 shadow-sm">
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="h-8 w-8 md:h-9 md:w-9 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-200"
-                                  onClick={() => handleQuantityChange(item.product.id, item.quantity - 1, item.product.name)}
-                                >
-                                  <Minus className="w-3 h-3 md:w-4 md:h-4" />
-                                </Button>
-
-                                <div className="flex items-center space-x-1 px-2">
-                                  <span className="font-bold text-base md:text-lg min-w-[32px] md:min-w-[36px] text-center text-slate-800">
-                                    {item.quantity}
-                                  </span>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-5 w-5 md:h-6 md:w-6 text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 rounded-full"
-                                    onClick={() => startEditing(item.product.id, item.quantity)}
-                                    title="Editar cantidad"
-                                  >
-                                    <Edit className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                                  </Button>
-                                </div>
-
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="h-8 w-8 md:h-9 md:w-9 hover:bg-green-50 hover:border-green-300 hover:text-green-600 transition-all duration-200"
-                                  onClick={() => handleQuantityChange(item.product.id, item.quantity + 1, item.product.name)}
-                                >
-                                  <Plus className="w-3 h-3 md:w-4 md:h-4" />
-                                </Button>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Price and Delete Section */}
-                          <div className="flex items-center gap-3">
-                            {/* Total Price */}
-                            <div className="text-right">
-                              <div className="font-bold text-base md:text-lg text-blue-600 leading-tight">
-                                {item.product.price ? (item.product.price * item.quantity).toFixed(2) : '0.00'}€
-                              </div>
-                              <div className="text-xs md:text-sm text-slate-500 leading-tight">
-                                {item.quantity}x {item.product.price ? item.product.price.toFixed(2) : '0.00'}€
-                              </div>
-                            </div>
-
-                            {/* Delete Button */}
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-9 w-9 text-red-500 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-all duration-200 rounded-lg"
-                              onClick={() => handleRemoveItem(item.product.id, item.product.name)}
-                              title="Eliminar producto"
+                        <p className={styles.unit}>
+                          {item.product.price
+                            ? `${price(item.product.price)} / ud`
+                            : 'Precio no disponible'}
+                        </p>
+                        <div className={styles.itemBottom}>
+                          <div className={styles.stepper}>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleQuantityChange(
+                                  item.product.id,
+                                  item.quantity - 1,
+                                  item.product.name,
+                                )
+                              }
+                              aria-label="Quitar una unidad"
                             >
-                              <Trash2 className="w-5 h-5" />
-                            </Button>
+                              <Minus size={12} aria-hidden="true" />
+                            </button>
+                            {editingItem === item.product.id ? (
+                              <input
+                                className={styles.qtyInput}
+                                type="number"
+                                min="1"
+                                max="99"
+                                value={tempQuantity}
+                                autoFocus
+                                onChange={(event) =>
+                                  setTempQuantity(parseInt(event.target.value) || 0)
+                                }
+                                onKeyDown={(event) => handleKeyPress(event, item.product.id)}
+                                onBlur={() => saveQuantity(item.product.id)}
+                                aria-label={`Cantidad de ${item.product.name}`}
+                              />
+                            ) : (
+                              <button
+                                type="button"
+                                className={styles.qty}
+                                onClick={() => startEditing(item.product.id, item.quantity)}
+                                aria-label={`Editar cantidad de ${item.product.name}`}
+                              >
+                                {item.quantity}
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleQuantityChange(
+                                  item.product.id,
+                                  item.quantity + 1,
+                                  item.product.name,
+                                )
+                              }
+                              aria-label="Añadir una unidad"
+                            >
+                              <Plus size={12} aria-hidden="true" />
+                            </button>
                           </div>
-
+                          <b className={styles.line}>
+                            {item.product.price
+                              ? price(item.product.price * item.quantity)
+                              : '—'}
+                          </b>
                         </div>
                       </div>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               )}
             </div>
 
             {items.length > 0 && (
-              <div className="border-t bg-gradient-to-r from-slate-50 to-blue-50 p-6 shadow-inner relative">
-                {/* Sistema de notificaciones mejorado - Más elegante y contextual */}
-                <div className="space-y-2 mb-4 min-h-[60px] flex flex-col justify-center">
-                  {/* Notificación de acciones del carrito - Simplificada y clara */}
-                  {notificationMessage && (
-                    <div className="mb-3">
-                      <div className="bg-green-50 border border-green-200 rounded-xl p-4 shadow-sm">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                            <CheckCircle2 className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-green-800 font-medium text-sm">
-                              {notificationMessage}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Notificación de cambios de cantidad - Simplificada */}
-                  {lastAction && (
-                    <div className="mb-3">
-                      <div className={`border rounded-xl p-4 shadow-sm ${
-                        lastAction.type === 'increase' 
-                          ? 'bg-blue-50 border-blue-200' 
-                          : 'bg-orange-50 border-orange-200'
-                      }`}>
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            lastAction.type === 'increase'
-                              ? 'bg-blue-100 text-blue-600'
-                              : 'bg-orange-100 text-orange-600'
-                          }`}>
-                            {lastAction.type === 'increase' ? 
-                              <TrendingUp className="w-4 h-4" /> :
-                              <TrendingDown className="w-4 h-4" />
-                            }
-                          </div>
-                          <div className="flex-1">
-                            <p className={`font-medium text-sm ${
-                              lastAction.type === 'increase' ? 'text-blue-800' : 'text-orange-800'
-                            }`}>
-                              {lastAction.message}
-                            </p>
-                            <p className={`text-xs ${
-                              lastAction.type === 'increase' ? 'text-blue-600' : 'text-orange-600'
-                            }`}>
-                              {lastAction.type === 'increase' ? 'Cantidad incrementada' : 'Cantidad reducida'}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Estado de carrito vacío de notificaciones */}
-                  {!notificationMessage && !lastAction && (
-                    <div className="text-center py-3">
-                      <p className="text-slate-500 text-sm font-medium">
-                        {getTotalItems()} {getTotalItems() === 1 ? 'producto listo' : 'productos listos'} para el checkout
-                      </p>
-                    </div>
-                  )}
+              <footer className={styles.foot}>
+                <p className={styles.notice} role="status" aria-live="polite">
+                  {notice || `${getTotalItems()} artículos en el pedido`}
+                </p>
+                <div className={styles.totalRow}>
+                  <span>Total</span>
+                  <b>{price(getTotalPrice())}</b>
                 </div>
-                
-                {/* Total con animación mejorada */}
-                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 shadow-lg border border-white/50 mb-6">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
-                        <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                      </div>
-                      <div>
-                        <span className="text-base sm:text-lg font-bold text-slate-800">Total Final:</span>
-                        <p className="text-xs text-slate-500 mt-0.5">
-                          Incluye todos los productos seleccionados
-                        </p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
-                        {getTotalPrice().toFixed(2)}€
-                      </div>
-                      <div className="text-sm text-slate-500">
-                        {getTotalItems()} {getTotalItems() === 1 ? 'producto' : 'productos'}
-                      </div>
-                      <div className="text-xs text-green-600 font-semibold mt-1 flex items-center justify-end space-x-1">
-                        <CheckCircle2 className="w-3 h-3" />
-                        <span>Envío incluido</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="space-y-3">
-                  {/* Botón checkout futurista */}
-                  <div className="relative overflow-hidden rounded-2xl">
-                    {/* Glow background effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl rounded-2xl"></div>
-                    
-                    <Button 
-                      className="relative w-full h-16 bg-gradient-to-r from-blue-600/90 via-blue-700/90 to-purple-600/90 hover:from-blue-700 hover:via-blue-800 hover:to-purple-700 backdrop-blur-xl text-white font-bold text-lg border border-blue-400/30 shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-0.5 rounded-2xl group" 
-                      size="lg"
-                      onClick={handleProceedToCheckout}
-                    >
-                      {/* Inner glow */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 via-transparent to-purple-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      
-                      {/* Content */}
-                      <div className="relative flex items-center justify-center space-x-3 z-10">
-                        <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20">
-                          <ShoppingBag className="w-5 h-5 text-white" />
-                        </div>
-                        <span className="text-white font-bold tracking-wide">Proceder al Pago</span>
-                        <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:translate-x-1 transition-transform duration-300">
-                          <ArrowRight className="w-4 h-4 text-white" />
-                        </div>
-                      </div>
-                      
-                      {/* Animated bottom border */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 opacity-60 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
-                    </Button>
-                  </div>
-                  
-                  {/* Botón vaciar carrito futurista */}
-                  <div className="relative overflow-hidden rounded-xl">
-                    <Button 
-                      variant="outline" 
-                      className="relative w-full h-12 bg-gradient-to-r from-red-50/80 to-red-50/80 hover:from-red-100 hover:to-red-100 border border-red-200/60 hover:border-red-300 text-red-600 hover:text-red-700 backdrop-blur-sm transition-all duration-300 group rounded-xl"
-                      onClick={handleClearCart}
-                    >
-                      {/* Subtle glow on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-400/5 to-red-400/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      
-                      <div className="relative flex items-center justify-center space-x-2 z-10">
-                        <div className="w-8 h-8 bg-red-100/80 rounded-lg flex items-center justify-center group-hover:bg-red-200/80 transition-colors duration-200">
-                          <Trash2 className="w-4 h-4 group-hover:animate-bounce" />
-                        </div>
-                        <span className="font-semibold">Vaciar Carrito</span>
-                      </div>
-                      
-                      {/* Bottom accent */}
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-300 via-red-400 to-red-300 opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-b-xl"></div>
-                    </Button>
-                  </div>
-                </div>
-              </div>
+                <p className={styles.totalNote}>El importe final se confirma en el checkout.</p>
+                <button type="button" className={styles.primary} onClick={handleProceedToCheckout}>
+                  Tramitar pedido
+                  <ArrowRight size={14} aria-hidden="true" />
+                </button>
+                <button type="button" className={styles.clear} onClick={handleClearCart}>
+                  Vaciar carrito
+                </button>
+              </footer>
             )}
-          </div>
-        </>
+          </aside>
+        </div>
       )}
 
-      {/* Modal de confirmación para eliminar producto */}
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent className="max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10000] bg-gradient-to-br from-white via-orange-50/30 to-red-50/30 backdrop-blur-xl border border-orange-200/50 shadow-2xl rounded-3xl overflow-hidden">
-          {/* Glow background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 to-red-400/5 rounded-3xl"></div>
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-300/60 to-transparent"></div>
-          
-          <AlertDialogHeader className="relative z-10">
-            <AlertDialogTitle className="flex items-center space-x-3 text-xl font-bold mb-2">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-red-100 rounded-2xl flex items-center justify-center border border-orange-200/50 shadow-md">
-                <AlertCircle className="w-6 h-6 text-orange-500" />
-              </div>
-              <span className="text-slate-800">¿Eliminar producto?</span>
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-lg leading-relaxed text-slate-600 pl-1">
-              Estás a punto de eliminar{' '}
-              <strong className="text-slate-800 bg-orange-50 px-2 py-0.5 rounded-lg border border-orange-100">
-                "{itemToDelete?.name}"
-              </strong>{' '}
-              de tu carrito.
-              <div className="mt-4 p-3 bg-gradient-to-r from-orange-50/80 to-red-50/80 rounded-xl border border-orange-200/40 backdrop-blur-sm">
-                <div className="flex items-center space-x-2 text-orange-700">
-                  <AlertCircle className="w-4 h-4" />
-                  <span className="text-sm font-semibold">Esta acción no se puede deshacer</span>
-                </div>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="pt-6 relative z-10 space-x-3">
-            <AlertDialogCancel className="flex-1 h-12 hover:bg-slate-100 border border-slate-200 px-6 text-lg font-medium rounded-xl transition-all duration-200 hover:shadow-md">
-              Cancelar
-            </AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={confirmRemoveItem}
-              className="flex-1 h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold text-lg border-none shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-[1.02] rounded-xl"
-            >
-              <div className="flex items-center justify-center space-x-2">
-                <Trash2 className="w-5 h-5" />
-                <span>Sí, eliminar</span>
-              </div>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-          
-          {/* Animated bottom border */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400/40 via-red-400/40 to-orange-400/40 rounded-b-3xl"></div>
-        </AlertDialogContent>
-      </AlertDialog>
+      {showDeleteDialog && (
+        <div className={styles.confirmLayer}>
+          <div
+            className={styles.confirm}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-delete-title"
+          >
+            <span className={styles.confirmKicker}>Carrito</span>
+            <h2 id="cart-delete-title">Eliminar producto</h2>
+            <p>
+              <b>{itemToDelete?.name}</b> saldrá del pedido. Puedes volver a añadirlo desde el
+              catálogo.
+            </p>
+            <div className={styles.confirmActions}>
+              <button
+                type="button"
+                autoFocus
+                onClick={() => {
+                  setShowDeleteDialog(false);
+                  setItemToDelete(null);
+                }}
+              >
+                Cancelar
+              </button>
+              <button type="button" className={styles.danger} onClick={confirmRemoveItem}>
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {/* Modal de confirmación para vaciar carrito */}
-      <AlertDialog open={showClearDialog} onOpenChange={setShowClearDialog}>
-        <AlertDialogContent className="max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10000] bg-white shadow-2xl">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center space-x-3 text-xl font-bold mb-2">
-              <div className="w-12 h-12 bg-gradient-to-br from-red-100 to-orange-100 rounded-2xl flex items-center justify-center border border-red-200/50 shadow-md">
-                <AlertCircle className="w-6 h-6 text-red-500" />
-              </div>
-              <span className="text-slate-800">¿Vaciar carrito completo?</span>
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-lg leading-relaxed text-slate-600 pl-1">
-              Vas a eliminar{' '}
-              <strong className="text-red-700 bg-red-50 px-2 py-0.5 rounded-lg border border-red-100">
-                {getTotalItems()} {getTotalItems() === 1 ? 'producto' : 'productos'}
-              </strong>{' '}
-              por un valor total de{' '}
-              <strong className="text-blue-700 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-100 text-xl">
-                {getTotalPrice().toFixed(2)}€
-              </strong>
-              .
-              <div className="mt-4 p-3 bg-gradient-to-r from-red-50/80 to-orange-50/80 rounded-xl border border-red-200/40 backdrop-blur-sm">
-                <div className="flex items-center space-x-2 text-red-700">
-                  <AlertTriangle className="w-4 h-4" />
-                  <span className="text-sm font-semibold">Se perderán todos los productos del carrito</span>
-                </div>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="pt-6">
-            <AlertDialogCancel className="hover:bg-slate-100 px-6 py-3 text-lg font-medium">
-              Cancelar
-            </AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={confirmClearCart}
-              className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 text-lg font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
-            >
-              <Trash2 className="w-5 h-5 mr-2" />
-              Sí, vaciar todo
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {showClearDialog && (
+        <div className={styles.confirmLayer}>
+          <div
+            className={styles.confirm}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-clear-title"
+          >
+            <span className={styles.confirmKicker}>Carrito</span>
+            <h2 id="cart-clear-title">Vaciar el carrito</h2>
+            <p>
+              Se quitarán los {getTotalItems() === 1 ? 'artículo' : `${getTotalItems()} artículos`}{' '}
+              del pedido. El catálogo sigue disponible.
+            </p>
+            <div className={styles.confirmActions}>
+              <button type="button" autoFocus onClick={() => setShowClearDialog(false)}>
+                Cancelar
+              </button>
+              <button type="button" className={styles.danger} onClick={confirmClearCart}>
+                Vaciar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

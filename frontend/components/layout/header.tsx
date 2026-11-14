@@ -1,779 +1,481 @@
-'use client'
+"use client";
+import { useEffect, useRef, useState, useTransition } from "react";
+import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, usePathname, useRouter } from "@/lib/navigation";
+import { ShoppingCart, ArrowUpRight } from "lucide-react";
+import { useCartStore } from "@/lib/store";
+import { CartDrawer } from "@/components/cart/cart-drawer";
+import { isolateBackground } from "@/components/kage/navigation/inert";
+import { getKageNavigationCopy } from "@/lib/kage-navigation-copy";
+import { useMagazines } from "@/components/magazines/magazine-context";
+import chrome from "./site-chrome.module.css";
+const languages = [
+  { code: "es", name: "Español" },
+  { code: "en", name: "English" },
+  { code: "de", name: "Deutsch" },
+  { code: "it", name: "Italiano" },
+  { code: "zh", name: "中文" },
+] as const;
 
-import { useState, useEffect } from 'react'
-import { Link, usePathname } from '@/lib/navigation'
-import Image from 'next/image'
-import { Menu, X, ShoppingCart, User, Phone, MapPin, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, BookOpen } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslations, useLocale } from 'next-intl'
-import { useCartStore } from '@/lib/store'
-import { Button } from '@/components/ui/button'
-import { CartDrawer } from '@/components/cart/cart-drawer'
-import { LanguageSwitcher } from '@/components/ui/language-switcher'
-import { CatalogModal } from '@/components/catalog/catalog-modal'
+type LocaleCode = (typeof languages)[number]["code"];
 
-const NAV_STYLES = {
-  scrolled: {
-    header: 'bg-card shadow-2xl shadow-slate-900/20 border-b border-border',
-    text: 'text-muted-foreground',
-    activeText: 'text-primary-foreground bg-primary shadow-lg',
-    hoverText: 'hover:text-foreground hover:bg-secondary'
-  },
-  normal: {
-    header: 'bg-card shadow-xl border-b border-border',
-    text: 'text-muted-foreground',
-    activeText: 'text-primary-foreground bg-primary shadow-lg',
-    hoverText: 'hover:text-primary hover:bg-primary-soft'
-  }
-}
-
-// Define types for navigation
-type SubCategory = { name: string; href: string }
-type NavigationItem = {
-  name: string
-  href: string
-  hasSubmenu?: boolean
-  icon?: string
-  submenu?: Array<{
-    name: string
-    href: string
-    logo: string
-    subcategories?: SubCategory[]
-  }>
-}
-
-export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isCatalogOpen, setIsCatalogOpen] = useState(false)
-  const [activeCatalog, setActiveCatalog] = useState<{ url: string; edition: string }>({
-    url: '/catalogs/topgel-febrero-2026.pdf',
-    edition: 'Edición Febrero 2026'
-  })
-  const [currentBannerIndex, setCurrentBannerIndex] = useState(0)
-  const [isHydrated, setIsHydrated] = useState(false)
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
-  const [activeMobileSubmenu, setActiveMobileSubmenu] = useState<string | null>(null)
-
-  const MAGAZINES = [
-    {
-      title: 'Revista TopGel',
-      edition: 'Febrero 2026',
-      fullEdition: 'Edición Febrero 2026',
-      url: '/catalogs/topgel-febrero-2026.pdf'
-    },
-    {
-      title: 'Revista TopGel',
-      edition: 'Marzo 2026',
-      fullEdition: 'Edición Marzo 2026',
-      url: '/catalogs/gmp-marzo-2026.pdf'
-    }
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBannerIndex((prev) => (prev + 1) % MAGAZINES.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const pathname = usePathname()
-  const { getTotalItems, toggleCart } = useCartStore()
-  const locale = useLocale()
-  const t = useTranslations('header')
-  const tNav = useTranslations('nav')
-  const tBrands = useTranslations('brands')
-
-  const isHomePage = pathname === '/'
-  const styles = isScrolled ? NAV_STYLES.scrolled : NAV_STYLES.normal
-
-  // Dynamic Navigation Structure based on translations
-  const NAVIGATION: NavigationItem[] = [
-    {
-      name: tNav('products'),
-      href: '/productos',
-      hasSubmenu: true,
-      submenu: [
-        {
-          name: tBrands('grupo-topgel.name'),
-          href: '/productos?brand=grupo-topgel',
-          logo: 'gtg',
-          subcategories: [
-            { name: t('categories.sea'), href: '/productos?brand=grupo-topgel&category=mar' },
-            { name: t('categories.meat'), href: '/productos?brand=grupo-topgel&category=carne' },
-            { name: t('categories.precooked'), href: '/productos?brand=grupo-topgel&category=precocinados' },
-            { name: t('categories.pastry'), href: '/productos?brand=grupo-topgel&category=reposteria' }
-          ]
-        },
-        {
-          name: tBrands('nestle.name'),
-          href: '/productos?brand=nestle',
-          logo: 'nestle',
-          subcategories: [
-            { name: t('categories.dairy'), href: '/productos?brand=nestle&category=lacteos' },
-            { name: t('categories.cereals'), href: '/productos?brand=nestle&category=cereales' },
-            { name: t('categories.chocolate'), href: '/productos?brand=nestle&category=chocolate' }
-          ]
-        },
-        {
-          name: tBrands('panamar.name'),
-          href: '/productos?brand=panamar',
-          logo: 'panamar',
-          subcategories: [
-            { name: t('categories.fresh_fish'), href: '/productos?brand=panamar&category=pescado-fresco' },
-            { name: t('categories.seafood'), href: '/productos?brand=panamar&category=mariscos' }
-          ]
-        }
-      ]
-    },
-    { name: tNav('about'), href: '/acerca' },
-    { name: tNav('contact'), href: '/contacto' },
-    { name: tNav('customerArea'), href: '/area-clientes', icon: 'user' }
-  ]
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    setIsHydrated(true)
-  }, [])
-
-  useEffect(() => {
-    document.body.classList.toggle('mobile-menu-open', isMobileMenuOpen)
-    return () => document.body.classList.remove('mobile-menu-open')
-  }, [isMobileMenuOpen])
-
-  const closeMobileMenu = () => setIsMobileMenuOpen(false)
-
-  const NavLink = ({ item, isMobile = false }: { item: NavigationItem, isMobile?: boolean }) => {
-    const isActive = pathname === item.href ||
-      (item.hasSubmenu && pathname.startsWith('/productos')) ||
-      (item.href === '/area-clientes' && pathname.startsWith('/area-clientes'))
-
-    if (isMobile) {
-      return (
-        <motion.div
-          whileHover={{ scale: 1.02, x: 4 }}
-          whileTap={{ scale: 0.98 }}
-          className="relative overflow-hidden"
-        >
-          <Link
-            href={item.href}
-            className={`
-              relative block py-4 px-6 text-base font-semibold rounded-xl transition-all duration-300 group
-              ${isActive
-                ? 'text-primary-foreground bg-primary shadow-lg border-l-4 border-primary/50'
-                : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
-              }
-            `}
-            onClick={closeMobileMenu}
-            aria-current={isActive ? 'page' : undefined}
-          >
-            {/* Active Page Indicator */}
-            {isActive && (
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: '4px' }}
-                className="absolute left-0 top-0 bottom-0 bg-warning rounded-r-full"
-              />
-            )}
-
-            {/* Ripple Effect Background */}
-            <motion.div
-              className="absolute inset-0 bg-secondary rounded-xl opacity-0 group-hover:opacity-100"
-              initial={false}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            />
-
-            {/* Content with micro-animation */}
-            <span className="relative z-10 flex items-center gap-3">
-              {item.icon === 'user' && <User className="w-5 h-5" />}
-              {isActive && !item.icon && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="w-2 h-2 bg-warning rounded-full animate-pulse"
-                />
-              )}
-              {item.name}
-              {isActive && (
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  <ArrowRight className="w-4 h-4 text-primary-foreground/70" />
-                </motion.div>
-              )}
-            </span>
-          </Link>
-        </motion.div>
-      )
-    }
-
-    const baseClass = `px-4 py-3 xl:px-6 text-sm font-semibold transition-all duration-300 rounded-lg ${isActive ? styles.activeText : `${styles.text} ${styles.hoverText}`
-      } hover:scale-105 focus-ring flex items-center gap-2`
-
+function Flag({ code }: { code: LocaleCode }) {
+  const common = {
+    viewBox: "0 0 20 14",
+    width: 20,
+    height: 14,
+    role: "presentation" as const,
+    focusable: "false" as const,
+  };
+  if (code === "es")
     return (
-      <Link
-        href={item.href}
-        className={baseClass}
-        aria-current={isActive ? 'page' : undefined}
-      >
-        {item.icon === 'user' && <User className="w-4 h-4" />}
-        {item.name}
-      </Link>
-    )
-  }
+      <svg {...common}>
+        <rect width="20" height="14" fill="#C60B1E" />
+        <rect y="3.5" width="20" height="7" fill="#FFC400" />
+      </svg>
+    );
+  if (code === "de")
+    return (
+      <svg {...common}>
+        <rect width="20" height="4.67" fill="#111" />
+        <rect y="4.67" width="20" height="4.67" fill="#DD0000" />
+        <rect y="9.33" width="20" height="4.67" fill="#FFCE00" />
+      </svg>
+    );
+  if (code === "it")
+    return (
+      <svg {...common}>
+        <rect width="6.67" height="14" fill="#008C45" />
+        <rect x="6.67" width="6.67" height="14" fill="#F4F5F0" />
+        <rect x="13.33" width="6.67" height="14" fill="#CD212A" />
+      </svg>
+    );
+  if (code === "zh")
+    return (
+      <svg {...common}>
+        <rect width="20" height="14" fill="#DE2910" />
+        <path
+          d="M4 3.2l0.9 2.7H7.7L5.4 7.6l0.9 2.7L4 8.7 1.7 10.3l0.9-2.7L0.3 5.9h2.8z"
+          fill="#FFDE00"
+        />
+      </svg>
+    );
+  return (
+    <svg {...common}>
+      <rect width="20" height="14" fill="#012169" />
+      <path d="M0 0l20 14M20 0L0 14" stroke="#fff" strokeWidth="2.6" />
+      <path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" strokeWidth="1.1" />
+      <path d="M10 0v14M0 7h20" stroke="#fff" strokeWidth="4.2" />
+      <path d="M10 0v14M0 7h20" stroke="#C8102E" strokeWidth="2.4" />
+    </svg>
+  );
+}
 
-  const BrandLogo = ({ brand }: { brand: { name: string; logo: string } }) => (
-    <Image
-      src={`/images/logo-${brand.logo}.png`}
-      alt={brand.name}
-      width={28}
-      height={28}
-      className="object-contain max-w-full max-h-full"
-    />
-  )
+function LocaleSelect() {
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [pending, start] = useTransition();
+  const [open, setOpen] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const copy = getKageNavigationCopy(locale);
+  const current = (languages.find((item) => item.code === locale) ?? languages[0]) as {
+    code: LocaleCode;
+    name: string;
+  };
 
-  const cartItemCount = isHydrated ? getTotalItems() : 0
+  useEffect(() => {
+    if (!open) return;
+    const onPointer = (event: MouseEvent) => {
+      if (box.current && !box.current.contains(event.target as Node)) setOpen(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const choose = (next: LocaleCode) => {
+    setOpen(false);
+    if (next === locale) return;
+    start(() =>
+      router.replace(
+        `${pathname}${window.location.search}${window.location.hash}`,
+        { locale: next, scroll: false },
+      ),
+    );
+  };
 
   return (
-    <div className="relative">
-      {/* Top Utility Bar - Premium Solid */}
-      <div className="fixed top-0 left-0 right-0 bg-primary text-primary-foreground text-xs z-[60] h-12 flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.1)_50%,transparent_100%)] bg-[length:200%_100%] animate-[shimmer_3s_infinite]" />
-        <div className="absolute inset-0 bg-primary" />
+    <div className={chrome.locale} ref={box}>
+      <button
+        type="button"
+        className={chrome.localeButton}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={`${copy.language}: ${current.code.toUpperCase()} · ${current.name}`}
+        aria-busy={pending}
+        disabled={pending}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span className={chrome.flag}>
+          <Flag code={current.code} />
+        </span>
+        <span className={chrome.localeCode}>{current.code.toUpperCase()}</span>
+        <svg
+          className={chrome.localeChevron}
+          viewBox="0 0 10 6"
+          width="10"
+          height="6"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+      </button>
 
-        <div className="container mx-auto px-6 lg:px-8 h-full flex items-center justify-between relative z-10">
-          <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-2 group cursor-default">
-              <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
-                <MapPin className="w-3.5 h-3.5 text-primary-foreground/80" />
-              </div>
-              <span className="text-primary-foreground/90 font-medium tracking-wide">{t('top_bar.location')}</span>
-            </div>
-
-            {/* CATALOG TRIGGER (Desktop) */}
-            {/* Button Removed - Moved to Announcement Bar */}
-
-            <a href="tel:968467514" className="hidden sm:flex items-center space-x-2 group hover:scale-105 transition-transform duration-300">
-              <div className="p-1.5 rounded-full bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
-                <Phone className="w-3.5 h-3.5 text-primary-foreground/80" />
-              </div>
-              <span className="text-primary-foreground/90 font-medium tracking-wide group-hover:text-primary-foreground transition-colors">
-                968 46 75 14
-              </span>
-            </a>
-          </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <LanguageSwitcher variant="default" />
-            <div className="bg-primary-foreground/10 px-5 py-1.5 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all duration-300">
-              <span className="text-primary-foreground font-semibold text-[13px] tracking-wide">
-                {t('top_bar.tagline')}
-              </span>
-            </div>
-          </div>
-          <div className="hidden lg:flex items-center space-x-2 text-primary-foreground/80 font-medium">
-            <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse" />
-            <span className="text-[13px]">{t('top_bar.quality')}</span>
-          </div>
-        </div>
-      </div>
-
-
-      {/* ANNOUNCEMENT BAR (Between Top Bar and Header) */}
-      {/* ANNOUNCEMENT BAR (Premium Dark Gradient) - Mobile: min-h-[5rem] for breathing room, Desktop: reset to h-11 */}
-      {!isMobileMenuOpen && (
-        <div className="fixed top-12 left-0 right-0 min-h-[5rem] sm:min-h-0 sm:h-11 bg-gradient-to-r from-slate-900 via-primary to-slate-900 z-[55] flex items-center justify-center shadow-lg border-b border-white/10">
-          {/* Animated sheen effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_8s_infinite]" />
-
-          <div className="relative z-10 flex items-center w-full justify-center h-full px-2 sm:px-4">
-            {/* Prev Button */}
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                setCurrentBannerIndex((prev) => (prev - 1 + MAGAZINES.length) % MAGAZINES.length)
-              }}
-              className="p-1.5 sm:p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-20 flex-shrink-0"
-              aria-label="Revista anterior"
-            >
-              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveCatalog({ url: MAGAZINES[currentBannerIndex].url, edition: MAGAZINES[currentBannerIndex].fullEdition })
-                setIsCatalogOpen(true)
-              }}
-              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 group px-2 sm:px-4 py-2 sm:py-0 flex-1 max-w-fit justify-center h-full transition-all hover:bg-white/5 rounded-xl mx-1"
-            >
-              {/* Animated Badge */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  boxShadow: [
-                    "0 0 0 0 rgba(234, 179, 8, 0)",
-                    "0 0 0 4px rgba(234, 179, 8, 0.3)",
-                    "0 0 0 0 rgba(234, 179, 8, 0)"
-                  ]
-                }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="bg-gradient-to-br from-amber-300 to-amber-500 text-slate-900 rounded-full p-1.5 shadow-lg border border-amber-200 shrink-0"
-              >
-                <BookOpen className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
-              </motion.div>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentBannerIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col sm:flex-row items-center gap-0.5 sm:gap-3 text-center sm:text-left w-full max-w-[280px] sm:max-w-none"
+      {open ? (
+        <ul className={chrome.localeMenu} role="listbox" aria-label={copy.language}>
+          {languages.map((language) => {
+            const active = language.code === locale;
+            return (
+              <li key={language.code}>
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  className={`${chrome.localeOption} ${active ? chrome.localeOptionActive : ""}`}
+                  onClick={() => choose(language.code)}
                 >
-                  <span className="font-bold text-[10px] sm:text-sm tracking-widest text-amber-400 uppercase drop-shadow-sm font-heading">
-                    ¡EDICIÓN ESPECIAL!
+                  <span className={chrome.flag}>
+                    <Flag code={language.code} />
                   </span>
-                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-white/30" />
-                  {/* Mobile: Short text */}
-                  <span className="sm:hidden text-white/95 text-[11px] font-medium tracking-wide group-hover:text-white transition-colors leading-snug">
-                    Ofertas exclusivas <span className="text-white font-bold border-b border-amber-400/50">{MAGAZINES[currentBannerIndex].edition}</span>
-                  </span>
-                  {/* Desktop: Full text */}
-                  <span className="hidden sm:inline text-white/90 text-[13px] font-medium tracking-wide group-hover:text-white transition-colors">
-                    Descubre las ofertas exclusivas de la <span className="text-white font-bold border-b border-amber-400/50 pb-0.5">{MAGAZINES[currentBannerIndex].title} - {MAGAZINES[currentBannerIndex].edition}</span>
-                  </span>
-                </motion.div>
-              </AnimatePresence>
-
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                className="hidden sm:block ml-2 bg-white/10 p-1 rounded-full group-hover:bg-amber-500 group-hover:text-blue-900 transition-colors shrink-0"
-              >
-                <ArrowRight className="w-3.5 h-3.5" />
-              </motion.div>
-            </button>
-
-            {/* Next Button */}
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                setCurrentBannerIndex((prev) => (prev + 1) % MAGAZINES.length)
-              }}
-              className="p-1.5 sm:p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-20 flex-shrink-0"
-              aria-label="Siguiente revista"
+                  <span className={chrome.localeName}>{language.name}</span>
+                  {active ? (
+                    <span className={chrome.localeCheck} aria-hidden="true">
+                      ✓
+                    </span>
+                  ) : null}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+export function Header() {
+  const locale = useLocale(),
+    t = useTranslations("nav"),
+    pathname = usePathname();
+  const copy = getKageNavigationCopy(locale);
+  const { magazines, openMagazine, openLibrary } = useMagazines();
+  const [open, setOpen] = useState(false),
+    [mobile, setMobile] = useState(false),
+    [stuck, setStuck] = useState(false),
+    [hidden, setHidden] = useState(false),
+    [mounted, setMounted] = useState(false);
+  const root = useRef<HTMLElement>(null),
+    trigger = useRef<HTMLButtonElement>(null),
+    openRef = useRef(false),
+    reason = useRef<"dismiss" | "navigation" | "handoff">("dismiss");
+  openRef.current = open;
+  const total = useCartStore((state) => state.getTotalItems()),
+    toggleCart = useCartStore((state) => state.toggleCart);
+  const close = (why: "dismiss" | "navigation" | "handoff" = "dismiss") => {
+    reason.current = why;
+    setOpen(false);
+  };
+  useEffect(() => {
+    setMounted(true);
+    const media = matchMedia("(max-width:820px)");
+    const change = () => {
+      setMobile(media.matches);
+      close();
+    };
+    change();
+    media.addEventListener("change", change);
+    return () => media.removeEventListener("change", change);
+  }, []);
+  useEffect(() => {
+    let last = scrollY;
+    const apply = () => {
+      const y = scrollY;
+      setStuck(y > 40);
+      setHidden(
+        !openRef.current &&
+          y > last + 4 &&
+          y > document.documentElement.clientHeight * 0.8,
+      );
+      last = y;
+    };
+    window.addEventListener("scroll", apply, { passive: true });
+    return () => window.removeEventListener("scroll", apply);
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    const button = trigger.current;
+    const html = document.documentElement;
+    window.dispatchEvent(
+      new CustomEvent("kage:overlay-open", { detail: { id: "menu" } }),
+    );
+    html.classList.add("nav-open");
+    document.body.classList.add("kage-menu-open");
+    setHidden(false);
+    const backgrounds = mobile
+      ? Array.from(
+          document.querySelectorAll<HTMLElement>("[data-kage-background]"),
+        )
+      : [];
+    const releaseBackground = isolateBackground(backgrounds);
+    const frame = requestAnimationFrame(() =>
+      root.current
+        ?.querySelector<HTMLElement>(
+          mobile ? ".nav-link" : ".kage-menu-resources a",
+        )
+        ?.focus({ preventScroll: true }),
+    );
+    const key = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== "Tab" || !mobile || !root.current) return;
+      const items = Array.from(
+        root.current.querySelectorAll<HTMLElement>(
+          "a[href],button:not(:disabled),select:not(:disabled)",
+        ),
+      ).filter((el) => el.getClientRects().length && !el.closest("[hidden]"));
+      const first = items[0],
+        last = items[items.length - 1];
+      if (!first) return;
+      if (
+        event.shiftKey &&
+        (document.activeElement === first ||
+          !root.current.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        last.focus();
+      } else if (
+        !event.shiftKey &&
+        (document.activeElement === last ||
+          !root.current.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    const outside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !root.current?.contains(event.target))
+        close();
+    };
+    document.addEventListener("keydown", key);
+    document.addEventListener("pointerdown", outside);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("keydown", key);
+      document.removeEventListener("pointerdown", outside);
+      window.dispatchEvent(
+        new CustomEvent("kage:overlay-close", { detail: { id: "menu" } }),
+      );
+      html.classList.remove("nav-open");
+      document.body.classList.remove("kage-menu-open");
+      releaseBackground();
+      if (reason.current === "dismiss" && button?.isConnected)
+        button.focus({ preventScroll: true });
+    };
+  }, [open, mobile]);
+  useEffect(() => {
+    const handoff = (event: Event) => {
+      const id = (event as CustomEvent<{ id?: string }>).detail?.id;
+      if (id && id !== "menu" && openRef.current) {
+        reason.current = "handoff";
+        setOpen(false);
+      }
+    };
+    window.addEventListener("kage:overlay-open", handoff);
+    return () => window.removeEventListener("kage:overlay-open", handoff);
+  }, []);
+  const links = [
+    { href: "/productos", label: t("products") },
+    { href: "/acerca", label: t("about") },
+    { href: "/contacto", label: t("contact") },
+    { href: "/area-clientes", label: t("customerArea") },
+    { href: "/trabaja-con-nosotros", label: locale === "es" ? "Trabaja con nosotros" : "Work with us" },
+  ];
+  const routeClick = (href: string) =>
+    close(href === pathname ? "dismiss" : "navigation");
+  const openCart = () => {
+    close("handoff");
+    requestAnimationFrame(() => toggleCart());
+  };
+  const showMagazine = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    magazine: (typeof magazines)[number],
+  ) => {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    )
+      return;
+    event.preventDefault();
+    close("handoff");
+    requestAnimationFrame(() => openMagazine(magazine));
+  };
+  return (
+    <>
+      <header
+        ref={root}
+        className={`nav ${chrome.header} ${stuck ? "stuck" : ""} ${hidden ? "hide" : ""} ${open ? "menu-open" : ""}`}
+        id="nav"
+        role={mobile && open ? "dialog" : undefined}
+        aria-modal={mobile && open ? true : undefined}
+        aria-label={mobile && open ? copy.primary : undefined}
+        data-fx="header-surface link-roll"
+      >
+        <Link
+          className="brand"
+          href="/"
+          data-cursor
+          aria-label={`Granja Maripepa · ${t("home")}`}
+          onClick={() => routeClick("/")}
+        >
+          <Image
+            src="/kage/brand/logo-alpha.png"
+            alt="Granja Maripepa"
+            width={135}
+            height={41}
+            priority
+            className="kage-brand-image"
+          />
+        </Link>
+        <nav className="nav-links" id="navlinks" aria-label={copy.primary}>
+          {links.map((link, index) => (
+            <Link
+              className={`nav-link ${pathname === link.href || pathname.startsWith(`${link.href}/`) ? "on" : ""}`}
+              key={link.href}
+              href={link.href}
+              aria-current={pathname === link.href ? "page" : undefined}
+              data-cursor
+              onClick={() => routeClick(link.href)}
             >
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Main Header */}
-      {/* Main Header - Mobile: Top 12 (3rem) + min-h-[5rem] = ~8rem (top-32) | Desktop: Top 12 + 11 = 5.75rem */}
-      <header className={`fixed top-32 sm:top-[5.75rem] left-0 right-0 z-50 transition-all duration-700 ease-out ${styles.header}`}>
-        <div className="absolute inset-0 bg-card" />
-        <nav className="container mx-auto px-4 lg:px-6 xl:px-8 relative z-10">
-          <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32">
-            {/* Logo */}
-            <Link href="/" className="flex items-center focus-ring rounded-xl p-2 group relative">
-              <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/5 transition-all duration-500" />
-              <Image
-                src="/images/logo.jpeg"
-                alt="Granja Mari Pepa"
-                width={220}
-                height={165}
-                className="object-contain w-28 h-20 sm:w-36 sm:h-26 md:w-44 md:h-32 lg:w-52 lg:h-38 xl:w-56 xl:h-42 transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
+              <span>{link.label}</span>
+              <span className="alt" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")} / {link.label}
+              </span>
             </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-2">
-              {NAVIGATION.map((item) => (
-                <div key={item.name} className="relative">
-                  {item.hasSubmenu ? (
-                    <div className="flex items-center">
-                      <NavLink item={item} />
-                      <div
-                        className="relative"
-                        onMouseEnter={() => setActiveSubmenu(item.name)}
-                        onMouseLeave={() => setActiveSubmenu(null)}
-                      >
-                        <button
-                          className={`p-2 ml-1 transition-all duration-300 rounded-lg ${styles.text}`}
-                          aria-expanded={activeSubmenu === item.name}
-                        >
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeSubmenu === item.name ? 'rotate-180' : ''}`} />
-                        </button>
-                        <AnimatePresence>
-                          {activeSubmenu === item.name && item.submenu && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                              transition={{ duration: 0.2 }}
-                              className="absolute top-full right-0 mt-2 w-80 max-h-96 bg-card rounded-xl shadow-2xl border border-border overflow-hidden z-[9999]"
-                              onMouseEnter={() => setActiveSubmenu(item.name)}
-                              onMouseLeave={() => setActiveSubmenu(null)}
-                            >
-                              <div className="p-4 bg-secondary border-b border-border">
-                                <h3 className="text-lg font-bold text-foreground">{t('brands_title')}</h3>
-                              </div>
-                              <div className="overflow-y-auto max-h-80 p-3">
-                                <div className="grid grid-cols-2 gap-3">
-                                  {item.submenu.map((brand) => (
-                                    <div key={brand.name} className="space-y-1">
-                                      <Link
-                                        href={brand.href}
-                                        onClick={() => setActiveSubmenu(null)}
-                                        className="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-secondary group border border-border hover:border-primary/30"
-                                      >
-                                        <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center mr-3 overflow-hidden group-hover:scale-110 transition-transform">
-                                          <BrandLogo brand={brand} />
-                                        </div>
-                                        <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                                          {brand.name}
-                                        </span>
-                                      </Link>
-                                      {brand.subcategories && (
-                                        <div className="ml-2 space-y-0.5">
-                                          {brand.subcategories.map((subcat) => (
-                                            <Link
-                                              key={subcat.name}
-                                              href={subcat.href}
-                                              onClick={() => setActiveSubmenu(null)}
-                                              className="block px-3 py-1.5 text-xs text-muted-foreground hover:text-primary hover:bg-primary-soft rounded transition-all"
-                                            >
-                                              • {subcat.name}
-                                            </Link>
-                                          ))}
-                                        </div>
-                                      )}
-                                    </div>
-                                  ))}
-                                </div>
-                                <div className="mt-4 pt-3 border-t border-border">
-                                  <Link
-                                    href="/productos"
-                                    onClick={() => setActiveSubmenu(null)}
-                                    className="flex items-center justify-center p-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary-hover transition-all font-medium"
-                                  >
-                                    {t('view_all_products')}
-                                    <ArrowRight className="w-4 h-4 ml-2" />
-                                  </Link>
-                                </div>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  ) : (
-                    <NavLink item={item} />
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Right Controls */}
-            <div className="flex items-center space-x-3">
-              <div className="relative group">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={toggleCart}
-                  className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl transition-all duration-300 relative overflow-hidden text-muted-foreground hover:text-foreground hover:bg-secondary"
-                  aria-label={t('cart_label', { count: cartItemCount })}
+          ))}
+          <div className="kage-menu-resources" hidden={!open}>
+            <p className="eyebrow">{copy.resources}</p>
+            <Link
+              href="/lorca"
+              onClick={() => routeClick("/lorca")}
+              data-cursor
+            >
+              {copy.location}
+            </Link>
+            <Link
+              href="/calidad"
+              onClick={() => routeClick("/calidad")}
+              data-cursor
+            >
+              {copy.quality}
+            </Link>
+            <Link
+              href="/reparto"
+              onClick={() => routeClick("/reparto")}
+              data-cursor
+            >
+              {copy.delivery}
+            </Link>
+            <Link
+              href="/preguntas-frecuentes"
+              onClick={() => routeClick("/preguntas-frecuentes")}
+              data-cursor
+            >
+              {copy.faq}
+            </Link>
+            <div className="kage-menu-magazines">
+              <p className="eyebrow">
+                {copy.magazines} · {copy.archive}
+              </p>
+              {magazines.slice(0, 4).map((magazine) => (
+                <a
+                  key={magazine.id}
+                  href={magazine.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(event) => showMagazine(event, magazine)}
+                  data-cursor
                 >
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/10 rounded-xl" />
-                  <ShoppingCart className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110" />
-                </Button>
-                {cartItemCount > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1.5 -right-1.5 bg-destructive text-destructive-foreground text-[11px] rounded-full min-w-[20px] h-5 flex items-center justify-center font-bold border-2 border-card shadow-lg z-50"
-                  >
-                    <span>{cartItemCount}</span>
-                  </motion.span>
-                )}
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="lg:hidden h-12 w-12 sm:h-14 sm:w-14 rounded-xl transition-all duration-300 bg-primary text-white hover:bg-primary/90 shadow-lg"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label={isMobileMenuOpen ? t('close_menu') : t('open_menu')}
+                  {magazine.edition}
+                </a>
+              ))}
+              <button
+                type="button"
+                className="kage-menu-all-magazines"
+                onClick={() => {
+                  close("handoff");
+                  requestAnimationFrame(() => openLibrary());
+                }}
+                data-cursor
               >
-                <motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                  {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2.5} /> : <Menu className="w-7 h-7" strokeWidth={2.5} />}
-                </motion.div>
-              </Button>
+                {locale === "es" ? "Ver todas las revistas" : "See all magazines"}
+              </button>
+            </div>
+            <div className="kage-menu-language">
+              <LocaleSelect />
             </div>
           </div>
         </nav>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: '100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '100%' }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden fixed inset-0 bg-white z-[10000] overflow-y-auto"
-            >
-              <div className="bg-primary pt-14 sm:pt-16">
-                <div className="flex items-center justify-between px-5 py-4">
-                  <Link href="/" onClick={closeMobileMenu} className="flex-shrink-0">
-                    <Image
-                      src="/images/logo.jpeg"
-                      alt="Mari Pepa"
-                      width={160}
-                      height={120}
-                      className="w-[140px] sm:w-[160px] h-auto object-contain rounded-xl"
-                    />
-                  </Link>
-                  <div className="flex items-center gap-4">
-                    <LanguageSwitcher variant="minimal" className="text-white" />
-                    <button
-                      onClick={closeMobileMenu}
-                      className="flex-shrink-0 w-14 h-14 rounded-xl bg-white flex items-center justify-center shadow-xl"
-                      aria-label={t('close_menu')}
-                    >
-                      <X className="w-7 h-7 text-primary" strokeWidth={2.5} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-slate-100 px-4 py-3 border-b border-slate-200">
-                <div className="flex items-center gap-2 text-sm">
-                  <div className="w-2 h-2 bg-primary rounded-full" />
-                  <span className="text-slate-500">{t('you_are_here')}:</span>
-                  <span className="font-semibold text-slate-800">
-                    {(() => {
-                      if (pathname === '/') return tNav('home')
-                      if (pathname === '/productos') return tNav('products')
-                      if (pathname === '/acerca' || pathname === '/acerca/') return tNav('about')
-                      if (pathname === '/contacto' || pathname === '/contacto/') return tNav('contact')
-                      if (pathname === '/area-clientes' || pathname === '/area-clientes/') return tNav('customerArea')
-                      if (pathname.startsWith('/productos/')) return tNav('products')
-                      return t('browsing')
-                    })()}
-                  </span>
-                </div>
-              </div>
-
-              <div className="px-4 py-6 space-y-2">
-                {/* Mobile Catalog Trigger */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0 }}
-                  className="flex flex-col gap-2 mb-4"
-                >
-                  <button
-                    onClick={() => {
-                      closeMobileMenu()
-                      setActiveCatalog({ url: MAGAZINES[1].url, edition: MAGAZINES[1].fullEdition })
-                      setIsCatalogOpen(true)
-                    }}
-                    className="w-full flex items-center p-4 bg-gradient-to-r from-success/20 to-success/10 border border-success/30 rounded-xl text-success-dark hover:bg-success/20 transition-all font-bold group"
-                  >
-                    <BookOpen className="w-5 h-5 mr-3 text-success-700" />
-                    REVISTA MARZO 2026
-                    <ArrowRight className="w-4 h-4 ml-auto text-success-700 group-hover:translate-x-1 transition-transform" />
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      closeMobileMenu()
-                      setActiveCatalog({ url: MAGAZINES[0].url, edition: MAGAZINES[0].fullEdition })
-                      setIsCatalogOpen(true)
-                    }}
-                    className="w-full flex items-center p-4 bg-gradient-to-r from-warning/20 to-warning/10 border border-warning/30 rounded-xl text-warning-dark hover:bg-warning/20 transition-all font-bold group"
-                  >
-                    <BookOpen className="w-5 h-5 mr-3 text-warning-700" />
-                    REVISTA FEBRERO 2026
-                    <ArrowRight className="w-4 h-4 ml-auto text-warning-700 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </motion.div>
-
-                {NAVIGATION.map((item, index) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    {item.hasSubmenu ? (
-                      <div>
-                        <div className="flex rounded-lg overflow-hidden">
-                          <NavLink item={item} isMobile />
-                          <button
-                            onClick={() => setActiveMobileSubmenu(
-                              activeMobileSubmenu === item.name ? null : item.name
-                            )}
-                            className="w-14 py-4 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary border-l border-border"
-                          >
-                            <ChevronDown className={`w-5 h-5 transition-transform ${activeMobileSubmenu === item.name ? 'rotate-180' : ''}`} />
-                          </button>
-                        </div>
-                        <AnimatePresence>
-                          {activeMobileSubmenu === item.name && item.submenu && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="overflow-hidden mt-2 ml-6 space-y-2 bg-secondary rounded-lg p-4"
-                            >
-                              {item.submenu.map((brand) => (
-                                <div key={brand.name}>
-                                  <Link
-                                    href={brand.href}
-                                    onClick={() => {
-                                      closeMobileMenu()
-                                      setActiveMobileSubmenu(null)
-                                    }}
-                                    className="flex items-center py-3 px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-all"
-                                  >
-                                    <div className="w-8 h-8 rounded bg-secondary flex items-center justify-center mr-3">
-                                      <BrandLogo brand={brand} />
-                                    </div>
-                                    <span className="font-medium">{brand.name}</span>
-                                  </Link>
-                                  {brand.subcategories && (
-                                    <div className="ml-12 space-y-1">
-                                      {brand.subcategories.map((subcat) => (
-                                        <Link
-                                          key={subcat.name}
-                                          href={subcat.href}
-                                          onClick={() => {
-                                            closeMobileMenu()
-                                            setActiveMobileSubmenu(null)
-                                          }}
-                                          className="block px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary rounded"
-                                        >
-                                          • {subcat.name}
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ) : (
-                      <NavLink item={item} isMobile />
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-8 px-6 pb-8 relative z-10"
-              >
-                <div className="bg-surface-raised rounded-2xl p-6 border border-border shadow-xl">
-                  <div className="text-center">
-                    <motion.div
-                      className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center shadow-lg"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 400 }}
-                    >
-                      <Phone className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <h3 className="text-foreground font-bold text-lg mb-2">
-                      {t('help_title')}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                      {t('help_text')}
-                    </p>
-
-                    <div className="grid grid-cols-1 gap-3 mb-6">
-                      <motion.div
-                        className="flex items-center justify-center space-x-3 p-4 bg-secondary rounded-xl border border-border"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Phone className="w-5 h-5 text-primary" />
-                        <div>
-                          <div className="text-foreground text-sm font-semibold">968 46 75 14</div>
-                          <div className="text-muted-foreground text-xs">{t('call_cta')}</div>
-                        </div>
-                      </motion.div>
-
-                      <motion.div
-                        className="flex items-center justify-center space-x-3 p-4 bg-secondary rounded-xl border border-border"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <MapPin className="w-5 h-5 text-success" />
-                        <div>
-                          <div className="text-foreground text-sm font-semibold">{t('top_bar.location')}</div>
-                          <div className="text-muted-foreground text-xs">{t('top_bar.tagline_short')}</div>
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Link
-                        href="/contacto"
-                        onClick={closeMobileMenu}
-                        className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg"
-                      >
-                        <span className="flex items-center gap-2">
-                          {t('contact_now')}
-                          <ArrowRight className="w-4 h-4" />
-                        </span>
-                      </Link>
-                    </motion.div>
-
-                    <div className="mt-6 pt-4 border-t border-border">
-                      <motion.p
-                        className="text-muted-foreground text-xs leading-relaxed"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                      >
-                        {t('excellence_msg')}
-                      </motion.p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Link href="/contacto" className={chrome.navCta} data-cursor onClick={() => routeClick("/contacto")}>
+          {locale === "es" ? "Hablemos" : "Talk to us"}
+          <ArrowUpRight size={13} aria-hidden="true" />
+        </Link>
+        <div className="kage-nav-utilities">
+          <div className="kage-desktop-language">
+            <LocaleSelect />
+          </div>
+          <button
+            type="button"
+            className="kage-cart"
+            aria-label={`${copy.cart}${mounted ? ` (${total})` : ""}`}
+            onClick={openCart}
+            data-cursor
+          >
+            <ShoppingCart size={18} aria-hidden="true" />
+            {mounted && total > 0 ? <span>{total}</span> : null}
+          </button>
+        </div>
+        <button
+          ref={trigger}
+          type="button"
+          className={`nav-burger ${open ? "active" : ""}`}
+          aria-label={open ? t("closeMenu") : t("openMenu")}
+          aria-expanded={open}
+          aria-controls="navlinks"
+          onClick={() => {
+            reason.current = "dismiss";
+            setOpen((value) => !value);
+          }}
+          data-cursor
+        >
+          <i />
+          <i />
+        </button>
       </header>
-
-      <CatalogModal
-        isOpen={isCatalogOpen}
-        onClose={() => setIsCatalogOpen(false)}
-        pdfUrl={activeCatalog.url}
-        edition={activeCatalog.edition}
-      />
-
       <CartDrawer />
-    </div>
-  )
+    </>
+  );
 }

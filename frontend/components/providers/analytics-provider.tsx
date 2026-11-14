@@ -1,29 +1,31 @@
-'use client';
-
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-import { initAnalytics, trackNavigation } from '@/lib/analytics';
-
-/**
- * Provider que inicializa el sistema de Analytics
- * y trackea automáticamente los cambios de ruta
- */
-export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  // Inicializar analytics una vez
+"use client";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import {
+  hasAnalyticsConsent,
+  initAnalytics,
+  stopAnalytics,
+  subscribeAnalyticsConsent,
+  trackNavigation,
+} from "@/lib/analytics";
+export function AnalyticsProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname(),
+    previous = useRef(pathname);
+  const [allowed, setAllowed] = useState(false);
   useEffect(() => {
-    initAnalytics();
+    const permitted = hasAnalyticsConsent();
+    if (!permitted) stopAnalytics();
+    setAllowed(permitted);
+    return subscribeAnalyticsConsent((choice) =>
+      setAllowed(choice?.analytics === true),
+    );
   }, []);
-
-  // Trackear cambios de página
+  useEffect(() => (allowed ? initAnalytics() : undefined), [allowed]);
   useEffect(() => {
-    if (pathname) {
+    if (allowed && pathname && previous.current !== pathname)
       trackNavigation(pathname);
-    }
-  }, [pathname]);
-
+    previous.current = pathname;
+  }, [pathname, allowed]);
   return <>{children}</>;
 }
-
 export default AnalyticsProvider;

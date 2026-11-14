@@ -1,847 +1,1492 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Bot,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useId,
+  useMemo,
+} from "react";
+import type { FormEvent, ReactNode } from "react";
+import {
   X,
   Send,
   RefreshCw,
-  Sparkles,
   Minimize2,
   Maximize2,
-  User,
-  Phone,
-  Mail,
-  Clock,
-  Package,
-  FileText,
-  MapPin,
-  TrendingUp,
-  ChevronRight,
-  Zap,
   Mic,
-  MicOff
-} from 'lucide-react';
-import { useTranslations, useLocale } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import apiClient from '@/lib/apiClient'; // 🔐 Cliente seguro para auth
+  MicOff,
+  ArrowUpRight,
+  Square,
+  Volume2,
+  Trash2,
+  ShieldCheck,
+  Headphones,
+  Package,
+  Boxes,
+  KeyRound,
+  AlertTriangle,
+  CheckCircle2,
+} from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { getPepaCopy } from "./pepa-copy";
+import styles from "./global-chatbot.module.css";
 
-
-interface ChatMessage {
-  role: 'user' | 'assistant';
+type Source = { label: string; url: string };
+type DeliveryResult = {
+  success: boolean;
+  channel?: string;
+  status?: string;
+  toMasked?: string;
+  providerMessageId?: string;
+  code?: string;
+  message?: string;
+  fallbackUrl?: string;
+  redirected?: boolean;
+};
+type ChatMessage = {
+  id: string;
+  role: "user" | "assistant";
   content: string;
-  timestamp?: Date;
-  isStreaming?: boolean;
+  streaming?: boolean;
+  isError?: boolean;
+  sources?: Source[];
   suggestions?: string[];
-  attachments?: { label: string; url: string }[];
+  wasVoice?: boolean;
+  redacted?: boolean;
+  send?: DeliveryResult;
+};
+type HistoryTurn = { role: "user" | "assistant"; content: string };
+type SseEvent = Record<string, unknown>;
+
+const HISTORY_KEY = "pepa:history";
+const MEMORY_KEY = "pepa:memory";
+const TOKEN_KEY = "pepa:token";
+const MAX_HISTORY_TURNS = 8;
+
+const newId = () =>
+  `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+class HttpError extends Error {}
+
+function toTurns(messages: ChatMessage[]): HistoryTurn[] {
+  return messages
+    .filter((message) => message.content.trim().length > 0 && !message.isError)
+    .slice(-10)
+    .map((message) => ({ role: message.role, content: message.content }));
 }
 
-interface QuickAction {
-  icon: React.ReactNode;
-  label: string;
-  action: string;
-  color: string;
+function loadMessages(memory: boolean): ChatMessage[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = (memory ? window.localStorage : window.sessionStorage).getItem(
+      HISTORY_KEY,
+    );
+    const parsed: unknown = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter(
+        (item): item is ChatMessage =>
+          Boolean(item) &&
+          typeof item === "object" &&
+          ((item as ChatMessage).role === "user" ||
+            (item as ChatMessage).role === "assistant") &&
+          typeof (item as ChatMessage).content === "string",
+      )
+      .map((item) => ({ ...item, id: item.id || newId(), streaming: false }));
+  } catch {
+    return [];
+  }
 }
 
-// Componente para renderizar Markdown simple (negrita, cursiva, enlaces)
-const MarkdownText = ({ content }: { content: string }) => {
-  // Procesar markdown simple
-  const parseMarkdown = (text: string): React.ReactNode[] => {
-    const parts: React.ReactNode[] = [];
-    let lastIndex = 0;
+async function readSse(
+  body: ReadableStream<Uint8Array>,
+  onEvent: (event: SseEvent) => void,
+  signal?: AbortSignal,
+) {
+  const reader = body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  for (;;) {
+    if (signal?.aborted) {
+      await reader.cancel().catch(() => undefined);
+      return;
+    }
+    const { done, value } = await reader.read();
+    if (done) break;
+    if (signal?.aborted) {
+      await reader.cancel().catch(() => undefined);
+      return;
+    }
+    buffer += decoder.decode(value, { stream: true });
+    const parts = buffer.split("\n\n");
+    buffer = parts.pop() || "";
+    for (const part of parts) {
+      if (signal?.aborted) {
+        await reader.cancel().catch(() => undefined);
+        return;
+      }
+      const line = part.trim();
+      if (!line.startsWith("data:")) continue;
+      const payload = line.slice(5).trim();
+      if (!payload || payload === "[DONE]") continue;
+      try {
+        onEvent(JSON.parse(payload) as SseEvent);
+      } catch {
+        /* fragmento incompleto */
+      }
+      await new Promise((resolve) => setTimeout(resolve, 8));
+    }
+  }
+}
 
-    // Regex para negrita **texto**, cursiva *texto*, y enlaces [texto](url)
+const LOGO_SOURCES = [
+  "/brand/logo-maripepa.jpeg",
+  "/images/logo.jpeg",
+  "/kage/brand/logo-alpha.png",
+];
+
+function BrandMark() {
+  const [index, setIndex] = useState(0);
+  if (index >= LOGO_SOURCES.length) {
+    return (
+      <span className={styles.monogram} aria-hidden="true">
+        MP
+      </span>
+    );
+  }
+  return (
+    <img
+      src={LOGO_SOURCES[index]}
+      alt=""
+      width={44}
+      height={22}
+      className={styles.brandImg}
+      onError={() => setIndex((i) => i + 1)}
+    />
+  );
+}
+
+function MarkdownText({ content }: { content: string }) {
+  const parse = (text: string): ReactNode[] => {
+    const parts: ReactNode[] = [];
     const regex = /(\*\*(.+?)\*\*)|(\*(.+?)\*)|(\[(.+?)\]\((.+?)\))/g;
-    let match;
-
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
     while ((match = regex.exec(text)) !== null) {
-      // Añadir texto antes del match
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
-      }
-
-      if (match[1]) {
-        // Negrita **texto**
-        parts.push(<strong key={match.index} className="font-bold text-emerald-700">{match[2]}</strong>);
-      } else if (match[3]) {
-        // Cursiva *texto*
-        parts.push(<em key={match.index} className="italic">{match[4]}</em>);
-      } else if (match[5]) {
-        // Enlace [texto](url)
+      if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+      if (match[1]) parts.push(<strong key={match.index}>{match[2]}</strong>);
+      else if (match[3]) parts.push(<em key={match.index}>{match[4]}</em>);
+      else if (match[5])
         parts.push(
-          <a
-            key={match.index}
-            href={match[7]}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-emerald-600 underline hover:text-emerald-800 transition-colors"
-          >
+          <a key={match.index} href={match[7]} target="_blank" rel="noopener noreferrer">
             {match[6]}
-          </a>
+          </a>,
         );
-      }
-
       lastIndex = match.index + match[0].length;
     }
-
-    // Añadir texto restante
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
-    }
-
-    return parts.length > 0 ? parts : [text];
+    if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+    return parts.length ? parts : [text];
   };
-
-  // Dividir por líneas para preservar saltos de línea
-  const lines = content.split('\n');
-
   return (
     <>
-      {lines.map((line, lineIndex) => (
-        <span key={lineIndex}>
-          {parseMarkdown(line)}
-          {lineIndex < lines.length - 1 && <br />}
+      {content.split("\n").map((line, index, lines) => (
+        <span key={index}>
+          {parse(line)}
+          {index < lines.length - 1 && <br />}
         </span>
       ))}
     </>
   );
-};
-
-// Hook para efecto de streaming de texto basado en tiempo (no afectado por cambio de pestaña)
-const useStreamingText = (
-  fullText: string,
-  isStreaming: boolean,
-  onComplete?: () => void
-) => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-  const startTimeRef = useRef<number | null>(null);
-  const durationRef = useRef<number>(0);
-  const animationFrameRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (!isStreaming) {
-      setDisplayedText(fullText);
-      setIsComplete(true);
-      return;
-    }
-
-    setDisplayedText('');
-    setIsComplete(false);
-    startTimeRef.current = Date.now();
-
-    // Calcular duración estimada: 20ms por caracter aprox, máx 3 seg
-    durationRef.current = Math.min(fullText.length * 20, 3000);
-
-    const animate = () => {
-      const now = Date.now();
-      const elapsed = now - (startTimeRef.current || now);
-      const progress = Math.min(elapsed / durationRef.current, 1);
-
-      const charIndex = Math.floor(progress * fullText.length);
-      setDisplayedText(fullText.slice(0, charIndex));
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animate);
-      } else {
-        setDisplayedText(fullText);
-        setIsComplete(true);
-        onComplete?.();
-      }
-    };
-
-    animationFrameRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    };
-  }, [fullText, isStreaming, onComplete]);
-
-  return { displayedText, isComplete };
-};
-
-// Componente para mensaje con streaming
-const StreamingMessage = ({
-  content,
-  isStreaming,
-  onStreamComplete
-}: {
-  content: string;
-  isStreaming: boolean;
-  onStreamComplete?: () => void;
-}) => {
-  const { displayedText, isComplete } = useStreamingText(content, isStreaming, onStreamComplete);
-
-  return (
-    <div className="relative">
-      <p className="text-sm whitespace-pre-wrap leading-relaxed">
-        <MarkdownText content={displayedText} />
-        {/* Cursor parpadeante mientras escribe */}
-        {isStreaming && !isComplete && (
-          <motion.span
-            animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.5, repeat: Infinity }}
-            className="inline-block w-0.5 h-4 ml-0.5 bg-emerald-500 align-text-bottom"
-          />
-        )}
-      </p>
-    </div>
-  );
-};
-
-// Estilos para hacer scroll
-const scrollToBottom = (element: HTMLDivElement | null) => {
-  if (element) {
-    element.scrollTop = element.scrollHeight;
-  }
-};
-
-// Hook para obtener saludo según hora del día
-const useTimeBasedGreeting = () => {
-  return useMemo(() => {
-    const hour = new Date().getHours();
-    if (hour >= 6 && hour < 12) return { greeting: 'Buenos días', period: 'mañana' };
-    if (hour >= 12 && hour < 20) return { greeting: 'Buenas tardes', period: 'tarde' };
-    return { greeting: 'Buenas noches', period: 'noche' };
-  }, []);
-};
-
-// Componente de acciones rápidas
-const QuickActions = ({ onAction }: { onAction: (action: string) => void }) => {
-  const actions: QuickAction[] = [
-    { icon: <FileText className="w-4 h-4" />, label: 'Mis facturas', action: 'Quiero ver mis facturas', color: 'from-blue-500 to-blue-600' },
-    { icon: <Package className="w-4 h-4" />, label: 'Hacer pedido', action: 'Cómo puedo hacer un pedido', color: 'from-emerald-500 to-teal-600' },
-    { icon: <Phone className="w-4 h-4" />, label: 'Contacto', action: 'Cuál es el teléfono de contacto', color: 'from-purple-500 to-purple-600' },
-    { icon: <Clock className="w-4 h-4" />, label: 'Horarios', action: 'Cuál es vuestro horario', color: 'from-amber-500 to-orange-500' },
-  ];
-
-  return (
-    <div className="grid grid-cols-2 gap-2 mt-3">
-      {actions.map((action, index) => (
-        <motion.button
-          key={index}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-          whileHover={{ scale: 1.03, y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={() => onAction(action.action)}
-          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl bg-gradient-to-r ${action.color} text-white text-xs font-medium shadow-lg hover:shadow-xl transition-all`}
-        >
-          {action.icon}
-          <span>{action.label}</span>
-        </motion.button>
-      ))}
-    </div>
-  );
-};
-
-// Componente de sugerencias contextuales
-const ContextualSuggestions = ({
-  suggestions,
-  onSelect
-}: {
-  suggestions: string[];
-  onSelect: (suggestion: string) => void;
-}) => {
-  if (!suggestions || suggestions.length === 0) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mt-3 space-y-1.5"
-    >
-      <p className="text-xs text-gray-500 flex items-center gap-1">
-        <Zap className="w-3 h-3" />
-        Quizás te interese:
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {suggestions.map((suggestion, index) => (
-          <motion.button
-            key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.05 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onSelect(suggestion)}
-            className="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 text-xs text-gray-700 hover:border-emerald-400 hover:text-emerald-700 hover:from-emerald-50 hover:to-teal-50 transition-all flex items-center gap-1"
-          >
-            <ChevronRight className="w-3 h-3" />
-            {suggestion}
-          </motion.button>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
+}
 
 export function GlobalChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentlyStreamingId, setCurrentlyStreamingId] = useState<number | null>(null);
-  const [showQuickActions, setShowQuickActions] = useState(true);
+  const [input, setInput] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [authPrompt, setAuthPrompt] = useState<string | null>(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [loginCode, setLoginCode] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [memoryEnabled, setMemoryEnabled] = useState(false);
+  const [showMemory, setShowMemory] = useState(false);
+  const [handoff, setHandoff] = useState<{ reference: string; eta: string } | null>(null);
+  const [handoffError, setHandoffError] = useState("");
+  const [isHandoffLoading, setIsHandoffLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [micError, setMicError] = useState("");
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [uncertaintyCount, setUncertaintyCount] = useState(0);
 
-  // i18n hooks
-  const t = useTranslations('chatbot');
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const panelId = useId();
+  const copy = getPepaCopy(useLocale());
+  const t = useTranslations("chatbot");
   const locale = useLocale();
+  const assistantName = locale === "es" ? "Pepa IA" : "Pepa AI";
 
-  // Greeting based on time and locale
+  const messagesRef = useRef<ChatMessage[]>([]);
+  const historyTurnsRef = useRef<HistoryTurn[]>([]);
+  const abortRef = useRef<AbortController | null>(null);
+  const requestSeqRef = useRef(0);
+  const sendingRef = useRef(false);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const codeRef = useRef<HTMLInputElement>(null);
+  const baseTranscriptRef = useRef("");
+  const voiceUsedRef = useRef(false);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  const ui = useMemo(
+    () =>
+      locale === "en"
+        ? {
+            capabilities: "What can I do for you?",
+            cards: [
+              { icon: Boxes, title: "Browse the catalogue", query: "What products do you distribute?" },
+              { icon: Package, title: "Check my order", query: "I want to check the status of my order" },
+              { icon: Headphones, title: "Talk to a person", query: "__handoff__" },
+            ],
+            loginTitle: "Sign in to see your account",
+            loginText: "Only your invoices, orders and balance are behind your customer code.",
+            code: "Customer code",
+            password: "Password",
+            enter: "Sign in",
+            loggingIn: "Checking…",
+            logout: "Sign out",
+            signedIn: "Signed in",
+            stop: "Stop generating",
+            regenerate: "Regenerate",
+            retry: "Try again",
+            sources: "Sources",
+            listen: "Listen to the answer",
+            stopListening: "Stop audio",
+            memory: "Memory",
+            memoryTitle: "Conversation memory",
+            memoryOn: "Remember this conversation",
+            memoryHint: "If you allow it, the chat will keep the context the next time you open it.",
+            memoryCount: (count: number) => `${count} messages stored on this device.`,
+            deleteMemory: "Delete history",
+            handoff: "Talk to a person",
+            handoffSend: "Sending your conversation…",
+            handoffDone: "Request received",
+            handoffEta: "Estimated reply:",
+            handoffError: "I could not send the request. Call 639 77 86 56 and we will help you.",
+            handoffReason: "The customer asked for a human agent from the assistant.",
+            micDenied: "Microphone permission denied.",
+            micHelp: "Open the padlock in the address bar and allow the microphone.",
+            micNotFound: "No microphone was found. Connect one and try again.",
+            micBusy: "The microphone is being used by another application. Close it and try again.",
+            micEmpty: "I could not hear you. Tap the microphone and speak a little closer.",
+            write: copy.write,
+          }
+        : {
+            capabilities: "¿Qué puedo hacer por ti?",
+            cards: [
+              { icon: Boxes, title: "Consultar catálogo", query: "¿Qué productos distribuís?" },
+              { icon: Package, title: "Estado de mi pedido", query: "Quiero consultar el estado de mi pedido" },
+              { icon: Headphones, title: "Hablar con soporte", query: "__handoff__" },
+            ],
+            loginTitle: "Entra para ver tu cuenta",
+            loginText: "Tus facturas, pedidos y saldo están detrás de tu código de cliente.",
+            code: "Código de cliente",
+            password: "Contraseña",
+            enter: "Entrar",
+            loggingIn: "Comprobando…",
+            logout: "Cerrar sesión",
+            signedIn: "Sesión iniciada",
+            stop: "Detener generación",
+            regenerate: "Regenerar",
+            retry: "Reintentar",
+            sources: "Fuentes",
+            listen: "Escuchar respuesta",
+            stopListening: "Detener audio",
+            memory: "Memoria",
+            memoryTitle: "Memoria de la conversación",
+            memoryOn: "Recordar esta conversación",
+            memoryHint: "Si lo permites, el chat conservará el contexto la próxima vez que lo abras.",
+            memoryCount: (count: number) => `${count} mensajes guardados en este dispositivo.`,
+            deleteMemory: "Borrar historial",
+            handoff: "Hablar con una persona",
+            handoffSend: "Enviando tu conversación…",
+            handoffDone: "Solicitud recibida",
+            handoffEta: "Respuesta estimada:",
+            handoffError: "No he podido enviar la solicitud. Llama al 639 77 86 56 y te ayudamos.",
+            handoffReason: "El cliente pide atención humana desde el asistente.",
+            micDenied: "Permiso de micrófono denegado.",
+            micHelp: "Abre el candado de la barra de direcciones y permite el micrófono.",
+            micNotFound: "No se ha encontrado ningún micrófono. Conecta uno y vuelve a intentarlo.",
+            micBusy: "El micrófono está siendo usado por otra aplicación. Ciérrala y vuelve a intentarlo.",
+            micEmpty: "No te he oído. Pulsa el micrófono y habla un poco más cerca.",
+            write: copy.write,
+          },
+    [locale, copy.write],
+  );
+
   const { greeting } = useMemo(() => {
     const hour = new Date().getHours();
-    if (locale === 'en') {
-      if (hour >= 6 && hour < 12) return { greeting: t('greetingMorning') };
-      if (hour >= 12 && hour < 20) return { greeting: t('greetingAfternoon') };
-      return { greeting: t('greetingEvening') };
-    }
-    if (hour >= 6 && hour < 12) return { greeting: t('greetingMorning') };
-    if (hour >= 12 && hour < 20) return { greeting: t('greetingAfternoon') };
-    return { greeting: t('greetingEvening') };
-  }, [locale, t]);
+    if (hour >= 6 && hour < 12) return { greeting: t("greetingMorning") };
+    if (hour >= 12 && hour < 20) return { greeting: t("greetingAfternoon") };
+    return { greeting: t("greetingEvening") };
+  }, [t]);
 
+  const commit = useCallback(
+    (updater: (previous: ChatMessage[]) => ChatMessage[]) => {
+      messagesRef.current = updater(messagesRef.current);
+      setMessages(messagesRef.current);
+    },
+    [],
+  );
 
-  // Auto-scroll cuando hay nuevos mensajes o durante streaming
+  const updateMessage = useCallback(
+    (id: string, patch: Partial<ChatMessage>) => {
+      commit((previous) =>
+        previous.map((message) =>
+          message.id === id ? { ...message, ...patch } : message,
+        ),
+      );
+    },
+    [commit],
+  );
+
   useEffect(() => {
-    scrollToBottom(messagesContainerRef.current);
-  }, [messages, currentlyStreamingId]);
-
-  // Focus en el input cuando se abre
-  useEffect(() => {
-    if (isOpen && !isMinimized) {
-      setTimeout(() => inputRef.current?.focus(), 100);
+    const memory = window.localStorage.getItem(MEMORY_KEY) === "1";
+    setMemoryEnabled(memory);
+    const stored = loadMessages(memory);
+    if (stored.length) {
+      messagesRef.current = stored;
+      setMessages(stored);
+      historyTurnsRef.current = toTurns(stored);
     }
+    const token = window.sessionStorage.getItem(TOKEN_KEY);
+    if (token) setAuthToken(token);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const payload = JSON.stringify(messages.filter((message) => !message.streaming));
+    window.sessionStorage.setItem(HISTORY_KEY, payload);
+    if (memoryEnabled) window.localStorage.setItem(HISTORY_KEY, payload);
+  }, [messages, memoryEnabled]);
+
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (container) container.scrollTop = container.scrollHeight;
+  }, [messages]);
+
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (container) container.scrollTop = container.scrollHeight;
+  }, [handoff, handoffError, showLogin]);
+
+  useEffect(() => {
+    if (!isOpen || isMinimized) return;
+    inputRef.current?.focus({ preventScroll: true });
   }, [isOpen, isMinimized]);
 
-  const handleStreamComplete = useCallback(() => {
-    setCurrentlyStreamingId(null);
+  useEffect(() => {
+    if (showLogin) codeRef.current?.focus({ preventScroll: true });
+  }, [showLogin]);
+
+  const closePanel = useCallback(() => {
+    setIsOpen(false);
+    window.dispatchEvent(
+      new CustomEvent("kage:overlay-close", { detail: { id: "pepa" } }),
+    );
+    launcherRef.current?.focus();
   }, []);
 
-  // Función para generar sugerencias basadas en el contexto
-  const generateSuggestions = useCallback((response: string): string[] => {
-    const lowerResponse = response.toLowerCase();
-
-    if (lowerResponse.includes('factura')) {
-      return ['Ver mi última factura', 'Descargar facturas en PDF', 'Problema con una factura'];
-    }
-    if (lowerResponse.includes('pedido') || lowerResponse.includes('comprar')) {
-      return ['Ver catálogo de productos', 'Tiempo de entrega', 'Formas de pago'];
-    }
-    if (lowerResponse.includes('producto') || lowerResponse.includes('catálogo')) {
-      return ['Productos congelados', 'Productos refrigerados', 'Marcas disponibles'];
-    }
-    if (lowerResponse.includes('contacto') || lowerResponse.includes('teléfono')) {
-      return ['Horario de atención', 'Delegación en Lorca', 'Email para pedidos'];
-    }
-    if (lowerResponse.includes('entrega') || lowerResponse.includes('reparto')) {
-      return ['Zona de cobertura', 'Modificar una entrega', 'Cadena de frío'];
-    }
-
-    return [];
+  const openPanel = useCallback(() => {
+    setIsOpen(true);
+    setIsMinimized(false);
+    window.dispatchEvent(
+      new CustomEvent("kage:overlay-open", { detail: { id: "pepa" } }),
+    );
   }, []);
 
-  const sendMessage = async (messageText?: string) => {
-    const userMessage = (messageText || input).trim();
-    if (!userMessage || isLoading) return;
-
-    setInput('');
-    setShowQuickActions(false);
-    setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
-    setIsLoading(true);
-
-    try {
-      // Usar apiClient para asegurar envío de Cookies HttpOnly y CSRF token
-      // Esto permite que el backend reconozca al usuario autenticado (req.user)
-      const response = await apiClient.post('/api/chatbot', {
-        message: userMessage,
-        history: messages.slice(-6),
-        conversationId: undefined, // Let backend generate or manage sessions
-        locale: locale // Send user's language for bilingual responses
-      });
-
-
-      const data = response.data;
-
-      if (data.success && data.response) {
-        const newMessageIndex = messages.length + 1; // +1 por el mensaje del usuario
-        const suggestions = generateSuggestions(data.response);
-        // Detectar enlaces de descarga en la respuesta
-        const linkRegex = /(\/api\/compartir\/descargar\/[\w-_]+)/i;
-        const match = data.response.match(linkRegex);
-        const attachments = match ? [{ label: 'Descargar factura', url: match[1] }] : [];
-        setCurrentlyStreamingId(newMessageIndex);
-        setMessages(prev => [...prev, {
-          role: 'assistant',
-          content: data.response,
-          timestamp: new Date(),
-          isStreaming: true,
-          suggestions,
-          // @ts-ignore - Attachments para descargar
-          attachments
-        }]);
-      } else {
-        throw new Error('Respuesta inválida');
+  useEffect(() => {
+    const onOverlay = (event: Event) => {
+      if ((event as CustomEvent<{ id?: string }>).detail?.id !== "pepa")
+        setIsOpen(false);
+    };
+    const onOpen = () => openPanel();
+    const onKey = (event: KeyboardEvent) => {
+      if (isOpen && event.key === "Escape" && !event.defaultPrevented) {
+        event.preventDefault();
+        closePanel();
       }
-    } catch {
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: t('connectionError'),
-        timestamp: new Date(),
-        isStreaming: false
-      }]);
-    } finally {
-      setIsLoading(false);
+    };
+    window.addEventListener("kage:overlay-open", onOverlay);
+    window.addEventListener("kage:open-pepa", onOpen);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("kage:overlay-open", onOverlay);
+      window.removeEventListener("kage:open-pepa", onOpen);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isOpen, closePanel, openPanel]);
+
+  useEffect(
+    () => () => {
+      try {
+        recorderRef.current?.stop();
+      } catch {
+        /* ya detenido */
+      }
+      streamRef.current?.getTracks().forEach((track) => track.stop());
+    },
+    [],
+  );
+
+  const runRequest = useCallback(
+    async (rawText: string, options?: { echoUser?: boolean }) => {
+      const text = rawText.trim();
+      if (!text || sendingRef.current) return;
+
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      const seq = ++requestSeqRef.current;
+      sendingRef.current = true;
+      const history = historyTurnsRef.current.slice(-MAX_HISTORY_TURNS);
+      const wasVoice = voiceUsedRef.current;
+      voiceUsedRef.current = false;
+
+      if (options?.echoUser !== false) {
+        commit((previous) => [
+          ...previous,
+          { id: newId(), role: "user", content: text, wasVoice },
+        ]);
+        historyTurnsRef.current = [
+          ...history,
+          { role: "user" as const, content: text },
+        ].slice(-MAX_HISTORY_TURNS);
+      }
+
+      const assistantId = newId();
+      commit((previous) => [
+        ...previous,
+        { id: assistantId, role: "assistant", content: "", streaming: true, wasVoice },
+      ]);
+      setIsGenerating(true);
+      setMicError("");
+      setHandoff(null);
+
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      if (authToken) headers.Authorization = `Bearer ${authToken}`;
+
+      try {
+        const response = await fetch("/api/chatbot/stream", {
+          method: "POST",
+          headers,
+          credentials: "same-origin",
+          body: JSON.stringify({ message: text, history, locale }),
+          signal: controller.signal,
+        });
+
+        if (response.status === 401) {
+          const payload = (await response.json().catch(() => null)) as
+            | { message?: string }
+            | null;
+          commit((previous) => previous.filter((message) => message.id !== assistantId));
+          setAuthPrompt(text);
+          setLoginError(payload?.message || "");
+          setShowLogin(true);
+          return;
+        }
+
+        if (!response.ok || !response.body) {
+          const payload = (await response.json().catch(() => null)) as
+            | { message?: string }
+            | null;
+          throw new HttpError(
+            payload?.message || "No se pudo contactar con el asistente.",
+          );
+        }
+
+        let accumulated = "";
+        let completed = false;
+
+        await readSse(response.body, (event) => {
+          if (typeof event.delta === "string") {
+            accumulated += event.delta;
+            updateMessage(assistantId, { content: accumulated, streaming: true });
+          }
+          if (event.done === true) {
+            completed = true;
+            const reply =
+              typeof event.reply === "string" && event.reply
+                ? event.reply
+                : accumulated;
+            const sources = Array.isArray(event.sources)
+              ? (event.sources as Source[]).filter(
+                  (source) =>
+                    source &&
+                    typeof source.label === "string" &&
+                    typeof source.url === "string",
+                )
+              : [];
+            const suggestions = Array.isArray(event.suggestions)
+              ? (event.suggestions as unknown[]).filter(
+                  (item): item is string => typeof item === "string",
+                )
+              : [];
+            updateMessage(assistantId, {
+              content: reply,
+              streaming: false,
+              sources,
+              suggestions,
+              redacted: event.redacted === true,
+              send:
+                event.send && typeof event.send === "object"
+                  ? (event.send as DeliveryResult)
+                  : undefined,
+            });
+            historyTurnsRef.current = [
+              ...historyTurnsRef.current,
+              { role: "assistant" as const, content: reply },
+            ].slice(-MAX_HISTORY_TURNS);
+            if (/(no tengo|no lo s[ée]|no estoy seguro|no dispongo)/i.test(reply))
+              setUncertaintyCount((count) => count + 1);
+          }
+          if (event.error && typeof event.error === "object") {
+            const detail = event.error as { message?: string };
+            completed = true;
+            updateMessage(assistantId, {
+              content: detail.message || "No he podido completar la respuesta.",
+              streaming: false,
+              isError: true,
+            });
+          }
+          if (event.aborted === true) {
+            completed = true;
+            updateMessage(assistantId, { streaming: false });
+          }
+        }, controller.signal);
+
+        if (!completed) updateMessage(assistantId, { streaming: false });
+      } catch (error) {
+        if (controller.signal.aborted) {
+          updateMessage(assistantId, { streaming: false });
+        } else {
+          updateMessage(assistantId, {
+            content:
+              error instanceof HttpError
+                ? error.message
+                : t("connectionError"),
+            streaming: false,
+            isError: true,
+          });
+        }
+      } finally {
+        if (requestSeqRef.current === seq) {
+          sendingRef.current = false;
+          setIsGenerating(false);
+        }
+      }
+    },
+    [authToken, commit, locale, t, updateMessage],
+  );
+
+  const stopGeneration = useCallback(() => {
+    abortRef.current?.abort();
+    setIsGenerating(false);
+  }, []);
+
+  const sendMessage = useCallback(
+    (rawText?: string, viaVoice = false) => {
+      const text = (rawText ?? input).trim();
+      if (!text || isGenerating) return;
+      setInput("");
+      setShowLogin(false);
+      voiceUsedRef.current = viaVoice;
+      void runRequest(text, { echoUser: true });
+    },
+    [input, isGenerating, runRequest],
+  );
+
+  const regenerate = useCallback(() => {
+    if (sendingRef.current) return;
+    const list = messagesRef.current;
+    const lastAssistant = [...list].reverse().find((message) => message.role === "assistant");
+    if (!lastAssistant) return;
+    const index = list.findIndex((message) => message.id === lastAssistant.id);
+    const userMessage = [...list.slice(0, index)]
+      .reverse()
+      .find((message) => message.role === "user");
+    if (!userMessage) return;
+
+    commit((previous) => previous.filter((message) => message.id !== lastAssistant.id));
+    const trimmed = [...historyTurnsRef.current];
+    while (trimmed.length && trimmed[trimmed.length - 1].role === "assistant")
+      trimmed.pop();
+    historyTurnsRef.current = trimmed;
+    void runRequest(userMessage.content, { echoUser: false });
+  }, [commit, runRequest]);
+
+  const clearChat = useCallback(() => {
+    abortRef.current?.abort();
+    commit(() => []);
+    historyTurnsRef.current = [];
+    setInput("");
+    setIsGenerating(false);
+    setShowLogin(false);
+    setAuthPrompt(null);
+    setHandoff(null);
+    setUncertaintyCount(0);
+    setSpeakingId(null);
+    window.sessionStorage.removeItem(HISTORY_KEY);
+    window.localStorage.removeItem(HISTORY_KEY);
+  }, [commit]);
+
+  const toggleMemory = useCallback(() => {
+    const next = !memoryEnabled;
+    setMemoryEnabled(next);
+    if (next) {
+      window.localStorage.setItem(MEMORY_KEY, "1");
+      window.localStorage.setItem(HISTORY_KEY, JSON.stringify(messagesRef.current));
+    } else {
+      window.localStorage.removeItem(MEMORY_KEY);
+      window.localStorage.removeItem(HISTORY_KEY);
     }
-  };
+  }, [memoryEnabled]);
 
-  const clearChat = () => {
-    setMessages([]);
-    setInput('');
-    setCurrentlyStreamingId(null);
-    setShowQuickActions(true);
-  };
+  const deleteMemory = useCallback(() => {
+    window.localStorage.removeItem(HISTORY_KEY);
+    window.localStorage.removeItem(MEMORY_KEY);
+    window.sessionStorage.removeItem(HISTORY_KEY);
+    setMemoryEnabled(false);
+    commit(() => []);
+    historyTurnsRef.current = [];
+    setShowMemory(false);
+  }, [commit]);
 
-  // Voice input functions
-  const startVoiceInput = useCallback(() => {
-    // Check for browser support
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  const signOut = useCallback(() => {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    setAuthToken(null);
+    setShowLogin(false);
+    setAuthPrompt(null);
+  }, []);
 
-    if (!SpeechRecognition) {
-      // Voice not supported
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: t('voiceNotSupported'),
-        timestamp: new Date(),
-        isStreaming: false
-      }]);
+  const submitLogin = useCallback(
+    async (event: FormEvent) => {
+      event.preventDefault();
+      if (isLoggingIn) return;
+      setLoginError("");
+      setIsLoggingIn(true);
+      try {
+        const csrfResponse = await fetch("/api/csrf-token", {
+          credentials: "same-origin",
+        });
+        const csrf = (await csrfResponse.json().catch(() => null)) as
+          | { token?: string }
+          | null;
+        const response = await fetch("/api/auth/secure/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(csrf?.token ? { "X-CSRF-Token": csrf.token } : {}),
+          },
+          credentials: "same-origin",
+          body: JSON.stringify({
+            customerCode: loginCode.trim(),
+            password: loginPassword,
+          }),
+        });
+        const data = (await response.json().catch(() => null)) as
+          | { success?: boolean; accessToken?: string; message?: string }
+          | null;
+        if (!response.ok || !data?.success || !data.accessToken) {
+          setLoginError(data?.message || "No se pudo iniciar sesión.");
+          return;
+        }
+        window.sessionStorage.setItem(TOKEN_KEY, data.accessToken);
+        setAuthToken(data.accessToken);
+        setLoginPassword("");
+        setShowLogin(false);
+        const pending = authPrompt;
+        setAuthPrompt(null);
+        if (pending) {
+          const headers: Record<string, string> = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.accessToken}`,
+          };
+          const history = historyTurnsRef.current.slice(-MAX_HISTORY_TURNS);
+          const deduped =
+            history.length &&
+            history[history.length - 1].role === "user" &&
+            history[history.length - 1].content === pending
+              ? history.slice(0, -1)
+              : history;
+          const assistantId = newId();
+          commit((previous) => [
+            ...previous,
+            { id: assistantId, role: "assistant", content: "", streaming: true },
+          ]);
+          setIsGenerating(true);
+          try {
+            const reply = await fetch("/api/chatbot/stream", {
+              method: "POST",
+              headers,
+              credentials: "same-origin",
+              body: JSON.stringify({ message: pending, history: deduped, locale }),
+            });
+            if (!reply.ok || !reply.body) throw new HttpError("retry");
+            let accumulated = "";
+            await readSse(reply.body, (sseEvent) => {
+              if (typeof sseEvent.delta === "string") {
+                accumulated += sseEvent.delta;
+                updateMessage(assistantId, { content: accumulated });
+              }
+              if (sseEvent.done === true) {
+                const finalReply =
+                  typeof sseEvent.reply === "string" && sseEvent.reply
+                    ? sseEvent.reply
+                    : accumulated;
+                updateMessage(assistantId, {
+                  content: finalReply,
+                  streaming: false,
+                  sources: Array.isArray(sseEvent.sources)
+                    ? (sseEvent.sources as Source[])
+                    : [],
+                  suggestions: Array.isArray(sseEvent.suggestions)
+                    ? (sseEvent.suggestions as string[])
+                    : [],
+                });
+                historyTurnsRef.current = [
+                  ...historyTurnsRef.current,
+                  { role: "assistant" as const, content: finalReply },
+                ].slice(-MAX_HISTORY_TURNS);
+              }
+            });
+          } catch {
+            updateMessage(assistantId, {
+              content: t("connectionError"),
+              streaming: false,
+              isError: true,
+            });
+          } finally {
+            setIsGenerating(false);
+          }
+        }
+      } catch {
+        setLoginError("No se pudo iniciar sesión. Inténtalo de nuevo.");
+      } finally {
+        setIsLoggingIn(false);
+      }
+    },
+    [authPrompt, commit, isLoggingIn, locale, loginCode, loginPassword, t, updateMessage],
+  );
+
+  const requestHandoff = useCallback(async () => {
+    if (isHandoffLoading) return;
+    setIsHandoffLoading(true);
+    setHandoffError("");
+    try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (authToken) headers.Authorization = `Bearer ${authToken}`;
+      const response = await fetch("/api/chatbot/stream", {
+        method: "POST",
+        headers,
+        credentials: "same-origin",
+        body: JSON.stringify({
+          handoff: true,
+          reason: ui.handoffReason,
+          history: historyTurnsRef.current,
+          locale,
+        }),
+      });
+      const data = (await response.json().catch(() => null)) as
+        | { handoff?: { reference?: string; eta?: string } }
+        | null;
+      if (!response.ok || !data?.handoff?.reference) throw new Error("handoff");
+      setHandoff({
+        reference: data.handoff.reference,
+        eta: data.handoff.eta || (locale === "en" ? "under 24 working hours" : "menos de 24 h laborables"),
+      });
+    } catch {
+      setHandoffError(ui.handoffError);
+    } finally {
+      setIsHandoffLoading(false);
+    }
+  }, [authToken, isHandoffLoading, locale, ui.handoffError, ui.handoffReason]);
+
+  const speak = useCallback(
+    (message: ChatMessage) => {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+      if (speakingId === message.id) {
+        window.speechSynthesis.cancel();
+        setSpeakingId(null);
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(
+        message.content.replace(/[*_#>`]/g, ""),
+      );
+      utterance.lang = locale === "en" ? "en-GB" : "es-ES";
+      utterance.onend = () => setSpeakingId(null);
+      utterance.onerror = () => setSpeakingId(null);
+      setSpeakingId(message.id);
+      window.speechSynthesis.speak(utterance);
+    },
+    [locale, speakingId],
+  );
+
+  const transcribeChunk = useCallback(async (blob: Blob) => {
+    const base64 = await new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(String(reader.result || ""));
+      reader.readAsDataURL(blob);
+    });
+    try {
+      const response = await fetch("/api/chatbot/transcribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+          audio: base64,
+          mimeType: blob.type,
+          language: locale === "en" ? "en" : "es",
+        }),
+        signal: AbortSignal.timeout(20000),
+      });
+      if (!response.ok) return "";
+      const data = (await response.json().catch(() => null)) as
+        | { text?: string }
+        | null;
+      return data?.text?.trim() || "";
+    } catch {
+      return "";
+    }
+  }, [locale]);
+
+  const appendTranscript = useCallback((text: string) => {
+    const clean = String(text || "").replace(/\s+/g, " ").trim();
+    if (!clean) return;
+    baseTranscriptRef.current = `${baseTranscriptRef.current} ${clean}`.trim();
+    setInput(baseTranscriptRef.current);
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
+
+  const stopVoiceInput = useCallback(async () => {
+    const recorder = recorderRef.current;
+    recorderRef.current = null;
+    if (!recorder) return;
+    setIsListening(false);
+
+    const blob = await new Promise<Blob | null>((resolve) => {
+      const parts: Blob[] = [];
+      let settled = false;
+      const done = (value: Blob | null) => {
+        if (settled) return;
+        settled = true;
+        resolve(value);
+      };
+      recorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) parts.push(event.data);
+      };
+      recorder.addEventListener(
+        "stop",
+        () => {
+          const type = recorder.mimeType || parts[0]?.type || "audio/webm";
+          done(parts.length ? new Blob(parts, { type }) : null);
+        },
+        { once: true },
+      );
+      try {
+        recorder.stop();
+      } catch {
+        done(null);
+      }
+      window.setTimeout(() => done(null), 5000);
+    });
+
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+
+    if (!blob || blob.size < 2048) {
+      setMicError(ui.micEmpty);
       return;
     }
 
+    setIsTranscribing(true);
+    const text = await transcribeChunk(blob);
+    setIsTranscribing(false);
+    if (!text) {
+      setMicError(ui.micEmpty);
+      return;
+    }
+    appendTranscript(text);
+  }, [transcribeChunk, appendTranscript, ui.micEmpty]);
+
+  const startVoiceInput = useCallback(async () => {
+    if (recorderRef.current || isTranscribing) return;
+    baseTranscriptRef.current = "";
+    voiceUsedRef.current = true;
+    setMicError("");
+
+    let stream: MediaStream;
     try {
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.lang = locale === 'en' ? 'en-US' : 'es-ES';
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = false;
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+      });
+    } catch (error) {
+      const name = error instanceof DOMException ? error.name : "";
+      const message =
+        name === "NotAllowedError" || name === "SecurityError"
+          ? `${ui.micDenied} ${ui.micHelp}`
+          : name === "NotFoundError" || name === "OverconstrainedError"
+            ? ui.micNotFound
+            : name === "NotReadableError"
+              ? ui.micBusy
+              : `${t("voiceNotSupported")}${name ? ` (${name})` : ""}`;
+      setMicError(message);
+      return;
+    }
 
-      recognitionRef.current.onstart = () => {
-        setIsListening(true);
-      };
+    streamRef.current = stream;
+    const mimeCandidates = [
+      "audio/webm;codecs=opus",
+      "audio/webm",
+      "audio/mp4",
+    ];
+    const mimeType =
+      mimeCandidates.find((type) => MediaRecorder.isTypeSupported(type)) || "";
 
-      recognitionRef.current.onend = () => {
-        setIsListening(false);
-      };
-
-      recognitionRef.current.onerror = () => {
-        setIsListening(false);
-      };
-
-      recognitionRef.current.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInput(transcript);
-        inputRef.current?.focus();
-      };
-
-      recognitionRef.current.start();
+    let recorder: MediaRecorder;
+    try {
+      recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
     } catch {
-      setIsListening(false);
+      stream.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+      setMicError(t("voiceNotSupported"));
+      return;
     }
-  }, [locale, t]);
 
-  const stopVoiceInput = useCallback(() => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
+    recorderRef.current = recorder;
+    recorder.onerror = () => {
+      recorderRef.current = null;
       setIsListening(false);
+      setMicError(t("voiceNotSupported"));
+    };
+
+    try {
+      recorder.start();
+    } catch {
+      recorderRef.current = null;
+      stream.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+      setMicError(t("voiceNotSupported"));
+      return;
     }
-  }, []);
 
-  const handleQuickAction = useCallback((action: string) => {
-    sendMessage(action);
-  }, []);
+    setIsListening(true);
+  }, [
+    t,
+    isTranscribing,
+    ui.micDenied,
+    ui.micHelp,
+    ui.micNotFound,
+    ui.micBusy,
+  ]);
 
-  const handleSuggestionSelect = useCallback((suggestion: string) => {
-    sendMessage(suggestion);
-  }, []);
+  const handleCapability = (query: string) => {
+    if (query === "__handoff__") {
+      void requestHandoff();
+      return;
+    }
+    void sendMessage(query);
+  };
 
-
-  const quickQuestions = [
-    '¿Qué productos distribuís?',
-    '¿Cómo hago un pedido?',
-    '¿Cuál es el horario?',
-    '¿Cómo descargo facturas?',
-  ];
+  const lastIndex = messages.length - 1;
+  const showHandoffChip =
+    !handoff &&
+    !isGenerating &&
+    (uncertaintyCount >= 2 ||
+      messages.filter((message) => message.role === "user").length >= 2);
 
   return (
-    <>
-      {/* Chatbot Container */}
-      <motion.div
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.3, type: "spring" }}
-      >
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className={`mb-4 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col ${isMinimized
-                ? 'w-64 sm:w-72 h-14'
-                : 'w-[calc(100vw-32px)] sm:w-[380px] md:w-[400px] h-[calc(100vh-120px)] sm:h-[500px] md:h-[550px] max-h-[600px]'
-                }`}
-            >
-              {/* Header */}
-              <div
-                className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-4 py-3 flex items-center justify-between cursor-pointer"
-                onClick={() => isMinimized && setIsMinimized(false)}
+    <div className={styles.widget} data-kage-pepa data-kage-pepa-open={isOpen || undefined}>
+      {isOpen && (
+        <section
+          id={panelId}
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby={`${panelId}-title`}
+          className={styles.panel}
+          data-minimized={isMinimized}
+          data-fx="assistant-panel"
+        >
+          <header className={styles.header}>
+            <div className={styles.identity}>
+              <span className={styles.brandMark} aria-hidden="true">
+                <BrandMark />
+              </span>
+              <div>
+                <h2 id={`${panelId}-title`}>{assistantName}</h2>
+                {!isMinimized && (
+                  <p>
+                    {authToken ? (
+                      <span className={styles.authTag}>
+                        <ShieldCheck aria-hidden="true" /> {ui.signedIn}
+                      </span>
+                    ) : (
+                      copy.subtitle
+                    )}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className={styles.tools}>
+              {authToken && !isMinimized && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={signOut}
+                  aria-label={ui.logout}
+                  title={ui.logout}
+                >
+                  <KeyRound aria-hidden="true" />
+                </Button>
+              )}
+              {!isMinimized && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => void requestHandoff()}
+                  disabled={isHandoffLoading}
+                  aria-label={ui.handoff}
+                  title={ui.handoff}
+                >
+                  <Headphones aria-hidden="true" />
+                </Button>
+              )}
+              {!isMinimized && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setShowMemory((value) => !value)}
+                  aria-label={ui.memory}
+                  title={ui.memory}
+                  aria-expanded={showMemory}
+                  aria-pressed={memoryEnabled}
+                >
+                  <ShieldCheck aria-hidden="true" />
+                </Button>
+              )}
+              {!isMinimized && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={clearChat}
+                  aria-label={copy.clear}
+                  title={copy.clear}
+                  className={styles.clearTool}
+                >
+                  <RefreshCw aria-hidden="true" />
+                </Button>
+              )}
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => setIsMinimized((value) => !value)}
+                aria-label={isMinimized ? copy.expand : copy.minimize}
+                title={isMinimized ? copy.expand : copy.minimize}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-white" />
-                  </div>
+                {isMinimized ? <Maximize2 aria-hidden="true" /> : <Minimize2 aria-hidden="true" />}
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={closePanel}
+                aria-label={copy.close}
+                title={copy.close}
+              >
+                <X aria-hidden="true" />
+              </Button>
+            </div>
+          </header>
+
+          {!isMinimized && (
+            <>
+              {showMemory && (
+                <section className={styles.memoryPanel} aria-label={ui.memoryTitle}>
                   <div>
-                    <h3 className="font-bold text-white text-sm flex items-center gap-1.5">
-                      Pepa
-                      <span className="text-[10px] font-normal bg-white/20 px-1.5 py-0.5 rounded-full">IA</span>
-                    </h3>
-                    {!isMinimized && (
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                        <span className="text-[11px] text-white/80">Asistente Virtual</span>
+                    <p className={styles.kicker}>{ui.memoryTitle}</p>
+                    <p>{ui.memoryCount(messages.length)}</p>
+                    <p className={styles.memoryHint}>{ui.memoryHint}</p>
+                  </div>
+                  <div className={styles.memoryActions}>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={memoryEnabled}
+                      className={styles.switch}
+                      onClick={toggleMemory}
+                    >
+                      <span aria-hidden="true" data-on={memoryEnabled} />
+                      {ui.memoryOn}
+                    </button>
+                    <button type="button" className={styles.memoryDelete} onClick={deleteMemory}>
+                      <Trash2 aria-hidden="true" /> {ui.deleteMemory}
+                    </button>
+                  </div>
+                </section>
+              )}
+
+              <div
+                ref={messagesContainerRef}
+                className={styles.messages}
+                role="log"
+                aria-label={copy.history}
+                aria-live="polite"
+                aria-relevant="additions"
+                aria-busy={isGenerating}
+              >
+                {messages.length === 0 && (
+                  <div className={styles.welcome}>
+                    <p className={styles.kicker}>{greeting}</p>
+                    <h3>{copy.welcome}</h3>
+                    <p>{copy.intro}</p>
+                    <p className={styles.kicker}>{ui.capabilities}</p>
+                    <div className={styles.capabilities}>
+                      {ui.cards.map((card) => {
+                        const Icon = card.icon;
+                        return (
+                          <button
+                            type="button"
+                            key={card.title}
+                            onClick={() => handleCapability(card.query)}
+                          >
+                            <Icon aria-hidden="true" />
+                            <span>{card.title}</span>
+                            <ArrowUpRight aria-hidden="true" />
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <div className={styles.questions}>
+                      {copy.questions.map((question) => (
+                        <button
+                          type="button"
+                          key={question}
+                          onClick={() => {
+                            setInput(question);
+                            inputRef.current?.focus({ preventScroll: true });
+                          }}
+                        >
+                          {question}
+                          <ArrowUpRight aria-hidden="true" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {messages.map((message, index) => (
+                  <article
+                    key={message.id}
+                    className={styles.message}
+                    data-role={message.role}
+                    data-error={message.isError || undefined}
+                    role={message.isError ? "alert" : undefined}
+                  >
+                    <p className={styles.speaker}>
+                      {message.role === "user" ? copy.you : assistantName}
+                    </p>
+                    <p className={styles.messageText}>
+                      <MarkdownText content={message.content} />
+                      {message.streaming && <span className={styles.caret} aria-hidden="true" />}
+                    </p>
+
+                    {message.isError && (
+                      <div className={styles.errorCard}>
+                        <AlertTriangle aria-hidden="true" />
+                        <button type="button" onClick={regenerate}>
+                          {ui.retry}
+                        </button>
                       </div>
                     )}
-                  </div>
-                </div>
-                <div className="flex items-center gap-1">
-                  {!isMinimized && (
-                    <>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={(e) => { e.stopPropagation(); clearChat(); }}
-                        className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/10"
-                        title="Limpiar chat"
-                      >
-                        <RefreshCw className="w-3.5 h-3.5" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={(e) => { e.stopPropagation(); setIsMinimized(true); }}
-                        className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/10"
-                        title="Minimizar"
-                      >
-                        <Minimize2 className="w-3.5 h-3.5" />
-                      </Button>
-                    </>
-                  )}
-                  {isMinimized && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={(e) => { e.stopPropagation(); setIsMinimized(false); }}
-                      className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/10"
-                      title="Maximizar"
-                    >
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </Button>
-                  )}
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
-                    className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/10"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </Button>
-                </div>
-              </div>
 
-              {!isMinimized && (
-                <>
-                  {/* Messages Area */}
-                  <div
-                    ref={messagesContainerRef}
-                    className="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-gray-50 to-white"
-                  >
-                    {messages.length === 0 && (
-                      <div className="text-center py-4">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ type: "spring", duration: 0.5 }}
-                          className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center shadow-lg"
-                        >
-                          <Bot className="w-8 h-8 text-emerald-600" />
-                        </motion.div>
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.2 }}
-                        >
-                          <h4 className="font-bold text-gray-800 mb-1">{greeting}, soy Pepa</h4>
-                          <p className="text-sm text-gray-500 mb-4 px-4">
-                            Tu asistente virtual de Granja Mari Pepa. Estoy aquí para ayudarte con productos, pedidos, facturas o cualquier duda.
-                          </p>
-                        </motion.div>
+                    {message.role === "assistant" && message.redacted && (
+                      <p className={styles.redactedNote}>
+                        <ShieldCheck aria-hidden="true" /> Datos personales protegidos.
+                      </p>
+                    )}
 
-                        {showQuickActions && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="px-2"
+                    {message.role === "assistant" && message.sources && message.sources.length > 0 && (
+                      <div className={styles.sources} aria-label={ui.sources}>
+                        {message.sources.map((source, sourceIndex) => (
+                          <a key={`${source.url}-${sourceIndex}`} href={source.url}>
+                            [{sourceIndex + 1}] {source.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
+                    {message.role === "assistant" && message.send && (
+                      <div className={styles.delivery} data-ok={message.send.success ? "true" : "false"}>
+                        {message.send.success ? (
+                          <CheckCircle2 aria-hidden="true" />
+                        ) : (
+                          <AlertTriangle aria-hidden="true" />
+                        )}
+                        <span>
+                          {message.send.success
+                            ? `Enviado por ${message.send.channel === "whatsapp" ? "WhatsApp" : "email"} a ${message.send.toMasked ?? ""}${message.send.redirected ? " (prueba)" : ""}`
+                            : `No enviado${message.send.code ? ` (${message.send.code})` : ""}`}
+                        </span>
+                        {message.send.fallbackUrl && (
+                          <a
+                            href={message.send.fallbackUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            <p className="text-xs text-gray-400 mb-2 flex items-center justify-center gap-1">
-                              <Zap className="w-3 h-3" />
-                              Acciones rápidas
-                            </p>
-                            <QuickActions onAction={handleQuickAction} />
-
-                            <div className="mt-4 pt-3 border-t border-gray-100">
-                              <p className="text-xs text-gray-400 mb-2">O pregúntame directamente:</p>
-                              <div className="space-y-1.5">
-                                {quickQuestions.map((q, i) => (
-                                  <motion.button
-                                    key={i}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.4 + i * 0.05 }}
-                                    whileHover={{ scale: 1.02, x: 4 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={() => {
-                                      setInput(q);
-                                      inputRef.current?.focus();
-                                    }}
-                                    className="block w-full text-left px-3 py-2 rounded-xl bg-white border border-gray-200 text-sm text-gray-700 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-700 transition-all shadow-sm"
-                                  >
-                                    {q}
-                                  </motion.button>
-                                ))}
-                              </div>
-                            </div>
-                          </motion.div>
+                            Abrir WhatsApp
+                          </a>
                         )}
                       </div>
                     )}
 
-                    {messages.map((msg, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div className={`flex items-end gap-2 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                          {/* Avatar */}
-                          <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${msg.role === 'user'
-                            ? 'bg-blue-600'
-                            : 'bg-gradient-to-br from-emerald-500 to-teal-600'
-                            }`}>
-                            {msg.role === 'user'
-                              ? <User className="w-3.5 h-3.5 text-white" />
-                              : <Bot className="w-3.5 h-3.5 text-white" />
-                            }
-                          </div>
-
-                          {/* Message Bubble */}
-                          <div className="flex flex-col">
-                            <div className={`rounded-2xl px-3.5 py-2.5 ${msg.role === 'user'
-                              ? 'bg-blue-600 text-white rounded-br-md'
-                              : 'bg-white border border-gray-200 text-gray-800 rounded-bl-md shadow-sm'
-                              }`}>
-                              {msg.role === 'assistant' ? (
-                                <StreamingMessage
-                                  content={msg.content}
-                                  isStreaming={Boolean(msg.isStreaming) && currentlyStreamingId === index}
-                                  onStreamComplete={handleStreamComplete}
-                                />
-                              ) : (
-                                <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
-                              )}
-                            </div>
-
-                            {/* Sugerencias contextuales para mensajes del asistente */}
-                            {msg.role === 'assistant' && msg.attachments && msg.attachments.length > 0 && (
-                              <div className="mt-2 flex gap-2">
-                                {msg.attachments.map((att: any, aidx: number) => (
-                                  <button
-                                    key={aidx}
-                                    onClick={async (e) => {
-                                      e.preventDefault();
-                                      try {
-                                        // Abrir nueva pestaña para descargar
-                                        window.open(att.url, '_blank', 'noopener');
-                                      } catch (err) {
-                                        console.error('Error descargando archivo', err);
-                                      }
-                                    }}
-                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-medium hover:bg-emerald-100 transition-all"
-                                  >
-                                    <FileText className="w-4 h-4" />
-                                    {att.label}
-                                  </button>
-                                ))}
-                              </div>
-                            )}
-
-                            {msg.role === 'assistant' &&
-                              msg.suggestions &&
-                              msg.suggestions.length > 0 &&
-                              index === messages.length - 1 &&
-                              currentlyStreamingId === null && (
-                                <ContextualSuggestions
-                                  suggestions={msg.suggestions}
-                                  onSelect={handleSuggestionSelect}
-                                />
-                              )}
-                          </div>
+                    {message.role === "assistant" &&
+                      message.suggestions &&
+                      message.suggestions.length > 0 &&
+                      index === lastIndex &&
+                      !message.streaming && (
+                        <div className={styles.suggestions}>
+                          {message.suggestions.map((suggestion) => (
+                            <button
+                              type="button"
+                              key={suggestion}
+                              onClick={() => void sendMessage(suggestion)}
+                            >
+                              {suggestion}
+                              <ArrowUpRight aria-hidden="true" />
+                            </button>
+                          ))}
                         </div>
-                      </motion.div>
-                    ))}
+                      )}
 
-                    {isLoading && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="flex justify-start"
-                      >
-                        <div className="flex items-end gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                            <Bot className="w-3.5 h-3.5 text-white" />
-                          </div>
-                          <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-xs text-gray-500 mr-2">Pensando</span>
-                              <div className="flex gap-1">
-                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
+                    {message.role === "assistant" && !message.streaming && !message.isError && (
+                      <div className={styles.messageTools}>
+                        <button
+                          type="button"
+                          onClick={regenerate}
+                          aria-label={ui.regenerate}
+                          className={styles.iconButton}
+                        >
+                          <RefreshCw aria-hidden="true" />
+                        </button>
+                        {message.wasVoice && (
+                          <button
+                            type="button"
+                            onClick={() => speak(message)}
+                            aria-label={speakingId === message.id ? ui.stopListening : ui.listen}
+                            className={styles.iconButton}
+                            aria-pressed={speakingId === message.id}
+                          >
+                            <Volume2 aria-hidden="true" />
+                          </button>
+                        )}
+                      </div>
                     )}
-                    <div ref={messagesEndRef} />
-                  </div>
+                  </article>
+                ))}
 
-                  {/* Input Area */}
-                  <div className="p-3 border-t border-gray-100 bg-white">
-                    <form
-                      onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
-                      className="flex gap-2"
-                    >
-                      <Input
-                        ref={inputRef}
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder={isListening ? t('voiceListening') : t('placeholder')}
-                        className={`flex-1 h-10 rounded-xl border-gray-200 focus:border-emerald-400 focus:ring-emerald-100 text-sm ${isListening ? 'border-red-400 bg-red-50' : ''}`}
-                        disabled={isLoading || currentlyStreamingId !== null}
-                      />
-                      {/* Voice Input Button */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        type="button"
-                        onClick={isListening ? stopVoiceInput : startVoiceInput}
-                        disabled={isLoading || currentlyStreamingId !== null}
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-lg ${isListening
-                            ? 'bg-red-500 text-white animate-pulse hover:bg-red-600'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800'
-                          }`}
-                        aria-label={t('voiceInput')}
-                      >
-                        {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        type="submit"
-                        disabled={!input.trim() || isLoading || currentlyStreamingId !== null}
-                        className="w-10 h-10 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all"
-                      >
-                        <Send className="w-4 h-4" />
-                      </motion.button>
-                    </form>
-                    <div className="flex items-center justify-between mt-2 px-1">
-                      <p className="text-[10px] text-gray-400 flex items-center gap-1">
-                        <Sparkles className="w-3 h-3" />
-                        {t('poweredBy')}
+                {isGenerating && messages[lastIndex]?.content === "" && (
+                  <p className={styles.loading} role="status">
+                    <span className={styles.dots} aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    {copy.loading}
+                  </p>
+                )}
+
+                {showHandoffChip && (
+                  <button
+                    type="button"
+                    className={styles.handoffChip}
+                    onClick={() => void requestHandoff()}
+                    disabled={isHandoffLoading}
+                  >
+                    <Headphones aria-hidden="true" />
+                    {isHandoffLoading ? ui.handoffSend : ui.handoff}
+                  </button>
+                )}
+
+                {handoff && (
+                  <div className={styles.handoffCard} role="status">
+                    <CheckCircle2 aria-hidden="true" />
+                    <div>
+                      <p className={styles.kicker}>{ui.handoffDone}</p>
+                      <p>
+                        {ui.handoffEta} <strong>{handoff.eta}</strong>
                       </p>
-                      <p className="text-[10px] text-gray-400">
-                        {t('since')}
-                      </p>
+                      <p className={styles.handoffRef}>#{handoff.reference}</p>
                     </div>
                   </div>
+                )}
+                {handoffError && (
+                  <p className={styles.micError} role="alert">
+                    {handoffError}
+                  </p>
+                )}
 
-                </>
-              )}
-            </motion.div>
+                {showLogin && (
+                  <form className={styles.loginCard} onSubmit={submitLogin} aria-label={ui.loginTitle}>
+                    <p className={styles.kicker}>{ui.loginTitle}</p>
+                    <p className={styles.loginHint}>{ui.loginText}</p>
+                    <label htmlFor={`${panelId}-code`}>{ui.code}</label>
+                    <input
+                      ref={codeRef}
+                      id={`${panelId}-code`}
+                      value={loginCode}
+                      onChange={(event) => setLoginCode(event.target.value)}
+                      inputMode="numeric"
+                      autoComplete="username"
+                      required
+                    />
+                    <label htmlFor={`${panelId}-password`}>{ui.password}</label>
+                    <input
+                      id={`${panelId}-password`}
+                      type="password"
+                      value={loginPassword}
+                      onChange={(event) => setLoginPassword(event.target.value)}
+                      autoComplete="current-password"
+                      required
+                    />
+                    {loginError && <p className={styles.loginError}>{loginError}</p>}
+                    <button type="submit" disabled={isLoggingIn}>
+                      {isLoggingIn ? ui.loggingIn : ui.enter}
+                    </button>
+                  </form>
+                )}
+              </div>
+
+              <footer className={styles.composer}>
+                {micError && (
+                  <p className={styles.micError} role="alert">
+                    {micError}{" "}
+                    <a
+                      href="https://support.google.com/chrome/answer/2693767"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {ui.micHelp}
+                    </a>
+                  </p>
+                )}
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    sendMessage();
+                  }}
+                >
+                  <label className={styles.srOnly} htmlFor={`${panelId}-input`}>
+                    {copy.write}
+                  </label>
+                  <textarea
+                    id={`${panelId}-input`}
+                    ref={inputRef}
+                    className={styles.textarea}
+                    value={input}
+                    rows={1}
+                    data-listening={isListening || isTranscribing || undefined}
+                    onChange={(event) => setInput(event.target.value)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" && !event.shiftKey) {
+                        event.preventDefault();
+                        sendMessage();
+                      }
+                    }}
+                    placeholder={
+                      isListening || isTranscribing
+                        ? t("voiceListening")
+                        : t("placeholder")
+                    }
+                    disabled={isGenerating}
+                    aria-describedby={`${panelId}-note`}
+                  />
+                  <button
+                    type="button"
+                    className={styles.control}
+                    data-listening={isListening || isTranscribing || undefined}
+                    onClick={isListening ? stopVoiceInput : startVoiceInput}
+                    disabled={isGenerating || isTranscribing}
+                    aria-label={t("voiceInput")}
+                    title={t("voiceInput")}
+                    data-tooltip={t("voiceInput")}
+                    aria-pressed={isListening}
+                    aria-busy={isTranscribing || undefined}
+                  >
+                    {isListening ? <MicOff aria-hidden="true" /> : <Mic aria-hidden="true" />}
+                    {isListening && <span className={styles.recDot} aria-hidden="true" />}
+                  </button>
+                  {isGenerating ? (
+                    <button
+                      type="button"
+                      className={styles.control}
+                      onClick={stopGeneration}
+                      aria-label={ui.stop}
+                      title={ui.stop}
+                      data-tooltip={ui.stop}
+                    >
+                      <Square aria-hidden="true" />
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className={styles.control}
+                      disabled={!input.trim()}
+                      aria-label={copy.send}
+                      title={copy.send}
+                      data-tooltip={copy.send}
+                    >
+                      <Send aria-hidden="true" />
+                    </button>
+                  )}
+                </form>
+                <div className={styles.underbar}>
+                  <p className={styles.note} id={`${panelId}-note`}>
+                    {copy.note}
+                  </p>
+                </div>
+              </footer>
+            </>
           )}
-        </AnimatePresence>
-
-        {/* Floating Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-white transition-all relative overflow-hidden group ${isOpen
-            ? 'bg-gray-700 hover:bg-gray-800'
-            : 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 hover:shadow-emerald-500/40'
-            }`}
-        >
-          {/* Shine effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-
-          <AnimatePresence mode="wait">
-            {isOpen ? (
-              <motion.div
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <X className="w-6 h-6 relative z-10" />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="bot"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Bot className="w-6 h-6 relative z-10" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Notification dot */}
-          {!isOpen && (
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white shadow-lg"
-            />
-          )}
-        </motion.button>
-      </motion.div>
-    </>
+        </section>
+      )}
+      <button
+        ref={launcherRef}
+        type="button"
+        className={styles.launcher}
+        data-kage-pepa-launcher
+        aria-controls={panelId}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? copy.close : copy.open}
+        onClick={isOpen ? closePanel : openPanel}
+      >
+        <span>{assistantName}</span>
+        {isOpen ? <X aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
+      </button>
+    </div>
   );
 }
 

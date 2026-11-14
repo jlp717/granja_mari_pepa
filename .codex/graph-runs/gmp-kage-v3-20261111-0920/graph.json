@@ -72,7 +72,15 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/components/kage/engine/**",
+        "frontend/components/kage/KageRuntimeProvider.tsx",
+        "frontend/components/kage/contracts.ts",
+        "frontend/public/kage/vendor/**",
+        "docs/redesign/KAGE-ANALISIS.md",
+        "docs/redesign/discovery/motion.json",
+        "docs/redesign/translations/zh.json"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -139,7 +147,22 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/app/globals.css",
+        "frontend/tailwind.config.ts",
+        "frontend/tsconfig.json",
+        "frontend/next.config.js",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/components/ui/**",
+        "frontend/components/kage/styles/**",
+        "frontend/components/kage/fonts/**",
+        "frontend/components/kage/typography/**",
+        "docs/redesign/DESIGN.md",
+        "docs/redesign/discovery/tokens.json",
+        "docs/redesign/discovery/chat-link-proposal/**",
+        "frontend/tests/__tests__/utils.test.tsx"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -206,7 +229,23 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/app/[locale]/layout.tsx",
+        "frontend/components/layout/**",
+        "frontend/components/kage/navigation/**",
+        "frontend/components/kage/KageSiteShell.tsx",
+        "frontend/components/kage/KageRoute.tsx",
+        "frontend/components/kage/Chapter.tsx",
+        "frontend/components/kage/WordReveal.tsx",
+        "frontend/components/kage/Foreground.tsx",
+        "frontend/components/kage/Cursor.tsx",
+        "frontend/lib/kage-navigation-copy.ts",
+        "docs/redesign/ARQUITECTURA-KAGE.md",
+        "docs/redesign/discovery/navigation.json",
+        "frontend/lib/analytics.ts",
+        "frontend/components/providers/analytics-provider.tsx",
+        "frontend/app/layout.tsx"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -273,7 +312,18 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/public/kage/scene/**",
+        "frontend/public/kage/foreground/**",
+        "frontend/public/kage/brand/**",
+        "frontend/public/kage/assets.json",
+        "docs/redesign/DIRECCION-DE-ARTE.md",
+        "docs/redesign/ASSETS.md",
+        "docs/redesign/COREOGRAFIA.md",
+        "docs/redesign/discovery/art.json",
+        "docs/redesign/art/**",
+        "docs/redesign/translations/it.json"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -340,7 +390,25 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/app/[locale]/page.tsx",
+        "frontend/components/home/**",
+        "frontend/app/[locale]/productos/**",
+        "frontend/components/kage/catalogue/**",
+        "frontend/lib/kage-home-copy.ts",
+        "frontend/lib/kage-catalogue-copy.ts",
+        "frontend/lib/kage-seo.ts",
+        "frontend/components/seo/**",
+        "frontend/app/sitemap.ts",
+        "frontend/app/robots.ts",
+        "frontend/app/robots.txt",
+        "docs/redesign/CONTENIDO-FUENTE.md",
+        "docs/redesign/fuentes/**",
+        "docs/redesign/discovery/public.json",
+        "frontend/public/robots.txt",
+        "frontend/public/sitemap.xml",
+        "docs/redesign/translations/de.json"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -407,7 +475,23 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/app/[locale]/acerca/**",
+        "frontend/app/[locale]/contacto/**",
+        "frontend/app/[locale]/lorca/**",
+        "frontend/app/[locale]/legal/**",
+        "frontend/app/[locale]/preguntas-frecuentes/**",
+        "frontend/app/[locale]/calidad/**",
+        "frontend/app/[locale]/reparto/**",
+        "frontend/app/[locale]/sectores/**",
+        "frontend/components/kage/editorial/**",
+        "frontend/lib/kage-editorial-copy.ts",
+        "docs/redesign/CONTENIDO-HUECOS.md",
+        "docs/redesign/CONTENIDO-PENDIENTE.md",
+        "docs/redesign/CONTENIDO-V3.md",
+        "docs/redesign/discovery/editorial.json",
+        "frontend/components/editorial/**"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -474,7 +558,31 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/app/[locale]/area-clientes/**",
+        "frontend/app/[locale]/checkout/**",
+        "frontend/app/[locale]/login-secure-example/**",
+        "frontend/app/[locale]/offline/**",
+        "frontend/app/[locale]/not-found.tsx",
+        "frontend/app/[locale]/error.tsx",
+        "frontend/app/[locale]/loading.tsx",
+        "frontend/app/not-found.tsx",
+        "frontend/app/global-error.tsx",
+        "frontend/components/customer/**",
+        "frontend/components/panamar/**",
+        "frontend/components/cart/**",
+        "frontend/components/auth/**",
+        "frontend/components/kage/operations/**",
+        "frontend/hooks/useApiData.ts",
+        "docs/redesign/rutas.json",
+        "docs/redesign/INVENTARIO-MAIN.md",
+        "docs/redesign/PROTEGIDO-MAIN.json",
+        "docs/redesign/baseline/sources/**",
+        "docs/redesign/discovery/application.json",
+        "frontend/public/sw.js",
+        "frontend/hooks/useServiceWorker.tsx",
+        "frontend/components/ErrorBoundary.tsx"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -541,7 +649,17 @@
           }
         }
       },
-      "writes": [],
+      "writes": [
+        "frontend/e2e/kage*",
+        "frontend/components/kage/__tests__/**",
+        "docs/redesign/critica/**",
+        "docs/redesign/baseline/runtime/**",
+        "docs/redesign/VERIFICACION-KAGE.md",
+        "docs/redesign/discovery/critic.json",
+        "frontend/jest.config.js",
+        "frontend/e2e/navigation.spec.ts",
+        "frontend/playwright.config.ts"
+      ],
       "requires_all_inputs": false
     },
     {
@@ -556,7 +674,15 @@
         "type": "object"
       },
       "writes": [
-        "reference/kage-verbatim/**"
+        "reference/kage-verbatim/**",
+        ".gitignore",
+        "README.md",
+        "CHANGELOG.md",
+        ".env.example",
+        "docs/redesign/DECISIONES.md",
+        "docs/redesign/RESULTADO.md",
+        "frontend/public/kage/secret-pathways-assets/**",
+        "frontend/public/kage/assets/**"
       ],
       "requires_all_inputs": true
     },
@@ -658,5 +784,35 @@
       "to": "verify",
       "data": "integrated-plan-and-runtime"
     }
-  ]
+  ],
+  "phase": "PLAN_APPROVED_FOR_ISOLATED_IMPLEMENTATION",
+  "source_reduction": {
+    "completed_readonly_nodes": [
+      "motion",
+      "tokens",
+      "navigation",
+      "art",
+      "public",
+      "editorial",
+      "application",
+      "critic"
+    ],
+    "head_main": "9f94e0444db79f31b4fea088308fef28a6317d07",
+    "bootstrap": "592d3a8",
+    "routes_main": 11,
+    "specials_main": 2,
+    "kage_files": 22,
+    "kage_total_bytes": 3624975,
+    "kage_index_sha256": "c8e06b90397ac246baf0ab6f32f5f6b570acc6fe03c7009f711b579fb72d9f49",
+    "brand_accent": "hsl(190 95% 40%) from Mainglobals77 andlivecomputed",
+    "backend_changes_allowed": false,
+    "catalogue_gate": "preserve Maincomingsoon/publicAPIstubs",
+    "source_math_preserved": true,
+    "necessary_adaptations": [
+      "realGMPlogo for subsetWordmark exceptionbrand",
+      "singlepersistentambientcanvas with originaltransientClothcardcanvas; single native-scrollinput",
+      "ReactSSR/accessibility/reducedstaticfallback/lifecycle/routes missing from single-documentKage"
+    ],
+    "translation_graph": "translations-graph.json"
+  }
 }

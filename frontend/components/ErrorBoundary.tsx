@@ -3,6 +3,7 @@
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { AlertCircle, RefreshCw, Home, Bug } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { gmailCompose } from '@/components/editorial/facts';
 
 interface Props {
   children: ReactNode;
@@ -78,15 +79,18 @@ export class ErrorBoundary extends Component<Props, State> {
   };
 
   handleReportBug = () => {
-    const subject = encodeURIComponent(`Error en web - ${this.state.eventId}`);
-    const body = encodeURIComponent(
+    const subject = `Error en web - ${this.state.eventId}`;
+    const body =
       `Hola,\n\nHe encontrado un error en la web:\n\n` +
       `ID: ${this.state.eventId}\n` +
       `Mensaje: ${this.state.error?.message}\n` +
       `URL: ${typeof window !== 'undefined' ? window.location.href : ''}\n\n` +
-      `Descripción de lo que estaba haciendo:\n\n`
+      `Descripción de lo que estaba haciendo:\n\n`;
+    window.open(
+      gmailCompose('pedidos@granjamaripepa.com', subject, body),
+      '_blank',
+      'noopener,noreferrer'
     );
-    window.open(`mailto:pedidos@granjamaripepa.com?subject=${subject}&body=${body}`, '_blank');
   };
 
   render() {

@@ -6,20 +6,35 @@
 
 const logger = require('../utils/logger');
 
-// Store para IPs baneadas
-const bannedIPs = new Set();
+// Store para IPs baneadas con caducidad (evita bloqueos permanentes)
+const bannedIPs = new Map();
+const BAN_TTL_MS = 30 * 60 * 1000;
+const MAX_BANNED_IPS = 5000;
 const ipAccessHistory = new Map();
 const deviceFingerprints = new Map();
 const csrfTokens = new Map();
 
+function isPrivateOrLoopback(ip) {
+  const value = String(ip || '').replace(/^::ffff:/, '');
+  if (!value) return false;
+  if (value === '::1' || value === 'localhost') return true;
+  if (value.startsWith('127.')) return true;
+  if (value.startsWith('10.')) return true;
+  if (value.startsWith('192.168.')) return true;
+  const match = /^172\.(\d+)\./.exec(value);
+  return Boolean(match && Number(match[1]) >= 16 && Number(match[1]) <= 31);
+}
+
 /**
- * Verificar IPs baneadas
+ * Verificar IPs baneadas (con TTL)
  */
 function checkBannedIP(req, res, next) {
-  if (bannedIPs.has(req.ip)) {
+  const until = bannedIPs.get(req.ip);
+  if (until && until > Date.now()) {
     logger.warn('🚫 IP baneada intentando acceder', { ip: req.ip });
     return res.status(403).json({ success: false, message: 'Acceso denegado' });
   }
+  if (until) bannedIPs.delete(req.ip);
   next();
 }
 
@@ -62,6 +77,10 @@ function validateHeaders(req, res, next) {
  * Detectar payloads maliciosos
  */
 function detectMaliciousPayloads(req, res, next) {
+  // El chatbot tiene sus propios guardrails (injection, PII, sin SQL).
+  // Su texto no debe confundirse con un payload SQLi/XSS genérico.
+  if (String(req.path || '').startsWith('/api/chatbot')) return next();
+
   if (req.body) {
     const bodyStr = JSON.stringify(req.body);
 
@@ -90,16 +109,43 @@ function detectMaliciousPayloads(req, res, next) {
 }
 
 /**
- * Honeypot trap para detectar bots
+ * Honeypot trap para detectar bots.
+ * No banea tráfico interno/loopback (health checks, nginx, monitorización)
+ * y no confunde el panel legítimo con un scanner.
  */
+const HONEYPOT_PATTERNS = [
+  /\/wp-admin/i,
+  /\/wp-login/i,
+  /\/phpmyadmin/i,
+  /\/pma\//i,
+  /\/\.env/i,
+  /\/config\.php/i,
+  /\/administrator/i,
+  /\/xmlrpc\.php/i,
+  /\/\.git\//i,
+];
+
 function honeypotTrap(req, res, next) {
-  // Si acceden a rutas honeypot, banear IP
-  if (req.path.includes('/admin') || req.path.includes('/wp-admin')) {
-    logger.warn('🍯 Honeypot activado', { ip: req.ip, path: req.path });
-    bannedIPs.add(req.ip);
+  const requestPath = String(req.path || '');
+  const isTrap = HONEYPOT_PATTERNS.some((pattern) => pattern.test(requestPath));
+
+  if (!isTrap) return next();
+
+  if (isPrivateOrLoopback(req.ip)) {
+    logger.warn('🍯 Honeypot desde red interna (sin ban)', {
+      ip: req.ip,
+      path: requestPath,
+    });
     return res.status(404).json({ success: false, message: 'Not found' });
   }
-  next();
+
+  if (bannedIPs.size >= MAX_BANNED_IPS) {
+    const oldest = bannedIPs.keys().next().value;
+    if (oldest) bannedIPs.delete(oldest);
+  }
+  bannedIPs.set(req.ip, Date.now() + BAN_TTL_MS);
+  logger.warn('🍯 Honeypot activado', { ip: req.ip, path: requestPath });
+  return res.status(404).json({ success: false, message: 'Not found' });
 }
 
 /**
@@ -131,7 +177,12 @@ function csrfProtectionAdvanced(req, res, next) {
     '/api/libro-iva',
     '/api/libro-iva/enviar-email',
     '/api/clientes/enviar-factura-email',
-    '/api/chatbot' // Chatbot IA - excluido de CSRF (operación de consulta)
+    '/api/public/applications', // Formulario público de empleo
+    '/api/public/cv', // Currículum del formulario público
+    '/api/admin/login', // Acceso al panel: sin sesión previa, tras puerta VPN y rate limit
+    '/api/chatbot', // Chatbot IA - excluido de CSRF (operación de consulta)
+    '/api/chatbot/stream', // Chatbot IA en streaming (SSE)
+    '/api/chatbot/transcribe' // Transcripción de voz del chatbot
   ];
 
   // Excluir rutas dinámicas de contacto (protegidas por JWT)

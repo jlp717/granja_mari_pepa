@@ -1,284 +1,138 @@
-'use client';
+const source = "https://www.mari-pepa.com";
+const organizationId = source + "/#organization";
+const logo = source + "/kage/brand/logo-alpha.png";
+const mapLorca =
+  "https://maps.google.com/?q=Granja+Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca";
 
-import Script from 'next/script';
-
-/**
- * ====================================================================
- * 🔍 JSON-LD Schema.org - SEO Structured Data
- * ====================================================================
- * Datos estructurados para mejorar SEO y Rich Results en Google
- */
-
-// Schema de la Organización
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': 'https://www.mari-pepa.com/#organization',
-  name: 'Granja Mari Pepa',
-  alternateName: ['Granja Maripepa S.L.', 'Mari Pepa Lorca', 'Granja Mari Pepa Lorca', 'Mari Pepa', 'Distribuidora Mari Pepa'],
-  url: 'https://www.mari-pepa.com',
-  logo: {
-    '@type': 'ImageObject',
-    url: 'https://www.mari-pepa.com/images/logo.jpeg',
-    width: 512,
-    height: 512,
-  },
-  image: 'https://www.mari-pepa.com/og-image.jpg',
-  description: 'Distribución de productos alimentarios de alta calidad para el sector HORECA. Especialistas en congelados, refrigerados y productos de ambiente desde 1966.',
-  foundingDate: '1966',
-  founders: [
-    {
-      '@type': 'Person',
-      name: 'Fundadores de Granja Mari Pepa',
-    },
-  ],
-  address: [
-    {
-      '@type': 'PostalAddress',
-      streetAddress: 'Pol. Industrial Saprelorca, Avd. Francisco Jimeno Sola, 3',
-      addressLocality: 'Lorca',
-      addressRegion: 'Murcia',
-      postalCode: '30817',
-      addressCountry: 'ES',
-    },
-
-  ],
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: '+34-968-46-75-14',
-      contactType: 'customer service',
-      areaServed: ['ES-MU', 'ES-AL', 'ES-A'],
-      availableLanguage: 'Spanish',
-      hoursAvailable: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '08:00',
-        closes: '19:00',
-      },
-    },
-    {
-      '@type': 'ContactPoint',
-      telephone: '+34-950-97-34-29',
-      contactType: 'sales',
-      areaServed: 'ES-AL',
-      availableLanguage: 'Spanish',
-    },
-  ],
-  email: 'pedidos@mari-pepa.com',
-  sameAs: [
-    'https://www.facebook.com/granjamaripepa',
-    'https://www.instagram.com/granjamaripepa',
-  ],
-  parentOrganization: {
-    '@type': 'Organization',
-    name: 'Grupo Topgel',
-  },
-  areaServed: [
-    {
-      '@type': 'State',
-      name: 'Murcia',
-      '@id': 'https://www.wikidata.org/wiki/Q5765',
-    },
-
-    {
-      '@type': 'State',
-      name: 'Almería',
-      '@id': 'https://www.wikidata.org/wiki/Q10400',
-    },
-  ],
-  knowsAbout: [
-    'Distribución alimentaria',
-    'Productos congelados',
-    'HORECA',
-    'Hostelería',
-    'Restauración',
-    'Catering',
-    'Congelados para hostelería',
-    'Distribución HORECA Murcia',
-    'Productos congelados Lorca',
-    'Distribuidor alimentario',
-    'Pescados y mariscos congelados',
-    'Helados Nestlé hostelería',
-  ],
+const addressLorca = {
+  "@type": "PostalAddress",
+  streetAddress: "Avenida Francisco Jimeno Sola, 3",
+  addressLocality: "Lorca",
+  addressRegion: "Murcia",
+  postalCode: "30817",
+  addressCountry: "ES",
 };
 
-// Schema del negocio local (Murcia)
-const localBusinessSchemaMurcia = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': 'https://www.mari-pepa.com/#murcia',
-  name: 'Granja Mari Pepa - Sede Central Murcia',
-  image: 'https://www.mari-pepa.com/og-image.jpg',
-  url: 'https://www.mari-pepa.com',
-  telephone: '+34-968-46-75-14',
-  email: 'pedidos@mari-pepa.com',
-  priceRange: '€€',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Pol. Industrial Saprelorca, Avd. Francisco Jimeno Sola, 3',
-    addressLocality: 'Lorca',
-    addressRegion: 'Murcia',
-    postalCode: '30817',
-    addressCountry: 'ES',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 37.6711,
-    longitude: -1.7009,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '13:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '16:00',
-      closes: '19:00',
-    },
-  ],
-  sameAs: organizationSchema.sameAs,
-  parentOrganization: {
-    '@id': 'https://www.mari-pepa.com/#organization',
-  },
+const addressViator = {
+  "@type": "PostalAddress",
+  streetAddress: "Calle Sierra de Ronda, 26",
+  addressLocality: "Viator",
+  addressRegion: "Almería",
+  postalCode: "04240",
+  addressCountry: "ES",
 };
 
-
-
-// Schema del sitio web
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': 'https://www.mari-pepa.com/#website',
-  url: 'https://www.mari-pepa.com',
-  name: 'Granja Mari Pepa',
-  description: 'Distribución alimentaria HORECA en Murcia, Almería y Alicante — congelados, refrigerados y ambiente desde 1966',
-  publisher: {
-    '@id': 'https://www.mari-pepa.com/#organization',
+const lorcaHours = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "13:00",
   },
-  inLanguage: ['es-ES', 'en-US', 'de-DE', 'it-IT', 'zh-CN'],
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://www.mari-pepa.com/productos?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "16:00",
+    closes: "19:00",
   },
-};
+];
 
-// Schema de FAQs
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: '¿Qué productos distribuye Granja Mari Pepa?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Distribuimos más de 1.500 referencias de productos en tres temperaturas: congelados (pescados, mariscos, carnes, precocinados, repostería), refrigerados (lácteos, charcutería, pastelería) y ambiente (conservas, aceites, bebidas).',
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": organizationId,
+    name: "Granja Maripepa",
+    legalName: "Granja Maripepa, S.L.",
+    url: source,
+    logo,
+    image: source + "/kage/brand/og.png",
+    foundingDate: "1966",
+    telephone: "+34968467514",
+    email: "pedidos@granjamaripepa.com",
+    address: addressLorca,
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Región de Murcia" },
+      { "@type": "AdministrativeArea", name: "Provincia de Almería" },
+    ],
+    knowsAbout: [
+      "Distribución alimentaria HORECA",
+      "Producto congelado",
+      "Producto refrigerado",
+      "Temperatura ambiente",
+      "Panadería y repostería",
+      "Grupo Topgel",
+      "Froneri",
+      "Nestlé Helados",
+      "Panamar",
+    ],
+    brand: [
+      { "@type": "Brand", name: "Grupo Topgel" },
+      { "@type": "Brand", name: "Nestlé Helados · Froneri" },
+      { "@type": "Brand", name: "Panamar" },
+    ],
+    sameAs: [mapLorca],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+34968467514",
+        contactType: "sales",
+        areaServed: "ES",
+        availableLanguage: ["es", "en"],
       },
-    },
-    {
-      '@type': 'Question',
-      name: '¿En qué zonas realiza entregas Granja Mari Pepa?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Realizamos entregas en toda la Región de Murcia y sur de la provincia de Alicante, con entrega en 24-48 horas garantizando la cadena de frío.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Cómo puedo hacerme cliente de Granja Mari Pepa?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Puede solicitar una visita comercial sin compromiso llamando al 968 46 75 14. Un asesor le visitará para presentar el catálogo y condiciones. Los pedidos se entregan en 24-48 horas.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Cuál es el horario de atención al cliente?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Nuestro horario de atención es de lunes a viernes, de 8:00 a 13:00 y de 16:00 a 19:00.',
-      },
-    },
-  ],
-};
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": source + "/#website",
+    url: source,
+    name: "Granja Maripepa",
+    inLanguage: ["es", "en", "de", "it", "zh"],
+    publisher: { "@id": organizationId },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WholesaleStore",
+    "@id": source + "/#lorca",
+    name: "Granja Maripepa · Sede Lorca",
+    parentOrganization: { "@id": organizationId },
+    url: source + "/es/lorca",
+    telephone: "+34968467514",
+    email: "pedidos@granjamaripepa.com",
+    address: addressLorca,
+    openingHoursSpecification: lorcaHours,
+    areaServed: ["Región de Murcia", "Provincia de Almería"],
+    sameAs: [mapLorca],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WholesaleStore",
+    "@id": source + "/#viator",
+    name: "Granja Maripepa · Delegación Viator",
+    parentOrganization: { "@id": organizationId },
+    url: source + "/es/contacto",
+    telephone: "+34950973429",
+    address: addressViator,
+    areaServed: ["Provincia de Almería", "Región de Murcia"],
+  },
+];
 
-/**
- * Componente que inyecta todos los schemas JSON-LD
- */
+/** Only published, verifiable identity. No price, rating, certification,
+ * search action or social account is inferred. */
 export function JsonLdSchemas() {
   return (
     <>
-      <Script
-        id="organization-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
-      />
-      <Script
-        id="local-business-murcia-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchemaMurcia),
-        }}
-      />
-
-      <Script
-        id="website-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteSchema),
-        }}
-      />
-      <Script
-        id="faq-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
+      {schemas.map((schema) => (
+        <script
+          key={schema["@id"]}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+          }}
+        />
+      ))}
     </>
   );
 }
-
-/**
- * Schema de Breadcrumbs dinámico
- */
-export function BreadcrumbSchema({ items }: { items: { name: string; url: string }[] }) {
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  };
-
-  return (
-    <Script
-      id="breadcrumb-schema"
-      type="application/ld+json"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(breadcrumbSchema),
-      }}
-    />
-  );
-}
-
 export default JsonLdSchemas;

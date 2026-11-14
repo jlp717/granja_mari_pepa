@@ -1,5 +1,5 @@
 /**
- * Service Worker - Granja Mari Pepa
+ * Service Worker - Granja Maripepa
  * Proporciona funcionalidad offline y caching inteligente
  * 
  * Estrategias de caching:
@@ -310,7 +310,7 @@ function createOfflineResponse(request, isApi = false) {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sin conexión - Granja Mari Pepa</title>
+        <title>Sin conexión - Granja Maripepa</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body {
@@ -465,7 +465,7 @@ self.addEventListener('push', (event) => {
 
   event.waitUntil(
     self.registration.showNotification(
-      data.title || 'Granja Mari Pepa',
+      data.title || 'Granja Maripepa',
       options
     )
   );

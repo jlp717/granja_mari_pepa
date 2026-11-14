@@ -16,6 +16,10 @@ data/
 *.sqlite
 *.sqlite3
 
+# Archivos subidos desde el panel y currículums privados
+uploads/
+private/
+
 # Ignorar archivos temporales
 *.tmp
 *.temp

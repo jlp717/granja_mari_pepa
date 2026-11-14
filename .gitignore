@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 */node_modules/
 npm-debug.log*
@@ -218,3 +218,13 @@ backend/test_*.js
 backend/verify_*.js
 .opencode/
 .swarm/
+
+# Local redesign worktrees, dependency caches and generated verification output
+/.kage-worktrees/
+/.kage-cache/
+/.redesign-cache/
+/frontend/.next-*/
+/frontend/playwright-report/
+/frontend/test-results/
+/auth.json
+*.tsbuildinfo

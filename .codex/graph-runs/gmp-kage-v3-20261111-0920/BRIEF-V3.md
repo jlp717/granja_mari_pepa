@@ -36,3 +36,5 @@ Corrección09:36: OLVIDAR los auditores.mjs. FuenteKage+verificaciónvisual/inte
 - data-fxbloquesheader/mainchildren/footer declaraefectosREALES incluyendo scene-camera,layer-handoff,word-reveal,chapter-rail,cursor-trail;nosoloatributos.
 - Nodeclarar100/productionready/PASSsinpruebaliteral. Resultadoincluyeretosreales/créditos/contenidopendiente, sinumbralrebajado.
 - Autonomía:nodecisiones/permisoentresteps,registraDECISIONES. SóloesencialOAuth,destrucciónnoautorizadacontradictoria,contradicciónevidenciada.
+## Precisión de arquitectura basada en fuente completa
+El usuario exige un único canvas PERSISTENTE ambiental en el layout y un solo motor de SCROLL; no exige un único RAF ni prohíbe los canvas locales transitorios de tarjetas. Kage tiene tres ClothCanvas y variosRAF. Se conserva ese subsistema literal en tarjetas (con dispose al salir), y un único canvas ambiental persistente. No crear compositor distinto ni reinterpretar shaders para una restricción que el usuario no impuso. Los canvas2D de texturas son recursos offline, no otros entornos.

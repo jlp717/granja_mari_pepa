@@ -15,7 +15,7 @@ const SMTP_CONFIG = {
     secure: true, // FORZADO: Siempre SSL
     auth: {
         user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
-        pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
+        pass: process.env.SMTP_PASSWORD
     },
     // Timeouts to prevent freezing
     connectionTimeout: 20000, // Increased to 20s
@@ -41,6 +41,9 @@ let transporter = null;
  */
 function initializeTransporter() {
     if (!transporter) {
+        if (!SMTP_CONFIG.auth.pass) {
+            throw new Error('SMTP_PASSWORD no configurada: no se puede enviar correo');
+        }
         transporter = nodemailer.createTransport(SMTP_CONFIG);
         logger.info('✅ Email service initializing...', {
             host: SMTP_CONFIG.host,
@@ -234,8 +237,175 @@ async function verifyConnection() {
     }
 }
 
+/**
+ * Aviso interno de nueva candidatura.
+ */
+/**
+ * Transporte dedicado para los avisos de candidaturas.
+ * Usa su propio buzón (SMTP_RRHH_*) para no tocar el canal de noreply
+ * que envían los correos de recuperación de contraseña.
+ */
+function createRrhhTransporter() {
+    if (!process.env.SMTP_RRHH_HOST) return null;
+    return nodemailer.createTransport({
+        host: process.env.SMTP_RRHH_HOST,
+        port: Number(process.env.SMTP_RRHH_PORT || 465),
+        secure: String(process.env.SMTP_RRHH_SECURE || 'true') === 'true',
+        auth: {
+            user: process.env.SMTP_RRHH_USER,
+            pass: process.env.SMTP_RRHH_PASSWORD,
+        },
+        connectionTimeout: 15000,
+        greetingTimeout: 15000,
+        socketTimeout: 20000,
+    });
+}
+
+async function sendApplicationNotification(application, to) {
+    const dedicated = createRrhhTransporter();
+    try {
+        const transporter = dedicated || initializeTransporter();
+        const senderAddress = dedicated
+            ? process.env.SMTP_RRHH_FROM || process.env.SMTP_RRHH_USER
+            : FROM_EMAIL;
+        const esc = (value) =>
+            String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        const row = (label, value) =>
+            value
+                ? `<tr>
+                     <td style="padding:9px 14px 9px 0;border-bottom:1px solid #ece8df;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#8a8578;width:36%;vertical-align:top;">${label}</td>
+                     <td style="padding:9px 0;border-bottom:1px solid #ece8df;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#1a1a1a;vertical-align:top;">${esc(value)}</td>
+                   </tr>`
+                : '';
+
+        const mailOptions = {
+            from: `"Granja Mari Pepa - Empleo" <${senderAddress}>`,
+            to,
+            subject: `Nueva candidatura: ${application.name}${application.jobTitle ? ` - ${application.jobTitle}` : ''}`,
+            html: `
+                <div style="margin:0;padding:0;background:#f2f1ee;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
+                    <tr>
+                      <td align="center">
+                        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
+                          <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
+                          <tr>
+                            <td style="padding:26px 30px 0;">
+                              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Granja Maripepa &middot; Empleo</p>
+                              <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Nueva candidatura recibida</h1>
+                              <p style="margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6b6b6b;">${esc(application.receivedAt || new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }))}</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:20px 30px 0;">
+                              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                ${row('Nombre', application.name)}
+                                ${row('Email', application.email)}
+                                ${row('Teléfono', application.phone)}
+                                ${row('Sector', application.sector)}
+                                ${row('Puesto', application.jobTitle)}
+                                ${row('Currículum', application.cvName)}
+                              </table>
+                            </td>
+                          </tr>
+                          ${
+                            application.message
+                              ? `<tr><td style="padding:18px 30px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:12px 14px;background:#faf9f6;border-left:2px solid #d8d2c5;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.65;color:#3d3d3d;">${esc(application.message)}</td></tr></table></td></tr>`
+                              : ''
+                          }
+                          <tr>
+                            <td style="padding:24px 30px 0;">
+                              <a href="https://maripepa.es/admin" style="display:inline-block;padding:12px 22px;background:#1a1a1a;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;">Abrir la consola</a>
+                              <p style="margin:10px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8a8578;">https://maripepa.es/admin</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:22px 30px 0;">
+                              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f1;border-left:2px solid #cf3700;">
+                                <tr>
+                                  <td style="padding:13px 15px;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.65;color:#4a4a4a;">
+                                    <strong style="color:#1a1a1a;">Acceso restringido.</strong> La consola solo funciona desde la red de la empresa o conectado a la VPN. Si no carga, comprueba la conexión antes de avisar.
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:20px 30px 26px;">
+                              <p style="margin:0;padding-top:16px;border-top:1px solid #ece8df;font-family:Arial,Helvetica,sans-serif;font-size:10.5px;line-height:1.6;color:#9a958a;">Aviso automático del sistema de empleo de Granja Maripepa. No respondas a este correo.</p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>`,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        logger.info('Aviso de candidatura enviado', { to, messageId: info.messageId });
+        return { success: true, messageId: info.messageId };
+    } catch (error) {
+        logger.error('Error enviando aviso de candidatura', { message: error.message });
+        return { success: false, error: error.message };
+    } finally {
+        if (dedicated) dedicated.close();
+    }
+}
+
+async function sendInvoiceEmail({ to, subject, text, html, pdfBuffer, filename }) {
+    if (!to) {
+        const error = new Error('Destinatario de email vacío');
+        error.code = 'NO_EMAIL';
+        throw error;
+    }
+
+    const transporter = initializeTransporter();
+    const info = await transporter.sendMail({
+        from: `"Granja Mari Pepa" <${FROM_EMAIL}>`,
+        to,
+        subject,
+        text,
+        html,
+        attachments: pdfBuffer
+            ? [{
+                filename: filename || 'factura.pdf',
+                content: pdfBuffer,
+                contentType: 'application/pdf'
+            }]
+            : []
+    });
+
+    const accepted = (info.accepted || []).map(String);
+    const rejected = (info.rejected || []).map(String);
+
+    if (!accepted.length || rejected.length > 0) {
+        const error = new Error(`SMTP no aceptó el destinatario: ${rejected.join(', ') || 'sin aceptados'}`);
+        error.code = 'SMTP_REJECTED';
+        throw error;
+    }
+
+    logger.info('Factura enviada por email', {
+        to,
+        messageId: info.messageId
+    });
+
+    return {
+        success: true,
+        messageId: info.messageId,
+        accepted,
+        rejected
+    };
+}
+
 module.exports = {
     sendPasswordResetEmail,
     sendVerificationCodeEmail,
+    sendApplicationNotification,
+    sendInvoiceEmail,
     verifyConnection
 };

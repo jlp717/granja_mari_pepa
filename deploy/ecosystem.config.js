@@ -36,9 +36,9 @@ module.exports = {
             max_memory_restart: '1G',
 
             // Graceful shutdown
-            kill_timeout: 5000,
+            kill_timeout: 15000,
             wait_ready: true,
-            listen_timeout: 10000,
+            listen_timeout: 30000,
 
             // Entorno de producción
             env: {

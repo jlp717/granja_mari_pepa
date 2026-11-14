@@ -306,6 +306,29 @@ async function getClientProducts(codigoCliente, limit = 100) {
   }
 }
 
+async function getClientOrders(codigoCliente, limit = 10) {
+  const safeLimit = Math.max(1, Math.min(50, Number(limit) || 10));
+  try {
+    return await odbcPool.query(
+      `SELECT
+         TRIM(SERIEALBARAN) AS SERIE,
+         NUMEROALBARAN AS NUMERO,
+         EJERCICIOALBARAN AS EJERCICIO,
+         IMPORTETOTAL AS TOTAL,
+         SITUACIONALBARAN AS SITUACION,
+         TRIM(CODIGOTIPOALBARAN) AS TIPO
+       FROM DSEDAC.CAC
+       WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
+       ORDER BY EJERCICIOALBARAN DESC, NUMEROALBARAN DESC
+       FETCH FIRST ${safeLimit} ROWS ONLY`,
+      [codigoCliente],
+    );
+  } catch (error) {
+    logger.error('Error obteniendo pedidos del cliente', error);
+    throw error;
+  }
+}
+
 /**
  * Obtener resumen de facturación del cliente (total agregado)
  */
@@ -604,6 +627,7 @@ module.exports = {
   getInvoices,
   countInvoices,
   getClientProducts,
+  getClientOrders,
   getClientSummary,
   getClientSummaryByYear,
   getAvailableYears,

@@ -1,15 +1,15 @@
 {
-  "name": "Granja Mari Pepa - Distribución Alimentaria Premium",
-  "short_name": "Mari Pepa",
-  "description": "Distribución alimentaria de alta calidad para hostelería, restauración y catering. Especialistas HORECA desde 1966 en Murcia y Almería.",
+  "name": "Granja Maripepa · Distribución HORECA",
+  "short_name": "Maripepa",
+  "description": "Distribución de producto congelado, refrigerado y de temperatura ambiente para hostelería y restauración desde Lorca, Murcia.",
   "version": "2.1.0",
   "start_url": "/",
   "scope": "/",
   "id": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#0d3d4d",
-  "background_color": "#ffffff",
+  "theme_color": "#05070a",
+  "background_color": "#05070a",
   "lang": "es-ES",
   "dir": "ltr",
   "categories": [
@@ -19,15 +19,15 @@
   ],
   "icons": [
     {
-      "src": "/images/logo.jpeg",
+      "src": "/kage/brand/logo-alpha.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/images/logo.jpeg",
+      "src": "/kage/brand/logo-alpha.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
@@ -43,7 +43,7 @@
       "sizes": "1200x630",
       "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "Granja Mari Pepa - Página Principal"
+      "label": "Granja Maripepa · Página principal"
     }
   ],
   "shortcuts": [

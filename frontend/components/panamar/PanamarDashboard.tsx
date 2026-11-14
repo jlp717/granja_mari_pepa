@@ -441,7 +441,7 @@ export function PanamarDashboard() {
       `Consumo (cajas): ${(doc.totalCajasPanamar || 0).toFixed(3)}\n` +
       `Importe PANAMAR: ${doc.totalImportePanamar.toFixed(2)} €\n` +
       `Líneas: ${doc.totalLineasPanamar}\n\n` +
-      `Granja Mari Pepa`
+      `Granja Maripepa`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank');
     setShowShareModal(false);

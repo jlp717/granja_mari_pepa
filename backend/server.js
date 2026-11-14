@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SERVIDOR PRINCIPAL - SECURITY FORTRESS EDITION
  * ================================================
  * API REST Ultra-Segura para Generación de Facturas PDF
@@ -20,6 +20,7 @@
 
 require('dotenv').config();
 
+const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');
@@ -37,10 +38,11 @@ const authControllerV2 = require('./app/controllers/authControllerV2');
 const tempLinkController = require('./app/controllers/tempLinkController');
 const pedidoController = require('./app/controllers/pedidoController');
 const productsController = require('./app/controllers/productsController');
-const chatbotController = require('./app/controllers/chatbotController'); // 🤖 Chatbot IA
-const libroIvaController = require('./app/controllers/libroIvaController'); // 📊 Libro IVA
-const panamarController = require('./app/controllers/panamarController'); // 📦 PANAMAR
-const { generalLimiter, pdfLimiter } = require('./app/middleware/rateLimiter');
+const chatbotController = require('./app/controllers/chatbotController'); // ðŸ¤– Chatbot IA
+const libroIvaController = require('./app/controllers/libroIvaController'); // Libro IVA
+const { adminRouter, publicRouter } = require('./app/routes/adminRoutes');
+const panamarController = require('./app/controllers/panamarController'); // ðŸ“¦ PANAMAR
+const { generalLimiter, pdfLimiter, chatbotLimiter } = require('./app/middleware/rateLimiter');
 const { notFoundHandler, errorHandler, requestLogger } = require('./app/middleware/errorHandler');
 
 // Validación con Joi (Seguridad extrema)
@@ -74,7 +76,7 @@ const {
   csrfProtection
 } = require('./app/middleware/sessionSecurity');
 
-// 🛡️ SECURITY FORTRESS - Protección ultra-avanzada
+// ðŸ›¡ï¸ SECURITY FORTRESS - Protección ultra-avanzada
 const {
   checkBannedIP,
   detectMaliciousBots,
@@ -90,13 +92,13 @@ const {
   getSecurityStats,
 } = require('./app/middleware/securityFortress');
 
-// 🔐 Autenticación de dos factores
+// ðŸ” Autenticación de dos factores
 const {
   require2FAForSensitive,
   needs2FAOnLogin,
 } = require('./app/middleware/twoFactorAuth');
 
-// 🛡️ SECURITY ULTRA - Protección nivel nación-estado
+// ðŸ›¡ï¸ SECURITY ULTRA - Protección nivel nación-estado
 const {
   applySecurityUltra,
   antiAutomation,
@@ -108,7 +110,7 @@ const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 // ===================================
-// 🛡️ SECURITY ULTRA - PRIMERA LÍNEA DE DEFENSA
+// ðŸ›¡ï¸ SECURITY ULTRA - PRIMERA LÍNEA DE DEFENSA
 // ===================================
 // SECURITY: Aplicar TODAS las capas de seguridad ultra antes de cualquier otro middleware
 applySecurityUltra(app);
@@ -171,18 +173,25 @@ app.use(helmet({
 
 // CORS con configuración segura
 const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(',')
+  ? process.env.CORS_ORIGIN.split(',').map((origin) => origin.trim()).filter(Boolean)
   : [
     'http://localhost:3000',
     'http://localhost:3001'
   ];
+
+// En desarrollo el panel se sirve desde localhost; en producción solo dominios reales.
+if (process.env.NODE_ENV !== 'production') {
+  for (const local of ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:3001']) {
+    if (!allowedOrigins.includes(local)) allowedOrigins.push(local);
+  }
+}
 
 // TODO: Temporal - Patrón para DevTunnels (QUITAR en producción)
 const devTunnelsPattern = /^https:\/\/[a-z0-9-]+-\d+\.uks1\.devtunnels\.ms$/;
 
 app.use(cors({
   origin: (origin, callback) => {
-    // ✅ Permitir health checks internos y requests de localhost sin origin
+    // âœ… Permitir health checks internos y requests de localhost sin origin
     // Esto es necesario para monitoreo interno (PM2, Nginx, curl)
     if (!origin) {
       // En producción, solo permitimos health checks sin origin
@@ -233,7 +242,7 @@ app.use(express.json({ limit: '5mb' })); // Reducido de 10mb a 5mb
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 // ===================================
-// 🛡️ SECURITY FORTRESS - CAPAS DE PROTECCIÓN
+// ðŸ›¡ï¸ SECURITY FORTRESS - CAPAS DE PROTECCIÓN
 // ===================================
 
 // CAPA 1: Verificar IPs baneadas (primera línea de defensa)
@@ -277,6 +286,36 @@ app.use(csrfProtectionAdvanced);
 // Rate limiting general
 app.use('/api/', generalLimiter);
 
+// Panel interno (red de empresa/VPN) y contenido público de la web
+app.use('/api/admin', adminRouter);
+// Corta las peticiones públicas de empleo que superen 20 s: evita que el
+// navegador se quede esperando y que se acumulen envíos colgados.
+const publicUploadTimeout = (req, res, next) => {
+  const timer = setTimeout(() => {
+    if (!res.headersSent) {
+      res.status(503).json({
+        success: false,
+        code: 'UPLOAD_TIMEOUT',
+        message: 'La operación ha tardado demasiado. Inténtalo de nuevo.',
+      });
+    }
+  }, 20000);
+  const clear = () => clearTimeout(timer);
+  res.on('finish', clear);
+  res.on('close', clear);
+  next();
+};
+app.use(['/api/public/applications', '/api/public/cv'], publicUploadTimeout);
+app.use('/api/public', publicRouter);
+
+// Archivos subidos desde el panel (PDF de revistas y portadas)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  maxAge: '7d',
+  immutable: false,
+  index: false,
+  dotfiles: 'deny',
+}));
+
 // ===================================
 // RUTAS
 // ===================================
@@ -288,7 +327,7 @@ app.use('/health', healthRoutes);
 // Legacy health check (mantener para compatibilidad)
 app.get('/api/health', facturaController.healthCheck.bind(facturaController));
 
-// 🛡️ RUTAS DE SEGURIDAD (estadísticas internas)
+// ðŸ›¡ï¸ RUTAS DE SEGURIDAD (estadísticas internas)
 app.get('/api/security/stats', requireAuth, (req, res) => {
   // Solo permitir en desarrollo o para administradores
   if (process.env.NODE_ENV === 'production') {
@@ -301,13 +340,13 @@ app.get('/api/security/stats', requireAuth, (req, res) => {
 app.get('/api/metrics', requireAuth, facturaController.obtenerMetricas.bind(facturaController));
 
 // RUTAS DE AUTENTICACIÓN (PÚBLICAS)
-// ✅ JOI VALIDATION + Rate limiting estricto
+// âœ… JOI VALIDATION + Rate limiting estricto
 app.post('/api/auth/login', loginRateLimiter, validateLogin, authController.login.bind(authController));
 app.post('/api/auth/refresh', refreshRateLimiter, validarRefreshToken, authController.refreshToken.bind(authController));
 app.get('/api/auth/health', authController.healthCheck.bind(authController));
 
 // RUTAS DE GESTIÓN DE CONTRASEÑAS (SISTEMA NUEVO)
-// ✅ Sistema de hash bcrypt + tokens de recuperación
+// âœ… Sistema de hash bcrypt + tokens de recuperación
 const passwordController = require('./app/controllers/passwordController');
 
 // PÚBLICAS: Recuperación de contraseña
@@ -380,7 +419,7 @@ app.post('/api/libro-iva/enviar-email', requireAuth, generalLimiter, auditDataAc
 app.post('/api/analytics/events', generalLimiter, (req, res) => {
   // Registro de eventos para analytics
   const { event, data } = req.body;
-  logger.info('📊 Analytics event', {
+  logger.info('ðŸ“Š Analytics event', {
     codigoCliente: req.user?.codigoCliente,
     event,
     timestamp: new Date().toISOString()
@@ -392,7 +431,7 @@ app.post('/api/analytics/events', generalLimiter, (req, res) => {
 // =====================================================
 app.post('/api/logs/frontend-error', generalLimiter, (req, res) => {
   const { error, componentStack, userAgent, url } = req.body;
-  logger.warn('⚠️ Frontend error', {
+  logger.warn('âš ï¸ Frontend error', {
     error,
     componentStack,
     userAgent,
@@ -406,7 +445,7 @@ app.post('/api/logs/frontend-error', generalLimiter, (req, res) => {
 app.post('/api/auth/logout', requireAuth, authController.logout.bind(authController));
 app.get('/api/auth/perfil', requireAuth, authController.obtenerPerfil.bind(authController));
 
-// 🛡️ AUDITORÍA: Acceso a datos de facturas (datos sensibles)
+// ðŸ›¡ï¸ AUDITORÍA: Acceso a datos de facturas (datos sensibles)
 app.get('/api/auth/facturas/:codigoCliente', requireAuth, requireOwnership, auditDataAccess('FACTURAS'), authController.obtenerFacturas.bind(authController));
 app.get('/api/auth/estadisticas/:codigoCliente', requireAuth, requireOwnership, auditDataAccess('ESTADISTICAS'), authController.obtenerEstadisticas.bind(authController));
 app.get('/api/auth/top-productos/:codigoCliente', requireAuth, requireOwnership, auditDataAccess('TOP_PRODUCTOS'), authController.obtenerTopProductos.bind(authController));
@@ -414,15 +453,15 @@ app.get('/api/auth/top-productos/:codigoCliente', requireAuth, requireOwnership,
 // RUTAS DE GESTIÓN DE CLIENTES
 app.post('/api/clientes/registrar', generalLimiter, clienteController.registrarCliente.bind(clienteController));
 
-// 🛡️ AUDITORÍA: Acceso a datos de clientes (datos sensibles)
+// ðŸ›¡ï¸ AUDITORÍA: Acceso a datos de clientes (datos sensibles)
 app.get('/api/clientes/:codigoCliente', requireAuth, requireOwnership, auditDataAccess('CLIENTE_PERFIL'), clienteController.obtenerCliente.bind(clienteController));
 
 // RUTAS DE DATOS DE CONTACTO (PROTEGIDAS + AUDITORÍA)
-app.get('/api/clientes/:codigoCliente/contacto', requireAuth, auditDataAccess('CONTACTO_LECTURA'), authController.obtenerDatosContacto.bind(authController));
-app.put('/api/clientes/:codigoCliente/contacto', requireAuth, generalLimiter, auditDataAccess('CONTACTO_MODIFICACION'), authController.actualizarDatosContacto.bind(authController));
+app.get('/api/clientes/:codigoCliente/contacto', requireAuth, requireOwnership, auditDataAccess('CONTACTO_LECTURA'), authController.obtenerDatosContacto.bind(authController));
+app.put('/api/clientes/:codigoCliente/contacto', requireAuth, requireOwnership, generalLimiter, validateActualizarContacto, auditDataAccess('CONTACTO_MODIFICACION'), authController.actualizarDatosContacto.bind(authController));
 app.get('/api/clientes/health', clienteController.healthCheck.bind(clienteController));
 
-// ⚠️ ENDPOINT DE PRUEBA - SOLO EN DESARROLLO
+// âš ï¸ ENDPOINT DE PRUEBA - SOLO EN DESARROLLO
 if (process.env.NODE_ENV !== 'production') {
   app.post('/api/clientes/test-insert', clienteController.testInsert.bind(clienteController));
 }
@@ -445,30 +484,32 @@ app.get('/api/pedidos/health', pedidoController.healthCheck.bind(pedidoControlle
 // RUTAS DE PRODUCTOS
 const { optionalAuth } = require('./app/middleware/authMiddleware');
 
-// 🌍 PÚBLICAS: Catálogo general de productos (sin precio personalizado)
+// ðŸŒ PÚBLICAS: Catálogo general de productos (sin precio personalizado)
 app.get('/api/public/productos', generalLimiter, productsController.obtenerProductosPublicos.bind(productsController));
 app.get('/api/public/productos/familias', generalLimiter, productsController.obtenerFamiliasPublicas.bind(productsController));
 app.get('/api/public/productos/:codigo', generalLimiter, productsController.obtenerProductoPublico.bind(productsController));
 
-// 🔒 PROTEGIDAS: Productos personalizados con precios del cliente
+// ðŸ”’ PROTEGIDAS: Productos personalizados con precios del cliente
 app.get('/api/productos/familias', requireAuth, generalLimiter, productsController.obtenerFamilias.bind(productsController));
 app.get('/api/productos/:codigo', requireAuth, generalLimiter, validateProducto, productsController.obtenerProducto.bind(productsController));
 app.get('/api/productos', requireAuth, generalLimiter, validateProductos, productsController.obtenerProductos.bind(productsController));
 
 // Gestión de cache (PROTEGIDO - requiere autenticación)
-// ✅ CORRECCIÓN SEGURIDAD: Endpoints de cache ahora requieren autenticación para prevenir DoS
+// âœ… CORRECCIÓN SEGURIDAD: Endpoints de cache ahora requieren autenticación para prevenir DoS
 app.delete('/api/cache/factura', requireAuth, facturaController.invalidarCacheFactura.bind(facturaController));
 app.delete('/api/cache/all', requireAuth, facturaController.invalidarTodoCache.bind(facturaController));
 
 // ===================================
-// 🤖 CHATBOT IA - Asistente Virtual
+// ðŸ¤– CHATBOT IA - Asistente Virtual
 // ===================================
 // Chatbot accesible para usuarios autenticados o con rate limiting estricto
-app.post('/api/chatbot', optionalAuth, generalLimiter, chatbotController.processChatMessage);
+app.post('/api/chatbot', optionalAuth, chatbotLimiter, chatbotController.processChatMessage);
+app.post('/api/chatbot/stream', optionalAuth, chatbotLimiter, chatbotController.streamChatMessage);
+app.post('/api/chatbot/transcribe', optionalAuth, chatbotLimiter, chatbotController.transcribeAudio);
 app.get('/api/chatbot/health', chatbotController.healthCheck);
 
 // =====================================================
-// 📦 PANAMAR - Documentos con productos familias 701-705
+// ðŸ“¦ PANAMAR - Documentos con productos familias 701-705
 // =====================================================
 // Modo especial para cliente 9999999999: consulta documentos cross-client
 // con productos PANAMAR y tarifa de valoración 84/85 hasta el 31/10/2026,
@@ -493,7 +534,7 @@ app.get('/api/panamar/diagnostics', requireAuth, generalLimiter, panamarControll
 app.get('/api/panamar/health', panamarController.healthCheck);
 
 // =====================================================
-// �🔒 SISTEMA DE AUTENTICACIÓN SEGURA (NIVEL BANCARIO)
+// ï¿½ðŸ”’ SISTEMA DE AUTENTICACIÓN SEGURA (NIVEL BANCARIO)
 // =====================================================
 // Implementa: bcrypt, zxcvbn, HaveIBeenPwned, JWT, historial de contraseñas
 const authSecureRoutes = require('./app/routes/authSecureRoutes');
@@ -501,10 +542,16 @@ app.use('/api/auth/secure', authSecureRoutes);
 
 // Ruta raíz - información de la API
 app.get('/', (req, res) => {
-  res.json({
+  const base = {
     name: 'Granja Mari Pepa - API de Facturación',
     version: '1.0.0',
     status: 'running',
+  };
+  if (process.env.NODE_ENV === 'production') {
+    return res.json(base);
+  }
+  res.json({
+    ...base,
     endpoints: {
       health: 'GET /health',
       auth: {
@@ -575,10 +622,10 @@ async function initializeServer() {
     try {
       logger.info('Intentando inicializar pool de conexiones ODBC...');
       await odbcPool.initialize();
-      logger.info('✅ Pool ODBC inicializado correctamente');
+      logger.info('âœ… Pool ODBC inicializado correctamente');
       dbConnected = true;
     } catch (odbcError) {
-      logger.error('⚠️ No se pudo conectar a la base de datos ODBC - Modo DEGRADADO activado');
+      logger.error('âš ï¸ No se pudo conectar a la base de datos ODBC - Modo DEGRADADO activado');
       logger.error(`   Error ODBC: ${odbcError.message}`);
       logger.error('   El servidor iniciará sin DB. Las rutas que requieran DB fallarán.');
       logger.error('   El pool reintentará conectar automáticamente cada 90 segundos.');
@@ -589,15 +636,15 @@ async function initializeServer() {
     try {
       logger.info('Intentando inicializar pool PANAMAR (CCSID=1208)...');
       await odbcPool.initializePanamar();
-      logger.info('✅ Pool PANAMAR inicializado correctamente');
+      logger.info('âœ… Pool PANAMAR inicializado correctamente');
     } catch (panamarError) {
-      logger.warn('⚠️ Pool PANAMAR no disponible al inicio - se reintentará en primer uso');
+      logger.warn('âš ï¸ Pool PANAMAR no disponible al inicio - se reintentará en primer uso');
       logger.warn(`   Error: ${panamarError.message}`);
     }
 
     // Verificar secretos JWT
     if (!process.env.JWT_ACCESS_SECRET || !process.env.JWT_REFRESH_SECRET) {
-      logger.error('❌ Error crítico: Secretos JWT no configurados en .env');
+      logger.error('âŒ Error crítico: Secretos JWT no configurados en .env');
       logger.error('Configure JWT_ACCESS_SECRET y JWT_REFRESH_SECRET antes de iniciar el servidor');
       throw new Error('Secretos JWT no configurados');
     }
@@ -605,14 +652,14 @@ async function initializeServer() {
     // Iniciar servidor HTTP
     const server = app.listen(PORT, HOST, () => {
       logger.info(`=================================================`);
-      logger.info(`🚀 Servidor iniciado ${dbConnected ? 'exitosamente' : 'en MODO DEGRADADO'}`);
+      logger.info(`ðŸš€ Servidor iniciado ${dbConnected ? 'exitosamente' : 'en MODO DEGRADADO'}`);
       logger.info(`=================================================`);
       logger.info(`Entorno: ${process.env.NODE_ENV || 'development'}`);
       logger.info(`Host: ${HOST}`);
       logger.info(`Puerto: ${PORT}`);
       logger.info(`URL: http://${HOST}:${PORT}`);
       if (!dbConnected) {
-        logger.info(`⚠️  DB: DESCONECTADA - El pool reintentará auto-conectar`);
+        logger.info(`âš ï¸  DB: DESCONECTADA - El pool reintentará auto-conectar`);
         logger.info(`   Ver /health para estado, o arregla la conexión ODBC`);
       }
       logger.info(`=================================================`);

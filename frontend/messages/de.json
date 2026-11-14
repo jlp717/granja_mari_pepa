@@ -102,7 +102,7 @@
         }
     },
     "hero": {
-        "title": "GRANJA MARI PEPA",
+        "title": "GRANJA MARIPEPA",
         "subtitle": "Tiefkühl-, Kühl- und Eisprodukte für HORECA",
         "cta": "Kontaktieren Sie uns",
         "since": "Seit 1966",
@@ -148,7 +148,7 @@
         "nestle": {
             "name": "Nestlé",
             "category": "Premium Eiscreme",
-            "detailed": "Granja Mari Pepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
+            "detailed": "Granja Maripepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
         },
         "panamar": {
             "name": "Panamar",
@@ -704,7 +704,7 @@
         "greetingMorning": "Guten Morgen, ich bin Pepa",
         "greetingAfternoon": "Guten Tag, ich bin Pepa",
         "greetingEvening": "Guten Abend, ich bin Pepa",
-        "subtitle": "Ihr virtueller Assistent von Granja Mari Pepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
+        "subtitle": "Ihr virtueller Assistent von Granja Maripepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
         "placeholder": "Schreiben Sie Ihre Nachricht...",
         "thinking": "Nachdenken",
         "send": "Senden",
@@ -740,14 +740,14 @@
         "downloadInvoice": "Descargar factura"
     },
     "footer": {
-        "companyName": "GRANJA MARI PEPA",
+        "companyName": "GRANJA MARIPEPA",
         "tagline": "Premium Lebensmittelvertrieb",
         "description_short": "Premium Lebensmittelvertrieb für HORECA",
         "nestle_distributor": "Offizieller Nestlé Vertriebspartner",
         "founded_text": "Gegründet in Lorca, 1966",
         "green_energy": "Grüne Energie",
         "quick_access": "Schnellzugriff",
-        "copyright": "© {year} Granja Mari Pepa. Alle Rechte vorbehalten.",
+        "copyright": "© {year} Granja Maripepa. Alle Rechte vorbehalten.",
         "rights_reserved": "Alle Rechte vorbehalten.",
         "catalog": "Katalog",
         "client_portal": "Kundenportal",
@@ -878,18 +878,18 @@
         }
     },
     "meta": {
-        "title": "Granja Mari Pepa | HORECA-Vertrieb Murcia und Lorca",
+        "title": "Granja Maripepa | HORECA-Vertrieb Murcia und Lorca",
         "description": "Führender Premium-Lebensmittelvertrieb für das Gastgewerbe. Tiefkühlkost, Fleisch und Fisch. 24-Stunden-Service in Murcia und Almería.",
-        "keywords": "granja mari pepa, gmp, lorca gmp, lorca granja, lebensmittelvertrieb, tiefkühlkost, HORECA, Murcia, Almería, fleisch, fisch, lorca"
+        "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, lebensmittelvertrieb, tiefkühlkost, HORECA, Murcia, Almería, fleisch, fisch, lorca"
     },
     "legal": {
         "privacy": {
             "title": "Datenschutzrichtlinie",
-            "intro": "Bei Granja Mari Pepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
+            "intro": "Bei Granja Maripepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
             "sections": {
                 "s1": {
                     "title": "1. Verantwortlicher für die Datenverarbeitung",
-                    "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@mari-pepa.com"
+                    "content": "Granja Maripepa, S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@granjamaripepa.com"
                 },
                 "s2": {
                     "title": "2. Zweck der Verarbeitung",
@@ -909,17 +909,17 @@
                 },
                 "s6": {
                     "title": "6. Rechte",
-                    "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Mari Pepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
+                    "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Maripepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
                 }
             }
         },
         "terms": {
             "title": "Allgemeine Geschäftsbedingungen",
-            "intro": "Willkommen auf der Website von Granja Mari Pepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
+            "intro": "Willkommen auf der Website von Granja Maripepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
             "sections": {
                 "s1": {
                     "title": "1. Geistiges Eigentum",
-                    "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Mari Pepa geschützt."
+                    "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Maripepa geschützt."
                 },
                 "s2": {
                     "title": "2. Nutzung der Website",
@@ -927,15 +927,15 @@
                 },
                 "s3": {
                     "title": "3. Haftung",
-                    "content": "Granja Mari Pepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
+                    "content": "Granja Maripepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
                 },
                 "s4": {
                     "title": "4. Änderungen",
-                    "content": "Granja Mari Pepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
+                    "content": "Granja Maripepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
                 },
                 "s5": {
                     "title": "5. Anwendbares Recht",
-                    "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Mari Pepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
+                    "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Maripepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
                 }
             }
         }

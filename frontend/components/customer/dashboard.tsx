@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
-import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { CustomToast } from '@/components/ui/custom-toast';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
 import {
@@ -54,6 +54,7 @@ import {
   AlertCircle,
   Flame,
   ArrowUpRight,
+  ArrowRight,
   ArrowDownRight,
   Briefcase,
   Crown,
@@ -96,9 +97,7 @@ import { secureFetch, secureDownload } from '@/lib/secureFetch'; // 🔐 HttpOnl
 import apiClient from '@/lib/apiClient'; // 🔐 Cliente API con autenticación automática
 
 const tabIds = [
-  // Comentado temporalmente: ocultamos Dashboard y Pedidos para que el área de clientes muestre directamente Facturas
-  // { id: 'dashboard', icon: BarChart3 },
-  // { id: 'pedidos', icon: ShoppingBag },
+  { id: 'dashboard', icon: LayoutGrid },
   { id: 'facturas', icon: FileText },
   { id: 'perfil', icon: User },
   { id: 'favoritos', icon: Heart }
@@ -130,6 +129,13 @@ const statusIcons = {
   paid: Check,
   cancelled: Trash2
 };
+
+function parsePortalDate(value?: string) {
+  if (!value) return 0;
+  const [dia, mes, ano] = value.split('/').map(Number);
+  if (!dia || !mes || !ano) return 0;
+  return new Date(ano, mes - 1, dia).getTime();
+}
 
 // Componente para visualizar PDF desde blob - con soporte móvil
 function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, generatePdfBlob: (f: FacturaBackend) => Promise<string> }) {
@@ -244,6 +250,7 @@ function PdfViewer({ factura, generatePdfBlob }: { factura: FacturaBackend, gene
 export function CustomerDashboard() {
   // ===== TRANSLATIONS =====
   const t = useTranslations('customerArea.dashboard');
+  const locale = useLocale();
 
   // Translated tabs - now using translation hook
   const tabs = useMemo(() => tabIds.map(tab => ({
@@ -256,8 +263,8 @@ export function CustomerDashboard() {
     return t(`status.${status}` as any) || status;
   }, [t]);
 
-  // Cambiado para que al cargar el área de clientes se muestre directamente 'facturas'
-  const [activeTab, setActiveTab] = useState('facturas');
+  // El área de clientes abre en el resumen del panel
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterMonth, setFilterMonth] = useState('all');
@@ -423,7 +430,6 @@ export function CustomerDashboard() {
 
   const {
     data: pedidos,
-    loading: loadingPedidos,
     fetchData: cargarPedidos
   } = useApiData<any>({
     endpoint: `/api/pedidos/${user?.id}`,
@@ -1441,18 +1447,18 @@ export function CustomerDashboard() {
           return;
         }
 
-        // Abrir cliente de email con enlace al PDF
-        const asunto = `Factura ${shareFactura.serieFactura}-${shareFactura.numeroFactura} - Granja Mari Pepa`;
-        const cuerpo = `🧺 Granja Mari Pepa\n\nHola,\n\nTe compartimos la factura de tu pedido:\n\n📄 Factura: ${shareFactura.serieFactura}-${shareFactura.numeroFactura}\n📅 Fecha: ${shareFactura.fecha}\n💰 Total: ${formatCurrency(shareFactura.totalFactura)}\n\n📥 Descargar PDF:\n${url}\n\nEste enlace es válido por 24 horas.\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\n¡Gracias por tu confianza! 🐔🥚\n\nGranja Mari Pepa\nwww.mari-pepa.com`;
+        // Abrir Gmail con enlace al PDF
+        const asunto = `Factura ${shareFactura.serieFactura}-${shareFactura.numeroFactura} - Granja Maripepa`;
+        const cuerpo = `🧺 Granja Maripepa\n\nHola,\n\nTe compartimos la factura de tu pedido:\n\n📄 Factura: ${shareFactura.serieFactura}-${shareFactura.numeroFactura}\n📅 Fecha: ${shareFactura.fecha}\n💰 Total: ${formatCurrency(shareFactura.totalFactura)}\n\n📥 Descargar PDF:\n${url}\n\nEste enlace es válido por 24 horas.\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\n¡Gracias por tu confianza! 🐔🥚\n\nGranja Maripepa\nwww.mari-pepa.com`;
 
-        const mailtoUrl = `mailto:${shareInput}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-        window.open(mailtoUrl, '_blank');
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(shareInput)}&su=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
 
         toast.success(
           <div className="flex flex-col">
             <div className="font-bold flex items-center gap-2">
               <Mail className="w-5 h-5" />
-              Cliente de email abierto
+              Gmail abierto
             </div>
             <div className="text-sm text-gray-600">
               Enlace de descarga incluido (válido 24h)
@@ -1768,6 +1774,51 @@ export function CustomerDashboard() {
   // Estadísticas de la TABLA DE FACTURAS - Según filtros activos
   const totalFacturasCount = useMemo(() => filteredFacturas?.length || 0, [filteredFacturas]);
   const totalFacturado = useMemo(() => (filteredFacturas || []).reduce((sum, f) => sum + (f.totalFactura || 0), 0), [filteredFacturas]);
+  const pendienteTotal = useMemo(
+    () => (filteredFacturas || []).reduce((sum, f) => sum + (f.estadoPago === 'pendiente' ? (f.importePendiente || 0) : 0), 0),
+    [filteredFacturas]
+  );
+
+  const pagadasCount = useMemo(
+    () => (filteredFacturas || []).filter((f) => f.estadoPago === 'pagada').length,
+    [filteredFacturas]
+  );
+  const pendientesCount = useMemo(
+    () => (filteredFacturas || []).filter((f) => f.estadoPago === 'pendiente').length,
+    [filteredFacturas]
+  );
+  const pendienteRatio = totalFacturado > 0 ? Math.min(100, Math.round((pendienteTotal / totalFacturado) * 100)) : 0;
+
+  const monthlySeries = useMemo(() => {
+    const now = new Date();
+    return Array.from({ length: 6 }, (_, index) => {
+      const date = new Date(now.getFullYear(), now.getMonth() - (5 - index), 1);
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const total = (facturas || []).reduce((sum, factura) => {
+        const [, facturaMonth, facturaYear] = (factura.fecha || '').split('/').map(Number);
+        return facturaMonth === month && facturaYear === year ? sum + (factura.totalFactura || 0) : sum;
+      }, 0);
+      return {
+        label: date.toLocaleDateString('es-ES', { month: 'short' }).replace('.', ''),
+        total,
+        current: index === 5,
+      };
+    });
+  }, [facturas]);
+  const maxMonthly = Math.max(...monthlySeries.map((month) => month.total), 1);
+
+  const lastPedido = useMemo(() => {
+    if (!pedidos?.length) return null;
+    return [...pedidos].sort((a: any, b: any) => parsePortalDate(b.fecha) - parsePortalDate(a.fecha))[0];
+  }, [pedidos]);
+
+  const ultimasFacturas = useMemo(() => {
+    if (!facturas?.length) return [];
+    return [...facturas].sort((a, b) => parsePortalDate(b.fecha) - parsePortalDate(a.fecha)).slice(0, 4);
+  }, [facturas]);
+
+  const isLoadingPortal = loadingFacturas || loadingPerfil;
   // ESTADÍSTICAS DE PAGADAS/PENDIENTES COMENTADAS - NO ELIMINAR
   // const facturasPagadas = useMemo(() => (filteredFacturas || []).filter(f => f.estadoPago === 'pagada').length, [filteredFacturas]);
   // const facturasPendientes = useMemo(() => (filteredFacturas || []).filter(f => f.estadoPago === 'pendiente').length, [filteredFacturas]);
@@ -1784,513 +1835,178 @@ export function CustomerDashboard() {
     setCurrentPage(1);
   }, [searchTerm, filterMonth, filterYear, fechaDesde, fechaHasta, itemsPerPage]);
 
-  // Mostrar overlay mientras carga cualquier dato inicial
-  if (loadingFacturas || loadingPedidos || loadingPerfil) {
-    return (
-      <div className="min-h-[70vh] relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center overflow-hidden rounded-2xl mx-4 my-8">
-        {/* Animated background */}
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-              opacity: [0.1, 0.3, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0],
-              opacity: [0.1, 0.3, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-pink-500 to-indigo-600 rounded-full blur-3xl"
-          />
-        </div>
-
-        {/* Loading content */}
-        <div className="relative z-10 text-center">
-          {/* Animated logo */}
-          <motion.div
-            animate={{
-              rotate: 360,
-              scale: [1, 1.1, 1]
-            }}
-            transition={{
-              rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-              scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="w-24 h-24 mx-auto mb-8 relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-3xl animate-pulse"></div>
-            <div className="absolute inset-1 bg-slate-900 rounded-3xl flex items-center justify-center">
-              <Building2 className="w-12 h-12 text-white" />
-            </div>
-          </motion.div>
-
-          {/* Loading text */}
-          <motion.h2
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-2xl font-bold text-white mb-4"
-          >
-            {t('loadingPanel')}
-          </motion.h2>
-
-          {/* Progress bar */}
-          <div className="w-64 h-2 bg-white/10 rounded-full overflow-hidden mx-auto mb-6">
-            <motion.div
-              animate={{ x: ['-100%', '100%'] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="h-full w-1/2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
-            />
-          </div>
-
-          {/* Loading steps */}
-          <div className="space-y-2 text-sm text-white/70">
-            <motion.p
-              animate={{ opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity, times: [0, 0.2, 0.8, 1] }}
-            >
-              Verificando credenciales...
-            </motion.p>
-            <motion.p
-              animate={{ opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 1, times: [0, 0.2, 0.8, 1] }}
-            >
-              Cargando tus datos...
-            </motion.p>
-            <motion.p
-              animate={{ opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 2, times: [0, 0.2, 0.8, 1] }}
-            >
-              Preparando tu dashboard...
-            </motion.p>
-          </div>
-
-          {/* Orbiting particles */}
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "linear",
-                delay: i * 0.5
-              }}
-              className="absolute w-32 h-32"
-              style={{
-                top: '50%',
-                left: '50%',
-                marginLeft: '-64px',
-                marginTop: '-64px'
-              }}
-            >
-              <motion.div
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.3, 0.8, 0.3]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.25
-                }}
-                className="absolute top-0 left-1/2 w-2 h-2 bg-white rounded-full"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Background decoration - sutil y sólido */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-40 right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
-      </div>
+    <MotionConfig reducedMotion="user">
+    <div className="relative min-h-screen bg-background text-foreground">
+      <div className="mx-auto w-full max-w-[1480px] px-4 pb-20 pt-[calc(var(--nav-h)+28px)] sm:px-6 lg:px-10">
 
       {/* 🔒 Security Alert Banner - shows when there are pending security issues */}
       <AnimatePresence>
         {(securityWarnings.hasLegacyPassword || securityWarnings.needsContactSetup) && (
           <motion.div
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-3 relative z-40"
+            exit={{ opacity: 0, y: -12 }}
+            className="mb-6 flex flex-col gap-3 border px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+            style={{
+              borderColor: 'var(--kage-accent)',
+              backgroundColor: 'color-mix(in srgb, var(--kage-accent) 10%, transparent)',
+            }}
           >
-            <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-              <div className="flex items-center gap-3">
-                <AlertTriangle className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm font-medium">
-                  {securityWarnings.hasLegacyPassword && securityWarnings.needsContactSetup
-                    ? '¡Atención! Tu cuenta necesita una contraseña segura y datos de contacto.'
-                    : securityWarnings.hasLegacyPassword
-                      ? '¡Tu contraseña es insegura! Cámbiala en la sección Perfil → Seguridad.'
-                      : 'Configura tu email y teléfono para poder recuperar tu contraseña.'}
-                </span>
-              </div>
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => {
-                  setActiveTab('perfil');
-                  setShowPasswordChangeModal(true);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="bg-white/20 hover:bg-white/30 text-white border-0 text-xs px-3 py-1"
-              >
-                Ir a Perfil →
-              </Button>
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--kage-accent)]" aria-hidden="true" />
+              <span className="text-sm text-foreground">
+                {securityWarnings.hasLegacyPassword && securityWarnings.needsContactSetup
+                  ? '¡Atención! Tu cuenta necesita una contraseña segura y datos de contacto.'
+                  : securityWarnings.hasLegacyPassword
+                    ? '¡Tu contraseña es insegura! Cámbiala en Perfil → Seguridad.'
+                    : 'Configura tu email y teléfono para poder recuperar tu contraseña.'}
+              </span>
             </div>
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() => {
+                setActiveTab('perfil');
+                setShowPasswordChangeModal(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="shrink-0"
+            >
+              Ir a Perfil
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Panel Header - Diseño limpio y sólido */}
-      <div className="bg-card border-b border-border shadow-sm sticky top-0 z-40">
-        <div className="container mx-auto px-3 sm:px-4">
-          <div className="flex items-center justify-between h-14 sm:h-16">
-            {/* Logo/Brand */}
-            <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-                className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
-              >
-                <Building2 className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-              </motion.div>
-              <div className="min-w-0">
-                <h1 className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white leading-tight">{t('sidebar.controlPanel')}</h1>
-                <p className="text-[10px] sm:text-sm text-gray-600 dark:text-gray-400 leading-tight">{t('sidebar.clientArea')}</p>
-              </div>
-            </div>
-
-            {/* Search Bar - Global */}
-            <div className="hidden md:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <Input
-                  placeholder="Buscar facturas, pedidos..."
-                  className="pl-10 h-10 bg-gray-50/50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </div>
-
-            {/* Right Actions */}
-            <div className="flex items-center gap-1 sm:gap-3 flex-shrink-0">
-              {/*
-              <div className="relative">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setShowNotifications(!showNotifications)}
-                  className="relative p-1.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg sm:rounded-xl transition-colors"
-                >
-                  <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
-                  {unreadNotifications > 0 && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                      {unreadNotifications}
-                    </span>
-                  )}
-                </motion.button>
-
-                <AnimatePresence>
-                  {showNotifications && (
-                    <>
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/20 z-40 md:hidden"
-                        onClick={() => setShowNotifications(false)}
-                      />
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        className="fixed md:absolute left-3 right-3 md:left-auto md:right-0 top-[120px] md:top-auto md:mt-2 w-auto md:w-96 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
-                      >
-                        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 sm:p-4 text-white">
-                          <div className="flex items-center justify-between">
-                            <h3 className="font-bold text-base sm:text-lg flex items-center gap-2">
-                              <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
-                              Notificaciones
-                            </h3>
-                            {unreadNotifications > 0 && (
-                              <button
-                                onClick={markAllAsRead}
-                                className="text-xs text-white/80 hover:text-white transition-colors"
-                              >
-                                Marcar todas leídas
-                              </button>
-                            )}
-                          </div>
-                        </div>
-                        <div className="max-h-80 sm:max-h-96 overflow-y-auto">
-                          {notifications.length === 0 ? (
-                            <div className="p-6 text-center">
-                              <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
-                              <p className="text-sm text-gray-600 dark:text-gray-400">
-                                Todo al día. No tienes notificaciones.
-                              </p>
-                            </div>
-                          ) : (
-                            <div className="divide-y divide-gray-100 dark:divide-gray-700">
-                              {notifications.map((notif) => (
-                                <motion.div
-                                  key={notif.id}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  className={`p-3 sm:p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer ${!notif.read ? 'bg-blue-50/50 dark:bg-blue-900/20' : ''
-                                    }`}
-                                  onClick={() => {
-                                    markNotificationAsRead(notif.id);
-                                    if (notif.action?.tab) {
-                                      handleTabChange(notif.action.tab);
-                                      setShowNotifications(false);
-                                    }
-                                  }}
-                                >
-                                  <div className="flex items-start gap-3">
-                                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${notif.type === 'success' ? 'bg-green-100 text-green-600' :
-                                      notif.type === 'warning' ? 'bg-amber-100 text-amber-600' :
-                                        notif.type === 'alert' ? 'bg-red-100 text-red-600' :
-                                          'bg-blue-100 text-blue-600'
-                                      }`}>
-                                      {notif.icon === 'file' && <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                      {notif.icon === 'award' && <Award className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                      {notif.icon === 'clock' && <Clock className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                      {notif.icon === 'crown' && <Crown className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                      {notif.icon === 'trophy' && <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                      {!notif.icon && <Bell className="w-4 h-4 sm:w-5 sm:h-5" />}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                      <div className="flex items-center justify-between gap-2">
-                                        <p className={`text-sm font-semibold text-gray-900 dark:text-white truncate ${!notif.read ? 'text-blue-700 dark:text-blue-400' : ''
-                                          }`}>
-                                          {notif.title}
-                                        </p>
-                                        {!notif.read && (
-                                          <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
-                                        )}
-                                      </div>
-                                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-2">
-                                        {notif.message}
-                                      </p>
-                                      <p className="text-[10px] sm:text-xs text-gray-400 mt-1">
-                                        {(() => {
-                                          const diff = Date.now() - notif.time.getTime();
-                                          const mins = Math.floor(diff / 60000);
-                                          const hours = Math.floor(diff / 3600000);
-                                          const days = Math.floor(diff / 86400000);
-                                          if (days > 0) return `Hace ${days} ${days === 1 ? 'día' : 'días'}`;
-                                          if (hours > 0) return `Hace ${hours} ${hours === 1 ? 'hora' : 'horas'}`;
-                                          return `Hace ${mins} min`;
-                                        })()}
-                                      </p>
-                                      {notif.action && (
-                                        <button className="text-xs text-blue-600 hover:text-blue-700 font-medium mt-1">
-                                          {notif.action.label} →
-                                        </button>
-                                      )}
-                                    </div>
-                                  </div>
-                                </motion.div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    </>
-                  )}
-                </AnimatePresence>
-              </div>
-              */}
-
-              {/* Ver Perfil Button */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleTabChange('perfil')}
-                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg sm:rounded-xl transition-all"
-              >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-                </div>
-                <div className="hidden lg:block text-left">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    {perfilCliente?.empresa || user?.company || 'Cliente'}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('sidebar.viewProfile')}</p>
-                </div>
-              </motion.button>
-
-              {/* Logout Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setShowLogoutModal(true)}
-                className="p-1.5 sm:p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg sm:rounded-xl transition-colors group"
-                title="Cerrar sesión"
-              >
-                <LogOut className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-red-600 dark:group-hover:text-red-400" />
-              </motion.button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Contenido principal */}
-      <div className="container mx-auto px-4 py-6 relative z-10">
-        <div className="grid grid-cols-1 xl:grid-cols-5 gap-8">
+      <div className="relative z-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
 
-          {/* Enhanced Sidebar */}
-          <div className="xl:col-span-1 space-y-6">
+          {/* Sidebar */}
+          <aside className="hidden lg:sticky lg:top-[calc(var(--nav-h)+24px)] lg:block" aria-label="Cuenta y navegación">
 
-            {/* User Profile Card - DISEÑO SÓLIDO SIN TRANSPARENCIAS */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative bg-card rounded-2xl p-6 shadow-lg border border-border overflow-hidden"
+                        <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="border border-[var(--line)] bg-[var(--ink-2)]"
             >
-              {/* Decorative accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: 'linear-gradient(90deg, #3B82F6 0%, #06B6D4 50%, #8B5CF6 100%)' }} />
-
-              {/* Subtle background pattern */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-100 rounded-full blur-2xl opacity-50" />
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-100 rounded-full blur-2xl opacity-50" />
-
-              <div className="relative z-10 text-center">
-                <div className="relative inline-block">
-                  <div
-                    className="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg ring-4 ring-blue-100 transform hover:scale-105 transition-transform"
-                    style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' }}
-                  >
-                    <User className="w-12 h-12 text-white" />
+              <div className="border-b border-[var(--line)] p-5">
+                <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                  Cuenta
+                </p>
+                <div className="mt-4 flex items-center gap-3">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-[var(--kage-accent)] text-lg text-white" aria-hidden="true">
+                    {(perfilCliente?.nombre || user?.name || 'C').charAt(0).toUpperCase()}
                   </div>
-                  <div className="absolute -top-1 -right-1 w-7 h-7 bg-emerald-500 rounded-full border-3 border-card flex items-center justify-center shadow-md">
-                    <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse" />
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-foreground">
+                      {perfilCliente?.empresa || user?.company || 'Cliente'}
+                    </p>
+                    <p className="truncate text-xs text-muted-foreground">
+                      {perfilCliente?.nombre || user?.name || ''}
+                    </p>
+                    <p className="mt-1 flex items-center gap-1.5 text-[10px] uppercase tracking-[0.12em] text-emerald-300">
+                      <span className="h-1 w-1 bg-emerald-400" aria-hidden="true" />
+                      Cuenta activa
+                    </p>
                   </div>
                 </div>
-
-                {/* Solo mostrar nombre alternativo (empresa) */}
-                <h2 className="text-xl font-bold text-foreground mb-3 tracking-tight">
-                  {perfilCliente?.empresa || user?.company}
-                </h2>
-
-                {/* Email con diseño moderno y limpio */}
-                <div className="w-full px-2">
+                <div className="mt-4">
                   {(() => {
                     const emailCandidato = perfilCliente?.contacto?.email || userEmail || user?.email || '';
                     const esEmailValido = emailCandidato &&
                       !emailCandidato.includes('@granja.local') &&
                       emailCandidato.includes('@') &&
                       emailCandidato.length > 5;
-
                     return esEmailValido ? (
-                      <div
-                        className="flex items-center justify-center text-xs rounded-lg px-3 py-2 border-l-4 border-blue-400"
-                        style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
-                      >
-                        <Mail className="w-3.5 h-3.5 mr-2 text-blue-600" />
-                        <span className="truncate text-blue-700 font-medium">{emailCandidato}</span>
-                      </div>
+                      <p className="flex items-center gap-2 truncate text-xs text-muted-foreground">
+                        <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                        <span className="truncate">{emailCandidato}</span>
+                      </p>
                     ) : (
-                      <motion.button
+                      <button
+                        type="button"
                         onClick={() => handleTabChange('perfil')}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full flex items-center justify-between text-xs text-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all group relative overflow-hidden"
-                        style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' }}
+                        className="flex w-full items-center justify-between border border-dashed border-[var(--line)] px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-[var(--kage-accent)] hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
                       >
-                        <div className="flex items-center relative z-10">
-                          <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
-                          <span className="font-bold">Añade tu email</span>
-                        </div>
-                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
-                      </motion.button>
+                        <span>Añadir email de contacto</span>
+                        <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </button>
                     );
                   })()}
+                  <p className="mt-2 font-mono text-[10px] tracking-[0.08em] text-muted-foreground">ID {user?.id || '—'}</p>
                 </div>
+              </div>
 
-                {/* Quick stats - Se ajusta según FILTROS activos */}
-                <div className="space-y-3 mt-5 pt-4 border-t border-border">
-                  {/* Filtro de Año con selector */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold text-foreground flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {t('sidebar.filterByYear')}
-                    </label>
+              <nav className="border-b border-[var(--line)] p-2" aria-label="Secciones del área de clientes">
+                {tabs.map((tab) => {
+                  const IconComponent = tab.icon;
+                  const isActive = activeTab === tab.id;
+                  const badgeCount = tab.id === 'favoritos' ? getFavoritesCount() : 0;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => handleTabChange(tab.id)}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={`flex min-h-[44px] w-full items-center gap-3 px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)] ${
+                        isActive
+                          ? 'bg-[var(--kage-accent)] text-white'
+                          : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'
+                      }`}
+                    >
+                      <IconComponent className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span className="flex-1">{tab.id === 'dashboard' ? 'Resumen' : tab.name}</span>
+                      {badgeCount > 0 && (
+                        <span className={`min-w-5 px-1.5 py-0.5 text-center text-[10px] ${isActive ? 'bg-white/20 text-white' : 'bg-white/10 text-foreground'}`}>
+                          {badgeCount > 99 ? '99+' : badgeCount}
+                        </span>
+                      )}
+                      {isActive && <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />}
+                    </button>
+                  );
+                })}
+              </nav>
+
+              <div className="space-y-4 border-b border-[var(--line)] p-5">
+                <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                  Periodo
+                </p>
+                <div className="space-y-3">
+                  <label className="block">
+                    <span className="mb-1.5 block text-xs text-muted-foreground">{t('sidebar.filterByYear')}</span>
                     <select
                       value={filterYear}
                       onChange={(e) => setFilterYear(e.target.value)}
-                      className="w-full px-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                      className="w-full"
                     >
-                      <option value="all">{t('filters.allMonths')}</option>
+                      <option value="all">{t('filters.allYears')}</option>
                       {Array.from({ length: 6 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                        <option key={year} value={String(year)}>
-                          {year}
-                        </option>
+                        <option key={year} value={String(year)}>{year}</option>
                       ))}
                     </select>
-                  </div>
-
-                  {/* Filtro de Mes con selector - Solo visible si hay año seleccionado */}
+                  </label>
                   {filterYear !== 'all' && (
-                    <div className="space-y-2">
-                      <label className="text-xs font-semibold text-foreground flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {t('sidebar.filterByMonth')}
-                      </label>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs text-muted-foreground">{t('sidebar.filterByMonth')}</span>
                       <select
                         value={filterMonth}
                         onChange={(e) => setFilterMonth(e.target.value)}
-                        className="w-full px-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        className="w-full"
                       >
                         <option value="all">{t('filters.allMonths')}</option>
-                        <option value="1">{t('filters.months.1')}</option>
-                        <option value="2">{t('filters.months.2')}</option>
-                        <option value="3">{t('filters.months.3')}</option>
-                        <option value="4">{t('filters.months.4')}</option>
-                        <option value="5">{t('filters.months.5')}</option>
-                        <option value="6">{t('filters.months.6')}</option>
-                        <option value="7">{t('filters.months.7')}</option>
-                        <option value="8">{t('filters.months.8')}</option>
-                        <option value="9">{t('filters.months.9')}</option>
-                        <option value="10">{t('filters.months.10')}</option>
-                        <option value="11">{t('filters.months.11')}</option>
-                        <option value="12">{t('filters.months.12')}</option>
+                        {Array.from({ length: 12 }, (_, i) => (
+                          <option key={i + 1} value={String(i + 1)}>{t(`filters.months.${i + 1}`)}</option>
+                        ))}
                       </select>
-                    </div>
+                    </label>
                   )}
-
-                  {/* Botón Restablecer Filtros */}
                   {(filterYear !== String(new Date().getFullYear()) || filterMonth !== 'all') && (
-                    <motion.button
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                    <button
+                      type="button"
                       onClick={() => {
                         setFilterYear(String(new Date().getFullYear()));
                         setFilterMonth('all');
@@ -2298,1536 +2014,803 @@ export function CustomerDashboard() {
                         setFechaDesde('');
                         setFechaHasta('');
                       }}
-                      className="w-full flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium text-rose-600 hover:text-rose-700 rounded-lg border-l-4 border-rose-400 transition-all shadow-sm"
-                      style={{ background: 'linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)' }}
+                      className="flex min-h-[44px] w-full items-center justify-center gap-2 border border-[var(--line)] px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-foreground/60 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
                     >
-                      <X className="w-3 h-3" />
+                      <X className="h-3.5 w-3.5" aria-hidden="true" />
                       {t('filters.resetFilters')}
-                    </motion.button>
+                    </button>
                   )}
-
-                  {/* Etiqueta del filtro activo */}
-                  <div className="flex flex-wrap items-center justify-center gap-1.5">
-                    {filterYear !== 'all' && (
-                      <div
-                        className="flex items-center gap-1 px-2 py-1 rounded-md border-l-2 border-blue-500 shadow-sm"
-                        style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
-                      >
-                        <Calendar className="w-3 h-3 text-blue-600" />
-                        <span className="text-xs font-semibold text-blue-700">
-                          {filterYear}
-                        </span>
-                      </div>
-                    )}
-                    {filterMonth !== 'all' && (
-                      <div
-                        className="flex items-center gap-1 px-2 py-1 rounded-md border-l-2 border-cyan-500 shadow-sm"
-                        style={{ background: 'linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)' }}
-                      >
-                        <span className="text-xs font-semibold text-cyan-700">
-                          {['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][parseInt(filterMonth) - 1]}
-                        </span>
-                      </div>
-                    )}
-                    {filterYear === 'all' && filterMonth === 'all' && (
-                      <div
-                        className="flex items-center gap-1 px-2 py-1 rounded-md border-l-2 border-purple-500 shadow-sm"
-                        style={{ background: 'linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)' }}
-                      >
-                        <Sparkles className="w-3 h-3 text-purple-600" />
-                        <span className="text-xs font-semibold text-purple-700">
-                          Todo
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Facturas Card */}
-                  <div
-                    className="text-center rounded-xl p-3 border-l-4 border-blue-500 shadow-sm"
-                    style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
-                  >
-                    <div className="text-2xl font-bold text-blue-600">{totalFacturasCount}</div>
-                    <div className="text-xs text-blue-700 font-medium mt-1">{t('sidebar.invoicesCount')}</div>
-                  </div>
-
-                  {/* Total Card - Optimizado para mostrar cifra completa */}
-                  <div
-                    className="text-center rounded-xl p-3 border-l-4 border-emerald-500 shadow-sm"
-                    style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
-                  >
-                    <div className="text-xs text-emerald-700 font-medium mb-1">{t('sidebar.totalInvoiced')}</div>
-                    <div className="font-bold text-emerald-600" style={{ fontSize: 'clamp(0.9rem, 3.5vw, 1.25rem)', lineHeight: '1.2' }}>
-                      {(() => {
-                        const formatted = new Intl.NumberFormat('es-ES', {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2
-                        }).format(totalFacturado);
-                        return (
-                          <span className="whitespace-nowrap">
-                            {formatted} <span className="text-emerald-600">€</span>
-                          </span>
-                        );
-                      })()}
-                    </div>
-                  </div>
                 </div>
+                <dl className="divide-y divide-[var(--line-soft)] border border-[var(--line)]">
+                  <div className="flex items-baseline justify-between gap-3 px-3 py-2.5">
+                    <dt className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{t('sidebar.invoicesCount')}</dt>
+                    <dd className="text-xl font-light tabular-nums text-foreground">{totalFacturasCount}</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3 px-3 py-2.5">
+                    <dt className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{t('sidebar.totalInvoiced')}</dt>
+                    <dd className="whitespace-nowrap text-sm font-light tabular-nums text-foreground">{formatCurrency(totalFacturado)}</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3 px-3 py-2.5">
+                    <dt className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Pendiente</dt>
+                    <dd className="whitespace-nowrap text-sm font-light tabular-nums text-foreground">{formatCurrency(pendienteTotal)}</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="space-y-2 p-3">
+                <button
+                  type="button"
+                  onClick={() => setShowLibroIvaModal(true)}
+                  className="flex min-h-[44px] w-full items-center justify-between gap-3 px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                >
+                  <span className="flex items-center gap-3">
+                    <BookOpen className="h-4 w-4" aria-hidden="true" />
+                    Libro de IVA
+                  </span>
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <a
+                  href={`/${locale}/productos`}
+                  className="flex min-h-[44px] w-full items-center justify-between gap-3 px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                >
+                  <span className="flex items-center gap-3">
+                    <ShoppingBag className="h-4 w-4" aria-hidden="true" />
+                    Catálogo de productos
+                  </span>
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <button
+                  type="button"
+                  onClick={handleLogoutClick}
+                  className="flex min-h-[44px] w-full items-center gap-3 border-t border-[var(--line)] px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:text-[#ff8a5c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                >
+                  <LogOut className="h-4 w-4" aria-hidden="true" />
+                  {t('logout')}
+                </button>
               </div>
             </motion.div>
 
-            {/* Navigation Menu - Diseño sólido */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-card rounded-2xl p-6 shadow-lg border border-border"
-            >
-              <nav className="space-y-2">
-                {tabs.map((tab, index) => {
+          </aside>
+
+          
+          {/* Main Content Area */}
+          <div ref={mainContentRef} className="min-w-0">
+            {/* Mobile account bar */}
+            <div className="mb-5 border border-[var(--line)] bg-[var(--ink-2)] lg:hidden">
+              <div className="flex items-center justify-between gap-3 p-4">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[var(--kage-accent)] text-sm text-white" aria-hidden="true">
+                    {(perfilCliente?.nombre || user?.name || 'C').charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm text-foreground">{perfilCliente?.empresa || user?.company || 'Cliente'}</p>
+                    <p className="truncate text-xs text-muted-foreground">{perfilCliente?.nombre || user?.name || ''}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleLogoutClick}
+                  className="flex h-11 w-11 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-[#ff8a5c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                  aria-label={t('logout')}
+                >
+                  <LogOut className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+              <nav className="grid grid-cols-4 border-t border-[var(--line)]" aria-label="Secciones del área de clientes">
+                {tabs.map((tab) => {
                   const IconComponent = tab.icon;
                   const isActive = activeTab === tab.id;
-
-                  // Calcular badges/notificaciones por tab
-                  let badgeCount = 0;
-                  // BADGE DE PENDIENTES EN FACTURAS COMENTADO - NO ELIMINAR
-                  // if (tab.id === 'facturas') {
-                  //   badgeCount = (facturas || []).filter(f => f.estadoPago === 'pendiente').length;
-                  // } else 
-                  if (tab.id === 'favoritos') {
-                    badgeCount = getFavoritesCount();
-                  }
-
-                  // Mostrar badge solo si NO estamos en la pestaña activa
-                  const showBadge = badgeCount > 0 && !isActive;
-
                   return (
-                    <motion.button
+                    <button
                       key={tab.id}
+                      type="button"
                       onClick={() => handleTabChange(tab.id)}
-                      whileHover={{ scale: 1.02, x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 group relative ${isActive
-                        ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
-                        : 'text-foreground hover:bg-secondary'
-                        }`}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={`flex min-h-[58px] flex-col items-center justify-center gap-1.5 px-1 py-2 text-[10px] tracking-[0.08em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--kage-accent)] ${
+                        isActive
+                          ? 'bg-[var(--kage-accent)] text-white'
+                          : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'
+                      }`}
                     >
-                      <IconComponent className={`w-5 h-5 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-foreground'}`} />
-                      <span className="font-medium flex-1 text-left">{tab.name}</span>
-
-                      {/* Badge de notificaciones */}
-                      {showBadge && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${isActive
-                            ? 'bg-primary-foreground text-primary'
-                            : 'bg-destructive text-destructive-foreground'
-                            }`}
-                        >
-                          {badgeCount > 99 ? '99+' : badgeCount}
-                        </motion.div>
-                      )}
-
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeTab"
-                          className="ml-auto"
-                        >
-                          <ChevronRight className="w-4 h-4" />
-                        </motion.div>
-                      )}
-                    </motion.button>
+                      <IconComponent className="h-4 w-4" aria-hidden="true" />
+                      <span className="leading-tight">{tab.id === 'dashboard' ? 'Resumen' : tab.name}</span>
+                    </button>
                   );
                 })}
               </nav>
+            </div>
 
-              <Separator className="my-6" />
-
-              <motion.button
-                onClick={handleLogoutClick}
-                whileHover={{ scale: 1.02, x: 4 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-destructive hover:bg-destructive-soft transition-all duration-300 group"
-              >
-                <LogOut className="w-5 h-5" />
-                <span className="font-medium">{t('logout')}</span>
-              </motion.button>
-            </motion.div>
-
-            {/* Quick Actions - Diseño sólido */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-card rounded-2xl p-6 shadow-lg border border-border"
-            >
-              <h3 className="font-semibold text-foreground mb-4 flex items-center">
-                <Sparkles className="w-5 h-5 mr-2 text-warning" />
-                {t('sidebar.quickAccess')}
-              </h3>
-
-              <div className="space-y-3">
-                {/* Libro de IVA */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setShowLibroIvaModal(true)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-all duration-200"
-                  style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
-                >
-                  <div className="flex items-center">
-                    <BookOpen className="w-4 h-4 text-blue-600 mr-2" />
-                    <span className="text-sm font-semibold text-blue-700">Libro de IVA</span>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-blue-500" />
-                </motion.button>
-
-                {/* Últimos Pedidos */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => handleTabChange('pedidos')}
-                  className="w-full flex items-center justify-between p-3 rounded-xl border-l-4 border-emerald-500 shadow-sm hover:shadow-md transition-all duration-200"
-                  style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
-                >
-                  <div className="flex items-center">
-                    <Package className="w-4 h-4 text-emerald-600 mr-2" />
-                    <span className="text-sm font-semibold text-emerald-700">Ver Pedidos</span>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-emerald-500" />
-                </motion.button>
+            <header className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--line-soft)] pb-6">
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                  Área de clientes
+                </p>
+                <h1 className="display mt-3 text-[clamp(30px,4.4vw,54px)] text-foreground">
+                  {activeTab === 'dashboard'
+                    ? 'Mi panel'
+                    : activeTab === 'facturas'
+                      ? t('tabs.facturas')
+                      : activeTab === 'perfil'
+                        ? t('tabs.perfil')
+                        : t('tabs.favoritos')}
+                </h1>
+                <p className="mt-3 max-w-[62ch] text-sm leading-relaxed text-muted-foreground">
+                  {activeTab === 'dashboard'
+                    ? 'Resumen de tu cuenta, tus documentos y tu actividad reciente.'
+                    : activeTab === 'facturas'
+                      ? 'Consulta, descarga y comparte tus facturas.'
+                      : activeTab === 'perfil'
+                        ? 'Tus datos de contacto, empresa y seguridad.'
+                        : 'Los productos que has guardado.'}
+                </p>
               </div>
-            </motion.div>
-          </div>
+              <div className="hidden text-right sm:block">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">MP / Cliente</p>
+                <p className="mt-1 font-mono text-[11px] text-foreground/70">{user?.id || '—'}</p>
+              </div>
+            </header>
 
-          {/* Main Content Area */}
-          <div ref={mainContentRef} className="xl:col-span-4">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="bg-card rounded-2xl p-8 shadow-lg border border-border"
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className=""
               >
 
-                {/* DASHBOARD TAB */}
-                {false && (
-                  <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-
-                    {/* ================================================================
-                        🎯 COMMAND CENTER - EXPERIENCIA NIVEL STRIPE/LINEAR
-                        Dashboard ejecutivo con diseño de clase mundial
-                    ================================================================ */}
-
-                    {/* BENTO GRID HERO - Diseño Asymétrico Premium */}
-                    <div className="grid grid-cols-12 gap-2 sm:gap-4 lg:gap-6">
-
-                      {/* ═══════ MAIN CARD - Cliente Identity ═══════ */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`col-span-12 lg:col-span-8 relative overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br ${clientProfile.tierGradient}`}
-                      >
-                        {/* Patrones de fondo premium */}
-                        <div className="absolute inset-0">
-                          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4" />
-                          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-black/10 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4" />
-                          {clientProfile.tier === 'strategic' && (
-                            <>
-                              <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-gradient-to-r from-amber-400/10 to-rose-400/10 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-                              <motion.div
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-0 left-0 w-full h-full opacity-10"
-                                style={{
-                                  background: 'conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent)'
-                                }}
-                              />
-                            </>
-                          )}
-                          {/* Grid pattern premium */}
-                          <div
-                            className="absolute inset-0 opacity-[0.02]"
-                            style={{
-                              backgroundImage: `
-                                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-                              `,
-                              backgroundSize: '32px 32px'
-                            }}
-                          />
-                        </div>
-
-                        <div className="relative z-10 p-6 lg:p-8">
-                          {/* Top Status Bar */}
-                          <div className="flex items-center justify-between mb-8">
-                            <div className="flex items-center gap-3">
-                              {/* Live Status Indicator */}
-                              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
-                                <motion.div
-                                  animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
-                                  transition={{ duration: 2, repeat: Infinity }}
-                                  className="w-2 h-2 rounded-full bg-emerald-400"
-                                />
-                                <span className="text-xs font-medium text-white/80">En línea</span>
-                              </div>
-
-                              {/* Date & Time */}
-                              <div className="hidden sm:flex items-center gap-4 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/5">
-                                <div className="flex items-center gap-1.5 text-white/60">
-                                  <Calendar className="w-3.5 h-3.5" />
-                                  <span className="text-xs capitalize">
-                                    {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short' })}
-                                  </span>
-                                </div>
-                                <div className="w-px h-3 bg-white/20" />
-                                <div className="flex items-center gap-1.5 text-white/60">
-                                  <Clock className="w-3.5 h-3.5" />
-                                  <span className="text-xs">
-                                    {new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Tier Badge - Premium Design */}
-                            <motion.div
-                              initial={{ opacity: 0, scale: 0.8, x: 20 }}
-                              animate={{ opacity: 1, scale: 1, x: 0 }}
-                              transition={{ delay: 0.3, type: "spring" }}
-                              className="relative"
-                            >
-                              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl">
-                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-400 to-orange-500' :
-                                  clientProfile.tier === 'enterprise' ? 'bg-gradient-to-br from-violet-400 to-purple-500' :
-                                    clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
-                                      'bg-gradient-to-br from-slate-400 to-gray-500'
-                                  }`}>
-                                  {clientProfile.tierIcon === 'crown' && <Crown className="w-4 h-4 text-white" />}
-                                  {clientProfile.tierIcon === 'gem' && <Gem className="w-4 h-4 text-white" />}
-                                  {clientProfile.tierIcon === 'zap' && <Zap className="w-4 h-4 text-white" />}
-                                  {clientProfile.tierIcon === 'sparkles' && <Sparkles className="w-4 h-4 text-white" />}
-                                </div>
-                                <div className="flex flex-col">
-                                  <span className="text-[10px] uppercase tracking-wider text-white/50 font-semibold">Nivel</span>
-                                  <span className="text-sm font-bold text-white leading-tight">{clientProfile.tierLabel}</span>
-                                </div>
-                              </div>
-                              {/* Glow effect for strategic tier */}
-                              {clientProfile.tier === 'strategic' && (
-                                <div className="absolute inset-0 rounded-2xl bg-amber-400/20 blur-xl -z-10" />
-                              )}
-                            </motion.div>
+                                {activeTab === 'dashboard' && (
+                  <div className="space-y-6">
+                    {/* Bienvenida */}
+                    <section className="relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)]">
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+                        style={{
+                          backgroundImage:
+                            'linear-gradient(to right, var(--bone) 1px, transparent 1px), linear-gradient(to bottom, var(--bone) 1px, transparent 1px)',
+                          backgroundSize: '48px 48px',
+                        }}
+                      />
+                      <div className="relative grid lg:grid-cols-[minmax(0,1fr)_320px]">
+                        <div className="p-6 sm:p-10">
+                          <div className="flex flex-wrap items-center gap-3 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                            <span className="h-1.5 w-1.5 bg-[var(--kage-accent)]" aria-hidden="true" />
+                            Ficha de cliente
+                            <span className="text-foreground/25" aria-hidden="true">/</span>
+                            <span className="font-mono normal-case tracking-normal text-foreground/70">{user?.id || '—'}</span>
                           </div>
-
-                          {/* Main Content */}
-                          <div className="flex flex-col xl:flex-row xl:items-end gap-6 xl:gap-8">
-                            {/* Identity Section */}
-                            <div className="flex-1 flex items-start gap-5 min-w-0">
-                              {/* Avatar Generativo Premium */}
-                              <motion.div
-                                initial={{ scale: 0, rotate: -180 }}
-                                animate={{ scale: 1, rotate: 0 }}
-                                transition={{ type: "spring", bounce: 0.5, delay: 0.1 }}
-                                className="relative shrink-0"
-                              >
-                                <div
-                                  className="w-20 h-20 lg:w-28 lg:h-28 rounded-3xl flex items-center justify-center shadow-2xl border-2 border-white/20 backdrop-blur-sm overflow-hidden"
-                                  style={{
-                                    background: `linear-gradient(135deg, ${clientProfile.accentColor}50, ${clientProfile.secondaryColor}30)`,
-                                  }}
-                                >
-                                  {/* Patrón interno único */}
-                                  <div
-                                    className="absolute inset-0 opacity-30"
-                                    style={{
-                                      backgroundImage: `radial-gradient(circle at 30% 30%, ${clientProfile.accentColor}40, transparent 50%)`,
-                                    }}
-                                  />
-                                  {clientProfile.tierIcon === 'crown' && <Crown className="w-10 h-10 lg:w-14 lg:h-14 text-white drop-shadow-2xl relative z-10" />}
-                                  {clientProfile.tierIcon === 'gem' && <Gem className="w-10 h-10 lg:w-14 lg:h-14 text-white drop-shadow-2xl relative z-10" />}
-                                  {clientProfile.tierIcon === 'zap' && <Zap className="w-10 h-10 lg:w-14 lg:h-14 text-white drop-shadow-2xl relative z-10" />}
-                                  {clientProfile.tierIcon === 'sparkles' && <Building2 className="w-10 h-10 lg:w-14 lg:h-14 text-white drop-shadow-2xl relative z-10" />}
-                                </div>
-
-                                {/* Status Ring */}
-                                {clientProfile.patterns.mesActivo && (
-                                  <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ delay: 0.5 }}
-                                    className="absolute -bottom-1 -right-1 w-7 h-7 bg-emerald-500 rounded-xl border-2 border-white shadow-lg flex items-center justify-center"
-                                  >
-                                    <Check className="w-4 h-4 text-white" />
-                                  </motion.div>
-                                )}
-
-                                {/* Racha Badge */}
-                                {clientProfile.patterns.rachaActiva >= 3 && (
-                                  <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ delay: 0.6 }}
-                                    className="absolute -top-2 -right-2 px-2 py-1 bg-orange-500 rounded-lg border-2 border-white shadow-lg flex items-center gap-1"
-                                  >
-                                    <Flame className="w-3 h-3 text-white" />
-                                    <span className="text-[10px] font-bold text-white">{clientProfile.patterns.rachaActiva}</span>
-                                  </motion.div>
-                                )}
-                              </motion.div>
-
-                              {/* Name & Details */}
-                              <div className="flex-1 min-w-0 overflow-hidden">
-                                <motion.div
-                                  initial={{ opacity: 0, x: -30 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: 0.15 }}
-                                >
-                                  <p className="text-white/50 text-sm font-medium tracking-wide">{clientProfile.greeting}</p>
-                                  <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-3xl 2xl:text-4xl font-bold text-white truncate leading-tight mt-1 mb-3">
-                                    {perfilCliente?.empresa || user?.company || 'Bienvenido'}
-                                  </h1>
-
-                                  {/* Context Tags */}
-                                  <div className="flex flex-wrap items-center gap-2">
-                                    {clientProfile.timeline.diasComoCliente > 0 && (
-                                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 text-white/70 text-xs font-medium">
-                                        <Clock className="w-3 h-3" />
-                                        {clientProfile.timeline.diasComoCliente} días
-                                      </div>
-                                    )}
-                                    {clientProfile.stats.totalFacturas > 0 && (
-                                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 text-white/70 text-xs font-medium">
-                                        <FileText className="w-3 h-3" />
-                                        {clientProfile.stats.totalFacturas} facturas
-                                      </div>
-                                    )}
-                                    {clientProfile.patterns.frecuenciaCompra && (
-                                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 text-white/70 text-xs font-medium">
-                                        <Repeat className="w-3 h-3" />
-                                        cada {clientProfile.patterns.frecuenciaCompra}d
-                                      </div>
-                                    )}
-                                  </div>
-                                </motion.div>
-                              </div>
-                            </div>
-
-                            {/* Main Metric - Facturación Total */}
-                            <motion.div
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.25 }}
-                              className="xl:text-right shrink-0"
-                            >
-                              <p className="text-white/40 text-xs font-semibold uppercase tracking-wider mb-1">Facturación Total</p>
-                              <div className="flex items-baseline gap-2 xl:justify-end">
-                                <span className="text-3xl sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-5xl font-bold text-white tracking-tighter">
-                                  {formatCurrencyNoDecimals(clientProfile.stats.totalFacturado)}
-                                </span>
-                              </div>
-                              {clientProfile.trends.tendencia !== 'neutral' && (
-                                <div className={`inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-lg ${clientProfile.trends.tendencia === 'up'
-                                  ? 'bg-emerald-500/20 text-emerald-300'
-                                  : 'bg-amber-500/20 text-amber-300'
-                                  }`}>
-                                  {clientProfile.trends.tendencia === 'up' ? (
-                                    <TrendingUp className="w-3.5 h-3.5" />
-                                  ) : (
-                                    <TrendingDown className="w-3.5 h-3.5" />
-                                  )}
-                                  <span className="text-xs font-semibold">
-                                    {clientProfile.trends.porcentajeCambio > 0 ? '+' : ''}{clientProfile.trends.porcentajeCambio.toFixed(0)}% vs mes anterior
-                                  </span>
-                                </div>
-                              )}
-                            </motion.div>
-                          </div>
-
-                          {/* Bottom Progress Bar - Next Milestone */}
-                          {clientProfile.milestones.next.progress < 100 && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.35 }}
-                              className="mt-8 pt-6 border-t border-white/10"
-                            >
-                              <div className="flex items-center justify-between mb-3">
-                                <div className="flex items-center gap-2">
-                                  <Target className="w-4 h-4 text-white/50" />
-                                  <span className="text-sm font-medium text-white/70">Próximo objetivo</span>
-                                </div>
-                                <span className="text-sm font-bold text-white">{clientProfile.milestones.next.label}</span>
-                              </div>
-                              <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
-                                <motion.div
-                                  initial={{ width: 0 }}
-                                  animate={{ width: `${clientProfile.milestones.next.progress}%` }}
-                                  transition={{ delay: 0.5, duration: 1.5, ease: "easeOut" }}
-                                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-white/60 to-white rounded-full"
-                                />
-                                {/* Shimmer effect */}
-                                <motion.div
-                                  animate={{ x: ['-100%', '200%'] }}
-                                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                                  className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                                />
-                              </div>
-                              <div className="flex justify-between mt-2">
-                                <span className="text-xs text-white/40">{formatCurrency(clientProfile.stats.totalFacturado)}</span>
-                                <span className="text-xs font-medium text-white/60">{clientProfile.milestones.next.progress.toFixed(0)}%</span>
-                              </div>
-                            </motion.div>
-                          )}
-                        </div>
-                      </motion.div>
-
-                      {/* ═══════ SIDE CARDS - Métricas Clave ═══════ */}
-                      <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-4 lg:gap-6">
-
-                        {/* Este Mes Card */}
-                        <motion.div
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.2 }}
-                          whileHover={{ scale: 1.02, y: -2 }}
-                          className="relative overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-5 lg:p-6 bg-gradient-to-br from-emerald-500 to-green-600 shadow-xl shadow-emerald-500/20"
-                        >
-                          <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-                          <div className="relative z-10">
-                            <div className="flex items-center justify-between mb-2 sm:mb-3">
-                              <span className="text-emerald-100 text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Este Mes</span>
-                              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center">
-                                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                              </div>
-                            </div>
-                            <p className="text-base sm:text-xl lg:text-2xl font-bold text-white mb-0.5 sm:mb-1 tracking-tight whitespace-nowrap">
-                              {formatCurrencyNoDecimals(clientProfile.stats.importeMes)}
-                            </p>
-                            <p className="text-emerald-200 text-[10px] sm:text-sm">
-                              {clientProfile.stats.facturasMes} {clientProfile.stats.facturasMes === 1 ? 'factura' : 'facturas'}
-                            </p>
-                          </div>
-                        </motion.div>
-
-                        {/* Media Mensual Card */}
-                        <motion.div
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.3 }}
-                          whileHover={{ scale: 1.02, y: -2 }}
-                          className="relative overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-5 lg:p-6 bg-gradient-to-br from-violet-500 to-purple-600 shadow-xl shadow-violet-500/20"
-                        >
-                          <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-                          <div className="relative z-10">
-                            <div className="flex items-center justify-between mb-2 sm:mb-3">
-                              <span className="text-violet-100 text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Media/Mes</span>
-                              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center">
-                                <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                              </div>
-                            </div>
-                            <p className="text-base sm:text-xl lg:text-2xl font-bold text-white mb-0.5 sm:mb-1 tracking-tight whitespace-nowrap">
-                              {formatCurrencyNoDecimals(clientProfile.stats.avgMensual)}
-                            </p>
-                            <p className="text-violet-200 text-[10px] sm:text-sm">
-                              {clientProfile.patterns.mesesConActividad} meses activos
-                            </p>
-                          </div>
-                        </motion.div>
-
-                        {/* Insights Card - Solo si hay */}
-                        {clientProfile.insights.length > 0 && (
-                          <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="col-span-2 lg:col-span-1 relative overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-5 lg:p-6 bg-white border border-gray-200 shadow-lg"
-                          >
-                            <div className="flex items-start gap-2 sm:gap-3">
-                              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${clientProfile.insights[0].type === 'achievement' ? 'bg-amber-100' :
-                                clientProfile.insights[0].type === 'trend' ? 'bg-emerald-100' :
-                                  clientProfile.insights[0].type === 'alert' ? 'bg-amber-100' :
-                                    'bg-blue-100'
-                                }`}>
-                                {clientProfile.insights[0].icon === 'flame' && <Flame className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />}
-                                {clientProfile.insights[0].icon === 'rocket' && <Rocket className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />}
-                                {clientProfile.insights[0].icon === 'trending-up' && <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />}
-                                {clientProfile.insights[0].icon === 'award' && <Award className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />}
-                                {clientProfile.insights[0].icon === 'trophy' && <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />}
-                                {clientProfile.insights[0].icon === 'clock' && <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />}
-                                {clientProfile.insights[0].icon === 'calendar' && <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="font-bold text-gray-900 text-xs sm:text-sm">{clientProfile.insights[0].title}</p>
-                                <p className="text-gray-600 text-[10px] sm:text-xs mt-0.5 line-clamp-2">{clientProfile.insights[0].description}</p>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* ═══════ QUICK ACTIONS BAR ═══════ */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4"
-                    >
-                      {/* Ver Facturas */}
-                      <motion.button
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleTabChange('facturas')}
-                        className="relative overflow-hidden rounded-xl sm:rounded-2xl p-3 sm:p-5 bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-200 shadow-sm hover:shadow-lg transition-all duration-300 group"
-                      >
-                        <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-blue-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform" />
-                        <div className="relative z-10 flex items-center gap-2 sm:gap-4">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-500 flex items-center justify-center shadow-lg shadow-blue-500/30 shrink-0">
-                            <FileText className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                          </div>
-                          <div className="text-left min-w-0">
-                            <p className="font-bold text-blue-900 text-xs sm:text-base truncate">Facturas</p>
-                            <p className="text-[10px] sm:text-xs text-blue-600">{clientProfile.stats.totalFacturas} total</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* Ver Catálogo */}
-                      <motion.button
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => window.location.href = '/productos'}
-                        className="relative overflow-hidden rounded-xl sm:rounded-2xl p-3 sm:p-5 bg-gradient-to-br from-emerald-50 to-green-100 border border-emerald-200 shadow-sm hover:shadow-lg transition-all duration-300 group"
-                      >
-                        <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-emerald-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform" />
-                        <div className="relative z-10 flex items-center gap-2 sm:gap-4">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30 shrink-0">
-                            <ShoppingCart className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                          </div>
-                          <div className="text-left min-w-0">
-                            <p className="font-bold text-emerald-900 text-xs sm:text-base truncate">Catálogo</p>
-                            <p className="text-[10px] sm:text-xs text-emerald-600">Ver productos</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* Libro IVA */}
-                      <motion.button
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setShowLibroIvaModal(true)}
-                        className="relative overflow-hidden rounded-xl sm:rounded-2xl p-3 sm:p-5 bg-gradient-to-br from-violet-50 to-purple-100 border border-violet-200 shadow-sm hover:shadow-lg transition-all duration-300 group"
-                      >
-                        <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-violet-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform" />
-                        <div className="relative z-10 flex items-center gap-2 sm:gap-4">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-violet-500 flex items-center justify-center shadow-lg shadow-violet-500/30 shrink-0">
-                            <BookOpen className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                          </div>
-                          <div className="text-left min-w-0">
-                            <p className="font-bold text-violet-900 text-xs sm:text-base truncate">Libro IVA</p>
-                            <p className="text-[10px] sm:text-xs text-violet-600">Generar PDF</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* Perfil */}
-                      <motion.button
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleTabChange('perfil')}
-                        className="relative overflow-hidden rounded-xl sm:rounded-2xl p-3 sm:p-5 bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 shadow-sm hover:shadow-lg transition-all duration-300 group"
-                      >
-                        <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-amber-500/10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform" />
-                        <div className="relative z-10 flex items-center gap-2 sm:gap-4">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-amber-500 flex items-center justify-center shadow-lg shadow-amber-500/30 shrink-0">
-                            <Settings className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                          </div>
-                          <div className="text-left min-w-0">
-                            <p className="font-bold text-amber-900 text-xs sm:text-base truncate">Mi Cuenta</p>
-                            <p className="text-[10px] sm:text-xs text-amber-600">Configuración</p>
-                          </div>
-                        </div>
-                      </motion.button>
-                    </motion.div>
-
-                    {/* ═══════ STATS CARDS - DISEÑO GLASS MORPHISM PREMIUM ═══════ */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                      className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6"
-                    >
-                      {[
-                        {
-                          title: 'Facturas',
-                          subtitle: 'Total emitidas',
-                          value: totalFacturasCountDashboard,
-                          icon: FileText,
-                          gradient: 'from-blue-500 via-blue-600 to-indigo-600',
-                          glowColor: 'shadow-blue-500/25',
-                          iconBg: 'bg-gradient-to-br from-blue-500 to-indigo-600',
-                          accentBorder: 'border-l-blue-500',
-                          sparkline: [30, 45, 35, 50, 40, 60, 55], // Datos ficticios para mini gráfico
-                        },
-                        {
-                          title: 'Facturado',
-                          subtitle: 'Importe total',
-                          value: formatCurrencyNoDecimals(totalFacturadoDashboard),
-                          icon: DollarSign,
-                          gradient: 'from-emerald-500 via-green-500 to-teal-500',
-                          glowColor: 'shadow-emerald-500/25',
-                          iconBg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
-                          accentBorder: 'border-l-emerald-500',
-                          sparkline: [40, 35, 55, 45, 60, 50, 70],
-                        },
-                        {
-                          title: 'Ticket Medio',
-                          subtitle: 'Por factura',
-                          value: (facturas && facturas.length > 0)
-                            ? formatCurrencyNoDecimals(totalFacturadoDashboard / facturas.length)
-                            : '€0',
-                          icon: TrendingUp,
-                          gradient: 'from-amber-500 via-orange-500 to-rose-500',
-                          glowColor: 'shadow-amber-500/25',
-                          iconBg: 'bg-gradient-to-br from-amber-500 to-orange-600',
-                          accentBorder: 'border-l-amber-500',
-                          sparkline: [25, 40, 30, 45, 35, 50, 45],
-                        },
-                        {
-                          title: 'Este Año',
-                          subtitle: `Facturas ${new Date().getFullYear()}`,
-                          value: (facturas || []).filter(f => f.ano === new Date().getFullYear()).length,
-                          icon: Calendar,
-                          gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
-                          glowColor: 'shadow-violet-500/25',
-                          iconBg: 'bg-gradient-to-br from-violet-500 to-purple-600',
-                          accentBorder: 'border-l-violet-500',
-                          sparkline: [35, 50, 45, 55, 50, 65, 60],
-                        }
-                      ].map((stat, index) => (
-                        <motion.div
-                          key={stat.title}
-                          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          transition={{ delay: 0.55 + index * 0.1, type: "spring", bounce: 0.3 }}
-                          whileHover={{
-                            y: -8,
-                            scale: 1.03,
-                            transition: { type: "spring", stiffness: 400 }
-                          }}
-                          className={`relative group cursor-pointer`}
-                        >
-                          {/* Glow effect on hover */}
-                          <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10`} />
-
-                          {/* Main Card */}
-                          <div className={`relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border-l-4 ${stat.accentBorder} shadow-lg ${stat.glowColor} hover:shadow-2xl transition-all duration-500`}>
-                            {/* Background Pattern */}
-                            <div className="absolute inset-0 opacity-[0.03]">
-                              <div className="absolute inset-0" style={{
-                                backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
-                                backgroundSize: '16px 16px'
-                              }} />
-                            </div>
-
-                            {/* Decorative Gradient Orb */}
-                            <div className={`absolute -top-10 -right-10 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br ${stat.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 group-hover:scale-150 transition-all duration-700`} />
-
-                            <div className="relative z-10 p-3 sm:p-5 lg:p-6">
-                              {/* Header */}
-                              <div className="flex items-start justify-between mb-2 sm:mb-4">
-                                <div className={`${stat.iconBg} p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
-                                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
-                                </div>
-
-                                {/* Mini Sparkline - Hidden on very small screens */}
-                                <div className="hidden xs:flex items-end gap-0.5 h-6 sm:h-8 opacity-40 group-hover:opacity-70 transition-opacity">
-                                  {stat.sparkline.map((value, i) => (
-                                    <motion.div
-                                      key={i}
-                                      initial={{ height: 0 }}
-                                      animate={{ height: `${(value / 70) * 100}%` }}
-                                      transition={{ delay: 0.8 + i * 0.05, duration: 0.5 }}
-                                      className={`w-0.5 sm:w-1 rounded-full bg-gradient-to-t ${stat.gradient}`}
-                                    />
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Value */}
-                              <div className="mb-1">
-                                <motion.span
-                                  className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 tracking-tight whitespace-nowrap"
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  transition={{ delay: 0.7 + index * 0.1 }}
-                                >
-                                  {stat.value}
-                                </motion.span>
-                              </div>
-
-                              {/* Labels */}
-                              <div className="flex items-center justify-between">
-                                <div className="min-w-0">
-                                  <p className="text-xs sm:text-sm font-bold text-gray-700 truncate">{stat.title}</p>
-                                  <p className="text-[10px] sm:text-xs text-gray-500 truncate">{stat.subtitle}</p>
-                                </div>
-
-                                {/* Trend Indicator - Hidden on mobile */}
-                                <div className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-50 text-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                                  <ArrowUpRight className="w-3 h-3" />
-                                  <span className="text-xs font-bold">+12%</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-
-                    {/* ═══════ ACTIVITY SECTION - BENTO LAYOUT PREMIUM ═══════ */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6">
-
-                      {/* Recent Orders - Diseño Premium */}
-                      <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6, duration: 0.5 }}
-                        className="lg:col-span-7"
-                      >
-                        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-gray-200 shadow-xl">
-                          {/* Header Premium */}
-                          <div className="relative px-3 sm:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2 sm:gap-4">
-                                <div className="relative">
-                                  <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                                    <Package className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                                  </div>
-                                  {pedidos.length > 0 && (
-                                    <motion.div
-                                      animate={{ scale: [1, 1.2, 1] }}
-                                      transition={{ duration: 2, repeat: Infinity }}
-                                      className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center"
-                                    >
-                                      <span className="text-[8px] sm:text-[10px] font-bold text-white">{pedidos.length}</span>
-                                    </motion.div>
-                                  )}
-                                </div>
-                                <div>
-                                  <h3 className="text-sm sm:text-lg font-bold text-gray-900">Pedidos Recientes</h3>
-                                  <p className="text-xs sm:text-sm text-gray-500">Últimas transacciones</p>
-                                </div>
-                              </div>
-                              <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => { /* disabled: pedidos removed */ }}
-                                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs sm:text-sm transition-colors"
-                              >
-                                <span className="hidden xs:inline">Ver todos</span>
-                                <span className="xs:hidden">Ver</span>
-                                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                              </motion.button>
-                            </div>
-                          </div>
-
-                          {/* Orders List */}
-                          <div className="px-3 sm:px-6 pb-4 sm:pb-6">
-                            {loadingPedidos ? (
-                              <div className="flex flex-col items-center justify-center py-8 sm:py-12">
-                                <div className="relative">
-                                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-4 border-blue-100 border-t-blue-500 animate-spin" />
-                                </div>
-                                <p className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4">Cargando pedidos...</p>
-                              </div>
-                            ) : pedidos.length === 0 ? (
-                              <div className="flex flex-col items-center justify-center py-8 sm:py-12">
-                                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gray-100 flex items-center justify-center mb-3 sm:mb-4">
-                                  <Package className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
-                                </div>
-                                <p className="text-gray-600 font-medium text-sm sm:text-base">Sin pedidos recientes</p>
-                                <p className="text-xs sm:text-sm text-gray-400 mt-1">Tus próximos pedidos aparecerán aquí</p>
-                              </div>
+                          <h2 className="display mt-6 text-[clamp(34px,5vw,64px)] text-foreground">
+                            {clientProfile.greeting}.
+                          </h2>
+                          <p className="mt-4 max-w-[48ch] text-[15px] font-light leading-relaxed text-muted-foreground">
+                            {clientProfile.greetingContext}
+                          </p>
+                          <div className="mt-8 flex flex-wrap gap-2">
+                            <Badge variant="outline">
+                              <Calendar className="h-3 w-3" aria-hidden="true" />
+                              {clientProfile.timeline.diasComoCliente} días como cliente
+                            </Badge>
+                            {clientProfile.patterns.rachaActiva > 0 && (
+                              <Badge variant="outline">
+                                <Flame className="h-3 w-3" aria-hidden="true" />
+                                {clientProfile.patterns.rachaActiva} meses de actividad
+                              </Badge>
+                            )}
+                            {securityWarnings.hasLegacyPassword || securityWarnings.needsContactSetup ? (
+                              <Badge className="border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                                <AlertTriangle className="h-3 w-3" aria-hidden="true" />
+                                Revisa tu seguridad
+                              </Badge>
                             ) : (
-                              <div className="space-y-2 sm:space-y-3">
-                                {pedidos.slice(0, 4).map((pedido, index) => {
-                                  const isPaid = pedido.estadoPago === 'Pagado';
-
-                                  return (
-                                    <motion.div
-                                      key={`${pedido.subempresa}-${pedido.numeroPedido}`}
-                                      initial={{ opacity: 0, x: -20 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: 0.7 + index * 0.1 }}
-                                      whileHover={{ x: 4, backgroundColor: 'rgba(59, 130, 246, 0.05)' }}
-                                      className="flex items-center justify-between p-2 sm:p-4 rounded-xl sm:rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300 cursor-pointer group"
-                                    >
-                                      <div className="flex items-center gap-2 sm:gap-4">
-                                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${isPaid ? 'bg-emerald-100' : 'bg-amber-100'
-                                          }`}>
-                                          {isPaid ? (
-                                            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
-                                          ) : (
-                                            <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
-                                          )}
-                                        </div>
-                                        <div className="min-w-0">
-                                          <p className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors text-xs sm:text-base truncate">
-                                            Pedido #{pedido.numeroPedido}
-                                          </p>
-                                          <p className="text-[10px] sm:text-xs text-gray-500">{pedido.fecha}</p>
-                                        </div>
-                                      </div>
-
-                                      <div className="flex items-center gap-2 sm:gap-4">
-                                        <div className="text-right">
-                                          <p className="font-bold text-gray-900 text-xs sm:text-base">{formatCurrency(pedido.importeTotal)}</p>
-                                          <Badge className={`text-[10px] sm:text-xs ${isPaid
-                                            ? 'bg-emerald-100 text-emerald-700 border-emerald-200'
-                                            : 'bg-amber-100 text-amber-700 border-amber-200'
-                                            }`}>
-                                            {pedido.estadoPago}
-                                          </Badge>
-                                        </div>
-                                        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
-                                      </div>
-                                    </motion.div>
-                                  );
-                                })}
-                              </div>
+                              <Badge className="border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                                <Shield className="h-3 w-3" aria-hidden="true" />
+                                Cuenta protegida
+                              </Badge>
                             )}
                           </div>
                         </div>
-                      </motion.div>
 
-                      {/* Right Column - Stats & Insights */}
+                        <div className="relative border-t border-[var(--line)] p-6 sm:p-8 lg:border-l lg:border-t-0">
+                          <div className="flex items-start justify-between gap-4">
+                            <div>
+                              <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">Cliente desde</p>
+                              <p className="num mt-1 text-[clamp(34px,4vw,48px)] text-foreground">
+                                {clientProfile.timeline.primeraFactura?.split('/')[2] || '—'}
+                              </p>
+                            </div>
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--line)] text-[var(--kage-accent)]" aria-hidden="true">
+                              <Building2 className="h-4 w-4" />
+                            </div>
+                          </div>
+                          <dl className="mt-8 divide-y divide-[var(--line-soft)] border-y border-[var(--line-soft)]">
+                            <div className="flex items-center justify-between gap-3 py-3">
+                              <dt className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Email</dt>
+                              <dd className="max-w-[190px] truncate text-xs text-foreground">{userEmail || 'Sin configurar'}</dd>
+                            </div>
+                            <div className="flex items-center justify-between gap-3 py-3">
+                              <dt className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Teléfono</dt>
+                              <dd className="max-w-[190px] truncate text-xs text-foreground">{userPhone || 'Sin configurar'}</dd>
+                            </div>
+                            <div className="flex items-center justify-between gap-3 py-3">
+                              <dt className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Cuenta</dt>
+                              <dd className="font-mono text-[11px] text-foreground/80">{user?.id || '—'}</dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </div>
                       <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.7, duration: 0.5 }}
-                        className="lg:col-span-5 space-y-3 sm:space-y-6"
-                      >
-                        {/* Activity Summary Card */}
-                        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 p-4 sm:p-6 shadow-xl shadow-violet-500/20">
-                          {/* Background Effects */}
-                          <div className="absolute inset-0 overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-white/10 rounded-full blur-3xl" />
-                            <div className="absolute bottom-0 left-0 w-24 sm:w-32 h-24 sm:h-32 bg-black/10 rounded-full blur-2xl" />
-                          </div>
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+                        className="h-[2px] origin-left bg-[var(--kage-accent)]"
+                        aria-hidden="true"
+                      />
+                    </section>
 
-                          <div className="relative z-10">
-                            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center">
-                                <PieChart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                              </div>
-                              <div>
-                                <h3 className="font-bold text-white text-sm sm:text-base">Resumen de Actividad</h3>
-                                <p className="text-[10px] sm:text-xs text-white/60">Estadísticas del período</p>
-                              </div>
-                            </div>
-
-                            {/* Quick Stats */}
-                            <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                              <div className="bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 backdrop-blur-sm">
-                                <p className="text-white/60 text-[10px] sm:text-xs font-medium mb-1">Facturas/Mes</p>
-                                <p className="text-lg sm:text-2xl font-bold text-white">
-                                  {clientProfile.stats.avgMensual ? Math.round(clientProfile.stats.totalFacturas / (clientProfile.patterns.mesesConActividad || 1)) : 0}
-                                </p>
-                              </div>
-                              <div className="bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 backdrop-blur-sm">
-                                <p className="text-white/60 text-[10px] sm:text-xs font-medium mb-1">Días Activo</p>
-                                <p className="text-lg sm:text-2xl font-bold text-white">{clientProfile.timeline.diasComoCliente}</p>
-                              </div>
-                            </div>
-
-                            {/* Progress to next tier */}
-                            {clientProfile.milestones.next.progress < 100 && (
-                              <div className="mt-4 sm:mt-6">
-                                <div className="flex items-center justify-between mb-1 sm:mb-2">
-                                  <span className="text-[10px] sm:text-xs text-white/70">Próximo nivel</span>
-                                  <span className="text-[10px] sm:text-xs font-bold text-white">{clientProfile.milestones.next.progress.toFixed(0)}%</span>
-                                </div>
-                                <div className="h-1.5 sm:h-2 bg-white/20 rounded-full overflow-hidden">
-                                  <motion.div
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${clientProfile.milestones.next.progress}%` }}
-                                    transition={{ delay: 1, duration: 1.5 }}
-                                    className="h-full bg-gradient-to-r from-amber-400 to-orange-400 rounded-full"
-                                  />
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Tier Status Card */}
-                        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-gray-200 shadow-lg p-4 sm:p-6">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 sm:gap-4">
-                              <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
-                                clientProfile.tier === 'enterprise' ? 'bg-gradient-to-br from-violet-500 to-purple-600' :
-                                  clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' :
-                                    'bg-gradient-to-br from-slate-500 to-gray-600'
-                                } shadow-lg`}>
-                                {clientProfile.tierIcon === 'crown' && <Crown className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
-                                {clientProfile.tierIcon === 'gem' && <Gem className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
-                                {clientProfile.tierIcon === 'zap' && <Zap className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
-                                {clientProfile.tierIcon === 'sparkles' && <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
-                              </div>
-                              <div>
-                                <p className="text-xs sm:text-sm text-gray-500 font-medium">Tu nivel actual</p>
-                                <h3 className="text-base sm:text-xl font-bold text-gray-900">{clientProfile.tierLabel}</h3>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <p className="text-xs sm:text-sm text-gray-500">Beneficios</p>
-                              <p className="text-sm sm:text-lg font-bold text-emerald-600">Activos</p>
-                            </div>
-                          </div>
-
-                          {/* Tier Benefits */}
-                          <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-gray-100">
-                            <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
-                              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-500 shrink-0" />
-                              <span>Acceso a facturas en PDF</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-gray-600 mt-2">
-                              <CheckCircle className="w-4 h-4 text-emerald-500" />
-                              <span>Historial completo de pedidos</span>
-                            </div>
-                            {(clientProfile.tier === 'enterprise' || clientProfile.tier === 'strategic') && (
-                              <div className="flex items-center gap-2 text-sm text-gray-600 mt-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-500" />
-                                <span>Atención preferente</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    {/* Charts Section - NUEVO */}
-                    {user?.id && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                    {/* KPIs */}
+                    <section aria-label="Resumen de cuenta" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-12">
+                      <motion.article
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.5 }}
+                        transition={{ duration: 0.45, delay: 0.05 }}
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-4 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
                       >
-                        <DashboardCharts codigoCliente={user?.id || ''} />
-                      </motion.div>
-                    )}
-                  </div>
-                )}
-
-                {/* PEDIDOS TAB */}
-
-                {false && (
-                  <div className="space-y-6">
-                    {/* Header with search and filters */}
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                      <div>
-                        <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
-                          Mis pedidos
-                        </h1>
-                        <p className="text-muted-foreground">
-                          Consulta el estado de todos tus pedidos
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Último pedido</p>
+                          <Package className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                        </div>
+                        <p className="mt-3 truncate text-[clamp(28px,3vw,40px)] font-light leading-none tracking-[-0.02em] tabular-nums text-foreground">
+                          {isLoadingPortal && !lastPedido ? '—' : lastPedido ? `#${lastPedido.numeroPedido}` : 'Sin pedidos'}
                         </p>
-                      </div>
-
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl shadow-lg hover:shadow-xl hover:bg-primary-hover transition-all duration-200"
-                      >
-                        <Plus className="w-5 h-5 mr-2" />
-                        Nuevo pedido
-                      </motion.button>
-                    </div>
-
-                    {/* Search and Filter Bar */}
-                    <div className="flex flex-col sm:flex-row gap-4 p-4 bg-secondary rounded-2xl border border-border">
-                      <div className="relative flex-1">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                        <Input
-                          placeholder="Buscar pedidos..."
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          className="pl-10 border-border bg-card shadow-sm"
-                        />
-                      </div>
-
-                      <select
-                        value={filterStatus}
-                        onChange={(e) => setFilterStatus(e.target.value)}
-                        className="px-4 py-2 bg-card border border-border rounded-xl shadow-sm focus:ring-2 focus:ring-primary focus:outline-none text-foreground"
-                      >
-                        <option value="all">Todos los estados</option>
-                        <option value="pending">Pendiente</option>
-                        <option value="processing">Procesando</option>
-                        <option value="shipped">Enviado</option>
-                        <option value="delivered">Entregado</option>
-                      </select>
-                    </div>
-
-                    {/* Orders List */}
-                    {loadingPedidos ? (
-                      <div className="text-center py-12">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-                        <p className="text-muted-foreground mt-4">Cargando pedidos...</p>
-                      </div>
-                    ) : (
-                      <div className="space-y-4">
-                        {filteredOrders.map((pedido, index) => {
-                          const isPaid = pedido.estadoPago === 'Pagado';
-                          const StatusIcon = isPaid ? CheckCircle : Clock;
-                          const statusColor = isPaid
-                            ? 'text-emerald-700 border-emerald-400'
-                            : 'text-amber-700 border-amber-400';
-                          const statusBg = isPaid
-                            ? 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)'
-                            : 'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)';
-
-                          return (
-                            <motion.div
-                              key={`${pedido.subempresa}-${pedido.numeroPedido}`}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: index * 0.05, duration: 0.3 }}
-                              whileHover={{ y: -2, scale: 1.01 }}
-                              className="bg-card rounded-2xl p-6 shadow-lg border border-border hover:shadow-xl transition-all duration-300"
-                            >
-                              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                                <div className="space-y-3">
-                                  <div className="flex items-center space-x-3">
-                                    <div
-                                      className="p-2 rounded-xl border-l-4 border-blue-500"
-                                      style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}
-                                    >
-                                      <Package className="w-5 h-5 text-blue-600" />
-                                    </div>
-                                    <div>
-                                      <h3 className="text-xl font-bold text-foreground">
-                                        Pedido #{pedido.numeroPedido}
-                                      </h3>
-                                      <div className="flex items-center text-sm text-muted-foreground space-x-4 mt-1">
-                                        <div className="flex items-center">
-                                          <Building className="w-4 h-4 mr-1" />
-                                          {pedido.subempresa}
-                                        </div>
-                                        <div className="flex items-center">
-                                          <Calendar className="w-4 h-4 mr-1" />
-                                          {pedido.fecha}
-                                        </div>
-                                        <div className="flex items-center font-semibold text-emerald-600">
-                                          <CreditCard className="w-4 h-4 mr-1" />
-                                          €{pedido.importeTotal.toFixed(2)}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  {pedido.tieneFactura && (
-                                    <div className="pl-11">
-                                      <div
-                                        className="flex items-center text-sm text-emerald-700 font-medium px-3 py-1.5 rounded-lg w-fit border-l-4 border-emerald-500"
-                                        style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
-                                      >
-                                        <FileText className="w-4 h-4 mr-1" />
-                                        Factura generada
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-
-                                <div className="flex flex-col items-end space-y-3">
-                                  <Badge
-                                    className={`${statusColor} font-semibold px-3 py-1.5 border-l-4 rounded-lg shadow-sm`}
-                                    style={{ background: statusBg }}
-                                  >
-                                    <StatusIcon className="w-3 h-3 mr-1" />
-                                    {pedido.estadoPago}
-                                  </Badge>
-
-                                  <div className="flex space-x-2">
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-400 transition-all duration-200 shadow-sm"
-                                    >
-                                      <Eye className="w-4 h-4 mr-1" />
-                                      Ver detalle
-                                    </Button>
-                                  </div>
-                                </div>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
-
-                        {filteredOrders.length === 0 && !loadingPedidos && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-center py-12"
-                          >
-                            <Package className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
-                            <h3 className="text-lg font-semibold text-foreground mb-2">
-                              No se encontraron pedidos
-                            </h3>
-                            <p className="text-muted-foreground">
-                              {searchTerm
-                                ? 'Prueba con diferentes criterios de búsqueda'
-                                : 'Todavía no tienes pedidos registrados'
-                              }
-                            </p>
-                          </motion.div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* FACTURAS TAB */}
-                {activeTab === 'facturas' && (
-                  <div className="space-y-6">
-                    {/* Breadcrumbs - NUEVO */}
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
-                    >
-                      <Building2 className="w-4 h-4" />
-                      <span className="font-medium">{t('sidebar.controlPanel')}</span>
-                      <ChevronRight className="w-3 h-3" />
-                      <FileText className="w-4 h-4 text-primary" />
-                      <span className="text-primary font-semibold">{t('tabs.facturas')}</span>
-                      {filterYear !== 'all' && (
-                        <>
-                          <ChevronRight className="w-3 h-3" />
-                          <Badge variant="outline" className="text-xs">{filterYear}</Badge>
-                        </>
-                      )}
-                    </motion.div>
-
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                      <div>
-                        <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
-                          <FileText className="w-5 h-5 inline-block mr-2" />
-                          {t('invoices')}
-                        </h1>
-                        <p className="text-muted-foreground">
-                          {filteredFacturas.length} {t('table.foundCount', { count: filteredFacturas.length }).replace('{count}', String(filteredFacturas.length)).replace(`${filteredFacturas.length} `, '')} • {t('table.downloadMessage')}
-                        </p>
-                      </div>
-
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setShowLibroIvaModal(true)}
-                        className="inline-flex items-center px-6 py-3 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-white border-l-4 border-purple-600"
-                        style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #9333EA 100%)' }}
-                      >
-                        <BookOpen className="w-5 h-5 mr-2" />
-                        {t('ivaBook')}
-                      </motion.button>
-                    </div>
-
-                    {/* Filtros Mejorados con Diseño Premium */}
-                    <div className="bg-white rounded-2xl border-2 border-blue-100 p-6 space-y-5 shadow-lg">
-                      {/* Búsqueda Dinámica Premium (Siempre Visible) */}
-                      <div className="space-y-2">
-                        <label className="text-sm font-bold text-blue-600 flex items-center">
-                          <Search className="w-4 h-4 mr-2" />
-                          {t('filters.search')}
-                        </label>
-                        <div className="relative group">
-                          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" />
-                          <Input
-                            placeholder={t('filters.search')}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-12 pr-10 h-14 border-2 border-gray-200 bg-gray-50 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-base text-gray-900 placeholder:text-gray-400 rounded-xl font-medium transition-all"
-                          />
-                          {searchTerm && (
-                            <button
-                              onClick={() => setSearchTerm('')}
-                              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-200 rounded-full transition-colors"
-                            >
-                              <X className="w-4 h-4 text-gray-400" />
-                            </button>
+                        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                          {lastPedido ? (
+                            <>
+                              <span className="inline-flex items-center gap-1.5">
+                                <span className={`h-1.5 w-1.5 ${String(lastPedido.estadoPago || '').toLowerCase().includes('pag') ? 'bg-emerald-400' : 'bg-amber-400'}`} aria-hidden="true" />
+                                {lastPedido.estadoPago || 'Pendiente'}
+                              </span>
+                              <span aria-hidden="true">·</span>
+                              <span>{lastPedido.fecha}</span>
+                              <span aria-hidden="true">·</span>
+                              <span className="tabular-nums text-foreground/80">{formatCurrency(lastPedido.importeTotal || 0)}</span>
+                            </>
+                          ) : (
+                            <span>Cuando hagas un pedido aparecerá aquí</span>
                           )}
                         </div>
-                      </div>
+                      </motion.article>
 
-                      {/* Selector de Cliente (NIF unificado) */}
-                      {clientsList.length > 1 && (
-                        <div className="space-y-2 relative" ref={clientDropdownRef}>
-                          <label className="text-sm font-bold text-blue-600 flex items-center">
-                            <Users className="w-4 h-4 mr-2" />
-                            Seleccionar Cuenta (Cliente)
-                          </label>
-                          <button
-                            onClick={() => { setClientDropdownOpen(!clientDropdownOpen); setClientSearch(''); setTimeout(() => clientSearchRef.current?.focus(), 50); }}
-                            className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white flex items-center justify-between text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
+                      <motion.article
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, delay: 0.11 }}
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-2 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Facturas</p>
+                          <FileText className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                        </div>
+                        <p className="mt-3 text-[clamp(28px,3vw,40px)] font-light leading-none tabular-nums text-foreground">
+                          {!facturas?.length ? '—' : totalFacturasCount}
+                        </p>
+                        <p className="mt-3 text-xs text-muted-foreground">
+                          {!facturas?.length ? 'Sin documentos' : `${pagadasCount} pagadas · ${pendientesCount} ${pendientesCount === 1 ? 'pendiente' : 'pendientes'}`}
+                        </p>
+                      </motion.article>
+
+                      <motion.article
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, delay: 0.17 }}
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-3 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Total facturado</p>
+                          <Activity className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                        </div>
+                        <p className="mt-3 whitespace-nowrap text-[clamp(22px,2.4vw,32px)] font-light leading-none tabular-nums text-foreground">
+                          {!facturas?.length ? '—' : formatCurrency(totalFacturado)}
+                        </p>
+                        <div
+                          className="mt-4 flex h-12 items-end gap-1"
+                          role="img"
+                          aria-label={`Evolución de facturación de los últimos seis meses: ${monthlySeries.map((month) => `${month.label} ${formatCurrency(month.total)}`).join(', ')}`}
+                        >
+                          {monthlySeries.map((month, index) => (
+                            <div key={`${month.label}-${index}`} className="flex h-full flex-1 flex-col items-center justify-end gap-1" aria-hidden="true">
+                              <div
+                                className={`w-full transition-colors ${month.current ? 'bg-[var(--kage-accent)]' : 'bg-white/15 group-hover:bg-white/25'}`}
+                                style={{ height: `${4 + Math.round((month.total / maxMonthly) * 32)}px` }}
+                              />
+                              <span className="text-[8px] uppercase tracking-[0.06em] text-muted-foreground">{month.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.article>
+
+                      <motion.article
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, delay: 0.23 }}
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-3 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Pendiente</p>
+                          <CreditCard className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                        </div>
+                        <p className="mt-3 whitespace-nowrap text-[clamp(22px,2.4vw,32px)] font-light leading-none tabular-nums text-foreground">
+                          {!facturas?.length ? '—' : formatCurrency(pendienteTotal)}
+                        </p>
+                        <div className="mt-4 h-1.5 w-full overflow-hidden bg-white/10" role="img" aria-label={`${pendienteRatio}% del importe está pendiente de pago`}>
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${pendienteRatio}%` }}
+                            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                            className="h-full bg-[var(--kage-accent)]"
+                          />
+                        </div>
+                        <p className="mt-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+                          {pendienteTotal > 0 ? `${pendienteRatio}% pendiente · ${pendientesCount} ${pendientesCount === 1 ? 'factura' : 'facturas'}` : 'Sin importes pendientes'}
+                        </p>
+                      </motion.article>
+                    </section>
+
+                    <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
+                      {/* Actividad reciente */}
+                      <section className="border border-[var(--line)] bg-[var(--ink-2)] transition-colors hover:border-foreground/30" aria-labelledby="actividad-reciente">
+                        <div className="flex items-center justify-between gap-3 border-b border-[var(--line)] px-5 py-4">
+                          <div>
+                            <div className="flex items-baseline gap-3">
+                              <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">01</span>
+                              <h2 id="actividad-reciente" className="text-sm font-medium text-foreground">Actividad reciente</h2>
+                            </div>
+                            <p className="mt-1 pl-7 text-xs text-muted-foreground">Tus últimas facturas</p>
+                          </div>
+                          <Button size="sm" variant="secondary" onClick={() => handleTabChange('facturas')}>
+                            Ver todas
+                          </Button>
+                        </div>
+
+                        {isLoadingPortal && ultimasFacturas.length === 0 ? (
+                          <div className="space-y-3 p-5" role="status" aria-live="polite">
+                            <span className="sr-only">Cargando facturas…</span>
+                            {[0, 1, 2, 3].map((item) => (
+                              <div key={item} className="h-14 w-full animate-pulse bg-white/5" aria-hidden="true" />
+                            ))}
+                          </div>
+                        ) : ultimasFacturas.length === 0 ? (
+                          <div className="flex flex-col items-center px-6 py-14 text-center">
+                            <FileText className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+                            <p className="mt-4 text-sm text-foreground">Todavía no tienes facturas</p>
+                            <p className="mt-1 max-w-[36ch] text-xs leading-relaxed text-muted-foreground">
+                              Cuando se emita tu primera factura podrás consultarla y descargarla aquí.
+                            </p>
+                          </div>
+                        ) : (
+                          <ul className="divide-y divide-[var(--line-soft)]">
+                            {ultimasFacturas.map((factura, index) => (
+                              <li key={`${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`} className="group/row flex flex-wrap items-center gap-3 px-5 py-4 transition-colors hover:bg-white/[0.03]">
+                                <span className="font-mono text-[10px] text-muted-foreground transition-colors group-hover/row:text-[#ff8a5c]" aria-hidden="true">
+                                  {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <div className="min-w-0 flex-1">
+                                  <p className="truncate text-sm text-foreground">
+                                    {factura.serieFactura}-{factura.numeroFactura}
+                                  </p>
+                                  <p className="mt-0.5 text-xs text-muted-foreground">{factura.fecha}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="whitespace-nowrap text-sm tabular-nums text-foreground">{formatCurrency(factura.totalFactura)}</p>
+                                  <Badge
+                                    variant="outline"
+                                    className={`mt-1 ${factura.estadoPago === 'pagada' ? '!border-emerald-500/40 !text-emerald-300' : '!border-amber-500/40 !text-amber-300'}`}
+                                  >
+                                    {factura.estadoPago === 'pagada' ? 'Pagada' : 'Pendiente'}
+                                  </Badge>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => handlePreviewPdf(factura)}
+                                    className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                    aria-label={`Ver factura ${factura.serieFactura}-${factura.numeroFactura}`}
+                                  >
+                                    <Eye className="h-4 w-4" aria-hidden="true" />
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleDownloadInvoice(factura)}
+                                    className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                    aria-label={`Descargar factura ${factura.serieFactura}-${factura.numeroFactura}`}
+                                  >
+                                    <Download className="h-4 w-4" aria-hidden="true" />
+                                  </button>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </section>
+
+                      <div className="space-y-6">
+                        {/* Contacto */}
+                        <section className="border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30" aria-labelledby="datos-contacto">
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="flex items-baseline gap-3">
+                              <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">02</span>
+                              <h2 id="datos-contacto" className="text-sm font-medium text-foreground">Datos de contacto</h2>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => handleTabChange('perfil')}
+                              className="flex min-h-[44px] items-center gap-1 px-2 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            >
+                              Editar
+                              <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+                            </button>
+                          </div>
+                          <ul className="mt-4 space-y-3 text-sm">
+                            <li className="flex items-start gap-3">
+                              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                              <span className="min-w-0 break-all text-foreground">{userEmail || 'Sin email configurado'}</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                              <span className="min-w-0 text-foreground">{userPhone || 'Sin teléfono configurado'}</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                              <span className="min-w-0 text-foreground">{perfilCliente?.direccion?.completa || 'Sin dirección de facturación'}</span>
+                            </li>
+                          </ul>
+                        </section>
+
+                        {/* Estado de cuenta */}
+                        <section className="border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30" aria-labelledby="estado-cuenta">
+                          <div className="flex items-baseline gap-3">
+                            <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">03</span>
+                            <h2 id="estado-cuenta" className="text-sm font-medium text-foreground">Estado de cuenta</h2>
+                          </div>
+                          <div className="mt-4 space-y-3">
+                            <div className="flex items-center justify-between gap-3 text-sm">
+                              <span className="text-muted-foreground">Contraseña</span>
+                              <span className={`inline-flex items-center gap-2 ${securityWarnings.hasLegacyPassword ? 'text-amber-300' : 'text-emerald-300'}`}>
+                                <span className={`h-1.5 w-1.5 ${securityWarnings.hasLegacyPassword ? 'bg-amber-400' : 'bg-emerald-400'}`} aria-hidden="true" />
+                                {securityWarnings.hasLegacyPassword ? 'Mejorable' : 'Segura'}
+                              </span>
+                            </div>
+                            <div className="flex items-center justify-between gap-3 text-sm">
+                              <span className="text-muted-foreground">Contacto</span>
+                              <span className={`inline-flex items-center gap-2 ${securityWarnings.needsContactSetup ? 'text-amber-300' : 'text-emerald-300'}`}>
+                                <span className={`h-1.5 w-1.5 ${securityWarnings.needsContactSetup ? 'bg-amber-400' : 'bg-emerald-400'}`} aria-hidden="true" />
+                                {securityWarnings.needsContactSetup ? 'Incompleto' : 'Completo'}
+                              </span>
+                            </div>
+                            <div className="flex items-center justify-between gap-3 text-sm">
+                              <span className="text-muted-foreground">Favoritos</span>
+                              <span className="tabular-nums text-foreground">{getFavoritesCount()}</span>
+                            </div>
+                          </div>
+                          <Button
+                            variant="secondary"
+                            className="mt-5 w-full"
+                            onClick={() => setShowPasswordChangeModal(true)}
                           >
-                            <span className={selectedCliente ? 'text-gray-900' : 'text-gray-400'}>
-                              {selectedCliente
-                                ? (clientsList.find(c => c.codigoCliente === selectedCliente)?.nombreCliente || selectedCliente)
-                                : 'Todas mis cuentas'}
-                            </span>
-                            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${clientDropdownOpen ? 'rotate-180' : ''}`} />
-                          </button>
-                          {clientDropdownOpen && (
-                            <div className="absolute z-30 top-full left-0 right-0 mt-1 bg-white border-2 border-blue-200 rounded-xl shadow-2xl max-h-72 flex flex-col">
-                              <div className="p-2 border-b border-blue-100 sticky top-0 bg-white rounded-t-xl">
-                                <div className="relative">
-                                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <Key className="h-4 w-4" aria-hidden="true" />
+                            Cambiar contraseña
+                          </Button>
+                        </section>
+                      </div>
+                    </div>
+
+                    {/* Accesos rápidos */}
+                    <section className="grid gap-3 sm:grid-cols-3" aria-label="Accesos rápidos">
+                      <button
+                        type="button"
+                        onClick={() => setShowLibroIvaModal(true)}
+                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                      >
+                        <span className="flex items-center gap-3 text-sm text-foreground">
+                          <BookOpen className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                          Libro de IVA
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                      </button>
+                      <a
+                        href={`/${locale}/productos`}
+                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                      >
+                        <span className="flex items-center gap-3 text-sm text-foreground">
+                          <ShoppingBag className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                          Explorar catálogo
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => handleTabChange('favoritos')}
+                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                      >
+                        <span className="flex items-center gap-3 text-sm text-foreground">
+                          <Heart className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                          Mis favoritos
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                      </button>
+                    </section>
+                  </div>
+                )}
+
+                
+
+                                {activeTab === 'facturas' && (
+                  <div className="space-y-6">
+                    <section className="grid grid-cols-2 gap-px border border-[var(--line)] bg-[var(--line)] xl:grid-cols-[repeat(3,minmax(0,1fr))_auto]" aria-label="Resumen del periodo">
+                      <div className="bg-[var(--ink-2)] p-4">
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Documentos</p>
+                        <p className="mt-1 text-2xl font-light tabular-nums text-foreground">{filteredFacturas.length}</p>
+                      </div>
+                      <div className="bg-[var(--ink-2)] p-4">
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Facturado</p>
+                        <p className="mt-1 whitespace-nowrap text-2xl font-light tabular-nums text-foreground">{formatCurrency(totalFacturado)}</p>
+                      </div>
+                      <div className={`p-4 ${pendienteTotal > 0 ? 'bg-[var(--kage-accent)] text-white' : 'bg-[var(--ink-2)]'}`}>
+                        <p className={`text-[10px] uppercase tracking-[0.18em] ${pendienteTotal > 0 ? 'text-white' : 'text-muted-foreground'}`}>Pendiente</p>
+                        <p className="mt-1 whitespace-nowrap text-2xl font-light tabular-nums">{formatCurrency(pendienteTotal)}</p>
+                      </div>
+                      <div className="flex items-center bg-[var(--ink-2)] p-4 xl:justify-end">
+                        <Button variant="secondary" onClick={() => setShowLibroIvaModal(true)}>
+                          <BookOpen className="h-4 w-4" aria-hidden="true" />
+                          {t('ivaBook')}
+                        </Button>
+                      </div>
+                    </section>
+
+                    {/* Filtros */}
+                    <section className="border border-[var(--line)] bg-[var(--ink-2)] p-4 transition-colors hover:border-foreground/30 sm:p-5" aria-labelledby="filtros-facturas">
+                      <div className="mb-4 flex items-baseline justify-between gap-3 border-b border-[var(--line-soft)] pb-3">
+                        <div className="flex items-baseline gap-3">
+                          <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">01</span>
+                          <h2 id="filtros-facturas" className="text-sm font-medium text-foreground">Filtros</h2>
+                        </div>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{filteredFacturas.length} {filteredFacturas.length === 1 ? 'resultado' : 'resultados'}</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 xl:grid-cols-6">
+                        <div className="col-span-2">
+                          <label htmlFor="facturas-busqueda" className="mb-1.5 block text-xs text-muted-foreground">
+                            {t('filters.search')}
+                          </label>
+                          <div className="relative">
+                            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+                            <Input
+                              id="facturas-busqueda"
+                              type="search"
+                              placeholder={t('filters.search')}
+                              value={searchTerm}
+                              onChange={(e) => setSearchTerm(e.target.value)}
+                              className="pl-10 pr-10"
+                            />
+                            {searchTerm && (
+                              <button
+                                type="button"
+                                onClick={() => setSearchTerm('')}
+                                className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                aria-label="Limpiar búsqueda"
+                              >
+                                <X className="h-4 w-4" aria-hidden="true" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+
+                        {clientsList.length > 1 && (
+                          <div className="relative col-span-2" ref={clientDropdownRef}>
+                            <span className="mb-1.5 block text-xs text-muted-foreground">Cuenta</span>
+                            <button
+                              type="button"
+                              onClick={() => { setClientDropdownOpen(!clientDropdownOpen); setClientSearch(''); setTimeout(() => clientSearchRef.current?.focus(), 50); }}
+                              className="flex min-h-[44px] w-full items-center justify-between gap-3 border border-[var(--kage-control-border)] bg-[var(--ink-2)] px-4 text-left text-sm text-foreground transition-colors hover:border-foreground/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--kage-accent)]"
+                              aria-expanded={clientDropdownOpen}
+                              aria-haspopup="listbox"
+                            >
+                              <span className="truncate">
+                                {selectedCliente
+                                  ? (clientsList.find(c => c.codigoCliente === selectedCliente)?.nombreCliente || selectedCliente)
+                                  : 'Todas mis cuentas'}
+                              </span>
+                              <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${clientDropdownOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+                            </button>
+                            {clientDropdownOpen && (
+                              <div className="absolute left-0 right-0 top-full z-30 mt-1 flex max-h-72 flex-col border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl" role="listbox" aria-label="Seleccionar cuenta">
+                                <div className="border-b border-[var(--line)] p-2">
                                   <input
                                     ref={clientSearchRef}
                                     type="text"
-                                    placeholder="Buscar por nombre o código..."
+                                    placeholder="Buscar por nombre o código…"
                                     value={clientSearch}
                                     onChange={(e) => setClientSearch(e.target.value)}
-                                    className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
                                     onClick={(e) => e.stopPropagation()}
+                                    className="kage-input text-sm"
+                                    aria-label="Buscar cuenta"
                                   />
                                 </div>
+                                <div className="overflow-y-auto">
+                                  <button
+                                    type="button"
+                                    onClick={() => { setSelectedCliente(undefined); setClientDropdownOpen(false); }}
+                                    role="option"
+                                    aria-selected={!selectedCliente}
+                                    className={`flex min-h-[44px] w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-white/5 ${!selectedCliente ? 'bg-[var(--kage-accent)] text-white' : 'text-foreground'}`}
+                                  >
+                                    Todas mis cuentas
+                                  </button>
+                                  {clientsList
+                                    .filter(client => {
+                                      if (!clientSearch.trim()) return true;
+                                      const q = clientSearch.toLowerCase().trim();
+                                      return (
+                                        client.nombreCliente.toLowerCase().includes(q) ||
+                                        (client.nombreFiscal && client.nombreFiscal.toLowerCase().includes(q)) ||
+                                        client.codigoCliente.toLowerCase().includes(q)
+                                      );
+                                    })
+                                    .map(client => (
+                                      <button
+                                        key={client.codigoCliente}
+                                        type="button"
+                                        onClick={() => { setSelectedCliente(client.codigoCliente); setClientDropdownOpen(false); }}
+                                        role="option"
+                                        aria-selected={selectedCliente === client.codigoCliente}
+                                        className={`flex min-h-[44px] w-full items-center justify-between gap-3 border-b border-[var(--line-soft)] px-4 py-2.5 text-left text-sm transition-colors hover:bg-white/5 ${selectedCliente === client.codigoCliente ? 'bg-[var(--kage-accent)] text-white' : 'text-foreground'}`}
+                                      >
+                                        <span className="min-w-0 truncate">{client.nombreCliente}</span>
+                                        <span className="shrink-0 font-mono text-[10px] text-muted-foreground">{client.codigoCliente}</span>
+                                      </button>
+                                    ))}
+                                </div>
                               </div>
-                              <div className="overflow-y-auto flex-1">
-                                <button
-                                  onClick={() => { setSelectedCliente(undefined); setClientDropdownOpen(false); }}
-                                  className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-blue-50 transition-colors border-b border-gray-100 ${!selectedCliente ? 'bg-blue-50 text-blue-700' : 'text-gray-700'}`}
-                                >
-                                  Todas mis cuentas
-                                </button>
-                                {clientsList
-                                  .filter(client => {
-                                    if (!clientSearch.trim()) return true;
-                                    const q = clientSearch.toLowerCase().trim();
-                                    return (
-                                      client.nombreCliente.toLowerCase().includes(q) ||
-                                      (client.nombreFiscal && client.nombreFiscal.toLowerCase().includes(q)) ||
-                                      client.codigoCliente.toLowerCase().includes(q)
-                                    );
-                                  })
-                                  .map(client => (
-                                    <button
-                                      key={client.codigoCliente}
-                                      onClick={() => { setSelectedCliente(client.codigoCliente); setClientDropdownOpen(false); }}
-                                      className={`w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition-colors border-b border-gray-50 ${selectedCliente === client.codigoCliente ? 'bg-blue-50 text-blue-700 font-bold' : 'text-gray-700 font-medium'}`}
-                                    >
-                                      <div className="flex items-center justify-between">
-                                        <div className="truncate font-bold text-gray-900">{client.nombreCliente}</div>
-                                        <div className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-mono">{client.codigoCliente}</div>
-                                      </div>
-                                      {client.nombreFiscal && client.nombreFiscal !== client.nombreCliente && (
-                                        <div className="text-xs text-gray-400 italic truncate mt-0.5">{client.nombreFiscal}</div>
-                                      )}
-                                    </button>
-                                  ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-
-                      {/* Filtros Adicionales */}
-                      <div className="space-y-5">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                          {/* Filtro por Mes */}
-                          <div className="space-y-2">
-                            <label className="text-sm font-bold text-blue-600 flex items-center">
-                              <Calendar className="w-4 h-4 mr-2" />
-                              {t('filters.month')}
-                            </label>
-                            <select
-                              value={filterMonth}
-                              onChange={(e) => setFilterMonth(e.target.value)}
-                              className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
-                            >
-                              <option value="all">{t('filters.allMonths')}</option>
-                              <option value="1">{t('filters.months.1')}</option>
-                              <option value="2">{t('filters.months.2')}</option>
-                              <option value="3">{t('filters.months.3')}</option>
-                              <option value="4">{t('filters.months.4')}</option>
-                              <option value="5">{t('filters.months.5')}</option>
-                              <option value="6">{t('filters.months.6')}</option>
-                              <option value="7">{t('filters.months.7')}</option>
-                              <option value="8">{t('filters.months.8')}</option>
-                              <option value="9">{t('filters.months.9')}</option>
-                              <option value="10">{t('filters.months.10')}</option>
-                              <option value="11">{t('filters.months.11')}</option>
-                              <option value="12">{t('filters.months.12')}</option>
-                            </select>
+                            )}
                           </div>
+                        )}
 
-                          {/* Filtro por Año */}
-                          <div className="space-y-2">
-                            <label className="text-sm font-bold text-blue-600 flex items-center">
-                              <Calendar className="w-4 h-4 mr-2" />
-                              {t('filters.year')}
-                            </label>
-                            <select
-                              value={filterYear}
-                              onChange={(e) => setFilterYear(e.target.value)}
-                              className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 text-gray-900 font-medium cursor-pointer hover:border-blue-300 transition-colors"
-                            >
-                              <option value="all">{t('filters.allMonths')}</option>
-                              {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                                <option key={year} value={String(year)}>
-                                  {year}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
+                        <div>
+                          <label htmlFor="facturas-mes" className="mb-1.5 block text-xs text-muted-foreground">{t('filters.month')}</label>
+                          <select
+                            id="facturas-mes"
+                            value={filterMonth}
+                            onChange={(e) => setFilterMonth(e.target.value)}
+                            className="w-full"
+                          >
+                            <option value="all">{t('filters.allMonths')}</option>
+                            {Array.from({ length: 12 }, (_, i) => (
+                              <option key={i + 1} value={String(i + 1)}>{t(`filters.months.${i + 1}`)}</option>
+                            ))}
+                          </select>
                         </div>
 
-                        {/* Filtro por Rango de Fechas - Diseño Premium */}
-                        <div className="border-t-2 border-blue-100 pt-5 mt-5">
-                          <label className="text-sm font-bold text-blue-600 flex items-center mb-3">
-                            <Calendar className="w-4 h-4 mr-2" />
-                            {t('filters.dateRange')}
-                          </label>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div className="space-y-2">
-                              <label className="text-xs font-semibold text-blue-500">{t('filters.from')}</label>
-                              <input
-                                type="date"
-                                value={fechaDesde}
-                                onChange={(e) => setFechaDesde(e.target.value)}
-                                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900 font-medium cursor-pointer hover:border-blue-300"
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="text-xs font-semibold text-blue-500">{t('filters.to')}</label>
-                              <input
-                                type="date"
-                                value={fechaHasta}
-                                onChange={(e) => setFechaHasta(e.target.value)}
-                                className="w-full h-12 px-4 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-gray-900 font-medium cursor-pointer hover:border-blue-300"
-                              />
-                            </div>
-                          </div>
-                          {(fechaDesde || fechaHasta) && (
-                            <button
-                              onClick={() => {
-                                setFechaDesde('');
-                                setFechaHasta('');
-                              }}
-                              className="mt-3 text-sm font-bold text-blue-600 hover:text-blue-700 underline decoration-2 underline-offset-2 transition-colors"
-                            >
-                              {t('filters.clearDateRange')}
-                            </button>
-                          )}
+                        <div>
+                          <label htmlFor="facturas-ano" className="mb-1.5 block text-xs text-muted-foreground">{t('filters.year')}</label>
+                          <select
+                            id="facturas-ano"
+                            value={filterYear}
+                            onChange={(e) => setFilterYear(e.target.value)}
+                            className="w-full"
+                          >
+                            <option value="all">{t('filters.allYears')}</option>
+                            {Array.from({ length: 6 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+                              <option key={year} value={String(year)}>{year}</option>
+                            ))}
+                          </select>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Mobile Cards View - Solo visible en móvil/tablet */}
-                    <div className="block lg:hidden space-y-4">
-                      {loadingFacturas ? (
-                        <div className="flex flex-col items-center py-12">
-                          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-                          <p className="text-gray-500 font-medium">{t('table.loadingInvoices')}</p>
+                      <div className="mt-4 border-t border-[var(--line-soft)] pt-4">
+                        <p className="mb-2 text-xs text-muted-foreground">{t('filters.dateRange')}</p>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label htmlFor="facturas-desde" className="mb-1.5 block text-xs text-muted-foreground">{t('filters.from')}</label>
+                            <input
+                              id="facturas-desde"
+                              type="date"
+                              value={fechaDesde}
+                              onChange={(e) => setFechaDesde(e.target.value)}
+                              className="kage-input [color-scheme:dark]"
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="facturas-hasta" className="mb-1.5 block text-xs text-muted-foreground">{t('filters.to')}</label>
+                            <input
+                              id="facturas-hasta"
+                              type="date"
+                              value={fechaHasta}
+                              onChange={(e) => setFechaHasta(e.target.value)}
+                              className="kage-input [color-scheme:dark]"
+                            />
+                          </div>
+                        </div>
+                        {(searchTerm || filterMonth !== 'all' || filterYear !== String(new Date().getFullYear()) || fechaDesde || fechaHasta || selectedCliente) && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSearchTerm('');
+                              setFilterMonth('all');
+                              setFilterYear(String(new Date().getFullYear()));
+                              setFechaDesde('');
+                              setFechaHasta('');
+                              setSelectedCliente(undefined);
+                            }}
+                            className="mt-3 flex min-h-[44px] items-center gap-2 text-xs text-muted-foreground underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                          >
+                            <X className="h-3.5 w-3.5" aria-hidden="true" />
+                            {t('filters.resetFilters')}
+                          </button>
+                        )}
+                      </div>
+                    </section>
+
+                    {/* Móvil: tarjetas */}
+                    <div className="space-y-3 lg:hidden">
+                      {loadingFacturas && paginatedFacturas.length === 0 ? (
+                        <div className="space-y-3" role="status" aria-live="polite">
+                          <span className="sr-only">{t('table.loadingInvoices')}</span>
+                          {[0, 1, 2].map((item) => (
+                            <div key={item} className="h-36 w-full animate-pulse border border-[var(--line)] bg-[var(--ink-2)]" aria-hidden="true" />
+                          ))}
                         </div>
                       ) : paginatedFacturas.length > 0 ? (
                         paginatedFacturas.map((factura, index) => (
-                          <motion.div
-                            key={`mobile-${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className="bg-white rounded-2xl border-2 border-gray-100 p-4 shadow-lg space-y-4"
-                          >
-                            {/* Header con Factura y Total */}
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg flex-shrink-0">
-                                  <FileText className="w-6 h-6 text-white" />
+                          <article key={`mobile-${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`} className="border border-[var(--line)] bg-[var(--ink-2)] p-4 transition-colors hover:border-foreground/30">
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="min-w-0">
+                                <div className="flex items-baseline gap-2">
+                                  <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">{String(startIndex + index + 1).padStart(2, '0')}</span>
+                                  <p className="truncate text-sm text-foreground">{factura.serieFactura}-{factura.numeroFactura}</p>
                                 </div>
-                                <div>
-                                  <div className="font-bold text-lg text-blue-600">
-                                    {factura.serieFactura}-{factura.numeroFactura}
-                                  </div>
-                                  <div className="text-xs text-gray-500 font-medium">
-                                    {factura.tipoDocumento || 'Factura'}
-                                  </div>
-                                </div>
+                                <p className="mt-1 pl-6 text-xs text-muted-foreground">{factura.tipoDocumento || 'Factura'}</p>
+                              </div>
+                              <Badge
+                                variant="outline"
+                                className={factura.estadoPago === 'pagada' ? '!border-emerald-500/40 !text-emerald-300' : '!border-amber-500/40 !text-amber-300'}
+                              >
+                                {factura.estadoPago === 'pagada' ? 'Pagada' : 'Pendiente'}
+                              </Badge>
+                            </div>
+                            <dl className="mt-4 grid grid-cols-2 gap-3 border-y border-[var(--line-soft)] py-3 text-sm">
+                              <div>
+                                <dt className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Fecha</dt>
+                                <dd className="mt-0.5 text-foreground">{factura.fecha}</dd>
                               </div>
                               <div className="text-right">
-                                <div className="font-bold text-xl text-emerald-600">
-                                  {formatCurrency(factura.totalFactura)}
-                                </div>
-                                <div className="text-xs text-gray-500 font-medium">IVA incl.</div>
+                                <dt className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Total</dt>
+                                <dd className="mt-0.5 whitespace-nowrap tabular-nums text-foreground">{formatCurrency(factura.totalFactura)}</dd>
                               </div>
-                            </div>
-
-                            {/* Info de Albarán y Fecha */}
-                            <div className="flex items-center justify-between text-sm bg-gray-50 rounded-xl p-3">
-                              <div className="flex items-center gap-2">
-                                <Package className="w-4 h-4 text-gray-400" />
-                                <span className="text-gray-600">
-                                  Albarán: <span className="font-semibold">{(factura as any).lista_albaranes || factura.numero_albaran}</span>
-                                </span>
+                              <div className="col-span-2">
+                                <dt className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Albarán</dt>
+                                <dd className="mt-0.5 text-foreground">{(factura as any).albaranes || (factura as any).lista_albaranes || factura.numero_albaran || '—'}</dd>
                               </div>
-                              <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4 text-blue-500" />
-                                <span className="font-semibold text-gray-700">{factura.fecha}</span>
-                              </div>
-                            </div>
-
-                            {/* Botones de Acción - Grid 2x2 para móvil */}
-                            <div className="grid grid-cols-2 gap-2">
-                              <Button
-                                size="sm"
-                                onClick={() => handlePreviewPdf(factura)}
-                                className="bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
-                              >
-                                <Eye className="w-4 h-4 mr-2" />
-                                Ver PDF
+                            </dl>
+                            <div className="mt-3 grid grid-cols-2 gap-2">
+                              <Button size="sm" variant="secondary" onClick={() => handlePreviewPdf(factura)}>
+                                <Eye className="h-4 w-4" aria-hidden="true" />
+                                Ver
                               </Button>
-
-                              <Button
-                                size="sm"
-                                onClick={() => handleDownloadInvoice(factura)}
-                                className="bg-violet-100 text-violet-600 hover:bg-violet-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
-                              >
-                                <Download className="w-4 h-4 mr-2" />
+                              <Button size="sm" variant="secondary" onClick={() => handleDownloadInvoice(factura)}>
+                                <Download className="h-4 w-4" aria-hidden="true" />
                                 Descargar
                               </Button>
-
-                              <Button
-                                size="sm"
-                                onClick={() => {
-                                  setSelectedFacturaForShare(factura);
-                                  setShowWhatsAppModal(true);
-                                }}
-                                className="bg-emerald-100 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
-                              >
-                                <MessageCircle className="w-4 h-4 mr-2" />
+                              <Button size="sm" variant="secondary" onClick={() => { setSelectedFacturaForShare(factura); setShowWhatsAppModal(true); }}>
+                                <MessageCircle className="h-4 w-4" aria-hidden="true" />
                                 WhatsApp
                               </Button>
-
                               <Button
                                 size="sm"
+                                variant="secondary"
                                 onClick={() => {
                                   if (!userEmail || !userEmail.includes('@')) {
                                     setPendingEmailFactura(factura);
-                                    toast(
-                                      <div>
-                                        <p className="font-semibold">📧 Configura tu email</p>
-                                        <p className="text-sm">Añade tu email para poder enviarte la factura</p>
-                                      </div>,
-                                      { duration: 4000, icon: '✉️' }
-                                    );
+                                    toast('Configura tu email para enviar facturas', { icon: '✉️' });
                                     setActiveTab('perfil');
                                     return;
                                   }
@@ -3835,857 +2818,545 @@ export function CustomerDashboard() {
                                   setEmailDestination(userEmail);
                                   setShowEmailConfirmModal(true);
                                 }}
-                                className="bg-rose-100 text-rose-600 hover:bg-rose-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md h-10"
                               >
-                                <Mail className="w-4 h-4 mr-2" />
+                                <Mail className="h-4 w-4" aria-hidden="true" />
                                 Email
                               </Button>
                             </div>
-                          </motion.div>
+                          </article>
                         ))
                       ) : null}
                     </div>
 
-                    {/* Enhanced Table with Premium Design - Solo visible en desktop */}
-                    <div className="hidden lg:block bg-white rounded-2xl border-2 border-gray-100 overflow-hidden shadow-xl">
-                      <div className="overflow-x-auto">
-                        <Table className="w-full">
-                          <TableHeader>
-                            <TableRow className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b-2 border-blue-100">
-                              <TableHead className="font-bold text-blue-700 py-4">
-                                <div className="flex items-center gap-2">
-                                  <FileText className="w-4 h-4" />
-                                  {t('table.invoice')}
-                                </div>
-                              </TableHead>
-                              <TableHead className="font-bold text-blue-700 text-center">
-                                <div className="flex items-center gap-2 justify-center">
-                                  <Package className="w-4 h-4" />
-                                  {t('table.deliveryNote')}
-                                </div>
-                              </TableHead>
-                              <TableHead className="font-bold text-blue-700">
-                                <div className="flex items-center gap-2">
-                                  <Calendar className="w-4 h-4" />
-                                  {t('table.date')}
-                                </div>
-                              </TableHead>
-                              <TableHead className="font-bold text-blue-700 text-right">
-                                <div className="flex items-center gap-2 justify-end">
-                                  <DollarSign className="w-4 h-4" />
-                                  {t('table.total')}
-                                </div>
-                              </TableHead>
-                              <TableHead className="font-bold text-blue-700 text-center">
-                                <div className="flex items-center gap-2 justify-center">
-                                  <Settings className="w-4 h-4" />
-                                  {t('table.actions')}
-                                </div>
-                              </TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {loadingFacturas ? (
-                              <TableRow>
-                                <TableCell colSpan={5} className="text-center py-12">
-                                  <div className="flex flex-col items-center">
-                                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-                                    <p className="text-gray-500 font-medium">{t('table.loadingInvoices')}</p>
+                    {/* Escritorio: tabla */}
+                    <div className="hidden border border-[var(--line)] bg-[var(--ink-2)] transition-colors hover:border-foreground/30 lg:block">
+                      <div className="flex items-center justify-between gap-3 border-b border-[var(--line)] px-5 py-3">
+                        <div className="flex items-baseline gap-3">
+                          <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">02</span>
+                          <h2 className="text-sm font-medium text-foreground">Documentos</h2>
+                        </div>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+                          {filteredFacturas.length > 0 ? `${startIndex + 1}–${Math.min(endIndex, filteredFacturas.length)} de ${filteredFacturas.length}` : 'Sin documentos'}
+                        </span>
+                      </div>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>{t('table.invoice')}</TableHead>
+                            <TableHead>{t('table.deliveryNote')}</TableHead>
+                            <TableHead>{t('table.date')}</TableHead>
+                            <TableHead>{t('table.total')}</TableHead>
+                            <TableHead className="text-right">{t('table.actions')}</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {loadingFacturas && paginatedFacturas.length === 0 ? (
+                            [0, 1, 2, 3, 4].map((item) => (
+                              <TableRow key={item}>
+                                <TableCell colSpan={5}>
+                                  <div className="h-6 w-full animate-pulse bg-white/5" aria-hidden="true" />
+                                </TableCell>
+                              </TableRow>
+                            ))
+                          ) : (
+                            paginatedFacturas.map((factura, index) => (
+                              <TableRow key={`${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`} className="group/row">
+                                <TableCell>
+                                  <div className="flex items-center gap-3">
+                                    <span className="w-5 shrink-0 font-mono text-[10px] text-muted-foreground transition-colors group-hover/row:text-[#ff8a5c]" aria-hidden="true">
+                                      {String(startIndex + index + 1).padStart(2, '0')}
+                                    </span>
+                                    <FileText className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                                    <div className="min-w-0">
+                                      <p className="truncate text-sm text-foreground">{factura.serieFactura}-{factura.numeroFactura}</p>
+                                      <Badge
+                                        variant="outline"
+                                        className={`mt-1 ${factura.estadoPago === 'pagada' ? '!border-emerald-500/40 !text-emerald-300' : '!border-amber-500/40 !text-amber-300'}`}
+                                      >
+                                        {factura.estadoPago === 'pagada' ? 'Pagada' : 'Pendiente'}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                </TableCell>
+                                <TableCell className="text-sm text-muted-foreground">
+                                  {(factura as any).albaranes || (factura as any).lista_albaranes || factura.numero_albaran || '—'}
+                                </TableCell>
+                                <TableCell>
+                                  <span className="whitespace-nowrap text-sm text-foreground">{factura.fecha}</span>
+                                </TableCell>
+                                <TableCell>
+                                  <span className="whitespace-nowrap text-sm tabular-nums text-foreground">{formatCurrency(factura.totalFactura)}</span>
+                                  <span className="mt-0.5 block text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IVA incl.</span>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="flex items-center justify-end gap-1">
+                                    <button
+                                      type="button"
+                                      onClick={() => handlePreviewPdf(factura)}
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      aria-label={`Ver factura ${factura.serieFactura}-${factura.numeroFactura}`}
+                                    >
+                                      <Eye className="h-4 w-4" aria-hidden="true" />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => handleDownloadInvoice(factura)}
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      aria-label={`Descargar factura ${factura.serieFactura}-${factura.numeroFactura}`}
+                                    >
+                                      <Download className="h-4 w-4" aria-hidden="true" />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => { setSelectedFacturaForShare(factura); setShowWhatsAppModal(true); }}
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      aria-label={`Compartir factura ${factura.serieFactura}-${factura.numeroFactura} por WhatsApp`}
+                                    >
+                                      <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        if (!userEmail || !userEmail.includes('@')) {
+                                          setPendingEmailFactura(factura);
+                                          toast('Configura tu email para enviar facturas', { icon: '✉️' });
+                                          setActiveTab('perfil');
+                                          return;
+                                        }
+                                        setEmailFacturaToSend(factura);
+                                        setEmailDestination(userEmail);
+                                        setShowEmailConfirmModal(true);
+                                      }}
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      aria-label={`Enviar factura ${factura.serieFactura}-${factura.numeroFactura} por email`}
+                                    >
+                                      <Mail className="h-4 w-4" aria-hidden="true" />
+                                    </button>
                                   </div>
                                 </TableCell>
                               </TableRow>
-                            ) : (
-                              paginatedFacturas.map((factura, index) => {
-                                const isPagada = factura.estadoPago === 'pagada';
-                                return (
-                                  <tr
-                                    key={`${factura.ejercicio}-${factura.serieFactura}-${factura.numeroFactura}`}
-                                    className="relative hover:bg-blue-50 transition-colors duration-150 border-b border-gray-100 group cursor-pointer"
-                                  >
-                                    {/* Número de Factura - Diseño Premium */}
-                                    <TableCell>
-                                      <div className="flex items-center space-x-3">
-                                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg flex-shrink-0">
-                                          <FileText className="w-5 h-5 text-white" />
-                                        </div>
-                                        <div className="min-w-0">
-                                          <div className="font-bold text-base text-blue-600">
-                                            {factura.serieFactura}-{factura.numeroFactura}
-                                          </div>
-                                          <div className="text-xs text-gray-500 font-medium">
-                                            {factura.tipoDocumento || 'Factura'}
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </TableCell>
-
-                                    {/* Albarán - Solo números centrados */}
-                                    <TableCell className="text-center">
-                                      <div className="text-sm text-gray-700 font-medium">
-                                        {(factura as any).albaranes || (factura as any).lista_albaranes || factura.numero_albaran || '-'}
-                                      </div>
-                                    </TableCell>
-
-                                    {/* Fecha - Premium */}
-                                    <TableCell>
-                                      <div className="flex items-center space-x-2">
-                                        <Calendar className="w-4 h-4 text-blue-500 flex-shrink-0" />
-                                        <span className="font-semibold text-gray-700 text-sm">{factura.fecha}</span>
-                                      </div>
-                                    </TableCell>
-
-                                    {/* Total - Verde Premium */}
-                                    <TableCell className="text-right">
-                                      <div className="font-bold text-lg text-emerald-600">
-                                        {formatCurrency(factura.totalFactura)}
-                                      </div>
-                                      <div className="text-xs text-gray-500 font-medium">IVA incl.</div>
-                                    </TableCell>
-
-                                    {/* Acciones - Premium Buttons */}
-                                    <TableCell>
-                                      <div className="flex justify-center gap-2">
-                                        {/* Previsualizar PDF */}
-                                        <Button
-                                          size="sm"
-                                          onClick={() => handlePreviewPdf(factura)}
-                                          className="bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-                                          title="Previsualizar PDF"
-                                        >
-                                          <Eye className="w-4 h-4" />
-                                        </Button>
-
-                                        {/* Descargar PDF */}
-                                        <Button
-                                          size="sm"
-                                          onClick={() => handleDownloadInvoice(factura)}
-                                          className="bg-violet-100 text-violet-600 hover:bg-violet-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-                                          title="Descargar PDF"
-                                        >
-                                          <Download className="w-4 h-4" />
-                                        </Button>
-
-                                        {/* Compartir por WhatsApp */}
-                                        <Button
-                                          size="sm"
-                                          onClick={() => {
-                                            setSelectedFacturaForShare(factura);
-                                            setShowWhatsAppModal(true);
-                                          }}
-                                          className="bg-emerald-100 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-                                          title="Compartir por WhatsApp"
-                                        >
-                                          <MessageCircle className="w-4 h-4" />
-                                        </Button>
-
-                                        {/* Compartir por Email */}
-                                        <Button
-                                          size="sm"
-                                          onClick={() => {
-                                            // Verificar si el usuario tiene email configurado
-                                            if (!userEmail || !userEmail.includes('@')) {
-                                              // Guardar la factura pendiente para enviar después
-                                              setPendingEmailFactura(factura);
-                                              toast(
-                                                <div>
-                                                  <p className="font-semibold">📧 Configura tu email</p>
-                                                  <p className="text-sm">Añade tu email para poder enviarte la factura</p>
-                                                </div>,
-                                                { duration: 4000, icon: '✉️' }
-                                              );
-                                              // Cambiar a la pestaña de perfil
-                                              setActiveTab('perfil');
-                                              return;
-                                            }
-
-                                            // Mostrar modal de confirmación
-                                            setEmailFacturaToSend(factura);
-                                            setEmailDestination(userEmail);
-                                            setShowEmailConfirmModal(true);
-                                          }}
-                                          className="bg-rose-100 text-rose-600 hover:bg-rose-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-                                          title={userEmail ? `Enviar a ${userEmail}` : 'Configura tu email primero'}
-                                        >
-                                          <Mail className="w-4 h-4" />
-                                        </Button>
-                                      </div>
-                                    </TableCell>
-                                  </tr>
-                                );
-                              })
-                            )}
-                          </TableBody>
-                        </Table>
-                      </div>
+                            ))
+                          )}
+                        </TableBody>
+                      </Table>
                     </div>
 
-                    {/* Mensaje sin resultados - visible en móvil y desktop */}
+                    {/* Estado vacío */}
                     {!loadingFacturas && filteredFacturas.length === 0 && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-center py-12 bg-white rounded-2xl border-2 border-gray-100 shadow-lg"
-                      >
-                        <FileText className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
-                        <h3 className="text-lg font-semibold text-foreground mb-2">
-                          No se encontraron facturas
-                        </h3>
-                        <p className="text-muted-foreground">
-                          {searchTerm ? 'Prueba con diferentes criterios de búsqueda' : 'Todavía no tienes facturas disponibles'}
+                      <div className="flex flex-col items-center border border-[var(--line)] bg-[var(--ink-2)] px-6 py-16 text-center">
+                        <FileText className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+                        <h3 className="mt-4 text-sm font-medium text-foreground">No hay facturas que coincidan</h3>
+                        <p className="mt-1 max-w-[42ch] text-xs leading-relaxed text-muted-foreground">
+                          {searchTerm || fechaDesde || fechaHasta || filterMonth !== 'all'
+                            ? 'Prueba a ampliar el periodo o a borrar los filtros activos.'
+                            : 'Todavía no tienes facturas disponibles. Aparecerán aquí en cuanto se emita la primera.'}
                         </p>
-                      </motion.div>
+                        {(searchTerm || fechaDesde || fechaHasta || filterMonth !== 'all' || filterYear !== String(new Date().getFullYear()) || selectedCliente) && (
+                          <Button
+                            variant="secondary"
+                            className="mt-6"
+                            onClick={() => {
+                              setSearchTerm('');
+                              setFilterMonth('all');
+                              setFilterYear(String(new Date().getFullYear()));
+                              setFechaDesde('');
+                              setFechaHasta('');
+                              setSelectedCliente(undefined);
+                            }}
+                          >
+                            Quitar filtros
+                          </Button>
+                        )}
+                      </div>
                     )}
 
-                    {/* Controles de Paginación */}
+                    {/* Paginación */}
                     {!loadingFacturas && filteredFacturas.length > 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4 }}
-                        className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 bg-secondary rounded-2xl border border-border"
-                      >
-                        {/* Información de página */}
-                        <div className="text-sm text-muted-foreground font-medium">
-                          Mostrando <span className="font-bold text-primary">{startIndex + 1}</span> - <span className="font-bold text-primary">{Math.min(endIndex, filteredFacturas.length)}</span> de <span className="font-bold text-foreground">{filteredFacturas.length}</span> facturas
-                        </div>
-
-                        {/* Controles de página */}
-                        <div className="flex items-center gap-2">
-                          {/* Botón Primera Página */}
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                      <nav className="flex flex-col items-center justify-between gap-4 border border-[var(--line)] bg-[var(--ink-2)] px-4 py-4 sm:flex-row" aria-label="Paginación de facturas">
+                        <p className="text-xs text-muted-foreground">
+                          Mostrando <span className="text-foreground">{startIndex + 1}</span>–<span className="text-foreground">{Math.min(endIndex, filteredFacturas.length)}</span> de <span className="text-foreground">{filteredFacturas.length}</span>
+                        </p>
+                        <div className="flex flex-wrap items-center justify-center gap-1">
+                          <button
+                            type="button"
                             onClick={() => setCurrentPage(1)}
                             disabled={currentPage === 1}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === 1
-                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                              }`}
-                            title="Primera página"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            aria-label="Primera página"
                           >
-                            <ChevronsLeft className="w-4 h-4" />
-                          </motion.button>
-
-                          {/* Botón Anterior */}
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            <ChevronsLeft className="h-4 w-4" aria-hidden="true" />
+                          </button>
+                          <button
+                            type="button"
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === 1
-                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                              }`}
-                            title="Página anterior"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            aria-label="Página anterior"
                           >
-                            <ChevronLeft className="w-4 h-4" />
-                          </motion.button>
-
-                          {/* Números de página */}
-                          <div className="flex items-center gap-1">
-                            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                              let pageNum: number;
-                              if (totalPages <= 5) {
-                                pageNum = i + 1;
-                              } else if (currentPage <= 3) {
-                                pageNum = i + 1;
-                              } else if (currentPage >= totalPages - 2) {
-                                pageNum = totalPages - 4 + i;
-                              } else {
-                                pageNum = currentPage - 2 + i;
-                              }
-
-                              return (
-                                <motion.button
-                                  key={pageNum}
-                                  whileHover={{ scale: 1.1 }}
-                                  whileTap={{ scale: 0.9 }}
-                                  onClick={() => setCurrentPage(pageNum)}
-                                  className={`w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${currentPage === pageNum
-                                    ? 'bg-primary text-primary-foreground shadow-lg'
-                                    : 'bg-card text-foreground hover:bg-secondary hover:text-primary shadow-md'
-                                    }`}
-                                >
-                                  {pageNum}
-                                </motion.button>
-                              );
-                            })}
-                          </div>
-
-                          {/* Botón Siguiente */}
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                          </button>
+                          {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                            let pageNum: number;
+                            if (totalPages <= 5) {
+                              pageNum = i + 1;
+                            } else if (currentPage <= 3) {
+                              pageNum = i + 1;
+                            } else if (currentPage >= totalPages - 2) {
+                              pageNum = totalPages - 4 + i;
+                            } else {
+                              pageNum = currentPage - 2 + i;
+                            }
+                            return (
+                              <button
+                                key={pageNum}
+                                type="button"
+                                onClick={() => setCurrentPage(pageNum)}
+                                aria-current={currentPage === pageNum ? 'page' : undefined}
+                                className={`flex h-11 w-11 items-center justify-center border text-xs tabular-nums transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)] ${
+                                  currentPage === pageNum
+                                    ? 'border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white'
+                                    : 'border-[var(--line)] text-muted-foreground hover:text-foreground'
+                                }`}
+                              >
+                                {pageNum}
+                              </button>
+                            );
+                          })}
+                          <button
+                            type="button"
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === totalPages
-                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                              }`}
-                            title="Página siguiente"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            aria-label="Página siguiente"
                           >
-                            <ChevronRight className="w-4 h-4" />
-                          </motion.button>
-
-                          {/* Botón Última Página */}
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                          </button>
+                          <button
+                            type="button"
                             onClick={() => setCurrentPage(totalPages)}
                             disabled={currentPage === totalPages}
-                            className={`p-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === totalPages
-                              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                              : 'bg-card text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg'
-                              }`}
-                            title="Última página"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            aria-label="Última página"
                           >
-                            <ChevronsRight className="w-4 h-4" />
-                          </motion.button>
+                            <ChevronsRight className="h-4 w-4" aria-hidden="true" />
+                          </button>
                         </div>
-
-                        {/* Selector de items por página */}
-                        <div className="flex items-center gap-3">
-                          <label htmlFor="itemsPerPage" className="text-sm text-muted-foreground font-medium whitespace-nowrap">
-                            Facturas por página:
-                          </label>
+                        <label htmlFor="items-per-page" className="flex items-center gap-2 text-xs text-muted-foreground">
+                          Por página
                           <select
-                            id="itemsPerPage"
+                            id="items-per-page"
                             value={itemsPerPage}
                             onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                            className="px-3 py-2 rounded-lg border-2 border-border bg-card text-foreground font-semibold focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 cursor-pointer hover:border-primary/50"
                           >
                             <option value={10}>10</option>
+                            <option value={15}>15</option>
                             <option value={25}>25</option>
                             <option value={50}>50</option>
-                            <option value={100}>100</option>
                           </select>
-                        </div>
-                      </motion.div>
+                        </label>
+                      </nav>
                     )}
                   </div>
                 )}
 
-                {/* PERFIL TAB */}
-                {activeTab === 'perfil' && (
-                  <div className="space-y-8">
-                    {/* Header Premium con Avatar */}
-                    <motion.div
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 shadow-2xl"
-                    >
-                      {/* Background Effects */}
-                      <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-                        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
+                
+
+                                {activeTab === 'perfil' && (
+                  <div className="space-y-6">
+                    {/* Identidad */}
+                    <section className="relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-6 sm:p-8">
+                      <div className="mb-6 flex items-center justify-between gap-3 border-b border-[var(--line-soft)] pb-4 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                        <span className="flex items-center gap-2">
+                          <span className="h-1.5 w-1.5 bg-[var(--kage-accent)]" aria-hidden="true" />
+                          Ficha de cliente
+                        </span>
+                        <span className="font-mono normal-case tracking-normal text-foreground/70">{user?.id || '—'}</span>
                       </div>
-
-                      <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-                        {/* Avatar Grande con Tier */}
-                        <div className="relative">
-                          <div className={`w-32 h-32 rounded-3xl flex items-center justify-center shadow-2xl ${clientProfile.tier === 'strategic' ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
-                            clientProfile.tier === 'enterprise' ? 'bg-gradient-to-br from-violet-500 to-purple-600' :
-                              clientProfile.tier === 'business' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' :
-                                'bg-gradient-to-br from-slate-500 to-gray-600'
-                            }`}>
-                            <span className="text-5xl font-black text-white">
-                              {(user?.name || 'C').charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <motion.div
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="absolute -bottom-2 -right-2 w-10 h-10 rounded-xl bg-white shadow-lg flex items-center justify-center"
-                          >
-                            {clientProfile.tierIcon === 'crown' && <Crown className="w-5 h-5 text-amber-500" />}
-                            {clientProfile.tierIcon === 'gem' && <Gem className="w-5 h-5 text-violet-500" />}
-                            {clientProfile.tierIcon === 'zap' && <Zap className="w-5 h-5 text-blue-500" />}
-                            {clientProfile.tierIcon === 'sparkles' && <Sparkles className="w-5 h-5 text-slate-500" />}
-                          </motion.div>
+                      <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+                        <div className="flex h-20 w-20 shrink-0 items-center justify-center bg-[var(--kage-accent)] text-3xl font-light text-white" aria-hidden="true">
+                          {(perfilCliente?.nombre || user?.name || 'C').charAt(0).toUpperCase()}
                         </div>
-
-                        {/* Info Principal */}
-                        <div className="flex-1 text-center md:text-left">
-                          <h1 className="text-3xl md:text-4xl font-black text-white mb-2">
-                            {perfilCliente?.nombre || user?.name || 'Mi Perfil'}
-                          </h1>
-                          <p className="text-lg text-slate-400 mb-4">
+                        <div className="min-w-0 flex-1">
+                          <h2 className="truncate text-2xl font-normal text-foreground">
+                            {perfilCliente?.nombre || user?.name || 'Mi perfil'}
+                          </h2>
+                          <p className="mt-1 truncate text-sm text-muted-foreground">
                             {perfilCliente?.empresa || user?.company || 'Empresa'}
                           </p>
-
-                          {/* Tags */}
-                          <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                            {/* Badge de tier COMENTADO: No mostrar nivel de cliente/partner estratégico */}
-                            {/*
-                            <Badge className={`${clientProfile.tierGradient} text-white border-0 px-4 py-1.5 text-sm font-bold shadow-lg`}>
-                              {clientProfile.tierIcon === 'crown' && <Crown className="w-4 h-4 mr-1.5" />}
-                              {clientProfile.tierIcon === 'gem' && <Gem className="w-4 h-4 mr-1.5" />}
-                              {clientProfile.tierIcon === 'zap' && <Zap className="w-4 h-4 mr-1.5" />}
-                              {clientProfile.tierIcon === 'sparkles' && <Sparkles className="w-4 h-4 mr-1.5" />}
-                              {clientProfile.tierLabel}
-                            </Badge>
-                            */}
-                            <Badge className="bg-white/10 text-white border-0 backdrop-blur-sm px-4 py-1.5">
-                              <Calendar className="w-4 h-4 mr-1.5" />
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            <Badge variant="outline">
+                              <Calendar className="h-3 w-3" aria-hidden="true" />
                               {clientProfile.timeline.diasComoCliente} días como cliente
                             </Badge>
                             {clientProfile.patterns.rachaActiva > 0 && (
-                              <Badge className="bg-emerald-500/20 text-emerald-400 border-0 px-4 py-1.5">
-                                <Flame className="w-4 h-4 mr-1.5" />
-                                Racha activa: {clientProfile.patterns.rachaActiva} meses
+                              <Badge variant="outline">
+                                <Flame className="h-3 w-3" aria-hidden="true" />
+                                {clientProfile.patterns.rachaActiva} meses de actividad
+                              </Badge>
+                            )}
+                            {securityWarnings.hasLegacyPassword && (
+                              <Badge className="border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                                <AlertTriangle className="h-3 w-3" aria-hidden="true" />
+                                Contraseña mejorable
                               </Badge>
                             )}
                           </div>
                         </div>
-
-                        {/* Stats Mini - COMENTADO: No mostrar total facturado y total facturas al cliente */}
-                        {/* <div className="grid grid-cols-2 gap-4">
-                          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/10">
-                            <p className="text-slate-400 text-xs font-medium mb-1">Total Facturado</p>
-                            <p className="text-base sm:text-lg font-bold text-white tracking-tight whitespace-nowrap">{formatCurrencyNoDecimals(clientProfile.stats.totalFacturado)}</p>
-                          </div>
-                          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/10">
-                            <p className="text-slate-400 text-xs font-medium mb-1">Facturas</p>
-                            <p className="text-xl font-bold text-white">{clientProfile.stats.totalFacturas}</p>
-                          </div>
-                        </div> */}
                       </div>
-                    </motion.div>
+                    </section>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8">
-                      {/* Personal Info - Col 7 */}
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="lg:col-span-7 space-y-6"
-                      >
-                        {/* Contact Card Premium */}
-                        <div className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl">
-                          {/* Decorative Top Bar */}
-                          <div className="h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-
-                          <div className="p-6">
-                            <div className="flex items-center justify-between mb-6">
-                              <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
-                                  <User className="w-6 h-6 text-white" />
+                    <div className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
+                      <div className="space-y-6">
+                        {/* Contacto */}
+                        <section className="border border-[var(--line)] bg-[var(--ink-2)] transition-colors hover:border-foreground/30" aria-labelledby="perfil-contacto">
+                          <div className="border-b border-[var(--line)] px-5 py-4">
+                            <div className="flex items-center justify-between gap-3">
+                              <div>
+                                <div className="flex items-baseline gap-3">
+                                  <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">01</span>
+                                  <h2 id="perfil-contacto" className="text-sm font-medium text-foreground">Información de contacto</h2>
                                 </div>
-                                <div>
-                                  <h3 className="text-lg font-bold text-gray-900">Información de Contacto</h3>
-                                  <p className="text-sm text-gray-500">Gestiona tus datos personales</p>
-                                </div>
+                                <p className="mt-1 pl-7 text-xs text-muted-foreground">Email y teléfono para facturas y recuperación</p>
                               </div>
                               {loadingContactData && (
-                                <div className="w-8 h-8 rounded-full border-2 border-blue-100 border-t-blue-500 animate-spin" />
+                                <span className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground" role="status">Cargando…</span>
                               )}
                             </div>
-
-                            <div className="space-y-5">
-                              {/* Nombre completo */}
-                              <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                                  <User className="w-4 h-4 text-blue-500" />
-                                  Nombre completo
-                                </label>
-                                <div className="relative">
-                                  <input
-                                    type="text"
-                                    value={perfilCliente?.nombre || user?.name || ''}
-                                    readOnly
-                                    className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600 cursor-not-allowed"
-                                  />
-                                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                                    <Lock className="w-4 h-4 text-gray-400" />
-                                  </div>
-                                </div>
-                                <p className="text-xs text-gray-400 flex items-center gap-1">
-                                  <Info className="w-3 h-3" />
-                                  Este campo no se puede modificar
-                                </p>
+                          </div>
+                          <div className="space-y-5 p-5">
+                            <div>
+                              <span className="mb-1.5 flex items-center gap-2 text-xs text-muted-foreground">
+                                <User className="h-3.5 w-3.5" aria-hidden="true" />
+                                Nombre completo
+                              </span>
+                              <div className="flex min-h-[44px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink)] px-4 py-2.5">
+                                <span className="min-w-0 truncate text-sm text-foreground">{perfilCliente?.nombre || user?.name || '—'}</span>
+                                <Lock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
                               </div>
+                              <p className="mt-1.5 text-xs text-muted-foreground">Este campo no se puede modificar.</p>
+                            </div>
 
-                              {/* Email */}
-                              <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                                  <Mail className="w-4 h-4 text-purple-500" />
-                                  Email de contacto
-                                </label>
-                                <div className="relative group">
-                                  <Input
-                                    type="email"
-                                    value={userEmail}
-                                    onChange={(e) => setUserEmail(e.target.value)}
-                                    placeholder="ejemplo@email.com"
-                                    className="h-14 pl-4 pr-12 border-2 border-gray-200 hover:border-purple-300 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 rounded-xl text-base transition-all"
-                                  />
-                                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                                    <Pencil className="w-4 h-4 text-gray-400 group-hover:text-purple-500 transition-colors" />
-                                  </div>
-                                </div>
-                                <p className="text-xs text-purple-600 flex items-center gap-1">
-                                  <Sparkles className="w-3 h-3" />
-                                  Se usará para compartir facturas por email
-                                </p>
-                              </div>
+                            <div>
+                              <label htmlFor="perfil-email" className="mb-1.5 flex items-center gap-2 text-xs text-muted-foreground">
+                                <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                                Email de contacto
+                              </label>
+                              <Input
+                                id="perfil-email"
+                                type="email"
+                                autoComplete="email"
+                                value={userEmail}
+                                onChange={(e) => setUserEmail(e.target.value)}
+                                placeholder="ejemplo@email.com"
+                              />
+                              <p className="mt-1.5 text-xs text-muted-foreground">Se usará para enviar facturas por email.</p>
+                            </div>
 
-                              {/* Teléfono */}
-                              <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                                  <Phone className="w-4 h-4 text-emerald-500" />
-                                  Teléfono de contacto
-                                </label>
-                                <div className="relative group">
-                                  <Input
-                                    type="tel"
-                                    value={userPhone}
-                                    onChange={(e) => setUserPhone(e.target.value)}
-                                    placeholder="+34 600 123 456"
-                                    className="h-14 pl-4 pr-12 border-2 border-gray-200 hover:border-emerald-300 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 rounded-xl text-base transition-all"
-                                  />
-                                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                                    <Pencil className="w-4 h-4 text-gray-400 group-hover:text-emerald-500 transition-colors" />
-                                  </div>
-                                </div>
-                                <p className="text-xs text-emerald-600 flex items-center gap-1">
-                                  <MessageCircle className="w-3 h-3" />
-                                  Se usará para compartir facturas por WhatsApp
-                                </p>
-                              </div>
+                            <div>
+                              <label htmlFor="perfil-telefono" className="mb-1.5 flex items-center gap-2 text-xs text-muted-foreground">
+                                <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+                                Teléfono de contacto
+                              </label>
+                              <Input
+                                id="perfil-telefono"
+                                type="tel"
+                                autoComplete="tel"
+                                value={userPhone}
+                                onChange={(e) => setUserPhone(e.target.value)}
+                                placeholder="+34 600 123 456"
+                              />
+                              <p className="mt-1.5 text-xs text-muted-foreground">Se usará para compartir facturas por WhatsApp.</p>
+                            </div>
 
-                              {/* Save Button */}
-                              <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => {
-                                  if (!user?.id) return;
+                            <Button
+                              onClick={() => {
+                                if (!user?.id) return;
 
-                                  const datosAGuardar: { email?: string | null; telefono?: string | null } = {};
-                                  const emailTrimmed = userEmail?.trim() || '';
-                                  const phoneTrimmed = userPhone?.trim() || '';
+                                const datosAGuardar: { email?: string | null; telefono?: string | null } = {};
+                                const emailTrimmed = userEmail?.trim() || '';
+                                const phoneTrimmed = userPhone?.trim() || '';
 
-                                  if (emailTrimmed) {
-                                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                    if (!emailRegex.test(emailTrimmed)) {
-                                      toast.error('El formato del email es inválido');
-                                      return;
-                                    }
-                                    datosAGuardar.email = emailTrimmed;
-                                  } else {
-                                    datosAGuardar.email = null;
-                                  }
-
-                                  if (phoneTrimmed) {
-                                    const phoneClean = phoneTrimmed.replace(/\D/g, '');
-                                    if (phoneClean.length < 9) {
-                                      toast.error('El teléfono debe tener al menos 9 dígitos');
-                                      return;
-                                    }
-                                    datosAGuardar.telefono = phoneTrimmed;
-                                  } else {
-                                    datosAGuardar.telefono = null;
-                                  }
-
-                                  if (!emailTrimmed && !phoneTrimmed) {
-                                    setPendingContactSave(datosAGuardar);
-                                    setShowDeleteContactModal(true);
+                                if (emailTrimmed) {
+                                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                  if (!emailRegex.test(emailTrimmed)) {
+                                    toast.error('El formato del email es inválido');
                                     return;
                                   }
+                                  datosAGuardar.email = emailTrimmed;
+                                } else {
+                                  datosAGuardar.email = null;
+                                }
 
-                                  guardarDatosContacto(datosAGuardar);
-                                }}
-                                className="w-full h-14 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2"
-                              >
-                                <Check className="w-5 h-5" />
-                                Guardar cambios
-                              </motion.button>
-                            </div>
-                          </div>
-                        </div>
+                                if (phoneTrimmed) {
+                                  const phoneClean = phoneTrimmed.replace(/\D/g, '');
+                                  if (phoneClean.length < 9) {
+                                    toast.error('El teléfono debe tener al menos 9 dígitos');
+                                    return;
+                                  }
+                                  datosAGuardar.telefono = phoneTrimmed;
+                                } else {
+                                  datosAGuardar.telefono = null;
+                                }
 
-                        {/* Company Info Card */}
-                        <div className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl">
-                          <div className="h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
+                                if (!emailTrimmed && !phoneTrimmed) {
+                                  setPendingContactSave(datosAGuardar);
+                                  setShowDeleteContactModal(true);
+                                  return;
+                                }
 
-                          <div className="p-6">
-                            <div className="flex items-center gap-4 mb-6">
-                              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
-                                <Building className="w-6 h-6 text-white" />
-                              </div>
-                              <div>
-                                <h3 className="text-lg font-bold text-gray-900">Información de Empresa</h3>
-                                <p className="text-sm text-gray-500">Datos de facturación y dirección</p>
-                              </div>
-                            </div>
-
-                            <div className="space-y-5">
-                              {/* Empresa */}
-                              <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                                  <Building className="w-4 h-4 text-emerald-500" />
-                                  Nombre de empresa
-                                </label>
-                                <div className="relative">
-                                  <input
-                                    type="text"
-                                    value={perfilCliente?.empresa || user?.company || ''}
-                                    readOnly
-                                    className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600 cursor-not-allowed"
-                                  />
-                                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                                    <Lock className="w-4 h-4 text-gray-400" />
-                                  </div>
-                                </div>
-                              </div>
-
-                              {/* Dirección */}
-                              <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                                  <MapPin className="w-4 h-4 text-rose-500" />
-                                  Dirección de facturación
-                                </label>
-                                <div className="relative">
-                                  <textarea
-                                    value={perfilCliente?.direccion?.completa || 'Cargando dirección...'}
-                                    readOnly
-                                    rows={3}
-                                    className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600 cursor-not-allowed resize-none"
-                                  />
-                                  <div className="absolute right-3 top-4">
-                                    <Lock className="w-4 h-4 text-gray-400" />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Right Column - Col 5 */}
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="lg:col-span-5 space-y-6"
-                      >
-                        {/* Support Card */}
-                        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 p-6 shadow-xl shadow-indigo-500/20">
-                          <div className="absolute inset-0 overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/10 rounded-full blur-xl" />
-                          </div>
-
-                          <div className="relative z-10">
-                            <div className="flex items-center gap-3 mb-4">
-                              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                <Settings className="w-6 h-6 text-white" />
-                              </div>
-                              <div>
-                                <h3 className="font-bold text-white text-lg">Actualizar información</h3>
-                                <p className="text-sm text-white/60">Cambios en datos de empresa</p>
-                              </div>
-                            </div>
-
-                            <p className="text-white/80 mb-5 text-sm leading-relaxed">
-                              Para modificar tus datos fiscales o de empresa, ponte en contacto con nuestro equipo de soporte.
-                            </p>
-
-                            <motion.button
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => {
-                                toast.info('Contactar soporte', {
-                                  description: '📞 Teléfono: +34 965 123 456\n📧 Email: soporte@granja-mari-pepa.com\n🕒 Horario: L-V 9:00-18:00',
-                                  duration: 8000,
-                                });
+                                guardarDatosContacto(datosAGuardar);
                               }}
-                              className="w-full py-3.5 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+                              className="w-full"
                             >
-                              <Phone className="w-5 h-5" />
-                              Contactar soporte
-                            </motion.button>
+                              <Check className="h-4 w-4" aria-hidden="true" />
+                              Guardar cambios
+                            </Button>
                           </div>
-                        </div>
+                        </section>
 
-                        {/* Security Card */}
-                        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 p-6 shadow-xl shadow-emerald-500/20">
-                          <div className="absolute inset-0 overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/10 rounded-full blur-xl" />
-                          </div>
-
-                          <div className="relative z-10">
-                            <div className="flex items-center gap-3 mb-4">
-                              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                <Shield className="w-6 h-6 text-white" />
-                              </div>
-                              <div>
-                                <h3 className="font-bold text-white text-lg">Seguridad</h3>
-                                <p className="text-sm text-white/60">Gestiona tu contraseña</p>
-                              </div>
+                        {/* Empresa */}
+                        <section className="border border-[var(--line)] bg-[var(--ink-2)] transition-colors hover:border-foreground/30" aria-labelledby="perfil-empresa">
+                          <div className="border-b border-[var(--line)] px-5 py-4">
+                            <div className="flex items-baseline gap-3">
+                              <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">02</span>
+                              <h2 id="perfil-empresa" className="text-sm font-medium text-foreground">Información de empresa</h2>
                             </div>
-
-                            <p className="text-white/80 mb-5 text-sm leading-relaxed">
-                              Mantén tu cuenta segura actualizando tu contraseña regularmente.
-                            </p>
-
-                            <motion.button
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setShowPasswordChangeModal(true)}
-                              className="w-full py-3.5 bg-white text-emerald-700 font-bold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-                            >
-                              <Key className="w-5 h-5" />
-                              Cambiar Contraseña
-                            </motion.button>
+                            <p className="mt-1 pl-7 text-xs text-muted-foreground">Datos de facturación y dirección</p>
                           </div>
-                        </div>
-
-                        {/* Quick Stats Mini Card - COMENTADO: No mostrar sección de rendimiento al cliente */}
-                        {/*
-                        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900 p-5 shadow-xl">
-                          <div className="absolute inset-0 overflow-hidden">
-                            <div className="absolute top-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl" />
-                          </div>
-
-                          <div className="relative z-10">
-                            <div className="flex items-center gap-2 mb-4">
-                              <TrendingUp className="w-5 h-5 text-emerald-400" />
-                              <span className="text-sm font-semibold text-white">Tu rendimiento</span>
+                          <dl className="divide-y divide-[var(--line-soft)]">
+                            <div className="px-5 py-4">
+                              <dt className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <Building className="h-3.5 w-3.5" aria-hidden="true" />
+                                Nombre de empresa
+                              </dt>
+                              <dd className="mt-1 text-sm text-foreground">{perfilCliente?.empresa || user?.company || '—'}</dd>
                             </div>
-
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="bg-white/5 rounded-xl p-3 backdrop-blur-sm border border-white/10">
-                                <p className="text-xs text-slate-400">Media mensual</p>
-                                <p className="text-sm sm:text-base font-bold text-white tracking-tight whitespace-nowrap">{formatCurrencyNoDecimals(clientProfile.stats.avgMensual)}</p>
-                              </div>
-                              <div className="bg-white/5 rounded-xl p-3 backdrop-blur-sm border border-white/10">
-                                <p className="text-xs text-slate-400">Media/factura</p>
-                                <p className="text-sm sm:text-base font-bold text-white tracking-tight whitespace-nowrap">{formatCurrencyNoDecimals(clientProfile.stats.avgPorFactura || 0)}</p>
-                              </div>
+                            <div className="px-5 py-4">
+                              <dt className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                                Dirección de facturación
+                              </dt>
+                              <dd className="mt-1 whitespace-pre-line text-sm text-foreground">
+                                {perfilCliente?.direccion?.completa || 'Cargando dirección…'}
+                              </dd>
                             </div>
+                          </dl>
+                        </section>
+                      </div>
+
+                      <div className="space-y-6">
+                        {/* Soporte */}
+                        <section className="border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30" aria-labelledby="perfil-soporte">
+                          <Settings className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                          <div className="mt-3 flex items-baseline gap-3">
+                            <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">03</span>
+                            <h2 id="perfil-soporte" className="text-sm font-medium text-foreground">Actualizar información</h2>
                           </div>
-                        </div>
-                        */}
-                      </motion.div>
+                          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                            Para modificar tus datos fiscales o de empresa, contacta con nuestro equipo.
+                          </p>
+                          <Button
+                            variant="secondary"
+                            className="mt-4 w-full"
+                            onClick={() => {
+                              toast.info('Contactar soporte', {
+                                description: '📞 Teléfono: +34 965 123 456\n📧 Email: soporte@granja-mari-pepa.com\n🕒 Horario: L-V 9:00-18:00',
+                                duration: 8000,
+                              });
+                            }}
+                          >
+                            <Phone className="h-4 w-4" aria-hidden="true" />
+                            Contactar soporte
+                          </Button>
+                        </section>
+
+                        {/* Seguridad */}
+                        <section className="border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30" aria-labelledby="perfil-seguridad">
+                          <Shield className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                          <div className="mt-3 flex items-baseline gap-3">
+                            <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">04</span>
+                            <h2 id="perfil-seguridad" className="text-sm font-medium text-foreground">Seguridad</h2>
+                          </div>
+                          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                            Mantén tu cuenta segura actualizando tu contraseña periódicamente.
+                          </p>
+                          <Button
+                            variant="secondary"
+                            className="mt-4 w-full"
+                            onClick={() => setShowPasswordChangeModal(true)}
+                          >
+                            <Key className="h-4 w-4" aria-hidden="true" />
+                            Cambiar contraseña
+                          </Button>
+                        </section>
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {/* FAVORITOS TAB */}
-                {activeTab === 'favoritos' && (
-                  <div className="space-y-8">
-                    {/* Header Premium */}
-                    <motion.div
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 p-8 shadow-2xl shadow-pink-500/20"
-                    >
-                      <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-                        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl" />
-                      </div>
+                
 
-                      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="flex items-center gap-6">
-                          <div className="w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl">
-                            <Heart className="w-10 h-10 text-white" fill="white" />
-                          </div>
-                          <div className="text-center md:text-left">
-                            <h1 className="text-3xl md:text-4xl font-black text-white mb-2">
-                              Mis Favoritos
-                            </h1>
-                            <p className="text-white/70 text-lg">
-                              {getFavoritesCount() > 0
-                                ? `${getFavoritesCount()} productos guardados`
-                                : 'Guarda tus productos preferidos aquí'
-                              }
-                            </p>
-                          </div>
+                                {activeTab === 'favoritos' && (
+                  <div className="space-y-6">
+                    <section className="flex flex-col gap-5 border border-[var(--line)] bg-[var(--ink-2)] p-6 transition-colors hover:border-foreground/30 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center border border-[var(--line)] text-muted-foreground">
+                          <Heart className="h-6 w-6" aria-hidden="true" />
                         </div>
-
-                        {getFavoritesCount() > 0 && (
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => {
-                              favorites.forEach(productId => removeFavorite(productId));
-                              toast.success('Todos los favoritos eliminados');
-                            }}
-                            className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-bold rounded-xl border border-white/30 hover:bg-white/30 transition-all flex items-center gap-2"
-                          >
-                            <Trash2 className="w-5 h-5" />
-                            Limpiar todo
-                          </motion.button>
-                        )}
+                        <div>
+                          <div className="flex items-baseline gap-3">
+                            <span className="font-mono text-[10px] text-[#ff8a5c]" aria-hidden="true">00</span>
+                            <h2 className="text-lg font-normal text-foreground">Mis favoritos</h2>
+                          </div>
+                          <p className="mt-1 pl-6 text-sm text-muted-foreground">
+                            {getFavoritesCount() > 0
+                              ? `${getFavoritesCount()} productos guardados`
+                              : 'Guarda tus productos preferidos aquí'}
+                          </p>
+                        </div>
                       </div>
-                    </motion.div>
+                      {getFavoritesCount() > 0 && (
+                        <Button
+                          variant="secondary"
+                          onClick={() => {
+                            favorites.forEach(productId => removeFavorite(productId));
+                            toast.success('Todos los favoritos eliminados');
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
+                          Limpiar todo
+                        </Button>
+                      )}
+                    </section>
 
                     {getFavoritesCount() === 0 ? (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl p-12"
-                      >
-                        <div className="absolute inset-0 overflow-hidden">
-                          <div className="absolute top-0 right-0 w-96 h-96 bg-rose-50 rounded-full blur-3xl opacity-50" />
-                          <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-50 rounded-full blur-2xl opacity-50" />
-                        </div>
-
-                        <div className="relative z-10 text-center max-w-md mx-auto">
-                          <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center">
-                            <Heart className="w-12 h-12 text-rose-400" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                            Tu lista está vacía
-                          </h3>
-                          <p className="text-gray-500 mb-8 leading-relaxed">
-                            Explora nuestro catálogo y guarda como favoritos los productos que más te gusten.
-                            Así podrás encontrarlos rápidamente cuando los necesites.
-                          </p>
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => window.location.href = '/productos'}
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-xl shadow-lg shadow-rose-500/30 hover:shadow-xl hover:shadow-rose-500/40 transition-all"
-                          >
-                            <ShoppingCart className="w-5 h-5" />
+                      <div className="flex flex-col items-center border border-[var(--line)] bg-[var(--ink-2)] px-6 py-16 text-center">
+                        <Heart className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+                        <h3 className="mt-4 text-sm font-medium text-foreground">Tu lista está vacía</h3>
+                        <p className="mt-1 max-w-[46ch] text-xs leading-relaxed text-muted-foreground">
+                          Explora el catálogo y guarda los productos que más te interesen para encontrarlos rápidamente cuando los necesites.
+                        </p>
+                        <Button asChild className="mt-6">
+                          <a href={`/${locale}/productos`}>
+                            <ShoppingCart className="h-4 w-4" aria-hidden="true" />
                             Explorar productos
-                          </motion.button>
-                        </div>
-                      </motion.div>
+                          </a>
+                        </Button>
+                      </div>
                     ) : (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl p-12"
-                      >
-                        <div className="absolute inset-0 overflow-hidden">
-                          <div className="absolute top-0 right-0 w-96 h-96 bg-rose-50 rounded-full blur-3xl opacity-50" />
-                        </div>
-
-                        <div className="relative z-10 text-center max-w-md mx-auto">
-                          <motion.div
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/30"
-                          >
-                            <Heart className="w-12 h-12 text-white" fill="white" />
-                          </motion.div>
-                          <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                            {getFavoritesCount()} productos guardados
-                          </h3>
-                          <p className="text-gray-500 mb-8 leading-relaxed">
-                            El catálogo de productos estará disponible próximamente.
-                            Tus favoritos se guardarán automáticamente y podrás acceder a ellos cuando quieras.
-                          </p>
-                          <Badge className="bg-rose-100 text-rose-700 border-rose-200 px-4 py-2 text-sm font-medium">
-                            <Sparkles className="w-4 h-4 mr-2" />
-                            Próximamente disponible
-                          </Badge>
-                        </div>
-                      </motion.div>
+                      <div className="flex flex-col items-center border border-[var(--line)] bg-[var(--ink-2)] px-6 py-16 text-center">
+                        <Heart className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+                        <h3 className="mt-4 text-sm font-medium text-foreground">
+                          {getFavoritesCount()} productos guardados
+                        </h3>
+                        <p className="mt-1 max-w-[46ch] text-xs leading-relaxed text-muted-foreground">
+                          El catálogo de productos estará disponible próximamente. Tus favoritos se conservarán y podrás acceder a ellos cuando quieras.
+                        </p>
+                        <Badge className="mt-5 border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                          <Sparkles className="h-3 w-3" aria-hidden="true" />
+                          Próximamente disponible
+                        </Badge>
+                      </div>
                     )}
                   </div>
                 )}
@@ -4693,6 +3364,7 @@ export function CustomerDashboard() {
             </AnimatePresence>
           </div>
         </div>
+      </div>
       </div>
 
       {/* Modal de Vista Rápida de Factura - RESPONSIVE */}
@@ -4710,10 +3382,10 @@ export function CustomerDashboard() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-card rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
+              className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
             >
               {/* Header - Responsive */}
-              <div className="bg-primary p-3 sm:p-4 text-primary-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+              <div className="border-b border-[var(--line)] bg-[var(--ink-2)] p-3 text-foreground sm:p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                   <div className="min-w-0">
@@ -4728,7 +3400,7 @@ export function CustomerDashboard() {
                     variant="ghost"
                     size="sm"
                     onClick={() => facturaPreview && handleDownloadInvoice(facturaPreview)}
-                    className="text-primary-foreground hover:bg-primary-foreground/20 h-9 sm:h-10 px-3 sm:px-4"
+                    className="text-foreground hover:bg-white/10 h-9 sm:h-10 px-3 sm:px-4"
                   >
                     <Download className="w-4 h-4 sm:mr-2" />
                     <span className="hidden sm:inline">Descargar</span>
@@ -4737,7 +3409,7 @@ export function CustomerDashboard() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setShowFacturaPreview(false)}
-                    className="text-primary-foreground hover:bg-primary-foreground/20 h-9 w-9 sm:h-10 sm:w-10"
+                    className="text-foreground hover:bg-white/10 h-9 w-9 sm:h-10 sm:w-10"
                   >
                     <X className="w-5 h-5" />
                   </Button>
@@ -4745,9 +3417,9 @@ export function CustomerDashboard() {
               </div>
 
               {/* PDF Viewer - con padding ajustado */}
-              <div className="flex-1 bg-secondary p-2 sm:p-4 relative overflow-auto">
+              <div className="flex-1 bg-[var(--ink)] p-2 sm:p-4 relative overflow-auto">
                 {loadingPdf ? (
-                  <div className="absolute inset-0 flex items-center justify-center bg-secondary">
+                  <div className="absolute inset-0 flex items-center justify-center bg-[var(--ink)]">
                     <div className="text-center">
                       <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-primary mx-auto mb-4"></div>
                       <p className="text-muted-foreground text-sm sm:text-base">Generando PDF...</p>
@@ -4780,9 +3452,9 @@ export function CustomerDashboard() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed inset-0 flex items-center justify-center z-50 p-4"
             >
-              <div className="bg-card rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-border">
+              <div className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl max-w-md w-full overflow-hidden border border-border">
                 {/* Header */}
-                <div className="bg-primary p-6 text-primary-foreground">
+                <div className="border-b border-[var(--line)] bg-[var(--ink-2)] p-6 text-foreground">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2.5 bg-primary-foreground/20 rounded-xl">
@@ -4790,7 +3462,7 @@ export function CustomerDashboard() {
                       </div>
                       <div>
                         <h2 className="text-xl font-bold">Enviar Factura por Email</h2>
-                        <p className="text-sm text-primary-foreground/80">Confirma el envío de tu factura</p>
+                        <p className="text-sm text-muted-foreground">Confirma el envío de tu factura</p>
                       </div>
                     </div>
                     {!sendingEmail && (
@@ -4903,7 +3575,7 @@ export function CustomerDashboard() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
+              className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl p-8 max-w-md w-full border border-border"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div
@@ -5010,7 +3682,7 @@ export function CustomerDashboard() {
                   stiffness: 300,
                   damping: 30
                 }}
-                className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
+                className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl p-8 max-w-md w-full border border-border"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="text-center">
@@ -5065,7 +3737,7 @@ export function CustomerDashboard() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed inset-0 flex items-center justify-center z-50 p-4"
             >
-              <div className="bg-card rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-border">
+              <div className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl max-w-md w-full overflow-hidden border border-border">
                 {/* Header */}
                 <div className="bg-warning p-6 text-warning-foreground">
                   <div className="flex items-center justify-between">
@@ -5188,7 +3860,7 @@ export function CustomerDashboard() {
                   stiffness: 300,
                   damping: 30
                 }}
-                className="bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full border border-border"
+                className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl p-8 max-w-md w-full border border-border"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="space-y-6">
@@ -5353,5 +4025,6 @@ export function CustomerDashboard() {
         onClose={() => setShowPasswordChangeModal(false)}
       />
     </div>
+    </MotionConfig>
   );
 }

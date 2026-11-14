@@ -12,12 +12,19 @@
 require('dotenv').config();
 const odbc = require('odbc');
 const logger = require('../utils/logger');
+const sqlGuard = require('../security/sqlGuard');
 
 // ─── Configuración ───────────────────────────────────────────────
-const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+const connectionString = process.env.ODBC_CONNECTION_STRING;
+if (!connectionString) {
+  throw new Error(
+    'ODBC_CONNECTION_STRING no configurada: el backend no puede arrancar sin credenciales por entorno.',
+  );
+}
 const HEARTBEAT_INTERVAL_MS = 90_000;     // 90 segundos (antes de cualquier firewall timeout)
 const MAX_CONSECUTIVE_FAILURES = 3;       // Forzar reinicio del pool tras N heartbeats fallidos
 const QUERY_TIMEOUT_MS = 30_000;          // Timeout por query individual
+const POOL_RECREATE_COOLDOWN_MS = 10 * 60 * 1000; // Enfriamiento: 1 recreación de pool cada 10 min máximo
 
 const poolConfig = {
   connectionString,
@@ -33,6 +40,8 @@ let pool = null;
 let heartbeatTimer = null;
 let consecutiveHeartbeatFailures = 0;
 let poolRecreationInProgress = false;
+let lastPoolRecreationAt = 0;
+let lastPanamarRecreationAt = 0;
 
 // Métricas de salud (expuestas vía /health)
 const healthMetrics = {
@@ -91,6 +100,7 @@ async function createPool() {
 
     pool = await odbc.pool(poolConfig);
     consecutiveHeartbeatFailures = 0;
+    lastPoolRecreationAt = Date.now();
     healthMetrics.poolCreatedAt = new Date().toISOString();
     healthMetrics.totalPoolRecreations++;
 
@@ -106,6 +116,23 @@ async function createPool() {
   } finally {
     poolRecreationInProgress = false;
   }
+}
+
+// ─── Recreación con enfriamiento ─────────────────────────────────
+
+/**
+ * Cada socket ODBC abierto deja un QZDASOINIT vivo en el AS/400. Recrear el pool
+ * en bucle deja decenas de jobs zombis consumiendo CPU y ralentiza a todos.
+ * Aquí se permite como máximo una recreación cada POOL_RECREATE_COOLDOWN_MS.
+ */
+async function recreatePoolThrottled(reason) {
+  const sinceLast = Date.now() - lastPoolRecreationAt;
+  if (pool && sinceLast < POOL_RECREATE_COOLDOWN_MS) {
+    logger.warn(`⏸️ Recreación de pool aplazada (${reason}): última hace ${Math.round(sinceLast / 1000)}s`);
+    return;
+  }
+  logger.warn(`🔄 Recreando pool (${reason})`);
+  try { await createPool(); } catch (e) { logger.error('❌ Recreación de pool fallida:', e.message); }
 }
 
 // ─── Heartbeat (Keep-alive) ──────────────────────────────────────
@@ -144,14 +171,10 @@ function startHeartbeat() {
 
       logger.warn(`💔 Heartbeat FAIL #${consecutiveHeartbeatFailures}: ${error.message}`);
 
-      // Si fallan N consecutivos, FORZAR recreación del pool
+      // Si fallan N consecutivos, recrear el pool (con enfriamiento)
       if (consecutiveHeartbeatFailures >= MAX_CONSECUTIVE_FAILURES) {
-        logger.error(`🚨 ${MAX_CONSECUTIVE_FAILURES} heartbeats fallidos consecutivos → Forzando recreación del pool`);
-        try {
-          await createPool();
-        } catch (e) {
-          logger.error('❌ No se pudo recrear el pool:', e.message);
-        }
+        logger.error(`🚨 ${MAX_CONSECUTIVE_FAILURES} heartbeats fallidos consecutivos → Recreación controlada del pool`);
+        await recreatePoolThrottled('heartbeats fallidos');
       }
     }
   }, HEARTBEAT_INTERVAL_MS);
@@ -170,8 +193,7 @@ function isConnectionError(error) {
     msg.includes('Communication link failure') ||
     msg.includes('Connection reset') ||
     msg.includes('not connected') ||
-    msg.includes('connection is closed') ||
-    msg.includes('Error preparing the SQL statement')
+    msg.includes('connection is closed')
   );
 }
 
@@ -182,7 +204,7 @@ function isConnectionError(error) {
  * 
  * Estrategia:
  * - Intentos 1-2: Reintenta con la conexión normal del pool
- * - Intento 3+: Fuerza recreación del pool y reintenta con pool fresco
+ * - Intento 3+: recrea el pool (con enfriamiento) y reintenta
  */
 async function query(sql, params = []) {
   const MAX_RETRIES = 5;
@@ -199,6 +221,15 @@ async function query(sql, params = []) {
       }
 
       connection = await pool.connect();
+
+      const guardContext = sqlGuard.getContext();
+      if (guardContext && guardContext.readOnly) {
+        sqlGuard.assertReadOnlySql(sql);
+        await connection.query('SET TRANSACTION READ ONLY');
+        logger.info('DB_GUARD_SET_TRANSACTION_READ_ONLY', {
+          tool: guardContext.tool,
+        });
+      }
 
       // Ejecutar con timeout de protección
       const result = await Promise.race([
@@ -224,10 +255,9 @@ async function query(sql, params = []) {
         // Cerrar conexión rota
         if (connection) { try { await connection.close(); } catch (_) { } connection = null; }
 
-        // A partir del intento 3, forzar pool nuevo
+        // A partir del intento 3, recrear pool nuevo (con enfriamiento anti-fuga)
         if (attempt >= 3) {
-          logger.warn('🔄 Forzando recreación del pool en intento ' + attempt);
-          try { await createPool(); } catch (_) { }
+          await recreatePoolThrottled('reintento de query');
         }
 
         if (attempt < MAX_RETRIES) {
@@ -295,6 +325,7 @@ async function createPanamarPool() {
       maxSize: 5
     });
     panamarConsecutiveFailures = 0;
+    lastPanamarRecreationAt = Date.now();
     panamarHealthMetrics.poolCreatedAt = new Date().toISOString();
     logger.info('✅ Pool PANAMAR creado correctamente');
 
@@ -306,6 +337,19 @@ async function createPanamarPool() {
   } finally {
     panamarPoolRecreating = false;
   }
+}
+
+/**
+ * Recreación del pool PANAMAR con el mismo enfriamiento anti-fuga.
+ */
+async function recreatePanamarPoolThrottled(reason) {
+  const sinceLast = Date.now() - lastPanamarRecreationAt;
+  if (panamarPool && sinceLast < POOL_RECREATE_COOLDOWN_MS) {
+    logger.warn(`⏸️ Recreación PANAMAR aplazada (${reason}): última hace ${Math.round(sinceLast / 1000)}s`);
+    return;
+  }
+  logger.warn(`🔄 Recreando pool PANAMAR (${reason})`);
+  try { await createPanamarPool(); } catch (e) { logger.error('❌ Recreación PANAMAR fallida:', e.message); }
 }
 
 /**
@@ -339,10 +383,8 @@ function startPanamarHeartbeat() {
       logger.warn(`💔 PANAMAR Heartbeat FAIL #${panamarConsecutiveFailures}: ${error.message}`);
 
       if (panamarConsecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-        logger.error(`🚨 ${MAX_CONSECUTIVE_FAILURES} heartbeats PANAMAR fallidos → Forzando recreación`);
-        try { await createPanamarPool(); } catch (e) {
-          logger.error('❌ No se pudo recrear el pool PANAMAR:', e.message);
-        }
+        logger.error(`🚨 ${MAX_CONSECUTIVE_FAILURES} heartbeats PANAMAR fallidos → Recreación controlada`);
+        await recreatePanamarPoolThrottled('heartbeats fallidos');
       }
     }
   }, HEARTBEAT_INTERVAL_MS);
@@ -385,10 +427,9 @@ async function panamarQuery(sql, params = []) {
           code: error.odbcErrors?.[0]?.code
         });
 
-        // A partir del intento 2, recrear el pool entero (las conexiones están muertas)
+        // A partir del intento 2, recrear el pool entero (con enfriamiento anti-fuga)
         if (attempt >= 2) {
-          logger.warn('🔄 Recreando pool PANAMAR en intento ' + attempt);
-          try { await createPanamarPool(); } catch (_) { }
+          await recreatePanamarPoolThrottled('reintento de query');
         }
 
         if (attempt < MAX_RETRIES) {

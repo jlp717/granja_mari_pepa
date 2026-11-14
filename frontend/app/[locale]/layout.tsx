@@ -1,207 +1,172 @@
-import '../globals.css'
-import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
-import { notFound } from 'next/navigation'
-import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, getTranslations } from 'next-intl/server'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
-import { Toaster } from '@/components/ui/toaster'
-import { Toaster as Sonner } from 'sonner'
-import { ScrollToTopProvider } from '@/components/providers/scroll-to-top-provider'
-import { PerformanceProvider } from '@/components/providers/performance-provider'
-import { LazyLoadingProvider } from '@/components/providers/lazy-loading-provider'
-import { ThemeProvider } from '@/contexts/ThemeContext'
-import { SessionProvider } from '@/contexts/SessionContext'
-import { GlobalChatbot } from '@/components/ui/global-chatbot'
-import { AnalyticsProvider } from '@/components/providers/analytics-provider'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { JsonLdSchemas } from '@/components/seo/JsonLdSchemas'
-import { locales, type Locale } from '@/i18n'
-import { TolgeeProvider } from '@/components/providers/tolgee-provider'
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { KageSiteShell } from "@/components/kage/KageSiteShell";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "sonner";
+import { PerformanceProvider } from "@/components/providers/performance-provider";
+import { LazyLoadingProvider } from "@/components/providers/lazy-loading-provider";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SessionProvider } from "@/contexts/SessionContext";
+import { GlobalChatbot } from "@/components/ui/global-chatbot";
+import { AnalyticsProvider } from "@/components/providers/analytics-provider";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { locales, type Locale } from "@/i18n";
 
-const inter = Inter({
-    subsets: ['latin'],
-    display: 'swap',
-    preload: true,
-    fallback: ['system-ui', 'arial']
-})
-
-// Force dynamic rendering to avoid SSG 404s
-export const dynamic = 'force-dynamic';
+// Force dynamic rendering only where the route needs request data.
 
 // Viewport separado (requerido en Next.js 14+)
-export const viewport: Viewport = {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    themeColor: '#16a34a',
-};
+
 
 // Generar metadata dinámica por locale
-export async function generateMetadata({ params: { locale } }: { params: { locale: Locale } }): Promise<Metadata> {
-    const t = await getTranslations({ locale, namespace: 'meta' });
-    const isSpanish = locale === 'es';
-    const localePrefix = isSpanish ? '' : `/${locale}`;
-    const canonicalUrl = `https://www.mari-pepa.com${localePrefix}`;
-    const ogLocaleMap: Record<string, string> = {
-        es: 'es_ES', en: 'en_US', de: 'de_DE', it: 'it_IT', zh: 'zh_CN'
-    };
+export async function generateMetadata(
+  props: {
+    params: Promise<{ locale: Locale }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
 
-    return {
-        metadataBase: new URL('https://www.mari-pepa.com'),
-        title: t('title'),
-        description: t('description'),
-        keywords: t('keywords'),
-        authors: [{ name: 'Granja Mari Pepa', url: 'https://www.mari-pepa.com' }],
-        creator: 'Grupo Topgel',
-        publisher: 'Granja Mari Pepa',
-        robots: {
+  const {
+    locale
+  } = params;
+
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const canonicalUrl = `https://www.mari-pepa.com/${locale}`;
+  const ogLocaleMap: Record<string, string> = {
+    es: "es_ES",
+    en: "en_GB",
+    de: "de_DE",
+    it: "it_IT",
+    zh: "zh_CN",
+  };
+
+  return {
+    metadataBase: new URL("https://www.mari-pepa.com"),
+    title: t("title"),
+    description: t("description"),
+    keywords: t("keywords"),
+    authors: [{ name: "Granja Maripepa", url: "https://www.mari-pepa.com" }],
+    creator: "Granja Maripepa",
+    publisher: "Granja Maripepa",
+    robots:
+      locale === "es" || locale === "en"
+        ? {
             index: true,
             follow: true,
             googleBot: {
-                index: true,
-                follow: true,
-                'max-video-preview': -1,
-                'max-image-preview': 'large',
-                'max-snippet': -1,
+              index: true,
+              follow: true,
+              "max-video-preview": -1,
+              "max-image-preview": "large",
+              "max-snippet": -1,
             },
+          }
+        : { index: false, follow: true },
+    openGraph: {
+      type: "website",
+      locale: ogLocaleMap[locale] || "es_ES",
+      url: canonicalUrl,
+      siteName: "Granja Maripepa",
+      title: t("title"),
+      description: t("description"),
+      images: [
+        {
+          url: "https://www.mari-pepa.com/og-maripepa.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Granja Maripepa · Distribución HORECA desde Lorca",
+          type: "image/jpeg",
         },
-        openGraph: {
-            type: 'website',
-            locale: ogLocaleMap[locale] || 'es_ES',
-            url: canonicalUrl,
-            siteName: 'Granja Mari Pepa',
-            title: t('title'),
-            description: t('description'),
-            images: [
-                {
-                    url: 'https://www.mari-pepa.com/og-image.jpg',
-                    width: 1200,
-                    height: 630,
-                    alt: t('title'),
-                    type: 'image/jpeg',
-                },
-            ],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: t('title'),
-            description: t('description'),
-            images: ['https://www.mari-pepa.com/og-image.jpg'],
-            creator: '@GranjaMaripepa',
-        },
-        alternates: {
-            canonical: canonicalUrl,
-            languages: {
-                'es': 'https://www.mari-pepa.com',
-                'en': 'https://www.mari-pepa.com/en',
-                'de': 'https://www.mari-pepa.com/de',
-                'it': 'https://www.mari-pepa.com/it',
-                'zh': 'https://www.mari-pepa.com/zh',
-            },
-        },
-        icons: {
-            icon: [
-                { url: '/images/icons/icon.svg', type: 'image/svg+xml' },
-                { url: '/favicon.ico', sizes: 'any' },
-            ],
-            apple: [
-                { url: '/images/logo.jpeg', sizes: '180x180', type: 'image/jpeg' },
-            ],
-            shortcut: '/images/icons/icon.svg',
-            other: [
-                { rel: 'mask-icon', url: '/images/icons/icon.svg', color: '#0d3d4d' },
-            ],
-        }
-    };
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: ["https://www.mari-pepa.com/og-maripepa.jpg"],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        es: "https://www.mari-pepa.com/es",
+        en: "https://www.mari-pepa.com/en",
+        "x-default": "https://www.mari-pepa.com/es",
+      },
+    },
+    icons: {
+      icon: [
+        { url: "/images/icons/icon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "any" },
+      ],
+      apple: [
+        { url: "/kage/brand/logo-alpha.png", sizes: "180x180", type: "image/png" },
+      ],
+      shortcut: "/images/icons/icon.svg",
+      other: [
+        { rel: "mask-icon", url: "/images/icons/icon.svg", color: "#0d3d4d" },
+      ],
+    },
+  };
 }
 
 // Generar rutas estáticas para todos los locales
 export function generateStaticParams() {
-    return locales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }
 
 interface LocaleLayoutProps {
-    children: React.ReactNode;
-    params: { locale: Locale };
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }
 
-export default async function LocaleLayout({
-    children,
-    params: { locale }
-}: LocaleLayoutProps) {
-    // Validar locale
-    if (!locales.includes(locale)) {
-        notFound();
-    }
+export default async function LocaleLayout(props: LocaleLayoutProps) {
+  const params = await props.params;
 
-    // Cargar mensajes de traducción
-    const messages = await getMessages();
+  const {
+    locale
+  } = params;
 
-    return (
-        <html lang={locale} className="scroll-smooth">
-            <head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-                <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-                {/* PWA Manifest */}
-                <link rel="manifest" href="/manifest.json" />
-                <link rel="apple-touch-icon" href="/images/logo.jpeg" />
-                <link rel="icon" type="image/svg+xml" href="/images/icons/icon.svg" />
-                {/* hreflang para SEO multilingüe */}
-                <link rel="alternate" hrefLang="es" href="https://www.mari-pepa.com" />
-                <link rel="alternate" hrefLang="en" href="https://www.mari-pepa.com/en" />
-                <link rel="alternate" hrefLang="de" href="https://www.mari-pepa.com/de" />
-                <link rel="alternate" hrefLang="it" href="https://www.mari-pepa.com/it" />
-                <link rel="alternate" hrefLang="zh" href="https://www.mari-pepa.com/zh" />
-                <link rel="alternate" hrefLang="x-default" href="https://www.mari-pepa.com" />
-                {/* JSON-LD SEO Schemas */}
-                <JsonLdSchemas />
-            </head>
-            <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-background`}>
-                <NextIntlClientProvider messages={messages}>
-                    <TolgeeProvider>
-                        <ErrorBoundary>
-                            <ThemeProvider>
-                                <SessionProvider>
-                                    <AnalyticsProvider>
-                                        <PerformanceProvider>
-                                            <LazyLoadingProvider>
-                                                <ScrollToTopProvider />
-                                                {/* Skip to main content para accesibilidad */}
-                                                <a
-                                                    href="#main-content"
-                                                    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none"
-                                                >
-                                                    {locale === 'es' ? 'Ir al contenido principal' : 'Skip to main content'}
-                                                </a>
-                                                <Header />
-                                                {/* pt responsive: móvil (top-bar 48px + header 80px = 128px = pt-32), 
-                              sm (48+96=144 = pt-36), md (48+112=160 = pt-40), lg+ (48+128=176 = pt-44) */}
-                                                {/* pt responsive: Top 12 + Announce 11 + Header (Variable) */}
-                                                {/* pt responsive: Adjusted for Taller Mobile Announcement (8rem + Height) */}
-                                                <main
-                                                    id="main-content"
-                                                    className="pt-56 sm:pt-48 md:pt-52 lg:pt-56 flex-1 bg-background"
-                                                    role="main"
-                                                >
-                                                    {children}
-                                                </main>
-                                                <Footer />
-                                                <Toaster />
-                                                <Sonner />
-                                                <GlobalChatbot />
-                                            </LazyLoadingProvider>
-                                        </PerformanceProvider>
-                                    </AnalyticsProvider>
-                                </SessionProvider>
-                            </ThemeProvider>
-                        </ErrorBoundary>
-                    </TolgeeProvider>
-                </NextIntlClientProvider>
-            </body>
-        </html>
-    )
+  const {
+    children
+  } = props;
+
+  // Validar locale
+  if (!locales.includes(locale as Locale)) {
+    notFound();
+  }
+
+  // Habilita renderizado estático para el árbol localizado (next-intl).
+  setRequestLocale(locale);
+
+  // Cargar mensajes de traducción
+  const messages = await getMessages();
+
+  return (
+        <NextIntlClientProvider messages={messages}>
+          <ErrorBoundary>
+            <ThemeProvider>
+              <SessionProvider>
+                <AnalyticsProvider>
+                  <PerformanceProvider>
+                    <LazyLoadingProvider>
+                      <KageSiteShell
+                        auxiliary={
+                          <>
+                            <Toaster />
+                            <Sonner />
+                            <GlobalChatbot />
+                          </>
+                        }
+                      >
+                        {children}
+                      </KageSiteShell>
+                    </LazyLoadingProvider>
+                  </PerformanceProvider>
+                </AnalyticsProvider>
+              </SessionProvider>
+            </ThemeProvider>
+          </ErrorBoundary>
+        </NextIntlClientProvider>
+  );
 }

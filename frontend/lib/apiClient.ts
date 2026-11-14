@@ -149,7 +149,9 @@ apiClient.interceptors.response.use(
           // Limpiar tokens legacy que puedan quedar de versiones anteriores
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
-          window.location.href = '/login';
+          const locale = window.location.pathname.split('/')[1];
+          const prefix = /^[a-z]{2}$/.test(locale) ? locale : 'es';
+          window.location.href = `/${prefix}/area-clientes`;
         }
         
         return Promise.reject(refreshError);

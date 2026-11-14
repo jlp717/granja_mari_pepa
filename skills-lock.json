@@ -1,169 +1,223 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "adapt": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "44722c0ec8698cc0b57b7e1813e4e4c18db22a8015b243c03d06c1c7a02606e0"
+      "computedHash": ""
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
       "sourceType": "github",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "computedHash": "c19a532a3777698b80b35270939a1dc559da451381971b3e1e78174d1ab54863"
+      "computedHash": ""
     },
     "animate": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "49ccc3eccb47ab302fc5de3ef9f772dcdee1cab03c548012eb2998255a23171b"
+      "computedHash": ""
     },
     "animejs": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/animejs/SKILL.md",
-      "computedHash": "87b7202252c808da0e63a82c85c2d1933c7fd2c11877be4e7851cd5ee58589e3"
+      "computedHash": "66baa5d7ef528cb7a7e2cb21ba66fc576c810b03139c51a128bab4705867470c"
     },
     "audit": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "11a982752a0ae87f06de0385c88df8f33b0f0a21dba2d9b4e119f78d1167fa4b"
+      "computedHash": ""
     },
     "bolder": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "a543474e4ded36d5991abb2db6b50021442a23096144ef55622b27113c41c625"
+      "computedHash": ""
     },
     "clarify": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "22918eb15984e524bcd1db4f871cff9ab541b38c55979f725d12adf56abd2f36"
+      "computedHash": ""
     },
     "colorize": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "7b14119c07e6c11698329018440b907ed3b99e15605309adfe2c2df0e42d9c82"
+      "computedHash": ""
     },
     "critique": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "659e79835cc453341b5de302d9f91fa1e372d1de840ad0f4faabcc6138f80f4e"
+      "computedHash": ""
     },
     "css-animations": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/css-animations/SKILL.md",
-      "computedHash": "91be631006d3670ac18c6d35cf4709bb33118d8ef8524ee31baa3217f67acaca"
+      "computedHash": "16c615848060aeabe3eb7c170472475d7f518fe0ebbeb5a42329842d02b444af"
     },
     "delight": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "65fd05ea4b4739db288f19b82cfd5ca7db72d3dfacc65b7ef4d58ec55f211d9f"
+      "computedHash": ""
     },
     "distill": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "15645c6dccfebd541e5a7934fc0741a12c951ee306d61454708ae1f75c99d10e"
+      "computedHash": ""
     },
     "gsap": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/gsap/SKILL.md",
-      "computedHash": "8b212228e747c03450551fed20aafd07306ea20feb391098b14397e1f3019bcc"
+      "computedHash": "c49586d5cd4d231581dbdacc90b2dbab862dd769574f30953959a0eba39110cd"
+    },
+    "higgsfield-brandkit": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-brandkit/SKILL.md",
+      "computedHash": "e7647cd6f6e20426eeafc11b737c0ff4bbcc33776efc29131b2e728500845c33"
+    },
+    "higgsfield-faceless-video": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-faceless-video/SKILL.md",
+      "computedHash": "95c4288e64c35e561f8bf6afea57ff52289b8da4c71a519144d9de8a4e2fa125"
+    },
+    "higgsfield-generate": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-generate/SKILL.md",
+      "computedHash": "20fb9cdafbea6900609e4a7f5e0091ed439ba65131dd59b915ff8202a008ca57"
+    },
+    "higgsfield-marketplace-cards": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-marketplace-cards/SKILL.md",
+      "computedHash": "dc920d81d0842e0f5dfb0c22ab3b96b16fb75ae62d33b1b8a3a9529d48d2af6f"
+    },
+    "higgsfield-product-photoshoot": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-product-photoshoot/SKILL.md",
+      "computedHash": "cd9bf8f795be535a96852b6d5c5207ddf7238fe4ada06bb226086cac721f741a"
+    },
+    "higgsfield-soul-id": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-soul-id/SKILL.md",
+      "computedHash": "be1abb8875552d0e8a2aa2fb4ac9fd6a3edf55aab55ab4ceb65b611ef037ddf4"
+    },
+    "higgsfield-video-explainer": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-video-explainer/SKILL.md",
+      "computedHash": "22e3132222b7120768530d385d1513bf678be59677f9363a5177adbbe323a518"
+    },
+    "higgsfield-websites": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-websites/SKILL.md",
+      "computedHash": "03f247a262133675f6a573fb6c66f1be8950f4addde18c5fa3499c39dd32ea64"
+    },
+    "higgsfield-youtube-thumbnail": {
+      "source": "higgsfield-ai/skills",
+      "sourceType": "github",
+      "skillPath": "higgsfield-youtube-thumbnail/SKILL.md",
+      "computedHash": "e95fdabc5eb58b61ef75cc844ccde91e0162082a907d5164d260ba201cab2b71"
     },
     "hyperframes": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/hyperframes/SKILL.md",
-      "computedHash": "1e0e8ae9da9dae9900696d61b6830c7715e54b1dc5201c4247c5c8487d11cbaf"
+      "computedHash": ""
     },
     "hyperframes-cli": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/hyperframes-cli/SKILL.md",
-      "computedHash": "816caaca77caae6bbf32f78dc3e93f54fc61bac4139d4425bd00cb077b5849e5"
+      "computedHash": ""
     },
     "hyperframes-registry": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/hyperframes-registry/SKILL.md",
-      "computedHash": "187cb9060bc904c44e9a5f525ef2489b9750d398f7b82efd06568726db4fa2a4"
+      "computedHash": "0ce3cd54c84972c7b38ed656ce0d261178ecf93bc736cf94c8c19970129b1bc9"
     },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "e2dba713f87180d0a8cf982d4f1664fadc155a13e1e5aa3d79c48f44b0f9c3a9"
+      "computedHash": ""
     },
     "layout": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "746432275018adb16be89276afa95cd6f868a38598cf7075294973ce0e757919"
+      "computedHash": ""
     },
     "lottie": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/lottie/SKILL.md",
-      "computedHash": "63dc4bcf80ec7f3c38560e811115eda7fb436190205c6fbc14089b423e658939"
+      "computedHash": "3633574dcc4b9fea5cf7156f9255afa9262184607db380c88165b2d5320e62d0"
     },
     "optimize": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "0220fcf48f835a80a7cd17b0cf975510e8f83a8fbb814189d20cea7159b454b0"
+      "computedHash": ""
     },
     "overdrive": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "16f80188b3e700f0b7761b08036f69bb463adb42de5cf91576db448c8e85c683"
+      "computedHash": ""
     },
     "polish": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "ca3bd07512cc763c4c41d13bb15e593b2cbc2a80471ad8685b93ed3b4d611c2e"
+      "computedHash": ""
     },
     "quieter": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "c2b06cf395b04471bdd4cb07b71b49e3bce50800acdfa773a824d1c46d0661d3"
+      "computedHash": ""
     },
     "remotion-to-hyperframes": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/remotion-to-hyperframes/SKILL.md",
-      "computedHash": "9988b32a8b15ea30824ba36b8549e336eddeba48786c063a8057eb96f421d4a8"
+      "computedHash": "6dfce75143f93ba03be2e7d8454c5100c82da88ec0aed6d721768de140317481"
     },
     "shape": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "45e5bb82c573fb95a86ef86f358d744575f0abe35e57d9e10143cf8d16a1aa2d"
+      "computedHash": ""
     },
     "tailwind": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/tailwind/SKILL.md",
-      "computedHash": "528e205c2453c9fbfc9c41b5bb0d7b1278195e09536b3f8ebb76eb7bc5326e75"
+      "computedHash": "56092513ee34fb8cc03caa0f76c57a239a0f7813efddf1fcf664b2ce1bb890eb"
     },
     "three": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/three/SKILL.md",
-      "computedHash": "9be3cc37c69221363c00461b34df4165be72163250b6e6de0e9ade27692367e2"
+      "computedHash": "792c86b8ede6600bad9fa99fb730b35c996bbe595307401e9ad6910a68fdc244"
     },
     "typeset": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "computedHash": "26f31a4cbe25cbe70a3bc95ce4f229767bf1dce2f59e049fadde13fc56bfc815"
+      "computedHash": ""
     },
     "waapi": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/waapi/SKILL.md",
-      "computedHash": "f7438b7b45048c41d28a3c16e5f25a2547d2bd3ee67335a1ec8695f66ad17850"
+      "computedHash": "eff738b62c248ade40f8552557433504cdb5c4bf9800173236b82eb45f310b73"
     },
     "website-to-hyperframes": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
       "skillPath": "skills/website-to-hyperframes/SKILL.md",
-      "computedHash": "19cac4db1463f0b670ca903c13e61ef62974d1578cf3432a44835d353540dce6"
+      "computedHash": "ff4a181e8d313ef3d7a7055972876896a7a971eb04cb3d0fa42986ab01a93251"
     }
   }
 }

@@ -7,7 +7,7 @@
 const jwt = require('jsonwebtoken');
 const logger = require('../utils/logger');
 
-const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || 'CAMBIAR-EN-PRODUCCION-POR-SECRETO-MUY-LARGO';
+const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
 
 /**
  * Middleware para verificar JWT
@@ -31,6 +31,14 @@ function authenticateToken(req, res, next) {
       return res.status(401).json({ 
         success: false, 
         message: 'Token no proporcionado' 
+      });
+    }
+
+    if (!JWT_ACCESS_SECRET) {
+      logger.error('JWT_ACCESS_SECRET no configurado: autenticación bloqueada');
+      return res.status(503).json({
+        success: false,
+        message: 'Servicio de autenticación no disponible'
       });
     }
     

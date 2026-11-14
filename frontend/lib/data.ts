@@ -170,7 +170,7 @@ export const delegations = [
 // Datos de la empresa - FUENTE: https://granjamaripepa.com
 export const companyInfo = {
   name: 'Granja Maripepa, S.L.',
-  shortName: 'Granja Mari Pepa',
+  shortName: 'Granja Maripepa',
   foundedYear: 1966,
   foundedCity: 'Lorca (Murcia)',
   email: 'pedidos@granjamaripepa.com',

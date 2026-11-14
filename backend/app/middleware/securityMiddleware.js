@@ -12,9 +12,15 @@ const { containsMaliciousPattern } = require('../utils/validators');
  */
 function detectMaliciousPatterns(req, res, next) {
   try {
+    // El chatbot valida su propio input (prompt injection, PII, sin SQL).
+    if (String(req.path || '').startsWith('/api/chatbot')) return next();
+
     // Verificar body
     if (req.body) {
       for (const [key, value] of Object.entries(req.body)) {
+        // El audio llega en base64 y puede contener por azar secuencias como
+        // "onerror=". Se valida en el controlador (tipo, tamaño y base64).
+        if (key === 'audio' && req.path === '/api/chatbot/transcribe') continue;
         if (typeof value === 'string' && containsMaliciousPattern(value)) {
           logger.warn('⚠️ Patrón malicioso detectado en body', { 
             key, 
