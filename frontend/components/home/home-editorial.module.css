@@ -179,8 +179,8 @@
    lorry, the sign and the building still read, the pixels do not. */
 .heroPlate {
   object-fit: cover;
-  object-position: 68% 54%;
-  filter: saturate(0.62) contrast(1.14) brightness(0.42) blur(1.1px);
+  object-position: 52% 50%;
+  filter: saturate(0.6) contrast(1.1) brightness(0.46) blur(0.7px);
   transform: scale(1.04);
 }
 

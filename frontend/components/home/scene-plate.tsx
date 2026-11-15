@@ -64,7 +64,7 @@ const SCENE_LAYER: Record<
 > = {
   0: {
     name: "gate",
-    slots: [{ cls: "fg-pine", file: "01-umbral" }],
+    slots: [],
   },
   1: {
     name: "pathways",

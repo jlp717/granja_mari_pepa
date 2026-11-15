@@ -38,7 +38,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             headline owns the left half; the hall world takes over below. */}
         <div className={styles.heroAtmos} aria-hidden="true">
           <Image
-            src="/kage/careers/careers-facility.jpg"
+            src="/kage/mp/plates/hero-muelle-alba.jpg"
             alt=""
             fill
             priority
