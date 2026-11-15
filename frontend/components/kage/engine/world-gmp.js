@@ -43,8 +43,8 @@ export function buildGmpWorld(ctx) {
     map: tx(deckData.map),
     normalMap: tx(deckData.normal, { srgb: false }),
     color: 0x1d2427,
-    roughness: 0.46,
-    metalness: 0.34,
+    roughness: 0.26,
+    metalness: 0.5,
   });
   const asphalt = surface(
     lib("gmpAsphalt", () => texStone(17)),
@@ -227,17 +227,6 @@ export function buildGmpWorld(ctx) {
   [-1, 1].forEach((side) =>
     add(gate, [0.14, 0.02, 44], [side * 5.1, 0.015, -17], marking),
   );
-  /* forecourt clutter: stacked pallets on the unlit side, which is where the
-     eye needs something to rest that is not the headline */
-  [
-    [-7.5, 0.86, -3.4],
-    [-7.5, 2.0, -3.4],
-    [-7.5, 3.14, -3.4],
-    [-8.9, 0.86, -2.2],
-  ].forEach(([x, y, z]) => {
-    add(gate, [2.3, 1.2, 1.9], [x, y, z], ink);
-    add(gate, [2.36, 0.14, 1.96], [x, y - 0.66, z], steel);
-  });
   /* the drain chase crosses the apron: floor detail in the emptiest third */
   [-4.2, -20].forEach((z) =>
     add(gate, [15.4, 0.06, 0.56], [0, 0.03, z], dark),
@@ -351,6 +340,37 @@ export function buildGmpWorld(ctx) {
   );
   frost.position.set(0, 4.4, -43.2);
   cold.add(frost);
+  /* The brand sits on the dock header, off the axis the headline runs down.
+     Kage gives its wordmark one deep, lit plane; this is that plane, sized to
+     signage and placed where no copy can land on it. */
+  if (
+    typeof window !== "undefined" &&
+    typeof Image !== "undefined" &&
+    typeof document !== "undefined"
+  ) {
+    const mark = document.createElement("img");
+    mark.src = "/kage/brand/logo-alpha.png";
+    mark.onload = () => {
+      const map = new THREE.Texture(mark);
+      map.encoding = THREE.sRGBEncoding;
+      map.needsUpdate = true;
+      const sign = new THREE.Mesh(
+        new THREE.PlaneGeometry(5.4, 1.64),
+        new THREE.MeshBasicMaterial({
+          map,
+          transparent: true,
+          depthWrite: false,
+          fog: false,
+          toneMapped: false,
+          opacity: 0.86,
+        }),
+      );
+      sign.position.set(10.2, 9.92, -43.52);
+      cold.add(sign);
+      WORLD.sign = sign;
+    };
+  }
+
   const platform = add(cold, [13.2, 0.92, 3.8], [0, 0.46, -41.5], steel);
   platform.receiveShadow = true;
   add(cold, [13.24, 0.1, 0.22], [0, 0.97, -39.7], edge);

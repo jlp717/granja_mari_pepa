@@ -326,6 +326,22 @@
       rgba(4, 7, 10, 0.38) 100%
     ),
     linear-gradient(180deg, rgba(4, 7, 10, 0.3), transparent 40%);
+  /* The scrim used to end on a hard line that read as a panel laid over the
+     scene. Feather both edges so the world runs behind the whole page. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 72px,
+    #000 calc(100% - 72px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 72px,
+    #000 calc(100% - 72px),
+    transparent 100%
+  );
 }
 
 .section > * {
