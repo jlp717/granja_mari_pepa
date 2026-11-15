@@ -730,6 +730,87 @@ async function getClientConsumptionStats(codigoCliente, months = 12) {
   }
 }
 
+/**
+ * Catalogo publico de productos: nombre, descripcion, familia y marca.
+ * Nunca devuelve precios ni condiciones comerciales.
+ */
+async function searchCatalog({ text, family, limit } = {}) {
+  const safeLimit = Math.max(1, Math.min(20, Number(limit) || 8));
+  const clean = String(text || '')
+    .replace(/[^\p{L}\p{N} ]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toUpperCase()
+    .slice(0, 40);
+  const fam = String(family || '').trim().toUpperCase().slice(0, 6);
+
+  const params = [];
+  let where = "A.ESTADO <> 'D'";
+  if (clean) {
+    const like = `%${clean}%`;
+    where +=
+      ' AND (UPPER(A.DESCRIPCIONARTICULO) LIKE ? OR UPPER(A.EXTENSIONDESCRIPCION) LIKE ? OR UPPER(A.CODIGOARTICULO) LIKE ?)';
+    params.push(like, like, like);
+  }
+  if (fam) {
+    where += ' AND TRIM(A.CODIGOFAMILIA) = ?';
+    params.push(fam);
+  }
+
+  try {
+    const rows = await odbcPool.query(
+      `SELECT
+         TRIM(A.CODIGOARTICULO) AS CODIGO,
+         TRIM(A.DESCRIPCIONARTICULO) AS NOMBRE,
+         TRIM(A.EXTENSIONDESCRIPCION) AS DETALLE,
+         TRIM(A.CODIGOFAMILIA) AS FAMILIA,
+         TRIM(F.DESCRIPCIONFAMILIA) AS FAMILIA_DESCRIPCION,
+         TRIM(A.CODIGOMARCA) AS MARCA,
+         TRIM(M.DESCRIPCIONMARCA) AS MARCA_DESCRIPCION,
+         TRIM(A.UNIDADMEDIDA) AS UNIDAD
+       FROM DSEDAC.ART A
+       LEFT JOIN DSEDAC.FAM F
+         ON TRIM(A.CODIGOFAMILIA) = TRIM(F.CODIGOFAMILIA)
+       LEFT JOIN DSEDAC.MAR M
+         ON TRIM(A.CODIGOMARCA) = TRIM(M.CODIGOMARCA)
+       WHERE ${where}
+       ORDER BY A.DESCRIPCIONARTICULO
+       FETCH FIRST ${safeLimit} ROWS ONLY`,
+      params,
+    );
+    return rows || [];
+  } catch (error) {
+    logger.error('Error buscando en el catalogo', error);
+    throw error;
+  }
+}
+
+/**
+ * Familias del catalogo con numero de articulos activos.
+ */
+async function listCatalogFamilies(limit = 12) {
+  const safeLimit = Math.max(1, Math.min(30, Number(limit) || 12));
+  try {
+    const rows = await odbcPool.query(
+      `SELECT
+         TRIM(A.CODIGOFAMILIA) AS FAMILIA,
+         TRIM(F.DESCRIPCIONFAMILIA) AS DESCRIPCION,
+         COUNT(*) AS ARTICULOS
+       FROM DSEDAC.ART A
+       LEFT JOIN DSEDAC.FAM F
+         ON TRIM(A.CODIGOFAMILIA) = TRIM(F.CODIGOFAMILIA)
+       WHERE A.ESTADO <> 'D'
+       GROUP BY TRIM(A.CODIGOFAMILIA), TRIM(F.DESCRIPCIONFAMILIA)
+       ORDER BY COUNT(*) DESC
+       FETCH FIRST ${safeLimit} ROWS ONLY`,
+    );
+    return rows || [];
+  } catch (error) {
+    logger.error('Error listando familias del catalogo', error);
+    throw error;
+  }
+}
+
 module.exports = {
   getInvoiceDetail,
   getInvoices,
@@ -742,6 +823,8 @@ module.exports = {
   getClientSummary,
   getClientSummaryByYear,
   getAvailableYears,
+  searchCatalog,
+  listCatalogFamilies,
   executeQuery,
   getClientConsumptionStats // Nueva función exportada
 };

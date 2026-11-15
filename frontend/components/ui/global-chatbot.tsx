@@ -8,7 +8,7 @@ import {
   useId,
   useMemo,
 } from "react";
-import type { FormEvent, ReactNode } from "react";
+import type { CSSProperties, FormEvent, PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import {
   X,
   Send,
@@ -28,6 +28,7 @@ import {
   KeyRound,
   AlertTriangle,
   CheckCircle2,
+  Check,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,63 @@ const MAX_HISTORY_TURNS = 8;
 
 const newId = () =>
   `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+const VOICE_RATE = 16000;
+const VOICE_CHUNK_SECONDS = 2.5;
+
+function encodeWav(pcm: Int16Array, sampleRate: number): Blob {
+  const header = new ArrayBuffer(44);
+  const view = new DataView(header);
+  const write = (offset: number, text: string) => {
+    for (let index = 0; index < text.length; index += 1) {
+      view.setUint8(offset + index, text.charCodeAt(index));
+    }
+  };
+  write(0, "RIFF");
+  view.setUint32(4, 36 + pcm.length * 2, true);
+  write(8, "WAVE");
+  write(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  write(36, "data");
+  view.setUint32(40, pcm.length * 2, true);
+  return new Blob([header, pcm.buffer], { type: "audio/wav" });
+}
+
+function toPcm16(input: Float32Array, sourceRate: number, targetRate = VOICE_RATE): Int16Array {
+  const ratio = sourceRate > targetRate ? sourceRate / targetRate : 1;
+  const length = Math.max(1, Math.floor(input.length / ratio));
+  const output = new Int16Array(length);
+  for (let index = 0; index < length; index += 1) {
+    const start = Math.floor(index * ratio);
+    const end = ratio > 1 ? Math.min(input.length, Math.floor((index + 1) * ratio)) : start + 1;
+    let sum = 0;
+    let count = 0;
+    for (let cursor = start; cursor < end; cursor += 1) {
+      sum += input[cursor];
+      count += 1;
+    }
+    const sample = count ? sum / count : input[start] || 0;
+    output[index] = Math.max(-1, Math.min(1, sample)) * 0x7fff;
+  }
+  return output;
+}
+
+function mergePcm(parts: Int16Array[]): Int16Array {
+  const total = parts.reduce((sum, part) => sum + part.length, 0);
+  const merged = new Int16Array(total);
+  let offset = 0;
+  for (const part of parts) {
+    merged.set(part, offset);
+    offset += part.length;
+  }
+  return merged;
+}
 
 class HttpError extends Error {}
 
@@ -222,6 +280,9 @@ export function GlobalChatbot() {
   const [isHandoffLoading, setIsHandoffLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
+  const [pendingTranscript, setPendingTranscript] = useState<string | null>(null);
+  const [dragPos, setDragPos] = useState<{ x: number; y: number } | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [micError, setMicError] = useState("");
   const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [uncertaintyCount, setUncertaintyCount] = useState(0);
@@ -243,8 +304,17 @@ export function GlobalChatbot() {
   const codeRef = useRef<HTMLInputElement>(null);
   const baseTranscriptRef = useRef("");
   const voiceUsedRef = useRef(false);
-  const recorderRef = useRef<MediaRecorder | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const processorRef = useRef<ScriptProcessorNode | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const pcmAllRef = useRef<Int16Array[]>([]);
+  const pendingSamplesRef = useRef<Int16Array[]>([]);
+  const pendingCountRef = useRef(0);
+  const partialTextRef = useRef("");
+  const flushChainRef = useRef<Promise<void>>(Promise.resolve());
+  const voiceRateRef = useRef(VOICE_RATE);
+  const panelRef = useRef<HTMLElement | null>(null);
+  const dragRef = useRef<{ dx: number; dy: number; width: number; height: number } | null>(null);
 
   const ui = useMemo(
     () =>
@@ -287,6 +357,9 @@ export function GlobalChatbot() {
             micNotFound: "No microphone was found. Connect one and try again.",
             micBusy: "The microphone is being used by another application. Close it and try again.",
             micEmpty: "I could not hear you. Tap the microphone and speak a little closer.",
+            transcriptReview: "Transcript ready",
+            acceptTranscript: "Use it",
+            discardTranscript: "Discard",
             write: copy.write,
           }
         : {
@@ -327,6 +400,9 @@ export function GlobalChatbot() {
             micNotFound: "No se ha encontrado ningún micrófono. Conecta uno y vuelve a intentarlo.",
             micBusy: "El micrófono está siendo usado por otra aplicación. Ciérrala y vuelve a intentarlo.",
             micEmpty: "No te he oído. Pulsa el micrófono y habla un poco más cerca.",
+            transcriptReview: "Transcripción lista",
+            acceptTranscript: "Usarla",
+            discardTranscript: "Descartar",
             write: copy.write,
           },
     [locale, copy.write],
@@ -438,11 +514,16 @@ export function GlobalChatbot() {
   useEffect(
     () => () => {
       try {
-        recorderRef.current?.stop();
+        processorRef.current?.disconnect();
       } catch {
-        /* ya detenido */
+        /* ya desconectado */
       }
       streamRef.current?.getTracks().forEach((track) => track.stop());
+      try {
+        void audioCtxRef.current?.close();
+      } catch {
+        /* ya cerrado */
+      }
     },
     [],
   );
@@ -610,7 +691,7 @@ export function GlobalChatbot() {
       if (!text || isGenerating) return;
       setInput("");
       setShowLogin(false);
-      voiceUsedRef.current = viaVoice;
+      voiceUsedRef.current = viaVoice || voiceUsedRef.current;
       void runRequest(text, { echoUser: true });
     },
     [input, isGenerating, runRequest],
@@ -859,7 +940,7 @@ export function GlobalChatbot() {
           mimeType: blob.type,
           language: locale === "en" ? "en" : "es",
         }),
-        signal: AbortSignal.timeout(20000),
+        signal: AbortSignal.timeout(60000),
       });
       if (!response.ok) return "";
       const data = (await response.json().catch(() => null)) as
@@ -871,70 +952,88 @@ export function GlobalChatbot() {
     }
   }, [locale]);
 
-  const appendTranscript = useCallback((text: string) => {
-    const clean = String(text || "").replace(/\s+/g, " ").trim();
-    if (!clean) return;
-    baseTranscriptRef.current = `${baseTranscriptRef.current} ${clean}`.trim();
-    setInput(baseTranscriptRef.current);
-    inputRef.current?.focus({ preventScroll: true });
-  }, []);
+  const flushVoiceChunk = useCallback(() => {
+    if (!pendingCountRef.current) return;
+    const merged = mergePcm(pendingSamplesRef.current);
+    pendingSamplesRef.current = [];
+    pendingCountRef.current = 0;
+    const blob = encodeWav(merged, voiceRateRef.current);
+    flushChainRef.current = flushChainRef.current
+      .then(() => transcribeChunk(blob))
+      .then((text) => {
+        const clean = String(text || "").replace(/\s+/g, " ").trim();
+        if (!clean) return;
+        partialTextRef.current = `${partialTextRef.current} ${clean}`.trim();
+        setInput(partialTextRef.current);
+      })
+      .catch(() => undefined);
+  }, [transcribeChunk]);
 
   const stopVoiceInput = useCallback(async () => {
-    const recorder = recorderRef.current;
-    recorderRef.current = null;
-    if (!recorder) return;
-    setIsListening(false);
-
-    const blob = await new Promise<Blob | null>((resolve) => {
-      const parts: Blob[] = [];
-      let settled = false;
-      const done = (value: Blob | null) => {
-        if (settled) return;
-        settled = true;
-        resolve(value);
-      };
-      recorder.ondataavailable = (event) => {
-        if (event.data && event.data.size > 0) parts.push(event.data);
-      };
-      recorder.addEventListener(
-        "stop",
-        () => {
-          const type = recorder.mimeType || parts[0]?.type || "audio/webm";
-          done(parts.length ? new Blob(parts, { type }) : null);
-        },
-        { once: true },
-      );
+    const processor = processorRef.current;
+    processorRef.current = null;
+    if (processor) {
       try {
-        recorder.stop();
+        processor.disconnect();
       } catch {
-        done(null);
+        /* ya desconectado */
       }
-      window.setTimeout(() => done(null), 5000);
-    });
-
+      processor.onaudioprocess = null;
+    }
+    const context = audioCtxRef.current;
+    audioCtxRef.current = null;
     streamRef.current?.getTracks().forEach((track) => track.stop());
     streamRef.current = null;
+    setIsListening(false);
+    if (!processor && !context) return;
 
-    if (!blob || blob.size < 2048) {
+    flushVoiceChunk();
+    await flushChainRef.current.catch(() => undefined);
+    if (context) {
+      try {
+        await context.close();
+      } catch {
+        /* ya cerrado */
+      }
+    }
+
+    const merged = mergePcm(pcmAllRef.current);
+    pcmAllRef.current = [];
+    if (merged.length < voiceRateRef.current * 0.4) {
+      setInput("");
       setMicError(ui.micEmpty);
       return;
     }
 
     setIsTranscribing(true);
-    const text = await transcribeChunk(blob);
+    const finalText = await transcribeChunk(encodeWav(merged, voiceRateRef.current));
     setIsTranscribing(false);
+
+    const text = String(finalText || partialTextRef.current || "")
+      .replace(/\s+/g, " ")
+      .trim();
     if (!text) {
+      setInput("");
       setMicError(ui.micEmpty);
       return;
     }
-    appendTranscript(text);
-  }, [transcribeChunk, appendTranscript, ui.micEmpty]);
+    setInput(text);
+    setPendingTranscript(text);
+    inputRef.current?.focus({ preventScroll: true });
+  }, [flushVoiceChunk, transcribeChunk, ui.micEmpty]);
 
   const startVoiceInput = useCallback(async () => {
-    if (recorderRef.current || isTranscribing) return;
+    if (audioCtxRef.current || isTranscribing) return;
     baseTranscriptRef.current = "";
+    partialTextRef.current = "";
+    pcmAllRef.current = [];
+    pendingSamplesRef.current = [];
+    pendingCountRef.current = 0;
+    flushChainRef.current = Promise.resolve();
     voiceUsedRef.current = true;
+    setPendingTranscript(null);
     setMicError("");
+    setInput("");
 
     let stream: MediaStream;
     try {
@@ -960,17 +1059,14 @@ export function GlobalChatbot() {
     }
 
     streamRef.current = stream;
-    const mimeCandidates = [
-      "audio/webm;codecs=opus",
-      "audio/webm",
-      "audio/mp4",
-    ];
-    const mimeType =
-      mimeCandidates.find((type) => MediaRecorder.isTypeSupported(type)) || "";
-
-    let recorder: MediaRecorder;
+    let context: AudioContext;
     try {
-      recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext?: typeof AudioContext })
+          .webkitAudioContext;
+      if (!AudioContextClass) throw new Error("NO_AUDIO_CONTEXT");
+      context = new AudioContextClass({ sampleRate: VOICE_RATE });
     } catch {
       stream.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
@@ -978,32 +1074,119 @@ export function GlobalChatbot() {
       return;
     }
 
-    recorderRef.current = recorder;
-    recorder.onerror = () => {
-      recorderRef.current = null;
-      setIsListening(false);
-      setMicError(t("voiceNotSupported"));
+    try {
+      await context.resume();
+    } catch {
+      /* algunos navegadores ya esta activo */
+    }
+    voiceRateRef.current =
+      context.sampleRate > 0 ? Math.min(context.sampleRate, VOICE_RATE) : VOICE_RATE;
+
+    const source = context.createMediaStreamSource(stream);
+    const processor = context.createScriptProcessor(4096, 1, 1);
+    const mute = context.createGain();
+    mute.gain.value = 0;
+
+    processor.onaudioprocess = (event) => {
+      const input = event.inputBuffer.getChannelData(0);
+      const pcm = toPcm16(input, context.sampleRate, voiceRateRef.current);
+      pcmAllRef.current.push(pcm);
+      pendingSamplesRef.current.push(pcm);
+      pendingCountRef.current += pcm.length;
+      if (pendingCountRef.current >= voiceRateRef.current * VOICE_CHUNK_SECONDS) {
+        flushVoiceChunk();
+      }
     };
 
-    try {
-      recorder.start();
-    } catch {
-      recorderRef.current = null;
-      stream.getTracks().forEach((track) => track.stop());
-      streamRef.current = null;
-      setMicError(t("voiceNotSupported"));
-      return;
-    }
+    source.connect(processor);
+    processor.connect(mute);
+    mute.connect(context.destination);
 
+    audioCtxRef.current = context;
+    processorRef.current = processor;
     setIsListening(true);
   }, [
     t,
     isTranscribing,
+    flushVoiceChunk,
     ui.micDenied,
     ui.micHelp,
     ui.micNotFound,
     ui.micBusy,
   ]);
+
+  const acceptTranscript = useCallback(() => {
+    setPendingTranscript(null);
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
+
+  const discardTranscript = useCallback(() => {
+    setPendingTranscript(null);
+    setInput("");
+    setMicError("");
+    voiceUsedRef.current = false;
+  }, []);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("pepa:pos");
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { x?: number; y?: number };
+      if (typeof parsed.x === "number" && typeof parsed.y === "number") {
+        setDragPos({ x: parsed.x, y: parsed.y });
+      }
+    } catch {
+      /* posicion no disponible */
+    }
+  }, []);
+
+  const handleDragStart = useCallback((event: ReactPointerEvent<HTMLElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    const target = event.target as HTMLElement | null;
+    if (target && target.closest("button, a, input, textarea")) return;
+    if (window.matchMedia("(max-width: 520px)").matches) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+    const rect = panel.getBoundingClientRect();
+    dragRef.current = {
+      dx: event.clientX - rect.left,
+      dy: event.clientY - rect.top,
+      width: rect.width,
+      height: rect.height,
+    };
+    setDragging(true);
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      /* captura no disponible */
+    }
+  }, []);
+
+  const handleDragMove = useCallback((event: ReactPointerEvent<HTMLElement>) => {
+    if (!dragRef.current) return;
+    const { dx, dy, width, height } = dragRef.current;
+    const maxX = Math.max(8, window.innerWidth - width - 8);
+    const maxY = Math.max(8, window.innerHeight - height - 8);
+    const x = Math.min(Math.max(8, event.clientX - dx), maxX);
+    const y = Math.min(Math.max(8, event.clientY - dy), maxY);
+    setDragPos({ x, y });
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    if (!dragRef.current) return;
+    dragRef.current = null;
+    setDragging(false);
+    setDragPos((current) => {
+      if (current) {
+        try {
+          window.localStorage.setItem("pepa:pos", JSON.stringify(current));
+        } catch {
+          /* almacenamiento no disponible */
+        }
+      }
+      return current;
+    });
+  }, []);
 
   const handleCapability = (query: string) => {
     if (query === "__handoff__") {
@@ -1025,14 +1208,31 @@ export function GlobalChatbot() {
       {isOpen && (
         <section
           id={panelId}
+          ref={panelRef}
           role="dialog"
           aria-modal="false"
           aria-labelledby={`${panelId}-title`}
           className={styles.panel}
           data-minimized={isMinimized}
+          data-dragged={dragPos ? "true" : undefined}
+          data-dragging={dragging || undefined}
           data-fx="assistant-panel"
+          style={
+            dragPos
+              ? ({
+                  "--pepa-x": `${dragPos.x}px`,
+                  "--pepa-y": `${dragPos.y}px`,
+                } as CSSProperties)
+              : undefined
+          }
         >
-          <header className={styles.header}>
+          <header
+            className={styles.header}
+            onPointerDown={handleDragStart}
+            onPointerMove={handleDragMove}
+            onPointerUp={handleDragEnd}
+            onPointerCancel={handleDragEnd}
+          >
             <div className={styles.identity}>
               <span className={styles.brandMark} aria-hidden="true">
                 <BrandMark />
@@ -1463,6 +1663,17 @@ export function GlobalChatbot() {
                     </button>
                   )}
                 </form>
+                {pendingTranscript && (
+                  <div className={styles.reviewBar} role="group" aria-label={ui.transcriptReview}>
+                    <span>{ui.transcriptReview}</span>
+                    <button type="button" onClick={acceptTranscript}>
+                      <Check aria-hidden="true" /> {ui.acceptTranscript}
+                    </button>
+                    <button type="button" onClick={discardTranscript}>
+                      <X aria-hidden="true" /> {ui.discardTranscript}
+                    </button>
+                  </div>
+                )}
                 <div className={styles.underbar}>
                   <p className={styles.note} id={`${panelId}-note`}>
                     {copy.note}

@@ -17,6 +17,7 @@ const dbGuard = require('../security/dbGuard');
 const sendTools = require('../security/sendTools');
 const customerProfileService = require('../services/customerProfileService');
 const databaseService = require('../services/databaseService');
+const emailService = require('../services/emailService');
 
 // ---------------------------------------------------------------------------
 // Configuracion
@@ -696,6 +697,18 @@ const PERSONAL_REF_HINT =
 const PROFILE_HINT =
   /\b(direccion|domicilio|ruta|reparto|alta|antiguedad|poblacion|provincia|ficha|perfil|desde cuando|soy cliente|cliente desde)\b/;
 const ORDERS_HINT = /\b(pedidos?|albaranes?|entregas?)\b/;
+const CATALOGUE_HINT =
+  /\b(catalogo|productos?|articulos?|referencias?|marcas?|familias?|categorias?|teneis|buscame|buscad|descripcion|congelad\w*|refrigerad\w*|pescados?|mariscos?|carnes?|verduras?|panaderia|bolleria|helados?|postres?|salsas?|ahumados?|masas?|sin gluten|alergenos?)\b/;
+
+function looksLikeCatalogue(message) {
+  return CATALOGUE_HINT.test(normalizeIntentText(message));
+}
+
+function shouldUseTools(message, user) {
+  return Boolean(
+    (user && needsAccountTools(message, user)) || looksLikeCatalogue(message),
+  );
+}
 
 function forcedToolChoice(message) {
   const normalized = normalizeIntentText(message);
@@ -737,15 +750,9 @@ async function planAccountTools({ prompt, history, message, user, signal }) {
     (choice && choice.message && choice.message.tool_calls) || [];
   if (!calls.length) return { messages: [], toolsUsed: [] };
 
-  const selected = calls.slice(0, 2);
-  const messages = [
-    {
-      role: 'assistant',
-      content: (choice.message && choice.message.content) || null,
-      tool_calls: selected,
-    },
-  ];
+  const selected = calls.slice(0, 3);
   const toolsUsed = [];
+  const results = [];
 
   for (const call of selected) {
     const name = call.function && call.function.name;
@@ -769,8 +776,20 @@ async function planAccountTools({ prompt, history, message, user, signal }) {
       content = JSON.stringify({ error: 'No disponible o no autorizado' });
     }
 
-    messages.push({ role: 'tool', tool_call_id: call.id, content });
+    results.push(`${name}: ${content}`);
   }
+
+  if (!results.length) return { messages: [], toolsUsed: [] };
+
+  // Se inyectan como contexto de sistema: incluir el mensaje assistant con
+  // tool_calls hacia que el modelo volviera a pedir herramientas en el stream
+  // final, y Groq respondia 400 "Tool choice is none, but model called a tool".
+  const messages = [
+    {
+      role: 'system',
+      content: `Datos reales consultados ahora en la base de datos. Usalos tal cual, sin inventar ni redondear a la ligera:\n${results.join('\n')}`,
+    },
+  ];
 
   return { messages, toolsUsed };
 }
@@ -781,7 +800,14 @@ function systemPrompt({ locale, toolsEnabled, identity }) {
       ? 'Default language: English. Always answer in the language the user writes in.'
       : 'Idioma por defecto: espanol. Responde siempre en el idioma en el que escribe el usuario.';
 
-  const accountRule = toolsEnabled
+  const catalogueRule = [
+    '- Tienes herramientas de catalogo publico: buscar_producto y listar_familias. Usalas para nombres, descripciones, familias y marcas de articulos.',
+    '- Es obligatorio invocarlas cuando pregunten si teneis un producto, que es un articulo, que categorias o familias hay, o de que marca es algo. No respondas de memoria.',
+    '- Para "que categorias teneis", "que familias hay" o "que tipos de producto teneis" usa listar_familias.',
+    '- Nunca des precios, tarifas, descuentos ni condiciones comerciales: no estan en el catalogo. Deriva al equipo comercial.',
+  ].join('\n');
+
+  const accountRules = toolsEnabled
     ? [
         '- Tienes funciones de solo lectura para datos de cuenta. El codigo de cliente lo aporta la sesion: jamas lo pidas ni lo cambies.',
         '- Si la pregunta toca SU cuenta, DEBES invocar la herramienta antes de responder. Nunca inventes ni estimes cifras.',
@@ -794,7 +820,13 @@ function systemPrompt({ locale, toolsEnabled, identity }) {
         '- consultar_perfil: direccion de entrega, poblacion, provincia, ruta de reparto y fecha de alta ("cual es mi direccion", "mi ruta", "desde cuando soy cliente", "mis datos").',
         '- Si una herramienta devuelve listas vacias, dilo con claridad y ofrece alternativas. No rellenes huecos con suposiciones.',
       ].join('\n')
-    : '- No tienes acceso a datos de cuenta en esta peticion. Si piden facturas, pedidos o saldo, indica que deben iniciar sesion con su codigo de cliente y contrasena.';
+    : toolsEnabled
+      ? '- No tienes acceso a datos de cuenta en esta peticion. Si piden facturas, pedidos, albaranes o saldo, indica que deben iniciar sesion con su codigo de cliente y contrasena.'
+      : '- No tienes herramientas en esta peticion: usa solo los datos aportados en el contexto y no inventes nada.';
+
+  const accountRule = toolsEnabled
+    ? `${catalogueRule}\n${accountRules}`
+    : accountRules;
 
   const identityBlock = identity
     ? `\n**IDENTIDAD VERIFICADA**\n- Nombre: ${identity.nombre || 'No configurado'}\n- Rol: ${identity.role || 'cliente'}\n- Email configurado: ${identity.email ? 'si' : 'no'}\n- Telefono configurado: ${identity.telefono ? 'si' : 'no'}\nNo pidas estos datos: ya estan verificados por la sesion.\n`
@@ -838,7 +870,7 @@ ${accountRule}
 
 const HANDOFF_DIR = path.join(__dirname, '..', '..', 'private', 'chatbot-handoffs');
 
-function createHandoffTicket({ history, reason, locale, codigoCliente }) {
+async function createHandoffTicket({ history, reason, locale, codigoCliente }) {
   const reference = `MP-${Date.now().toString(36).toUpperCase()}`;
   const record = {
     reference,
@@ -862,6 +894,33 @@ function createHandoffTicket({ history, reason, locale, codigoCliente }) {
     logger.info('Handoff de chatbot registrado', { reference });
   } catch (error) {
     logger.error('No se pudo registrar el handoff del chatbot', {
+      message: error.message,
+    });
+  }
+
+  const conversation = record.history
+    .map(
+      (item) =>
+        `${item.role === 'user' ? 'Cliente' : 'Pepa'}: ${item.content}`,
+    )
+    .join('\n\n');
+
+  try {
+    await emailService.sendInternalNotification({
+      subject: `Chatbot Mari Pepa: solicitud de persona ${reference}`,
+      text: [
+        `Referencia: ${reference}`,
+        `Cliente: ${record.codigoCliente || 'sin sesion iniciada'}`,
+        `Idioma: ${record.locale}`,
+        `Motivo: ${record.reason || 'no indicado'}`,
+        '',
+        'Conversacion:',
+        conversation || '(sin historial)',
+      ].join('\n'),
+    });
+  } catch (error) {
+    logger.warn('No se pudo notificar el handoff por email', {
+      reference,
       message: error.message,
     });
   }
@@ -917,7 +976,7 @@ async function streamChatMessage(req, res) {
   const locale = body.locale === 'en' ? 'en' : 'es';
 
   if (body.handoff === true) {
-    const reference = createHandoffTicket({
+    const reference = await createHandoffTicket({
       history: body.history,
       reason: body.reason || body.message,
       locale,
@@ -1017,7 +1076,7 @@ async function streamChatMessage(req, res) {
   const identity = req.user
     ? await customerProfileService.getProfile(req.user.codigoCliente)
     : null;
-  const toolsEnabled = needsAccountTools(message, req.user);
+  const toolsEnabled = shouldUseTools(message, req.user);
   const prompt = systemPrompt({ locale, toolsEnabled, identity });
   const estimatedTokens =
     estimateTokens(prompt) +
@@ -1076,6 +1135,11 @@ async function streamChatMessage(req, res) {
     }
   }
 
+  const dataContext = toolMessages.length ? toolMessages[0].content : '';
+  const finalPrompt = dataContext
+    ? `${systemPrompt({ locale, toolsEnabled: false, identity })}\n\n${dataContext}`
+    : prompt;
+
   try {
     const stream = await withGroqRetry(
       () =>
@@ -1083,10 +1147,9 @@ async function streamChatMessage(req, res) {
           {
             model: GROQ_MODEL(),
             messages: [
-              { role: 'system', content: prompt },
+              { role: 'system', content: finalPrompt },
               ...history,
               { role: 'user', content: message },
-              ...toolMessages,
             ],
             temperature: 0.4,
             top_p: 0.9,
@@ -1113,9 +1176,17 @@ async function streamChatMessage(req, res) {
     }
 
     const answer = `${message}\n${guard.text}`;
+    const replyText = guard.text && guard.text.trim()
+      ? guard.text
+      : locale === 'en'
+        ? 'I could not build the answer. Could you say it again in another way?'
+        : 'No he podido preparar la respuesta. ¿Me lo repites de otra forma?';
+    if (!guard.text || !guard.text.trim()) {
+      sse(res, { delta: replyText });
+    }
     sse(res, {
       done: true,
-      reply: guard.text,
+      reply: replyText,
       sources: resolveSources(answer, locale),
       suggestions: buildSuggestions(answer, locale),
       redacted: guard.redacted,
@@ -1200,7 +1271,7 @@ async function processChatMessage(req, res) {
   const identity = req.user
     ? await customerProfileService.getProfile(req.user.codigoCliente)
     : null;
-  const toolsEnabled = needsAccountTools(message, req.user);
+  const toolsEnabled = shouldUseTools(message, req.user);
   const prompt = systemPrompt({ locale, toolsEnabled, identity });
 
   try {
@@ -1221,15 +1292,19 @@ async function processChatMessage(req, res) {
       toolsUsed = plan.toolsUsed;
     }
 
+    const dataContext = toolMessages.length ? toolMessages[0].content : '';
+    const finalPrompt = dataContext
+      ? `${systemPrompt({ locale, toolsEnabled: false, identity })}\n\n${dataContext}`
+      : prompt;
+
     const completion = await withGroqRetry(() =>
       groq.chat.completions.create(
         {
           model: GROQ_MODEL(),
           messages: [
-            { role: 'system', content: prompt },
+            { role: 'system', content: finalPrompt },
             ...history,
             { role: 'user', content: message },
-            ...toolMessages,
           ],
           temperature: 0.4,
           max_tokens: MAX_RESPONSE_TOKENS,
@@ -1284,12 +1359,19 @@ async function transcribeAudio(req, res) {
     if (!buffer.length || buffer.length < 512) {
       return res.status(400).json({ success: false, message: 'Audio demasiado corto.' });
     }
-    if (buffer.length > 8 * 1024 * 1024) {
+    if (buffer.length > 24 * 1024 * 1024) {
       return res.status(413).json({ success: false, message: 'Audio demasiado grande.' });
     }
 
     const resolvedType = mimeType || 'audio/webm';
-    const extension = String(resolvedType).includes('mp4') ? 'mp4' : 'webm';
+    const lowerType = String(resolvedType).toLowerCase();
+    const extension = lowerType.includes('mp4')
+      ? 'mp4'
+      : lowerType.includes('wav')
+        ? 'wav'
+        : lowerType.includes('ogg')
+          ? 'ogg'
+          : 'webm';
     const file = new File([buffer], `voz.${extension}`, {
       type: resolvedType,
     });
@@ -1297,9 +1379,11 @@ async function transcribeAudio(req, res) {
     const result = await withGroqRetry(() =>
       groq.audio.transcriptions.create({
         file,
-        model: 'whisper-large-v3-turbo',
+        model: 'whisper-large-v3',
         response_format: 'json',
         temperature: 0,
+        prompt:
+          'Cliente de Granja Maripepa, distribuidor HORECA en Lorca. Habla de facturas, albaranes, pedidos, productos congelados, refrigerados, panaderia congelada, marcas y reparto.',
         ...(language === 'es' || language === 'en' ? { language } : {}),
       }),
     );

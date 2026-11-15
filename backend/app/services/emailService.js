@@ -402,10 +402,38 @@ async function sendInvoiceEmail({ to, subject, text, html, pdfBuffer, filename }
     };
 }
 
+/**
+ * Notificacion interna (handoffs, avisos del chatbot).
+ */
+async function sendInternalNotification({ to, subject, text, replyTo }) {
+    const recipient = to || process.env.CHATBOT_HANDOFF_EMAIL || 'pedidos@mari-pepa.com';
+    try {
+        const transport = initializeTransporter();
+        const info = await transport.sendMail({
+            from: FROM_EMAIL,
+            to: recipient,
+            subject,
+            text,
+            ...(replyTo ? { replyTo } : {})
+        });
+        logger.info('Notificacion interna enviada', {
+            to: recipient,
+            messageId: info && info.messageId
+        });
+        return { success: true, messageId: (info && info.messageId) || null };
+    } catch (error) {
+        logger.error('Error enviando notificacion interna', {
+            message: error.message
+        });
+        return { success: false, message: error.message };
+    }
+}
+
 module.exports = {
     sendPasswordResetEmail,
     sendVerificationCodeEmail,
     sendApplicationNotification,
     sendInvoiceEmail,
+    sendInternalNotification,
     verifyConnection
 };
