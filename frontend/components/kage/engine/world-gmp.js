@@ -360,7 +360,12 @@ export function buildGmpWorld(ctx) {
 
   /* ------------------------------------------------- 04 · the pass table */
   const pass = groups[4];
-  add(pass, [8.6, 0.16, 3.2], [0, 3.32, -33.5], steelLit);
+  const bench = new THREE.MeshStandardMaterial({
+    color: 0x2a3236,
+    roughness: 0.44,
+    metalness: 0.58,
+  });
+  add(pass, [8.6, 0.16, 3.2], [0, 3.32, -33.5], bench);
   add(pass, [7.9, 0.14, 2.6], [0, 3.06, -33.5], steel);
   [
     [-3.9, -32.4],

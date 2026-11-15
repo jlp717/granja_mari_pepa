@@ -44,9 +44,11 @@ export function BrandFallback() {
   );
 }
 
-/** Foreground stages follow Kage's slot grammar: three pieces per chapter,
- *  each anchored by the ported rules and entering one after another. The
- *  artwork is ours; the composition is the one that reads as a collage. */
+/** Foreground stages follow Kage's slot grammar. Only the gate keeps a near
+ *  plane: the other cutouts are photographic plates rather than isolated
+ *  objects, so at stage size they laid a hard top edge across the frame and
+ *  sat under the copy. The live hall carries those chapters, which is what
+ *  Kage lets the temple do. */
 const FG_SIZE: Record<string, readonly [number, number]> = {
   "01-umbral": [2200, 882],
   "02-frio": [2200, 980],
@@ -64,38 +66,10 @@ const SCENE_LAYER: Record<
     name: "gate",
     slots: [{ cls: "fg-pine", file: "01-umbral" }],
   },
-  1: {
-    name: "pathways",
-    slots: [
-      { cls: "fg-sakura", file: "01-umbral" },
-      { cls: "fg-bush", file: "03-catalogo" },
-      { cls: "fg-lantern", file: "04-ruta-scrub" },
-    ],
-  },
-  2: {
-    name: "lessons",
-    slots: [
-      { cls: "fg-wall", file: "02-frio" },
-      { cls: "fg-stones", file: "04-ruta-hill" },
-      { cls: "fg-grass", file: "04-ruta-scrub" },
-    ],
-  },
-  3: {
-    name: "eternity",
-    slots: [
-      { cls: "fg-hill", file: "04-ruta-hill" },
-      { cls: "fg-grass", file: "04-ruta-scrub" },
-      { cls: "fg-ruins", file: "05-mesa" },
-    ],
-  },
-  4: {
-    name: "foot",
-    slots: [
-      { cls: "fg-bush", file: "03-catalogo" },
-      { cls: "fg-grass", file: "02-frio" },
-      { cls: "fg-stones", file: "05-mesa" },
-    ],
-  },
+  1: { name: "pathways", slots: [] },
+  2: { name: "lessons", slots: [] },
+  3: { name: "eternity", slots: [] },
+  4: { name: "foot", slots: [] },
 };
 
 export function HomeForeground({

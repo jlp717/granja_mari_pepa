@@ -55,7 +55,7 @@ html{scrollbar-width:thin;scrollbar-color:rgba(223,231,224,.22) #05070a}
 }
 #grain{
   position:fixed; inset:-1px; z-index:60; pointer-events:none;
-  opacity:.055; mix-blend-mode:overlay;
+  opacity:.028; mix-blend-mode:overlay;
   background-repeat:repeat; background-size:180px 180px;
 }
 #vignette{
@@ -712,7 +712,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 .fg-el > img{
   width:100%; height:auto;   /* the width/height attrs hold the box before the lazy image lands */
   opacity:1;
-  filter:saturate(.88) brightness(.86);
+  filter:saturate(.82) brightness(.52) contrast(1.06);
 }
 .fg-el--flip > img{ transform:scaleX(-1); }
 /* each piece waits off the edge it is anchored to until its chapter is called */
