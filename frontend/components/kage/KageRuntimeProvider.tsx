@@ -92,7 +92,10 @@ export function KageRuntimeProvider({
         !state.reducedMotion &&
         !document.hidden &&
         !state.fallback;
-      setVisible(active && state.ready);
+      /* Once the engine has presented a frame the canvas stays on: a dev
+         recompile republishes ready:false and used to black the world out
+         under the reader. It is still dropped on a fallback or no-WebGL. */
+      setVisible((shown) => allowWebGL && !state.fallback && (state.ready || shown));
       if (nextWorld === "photo") {
         if (pending) {
           cancellation?.abort();

@@ -5292,7 +5292,11 @@ void main () {
     },
     () => {
       if (control) buildWordmark();
-      else if (options.world !== "careers" && options.world !== "photo")
+      else if (
+        options.world !== "careers" &&
+        options.world !== "photo" &&
+        options.world !== "gmp"
+      )
         loadBrandPlane();
     },
     () => {
