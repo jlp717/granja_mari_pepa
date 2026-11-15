@@ -362,11 +362,11 @@ export function buildGmpWorld(ctx) {
           depthWrite: false,
           fog: false,
           toneMapped: false,
-          opacity: 0.86,
+          opacity: 0.72,
         }),
       );
-      sign.position.set(10.2, 9.92, -43.52);
-      cold.add(sign);
+      sign.position.set(4.15, 10.34, -8.92);
+      gate.add(sign);
       WORLD.sign = sign;
     };
   }
