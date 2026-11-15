@@ -1,0 +1,99 @@
+{
+  "seoTitle": "Congelados y refrigerados para hostelería | Maripepa",
+  "seoDescription": "Siete familias para tu carta: mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Consulta referencia y formato con el equipo.",
+  "label": "Gama · HORECA",
+  "title": "Lo que tu carta necesita, en siete familias.",
+  "lead": "Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Empieza por la familia que te interesa y concreta con el equipo la referencia, el formato y la documentación.",
+  "noticeTitle": "Una gama para consultar",
+  "notice": "Esta página ordena la gama por familias. Las condiciones de cada referencia se confirman con el equipo: no mostramos stock ni precios públicos.",
+  "all": "Todas las familias",
+  "filterLabel": "Filtrar por familia",
+  "resultLabel": "Familias",
+  "reset": "Ver las siete familias",
+  "emptyTitle": "Esa familia no está en la gama publicada.",
+  "empty": "Vuelve a las siete familias o pregúntanos por el producto que buscas.",
+  "loading": "Cargando la gama",
+  "errorTitle": "No hemos podido mostrar esta página.",
+  "error": "Vuelve a intentarlo o escríbenos por los canales de contacto.",
+  "retry": "Volver a intentarlo",
+  "illustration": "Fotografía de la gama. La referencia concreta se consulta con el equipo.",
+  "consult": "Consultar esta familia",
+  "brandsTitle": "Marcas que forman la gama.",
+  "brandsText": "Grupo Topgel, Froneri (Nestlé Helados) y Panamar forman parte de la oferta publicada. Sus webs amplían la información de marca; para referencias y condiciones de suministro, habla con nuestro equipo.",
+  "archiveTitle": "Revistas de la casa.",
+  "archiveText": "Catálogos fechados con producto, campaña y propuestas para carta. Ábrelos en el visor y consulta la edición que te interese.",
+  "pdfAction": "Abrir revista",
+  "contactTitle": "De la familia al producto concreto.",
+  "contactText": "Dinos qué cocinas, para cuántos servicios y qué formato necesitas. Te orientamos sobre producto, conservación y documentación antes de decidir.",
+  "contact": "Hablar con el equipo",
+  "clients": "Área de clientes",
+  "home": "Volver al inicio",
+  "phone": "Llamar a Lorca",
+  "whatsapp": "Consultar por WhatsApp",
+  "schedule": "Lunes a viernes, 8:00–13:00 y 16:00–19:00",
+  "families": [
+    {
+      "id": "mar",
+      "title": "Productos del mar",
+      "tag": "Pescados y mariscos congelados",
+      "paragraphs": [
+        "Pescados y mariscos congelados para cartas, menús y servicio diario. Una familia pensada para conservar producto y organizar la cocina con antelación.",
+        "Cuéntanos qué elaboración tienes en carta y te orientamos sobre especie, formato y presentación. La ficha de cada referencia se consulta con el equipo."
+      ]
+    },
+    {
+      "id": "carne",
+      "title": "Carnes",
+      "tag": "Carnes congeladas",
+      "paragraphs": [
+        "Carnes congeladas para parrilla, guisos, menús del día y colectividades. Una base estable para completar la carta y ajustar el servicio.",
+        "Indícanos el tipo de corte, el uso y el formato que buscas. Confirmamos contigo la referencia y su documentación antes de cerrar la propuesta."
+      ]
+    },
+    {
+      "id": "precocinados",
+      "title": "Precocinados",
+      "tag": "Preparados y verduras congeladas",
+      "paragraphs": [
+        "Preparados y verduras congeladas para completar servicios, resolver una guarnición o aligerar la preparación en cocina.",
+        "Cuéntanos qué necesitas preparar y para cuántos servicios. Te ayudamos a concretar producto, formato y conservación."
+      ]
+    },
+    {
+      "id": "reposteria",
+      "title": "Repostería",
+      "tag": "Dulces y postres congelados",
+      "paragraphs": [
+        "Dulces y postres congelados para completar la propuesta de postres sin sumar carga a la cocina.",
+        "Pregunta por la presentación que necesitas y solicita la ficha de la referencia. El equipo te orienta sobre formato, conservación y servicio."
+      ]
+    },
+    {
+      "id": "panaderia",
+      "title": "Panadería",
+      "tag": "Pan y bollería congelados",
+      "paragraphs": [
+        "Pan y bollería congelados para completar el servicio de pan y resolver el desayuno o la merienda sin sumar carga a la cocina.",
+        "Cuéntanos qué formato necesitas y para cuántos servicios. El equipo confirma la referencia, la conservación y la documentación."
+      ]
+    },
+    {
+      "id": "refrigerados",
+      "title": "Refrigerados",
+      "tag": "Quesos, ahumados y foie",
+      "paragraphs": [
+        "Quesos, salmón ahumado y foie para completar una tabla, un entrante o una elaboración de carta. Producto refrigerado con su propia conservación y manipulación.",
+        "Indícanos el uso y el formato que buscas. Confirmamos la referencia, la caducidad y la documentación antes de cerrar la propuesta."
+      ]
+    },
+    {
+      "id": "salsas",
+      "title": "Salsas y preparados",
+      "tag": "Salsas, patatas y platos preparados",
+      "paragraphs": [
+        "Salsas, patatas y preparados para resolver una guarnición o completar un plato sin montar la elaboración desde cero.",
+        "Pregunta por la presentación que necesitas. El equipo te orienta sobre formato, conservación y uso en cocina."
+      ]
+    }
+  ]
+}

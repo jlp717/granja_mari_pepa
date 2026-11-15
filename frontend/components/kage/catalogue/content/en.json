@@ -1,0 +1,99 @@
+{
+  "seoTitle": "Frozen and chilled food for hospitality | Maripepa",
+  "seoDescription": "Seven families for your menu: seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Ask the team about reference and format.",
+  "label": "Range · HORECA",
+  "title": "What your menu needs, in seven families.",
+  "lead": "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Start with the family you need and confirm the reference, format and documentation with our team.",
+  "noticeTitle": "A range to consult",
+  "notice": "This page organises the range by family. Each reference's conditions are confirmed with the team: we do not show public stock or prices.",
+  "all": "All families",
+  "filterLabel": "Filter by family",
+  "resultLabel": "Families",
+  "reset": "See the seven families",
+  "emptyTitle": "That family is not part of the published range.",
+  "empty": "Go back to the seven families or ask us about the product you are looking for.",
+  "loading": "Loading the range",
+  "errorTitle": "We could not show this page.",
+  "error": "Try again or write to us through the contact channels.",
+  "retry": "Try again",
+  "illustration": "Range photography. The specific reference is confirmed with the team.",
+  "consult": "Ask about this family",
+  "brandsTitle": "Brands in the range.",
+  "brandsText": "Grupo Topgel, Froneri (Nestlé Helados) and Panamar are part of the published offer. Their websites expand brand information; for references and supply conditions, talk to our team.",
+  "archiveTitle": "The house magazines.",
+  "archiveText": "Dated catalogues with product, campaign and menu ideas. Open them in the viewer and browse the edition you need.",
+  "pdfAction": "Open magazine",
+  "contactTitle": "From the family to the specific product.",
+  "contactText": "Tell us what you cook, how many services you run and which format you need. We will guide you on product, storage and documentation before you decide.",
+  "contact": "Talk to the team",
+  "clients": "Customer area",
+  "home": "Back to home",
+  "phone": "Call Lorca",
+  "whatsapp": "Ask on WhatsApp",
+  "schedule": "Monday to Friday, 8:00–13:00 and 16:00–19:00",
+  "families": [
+    {
+      "id": "mar",
+      "title": "Seafood",
+      "tag": "Frozen fish and seafood",
+      "paragraphs": [
+        "Frozen fish and seafood for menus and daily service. A family built to keep product and organise the kitchen ahead of time.",
+        "Tell us what you serve and we will guide you on species, format and presentation. Each reference's sheet is confirmed with the team."
+      ]
+    },
+    {
+      "id": "carne",
+      "title": "Meat",
+      "tag": "Frozen meat",
+      "paragraphs": [
+        "Frozen meat for the grill, stews, set menus and catering. A stable base to complete the menu and adjust the service.",
+        "Tell us the cut, use and format you need. We confirm the reference and its documentation before closing the proposal."
+      ]
+    },
+    {
+      "id": "precocinados",
+      "title": "Prepared dishes",
+      "tag": "Frozen preparations and vegetables",
+      "paragraphs": [
+        "Frozen preparations and vegetables to complete a service, solve a side dish or lighten kitchen prep.",
+        "Tell us what you need to prepare and for how many services. We help you confirm product, format and storage."
+      ]
+    },
+    {
+      "id": "reposteria",
+      "title": "Pastry",
+      "tag": "Frozen desserts and pastry",
+      "paragraphs": [
+        "Frozen desserts and pastry to complete the dessert offer without adding load to the kitchen.",
+        "Ask for the presentation you need and request the reference sheet. The team will guide you on format, storage and service."
+      ]
+    },
+    {
+      "id": "panaderia",
+      "title": "Bakery",
+      "tag": "Frozen bread and viennoiserie",
+      "paragraphs": [
+        "Frozen bread and viennoiserie to complete the bread service and solve breakfast or a snack without adding load to the kitchen.",
+        "Tell us the format you need and for how many services. The team confirms the reference, storage and documentation."
+      ]
+    },
+    {
+      "id": "refrigerados",
+      "title": "Chilled products",
+      "tag": "Cheese, smoked fish and foie gras",
+      "paragraphs": [
+        "Cheese, smoked salmon and foie gras to complete a board, a starter or a menu preparation. Chilled product with its own storage and handling.",
+        "Tell us the use and format you need. We confirm the reference, shelf life and documentation before closing the proposal."
+      ]
+    },
+    {
+      "id": "salsas",
+      "title": "Sauces and preparations",
+      "tag": "Sauces, potatoes and ready preparations",
+      "paragraphs": [
+        "Sauces, potatoes and preparations to solve a side dish or complete a plate without starting from scratch.",
+        "Ask for the presentation you need. The team will guide you on format, storage and use in the kitchen."
+      ]
+    }
+  ]
+}

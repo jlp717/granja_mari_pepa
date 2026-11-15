@@ -1,0 +1,130 @@
+/* Composition source: reference/kage-verbatim/index.html B 534–637.
+   Content adaptations: four real families, longer translated copy, no SKU display. */
+.heroSupport {
+  margin-top: 20px;
+}
+:global(body[data-layout-story="b"]) .temperatures {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.temperatures h3 {
+  font-size: clamp(20px, 2vw, 30px);
+}
+.temperatures p {
+  max-width: 34ch;
+  margin: 18px 0 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.range :global(.card):nth-child(n) .familyFrame {
+  background: none;
+  overflow: hidden;
+}
+.foodPhoto {
+  object-fit: cover;
+}
+.family:focus-visible,
+.fourth:focus-visible,
+.brandLink:focus-visible {
+  outline: 1px solid var(--bone);
+  outline-offset: 6px;
+}
+.fourth {
+  margin-top: clamp(46px, 8vh, 96px);
+  /* Compact strip like a meta row — not a second full gallery card. */
+  grid-template-columns: 64px minmax(120px, 168px) minmax(0, 1.2fr) 86px !important;
+  align-items: center;
+}
+.fourthPhoto {
+  position: relative;
+  width: 100%;
+  max-width: 168px;
+  aspect-ratio: 3 / 2;
+  height: auto;
+  max-height: 112px;
+  overflow: hidden;
+  outline: 1px solid var(--line-soft);
+  outline-offset: -1px;
+  background: #0a1013;
+}
+.fourthPhoto :global(img),
+.fourthPhoto .foodPhoto {
+  object-fit: cover;
+  object-position: center;
+}
+.caption {
+  margin-top: 18px;
+}
+.supports {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 90px);
+  margin-top: clamp(46px, 8vh, 96px);
+}
+.supports h3 {
+  font-size: clamp(20px, 2vw, 30px);
+}
+.supports p {
+  max-width: 65ch;
+}
+.tableCopy {
+  max-width: 48ch;
+  grid-column: 1;
+  grid-row: 2;
+}
+.tableCopy p + p {
+  margin-top: 20px;
+}
+
+.brandLink {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line-soft);
+  transition:
+    color 0.4s,
+    border-color 0.5s var(--ease);
+}
+.brandLink:hover,
+.brandLink:focus-visible {
+  color: var(--bone);
+  border-color: var(--bone);
+}
+
+@media (max-width: 820px) {
+  :global(body[data-layout-story="b"]) .temperatures,
+  .supports {
+    grid-template-columns: 1fr;
+  }
+  .temperatures p {
+    max-width: 65ch;
+  }
+  .fourth {
+    grid-template-columns: 44px minmax(0, 1fr) 74px;
+  }
+  .fourthPhoto {
+    grid-column: 1/-1;
+  }
+  .tableCopy {
+    margin-top: 26px;
+  }
+  .manifesto :global(.foot-grid) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The GMP preview uses the delivered Umbral plate, never the Kyoto CSS still. */
+.peekFrame:global(.peek-fr) {
+  position: relative;
+  overflow: hidden;
+  background: none;
+}
+.peekFrame img {
+  object-fit: cover;
+}
+
+/* Source footer B uses a54px mark in its70px first track. */
+.manifestoMark {
+  width: 54px;
+  height: auto;
+}

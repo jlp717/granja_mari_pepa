@@ -1,0 +1,128 @@
+{
+  "seoTitle": "Granja Maripepa | HORECA distribution in Murcia",
+  "seoDescription": "Food distribution for hospitality from Lorca. Frozen, chilled and ambient products for restaurants, catering and collectives in Murcia and Almería.",
+  "scroll": "Follow the journey",
+  "illustration": "Illustrative photograph. Ask about available formats.",
+  "products": "Explore the range",
+  "contact": "Talk to the team",
+  "read": "Continue",
+  "familyNames": [
+    "Seafood",
+    "Meat",
+    "Prepared foods",
+    "Pastry and desserts"
+  ],
+  "brandsTitle": "Brands within the published range",
+  "brandsIntro": "Grupo Topgel, Nestlé and Panamar appear in our published offer. Their websites provide additional brand information; ask our team about the supply conditions for your establishment.",
+  "phone": "Telephone",
+  "email": "Enquiries and orders",
+  "hours": "Contact hours",
+  "schedule": "Monday to Friday, 08:00–13:00 and 16:00–19:00",
+  "catalogueNotice": "The public catalogue is being prepared. This journey introduces product families, not stock or prices.",
+  "chapters": [
+    {
+      "label": "01 · Threshold",
+      "title": "The kitchen begins before the flame.",
+      "lead": "Before a dish reaches the table, someone chooses the ingredients. Granja Maripepa was founded in Lorca in 1966 and distributes food for hospitality, restaurants and catering.",
+      "supports": [
+        {
+          "title": "From Lorca",
+          "text": "Saprelorca is our starting point. Talk to the team, describe your establishment and direct your enquiry towards the families you need. A specific conversation gives a product list its context."
+        },
+        {
+          "title": "For your service",
+          "text": "A restaurant and a catering service may have different questions. Tell us what you are looking for and use this visit to explore the published range before confirming individual items and conditions."
+        }
+      ],
+      "action": "Discover the range"
+    },
+    {
+      "label": "02 · Cold",
+      "title": "Every food has its own place.",
+      "lead": "Frozen, chilled and ambient products form part of our published activity. They are different ways to organise a supply enquiry. Explain the kind of product your kitchen needs from the outset.",
+      "supports": [
+        {
+          "title": "Frozen",
+          "text": "Grupo Topgel's range includes frozen seafood, meat, prepared foods and pastry. Start with a family, then ask about the item, presentation and information you need to consider it for your menu."
+        },
+        {
+          "title": "Chilled and ambient",
+          "text": "Granja Maripepa also publishes activity in these temperatures. Their presence here does not mean that every item is available. Confirm the particular product and its conditions with the team."
+        },
+        {
+          "title": "Information before choosing",
+          "text": "The photographs introduce each family. Request the specific product documentation for ingredients, allergens, formats and storage. An illustrative image cannot replace a product specification."
+        }
+      ],
+      "action": "Explore the families"
+    },
+    {
+      "label": "03 · Range",
+      "title": "A path through what your kitchen needs.",
+      "lead": "Four families open the catalogue: seafood, meat, prepared foods and pastry. You do not need an item code to begin. Start with the preparation you have in mind and bring that need to the conversation.",
+      "supports": [
+        {
+          "title": "Families, not a stock display",
+          "text": "Each link leads to a description of a family. The public catalogue is still being prepared. Sample items, quantities and prices are not presented as verified availability."
+        },
+        {
+          "title": "Brands with their own names",
+          "text": "Grupo Topgel, Nestlé and Panamar have a place in the published offer. Their official websites provide context, without replacing the particular terms agreed for your establishment."
+        }
+      ],
+      "action": "View all families"
+    },
+    {
+      "label": "04 · Route",
+      "title": "The next stop is a conversation.",
+      "lead": "Your establishment's location and requirements are the start of a delivery enquiry. Speak to us to confirm coverage, conditions and supply arrangements. This page does not replace that confirmation with a general delivery promise.",
+      "supports": [
+        {
+          "title": "Call",
+          "text": "Lorca's published telephone is 968 46 75 14. The mobile number 639 77 86 55 is also available as a contact channel. Choose the option that suits your enquiry."
+        },
+        {
+          "title": "Write",
+          "text": "The Contact page publishes pedidos@granjamaripepa.com for enquiries and orders. Include your establishment's name, location and the families you are interested in. Do not include account passwords."
+        },
+        {
+          "title": "Time to talk",
+          "text": "Published contact hours are Monday to Friday, 08:00–13:00 and 16:00–19:00. Keep the item reference or document to hand when asking about a particular product or service detail."
+        }
+      ],
+      "action": "Ask about my area"
+    },
+    {
+      "label": "05 · Table",
+      "title": "Your kitchen.",
+      "lead": "This journey leads to the professional's work. Hospitality, restaurants and catering are the sectors Granja Maripepa addresses. A range makes sense when it responds to your establishment's needs.",
+      "supports": [
+        {
+          "title": "From an idea to an enquiry",
+          "text": "Ask about a family, find additional brand information or request product documentation. A focused enquiry helps identify what still needs to be confirmed before a decision."
+        },
+        {
+          "title": "Your commercial relationship",
+          "text": "Existing customers retain their own customer-area access. For an initial conversation or a range enquiry, use the published contact channels. You do not need to start a purchase to ask for information."
+        }
+      ],
+      "action": "Get in touch"
+    },
+    {
+      "label": "Manifesto",
+      "title": "Alongside those who feed others.",
+      "lead": "From Lorca, since 1966. Our published purpose is to support restaurant professionals through food distribution and help with the work of the kitchen. This journey is an introduction; product and service details are confirmed with you.",
+      "supports": [
+        {
+          "title": "A range to discuss",
+          "text": "Families, brands and dated documents help prepare the conversation."
+        },
+        {
+          "title": "A team to call",
+          "text": "Published contact channels provide a clear next step."
+        }
+      ],
+      "action": "Start a conversation"
+    }
+  ]
+}

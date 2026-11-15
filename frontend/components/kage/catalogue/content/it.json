@@ -1,0 +1,72 @@
+{
+  "seoTitle": "Gamma alimentare per la ristorazione | Granja Maripepa",
+  "seoDescription": "Quattro famiglie di surgelati, marchi pubblicati e archivio delle riviste Granja Maripepa. Catalogo pubblico in preparazione: chiedi informazioni al team.",
+  "label": "Gamma · orientamento di prodotto",
+  "title": "Parti da ciò che devi cucinare.",
+  "lead": "Pesce, carni, preparati e pasticceria: quattro percorsi per una richiesta concreta sulla gamma pubblicata di Grupo Topgel.",
+  "noticeTitle": "Catalogo pubblico in preparazione",
+  "notice": "Il catalogo pubblico arriverà prossimamente. Qui non sono mostrati articoli acquistabili, prezzi, scorte o condizioni individuali. La selezione cambia la lettura delle famiglie, non un inventario.",
+  "all": "Tutte le famiglie",
+  "filterLabel": "Esplora per famiglia",
+  "resultLabel": "Famiglie pubblicate",
+  "reset": "Vedi le quattro famiglie",
+  "emptyTitle": "La selezione non corrisponde a una famiglia pubblicata.",
+  "empty": "Torna alle quattro famiglie o chiedi al team del prodotto che cerchi. Una categoria nell'URL non conferma la disponibilità di un articolo.",
+  "loading": "Preparazione delle informazioni sulla gamma",
+  "errorTitle": "Non è stato possibile mostrare questa pagina.",
+  "error": "Riprova oppure utilizza i canali di contatto. Questo avviso non conferma e non modifica alcun ordine.",
+  "retry": "Riprova",
+  "illustration": "Fotografia illustrativa della famiglia. Non identifica un articolo né conferma disponibilità.",
+  "consult": "Chiedi di questa famiglia",
+  "brandsTitle": "Tre marchi, le loro voci.",
+  "brandsText": "Questi marchi compaiono nell'offerta pubblicata di Granja Maripepa. I loro siti aggiungono informazioni sul marchio. Per articoli e condizioni di fornitura specifici, contatta il nostro team.",
+  "archiveTitle": "Documenti con una data.",
+  "archiveText": "Le riviste appartengono alle edizioni indicate. Restano documenti di consultazione: immagini, referenze e promozioni non confermano un'offerta vigente né scorte attuali.",
+  "pdfAction": "Apri il PDF in una nuova scheda",
+  "contactTitle": "Dal percorso a una richiesta concreta.",
+  "contactText": "Indica locale, località e famiglia di interesse. Chiedi formato e documentazione dell'articolo che cerchi e conferma con il team le condizioni del servizio prima di decidere.",
+  "contact": "Parla con il team",
+  "clients": "Area clienti",
+  "home": "Torna alla home",
+  "phone": "Chiama Lorca",
+  "whatsapp": "Chiedi su WhatsApp",
+  "schedule": "Da lunedì a venerdì, 08:00–13:00 e 16:00–19:00",
+  "families": [
+    {
+      "id": "mar",
+      "title": "Pesce e frutti di mare",
+      "tag": "Pesci e frutti di mare surgelati",
+      "paragraphs": [
+        "Questa famiglia riunisce pesci e frutti di mare surgelati nella gamma pubblicata di Grupo Topgel. È un punto di partenza per una cucina che vuole orientare la richiesta verso preparazioni di mare, senza dover conoscere in anticipo un codice articolo. La selezione aiuta a dare un contesto concreto alla conversazione.",
+        "Spiega quale tipo di prodotto ti serve. Per specie, presentazione, ingredienti, allergeni e conservazione, richiedi la documentazione della referenza specifica. La fotografia è illustrativa e non identifica un formato disponibile. Il catalogo pubblico è in preparazione: scegliere una famiglia non riserva scorte e non stabilisce un prezzo. Il team conferma le informazioni concrete di fornitura."
+      ]
+    },
+    {
+      "id": "carne",
+      "title": "Carni",
+      "tag": "La famiglia delle carni surgelate",
+      "paragraphs": [
+        "Le carni fanno parte delle quattro famiglie di surgelati pubblicate di Grupo Topgel. Questa sezione aiuta a collocare un'esigenza della cucina prima di scegliere un articolo specifico. Puoi usarla per avviare una conversazione sulla preparazione o sulla presentazione che desideri per il tuo locale. Non occorre iniziare da un codice prodotto.",
+        "Qui tagli, pesi e provenienze non vengono presentati come articoli disponibili. Chiedi al team composizione, formato, conservazione e documentazione del prodotto. L'immagine accompagna la famiglia e non conferma una referenza o le scorte. Le condizioni si verificano per ogni richiesta. La selezione di una famiglia non aggiunge nulla al carrello."
+      ]
+    },
+    {
+      "id": "precocinados",
+      "title": "Prodotti preparati",
+      "tag": "Preparati e verdure surgelati",
+      "paragraphs": [
+        "La descrizione pubblicata di questa famiglia comprende preparati e verdure surgelati. È utile per organizzare una richiesta su prodotti destinati a una preparazione o a una parte del servizio, senza considerare il nome della famiglia come un elenco completo di articoli disponibili. Il punto di partenza resta l'esigenza che vuoi discutere.",
+        "Racconta che cosa devi preparare e richiedi informazioni sul prodotto concreto. Ingredienti, allergeni, formati e indicazioni di conservazione vanno verificati nella documentazione, non dedotti dalla fotografia. Questa pagina non assegna tempi di preparazione, rese o disponibilità a una referenza. Il catalogo è in preparazione: il team conferma i dati necessari per valutare ogni possibilità."
+      ]
+    },
+    {
+      "id": "reposteria",
+      "title": "Pasticceria e dessert",
+      "tag": "Dolci e dessert surgelati",
+      "paragraphs": [
+        "Questa famiglia comprende dolci e dessert surgelati nella gamma pubblicata di Grupo Topgel. Può avviare una richiesta per completare una proposta di dessert o aiutarti a ottenere informazioni su un articolo che conosci già. Non devi interpretare la fotografia come un prodotto specifico per continuare a conoscere questa famiglia.",
+        "Chiedi la presentazione necessaria e la relativa scheda per ingredienti, allergeni, conservazione e altre informazioni dell'articolo. Qui porzioni, pesi e finiture non sono confermati senza documentazione. La selezione orienta la conversazione, non aggiunge prodotti al carrello e non trasforma un'immagine illustrativa in un'offerta disponibile. Le condizioni particolari si confermano con il team."
+      ]
+    }
+  ]
+}

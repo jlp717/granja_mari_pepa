@@ -1,0 +1,61 @@
+{
+  "node_syntax": [
+    {
+      "path": "frontend\\components\\kage\\engine\\kage-engine.js",
+      "check": "Node syntax only; imports not executed",
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "path": "frontend\\components\\kage\\engine\\world-gmp.js",
+      "check": "Node syntax only; imports not executed",
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "path": "frontend\\components\\kage\\engine\\world-gmp.test.js",
+      "check": "Node syntax only; imports not executed",
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "literal_source_parity": [
+    {
+      "name": "CLOTH_VERT",
+      "byte_equal": true,
+      "sha256": "097c9af2313085746688d791e9fdac5c5e1f7b2e501bac7ebe2721f84a079870"
+    },
+    {
+      "name": "CLOTH_SDF",
+      "byte_equal": true,
+      "sha256": "6632a04aa05168b5034768f4b1ad4a5052fcfa38f272de7d891b1063a888e897"
+    },
+    {
+      "name": "CLOTH_FRAG",
+      "byte_equal": true,
+      "sha256": "2efa272123ba189d7e630db958bf6c62735a9860dea34392eff85a4eaa024222"
+    },
+    {
+      "name": "CLOTH_SHADOW_VERT",
+      "byte_equal": true,
+      "sha256": "70fca01443da033debff9096c524ffb88f5c539ec2e944956fc6ee37dcf2c4d2"
+    },
+    {
+      "name": "CLOTH_SHADOW_FRAG",
+      "byte_equal": true,
+      "sha256": "d51e65b8a623a116eca23688c8a8e08716bac80163e88ba6188d0341e6758b8d"
+    },
+    {
+      "name": "function initPost() {",
+      "byte_equal": true,
+      "sha256": "132cf951dea6d65d954e68c3010ef404252fa73aa28f06ffb73e84f713aaaed7"
+    },
+    {
+      "name": "function renderPost() {",
+      "byte_equal": true,
+      "sha256": "79042b4515be12a18dc487a2ea6943501bc7373dc14e692a954a3a28b6796812"
+    }
+  ],
+  "tests": "Jest/TypeScript pending Root dependencies; no runtime imported/executed",
+  "initial_check_limitation": "First parser invocation stopped at Windows stdin cp1252; rerun explicitly uses UTF8. No source change."
+}

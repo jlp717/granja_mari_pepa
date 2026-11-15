@@ -1,0 +1,128 @@
+{
+  "seoTitle": "Granja Maripepa | Distribución HORECA Murcia",
+  "seoDescription": "Distribución alimentaria para hostelería desde Lorca. Congelados, refrigerados y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
+  "scroll": "Recorre nuestra historia",
+  "illustration": "Fotografía ilustrativa. Consulta los formatos disponibles.",
+  "products": "Consultar la gama",
+  "contact": "Hablar con el equipo",
+  "read": "Continuar",
+  "familyNames": [
+    "Productos del mar",
+    "Carnes",
+    "Precocinados",
+    "Repostería"
+  ],
+  "brandsTitle": "Marcas que forman parte de la gama",
+  "brandsIntro": "Grupo Topgel, Nestlé y Panamar aparecen en nuestra oferta publicada. Sus páginas permiten ampliar la información de cada marca; las condiciones de suministro se consultan con nuestro equipo.",
+  "phone": "Teléfono",
+  "email": "Email de consultas y pedidos",
+  "hours": "Horario de atención",
+  "schedule": "Lunes a viernes, 8:00–13:00 y 16:00–19:00",
+  "catalogueNotice": "El catálogo público está en preparación. Esta visita presenta familias de producto, no existencias ni tarifas.",
+  "chapters": [
+    {
+      "label": "01 · Umbral",
+      "title": "La cocina empieza mucho antes del fuego.",
+      "lead": "Antes de que un plato llegue a la mesa, hay una elección de producto. Granja Maripepa nació en Lorca en 1966 y se dedica a la distribución alimentaria para hostelería, restauración y catering.",
+      "supports": [
+        {
+          "title": "Desde Lorca",
+          "text": "Nuestro punto de partida es Saprelorca. Desde aquí puedes hablar con el equipo, explicar cómo trabaja tu establecimiento y orientar una consulta hacia las familias que necesitas. Una conversación concreta ayuda más que una lista de productos sin contexto."
+        },
+        {
+          "title": "Para tu servicio",
+          "text": "Un restaurante, un servicio de catering y una cocina de colectividades no plantean la misma consulta. Cuéntanos qué buscas y utiliza esta visita como un primer recorrido por la gama publicada, antes de confirmar referencias y condiciones."
+        }
+      ],
+      "action": "Conocer la gama"
+    },
+    {
+      "label": "02 · Frío",
+      "title": "Cada alimento pide su propio lugar.",
+      "lead": "Congelados, refrigerados y productos a temperatura ambiente forman parte de la actividad que publicamos. Son formas distintas de organizar una consulta de suministro, y conviene indicar desde el principio qué tipo de producto necesita tu cocina.",
+      "supports": [
+        {
+          "title": "Congelados",
+          "text": "La gama de Grupo Topgel reúne productos del mar, carnes, precocinados y repostería congelados. Puedes empezar por una familia y concretar después la referencia, la presentación y la información que necesites para valorar su uso."
+        },
+        {
+          "title": "Refrigerados y ambiente",
+          "text": "La actividad de Granja Maripepa también incluye estas temperaturas. Su presencia en este recorrido no implica que cada referencia esté disponible: consulta siempre el producto concreto y sus condiciones con el equipo."
+        },
+        {
+          "title": "Información antes de elegir",
+          "text": "Las fotografías orientan sobre cada familia. Para conocer ingredientes, alérgenos, formatos o conservación de una referencia, solicita su documentación específica. Una imagen ilustrativa no sustituye una ficha de producto."
+        }
+      ],
+      "action": "Explorar las familias"
+    },
+    {
+      "label": "03 · Gama",
+      "title": "Un recorrido por lo que tu cocina necesita.",
+      "lead": "Cuatro familias abren el catálogo: mar, carnes, precocinados y repostería. No hace falta empezar por un código. Puedes partir del tipo de elaboración que preparas y llevar esa necesidad a la conversación comercial.",
+      "supports": [
+        {
+          "title": "Familias, no escaparates de stock",
+          "text": "Cada enlace conduce a una explicación de la familia. El catálogo público sigue en preparación; no mostramos como disponibles artículos de muestra, precios o cantidades que no estén acreditados."
+        },
+        {
+          "title": "Las marcas, con su nombre",
+          "text": "Grupo Topgel, Nestlé y Panamar tienen su lugar en la oferta publicada. Encontrarás sus destinos oficiales como información complementaria, sin confundir un catálogo de marca con las condiciones particulares de tu establecimiento."
+        }
+      ],
+      "action": "Ver todas las familias"
+    },
+    {
+      "label": "04 · Ruta",
+      "title": "La siguiente parada es una conversación.",
+      "lead": "La dirección de tu establecimiento y lo que necesitas son el inicio de una consulta de reparto. Para confirmar cobertura, condiciones y organización del suministro, habla con nosotros. Aquí no fijamos un plazo general que sustituya esa confirmación.",
+      "supports": [
+        {
+          "title": "Llama",
+          "text": "El teléfono de Lorca es 968 46 75 14. También está publicado el móvil 639 77 86 55. Elige el canal que te resulte más cómodo para explicar tu consulta y continuar con el equipo."
+        },
+        {
+          "title": "Escribe",
+          "text": "Contacto publica pedidos@granjamaripepa.com para consultas y pedidos. Puedes indicar el nombre del establecimiento, la localidad y las familias que te interesan, sin introducir datos de acceso a tu cuenta."
+        },
+        {
+          "title": "Con tiempo para hablar",
+          "text": "El horario publicado es de lunes a viernes, de 8:00 a 13:00 y de 16:00 a 19:00. Si necesitas confirmar un dato de producto o de servicio, ten a mano la referencia o el documento al que te refieres."
+        }
+      ],
+      "action": "Consultar mi zona"
+    },
+    {
+      "label": "05 · Mesa",
+      "title": "Tu cocina.",
+      "lead": "El destino de este recorrido es el trabajo del profesional. Hostelería, restauración y catering son los sectores a los que se dirige Granja Maripepa. La gama cobra sentido cuando responde a una necesidad de tu establecimiento.",
+      "supports": [
+        {
+          "title": "De la idea a la consulta",
+          "text": "Puedes preguntar por una familia, ampliar información sobre una marca o solicitar documentación de un producto. Cuanto más concreta sea la consulta, más fácil será identificar la información que falta antes de decidir."
+        },
+        {
+          "title": "Tu relación comercial",
+          "text": "Si ya eres cliente, el área de clientes conserva su acceso propio. Para una primera conversación o una consulta sobre la gama, utiliza los canales publicados de Contacto. No necesitas iniciar una compra para pedir información."
+        }
+      ],
+      "action": "Contactar"
+    },
+    {
+      "label": "Manifiesto",
+      "title": "Al lado de quien da de comer.",
+      "lead": "Desde Lorca, desde 1966. Nuestro propósito publicado es apoyar al profesional de la restauración mediante la distribución alimentaria y facilitar la tarea de la cocina. Este recorrido es una puerta de entrada: la información concreta de producto y servicio se confirma contigo.",
+      "supports": [
+        {
+          "title": "Una gama que se consulta",
+          "text": "Familias, marcas y documentos fechados para preparar la conversación."
+        },
+        {
+          "title": "Un equipo al que llamar",
+          "text": "Los canales de contacto están disponibles para dar el siguiente paso."
+        }
+      ],
+      "action": "Empezar una conversación"
+    }
+  ]
+}

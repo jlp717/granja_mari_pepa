@@ -1,0 +1,72 @@
+{
+  "seoTitle": "Lebensmittelsortiment für Gastronomie | Granja Maripepa",
+  "seoDescription": "Vier Tiefkühl-Produktgruppen, veröffentlichte Marken und datierte Magazine von Granja Maripepa. Der öffentliche Katalog wird vorbereitet; fragen Sie das Team.",
+  "label": "Sortiment · Orientierung",
+  "title": "Beginnen Sie bei Ihrer Küche.",
+  "lead": "Fisch und Meeresfrüchte, Fleisch, zubereitete Produkte und Desserts: vier Ausgangspunkte für eine konkrete Anfrage zum veröffentlichten Sortiment von Grupo Topgel.",
+  "noticeTitle": "Öffentlicher Katalog in Vorbereitung",
+  "notice": "Der öffentliche Katalog erscheint demnächst. Kaufbare Artikel, Preise, Bestände und individuelle Bedingungen werden hier nicht angezeigt. Die Auswahl ändert die Informationen zur Produktgruppe, keinen Lagerbestand.",
+  "all": "Alle Produktgruppen",
+  "filterLabel": "Nach Produktgruppe orientieren",
+  "resultLabel": "Veröffentlichte Gruppen",
+  "reset": "Alle vier Gruppen ansehen",
+  "emptyTitle": "Diese Auswahl entspricht keiner veröffentlichten Gruppe.",
+  "empty": "Kehren Sie zu den vier Gruppen zurück oder fragen Sie nach dem gesuchten Produkt. Eine Kategorie in einer URL bestätigt keine Verfügbarkeit.",
+  "loading": "Die Sortimentsinformationen werden vorbereitet",
+  "errorTitle": "Diese Seite konnte nicht angezeigt werden.",
+  "error": "Versuchen Sie es erneut oder nutzen Sie die Kontaktkanäle. Dieser Hinweis bestätigt und verändert keine Bestellung.",
+  "retry": "Erneut versuchen",
+  "illustration": "Beispielfoto der Produktgruppe. Es bezeichnet keinen Artikel und bestätigt keine Verfügbarkeit.",
+  "consult": "Diese Gruppe anfragen",
+  "brandsTitle": "Drei Marken mit eigener Stimme.",
+  "brandsText": "Diese Marken erscheinen im veröffentlichten Angebot von Granja Maripepa. Ihre Websites ergänzen die Markeninformationen. Konkrete Artikel und Lieferbedingungen klären Sie mit unserem Team.",
+  "archiveTitle": "Unterlagen mit Datum.",
+  "archiveText": "Die Magazine gehören zu den angegebenen Ausgaben. Sie bleiben Informationsunterlagen. Ihre Bilder, Artikel und Aktionen bestätigen weder ein aktuelles Angebot noch einen heutigen Lagerbestand.",
+  "pdfAction": "PDF in einem neuen Tab öffnen",
+  "contactTitle": "Vom Überblick zur konkreten Anfrage.",
+  "contactText": "Nennen Sie Betrieb, Ort und gewünschte Gruppe. Fragen Sie nach Ausführung und Unterlagen des gesuchten Artikels und bestätigen Sie die Servicebedingungen vor Ihrer Entscheidung mit dem Team.",
+  "contact": "Mit dem Team sprechen",
+  "clients": "Kundenbereich",
+  "home": "Zur Startseite",
+  "phone": "In Lorca anrufen",
+  "whatsapp": "Über WhatsApp anfragen",
+  "schedule": "Montag bis Freitag, 08:00–13:00 und 16:00–19:00 Uhr",
+  "families": [
+    {
+      "id": "mar",
+      "title": "Fisch und Meeresfrüchte",
+      "tag": "Tiefgekühlter Fisch und Schalentiere",
+      "paragraphs": [
+        "Diese Produktgruppe umfasst tiefgekühlten Fisch und Meeresfrüchte im veröffentlichten Sortiment von Grupo Topgel. Sie ist ein Ausgangspunkt für Küchen, die eine Anfrage zu entsprechenden Zubereitungen stellen möchten, ohne vorab einen Artikelcode kennen zu müssen. Die Auswahl hilft, dem Gespräch einen konkreten Zusammenhang zu geben.",
+        "Beschreiben Sie, welche Art von Produkt Sie benötigen. Für Art, Ausführung, Zutaten, Allergene und Lagerung fordern Sie die Unterlagen des jeweiligen Artikels an. Das Foto dient der Veranschaulichung und bezeichnet kein verfügbares Format. Der öffentliche Katalog wird vorbereitet: Eine Auswahl reserviert keinen Bestand und legt keinen Preis fest. Konkrete Lieferinformationen bestätigt das Team."
+      ]
+    },
+    {
+      "id": "carne",
+      "title": "Fleisch",
+      "tag": "Die Gruppe der tiefgekühlten Fleischprodukte",
+      "paragraphs": [
+        "Fleisch gehört zu den vier veröffentlichten Tiefkühl-Produktgruppen von Grupo Topgel. Dieser Bereich hilft, einen Küchenbedarf einzuordnen, bevor ein bestimmter Artikel gewählt wird. Nutzen Sie die Gruppe für ein Gespräch über die Zubereitung oder Präsentation, die Sie für Ihren Betrieb suchen. Ein konkreter Produktcode ist dafür zunächst nicht nötig.",
+        "Zuschnitte, Gewichte und Herkunft werden hier nicht als verfügbare Artikel dargestellt. Fragen Sie das Team nach Zusammensetzung, Format, Lagerung und den passenden Unterlagen. Das Bild veranschaulicht die Gruppe und bestätigt weder einen Artikel noch einen Lagerbestand. Die Bedingungen werden für jede Anfrage geklärt. Die Gruppenauswahl fügt einem Warenkorb nichts hinzu."
+      ]
+    },
+    {
+      "id": "precocinados",
+      "title": "Zubereitete Produkte",
+      "tag": "Tiefgekühlte Zubereitungen und Gemüse",
+      "paragraphs": [
+        "Die veröffentlichte Beschreibung dieser Gruppe umfasst tiefgekühlte Zubereitungen und Gemüse. Sie hilft, Fragen zu Produkten für eine bestimmte Zubereitung oder einen Teil des Services zu ordnen. Dabei ist der Gruppenname keine vollständige Liste tatsächlich verfügbarer Artikel. Ausgangspunkt bleibt der Bedarf, den Sie mit dem Team besprechen möchten.",
+        "Erklären Sie, was Sie zubereiten wollen, und fragen Sie nach dem konkreten Produkt. Zutaten, Allergene, Formate und Lagerhinweise werden anhand seiner Unterlagen geprüft, nicht aus einem Foto abgeleitet. Diese Seite bestätigt keine Zubereitungszeiten, Ausbeuten oder Verfügbarkeit. Der öffentliche Katalog wird vorbereitet; die nötigen Angaben zur Beurteilung einer Option bestätigt das Team."
+      ]
+    },
+    {
+      "id": "reposteria",
+      "title": "Backwaren und Desserts",
+      "tag": "Tiefgekühlte Süßspeisen und Desserts",
+      "paragraphs": [
+        "Diese Gruppe umfasst tiefgekühlte Süßspeisen und Desserts im veröffentlichten Sortiment von Grupo Topgel. Sie kann der Beginn einer Anfrage für Ihr Dessertangebot sein oder helfen, Informationen zu einem bereits bekannten Artikel anzufordern. Sie müssen das Foto nicht als konkretes Produkt verstehen, um sich weiter über diese Gruppe zu informieren.",
+        "Fragen Sie nach der benötigten Ausführung und dem Datenblatt für Zutaten, Allergene, Lagerung und weitere Artikelangaben. Portionen, Gewichte oder Ausführungsdetails werden hier ohne Unterlagen nicht bestätigt. Die Gruppenauswahl orientiert das Gespräch. Sie legt kein Produkt in einen Warenkorb und macht aus einem Beispielfoto kein verfügbares Angebot. Konkrete Bedingungen bestätigt das Team."
+      ]
+    }
+  ]
+}

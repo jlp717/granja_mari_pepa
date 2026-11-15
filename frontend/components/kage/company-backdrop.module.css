@@ -1,0 +1,88 @@
+/* Real company photographs behind every public page. */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #04070a;
+}
+
+.frame {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.06);
+  will-change: opacity, transform;
+  filter: saturate(0.94) contrast(1.14) brightness(1.02);
+}
+
+.frame:first-child {
+  opacity: 1;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.46;
+  mix-blend-mode: soft-light;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035) 0px,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.045) 0px,
+      rgba(0, 0, 0, 0.045) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+.grade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      118% 88% at 46% 38%,
+      transparent 16%,
+      rgba(4, 7, 10, 0.58) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(4, 7, 10, 0.74) 0%,
+      rgba(4, 7, 10, 0.26) 46%,
+      rgba(3, 6, 9, 0) 70%,
+      rgba(4, 7, 10, 0.34) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 7, 10, 0.34) 0%,
+      transparent 32%,
+      rgba(4, 7, 10, 0.54) 100%
+    );
+}
+
+.grade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background:
+    radial-gradient(88% 68% at 72% 28%, rgba(255, 168, 88, 0.1), transparent 62%),
+    linear-gradient(180deg, rgba(9, 34, 52, 0.22), rgba(0, 0, 0, 0.1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame {
+    transition: none;
+  }
+}

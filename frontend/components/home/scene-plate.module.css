@@ -1,0 +1,47 @@
+/* Kage layers: section scrim -1, reading 2. The added plate sits below
+   that scrim; it is a static fallback, never a second scroll engine. */
+.plate[data-scene-fallback][aria-hidden] {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.8s var(--ease),
+    visibility 0.8s;
+}
+.plate img {
+  object-fit: cover;
+}
+.brand {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.8s var(--ease),
+    visibility 0.8s;
+}
+.brand img {
+  width: min(600px, 74vw);
+  height: auto;
+}
+:global(html.kage-live) .plate[data-scene-fallback][aria-hidden],
+:global(html.kage-live) .brand {
+  opacity: 0;
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plate[data-scene-fallback][aria-hidden],
+  .brand {
+    transition: none;
+  }
+}

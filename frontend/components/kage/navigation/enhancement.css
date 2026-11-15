@@ -1,0 +1,52 @@
+/* Kage 77–93,4146–4193; visible SSR is the progressive baseline. */
+.kage-site [data-rv] {
+  opacity: 1;
+  transform: none;
+}
+.kage-site [data-rv][data-kage-wait] {
+  opacity: 0;
+}
+.kage-site [data-rv="up"][data-kage-wait] {
+  transform: translate3d(0, 26px, 0);
+}
+.kage-site .word-reveal .word {
+  opacity: 1;
+  transform: none;
+}
+.kage-site .word-reveal[data-kage-word-wait] .word {
+  opacity: 0;
+  transform: translate3d(0, 112%, 0);
+}
+.kage-site .kage-word-initial .word {
+  animation:
+    kage-word-rise 0.82s var(--ease-out) both,
+    kage-word-fade 0.5s var(--ease-out) both;
+  animation-delay: var(--word-delay, 0ms);
+}
+@keyframes kage-word-rise {
+  from {
+    transform: translate3d(0, 112%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes kage-word-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kage-site [data-rv],
+  .kage-site [data-rv][data-kage-wait],
+  .kage-site .word-reveal .word,
+  .kage-site .word-reveal[data-kage-word-wait] .word {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+    transition: none !important;
+  }
+}
