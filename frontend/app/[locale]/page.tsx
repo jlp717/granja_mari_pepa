@@ -17,7 +17,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: Locale
 export default async function HomePage(props: { params: Promise<{ locale: Locale }> }) {
   const params = await props.params;
   return (
-    <KageRoute routeId="home" mode="journey">
+    <KageRoute routeId="home" mode="journey" world="gmp">
       <HomeEditorial locale={params.locale} />
     </KageRoute>
   );

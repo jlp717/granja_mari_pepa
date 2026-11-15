@@ -23,7 +23,7 @@ export default async function ProductsPage(
   const searchParams = await props.searchParams;
   const params = await props.params;
   return (
-    <KageRoute routeId="catalogue" mode="ambient">
+    <KageRoute routeId="catalogue" mode="ambient" world="gmp">
       <Catalogue
         locale={params.locale}
         category={searchParams.category}

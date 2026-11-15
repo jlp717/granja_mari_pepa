@@ -434,7 +434,7 @@ const WHO_AM_I =
   /\b(quien\s+soy|dime\s+quien\s+soy|mi\s+nombre|como\s+me\s+llamo|mi\s+perfil|mi\s+cuenta\s+de\s+cliente)\b/i;
 
 const SEND_INTENT =
-  /\b(envia|enviar|manda|mandar|remite|remitir|send|comparte|compartir)\b[\s\S]{0,80}\b(factura|albaran|pdf|email|correo|whatsapp|wasap|guasap)\b/i;
+  /\b(envi\w*|mand\w*|remit\w*|send|compart\w*|pas\w*)\b[\s\S]{0,80}\b(factura|albaran|pdf|email|correo|whatsapp|wasap|guasap)\b/i;
 
 const EMAIL_HINT = /\b(email|correo|gmail|e-mail)\b/i;
 const WHATSAPP_HINT = /\b(whatsapp|wasap|guasap)\b/i;
@@ -504,9 +504,10 @@ function sendStatusReply(result, locale) {
   }
 
   if (result?.code === 'OPENWA_NOT_READY') {
+    const fallback = result.fallbackUrl ? ` ${result.fallbackUrl}` : '';
     return en
-      ? 'WhatsApp is configured, but the OpenWA session is not linked. Scan the QR in the OpenWA dashboard and try again.'
-      : 'WhatsApp está configurado, pero la sesión de OpenWA no está vinculada. Escanea el QR en el panel de OpenWA y vuelve a intentarlo.';
+      ? `I have not sent it by WhatsApp because the automatic channel is not linked yet. I can send it by email, or you can write to our team here:${fallback}`
+      : `No lo he enviado por WhatsApp porque el canal automático aún no está vinculado. Puedo enviártela por email o puedes escribirnos aquí:${fallback}`;
   }
 
   if (result?.code && String(result.code).startsWith('OPENWA_')) {
@@ -852,6 +853,7 @@ ${accountRule}
 
 **ENVIOS**
 - Si piden enviar una factura, el sistema ejecuta la herramienta de envio y te dara el resultado. No afirmes que se ha enviado si el resultado no contiene providerMessageId. No inventes destinatarios ni canales.
+- Tampoco prometas "voy a solicitarlo" ni "en breve lo recibes": si no has llamado a la herramienta de envio, no ha ocurrido nada. Di la verdad y ofrece el canal disponible.
 
 **FUENTES**
 - Si la respuesta se apoya en una pagina de la web, cita el numero de fuente entre corchetes, por ejemplo [1] o [2]. No inventes fuentes.
