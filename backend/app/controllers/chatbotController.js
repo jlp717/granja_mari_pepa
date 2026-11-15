@@ -43,9 +43,9 @@ const RPD_LIMIT = 950;
 const TPM_LIMIT = 7600;
 const MAX_QUEUE_WAIT_MS = 20000;
 
-const COMPANY_PHONE = '+34 968 46 70 20';
-const COMPANY_MOBILE = '639 77 86 56';
-const COMPANY_EMAIL = 'pedidos@mari-pepa.com';
+const COMPANY_PHONE = '+34 968 46 75 14';
+const COMPANY_MOBILE = '639 77 86 55';
+const COMPANY_EMAIL = 'pedidos@granjamaripepa.com';
 
 let groq = null;
 if (process.env.GROQ_API_KEY) {
@@ -703,6 +703,7 @@ async function resolveDeterministicIntent(req, message, locale) {
 
 function requiresLogin(message, user) {
   const normalized = normalizeIntentText(message);
+  if (HOW_TO.test(normalized)) return false;
   return Boolean(
     !user &&
       (PERSONAL_INTENT.test(normalized) ||
@@ -718,6 +719,11 @@ function requiresLogin(message, user) {
 const LOGIN_REQUIRED_MESSAGE =
   'Para consultar datos de tu cuenta necesito que inicies sesión con tu código de cliente y contraseña.';
 
+// Preguntas de "como/donde" sobre el proceso no piden datos: se responden sin
+// obligar a iniciar sesion (evita fricción en el primer mensaje).
+const HOW_TO =
+  /\b(como (puedo|hago|descargo|accedo|consulto|veo|solicito|pido|cambio|funciona)|donde (puedo|estan?|encuentro|veo|consulto|descargo)|que pasos|paso a paso|me explicas|puedes explicar(me)?|para que sirve)\b/;
+
 const INVOICE_HINT = /\b(facturas?|F[-\/\s]?\d{1,6})\b/i;
 
 function needsAccountTools(message, user) {
@@ -730,6 +736,8 @@ function needsAccountTools(message, user) {
           PERSONAL_REF_HINT.test(normalized)) ||
         (PROFILE_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) ||
         (ORDERS_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) ||
+        (ORDERS_HINT.test(normalized) && /\d/.test(normalized)) ||
+        PAYMENT_HINT.test(normalized) ||
         (MONTH_HINT.test(normalized) &&
           /\b(facturas?|pedidos?|albaranes?)\b/.test(normalized))),
   );
@@ -738,12 +746,14 @@ function needsAccountTools(message, user) {
 const MONTH_HINT =
   /\b(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|setiembre|octubre|noviembre|diciembre)\b/;
 const ACCOUNT_SUMMARY_HINT =
-  /\b(productos?|articulos?|compro|compra|compras|gast\w*|consum\w*|facturad\w*|pendiente|deuda|saldo|estrella|resumen)\b/;
+  /\b(productos?|articulos?|compr\w*|gast\w*|consum\w*|facturad\w*|pendiente|deuda|saldo|estrella|resumen)\b/;
 const PERSONAL_REF_HINT =
   /\b(mi|mis|mia|mio|mias|mios|me|yo|he|tengo|llevo|debo|suelo|soy|era|compro|gasto|gaste|gastado|consumo|pedi|pague|deje)\b/;
 const PROFILE_HINT =
   /\b(direccion|domicilio|ruta|reparto|alta|antiguedad|poblacion|provincia|ficha|perfil|desde cuando|soy cliente|cliente desde)\b/;
-const ORDERS_HINT = /\b(pedidos?|albaranes?|entregas?)\b/;
+const ORDERS_HINT = /\b(pedidos?|albaran(?:es)?|entregas?)\b/;
+const PAYMENT_HINT =
+  /\b(venc\w*|pagar|pago|cobra|deuda|pendiente|recibo)\b/;
 const CATALOGUE_HINT =
   /\b(catalogo|productos?|articulos?|referencias?|marcas?|familias?|categorias?|teneis|buscame|buscad|descripcion|congelad\w*|refrigerad\w*|pescados?|mariscos?|carnes?|verduras?|panaderia|bolleria|helados?|postres?|salsas?|ahumados?|masas?|sin gluten|alergenos?)\b/;
 
@@ -761,6 +771,11 @@ function forcedToolChoice(message) {
   const normalized = normalizeIntentText(message);
   if (MONTH_HINT.test(normalized)) return 'auto';
   if (ORDERS_HINT.test(normalized)) return 'auto';
+  // Historial de un articulo: deja que el modelo elija la herramienta correcta
+  // (compras del articulo vs resumen de cuenta).
+  if (/\b(historial|comprad\w*|compras? de|cuando (pedi|compre))\b/.test(normalized)) {
+    return 'auto';
+  }
   if (PROFILE_HINT.test(normalized) && PERSONAL_REF_HINT.test(normalized)) {
     return { type: 'function', function: { name: 'consultar_perfil' } };
   }
@@ -871,6 +886,9 @@ function systemPrompt({ locale, toolsEnabled, identity }) {
         '- consultar_pedidos: pedidos del cliente con fecha, importe y numero de lineas ("mis pedidos", "mi ultimo pedido", "que pedi en enero", "cuantos pedidos tengo").',
         '- consultar_detalle_pedido: lineas de un pedido concreto con articulo, unidades, precio y descuento ("que lleva mi pedido", "detalle del pedido P-982", "que articulos pedi"). Necesita serie, numero y ejercicio.',
         '- consultar_albaranes: albaranes o entregas con importe y situacion. Solo si preguntan por albaranes o entregas.',
+        '- consultar_detalle_albaran: lineas de un albaran concreto (serie, numero y ejercicio) con articulo, unidades e importe.',
+        '- consultar_vencimientos: pagos pendientes con factura, fecha de vencimiento, importe y dias restantes. Usala para "cuando tengo que pagar", "que vence este mes", "que tengo pendiente de pago", "proximo vencimiento".',
+        '- consultar_compras_articulo: historial de compras de un articulo concreto por codigo o descripcion (unidades, importe, entregas y ultima compra). Usala para "cuanto X he comprado", "cuando pedi X por ultima vez".',
         '- consultar_perfil: direccion de entrega, poblacion, provincia, ruta de reparto y fecha de alta ("cual es mi direccion", "mi ruta", "desde cuando soy cliente", "mis datos").',
         '- Si una herramienta devuelve listas vacias, dilo con claridad y ofrece alternativas. No rellenes huecos con suposiciones.',
       ].join('\n')
@@ -1040,7 +1058,7 @@ function unavailableResponse(res) {
     success: false,
     code: 'CHATBOT_UNAVAILABLE',
     message:
-      'El asistente no esta disponible en este momento. Puedes escribir a pedidos@mari-pepa.com o llamar al 639 77 86 56.',
+      'El asistente no esta disponible en este momento. Puedes escribir a pedidos@granjamaripepa.com o llamar al 639 77 86 55.',
   });
 }
 

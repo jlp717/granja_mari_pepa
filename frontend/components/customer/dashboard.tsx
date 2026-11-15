@@ -3260,7 +3260,7 @@ export function CustomerDashboard() {
                             className="mt-4 w-full"
                             onClick={() => {
                               toast.info('Contactar soporte', {
-                                description: '📞 Teléfono: +34 965 123 456\n📧 Email: soporte@granja-mari-pepa.com\n🕒 Horario: L-V 9:00-18:00',
+                                description: '📞 Teléfono: +34 968 46 75 14\n📧 Email: pedidos@granjamaripepa.com\n🕒 Horario: L-V 9:00-18:00',
                                 duration: 8000,
                               });
                             }}

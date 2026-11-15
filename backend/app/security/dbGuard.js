@@ -11,6 +11,7 @@
 
 const sqlGuard = require('./sqlGuard');
 const databaseService = require('../services/databaseService');
+const odbcPool = require('../config/odbcConfig');
 const { parseInvoiceReference } = require('../services/invoiceReference');
 const logger = require('../utils/logger');
 
@@ -183,6 +184,76 @@ const TOOL_DEFINITIONS = Object.freeze([
       parameters: {
         type: 'object',
         properties: {},
+        additionalProperties: false,
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'consultar_vencimientos',
+      description:
+        'Vencimientos de pago pendientes del cliente autenticado, ordenados por fecha, con factura, importe y dias que faltan. Usala para "cuando tengo que pagar", "que vence este mes", "que tengo pendiente de pago", "proximo vencimiento". No requiere argumentos.',
+      parameters: {
+        type: 'object',
+        properties: {
+          limite: {
+            type: 'integer',
+            minimum: 1,
+            maximum: 20,
+            description: 'Numero de vencimientos a devolver, por defecto 8.',
+          },
+        },
+        additionalProperties: false,
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'consultar_detalle_albaran',
+      description:
+        'Lineas de un albaran concreto del cliente: articulo, descripcion, unidades, precio, descuento e importe. Usala para "que lleva el albaran 1234", "detalle del albaran P-1234", "que me entregasteis". Necesita numero y ejercicio; la serie es opcional (por defecto P).',
+      parameters: {
+        type: 'object',
+        properties: {
+          serie: {
+            type: 'string',
+            description: 'Serie del albaran, por ejemplo P.',
+          },
+          numero: {
+            type: 'integer',
+            description: 'Numero de albaran.',
+          },
+          ejercicio: {
+            type: 'integer',
+            description: 'Ano del albaran.',
+          },
+        },
+        required: ['numero', 'ejercicio'],
+        additionalProperties: false,
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'consultar_compras_articulo',
+      description:
+        'Historial de compras del cliente de un articulo concreto (por codigo o por texto de la descripcion): unidades, importe, numero de entregas y ultima compra. Usala para "cuanto bogavante he comprado", "cuando pedi X por ultima vez", "mi historial de X".',
+      parameters: {
+        type: 'object',
+        properties: {
+          texto: {
+            type: 'string',
+            description: 'Codigo o palabra de la descripcion del articulo.',
+          },
+          ejercicio: {
+            type: 'integer',
+            description: 'Ano concreto; si se omite, ultimos tres ejercicios.',
+          },
+        },
+        required: ['texto'],
         additionalProperties: false,
       },
     },
@@ -448,6 +519,12 @@ async function consultarFactura(user, args) {
       );
 
       if (detail && detail.header) {
+        const owner = String(detail.header.CODIGOCLIENTEFACTURA || '').trim();
+        if (owner && owner !== codigoCliente) {
+          // Aunque el ERP permita acceso por NIF compartido, el chatbot solo
+          // entrega facturas del codigo de cliente de la sesion.
+          break;
+        }
         return {
           encontrada: true,
           serie: detail.header.SERIEFACTURA,
@@ -522,12 +599,179 @@ async function listarFamilias() {
   };
 }
 
+async function consultarVencimientos(user, args) {
+  const codigoCliente = requireClientCode(user);
+  const limit = Math.max(1, Math.min(20, Number((args && args.limite) || 8)));
+  const rows = await odbcPool.query(
+    `SELECT
+       NUMERODOCUMENTO AS NUMERO,
+       EJERCICIODOCUMENTO AS EJERCICIO,
+       DIAVENCIMIENTO,
+       MESVENCIMIENTO,
+       ANOVENCIMIENTO,
+       IMPORTEVENCIMIENTO,
+       IMPORTEPENDIENTE
+     FROM DSEDAC.CVC
+     WHERE TRIM(CODIGOCLIENTEFACTURA) = ?
+       AND COALESCE(ANULADOSN, 'N') <> 'S'
+       AND COALESCE(IMPORTEPENDIENTE, 0) > 0
+     ORDER BY ANOVENCIMIENTO, MESVENCIMIENTO, DIAVENCIMIENTO
+     FETCH FIRST ${limit} ROWS ONLY`,
+    [codigoCliente],
+  );
+
+  const today = new Date();
+  const midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const vencimientos = (rows || []).map((row) => {
+    const fecha = `${String(row.DIAVENCIMIENTO).padStart(2, '0')}/${String(row.MESVENCIMIENTO).padStart(2, '0')}/${row.ANOVENCIMIENTO}`;
+    const due = new Date(
+      Number(row.ANOVENCIMIENTO),
+      Number(row.MESVENCIMIENTO) - 1,
+      Number(row.DIAVENCIMIENTO),
+    );
+    const dias = Math.round((due.getTime() - midnight.getTime()) / 86400000);
+    return {
+      factura: `F-${row.NUMERO}/${row.EJERCICIO}`,
+      fecha,
+      dias,
+      vencido: dias < 0,
+      importe: money(row.IMPORTEVENCIMIENTO),
+      pendiente: money(row.IMPORTEPENDIENTE),
+    };
+  });
+
+  return {
+    total: vencimientos.length,
+    pendienteTotal: money(
+      (rows || []).reduce((sum, row) => sum + (Number(row.IMPORTEPENDIENTE) || 0), 0),
+    ),
+    vencimientos,
+    mensaje: vencimientos.length
+      ? 'Vencimientos pendientes de tu cuenta, del mas proximo al mas lejano.'
+      : 'No tienes vencimientos pendientes.',
+  };
+}
+
+async function consultarDetalleAlbaran(user, args) {
+  const codigoCliente = requireClientCode(user);
+  const numero = Number(args && args.numero);
+  const ejercicio = Number(args && args.ejercicio);
+  const serie = String((args && args.serie) || 'P').trim().toUpperCase();
+  if (!Number.isFinite(numero) || !Number.isFinite(ejercicio)) {
+    return {
+      encontrado: false,
+      mensaje: 'Necesito el numero y el ejercicio del albaran.',
+    };
+  }
+
+  const rows = await odbcPool.query(
+    `SELECT
+       TRIM(CODIGOARTICULO) AS ARTICULO,
+       DESCRIPCION,
+       CANTIDADUNIDADES,
+       PRECIOVENTA,
+       PORCENTAJEDESCUENTO,
+       IMPORTEVENTA
+     FROM DSEDAC.LAC
+     WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
+       AND TRIM(SERIEALBARAN) = ?
+       AND NUMEROALBARAN = ?
+       AND EJERCICIOALBARAN = ?
+     ORDER BY SECUENCIA
+     FETCH FIRST 100 ROWS ONLY`,
+    [codigoCliente, serie, numero, ejercicio],
+  );
+
+  return {
+    encontrado: (rows || []).length > 0,
+    serie,
+    numero,
+    ejercicio,
+    totalLineas: (rows || []).length,
+    lineas: (rows || []).map((line) => ({
+      articulo: line.ARTICULO,
+      descripcion: String(line.DESCRIPCION || '').trim(),
+      unidades: Number(line.CANTIDADUNIDADES) || 0,
+      precio: money(line.PRECIOVENTA),
+      descuento: Number(line.PORCENTAJEDESCUENTO) || 0,
+      importe: money(line.IMPORTEVENTA),
+    })),
+    mensaje: (rows || []).length
+      ? `${rows.length} linea(s) en ese albaran.`
+      : 'No encuentro ese albaran en tu cuenta. Revisa serie, numero y ejercicio.',
+  };
+}
+
+async function consultarComprasArticulo(user, args) {
+  const codigoCliente = requireClientCode(user);
+  const texto = String((args && args.texto) || '').trim();
+  if (texto.length < 2) {
+    return { total: 0, mensaje: 'Dime el articulo o una palabra de su descripcion.' };
+  }
+  const ejercicio = Number(args && args.ejercicio) || null;
+  const pattern = `%${texto.toUpperCase()}%`;
+  const params = [codigoCliente, pattern, pattern];
+  let yearFilter = '';
+  if (ejercicio) {
+    yearFilter = ' AND EJERCICIOALBARAN = ?';
+    params.push(ejercicio);
+  } else {
+    yearFilter = ' AND EJERCICIOALBARAN >= YEAR(CURRENT_DATE) - 3';
+  }
+
+  const rows = await odbcPool.query(
+    `SELECT
+       TRIM(CODIGOARTICULO) AS ARTICULO,
+       DESCRIPCION,
+       SUM(ABS(CANTIDADUNIDADES)) AS UNIDADES,
+       SUM(ABS(IMPORTEVENTA)) AS IMPORTE,
+       COUNT(DISTINCT NUMEROALBARAN) AS ENTREGAS,
+       MAX(ANODOCUMENTO * 10000 + MESDOCUMENTO * 100 + DIADOCUMENTO) AS ULTIMA
+     FROM DSEDAC.LAC
+     WHERE TRIM(CODIGOCLIENTEALBARAN) = ?
+       AND (UPPER(TRIM(CODIGOARTICULO)) LIKE ? OR UPPER(DESCRIPCION) LIKE ?)
+       ${yearFilter}
+     GROUP BY CODIGOARTICULO, DESCRIPCION
+     ORDER BY IMPORTE DESC
+     FETCH FIRST 8 ROWS ONLY`,
+    params,
+  );
+
+  const articulos = (rows || []).map((row) => {
+    const last = String(row.ULTIMA || '');
+    const ultimaCompra =
+      last.length === 8
+        ? `${last.slice(6, 8)}/${last.slice(4, 6)}/${last.slice(0, 4)}`
+        : null;
+    return {
+      codigo: row.ARTICULO,
+      nombre: String(row.DESCRIPCION || '').trim(),
+      unidades: Number(row.UNIDADES) || 0,
+      importe: money(row.IMPORTE),
+      entregas: Number(row.ENTREGAS) || 0,
+      ultimaCompra,
+    };
+  });
+
+  return {
+    total: articulos.length,
+    ejercicio: ejercicio || 'ultimos 3 anos',
+    articulos,
+    mensaje: articulos.length
+      ? 'Historial de compras de ese articulo.'
+      : 'No encuentro compras de ese articulo en tu cuenta.',
+  };
+}
+
 const HANDLERS = Object.freeze({
   consultar_resumen_cuenta: consultarResumenCuenta,
   consultar_factura: consultarFactura,
   consultar_pedidos: consultarPedidos,
   consultar_detalle_pedido: consultarDetallePedido,
   consultar_albaranes: consultarAlbaranes,
+  consultar_detalle_albaran: consultarDetalleAlbaran,
+  consultar_vencimientos: consultarVencimientos,
+  consultar_compras_articulo: consultarComprasArticulo,
   consultar_perfil: consultarPerfil,
   buscar_producto: buscarProducto,
   listar_familias: listarFamilias,

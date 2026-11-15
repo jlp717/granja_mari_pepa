@@ -467,7 +467,7 @@ export function GlobalChatbot() {
             handoffDone: "Request received",
             handoffEta: "Estimated reply:",
             handoffFallback: "Your request is saved. If it is urgent, call us:",
-            handoffError: "I could not send the request. Call 639 77 86 56 and we will help you.",
+            handoffError: "I could not send the request. Call 639 77 86 55 and we will help you.",
             handoffReason: "The customer asked for a human agent from the assistant.",
             micDenied: "Microphone permission denied.",
             micHelp: "Open the padlock in the address bar and allow the microphone.",
@@ -522,7 +522,7 @@ export function GlobalChatbot() {
             handoffDone: "Solicitud recibida",
             handoffEta: "Respuesta estimada:",
             handoffFallback: "Tu solicitud queda registrada. Si es urgente, llámanos:",
-            handoffError: "No he podido enviar la solicitud. Llama al 639 77 86 56 y te ayudamos.",
+            handoffError: "No he podido enviar la solicitud. Llama al 639 77 86 55 y te ayudamos.",
             handoffReason: "El cliente pide atención humana desde el asistente.",
             micDenied: "Permiso de micrófono denegado.",
             micHelp: "Abre el candado de la barra de direcciones y permite el micrófono.",
@@ -1958,7 +1958,7 @@ export function GlobalChatbot() {
                       {handoff.notified === false && (
                         <p className={styles.handoffNote}>
                           {ui.handoffFallback}{" "}
-                          <a href="tel:+34639778656">639 77 86 56</a>
+                          <a href="tel:+34639778655">639 77 86 55</a>
                         </p>
                       )}
                     </div>
