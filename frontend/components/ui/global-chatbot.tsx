@@ -17,9 +17,12 @@ import {
   Maximize2,
   Mic,
   MicOff,
+  Loader2,
   ArrowUpRight,
   Square,
-  Volume2,
+  Headset,
+  Pause,
+  Play,
   Trash2,
   ShieldCheck,
   Headphones,
@@ -29,6 +32,8 @@ import {
   AlertTriangle,
   CheckCircle2,
   Check,
+  Copy,
+  FileText,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
@@ -55,6 +60,7 @@ type ChatMessage = {
   isError?: boolean;
   sources?: Source[];
   suggestions?: string[];
+  attachments?: { label: string; url: string }[];
   wasVoice?: boolean;
   redacted?: boolean;
   send?: DeliveryResult;
@@ -134,6 +140,73 @@ function toTurns(messages: ChatMessage[]): HistoryTurn[] {
     .filter((message) => message.content.trim().length > 0 && !message.isError)
     .slice(-10)
     .map((message) => ({ role: message.role, content: message.content }));
+}
+
+// Un turno de usuario sin respuesta (p.ej. tras un 401 que abre el login) no
+// debe viajar como contexto: el modelo lo interpretaria como la pregunta
+// pendiente y responderia a esa en vez de a la actual.
+function completeTurns(turns: HistoryTurn[]): HistoryTurn[] {
+  const trimmed = [...turns];
+  while (trimmed.length && trimmed[trimmed.length - 1].role === "user") {
+    trimmed.pop();
+  }
+  return trimmed;
+}
+
+type VoiceLike = { name: string; lang: string; localService?: boolean };
+
+// Elige la voz menos robotica disponible: prioriza voces neuronales/naturales
+// (Edge y Windows modernos), luego las voces es-ES conocidas y deja Helena
+// como ultimo recurso.
+export function pickBestVoice<T extends VoiceLike>(voices: T[], locale: string): T | null {
+  if (!voices.length) return null;
+  const want = locale === "en" ? "en" : "es";
+  const matching = voices.filter((voice) => voice.lang.toLowerCase().startsWith(want));
+  const pool = matching.length ? matching : voices;
+  const score = (voice: T, index: number) => {
+    const name = voice.name.toLowerCase();
+    let value = 0;
+    if (/natural|neural|online|premium|enhanced/.test(name)) value += 100;
+    if (/google/.test(name)) value += 60;
+    if (want === "es" && /laura|pablo|monica|paulina|sabina|jorge|diego|marisol|ximena/.test(name)) {
+      value += 40;
+    }
+    if (want === "es" && /helena/.test(name)) value += 5;
+    if (voice.lang.toLowerCase() === (want === "en" ? "en-gb" : "es-es")) value += 25;
+    if (voice.localService === false) value += 15;
+    return value * 1000 - index;
+  };
+  return [...pool]
+    .map((voice, index) => ({ voice, score: score(voice, index) }))
+    .sort((left, right) => right.score - left.score)[0].voice;
+}
+
+// Trocea por frases para que Chrome no corte la locucion a los ~15 s y para
+// que el ritmo tenga pausas naturales entre ideas.
+export function chunkForSpeech(text: string, max = 190): string[] {
+  const clean = String(text || "")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/[*_#>`]/g, "")
+    .replace(/[•·]/g, ",")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!clean) return [];
+  const sentences = clean.match(/[^.!?;:]+[.!?;:]*/g) || [clean];
+  const chunks: string[] = [];
+  let current = "";
+  for (const raw of sentences) {
+    const sentence = raw.trim();
+    if (!sentence) continue;
+    if (current && current.length + 1 + sentence.length > max) {
+      chunks.push(current);
+      current = sentence;
+    } else {
+      current = current ? `${current} ${sentence}` : sentence;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks.map((chunk) => (/[.!?]$/.test(chunk) ? chunk : `${chunk}.`));
 }
 
 function loadMessages(memory: boolean): ChatMessage[] {
@@ -227,7 +300,21 @@ function BrandMark() {
   );
 }
 
+function deliveryText(send: DeliveryResult, locale: string): string {
+  const channel = send.channel === "whatsapp" ? "WhatsApp" : "email";
+  if (send.success) {
+    return locale === "en"
+      ? `Sent by ${channel} to ${send.toMasked ?? ""}${send.redirected ? " (test)" : ""}`
+      : `Enviado por ${channel} a ${send.toMasked ?? ""}${send.redirected ? " (prueba)" : ""}`;
+  }
+  return locale === "en"
+    ? `Not sent${send.code ? ` (${send.code})` : ""}`
+    : `No enviado${send.code ? ` (${send.code})` : ""}`;
+}
+
 function MarkdownText({ content }: { content: string }) {
+  const safeHref = (href: string) =>
+    /^(https?:\/\/|\/|#|mailto:)/i.test(href.trim());
   const parse = (text: string): ReactNode[] => {
     const parts: ReactNode[] = [];
     const regex = /(\*\*(.+?)\*\*)|(\*(.+?)\*)|(\[(.+?)\]\((.+?)\))/g;
@@ -237,12 +324,13 @@ function MarkdownText({ content }: { content: string }) {
       if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
       if (match[1]) parts.push(<strong key={match.index}>{match[2]}</strong>);
       else if (match[3]) parts.push(<em key={match.index}>{match[4]}</em>);
-      else if (match[5])
+      else if (match[5] && safeHref(match[7]))
         parts.push(
           <a key={match.index} href={match[7]} target="_blank" rel="noopener noreferrer">
             {match[6]}
           </a>,
         );
+      else if (match[5]) parts.push(match[6]);
       lastIndex = match.index + match[0].length;
     }
     if (lastIndex < text.length) parts.push(text.slice(lastIndex));
@@ -275,16 +363,22 @@ export function GlobalChatbot() {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [memoryEnabled, setMemoryEnabled] = useState(false);
   const [showMemory, setShowMemory] = useState(false);
-  const [handoff, setHandoff] = useState<{ reference: string; eta: string } | null>(null);
+  const [handoff, setHandoff] = useState<{ reference: string; eta: string; notified?: boolean } | null>(null);
   const [handoffError, setHandoffError] = useState("");
   const [isHandoffLoading, setIsHandoffLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [isRequestingMic, setIsRequestingMic] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [pendingTranscript, setPendingTranscript] = useState<string | null>(null);
   const [dragPos, setDragPos] = useState<{ x: number; y: number } | null>(null);
   const [dragging, setDragging] = useState(false);
   const [micError, setMicError] = useState("");
-  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [speech, setSpeech] = useState<{
+    id: string;
+    status: "loading" | "playing" | "paused";
+    engine: "server" | "browser";
+  } | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [uncertaintyCount, setUncertaintyCount] = useState(0);
 
   const launcherRef = useRef<HTMLButtonElement>(null);
@@ -302,7 +396,6 @@ export function GlobalChatbot() {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const codeRef = useRef<HTMLInputElement>(null);
-  const baseTranscriptRef = useRef("");
   const voiceUsedRef = useRef(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const processorRef = useRef<ScriptProcessorNode | null>(null);
@@ -315,6 +408,13 @@ export function GlobalChatbot() {
   const voiceRateRef = useRef(VOICE_RATE);
   const panelRef = useRef<HTMLElement | null>(null);
   const dragRef = useRef<{ dx: number; dy: number; width: number; height: number } | null>(null);
+  const stickToBottomRef = useRef(true);
+  const voiceCacheRef = useRef<SpeechSynthesisVoice[]>([]);
+  const speechQueueRef = useRef<{ id: string; chunks: string[]; index: number; locale: string } | null>(null);
+  const speechTimerRef = useRef<number | null>(null);
+  const speechReqRef = useRef(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUrlRef = useRef<string | null>(null);
 
   const ui = useMemo(
     () =>
@@ -324,7 +424,7 @@ export function GlobalChatbot() {
             cards: [
               { icon: Boxes, title: "Browse the catalogue", query: "What products do you distribute?" },
               { icon: Package, title: "Check my order", query: "I want to check the status of my order" },
-              { icon: Headphones, title: "Talk to a person", query: "__handoff__" },
+              { icon: Headset, title: "Talk to a person", query: "__handoff__" },
             ],
             loginTitle: "Sign in to see your account",
             loginText: "Only your invoices, orders and balance are behind your customer code.",
@@ -334,12 +434,20 @@ export function GlobalChatbot() {
             loggingIn: "Checking…",
             logout: "Sign out",
             signedIn: "Signed in",
+            redacted: "Personal data protected.",
+            loginFailed: "We could not sign you in. Please try again.",
+            whatsapp: "Open WhatsApp",
+            copy: "Copy answer",
+            copied: "Copied",
             stop: "Stop generating",
             regenerate: "Regenerate",
             retry: "Try again",
             sources: "Sources",
             downloads: "Downloads",
             listen: "Listen to the answer",
+            pause: "Pause reading",
+            resume: "Resume reading",
+            preparing: "Preparing audio",
             stopListening: "Stop audio",
             memory: "Memory",
             memoryTitle: "Conversation memory",
@@ -351,6 +459,7 @@ export function GlobalChatbot() {
             handoffSend: "Sending your conversation…",
             handoffDone: "Request received",
             handoffEta: "Estimated reply:",
+            handoffFallback: "Your request is saved. If it is urgent, call us:",
             handoffError: "I could not send the request. Call 639 77 86 56 and we will help you.",
             handoffReason: "The customer asked for a human agent from the assistant.",
             micDenied: "Microphone permission denied.",
@@ -358,6 +467,8 @@ export function GlobalChatbot() {
             micNotFound: "No microphone was found. Connect one and try again.",
             micBusy: "The microphone is being used by another application. Close it and try again.",
             micEmpty: "I could not hear you. Tap the microphone and speak a little closer.",
+            micTimeout: "The microphone did not respond. Check the browser permission and try again.",
+            transcribeError: "I could not transcribe the audio. Check your connection and try again.",
             transcriptReview: "Transcript ready",
             acceptTranscript: "Use it",
             discardTranscript: "Discard",
@@ -368,7 +479,7 @@ export function GlobalChatbot() {
             cards: [
               { icon: Boxes, title: "Consultar catálogo", query: "¿Qué productos distribuís?" },
               { icon: Package, title: "Estado de mi pedido", query: "Quiero consultar el estado de mi pedido" },
-              { icon: Headphones, title: "Hablar con soporte", query: "__handoff__" },
+              { icon: Headset, title: "Hablar con soporte", query: "__handoff__" },
             ],
             loginTitle: "Entra para ver tu cuenta",
             loginText: "Tus facturas, pedidos y saldo están detrás de tu código de cliente.",
@@ -378,12 +489,20 @@ export function GlobalChatbot() {
             loggingIn: "Comprobando…",
             logout: "Cerrar sesión",
             signedIn: "Sesión iniciada",
+            redacted: "Datos personales protegidos.",
+            loginFailed: "No se pudo iniciar sesión. Inténtalo de nuevo.",
+            whatsapp: "Abrir WhatsApp",
+            copy: "Copiar respuesta",
+            copied: "Copiado",
             stop: "Detener generación",
             regenerate: "Regenerar",
             retry: "Reintentar",
             sources: "Fuentes",
             downloads: "Descargas",
             listen: "Escuchar respuesta",
+            pause: "Pausar lectura",
+            resume: "Reanudar lectura",
+            preparing: "Preparando voz",
             stopListening: "Detener audio",
             memory: "Memoria",
             memoryTitle: "Memoria de la conversación",
@@ -395,6 +514,7 @@ export function GlobalChatbot() {
             handoffSend: "Enviando tu conversación…",
             handoffDone: "Solicitud recibida",
             handoffEta: "Respuesta estimada:",
+            handoffFallback: "Tu solicitud queda registrada. Si es urgente, llámanos:",
             handoffError: "No he podido enviar la solicitud. Llama al 639 77 86 56 y te ayudamos.",
             handoffReason: "El cliente pide atención humana desde el asistente.",
             micDenied: "Permiso de micrófono denegado.",
@@ -402,6 +522,8 @@ export function GlobalChatbot() {
             micNotFound: "No se ha encontrado ningún micrófono. Conecta uno y vuelve a intentarlo.",
             micBusy: "El micrófono está siendo usado por otra aplicación. Ciérrala y vuelve a intentarlo.",
             micEmpty: "No te he oído. Pulsa el micrófono y habla un poco más cerca.",
+            micTimeout: "El micrófono no ha respondido. Revisa el permiso del navegador e inténtalo otra vez.",
+            transcribeError: "No he podido transcribir el audio. Revisa tu conexión e inténtalo otra vez.",
             transcriptReview: "Transcripción lista",
             acceptTranscript: "Usarla",
             discardTranscript: "Descartar",
@@ -410,11 +532,17 @@ export function GlobalChatbot() {
     [locale, copy.write],
   );
 
-  const { greeting } = useMemo(() => {
+  const [greeting, setGreeting] = useState("");
+
+  useEffect(() => {
     const hour = new Date().getHours();
-    if (hour >= 6 && hour < 12) return { greeting: t("greetingMorning") };
-    if (hour >= 12 && hour < 20) return { greeting: t("greetingAfternoon") };
-    return { greeting: t("greetingEvening") };
+    setGreeting(
+      hour >= 6 && hour < 12
+        ? t("greetingMorning")
+        : hour >= 12 && hour < 20
+          ? t("greetingAfternoon")
+          : t("greetingEvening"),
+    );
   }, [t]);
 
   const commit = useCallback(
@@ -450,18 +578,28 @@ export function GlobalChatbot() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || isGenerating) return;
     const payload = JSON.stringify(messages.filter((message) => !message.streaming));
     window.sessionStorage.setItem(HISTORY_KEY, payload);
     if (memoryEnabled) window.localStorage.setItem(HISTORY_KEY, payload);
-  }, [messages, memoryEnabled]);
+  }, [messages, memoryEnabled, isGenerating]);
 
   useEffect(() => {
     const container = messagesContainerRef.current;
-    if (container) container.scrollTop = container.scrollHeight;
+    if (!container || !stickToBottomRef.current) return;
+    container.scrollTop = container.scrollHeight;
   }, [messages]);
 
+  const handleMessagesScroll = useCallback(() => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    stickToBottomRef.current =
+      container.scrollHeight - container.scrollTop - container.clientHeight < 96;
+  }, []);
+
   useEffect(() => {
+    if (!showLogin && !handoff && !handoffError) return;
+    stickToBottomRef.current = true;
     const container = messagesContainerRef.current;
     if (container) container.scrollTop = container.scrollHeight;
   }, [handoff, handoffError, showLogin]);
@@ -472,16 +610,64 @@ export function GlobalChatbot() {
   }, [isOpen, isMinimized]);
 
   useEffect(() => {
+    const element = inputRef.current;
+    if (!element) return;
+    element.style.height = "auto";
+    element.style.height = `${Math.min(element.scrollHeight, 132)}px`;
+  }, [input]);
+
+  useEffect(() => {
     if (showLogin) codeRef.current?.focus({ preventScroll: true });
   }, [showLogin]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const load = () => {
+      voiceCacheRef.current = window.speechSynthesis.getVoices();
+    };
+    load();
+    window.speechSynthesis.addEventListener?.("voiceschanged", load);
+    return () => {
+      window.speechSynthesis.removeEventListener?.("voiceschanged", load);
+    };
+  }, []);
+
+  const stopSpeech = useCallback(() => {
+    speechReqRef.current += 1;
+    speechQueueRef.current = null;
+    if (speechTimerRef.current) {
+      window.clearTimeout(speechTimerRef.current);
+      speechTimerRef.current = null;
+    }
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      } catch {
+        /* audio ya detenido */
+      }
+      audioRef.current = null;
+    }
+    if (audioUrlRef.current) {
+      URL.revokeObjectURL(audioUrlRef.current);
+      audioUrlRef.current = null;
+    }
+    try {
+      window.speechSynthesis?.cancel();
+    } catch {
+      /* sin sintesis de voz */
+    }
+    setSpeech(null);
+  }, []);
+
   const closePanel = useCallback(() => {
+    stopSpeech();
     setIsOpen(false);
     window.dispatchEvent(
       new CustomEvent("kage:overlay-close", { detail: { id: "pepa" } }),
     );
     launcherRef.current?.focus();
-  }, []);
+  }, [stopSpeech]);
 
   const openPanel = useCallback(() => {
     setIsOpen(true);
@@ -526,21 +712,30 @@ export function GlobalChatbot() {
       } catch {
         /* ya cerrado */
       }
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* sin sintesis de voz */
+      }
     },
     [],
   );
 
   const runRequest = useCallback(
-    async (rawText: string, options?: { echoUser?: boolean }) => {
+    async (rawText: string, options?: { echoUser?: boolean; token?: string | null }) => {
       const text = rawText.trim();
       if (!text || sendingRef.current) return;
 
+      // Una respuesta nueva no debe solaparse con la locucion anterior.
+      stopSpeech();
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
       const seq = ++requestSeqRef.current;
       sendingRef.current = true;
-      const history = historyTurnsRef.current.slice(-MAX_HISTORY_TURNS);
+      const history = completeTurns(
+        historyTurnsRef.current.slice(-MAX_HISTORY_TURNS),
+      );
       const wasVoice = voiceUsedRef.current;
       voiceUsedRef.current = false;
 
@@ -563,11 +758,13 @@ export function GlobalChatbot() {
       setIsGenerating(true);
       setMicError("");
       setHandoff(null);
+      stickToBottomRef.current = true;
 
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
       };
-      if (authToken) headers.Authorization = `Bearer ${authToken}`;
+      const token = options?.token !== undefined ? options.token : authToken;
+      if (token) headers.Authorization = `Bearer ${token}`;
 
       try {
         const response = await fetch("/api/chatbot/stream", {
@@ -591,10 +788,17 @@ export function GlobalChatbot() {
 
         if (!response.ok || !response.body) {
           const payload = (await response.json().catch(() => null)) as
-            | { message?: string }
+            | { message?: string; retryAfter?: number }
             | null;
+          const wait = Math.min(90, Math.ceil(Number(payload?.retryAfter) || 0));
+          const retryHint =
+            wait > 0
+              ? locale === "en"
+                ? ` Try again in ${wait}s.`
+                : ` Reinténtalo en ${wait} s.`
+              : "";
           throw new HttpError(
-            payload?.message || "No se pudo contactar con el asistente.",
+            `${payload?.message || t("connectionError")}${retryHint}`,
           );
         }
 
@@ -634,7 +838,9 @@ export function GlobalChatbot() {
                 const candidate = item as { label?: unknown; url?: unknown };
                 return (
                   typeof candidate.label === "string" &&
-                  typeof candidate.url === "string"
+                  typeof candidate.url === "string" &&
+                  (candidate.url.startsWith("/") ||
+                    candidate.url.startsWith("https://"))
                 );
               },
             );
@@ -693,18 +899,19 @@ export function GlobalChatbot() {
         }
       }
     },
-    [authToken, commit, locale, t, updateMessage],
+    [authToken, commit, locale, stopSpeech, t, updateMessage],
   );
 
   const stopGeneration = useCallback(() => {
     abortRef.current?.abort();
+    sendingRef.current = false;
     setIsGenerating(false);
   }, []);
 
   const sendMessage = useCallback(
     (rawText?: string, viaVoice = false) => {
       const text = (rawText ?? input).trim();
-      if (!text || isGenerating) return;
+      if (!text || isGenerating || sendingRef.current) return;
       setInput("");
       setShowLogin(false);
       voiceUsedRef.current = viaVoice || voiceUsedRef.current;
@@ -742,10 +949,10 @@ export function GlobalChatbot() {
     setAuthPrompt(null);
     setHandoff(null);
     setUncertaintyCount(0);
-    setSpeakingId(null);
+    stopSpeech();
     window.sessionStorage.removeItem(HISTORY_KEY);
     window.localStorage.removeItem(HISTORY_KEY);
-  }, [commit]);
+  }, [commit, stopSpeech]);
 
   const toggleMemory = useCallback(() => {
     const next = !memoryEnabled;
@@ -771,10 +978,16 @@ export function GlobalChatbot() {
 
   const signOut = useCallback(() => {
     window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.removeItem(HISTORY_KEY);
+    window.localStorage.removeItem(HISTORY_KEY);
     setAuthToken(null);
     setShowLogin(false);
     setAuthPrompt(null);
-  }, []);
+    setHandoff(null);
+    stopSpeech();
+    commit(() => []);
+    historyTurnsRef.current = [];
+  }, [commit, stopSpeech]);
 
   const submitLogin = useCallback(
     async (event: FormEvent) => {
@@ -805,7 +1018,7 @@ export function GlobalChatbot() {
           | { success?: boolean; accessToken?: string; message?: string }
           | null;
         if (!response.ok || !data?.success || !data.accessToken) {
-          setLoginError(data?.message || "No se pudo iniciar sesión.");
+          setLoginError(data?.message || ui.loginFailed);
           return;
         }
         window.sessionStorage.setItem(TOKEN_KEY, data.accessToken);
@@ -815,75 +1028,24 @@ export function GlobalChatbot() {
         const pending = authPrompt;
         setAuthPrompt(null);
         if (pending) {
-          const headers: Record<string, string> = {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${data.accessToken}`,
-          };
-          const history = historyTurnsRef.current.slice(-MAX_HISTORY_TURNS);
-          const deduped =
-            history.length &&
-            history[history.length - 1].role === "user" &&
-            history[history.length - 1].content === pending
-              ? history.slice(0, -1)
-              : history;
-          const assistantId = newId();
-          commit((previous) => [
-            ...previous,
-            { id: assistantId, role: "assistant", content: "", streaming: true },
-          ]);
-          setIsGenerating(true);
-          try {
-            const reply = await fetch("/api/chatbot/stream", {
-              method: "POST",
-              headers,
-              credentials: "same-origin",
-              body: JSON.stringify({ message: pending, history: deduped, locale }),
-            });
-            if (!reply.ok || !reply.body) throw new HttpError("retry");
-            let accumulated = "";
-            await readSse(reply.body, (sseEvent) => {
-              if (typeof sseEvent.delta === "string") {
-                accumulated += sseEvent.delta;
-                updateMessage(assistantId, { content: accumulated });
-              }
-              if (sseEvent.done === true) {
-                const finalReply =
-                  typeof sseEvent.reply === "string" && sseEvent.reply
-                    ? sseEvent.reply
-                    : accumulated;
-                updateMessage(assistantId, {
-                  content: finalReply,
-                  streaming: false,
-                  sources: Array.isArray(sseEvent.sources)
-                    ? (sseEvent.sources as Source[])
-                    : [],
-                  suggestions: Array.isArray(sseEvent.suggestions)
-                    ? (sseEvent.suggestions as string[])
-                    : [],
-                });
-                historyTurnsRef.current = [
-                  ...historyTurnsRef.current,
-                  { role: "assistant" as const, content: finalReply },
-                ].slice(-MAX_HISTORY_TURNS);
-              }
-            });
-          } catch {
-            updateMessage(assistantId, {
-              content: t("connectionError"),
-              streaming: false,
-              isError: true,
-            });
-          } finally {
-            setIsGenerating(false);
+          const turns = historyTurnsRef.current;
+          const last = turns[turns.length - 1];
+          if (last && last.role === "user" && last.content === pending) {
+            historyTurnsRef.current = turns.slice(0, -1);
           }
+          voiceUsedRef.current = false;
+          void runRequest(pending, {
+            echoUser: false,
+            token: data.accessToken,
+          });
         }
       } catch {
-        setLoginError("No se pudo iniciar sesión. Inténtalo de nuevo.");
+        setLoginError(ui.loginFailed);
       } finally {
         setIsLoggingIn(false);
       }
     },
-    [authPrompt, commit, isLoggingIn, locale, loginCode, loginPassword, t, updateMessage],
+    [authPrompt, isLoggingIn, loginCode, loginPassword, runRequest, ui.loginFailed],
   );
 
   const requestHandoff = useCallback(async () => {
@@ -905,12 +1067,13 @@ export function GlobalChatbot() {
         }),
       });
       const data = (await response.json().catch(() => null)) as
-        | { handoff?: { reference?: string; eta?: string } }
+        | { handoff?: { reference?: string; eta?: string; notified?: boolean } }
         | null;
       if (!response.ok || !data?.handoff?.reference) throw new Error("handoff");
       setHandoff({
         reference: data.handoff.reference,
         eta: data.handoff.eta || (locale === "en" ? "under 24 working hours" : "menos de 24 h laborables"),
+        notified: data.handoff.notified,
       });
     } catch {
       setHandoffError(ui.handoffError);
@@ -919,26 +1082,144 @@ export function GlobalChatbot() {
     }
   }, [authToken, isHandoffLoading, locale, ui.handoffError, ui.handoffReason]);
 
-  const speak = useCallback(
+  const speakWithBrowser = useCallback(
     (message: ChatMessage) => {
       if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-      if (speakingId === message.id) {
-        window.speechSynthesis.cancel();
-        setSpeakingId(null);
+      const chunks = chunkForSpeech(message.content);
+      if (!chunks.length) return;
+      window.speechSynthesis.cancel();
+      if (speechTimerRef.current) {
+        window.clearTimeout(speechTimerRef.current);
+        speechTimerRef.current = null;
+      }
+      const queue = { id: message.id, chunks, index: 0, locale };
+      speechQueueRef.current = queue;
+      setSpeech({ id: message.id, status: "playing", engine: "browser" });
+
+      const next = () => {
+        const active = speechQueueRef.current;
+        if (!active || active.id !== message.id) return;
+        if (active.index >= active.chunks.length) {
+          speechQueueRef.current = null;
+          setSpeech(null);
+          return;
+        }
+        const chunk = active.chunks[active.index];
+        active.index += 1;
+        const utterance = new SpeechSynthesisUtterance(chunk);
+        const voice = pickBestVoice(voiceCacheRef.current, locale);
+        if (voice) {
+          utterance.voice = voice;
+          utterance.lang = voice.lang;
+        } else {
+          utterance.lang = locale === "en" ? "en-GB" : "es-ES";
+        }
+        // Las voces neuronales ya vienen bien ritmadas; las SAPI suenan
+        // apresuradas y metalicas, asi que se leen algo mas despacio.
+        const natural = voice
+          ? /natural|neural|online|premium|enhanced|google/i.test(voice.name)
+          : false;
+        utterance.rate = natural ? 1 : 0.95;
+        utterance.pitch = 1;
+        utterance.onend = () => {
+          const after = speechQueueRef.current;
+          if (!after || after.id !== message.id) return;
+          speechTimerRef.current = window.setTimeout(next, 150);
+        };
+        utterance.onerror = () => {
+          const after = speechQueueRef.current;
+          if (!after || after.id !== message.id) return;
+          speechQueueRef.current = null;
+          setSpeech(null);
+        };
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Chrome descarta la primera locucion si se encola justo tras cancel().
+      speechTimerRef.current = window.setTimeout(next, 80);
+    },
+    [locale],
+  );
+
+  const startSpeech = useCallback(
+    async (message: ChatMessage) => {
+      stopSpeech();
+      if (typeof window === "undefined") return;
+      const req = speechReqRef.current;
+      const text = message.content.slice(0, 900);
+      setSpeech({ id: message.id, status: "loading", engine: "server" });
+      try {
+        const response = await fetch("/api/chatbot/speech", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify({ text, locale }),
+          signal: AbortSignal.timeout(60000),
+        });
+        if (!response.ok) throw new Error("tts");
+        const blob = await response.blob();
+        if (req !== speechReqRef.current) return;
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audioRef.current = audio;
+        audioUrlRef.current = url;
+        audio.onended = () => {
+          if (audioRef.current === audio) stopSpeech();
+        };
+        audio.onerror = () => {
+          if (audioRef.current !== audio) return;
+          stopSpeech();
+          speakWithBrowser(message);
+        };
+        await audio.play();
+        if (req !== speechReqRef.current) return;
+        setSpeech({ id: message.id, status: "playing", engine: "server" });
+      } catch {
+        if (req !== speechReqRef.current) return;
+        if (audioRef.current) return;
+        speakWithBrowser(message);
+      }
+    },
+    [locale, speakWithBrowser, stopSpeech],
+  );
+
+  const toggleSpeech = useCallback(
+    (message: ChatMessage) => {
+      if (!speech || speech.id !== message.id) {
+        void startSpeech(message);
         return;
       }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(
-        message.content.replace(/[*_#>`]/g, ""),
-      );
-      utterance.lang = locale === "en" ? "en-GB" : "es-ES";
-      utterance.onend = () => setSpeakingId(null);
-      utterance.onerror = () => setSpeakingId(null);
-      setSpeakingId(message.id);
-      window.speechSynthesis.speak(utterance);
+      if (speech.status === "loading") return;
+      const nextStatus = speech.status === "playing" ? "paused" : "playing";
+      if (speech.engine === "server" && audioRef.current) {
+        if (nextStatus === "paused") audioRef.current.pause();
+        else void audioRef.current.play().catch(() => undefined);
+      } else if (speech.status === "playing") {
+        window.speechSynthesis.pause();
+      } else {
+        window.speechSynthesis.resume();
+      }
+      setSpeech({ ...speech, status: nextStatus });
     },
-    [locale, speakingId],
+    [speech, startSpeech],
   );
+
+  const copyMessage = useCallback(async (message: ChatMessage) => {
+    const plain = message.content
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1 ($2)")
+      .replace(/\*\*(.+?)\*\*/g, "$1")
+      .trim();
+    try {
+      await navigator.clipboard.writeText(plain);
+      setCopiedId(message.id);
+      window.setTimeout(
+        () => setCopiedId((current) => (current === message.id ? null : current)),
+        1600,
+      );
+    } catch {
+      /* portapapeles no disponible */
+    }
+  }, []);
 
   const transcribeChunk = useCallback(async (blob: Blob) => {
     const base64 = await new Promise<string>((resolve) => {
@@ -958,13 +1239,13 @@ export function GlobalChatbot() {
         }),
         signal: AbortSignal.timeout(60000),
       });
-      if (!response.ok) return "";
+      if (!response.ok) return { ok: false, text: "" };
       const data = (await response.json().catch(() => null)) as
         | { text?: string }
         | null;
-      return data?.text?.trim() || "";
+      return { ok: true, text: data?.text?.trim() || "" };
     } catch {
-      return "";
+      return { ok: false, text: "" };
     }
   }, [locale]);
 
@@ -976,8 +1257,8 @@ export function GlobalChatbot() {
     const blob = encodeWav(merged, voiceRateRef.current);
     flushChainRef.current = flushChainRef.current
       .then(() => transcribeChunk(blob))
-      .then((text) => {
-        const clean = String(text || "").replace(/\s+/g, " ").trim();
+      .then((result) => {
+        const clean = String(result.text || "").replace(/\s+/g, " ").trim();
         if (!clean) return;
         partialTextRef.current = `${partialTextRef.current} ${clean}`.trim();
         setInput(partialTextRef.current);
@@ -1022,25 +1303,24 @@ export function GlobalChatbot() {
     }
 
     setIsTranscribing(true);
-    const finalText = await transcribeChunk(encodeWav(merged, voiceRateRef.current));
+    const finalResult = await transcribeChunk(encodeWav(merged, voiceRateRef.current));
     setIsTranscribing(false);
 
-    const text = String(finalText || partialTextRef.current || "")
+    const text = String(finalResult.text || partialTextRef.current || "")
       .replace(/\s+/g, " ")
       .trim();
     if (!text) {
       setInput("");
-      setMicError(ui.micEmpty);
+      setMicError(finalResult.ok ? ui.micEmpty : ui.transcribeError);
       return;
     }
     setInput(text);
     setPendingTranscript(text);
     inputRef.current?.focus({ preventScroll: true });
-  }, [flushVoiceChunk, transcribeChunk, ui.micEmpty]);
+  }, [flushVoiceChunk, transcribeChunk, ui.micEmpty, ui.transcribeError]);
 
   const startVoiceInput = useCallback(async () => {
     if (audioCtxRef.current || isTranscribing) return;
-    baseTranscriptRef.current = "";
     partialTextRef.current = "";
     pcmAllRef.current = [];
     pendingSamplesRef.current = [];
@@ -1052,26 +1332,49 @@ export function GlobalChatbot() {
     setInput("");
 
     let stream: MediaStream;
+    let request: Promise<MediaStream> | null = null;
+    let timer: number | undefined;
+    setIsRequestingMic(true);
     try {
-      stream = await navigator.mediaDevices.getUserMedia({
+      request = navigator.mediaDevices.getUserMedia({
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true,
         },
       });
+      stream = await Promise.race([
+        request,
+        new Promise<never>((_resolve, reject) => {
+          timer = window.setTimeout(
+            () => reject(new DOMException("Mic timeout", "TimeoutError")),
+            12000,
+          );
+        }),
+      ]);
     } catch (error) {
       const name = error instanceof DOMException ? error.name : "";
+      if (name === "TimeoutError" && request) {
+        // Si el permiso se concede tarde, cerramos el micro igualmente.
+        void request
+          .then((late) => late.getTracks().forEach((track) => track.stop()))
+          .catch(() => undefined);
+      }
       const message =
         name === "NotAllowedError" || name === "SecurityError"
           ? `${ui.micDenied} ${ui.micHelp}`
-          : name === "NotFoundError" || name === "OverconstrainedError"
-            ? ui.micNotFound
-            : name === "NotReadableError"
-              ? ui.micBusy
-              : `${t("voiceNotSupported")}${name ? ` (${name})` : ""}`;
+          : name === "TimeoutError"
+            ? ui.micTimeout
+            : name === "NotFoundError" || name === "OverconstrainedError"
+              ? ui.micNotFound
+              : name === "NotReadableError"
+                ? ui.micBusy
+                : `${t("voiceNotSupported")}${name ? ` (${name})` : ""}`;
       setMicError(message);
       return;
+    } finally {
+      if (timer) window.clearTimeout(timer);
+      setIsRequestingMic(false);
     }
 
     streamRef.current = stream;
@@ -1129,6 +1432,7 @@ export function GlobalChatbot() {
     ui.micHelp,
     ui.micNotFound,
     ui.micBusy,
+    ui.micTimeout,
   ]);
 
   const acceptTranscript = useCallback(() => {
@@ -1213,6 +1517,14 @@ export function GlobalChatbot() {
   };
 
   const lastIndex = messages.length - 1;
+  const announcedReply = [...messages]
+    .reverse()
+    .find(
+      (message) =>
+        message.role === "assistant" &&
+        !message.streaming &&
+        message.content.trim().length > 0,
+    );
   const showHandoffChip =
     !handoff &&
     !isGenerating &&
@@ -1289,7 +1601,7 @@ export function GlobalChatbot() {
                   aria-label={ui.handoff}
                   title={ui.handoff}
                 >
-                  <Headphones aria-hidden="true" />
+                  <Headset aria-hidden="true" />
                 </Button>
               )}
               {!isMinimized && (
@@ -1365,14 +1677,20 @@ export function GlobalChatbot() {
                 </section>
               )}
 
+              <p className={styles.srOnly} role="status" aria-live="polite">
+                {announcedReply
+                  ? `${assistantName}: ${announcedReply.content.slice(0, 600)}`
+                  : ""}
+              </p>
+
               <div
                 ref={messagesContainerRef}
                 className={styles.messages}
                 role="log"
                 aria-label={copy.history}
-                aria-live="polite"
-                aria-relevant="additions"
+                aria-live="off"
                 aria-busy={isGenerating}
+                onScroll={handleMessagesScroll}
               >
                 {messages.length === 0 && (
                   <div className={styles.welcome}>
@@ -1441,12 +1759,12 @@ export function GlobalChatbot() {
 
                     {message.role === "assistant" && message.redacted && (
                       <p className={styles.redactedNote}>
-                        <ShieldCheck aria-hidden="true" /> Datos personales protegidos.
+                        <ShieldCheck aria-hidden="true" /> {ui.redacted}
                       </p>
                     )}
 
                     {message.role === "assistant" && message.attachments && message.attachments.length > 0 && (
-                      <div className={styles.attachments} aria-label={ui.downloads}>
+                      <div className={styles.attachments} role="group" aria-label={ui.downloads}>
                         {message.attachments.map((attachment, attachmentIndex) => (
                           <a
                             key={`${attachment.url}-${attachmentIndex}`}
@@ -1463,7 +1781,7 @@ export function GlobalChatbot() {
                     )}
 
                     {message.role === "assistant" && message.sources && message.sources.length > 0 && (
-                      <div className={styles.sources} aria-label={ui.sources}>
+                      <div className={styles.sources} role="group" aria-label={ui.sources}>
                         {message.sources.map((source, sourceIndex) => (
                           <a key={`${source.url}-${sourceIndex}`} href={source.url}>
                             [{sourceIndex + 1}] {source.label}
@@ -1480,9 +1798,7 @@ export function GlobalChatbot() {
                           <AlertTriangle aria-hidden="true" />
                         )}
                         <span>
-                          {message.send.success
-                            ? `Enviado por ${message.send.channel === "whatsapp" ? "WhatsApp" : "email"} a ${message.send.toMasked ?? ""}${message.send.redirected ? " (prueba)" : ""}`
-                            : `No enviado${message.send.code ? ` (${message.send.code})` : ""}`}
+                          {deliveryText(message.send, locale)}
                         </span>
                         {message.send.fallbackUrl && (
                           <a
@@ -1490,7 +1806,7 @@ export function GlobalChatbot() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Abrir WhatsApp
+                            {ui.whatsapp}
                           </a>
                         )}
                       </div>
@@ -1525,15 +1841,69 @@ export function GlobalChatbot() {
                         >
                           <RefreshCw aria-hidden="true" />
                         </button>
-                        {message.wasVoice && (
+                        <button
+                          type="button"
+                          onClick={() => void copyMessage(message)}
+                          aria-label={copiedId === message.id ? ui.copied : ui.copy}
+                          className={styles.iconButton}
+                          data-copied={copiedId === message.id || undefined}
+                        >
+                          {copiedId === message.id ? (
+                            <Check aria-hidden="true" />
+                          ) : (
+                            <Copy aria-hidden="true" />
+                          )}
+                        </button>
+                        {speech && speech.id === message.id ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => toggleSpeech(message)}
+                              aria-label={
+                                speech.status === "loading"
+                                  ? ui.preparing
+                                  : speech.status === "playing"
+                                    ? ui.pause
+                                    : ui.resume
+                              }
+                              className={styles.iconButton}
+                              aria-pressed="true"
+                              disabled={speech.status === "loading"}
+                            >
+                              {speech.status === "loading" ? (
+                                <Loader2 aria-hidden="true" className={styles.spin} />
+                              ) : speech.status === "playing" ? (
+                                <Pause aria-hidden="true" />
+                              ) : (
+                                <Play aria-hidden="true" />
+                              )}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={stopSpeech}
+                              aria-label={ui.stopListening}
+                              className={styles.iconButton}
+                            >
+                              <Square aria-hidden="true" />
+                            </button>
+                            <span
+                              className={styles.equalizer}
+                              data-playing={speech.status === "playing" || undefined}
+                              aria-hidden="true"
+                            >
+                              <i />
+                              <i />
+                              <i />
+                            </span>
+                          </>
+                        ) : (
                           <button
                             type="button"
-                            onClick={() => speak(message)}
-                            aria-label={speakingId === message.id ? ui.stopListening : ui.listen}
+                            onClick={() => toggleSpeech(message)}
+                            aria-label={ui.listen}
                             className={styles.iconButton}
-                            aria-pressed={speakingId === message.id}
                           >
-                            <Volume2 aria-hidden="true" />
+                            <Headphones aria-hidden="true" />
                           </button>
                         )}
                       </div>
@@ -1559,7 +1929,7 @@ export function GlobalChatbot() {
                     onClick={() => void requestHandoff()}
                     disabled={isHandoffLoading}
                   >
-                    <Headphones aria-hidden="true" />
+                    <Headset aria-hidden="true" />
                     {isHandoffLoading ? ui.handoffSend : ui.handoff}
                   </button>
                 )}
@@ -1573,6 +1943,12 @@ export function GlobalChatbot() {
                         {ui.handoffEta} <strong>{handoff.eta}</strong>
                       </p>
                       <p className={styles.handoffRef}>#{handoff.reference}</p>
+                      {handoff.notified === false && (
+                        <p className={styles.handoffNote}>
+                          {ui.handoffFallback}{" "}
+                          <a href="tel:+34639778656">639 77 86 56</a>
+                        </p>
+                      )}
                     </div>
                   </div>
                 )}
@@ -1594,6 +1970,7 @@ export function GlobalChatbot() {
                       onChange={(event) => setLoginCode(event.target.value)}
                       inputMode="numeric"
                       autoComplete="username"
+                      maxLength={10}
                       required
                     />
                     <label htmlFor={`${panelId}-password`}>{ui.password}</label>
@@ -1654,7 +2031,6 @@ export function GlobalChatbot() {
                         ? t("voiceListening")
                         : t("placeholder")
                     }
-                    disabled={isGenerating}
                     aria-describedby={`${panelId}-note`}
                   />
                   <button
@@ -1662,14 +2038,20 @@ export function GlobalChatbot() {
                     className={styles.control}
                     data-listening={isListening || isTranscribing || undefined}
                     onClick={isListening ? stopVoiceInput : startVoiceInput}
-                    disabled={isGenerating || isTranscribing}
+                    disabled={isGenerating || isTranscribing || isRequestingMic}
                     aria-label={t("voiceInput")}
                     title={t("voiceInput")}
                     data-tooltip={t("voiceInput")}
                     aria-pressed={isListening}
-                    aria-busy={isTranscribing || undefined}
+                    aria-busy={isTranscribing || isRequestingMic || undefined}
                   >
-                    {isListening ? <MicOff aria-hidden="true" /> : <Mic aria-hidden="true" />}
+                    {isRequestingMic ? (
+                      <Loader2 aria-hidden="true" className={styles.spin} />
+                    ) : isListening ? (
+                      <MicOff aria-hidden="true" />
+                    ) : (
+                      <Mic aria-hidden="true" />
+                    )}
                     {isListening && <span className={styles.recDot} aria-hidden="true" />}
                   </button>
                   {isGenerating ? (

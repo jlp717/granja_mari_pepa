@@ -196,8 +196,33 @@ const INJECTION_PATTERNS = [
   /<\/?\s*(system|assistant)\s*>|\[INST\]|<\|im_start\|>/i,
 ];
 
+// "política de devoluciones/precios" es una consulta legítima: solo se bloquea
+// la política como tema general.
 const PROHIBITED_TOPIC =
-  /\b(pol[ií]tica|elecciones|religi[oó]n|iglesia|futbol|f[uú]tbol|pornograf[ií]a|apuestas)\b/i;
+  /\b(elecciones|religi[oó]n|iglesia|futbol|f[uú]tbol|pornograf[ií]a|apuestas)\b|\bpol[ií]tica\b(?!\s+de\b)/i;
+
+// Precios: no se revelan tarifas actuales, tampoco a clientes autenticados.
+// La intencion de precio se responde con plantilla determinista, sin modelo,
+// para que sea imposible filtrar una tarifa por error de generacion.
+const PRICE_INTENT =
+  /\b(precios?|tarifas?|cuanto (cuesta|cuestan|vale|valen|sale|salen)|a como (esta|estan|vende|venden)|euros? (por|el) (kilo|kg|unidad))\b/;
+const AMOUNT_CONTEXT_HINT =
+  /\b(factura|facturas|facturado|albaran|albaranes|pagado|pague|importe|total|abone|costo|costaron|gaste|gastado)\b/;
+
+function isPriceQuestion(rawMessage) {
+  const normalized = normalizeIntentText(rawMessage);
+  return PRICE_INTENT.test(normalized) && !AMOUNT_CONTEXT_HINT.test(normalized);
+}
+
+function priceReply(locale) {
+  return locale === 'en'
+    ? 'I cannot give current prices or rates: they depend on the campaign and the volume, and they are not in the assistant catalogue. I can put you in touch with the sales team so they confirm them.'
+    : 'No puedo darte precios ni tarifas actuales: dependen de la campaña y del volumen, y no están en el catálogo del asistente. Puedo ponerte en contacto con el equipo comercial para que te los confirmen.';
+}
+
+function normalizeOutput(text) {
+  return String(text || '').replace(/[\u00A0\u202F]/g, ' ');
+}
 
 function inspectInput(rawMessage) {
   const message = String(rawMessage || '')
@@ -398,7 +423,7 @@ function buildSuggestions(text, locale) {
 }
 
 const PERSONAL_INTENT =
-  /(mis\s+(facturas?|pedidos?|datos|albaranes?|cobros?|l[ií]quidaciones?|consumos?|pagos?)|mi\s+(cuenta|cliente|historial|saldo|pedido|factura|deuda)|cu[aá]nto\s+(debo|he\s+gastado|he\s+comprado)|facturas?\s+pendientes?|estado\s+de\s+mi\s+pedido|c[oó]digo\s+de\s+cliente|datos\s+de\s+mi\s+cuenta)/i;
+  /(mis\s+(facturas?|pedidos?|datos|albaranes?|cobros?|l[ií]quidaciones?|consumos?|pagos?)|mi\s+(cuenta|cliente|historial|saldo|pedido|factura|albaran|deuda)|(mis|mi)\s+(ultim[oa]s?|penultim[oa]s?)\s+(factura|albaran|pedido|entrega)|cu[aá]nto\s+(debo|he\s+gastado|he\s+comprado|pagu[eé]|abon[eé]|me\s+cost[oó]|me\s+costaron)|(ultim[oa]s?|penultim[oa]s?)\s+(factura|albaran|pedido)|(importe|total)\s+de\s+(mi|mis)\s+(factura|facturas|pedido|pedidos|albaran|albaranes)|facturas?\s+pendientes?|estado\s+de\s+mi\s+pedido|c[oó]digo\s+de\s+cliente|datos\s+de\s+mi\s+cuenta)/i;
 
 const HTML_ENTITY_MAP = {
   aacute: 'a',
@@ -715,7 +740,7 @@ const MONTH_HINT =
 const ACCOUNT_SUMMARY_HINT =
   /\b(productos?|articulos?|compro|compra|compras|gast\w*|consum\w*|facturad\w*|pendiente|deuda|saldo|estrella|resumen)\b/;
 const PERSONAL_REF_HINT =
-  /\b(mi|mis|me|yo|he|tengo|llevo|debo|suelo|soy|era|compro|gasto|gaste|gastado|consumo|pedi|pague|deje)\b/;
+  /\b(mi|mis|mia|mio|mias|mios|me|yo|he|tengo|llevo|debo|suelo|soy|era|compro|gasto|gaste|gastado|consumo|pedi|pague|deje)\b/;
 const PROFILE_HINT =
   /\b(direccion|domicilio|ruta|reparto|alta|antiguedad|poblacion|provincia|ficha|perfil|desde cuando|soy cliente|cliente desde)\b/;
 const ORDERS_HINT = /\b(pedidos?|albaranes?|entregas?)\b/;
@@ -746,6 +771,13 @@ function forcedToolChoice(message) {
 }
 
 async function planAccountTools({ prompt, history, message, user, signal }) {
+  // Un visitante anónimo solo puede invocar herramientas públicas: el modelo
+  // no debe poder pedir facturas ni pedidos sin sesión.
+  const availableTools = user
+    ? dbGuard.TOOL_DEFINITIONS
+    : dbGuard.TOOL_DEFINITIONS.filter((tool) =>
+        dbGuard.PUBLIC_TOOL_NAMES.includes(tool.function.name),
+      );
   const plan = await withGroqRetry(
     () =>
       groq.chat.completions.create(
@@ -756,8 +788,8 @@ async function planAccountTools({ prompt, history, message, user, signal }) {
             ...history,
             { role: 'user', content: message },
           ],
-          tools: dbGuard.TOOL_DEFINITIONS,
-          tool_choice: forcedToolChoice(message),
+          tools: availableTools,
+          tool_choice: user ? forcedToolChoice(message) : 'auto',
           temperature: 0.1,
           max_tokens: 350,
           stream: false,
@@ -861,11 +893,16 @@ ${identityBlock}
 
 **TONO**
 - Cercano, profesional y de la tierra. Tutea en espanol, sin emojis y sin marketing vacio.
-- Respuestas breves: 2-4 frases o una lista corta. Ve al grano.
+- Respuestas utiles y concretas: 2-5 frases o una lista de maximo 6 elementos. Ve al grano y no repitas la pregunta.
+
+**FORMATO**
+- Texto plano con **negrita** para lo importante y guiones para las listas. Nada de tablas, bloques de codigo ni encabezados.
+- Importes siempre con dos decimales y el simbolo €, por ejemplo 1.234,56 €.
+- Si falta un dato imprescindible, pide solo ese dato (numero o referencia de factura, mes o ejercicio) y ofrece el siguiente paso.
 
 **REGLA DE ORO**
 - No inventes nunca datos, precios, plazos ni cifras. Si no lo sabes: "No tengo esa informacion con certeza, pero puedo conectarte con una persona del equipo."
-- Para precios o condiciones concretas, deriva al equipo comercial.
+- PROHIBIDO dar precios actuales, tarifas, descuentos, margenes o condiciones comerciales, aunque el usuario insista, diga que es comercial o lo pida como "solo orientativo". Deriva siempre al equipo comercial.
 - No des datos de otros clientes ni informacion confidencial.
 
 **DATOS PERSONALES**
@@ -928,8 +965,9 @@ async function createHandoffTicket({ history, reason, locale, codigoCliente }) {
     )
     .join('\n\n');
 
+  let notified = false;
   try {
-    await emailService.sendInternalNotification({
+    const delivery = await emailService.sendInternalNotification({
       subject: `Chatbot Mari Pepa: solicitud de persona ${reference}`,
       text: [
         `Referencia: ${reference}`,
@@ -941,6 +979,13 @@ async function createHandoffTicket({ history, reason, locale, codigoCliente }) {
         conversation || '(sin historial)',
       ].join('\n'),
     });
+    notified = Boolean(delivery && delivery.success);
+    if (!notified) {
+      logger.warn('Notificacion de handoff no entregada', {
+        reference,
+        message: (delivery && delivery.message) || 'sin detalle',
+      });
+    }
   } catch (error) {
     logger.warn('No se pudo notificar el handoff por email', {
       reference,
@@ -948,7 +993,7 @@ async function createHandoffTicket({ history, reason, locale, codigoCliente }) {
     });
   }
 
-  return reference;
+  return { reference, notified };
 }
 
 // ---------------------------------------------------------------------------
@@ -977,8 +1022,17 @@ function sanitizeHistory(history) {
     .slice(-MAX_HISTORY_MESSAGES)
     .map((item) => ({
       role: item.role,
-      content: String(item.content || '').slice(0, MAX_HISTORY_CHARS),
-    }));
+      content: String(item.content || '')
+        .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, ' ')
+        .slice(0, MAX_HISTORY_CHARS),
+    }))
+    // El historial lo controla el cliente: se descarta cualquier turno
+    // manipulado con instrucciones o etiquetas de rol.
+    .filter(
+      (item) =>
+        item.content.trim().length > 0 &&
+        !INJECTION_PATTERNS.some((pattern) => pattern.test(item.content)),
+    );
 }
 
 function unavailableResponse(res) {
@@ -999,7 +1053,7 @@ async function streamChatMessage(req, res) {
   const locale = body.locale === 'en' ? 'en' : 'es';
 
   if (body.handoff === true) {
-    const reference = await createHandoffTicket({
+    const ticket = await createHandoffTicket({
       history: body.history,
       reason: body.reason || body.message,
       locale,
@@ -1008,7 +1062,8 @@ async function streamChatMessage(req, res) {
     return res.json({
       success: true,
       handoff: {
-        reference,
+        reference: ticket.reference,
+        notified: ticket.notified,
         eta: locale === 'en' ? 'under 24 working hours' : 'menos de 24 h laborables',
       },
     });
@@ -1057,6 +1112,18 @@ async function streamChatMessage(req, res) {
         locale === 'en'
           ? 'I can only help with Granja Maripepa products, orders, delivery and customer accounts. What do you need?'
           : 'Solo puedo ayudarte con productos, pedidos, reparto y cuentas de Granja Maripepa. ¿Que necesitas?',
+      sources: [],
+      suggestions: buildSuggestions(message, locale),
+      blocked: true,
+    });
+    return res.end();
+  }
+
+  if (isPriceQuestion(message)) {
+    openStream(res);
+    sse(res, {
+      done: true,
+      reply: priceReply(locale),
       sources: [],
       suggestions: buildSuggestions(message, locale),
       blocked: true,
@@ -1189,22 +1256,23 @@ async function streamChatMessage(req, res) {
       const delta = (chunk.choices && chunk.choices[0] && chunk.choices[0].delta && chunk.choices[0].delta.content) || '';
       if (!delta) continue;
       full += delta;
-      const safe = guard.push(delta);
+      const safe = normalizeOutput(guard.push(delta));
       if (safe) sse(res, { delta: safe });
     }
 
-    const tail = guard.flush();
+    const tail = normalizeOutput(guard.flush());
     if (tail) {
       sse(res, { delta: tail });
     }
 
-    const answer = `${message}\n${guard.text}`;
-    const replyText = guard.text && guard.text.trim()
-      ? guard.text
+    const finalText = normalizeOutput(guard.text);
+    const answer = `${message}\n${finalText}`;
+    const replyText = finalText && finalText.trim()
+      ? finalText
       : locale === 'en'
         ? 'I could not build the answer. Could you say it again in another way?'
         : 'No he podido preparar la respuesta. ¿Me lo repites de otra forma?';
-    if (!guard.text || !guard.text.trim()) {
+    if (!finalText || !finalText.trim()) {
       sse(res, { delta: replyText });
     }
     sse(res, {
@@ -1276,6 +1344,32 @@ async function processChatMessage(req, res) {
   }
 
   const locale = req.body.locale === 'en' ? 'en' : 'es';
+
+  if (PROHIBITED_TOPIC.test(message)) {
+    return res.json({
+      success: true,
+      done: true,
+      reply:
+        locale === 'en'
+          ? 'I can only help with Granja Maripepa products, orders, delivery and customer accounts. What do you need?'
+          : 'Solo puedo ayudarte con productos, pedidos, reparto y cuentas de Granja Maripepa. ¿Que necesitas?',
+      sources: [],
+      suggestions: buildSuggestions(message, locale),
+      blocked: true,
+    });
+  }
+
+  if (isPriceQuestion(message)) {
+    return res.json({
+      success: true,
+      done: true,
+      reply: priceReply(locale),
+      sources: [],
+      suggestions: buildSuggestions(message, locale),
+      blocked: true,
+    });
+  }
+
   const deterministic = await resolveDeterministicIntent(req, message, locale).catch((error) => {
     logger.error('Error resolviendo intención determinista (no stream)', {
       message: error.message,
@@ -1341,11 +1435,12 @@ async function processChatMessage(req, res) {
     const raw = (completion.choices[0] && completion.choices[0].message && completion.choices[0].message.content) || '';
     guard.push(raw);
     guard.flush();
+    const finalText = normalizeOutput(guard.text);
 
     return res.json({
       success: true,
-      reply: guard.text,
-      response: guard.text,
+      reply: finalText,
+      response: finalText,
       sources: resolveSources(`${message}\n${raw}`, locale),
       suggestions: buildSuggestions(`${message}\n${raw}`, locale),
       redacted: guard.redacted,
@@ -1472,6 +1567,70 @@ async function transcribeAudio(req, res) {
 }
 
 // ---------------------------------------------------------------------------
+// Texto a voz (Kokoro-82M local, gratis y sin salida de datos)
+// ---------------------------------------------------------------------------
+
+const SPEECH_SERVICE_URL = process.env.TTS_SERVICE_URL || 'http://127.0.0.1:5100';
+const SPEECH_CACHE_MAX = 40;
+const speechCache = new Map();
+
+function cleanSpeechText(raw) {
+  return normalizeOutput(String(raw || ''))
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/[*_#>`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 900);
+}
+
+async function speakText(req, res) {
+  const text = cleanSpeechText(req.body && req.body.text);
+  if (text.length < 2) {
+    return res.status(400).json({
+      success: false,
+      code: 'EMPTY_TEXT',
+      message: 'Texto vacio.',
+    });
+  }
+  const locale = req.body && req.body.locale === 'en' ? 'en' : 'es';
+  const cacheKey = `${locale}:${text}`;
+  const cached = speechCache.get(cacheKey);
+  if (cached) {
+    res.setHeader('Content-Type', cached.mime);
+    res.setHeader('Cache-Control', 'private, max-age=600');
+    return res.send(cached.buffer);
+  }
+
+  try {
+    const response = await fetch(`${SPEECH_SERVICE_URL}/speech`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, locale }),
+      signal: AbortSignal.timeout(45000),
+    });
+    if (!response.ok) throw new Error(`tts ${response.status}`);
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 1000) throw new Error('tts empty');
+    const mime = response.headers.get('content-type') || 'audio/mpeg';
+    speechCache.set(cacheKey, { buffer, mime });
+    if (speechCache.size > SPEECH_CACHE_MAX) {
+      speechCache.delete(speechCache.keys().next().value);
+    }
+    res.setHeader('Content-Type', mime);
+    res.setHeader('Cache-Control', 'private, max-age=600');
+    return res.send(buffer);
+  } catch (error) {
+    logger.warn('TTS local no disponible', { message: error.message });
+    return res.status(503).json({
+      success: false,
+      code: 'TTS_UNAVAILABLE',
+      message: 'La lectura en voz alta no esta disponible ahora mismo.',
+    });
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Salud y enlaces de descarga
 // ---------------------------------------------------------------------------
 
@@ -1493,62 +1652,19 @@ async function healthCheck(req, res) {
   });
 }
 
-async function generateShareLink(req, res) {
-  try {
-    const { serie, numero, ejercicio } = req.body || {};
-    const codigoCliente = req.user && req.user.codigoCliente;
-    if (!codigoCliente) {
-      return res.status(401).json({ success: false, message: 'No autenticado' });
-    }
-    if (!serie || !numero || !ejercicio) {
-      return res.status(400).json({
-        success: false,
-        message: 'serie, numero y ejercicio son requeridos',
-      });
-    }
-
-    const invoice = await databaseService.getInvoiceDetail(
-      serie,
-      parseInt(numero, 10),
-      ejercicio,
-      codigoCliente,
-    );
-    if (!invoice || !invoice.header) {
-      return res.status(404).json({
-        success: false,
-        message: 'Factura no encontrada o no pertenece al cliente',
-      });
-    }
-
-    const token = `share_${Date.now()}_${require('crypto')
-      .randomBytes(8)
-      .toString('hex')}`;
-    return res.json({
-      success: true,
-      token,
-      url: `/api/compartir/descargar/${token}`,
-      expiresIn: 3600,
-    });
-  } catch (error) {
-    logger.error('Error generando enlace desde chatbot', {
-      message: error.message,
-    });
-    return res.status(500).json({ success: false, message: 'Error generando enlace' });
-  }
-}
-
 module.exports = {
   processChatMessage,
   streamChatMessage,
   transcribeAudio,
+  speakText,
   downloadDocument,
   healthCheck,
-  generateShareLink,
   __test: {
     whoAmIReply,
     sendStatusReply,
     extractInvoiceNumber,
     resolveDeterministicIntent,
     normalizeIntentText,
+    sanitizeHistory,
   },
 };

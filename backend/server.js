@@ -506,6 +506,7 @@ app.delete('/api/cache/all', requireAuth, facturaController.invalidarTodoCache.b
 app.post('/api/chatbot', optionalAuth, chatbotLimiter, chatbotController.processChatMessage);
 app.post('/api/chatbot/stream', optionalAuth, chatbotLimiter, chatbotController.streamChatMessage);
 app.post('/api/chatbot/transcribe', optionalAuth, chatbotLimiter, chatbotController.transcribeAudio);
+app.post('/api/chatbot/speech', optionalAuth, chatbotLimiter, chatbotController.speakText);
 app.get('/api/chatbot/health', chatbotController.healthCheck);
 app.get('/api/chatbot/documento/:token', chatbotLimiter, chatbotController.downloadDocument);
 

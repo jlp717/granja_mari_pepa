@@ -182,7 +182,8 @@ function csrfProtectionAdvanced(req, res, next) {
     '/api/admin/login', // Acceso al panel: sin sesión previa, tras puerta VPN y rate limit
     '/api/chatbot', // Chatbot IA - excluido de CSRF (operación de consulta)
     '/api/chatbot/stream', // Chatbot IA en streaming (SSE)
-    '/api/chatbot/transcribe' // Transcripción de voz del chatbot
+    '/api/chatbot/transcribe', // Transcripción de voz del chatbot
+    '/api/chatbot/speech' // Lectura en voz alta (TTS local)
   ];
 
   // Excluir rutas dinámicas de contacto (protegidas por JWT)

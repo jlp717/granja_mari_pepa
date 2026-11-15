@@ -59,7 +59,7 @@ export function getLocaleFromPathname(pathname: string): string {
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];
   
-  if (firstSegment && locales.includes(firstSegment as any)) {
+  if (firstSegment && (locales as readonly string[]).includes(firstSegment)) {
     return firstSegment;
   }
   

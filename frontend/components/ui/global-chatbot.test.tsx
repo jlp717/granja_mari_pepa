@@ -16,7 +16,7 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
-import { GlobalChatbot } from "./global-chatbot";
+import { GlobalChatbot, pickBestVoice, chunkForSpeech } from "./global-chatbot";
 import apiClient from "@/lib/apiClient";
 jest.mock("@/lib/apiClient", () => ({
   __esModule: true,
@@ -166,5 +166,34 @@ describe("Pepa IA presentation preserves the real chat contract", () => {
     );
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("natural speech", () => {
+  const voices = [
+    { name: "Microsoft Helena - Spanish (Spain)", lang: "es-ES", localService: true },
+    { name: "Microsoft Laura - Spanish (Spain)", lang: "es-ES", localService: true },
+    {
+      name: "Microsoft Elvira Online (Natural) - Spanish (Spain)",
+      lang: "es-ES",
+      localService: false,
+    },
+    { name: "Google español de Estados Unidos", lang: "es-US", localService: false },
+  ];
+
+  it("prefers neural voices and ranks the robotic one last", () => {
+    expect(pickBestVoice(voices, "es")?.name).toContain("Elvira");
+    expect(pickBestVoice(voices.slice(0, 2), "es")?.name).toContain("Laura");
+    expect(pickBestVoice([], "es")).toBeNull();
+  });
+
+  it("splits long answers into punctuated chunks without markdown", () => {
+    const text = `Primera frase con **negrita**. Segunda frase con un [enlace](/es/productos) y más texto. ${"Relleno de prueba. ".repeat(20)}Final.`;
+    const chunks = chunkForSpeech(text, 120);
+    expect(chunks.length).toBeGreaterThan(1);
+    expect(chunks.every((chunk) => chunk.length <= 120)).toBe(true);
+    expect(chunks.every((chunk) => /[.!?]$/.test(chunk))).toBe(true);
+    expect(chunks.join(" ")).not.toContain("**");
+    expect(chunks.join(" ")).not.toContain("](");
   });
 });

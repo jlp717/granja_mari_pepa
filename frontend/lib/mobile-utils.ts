@@ -3,9 +3,14 @@
  * Incluye feedback háptico, gestos y animaciones optimizadas
  */
 
+type HapticKind = 'light' | 'medium' | 'heavy' | 'selection';
+type HapticNavigator = Navigator & {
+  hapticFeedback?: Partial<Record<HapticKind, () => void>>;
+};
+
 // Hook para feedback háptico
 export const useHapticFeedback = () => {
-  const triggerHaptic = (type: 'light' | 'medium' | 'heavy' | 'selection' = 'light') => {
+  const triggerHaptic = (type: HapticKind = 'light') => {
     if (typeof window !== 'undefined' && 'navigator' in window) {
       // Vibration API para Android
       if ('vibrate' in navigator) {
@@ -19,9 +24,8 @@ export const useHapticFeedback = () => {
       }
       
       // iOS Haptic Feedback (si está disponible)
-      if ('hapticFeedback' in navigator) {
-        (navigator as any).hapticFeedback?.[type]?.();
-      }
+      const haptic = navigator as HapticNavigator;
+      haptic.hapticFeedback?.[type]?.();
     }
   };
 
@@ -37,7 +41,7 @@ export const useTouchGestures = () => {
     let touchTimeout: NodeJS.Timeout;
 
     return {
-      onTouchStart: (e: React.TouchEvent) => {
+      onTouchStart: () => {
         touchStartTime = Date.now();
         if (onLongPress) {
           touchTimeout = setTimeout(() => {
@@ -45,7 +49,7 @@ export const useTouchGestures = () => {
           }, 500); // Long press after 500ms
         }
       },
-      onTouchEnd: (e: React.TouchEvent) => {
+      onTouchEnd: () => {
         const touchDuration = Date.now() - touchStartTime;
         clearTimeout(touchTimeout);
         
@@ -157,14 +161,18 @@ export const mobileScrollConfig = {
   }
 };
 
+type BatteryLike = { level: number };
+type BatteryNavigator = Navigator & { getBattery?: () => Promise<BatteryLike> };
+
 // Detectar capacidades del dispositivo
 export const deviceCapabilities = {
   isTouchDevice: () => typeof window !== 'undefined' && 'ontouchstart' in window,
   supportsHover: () => typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches,
   prefersReducedMotion: () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   isLowPowerMode: () => {
-    if (typeof navigator !== 'undefined' && 'getBattery' in navigator) {
-      return (navigator as any).getBattery().then((battery: any) => battery.level < 0.2);
+    const nav = typeof navigator !== 'undefined' ? (navigator as BatteryNavigator) : null;
+    if (nav && typeof nav.getBattery === 'function') {
+      return nav.getBattery().then((battery) => battery.level < 0.2);
     }
     return Promise.resolve(false);
   }
@@ -201,10 +209,13 @@ export const touchStyles = `
 `;
 
 // Polyfill para requestIdleCallback en dispositivos que no lo soportan
+type IdleWindow = Window & { requestIdleCallback?: (callback: () => void) => number };
+
 export const scheduleWork = (callback: () => void, priority: 'high' | 'low' = 'low') => {
   if (typeof window !== 'undefined') {
-    if ('requestIdleCallback' in window && priority === 'low') {
-      (window as any).requestIdleCallback(callback);
+    const idleWindow = window as IdleWindow;
+    if (typeof idleWindow.requestIdleCallback === 'function' && priority === 'low') {
+      idleWindow.requestIdleCallback(callback);
     } else {
       requestAnimationFrame(callback);
     }

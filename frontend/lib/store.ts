@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartItem, Product, UserProfile, PanamarDocument, PanamarFilters, PanamarDocumentsResponse, PanamarSummary } from './types';
+import { CartItem, Product, UserProfile } from './types';
 
 const PANAMAR_CLIENT_CODE = '9999999999';
 
@@ -120,7 +120,7 @@ export const useCartStore = create<CartStore>()(
  */
 export const useAuthStore = create<AuthStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
       isAuthenticated: false,
       isPanamarMode: false,

@@ -68,13 +68,6 @@
   gap: 14px;
   min-width: 0;
 }
-.index {
-  color: var(--kage-accent, #cf3700);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  white-space: nowrap;
-}
 .identity h2 {
   margin: 0;
   font-size: 20px;
@@ -133,45 +126,8 @@
 .welcome .kicker:not(:first-child) {
   margin-top: 30px;
 }
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  margin-top: 14px;
-  border: 1px solid var(--line, rgba(223,231,224,0.14));
-  background: var(--line, rgba(223,231,224,0.14));
-}
-.actions button {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 14px;
-  min-height: 84px;
-  padding: 16px;
-  border: 0;
-  background: var(--ink-2, #0b0f14);
-  color: var(--bone, #dfe7e0);
-  font: inherit;
-  font-size: 13px;
-  text-align: start;
-  cursor: pointer;
-  transition:
-    background 0.5s var(--ease-out, cubic-bezier(0.22,1,0.36,1)),
-    color 0.45s var(--ease, cubic-bezier(0.4,0,0.2,1));
-}
-.actionIndex {
-  grid-column: 1/-1;
-  color: var(--kage-muted, #78837c);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-}
-.actions button:hover {
-  background: var(--ink, #06090d);
-  color: var(--kage-accent, #cf3700);
-}
-.actions svg,
 .questions svg,
-.suggestions svg,
-.attachment svg {
+.suggestions svg {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
@@ -246,20 +202,6 @@
 .suggestions {
   display: grid;
   margin-top: 14px;
-}
-.attachment {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 44px;
-  margin-top: 14px;
-  padding: 9px 12px;
-  border: 1px solid var(--line, rgba(223,231,224,0.14));
-  background: none;
-  color: var(--bone, #dfe7e0);
-  font: inherit;
-  font-size: 12px;
-  cursor: pointer;
 }
 .loading {
   display: flex;
@@ -432,7 +374,6 @@
 
 .messages {
   padding: 18px 16px 8px;
-  gap: 14px;
   background:
     radial-gradient(120% 60% at 50% 0%, rgba(207, 55, 0, 0.05), transparent 60%),
     #06090d;
@@ -826,21 +767,17 @@
   font-size: 11px;
   opacity: 0.75;
 }
-.handoffLink {
-  border: 0;
-  background: none;
-  padding: 0;
+.handoffNote {
+  margin: 6px 0 0;
   color: var(--bone-dim, #aab4ad);
-  font: inherit;
   font-size: 11px;
+  line-height: 1.5;
+}
+.handoffNote a {
+  color: var(--kage-accent, #cf3700);
   text-decoration: underline;
   text-underline-offset: 3px;
-  cursor: pointer;
 }
-.handoffLink:hover {
-  color: var(--kage-accent, #cf3700);
-}
-
 .loginCard {
   display: grid;
   gap: 8px;
@@ -1233,4 +1170,175 @@
 .reviewBar svg {
   width: 14px;
   height: 14px;
+}
+
+/* ============================================================ v4 · auditoría */
+/* El nombre `cue` se resolvía al keyframe global y el cursor de streaming
+   nunca parpadeaba. Se declara en este módulo para que el compilador lo emita. */
+@keyframes cue {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  95% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.caret {
+  animation-duration: 1.1s;
+  animation-timing-function: steps(1, end);
+}
+
+.identity {
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 10px;
+}
+.identity > div {
+  flex: 1 1 auto;
+  min-width: 108px;
+}
+.identity h2,
+.identity p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.brandMark {
+  width: 40px;
+  height: 22px;
+}
+.brandMark img,
+.brandImg {
+  width: 38px;
+  height: auto;
+  object-fit: contain;
+}
+.tools {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+}
+.widget .tools button {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+}
+.widget .tools svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ============================================================ v5 · experiencia */
+/* Entrada suave de cada mensaje: una sola vez por montaje, sin re-animar en
+   cada token del streaming (la key del articulo es estable). */
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.message {
+  animation: msg-in 0.32s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+
+.iconButton[data-copied="true"] {
+  color: var(--kage-accent, #cf3700);
+  border-color: rgba(207, 55, 0, 0.5);
+}
+
+.textarea {
+  overflow-y: auto;
+}
+
+@keyframes spin-soft {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin-soft 0.9s linear infinite;
+}
+
+.control[aria-busy="true"] {
+  color: var(--kage-accent, #cf3700);
+  border-color: rgba(207, 55, 0, 0.55);
+}
+
+/* Indicador de locucion: tres barras que solo se mueven mientras se lee. */
+.equalizer {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 30px;
+  padding: 0 4px;
+}
+.equalizer i {
+  width: 2px;
+  height: 14px;
+  border-radius: 1px;
+  background: var(--kage-accent, #cf3700);
+  transform: scaleY(0.3);
+  transform-origin: bottom;
+}
+.equalizer[data-playing] i {
+  animation: eq-bars 0.9s ease-in-out infinite;
+}
+.equalizer[data-playing] i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.equalizer[data-playing] i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes eq-bars {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message {
+    animation: none;
+  }
+  .spin {
+    animation: none;
+  }
+  .equalizer[data-playing] i {
+    animation: none;
+    transform: scaleY(0.8);
+  }
+}
+
+/* En móvil el panel ocupa toda la pantalla: el lanzador flotante tapaba el
+   botón de enviar del composer. */
+@media (max-width: 560px) {
+  .widget[data-kage-pepa-open] .launcher {
+    display: none;
+  }
+  .widget .tools button {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .textarea {
+    font-size: 16px;
+  }
+  .composer {
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
 }

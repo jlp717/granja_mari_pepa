@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- carga diferida en cliente: evita incluir GSAP en el bundle SSR */
 'use client';
 
 type ScrollTriggerLike = {
