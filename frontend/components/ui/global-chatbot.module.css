@@ -689,6 +689,33 @@
   gap: 6px;
   margin-top: 10px;
 }
+
+.attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.attachments a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(207, 55, 0, 0.45);
+  background: rgba(207, 55, 0, 0.12);
+  color: inherit;
+  font-size: 13px;
+  text-decoration: none;
+}
+.attachments a:hover {
+  background: rgba(207, 55, 0, 0.2);
+  border-color: rgba(207, 55, 0, 0.7);
+}
+.attachments svg {
+  width: 16px;
+  height: 16px;
+}
 .sources a {
   display: inline-flex;
   align-items: center;

@@ -576,6 +576,27 @@ async function resolveDeterministicIntent(req, message, locale) {
     };
   }
 
+  const downloadIntent = await sendTools.buildDocumentLinks({
+    codigoCliente: req.user && req.user.codigoCliente,
+    message,
+    locale,
+  });
+  if (downloadIntent) {
+    return {
+      handled: true,
+      status: 200,
+      payload: {
+        done: true,
+        reply: downloadIntent.reply,
+        attachments: downloadIntent.attachments,
+        sources: [],
+        suggestions: buildSuggestions(message, locale),
+        authenticated: Boolean(req.user),
+        toolsUsed: ['enlace_documentos'],
+      },
+    };
+  }
+
   if (SEND_INTENT.test(intentText)) {
     if (!req.user) {
       return {
@@ -1344,6 +1365,44 @@ async function processChatMessage(req, res) {
 }
 
 // ---------------------------------------------------------------------------
+// Descarga de documentos (PDF suelto o ZIP de facturas)
+// ---------------------------------------------------------------------------
+
+async function downloadDocument(req, res) {
+  const payload = sendTools.readDocumentToken(req.params.token);
+  if (!payload) {
+    return res.status(410).json({
+      success: false,
+      message: 'El enlace ha caducado. Pide uno nuevo en el chat.',
+    });
+  }
+  try {
+    const bundle = await sendTools.buildDocumentBundle(payload);
+    if (!bundle) {
+      return res.status(404).json({
+        success: false,
+        message: 'No se pudo generar el documento.',
+      });
+    }
+    res.setHeader('Content-Type', bundle.contentType);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${bundle.filename}"`,
+    );
+    res.setHeader('Cache-Control', 'private, no-store');
+    return res.send(bundle.buffer);
+  } catch (error) {
+    logger.error('Error generando documento del chatbot', {
+      message: error.message,
+    });
+    return res.status(500).json({
+      success: false,
+      message: 'No se pudo generar el documento.',
+    });
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Voz a texto (Whisper)
 // ---------------------------------------------------------------------------
 
@@ -1482,6 +1541,7 @@ module.exports = {
   processChatMessage,
   streamChatMessage,
   transcribeAudio,
+  downloadDocument,
   healthCheck,
   generateShareLink,
   __test: {

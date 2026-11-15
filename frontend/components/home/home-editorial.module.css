@@ -1128,3 +1128,6 @@
     transform: scaleX(1);
   }
 }
+
+/* The live hall carries the hero; the plate video only hid it. */
+.heroAtmos{ display:none; }

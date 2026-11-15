@@ -83,7 +83,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <HomeForeground chapter="hero" scene={0} />
         <div
           className={styles.heroAtmos}
-          style={{ position: "absolute", inset: 0, zIndex: 0 }}
+          style={{ position: "absolute", inset: 0, zIndex: 0, display: "none" }}
           aria-hidden="true"
         >
           <video

@@ -507,6 +507,7 @@ app.post('/api/chatbot', optionalAuth, chatbotLimiter, chatbotController.process
 app.post('/api/chatbot/stream', optionalAuth, chatbotLimiter, chatbotController.streamChatMessage);
 app.post('/api/chatbot/transcribe', optionalAuth, chatbotLimiter, chatbotController.transcribeAudio);
 app.get('/api/chatbot/health', chatbotController.healthCheck);
+app.get('/api/chatbot/documento/:token', chatbotLimiter, chatbotController.downloadDocument);
 
 // =====================================================
 // ðŸ“¦ PANAMAR - Documentos con productos familias 701-705

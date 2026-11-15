@@ -338,6 +338,7 @@ export function GlobalChatbot() {
             regenerate: "Regenerate",
             retry: "Try again",
             sources: "Sources",
+            downloads: "Downloads",
             listen: "Listen to the answer",
             stopListening: "Stop audio",
             memory: "Memory",
@@ -381,6 +382,7 @@ export function GlobalChatbot() {
             regenerate: "Regenerar",
             retry: "Reintentar",
             sources: "Fuentes",
+            downloads: "Descargas",
             listen: "Escuchar respuesta",
             stopListening: "Detener audio",
             memory: "Memoria",
@@ -623,11 +625,25 @@ export function GlobalChatbot() {
                   (item): item is string => typeof item === "string",
                 )
               : [];
+            const attachments = (Array.isArray(event.attachments)
+              ? event.attachments
+              : []
+            ).filter(
+              (item): item is { label: string; url: string } => {
+                if (!item || typeof item !== "object") return false;
+                const candidate = item as { label?: unknown; url?: unknown };
+                return (
+                  typeof candidate.label === "string" &&
+                  typeof candidate.url === "string"
+                );
+              },
+            );
             updateMessage(assistantId, {
               content: reply,
               streaming: false,
               sources,
               suggestions,
+              attachments,
               redacted: event.redacted === true,
               send:
                 event.send && typeof event.send === "object"
@@ -1427,6 +1443,23 @@ export function GlobalChatbot() {
                       <p className={styles.redactedNote}>
                         <ShieldCheck aria-hidden="true" /> Datos personales protegidos.
                       </p>
+                    )}
+
+                    {message.role === "assistant" && message.attachments && message.attachments.length > 0 && (
+                      <div className={styles.attachments} aria-label={ui.downloads}>
+                        {message.attachments.map((attachment, attachmentIndex) => (
+                          <a
+                            key={`${attachment.url}-${attachmentIndex}`}
+                            href={attachment.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                          >
+                            <FileText aria-hidden="true" />
+                            {attachment.label}
+                          </a>
+                        ))}
+                      </div>
                     )}
 
                     {message.role === "assistant" && message.sources && message.sources.length > 0 && (

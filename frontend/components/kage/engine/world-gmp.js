@@ -17,7 +17,7 @@ export function buildGmpWorld(ctx) {
     texGlow,
     hdr,
   } = ctx;
-  const accent = new THREE.Color().setHSL(190 / 360, 0.95, 0.4);
+  const accent = new THREE.Color(0xcf3700);
   const timber = surface(
     lib("gmpWood", () => texWood(3, { boards: 7 })),
     [4, 1.6],
@@ -55,11 +55,16 @@ export function buildGmpWorld(ctx) {
     return mesh;
   };
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(150, 150), floorMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.set(0, 0, -18);
+  ground.rotation.x = -Math.PI / 2;  ground.position.set(0, 0, -18);
   ground.receiveShadow = true;
   scene.add(ground);
   WORLD.floor = ground;
+  // The hall needs a readable key: cold sky, warm sodium bounce, and one
+  // directional rake so the racking shows an edge instead of a silhouette.
+  scene.add(new THREE.HemisphereLight(0x9cb4c2, 0x1a1210, 0.85));
+  const keyLight = new THREE.DirectionalLight(0xffb070, 1.35);
+  keyLight.position.set(22, 30, -12);
+  scene.add(keyLight);
   WORLD.floorMat = floorMat;
   const sky = new THREE.Mesh(
     new THREE.PlaneGeometry(360, 190),

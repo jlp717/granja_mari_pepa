@@ -48,10 +48,8 @@ it("constructs five real environmental groups with the measured accent", () => {
     });
     expect(count).toBeGreaterThan(4);
   });
-  const color = result.accent.getHSL({});
-  expect(color.h).toBeCloseTo(190 / 360);
-  expect(color.s).toBeCloseTo(0.95);
-  expect(color.l).toBeCloseTo(0.4);
+  const color = result.accent.getHexString();
+  expect(color).toBe("cf3700");
   expect(WORLD.floor.isMesh).toBe(true);
   expect(WORLD.moon.geometry.type).toBe("CircleGeometry");
   expect(scene.children).toContain(result.groups[4]);
