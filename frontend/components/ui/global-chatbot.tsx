@@ -78,6 +78,10 @@ const newId = () =>
 
 const VOICE_RATE = 16000;
 const VOICE_CHUNK_SECONDS = 2.5;
+// WAV silencioso de 0 muestras: desbloquea el audio dentro del gesto del usuario
+// (Safari iOS bloquea play() si se llama tras un await).
+const SILENT_AUDIO =
+  "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
 
 function encodeWav(pcm: Int16Array, sampleRate: number): Blob {
   const header = new ArrayBuffer(44);
@@ -289,6 +293,9 @@ function BrandMark() {
     );
   }
   return (
+    // El logo es un fallback de 44x22 px con cadena de fuentes: no compensa
+    // el optimizador de next/image para un activo tan pequeno.
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={LOGO_SOURCES[index]}
       alt=""
@@ -1148,6 +1155,10 @@ export function GlobalChatbot() {
       const req = speechReqRef.current;
       const text = message.content.slice(0, 900);
       setSpeech({ id: message.id, status: "loading", engine: "server" });
+      // Desbloqueo de audio en el mismo tick del clic (Safari iOS).
+      const audio = new Audio(SILENT_AUDIO);
+      audioRef.current = audio;
+      void audio.play().catch(() => undefined);
       try {
         const response = await fetch("/api/chatbot/speech", {
           method: "POST",
@@ -1160,9 +1171,9 @@ export function GlobalChatbot() {
         const blob = await response.blob();
         if (req !== speechReqRef.current) return;
         const url = URL.createObjectURL(blob);
-        const audio = new Audio(url);
-        audioRef.current = audio;
         audioUrlRef.current = url;
+        audio.src = url;
+        audio.load();
         audio.onended = () => {
           if (audioRef.current === audio) stopSpeech();
         };
@@ -1176,7 +1187,8 @@ export function GlobalChatbot() {
         setSpeech({ id: message.id, status: "playing", engine: "server" });
       } catch {
         if (req !== speechReqRef.current) return;
-        if (audioRef.current) return;
+        if (audioRef.current !== audio) return;
+        stopSpeech();
         speakWithBrowser(message);
       }
     },

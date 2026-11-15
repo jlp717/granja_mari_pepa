@@ -81,7 +81,14 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):  # noqa: N802
         if self.path == "/health":
-            return self._json(200, {"status": "ok", "loaded": sorted(_pipelines)})
+            return self._json(
+                200,
+                {
+                    "status": "ok",
+                    "voices": {locale: voice for locale, (voice, _) in VOICES.items()},
+                    "loaded": sorted(_pipelines),
+                },
+            )
         return self._json(404, {"error": "not found"})
 
     def do_POST(self):  # noqa: N802
