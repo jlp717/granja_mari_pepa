@@ -167,8 +167,21 @@
 }
 
 .heroAtmos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
+}
+
+/* The company plate. A phone photograph of the real bay cannot carry the
+   hero at full sharpness, so it is graded and softened into a ground: the
+   lorry, the sign and the building still read, the pixels do not. */
+.heroPlate {
+  object-fit: cover;
+  object-position: 68% 54%;
+  filter: saturate(0.62) contrast(1.14) brightness(0.42) blur(1.1px);
+  transform: scale(1.04);
 }
 
 .heroAtmosVideo {
@@ -179,12 +192,51 @@
   opacity: 0.92;
 }
 
+.heroBrand {
+  position: absolute;
+  right: var(--pad);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(210px, 21vw, 360px);
+  opacity: 0.94;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+}
+
+.heroBrand img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1100px) {
+  .heroBrand {
+    display: none;
+  }
+}
+
 .heroAtmosVeil {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(4, 7, 10, 0.5) 0%, transparent 34%, rgba(4, 7, 10, 0.58) 100%),
-    linear-gradient(90deg, rgba(4, 7, 10, 0.82) 0%, rgba(4, 7, 10, 0.42) 42%, transparent 68%);
+    radial-gradient(
+      78% 66% at 80% 44%,
+      rgba(207, 55, 0, 0.17),
+      transparent 62%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 7, 10, 0.62) 0%,
+      rgba(4, 7, 10, 0.16) 26%,
+      rgba(4, 7, 10, 0.52) 74%,
+      rgba(4, 7, 10, 0.9) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(4, 7, 10, 0.93) 0%,
+      rgba(4, 7, 10, 0.74) 40%,
+      rgba(4, 7, 10, 0.3) 66%,
+      rgba(4, 7, 10, 0.58) 100%
+    );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -499,6 +551,15 @@
   z-index: 0;
 }
 
+/* The band behind "how we work" is the company's own bay: the sign, the
+   lorry, the mountain. A rendered loop of an anonymous warehouse was the one
+   thing on the page that said nothing about Mari Pepa. */
+.systemPhoto {
+  object-fit: cover;
+  object-position: 26% 34%;
+  filter: saturate(0.68) contrast(1.14) brightness(0.46) blur(0.6px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .systemVideo {
     display: none;
@@ -509,8 +570,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(4, 7, 10, 0.22), rgba(4, 7, 10, 0.86) 78%),
-    linear-gradient(90deg, rgba(4, 7, 10, 0.72), transparent 62%);
+    linear-gradient(180deg, rgba(4, 7, 10, 0.34), rgba(4, 7, 10, 0.95) 70%),
+    linear-gradient(90deg, rgba(4, 7, 10, 0.88), rgba(4, 7, 10, 0.32) 58%, transparent 84%);
 }
 
 .systemHead {
@@ -1145,5 +1206,3 @@
   }
 }
 
-/* The live hall carries the hero; the plate video only hid it. */
-.heroAtmos{ display:none; }

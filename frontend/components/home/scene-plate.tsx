@@ -66,10 +66,22 @@ const SCENE_LAYER: Record<
     name: "gate",
     slots: [{ cls: "fg-pine", file: "01-umbral" }],
   },
-  1: { name: "pathways", slots: [] },
-  2: { name: "lessons", slots: [] },
-  3: { name: "eternity", slots: [] },
-  4: { name: "foot", slots: [] },
+  1: {
+    name: "pathways",
+    slots: [{ cls: "fg-bush", file: "03-catalogo" }],
+  },
+  2: {
+    name: "lessons",
+    slots: [{ cls: "fg-wall", file: "02-frio" }],
+  },
+  3: {
+    name: "eternity",
+    slots: [{ cls: "fg-grass", file: "04-ruta-scrub" }],
+  },
+  4: {
+    name: "foot",
+    slots: [{ cls: "fg-bush", file: "02-frio" }],
+  },
 };
 
 export function HomeForeground({

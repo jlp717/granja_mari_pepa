@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import type { Locale } from "@/i18n";
@@ -26,54 +26,6 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
   const copy = getHomeEditorialCopy(locale);
   const { magazines, openMagazine, openLibrary } = useMagazines();
   const [activeFamily, setActiveFamily] = useState(0);
-  const atmos = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = atmos.current;
-    if (!video) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const wide = window.matchMedia("(min-width: 901px)");
-    if (reduce.matches || !wide.matches) return;
-
-    let frame = 0;
-    let queued = false;
-    let ready = false;
-
-    const onReady = () => {
-      ready = true;
-      video.pause();
-      paint();
-    };
-    const paint = () => {
-      queued = false;
-      if (!ready || !video.duration) return;
-      const rect = video.getBoundingClientRect();
-      const span = Math.max(1, rect.height);
-      const progress = Math.min(1, Math.max(0, window.scrollY / span));
-      const target = progress * Math.max(0, video.duration - 0.05);
-      if (Math.abs(video.currentTime - target) > 0.015) {
-        video.currentTime = target;
-      }
-    };
-    const request = () => {
-      if (queued) return;
-      queued = true;
-      frame = requestAnimationFrame(paint);
-    };
-
-    video.addEventListener("loadedmetadata", onReady);
-    if (video.readyState >= 1) onReady();
-
-    window.addEventListener("scroll", request, { passive: true });
-    window.addEventListener("resize", request);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      video.removeEventListener("loadedmetadata", onReady);
-      window.removeEventListener("scroll", request);
-      window.removeEventListener("resize", request);
-    };
-  }, []);
   const catalogue = "/productos";
   const contact = "/contacto";
 
@@ -81,19 +33,17 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
     <>
       <Chapter id="hero" scene={0} className={`hero ${styles.hero}`} title={copy.hero.eyebrow}>
         <HomeForeground chapter="hero" scene={0} />
-        <div
-          className={styles.heroAtmos}
-          style={{ position: "absolute", inset: 0, zIndex: 0, display: "none" }}
-          aria-hidden="true"
-        >
-          <video
-            ref={atmos}
-            className={styles.heroAtmosVideo}
-            src="/kage/mp/video/hero-scrub.mp4"
-            poster="/kage/mp/plates/umbral-bluehour.webp"
-            muted
-            playsInline
-            preload="metadata"
+        {/* The hero is the company itself: the Lorca facility, the cold
+            lorry at the door, the sign over the bay. Graded down so the
+            headline owns the left half; the hall world takes over below. */}
+        <div className={styles.heroAtmos} aria-hidden="true">
+          <Image
+            src="/kage/careers/careers-facility.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroPlate}
           />
           <div className={styles.heroAtmosVeil} />
         </div>
@@ -123,6 +73,18 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
                 <ArrowRight size={14} aria-hidden="true" />
               </a>
             </div>
+          </div>
+          {/* Kage gives its wordmark the architecture; ours gets the negative
+              space beside the copy, at a size that reads before the nav does. */}
+          <div className={styles.heroBrand} aria-hidden="true">
+            <Image
+              src="/kage/brand/logo-alpha.png"
+              alt=""
+              width={600}
+              height={182}
+              priority
+              unoptimized
+            />
           </div>
         </div>
 
@@ -203,15 +165,12 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
       >
         <HomeForeground chapter="sistema" scene={2} />
         <div className={styles.systemBand} data-rv="fade">
-          <video
-            className={styles.systemVideo}
-            src="/kage/mp/video/sistema-dawn.mp4"
-            poster="/kage/mp/video/sistema-plano-poster.webp"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
+          <Image
+            src="/kage/careers/careers-02.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className={styles.systemPhoto}
           />
           <div className={styles.systemVeil} aria-hidden="true" />
           <div className={styles.systemHead}>

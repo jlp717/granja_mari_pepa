@@ -928,10 +928,13 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
    Kage's own pieces are cut for a full-bleed stage; ours are photographic and
    at 100% width they ate the headline. Cap the plane, then keep the two centre
    anchors out of the middle third. */
+.fg .fg-el{
+  max-width:min(38vw,520px);
+}
 .fg .fg-el > img{
-  width:auto;
-  max-width:min(44vw,620px);
-  max-height:min(32svh,400px);
+  width:100%;
+  max-width:none;
+  max-height:none;
 }
 [data-fg="lessons"] .fg-grass{ left:auto; right:18%; bottom:-96px; width:min(30vw,420px); }
 [data-fg="foot"] .fg-stones{ left:-7%; right:auto; bottom:-96px; width:min(26vw,360px); }
