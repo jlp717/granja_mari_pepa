@@ -20,7 +20,7 @@ Dependencias del sistema: `ffmpeg` y `espeak-ng` (APT).
 Se eligen por entorno al arrancar el servicio:
 
 ```
-TTS_VOICE_ES=em_santa   # por defecto ef_dora
+TTS_VOICE_ES=em_santa   # por defecto em_santa
 TTS_VOICE_EN=af_heart
 ```
 

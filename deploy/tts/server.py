@@ -25,7 +25,7 @@ PORT = 5100
 MAX_CHARS = 900
 SAMPLE_RATE = 24000
 VOICES = {
-    "es": (os.environ.get("TTS_VOICE_ES", "ef_dora"), "e"),
+    "es": (os.environ.get("TTS_VOICE_ES", "em_santa"), "e"),
     "en": (os.environ.get("TTS_VOICE_EN", "af_heart"), "a"),
 }
 
