@@ -5,8 +5,13 @@
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
+const { loadEnvConfig } = require('@next/env');
 
 const dev = process.env.NODE_ENV !== 'production';
+// Custom server: Next does not load .env files here. Load them before the
+// middleware and route handlers read private variables such as
+// ADMIN_ACCESS_SECRET.
+loadEnvConfig(process.cwd(), dev);
 const port = parseInt(process.env.PORT || '3001', 10);
 const app = next({ dev });
 const handle = app.getRequestHandler();
