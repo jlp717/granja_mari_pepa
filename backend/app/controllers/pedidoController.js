@@ -93,9 +93,19 @@ async function obtenerPedidos(req, res) {
     ]);
 
     const pad = (value) => String(value || 0).padStart(2, '0');
+    const pick = (row, upper, lower) =>
+      row[upper] !== undefined ? row[upper] : row[lower];
     const pedidos = (pedidosRaw || []).map((p) => {
-      const facturas = Number(p.facturas) || 0;
-      const pendiente = Number(p.pendiente) || 0;
+      const numero = pick(p, 'NUMERO', 'numero');
+      const dia = pick(p, 'DIA', 'dia');
+      const mes = pick(p, 'MES', 'mes');
+      const ano = pick(p, 'ANO', 'ano');
+      const facturas = Number(pick(p, 'FACTURAS', 'facturas')) || 0;
+      const pendiente = Number(pick(p, 'PENDIENTE', 'pendiente')) || 0;
+      const importePedido =
+        Number(pick(p, 'IMPORTEPEDIDO', 'importePedido')) || 0;
+      const importeFacturado =
+        Number(pick(p, 'IMPORTEFACTURADO', 'importeFacturado')) || 0;
       const estadoPago =
         facturas === 0
           ? 'Sin facturar'
@@ -104,14 +114,11 @@ async function obtenerPedidos(req, res) {
             : 'Pagado';
       return {
         ...p,
-        numeroPedido: p.numero,
-        fecha: `${pad(p.dia)}/${pad(p.mes)}/${p.ano || ''}`,
-        importeTotal:
-          Number(p.importeFacturado) > 0
-            ? Number(p.importeFacturado)
-            : Number(p.importePedido) || 0,
-        importePedido: Number(p.importePedido) || 0,
-        importeFacturado: Number(p.importeFacturado) || 0,
+        numeroPedido: numero,
+        fecha: `${pad(dia)}/${pad(mes)}/${ano || ''}`,
+        importeTotal: importeFacturado > 0 ? importeFacturado : importePedido,
+        importePedido,
+        importeFacturado,
         facturas,
         pendiente,
         estadoPago,
