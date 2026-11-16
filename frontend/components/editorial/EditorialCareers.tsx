@@ -23,12 +23,20 @@ import {
   HeartHandshake,
   HardHat,
   Compass,
+  Factory,
+  ShoppingBasket,
+  Code2,
+  Snowflake,
+  CalendarDays,
 } from "lucide-react";
 import styles from "./careers.module.css";
 import {
   DEPARTMENTS,
   LOCATIONS,
   SECTORS,
+  resolveJobAccent,
+  resolveJobIconName,
+  sectorForJob,
   type Job,
   type JobIcon,
 } from "./careers-data";
@@ -39,6 +47,12 @@ const ICONS: Record<JobIcon, typeof Warehouse> = {
   sales: TrendingUp,
   admin: FileText,
   quality: Shield,
+  factory: Factory,
+  shopping: ShoppingBasket,
+  code: Code2,
+  handshake: HeartHandshake,
+  cold: Snowflake,
+  calendar: CalendarDays,
 };
 
 type BadField = "nombre" | "email" | "telefono" | "file";
@@ -202,6 +216,10 @@ export function EditorialCareers({
   const [cvSector, setCvSector] = useState("Otro");
   const [cvJob, setCvJob] = useState("");
   const activeJob = jobs.find((job) => job.slug === cvJob) || null;
+  const activeSector = activeJob ? sectorForJob(activeJob) : cvSector;
+  const sectorOptions = SECTORS.includes(activeSector)
+    ? SECTORS
+    : [...SECTORS, activeSector];
   const [cvSubmitted, setCvSubmitted] = useState(false);
   const [cvSending, setCvSending] = useState(false);
   const [cvError, setCvError] = useState("");
@@ -311,7 +329,7 @@ export function EditorialCareers({
           name,
           email,
           phone,
-          sector: cvSector,
+          sector: activeSector,
           message,
           jobId: jobSlug,
           jobTitle: selectedJob?.title || "",
@@ -453,7 +471,7 @@ export function EditorialCareers({
                     >
                       <span
                         className={styles.liveDot}
-                        style={{ background: job.accent }}
+                        style={{ background: resolveJobAccent(job.accent, job.icon) }}
                         aria-hidden="true"
                       />
                       <span className={styles.liveBody}>
@@ -796,7 +814,7 @@ export function EditorialCareers({
           ) : (
             <ul className={styles.jobList}>
               {filtered.map((job) => {
-                const Icon = ICONS[job.icon];
+                const Icon = ICONS[resolveJobIconName(job.icon)] ?? Warehouse;
                 return (
                   <li key={job.slug} data-rv="up">
                     <Link
@@ -806,7 +824,7 @@ export function EditorialCareers({
                     >
                       <span
                         className={styles.jobIcon}
-                        style={{ color: job.accent }}
+                        style={{ color: resolveJobAccent(job.accent, job.icon) }}
                       >
                         <Icon size={22} aria-hidden="true" />
                       </span>
@@ -1033,13 +1051,19 @@ export function EditorialCareers({
                   <label className={styles.field}>
                     <span>
                       {isEs ? "Sector de interés" : "Sector of interest"} *
+                      {activeJob
+                        ? isEs
+                          ? " · según la oferta"
+                          : " · from the role"
+                        : ""}
                     </span>
                     <select
                       name="cv-sector"
-                      value={cvSector}
+                      value={activeSector}
                       onChange={(e) => setCvSector(e.target.value)}
+                      disabled={!!activeJob}
                     >
-                      {SECTORS.map((s) => (
+                      {sectorOptions.map((s) => (
                         <option key={s} value={s}>
                           {s}
                         </option>

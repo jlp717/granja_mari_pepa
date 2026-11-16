@@ -1455,6 +1455,20 @@
   outline-color: var(--bone);
 }
 
+.colorAuto {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 8px;
+}
+
+.colorDot {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--line);
+  display: inline-block;
+}
+
 .uploadBox {
   display: flex;
   align-items: center;

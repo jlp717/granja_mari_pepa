@@ -17,7 +17,9 @@ import styles from "./admin.module.css";
 import {
   DEPARTMENTS,
   LOCATIONS,
-  type JobIcon,
+  jobIconLabel,
+  resolveJobAccent,
+  resolveJobIconName,
 } from "@/components/editorial/careers-data";
 import {
   JOB_ACCENTS,
@@ -119,6 +121,7 @@ export function AdminOffers({
   const openEdit = (job: AdminJob) => {
     setEditing({
       ...job,
+      icon: jobIconLabel(job.icon),
       responsibilities: [...job.responsibilities],
       requirements: [...job.requirements],
       offers: [...job.offers],
@@ -161,8 +164,9 @@ export function AdminOffers({
   };
 
   const listValue = (items: string[]) => items.join("\n");
-  const splitValue = (value: string) =>
-    value.split("\n").map((line) => line.trim());
+  // Sin recortar al escribir: el espacio final de cada línea debe sobrevivir
+  // mientras se teclea. El recorte ocurre solo al guardar.
+  const splitValue = (value: string) => value.split("\n");
   const filled = (items: string[]) => items.filter((item) => item.trim().length > 0);
 
   const submit = async (event: FormEvent) => {
@@ -183,11 +187,16 @@ export function AdminOffers({
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
     const now = new Date().toISOString();
+    const icon = resolveJobIconName(
+      editing.icon || editing.department || editing.title,
+    );
     setSaving(true);
     setSubmitError("");
     try {
       await onSave({
         ...editing,
+        icon,
+        accent: resolveJobAccent(editing.accent, icon),
         slug: uniqueSlug(slug, jobs, editing.id),
         title: editing.title.trim(),
         description: editing.description.trim(),
@@ -209,6 +218,10 @@ export function AdminOffers({
 
   const isPublic = editing ? editing.status === "published" : false;
   const isExisting = editing ? jobs.some((job) => job.id === editing.id) : false;
+  const previewIcon = resolveJobIconName(
+    editing?.icon || editing?.department || editing?.title || "",
+  );
+  const previewAccent = resolveJobAccent(editing?.accent, previewIcon);
 
   return (
     <div className={styles.page}>
@@ -563,17 +576,24 @@ export function AdminOffers({
               <section className={styles.formSection}>
                 <h3>Etiqueta visual</h3>
                 <div className={styles.formGrid}>
-                  <label className={styles.field}>
+                  <label className={`${styles.field} ${styles.fieldWide}`}>
                     <span>Icono</span>
-                    <select
+                    <input
+                      list="admin-job-icons"
                       value={editing.icon}
-                      onChange={(event) => set("icon", event.target.value as JobIcon)}
-                      className={styles.selectInput}
-                    >
+                      onChange={(event) => set("icon", event.target.value)}
+                      className={styles.input}
+                      placeholder="Escribe el concepto: almacén, reparto, calidad…"
+                    />
+                    <datalist id="admin-job-icons">
                       {JOB_ICONS.map((icon) => (
-                        <option key={icon.value} value={icon.value}>{icon.label}</option>
+                        <option key={icon.value} value={icon.label} />
                       ))}
-                    </select>
+                    </datalist>
+                    <em className={styles.formHint}>
+                      Acepta cualquier palabra: si no coincide con un icono
+                      conocido, se genera uno estable a partir del texto.
+                    </em>
                   </label>
                   <div className={styles.field}>
                     <span>Color</span>
@@ -589,6 +609,21 @@ export function AdminOffers({
                           aria-pressed={editing.accent === accent}
                         />
                       ))}
+                    </div>
+                    <div className={styles.colorAuto}>
+                      <span
+                        className={styles.colorDot}
+                        style={{ background: previewAccent }}
+                        aria-hidden="true"
+                      />
+                      <button
+                        type="button"
+                        className={styles.secondaryBtn}
+                        onClick={() => set("accent", "")}
+                        aria-pressed={!editing.accent}
+                      >
+                        {editing.accent ? "Color automático" : "Automático activo"}
+                      </button>
                     </div>
                   </div>
                 </div>

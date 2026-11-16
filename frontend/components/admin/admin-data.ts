@@ -1,4 +1,4 @@
-import type { Job, JobIcon } from "@/components/editorial/careers-data";
+import { JOB_ICON_OPTIONS, type Job, type JobIcon } from "@/components/editorial/careers-data";
 
 export type JobStatus = "published" | "draft";
 export type MagazineStatus = "published" | "draft";
@@ -134,13 +134,8 @@ export interface AdminSession {
   current: boolean;
 }
 
-export const JOB_ICONS: Array<{ value: JobIcon; label: string }> = [
-  { value: "warehouse", label: "Almacén" },
-  { value: "truck", label: "Reparto" },
-  { value: "sales", label: "Ventas" },
-  { value: "admin", label: "Administración" },
-  { value: "quality", label: "Calidad" },
-];
+export const JOB_ICONS: Array<{ value: JobIcon; label: string }> =
+  JOB_ICON_OPTIONS.map(({ value, label }) => ({ value, label }));
 
 export const JOB_ACCENTS = ["#C24A1F", "#5C6238", "#9CB4C2", "#C9A24A"];
 
@@ -534,8 +529,8 @@ export function emptyJob(): AdminJob {
     requirements: [],
     offers: [],
     details: [],
-    icon: "warehouse",
-    accent: JOB_ACCENTS[0],
+    icon: "",
+    accent: "",
     status: "draft",
     createdAt: now,
     updatedAt: now,
