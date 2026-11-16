@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-const CHECK_INTERVAL_MS = 5000;
-const REQUEST_TIMEOUT_MS = 3500;
+const CHECK_INTERVAL_MS = 2500;
+const REQUEST_TIMEOUT_MS = 2000;
 
 /**
  * The panel is only served from the internal network. If the VPN drops, every
@@ -50,6 +50,7 @@ export function AdminVpnGuard() {
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("online", onVisible);
     window.addEventListener("offline", onVisible);
+    window.addEventListener("pageshow", onVisible);
     void check();
 
     return () => {
@@ -58,6 +59,7 @@ export function AdminVpnGuard() {
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("online", onVisible);
       window.removeEventListener("offline", onVisible);
+      window.removeEventListener("pageshow", onVisible);
     };
   }, []);
 
