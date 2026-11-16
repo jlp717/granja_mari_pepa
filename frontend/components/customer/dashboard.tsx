@@ -3441,10 +3441,10 @@ export function CustomerDashboard() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl w-full max-w-5xl h-[95vh] sm:h-[90vh] overflow-hidden flex flex-col border border-border"
+              className="flex h-[calc(100dvh-1rem)] max-h-[calc(100dvh-1rem)] w-full max-w-5xl flex-col overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl sm:h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-2rem)]"
             >
               {/* Header - Responsive */}
-              <div className="border-b border-[var(--line)] bg-[var(--ink-2)] p-3 text-foreground sm:p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+              <div className="border-b border-[var(--line)] bg-[var(--ink-2)] p-3 text-foreground sm:p-4 flex shrink-0 flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                   <div className="min-w-0">
@@ -3476,7 +3476,7 @@ export function CustomerDashboard() {
               </div>
 
               {/* PDF Viewer - con padding ajustado */}
-              <div className="flex-1 bg-[var(--ink)] p-2 sm:p-4 relative overflow-auto">
+              <div className="flex-1 min-h-0 bg-[var(--ink)] p-2 sm:p-4 relative overflow-auto">
                 {loadingPdf ? (
                   <div className="absolute inset-0 flex items-center justify-center bg-[var(--ink)]">
                     <div className="text-center">
@@ -3511,7 +3511,7 @@ export function CustomerDashboard() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed inset-0 flex items-center justify-center z-50 p-4"
             >
-              <div className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl max-w-md w-full overflow-hidden border border-border">
+              <div className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl">
                 {/* Header */}
                 <div className="border-b border-[var(--line)] p-6">
                   <div className="flex items-start justify-between gap-4">
@@ -3622,7 +3622,7 @@ export function CustomerDashboard() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl p-8 max-w-md w-full border border-border"
+              className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] p-6 shadow-2xl sm:p-8"
             >
               <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] pb-5 mb-6">
                 <div>
@@ -3923,7 +3923,7 @@ pedidos@granjamaripepa.com`}
                   stiffness: 300,
                   damping: 30
                 }}
-                className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl p-8 max-w-md w-full border border-border"
+                className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] p-6 shadow-2xl sm:p-8"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="space-y-6">
