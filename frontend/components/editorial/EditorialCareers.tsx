@@ -231,9 +231,11 @@ export function EditorialCareers({
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const job = params.get("puesto") || "";
+    // Se aplica al instante: si llega una candidatura antes que este efecto,
+    // el puesto y el sector deben estar ya fijados, no depender del scroll.
+    if (job && jobs.some((item) => item.slug === job)) setCvJob(job);
+    if (window.location.hash !== "#careers-cv") return;
     const timer = window.setTimeout(() => {
-      if (job && jobs.some((item) => item.slug === job)) setCvJob(job);
-      if (window.location.hash !== "#careers-cv") return;
       const target = document.getElementById("careers-cv");
       if (!target) return;
       const top = target.getBoundingClientRect().top + window.scrollY - 96;
