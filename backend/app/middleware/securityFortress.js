@@ -179,6 +179,7 @@ function csrfProtectionAdvanced(req, res, next) {
     '/api/clientes/enviar-factura-email',
     '/api/public/applications', // Formulario público de empleo
     '/api/public/cv', // Currículum del formulario público
+    '/api/public/contact', // Formulario público de contacto
     '/api/admin/login', // Acceso al panel: sin sesión previa, tras puerta VPN y rate limit
     '/api/chatbot', // Chatbot IA - excluido de CSRF (operación de consulta)
     '/api/chatbot/stream', // Chatbot IA en streaming (SSE)

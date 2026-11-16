@@ -312,6 +312,7 @@ const publicUploadTimeout = (ms) => (req, res, next) => {
 };
 app.use('/api/public/cv', publicUploadTimeout(180000));
 app.use('/api/public/applications', publicUploadTimeout(25000));
+app.use('/api/public/contact', publicUploadTimeout(25000));
 app.use('/api/public', publicRouter);
 
 // Archivos subidos desde el panel (PDF de revistas y portadas)

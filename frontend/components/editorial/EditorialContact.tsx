@@ -85,6 +85,7 @@ export function EditorialContact({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(parsed.data),
+          signal: AbortSignal.timeout(30000),
         });
         const data = (await response.json().catch(() => null)) as {
           message?: string;
