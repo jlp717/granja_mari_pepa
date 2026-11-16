@@ -28,14 +28,16 @@ const pdf = "%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\ntrailer<</Root 1 0 R>>\n%
 // 400 es la respuesta esperada al enviar datos inválidos a propósito.
 http.setResponseCallback(http.expectedStatuses(200, 201, 400));
 
-const scenarios = {
-  validacion: {
+const scenarios = {};
+const validationIterations = Number(__ENV.ITERATIONS ?? 3);
+if (validationIterations > 0) {
+  scenarios.validacion = {
     executor: "per-vu-iterations",
     vus: 1,
-    iterations: Number(__ENV.ITERATIONS || 3),
+    iterations: validationIterations,
     exec: "validation",
-  },
-};
+  };
+}
 if (allowWrites) {
   scenarios.escritura = {
     executor: "per-vu-iterations",
