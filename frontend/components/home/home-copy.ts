@@ -53,7 +53,7 @@ export interface HomeEditorialCopy {
 
 const es: HomeEditorialCopy = {
   hero: {
-    eyebrow: "Granja Maripepa · Lorca, 1966",
+    eyebrow: "Maripepa · Lorca, 1966",
     title: "Lo que llega a tu cocina empieza en Lorca.",
     lead: "Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería.",
     primary: "Ver la gama",
@@ -141,7 +141,7 @@ const es: HomeEditorialCopy = {
     lorca: {
       name: "Lorca · Murcia",
       address: "Av. Francisco Jimeno Sola, 3 · Pol. Saprelorca",
-      maps: "https://maps.google.com/?q=Granja+Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca",
+      maps: "https://maps.google.com/?q=Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca",
     },
     viator: {
       name: "Viator · Almería",
@@ -159,7 +159,7 @@ const es: HomeEditorialCopy = {
 
 const en: HomeEditorialCopy = {
   hero: {
-    eyebrow: "Granja Maripepa · Lorca, 1966",
+    eyebrow: "Maripepa · Lorca, 1966",
     title: "What reaches your kitchen starts in Lorca.",
     lead: "We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería.",
     primary: "Explore the range",
@@ -246,7 +246,7 @@ const en: HomeEditorialCopy = {
     lorca: {
       name: "Lorca · Murcia",
       address: "Av. Francisco Jimeno Sola, 3 · Saprelorca industrial park",
-      maps: "https://maps.google.com/?q=Granja+Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca",
+      maps: "https://maps.google.com/?q=Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca",
     },
     viator: {
       name: "Viator · Almería",

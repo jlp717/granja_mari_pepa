@@ -11,7 +11,7 @@ async function testLoginNoEmail() {
         console.log('='.repeat(80));
 
         const customerCode = '4300009900';
-        const password = '23224478K'; // NIF usado como contraseña legacy
+        const password = (process.env.TEST_NIF || '00000000T'); // NIF usado como contraseña legacy
         const ipAddress = '127.0.0.1';
         const userAgent = 'Test Script';
 

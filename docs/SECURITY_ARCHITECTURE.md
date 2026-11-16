@@ -17,7 +17,7 @@
 
 ## Resumen Ejecutivo
 
-Este documento describe el diseño e implementación de un **sistema de autenticación de nivel bancario** para Granja Mari Pepa, que reemplaza el sistema legacy inseguro (código cliente + NIF como contraseña) con una arquitectura moderna que cumple con:
+Este documento describe el diseño e implementación de un **sistema de autenticación de nivel bancario** para Mari Pepa, que reemplaza el sistema legacy inseguro (código cliente + NIF como contraseña) con una arquitectura moderna que cumple con:
 
 - **NIST SP 800-63B** (Digital Identity Guidelines - Authentication and Lifecycle Management)
 - **OWASP Authentication Cheat Sheet 2025**
@@ -885,7 +885,7 @@ Este sistema de autenticación implementa las **mejores prácticas 2025** para s
 
 ---
 
-**Documentado por:** Sistema de Autenticación Segura - Granja Mari Pepa
+**Documentado por:** Sistema de Autenticación Segura - Mari Pepa
 **Fecha:** 2025-01-15
 **Versión:** 1.0
 **Cumplimiento:** NIST SP 800-63B, OWASP 2025

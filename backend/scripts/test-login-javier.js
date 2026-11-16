@@ -11,7 +11,7 @@ async function testLoginJavier() {
 
     try {
         const customerCode = 'TEST_JAVIER';
-        const password = 'TEST123';
+        const password = process.env.TEST_PASSWORD || '';
         const ipAddress = '127.0.0.1';
         const userAgent = 'Test Script - Login Javier';
 

@@ -11,7 +11,7 @@ const odbc = require('odbc');
 async function main() {
   console.log('=== DIAGNÓSTICO FINAL: DSED.LACLAE + DSEDAC.LAC ===\n');
 
-  const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+  const connectionString = process.env.ODBC_CONNECTION_STRING;
   
   let conn;
   try {

@@ -16,7 +16,7 @@ async function resetPasswordToNif() {
     console.log(`🔄 RESET PASSWORD A NIF PARA: ${customerCode}`);
     console.log('========================================\n');
 
-    const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+    const connectionString = process.env.ODBC_CONNECTION_STRING;
     let cn;
 
     try {

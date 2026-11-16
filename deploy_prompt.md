@@ -1,4 +1,4 @@
-### Prompt para Despliegue Completo de la Web "Granja Mari Pepa"
+### Prompt para Despliegue Completo de la Web "Mari Pepa"
 
 #### Contexto del Proyecto
 - **Dominio**: `https://mari-pepa.com` (gestionado en Sys4Net, con posibilidad de usar Cloudflare).

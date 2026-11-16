@@ -281,7 +281,7 @@ export function AdminApplications({
                     selected.email,
                     selected.jobTitle
                       ? `Respuesta a tu candidatura — ${selected.jobTitle}`
-                      : "Respuesta a tu candidatura — Granja Maripepa",
+                      : "Respuesta a tu candidatura — Maripepa",
                   )}
                   target="_blank"
                   rel="noopener noreferrer"

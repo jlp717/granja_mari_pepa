@@ -8,7 +8,7 @@
 
 ## Learned Workspace Facts
 
-- Este repo es la web mari-pepa.com (Next.js + Supabase) de Granja Mari Pepa, distribución HORECA. El libro de IVA repercutido y la regeneración de facturas Panamar viven aquí. La app de movilidad es otro repo (`gmp_app_mobilidad`) y su rama de referencia es `test`, no `main`.
+- Este repo es la web mari-pepa.com (Next.js + Supabase) de Mari Pepa, distribución HORECA. El libro de IVA repercutido y la regeneración de facturas Panamar viven aquí. La app de movilidad es otro repo (`gmp_app_mobilidad`) y su rama de referencia es `test`, no `main`.
 - El rediseño público va en la rama `rediseno/v3`. El canon está en `docs/redesign/` (DIRECCION-DE-ARTE.md, DESIGN.md, DECISIONES.md). Concepto «Cámara y albarán». Acento `--mp-accent` `#cf3700`, no el violeta de Stripe `#533afd`. Tipografías: Barlow Condensed, Source Sans 3 y Source Code Pro. El movimiento usa solo valores medidos (opacidad 0,5 s ease, transform 0,8 s curva Stripe, marquesina 28 s lineal) y respeta `prefers-reduced-motion`.
 - La guía de generación de assets está en `docs/redesign/art/GUIA-GENERACION-ASSETS.md`. Entrega web: `.webp` / `.mp4` / `.glb` bajo `frontend/public/kage/`.
 - El desarrollo local es `npm run dev` en `frontend/`, puerto 3000, Node v22 en `C:\Users\Javier\AppData\Local\nvm\v22.22.1`. La shell es PowerShell. El build de producción usa un `.next` distinto del de desarrollo.
@@ -75,7 +75,7 @@
 
 - Respuesta directa de 40-60 palabras bajo un H2.
 - Un dato verificable cada 150-200 palabras.
-- Nombrar entidad completa: “Granja Maripepa, Lorca (Murcia)”.
+- Nombrar entidad completa: “Maripepa, Lorca (Murcia)”.
 - Priorizar formato extractable: definición, pasos, tabla breve o FAQ.
 - Mostrar fecha visible cuando aplique.
 - Mantener `llms.txt` actualizado.
@@ -97,7 +97,7 @@
 
 **No inventar datos fuera de esta lista.**
 
-- Razón social: Granja Maripepa, S.L. Distribuidor alimentario HORECA.
+- Razón social: Maripepa, S.L. Distribuidor alimentario HORECA.
 - Fundación: 1966, Lorca (Murcia).
 - Sede: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.
 - Teléfonos sede: 968 46 75 14 y 639 77 86 55.

@@ -2,7 +2,7 @@ const odbc = require('odbc');
 require('dotenv').config();
 
 async function checkTables() {
-    const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+    const connectionString = process.env.ODBC_CONNECTION_STRING;
     try {
         const cn = await odbc.connect(connectionString);
         console.log("Connected. Listing tables in JAVIER schema...");

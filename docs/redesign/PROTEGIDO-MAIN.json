@@ -1093,7 +1093,7 @@
       {
         "path": "frontend/messages/es.json",
         "key": "legal.privacy.sections.s1.content",
-        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "value": "Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
         "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
       },
       {
@@ -1123,13 +1123,13 @@
       {
         "path": "frontend/messages/es.json",
         "key": "legal.privacy.sections.s6.content",
-        "value": "Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios.",
+        "value": "Usted tiene derecho a obtener confirmación sobre si en Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios.",
         "sha256": "ab6fb22a1b18433e524f8407fe018dc658cbf2b16f0cd7d442fc9c32cebf046a"
       },
       {
         "path": "frontend/messages/es.json",
         "key": "legal.terms.sections.s1.content",
-        "value": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa.",
+        "value": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Mari Pepa.",
         "sha256": "c890527a5ed8c4813886b03b0d9696b6cd625fd463c31b6411a49441a8b505aa"
       },
       {
@@ -1141,25 +1141,25 @@
       {
         "path": "frontend/messages/es.json",
         "key": "legal.terms.sections.s3.content",
-        "value": "Granja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo.",
+        "value": "Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo.",
         "sha256": "b8060043112eaea24ab988d5d19b1be381adf8e4027bf0744c1e11616f7cb299"
       },
       {
         "path": "frontend/messages/es.json",
         "key": "legal.terms.sections.s4.content",
-        "value": "Granja Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web.",
+        "value": "Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web.",
         "sha256": "e54a15ef665f853070d1dfe759bc8c7d8a13566df29ecbd96545d41cce447d6e"
       },
       {
         "path": "frontend/messages/es.json",
         "key": "legal.terms.sections.s5.content",
-        "value": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia).",
+        "value": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia).",
         "sha256": "46943aacbd4694a4bb5d5e4da422d2e3ed6bb6250a563320756bade568144787"
       },
       {
         "path": "frontend/messages/en.json",
         "key": "legal.privacy.sections.s1.content",
-        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "value": "Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
         "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
       },
       {
@@ -1189,13 +1189,13 @@
       {
         "path": "frontend/messages/en.json",
         "key": "legal.privacy.sections.s6.content",
-        "value": "You have the right to obtain confirmation as to whether Granja Mari Pepa is processing your personal data, therefore you have the right to access your personal data, rectify inaccurate data or request its deletion when the data is no longer necessary.",
+        "value": "You have the right to obtain confirmation as to whether Mari Pepa is processing your personal data, therefore you have the right to access your personal data, rectify inaccurate data or request its deletion when the data is no longer necessary.",
         "sha256": "a9c566829e72a616b44ee41e56ea08ce5b9a00827a6a05f1b6ea5ba42cfba204"
       },
       {
         "path": "frontend/messages/en.json",
         "key": "legal.terms.sections.s1.content",
-        "value": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Granja Mari Pepa.",
+        "value": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Mari Pepa.",
         "sha256": "b2d82f1cc6010b59408aa30f82c3b26eb6c5079f1e20474ddfef964d360bbc47"
       },
       {
@@ -1207,25 +1207,25 @@
       {
         "path": "frontend/messages/en.json",
         "key": "legal.terms.sections.s3.content",
-        "value": "Granja Mari Pepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein.",
+        "value": "Mari Pepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein.",
         "sha256": "c1decf02449a58a2da97d25eacb8983e2f133442e839cf7e004223d3ded28fa5"
       },
       {
         "path": "frontend/messages/en.json",
         "key": "legal.terms.sections.s4.content",
-        "value": "Granja Mari Pepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website.",
+        "value": "Mari Pepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website.",
         "sha256": "ebfa9ca92b7f34438cffc0235ef0270e107e92c587db5c263b47cf7887aeae34"
       },
       {
         "path": "frontend/messages/en.json",
         "key": "legal.terms.sections.s5.content",
-        "value": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Granja Mari Pepa agree to expressly submit to the courts and tribunals of Lorca (Murcia).",
+        "value": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Mari Pepa agree to expressly submit to the courts and tribunals of Lorca (Murcia).",
         "sha256": "79621b95b235d957d1d413def9cc73716b9342291dace2c18b3ace1d45cb99b5"
       },
       {
         "path": "frontend/messages/de.json",
         "key": "legal.privacy.sections.s1.content",
-        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@mari-pepa.com",
+        "value": "Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@mari-pepa.com",
         "sha256": "a89d66bac807598a58e49b4868c0d8b9274058b3ef8bbaa9f808294a62480ca1"
       },
       {
@@ -1255,13 +1255,13 @@
       {
         "path": "frontend/messages/de.json",
         "key": "legal.privacy.sections.s6.content",
-        "value": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Mari Pepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind.",
+        "value": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Mari Pepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind.",
         "sha256": "0d406d8851bee29dd8a7b8760b6f366f0cc143e864ff3aba4f5b822223bb6758"
       },
       {
         "path": "frontend/messages/de.json",
         "key": "legal.terms.sections.s1.content",
-        "value": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Mari Pepa geschützt.",
+        "value": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Mari Pepa geschützt.",
         "sha256": "536845b4ff103d574d3428e90b097d17fdb99d5025d13a4e134d23188c3217b6"
       },
       {
@@ -1273,25 +1273,25 @@
       {
         "path": "frontend/messages/de.json",
         "key": "legal.terms.sections.s3.content",
-        "value": "Granja Mari Pepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können.",
+        "value": "Mari Pepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können.",
         "sha256": "95d54e93d4a01d9b23f01601951cc663cbc42cfd20f5d5c9eb13a58f673144c2"
       },
       {
         "path": "frontend/messages/de.json",
         "key": "legal.terms.sections.s4.content",
-        "value": "Granja Mari Pepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren.",
+        "value": "Mari Pepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren.",
         "sha256": "f8ed776ec7e4469537734bf18107f3db538b3baa0b7fa325c134042cedf429a8"
       },
       {
         "path": "frontend/messages/de.json",
         "key": "legal.terms.sections.s5.content",
-        "value": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Mari Pepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen.",
+        "value": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Mari Pepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen.",
         "sha256": "cbafc10e7b84f756c745300dc515bb792b1f9e39668c20a28fa70205ad7849de"
       },
       {
         "path": "frontend/messages/it.json",
         "key": "legal.privacy.sections.s1.content",
-        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "value": "Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
         "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
       },
       {
@@ -1321,13 +1321,13 @@
       {
         "path": "frontend/messages/it.json",
         "key": "legal.privacy.sections.s6.content",
-        "value": "Avete il diritto di ottenere conferma se in Granja Mari Pepa stiamo trattando i vostri dati personali, pertanto avete diritto ad accedere ai vostri dati personali, rettificare i dati inesatti o richiederne la cancellazione quando i dati non siano più necessari.",
+        "value": "Avete il diritto di ottenere conferma se in Mari Pepa stiamo trattando i vostri dati personali, pertanto avete diritto ad accedere ai vostri dati personali, rettificare i dati inesatti o richiederne la cancellazione quando i dati non siano più necessari.",
         "sha256": "c5999153cbea8fef9a7779b3c56ba76f977dc06307e066eea0532927c85ed4c6"
       },
       {
         "path": "frontend/messages/it.json",
         "key": "legal.terms.sections.s1.content",
-        "value": "Il codice sorgente, i disegni grafici, le immagini, le fotografie, i suoni, le animazioni, il software, i testi, così come le informazioni e i contenuti raccolti nel presente sito web sono protetti dalla legislazione spagnola sui diritti di proprietà intellettuale e industriale a favore di Granja Mari Pepa.",
+        "value": "Il codice sorgente, i disegni grafici, le immagini, le fotografie, i suoni, le animazioni, il software, i testi, così come le informazioni e i contenuti raccolti nel presente sito web sono protetti dalla legislazione spagnola sui diritti di proprietà intellettuale e industriale a favore di Mari Pepa.",
         "sha256": "faeb4b8e2da620db4fac7e72fc4cf6600568e287b16e0f45784ad9bd910bd057"
       },
       {
@@ -1339,25 +1339,25 @@
       {
         "path": "frontend/messages/it.json",
         "key": "legal.terms.sections.s3.content",
-        "value": "Granja Mari Pepa non si assume la responsabilità dell'inadempimento di qualsiasi norma applicabile in cui possa incorrere l'utente nel suo accesso al sito web e/o nell'uso delle informazioni in esso contenute.",
+        "value": "Mari Pepa non si assume la responsabilità dell'inadempimento di qualsiasi norma applicabile in cui possa incorrere l'utente nel suo accesso al sito web e/o nell'uso delle informazioni in esso contenute.",
         "sha256": "5b39b538352c59fead6596b65ea834bd1570be108848d0daa4609c4cf2ae38e4"
       },
       {
         "path": "frontend/messages/it.json",
         "key": "legal.terms.sections.s4.content",
-        "value": "Granja Mari Pepa si riserva il diritto di modificare o aggiornare in qualsiasi momento le presenti condizioni d'uso, così come qualsiasi tipo di informazione che possa apparire nel sito web.",
+        "value": "Mari Pepa si riserva il diritto di modificare o aggiornare in qualsiasi momento le presenti condizioni d'uso, così come qualsiasi tipo di informazione che possa apparire nel sito web.",
         "sha256": "e6b18c71f460dbdcd355e9b5aa22dd2b0520026e82e0a6296c38050215a24609"
       },
       {
         "path": "frontend/messages/it.json",
         "key": "legal.terms.sections.s5.content",
-        "value": "Le presenti condizioni saranno regolate dalla legislazione spagnola. Per qualsiasi controversia che possa derivare dall'accesso o uso di questo sito web, l'utente e Granja Mari Pepa accettano di sottoporsi espressamente alle corti e ai tribunali di Lorca (Murcia).",
+        "value": "Le presenti condizioni saranno regolate dalla legislazione spagnola. Per qualsiasi controversia che possa derivare dall'accesso o uso di questo sito web, l'utente e Mari Pepa accettano di sottoporsi espressamente alle corti e ai tribunali di Lorca (Murcia).",
         "sha256": "cb33af0369df5f1e420869008d059175497774cd07c40aa204e272be92de662c"
       },
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.privacy.sections.s1.content",
-        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "value": "Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
         "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
       },
       {
@@ -1387,13 +1387,13 @@
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.privacy.sections.s6.content",
-        "value": "您有权确认Granja Mari Pepa是否正在处理您的个人数据，因此您有权访问您的个人数据，更正不准确的数据或在不再需要时请求删除。",
+        "value": "您有权确认Mari Pepa是否正在处理您的个人数据，因此您有权访问您的个人数据，更正不准确的数据或在不再需要时请求删除。",
         "sha256": "a43e5b2fe6591ed788f8e8e6c44c5cfb2f961e1de048bb97de2e2a295321efa0"
       },
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.terms.sections.s1.content",
-        "value": "源代码、图形设计、图像、照片、声音、动画、软件、文本以及本网站收集的信息和内容受西班牙知识产权和工业产权立法的保护，归Granja Mari Pepa所有。",
+        "value": "源代码、图形设计、图像、照片、声音、动画、软件、文本以及本网站收集的信息和内容受西班牙知识产权和工业产权立法的保护，归Mari Pepa所有。",
         "sha256": "96c0b0053f9d7bcc8750c01f61e6d8513845b41e7d70fbc65895c2b37fdb1bd2"
       },
       {
@@ -1405,19 +1405,19 @@
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.terms.sections.s3.content",
-        "value": "Granja Mari Pepa不对用户在访问网站和/或使用其中包含的信息时可能违反的任何适用规范负责。",
+        "value": "Mari Pepa不对用户在访问网站和/或使用其中包含的信息时可能违反的任何适用规范负责。",
         "sha256": "8ca5c2a064c543b235d2befb9d7f0586db7791fceed2d77f6be3b3f4a588fd23"
       },
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.terms.sections.s4.content",
-        "value": "Granja Mari Pepa保留随时修改或更新本使用条款以及网站上可能出现的任何类型信息的权利。",
+        "value": "Mari Pepa保留随时修改或更新本使用条款以及网站上可能出现的任何类型信息的权利。",
         "sha256": "5cc1153997b82677990ee300808273a757e213473aa139cdca0ffcd5bf3f4ac7"
       },
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.terms.sections.s5.content",
-        "value": "本条款受西班牙法律管辖。对于因访问或使用本网站而可能产生的任何争议，用户和Granja Mari Pepa同意明确提交给Lorca（穆尔西亚）的法院和法庭。",
+        "value": "本条款受西班牙法律管辖。对于因访问或使用本网站而可能产生的任何争议，用户和Mari Pepa同意明确提交给Lorca（穆尔西亚）的法院和法庭。",
         "sha256": "5f48172006add4af9a98cdfcb01506d2af0f69984ea9fa2ad897b1287938e0d1"
       }
     ],
@@ -1430,7 +1430,7 @@
       {
         "path": "frontend/messages/es.json",
         "key": "legal.privacy.intro",
-        "value": "En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios."
+        "value": "En Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios."
       },
       {
         "path": "frontend/messages/es.json",
@@ -1470,7 +1470,7 @@
       {
         "path": "frontend/messages/es.json",
         "key": "legal.terms.intro",
-        "value": "Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones."
+        "value": "Bienvenido al sitio web de Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones."
       },
       {
         "path": "frontend/messages/es.json",
@@ -1505,7 +1505,7 @@
       {
         "path": "frontend/messages/en.json",
         "key": "legal.privacy.intro",
-        "value": "At Granja Mari Pepa we take the privacy of our customers and users very seriously."
+        "value": "At Mari Pepa we take the privacy of our customers and users very seriously."
       },
       {
         "path": "frontend/messages/en.json",
@@ -1545,7 +1545,7 @@
       {
         "path": "frontend/messages/en.json",
         "key": "legal.terms.intro",
-        "value": "Welcome to the Granja Mari Pepa website. By accessing and using this site, you agree to the following terms and conditions."
+        "value": "Welcome to the Mari Pepa website. By accessing and using this site, you agree to the following terms and conditions."
       },
       {
         "path": "frontend/messages/en.json",
@@ -1580,7 +1580,7 @@
       {
         "path": "frontend/messages/de.json",
         "key": "legal.privacy.intro",
-        "value": "Bei Granja Mari Pepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst."
+        "value": "Bei Mari Pepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst."
       },
       {
         "path": "frontend/messages/de.json",
@@ -1620,7 +1620,7 @@
       {
         "path": "frontend/messages/de.json",
         "key": "legal.terms.intro",
-        "value": "Willkommen auf der Website von Granja Mari Pepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen."
+        "value": "Willkommen auf der Website von Mari Pepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen."
       },
       {
         "path": "frontend/messages/de.json",
@@ -1655,7 +1655,7 @@
       {
         "path": "frontend/messages/it.json",
         "key": "legal.privacy.intro",
-        "value": "In Granja Mari Pepa prendiamo molto sul serio la privacy dei nostri clienti e utenti."
+        "value": "In Mari Pepa prendiamo molto sul serio la privacy dei nostri clienti e utenti."
       },
       {
         "path": "frontend/messages/it.json",
@@ -1695,7 +1695,7 @@
       {
         "path": "frontend/messages/it.json",
         "key": "legal.terms.intro",
-        "value": "Benvenuti nel sito web di Granja Mari Pepa. Accedendo e utilizzando questo sito, accettate i seguenti termini e condizioni."
+        "value": "Benvenuti nel sito web di Mari Pepa. Accedendo e utilizzando questo sito, accettate i seguenti termini e condizioni."
       },
       {
         "path": "frontend/messages/it.json",
@@ -1730,7 +1730,7 @@
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.privacy.intro",
-        "value": "在Granja Mari Pepa，我们非常重视客户和用户的隐私。"
+        "value": "在Mari Pepa，我们非常重视客户和用户的隐私。"
       },
       {
         "path": "frontend/messages/zh.json",
@@ -1770,7 +1770,7 @@
       {
         "path": "frontend/messages/zh.json",
         "key": "legal.terms.intro",
-        "value": "欢迎访问Granja Mari Pepa网站。访问并使用本网站即表示您接受以下条款和条件。"
+        "value": "欢迎访问Mari Pepa网站。访问并使用本网站即表示您接受以下条款和条件。"
       },
       {
         "path": "frontend/messages/zh.json",

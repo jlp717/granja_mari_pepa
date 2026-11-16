@@ -1,5 +1,5 @@
 /**
- * CHATBOT IA - GRANJA MARI PEPA
+ * CHATBOT IA - MARI PEPA
  * =============================
  * Asistente conversacional sobre Groq (openai/gpt-oss-120b) con:
  * - Streaming SSE token a token
@@ -323,7 +323,7 @@ function createOutputGuard(authenticated) {
 // ---------------------------------------------------------------------------
 
 const COMPANY_INFO = `
-**GRANJA MARIPEPA, S.L. - FICHA OFICIAL**
+**MARIPEPA, S.L. - FICHA OFICIAL**
 - Empresa familiar de Lorca (Murcia), fundada en 1966.
 - Distribucion HORECA de congelados, refrigerados, panaderia congelada, helados y temperatura ambiente.
 - Cobertura: Region de Murcia y Almeria, con flota propia y cadena de frio controlada.
@@ -904,7 +904,7 @@ function systemPrompt({ locale, toolsEnabled, identity }) {
     ? `\n**IDENTIDAD VERIFICADA**\n- Nombre: ${identity.nombre || 'No configurado'}\n- Rol: ${identity.role || 'cliente'}\n- Email configurado: ${identity.email ? 'si' : 'no'}\n- Telefono configurado: ${identity.telefono ? 'si' : 'no'}\nNo pidas estos datos: ya estan verificados por la sesion.\n`
     : '';
 
-  return `Eres Pepa, el asistente virtual de Granja Maripepa (Lorca, Murcia, desde 1966), distribuidor HORECA de congelados, refrigerados y panaderia congelada.
+  return `Eres Pepa, el asistente virtual de Maripepa (Lorca, Murcia, desde 1966), distribuidor HORECA de congelados, refrigerados y panaderia congelada.
 
 ${COMPANY_INFO}
 ${identityBlock}
@@ -1128,8 +1128,8 @@ async function streamChatMessage(req, res) {
       done: true,
       reply:
         locale === 'en'
-          ? 'I can only help with Granja Maripepa products, orders, delivery and customer accounts. What do you need?'
-          : 'Solo puedo ayudarte con productos, pedidos, reparto y cuentas de Granja Maripepa. ¿Que necesitas?',
+          ? 'I can only help with Maripepa products, orders, delivery and customer accounts. What do you need?'
+          : 'Solo puedo ayudarte con productos, pedidos, reparto y cuentas de Maripepa. ¿Que necesitas?',
       sources: [],
       suggestions: buildSuggestions(message, locale),
       blocked: true,
@@ -1369,8 +1369,8 @@ async function processChatMessage(req, res) {
       done: true,
       reply:
         locale === 'en'
-          ? 'I can only help with Granja Maripepa products, orders, delivery and customer accounts. What do you need?'
-          : 'Solo puedo ayudarte con productos, pedidos, reparto y cuentas de Granja Maripepa. ¿Que necesitas?',
+          ? 'I can only help with Maripepa products, orders, delivery and customer accounts. What do you need?'
+          : 'Solo puedo ayudarte con productos, pedidos, reparto y cuentas de Maripepa. ¿Que necesitas?',
       sources: [],
       suggestions: buildSuggestions(message, locale),
       blocked: true,
@@ -1557,7 +1557,7 @@ async function transcribeAudio(req, res) {
         response_format: 'json',
         temperature: 0,
         prompt:
-          'Cliente de Granja Maripepa, distribuidor HORECA en Lorca. Habla de facturas, albaranes, pedidos, productos congelados, refrigerados, panaderia congelada, marcas y reparto.',
+          'Cliente de Maripepa, distribuidor HORECA en Lorca. Habla de facturas, albaranes, pedidos, productos congelados, refrigerados, panaderia congelada, marcas y reparto.',
         ...(language === 'es' || language === 'en' ? { language } : {}),
       }),
     );

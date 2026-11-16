@@ -11,7 +11,7 @@ async function testChangePasswordJavier() {
 
     try {
         const customerId = 999999; // ID del usuario TEST_JAVIER
-        const currentPassword = 'TEST123';
+        const currentPassword = process.env.TEST_PASSWORD || '';
         const newPassword = 'MiNuevaContraseñaSuper123!';
         const ipAddress = '127.0.0.1';
         const userAgent = 'Test Script - Change Password';

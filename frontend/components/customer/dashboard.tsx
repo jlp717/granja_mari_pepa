@@ -1460,8 +1460,8 @@ export function CustomerDashboard() {
         }
 
         // Abrir Gmail con enlace al PDF
-        const asunto = `Factura ${shareFactura.serieFactura}-${shareFactura.numeroFactura} - Granja Maripepa`;
-        const cuerpo = `🧺 Granja Maripepa\n\nHola,\n\nTe compartimos la factura de tu pedido:\n\n📄 Factura: ${shareFactura.serieFactura}-${shareFactura.numeroFactura}\n📅 Fecha: ${shareFactura.fecha}\n💰 Total: ${formatCurrency(shareFactura.totalFactura)}\n\n📥 Descargar PDF:\n${url}\n\nEste enlace es válido por 24 horas.\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\n¡Gracias por tu confianza! 🐔🥚\n\nGranja Maripepa\nwww.mari-pepa.com`;
+        const asunto = `Factura ${shareFactura.serieFactura}-${shareFactura.numeroFactura} - Maripepa`;
+        const cuerpo = `🧺 Maripepa\n\nHola,\n\nTe compartimos la factura de tu pedido:\n\n📄 Factura: ${shareFactura.serieFactura}-${shareFactura.numeroFactura}\n📅 Fecha: ${shareFactura.fecha}\n💰 Total: ${formatCurrency(shareFactura.totalFactura)}\n\n📥 Descargar PDF:\n${url}\n\nEste enlace es válido por 24 horas.\n\nSi tienes alguna pregunta, no dudes en contactarnos.\n\n¡Gracias por tu confianza! 🐔🥚\n\nMaripepa\nwww.mari-pepa.com`;
 
         const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(shareInput)}&su=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
         window.open(gmailUrl, '_blank', 'noopener,noreferrer');
@@ -3531,7 +3531,7 @@ export function CustomerDashboard() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                        Granja Maripepa · Factura
+                        Maripepa · Factura
                       </p>
                       <h2 className="mt-1 text-xl font-light text-foreground">
                         Enviar por email
@@ -3643,7 +3643,7 @@ export function CustomerDashboard() {
               <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] pb-5 mb-6">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                    Granja Maripepa · Factura
+                    Maripepa · Factura
                   </p>
                   <h2 className="mt-1 text-xl font-light text-foreground">
                     Enviar por WhatsApp
@@ -3689,7 +3689,7 @@ Fecha: ${selectedFacturaForShare.fecha}
 Importe: ${formatCurrency(selectedFacturaForShare.totalFactura)}
 Estado: ${selectedFacturaForShare.estadoPago === 'pagada' ? 'Pagada' : 'Pendiente'}
 
-Granja Maripepa, S.L.
+Maripepa, S.L.
 Tel. 968 46 75 14
 pedidos@granjamaripepa.com`}
                   </pre>

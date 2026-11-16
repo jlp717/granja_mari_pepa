@@ -1,7 +1,7 @@
 /**
  * PM2 ECOSYSTEM CONFIGURATION - PRODUCTION
  * =========================================
- * Configuración profesional de PM2 para Granja Mari Pepa
+ * Configuración profesional de PM2 para Mari Pepa
  * 
  * Características:
  * - Cluster mode para frontend (aprovecha múltiples CPUs)

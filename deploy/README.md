@@ -1,4 +1,4 @@
-# 🚀 Guía de Despliegue Profesional - Granja Mari Pepa
+# 🚀 Guía de Despliegue Profesional - Mari Pepa
 
 ## Arquitectura de Producción
 

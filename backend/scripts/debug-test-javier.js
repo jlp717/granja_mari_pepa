@@ -54,7 +54,7 @@ async function debugTestJavier() {
         console.log('\n🧪 Prueba de verificación manual:');
         console.log('-'.repeat(80));
 
-        const plainPassword = 'TEST123';
+        const plainPassword = process.env.TEST_PASSWORD || '';
         const expectedHash = `LEGACY_${plainPassword}`;
         const storedHash = customer.PASSWORD_HASH ? customer.PASSWORD_HASH.trim() : '';
 

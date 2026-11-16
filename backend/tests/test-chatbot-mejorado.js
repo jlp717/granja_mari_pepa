@@ -126,7 +126,7 @@ async function login() {
       method: 'POST',
       body: {
         nif: 'P33', // Cliente de prueba conocido
-        password: 'mariPepa2024' // Password de prueba (puede necesitar ajuste)
+        password: (process.env.TEST_CHATBOT_PASSWORD || '') // Password de prueba (puede necesitar ajuste)
       }
     });
 
@@ -148,7 +148,7 @@ async function login() {
 async function runAllTests() {
   console.log(`${colors.bright}${colors.cyan}
 ╔═══════════════════════════════════════════════════════════╗
-║   PRUEBAS DEL CHATBOT MEJORADO - GRANJA MARI PEPA        ║
+║   PRUEBAS DEL CHATBOT MEJORADO - MARI PEPA        ║
 ╚═══════════════════════════════════════════════════════════╝
 ${colors.reset}`);
 

@@ -1,4 +1,4 @@
-# 🚀 Backend API - Granja Mari Pepa
+# 🚀 Backend API - Mari Pepa
 
 Sistema de autenticación y gestión de facturas para clientes.
 

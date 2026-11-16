@@ -162,7 +162,7 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
         try {
           await navigator.share({
             title: `Libro IVA ${selectedYear}`,
-            text: `Adjunto libro de IVA del ejercicio ${selectedYear} - Granja Maripepa`,
+            text: `Adjunto libro de IVA del ejercicio ${selectedYear} - Maripepa`,
             files: [file]
           });
           toast.success('Abriendo menú de compartir...');
@@ -191,7 +191,7 @@ export default function LibroIvaModal({ isOpen, onClose, codigoCliente, userEmai
       // No revocamos URL inmediatamente para dar tiempo a la descarga
 
       const phone = phoneInput.replace(/[\s\-\(\)]/g, '');
-      const mensaje = `📊 *Libro de IVA ${selectedYear}*\n\nHola,\nAdjunto el documento PDF descargado.\n\n_Granja Maripepa_`;
+      const mensaje = `📊 *Libro de IVA ${selectedYear}*\n\nHola,\nAdjunto el documento PDF descargado.\n\n_Maripepa_`;
 
       let whatsappUrl = '';
       if (phone && phone.length >= 9) {

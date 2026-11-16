@@ -5,8 +5,8 @@ import { AdminVpnGuard } from "@/components/admin/AdminVpnGuard";
 import styles from "@/components/admin/AdminBackdrop.module.css";
 
 export const metadata: Metadata = {
-  title: "Administración | Granja Maripepa",
-  description: "Panel interno de administración de Granja Maripepa.",
+  title: "Administración | Maripepa",
+  description: "Panel interno de administración de Maripepa.",
   robots: {
     index: false,
     follow: false,

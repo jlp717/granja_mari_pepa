@@ -1,4 +1,4 @@
-# CLAUDE.md — Granja Mari Pepa
+# CLAUDE.md — Mari Pepa
 
 ## ⚠️ LEER PRIMERO
 
@@ -8,7 +8,7 @@ Este archivo ha sido actualizado. El rediseño sigue **DESIGN.md** y **REDESIGN_
 
 ## PROYECTO
 
-- **Empresa**: Granja Maripepa, S.L. — Distribuidor HORECA (hostelería, restauración)
+- **Empresa**: Maripepa, S.L. — Distribuidor HORECA (hostelería, restauración)
 - **Fundación**: Lorca (Murcia), 1966
 - **Productos**: congelados, refrigerados, helados, temperatura ambiente
 - **Cliente**: chef, jefe de compras, restaurador, panadero, heladero (B2B)

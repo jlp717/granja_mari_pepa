@@ -1,4 +1,4 @@
-# 🚀 GUÍA DE ARRANQUE RÁPIDO - Granja Mari Pepa
+# 🚀 GUÍA DE ARRANQUE RÁPIDO - Mari Pepa
 
 ## ⚡ Inicio Rápido (Todo de una vez)
 

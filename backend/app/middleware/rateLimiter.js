@@ -47,6 +47,9 @@ const pdfLimiter = createLimiter(60 * 1000, 30); // 30 PDFs/min (aumentado de 10
 // Cada mensaje del chatbot consume cuota de un proveedor externo. Límite
 // propio para que un anónimo no pueda agotar la cuota desde una sola IP.
 const chatbotLimiter = createLimiter(15 * 60 * 1000, 60); // 60 mensajes/15min
+// Formularios públicos que envían correo o escriben en DB2: límites propios.
+const contactLimiter = createLimiter(15 * 60 * 1000, 6); // 6 contactos/15min por IP
+const publicFormLimiter = createLimiter(15 * 60 * 1000, 20); // 20 candidaturas/15min
 
 // Limpiar registros antiguos cada 30 minutos para evitar fugas de memoria
 setInterval(() => {
@@ -62,5 +65,7 @@ setInterval(() => {
 module.exports = {
   generalLimiter,
   pdfLimiter,
+  contactLimiter,
+  publicFormLimiter,
   chatbotLimiter
 };

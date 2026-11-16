@@ -12,7 +12,7 @@ const odbc = require('odbc');
 async function main() {
   console.log('=== DIAGNÓSTICO RÁPIDO: Albarán S-303, Cliente 4300032679 ===\n');
 
-  const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+  const connectionString = process.env.ODBC_CONNECTION_STRING;
   
   let conn;
   try {

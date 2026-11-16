@@ -5,7 +5,7 @@
 ## Asunto: Re: Discrepancias en facturas - Restaurante La Patrona SL
 
 **Para:** Restaurante La Patrona SL  
-**De:** Equipo de soporte técnico - Granja Mari Pepa  
+**De:** Equipo de soporte técnico - Mari Pepa  
 **Fecha:** 6 de abril de 2026
 
 ---
@@ -62,7 +62,7 @@ Quedamos a su entera disposición para cualquier aclaración adicional que neces
 Atentamente,
 
 **Equipo de Soporte Técnico**  
-Granja Mari Pepa - Food & Frozen  
+Mari Pepa - Food & Frozen  
 📞 639 77 86 56  
 📧 pedidos@mari-pepa.com  
 🌐 www.mari-pepa.com

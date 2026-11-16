@@ -100,7 +100,7 @@ export function AdminVpnGuard() {
             color: "#78837c",
           }}
         >
-          Granja Maripepa · Administración
+          Maripepa · Administración
         </p>
         <h1
           id="vpn-lost-title"

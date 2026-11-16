@@ -1,10 +1,10 @@
 # ============================================
 # SCRIPT DE ARRANQUE - FRONTEND
 # ============================================
-# Inicia el frontend de Granja Mari Pepa en modo desarrollo
+# Inicia el frontend de Mari Pepa en modo desarrollo
 
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  GRANJA MARI PEPA - FRONTEND WEB" -ForegroundColor Cyan
+Write-Host "  MARI PEPA - FRONTEND WEB" -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 

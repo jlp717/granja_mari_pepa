@@ -6,7 +6,7 @@ async function testConnection() {
   console.log('🔌 TEST DE CONEXIÓN ODBC');
   console.log('========================================');
 
-  const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+  const connectionString = process.env.ODBC_CONNECTION_STRING;
   console.log(`String de conexión: ${connectionString}`);
 
   try {

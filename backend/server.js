@@ -3,7 +3,7 @@
  * ================================================
  * API REST Ultra-Segura para Generación de Facturas PDF
  *
- * Granja Mari Pepa - Sistema de Facturación
+ * Mari Pepa - Sistema de Facturación
  * 
  * CAPAS DE SEGURIDAD IMPLEMENTADAS:
  * - Capa 1: Detección y bloqueo de IPs maliciosas
@@ -553,7 +553,7 @@ app.use('/api/auth/secure', authSecureRoutes);
 // Ruta raíz - información de la API
 app.get('/', (req, res) => {
   const base = {
-    name: 'Granja Mari Pepa - API de Facturación',
+    name: 'Mari Pepa - API de Facturación',
     version: '1.0.0',
     status: 'running',
   };

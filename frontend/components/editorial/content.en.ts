@@ -9,13 +9,13 @@ export const STORY_TRANSLATIONS_EN = {
         label: "1966",
         title: "Since 1966, product and service for those who cook.",
         paragraphs: [
-          "Granja Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond.",
+          "Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond.",
           "Today the company keeps its head office in Lorca and a branch in Viator, Almería. Two points of departure, one team and the same idea of service.",
         ],
       },
       {
         label: "The company",
-        title: "Granja Maripepa in figures.",
+        title: "Maripepa in figures.",
         paragraphs: [],
         facts: [
           { label: "Founded", value: "1966" },
@@ -60,7 +60,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "Brands",
         title: "The brands we distribute.",
         paragraphs: [
-          "Granja Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados. It works with Panamar, Okin and Pastelería Amparín. Each brand brings its own speciality to the range.",
+          "Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados. It works with Panamar, Okin and Pastelería Amparín. Each brand brings its own speciality to the range.",
         ],
         brands: [
           {
@@ -104,7 +104,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "Network",
         title: "A national network with its base in Lorca.",
         paragraphs: [
-          "Granja Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group's catalogue when a reference is not held at the Saprelorca warehouse.",
+          "Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group's catalogue when a reference is not held at the Saprelorca warehouse.",
           "The conversation stays local: the Lorca team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay in the south-east.",
         ],
       },
@@ -151,7 +151,7 @@ export const STORY_TRANSLATIONS_EN = {
       link: "Talk to the team",
     },
     seo: {
-      title: "About us | Granja Maripepa, Lorca since 1966",
+      title: "About us | Maripepa, Lorca since 1966",
       description:
         "Food distribution for hospitality in Lorca since 1966, with a branch in Viator (Almería) and a frozen, chilled and ambient range for professional kitchens.",
     },
@@ -166,7 +166,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "Head office",
         title: "The Lorca head office, in Saprelorca.",
         paragraphs: [
-          "Granja Maripepa's operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution.",
+          "Maripepa's operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution.",
           "Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day of distribution is resolved here.",
         ],
       },
@@ -190,7 +190,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "Expansion",
         title: "A warehouse that grows in Saprelorca.",
         paragraphs: [
-          "In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Granja Maripepa. The two plots cover a total of 8,953 m².",
+          "In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Maripepa. The two plots cover a total of 8,953 m².",
           "The project is under way: grouping and expanding the company's facilities. There is no opening date, no built square metres and no published investment figure.",
         ],
       },
@@ -209,9 +209,9 @@ export const STORY_TRANSLATIONS_EN = {
       link: "See contact and map",
     },
     seo: {
-      title: "Lorca head office | Granja Maripepa, Saprelorca",
+      title: "Lorca head office | Maripepa, Saprelorca",
       description:
-        "Head office at Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Opening hours, telephone numbers and how to find Granja Maripepa in Murcia.",
+        "Head office at Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Opening hours, telephone numbers and how to find Maripepa in Murcia.",
     },
   },
   calidad: {
@@ -232,7 +232,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "System",
         title: "A management system, not a sticker.",
         paragraphs: [
-          "Granja Maripepa works with a quality management system in line with the ISO 9001 standard. It is not a label to hang on the wall: it is the way processes, records and responsibilities are organised.",
+          "Maripepa works with a quality management system in line with the ISO 9001 standard. It is not a label to hang on the wall: it is the way processes, records and responsibilities are organised.",
           "Traceability follows the product from reception to delivery, and the cold chain is looked after at every step. That way, when something is asked, there is a well-founded answer.",
           "The documentation for each reference is kept and updated. If you need a sheet, an allergen or a storage condition, you ask the team and it is confirmed for the exact product.",
         ],
@@ -311,7 +311,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "Coverage",
         title: "Delivery for hospitality in Murcia, Almería and Alicante.",
         paragraphs: [
-          "Granja Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment.",
+          "Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment.",
           "The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address.",
         ],
       },

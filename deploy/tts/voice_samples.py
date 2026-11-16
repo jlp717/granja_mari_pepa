@@ -9,7 +9,7 @@ import soundfile as sf
 from kokoro import KPipeline
 
 TEXT = (
-    "Hola, soy Pepa, el asistente de Granja Maripepa. "
+    "Hola, soy Pepa, el asistente de Maripepa. "
     "Puedo consultar tus pedidos, tus facturas y tus albaranes, y avisarte del reparto."
 )
 VOICES = ["ef_dora", "em_alex", "em_santa"]

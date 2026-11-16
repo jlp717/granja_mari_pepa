@@ -43,7 +43,7 @@ export function Catalogue({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "Familias de producto de Granja Maripepa",
+            name: "Familias de producto de Maripepa",
             numberOfItems: copy.families.length,
             itemListElement: copy.families.map((family, index) => ({
               "@type": "ListItem",

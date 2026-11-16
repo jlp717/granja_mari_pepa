@@ -150,4 +150,4 @@ Se ha preparado una respuesta profesional de disculpa explicando:
 
 ---
 
-*Análisis realizado por el equipo de desarrollo de Granja Mari Pepa*
+*Análisis realizado por el equipo de desarrollo de Mari Pepa*

@@ -1,4 +1,4 @@
-# MOTION_GUIDELINES.md — Granja Mari Pepa
+# MOTION_GUIDELINES.md — Mari Pepa
 
 > Especificación de motion e interacción. Acompaña a [DESIGN.md](DESIGN.md), [COMPONENTS.md](COMPONENTS.md).
 

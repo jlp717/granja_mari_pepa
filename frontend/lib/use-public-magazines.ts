@@ -20,7 +20,7 @@ export interface NavMagazine {
 const FALLBACK: NavMagazine[] = [
   {
     id: "mag-2026-01",
-    title: "Revista Granja Mari Pepa",
+    title: "Revista Mari Pepa",
     edition: "Enero 2026",
     pdfUrl: "/catalogs/enero-2026-granja-mari-pepa.pdf",
     coverUrl: "/catalogs/covers/enero-2026-granja-mari-pepa.jpg",
@@ -38,7 +38,7 @@ const FALLBACK: NavMagazine[] = [
   },
   {
     id: "mag-2026-03",
-    title: "Revista Granja Mari Pepa",
+    title: "Revista Mari Pepa",
     edition: "Marzo 2026",
     pdfUrl: "/catalogs/gmp-marzo-2026.pdf",
     coverUrl: "/catalogs/covers/gmp-marzo-2026.jpg",
@@ -65,7 +65,7 @@ const FALLBACK: NavMagazine[] = [
   },
   {
     id: "mag-2026-06",
-    title: "Revista Granja Mari Pepa",
+    title: "Revista Mari Pepa",
     edition: "Junio 2026",
     pdfUrl: "/catalogs/junio-2026-granja-mari-pepa.pdf",
     coverUrl: "/catalogs/covers/junio-2026-granja-mari-pepa.jpg",
@@ -74,7 +74,7 @@ const FALLBACK: NavMagazine[] = [
   },
   {
     id: "mag-2026-07",
-    title: "Revista Granja Mari Pepa",
+    title: "Revista Mari Pepa",
     edition: "Julio-Agosto 2026",
     pdfUrl: "/catalogs/julio-agosto-2026-granja-mari-pepa.pdf",
     coverUrl: "/catalogs/covers/julio-agosto-2026-granja-mari-pepa.jpg",

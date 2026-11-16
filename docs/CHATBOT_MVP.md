@@ -1,4 +1,4 @@
-Chatbot MVP - Granja Mari Pepa
+Chatbot MVP - Mari Pepa
 
 Resumen:
 - Chatbot integrado con Groq (Llama) con reglas NLU para facturas.

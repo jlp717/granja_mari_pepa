@@ -44,7 +44,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <div className={styles.heroAtmos} aria-hidden="true">
           <Image
             src="/gmp/careers/careers-03.jpg"
-            alt="Sede de Granja Maripepa en Saprelorca con camión frigorífico"
+            alt="Sede de Maripepa en Saprelorca con camión frigorífico"
             fill
             priority
             sizes="100vw"
@@ -154,7 +154,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             <figure className={styles.originSmall}>
               <Image
                 src="/gmp/careers/careers-facility.jpg"
-                alt="Nave y camión de Granja Maripepa en el Polígono Saprelorca"
+                alt="Nave y camión de Maripepa en el Polígono Saprelorca"
                 fill
                 sizes="(max-width: 900px) 45vw, 18vw"
                 className={styles.photo}
@@ -185,7 +185,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <div className={styles.systemBand} data-rv="fade">
           <Image
             src="/gmp/careers/careers-01.jpg"
-            alt="Camión frigorífico en la sede de Granja Maripepa, Lorca"
+            alt="Camión frigorífico en la sede de Maripepa, Lorca"
             fill
             sizes="100vw"
             className={styles.systemPhoto}
@@ -459,7 +459,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
           <figure className={styles.sitesPhoto} data-rv="up">
             <Image
               src="/gmp/careers/careers-04.jpg"
-              alt="Camión frigorífico de Granja Maripepa en ruta"
+              alt="Camión frigorífico de Maripepa en ruta"
               fill
               sizes="(max-width: 900px) 100vw, 55vw"
               className={styles.photo}

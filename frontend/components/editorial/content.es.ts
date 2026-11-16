@@ -12,14 +12,14 @@ export const STORIES_ES = {
         scene: 0,
         layout: "hero",
         paragraphs: [
-          "Granja Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder.",
+          "Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder.",
           "Hoy la empresa mantiene la sede en Lorca y una delegación en Viator, Almería. Dos puntos de salida, un mismo equipo y la misma idea de servicio.",
         ],
       },
       {
         id: "ficha",
         label: "La empresa",
-        title: "Granja Maripepa en datos.",
+        title: "Maripepa en datos.",
         scene: 4,
         layout: "facts",
         paragraphs: [],
@@ -72,7 +72,7 @@ export const STORIES_ES = {
         scene: 2,
         layout: "brands",
         paragraphs: [
-          "Granja Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados. Trabaja con Panamar, Okin y Pastelería Amparín. Cada marca aporta su especialidad a la gama.",
+          "Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados. Trabaja con Panamar, Okin y Pastelería Amparín. Cada marca aporta su especialidad a la gama.",
         ],
         brands: [
           {
@@ -119,7 +119,7 @@ export const STORIES_ES = {
         scene: 1,
         layout: "spread",
         paragraphs: [
-          "Granja Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación. Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca.",
+          "Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación. Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca.",
           "La conversación sigue siendo local: el equipo de Lorca responde, confirma la disponibilidad y organiza la entrega. La red amplía el catálogo; la atención y la ruta se quedan en el sureste.",
         ],
       },
@@ -173,7 +173,7 @@ export const STORIES_ES = {
       href: "/contacto",
     },
     seo: {
-      title: "Quiénes somos | Granja Maripepa, Lorca desde 1966",
+      title: "Quiénes somos | Maripepa, Lorca desde 1966",
       description:
         "Distribución alimentaria para hostelería en Lorca desde 1966, con delegación en Viator (Almería) y gama de congelado, refrigerado y ambiente.",
     },
@@ -191,7 +191,7 @@ export const STORIES_ES = {
         scene: 3,
         layout: "hero",
         paragraphs: [
-          "En Lorca se coordina la operación de Granja Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto.",
+          "En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto.",
           "Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de la distribución.",
         ],
       },
@@ -224,7 +224,7 @@ export const STORIES_ES = {
         scene: 1,
         layout: "spread",
         paragraphs: [
-          "En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Granja Maripepa. Las dos parcelas suman 8.953 m².",
+          "En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Maripepa. Las dos parcelas suman 8.953 m².",
           "El proyecto está en trámite: agrupar y ampliar las instalaciones de la empresa. No hay fecha de apertura, ni metros construidos, ni cifra de inversión publicada.",
         ],
       },
@@ -247,9 +247,9 @@ export const STORIES_ES = {
       href: "/contacto",
     },
     seo: {
-      title: "Sede en Lorca | Granja Maripepa, Saprelorca",
+      title: "Sede en Lorca | Maripepa, Saprelorca",
       description:
-        "Sede en Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Horario de atención, teléfonos y cómo llegar a Granja Maripepa en Murcia.",
+        "Sede en Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Horario de atención, teléfonos y cómo llegar a Maripepa en Murcia.",
     },
   },
   calidad: {
@@ -276,7 +276,7 @@ export const STORIES_ES = {
         scene: 3,
         layout: "spread",
         paragraphs: [
-          "Granja Maripepa trabaja con un sistema de gestión de la calidad conforme a la norma ISO 9001. No es una etiqueta para colgar: es la forma de ordenar procesos, registros y responsabilidades.",
+          "Maripepa trabaja con un sistema de gestión de la calidad conforme a la norma ISO 9001. No es una etiqueta para colgar: es la forma de ordenar procesos, registros y responsabilidades.",
           "La trazabilidad recorre el producto de la recepción a la entrega, y la cadena de frío se cuida en cada paso. Así, cuando algo se pregunta, hay una respuesta con base.",
           "La documentación de cada referencia se conserva y se actualiza. Si necesitas una ficha, un alérgeno o una condición de conservación, se solicita al equipo y se confirma para el producto exacto.",
         ],
@@ -371,7 +371,7 @@ export const STORIES_ES = {
         scene: 4,
         layout: "hero",
         paragraphs: [
-          "Granja Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento.",
+          "Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento.",
           "La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa.",
         ],
       },

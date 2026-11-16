@@ -1,6 +1,6 @@
 # Script de Verificacion del Sistema
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  VERIFICACION - GRANJA MARI PEPA" -ForegroundColor Cyan
+Write-Host "  VERIFICACION - MARI PEPA" -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 

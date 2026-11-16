@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Servicio TTS local para el chatbot de Granja Mari Pepa.
+"""Servicio TTS local para el chatbot de Mari Pepa.
 
 Motor: Kokoro-82M (Apache-2.0), inferencia en CPU, sin claves ni servicios
 externos. Escucha solo en 127.0.0.1:5100 y devuelve MP3 mono 48 kbps

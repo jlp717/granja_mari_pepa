@@ -101,7 +101,7 @@
     }
   },
   "hero": {
-    "title": "GRANJA MARIPEPA",
+    "title": "MARIPEPA",
     "subtitle": "Congelados, refrigerados y helados para HORECA",
     "cta": "Contactar",
     "since": "Desde 1966",
@@ -147,7 +147,7 @@
     "nestle": {
       "name": "Nestlé",
       "category": "Helados Premium",
-      "detailed": "Granja Maripepa es distribuidor oficial de helados Nestlé para hostelería y establecimientos."
+      "detailed": "Maripepa es distribuidor oficial de helados Nestlé para hostelería y establecimientos."
     },
     "panamar": {
       "name": "Panamar",
@@ -272,7 +272,7 @@
   },
   "about_page": {
     "hero": {
-      "title": "Granja Maripepa",
+      "title": "Maripepa",
       "subtitle_1": "Más de",
       "subtitle_highlight": "Desde 1966",
       "subtitle_2": "al servicio del sector HORECA",
@@ -287,7 +287,7 @@
       "milestones": {
         "1966": {
           "title": "Fundación en Lorca (Murcia)",
-          "desc": "Granja Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
+          "desc": "Maripepa, S.L. se fundó en Lorca (Murcia), especializada desde el inicio en el mercado HORECA y canal de alimentación."
         },
         "2020": {
           "title": "Energía 100% Verde",
@@ -353,7 +353,7 @@
         "capacity": "Capacidad frigorífica de 5.000m³"
       },
       "stats": {
-        "title": "Granja Maripepa en Cifras",
+        "title": "Maripepa en Cifras",
         "founded_label": "Año de fundación",
         "references_label": "Referencias de producto",
         "capacity_label": "Capacidad frigorífica",
@@ -430,7 +430,7 @@
       "badge": "Reseñas en Google",
       "title_1": "Lo que dicen",
       "title_highlight": "nuestros clientes",
-      "description": "La opinión de quienes confían en Granja Maripepa para su negocio",
+      "description": "La opinión de quienes confían en Maripepa para su negocio",
       "antonio_review": {
         "text": "Esta empresa distribuye todo tipo de congelados, helados, y un sinfín de productos. Si quieres productos de calidad y un trato excepcional no busques más. La mejor empresa que conozco de su sector.",
         "role": "8 reseñas · Guía local"
@@ -450,7 +450,7 @@
       "title_1": "¿Listo para",
       "title_highlight": "trabajar juntos",
       "title_suffix": "?",
-      "description": "Únete a los establecimientos HORECA que confían en Granja Maripepa para llevar productos de calidad certificada a sus clientes en Murcia y Alicante.",
+      "description": "Únete a los establecimientos HORECA que confían en Maripepa para llevar productos de calidad certificada a sus clientes en Murcia y Alicante.",
       "contact": "Contactar ahora",
       "catalog": "Ver catálogo"
     }
@@ -747,7 +747,7 @@
     "greetingMorning": "Buenos días, soy Pepa",
     "greetingAfternoon": "Buenas tardes, soy Pepa",
     "greetingEvening": "Buenas noches, soy Pepa",
-    "subtitle": "Tu asistente virtual de Granja Maripepa. Estoy aquí para ayudarte con productos, pedidos, facturas o cualquier duda.",
+    "subtitle": "Tu asistente virtual de Maripepa. Estoy aquí para ayudarte con productos, pedidos, facturas o cualquier duda.",
     "placeholder": "Escribe tu mensaje...",
     "thinking": "Pensando",
     "send": "Enviar",
@@ -783,7 +783,7 @@
     "downloadInvoice": "Descargar factura"
   },
   "footer": {
-    "companyName": "GRANJA MARIPEPA",
+    "companyName": "MARIPEPA",
     "tagline": "Distribución alimentaria para hostelería",
     "description_short": "Congelado, refrigerado y temperatura ambiente para HORECA",
     "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
@@ -791,7 +791,7 @@
     "founded_text": "Fundada en Lorca, 1966",
     "green_energy": "Energía Verde",
     "quick_access": "Acceso Rápido",
-    "copyright": "© {year} Granja Maripepa. Todos los derechos reservados.",
+    "copyright": "© {year} Maripepa. Todos los derechos reservados.",
     "quickLinks": "Enlaces rápidos",
     "legal": "Legal",
     "privacy": "Política de Privacidad",
@@ -878,18 +878,18 @@
     }
   },
   "meta": {
-    "title": "Granja Maripepa | Distribución HORECA en Murcia y Almería",
+    "title": "Maripepa | Distribución HORECA en Murcia y Almería",
     "description": "Distribución alimentaria para hostelería desde Lorca. Congelado, refrigerado y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
-    "keywords": "Granja Maripepa, Maripepa, HORECA, Lorca, Polígono Saprelorca, distribución alimentaria, congelados, refrigerados, Grupo Topgel, Nestlé Helados, Panamar, Murcia, Almería"
+    "keywords": "Maripepa, HORECA, Lorca, Polígono Saprelorca, distribución alimentaria, congelados, refrigerados, Grupo Topgel, Nestlé Helados, Panamar, Murcia, Almería"
   },
   "legal": {
     "privacy": {
-      "title": "Política de Privacidad | Granja Maripepa",
-      "intro": "Qué datos trata Granja Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos. Puedes escribir a pedidos@granjamaripepa.com para cualquier consulta sobre privacidad.",
+      "title": "Política de Privacidad | Maripepa",
+      "intro": "Qué datos trata Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos. Puedes escribir a pedidos@granjamaripepa.com para cualquier consulta sobre privacidad.",
       "sections": {
         "s1": {
           "title": "1. Responsable del Tratamiento",
-          "content": "Granja Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Teléfono: 968 46 75 14<br />Email: pedidos@granjamaripepa.com"
+          "content": "Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Teléfono: 968 46 75 14<br />Email: pedidos@granjamaripepa.com"
         },
         "s2": {
           "title": "2. Finalidad del Tratamiento",
@@ -918,12 +918,12 @@
       }
     },
     "terms": {
-      "title": "Términos y Condiciones | Granja Maripepa",
-      "intro": "Bienvenido al sitio web de Granja Maripepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+      "title": "Términos y Condiciones | Maripepa",
+      "intro": "Bienvenido al sitio web de Maripepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
       "sections": {
         "s1": {
           "title": "1. Propiedad Intelectual",
-          "content": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Maripepa."
+          "content": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Maripepa."
         },
         "s2": {
           "title": "2. Uso del Sitio Web",
@@ -931,15 +931,15 @@
         },
         "s3": {
           "title": "3. Responsabilidad",
-          "content": "Granja Maripepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo."
+          "content": "Maripepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo."
         },
         "s4": {
           "title": "4. Modificaciones",
-          "content": "Granja Maripepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web."
+          "content": "Maripepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web."
         },
         "s5": {
           "title": "5. Ley Aplicable",
-          "content": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Maripepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
+          "content": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Maripepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
         }
       }
     }

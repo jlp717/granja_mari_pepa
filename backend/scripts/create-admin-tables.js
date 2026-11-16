@@ -13,7 +13,7 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const odbc = require('odbc');
 
 const connectionString =
-  process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+  process.env.ODBC_CONNECTION_STRING;
 
 const TABLES = {
   ADMIN_JOB_OFFERS: `CREATE TABLE JAVIER.ADMIN_JOB_OFFERS (

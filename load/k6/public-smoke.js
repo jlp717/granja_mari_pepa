@@ -1,5 +1,5 @@
 /**
- * Prueba de carga pública de Granja Mari Pepa.
+ * Prueba de carga pública de Mari Pepa.
  *
  * Solo lectura: portada, empleo, contacto y las dos APIs públicas que
  * alimentan esas páginas. No escribe en DB2 ni envía correo.

@@ -307,7 +307,7 @@ export function BootPreloader({ allowed }: { allowed: boolean }) {
             <i id="pre-fill" style={{ right: `${right}%` }} />
           </div>
           <div className="pre-meta" aria-hidden="true">
-            <span>Granja Maripepa</span>
+            <span>Maripepa</span>
             <b>
               <span id="pre-pct">{pct}</span>%
             </b>

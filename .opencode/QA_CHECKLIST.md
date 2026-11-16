@@ -1,4 +1,4 @@
-# QA_CHECKLIST.md — Granja Mari Pepa
+# QA_CHECKLIST.md — Mari Pepa
 
 > Checklist QA final. Cualquier feature debe pasar todos los aplicables antes de mergear `redesign-2026 → main`. Acompaña a [DESIGN.md](DESIGN.md), [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md).
 

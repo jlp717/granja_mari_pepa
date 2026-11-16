@@ -1,10 +1,10 @@
 # ============================================
 # SCRIPT DE ARRANQUE - BACKEND
 # ============================================
-# Inicia el backend de Granja Mari Pepa en modo desarrollo
+# Inicia el backend de Mari Pepa en modo desarrollo
 
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  GRANJA MARI PEPA - BACKEND API" -ForegroundColor Cyan
+Write-Host "  MARI PEPA - BACKEND API" -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 

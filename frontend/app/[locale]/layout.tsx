@@ -45,9 +45,9 @@ export async function generateMetadata(props: {
     title: t("title"),
     description: t("description"),
     keywords: t("keywords"),
-    authors: [{ name: "Granja Maripepa", url: "https://www.mari-pepa.com" }],
-    creator: "Granja Maripepa",
-    publisher: "Granja Maripepa",
+    authors: [{ name: "Maripepa", url: "https://www.mari-pepa.com" }],
+    creator: "Maripepa",
+    publisher: "Maripepa",
     robots:
       locale === "es" || locale === "en"
         ? {
@@ -66,7 +66,7 @@ export async function generateMetadata(props: {
       type: "website",
       locale: ogLocaleMap[locale] || "es_ES",
       url: canonicalUrl,
-      siteName: "Granja Maripepa",
+      siteName: "Maripepa",
       title: t("title"),
       description: t("description"),
       images: [
@@ -74,7 +74,7 @@ export async function generateMetadata(props: {
           url: "https://www.mari-pepa.com/og-maripepa.jpg",
           width: 1200,
           height: 630,
-          alt: "Granja Maripepa · Distribución HORECA desde Lorca",
+          alt: "Maripepa · Distribución HORECA desde Lorca",
           type: "image/jpeg",
         },
       ],

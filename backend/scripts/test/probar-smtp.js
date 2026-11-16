@@ -65,14 +65,14 @@ async function enviarEmailPrueba(destinatario) {
     console.log(`📤 Enviando email de prueba a: ${destinatario}`);
     
     const info = await transporter.sendMail({
-      from: '"Granja Mari Pepa" <noreply@mari-pepa.com>',
+      from: '"Mari Pepa" <noreply@mari-pepa.com>',
       to: destinatario,
-      subject: '🧪 Email de Prueba - Granja Mari Pepa',
+      subject: '🧪 Email de Prueba - Mari Pepa',
       text: 'Este es un email de prueba del sistema. Si lo recibes, el SMTP está funcionando correctamente.',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #667eea;">✅ Email de Prueba</h2>
-          <p>Este es un email de prueba del sistema <strong>Granja Mari Pepa</strong>.</p>
+          <p>Este es un email de prueba del sistema <strong>Mari Pepa</strong>.</p>
           <p>Si lo recibes, el servidor SMTP está funcionando correctamente.</p>
           <hr style="border: 1px solid #eee; margin: 20px 0;">
           <p style="color: #999; font-size: 12px;">

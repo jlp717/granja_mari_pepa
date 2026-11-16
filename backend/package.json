@@ -1,7 +1,7 @@
 {
   "name": "granja-mari-pepa-backend",
   "version": "1.0.0",
-  "description": "Backend API para sistema de facturación de Granja Mari Pepa",
+  "description": "Backend API para sistema de facturación de Mari Pepa",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -17,7 +17,7 @@
     "express",
     "odbc"
   ],
-  "author": "Granja Mari Pepa",
+  "author": "Mari Pepa",
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

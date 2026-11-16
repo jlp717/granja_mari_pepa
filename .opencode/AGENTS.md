@@ -1,4 +1,4 @@
-﻿# Granja Mari Pepa - Reglas del Equipo de Agentes
+﻿# Mari Pepa - Reglas del Equipo de Agentes
 
 - Stack: Next.js App Router, TypeScript, Tailwind, shadcn/ui, Node.js.
 - Base de datos real para este ecosistema: IBM DB2/AS400 en 192.168.1.22, DSN GMP.

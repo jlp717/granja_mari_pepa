@@ -340,9 +340,9 @@ const transporter = nodemailer.createTransporter({
 });
 
 await transporter.sendMail({
-  from: 'Granja Mari Pepa <noreply@granjamari pepa.com>',
+  from: 'Mari Pepa <noreply@granjamari pepa.com>',
   to: customer.EMAIL,
-  subject: 'Código de verificación - Granja Mari Pepa',
+  subject: 'Código de verificación - Mari Pepa',
   html: `
     <h1>Código de Verificación</h1>
     <p>Tu código es: <strong>${verificationCode}</strong></p>

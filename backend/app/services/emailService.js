@@ -40,13 +40,22 @@ const SMTP_CONFIG = {
     // NOTE: The mail server (mail.mari-pepa.com) returns a certificate for 'clientes61.dnspropio.com'
     // This is a server-side configuration issue but we handle it here to allow email sending
     tls: {
-        rejectUnauthorized: false, // Accept self-signed or mismatched certs
+        rejectUnauthorized: true,
         minVersion: 'TLSv1.2'
     }
 };
 
 const FROM_EMAIL = process.env.SMTP_FROM || 'noreply@mari-pepa.com';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
 // Crear transportador de nodemailer
 let transporter = null;
@@ -82,9 +91,9 @@ async function sendPasswordResetEmail(to, resetToken, customerName) {
         const resetLink = `${FRONTEND_URL}/reset-password?token=${resetToken}`;
 
         const mailOptions = {
-            from: `"Granja Mari Pepa - Soporte" <${FROM_EMAIL}>`,
+            from: `"Mari Pepa - Soporte" <${FROM_EMAIL}>`,
             to: to,
-            subject: 'Recuperación de Contraseña - Granja Mari Pepa',
+            subject: 'Recuperación de Contraseña - Mari Pepa',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
                     <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
@@ -93,11 +102,11 @@ async function sendPasswordResetEmail(to, resetToken, customerName) {
                         </div>
 
                         <p style="font-size: 16px; color: #333; line-height: 1.6;">
-                            Hola <strong>${customerName}</strong>,
+                            Hola <strong>${escapeHtml(customerName)}</strong>,
                         </p>
 
                         <p style="font-size: 14px; color: #666; line-height: 1.6;">
-                            Hemos recibido una solicitud para restablecer tu contraseña en <strong>Granja Mari Pepa</strong>.
+                            Hemos recibido una solicitud para restablecer tu contraseña en <strong>Mari Pepa</strong>.
                         </p>
 
                         <div style="background-color: #f0f7f1; padding: 20px; border-radius: 8px; margin: 25px 0;">
@@ -127,7 +136,7 @@ async function sendPasswordResetEmail(to, resetToken, customerName) {
                         <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
 
                         <p style="font-size: 12px; color: #999; line-height: 1.5; margin: 0;">
-                            <strong>Granja Mari Pepa</strong><br>
+                            <strong>Mari Pepa</strong><br>
                             Pol. Ind. Saprelorca - Parcela D-3<br>
                             30817 Lorca, Murcia<br>
                             📞 639 77 86 56 | 📧 pedidos@mari-pepa.com
@@ -167,9 +176,9 @@ async function sendVerificationCodeEmail(to, verificationCode, customerName) {
         const transporter = initializeTransporter();
 
         const mailOptions = {
-            from: `"Granja Mari Pepa - Seguridad" <${FROM_EMAIL}>`,
+            from: `"Mari Pepa - Seguridad" <${FROM_EMAIL}>`,
             to: to,
-            subject: 'Código de Verificación - Granja Mari Pepa',
+            subject: 'Código de Verificación - Mari Pepa',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
                     <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
@@ -178,11 +187,11 @@ async function sendVerificationCodeEmail(to, verificationCode, customerName) {
                         </div>
 
                         <p style="font-size: 16px; color: #333; line-height: 1.6;">
-                            Hola <strong>${customerName}</strong>,
+                            Hola <strong>${escapeHtml(customerName)}</strong>,
                         </p>
 
                         <p style="font-size: 14px; color: #666; line-height: 1.6;">
-                            Tu código de verificación para <strong>Granja Mari Pepa</strong> es:
+                            Tu código de verificación para <strong>Mari Pepa</strong> es:
                         </p>
 
                         <div style="background-color: #f0f7f1; padding: 30px; border-radius: 8px; margin: 25px 0; text-align: center;">
@@ -205,7 +214,7 @@ async function sendVerificationCodeEmail(to, verificationCode, customerName) {
                         <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
 
                         <p style="font-size: 12px; color: #999; line-height: 1.5; margin: 0;">
-                            <strong>Granja Mari Pepa</strong><br>
+                            <strong>Mari Pepa</strong><br>
                             Pol. Ind. Saprelorca - Parcela D-3<br>
                             30817 Lorca, Murcia<br>
                             📞 639 77 86 56 | 📧 pedidos@mari-pepa.com
@@ -298,7 +307,7 @@ async function sendApplicationNotification(application, to) {
                 : '';
 
         const mailOptions = {
-            from: `"Granja Mari Pepa - Empleo" <${senderAddress}>`,
+            from: `"Mari Pepa - Empleo" <${senderAddress}>`,
             to,
             replyTo: application.email,
             subject: `Nueva candidatura: ${application.name}${application.jobTitle ? ` - ${application.jobTitle}` : ''}`,
@@ -311,7 +320,7 @@ async function sendApplicationNotification(application, to) {
                           <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
                           <tr>
                             <td style="padding:26px 30px 0;">
-                              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Granja Maripepa &middot; Empleo</p>
+                              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Maripepa &middot; Empleo</p>
                               <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Nueva candidatura recibida</h1>
                               <p style="margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6b6b6b;">${esc(application.receivedAt || new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }))}</p>
                             </td>
@@ -352,7 +361,7 @@ async function sendApplicationNotification(application, to) {
                           </tr>
                           <tr>
                             <td style="padding:20px 30px 26px;">
-                              <p style="margin:0;padding-top:16px;border-top:1px solid #ece8df;font-family:Arial,Helvetica,sans-serif;font-size:10.5px;line-height:1.6;color:#9a958a;">Aviso automático del sistema de empleo de Granja Maripepa. No respondas a este correo.</p>
+                              <p style="margin:0;padding-top:16px;border-top:1px solid #ece8df;font-family:Arial,Helvetica,sans-serif;font-size:10.5px;line-height:1.6;color:#9a958a;">Aviso automático del sistema de empleo de Maripepa. No respondas a este correo.</p>
                             </td>
                           </tr>
                         </table>
@@ -382,7 +391,7 @@ async function sendInvoiceEmail({ to, subject, text, html, pdfBuffer, filename }
 
     const transporter = initializeTransporter();
     const info = await transporter.sendMail({
-        from: `"Granja Mari Pepa" <${FROM_EMAIL}>`,
+        from: `"Mari Pepa" <${FROM_EMAIL}>`,
         to,
         subject,
         text,
@@ -425,22 +434,22 @@ async function sendInvoiceEmail({ to, subject, text, html, pdfBuffer, filename }
 async function sendApplicationStatusEmail(application, status) {
     const templates = {
         review: {
-            subject: 'Tu candidatura está en revisión — Granja Maripepa',
+            subject: 'Tu candidatura está en revisión — Maripepa',
             title: 'Candidatura en revisión',
             body: 'Hemos recibido tu candidatura y ya la está revisando el equipo de selección. Si necesitamos algún dato adicional, nos pondremos en contacto contigo por este mismo correo.'
         },
         interview: {
-            subject: `Entrevista${application.jobTitle ? ` — ${application.jobTitle}` : ''} — Granja Maripepa`,
+            subject: `Entrevista${application.jobTitle ? ` — ${application.jobTitle}` : ''} — Maripepa`,
             title: 'Queremos conocerte',
             body: 'Tu candidatura ha pasado a la fase de entrevista. El equipo de Recursos Humanos se pondrá en contacto contigo para concretar fecha, hora y formato de la conversación.'
         },
         rejected: {
-            subject: 'Resolución de tu candidatura — Granja Maripepa',
+            subject: 'Resolución de tu candidatura — Maripepa',
             title: 'Candidatura revisada',
             body: 'Gracias por el tiempo que has dedicado a tu candidatura. En esta ocasión no vamos a continuar con el proceso, pero conservamos tu currículum para futuras vacantes que encajen con tu perfil.'
         },
         hired: {
-            subject: 'Siguiente paso en tu candidatura — Granja Maripepa',
+            subject: 'Siguiente paso en tu candidatura — Maripepa',
             title: 'Seguimos adelante',
             body: 'Nos alegra comunicarte que queremos dar el siguiente paso contigo. El equipo de Recursos Humanos se pondrá en contacto para concretar las condiciones y la incorporación.'
         }
@@ -464,7 +473,7 @@ async function sendApplicationStatusEmail(application, status) {
         const job = esc(application.jobTitle || '');
 
         const info = await transporter.sendMail({
-            from: `"Granja Mari Pepa - Empleo" <${senderAddress}>`,
+            from: `"Mari Pepa - Empleo" <${senderAddress}>`,
             to: application.email,
             replyTo: process.env.SMTP_RRHH_REPLY_TO || 'cv.rrhh@maripepa.es',
             subject: template.subject,
@@ -475,8 +484,8 @@ async function sendApplicationStatusEmail(application, status) {
                       <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
                         <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
                         <tr><td style="padding:26px 30px 0;">
-                          <img src="cid:${EMAIL_LOGO_CID}" alt="Granja Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
-                          <p style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Granja Maripepa &middot; Empleo</p>
+                          <img src="cid:${EMAIL_LOGO_CID}" alt="Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
+                          <p style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Maripepa &middot; Empleo</p>
                           <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">${template.title}</h1>
                         </td></tr>
                         <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
@@ -486,7 +495,7 @@ async function sendApplicationStatusEmail(application, status) {
                           <p style="margin:0;">Si tienes cualquier duda, responde a este correo o escribe a <a href="mailto:cv.rrhh@maripepa.es" style="color:#cf3700;">cv.rrhh@maripepa.es</a>.</p>
                         </td></tr>
                         <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8a8578;">
-                          Granja Maripepa, S.L. &middot; Lorca, Murcia &middot; 968 46 75 14
+                          Maripepa, S.L. &middot; Lorca, Murcia &middot; 968 46 75 14
                         </td></tr>
                       </table>
                     </td></tr>
@@ -526,10 +535,10 @@ async function sendContactAcknowledgment({ to, name }) {
         const transport = initializeTransporter();
         const inbox = process.env.CONTACT_EMAIL || 'pedidos@mari-pepa.com';
         const info = await transport.sendMail({
-            from: `"Granja Mari Pepa" <${FROM_EMAIL}>`,
+            from: `"Mari Pepa" <${FROM_EMAIL}>`,
             to,
             replyTo: inbox,
-            subject: 'Hemos recibido tu mensaje — Granja Mari Pepa',
+            subject: 'Hemos recibido tu mensaje — Mari Pepa',
             html: `
                 <div style="margin:0;padding:0;background:#f2f1ee;">
                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
@@ -537,17 +546,17 @@ async function sendContactAcknowledgment({ to, name }) {
                       <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
                         <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
                         <tr><td style="padding:26px 30px 0;">
-                          <img src="cid:${EMAIL_LOGO_CID}" alt="Granja Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
+                          <img src="cid:${EMAIL_LOGO_CID}" alt="Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
                           <h1 style="margin:18px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Hemos recibido tu mensaje</h1>
                         </td></tr>
                         <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
                           <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
-                          <p style="margin:0 0 12px;">Gracias por escribir a Granja Mari Pepa. Tu mensaje ya está en manos del equipo correspondiente y te responderemos a este mismo correo lo antes posible.</p>
+                          <p style="margin:0 0 12px;">Gracias por escribir a Mari Pepa. Tu mensaje ya está en manos del equipo correspondiente y te responderemos a este mismo correo lo antes posible.</p>
                           <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Si necesitas algo urgente, llámanos al <a href="tel:+34968467514" style="color:#cf3700;text-decoration:none;">968 46 75 14</a>.</p>
                           <p style="margin:0;">Puedes responder a este correo y llegará directamente a <a href="mailto:${inbox}" style="color:#cf3700;">${inbox}</a>.</p>
                         </td></tr>
                         <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#8a8578;">
-                          Granja Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
+                          Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
                           968 46 75 14 &middot; pedidos@granjamaripepa.com
                         </td></tr>
                       </table>

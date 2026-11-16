@@ -35,7 +35,7 @@
     Aplica sin confirmacion (solo para ejecucion revisada y desatendida).
 
 .NOTES
-    Proyecto: Granja Mari Pepa. No hay despliegue ni escritura en produccion.
+    Proyecto: Mari Pepa. No hay despliegue ni escritura en produccion.
     Rollback: git status / git diff, y restaurar desde git los cambios no deseados.
 #>
 

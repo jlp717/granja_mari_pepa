@@ -55,15 +55,19 @@ function isInternalIp(ip) {
 function clientIp(req) {
   const peer = normalize(req.socket?.remoteAddress || '');
   if (peerIsLoopback(req)) {
-    const cf = req.headers['cf-connecting-ip'];
-    if (typeof cf === 'string' && cf.length) {
-      return normalize(cf);
-    }
+    // nginx sobrescribe X-Real-IP con la IP real; es la fuente fiable.
     const real = req.headers['x-real-ip'];
-    if (typeof real === 'string' && real.length) return normalize(real);
+    if (typeof real === 'string' && real.length) {
+      return normalize(real.split(',')[0]);
+    }
+    // Último salto del X-Forwarded-For: lo añade el proxy, no el cliente.
     const forwarded = req.headers['x-forwarded-for'];
     if (typeof forwarded === 'string' && forwarded.length) {
-      return normalize(forwarded.split(',')[0]);
+      const hops = forwarded
+        .split(',')
+        .map((hop) => normalize(hop))
+        .filter(Boolean);
+      if (hops.length) return hops[hops.length - 1];
     }
   }
   return peer || normalize(req.ip || '');
@@ -79,7 +83,7 @@ function requireInternalNetwork(req, res, next) {
     success: false,
     code: 'NETWORK_NOT_ALLOWED',
     message:
-      'El panel de administración solo está disponible desde la red interna de Granja Mari Pepa o su VPN.',
+      'El panel de administración solo está disponible desde la red interna de Mari Pepa o su VPN.',
   });
 }
 

@@ -82,7 +82,7 @@ async function sendInvoiceDocument({
       fallbackUrl: buildWaMeLink(
         recipient,
         fallbackText ||
-          'Hola, le enviamos su factura de Granja Maripepa. ¿Nos confirma que puede recibir el PDF por WhatsApp?',
+          'Hola, le enviamos su factura de Maripepa. ¿Nos confirma que puede recibir el PDF por WhatsApp?',
       ),
     };
   }
@@ -129,7 +129,7 @@ async function sendInvoiceDocument({
         fallbackUrl: buildWaMeLink(
           String(process.env.COMPANY_WHATSAPP || '34639778655').replace(/\D/g, ''),
           fallbackText ||
-            'Hola, le enviamos su factura de Granja Maripepa. ¿Nos confirma que puede recibir el PDF por WhatsApp?',
+            'Hola, le enviamos su factura de Maripepa. ¿Nos confirma que puede recibir el PDF por WhatsApp?',
         ),
       };
     }

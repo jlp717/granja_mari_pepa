@@ -20,7 +20,7 @@ const MAGAZINES = [
   {
     id: 'mag-2026-01',
     file: 'enero-2026-granja-mari-pepa.pdf',
-    title: 'Revista Granja Mari Pepa',
+    title: 'Revista Mari Pepa',
     edition: 'Enero 2026',
     date: '2026-01-01',
     description:
@@ -38,7 +38,7 @@ const MAGAZINES = [
   {
     id: 'mag-2026-03',
     file: 'gmp-marzo-2026.pdf',
-    title: 'Revista Granja Mari Pepa',
+    title: 'Revista Mari Pepa',
     edition: 'Marzo 2026',
     date: '2026-03-01',
     description:
@@ -65,7 +65,7 @@ const MAGAZINES = [
   {
     id: 'mag-2026-06',
     file: 'junio-2026-granja-mari-pepa.pdf',
-    title: 'Revista Granja Mari Pepa',
+    title: 'Revista Mari Pepa',
     edition: 'Junio 2026',
     date: '2026-06-01',
     description:
@@ -74,7 +74,7 @@ const MAGAZINES = [
   {
     id: 'mag-2026-07',
     file: 'julio-agosto-2026-granja-mari-pepa.pdf',
-    title: 'Revista Granja Mari Pepa',
+    title: 'Revista Mari Pepa',
     edition: 'Julio-Agosto 2026',
     date: '2026-07-01',
     description:
@@ -111,7 +111,7 @@ const MAGAZINES = [
 
 async function main() {
   const connection = await odbc.connect(
-    process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER',
+    process.env.ODBC_CONNECTION_STRING,
   );
   try {
     await connection.query("DELETE FROM JAVIER.ADMIN_MAGAZINES");

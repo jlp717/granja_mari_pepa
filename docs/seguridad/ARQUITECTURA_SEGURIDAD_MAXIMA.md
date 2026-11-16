@@ -1278,4 +1278,4 @@ Esta arquitectura proporciona **7 capas de seguridad**:
 
 **Fecha de creación**: 27 de Noviembre de 2025  
 **Versión**: 1.0  
-**Autor**: Arquitectura de Seguridad - Granja Mari Pepa
+**Autor**: Arquitectura de Seguridad - Mari Pepa

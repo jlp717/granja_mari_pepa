@@ -1,5 +1,5 @@
 {
-  "name": "Granja Maripepa · Distribución HORECA",
+  "name": "Maripepa · Distribución HORECA",
   "short_name": "Maripepa",
   "description": "Distribución de producto congelado, refrigerado y de temperatura ambiente para hostelería y restauración desde Lorca, Murcia.",
   "version": "2.1.0",
@@ -43,7 +43,7 @@
       "sizes": "1200x630",
       "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "Granja Maripepa · Página principal"
+      "label": "Maripepa · Página principal"
     }
   ],
   "shortcuts": [

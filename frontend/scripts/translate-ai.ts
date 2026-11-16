@@ -18,7 +18,7 @@ const LANG_NAMES = {
 };
 
 const SYSTEM_PROMPT = (langName) => `
-You are a professional translator for "Granja Mari Pepa", a premium food distribution company for HORECA (Hotels, Restaurants, Catering).
+You are a professional translator for "Mari Pepa", a premium food distribution company for HORECA (Hotels, Restaurants, Catering).
 Target Language: ${langName}
 
 Your tone must be:

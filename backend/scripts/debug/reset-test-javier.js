@@ -17,7 +17,7 @@ async function resetTestJavier() {
 
     const customerCode = 'TEST_JAVIER';
     const newPassword = 'TEST_JAVIER';
-    const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+    const connectionString = process.env.ODBC_CONNECTION_STRING;
 
     let cn;
     try {

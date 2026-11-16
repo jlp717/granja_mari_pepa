@@ -5,7 +5,7 @@ const logo = {
   url: source + "/gmp/brand/logo-alpha.png",
 };
 const mapLorca =
-  "https://maps.google.com/?q=Granja+Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca";
+  "https://maps.google.com/?q=Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca";
 
 const addressLorca = {
   "@type": "PostalAddress",
@@ -47,8 +47,8 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": organizationId,
-    name: "Granja Maripepa",
-    legalName: "Granja Maripepa, S.L.",
+    name: "Maripepa",
+    legalName: "Maripepa, S.L.",
     taxID: "B04008710",
     url: source,
     logo,
@@ -93,7 +93,7 @@ const schemas = [
     "@type": "WebSite",
     "@id": source + "/#website",
     url: source,
-    name: "Granja Maripepa",
+    name: "Maripepa",
     inLanguage: ["es", "en", "de", "it", "zh"],
     publisher: { "@id": organizationId },
   },
@@ -101,7 +101,7 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "WholesaleStore",
     "@id": source + "/#lorca",
-    name: "Granja Maripepa · Sede Lorca",
+    name: "Maripepa · Sede Lorca",
     parentOrganization: { "@id": organizationId },
     url: source + "/es/lorca",
     telephone: "+34968467514",
@@ -120,7 +120,7 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "WholesaleStore",
     "@id": source + "/#viator",
-    name: "Granja Maripepa · Delegación Viator",
+    name: "Maripepa · Delegación Viator",
     parentOrganization: { "@id": organizationId },
     url: source + "/es/contacto",
     telephone: "+34950973429",

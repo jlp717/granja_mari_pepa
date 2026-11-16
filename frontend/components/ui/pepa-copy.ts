@@ -27,7 +27,7 @@ const withActions = (labels: string[]) =>
   labels.map((label, index) => ({ label, action: actions[index] }));
 const copy: Record<string, PepaCopy> = {
   es: {
-    subtitle: "Asistente de Granja Maripepa",
+    subtitle: "Asistente de Maripepa",
     open: "Abrir Pepa IA",
     close: "Cerrar Pepa IA",
     clear: "Limpiar conversación",
@@ -52,7 +52,7 @@ const copy: Record<string, PepaCopy> = {
     actions: withActions(["Facturas", "Pedidos", "Contacto", "Horarios"]),
   },
   en: {
-    subtitle: "Granja Maripepa assistant",
+    subtitle: "Maripepa assistant",
     open: "Open Pepa AI",
     close: "Close Pepa AI",
     clear: "Clear conversation",
@@ -76,7 +76,7 @@ const copy: Record<string, PepaCopy> = {
     actions: withActions(["Invoices", "Orders", "Contact", "Opening hours"]),
   },
   de: {
-    subtitle: "Assistent von Granja Maripepa",
+    subtitle: "Assistent von Maripepa",
     open: "Pepa AI öffnen",
     close: "Pepa AI schließen",
     clear: "Unterhaltung löschen",
@@ -106,7 +106,7 @@ const copy: Record<string, PepaCopy> = {
     ]),
   },
   it: {
-    subtitle: "Assistente di Granja Maripepa",
+    subtitle: "Assistente di Maripepa",
     open: "Apri Pepa AI",
     close: "Chiudi Pepa AI",
     clear: "Cancella conversazione",
@@ -131,7 +131,7 @@ const copy: Record<string, PepaCopy> = {
     actions: withActions(["Fatture", "Ordini", "Contatti", "Orari"]),
   },
   zh: {
-    subtitle: "Granja Maripepa 助手",
+    subtitle: "Maripepa 助手",
     open: "打开 Pepa AI",
     close: "关闭 Pepa AI",
     clear: "清除对话",

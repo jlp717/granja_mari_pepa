@@ -1,8 +1,8 @@
-# 🛠️ CORRECCIONES Y MEJORAS DEL SISTEMA - Granja Mari Pepa
+# 🛠️ CORRECCIONES Y MEJORAS DEL SISTEMA - Mari Pepa
 
 **Fecha**: 13 de diciembre de 2025
 **Desarrollador**: Claude (Anthropic)
-**Cliente**: Granja Mari Pepa
+**Cliente**: Mari Pepa
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## 📊 Resumen Ejecutivo
 
-Se han identificado y corregido **7 problemas críticos** en el sistema de gestión de Granja Mari Pepa:
+Se han identificado y corregido **7 problemas críticos** en el sistema de gestión de Mari Pepa:
 
 ✅ **Error del chatbot** - Desajuste entre frontend y backend corregido
 ✅ **Advertencias de keys duplicadas** - Identificadas causas en componentes React

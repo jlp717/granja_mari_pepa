@@ -1,4 +1,4 @@
-# Granja Mari Pepa — web y área de clientes
+# Mari Pepa — web y área de clientes
 
 Aplicación Next.js con cinco idiomas y servicios de negocio existentes. El rediseño de esta rama, `rediseno/v3`, porta el sistema visual autorizado de Kage desde una copia literal conservada en `reference/kage-verbatim/`. Backend, autenticación y datos mantienen su arquitectura previa.
 

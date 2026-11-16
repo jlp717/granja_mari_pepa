@@ -8,6 +8,11 @@
 const express = require('express');
 const controller = require('../controllers/adminController');
 const { requireInternalNetwork } = require('../middleware/adminNetwork');
+const {
+  contactLimiter,
+  publicFormLimiter,
+  pdfLimiter,
+} = require('../middleware/rateLimiter');
 
 const adminRouter = express.Router();
 const publicRouter = express.Router();
@@ -46,11 +51,11 @@ adminRouter.delete('/magazines/:id', controller.deleteMagazine);
 adminRouter.put('/applications/:id', controller.updateApplication);
 adminRouter.delete('/applications/:id', controller.deleteApplication);
 
-adminRouter.post('/team', controller.inviteMember);
-adminRouter.post('/team/:id/resend', controller.resendInvite);
-adminRouter.delete('/team/:id', controller.revokeMember);
+adminRouter.post('/team', controller.requireAdmin, controller.inviteMember);
+adminRouter.post('/team/:id/resend', controller.requireAdmin, controller.resendInvite);
+adminRouter.delete('/team/:id', controller.requireAdmin, controller.revokeMember);
 
-adminRouter.put('/settings', controller.saveSettings);
+adminRouter.put('/settings', controller.requireAdmin, controller.saveSettings);
 adminRouter.post('/account/password', controller.changePassword);
 
 adminRouter.post(
@@ -63,10 +68,11 @@ publicRouter.get('/jobs', controller.publicJobs);
 publicRouter.get('/jobs/:slug', controller.publicJob);
 publicRouter.get('/magazines', controller.publicMagazines);
 publicRouter.get('/events', controller.publicEvents);
-publicRouter.post('/applications', controller.publicApplication);
-publicRouter.post('/contact', controller.publicContact);
+publicRouter.post('/applications', publicFormLimiter, controller.publicApplication);
+publicRouter.post('/contact', contactLimiter, controller.publicContact);
 publicRouter.post(
   '/cv',
+  pdfLimiter,
   express.raw({ type: ['application/pdf'], limit: '10mb' }),
   controller.publicCv,
 );

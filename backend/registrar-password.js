@@ -12,8 +12,13 @@ async function registrarPassword() {
   let connection;
   
   try {
-    const codigoCliente = '4300009900';
-    const password = '23224478K'; // NIF como contraseña
+    const codigoCliente = process.env.TEST_CUSTOMER_CODE || '';
+    const password = process.env.TEST_CUSTOMER_PASSWORD || '';
+    if (!codigoCliente || !password) {
+      throw new Error(
+        'Define TEST_CUSTOMER_CODE y TEST_CUSTOMER_PASSWORD para ejecutar este script.',
+      );
+    }
     
     console.log(`🔐 Registrando contraseña para cliente ${codigoCliente}...`);
     
@@ -67,7 +72,7 @@ async function registrarPassword() {
     console.log(`\n🎉 COMPLETADO`);
     console.log(`\nPuedes hacer login con:`);
     console.log(`  - Código Cliente: ${codigoCliente}`);
-    console.log(`  - Contraseña: ${password}`);
+    console.log(`  - Contraseña: la definida en TEST_CUSTOMER_PASSWORD`);
     
     await connection.close();
     

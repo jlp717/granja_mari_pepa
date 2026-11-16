@@ -66,7 +66,7 @@ export function MagazineTicker() {
       <div
         className={styles.ticker}
         role="region"
-        aria-label="Revistas Granja Maripepa"
+        aria-label="Revistas Maripepa"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}

@@ -339,7 +339,7 @@ export function EditorialStory({
                     className="arrowlink"
                     href={gmailCompose(
                       EDITORIAL_FACTS.lorcaEmail,
-                      "Contacto — Lorca · Granja Maripepa",
+                      "Contacto — Lorca · Maripepa",
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -359,7 +359,7 @@ export function EditorialStory({
           className={styles.manifesto}
         >
           <div className="sec-head" data-rv="fade">
-            <span className="k">Granja Maripepa</span>
+            <span className="k">Maripepa</span>
             <span className="rule" />
             <a
               className="k"

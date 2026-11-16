@@ -75,7 +75,7 @@ async function sendCloudDocument({ to, pdfBuffer, filename, caption }) {
       toMasked: maskPhone(recipient),
       fallbackUrl: buildWaMeLink(
         recipient,
-        'Hola, soy Pepa de Granja Maripepa. ¿Te envío tu factura por aquí?',
+        'Hola, soy Pepa de Maripepa. ¿Te envío tu factura por aquí?',
       ),
     };
   }
@@ -171,7 +171,7 @@ async function sendInvoiceDocument(args) {
     fallbackUrl: recipient
       ? buildWaMeLink(
           recipient,
-          'Hola, soy Pepa de Granja Maripepa. ¿Te envío tu factura por aquí?',
+          'Hola, soy Pepa de Maripepa. ¿Te envío tu factura por aquí?',
         )
       : null,
   };

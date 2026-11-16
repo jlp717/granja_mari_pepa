@@ -348,12 +348,12 @@ export function Header() {
           className="brand"
           href="/"
           data-cursor
-          aria-label={`Granja Maripepa · ${t("home")}`}
+          aria-label={`Maripepa · ${t("home")}`}
           onClick={() => routeClick("/")}
         >
           <Image
             src="/gmp/brand/logo-alpha.png"
-            alt="Granja Maripepa"
+            alt="Maripepa"
             width={135}
             height={41}
             priority

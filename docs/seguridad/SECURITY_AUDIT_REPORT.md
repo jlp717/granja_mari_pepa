@@ -1,5 +1,5 @@
 # 🔴 INFORME DE AUDITORÍA DE SEGURIDAD - RED TEAM
-## Granja Mari Pepa - Sistema de Facturación
+## Mari Pepa - Sistema de Facturación
 
 **Fecha:** Enero 2025  
 **Versión:** 4.0.0 SECURITY ULTRA EDITION  

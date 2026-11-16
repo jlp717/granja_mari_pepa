@@ -11,7 +11,7 @@ export const SUPPORT_EN = {
         intro: "Seven families across frozen, chilled and ambient.",
         questions: [
           {
-            question: "What products does Granja Maripepa distribute?",
+            question: "What products does Maripepa distribute?",
             answer:
               "Frozen, chilled and ambient products for hospitality, catering and collective catering. The range is organised into seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. We are the official distributor of Grupo Topgel and Nestlé Helados, and we work with Panamar, Okin and Pastelería Amparín.",
           },
@@ -28,7 +28,7 @@ export const SUPPORT_EN = {
           {
             question: "What does the Grupo Topgel network add?",
             answer:
-              "Granja Maripepa is a partner-delegation of Grupo Topgel. That network completes the range with references that are not held at the Saprelorca warehouse, while attention and delivery stay in Lorca.",
+              "Maripepa is a partner-delegation of Grupo Topgel. That network completes the range with references that are not held at the Saprelorca warehouse, while attention and delivery stay in Lorca.",
           },
         ],
       },
@@ -159,9 +159,9 @@ export const SUPPORT_EN = {
       },
     ],
     seo: {
-      title: "Frequently asked questions | Granja Maripepa",
+      title: "Frequently asked questions | Maripepa",
       description:
-        "Answers about the range, orders, delivery, product documentation, magazines and customer area of Granja Maripepa in Lorca and Viator, Murcia and Almería.",
+        "Answers about the range, orders, delivery, product documentation, magazines and customer area of Maripepa in Lorca and Viator, Murcia and Almería.",
     },
   },
   contact: {
@@ -209,9 +209,9 @@ export const SUPPORT_EN = {
       },
     ],
     seo: {
-      title: "Contact and opening hours | Granja Maripepa",
+      title: "Contact and opening hours | Maripepa",
       description:
-        "Telephones 968 46 75 14 and 639 77 86 55, email, WhatsApp, Monday to Friday opening hours and addresses in Lorca and Viator to talk to Granja Maripepa.",
+        "Telephones 968 46 75 14 and 639 77 86 55, email, WhatsApp, Monday to Friday opening hours and addresses in Lorca and Viator to talk to Maripepa.",
     },
   },
   ui: {
@@ -257,6 +257,6 @@ export const SUPPORT_EN = {
     location: "Location",
     preparation: "Prepare",
     channelLink: "Channels",
-    contactSubject: "Enquiry for Granja Maripepa",
+    contactSubject: "Enquiry for Maripepa",
   },
 } as const;

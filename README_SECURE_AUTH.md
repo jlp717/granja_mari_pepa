@@ -1,6 +1,6 @@
 # SISTEMA DE AUTENTICACIÓN DE NIVEL BANCARIO
 
-## 🛡️ Granja Mari Pepa - Autenticación Segura v2.0
+## 🛡️ Mari Pepa - Autenticación Segura v2.0
 
 Sistema de autenticación moderno que cumple con **NIST SP 800-63B** y **OWASP Authentication Cheat Sheet 2025**, implementando políticas de contraseñas basadas en **fortaleza real** (zxcvbn) en lugar de reglas obsoletas.
 
@@ -462,7 +462,7 @@ Para mejoras o reportar issues:
 
 ## 📄 Licencia
 
-Propietario: Granja Mari Pepa
+Propietario: Mari Pepa
 Uso interno / comercial permitido
 Todos los derechos reservados
 

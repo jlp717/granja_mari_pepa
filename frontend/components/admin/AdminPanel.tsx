@@ -1128,14 +1128,14 @@ export function AdminPanel() {
           <div className={styles.loginBrand}>
             <Image
               src="/gmp/brand/logo-alpha.png"
-              alt="Granja Maripepa"
+              alt="Maripepa"
               width={160}
               height={49}
             />
             <span>Administración</span>
           </div>
           <div className={styles.loginQuote}>
-            <span className={styles.kicker}>Granja Maripepa</span>
+            <span className={styles.kicker}>Maripepa</span>
             <p>El contenido de la web, en un solo lugar.</p>
             <small>Ofertas · Revistas · Candidaturas</small>
           </div>
@@ -1145,7 +1145,7 @@ export function AdminPanel() {
             <div className={styles.loginCardBrand}>
               <Image
                 src="/gmp/brand/logo-alpha.png"
-                alt="Granja Maripepa"
+                alt="Maripepa"
                 width={118}
                 height={36}
               />
@@ -1221,10 +1221,10 @@ export function AdminPanel() {
       ) : null}
       <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
         <div className={styles.sidebarHead}>
-          <a href="/es" className={styles.brand} aria-label="Granja Maripepa">
+          <a href="/es" className={styles.brand} aria-label="Maripepa">
             <Image
               src="/gmp/brand/logo-alpha.png"
-              alt="Granja Maripepa"
+              alt="Maripepa"
               width={126}
               height={38}
             />

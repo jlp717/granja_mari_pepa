@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '.env.local118' });
 const odbc = require('odbc');
 
-const connectionString = process.env.ODBC_CONNECTION_STRING || 'DSN=GMP;UID=JAVIER;PWD=JAVIER';
+const connectionString = process.env.ODBC_CONNECTION_STRING;
 
 async function borrarEmailCliente() {
   let connection;

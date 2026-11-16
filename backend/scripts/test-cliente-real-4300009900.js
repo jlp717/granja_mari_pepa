@@ -48,7 +48,7 @@ async function testClienteReal() {
         console.log('\n📋 Paso 2: Verificar formato de contraseña');
         console.log('-'.repeat(80));
 
-        const expectedNif = '23224478K';
+        const expectedNif = (process.env.TEST_NIF || '00000000T');
         const expectedHash = `LEGACY_${expectedNif}`;
         const storedHash = customer.PASSWORD_HASH.trim();
 

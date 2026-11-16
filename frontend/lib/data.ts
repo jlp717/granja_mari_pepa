@@ -181,15 +181,15 @@ export const delegations = [
 
 // Datos de la empresa - FUENTE: https://granjamaripepa.com
 export const companyInfo = {
-  name: "Granja Maripepa, S.L.",
-  shortName: "Granja Maripepa",
+  name: "Maripepa, S.L.",
+  shortName: "Maripepa",
   foundedYear: 1966,
   foundedCity: "Lorca (Murcia)",
   email: "pedidos@granjamaripepa.com",
   slogan:
     "Especialistas en productos congelados, refrigerados y helados para HORECA",
   description:
-    "Granja Maripepa, S.L. se fundó en 1966 en Lorca (Murcia), especializada en el mercado HORECA (hostelería, restauración y catering) y en el canal de Alimentación. Actualmente contamos con una gama de más de 1500 referencias en tres temperaturas (congelado, refrigerado y temperatura ambiente).",
+    "Maripepa, S.L. se fundó en 1966 en Lorca (Murcia), especializada en el mercado HORECA (hostelería, restauración y catering) y en el canal de Alimentación. Actualmente contamos con una gama de más de 1500 referencias en tres temperaturas (congelado, refrigerado y temperatura ambiente).",
   certifications: ["ISO 9001"],
   serviceAreas: ["Murcia", "Alicante"],
   deliveryTime: "24 - 48 horas",

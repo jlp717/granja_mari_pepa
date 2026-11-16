@@ -333,15 +333,15 @@ async function enviarFacturaPorEmail(req, res) {
     const nodemailer = require('nodemailer');
 
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || '_dc-mx.bef93564e202.mari-pepa.com',
+      host: process.env.SMTP_HOST,
       port: 465, // FORZADO: 465 (SSL) para saltar bloqueos de puerto 587
       secure: true,
       auth: {
-        user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
-        pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD
       },
       tls: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: true,
         minVersion: 'TLSv1.2'
       },
       connectionTimeout: 20000, // 20 segundos (Aumentado para redes lentas)
@@ -379,7 +379,7 @@ async function enviarFacturaPorEmail(req, res) {
                 <!-- Header -->
                 <tr><td style="background:linear-gradient(135deg, #1E3A5F 0%, #2D5A87 100%);padding:32px;text-align:center;">
                     <h1 style="color:#FFFFFF;margin:0;font-size:24px;font-weight:600;">
-                        🧺 Granja Mari Pepa
+                        🧺 Mari Pepa
                     </h1>
                     <p style="color:#93C5FD;margin:8px 0 0;font-size:14px;">
                         Factura Electrónica
@@ -425,7 +425,7 @@ async function enviarFacturaPorEmail(req, res) {
                 <!-- Footer -->
                 <tr><td style="background:#F8FAFC;padding:24px;border-top:1px solid #E2E8F0;text-align:center;">
                     <p style="color:#64748B;font-size:13px;margin:0 0 8px;">
-                        <strong>Granja Mari Pepa</strong>
+                        <strong>Mari Pepa</strong>
                     </p>
                     <p style="color:#94A3B8;font-size:12px;margin:0;">
                         Tel: 639 77 86 56 · pedidos@mari-pepa.com · www.mari-pepa.com
@@ -440,9 +440,9 @@ async function enviarFacturaPorEmail(req, res) {
 
     // Enviar email con PDF adjunto
     const mailOptions = {
-      from: '"Granja Mari Pepa" <noreply@mari-pepa.com>',
+      from: '"Mari Pepa" <noreply@mari-pepa.com>',
       to: destinatario,
-      subject: `Factura ${numeroFactura} - Granja Mari Pepa`,
+      subject: `Factura ${numeroFactura} - Mari Pepa`,
       html: htmlTemplate,
       attachments: [
         {
@@ -524,7 +524,7 @@ async function enviarFacturaPorWhatsapp(req, res) {
       fecha ? `Fecha: ${fecha}` : '',
       `Importe: ${total} EUR`,
       '',
-      'Granja Maripepa, S.L.',
+      'Maripepa, S.L.',
       'Tel. 968 46 75 14',
       'pedidos@granjamaripepa.com',
     ]

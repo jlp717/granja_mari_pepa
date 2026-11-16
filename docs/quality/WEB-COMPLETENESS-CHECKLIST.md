@@ -1,4 +1,4 @@
-# Checklist de completitud web — Granja Mari Pepa
+# Checklist de completitud web — Mari Pepa
 
 Fecha: 2026-11-16
 Rama de referencia: `rediseno/v3` (verificada en `.git/HEAD`)

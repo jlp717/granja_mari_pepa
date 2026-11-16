@@ -9,7 +9,7 @@
 const { execSync } = require('child_process');
 
 console.log('╔══════════════════════════════════════════════════════════════════╗');
-console.log('║          DIAGNÓSTICO DE PRODUCCIÓN - GRANJA MARI PEPA            ║');
+console.log('║          DIAGNÓSTICO DE PRODUCCIÓN - MARI PEPA            ║');
 console.log('╚══════════════════════════════════════════════════════════════════╝\n');
 
 // 1. Verificar rama de Git

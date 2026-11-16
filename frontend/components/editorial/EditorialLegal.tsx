@@ -90,7 +90,7 @@ export async function EditorialLegal({
         title={t("title")}
         className="sec"
       >
-        <div className="eyebrow">Granja Maripepa</div>
+        <div className="eyebrow">Maripepa</div>
         <WordReveal as="h1" className={`display h-sec ${styles.readingTitle}`}>
           {t("title")}
         </WordReveal>

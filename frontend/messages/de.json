@@ -102,7 +102,7 @@
     }
   },
   "hero": {
-    "title": "GRANJA MARIPEPA",
+    "title": "MARIPEPA",
     "subtitle": "Tiefkühl-, Kühl- und Eisprodukte für HORECA",
     "cta": "Kontaktieren Sie uns",
     "since": "Seit 1966",
@@ -148,7 +148,7 @@
     "nestle": {
       "name": "Nestlé",
       "category": "Premium Eiscreme",
-      "detailed": "Granja Maripepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
+      "detailed": "Maripepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
     },
     "panamar": {
       "name": "Panamar",
@@ -273,7 +273,7 @@
   },
   "about_page": {
     "hero": {
-      "title": "Granja Maripepa",
+      "title": "Maripepa",
       "subtitle_1": "Mehr als",
       "subtitle_highlight": "55 Jahre",
       "subtitle_2": "im Dienst des HORECA-Sektors",
@@ -288,7 +288,7 @@
       "milestones": {
         "1966": {
           "title": "Gegründet in Lorca (Murcia)",
-          "desc": "Granja Maripepa, S.L. wurde in Lorca (Murcia) gegründet und spezialisierte sich von Anfang an auf den HORECA-Markt und den Lebensmittelkanal."
+          "desc": "Maripepa, S.L. wurde in Lorca (Murcia) gegründet und spezialisierte sich von Anfang an auf den HORECA-Markt und den Lebensmittelkanal."
         },
         "2020": {
           "title": "100% Grüne Energie",
@@ -354,7 +354,7 @@
         "capacity": "Kühlkapazität von 5.000m³"
       },
       "stats": {
-        "title": "Granja Maripepa in Zahlen",
+        "title": "Maripepa in Zahlen",
         "founded_label": "Gründungsjahr",
         "references_label": "Produktreferenzen",
         "capacity_label": "Kühlkapazität",
@@ -431,7 +431,7 @@
       "badge": "Google Bewertungen",
       "title_1": "Was",
       "title_highlight": "unsere Kunden sagen",
-      "description": "Die Meinung derer, die Granja Maripepa für ihr Geschäft vertrauen",
+      "description": "Die Meinung derer, die Maripepa für ihr Geschäft vertrauen",
       "antonio_review": {
         "text": "Dieses Unternehmen vertreibt alle Arten von Tiefkühlkost, Eiscreme und unzählige Produkte. Wenn Sie Qualitätsprodukte und eine außergewöhnliche Behandlung wünschen, suchen Sie nicht weiter. Das beste Unternehmen, das ich in seiner Branche kenne.",
         "role": "8 Bewertungen · Local Guide"
@@ -451,7 +451,7 @@
       "title_1": "Bereit zur",
       "title_highlight": "Zusammenarbeit",
       "title_suffix": "?",
-      "description": "Schließen Sie sich den HORECA-Betrieben an, die Granja Maripepa vertrauen, um ihren Kunden in Murcia und Alicante zertifizierte Qualitätsprodukte zu bringen.",
+      "description": "Schließen Sie sich den HORECA-Betrieben an, die Maripepa vertrauen, um ihren Kunden in Murcia und Alicante zertifizierte Qualitätsprodukte zu bringen.",
       "contact": "Jetzt kontaktieren",
       "catalog": "Katalog ansehen"
     }
@@ -704,7 +704,7 @@
     "greetingMorning": "Guten Morgen, ich bin Pepa",
     "greetingAfternoon": "Guten Tag, ich bin Pepa",
     "greetingEvening": "Guten Abend, ich bin Pepa",
-    "subtitle": "Ihr virtueller Assistent von Granja Maripepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
+    "subtitle": "Ihr virtueller Assistent von Maripepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
     "placeholder": "Schreiben Sie Ihre Nachricht...",
     "thinking": "Nachdenken",
     "send": "Senden",
@@ -740,14 +740,14 @@
     "downloadInvoice": "Descargar factura"
   },
   "footer": {
-    "companyName": "GRANJA MARIPEPA",
+    "companyName": "MARIPEPA",
     "tagline": "Premium Lebensmittelvertrieb",
     "description_short": "Premium Lebensmittelvertrieb für HORECA",
     "nestle_distributor": "Offizieller Nestlé Vertriebspartner",
     "founded_text": "Gegründet in Lorca, 1966",
     "green_energy": "Grüne Energie",
     "quick_access": "Schnellzugriff",
-    "copyright": "© {year} Granja Maripepa. Alle Rechte vorbehalten.",
+    "copyright": "© {year} Maripepa. Alle Rechte vorbehalten.",
     "rights_reserved": "Alle Rechte vorbehalten.",
     "catalog": "Katalog",
     "client_portal": "Kundenportal",
@@ -878,18 +878,18 @@
     }
   },
   "meta": {
-    "title": "Granja Maripepa | HORECA-Vertrieb Murcia und Lorca",
+    "title": "Maripepa | HORECA-Vertrieb Murcia und Lorca",
     "description": "Führender Premium-Lebensmittelvertrieb für das Gastgewerbe. Tiefkühlkost, Fleisch und Fisch. 24-Stunden-Service in Murcia und Almería.",
-    "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, lebensmittelvertrieb, tiefkühlkost, HORECA, Murcia, Almería, fleisch, fisch, lorca"
+    "keywords": "maripepa, gmp, lorca gmp, lebensmittelvertrieb, tiefkühlkost, HORECA, Murcia, Almería, fleisch, fisch, lorca"
   },
   "legal": {
     "privacy": {
       "title": "Datenschutzrichtlinie",
-      "intro": "Bei Granja Maripepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
+      "intro": "Bei Maripepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
       "sections": {
         "s1": {
           "title": "1. Verantwortlicher für die Datenverarbeitung",
-          "content": "Granja Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Telefon: 968 46 75 14<br />E-Mail: pedidos@granjamaripepa.com"
+          "content": "Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Telefon: 968 46 75 14<br />E-Mail: pedidos@granjamaripepa.com"
         },
         "s2": {
           "title": "2. Zweck der Verarbeitung",
@@ -909,7 +909,7 @@
         },
         "s6": {
           "title": "6. Rechte",
-          "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Maripepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
+          "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Maripepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
         },
         "s7": {
           "title": "7. Cookies und lokale Speicherung",
@@ -919,11 +919,11 @@
     },
     "terms": {
       "title": "Allgemeine Geschäftsbedingungen",
-      "intro": "Willkommen auf der Website von Granja Maripepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
+      "intro": "Willkommen auf der Website von Maripepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
       "sections": {
         "s1": {
           "title": "1. Geistiges Eigentum",
-          "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Maripepa geschützt."
+          "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Maripepa geschützt."
         },
         "s2": {
           "title": "2. Nutzung der Website",
@@ -931,15 +931,15 @@
         },
         "s3": {
           "title": "3. Haftung",
-          "content": "Granja Maripepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
+          "content": "Maripepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
         },
         "s4": {
           "title": "4. Änderungen",
-          "content": "Granja Maripepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
+          "content": "Maripepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
         },
         "s5": {
           "title": "5. Anwendbares Recht",
-          "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Maripepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
+          "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Maripepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
         }
       }
     }

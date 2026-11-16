@@ -72,9 +72,9 @@ if (-not $pm2Installed) {
 
 # 6. Configurar firewall
 Write-Host "[6/6] Configurando firewall para puerto 5000..." -ForegroundColor Cyan
-$regla = Get-NetFirewallRule -DisplayName "Granja Mari Pepa API" -ErrorAction SilentlyContinue
+$regla = Get-NetFirewallRule -DisplayName "Mari Pepa API" -ErrorAction SilentlyContinue
 if (-not $regla) {
-    New-NetFirewallRule -DisplayName "Granja Mari Pepa API" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow
+    New-NetFirewallRule -DisplayName "Mari Pepa API" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow
     Write-Host "  Firewall configurado" -ForegroundColor Green
 } else {
     Write-Host "  Firewall ya configurado" -ForegroundColor Green

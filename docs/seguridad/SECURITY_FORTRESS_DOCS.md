@@ -2,7 +2,7 @@
 
 ## Resumen Ejecutivo
 
-Este documento describe las **10 capas de seguridad** implementadas en el sistema de Granja Mari Pepa, diseñadas para hacer el sistema virtualmente imposible de hackear.
+Este documento describe las **10 capas de seguridad** implementadas en el sistema de Mari Pepa, diseñadas para hacer el sistema virtualmente imposible de hackear.
 
 ---
 

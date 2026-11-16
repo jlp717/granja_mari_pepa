@@ -1,4 +1,4 @@
-/* Admin — Granja Mari Pepa. Same dark editorial grammar as the public site. */
+/* Admin — Mari Pepa. Same dark editorial grammar as the public site. */
 
 /* Sin fondo propio: el panel vive sobre components/admin/AdminBackdrop.tsx
    (fondo fijo z-index 0, parallax por --admin-scroll). Dejar .shell opaco

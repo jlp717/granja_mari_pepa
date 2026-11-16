@@ -5,7 +5,7 @@ test.describe('Navegación principal', () => {
     await page.goto('/');
     
     // Verificar título
-    await expect(page).toHaveTitle(/Granja Mari Pepa/);
+    await expect(page).toHaveTitle(/Maripepa/);
     
     // Verificar header
     await expect(page.locator('header')).toBeVisible();

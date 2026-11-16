@@ -574,7 +574,7 @@ async function updateApplication(id, payload, actor) {
 
 async function deleteApplication(id, actor) {
   const rows = await query(
-    `SELECT NAME FROM ${table('ADMIN_APPLICATIONS')} WHERE ID = ? AND ACTIVE = 1`,
+    `SELECT NAME, CV_URL FROM ${table('ADMIN_APPLICATIONS')} WHERE ID = ? AND ACTIVE = 1`,
     [id],
   );
   if (!rows.length) return false;
@@ -584,6 +584,14 @@ async function deleteApplication(id, actor) {
      WHERE ID = ? AND ACTIVE = 1`,
     [id],
   );
+  // El PDF no se conserva tras el borrado lógico: se elimina del disco.
+  const cvUrl = String(rows[0].CV_URL || '').trim();
+  if (/^\/api\/admin\/cv\/[A-Za-z0-9._-]+\.pdf$/.test(cvUrl)) {
+    const file = path.basename(cvUrl);
+    await fs.promises
+      .unlink(path.join(__dirname, '..', '..', 'private', 'cv', file))
+      .catch(() => {});
+  }
   await logActivity({
     kind: 'delete',
     entity: 'Candidatura',
@@ -860,7 +868,7 @@ async function recordAttempt(email, ip, success) {
 async function failedAttempts(email, ip) {
   const rows = await query(
     `SELECT COUNT(*) AS N FROM ${table('ADMIN_LOGIN_ATTEMPTS')}
-      WHERE LOWER(EMAIL) = ? AND IP = ? AND SUCCESS = 0
+      WHERE (LOWER(EMAIL) = ? OR IP = ?) AND SUCCESS = 0
         AND CREATED_AT > CURRENT TIMESTAMP - ${ATTEMPT_WINDOW_MINUTES} MINUTES`,
     [String(email || '').trim().toLowerCase(), str(ip, 64)],
   );
@@ -970,8 +978,8 @@ async function revokeOtherSessions(userId, currentToken, actor) {
   await query(
     `UPDATE ${table('ADMIN_SESSIONS')}
         SET ACTIVE = 0, UPDATED_AT = CURRENT TIMESTAMP
-      WHERE ACTIVE = 1 AND TOKEN <> ?`,
-    [currentHash],
+      WHERE ACTIVE = 1 AND USER_ID = ? AND TOKEN <> ?`,
+    [String(userId || ''), currentHash],
   );
   await logActivity({
     kind: 'security',

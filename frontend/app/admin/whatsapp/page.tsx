@@ -64,7 +64,7 @@ export default async function WhatsAppLinkPage() {
   return (
     <main className="mx-auto flex min-h-[70vh] max-w-2xl flex-col justify-center px-4 py-12">
       <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-        Granja Maripepa · Administración
+        Maripepa · Administración
       </p>
       <h1 className="mt-2 text-3xl font-light text-foreground">
         Vincular WhatsApp

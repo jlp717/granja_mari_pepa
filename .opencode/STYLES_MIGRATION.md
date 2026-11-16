@@ -1,4 +1,4 @@
-# STYLES_MIGRATION.md — Granja Mari Pepa
+# STYLES_MIGRATION.md — Mari Pepa
 
 > Plan de migración del sistema de estilos actual (1.157 líneas en `frontend/app/globals.css` + `tailwind.config.js` shadcn) al nuevo sistema editorial mediterráneo. Acompaña a [DESIGN.md](DESIGN.md) y [COMPONENTS.md](COMPONENTS.md).
 
@@ -76,7 +76,7 @@ Crear `frontend/app/styles/tokens.css` (o equivalente) con el siguiente contenid
 
 ```css
 /* ============================================================
- * tokens.css — Granja Mari Pepa
+ * tokens.css — Mari Pepa
  * Sistema visual editorial mediterráneo profesional.
  * Fuente: .opencode/DESIGN.md §10
  * ============================================================ */

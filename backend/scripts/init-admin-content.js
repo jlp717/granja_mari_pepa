@@ -5,7 +5,7 @@
  * (ofertas y revistas) a las tablas del esquema JAVIER.
  *
  * Uso: node scripts/init-admin-content.js
- * Requisitos: ODBC configurado (DSN=GMP;UID=JAVIER;PWD=JAVIER).
+ * Requisitos: ODBC configurado (ODBC_CONNECTION_STRING).
  */
 
 const path = require('path');

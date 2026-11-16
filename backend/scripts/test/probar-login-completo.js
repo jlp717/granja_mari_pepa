@@ -17,7 +17,7 @@ async function probarLogin() {
     console.log('✅ Conectado\n');
     
     const codigoCliente = '4300009900';
-    const nif = '23224478K';
+    const nif = (process.env.TEST_NIF || '00000000T');
     
     console.log('🔍 Paso 1: Buscar credenciales...\n');
     

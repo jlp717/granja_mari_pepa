@@ -77,7 +77,7 @@ describe("BootPreloader", () => {
     expect(document.body.classList.contains("is-locked")).toBe(false);
     expect(screen.getByText("0")).toBeTruthy();
     expect(document.getElementById("pre-fill")?.style.right).toBe("100.0%");
-    expect(screen.getByText(/Granja Maripepa/i)).toBeTruthy();
+    expect(screen.getByText(/Maripepa/i)).toBeTruthy();
   });
 
   it("keeps bar and percent on the same smoothed display while target jumps to ready", () => {

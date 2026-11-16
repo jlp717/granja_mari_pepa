@@ -19,9 +19,9 @@
 ### B1. Hechos de partida
 | Campo | Valor | Fuente |
 |---|---|---|
-| Proyecto | Web de Granja Mari Pepa, distribución HORECA, hecha con Next.js y Supabase | Javier (declarado) |
+| Proyecto | Web de Mari Pepa, distribución HORECA, hecha con Next.js y Supabase | Javier (declarado) |
 | Rediseño pedido | Mismo contenido y funcionalidad; estilo visual y gráfico totalmente distinto; acabado de startup profesional; se pueden añadir páginas, secciones o elementos | Javier (declarado) |
-| Empresa | Granja Mari Pepa, Lorca (Murcia); proveedor de productos congelados, refrigerados y frescos; indicado «más de 50 años» de trayectoria | **Fuente de terceros** (directorio proveedores.com) → `PENDIENTE-CONFIRMAR` con la web corporativa pública o con Javier antes de mostrarlo como dato |
+| Empresa | Mari Pepa, Lorca (Murcia); proveedor de productos congelados, refrigerados y frescos; indicado «más de 50 años» de trayectoria | **Fuente de terceros** (directorio proveedores.com) → `PENDIENTE-CONFIRMAR` con la web corporativa pública o con Javier antes de mostrarlo como dato |
 | Web corporativa pública | granjamaripepa.com (enlazada desde el directorio anterior) | Usar como fuente de hechos de marca **solo si carga y lo confirma** |
 | Stack real | `POR-COMPLETAR` desde `INVENTARIO.md` | Repo |
 

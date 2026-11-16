@@ -1,10 +1,10 @@
 # ============================================
 # SCRIPT DE ARRANQUE COMPLETO
 # ============================================
-# Inicia backend y frontend de Granja Mari Pepa simultáneamente
+# Inicia backend y frontend de Mari Pepa simultáneamente
 
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  GRANJA MARI PEPA - SISTEMA COMPLETO" -ForegroundColor Cyan
+Write-Host "  MARI PEPA - SISTEMA COMPLETO" -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 

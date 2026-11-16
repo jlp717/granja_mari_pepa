@@ -58,7 +58,7 @@ async function verificarCliente() {
           nifOriginal.toUpperCase(),             // Mayúsculas
           nifOriginal.trim().toUpperCase(),      // Mayúsculas sin espacios
           nifOriginal.replace(/\s+/g, '').toUpperCase(), // Mayúsculas sin espacios
-          '23224478K',                           // El que dice el usuario
+          (process.env.TEST_NIF || '00000000T'),                           // El que dice el usuario
         ];
         
         for (const variacion of variaciones) {

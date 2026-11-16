@@ -48,12 +48,17 @@ function isInternalIp(ip: string): boolean {
 }
 
 function clientIp(request: NextRequest): string {
-  const cf = request.headers.get("cf-connecting-ip");
-  if (cf) return normalize(cf);
+  // nginx sobrescribe X-Real-IP: es la fuente fiable en producción.
   const real = request.headers.get("x-real-ip");
-  if (real) return normalize(real);
+  if (real) return normalize(real.split(",")[0]);
   const forwarded = request.headers.get("x-forwarded-for");
-  if (forwarded) return normalize(forwarded.split(",")[0]);
+  if (forwarded) {
+    const hops = forwarded
+      .split(",")
+      .map((hop) => normalize(hop))
+      .filter(Boolean);
+    if (hops.length) return hops[hops.length - 1];
+  }
   return "";
 }
 
@@ -79,7 +84,7 @@ function denied(request: NextRequest, ip: string): NextResponse {
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8" />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Acceso restringido | Granja Maripepa</title>
+<title>Acceso restringido | Maripepa</title>
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -100,7 +105,7 @@ function denied(request: NextRequest, ip: string): NextResponse {
     font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
     text-decoration: none; border-bottom: 1px solid rgba(223,231,224,.3); }
 </style></head><body><main>
-  <span class="kicker">Granja Maripepa · Administración</span>
+  <span class="kicker">Maripepa · Administración</span>
   <h1>Acceso restringido</h1>
   <p>Este panel solo está disponible desde la red interna de la empresa. La VPN debe permanecer conectada mientras lo usas.</p>
   <p>Con la VPN activa, entra por la dirección interna:</p>
@@ -131,14 +136,7 @@ export function proxy(request: NextRequest) {
   if (isAdminPath) {
     const ip = clientIp(request);
     const noIpAllowed = process.env.NODE_ENV !== "production";
-    /* Direct LAN/VPN access uses a private literal host (192.168.x.x:3001).
-     * Cloudflare and nginx requests carry the public domain as Host, so a
-     * spoofed header cannot turn a proxied request into a direct one. */
-    const host = (request.headers.get("host") || "").toLowerCase();
-    const direct = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/.test(
-      host,
-    );
-    if (!isInternalIp(ip) && !direct && !(noIpAllowed && !ip)) {
+    if (!isInternalIp(ip) && !(noIpAllowed && !ip)) {
       return denied(request, ip);
     }
     const response = NextResponse.next();

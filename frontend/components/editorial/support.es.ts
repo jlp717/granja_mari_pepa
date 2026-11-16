@@ -10,7 +10,7 @@ export const FAQ_ES = {
       intro: "Siete familias en congelado, refrigerado y temperatura ambiente.",
       questions: [
         {
-          question: "¿Qué productos distribuye Granja Maripepa?",
+          question: "¿Qué productos distribuye Maripepa?",
           answer:
             "Producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades. La gama se organiza en productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Distribuimos oficialmente Grupo Topgel y Nestlé Helados, y trabajamos con Panamar, Okin y Pastelería Amparín.",
         },
@@ -27,7 +27,7 @@ export const FAQ_ES = {
         {
           question: "¿Qué aporta la red de Grupo Topgel?",
           answer:
-            "Granja Maripepa es socio-delegación de Grupo Topgel. Esa red permite completar la gama con referencias que no están en el almacén de Saprelorca, manteniendo la atención y la entrega desde Lorca.",
+            "Maripepa es socio-delegación de Grupo Topgel. Esa red permite completar la gama con referencias que no están en el almacén de Saprelorca, manteniendo la atención y la entrega desde Lorca.",
         },
       ],
     },
@@ -159,7 +159,7 @@ export const FAQ_ES = {
     },
   ],
   seo: {
-    title: "Preguntas frecuentes | Granja Maripepa",
+    title: "Preguntas frecuentes | Maripepa",
     description:
       "Respuestas sobre gama, pedidos, entrega, documentación, revistas y área de clientes de la empresa de distribución en Lorca y Viator, Murcia y Almería.",
   },
@@ -209,9 +209,9 @@ export const CONTACT_ES = {
     },
   ],
   seo: {
-    title: "Contacto y horario | Granja Maripepa",
+    title: "Contacto y horario | Maripepa",
     description:
-      "Teléfonos 968 46 75 14 y 639 77 86 55, correo, WhatsApp, horario de lunes a viernes y direcciones en Lorca y Viator para hablar con Granja Maripepa.",
+      "Teléfonos 968 46 75 14 y 639 77 86 55, correo, WhatsApp, horario de lunes a viernes y direcciones en Lorca y Viator para hablar con Maripepa.",
   },
 } as const;
 export const UI_ES = {
@@ -257,5 +257,5 @@ export const UI_ES = {
   location: "Ubicación",
   preparation: "Preparar",
   channelLink: "Canales",
-  contactSubject: "Consulta para Granja Maripepa",
+  contactSubject: "Consulta para Maripepa",
 } as const;

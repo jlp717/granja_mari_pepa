@@ -248,7 +248,7 @@ export function AdminMagazines({
                   <img src={magazine.coverUrl} alt="" />
                 ) : (
                   <div className={styles.magCoverText}>
-                    <span>GRANJA MARIPEPA</span>
+                    <span>MARIPEPA</span>
                     <b>{magazine.title || "Revista"}</b>
                     <em>{magazine.edition || "Sin edición"}</em>
                   </div>

@@ -1,4 +1,4 @@
-# DESIGN.md — Granja Mari Pepa
+# DESIGN.md — Mari Pepa
 
 > Especificación de rediseño completo. Documento principal autocontenido.
 > Acompañan: [COMPONENTS.md](COMPONENTS.md) · [MOTION_GUIDELINES.md](MOTION_GUIDELINES.md) · [COPYWRITING.md](COPYWRITING.md) · [STYLES_MIGRATION.md](STYLES_MIGRATION.md) · [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · [QA_CHECKLIST.md](QA_CHECKLIST.md) · [page_map.json](page_map.json) · [component_map.json](component_map.json).
@@ -19,7 +19,7 @@ Sobre esa base se rehace la dirección visual de Mari Pepa.
 
 ### 1.1. La marca real (verificada en producción)
 
-- **Razón social**: Granja Maripepa, S.L.
+- **Razón social**: Maripepa, S.L.
 - **Actividad**: distribución HORECA — congelados, refrigerados, helados, temperatura ambiente — para hostelería y restauración.
 - **Fundación**: Lorca (Murcia), **1966**. (`acerca` y home dicen "55 años" y "+55 Años de Experiencia"; 2026 − 1966 = **60 años**. Math error que debe corregirse).
 - **Cobertura**: dos delegaciones — **Lorca/Murcia** y **Almería**.
@@ -651,7 +651,7 @@ Detalle en [COPYWRITING.md](COPYWRITING.md). Resumen:
 
 En menos de 5 segundos, la home debe transmitir:
 
-1. **Quién**: Granja Mari Pepa.
+1. **Quién**: Mari Pepa.
 2. **Qué hace**: distribución HORECA de congelados, refrigerados, helado y temperatura ambiente.
 3. **Dónde**: Murcia y Almería.
 4. **Desde cuándo**: 1966.

@@ -31,14 +31,14 @@ export async function generateMetadata(props: {
     return editorialMetadata(
       params.locale,
       "/trabaja-con-nosotros",
-      "Trabaja con nosotros | Granja Maripepa",
+      "Trabaja con nosotros | Maripepa",
       "Ofertas de empleo en Lorca y Viator.",
     );
   }
   return editorialMetadata(
     params.locale,
     `/trabaja-con-nosotros/${job.slug}`,
-    `${job.title} — ${job.location} | Granja Maripepa`,
+    `${job.title} — ${job.location} | Maripepa`,
     `${job.title} en ${job.location}. ${job.description}`,
   );
 }

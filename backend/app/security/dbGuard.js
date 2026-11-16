@@ -152,7 +152,7 @@ const TOOL_DEFINITIONS = Object.freeze([
     function: {
       name: 'buscar_producto',
       description:
-        'Busca en el catalogo de Granja Maripepa por palabra del nombre o la descripcion. Devuelve codigo, nombre, descripcion ampliada, familia y marca. No devuelve precios. Usala para "que es X", "teneis X", "que productos de pescado hay", "buscame bogavante", "que marca es".',
+        'Busca en el catalogo de Maripepa por palabra del nombre o la descripcion. Devuelve codigo, nombre, descripcion ampliada, familia y marca. No devuelve precios. Usala para "que es X", "teneis X", "que productos de pescado hay", "buscame bogavante", "que marca es".',
       parameters: {
         type: 'object',
         properties: {

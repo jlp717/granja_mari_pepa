@@ -73,6 +73,19 @@ async function requireSession(req, res, next) {
   return next();
 }
 
+function requireAdmin(req, res, next) {
+  const role = String((req.admin && req.admin.role) || '').trim();
+  if (role !== 'admin') {
+    return fail(
+      res,
+      403,
+      'Solo un administrador puede realizar esta acción.',
+      'ROLE_REQUIRED',
+    );
+  }
+  return next();
+}
+
 async function health(_req, res) {
   return res.json({ success: true, service: 'admin', schema: adminService.SCHEMA });
 }
@@ -427,7 +440,11 @@ const publicApplication = wrap(async (req, res) => {
 
 const publicContact = wrap(async (req, res) => {
   const payload = req.body || {};
-  const clean = (value, max) => String(value ?? '').trim().slice(0, max);
+  const clean = (value, max) =>
+    String(value ?? '')
+      .replace(/[\r\n]+/g, ' ')
+      .trim()
+      .slice(0, max);
   const name = clean(payload.nombre || payload.name, 120);
   const email = clean(payload.email, 160);
   const company = clean(payload.empresa || payload.company, 160);
@@ -529,6 +546,7 @@ module.exports = {
   adminEvents,
   publicEvents,
   requireSession,
+  requireAdmin,
   login,
   logout,
   session,

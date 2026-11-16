@@ -1,4 +1,4 @@
-# 🔍 Auditoría Completa de Responsive/UX - Granja Mari Pepa
+# 🔍 Auditoría Completa de Responsive/UX - Mari Pepa
 
 ## Estado: ✅ COMPLETADA
 

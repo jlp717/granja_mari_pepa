@@ -1,13 +1,13 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 🏢 GRANJA MARI PEPA - SERVICIO DE GENERACIÓN DE PDFs
+ * 🏢 MARI PEPA - SERVICIO DE GENERACIÓN DE PDFs
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  *
  * Genera PDFs de facturas con diseño profesional, elegante y moderno
  * Inspirado en las mejores prácticas de diseño empresarial
  *
  * Características:
- * - Diseño limpio y profesional a la altura de Granja Mari Pepa
+ * - Diseño limpio y profesional a la altura de Mari Pepa
  * - Cálculos precisos y verificados
  * - Totales agrupados correctamente por % IVA
  * - Compatible con estructura multi-albarán de CAC
@@ -128,7 +128,7 @@ function formatNumber(num, decimals = 2) {
  * FUNCIÓN PRINCIPAL: Generar PDF de factura con diseño profesional
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  *
- * Genera un PDF elegante, moderno y profesional a la altura de Granja Mari Pepa
+ * Genera un PDF elegante, moderno y profesional a la altura de Mari Pepa
  * Compatible con estructura multi-albarán de la tabla CAC
  *
  * @param {Object} facturaData - Datos de la factura {header, lines, payments}

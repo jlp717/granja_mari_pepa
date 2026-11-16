@@ -1,8 +1,8 @@
-# Granja Maripepa
+# Maripepa
 > Distribuidor HORECA desde 1966 en Lorca (Murcia).
 
 ## Identidad
-- Razón social: Granja Maripepa, S.L.
+- Razón social: Maripepa, S.L.
 - CIF: B04008710.
 - Fundación: 1966.
 - Sede: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.
@@ -37,5 +37,5 @@
 ## Notas de uso
 - El catálogo público está en preparación.
 - No hay precios ni stock públicos.
-- Para condiciones, contacte con Granja Maripepa.
+- Para condiciones, contacte con Maripepa.
 - El contenido está en español e inglés; solo es/en son indexables.

@@ -324,7 +324,7 @@ sudo nano /etc/systemd/system/granja-mari-pepa.service
 **Contenido del servicio:**
 ```ini
 [Unit]
-Description=Granja Mari Pepa API Backend
+Description=Mari Pepa API Backend
 After=network.target
 
 [Service]
@@ -446,13 +446,13 @@ npm run dev
 
 ```powershell
 # Abrir puerto 5000 para conexiones entrantes
-New-NetFirewallRule -DisplayName "Granja Mari Pepa API" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "Mari Pepa API" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow
 
 # Verificar regla creada
-Get-NetFirewallRule -DisplayName "Granja Mari Pepa API"
+Get-NetFirewallRule -DisplayName "Mari Pepa API"
 
 # Opcional: Restringir a red local solamente
-New-NetFirewallRule -DisplayName "Granja Mari Pepa API (LAN Only)" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow -RemoteAddress 192.168.1.0/24
+New-NetFirewallRule -DisplayName "Mari Pepa API (LAN Only)" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow -RemoteAddress 192.168.1.0/24
 ```
 
 ### 6.2 Configurar Port Forwarding en Router

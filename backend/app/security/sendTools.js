@@ -198,7 +198,7 @@ async function executeEmail({ profile, invoice, pdfBuffer, locale }) {
   const serie = header.SERIEFACTURA || 'F';
   const filename = `Factura_${serie}_${invoice.numero}_${invoice.ejercicio}.pdf`;
   const subjectPrefix = testRedirect ? '[TEST] ' : '';
-  const subject = `${subjectPrefix}Factura ${serie}-${invoice.numero} - Granja Mari Pepa`;
+  const subject = `${subjectPrefix}Factura ${serie}-${invoice.numero} - Mari Pepa`;
   const text =
     locale === 'en'
       ? `Attached is invoice ${serie}-${invoice.numero}.`
@@ -210,7 +210,7 @@ async function executeEmail({ profile, invoice, pdfBuffer, locale }) {
       to,
       subject,
       text,
-      html: `<p>${text}</p><p>Granja Mari Pepa · Lorca (Murcia)</p>`,
+      html: `<p>${text}</p><p>Mari Pepa · Lorca (Murcia)</p>`,
       pdfBuffer,
       filename,
     });
@@ -281,7 +281,7 @@ async function executeWhatsApp({ profile, invoice, pdfBuffer, locale }) {
       toMasked: maskPhone(to),
       fallbackUrl: whatsappService.buildWaMeLink(
         COMPANY_WHATSAPP,
-        'Hola, soy Pepa de Granja Maripepa. Necesito que me envieis mi factura por WhatsApp.',
+        'Hola, soy Pepa de Maripepa. Necesito que me envieis mi factura por WhatsApp.',
       ),
     };
   }
@@ -330,8 +330,8 @@ async function executeWhatsApp({ profile, invoice, pdfBuffer, locale }) {
   const captionPrefix = testRedirect ? '[TEST] ' : '';
   const caption =
     locale === 'en'
-      ? `${captionPrefix}Invoice ${serie}-${invoice.numero} - Granja Mari Pepa`
-      : `${captionPrefix}Factura ${serie}-${invoice.numero} - Granja Mari Pepa`;
+      ? `${captionPrefix}Invoice ${serie}-${invoice.numero} - Mari Pepa`
+      : `${captionPrefix}Factura ${serie}-${invoice.numero} - Mari Pepa`;
 
   try {
     await outboxService.markSending(outbox.ID);

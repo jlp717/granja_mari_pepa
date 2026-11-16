@@ -331,7 +331,7 @@ async function sendEmail(req, res) {
       <table width="600" cellpadding="0" cellspacing="0" style="background:#FFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
         <tr><td style="background:linear-gradient(135deg,#E67E22 0%,#D35400 100%);padding:28px;text-align:center;">
           <h1 style="color:#FFF;margin:0;font-size:22px;">📄 Factura PANAMAR</h1>
-          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa</p>
+          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Mari Pepa</p>
         </td></tr>
         <tr><td style="padding:28px;">
           <p style="color:#1E293B;font-size:15px;line-height:1.5;margin:0 0 20px;">
@@ -368,7 +368,7 @@ async function sendEmail(req, res) {
         </td></tr>
         <tr><td style="background:#F8FAFC;padding:20px;border-top:1px solid #E2E8F0;text-align:center;">
           <p style="color:#64748B;font-size:12px;margin:0;">
-            <strong>Granja Mari Pepa</strong> · Tel: 639 77 86 56 · www.mari-pepa.com
+            <strong>Mari Pepa</strong> · Tel: 639 77 86 56 · www.mari-pepa.com
           </p>
         </td></tr>
       </table>
@@ -378,9 +378,9 @@ async function sendEmail(req, res) {
 </html>`;
 
     const mailOptions = {
-      from: '"Granja Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
+      from: '"Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
       to: destinatario,
-      subject: `Factura PANAMAR ${docRef} - Granja Mari Pepa`,
+      subject: `Factura PANAMAR ${docRef} - Mari Pepa`,
       html: htmlTemplate,
       attachments: [{ filename, content: pdfBuffer, contentType: 'application/pdf' }]
     };
@@ -741,7 +741,7 @@ async function sendEmailByIdentity(req, res) {
       <table width="600" cellpadding="0" cellspacing="0" style="background:#FFF;border-radius:8px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
         <tr><td style="background:linear-gradient(135deg,#E67E22 0%,#D35400 100%);padding:28px;text-align:center;">
           <h1 style="color:#FFF;margin:0;font-size:22px;">📄 Factura PANAMAR</h1>
-          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Granja Mari Pepa</p>
+          <p style="color:#FDEBD0;margin:6px 0 0;font-size:13px;">Mari Pepa</p>
         </td></tr>
         <tr><td style="padding:28px;">
           <p style="color:#1E293B;font-size:15px;line-height:1.5;margin:0 0 20px;">
@@ -778,7 +778,7 @@ async function sendEmailByIdentity(req, res) {
         </td></tr>
         <tr><td style="background:#F8FAFC;padding:20px;border-top:1px solid #E2E8F0;text-align:center;">
           <p style="color:#64748B;font-size:12px;margin:0;">
-            <strong>Granja Mari Pepa</strong> · Tel: 639 77 86 56 · www.mari-pepa.com
+            <strong>Mari Pepa</strong> · Tel: 639 77 86 56 · www.mari-pepa.com
           </p>
         </td></tr>
       </table>
@@ -788,9 +788,9 @@ async function sendEmailByIdentity(req, res) {
 </html>`;
 
     const mailOptions = {
-      from: '"Granja Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
+      from: '"Mari Pepa - PANAMAR" <noreply@mari-pepa.com>',
       to: destinatario,
-      subject: `Factura PANAMAR ${docRef} - Granja Mari Pepa`,
+      subject: `Factura PANAMAR ${docRef} - Mari Pepa`,
       html: htmlTemplate,
       attachments: [{ filename, content: pdfBuffer, contentType: 'application/pdf' }]
     };

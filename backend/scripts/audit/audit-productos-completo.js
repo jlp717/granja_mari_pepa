@@ -545,7 +545,7 @@ class AuditoriaProductos {
 
     try {
       console.log('\n═══════════════════════════════════════════════════════════════');
-      console.log('   AUDITORÍA EXHAUSTIVA DE PRODUCTOS - GRANJA MARI PEPA');
+      console.log('   AUDITORÍA EXHAUSTIVA DE PRODUCTOS - MARI PEPA');
       console.log('═══════════════════════════════════════════════════════════════\n');
 
       await odbcPool.initialize();

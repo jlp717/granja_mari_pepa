@@ -50,7 +50,7 @@ gcloud auth login
 ### 3. Crear proyecto y habilitar APIs
 ```powershell
 # Crear proyecto
-gcloud projects create granja-mari-pepa-maps --name="Granja Mari Pepa Maps"
+gcloud projects create granja-mari-pepa-maps --name="Mari Pepa Maps"
 
 # Establecer como proyecto activo
 gcloud config set project granja-mari-pepa-maps

@@ -26,8 +26,8 @@ export function Footer() {
         <div data-rv="up">
           <span className={chrome.kicker}>
             {isEs
-              ? "Granja Maripepa · Desde 1966"
-              : "Granja Maripepa · Since 1966"}
+              ? "Maripepa · Desde 1966"
+              : "Maripepa · Since 1966"}
           </span>
           <h2 id="foot-closing" className={chrome.title}>
             {isEs ? (
@@ -86,7 +86,7 @@ export function Footer() {
         <div className="foot-brand" data-rv="up">
           <Link
             href="/"
-            aria-label={`Granja Maripepa · ${nav("home")}`}
+            aria-label={`Maripepa · ${nav("home")}`}
             data-cursor
           >
             <Image
@@ -220,7 +220,7 @@ export function Footer() {
         </div>
       </div>
       <div className="foot-base">
-        <span>© {new Date().getFullYear()} Granja Maripepa, S.L.</span>
+        <span>© {new Date().getFullYear()} Maripepa, S.L.</span>
         <span>{t("rights_reserved")}</span>
         <a href="#main-content" data-cursor>
           {copy.top} ↑

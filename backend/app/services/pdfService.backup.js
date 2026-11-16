@@ -1,10 +1,10 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 🏢 GRANJA MARI PEPA - SERVICIO DE GENERACIÓN DE PDFs v2.0
+ * 🏢 MARI PEPA - SERVICIO DE GENERACIÓN DE PDFs v2.0
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  *
  * Genera PDFs de facturas con diseño PROFESIONAL y ELEGANTE
- * ✨ Diseño único e inigualable para Granja Mari Pepa
+ * ✨ Diseño único e inigualable para Mari Pepa
  * 🎨 Visual, rápido y fácil de leer para el cliente
  * ✅ Datos 100% precisos y verificados
  *

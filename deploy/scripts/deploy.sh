@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================
-# SCRIPT DE DESPLIEGUE - GRANJA MARI PEPA
+# SCRIPT DE DESPLIEGUE - MARI PEPA
 # ============================================
 # Script profesional de despliegue con:
 # - Verificación de requisitos
@@ -357,7 +357,7 @@ show_status() {
 main() {
     echo ""
     echo "============================================"
-    echo "🚀 DESPLIEGUE - GRANJA MARI PEPA"
+    echo "🚀 DESPLIEGUE - MARI PEPA"
     echo "============================================"
     echo "Timestamp: $TIMESTAMP"
     echo "Branch: $BRANCH"

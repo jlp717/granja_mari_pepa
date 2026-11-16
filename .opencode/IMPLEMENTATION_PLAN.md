@@ -1,4 +1,4 @@
-# IMPLEMENTATION_PLAN.md — Granja Mari Pepa
+# IMPLEMENTATION_PLAN.md — Mari Pepa
 
 > Plan de implementación por fases. Acompaña a [DESIGN.md](DESIGN.md), [STYLES_MIGRATION.md](STYLES_MIGRATION.md), [QA_CHECKLIST.md](QA_CHECKLIST.md).
 

@@ -38,7 +38,7 @@ export function createGMPMetadata(
       title,
       description,
       url: canonical,
-      siteName: "Granja Maripepa",
+      siteName: "Maripepa",
       type: "website",
       locale: {
         es: "es_ES",
@@ -52,7 +52,7 @@ export function createGMPMetadata(
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: "Granja Maripepa · " + title,
+          alt: "Maripepa · " + title,
         },
       ],
     },

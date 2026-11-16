@@ -1,4 +1,4 @@
-# 🚀 Auditoría Web Completa - Granja Mari Pepa
+# 🚀 Auditoría Web Completa - Mari Pepa
 
 ## Resumen Ejecutivo
 
@@ -68,7 +68,7 @@ trackFormSubmit('form_contacto', 'contacto_general');
 ### 5. 🔍 SEO - JSON-LD Schemas (`components/seo/JsonLdSchemas.tsx`)
 ```javascript
 // Schemas implementados:
-- Organization (Granja Mari Pepa)
+- Organization (Mari Pepa)
 - LocalBusiness (Murcia y Almería)
 - WebSite
 - FAQPage

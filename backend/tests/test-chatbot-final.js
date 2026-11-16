@@ -123,7 +123,7 @@ async function login() {
       method: 'POST',
       body: {
         nif: 'P33',
-        password: 'mariPepa2024'
+        password: (process.env.TEST_CHATBOT_PASSWORD || '')
       }
     });
 
@@ -145,7 +145,7 @@ async function runTests() {
   console.log(`${colors.bright}${colors.cyan}
 ╔═══════════════════════════════════════════════════════════╗
 ║   PRUEBAS FINALES - CHATBOT ANTI-ALUCINACIÓN            ║
-║   Granja Mari Pepa - Plan Aprobado                      ║
+║   Mari Pepa - Plan Aprobado                      ║
 ╚═══════════════════════════════════════════════════════════╝
 ${colors.reset}`);
 

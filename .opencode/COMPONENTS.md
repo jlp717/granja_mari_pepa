@@ -1,4 +1,4 @@
-# COMPONENTS.md — Granja Mari Pepa
+# COMPONENTS.md — Mari Pepa
 
 > Especificación de componentes del rediseño. Acompaña a [DESIGN.md](DESIGN.md), [MOTION_GUIDELINES.md](MOTION_GUIDELINES.md), [STYLES_MIGRATION.md](STYLES_MIGRATION.md).
 
@@ -194,7 +194,7 @@ type PromoStripProps = {
 ```
 === bloque 1: noche oliva (--color-bg-night) ===
 
-GRANJA MARI PEPA
+MARI PEPA
 Distribuidor Oficial Nestlé · ISO 9001 · Energía 100% Verde
 
 [ Producto ]      [ Empresa ]      [ Contacto ]                  [ Newsletter ]
@@ -215,12 +215,12 @@ Tlf 968 46 75 14                     Tlf 639 77 86 55
 
 === bloque 3: crema ===
 
-© Granja Maripepa S.L. · Privacidad · Términos · Cookies        es · en · de · it · zh
+© Maripepa S.L. · Privacidad · Términos · Cookies        es · en · de · it · zh
 ```
 
 **Visual.**
 - Tres bloques de color con curva SVG de transición entre 1 y 2.
-- Display "GRANJA MARI PEPA" en Fraunces 600 `clamp(3rem, 8vw, 6.5rem)`.
+- Display "MARI PEPA" en Fraunces 600 `clamp(3rem, 8vw, 6.5rem)`.
 - Nav columnas en mono uppercase `--fs-label` muted.
 
 **Responsive.**

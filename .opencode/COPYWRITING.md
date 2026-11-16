@@ -1,4 +1,4 @@
-# COPYWRITING.md — Granja Mari Pepa
+# COPYWRITING.md — Mari Pepa
 
 > Especificación de tono de voz, mensaje y microcopy. Acompaña a [DESIGN.md](DESIGN.md), [COMPONENTS.md](COMPONENTS.md).
 
@@ -6,7 +6,7 @@
 
 ## 1. Voz
 
-**Quién habla.** Granja Mari Pepa, distribuidor HORECA en el Levante, fundado en Lorca en 1966. Habla con la cercanía de un proveedor de toda la vida y la precisión de una empresa con ISO 9001.
+**Quién habla.** Mari Pepa, distribuidor HORECA en el Levante, fundado en Lorca en 1966. Habla con la cercanía de un proveedor de toda la vida y la precisión de una empresa con ISO 9001.
 
 **A quién habla.** Hostelería profesional: chef, jefe de cocina, jefe de compras de cadena, maître que pide stock, panadero, heladero, gestor de eventos. **Nunca al consumidor final**.
 
@@ -252,7 +252,7 @@ Variantes:
 ### 4.6. `/lorca` (corregir math)
 
 **Hero (HeroPinned).**
-- h1: **Granja Mari Pepa en Lorca.**
+- h1: **Mari Pepa en Lorca.**
 - Subtítulos rotantes:
   1. Polígono Industrial Saprelorca.
   2. Distribuidor HORECA en Murcia desde 1966.
@@ -269,7 +269,7 @@ Variantes:
 ### 4.7. `/almeria` (nueva, hermana de `/lorca`)
 
 **Hero (HeroPinned).**
-- h1: **Granja Mari Pepa en Almería.**
+- h1: **Mari Pepa en Almería.**
 - Subtítulos rotantes:
   1. Delegación Almería.
   2. Repartimos en costa y capital.
@@ -345,7 +345,7 @@ Variantes:
 ### 4.12. Footer
 
 **Bloque 1 — noche oliva.**
-- Display: "GRANJA MARI PEPA"
+- Display: "MARI PEPA"
 - Subtítulo: "Distribuidor Oficial Nestlé · ISO 9001 · Energía 100% Verde"
 - Newsletter: "Recibe los lanzamientos de catálogo y avisos de campaña. Una vez al mes, no más."
   - Placeholder: "tu@correo.es"
@@ -356,7 +356,7 @@ Variantes:
 - "Almería — c/[validar]. 639 77 86 55."
 
 **Bloque 3 — crema.**
-- "© 2026 Granja Maripepa S.L. — Todos los derechos reservados."
+- "© 2026 Maripepa S.L. — Todos los derechos reservados."
 - Links: Privacidad · Términos · Cookies
 - Idiomas: ES · EN · DE · IT · ZH
 

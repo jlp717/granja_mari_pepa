@@ -6,7 +6,7 @@ async function testLogin() {
     
     const postData = JSON.stringify({
       codigoCliente: '4300009900',
-      password: '23224478K'
+      password: (process.env.TEST_NIF || '00000000T')
     });
     
     const options = {

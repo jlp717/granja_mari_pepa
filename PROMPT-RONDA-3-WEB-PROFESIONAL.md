@@ -23,7 +23,7 @@ Lo que **no** se sabe leyendo texto (colores, tipografías, curvas, duraciones, 
 
 - **Remodelación completa de estilos.** Se reescribe el sistema visual desde cero (tokens, tipografía, rejilla, componentes). Todo lo antiguo se borra: ni estilos viejos mezclados, ni componentes duplicados, ni «lo dejo por si acaso».
 - **Cada página es una composición propia**, no una plantilla: escala tipográfica con contraste fuerte, ritmo entre secciones, imagen protagonista a gran formato, jerarquía clara, contenido centrado o asimetría **intencionada**.
-- **Dirección de arte con concepto**: una idea visual reconocible para Granja Mari Pepa (alimentación, frío, producto, hostelería) que recorre toda la web.
+- **Dirección de arte con concepto**: una idea visual reconocible para Mari Pepa (alimentación, frío, producto, hostelería) que recorre toda la web.
 - **Firmas de marca memorables (mínimo 4)** que vuelvan en varias páginas: por ejemplo cursor contextual («Ver producto», «Arrastrar»), marquesinas con datos reales, titulares con elementos gráficos incrustados, un sello o elemento lúdico propio, slider arrastrable con contador, navegación con microtexto, cierre con CTA gigante. Elige y adapta según lo que midas en las referencias.
 - **Movimiento coreografiado, no decorativo**: entrada del hero, entradas al scroll con escalonado, cabecera que reacciona, hover/foco/pulsación en todo lo interactivo, transiciones entre rutas, skeletons, modales y menús con entrada y salida. Reducido si el usuario lo pide.
 - **Imagen real de producto** a gran tamaño (nunca producto «inventado» con IA). Ilustración, texturas y elementos gráficos propios con un único lenguaje visual.

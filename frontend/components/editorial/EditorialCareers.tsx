@@ -416,7 +416,7 @@ export function EditorialCareers({
                   : "Team · HORECA · Lorca & Almería"}
               </div>
               <WordReveal as="h1" className="display h-hero">
-                {isEs ? "Únete a Granja Maripepa" : "Join Granja Maripepa"}
+                {isEs ? "Únete a Maripepa" : "Join Maripepa"}
               </WordReveal>
               <p className="hero-sub body">
                 {isEs
@@ -591,8 +591,8 @@ export function EditorialCareers({
                 src="/gmp/careers/careers-facility.jpg"
                 alt={
                   isEs
-                    ? "Nave de Granja Maripepa en el Polígono Saprelorca, Lorca"
-                    : "Granja Maripepa warehouse at Saprelorca, Lorca"
+                    ? "Nave de Maripepa en el Polígono Saprelorca, Lorca"
+                    : "Maripepa warehouse at Saprelorca, Lorca"
                 }
                 fill
                 sizes="(max-width: 1080px) 100vw, 46vw"
@@ -633,7 +633,7 @@ export function EditorialCareers({
               <div className={styles.plantLinks}>
                 <a
                   className={styles.plantLink}
-                  href="https://maps.google.com/?q=Granja+Mari+Pepa+Lorca"
+                  href="https://maps.google.com/?q=Mari+Pepa+Lorca"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-cursor

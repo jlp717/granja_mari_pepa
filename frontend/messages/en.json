@@ -102,7 +102,7 @@
     }
   },
   "hero": {
-    "title": "GRANJA MARIPEPA",
+    "title": "MARIPEPA",
     "subtitle": "Frozen, refrigerated and ice cream products for HORECA",
     "cta": "Contact Us",
     "since": "Since 1966",
@@ -148,7 +148,7 @@
     "nestle": {
       "name": "Nestlé",
       "category": "Premium Ice Cream",
-      "detailed": "Granja Maripepa is an official distributor of Nestlé ice creams for hospitality and establishments."
+      "detailed": "Maripepa is an official distributor of Nestlé ice creams for hospitality and establishments."
     },
     "panamar": {
       "name": "Panamar",
@@ -273,7 +273,7 @@
   },
   "about_page": {
     "hero": {
-      "title": "Granja Maripepa",
+      "title": "Maripepa",
       "subtitle_1": "More than",
       "subtitle_highlight": "55 years",
       "subtitle_2": "serving the HORECA sector",
@@ -288,7 +288,7 @@
       "milestones": {
         "1966": {
           "title": "Founded in Lorca (Murcia)",
-          "desc": "Granja Maripepa, S.L. was founded in Lorca (Murcia), specializing from the start in the HORECA market and food channel."
+          "desc": "Maripepa, S.L. was founded in Lorca (Murcia), specializing from the start in the HORECA market and food channel."
         },
         "2020": {
           "title": "100% Green Energy",
@@ -354,7 +354,7 @@
         "capacity": "Refrigerated capacity of 5,000m³"
       },
       "stats": {
-        "title": "Granja Maripepa in Figures",
+        "title": "Maripepa in Figures",
         "founded_label": "Founding Year",
         "references_label": "Product References",
         "capacity_label": "Refrigerated Capacity",
@@ -431,7 +431,7 @@
       "badge": "Google Reviews",
       "title_1": "What",
       "title_highlight": "our clients say",
-      "description": "The opinion of those who trust Granja Maripepa for their business",
+      "description": "The opinion of those who trust Maripepa for their business",
       "antonio_review": {
         "text": "This company distributes all kinds of frozen foods, ice creams, and endless products. If you want quality products and exceptional treatment look no further. The best company I know in its sector.",
         "role": "8 reviews · Local guide"
@@ -451,7 +451,7 @@
       "title_1": "Ready to",
       "title_highlight": "work together",
       "title_suffix": "?",
-      "description": "Join the HORECA establishments that trust Granja Maripepa to bring certified quality products to their customers in Murcia and Alicante.",
+      "description": "Join the HORECA establishments that trust Maripepa to bring certified quality products to their customers in Murcia and Alicante.",
       "contact": "Contact now",
       "catalog": "View catalog"
     }
@@ -748,7 +748,7 @@
     "greetingMorning": "Good morning, I'm Pepa",
     "greetingAfternoon": "Good afternoon, I'm Pepa",
     "greetingEvening": "Good evening, I'm Pepa",
-    "subtitle": "Your Granja Maripepa virtual assistant. I'm here to help you with products, orders, invoices or any questions.",
+    "subtitle": "Your Maripepa virtual assistant. I'm here to help you with products, orders, invoices or any questions.",
     "placeholder": "Type your message...",
     "thinking": "Thinking",
     "send": "Send",
@@ -784,7 +784,7 @@
     "downloadInvoice": "Download invoice"
   },
   "footer": {
-    "companyName": "GRANJA MARIPEPA",
+    "companyName": "MARIPEPA",
     "tagline": "Premium food product distributors",
     "description_short": "Premium food distributors for HORECA",
     "description_long": "Specialists in distribution of frozen, refrigerated and ambient products for hospitality and catering.",
@@ -792,7 +792,7 @@
     "founded_text": "Founded in Lorca, 1966",
     "green_energy": "Green Energy",
     "quick_access": "Quick Access",
-    "copyright": "© {year} Granja Maripepa. All rights reserved.",
+    "copyright": "© {year} Maripepa. All rights reserved.",
     "quickLinks": "Quick links",
     "legal": "Legal",
     "privacy": "Privacy Policy",
@@ -878,18 +878,18 @@
     }
   },
   "meta": {
-    "title": "Granja Maripepa | HORECA Distribution Murcia & Lorca",
+    "title": "Maripepa | HORECA Distribution Murcia & Lorca",
     "description": "Food distribution for hospitality from Lorca since 1966. Frozen, chilled and ambient products for restaurants, catering and collectives.",
-    "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, food distribution, frozen food, HORECA, Murcia, Almería, meats, seafood, mari pepa"
+    "keywords": "maripepa, gmp, lorca gmp, food distribution, frozen food, HORECA, Murcia, Almería, meats, seafood"
   },
   "legal": {
     "privacy": {
-      "title": "Privacy Policy | Granja Maripepa",
-      "intro": "What data Granja Maripepa processes, why, for how long and how to exercise your rights. Write to pedidos@granjamaripepa.com for any privacy question.",
+      "title": "Privacy Policy | Maripepa",
+      "intro": "What data Maripepa processes, why, for how long and how to exercise your rights. Write to pedidos@granjamaripepa.com for any privacy question.",
       "sections": {
         "s1": {
           "title": "1. Data Controller",
-          "content": "Granja Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Phone: 968 46 75 14<br />Email: pedidos@granjamaripepa.com"
+          "content": "Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Phone: 968 46 75 14<br />Email: pedidos@granjamaripepa.com"
         },
         "s2": {
           "title": "2. Purpose of Processing",
@@ -918,12 +918,12 @@
       }
     },
     "terms": {
-      "title": "Terms and Conditions | Granja Maripepa",
-      "intro": "Welcome to the Granja Maripepa website. By accessing and using this site, you agree to the following terms and conditions.",
+      "title": "Terms and Conditions | Maripepa",
+      "intro": "Welcome to the Maripepa website. By accessing and using this site, you agree to the following terms and conditions.",
       "sections": {
         "s1": {
           "title": "1. Intellectual Property",
-          "content": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Granja Maripepa."
+          "content": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Maripepa."
         },
         "s2": {
           "title": "2. Use of the Website",
@@ -931,15 +931,15 @@
         },
         "s3": {
           "title": "3. Liability",
-          "content": "Granja Maripepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein."
+          "content": "Maripepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein."
         },
         "s4": {
           "title": "4. Modifications",
-          "content": "Granja Maripepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website."
+          "content": "Maripepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website."
         },
         "s5": {
           "title": "5. Applicable Law",
-          "content": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Granja Maripepa agree to expressly submit to the courts and tribunals of Lorca (Murcia)."
+          "content": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Maripepa agree to expressly submit to the courts and tribunals of Lorca (Murcia)."
         }
       }
     }

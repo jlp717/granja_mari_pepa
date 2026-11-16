@@ -14,8 +14,8 @@ export async function generateMetadata(props: {
   return editorialMetadata(
     params.locale,
     "/trabaja-con-nosotros",
-    "Trabaja con nosotros | Granja Maripepa",
-    "Únete al equipo de Granja Maripepa. Ofertas de empleo en Lorca y Viator. Envía tu currículum.",
+    "Trabaja con nosotros | Maripepa",
+    "Únete al equipo de Maripepa. Ofertas de empleo en Lorca y Viator. Envía tu currículum.",
   );
 }
 

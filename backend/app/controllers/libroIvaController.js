@@ -495,15 +495,15 @@ async function enviarLibroIVAPorEmail(req, res) {
     // Configurar nodemailer con timeout
     const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || '_dc-mx.bef93564e202.mari-pepa.com',
+      host: process.env.SMTP_HOST,
       port: 465, // FORZADO: 465 (SSL) para saltar bloqueos de puerto 587
       secure: true,
       auth: {
-        user: process.env.SMTP_USER || 'noreply@mari-pepa.com',
-        pass: process.env.SMTP_PASSWORD || '6pVyRf3xptxiN3i'
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD
       },
       tls: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: true,
         minVersion: 'TLSv1.2'
       },
       connectionTimeout: 20000, // 20 segundos (Aumentado para evitar timeouts)
@@ -534,7 +534,7 @@ async function enviarLibroIVAPorEmail(req, res) {
                         📊 Libro de IVA ${ejercicio}
                     </h1>
                     <p style="color:#93C5FD;margin:8px 0 0;font-size:14px;">
-                        Granja Mari Pepa
+                        Mari Pepa
                     </p>
                 </td></tr>
                 
@@ -579,7 +579,7 @@ async function enviarLibroIVAPorEmail(req, res) {
                 <!-- Footer -->
                 <tr><td style="background:#F8FAFC;padding:24px;border-top:1px solid #E2E8F0;text-align:center;">
                     <p style="color:#64748B;font-size:13px;margin:0 0 8px;">
-                        <strong>Granja Mari Pepa</strong>
+                        <strong>Mari Pepa</strong>
                     </p>
                     <p style="color:#94A3B8;font-size:12px;margin:0;">
                         Tel: 639 77 86 56 · pedidos@mari-pepa.com · www.mari-pepa.com
@@ -594,7 +594,7 @@ async function enviarLibroIVAPorEmail(req, res) {
 
     // Enviar email con PDF adjunto
     const mailOptions = {
-      from: '"Granja Mari Pepa" <noreply@mari-pepa.com>',
+      from: '"Mari Pepa" <noreply@mari-pepa.com>',
       to: destinatario,
       subject: `Libro de IVA ${ejercicio} - ${nombreCliente}`,
       html: htmlTemplate,

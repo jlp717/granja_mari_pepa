@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unifica los datos de contacto publicos con la web oficial de Granja Maripepa.
+"""Unifica los datos de contacto publicos con la web oficial de Maripepa.
 
 Datos canonicos (granjamaripepa.com):
   968 46 75 14 / 639 77 86 55 / pedidos@granjamaripepa.com

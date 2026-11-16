@@ -20,7 +20,7 @@ const databaseService = require('../../app/services/databaseService');
 const logger = require('../../app/utils/logger');
 
 const CUSTOMER_CODE = 'TEST_JAVIER';
-const LEGACY_PASSWORD = 'TEST123';
+const LEGACY_PASSWORD = process.env.TEST_PASSWORD || '';
 
 async function resetTestJavier() {
     try {
