@@ -10,6 +10,7 @@ const path = require('path');
 const crypto = require('crypto');
 const adminService = require('../services/adminService');
 const contentEvents = require('../services/contentEvents');
+const emailService = require('../services/emailService');
 const logger = require('../utils/logger');
 
 const COOKIE_NAME = 'gmp_admin_session';
@@ -232,9 +233,39 @@ const deleteMagazine = wrap(async (req, res) => {
 /* ---------------------------------------------------------- applications */
 
 const updateApplication = wrap(async (req, res) => {
-  await adminService.updateApplication(req.params.id, req.body || {}, actor(req));
+  const result = await adminService.updateApplication(
+    req.params.id,
+    req.body || {},
+    actor(req),
+  );
+  if (result.error === 'missing') {
+    return fail(res, 404, 'La candidatura ya no existe.');
+  }
+  if (result.error === 'locked') {
+    return fail(
+      res,
+      409,
+      'Esta candidatura se cerró hace más de 5 días hábiles. Su estado ya no se puede modificar.',
+      'APPLICATION_LOCKED',
+    );
+  }
+  if (result.statusChanged) {
+    const target = String((req.body || {}).status || '');
+    emailService
+      .sendApplicationStatusEmail(result.application, target)
+      .catch((error) => {
+        logger.warn('Respuesta al candidato no enviada', {
+          message: error.message,
+          status: target,
+        });
+      });
+  }
   contentEvents.publishAdmin('applications', 'updated');
-  return res.json({ success: true });
+  return res.json({
+    success: true,
+    statusChanged: result.statusChanged,
+    previousStatus: result.previousStatus,
+  });
 });
 
 const deleteApplication = wrap(async (req, res) => {

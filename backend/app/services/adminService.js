@@ -510,9 +510,44 @@ async function listApplications() {
   return rows.map(mapApplication);
 }
 
+function businessDaysSince(value) {
+  const start = new Date(String(value || '').replace(' ', 'T'));
+  if (Number.isNaN(start.getTime())) return 0;
+  const end = new Date();
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
+  let days = 0;
+  const cursor = new Date(start);
+  while (cursor < end) {
+    cursor.setDate(cursor.getDate() + 1);
+    const day = cursor.getDay();
+    if (day !== 0 && day !== 6) days += 1;
+  }
+  return days;
+}
+
 async function updateApplication(id, payload, actor) {
   const allowed = ['new', 'review', 'interview', 'rejected', 'hired'];
   const status = allowed.includes(payload.status) ? payload.status : 'new';
+  const rows = await query(
+    `SELECT ID, JOB_ID, JOB_TITLE, NAME, EMAIL, PHONE, SECTOR, MESSAGE,
+            CV_NAME, CV_URL, STATUS, NOTES, CREATED_AT, UPDATED_AT
+       FROM ${table('ADMIN_APPLICATIONS')}
+      WHERE ID = ? AND ACTIVE = 1`,
+    [id],
+  );
+  if (!rows.length) return { error: 'missing' };
+  const current = rows[0];
+  const currentStatus = String(current.STATUS || '').trim();
+  const closed = currentStatus === 'rejected' || currentStatus === 'hired';
+  if (
+    closed &&
+    status !== currentStatus &&
+    businessDaysSince(current.UPDATED_AT) > 5
+  ) {
+    return { error: 'locked', previousStatus: currentStatus };
+  }
+
   await query(
     `UPDATE ${table('ADMIN_APPLICATIONS')}
        SET STATUS = ?, NOTES = ?, UPDATED_AT = CURRENT TIMESTAMP
@@ -525,7 +560,15 @@ async function updateApplication(id, payload, actor) {
     detail: `${str(payload.name, 160) || 'Candidatura'} · ${status}`,
     actor,
   });
-  return true;
+  return {
+    previousStatus: currentStatus,
+    statusChanged: currentStatus !== status,
+    application: mapApplication({
+      ...current,
+      STATUS: status,
+      NOTES: str(payload.notes, 4000),
+    }),
+  };
 }
 
 async function deleteApplication(id, actor) {

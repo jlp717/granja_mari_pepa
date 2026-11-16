@@ -816,7 +816,27 @@ export function AdminPanel() {
         });
       }, 250);
     };
-    source.addEventListener('message', schedule);
+    const onEvent = (event: MessageEvent) => {
+      try {
+        const payload = JSON.parse(event.data) as {
+          type?: string;
+          action?: string;
+        };
+        if (payload.type === "applications" && payload.action === "created") {
+          notify("Nueva candidatura recibida");
+        } else if (payload.type === "magazines") {
+          notify("Revistas actualizadas");
+        } else if (payload.type === "jobs") {
+          notify("Ofertas actualizadas");
+        } else if (payload.type === "team") {
+          notify("Equipo actualizado");
+        }
+      } catch {
+        /* Evento no válido: se ignora. */
+      }
+      schedule();
+    };
+    source.addEventListener('message', onEvent);
     return () => {
       source.close();
       if (timer) window.clearTimeout(timer);

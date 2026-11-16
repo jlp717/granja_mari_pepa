@@ -403,8 +403,96 @@ async function sendInvoiceEmail({ to, subject, text, html, pdfBuffer, filename }
 }
 
 /**
- * Notificacion interna (handoffs, avisos del chatbot).
+ * Respuesta al candidato según el estado de su candidatura.
+ * Una plantilla por estado: revisión, entrevista, descartada y contratada.
  */
+async function sendApplicationStatusEmail(application, status) {
+    const templates = {
+        review: {
+            subject: 'Tu candidatura está en revisión — Granja Maripepa',
+            title: 'Candidatura en revisión',
+            body: 'Hemos recibido tu candidatura y ya la está revisando el equipo de selección. Si necesitamos algún dato adicional, nos pondremos en contacto contigo por este mismo correo.'
+        },
+        interview: {
+            subject: `Entrevista${application.jobTitle ? ` — ${application.jobTitle}` : ''} — Granja Maripepa`,
+            title: 'Queremos conocerte',
+            body: 'Tu candidatura ha pasado a la fase de entrevista. El equipo de Recursos Humanos se pondrá en contacto contigo para concretar fecha, hora y formato de la conversación.'
+        },
+        rejected: {
+            subject: 'Resolución de tu candidatura — Granja Maripepa',
+            title: 'Candidatura revisada',
+            body: 'Gracias por el tiempo que has dedicado a tu candidatura. En esta ocasión no vamos a continuar con el proceso, pero conservamos tu currículum para futuras vacantes que encajen con tu perfil.'
+        },
+        hired: {
+            subject: 'Siguiente paso en tu candidatura — Granja Maripepa',
+            title: 'Seguimos adelante',
+            body: 'Nos alegra comunicarte que queremos dar el siguiente paso contigo. El equipo de Recursos Humanos se pondrá en contacto para concretar las condiciones y la incorporación.'
+        }
+    };
+    const template = templates[status];
+    if (!template) return { success: false, skipped: true };
+
+    const dedicated = createRrhhTransporter();
+    try {
+        const transporter = dedicated || initializeTransporter();
+        const senderAddress = dedicated
+            ? process.env.SMTP_RRHH_FROM || process.env.SMTP_RRHH_USER
+            : FROM_EMAIL;
+        const esc = (value) =>
+            String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        const name = esc(application.name || '');
+        const job = esc(application.jobTitle || '');
+
+        const info = await transporter.sendMail({
+            from: `"Granja Mari Pepa - Empleo" <${senderAddress}>`,
+            to: application.email,
+            replyTo: process.env.SMTP_RRHH_USER || 'cv.rrhh@maripepa.es',
+            subject: template.subject,
+            html: `
+                <div style="margin:0;padding:0;background:#f2f1ee;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
+                    <tr><td align="center">
+                      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
+                        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
+                        <tr><td style="padding:26px 30px 0;">
+                          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Granja Maripepa &middot; Empleo</p>
+                          <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">${template.title}</h1>
+                        </td></tr>
+                        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
+                          <p style="margin:0 0 12px;">Hola${name ? ` ${name}` : ''},</p>
+                          <p style="margin:0 0 12px;">${template.body}</p>
+                          ${job ? `<p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Puesto: ${job}</p>` : ''}
+                          <p style="margin:0;">Si tienes cualquier duda, responde a este correo o escribe a <a href="mailto:cv.rrhh@maripepa.es" style="color:#cf3700;">cv.rrhh@maripepa.es</a>.</p>
+                        </td></tr>
+                        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8a8578;">
+                          Granja Maripepa, S.L. &middot; Lorca, Murcia &middot; 968 46 75 14
+                        </td></tr>
+                      </table>
+                    </td></tr>
+                  </table>
+                </div>
+            `
+        });
+        logger.info('Respuesta de candidatura enviada', {
+            to: application.email,
+            status,
+            messageId: info && info.messageId
+        });
+        return { success: true, messageId: (info && info.messageId) || null };
+    } catch (error) {
+        logger.error('Error enviando respuesta de candidatura', {
+            message: error.message,
+            status
+        });
+        return { success: false, message: error.message };
+    }
+}
+
+
 async function sendInternalNotification({ to, subject, text, replyTo }) {
     const recipient = to || process.env.CHATBOT_HANDOFF_EMAIL || 'pedidos@mari-pepa.com';
     try {
@@ -433,6 +521,7 @@ module.exports = {
     sendPasswordResetEmail,
     sendVerificationCodeEmail,
     sendApplicationNotification,
+    sendApplicationStatusEmail,
     sendInvoiceEmail,
     sendInternalNotification,
     verifyConnection

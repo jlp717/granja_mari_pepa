@@ -36,6 +36,7 @@ export function AdminApplications({
   const [status, setStatus] = useState<"all" | Application["status"]>("all");
   const [selected, setSelected] = useState<Application | null>(null);
   const [draft, setDraft] = useState<Application | null>(null);
+  const [pendingStatus, setPendingStatus] = useState<Application | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -107,6 +108,19 @@ export function AdminApplications({
     URL.revokeObjectURL(url);
   };
 
+  const saveDraft = async (application: Application) => {
+    try {
+      await onUpdate({ ...application, notes: application.notes.trim() });
+      setSelected(null);
+      setDraft(null);
+      setPendingStatus(null);
+    } catch (failure) {
+      setError(
+        failure instanceof Error ? failure.message : "No se pudo guardar la candidatura.",
+      );
+    }
+  };
+
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     if (!draft) return;
@@ -114,15 +128,12 @@ export function AdminApplications({
       setError("El nombre no puede quedar vacío.");
       return;
     }
-    try {
-      await onUpdate({ ...draft, notes: draft.notes.trim() });
-      setSelected(null);
-      setDraft(null);
-    } catch (failure) {
-      setError(
-        failure instanceof Error ? failure.message : "No se pudo guardar la candidatura.",
-      );
+    if (selected && draft.status !== selected.status) {
+      setError("");
+      setPendingStatus({ ...draft, notes: draft.notes.trim() });
+      return;
     }
+    await saveDraft(draft);
   };
 
   return (
@@ -357,6 +368,52 @@ export function AdminApplications({
               </button>
             </footer>
           </form>
+        </div>
+      ) : null}
+
+      {pendingStatus && selected ? (
+        <div className={styles.confirmLayer}>
+          <div
+            className={styles.confirm}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="status-confirm-title"
+          >
+            <span className={styles.confirmKicker}>Cambio de estado</span>
+            <h2 id="status-confirm-title">Confirmar cambio</h2>
+            <p>
+              Vas a pasar la candidatura de{" "}
+              <b>{APPLICATION_STATUS[selected.status].label}</b> a{" "}
+              <b>{APPLICATION_STATUS[pendingStatus.status].label}</b>.
+            </p>
+            {pendingStatus.status === "rejected" ||
+            pendingStatus.status === "hired" ? (
+              <p style={{ marginTop: 10 }}>
+                Este estado cierra el proceso. Podrás corregirlo durante los
+                próximos <b>5 días hábiles</b>; después quedará bloqueado.
+              </p>
+            ) : null}
+            <p style={{ marginTop: 10 }}>
+              Se enviará al candidato el correo correspondiente a este estado.
+            </p>
+            {error ? <p className={styles.fieldError}>{error}</p> : null}
+            <div className={styles.confirmActions}>
+              <button
+                type="button"
+                className={styles.secondaryBtn}
+                onClick={() => setPendingStatus(null)}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className={styles.primaryBtn}
+                onClick={() => saveDraft(pendingStatus)}
+              >
+                Confirmar cambio
+              </button>
+            </div>
+          </div>
         </div>
       ) : null}
     </div>
