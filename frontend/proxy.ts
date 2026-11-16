@@ -131,12 +131,13 @@ export async function proxy(request: NextRequest) {
       secret.length >= 32
         ? await verifyAdminAccessToken(cookie, secret)
         : false;
-    /* Direct LAN/VPN access carries no proxy headers: Cloudflare always adds
-     * Cf-Connecting-Ip and nginx adds X-Real-Ip. Port 3001 is only reachable
-     * from the private network. */
-    const direct =
-      !request.headers.has("cf-connecting-ip") &&
-      !request.headers.has("x-real-ip");
+    /* Direct LAN/VPN access uses a private literal host (192.168.x.x:3001).
+     * Cloudflare and nginx requests carry the public domain as Host, so a
+     * spoofed header cannot turn a proxied request into a direct one. */
+    const host = (request.headers.get("host") || "").toLowerCase();
+    const direct = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/.test(
+      host,
+    );
     if (!isInternalIp(ip) && !enrolled && !direct && !(noIpAllowed && !ip)) {
       return denied(request, ip);
     }
