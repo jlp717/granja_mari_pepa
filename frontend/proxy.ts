@@ -57,6 +57,15 @@ function clientIp(request: NextRequest): string {
   return "";
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function denied(request: NextRequest, ip: string): NextResponse {
   console.warn(
     "[admin-gate] denied " +
@@ -97,6 +106,7 @@ function denied(request: NextRequest, ip: string): NextResponse {
   <p>Con la VPN activa, entra por la dirección interna:</p>
   <p><strong>http://192.168.1.230:3001/admin</strong></p>
   <p>Si la VPN se desconecta, la sesión dejará de responder de inmediato.</p>
+  <p style="font-size:11px;opacity:.6">IP detectada: ${escapeHtml(ip || "desconocida")}</p>
   <small>Área privada · no indexable</small>
   <a href="/es">Volver a la web pública</a>
 </main></body></html>`;
