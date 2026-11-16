@@ -5,52 +5,12 @@
  * segunda comprobación protege la API aunque se llame directamente.
  */
 
-const crypto = require('crypto');
-
 const PRIVATE_PREFIXES = [
   '10.',
   '192.168.',
   '::ffff:10.',
   '::ffff:192.168.',
 ];
-
-const ADMIN_ACCESS_COOKIE = 'gmp_admin_access';
-
-function readCookie(req, name) {
-  const header = req.headers.cookie;
-  if (typeof header !== 'string' || !header) return '';
-  for (const part of header.split(';')) {
-    const index = part.indexOf('=');
-    if (index < 0) continue;
-    if (part.slice(0, index).trim() === name) {
-      return part.slice(index + 1).trim();
-    }
-  }
-  return '';
-}
-
-/** Same stateless token the Next middleware issues after internal enrolment. */
-function hasEnrolledDevice(req) {
-  const secret = process.env.ADMIN_ACCESS_SECRET || '';
-  if (secret.length < 32) return false;
-  const token = readCookie(req, ADMIN_ACCESS_COOKIE);
-  const parts = token.split('.');
-  if (parts.length !== 4 || parts[0] !== 'v1') return false;
-  const exp = Number(parts[1]);
-  if (!Number.isFinite(exp) || exp <= Math.floor(Date.now() / 1000)) {
-    return false;
-  }
-  const expected = crypto
-    .createHmac('sha256', secret)
-    .update(`v1.${parts[1]}.${parts[2]}`)
-    .digest('hex');
-  const provided = Buffer.from(parts[3], 'hex');
-  const reference = Buffer.from(expected, 'hex');
-  return (
-    provided.length === reference.length &&
-    crypto.timingSafeEqual(provided, reference)
-  );
-}
 
 function normalize(ip) {
   return String(ip || '')
@@ -111,7 +71,7 @@ function clientIp(req) {
 
 function requireInternalNetwork(req, res, next) {
   const ip = clientIp(req);
-  if (isInternalIp(ip) || hasEnrolledDevice(req)) {
+  if (isInternalIp(ip)) {
     req.adminIp = ip;
     return next();
   }

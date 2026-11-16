@@ -1,10 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { locales, defaultLocale } from "./i18n";
-import {
-  ADMIN_ACCESS_COOKIE,
-  verifyAdminAccessToken,
-} from "./lib/admin-access";
 
 const intlMiddleware = createMiddleware({
   locales,
@@ -97,10 +93,10 @@ function denied(request: NextRequest, ip: string): NextResponse {
 </style></head><body><main>
   <span class="kicker">Granja Maripepa · Administración</span>
   <h1>Acceso restringido</h1>
-  <p>Este panel solo está disponible desde la red interna de la empresa o desde un navegador ya autorizado.</p>
-  <p>Si estás conectado a la VPN, abre esta dirección para autorizar este dispositivo durante 30 días:</p>
-  <p><strong>http://192.168.1.230:3001/admin/enroll</strong></p>
-  <p>Si ya autorizaste este navegador, vuelve a entrar en mari-pepa.com/admin.</p>
+  <p>Este panel solo está disponible desde la red interna de la empresa. La VPN debe permanecer conectada mientras lo usas.</p>
+  <p>Con la VPN activa, entra por la dirección interna:</p>
+  <p><strong>http://192.168.1.230:3001/admin</strong></p>
+  <p>Si la VPN se desconecta, la sesión dejará de responder de inmediato.</p>
   <small>Área privada · no indexable</small>
   <a href="/es">Volver a la web pública</a>
 </main></body></html>`;
@@ -114,7 +110,7 @@ function denied(request: NextRequest, ip: string): NextResponse {
   });
 }
 
-export async function proxy(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAdminPath =
     pathname === "/admin" ||
@@ -125,12 +121,6 @@ export async function proxy(request: NextRequest) {
   if (isAdminPath) {
     const ip = clientIp(request);
     const noIpAllowed = process.env.NODE_ENV !== "production";
-    const secret = process.env.ADMIN_ACCESS_SECRET || "";
-    const cookie = request.cookies.get(ADMIN_ACCESS_COOKIE)?.value || "";
-    const enrolled =
-      secret.length >= 32
-        ? await verifyAdminAccessToken(cookie, secret)
-        : false;
     /* Direct LAN/VPN access uses a private literal host (192.168.x.x:3001).
      * Cloudflare and nginx requests carry the public domain as Host, so a
      * spoofed header cannot turn a proxied request into a direct one. */
@@ -138,7 +128,7 @@ export async function proxy(request: NextRequest) {
     const direct = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/.test(
       host,
     );
-    if (!isInternalIp(ip) && !enrolled && !direct && !(noIpAllowed && !ip)) {
+    if (!isInternalIp(ip) && !direct && !(noIpAllowed && !ip)) {
       return denied(request, ip);
     }
     const response = NextResponse.next();
