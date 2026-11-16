@@ -425,6 +425,50 @@ const publicApplication = wrap(async (req, res) => {
   return res.status(201).json({ success: true, id });
 });
 
+const publicContact = wrap(async (req, res) => {
+  const payload = req.body || {};
+  const clean = (value, max) => String(value ?? '').trim().slice(0, max);
+  const name = clean(payload.nombre || payload.name, 120);
+  const email = clean(payload.email, 160);
+  const company = clean(payload.empresa || payload.company, 160);
+  const phone = clean(payload.telefono || payload.phone, 40);
+  const message = clean(payload.mensaje || payload.message, 4000);
+  const privacy = payload.privacidad === true || payload.privacy === true;
+  if (name.length < 2 || message.length < 10) {
+    return fail(res, 400, 'Faltan datos: revisa el nombre y el mensaje.');
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return fail(res, 400, 'El email no es válido.');
+  }
+  if (!privacy) {
+    return fail(res, 400, 'Debes aceptar la política de privacidad.');
+  }
+  const lines = [
+    `Nombre: ${name}`,
+    `Empresa: ${company || '—'}`,
+    `Email: ${email}`,
+    `Teléfono: ${phone || '—'}`,
+    '',
+    'Mensaje:',
+    message,
+  ];
+  const sent = await emailService.sendInternalNotification({
+    to: process.env.CONTACT_EMAIL || 'pedidos@mari-pepa.com',
+    subject: `Contacto web: ${name}${company ? ` · ${company}` : ''}`,
+    text: lines.join('\n'),
+    replyTo: email,
+  });
+  if (!sent.success) {
+    logger.error('Contacto web no enviado', { message: sent.message });
+    return fail(
+      res,
+      503,
+      'No se pudo enviar el mensaje. Llámanos al 968 46 75 14 y lo resolvemos.',
+    );
+  }
+  return res.status(201).json({ success: true });
+});
+
 const publicCv = wrap(async (req, res) => {
   if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
     return fail(res, 400, 'No se recibió ningún archivo.');
@@ -506,6 +550,7 @@ module.exports = {
   publicJob,
   publicMagazines,
   publicApplication,
+  publicContact,
   publicCv,
   downloadCv,
   COOKIE_NAME,

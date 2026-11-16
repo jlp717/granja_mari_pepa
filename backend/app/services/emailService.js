@@ -285,6 +285,7 @@ async function sendApplicationNotification(application, to) {
         const mailOptions = {
             from: `"Granja Mari Pepa - Empleo" <${senderAddress}>`,
             to,
+            replyTo: application.email,
             subject: `Nueva candidatura: ${application.name}${application.jobTitle ? ` - ${application.jobTitle}` : ''}`,
             html: `
                 <div style="margin:0;padding:0;background:#f2f1ee;">
@@ -450,7 +451,7 @@ async function sendApplicationStatusEmail(application, status) {
         const info = await transporter.sendMail({
             from: `"Granja Mari Pepa - Empleo" <${senderAddress}>`,
             to: application.email,
-            replyTo: process.env.SMTP_RRHH_USER || 'cv.rrhh@maripepa.es',
+            replyTo: process.env.SMTP_RRHH_REPLY_TO || 'cv.rrhh@maripepa.es',
             subject: template.subject,
             html: `
                 <div style="margin:0;padding:0;background:#f2f1ee;">

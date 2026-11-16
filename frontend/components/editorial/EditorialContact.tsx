@@ -29,6 +29,7 @@ export function EditorialContact({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [preview, setPreview] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [sending, setSending] = useState(false);
   const schema = z.object({
     nombre: z.string().min(2, t("form_section.errors.name")),
     empresa: z.string().min(2, t("form_section.errors.company")),
@@ -76,6 +77,39 @@ export function EditorialContact({
     const submitter = (event.nativeEvent as SubmitEvent)
       .submitter as HTMLButtonElement | null;
     const intent = submitter?.value || "copy";
+    if (intent === "send") {
+      setSending(true);
+      setFeedback(locale === "en" ? "Sending…" : "Enviando…");
+      try {
+        const response = await fetch("/api/public/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsed.data),
+        });
+        const data = (await response.json().catch(() => null)) as {
+          message?: string;
+        } | null;
+        if (!response.ok) throw new Error(data?.message || "");
+        setFeedback(
+          locale === "en"
+            ? "Message sent. We will reply as soon as possible."
+            : "Mensaje enviado. Te responderemos lo antes posible.",
+        );
+        form.reset();
+        setPreview("");
+      } catch (failure) {
+        setFeedback(
+          failure instanceof Error && failure.message
+            ? failure.message
+            : locale === "en"
+              ? "We could not send it. Try again or call 968 46 75 14."
+              : "No se pudo enviar. Inténtalo de nuevo o llama al 968 46 75 14.",
+        );
+      } finally {
+        setSending(false);
+      }
+      return;
+    }
     if (intent === "email") {
       window.open(
         inquiryGmail(ui.contactSubject, text),
@@ -312,11 +346,18 @@ export function EditorialContact({
               className="cta"
               type="submit"
               name="action"
-              value="email"
+              value="send"
               data-cursor
+              disabled={sending}
             >
               <i />
-              {copy.email}
+              {sending
+                ? locale === "en"
+                  ? "Sending…"
+                  : "Enviando…"
+                : locale === "en"
+                  ? "Send message"
+                  : "Enviar mensaje"}
             </button>
             <button
               className="arrowlink"

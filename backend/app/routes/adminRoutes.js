@@ -64,6 +64,7 @@ publicRouter.get('/jobs/:slug', controller.publicJob);
 publicRouter.get('/magazines', controller.publicMagazines);
 publicRouter.get('/events', controller.publicEvents);
 publicRouter.post('/applications', controller.publicApplication);
+publicRouter.post('/contact', controller.publicContact);
 publicRouter.post(
   '/cv',
   express.raw({ type: ['application/pdf'], limit: '10mb' }),
