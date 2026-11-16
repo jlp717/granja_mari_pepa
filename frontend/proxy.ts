@@ -134,8 +134,7 @@ export async function proxy(request: NextRequest) {
      * from the private network. */
     const direct =
       !request.headers.has("cf-connecting-ip") &&
-      !request.headers.has("x-real-ip") &&
-      !request.headers.has("x-forwarded-for");
+      !request.headers.has("x-real-ip");
     if (!isInternalIp(ip) && !enrolled && !direct && !(noIpAllowed && !ip)) {
       return denied(request, ip);
     }
