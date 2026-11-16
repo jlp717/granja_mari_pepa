@@ -97,8 +97,10 @@ function denied(request: NextRequest, ip: string): NextResponse {
 </style></head><body><main>
   <span class="kicker">Granja Maripepa · Administración</span>
   <h1>Acceso restringido</h1>
-  <p>Este panel solo está disponible desde la red interna de la empresa o su conexión VPN.</p>
-  <p>Si estás teletrabajando, conecta primero el cliente VPN corporativo y vuelve a intentarlo.</p>
+  <p>Este panel solo está disponible desde la red interna de la empresa o desde un navegador ya autorizado.</p>
+  <p>Si estás conectado a la VPN, abre esta dirección para autorizar este dispositivo durante 30 días:</p>
+  <p><strong>http://192.168.1.230:3001/admin/enroll</strong></p>
+  <p>Si ya autorizaste este navegador, vuelve a entrar en mari-pepa.com/admin.</p>
   <small>Área privada · no indexable</small>
   <a href="/es">Volver a la web pública</a>
 </main></body></html>`;
