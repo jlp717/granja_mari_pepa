@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo, useRef, useSyncExternalStore, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { CustomToast } from '@/components/ui/custom-toast';
@@ -95,6 +96,16 @@ import type { FacturaBackend } from '@/lib/types';
 import { formatCurrency, formatCurrencyNoDecimals } from '@/lib/utils';
 import { secureFetch, secureDownload } from '@/lib/secureFetch'; // 🔐 HttpOnly Cookie Auth
 import apiClient from '@/lib/apiClient'; // 🔐 Cliente API con autenticación automática
+
+function Portal({ children }: { children: ReactNode }) {
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  if (!mounted) return null;
+  return createPortal(children, document.body);
+}
 
 const tabIds = [
   { id: 'dashboard', icon: LayoutGrid },
@@ -3429,11 +3440,12 @@ export function CustomerDashboard() {
       {/* Modal de Vista Rápida de Factura - RESPONSIVE */}
       <AnimatePresence>
         {showFacturaPreview && facturaPreview && (
+          <Portal>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 sm:p-4"
+            className="fixed inset-0 bg-black/80 z-[10000] flex items-center justify-center p-2 sm:p-4"
             onClick={() => setShowFacturaPreview(false)}
           >
             <motion.div
@@ -3490,26 +3502,28 @@ export function CustomerDashboard() {
               </div>
             </motion.div>
           </motion.div>
+          </Portal>
         )}
       </AnimatePresence>
 
       {/* Modal de confirmación de envío por email */}
       <AnimatePresence>
         {showEmailConfirmModal && emailFacturaToSend && (
+          <Portal>
           <>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => !sendingEmail && setShowEmailConfirmModal(false)}
-              className="fixed inset-0 bg-black/60 z-50"
+              className="fixed inset-0 bg-black/60 z-[10000]"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-0 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 flex items-center justify-center z-[10000] p-4"
             >
               <div className="max-h-[calc(100dvh_-_2rem)] w-[calc(100vw_-_2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl">
                 {/* Header */}
@@ -3604,17 +3618,19 @@ export function CustomerDashboard() {
               </div>
             </motion.div>
           </>
+          </Portal>
         )}
       </AnimatePresence>
 
       {/* Modal de WhatsApp mejorado */}
       <AnimatePresence>
         {showWhatsAppModal && selectedFacturaForShare && (
+          <Portal>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/60 z-[10000] flex items-center justify-center p-4"
             onClick={() => setShowWhatsAppModal(false)}
           >
             <motion.div
@@ -3720,6 +3736,7 @@ pedidos@granjamaripepa.com`}
               </div>
             </motion.div>
           </motion.div>
+          </Portal>
         )}
       </AnimatePresence>
 
@@ -3732,7 +3749,7 @@ pedidos@granjamaripepa.com`}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 z-[10000] flex items-center justify-center p-4"
               onClick={() => setShowLogoutModal(false)}
             >
               <motion.div
@@ -3791,14 +3808,14 @@ pedidos@granjamaripepa.com`}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowDeleteContactModal(false)}
-              className="fixed inset-0 bg-black/60 z-50"
+              className="fixed inset-0 bg-black/60 z-[10000]"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-0 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 flex items-center justify-center z-[10000] p-4"
             >
               <div className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl max-w-md w-full overflow-hidden border border-border">
                 {/* Header */}
@@ -3910,7 +3927,7 @@ pedidos@granjamaripepa.com`}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/60 z-[10000] flex items-center justify-center p-4"
               onClick={() => setShowShareModal(false)}
             >
               <motion.div
