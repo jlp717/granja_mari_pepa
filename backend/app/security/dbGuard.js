@@ -309,7 +309,7 @@ async function consultarResumenCuenta(user) {
     )?.total || '0.00';
 
   const pendiente = (byYear || []).reduce(
-    (sum, row) => sum + (Number(row.TOTALPENDIENTES) || 0),
+    (sum, row) => sum + (Number(row.IMPORTEPENDIENTE) || 0),
     0,
   );
 
@@ -333,7 +333,7 @@ async function consultarResumenCuenta(user) {
         (Number(row.TOTALPAGADAS) || 0) + (Number(row.TOTALPENDIENTES) || 0),
       ),
       totalPagado: money(row.TOTALPAGADAS),
-      totalPendiente: money(row.TOTALPENDIENTES),
+      totalPendiente: money(row.IMPORTEPENDIENTE),
     })),
     ultimasFacturas: (invoices || []).slice(0, 8).map((factura) => ({
       serie: factura.SERIE,

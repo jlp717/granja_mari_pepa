@@ -395,6 +395,16 @@ async function obtenerFacturas(req, res) {
         FROM DSEDAC.CVC
         GROUP BY TRIM(SERIEDOCUMENTO), NUMERODOCUMENTO, EJERCICIODOCUMENTO
       ),
+      PendientesCAC AS (
+        SELECT
+          TRIM(SERIEFACTURA) AS SERIE,
+          NUMEROFACTURA AS NUMERO,
+          EJERCICIOFACTURA AS EJERCICIO,
+          MAX(COALESCE(IMPORTECOBRADOPENDIENTE, 0)) AS PENDIENTE
+        FROM DSEDAC.CAC
+        WHERE NUMEROFACTURA > 0
+        GROUP BY TRIM(SERIEFACTURA), NUMEROFACTURA, EJERCICIOFACTURA
+      ),
       FacturasBase AS (
         SELECT
           TRIM(CFC.SERIEFACTURA) AS SERIE,
@@ -409,7 +419,7 @@ async function obtenerFacturas(req, res) {
           CFC.IMPORTEBASEIMPONIBLE AS BASE_IMPONIBLE,
           CFC.IMPORTEIVA AS IVA,
           CFC.IMPORTETOTAL AS TOTAL,
-          COALESCE(PF.PENDIENTE, 0) AS PENDIENTE,
+          COALESCE(PF.PENDIENTE, PC.PENDIENTE, 0) AS PENDIENTE,
           CAST(
             CASE
               WHEN CFC.DIADOCUMENTO < 10 THEN '0' || TRIM(CAST(CFC.DIADOCUMENTO AS CHAR(2)))
@@ -427,6 +437,10 @@ async function obtenerFacturas(req, res) {
           ON TRIM(CFC.SERIEFACTURA) = PF.SERIE
           AND CFC.NUMEROFACTURA = PF.NUMERO
           AND CFC.EJERCICIOFACTURA = PF.EJERCICIO
+        LEFT JOIN PendientesCAC PC
+          ON TRIM(CFC.SERIEFACTURA) = PC.SERIE
+          AND CFC.NUMEROFACTURA = PC.NUMERO
+          AND CFC.EJERCICIOFACTURA = PC.EJERCICIO
         WHERE TRIM(CFC.CODIGOCLIENTE) IN (${codigosInClause})
           AND CFC.NUMEROFACTURA > 0
           AND CFC.NUMEROFACTURA < 900000
@@ -477,25 +491,31 @@ async function obtenerFacturas(req, res) {
     const facturasRaw = await odbcPool.query(query);
 
     // Mapear a formato camelCase
-    const facturas = (facturasRaw || []).map(f => ({
-      serieFactura: f.SERIE || '',
-      numeroFactura: f.NUMERO || 0,
-      ejercicio: f.EJERCICIO || 0,
-      ano: f.ANO || 0,
-      mes: f.MES || 0,
-      dia: f.DIA || 0,
-      totalBase: f.BASE_IMPONIBLE || 0,
-      totalIVA: f.IVA || 0,
-      totalFactura: f.TOTAL || 0,
-      fecha: f.FECHA || '',
-      estado: f.PENDIENTE === 0 ? 'Pagada' : 'Pendiente',
-      numeroProductos: f.NUM_PRODUCTOS || 0,
-      albaranes: f.ALBARANES || '',
-      numAlbaranes: f.NUM_ALBARANES || 0,
-      codigoCliente: (f.CODIGO_CLIENTE || '').trim(),
-      nombreComercial: f.NOMBRE_COMERCIAL || '',
-      nombreFiscal: f.NOMBRE_FISCAL || ''
-    }));
+    const facturas = (facturasRaw || []).map(f => {
+      const pendiente = Number(f.PENDIENTE) || 0;
+      const pagada = pendiente <= 0;
+      return {
+        serieFactura: f.SERIE || '',
+        numeroFactura: f.NUMERO || 0,
+        ejercicio: f.EJERCICIO || 0,
+        ano: f.ANO || 0,
+        mes: f.MES || 0,
+        dia: f.DIA || 0,
+        totalBase: f.BASE_IMPONIBLE || 0,
+        totalIVA: f.IVA || 0,
+        totalFactura: f.TOTAL || 0,
+        fecha: f.FECHA || '',
+        importePendiente: pendiente,
+        estadoPago: pagada ? 'pagada' : 'pendiente',
+        estado: pagada ? 'Pagada' : 'Pendiente',
+        numeroProductos: f.NUM_PRODUCTOS || 0,
+        albaranes: f.ALBARANES || '',
+        numAlbaranes: f.NUM_ALBARANES || 0,
+        codigoCliente: (f.CODIGO_CLIENTE || '').trim(),
+        nombreComercial: f.NOMBRE_COMERCIAL || '',
+        nombreFiscal: f.NOMBRE_FISCAL || ''
+      };
+    });
 
     // 4. OBTENER LISTA DE CLIENTES ÚNICOS PARA EL SELECTOR
     const queryClientes = `

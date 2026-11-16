@@ -268,7 +268,7 @@ export function CustomerDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterMonth, setFilterMonth] = useState('all');
-  const [filterYear, setFilterYear] = useState(String(new Date().getFullYear())); // Año actual dinámico
+  const [filterYear, setFilterYear] = useState('all');
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [clientsList, setClientsList] = useState<{ codigoCliente: string; nombreCliente: string; nombreFiscal?: string }[]>([]);
   const [selectedCliente, setSelectedCliente] = useState<string | undefined>(undefined);
@@ -2004,11 +2004,11 @@ export function CustomerDashboard() {
                       </select>
                     </label>
                   )}
-                  {(filterYear !== String(new Date().getFullYear()) || filterMonth !== 'all') && (
+                  {(filterYear !== 'all' || filterMonth !== 'all') && (
                     <button
                       type="button"
                       onClick={() => {
-                        setFilterYear(String(new Date().getFullYear()));
+                        setFilterYear('all');
                         setFilterMonth('all');
                         setSearchTerm('');
                         setFechaDesde('');
@@ -2268,8 +2268,8 @@ export function CustomerDashboard() {
                           {lastPedido ? (
                             <>
                               <span className="inline-flex items-center gap-1.5">
-                                <span className={`h-1.5 w-1.5 ${String(lastPedido.estadoPago || '').toLowerCase().includes('pag') ? 'bg-emerald-400' : 'bg-amber-400'}`} aria-hidden="true" />
-                                {lastPedido.estadoPago || 'Pendiente'}
+                                <span className={`h-1.5 w-1.5 ${/pag/i.test(String(lastPedido.estadoPago || '')) ? 'bg-emerald-400' : /pend/i.test(String(lastPedido.estadoPago || '')) ? 'bg-amber-400' : 'bg-white/40'}`} aria-hidden="true" />
+                                {lastPedido.estadoPago || 'Sin facturar'}
                               </span>
                               <span aria-hidden="true">·</span>
                               <span>{lastPedido.fecha}</span>
