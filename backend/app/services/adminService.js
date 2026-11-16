@@ -531,7 +531,7 @@ async function updateApplication(id, payload, actor) {
   const status = allowed.includes(payload.status) ? payload.status : 'new';
   const rows = await query(
     `SELECT ID, JOB_ID, JOB_TITLE, NAME, EMAIL, PHONE, SECTOR, MESSAGE,
-            CV_NAME, CV_URL, STATUS, NOTES, CREATED_AT, UPDATED_AT
+            CV_NAME, CV_URL, STATUS, NOTES, CREATED_AT, UPDATED_AT, STATUS_CHANGED_AT
        FROM ${table('ADMIN_APPLICATIONS')}
       WHERE ID = ? AND ACTIVE = 1`,
     [id],
@@ -543,16 +543,17 @@ async function updateApplication(id, payload, actor) {
   if (
     closed &&
     status !== currentStatus &&
-    businessDaysSince(current.UPDATED_AT) > 5
+    businessDaysSince(current.STATUS_CHANGED_AT || current.UPDATED_AT) > 5
   ) {
     return { error: 'locked', previousStatus: currentStatus };
   }
 
   await query(
     `UPDATE ${table('ADMIN_APPLICATIONS')}
-       SET STATUS = ?, NOTES = ?, UPDATED_AT = CURRENT TIMESTAMP
+       SET STATUS = ?, NOTES = ?, UPDATED_AT = CURRENT TIMESTAMP,
+           STATUS_CHANGED_AT = CASE WHEN STATUS <> ? THEN CURRENT TIMESTAMP ELSE STATUS_CHANGED_AT END
      WHERE ID = ? AND ACTIVE = 1`,
-    [status, str(payload.notes, 4000), id],
+    [status, str(payload.notes, 4000), status, id],
   );
   await logActivity({
     kind: 'status',
