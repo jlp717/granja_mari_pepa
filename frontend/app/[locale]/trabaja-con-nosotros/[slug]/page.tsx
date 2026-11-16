@@ -52,7 +52,7 @@ export default async function JobPage(props: {
   if (!job) notFound();
 
   const isEs = params.locale === "es";
-  const applyHref = `/${params.locale}/trabaja-con-nosotros#candidatura`;
+  const applyHref = `/${params.locale}/trabaja-con-nosotros#careers-cv`;
   const liveJobs = await fetchPublicJobs();
   const related = (liveJobs ?? [])
     .filter((item) => item.slug !== job.slug)

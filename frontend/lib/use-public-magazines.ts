@@ -129,6 +129,7 @@ export function usePublicMagazines(): NavMagazine[] {
       try {
         const response = await fetch("/api/public/magazines", {
           headers: { Accept: "application/json" },
+          cache: "no-store",
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = (await response.json()) as {

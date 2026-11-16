@@ -165,7 +165,7 @@ export function EditorialCareers({
     field.style.height = `${field.scrollHeight}px`;
   };
 
-  const cvEmailHref = "#candidatura";
+  const cvEmailHref = "#careers-cv";
 
   const filtered = jobs.filter((job) => {
     if (dept !== "Todos" && job.department !== dept) return false;
