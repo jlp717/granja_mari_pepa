@@ -292,9 +292,10 @@ app.use('/api/', generalLimiter);
 
 // Panel interno (red de empresa/VPN) y contenido público de la web
 app.use('/api/admin', adminRouter);
-// Corta las peticiones públicas de empleo que superen 20 s: evita que el
-// navegador se quede esperando y que se acumulen envíos colgados.
-const publicUploadTimeout = (req, res, next) => {
+// Corta las peticiones públicas de empleo que superen su límite: evita que el
+// navegador se quede esperando y que se acumulen envíos colgados. La subida del
+// CV necesita margen real para conexiones lentas; el registro es inmediato.
+const publicUploadTimeout = (ms) => (req, res, next) => {
   const timer = setTimeout(() => {
     if (!res.headersSent) {
       res.status(503).json({
@@ -303,13 +304,14 @@ const publicUploadTimeout = (req, res, next) => {
         message: 'La operación ha tardado demasiado. Inténtalo de nuevo.',
       });
     }
-  }, 20000);
+  }, ms);
   const clear = () => clearTimeout(timer);
   res.on('finish', clear);
   res.on('close', clear);
   next();
 };
-app.use(['/api/public/applications', '/api/public/cv'], publicUploadTimeout);
+app.use('/api/public/cv', publicUploadTimeout(180000));
+app.use('/api/public/applications', publicUploadTimeout(25000));
 app.use('/api/public', publicRouter);
 
 // Archivos subidos desde el panel (PDF de revistas y portadas)

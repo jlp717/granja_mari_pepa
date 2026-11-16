@@ -131,6 +131,63 @@ const FAQ = [
   },
 ];
 
+const CV_MAX_BYTES = 10 * 1024 * 1024;
+const CV_UPLOAD_TIMEOUT_MS = 180000;
+const APPLICATION_TIMEOUT_MS = 30000;
+
+type CvUploadError = Error & { code?: "timeout" | "network" | "server" };
+
+/**
+ * Sube el CV con progreso real. Una conexión lenta puede tardar minutos:
+ * abortar a los 20 s dejaba candidaturas válidas sin enviar.
+ */
+function uploadCv(
+  file: File,
+  onProgress: (percent: number) => void,
+): Promise<{ url: string; name: string }> {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open(
+      "POST",
+      `/api/public/cv?name=${encodeURIComponent(file.name)}`,
+    );
+    request.setRequestHeader("Content-Type", "application/pdf");
+    request.timeout = CV_UPLOAD_TIMEOUT_MS;
+    request.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        onProgress(Math.min(99, Math.round((event.loaded / event.total) * 100)));
+      }
+    };
+    request.onload = () => {
+      let data: { url?: string; name?: string; message?: string } | null = null;
+      try {
+        data = JSON.parse(request.responseText);
+      } catch {
+        data = null;
+      }
+      if (request.status >= 200 && request.status < 300 && data?.url) {
+        onProgress(100);
+        resolve({ url: data.url, name: data.name || file.name });
+        return;
+      }
+      const error = new Error(data?.message || "") as CvUploadError;
+      error.code = "server";
+      reject(error);
+    };
+    request.onerror = () => {
+      const error = new Error("") as CvUploadError;
+      error.code = "network";
+      reject(error);
+    };
+    request.ontimeout = () => {
+      const error = new Error("") as CvUploadError;
+      error.code = "timeout";
+      reject(error);
+    };
+    request.send(file);
+  });
+}
+
 export function EditorialCareers({
   locale,
   jobs,
@@ -150,6 +207,7 @@ export function EditorialCareers({
   const [cvError, setCvError] = useState("");
   const [cvInvalid, setCvInvalid] = useState<BadField[]>([]);
   const [cvFileName, setCvFileName] = useState("");
+  const [cvProgress, setCvProgress] = useState(0);
   const cvFormRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -224,42 +282,28 @@ export function EditorialCareers({
       !file.name.toLowerCase().endsWith(".pdf")
     ) {
       bad.push("file");
+    } else if (file.size > CV_MAX_BYTES) {
+      bad.push("file");
     }
     setCvInvalid(bad);
     if (bad.length) {
+      const oversize = !!file && file.size > CV_MAX_BYTES;
       setCvError(
-        isEs
-          ? `Faltan ${bad.length === 1 ? "un dato" : `${bad.length} datos`}: revisa lo marcado en rojo.`
-          : `Missing ${bad.length === 1 ? "one field" : `${bad.length} fields`}: check what is marked in red.`,
+        oversize
+          ? isEs
+            ? "El CV no puede superar 10 MB. Guarda una versión más ligera y vuelve a intentarlo."
+            : "Your CV cannot exceed 10 MB. Save a lighter version and try again."
+          : isEs
+            ? `Faltan ${bad.length === 1 ? "un dato" : `${bad.length} datos`}: revisa lo marcado en rojo.`
+            : `Missing ${bad.length === 1 ? "one field" : `${bad.length} fields`}: check what is marked in red.`,
       );
       return;
     }
     setCvError("");
     setCvSending(true);
-    const timeoutMs = 20000;
+    setCvProgress(0);
     try {
-      const cvResponse = await fetch(
-        `/api/public/cv?name=${encodeURIComponent(file!.name)}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/pdf" },
-          body: file,
-          signal: AbortSignal.timeout(timeoutMs),
-        },
-      );
-      const cvData = (await cvResponse.json().catch(() => null)) as {
-        url?: string;
-        name?: string;
-        message?: string;
-      } | null;
-      if (!cvResponse.ok || !cvData?.url) {
-        throw new Error(
-          cvData?.message ||
-            (isEs
-              ? "No se pudo subir el currículum."
-              : "Could not upload your resume."),
-        );
-      }
+      const cvData = await uploadCv(file!, setCvProgress);
       const response = await fetch("/api/public/applications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -274,7 +318,7 @@ export function EditorialCareers({
           cvName: cvData.name || file!.name,
           cvUrl: cvData.url,
         }),
-        signal: AbortSignal.timeout(timeoutMs),
+        signal: AbortSignal.timeout(APPLICATION_TIMEOUT_MS),
       });
       const data = (await response.json().catch(() => null)) as {
         message?: string;
@@ -289,21 +333,29 @@ export function EditorialCareers({
       }
       setCvSubmitted(true);
     } catch (failure) {
+      const uploadError = failure as CvUploadError;
       const timedOut =
-        failure instanceof DOMException && failure.name === "TimeoutError";
+        (failure instanceof DOMException && failure.name === "TimeoutError") ||
+        uploadError?.code === "timeout";
+      const network = uploadError?.code === "network";
+      const message = failure instanceof Error ? failure.message : "";
       setCvError(
         timedOut
           ? isEs
-            ? "El envío ha tardado demasiado. Revisa tu conexión y vuelve a intentarlo."
-            : "The upload took too long. Check your connection and try again."
-          : failure instanceof Error
-            ? failure.message
-            : isEs
-              ? "No se pudo enviar la candidatura."
-              : "Could not send your application.",
+            ? "La subida ha tardado demasiado. Comprueba tu conexión o adjunta un CV más ligero."
+            : "The upload took too long. Check your connection or attach a lighter CV."
+          : network
+            ? isEs
+              ? "No pudimos subir tu CV. Revisa tu conexión y vuelve a intentarlo."
+              : "We could not upload your CV. Check your connection and try again."
+            : message ||
+              (isEs
+                ? "No se pudo enviar la candidatura."
+                : "Could not send your application."),
       );
     } finally {
       setCvSending(false);
+      setCvProgress(0);
     }
   }
 
@@ -1073,11 +1125,15 @@ export function EditorialCareers({
                   disabled={cvSending}
                 >
                   <i aria-hidden="true" />
-                  <span>
+                  <span aria-live="polite">
                     {cvSending
-                      ? isEs
-                        ? "Enviando…"
-                        : "Sending…"
+                      ? cvProgress > 0 && cvProgress < 100
+                        ? isEs
+                          ? `Subiendo CV… ${cvProgress}%`
+                          : `Uploading CV… ${cvProgress}%`
+                        : isEs
+                          ? "Enviando…"
+                          : "Sending…"
                       : isEs
                         ? "Enviar candidatura"
                         : "Submit application"}
