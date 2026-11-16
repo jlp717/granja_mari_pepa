@@ -536,6 +536,7 @@ async function enviarFacturaPorWhatsapp(req, res) {
       pdfBuffer,
       filename,
       caption,
+      fallbackText: caption,
     });
 
     if (!result.success) {

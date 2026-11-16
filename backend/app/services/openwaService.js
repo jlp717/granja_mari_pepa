@@ -60,7 +60,13 @@ async function getSession() {
   }
 }
 
-async function sendInvoiceDocument({ to, pdfBuffer, filename, caption }) {
+async function sendInvoiceDocument({
+  to,
+  pdfBuffer,
+  filename,
+  caption,
+  fallbackText,
+}) {
   const recipient = normalizePhone(to);
   if (!recipient) {
     return { success: false, code: 'NO_PHONE', message: 'El cliente no tiene un teléfono válido.' };
@@ -75,7 +81,8 @@ async function sendInvoiceDocument({ to, pdfBuffer, filename, caption }) {
       toMasked: maskPhone(recipient),
       fallbackUrl: buildWaMeLink(
         recipient,
-        'Hola, soy Pepa de Granja Maripepa. ¿Te envío tu factura por aquí?',
+        fallbackText ||
+          'Hola, le enviamos su factura de Granja Maripepa. ¿Nos confirma que puede recibir el PDF por WhatsApp?',
       ),
     };
   }
@@ -121,7 +128,8 @@ async function sendInvoiceDocument({ to, pdfBuffer, filename, caption }) {
         toMasked: maskPhone(recipient),
         fallbackUrl: buildWaMeLink(
           String(process.env.COMPANY_WHATSAPP || '34639778655').replace(/\D/g, ''),
-          'Hola, soy Pepa de Granja Maripepa. Necesito que me envieis mi factura por WhatsApp.',
+          fallbackText ||
+            'Hola, le enviamos su factura de Granja Maripepa. ¿Nos confirma que puede recibir el PDF por WhatsApp?',
         ),
       };
     }
