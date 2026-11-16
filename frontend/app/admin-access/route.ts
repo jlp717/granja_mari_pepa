@@ -23,7 +23,9 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const response = NextResponse.redirect(new URL("/admin", request.url));
+  const response = NextResponse.redirect(
+    new URL("/admin", "https://www.mari-pepa.com"),
+  );
   response.cookies.set(ADMIN_ACCESS_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

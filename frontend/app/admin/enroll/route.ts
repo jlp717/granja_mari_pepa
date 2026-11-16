@@ -18,8 +18,7 @@ export async function GET() {
   }
 
   const token = await createAdminAccessToken(secret);
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://www.mari-pepa.com";
-  const target = new URL("/admin-access", site);
+  const target = new URL("/admin-access", "https://www.mari-pepa.com");
   target.searchParams.set("t", token);
 
   const response = NextResponse.redirect(target);
