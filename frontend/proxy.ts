@@ -1,6 +1,10 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { locales, defaultLocale } from "./i18n";
+import {
+  ADMIN_ACCESS_COOKIE,
+  verifyAdminAccessToken,
+} from "./lib/admin-access";
 
 const intlMiddleware = createMiddleware({
   locales,
@@ -108,7 +112,7 @@ function denied(request: NextRequest, ip: string): NextResponse {
   });
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAdminPath =
     pathname === "/admin" ||
@@ -119,7 +123,22 @@ export function proxy(request: NextRequest) {
   if (isAdminPath) {
     const ip = clientIp(request);
     const noIpAllowed = process.env.NODE_ENV !== "production";
-    if (!isInternalIp(ip) && !(noIpAllowed && !ip)) return denied(request, ip);
+    const secret = process.env.ADMIN_ACCESS_SECRET || "";
+    const cookie = request.cookies.get(ADMIN_ACCESS_COOKIE)?.value || "";
+    const enrolled =
+      secret.length >= 32
+        ? await verifyAdminAccessToken(cookie, secret)
+        : false;
+    /* Direct LAN/VPN access carries no proxy headers: Cloudflare always adds
+     * Cf-Connecting-Ip and nginx adds X-Real-Ip. Port 3001 is only reachable
+     * from the private network. */
+    const direct =
+      !request.headers.has("cf-connecting-ip") &&
+      !request.headers.has("x-real-ip") &&
+      !request.headers.has("x-forwarded-for");
+    if (!isInternalIp(ip) && !enrolled && !direct && !(noIpAllowed && !ip)) {
+      return denied(request, ip);
+    }
     const response = NextResponse.next();
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
     return response;
