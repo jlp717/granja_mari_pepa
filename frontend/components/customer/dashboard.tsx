@@ -3441,7 +3441,7 @@ export function CustomerDashboard() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="flex h-[calc(100dvh-1rem)] max-h-[calc(100dvh-1rem)] w-full max-w-5xl flex-col overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl sm:h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-2rem)]"
+              className="flex h-[calc(100dvh_-_1rem)] max-h-[calc(100dvh_-_1rem)] w-full max-w-5xl flex-col overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl sm:h-[calc(100dvh_-_2rem)] sm:max-h-[calc(100dvh_-_2rem)]"
             >
               {/* Header - Responsive */}
               <div className="border-b border-[var(--line)] bg-[var(--ink-2)] p-3 text-foreground sm:p-4 flex shrink-0 flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
@@ -3511,7 +3511,7 @@ export function CustomerDashboard() {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed inset-0 flex items-center justify-center z-50 p-4"
             >
-              <div className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl">
+              <div className="max-h-[calc(100dvh_-_2rem)] w-[calc(100vw_-_2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl">
                 {/* Header */}
                 <div className="border-b border-[var(--line)] p-6">
                   <div className="flex items-start justify-between gap-4">
@@ -3622,7 +3622,7 @@ export function CustomerDashboard() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] p-6 shadow-2xl sm:p-8"
+              className="max-h-[calc(100dvh_-_2rem)] w-[calc(100vw_-_2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] p-6 shadow-2xl sm:p-8"
             >
               <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] pb-5 mb-6">
                 <div>
@@ -3923,7 +3923,7 @@ pedidos@granjamaripepa.com`}
                   stiffness: 300,
                   damping: 30
                 }}
-                className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] p-6 shadow-2xl sm:p-8"
+                className="max-h-[calc(100dvh_-_2rem)] w-[calc(100vw_-_2rem)] max-w-md overflow-y-auto border border-[var(--line)] bg-[var(--ink-2)] p-6 shadow-2xl sm:p-8"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="space-y-6">
