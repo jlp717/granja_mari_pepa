@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const CHECK_INTERVAL_MS = 2500;
+const CHECK_INTERVAL_MS = 15000;
 const REQUEST_TIMEOUT_MS = 2000;
 
 /**
@@ -26,7 +26,7 @@ export function AdminVpnGuard() {
         REQUEST_TIMEOUT_MS,
       );
       try {
-        const response = await fetch("/api/admin/overview", {
+        const response = await fetch("/api/admin/session", {
           cache: "no-store",
           credentials: "same-origin",
           signal: controller.signal,
