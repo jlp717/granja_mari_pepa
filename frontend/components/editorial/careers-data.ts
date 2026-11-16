@@ -1,9 +1,9 @@
-export type JobIcon =
-  | "warehouse"
-  | "truck"
-  | "sales"
-  | "admin"
-  | "quality";
+/**
+ * JOBS son datos de ejemplo para tipar/desarrollar; no se publican si la API
+ * no devuelve ofertas. Las páginas de empleo solo renderizan `live` y, si la
+ * API falla o no hay vacantes, muestran el estado vacío o `notFound()`.
+ */
+export type JobIcon = "warehouse" | "truck" | "sales" | "admin" | "quality";
 
 export interface JobDetail {
   label: string;

@@ -6,7 +6,24 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #04070a;
+  /* Base colour is the old flat #04070a. The gradients below keep the first
+     paint from being a dead black rectangle while frame 0 is still decoding. */
+  background-color: #04070a;
+  background-image:
+    radial-gradient(
+      120% 92% at 70% 16%,
+      rgba(255, 168, 88, 0.13) 0%,
+      rgba(255, 168, 88, 0.05) 34%,
+      transparent 62%
+    ),
+    radial-gradient(
+      96% 76% at 18% 26%,
+      rgba(30, 58, 78, 0.55) 0%,
+      rgba(12, 26, 38, 0.3) 48%,
+      transparent 78%
+    ),
+    linear-gradient(162deg, #0b1a26 0%, #0a141e 38%, #060c12 68%, #04070a 100%);
+  background-repeat: no-repeat;
 }
 
 .frame {
@@ -77,7 +94,11 @@
   pointer-events: none;
   mix-blend-mode: soft-light;
   background:
-    radial-gradient(88% 68% at 72% 28%, rgba(255, 168, 88, 0.1), transparent 62%),
+    radial-gradient(
+      88% 68% at 72% 28%,
+      rgba(255, 168, 88, 0.1),
+      transparent 62%
+    ),
     linear-gradient(180deg, rgba(9, 34, 52, 0.22), rgba(0, 0, 0, 0.1));
 }
 

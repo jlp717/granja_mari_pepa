@@ -1,0 +1,75 @@
+{
+  "status": "ok",
+  "node_id": "public",
+  "summary": "Implemented source-frozen V3 Home/Catalogue/SEO candidate with5locales,real editorial GET selection,SSR scene/brand fallback,foreground and peek assets,canonical OG1200x630,and55literallegalclauses. Whole TypeScript detector0; assetdelta lint blocked by ENOSPC. Runtime acceptance pending.",
+  "facts": [
+    {
+      "claim": "55 legal clauses retained with original message-file fingerprints; no messages changed.",
+      "evidence": [
+        {
+          "path": "docs/redesign/fuentes/legal-main.json",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "claim": "All 16 Latin-language family descriptions contain80–150words; Chinese descriptions retain full translated content.",
+      "evidence": [
+        {
+          "path": "docs/redesign/fuentes/public-checks.json",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "claim": "Actual pure family selection body passed24cases without network or copy mutation.",
+      "evidence": [
+        {
+          "path": "docs/redesign/fuentes/public-logic-checks.json",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "claim": "Prettier completed25ownedsourcefiles withEXIT0.",
+      "evidence": [
+        {
+          "path": "docs/redesign/fuentes/public-manifest.json",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/redesign/fuentes/public-manifest.json",
+      "sha256": "25f0953932dc1fa0ad55d0924da0d0c8e5883221fc64b000d0cb6f2b6dd35944"
+    },
+    {
+      "path": "docs/redesign/CONTENIDO-FUENTE.md"
+    },
+    {
+      "path": "docs/redesign/fuentes/legal-main.json"
+    },
+    {
+      "path": "docs/redesign/fuentes/public-validation.json"
+    },
+    {
+      "path": "docs/redesign/fuentes/mesa-title-proof.json"
+    },
+    {
+      "path": "docs/redesign/fuentes/asset-connection-proof.json"
+    },
+    {
+      "path": "docs/redesign/fuentes/public-delta-assets.json"
+    }
+  ],
+  "risks": [
+    "No current certification,SLA,realSKU,price or stock inferred.",
+    "Catalog remains gated; no fake detail route from static sample products.",
+    "No runtime,visual round,performance or production acceptance is claimed.",
+    "Latest asset delta focal ESLint stopped on ENOSPC; Root paused check processes. Earlier focal13files passed.",
+    "RootR1 had not visited; final source must be integrated before actual review."
+  ],
+  "confidence": 0.87
+}

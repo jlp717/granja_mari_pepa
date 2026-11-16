@@ -67,7 +67,8 @@ const es: HomeEditorialCopy = {
   ],
   origin: {
     kicker: "01 · Origen",
-    title: "Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar.",
+    title:
+      "Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar.",
     lead: "Nacimos en Lorca y crecimos con la hostelería del sureste. Hoy coordinamos Lorca y Viator para que producto, pedido y ruta hablen el mismo idioma.",
     points: [
       {
@@ -85,32 +86,32 @@ const es: HomeEditorialCopy = {
     ],
   },
   system: {
-    kicker: "02 · Cómo trabajamos",
-    title: "El pedido entra. La ruta sale. Tu cocina sigue.",
-    lead: "No vendemos una caja: organizamos producto, preparación y entrega para que el servicio de tu establecimiento no se pare.",
+    kicker: "02 · Capacidad",
+    title: "Tres temperaturas, un solo pedido.",
+    lead: "Congelado, refrigerado y ambiente conviven en la misma operación. 5.000 m³ de frío, más de 1.500 referencias y dos puntos de salida para que la cocina no se pare.",
     steps: [
       {
         index: "01",
-        title: "Consulta",
-        text: "Cuéntanos qué familia necesitas, para qué servicio y en qué localidad. La conversación empieza por tu cocina, no por un código.",
+        title: "5.000 m³",
+        text: "Capacidad frigorífica en la sede de Saprelorca. Congelado y refrigerado en el mismo circuito de preparación.",
       },
       {
         index: "02",
-        title: "Preparación",
-        text: "El pedido se prepara en cámara y se organiza por ruta. El almacén de Lorca coordina la salida con la delegación de Viator.",
+        title: "+1.500",
+        text: "Referencias en siete familias, de productos del mar a salsas y preparados.",
       },
       {
         index: "03",
-        title: "Ruta",
-        text: "La entrega se ajusta a la zona y al horario del establecimiento. El equipo confirma la organización antes de salir.",
+        title: "Dos sedes",
+        text: "Lorca y Viator comparten almacén, rutas y atención. Dos puntos de salida para Murcia, Almería y Alicante.",
       },
       {
         index: "04",
-        title: "Entrega",
-        text: "Albarán, firma de entrega y seguimiento de incidencias. Lo que ocurre en la puerta también forma parte del servicio.",
+        title: "24–48 h",
+        text: "Plazo habitual de entrega. Se confirma por pedido y zona antes de salir.",
       },
     ],
-    action: "Consultar mi zona",
+    action: "Consultar disponibilidad",
   },
   range: {
     kicker: "03 · La gama",
@@ -190,32 +191,32 @@ const en: HomeEditorialCopy = {
     ],
   },
   system: {
-    kicker: "02 · How we work",
-    title: "The order comes in. The route goes out. Your kitchen keeps moving.",
-    lead: "We do not sell a box: we organise product, preparation and delivery so your service does not stop.",
+    kicker: "02 · Capacity",
+    title: "Three temperatures, one single order.",
+    lead: "Frozen, chilled and ambient share the same operation. 5,000 m³ of cold storage, more than 1,500 references and two departure points so the kitchen never stops.",
     steps: [
       {
         index: "01",
-        title: "Conversation",
-        text: "Tell us which family you need, for which service and in which town. The conversation starts with your kitchen, not a code.",
+        title: "5,000 m³",
+        text: "Cold-storage capacity at the Saprelorca site. Frozen and chilled in the same preparation circuit.",
       },
       {
         index: "02",
-        title: "Preparation",
-        text: "The order is prepared in the cold room and organised by route. The Lorca warehouse coordinates departure with the Viator branch.",
+        title: "+1,500",
+        text: "References across seven families, from seafood to sauces and prepared dishes.",
       },
       {
         index: "03",
-        title: "Route",
-        text: "Delivery is arranged around the area and the venue's schedule. The team confirms the plan before leaving.",
+        title: "Two sites",
+        text: "Lorca and Viator share warehouse, routes and customer service. Two departure points for Murcia, Almería and Alicante.",
       },
       {
         index: "04",
-        title: "Delivery",
-        text: "Delivery note, signature and incident tracking. What happens at the door is part of the service too.",
+        title: "24–48 h",
+        text: "Usual delivery time. Confirmed per order and area before departure.",
       },
     ],
-    action: "Check my area",
+    action: "Check availability",
   },
   range: {
     kicker: "03 · The range",
@@ -261,6 +262,8 @@ const en: HomeEditorialCopy = {
   },
 };
 
-export function getHomeEditorialCopy(locale: Locale | string): HomeEditorialCopy {
+export function getHomeEditorialCopy(
+  locale: Locale | string,
+): HomeEditorialCopy {
   return locale === "es" ? es : en;
 }

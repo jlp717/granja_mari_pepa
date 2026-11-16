@@ -8,13 +8,12 @@ export const SUPPORT_EN = {
         id: "gama",
         title: "The range",
         scene: 0,
-        intro:
-          "Seven families across frozen, chilled and bakery products.",
+        intro: "Seven families across frozen, chilled and ambient.",
         questions: [
           {
             question: "What products does Granja Maripepa distribute?",
             answer:
-              "Frozen, chilled and ambient products for hospitality, restaurants and catering. The range is organised into seafood, meat, prepared dishes and pastry, with Grupo Topgel, Froneri (Nestlé Helados) and Panamar.",
+              "Frozen, chilled and ambient products for hospitality, catering and collective catering. The range is organised into seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. We are the official distributor of Grupo Topgel and Nestlé Helados, and we work with Panamar, Okin and Pastelería Amparín.",
           },
           {
             question: "Where can I see the families and references?",
@@ -22,9 +21,14 @@ export const SUPPORT_EN = {
               "On the range page you can browse the seven families. For a specific reference, give us its name or format and we will send you its information.",
           },
           {
-            question: "Do photos and magazines show the exact product?",
+            question: "Do the photos and magazines show the exact product?",
             answer:
-              "Images guide you on the family or presentation. The reference sheet is what confirms ingredients, format and storage.",
+              "The images guide you on the family or the presentation. The reference sheet is what confirms ingredients, format and storage.",
+          },
+          {
+            question: "What does the Grupo Topgel network add?",
+            answer:
+              "Granja Maripepa is a partner-delegation of Grupo Topgel. That network completes the range with references that are not held at the Saprelorca warehouse, while attention and delivery stay in Lorca.",
           },
         ],
       },
@@ -33,7 +37,7 @@ export const SUPPORT_EN = {
         title: "Orders and delivery",
         scene: 2,
         intro:
-          "Coverage and schedules are confirmed for each town and each order.",
+          "Coverage and schedule are confirmed for each town and each order.",
         questions: [
           {
             question: "How do I place an order?",
@@ -43,7 +47,7 @@ export const SUPPORT_EN = {
           {
             question: "Do you deliver to my town?",
             answer:
-              "We work in Murcia and Almería from Lorca and Viator. Give us your full address and the team will confirm coverage and conditions for that destination.",
+              "We deliver in Murcia, Almería and Alicante from Lorca and Viator. Give us your full address and the team will confirm coverage and conditions for that destination.",
           },
           {
             question: "Can I change or review a delivery?",
@@ -56,8 +60,7 @@ export const SUPPORT_EN = {
         id: "documentacion",
         title: "Product and documentation",
         scene: 3,
-        intro:
-          "The information for each reference is confirmed with the team.",
+        intro: "The information for each reference is checked with the team.",
         questions: [
           {
             question: "Can I see ingredients, allergens and storage?",
@@ -72,7 +75,7 @@ export const SUPPORT_EN = {
           {
             question: "Can I use the magazines to place an order?",
             answer:
-              "The magazines are dated catalogues for reference. If a product interests you, confirm with the team that it is still available and its current conditions.",
+              "Each magazine is a reference catalogue with its publication date. If a reference interests you, confirm with the team that it is still available and its current conditions.",
           },
         ],
       },
@@ -80,8 +83,7 @@ export const SUPPORT_EN = {
         id: "contacto",
         title: "Contact and opening hours",
         scene: 4,
-        intro:
-          "Telephones, email and address to speak to people.",
+        intro: "Telephones, email and address to speak to people.",
         questions: [
           {
             question: "Which telephone numbers are published?",
@@ -90,13 +92,22 @@ export const SUPPORT_EN = {
           },
           {
             question: "What are the opening hours?",
-            answer:
-              "Monday to Friday, 8:00–13:00 and 16:00–19:00.",
+            answer: "Monday to Friday, 8:00–13:00 and 16:00–19:00.",
           },
           {
             question: "Where is the head office?",
             answer:
-              "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. The Viator branch is at Calle Sierra de Ronda, 26, Polígono La Juaida, Almería.",
+              "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. The Viator branch is at Calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, Almería.",
+          },
+          {
+            question: "What is the Viator branch?",
+            answer:
+              "The second site, in Almería. It is at Calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, and it brings the operation and delivery closer to the area. Its telephone numbers are 950 97 34 29 and 670 49 01 47.",
+          },
+          {
+            question: "Is the Lorca head office going to be expanded?",
+            answer:
+              "In 2026 the planning for plots D2 and D3 in Saprelorca was approved to group and expand the facilities across 8,953 m². The project remains under way: there is no opening date and no published investment figure.",
           },
         ],
       },
@@ -104,23 +115,22 @@ export const SUPPORT_EN = {
         id: "revistas",
         title: "Magazines",
         scene: 1,
-        intro:
-          "Dated publications with product, campaign and menu ideas.",
+        intro: "Dated publications with product, campaign and menu ideas.",
         questions: [
           {
             question: "Where are the magazines?",
             answer:
-              "In the header library and on the range page. You can open them in the viewer, turn the pages and download the PDF.",
+              "In the menu, under Magazines, and on the Products page. You can open them in the viewer, turn the pages and download the PDF.",
           },
           {
             question: "Are the editions updated?",
             answer:
-              "Yes. Active magazines are managed from the internal panel and appear on the website once published.",
+              "Yes. The website shows the published editions. If you are looking for an earlier edition, ask us for it and we will send it to you.",
           },
           {
             question: "Can I request a printed magazine?",
             answer:
-              "Ask the team by phone or email. The digital version is always available on the website.",
+              "Check with the team by phone or email. The digital version is always available on the website.",
           },
         ],
       },
@@ -128,8 +138,7 @@ export const SUPPORT_EN = {
         id: "clientes",
         title: "Customer area",
         scene: 5,
-        intro:
-          "Orders, invoices and documents in a private space.",
+        intro: "Orders, invoices and documents in a private space.",
         questions: [
           {
             question: "Do I need an account to browse the range?",
@@ -144,7 +153,7 @@ export const SUPPORT_EN = {
           {
             question: "What should I do if I cannot find an invoice?",
             answer:
-              "Check the customer area and, if it is not there, write to us with the invoice number or period. The team will locate it with you.",
+              "Check the customer area and, if it is not there, write to us with the invoice number or the period. The team will locate it with you.",
           },
         ],
       },
@@ -152,23 +161,23 @@ export const SUPPORT_EN = {
     seo: {
       title: "Frequently asked questions | Granja Maripepa",
       description:
-        "Answers about the range, orders, delivery, documentation, magazines and the Granja Maripepa customer area in Lorca and Viator.",
+        "Answers about the range, orders, delivery, product documentation, magazines and customer area of Granja Maripepa in Lorca and Viator, Murcia and Almería.",
     },
   },
   contact: {
-    title: "Let's talk about your kitchen.",
+    title: "Contact.",
     intro:
-      "Choose how you prefer to talk. If you want, prepare the message first with your establishment details.",
-    channelTitle: "A real channel, your choice.",
+      "Channels, opening hours and addresses to talk to the team. The form does not send on its own: it prepares the message and you decide when and how to send it.",
+    channelTitle: "Talk to a person.",
     prepareTitle: "Prepare your enquiry.",
     prepareIntro:
-      "Complete the details and choose email, WhatsApp or copy. You review the message before sending it; the website does not send it on its own.",
+      "Complete the details and choose email, WhatsApp or copy. You review the message before sending it.",
     hoursTitle: "Opening hours.",
     hoursBody:
-      "Monday to Friday, 8:00–13:00 and 16:00–19:00. For a visit or a specific operation, confirm with the team beforehand.",
-    locationsTitle: "Lorca, the starting point.",
+      "Monday to Friday, 8:00–13:00 and 16:00–19:00. For a visit, confirm with the team beforehand.",
+    locationsTitle: "Two addresses.",
     locationsBody:
-      "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. The Viator branch is at Calle Sierra de Ronda, 26, Polígono La Juaida, Almería.",
+      "Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería.",
     questionsTitle: "Before you write.",
     call: "Call",
     email: "Open email",
@@ -180,28 +189,29 @@ export const SUPPORT_EN = {
     preview: "Preview of your enquiry",
     privacyLink: "Read the privacy policy",
     validation: "Check the marked fields before preparing the enquiry.",
-    prepared: "Enquiry ready. Complete the sending in the channel you choose.",
+    prepared:
+      "Enquiry prepared. Complete the sending in the channel you choose.",
     questions: [
       {
         question: "Does the form send the message?",
         answer:
-          "No. Prepare the text and open email or WhatsApp. You decide when to send it and can review it first.",
+          "No. It prepares the text and opens email or WhatsApp. You decide when to send it and can review it first.",
       },
       {
-        question: "Can I ask about product and delivery?",
+        question: "What do I include in the enquiry?",
         answer:
-          "Yes. Give the family or reference, your town and what you need to confirm. If you do not know the format, describe its use.",
+          "Your establishment, the town and the family or reference you are interested in. If you do not know the format, describe the use. That is enough to start.",
       },
       {
-        question: "Where is the head office?",
+        question: "Which channel do I choose?",
         answer:
-          "In the Saprelorca industrial estate in Lorca. The full address and map are on this page.",
+          "For orders and urgent matters, the phone. To send details or a detailed enquiry, email. WhatsApp is good for a quick conversation. Any of the three reaches the team.",
       },
     ],
     seo: {
-      title: "Contact | Granja Maripepa in Lorca and Viator",
+      title: "Contact and opening hours | Granja Maripepa",
       description:
-        "Telephones 968 46 75 14 and 639 77 86 55, email, WhatsApp, Monday to Friday opening hours and address in the Saprelorca estate, Lorca.",
+        "Telephones 968 46 75 14 and 639 77 86 55, email, WhatsApp, Monday to Friday opening hours and addresses in Lorca and Viator to talk to Granja Maripepa.",
     },
   },
   ui: {

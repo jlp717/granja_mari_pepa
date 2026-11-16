@@ -1,943 +1,947 @@
 {
-    "header": {
-        "top_bar": {
-            "location": "Murcia • Almería",
-            "tagline": "Spezialisierter Vertrieb seit 1966",
-            "tagline_short": "Spezialisierter Vertrieb",
-            "quality": "Premium Qualität"
-        },
-        "brands_title": "Unsere Marken",
-        "view_all_products": "Alle Produkte ansehen",
-        "cart_label": "Warenkorb ({count})",
-        "close_menu": "Menü schließen",
-        "open_menu": "Menü öffnen",
-        "you_are_here": "Sie befinden sich hier",
-        "browsing": "Durchsuchen",
-        "help_title": "Brauchen Sie Hilfe?",
-        "help_text": "Unser Expertenteam steht Ihnen zur Verfügung, um Sie bei Produkten und Bestellungen zu beraten.",
-        "call_cta": "Anrufe und WhatsApp",
-        "contact_now": "Jetzt kontaktieren",
-        "excellence_msg": "Über 55 Jahre Exzellenz im HORECA-Service.",
-        "categories": {
-            "sea": "Meeresfrüchte",
-            "meat": "Fleisch",
-            "precooked": "Vorgekocht",
-            "pastry": "Gebäck",
-            "dairy": "Molkereiprodukte",
-            "cereals": "Getreide",
-            "chocolate": "Schokolade",
-            "fresh_fish": "Frischer Fisch",
-            "seafood_shell": "Schalentiere",
-            "seafood": "Mariscos"
-        }
+  "header": {
+    "top_bar": {
+      "location": "Murcia • Almería",
+      "tagline": "Spezialisierter Vertrieb seit 1966",
+      "tagline_short": "Spezialisierter Vertrieb",
+      "quality": "Premium Qualität"
     },
-    "nav": {
-        "home": "Startseite",
-        "products": "Produkte",
-        "about": "Über uns",
-        "contact": "Kontakt",
-        "customerArea": "Kundenbereich",
-        "openMenu": "Menü öffnen",
-        "closeMenu": "Menü schließen"
-    },
-    "categories_section": {
-        "premium_catalog": "PREMIUM KATALOG",
-        "our_products_1": "UNSERE",
-        "our_products_2": "PRODUKTE",
-        "description": "Entdecken Sie unsere Premium-Auswahl an Lebensmitteln, sorgfältig ausgewählt, um höchste Qualitätsstandards zu erfüllen",
-        "featured": "Hervorgehoben",
-        "view_catalog": "Katalog ansehen",
-        "view_catalog_topgel": "Katalog Grupo Topgel ansehen"
-    },
-    "distributors_section": {
-        "official_partners": "OFFIZIELLE PARTNER",
-        "title_part1": "MARKEN, DIE WIR",
-        "title_part2": "VERTREIBEN",
-        "partners_description": "Wir arbeiten mit den <strong1>Marktführern im Lebensmittelbereich</strong1> zusammen, um Ihnen Produkte von <strong2>höchster Qualität</strong2> und Prestige anzubieten.",
-        "interested_text": "Interessiert an unseren Produkten?",
-        "request_info": "Informationen anfordern",
-        "view_products": "Produkte ansehen"
-    },
-    "common": {
-        "home": "Startseite",
-        "products": "Produkte",
-        "brands": "Marken",
-        "about": "Über uns",
-        "contact": "Kontakt",
-        "customerArea": "Kundenbereich",
-        "login": "Anmelden",
-        "logout": "Abmelden",
-        "loading": "Laden...",
-        "error": "Fehler",
-        "success": "Erfolg",
-        "cancel": "Abbrechen",
-        "confirm": "Bestätigen",
-        "save": "Speichern",
-        "back": "Zurück",
-        "next": "Weiter",
-        "search": "Suchen",
-        "noResults": "Keine Ergebnisse",
-        "viewMore": "Mehr anzeigen",
-        "explore": "Entdecken",
-        "learnMore": "Mehr erfahren",
-        "close": "Schließen",
-        "send": "Senden",
-        "download": "Herunterladen",
-        "continue": "Weiter",
-        "required": "Erforderlich",
-        "optional": "Optional",
-        "premium": "PREMIUM",
-        "view_products": "Produkte ansehen",
-        "specialties": {
-            "seafood": "Meeresfrüchte",
-            "meats": "Ausgewähltes Fleisch",
-            "precooked": "Vorgekochte Gerichte",
-            "pastry": "Gebäck",
-            "ice_cream_hospitality": "Gastronomie-Eis",
-            "tubs": "Becher",
-            "frozen_desserts": "Tiefkühldesserts",
-            "frozen_bread": "Tiefkühlbrot",
-            "fermented_dough": "Gärungsteige",
-            "specialties": "Spezialitäten"
-        }
-    },
-    "hero": {
-        "title": "GRANJA MARIPEPA",
-        "subtitle": "Tiefkühl-, Kühl- und Eisprodukte für HORECA",
-        "cta": "Kontaktieren Sie uns",
-        "since": "Seit 1966",
-        "description": "Umfassende Lebensmittellösungen für Profis. Spezialisten für Premium-Fleisch, Fisch und vorgekochte Produkte.",
-        "viewProducts": "Produkte ansehen",
-        "contactUs": "Kontaktieren Sie uns",
-        "explore_products": "Produkte entdecken",
-        "contact_us": "Kontaktieren Sie uns",
-        "scroll_down": "Nach unten scrollen"
-    },
-    "products": {
-        "title": "UNSERE PRODUKTE",
-        "subtitle": "Entdecken Sie unsere Premium-Lebensmittelauswahl, sorgfältig ausgewählt, um höchste Qualitätsstandards zu erfüllen",
-        "premium": "PREMIUM",
-        "seaProducts": "Meeresfrüchte",
-        "seaDescription": "Tiefkühlfisch und Meeresfrüchte in Premium-Qualität",
-        "meat": "Fleisch",
-        "meatDescription": "Ausgewähltes Tiefkühlfleisch",
-        "precooked": "Vorgekocht",
-        "precookedDescription": "Zubereitetes und tiefgekühltes Gemüse",
-        "pastry": "Gebäck",
-        "pastryDescription": "Tiefgekühlte Süßwaren und Desserts",
-        "viewCatalog": "Katalog ansehen",
-        "explore": "Entdecken",
-        "categories": "Kategorien",
-        "allProducts": "Alle Produkte",
-        "frozen": "Tiefgekühlt",
-        "refrigerated": "Gekühlt",
-        "iceCream": "Eiscreme"
-    },
-    "brands": {
-        "title": "MARKEN, DIE WIR VERTREIBEN",
-        "subtitle": "Wir arbeiten mit Branchenführern zusammen, um Ihnen Produkte von höchster Qualität und Prestige anzubieten.",
-        "viewProducts": "Produkte ansehen",
-        "frozenPremium": "Premium Tiefkühlkost",
-        "iceCreamPremium": "Premium Eiscreme",
-        "bakery": "Bäckerei",
-        "grupo-topgel": {
-            "name": "Grupo Topgel",
-            "category": "Premium Tiefkühlkost",
-            "detailed": "Führend im Vertrieb von Tiefkühlprodukten: Fisch, Meeresfrüchte, Fleisch, vorgekochte Gerichte und Premium-Gebäck."
-        },
-        "nestle": {
-            "name": "Nestlé",
-            "category": "Premium Eiscreme",
-            "detailed": "Granja Maripepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
-        },
-        "panamar": {
-            "name": "Panamar",
-            "category": "Bäckerei",
-            "detailed": "Spezialisten für hochwertige Tiefkühlbackwaren für Gastronomie und Restauration."
-        },
-        "interested": "Interessiert an unseren Produkten?",
-        "requestInfo": "Informationen anfordern"
-    },
-    "contact_page": {
-        "hero": {
-            "badge": "Direkter Kontakt",
-            "title": "Lassen Sie uns sprechen",
-            "subtitle_1": "Wir sind hier, um",
-            "subtitle_highlight": "zuzuhören",
-            "subtitle_2": "und Ihnen zu helfen",
-            "description": "Unser Expertenteam steht bereit, um Ihre Fragen zu beantworten, Lösungen anzupassen und Sie auf jedem Schritt zum Erfolg zu begleiten.",
-            "cta_send": "Nachricht senden"
-        },
-        "channels": {
-            "title_1": "Verbinden Sie sich",
-            "title_2": "mit uns",
-            "description": "Mehrere Kommunikationskanäle, damit Sie den wählen können, der am besten zu Ihnen passt",
-            "murcia": {
-                "title": "Delegation Murcia",
-                "desc": "Lorca - Hauptsitz"
-            },
-            "email": {
-                "title": "Bestell-E-Mail",
-                "desc": "Anfragen und Bestellungen"
-            },
-            "almeria": {
-                "title": "Delegation Almería",
-                "desc": "Viator"
-            }
-        },
-        "schedule": {
-            "title": "Kundenservice-Zeiten",
-            "days": "Montag - Freitag",
-            "hours": "8:00 - 13:00 und 16:00 - 19:00",
-            "after_hours": "Telefone außerhalb der Geschäftszeiten"
-        },
-        "form_section": {
-            "title_1": "Erzählen Sie uns von",
-            "title_2": "Ihrem Projekt",
-            "description": "Jedes Unternehmen ist einzigartig. Teilen Sie uns Ihre Bedürfnisse mit und wir erstellen eine personalisierte Lösung, die Ihr Wachstum fördert.",
-            "stats": {
-                "delivery": "Garantierte Lieferung",
-                "quality": "Zertifizierte Qualität",
-                "foundation": "Gründungsjahr",
-                "experience": "Jahre Erfahrung"
-            },
-            "form_title": "Senden Sie uns Ihre Nachricht",
-            "form_subtitle": "Wir werden so schnell wie möglich antworten",
-            "labels": {
-                "name": "Vollständiger Name *",
-                "company": "Unternehmen *",
-                "email": "E-Mail *",
-                "phone": "Telefon *",
-                "message": "Nachricht *",
-                "privacy": "Ich akzeptiere die Datenschutzrichtlinie *",
-                "privacy_desc": "Mit dem Absenden dieses Formulars akzeptieren Sie, dass wir Ihre Daten bearbeiten, um Ihre Anfrage zu beantworten."
-            },
-            "placeholders": {
-                "name": "Ihr Name",
-                "company": "Ihr Unternehmensname",
-                "email": "sie@email.com",
-                "phone": "+34 XXX XXX XXX",
-                "message": "Erzählen Sie uns, wie wir Ihnen helfen können..."
-            },
-            "errors": {
-                "name": "Name muss mindestens 2 Zeichen haben",
-                "company": "Unternehmen muss mindestens 2 Zeichen haben",
-                "email": "Ungültige E-Mail",
-                "phone": "Ungültiges Telefon",
-                "message": "Nachricht muss mindestens 10 Zeichen haben",
-                "privacy": "Sie müssen die Datenschutzrichtlinie akzeptieren"
-            },
-            "success": "Nachricht erfolgreich gesendet! Wir werden Sie bald kontaktieren.",
-            "submit": "Nachricht senden",
-            "sending": "Senden..."
-        },
-        "locations": {
-            "title_1": "Unsere",
-            "title_2": "Standorte",
-            "description": "Präsent in den wichtigsten Städten Südostspaniens, um näher bei Ihnen zu sein",
-            "main_delegation": "Hauptdelegation",
-            "active": "Aktiv",
-            "address": "Adresse",
-            "phone": "Telefon",
-            "view_globe": "Auf dem Globus anzeigen"
-        },
-        "globe": {
-            "title": "Interaktiver 3D-Globus",
-            "subtitle": "Klicken Sie auf Standorte für ein immersives Erlebnis",
-            "click_points_hint": "Klicken Sie auf die Punkte für ein immersives Erlebnis",
-            "view_maps": "Auf Karten anzeigen",
-            "sede_murcia": "Hauptsitz in Murcia",
-            "delegation_andalucia": "Handelsdelegation in Andalusien"
-        },
-        "cta_final": {
-            "title_1": "Bereit zu",
-            "title_2": "starten?",
-            "description": "Unser Team ist bereit, Ihnen zu helfen, die besten Lösungen für Ihr Unternehmen zu finden. Der erste Schritt ist so einfach wie ein Anruf.",
-            "whatsapp": "WhatsApp",
-            "guarantees": {
-                "delivery": {
-                    "text": "Lieferung 24-48h",
-                    "desc": "Kühlkette garantiert"
-                },
-                "support": {
-                    "text": "Personalisierte Betreuung",
-                    "desc": "HORECA-Spezialisten"
-                },
-                "quality": {
-                    "text": "ISO 9001 Qualität",
-                    "desc": "Zertifizierte Garantie"
-                }
-            }
-        },
-        "whatsapp_message": "Hallo! Ich möchte weitere Informationen über Ihre Produkte erhalten."
-    },
-    "about_page": {
-        "hero": {
-            "title": "Granja Maripepa",
-            "subtitle_1": "Mehr als",
-            "subtitle_highlight": "55 Jahre",
-            "subtitle_2": "im Dienst des HORECA-Sektors",
-            "description": "Seit 1966 in Lorca (Murcia) sind wir Spezialisten für den Vertrieb von tiefgekühlten, gekühlten und ungekühlten Produkten für Gastronomie, Catering und Lebensmitteldienstleistungen.",
-            "cta_history": "Entdecken Sie unsere Geschichte",
-            "cta_contact": "Jetzt kontaktieren"
-        },
-        "history": {
-            "title_1": "Unsere",
-            "title_2": "Geschichte",
-            "description": "Mehr als fünf Jahrzehnte Erfahrung und Engagement für Qualität im Lebensmittelsektor",
-            "milestones": {
-                "1966": {
-                    "title": "Gegründet in Lorca (Murcia)",
-                    "desc": "Granja Maripepa, S.L. wurde in Lorca (Murcia) gegründet und spezialisierte sich von Anfang an auf den HORECA-Markt und den Lebensmittelkanal."
-                },
-                "2020": {
-                    "title": "100% Grüne Energie",
-                    "desc": "Zertifizierung von Feníe Energía und CNMC, dass unsere Energie zu 100% aus erneuerbaren Quellen stammt."
-                },
-                "1980s": {
-                    "title": "Regionale Konsolidierung",
-                    "desc": "Erweiterung des Sortiments an tiefgekühlten, gekühlten und ungekühlten Produkten für Gastronomie und Catering."
-                },
-                "2000s": {
-                    "title": "ISO 9001 Zertifizierung",
-                    "desc": "Erhalt der ISO 9001:2008 Zertifizierung, die unser Qualitätsmanagementsystem garantiert."
-                },
-                "today": {
-                    "title": "Mehr als 1.500 Referenzen",
-                    "desc": "Derzeit haben wir ein Sortiment von mehr als 1.500 Referenzen in drei Temperaturen und bedienen Murcia und Alicante."
-                }
-            }
-        },
-        "delegations": {
-            "title": "Unsere Delegationen",
-            "description": "Nachfolgend finden Sie die offizielle Adresse unseres Hauptsitzes in Lorca (Murcia).",
-            "view_maps": "Auf Google Maps anzeigen"
-        },
-        "values": {
-            "title_1": "Unsere",
-            "title_2": "Werte",
-            "description": "Die Säulen, die unsere Exzellenz stützen und unsere Arbeitsweise jeden Tag definieren",
-            "items": {
-                "quality": {
-                    "title": "Zertifizierte Qualität",
-                    "desc": "Qualitätsgarantie unterstützt durch ISO 9001 Standard. Rückverfolgbarkeit aller unserer Produkte.",
-                    "label": "Qualitätszertifizierung"
-                },
-                "service": {
-                    "title": "Schneller Service",
-                    "desc": "24-48 Stunden Lieferservice unter Einhaltung der Kühlkette zu jeder Zeit.",
-                    "label": "Lieferzeit"
-                },
-                "coverage": {
-                    "title": "Regionale Abdeckung",
-                    "desc": "Service in Murcia und Alicante mit strategischer Delegation in Lorca.",
-                    "label": "Bediente Provinzen"
-                },
-                "attention": {
-                    "title": "Personalisierte Betreuung",
-                    "desc": "Hochqualifiziertes Team, das den Markt und das HORECA-Produkt kennt.",
-                    "label": "Jahre Erfahrung"
-                }
-            }
-        },
-        "commitment": {
-            "title_1": "Unser",
-            "title_2": "Engagement",
-            "description": "Was uns unterscheidet und warum unsere Kunden uns seit mehr als 55 Jahren vertrauen",
-            "offer_title": "Was wir bieten",
-            "items": {
-                "quality": "Qualitätsgarantie, unterstützt durch ISO 9001 Standard",
-                "traceability": "Rückverfolgbarkeit aller unserer Produkte",
-                "delivery": "Lieferservice in 24 – 48 Stunden",
-                "service": "Service in Murcia und Alicante",
-                "attention": "Personalisierte Betreuung",
-                "capacity": "Kühlkapazität von 5.000m³"
-            },
-            "stats": {
-                "title": "Granja Maripepa in Zahlen",
-                "founded_label": "Gründungsjahr",
-                "references_label": "Produktreferenzen",
-                "capacity_label": "Kühlkapazität",
-                "temps_label": "Temperaturen (tiefgekühlt, gekühlt, ungekühlt)"
-            }
-        },
-        "certifications": {
-            "title_1": "Zertifizierungen",
-            "title_2": "& Qualität",
-            "description": "Unser Engagement für höchste Standards an Qualität und Lebensmittelsicherheit",
-            "items": {
-                "iso": {
-                    "name": "ISO 9001:2008",
-                    "desc": "Qualitätsmanagementsystem",
-                    "label": "Zertifiziert"
-                },
-                "green": {
-                    "name": "100% Grüne Energie",
-                    "desc": "Feníe Energía + CNMC",
-                    "label": "Erneuerbar"
-                },
-                "traceability": {
-                    "name": "Totale Rückverfolgbarkeit",
-                    "desc": "Produktkontrolle",
-                    "label": "Garantie"
-                },
-                "cold_chain": {
-                    "name": "Kühlkette",
-                    "desc": "5.000m³ Kühlkapazität",
-                    "label": "Zertifiziert"
-                }
-            },
-            "process": {
-                "title": "Qualitätskontrollprozess",
-                "description": "Von der Annahme bis zur Lieferung wird jeder Schritt kontrolliert",
-                "steps": {
-                    "reception": {
-                        "title": "Annahme",
-                        "desc": "Temperatur- und Qualitätskontrolle bei Erhalt"
-                    },
-                    "inspection": {
-                        "title": "Inspektion",
-                        "desc": "Umfassende Überprüfung aller Produkte"
-                    },
-                    "certification": {
-                        "title": "Zertifizierung",
-                        "desc": "Kennzeichnung und Registrierung gemäß Vorschriften"
-                    },
-                    "distribution": {
-                        "title": "Vertrieb",
-                        "desc": "Lieferung mit garantierter Kühlkette"
-                    }
-                }
-            }
-        },
-        "strategy": {
-            "title_1": "Unsere",
-            "title_2": "Geschäftsstrategie",
-            "description": "Der Exzellenz im Service für den HORECA-Sektor verpflichtet",
-            "mission": {
-                "title": "Unsere Mission",
-                "item_1": "Unterstützung der Gastronomie durch den Vertrieb ausgewählter Produkte von höchster Qualität.",
-                "item_2": "Stets nach Innovation suchen, um die Anforderungen des Endkunden zu erfüllen.",
-                "item_3": "Die Aufgabe des Küchenprofis erleichtern."
-            },
-            "vision": {
-                "title": "Unsere Vision",
-                "item_1": "Anspruchsvollere und informiertere Kunden verlangen höhere Qualität bei Produkten und Dienstleistungen.",
-                "item_2": "Die Auswahl der professionellen Unterstützung, die diese Erwartungen erfüllt, kann den Unterschied ausmachen.",
-                "item_3": "Unser Ziel ist es, diese Unterstützung für den HORECA-Kanal zu sein."
-            }
-        },
-        "reviews": {
-            "badge": "Google Bewertungen",
-            "title_1": "Was",
-            "title_highlight": "unsere Kunden sagen",
-            "description": "Die Meinung derer, die Granja Maripepa für ihr Geschäft vertrauen",
-            "antonio_review": {
-                "text": "Dieses Unternehmen vertreibt alle Arten von Tiefkühlkost, Eiscreme und unzählige Produkte. Wenn Sie Qualitätsprodukte und eine außergewöhnliche Behandlung wünschen, suchen Sie nicht weiter. Das beste Unternehmen, das ich in seiner Branche kenne.",
-                "role": "8 Bewertungen · Local Guide"
-            },
-            "view_all": {
-                "title": "Alle Bewertungen ansehen",
-                "subtitle": "Lesen Sie die 18 Meinungen unserer Kunden auf Google Maps",
-                "link": "In Google Maps öffnen"
-            },
-            "summary": {
-                "rating_label": "Google Bewertung",
-                "reviews_label": "Kundenbewertungen",
-                "write_review": "Bewertung schreiben"
-            }
-        },
-        "cta_final": {
-            "title_1": "Bereit zur",
-            "title_highlight": "Zusammenarbeit",
-            "title_suffix": "?",
-            "description": "Schließen Sie sich den HORECA-Betrieben an, die Granja Maripepa vertrauen, um ihren Kunden in Murcia und Alicante zertifizierte Qualitätsprodukte zu bringen.",
-            "contact": "Jetzt kontaktieren",
-            "catalog": "Katalog ansehen"
-        }
-    },
-    "customerArea": {
-        "title": "Kundenbereich",
-        "welcome": "Willkommen in Ihrem",
-        "welcomeHighlight": "Persönlichen Bereich",
-        "description": "Greifen Sie auf Ihr personalisiertes Kontrollpanel zu, um Bestellungen zu verwalten, Rechnungen herunterzuladen und vieles mehr mit absolutem Komfort.",
-        "exclusiveBadge": "Exklusiver Kundenbereich",
-        "login": {
-            "title": "Anmelden",
-            "subtitle": "Zugang mit Ihren Anmeldedaten",
-            "clientCode": "Kundencode",
-            "clientCodePlaceholder": "z.B. 0123456789",
-            "password": "Passwort",
-            "passwordPlaceholder": "Ihr Passwort",
-            "forgotPassword": "Passwort vergessen?",
-            "accessButton": "Zugreifen",
-            "loggingIn": "Anmelden...",
-            "needHelp": "Brauchen Sie Hilfe?",
-            "contactSupport": "Support kontaktieren",
-            "needAccount": "Brauchen Sie ein Konto?",
-            "contactUs": "Kontaktieren Sie uns",
-            "contactToast": "📞 Kontaktieren Sie uns\\n\\nTelefon: +34 968 46 75 14\\nE-Mail: pedidos@granjamaripepa.com\\nÖffnungszeiten: Mo-Fr 9:00-18:00"
-        },
-        "emailSetup": {
-            "title": "Kontakteinstellungen",
-            "subtitle": "Para tu seguridad, necesitamos tus datos de contacto.",
-            "data_usage": "Uso de tus datos:",
-            "data_usage_desc": "Nur zur Passwortwiederherstellung und zum Rechnungsversand. Wir geben diese Informationen nicht weiter.",
-            "email": "Email",
-            "phone": "Telefon",
-            "save": "Guardar y Continuar",
-            "saving": "Guardando..."
-        },
-        "features": {
-            "history": "Historial completo",
-            "historyDesc": "Todos tus pedidos organizados",
-            "security": "Datos seguros",
-            "securityDesc": "Garantierter Schutz",
-            "priority": "Acceso prioritario",
-            "priorityDesc": "Ofertas y novedades exclusivas"
-        },
-        "dashboard": {
-            "welcome": "Willkommen",
-            "invoices": "Rechnungen",
-            "invoicesDesc": "Rechnungen einsehen und herunterladen",
-            "orders": "Bestellungen",
-            "ordersDesc": "Bestellverlauf",
-            "profile": "Profil",
-            "profileDesc": "Daten verwalten",
-            "ivaBook": "MwSt-Buch",
-            "ivaBookDesc": "Quartalsweise MwSt-Übersicht",
-            "downloadPdf": "PDF herunterladen",
-            "viewAll": "Alle anzeigen",
-            "noInvoices": "Keine aktuellen Rechnungen",
-            "lastInvoices": "Letzte Rechnungen",
-            "totalPending": "Ausstehender Gesamtbetrag",
-            "logout": "Abmelden",
-            "loadingPanel": "Dein Panel wird geladen",
-            "logoutConfirm": "Möchten Sie sich wirklich abmelden?",
-            "logoutSuccess": "Sitzung erfolgreich beendet",
-            "tabs": {
-                "facturas": "Rechnungen",
-                "perfil": "Profil",
-                "favoritos": "Favoriten",
-                "pedidos": "Bestellungen",
-                "dashboard": "Dashboard"
-            },
-            "status": {
-                "pending": "Ausstehend",
-                "processing": "In Bearbeitung",
-                "shipped": "Versandt",
-                "delivered": "Geliefert",
-                "paid": "Bezahlt",
-                "cancelled": "Storniert"
-            },
-            "pdf": {
-                "loading": "PDF wird geladen...",
-                "error": "Fehler beim Laden der PDF",
-                "mobileTitle": "Rechnung {serie}-{numero}",
-                "mobileDesc": "Um die vollständige PDF auf Ihrem Mobilgerät anzuzeigen, laden Sie sie direkt herunter.",
-                "download": "PDF herunterladen",
-                "saveInfo": "Die PDF wird in Ihrem Download-Ordner gespeichert"
-            },
-            "filters": {
-                "filterByYear": "Nach Jahr filtern",
-                "filterByMonth": "Nach Monat filtern",
-                "allMonths": "Alle Monate",
-                "allYears": "Alle Jahre",
-                "month": "Monat",
-                "year": "Jahr",
-                "dateRange": "Datumsbereich (optional)",
-                "from": "Von",
-                "to": "Bis",
-                "search": "Nach Rechnungsnummer, Serie oder Lieferschein suchen...",
-                "resetFilters": "Filter zurücksetzen",
-                "clearDateRange": "Datumsbereich löschen",
-                "profile_tip": "Sie können diese Daten jederzeit in Ihrem Profil erneut hinzufügen.",
-                "logoutConfirm": "Sind Sie sicher, dass Sie sich abmelden möchten? Sie müssen sich erneut anmelden, um auf Ihr Konto zuzugreifen.",
-                "months": {
-                    "1": "Januar",
-                    "2": "Februar",
-                    "3": "März",
-                    "4": "April",
-                    "5": "Mai",
-                    "6": "Juni",
-                    "7": "Juli",
-                    "8": "August",
-                    "9": "September",
-                    "10": "Oktober",
-                    "11": "November",
-                    "12": "Dezember"
-                }
-            },
-            "table": {
-                "invoice": "Rechnung",
-                "deliveryNote": "Lieferschein",
-                "date": "Datum",
-                "total": "Gesamt",
-                "actions": "Aktionen",
-                "view": "Ansehen",
-                "download": "Herunterladen",
-                "share": "Teilen",
-                "noResults": "Keine Rechnungen gefunden",
-                "foundCount": "{count} Rechnungen gefunden",
-                "downloadMessage": "Laden Sie Ihre Dokumente als PDF herunter",
-                "loadingInvoices": "Rechnungen werden geladen..."
-            },
-            "sidebar": {
-                "clientArea": "Kundenbereich",
-                "controlPanel": "Kontrollpanel",
-                "viewProfile": "Profil anzeigen",
-                "filterByYear": "Nach Jahr filtern",
-                "filterByMonth": "Nach Monat filtern",
-                "invoicesCount": "Rechnungen",
-                "totalInvoiced": "Gesamtbetrag",
-                "quickAccess": "Schnellzugriff"
-            },
-            "greeting": {
-                "morning": "Guten Morgen",
-                "afternoon": "Guten Tag",
-                "evening": "Guten Abend",
-                "welcomeBack": "Willkommen zurück in Ihrem exklusiven Portal"
-            },
-            "actions": {
-                "repeatOrder": "Letzte Bestellung wiederholen",
-                "viewCatalog": "Katalog ansehen",
-                "myInvoices": "Meine Rechnungen",
-                "directLine": "Direktleitung",
-                "contact": "Kontaktieren"
-            },
-            "milestones": {
-                "firstInvoice": "Erste Rechnung",
-                "invoiced1k": "1.000€ abgerechnet",
-                "invoiced5k": "5.000€ abgerechnet",
-                "invoiced10k": "10.000€ abgerechnet",
-                "invoiced50k": "50.000€ abgerechnet",
-                "streak3": "3 Monate in Folge",
-                "streak6": "6 Monate in Folge",
-                "legendClient": "Legendärer Kunde"
-            },
-            "metrics": {
-                "thisMonth": "Diesen Monat",
-                "activeStreak": "Aktive Serie",
-                "months": "Monate",
-                "avgMonthly": "Monatsdurchschnitt",
-                "totalInvoiced": "Gesamtabrechnung"
-            },
-            "tiers": {
-                "starter": "Neuer Kunde",
-                "bronze": "Bronze-Kunde",
-                "silver": "Silber-Kunde",
-                "gold": "Gold-Kunde",
-                "platinum": "Platin-Kunde",
-                "strategic": "Strategischer Kunde",
-                "enterprise": "VIP-Kunde"
-            }
-        },
-        "publicFeatures": {
-            "badge": "Panel de Control",
-            "title": "Todo lo que necesitas en un solo lugar",
-            "subtitle": "Verwalten Sie Ihre Geschäftsbeziehung mit uns einfach und effizient",
-            "items": {
-                "orders": {
-                    "title": "Bestellverwaltung",
-                    "desc": "Realiza y consulta todos tus pedidos en tiempo real",
-                    "label": "Disponible"
-                },
-                "invoices": {
-                    "title": "Facturas PDF",
-                    "desc": "Descarga y gestiona tus facturas al instante",
-                    "label": "Digital"
-                },
-                "profile": {
-                    "title": "Perfil Personal",
-                    "desc": "Actualiza tus datos y preferencias de contacto",
-                    "label": "Personalizable"
-                },
-                "stats": {
-                    "title": "Statistiken",
-                    "desc": "Analiza tu historial y patrones de compra",
-                    "label": "Insights"
-                }
-            },
-            "cta": {
-                "title": "Noch kein Konto?",
-                "desc": "Contacta con nuestro equipo comercial para obtener acceso",
-                "button": "Contactar"
-            }
-        },
-        "invoice": {
-            "number": "Nummer",
-            "date": "Fecha",
-            "total": "Total",
-            "base": "Base imponible",
-            "vat": "IVA",
-            "surcharge": "Recargo equiv.",
-            "status": "Estado",
-            "paid": "Pagada",
-            "pending": "Pendiente",
-            "overdue": "Vencida",
-            "dueDate": "Fecha vencimiento",
-            "products": "Productos",
-            "quantity": "Cantidad",
-            "unitPrice": "Precio unit.",
-            "lineTotal": "Importe"
-        },
-        "password": {
-            "change": "Passwort ändern",
-            "current": "Aktuelles Passwort",
-            "new": "Neues Passwort",
-            "confirm": "Passwort bestätigen",
-            "requirements": "Mindestens 12 Zeichen",
-            "strength": "Fortaleza",
-            "weak": "Schwach",
-            "medium": "Media",
-            "strong": "Fuerte",
-            "veryStrong": "Muy fuerte",
-            "mismatch": "Passwörter stimmen nicht überein",
-            "success": "Passwort erfolgreich geändert"
-        }
-    },
-    "chatbot": {
-        "name": "Pepa",
-        "badge": "KI",
-        "status": "Virtueller Assistent",
-        "greeting": "Hallo, ich bin Pepa",
-        "greetingMorning": "Guten Morgen, ich bin Pepa",
-        "greetingAfternoon": "Guten Tag, ich bin Pepa",
-        "greetingEvening": "Guten Abend, ich bin Pepa",
-        "subtitle": "Ihr virtueller Assistent von Granja Maripepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
-        "placeholder": "Schreiben Sie Ihre Nachricht...",
-        "thinking": "Nachdenken",
-        "send": "Senden",
-        "clearChat": "Chat löschen",
-        "minimize": "Minimieren",
-        "maximize": "Maximieren",
-        "close": "Schließen",
-        "quickActionsTitle": "Schnelle Aktionen",
-        "orAskMe": "Oder fragen Sie mich direkt:",
-        "quickActions": {
-            "invoices": "Mis facturas",
-            "invoicesQuery": "Ich möchte meine Rechnungen sehen",
-            "order": "Hacer pedido",
-            "orderQuery": "Wie kann ich eine Bestellung aufgeben",
-            "contact": "Contacto",
-            "contactQuery": "Wie lautet die Kontakttelefonnummer",
-            "schedule": "Horarios",
-            "scheduleQuery": "Was sind Ihre Öffnungszeiten"
-        },
-        "suggestions": "Das könnte Sie interessieren:",
-        "quickQuestions": [
-            "Welche Produkte vertreiben Sie?",
-            "Wie gebe ich eine Bestellung auf?",
-            "Wie sind die Öffnungszeiten?",
-            "Wie lade ich Rechnungen herunter?"
-        ],
-        "voiceInput": "Spracheingabe",
-        "voiceListening": "Zuhören...",
-        "voiceNotSupported": "Ihr Browser unterstützt keine Spracheingabe",
-        "connectionError": "Es konnte keine Verbindung zum Server hergestellt werden. Bitte versuchen Sie es in einigen Sekunden erneut.",
-        "poweredBy": "Pepa IA",
-        "since": "HORECA desde 1966",
-        "downloadInvoice": "Descargar factura"
-    },
-    "footer": {
-        "companyName": "GRANJA MARIPEPA",
-        "tagline": "Premium Lebensmittelvertrieb",
-        "description_short": "Premium Lebensmittelvertrieb für HORECA",
-        "nestle_distributor": "Offizieller Nestlé Vertriebspartner",
-        "founded_text": "Gegründet in Lorca, 1966",
-        "green_energy": "Grüne Energie",
-        "quick_access": "Schnellzugriff",
-        "copyright": "© {year} Granja Maripepa. Alle Rechte vorbehalten.",
-        "rights_reserved": "Alle Rechte vorbehalten.",
-        "catalog": "Katalog",
-        "client_portal": "Kundenportal",
-        "location_lorca": "Lorca, Murcia",
-        "description_long": "Spezialisten für den Vertrieb von Tiefkühl-, Kühl- und Umgebungstemperaturprodukten für Gastronomie und Catering.",
-        "quickLinks": "Schnellzugriff",
-        "legal": "Legal",
-        "privacy": "Datenschutzrichtlinie",
-        "terms": "Allgemeine Geschäftsbedingungen",
-        "cookies": "Cookie-Richtlinie",
-        "legalNotice": "Aviso Legal",
-        "contact": "Contacto",
-        "followUs": "Folgen Sie uns",
-        "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
-        "delegation": "Delegation Murcia"
-    },
-    "globe_map": {
-        "badge": "VERTRIEBSNETZWERK",
-        "title_1": "Unsere",
-        "title_2": "Präsenz",
-        "subtitle": "Strategische Abdeckung im Südosten Spaniens",
-        "operations_title": "Betriebszentren",
-        "select_to_view": "Zum Auswählen auf Karte klicken",
-        "status_online": "ONLINE",
-        "status_viewing": "ANSICHT",
-        "headquarters": "Hauptsitz",
-        "regional_coverage": "Regionale Abdeckung",
-        "regional_coverage_desc": "Vertriebsservice in Murcia und Alicante. Lieferung in 24-48h.",
-        "go_to": "Gehe zu"
-    },
-    "errors": {
-        "notFound": "Seite nicht gefunden",
-        "notFoundDesc": "Entschuldigung, die gesuchte Seite existiert nicht.",
-        "serverError": "Serverfehler",
-        "serverErrorDesc": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
-        "networkError": "Verbindungsfehler",
-        "networkErrorDesc": "No se pudo conectar con el servidor.",
-        "unauthorized": "No autorizado",
-        "unauthorizedDesc": "Sie müssen sich anmelden, um darauf zugreifen zu können.",
-        "forbidden": "Acceso denegado",
-        "forbiddenDesc": "No tienes permisos para acceder a este recurso.",
-        "tryAgain": "Intentar de nuevo",
-        "goHome": "Ir al inicio",
-        "invalidCredentials": "Credenciales incorrectas",
-        "invalidCredentialsDesc": "Überprüfen Sie Ihren Kundencode und Ihr Passwort."
-    },
-    "contact": {
-        "title": "Contacto",
-        "subtitle": "Wir sind für Sie da",
-        "phone": "Telefon",
-        "email": "Email",
-        "address": "Adresse",
-        "schedule": "Horario",
-        "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
-        "scheduleSaturday": "Samstag: 9:00 - 14:00",
-        "scheduleSunday": "Domingos y festivos: Cerrado",
-        "form": {
-            "title": "Senden Sie uns eine Nachricht",
-            "name": "Nombre",
-            "namePlaceholder": "Tu nombre completo",
-            "email": "Email",
-            "emailPlaceholder": "tu@email.com",
-            "phone": "Telefon",
-            "phonePlaceholder": "612 345 678",
-            "company": "Empresa",
-            "companyPlaceholder": "Nombre de tu empresa (opcional)",
-            "message": "Mensaje",
-            "messagePlaceholder": "Wie können wir Ihnen helfen?",
-            "submit": "Enviar mensaje",
-            "sending": "Enviando...",
-            "successTitle": "Nachricht gesendet!",
-            "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
-            "errorTitle": "Error al enviar",
-            "errorMessage": "Bitte versuchen Sie es später erneut."
-        },
-        "location": {
-            "title": "Unser Standort",
-            "mainOffice": "Oficina Principal",
-            "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
-            "city": "30817 - Lorca (Murcia)"
-        }
-    },
-    "products_page": {
-        "title": "Demnächst",
-        "subtitle_1": "Estamos preparando algo especial",
-        "subtitle_2": "Unser Produktkatalog wird mit neuen Funktionen aktualisiert.",
-        "cta_home": "Volver al inicio",
-        "cta_clients": "Área de clientes",
-        "badge": "Demnächst verfügbar"
-    },
-    "accessibility": {
-        "skipToContent": "Ir al contenido principal",
-        "menuToggle": "Menü öffnen",
-        "languageSwitch": "Cambiar idioma",
-        "darkMode": "Modo oscuro",
-        "lightMode": "Modo claro",
-        "loading": "Cargando contenido",
-        "newWindow": "Se abre en nueva ventana"
-    },
+    "brands_title": "Unsere Marken",
+    "view_all_products": "Alle Produkte ansehen",
+    "cart_label": "Warenkorb ({count})",
+    "close_menu": "Menü schließen",
+    "open_menu": "Menü öffnen",
+    "you_are_here": "Sie befinden sich hier",
+    "browsing": "Durchsuchen",
+    "help_title": "Brauchen Sie Hilfe?",
+    "help_text": "Unser Expertenteam steht Ihnen zur Verfügung, um Sie bei Produkten und Bestellungen zu beraten.",
+    "call_cta": "Anrufe und WhatsApp",
+    "contact_now": "Jetzt kontaktieren",
+    "excellence_msg": "Über 55 Jahre Exzellenz im HORECA-Service.",
     "categories": {
-        "mar": {
-            "name": "Meeresfrüchte",
-            "description": "Tiefkühlfisch und Meeresfrüchte von höchster Qualität"
-        },
-        "carne": {
-            "name": "Fleisch",
-            "description": "Ausgewähltes Tiefkühlfleisch"
-        },
-        "precocinados": {
-            "name": "Fertiggerichte",
-            "description": "Tiefkühlfertiggerichte und Gemüse"
-        },
-        "reposteria": {
-            "name": "Backwaren",
-            "description": "Tiefkühlgebäck und Desserts"
-        },
-        "helados": {
-            "name": "Eiscreme",
-            "description": "Große Auswahl an Nestlé-Eis für die Gastronomie"
-        },
-        "chocolate": {
-            "name": "Schokolade",
-            "description": "Schokolade und Kakaoprodukte von höchster Qualität"
-        },
-        "pan": {
-            "name": "Tiefkühlbrot",
-            "description": "Hochwertiges Tiefkühlbrot und Teige"
-        }
-    },
-    "meta": {
-        "title": "Granja Maripepa | HORECA-Vertrieb Murcia und Lorca",
-        "description": "Führender Premium-Lebensmittelvertrieb für das Gastgewerbe. Tiefkühlkost, Fleisch und Fisch. 24-Stunden-Service in Murcia und Almería.",
-        "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, lebensmittelvertrieb, tiefkühlkost, HORECA, Murcia, Almería, fleisch, fisch, lorca"
-    },
-    "legal": {
-        "privacy": {
-            "title": "Datenschutzrichtlinie",
-            "intro": "Bei Granja Maripepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
-            "sections": {
-                "s1": {
-                    "title": "1. Verantwortlicher für die Datenverarbeitung",
-                    "content": "Granja Maripepa, S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@granjamaripepa.com"
-                },
-                "s2": {
-                    "title": "2. Zweck der Verarbeitung",
-                    "content": "Wir verarbeiten die von Ihnen bereitgestellten Informationen, um den angeforderten Service zu erbringen, die Abrechnung durchzuführen und Ihnen kommerzielle Mitteilungen über unsere Produkte und Dienstleistungen zu senden."
-                },
-                "s3": {
-                    "title": "3. Datenspeicherung",
-                    "content": "Die bereitgestellten Daten werden so lange aufbewahrt, wie die Geschäftsbeziehung besteht oder für die Jahre, die zur Erfüllung gesetzlicher Verpflichtungen erforderlich sind."
-                },
-                "s4": {
-                    "title": "4. Legitimation",
-                    "content": "Die Rechtsgrundlage für die Verarbeitung Ihrer Daten ist die Durchführung des Vertrags über die Erbringung von Dienstleistungen und/oder den Verkauf von Produkten."
-                },
-                "s5": {
-                    "title": "5. Empfänger",
-                    "content": "Die Daten werden nicht an Dritte weitergegeben, es sei denn, es besteht eine gesetzliche Verpflichtung."
-                },
-                "s6": {
-                    "title": "6. Rechte",
-                    "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Maripepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
-                }
-            }
-        },
-        "terms": {
-            "title": "Allgemeine Geschäftsbedingungen",
-            "intro": "Willkommen auf der Website von Granja Maripepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
-            "sections": {
-                "s1": {
-                    "title": "1. Geistiges Eigentum",
-                    "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Maripepa geschützt."
-                },
-                "s2": {
-                    "title": "2. Nutzung der Website",
-                    "content": "Der Nutzer verpflichtet sich, die Website, ihre Dienste und Inhalte sorgfältig, korrekt und rechtmäßig zu nutzen und insbesondere das Urheberrecht und andere Identifikationsdaten der Rechte ihrer Inhaber nicht zu unterdrücken, zu umgehen oder zu manipulieren."
-                },
-                "s3": {
-                    "title": "3. Haftung",
-                    "content": "Granja Maripepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
-                },
-                "s4": {
-                    "title": "4. Änderungen",
-                    "content": "Granja Maripepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
-                },
-                "s5": {
-                    "title": "5. Anwendbares Recht",
-                    "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Maripepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
-                }
-            }
-        }
+      "sea": "Meeresfrüchte",
+      "meat": "Fleisch",
+      "precooked": "Vorgekocht",
+      "pastry": "Gebäck",
+      "dairy": "Molkereiprodukte",
+      "cereals": "Getreide",
+      "chocolate": "Schokolade",
+      "fresh_fish": "Frischer Fisch",
+      "seafood_shell": "Schalentiere",
+      "seafood": "Mariscos"
     }
+  },
+  "nav": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "customerArea": "Kundenbereich",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "categories_section": {
+    "premium_catalog": "PREMIUM KATALOG",
+    "our_products_1": "UNSERE",
+    "our_products_2": "PRODUKTE",
+    "description": "Entdecken Sie unsere Premium-Auswahl an Lebensmitteln, sorgfältig ausgewählt, um höchste Qualitätsstandards zu erfüllen",
+    "featured": "Hervorgehoben",
+    "view_catalog": "Katalog ansehen",
+    "view_catalog_topgel": "Katalog Grupo Topgel ansehen"
+  },
+  "distributors_section": {
+    "official_partners": "OFFIZIELLE PARTNER",
+    "title_part1": "MARKEN, DIE WIR",
+    "title_part2": "VERTREIBEN",
+    "partners_description": "Wir arbeiten mit den <strong1>Marktführern im Lebensmittelbereich</strong1> zusammen, um Ihnen Produkte von <strong2>höchster Qualität</strong2> und Prestige anzubieten.",
+    "interested_text": "Interessiert an unseren Produkten?",
+    "request_info": "Informationen anfordern",
+    "view_products": "Produkte ansehen"
+  },
+  "common": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "brands": "Marken",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "customerArea": "Kundenbereich",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "save": "Speichern",
+    "back": "Zurück",
+    "next": "Weiter",
+    "search": "Suchen",
+    "noResults": "Keine Ergebnisse",
+    "viewMore": "Mehr anzeigen",
+    "explore": "Entdecken",
+    "learnMore": "Mehr erfahren",
+    "close": "Schließen",
+    "send": "Senden",
+    "download": "Herunterladen",
+    "continue": "Weiter",
+    "required": "Erforderlich",
+    "optional": "Optional",
+    "premium": "PREMIUM",
+    "view_products": "Produkte ansehen",
+    "specialties": {
+      "seafood": "Meeresfrüchte",
+      "meats": "Ausgewähltes Fleisch",
+      "precooked": "Vorgekochte Gerichte",
+      "pastry": "Gebäck",
+      "ice_cream_hospitality": "Gastronomie-Eis",
+      "tubs": "Becher",
+      "frozen_desserts": "Tiefkühldesserts",
+      "frozen_bread": "Tiefkühlbrot",
+      "fermented_dough": "Gärungsteige",
+      "specialties": "Spezialitäten"
+    }
+  },
+  "hero": {
+    "title": "GRANJA MARIPEPA",
+    "subtitle": "Tiefkühl-, Kühl- und Eisprodukte für HORECA",
+    "cta": "Kontaktieren Sie uns",
+    "since": "Seit 1966",
+    "description": "Umfassende Lebensmittellösungen für Profis. Spezialisten für Premium-Fleisch, Fisch und vorgekochte Produkte.",
+    "viewProducts": "Produkte ansehen",
+    "contactUs": "Kontaktieren Sie uns",
+    "explore_products": "Produkte entdecken",
+    "contact_us": "Kontaktieren Sie uns",
+    "scroll_down": "Nach unten scrollen"
+  },
+  "products": {
+    "title": "UNSERE PRODUKTE",
+    "subtitle": "Entdecken Sie unsere Premium-Lebensmittelauswahl, sorgfältig ausgewählt, um höchste Qualitätsstandards zu erfüllen",
+    "premium": "PREMIUM",
+    "seaProducts": "Meeresfrüchte",
+    "seaDescription": "Tiefkühlfisch und Meeresfrüchte in Premium-Qualität",
+    "meat": "Fleisch",
+    "meatDescription": "Ausgewähltes Tiefkühlfleisch",
+    "precooked": "Vorgekocht",
+    "precookedDescription": "Zubereitetes und tiefgekühltes Gemüse",
+    "pastry": "Gebäck",
+    "pastryDescription": "Tiefgekühlte Süßwaren und Desserts",
+    "viewCatalog": "Katalog ansehen",
+    "explore": "Entdecken",
+    "categories": "Kategorien",
+    "allProducts": "Alle Produkte",
+    "frozen": "Tiefgekühlt",
+    "refrigerated": "Gekühlt",
+    "iceCream": "Eiscreme"
+  },
+  "brands": {
+    "title": "MARKEN, DIE WIR VERTREIBEN",
+    "subtitle": "Wir arbeiten mit Branchenführern zusammen, um Ihnen Produkte von höchster Qualität und Prestige anzubieten.",
+    "viewProducts": "Produkte ansehen",
+    "frozenPremium": "Premium Tiefkühlkost",
+    "iceCreamPremium": "Premium Eiscreme",
+    "bakery": "Bäckerei",
+    "grupo-topgel": {
+      "name": "Grupo Topgel",
+      "category": "Premium Tiefkühlkost",
+      "detailed": "Führend im Vertrieb von Tiefkühlprodukten: Fisch, Meeresfrüchte, Fleisch, vorgekochte Gerichte und Premium-Gebäck."
+    },
+    "nestle": {
+      "name": "Nestlé",
+      "category": "Premium Eiscreme",
+      "detailed": "Granja Maripepa ist offizieller Vertriebspartner für Nestlé-Eis für Gastronomie und Einrichtungen."
+    },
+    "panamar": {
+      "name": "Panamar",
+      "category": "Bäckerei",
+      "detailed": "Spezialisten für hochwertige Tiefkühlbackwaren für Gastronomie und Restauration."
+    },
+    "interested": "Interessiert an unseren Produkten?",
+    "requestInfo": "Informationen anfordern"
+  },
+  "contact_page": {
+    "hero": {
+      "badge": "Direkter Kontakt",
+      "title": "Lassen Sie uns sprechen",
+      "subtitle_1": "Wir sind hier, um",
+      "subtitle_highlight": "zuzuhören",
+      "subtitle_2": "und Ihnen zu helfen",
+      "description": "Unser Expertenteam steht bereit, um Ihre Fragen zu beantworten, Lösungen anzupassen und Sie auf jedem Schritt zum Erfolg zu begleiten.",
+      "cta_send": "Nachricht senden"
+    },
+    "channels": {
+      "title_1": "Verbinden Sie sich",
+      "title_2": "mit uns",
+      "description": "Mehrere Kommunikationskanäle, damit Sie den wählen können, der am besten zu Ihnen passt",
+      "murcia": {
+        "title": "Delegation Murcia",
+        "desc": "Lorca - Hauptsitz"
+      },
+      "email": {
+        "title": "Bestell-E-Mail",
+        "desc": "Anfragen und Bestellungen"
+      },
+      "almeria": {
+        "title": "Delegation Almería",
+        "desc": "Viator"
+      }
+    },
+    "schedule": {
+      "title": "Kundenservice-Zeiten",
+      "days": "Montag - Freitag",
+      "hours": "8:00 - 13:00 und 16:00 - 19:00",
+      "after_hours": "Telefone außerhalb der Geschäftszeiten"
+    },
+    "form_section": {
+      "title_1": "Erzählen Sie uns von",
+      "title_2": "Ihrem Projekt",
+      "description": "Jedes Unternehmen ist einzigartig. Teilen Sie uns Ihre Bedürfnisse mit und wir erstellen eine personalisierte Lösung, die Ihr Wachstum fördert.",
+      "stats": {
+        "delivery": "Garantierte Lieferung",
+        "quality": "Zertifizierte Qualität",
+        "foundation": "Gründungsjahr",
+        "experience": "Jahre Erfahrung"
+      },
+      "form_title": "Senden Sie uns Ihre Nachricht",
+      "form_subtitle": "Wir werden so schnell wie möglich antworten",
+      "labels": {
+        "name": "Vollständiger Name *",
+        "company": "Unternehmen *",
+        "email": "E-Mail *",
+        "phone": "Telefon *",
+        "message": "Nachricht *",
+        "privacy": "Ich akzeptiere die Datenschutzrichtlinie *",
+        "privacy_desc": "Mit dem Absenden dieses Formulars akzeptieren Sie, dass wir Ihre Daten bearbeiten, um Ihre Anfrage zu beantworten."
+      },
+      "placeholders": {
+        "name": "Ihr Name",
+        "company": "Ihr Unternehmensname",
+        "email": "sie@email.com",
+        "phone": "+34 XXX XXX XXX",
+        "message": "Erzählen Sie uns, wie wir Ihnen helfen können..."
+      },
+      "errors": {
+        "name": "Name muss mindestens 2 Zeichen haben",
+        "company": "Unternehmen muss mindestens 2 Zeichen haben",
+        "email": "Ungültige E-Mail",
+        "phone": "Ungültiges Telefon",
+        "message": "Nachricht muss mindestens 10 Zeichen haben",
+        "privacy": "Sie müssen die Datenschutzrichtlinie akzeptieren"
+      },
+      "success": "Nachricht erfolgreich gesendet! Wir werden Sie bald kontaktieren.",
+      "submit": "Nachricht senden",
+      "sending": "Senden..."
+    },
+    "locations": {
+      "title_1": "Unsere",
+      "title_2": "Standorte",
+      "description": "Präsent in den wichtigsten Städten Südostspaniens, um näher bei Ihnen zu sein",
+      "main_delegation": "Hauptdelegation",
+      "active": "Aktiv",
+      "address": "Adresse",
+      "phone": "Telefon",
+      "view_globe": "Auf dem Globus anzeigen"
+    },
+    "globe": {
+      "title": "Interaktiver 3D-Globus",
+      "subtitle": "Klicken Sie auf Standorte für ein immersives Erlebnis",
+      "click_points_hint": "Klicken Sie auf die Punkte für ein immersives Erlebnis",
+      "view_maps": "Auf Karten anzeigen",
+      "sede_murcia": "Hauptsitz in Murcia",
+      "delegation_andalucia": "Handelsdelegation in Andalusien"
+    },
+    "cta_final": {
+      "title_1": "Bereit zu",
+      "title_2": "starten?",
+      "description": "Unser Team ist bereit, Ihnen zu helfen, die besten Lösungen für Ihr Unternehmen zu finden. Der erste Schritt ist so einfach wie ein Anruf.",
+      "whatsapp": "WhatsApp",
+      "guarantees": {
+        "delivery": {
+          "text": "Lieferung 24-48h",
+          "desc": "Kühlkette garantiert"
+        },
+        "support": {
+          "text": "Personalisierte Betreuung",
+          "desc": "HORECA-Spezialisten"
+        },
+        "quality": {
+          "text": "ISO 9001 Qualität",
+          "desc": "Zertifizierte Garantie"
+        }
+      }
+    },
+    "whatsapp_message": "Hallo! Ich möchte weitere Informationen über Ihre Produkte erhalten."
+  },
+  "about_page": {
+    "hero": {
+      "title": "Granja Maripepa",
+      "subtitle_1": "Mehr als",
+      "subtitle_highlight": "55 Jahre",
+      "subtitle_2": "im Dienst des HORECA-Sektors",
+      "description": "Seit 1966 in Lorca (Murcia) sind wir Spezialisten für den Vertrieb von tiefgekühlten, gekühlten und ungekühlten Produkten für Gastronomie, Catering und Lebensmitteldienstleistungen.",
+      "cta_history": "Entdecken Sie unsere Geschichte",
+      "cta_contact": "Jetzt kontaktieren"
+    },
+    "history": {
+      "title_1": "Unsere",
+      "title_2": "Geschichte",
+      "description": "Mehr als fünf Jahrzehnte Erfahrung und Engagement für Qualität im Lebensmittelsektor",
+      "milestones": {
+        "1966": {
+          "title": "Gegründet in Lorca (Murcia)",
+          "desc": "Granja Maripepa, S.L. wurde in Lorca (Murcia) gegründet und spezialisierte sich von Anfang an auf den HORECA-Markt und den Lebensmittelkanal."
+        },
+        "2020": {
+          "title": "100% Grüne Energie",
+          "desc": "Zertifizierung von Feníe Energía und CNMC, dass unsere Energie zu 100% aus erneuerbaren Quellen stammt."
+        },
+        "1980s": {
+          "title": "Regionale Konsolidierung",
+          "desc": "Erweiterung des Sortiments an tiefgekühlten, gekühlten und ungekühlten Produkten für Gastronomie und Catering."
+        },
+        "2000s": {
+          "title": "ISO 9001 Zertifizierung",
+          "desc": "Erhalt der ISO 9001 Zertifizierung, die unser Qualitätsmanagementsystem garantiert."
+        },
+        "today": {
+          "title": "Mehr als 1.500 Referenzen",
+          "desc": "Derzeit haben wir ein Sortiment von mehr als 1.500 Referenzen in drei Temperaturen und bedienen Murcia und Alicante."
+        }
+      }
+    },
+    "delegations": {
+      "title": "Unsere Delegationen",
+      "description": "Nachfolgend finden Sie die offizielle Adresse unseres Hauptsitzes in Lorca (Murcia).",
+      "view_maps": "Auf Google Maps anzeigen"
+    },
+    "values": {
+      "title_1": "Unsere",
+      "title_2": "Werte",
+      "description": "Die Säulen, die unsere Exzellenz stützen und unsere Arbeitsweise jeden Tag definieren",
+      "items": {
+        "quality": {
+          "title": "Zertifizierte Qualität",
+          "desc": "Qualitätsgarantie unterstützt durch ISO 9001 Standard. Rückverfolgbarkeit aller unserer Produkte.",
+          "label": "Qualitätszertifizierung"
+        },
+        "service": {
+          "title": "Schneller Service",
+          "desc": "24-48 Stunden Lieferservice unter Einhaltung der Kühlkette zu jeder Zeit.",
+          "label": "Lieferzeit"
+        },
+        "coverage": {
+          "title": "Regionale Abdeckung",
+          "desc": "Service in Murcia und Alicante mit strategischer Delegation in Lorca.",
+          "label": "Bediente Provinzen"
+        },
+        "attention": {
+          "title": "Personalisierte Betreuung",
+          "desc": "Hochqualifiziertes Team, das den Markt und das HORECA-Produkt kennt.",
+          "label": "Jahre Erfahrung"
+        }
+      }
+    },
+    "commitment": {
+      "title_1": "Unser",
+      "title_2": "Engagement",
+      "description": "Was uns unterscheidet und warum unsere Kunden uns seit mehr als 55 Jahren vertrauen",
+      "offer_title": "Was wir bieten",
+      "items": {
+        "quality": "Qualitätsgarantie, unterstützt durch ISO 9001 Standard",
+        "traceability": "Rückverfolgbarkeit aller unserer Produkte",
+        "delivery": "Lieferservice in 24 – 48 Stunden",
+        "service": "Service in Murcia und Alicante",
+        "attention": "Personalisierte Betreuung",
+        "capacity": "Kühlkapazität von 5.000m³"
+      },
+      "stats": {
+        "title": "Granja Maripepa in Zahlen",
+        "founded_label": "Gründungsjahr",
+        "references_label": "Produktreferenzen",
+        "capacity_label": "Kühlkapazität",
+        "temps_label": "Temperaturen (tiefgekühlt, gekühlt, ungekühlt)"
+      }
+    },
+    "certifications": {
+      "title_1": "Zertifizierungen",
+      "title_2": "& Qualität",
+      "description": "Unser Engagement für höchste Standards an Qualität und Lebensmittelsicherheit",
+      "items": {
+        "iso": {
+          "name": "ISO 9001",
+          "desc": "Qualitätsmanagementsystem",
+          "label": "Zertifiziert"
+        },
+        "green": {
+          "name": "100% Grüne Energie",
+          "desc": "Feníe Energía + CNMC",
+          "label": "Erneuerbar"
+        },
+        "traceability": {
+          "name": "Totale Rückverfolgbarkeit",
+          "desc": "Produktkontrolle",
+          "label": "Garantie"
+        },
+        "cold_chain": {
+          "name": "Kühlkette",
+          "desc": "5.000m³ Kühlkapazität",
+          "label": "Zertifiziert"
+        }
+      },
+      "process": {
+        "title": "Qualitätskontrollprozess",
+        "description": "Von der Annahme bis zur Lieferung wird jeder Schritt kontrolliert",
+        "steps": {
+          "reception": {
+            "title": "Annahme",
+            "desc": "Temperatur- und Qualitätskontrolle bei Erhalt"
+          },
+          "inspection": {
+            "title": "Inspektion",
+            "desc": "Umfassende Überprüfung aller Produkte"
+          },
+          "certification": {
+            "title": "Zertifizierung",
+            "desc": "Kennzeichnung und Registrierung gemäß Vorschriften"
+          },
+          "distribution": {
+            "title": "Vertrieb",
+            "desc": "Lieferung mit garantierter Kühlkette"
+          }
+        }
+      }
+    },
+    "strategy": {
+      "title_1": "Unsere",
+      "title_2": "Geschäftsstrategie",
+      "description": "Der Exzellenz im Service für den HORECA-Sektor verpflichtet",
+      "mission": {
+        "title": "Unsere Mission",
+        "item_1": "Unterstützung der Gastronomie durch den Vertrieb ausgewählter Produkte von höchster Qualität.",
+        "item_2": "Stets nach Innovation suchen, um die Anforderungen des Endkunden zu erfüllen.",
+        "item_3": "Die Aufgabe des Küchenprofis erleichtern."
+      },
+      "vision": {
+        "title": "Unsere Vision",
+        "item_1": "Anspruchsvollere und informiertere Kunden verlangen höhere Qualität bei Produkten und Dienstleistungen.",
+        "item_2": "Die Auswahl der professionellen Unterstützung, die diese Erwartungen erfüllt, kann den Unterschied ausmachen.",
+        "item_3": "Unser Ziel ist es, diese Unterstützung für den HORECA-Kanal zu sein."
+      }
+    },
+    "reviews": {
+      "badge": "Google Bewertungen",
+      "title_1": "Was",
+      "title_highlight": "unsere Kunden sagen",
+      "description": "Die Meinung derer, die Granja Maripepa für ihr Geschäft vertrauen",
+      "antonio_review": {
+        "text": "Dieses Unternehmen vertreibt alle Arten von Tiefkühlkost, Eiscreme und unzählige Produkte. Wenn Sie Qualitätsprodukte und eine außergewöhnliche Behandlung wünschen, suchen Sie nicht weiter. Das beste Unternehmen, das ich in seiner Branche kenne.",
+        "role": "8 Bewertungen · Local Guide"
+      },
+      "view_all": {
+        "title": "Alle Bewertungen ansehen",
+        "subtitle": "Lesen Sie die 18 Meinungen unserer Kunden auf Google Maps",
+        "link": "In Google Maps öffnen"
+      },
+      "summary": {
+        "rating_label": "Google Bewertung",
+        "reviews_label": "Kundenbewertungen",
+        "write_review": "Bewertung schreiben"
+      }
+    },
+    "cta_final": {
+      "title_1": "Bereit zur",
+      "title_highlight": "Zusammenarbeit",
+      "title_suffix": "?",
+      "description": "Schließen Sie sich den HORECA-Betrieben an, die Granja Maripepa vertrauen, um ihren Kunden in Murcia und Alicante zertifizierte Qualitätsprodukte zu bringen.",
+      "contact": "Jetzt kontaktieren",
+      "catalog": "Katalog ansehen"
+    }
+  },
+  "customerArea": {
+    "title": "Kundenbereich",
+    "welcome": "Willkommen in Ihrem",
+    "welcomeHighlight": "Persönlichen Bereich",
+    "description": "Greifen Sie auf Ihr personalisiertes Kontrollpanel zu, um Bestellungen zu verwalten, Rechnungen herunterzuladen und vieles mehr mit absolutem Komfort.",
+    "exclusiveBadge": "Exklusiver Kundenbereich",
+    "login": {
+      "title": "Anmelden",
+      "subtitle": "Zugang mit Ihren Anmeldedaten",
+      "clientCode": "Kundencode",
+      "clientCodePlaceholder": "z.B. 0123456789",
+      "password": "Passwort",
+      "passwordPlaceholder": "Ihr Passwort",
+      "forgotPassword": "Passwort vergessen?",
+      "accessButton": "Zugreifen",
+      "loggingIn": "Anmelden...",
+      "needHelp": "Brauchen Sie Hilfe?",
+      "contactSupport": "Support kontaktieren",
+      "needAccount": "Brauchen Sie ein Konto?",
+      "contactUs": "Kontaktieren Sie uns",
+      "contactToast": "📞 Kontaktieren Sie uns\\n\\nTelefon: +34 968 46 75 14\\nE-Mail: pedidos@granjamaripepa.com\\nÖffnungszeiten: Mo-Fr 9:00-18:00"
+    },
+    "emailSetup": {
+      "title": "Kontakteinstellungen",
+      "subtitle": "Para tu seguridad, necesitamos tus datos de contacto.",
+      "data_usage": "Uso de tus datos:",
+      "data_usage_desc": "Nur zur Passwortwiederherstellung und zum Rechnungsversand. Wir geben diese Informationen nicht weiter.",
+      "email": "Email",
+      "phone": "Telefon",
+      "save": "Guardar y Continuar",
+      "saving": "Guardando..."
+    },
+    "features": {
+      "history": "Historial completo",
+      "historyDesc": "Todos tus pedidos organizados",
+      "security": "Datos seguros",
+      "securityDesc": "Garantierter Schutz",
+      "priority": "Acceso prioritario",
+      "priorityDesc": "Ofertas y novedades exclusivas"
+    },
+    "dashboard": {
+      "welcome": "Willkommen",
+      "invoices": "Rechnungen",
+      "invoicesDesc": "Rechnungen einsehen und herunterladen",
+      "orders": "Bestellungen",
+      "ordersDesc": "Bestellverlauf",
+      "profile": "Profil",
+      "profileDesc": "Daten verwalten",
+      "ivaBook": "MwSt-Buch",
+      "ivaBookDesc": "Quartalsweise MwSt-Übersicht",
+      "downloadPdf": "PDF herunterladen",
+      "viewAll": "Alle anzeigen",
+      "noInvoices": "Keine aktuellen Rechnungen",
+      "lastInvoices": "Letzte Rechnungen",
+      "totalPending": "Ausstehender Gesamtbetrag",
+      "logout": "Abmelden",
+      "loadingPanel": "Dein Panel wird geladen",
+      "logoutConfirm": "Möchten Sie sich wirklich abmelden?",
+      "logoutSuccess": "Sitzung erfolgreich beendet",
+      "tabs": {
+        "facturas": "Rechnungen",
+        "perfil": "Profil",
+        "favoritos": "Favoriten",
+        "pedidos": "Bestellungen",
+        "dashboard": "Dashboard"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "processing": "In Bearbeitung",
+        "shipped": "Versandt",
+        "delivered": "Geliefert",
+        "paid": "Bezahlt",
+        "cancelled": "Storniert"
+      },
+      "pdf": {
+        "loading": "PDF wird geladen...",
+        "error": "Fehler beim Laden der PDF",
+        "mobileTitle": "Rechnung {serie}-{numero}",
+        "mobileDesc": "Um die vollständige PDF auf Ihrem Mobilgerät anzuzeigen, laden Sie sie direkt herunter.",
+        "download": "PDF herunterladen",
+        "saveInfo": "Die PDF wird in Ihrem Download-Ordner gespeichert"
+      },
+      "filters": {
+        "filterByYear": "Nach Jahr filtern",
+        "filterByMonth": "Nach Monat filtern",
+        "allMonths": "Alle Monate",
+        "allYears": "Alle Jahre",
+        "month": "Monat",
+        "year": "Jahr",
+        "dateRange": "Datumsbereich (optional)",
+        "from": "Von",
+        "to": "Bis",
+        "search": "Nach Rechnungsnummer, Serie oder Lieferschein suchen...",
+        "resetFilters": "Filter zurücksetzen",
+        "clearDateRange": "Datumsbereich löschen",
+        "profile_tip": "Sie können diese Daten jederzeit in Ihrem Profil erneut hinzufügen.",
+        "logoutConfirm": "Sind Sie sicher, dass Sie sich abmelden möchten? Sie müssen sich erneut anmelden, um auf Ihr Konto zuzugreifen.",
+        "months": {
+          "1": "Januar",
+          "2": "Februar",
+          "3": "März",
+          "4": "April",
+          "5": "Mai",
+          "6": "Juni",
+          "7": "Juli",
+          "8": "August",
+          "9": "September",
+          "10": "Oktober",
+          "11": "November",
+          "12": "Dezember"
+        }
+      },
+      "table": {
+        "invoice": "Rechnung",
+        "deliveryNote": "Lieferschein",
+        "date": "Datum",
+        "total": "Gesamt",
+        "actions": "Aktionen",
+        "view": "Ansehen",
+        "download": "Herunterladen",
+        "share": "Teilen",
+        "noResults": "Keine Rechnungen gefunden",
+        "foundCount": "{count} Rechnungen gefunden",
+        "downloadMessage": "Laden Sie Ihre Dokumente als PDF herunter",
+        "loadingInvoices": "Rechnungen werden geladen..."
+      },
+      "sidebar": {
+        "clientArea": "Kundenbereich",
+        "controlPanel": "Kontrollpanel",
+        "viewProfile": "Profil anzeigen",
+        "filterByYear": "Nach Jahr filtern",
+        "filterByMonth": "Nach Monat filtern",
+        "invoicesCount": "Rechnungen",
+        "totalInvoiced": "Gesamtbetrag",
+        "quickAccess": "Schnellzugriff"
+      },
+      "greeting": {
+        "morning": "Guten Morgen",
+        "afternoon": "Guten Tag",
+        "evening": "Guten Abend",
+        "welcomeBack": "Willkommen zurück in Ihrem exklusiven Portal"
+      },
+      "actions": {
+        "repeatOrder": "Letzte Bestellung wiederholen",
+        "viewCatalog": "Katalog ansehen",
+        "myInvoices": "Meine Rechnungen",
+        "directLine": "Direktleitung",
+        "contact": "Kontaktieren"
+      },
+      "milestones": {
+        "firstInvoice": "Erste Rechnung",
+        "invoiced1k": "1.000€ abgerechnet",
+        "invoiced5k": "5.000€ abgerechnet",
+        "invoiced10k": "10.000€ abgerechnet",
+        "invoiced50k": "50.000€ abgerechnet",
+        "streak3": "3 Monate in Folge",
+        "streak6": "6 Monate in Folge",
+        "legendClient": "Legendärer Kunde"
+      },
+      "metrics": {
+        "thisMonth": "Diesen Monat",
+        "activeStreak": "Aktive Serie",
+        "months": "Monate",
+        "avgMonthly": "Monatsdurchschnitt",
+        "totalInvoiced": "Gesamtabrechnung"
+      },
+      "tiers": {
+        "starter": "Neuer Kunde",
+        "bronze": "Bronze-Kunde",
+        "silver": "Silber-Kunde",
+        "gold": "Gold-Kunde",
+        "platinum": "Platin-Kunde",
+        "strategic": "Strategischer Kunde",
+        "enterprise": "VIP-Kunde"
+      }
+    },
+    "publicFeatures": {
+      "badge": "Panel de Control",
+      "title": "Todo lo que necesitas en un solo lugar",
+      "subtitle": "Verwalten Sie Ihre Geschäftsbeziehung mit uns einfach und effizient",
+      "items": {
+        "orders": {
+          "title": "Bestellverwaltung",
+          "desc": "Realiza y consulta todos tus pedidos en tiempo real",
+          "label": "Disponible"
+        },
+        "invoices": {
+          "title": "Facturas PDF",
+          "desc": "Descarga y gestiona tus facturas al instante",
+          "label": "Digital"
+        },
+        "profile": {
+          "title": "Perfil Personal",
+          "desc": "Actualiza tus datos y preferencias de contacto",
+          "label": "Personalizable"
+        },
+        "stats": {
+          "title": "Statistiken",
+          "desc": "Analiza tu historial y patrones de compra",
+          "label": "Insights"
+        }
+      },
+      "cta": {
+        "title": "Noch kein Konto?",
+        "desc": "Contacta con nuestro equipo comercial para obtener acceso",
+        "button": "Contactar"
+      }
+    },
+    "invoice": {
+      "number": "Nummer",
+      "date": "Fecha",
+      "total": "Total",
+      "base": "Base imponible",
+      "vat": "IVA",
+      "surcharge": "Recargo equiv.",
+      "status": "Estado",
+      "paid": "Pagada",
+      "pending": "Pendiente",
+      "overdue": "Vencida",
+      "dueDate": "Fecha vencimiento",
+      "products": "Productos",
+      "quantity": "Cantidad",
+      "unitPrice": "Precio unit.",
+      "lineTotal": "Importe"
+    },
+    "password": {
+      "change": "Passwort ändern",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "confirm": "Passwort bestätigen",
+      "requirements": "Mindestens 12 Zeichen",
+      "strength": "Fortaleza",
+      "weak": "Schwach",
+      "medium": "Media",
+      "strong": "Fuerte",
+      "veryStrong": "Muy fuerte",
+      "mismatch": "Passwörter stimmen nicht überein",
+      "success": "Passwort erfolgreich geändert"
+    }
+  },
+  "chatbot": {
+    "name": "Pepa",
+    "badge": "KI",
+    "status": "Virtueller Assistent",
+    "greeting": "Hallo, ich bin Pepa",
+    "greetingMorning": "Guten Morgen, ich bin Pepa",
+    "greetingAfternoon": "Guten Tag, ich bin Pepa",
+    "greetingEvening": "Guten Abend, ich bin Pepa",
+    "subtitle": "Ihr virtueller Assistent von Granja Maripepa. Ich bin hier, um Ihnen bei Produkten, Bestellungen, Rechnungen oder Fragen zu helfen.",
+    "placeholder": "Schreiben Sie Ihre Nachricht...",
+    "thinking": "Nachdenken",
+    "send": "Senden",
+    "clearChat": "Chat löschen",
+    "minimize": "Minimieren",
+    "maximize": "Maximieren",
+    "close": "Schließen",
+    "quickActionsTitle": "Schnelle Aktionen",
+    "orAskMe": "Oder fragen Sie mich direkt:",
+    "quickActions": {
+      "invoices": "Mis facturas",
+      "invoicesQuery": "Ich möchte meine Rechnungen sehen",
+      "order": "Hacer pedido",
+      "orderQuery": "Wie kann ich eine Bestellung aufgeben",
+      "contact": "Contacto",
+      "contactQuery": "Wie lautet die Kontakttelefonnummer",
+      "schedule": "Horarios",
+      "scheduleQuery": "Was sind Ihre Öffnungszeiten"
+    },
+    "suggestions": "Das könnte Sie interessieren:",
+    "quickQuestions": [
+      "Welche Produkte vertreiben Sie?",
+      "Wie gebe ich eine Bestellung auf?",
+      "Wie sind die Öffnungszeiten?",
+      "Wie lade ich Rechnungen herunter?"
+    ],
+    "voiceInput": "Spracheingabe",
+    "voiceListening": "Zuhören...",
+    "voiceNotSupported": "Ihr Browser unterstützt keine Spracheingabe",
+    "connectionError": "Es konnte keine Verbindung zum Server hergestellt werden. Bitte versuchen Sie es in einigen Sekunden erneut.",
+    "poweredBy": "Pepa IA",
+    "since": "HORECA desde 1966",
+    "downloadInvoice": "Descargar factura"
+  },
+  "footer": {
+    "companyName": "GRANJA MARIPEPA",
+    "tagline": "Premium Lebensmittelvertrieb",
+    "description_short": "Premium Lebensmittelvertrieb für HORECA",
+    "nestle_distributor": "Offizieller Nestlé Vertriebspartner",
+    "founded_text": "Gegründet in Lorca, 1966",
+    "green_energy": "Grüne Energie",
+    "quick_access": "Schnellzugriff",
+    "copyright": "© {year} Granja Maripepa. Alle Rechte vorbehalten.",
+    "rights_reserved": "Alle Rechte vorbehalten.",
+    "catalog": "Katalog",
+    "client_portal": "Kundenportal",
+    "location_lorca": "Lorca, Murcia",
+    "description_long": "Spezialisten für den Vertrieb von Tiefkühl-, Kühl- und Umgebungstemperaturprodukten für Gastronomie und Catering.",
+    "quickLinks": "Schnellzugriff",
+    "legal": "Legal",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "cookies": "Cookie-Richtlinie",
+    "legalNotice": "Aviso Legal",
+    "contact": "Contacto",
+    "followUs": "Folgen Sie uns",
+    "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
+    "delegation": "Delegation Murcia"
+  },
+  "globe_map": {
+    "badge": "VERTRIEBSNETZWERK",
+    "title_1": "Unsere",
+    "title_2": "Präsenz",
+    "subtitle": "Strategische Abdeckung im Südosten Spaniens",
+    "operations_title": "Betriebszentren",
+    "select_to_view": "Zum Auswählen auf Karte klicken",
+    "status_online": "ONLINE",
+    "status_viewing": "ANSICHT",
+    "headquarters": "Hauptsitz",
+    "regional_coverage": "Regionale Abdeckung",
+    "regional_coverage_desc": "Vertriebsservice in Murcia und Alicante. Lieferung in 24-48h.",
+    "go_to": "Gehe zu"
+  },
+  "errors": {
+    "notFound": "Seite nicht gefunden",
+    "notFoundDesc": "Entschuldigung, die gesuchte Seite existiert nicht.",
+    "serverError": "Serverfehler",
+    "serverErrorDesc": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+    "networkError": "Verbindungsfehler",
+    "networkErrorDesc": "No se pudo conectar con el servidor.",
+    "unauthorized": "No autorizado",
+    "unauthorizedDesc": "Sie müssen sich anmelden, um darauf zugreifen zu können.",
+    "forbidden": "Acceso denegado",
+    "forbiddenDesc": "No tienes permisos para acceder a este recurso.",
+    "tryAgain": "Intentar de nuevo",
+    "goHome": "Ir al inicio",
+    "invalidCredentials": "Credenciales incorrectas",
+    "invalidCredentialsDesc": "Überprüfen Sie Ihren Kundencode und Ihr Passwort."
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Wir sind für Sie da",
+    "phone": "Telefon",
+    "email": "Email",
+    "address": "Adresse",
+    "schedule": "Horario",
+    "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
+    "scheduleSaturday": "Samstag: 9:00 - 14:00",
+    "scheduleSunday": "Domingos y festivos: Cerrado",
+    "form": {
+      "title": "Senden Sie uns eine Nachricht",
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre completo",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "phone": "Telefon",
+      "phonePlaceholder": "612 345 678",
+      "company": "Empresa",
+      "companyPlaceholder": "Nombre de tu empresa (opcional)",
+      "message": "Mensaje",
+      "messagePlaceholder": "Wie können wir Ihnen helfen?",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando...",
+      "successTitle": "Nachricht gesendet!",
+      "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
+      "errorTitle": "Error al enviar",
+      "errorMessage": "Bitte versuchen Sie es später erneut."
+    },
+    "location": {
+      "title": "Unser Standort",
+      "mainOffice": "Oficina Principal",
+      "address": "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca",
+      "city": "30817 - Lorca (Murcia)"
+    }
+  },
+  "products_page": {
+    "title": "Demnächst",
+    "subtitle_1": "Estamos preparando algo especial",
+    "subtitle_2": "Unser Produktkatalog wird mit neuen Funktionen aktualisiert.",
+    "cta_home": "Volver al inicio",
+    "cta_clients": "Área de clientes",
+    "badge": "Demnächst verfügbar"
+  },
+  "accessibility": {
+    "skipToContent": "Ir al contenido principal",
+    "menuToggle": "Menü öffnen",
+    "languageSwitch": "Cambiar idioma",
+    "darkMode": "Modo oscuro",
+    "lightMode": "Modo claro",
+    "loading": "Cargando contenido",
+    "newWindow": "Se abre en nueva ventana"
+  },
+  "categories": {
+    "mar": {
+      "name": "Meeresfrüchte",
+      "description": "Tiefkühlfisch und Meeresfrüchte von höchster Qualität"
+    },
+    "carne": {
+      "name": "Fleisch",
+      "description": "Ausgewähltes Tiefkühlfleisch"
+    },
+    "precocinados": {
+      "name": "Fertiggerichte",
+      "description": "Tiefkühlfertiggerichte und Gemüse"
+    },
+    "reposteria": {
+      "name": "Backwaren",
+      "description": "Tiefkühlgebäck und Desserts"
+    },
+    "helados": {
+      "name": "Eiscreme",
+      "description": "Große Auswahl an Nestlé-Eis für die Gastronomie"
+    },
+    "chocolate": {
+      "name": "Schokolade",
+      "description": "Schokolade und Kakaoprodukte von höchster Qualität"
+    },
+    "pan": {
+      "name": "Tiefkühlbrot",
+      "description": "Hochwertiges Tiefkühlbrot und Teige"
+    }
+  },
+  "meta": {
+    "title": "Granja Maripepa | HORECA-Vertrieb Murcia und Lorca",
+    "description": "Führender Premium-Lebensmittelvertrieb für das Gastgewerbe. Tiefkühlkost, Fleisch und Fisch. 24-Stunden-Service in Murcia und Almería.",
+    "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, lebensmittelvertrieb, tiefkühlkost, HORECA, Murcia, Almería, fleisch, fisch, lorca"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "intro": "Bei Granja Maripepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
+      "sections": {
+        "s1": {
+          "title": "1. Verantwortlicher für die Datenverarbeitung",
+          "content": "Granja Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Telefon: 968 46 75 14<br />E-Mail: pedidos@granjamaripepa.com"
+        },
+        "s2": {
+          "title": "2. Zweck der Verarbeitung",
+          "content": "Wir verarbeiten die von Ihnen bereitgestellten Informationen, um den angeforderten Service zu erbringen, die Abrechnung durchzuführen und Ihnen kommerzielle Mitteilungen über unsere Produkte und Dienstleistungen zu senden."
+        },
+        "s3": {
+          "title": "3. Datenspeicherung",
+          "content": "Die bereitgestellten Daten werden so lange aufbewahrt, wie die Geschäftsbeziehung besteht oder für die Jahre, die zur Erfüllung gesetzlicher Verpflichtungen erforderlich sind."
+        },
+        "s4": {
+          "title": "4. Legitimation",
+          "content": "Die Rechtsgrundlage für die Verarbeitung Ihrer Daten ist die Durchführung des Vertrags über die Erbringung von Dienstleistungen und/oder den Verkauf von Produkten."
+        },
+        "s5": {
+          "title": "5. Empfänger",
+          "content": "Die Daten werden nicht an Dritte weitergegeben, es sei denn, es besteht eine gesetzliche Verpflichtung."
+        },
+        "s6": {
+          "title": "6. Rechte",
+          "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Maripepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
+        },
+        "s7": {
+          "title": "7. Cookies und lokale Speicherung",
+          "content": "Diese Website verwendet keine Werbe- oder Drittanbieter-Cookies. Sie nutzt technisch notwendige Speicherung für Zugang, Warenkorb und Ihre Einstellungen und speichert Ihre Entscheidung zur Analyse im lokalen Speicher des Browsers unter dem Schlüssel gmp-kage-consent-v1. Wenn Sie die optionale Analyse akzeptieren, wird eine Sitzungskennung im Sitzungsspeicher erstellt und Ereignisse an den eigenen Analysedienst der Website gesendet, ohne sie an Dritte weiterzugeben. Sie können Ihre Wahl jederzeit über „Datenschutzeinstellungen“ im Cookie-Hinweis ändern oder widerrufen."
+        }
+      }
+    },
+    "terms": {
+      "title": "Allgemeine Geschäftsbedingungen",
+      "intro": "Willkommen auf der Website von Granja Maripepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
+      "sections": {
+        "s1": {
+          "title": "1. Geistiges Eigentum",
+          "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Maripepa geschützt."
+        },
+        "s2": {
+          "title": "2. Nutzung der Website",
+          "content": "Der Nutzer verpflichtet sich, die Website, ihre Dienste und Inhalte sorgfältig, korrekt und rechtmäßig zu nutzen und insbesondere das Urheberrecht und andere Identifikationsdaten der Rechte ihrer Inhaber nicht zu unterdrücken, zu umgehen oder zu manipulieren."
+        },
+        "s3": {
+          "title": "3. Haftung",
+          "content": "Granja Maripepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
+        },
+        "s4": {
+          "title": "4. Änderungen",
+          "content": "Granja Maripepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
+        },
+        "s5": {
+          "title": "5. Anwendbares Recht",
+          "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Maripepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
+        }
+      }
+    }
+  }
 }

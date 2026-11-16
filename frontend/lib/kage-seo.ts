@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { Locale } from "@/i18n";
 
 export const KAGE_SITE_URL = "https://www.mari-pepa.com";
+// Update manually whenever public content changes.
+export const KAGE_CONTENT_UPDATED = new Date("2026-11-16");
 export const KAGE_LOCALES = ["es", "en", "de", "it", "zh"] as const;
 /** Only locales with a complete translation are indexable. The rest remain
  * reachable for users but are excluded from hreflang and sitemap until their
@@ -12,8 +14,12 @@ export function createKageMetadata(
   path: string,
   title: string,
   description: string,
+  ogImage?: string,
 ): Metadata {
   const canonical = KAGE_SITE_URL + "/" + locale + path;
+  /** Site-wide OG image by default. A per-page override is only valid when the
+   * asset is ≥1200×630 and is not upscaled; otherwise keep the global. */
+  const ogImageUrl = ogImage ?? "/og-maripepa.jpg";
   return {
     metadataBase: new URL(KAGE_SITE_URL),
     title: { absolute: title },
@@ -43,7 +49,7 @@ export function createKageMetadata(
       }[locale],
       images: [
         {
-          url: "/og-maripepa.jpg",
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: "Granja Maripepa · " + title,
@@ -54,7 +60,7 @@ export function createKageMetadata(
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-maripepa.jpg"],
+      images: [ogImageUrl],
     },
     robots:
       locale === "es" || locale === "en"

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "node_id": "art",
+  "summary": "Entrega constructora V3 lista para integrar: dirección y114filas/14rutas aprobadas antes del JSX, logo Main alfa, cinco ambientes nativos y cuatro alfa bajos, OG propia1200×630. Se conserva la aceptación runtime pendiente y Art sigue disponible para las tres rondas. No se tocó auth/API/backend ni se incorporó material de otro rediseño.",
+  "facts": [
+    {
+      "claim": "La dirección documenta Kage B literal, un acento Main medido hsl(190 95%40%), Onest fuente y excepción de identidad mediante logo real. La ruta fonts.css fue corregida según revisión independiente de Tokens.",
+      "evidence": [
+        {
+          "path": "docs/redesign/DIRECCION-DE-ARTE.md"
+        },
+        {
+          "path": "docs/redesign/art/review-design.json"
+        }
+      ]
+    },
+    {
+      "claim": "El contrato contiene14rutas (11Main+3marketing nuevas) y114filas, sin ninguna aceptación runtime. El diseño de Public, Editorial y Application se aprobó por mensajes antes de sus respectivos JSX.",
+      "evidence": [
+        {
+          "path": "docs/redesign/COREOGRAFIA.md"
+        },
+        {
+          "path": "docs/redesign/art/section-plan.json"
+        }
+      ]
+    },
+    {
+      "claim": "Hay cinco masters PNG nativos1536×1024, cinco placas WebP y cuatro alfa locales lossless con RGB visible preservado y material acotado al borde inferior. Se realizaron cinco llamadas nativas y cero regeneraciones; su coste no se informó.",
+      "evidence": [
+        {
+          "path": "docs/redesign/art/native-jobs.json"
+        },
+        {
+          "path": "docs/redesign/art/environment-assets-proof.json"
+        },
+        {
+          "path": "docs/redesign/art/alphas-overview.png"
+        }
+      ]
+    },
+    {
+      "claim": "El único intento Higgsfield gpt_image_2_6 medium1k3:2 fue rechazado por requisito de plan. Saldo observado10→10, delta0; cargo explícito desconocido. No hubo job, compra, recarga, suscripción o nuevo OAuth. Se usó el fallback nativo expresamente autorizado.",
+      "evidence": [
+        {
+          "path": "docs/redesign/art/umbral-job.json"
+        },
+        {
+          "path": "docs/redesign/art/umbral-bridge-run.json"
+        },
+        {
+          "path": "docs/redesign/ASSETS.md"
+        }
+      ]
+    },
+    {
+      "claim": "Logo real600×182 con RGB de Main intacto, aprobado para fondo oscuro. OG1200×630 local con ese logo y Umbral, sin cifras o afirmaciones añadidas, sin una nueva generación.",
+      "evidence": [
+        {
+          "path": "docs/redesign/art/logo-alpha-proof.json"
+        },
+        {
+          "path": "docs/redesign/art/logo-alpha-review.png"
+        },
+        {
+          "path": "docs/redesign/art/og-proof.json"
+        },
+        {
+          "path": "frontend/public/kage/brand/og.png"
+        }
+      ]
+    },
+    {
+      "claim": "El snapshot runtime consta de12archivos y2337085bytes; el manifiesto assets.json se copia al final desde su snapshot inmutable. Root confirmó la copia SHA correcta en Root y siete worktrees. Esta entrega no transforma la aprobación estática en aceptación de la aplicación.",
+      "evidence": [
+        {
+          "path": "docs/redesign/art/runtime-files.json"
+        },
+        {
+          "path": "docs/redesign/art/runtime-assets-frozen.json"
+        }
+      ]
+    },
+    {
+      "claim": "El gate obligatorio se ejecutó sobre el paquete actual. Resultado BLOCKED; diff y escaneo se reportan literalmente en el registro, sin modificar políticas o detector.",
+      "evidence": [
+        {
+          "path": "docs/redesign/art/loop-gate-r3.json"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    "docs/redesign/DIRECCION-DE-ARTE.md",
+    "docs/redesign/COREOGRAFIA.md",
+    "docs/redesign/ASSETS.md",
+    "docs/redesign/art/package-files.json",
+    "docs/redesign/art/runtime-files.json",
+    "docs/redesign/art/four-masters-contact-sheet.png",
+    "docs/redesign/art/alphas-overview.png",
+    "frontend/public/kage/assets.json",
+    "frontend/public/kage/brand/logo-alpha.png",
+    "frontend/public/kage/brand/og.png"
+  ],
+  "risks": [
+    "No hay aceptación de rutas, tres rondas, contraste integrado, FPS, Lighthouse, formularios o salud de backend en esta entrega de assets.",
+    "El coste de las cinco generaciones nativas no se informó. El delta0 de Higgsfield pertenece sólo al intento rechazado.",
+    "Los ambientes son ilustraciones ficticias; no acreditan instalaciones, flota, mercancía, equipo o procedimientos de la empresa.",
+    "El recorte390 y el velo de lectura deben validarse en la aplicación; los alfa no pueden tapar texto o foco.",
+    "El gate advierte de dos políticas .opencode no presentes en Main; no se inventaron ni se declaró producción preparada.",
+    "Las capas y estados condicionales permanecen pendientes de observación con fixture identificado; una UI de error no demuestra HTTP500."
+  ],
+  "confidence": 0.97
+}

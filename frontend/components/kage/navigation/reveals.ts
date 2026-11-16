@@ -7,7 +7,12 @@ export function prepareSectionReveals(root: HTMLElement): () => void {
   }
   const timers = new Set<ReturnType<typeof setTimeout>>();
   const groups = new Map<Element | null, HTMLElement[]>();
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const seen = new WeakSet<HTMLElement>();
+  const reduce =
+    typeof window.matchMedia === "function"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)")
+      : null;
+  const reduced = () => reduce === null || reduce.matches;
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
@@ -20,7 +25,7 @@ export function prepareSectionReveals(root: HTMLElement): () => void {
             el.removeAttribute("data-kage-wait");
             timers.delete(timer);
           },
-          reduce.matches ? 0 : Number(el.dataset.rvd || 0),
+          reduced() ? 0 : Number(el.dataset.rvd || 0),
         );
         timers.add(timer);
       }
@@ -34,28 +39,31 @@ export function prepareSectionReveals(root: HTMLElement): () => void {
   }
   for (const group of Array.from(groups.values()))
     group.forEach((el, i) => {
-      el.dataset.rvd = String(i * 85);
+      // Optional per-element extra delay (ms) summed on top of the 85 ms stagger.
+      el.dataset.rvd = String(i * 85 + Number(el.dataset.rvDelay || 0));
       if (
-        reduce.matches ||
+        reduced() ||
         el.getBoundingClientRect().top < document.documentElement.clientHeight
       ) {
         el.classList.add("rv-in");
         return;
       }
+      if (seen.has(el)) return;
+      seen.add(el);
       el.setAttribute("data-kage-wait", "");
       observer.observe(el);
     });
   const show = () => {
-    if (reduce.matches)
+    if (reduced())
       items.forEach((el) => {
         el.removeAttribute("data-kage-wait");
         el.classList.add("rv-in");
       });
   };
-  reduce.addEventListener("change", show);
+  reduce?.addEventListener("change", show);
   return () => {
     observer.disconnect();
     timers.forEach(clearTimeout);
-    reduce.removeEventListener("change", show);
+    reduce?.removeEventListener("change", show);
   };
 }

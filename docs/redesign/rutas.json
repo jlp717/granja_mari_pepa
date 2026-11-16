@@ -1,0 +1,111 @@
+{
+  "source": "Main tracked source only",
+  "baseCommit": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "pages": [
+    {
+      "path": "frontend/app/[locale]/acerca/page.tsx",
+      "pattern": "/[locale]/acerca",
+      "classification": "marketing"
+    },
+    {
+      "path": "frontend/app/[locale]/area-clientes/page.tsx",
+      "pattern": "/[locale]/area-clientes",
+      "classification": "transactional"
+    },
+    {
+      "path": "frontend/app/[locale]/checkout/page.tsx",
+      "pattern": "/[locale]/checkout",
+      "classification": "transactional"
+    },
+    {
+      "path": "frontend/app/[locale]/contacto/page.tsx",
+      "pattern": "/[locale]/contacto",
+      "classification": "marketing-form"
+    },
+    {
+      "path": "frontend/app/[locale]/legal/privacidad/page.tsx",
+      "pattern": "/[locale]/legal/privacidad",
+      "classification": "reading"
+    },
+    {
+      "path": "frontend/app/[locale]/legal/terminos/page.tsx",
+      "pattern": "/[locale]/legal/terminos",
+      "classification": "reading"
+    },
+    {
+      "path": "frontend/app/[locale]/login-secure-example/page.tsx",
+      "pattern": "/[locale]/login-secure-example",
+      "classification": "transactional"
+    },
+    {
+      "path": "frontend/app/[locale]/lorca/page.tsx",
+      "pattern": "/[locale]/lorca",
+      "classification": "marketing"
+    },
+    {
+      "path": "frontend/app/[locale]/offline/page.tsx",
+      "pattern": "/[locale]/offline",
+      "classification": "state"
+    },
+    {
+      "path": "frontend/app/[locale]/page.tsx",
+      "pattern": "/[locale]",
+      "classification": "marketing"
+    },
+    {
+      "path": "frontend/app/[locale]/productos/page.tsx",
+      "pattern": "/[locale]/productos",
+      "classification": "transactional-gated"
+    }
+  ],
+  "special": [
+    "frontend/app/[locale]/layout.tsx",
+    "frontend/app/[locale]/not-found.tsx"
+  ],
+  "samples": {
+    "/[locale]/acerca": [
+      "/es/acerca"
+    ],
+    "/[locale]/area-clientes": [
+      "/es/area-clientes"
+    ],
+    "/[locale]/checkout": [
+      "/es/checkout"
+    ],
+    "/[locale]/contacto": [
+      "/es/contacto"
+    ],
+    "/[locale]/legal/privacidad": [
+      "/es/legal/privacidad"
+    ],
+    "/[locale]/legal/terminos": [
+      "/es/legal/terminos"
+    ],
+    "/[locale]/login-secure-example": [
+      "/es/login-secure-example"
+    ],
+    "/[locale]/lorca": [
+      "/es/lorca"
+    ],
+    "/[locale]/offline": [
+      "/es/offline"
+    ],
+    "/[locale]": [
+      "/es"
+    ],
+    "/[locale]/productos": [
+      "/es/productos"
+    ]
+  },
+  "privateStates": [
+    "CustomerDashboard:facturas",
+    "CustomerDashboard:perfil",
+    "CustomerDashboard:favoritos",
+    "PanamarDashboard:documents"
+  ],
+  "disabledStates": [
+    "CustomerDashboard:dashboard",
+    "CustomerDashboard:pedidos"
+  ],
+  "employmentTracked": false
+}

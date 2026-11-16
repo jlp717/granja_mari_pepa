@@ -1,0 +1,226 @@
+{
+  "sourceHead": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "checks": [
+    {
+      "name": "messages_unmodified_es",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "literal_legal_es",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "home_six_complete_chapters_es",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "four_real_family_ids_es",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "family_copy_80_150_words_es",
+      "pass": true,
+      "detail": [
+        102,
+        103,
+        100,
+        103
+      ]
+    },
+    {
+      "name": "translated_catalogue_states_es",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "messages_unmodified_en",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "literal_legal_en",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "home_six_complete_chapters_en",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "four_real_family_ids_en",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "family_copy_80_150_words_en",
+      "pass": true,
+      "detail": [
+        101,
+        102,
+        106,
+        104
+      ]
+    },
+    {
+      "name": "translated_catalogue_states_en",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "messages_unmodified_de",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "literal_legal_de",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "home_six_complete_chapters_de",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "four_real_family_ids_de",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "family_copy_80_150_words_de",
+      "pass": true,
+      "detail": [
+        97,
+        98,
+        98,
+        100
+      ]
+    },
+    {
+      "name": "translated_catalogue_states_de",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "messages_unmodified_it",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "literal_legal_it",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "home_six_complete_chapters_it",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "four_real_family_ids_it",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "family_copy_80_150_words_it",
+      "pass": true,
+      "detail": [
+        105,
+        101,
+        105,
+        101
+      ]
+    },
+    {
+      "name": "translated_catalogue_states_it",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "messages_unmodified_zh",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "literal_legal_zh",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "home_six_complete_chapters_zh",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "four_real_family_ids_zh",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "chinese_full_family_copy",
+      "pass": true,
+      "detail": [
+        215,
+        214,
+        192,
+        213
+      ]
+    },
+    {
+      "name": "translated_catalogue_states_zh",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "55_literal_clauses",
+      "pass": true,
+      "detail": 55
+    },
+    {
+      "name": "pdf_identity_Marzo 2026",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "pdf_identity_Febrero 2026",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cloth_source_and_ssr_fallback",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "next_links_preserve_route_continuity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "no_speculative_image_scale",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "seo_no_sla_cert_price_reviews",
+      "pass": true,
+      "detail": "Checks actual property keys and unverified factual values. The first broad text scan matched a comment about excluded ratings; that FAIL is preserved in public-checks-first.json."
+    },
+    {
+      "name": "seo_duplicate_static_files_removed",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "limits": [
+    "No TypeScript, ESLint, build, browser or performance result is claimed before Root depsReady."
+  ],
+  "status": "PASS",
+  "passed": 38,
+  "total": 38
+}

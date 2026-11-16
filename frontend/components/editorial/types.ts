@@ -20,11 +20,33 @@ export interface ChapterShot {
   caption: string;
   href: string;
 }
+export interface FactEntry {
+  label: string;
+  value: string;
+  note?: string;
+  href?: string;
+}
+export interface TimelineEntry {
+  year: string;
+  title: string;
+  text: string;
+}
+export interface BrandEntry {
+  name: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  href?: string;
+}
 export interface ChapterText {
   label: string;
   title: string;
   paragraphs: readonly string[];
   shots?: readonly ChapterShot[];
+  facts?: readonly FactEntry[];
+  timeline?: readonly TimelineEntry[];
+  brands?: readonly BrandEntry[];
 }
 export interface StoryText {
   title: string;
@@ -38,7 +60,15 @@ export interface StoryCopy extends StoryText {
   chapters: readonly (ChapterText & {
     id: string;
     scene: KageScene;
-    layout: "hero" | "spread" | "atlas" | "gallery" | "closing";
+    layout:
+      | "hero"
+      | "spread"
+      | "atlas"
+      | "gallery"
+      | "closing"
+      | "facts"
+      | "timeline"
+      | "brands";
   })[];
   manifesto: StoryText["manifesto"] & { href: string };
 }

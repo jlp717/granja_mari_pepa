@@ -1,5 +1,11 @@
 "use client";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useKageValue } from "./navigation/useKageValue";
@@ -17,9 +23,9 @@ import { useKageValue } from "./navigation/useKageValue";
 
 const RAMP_MS = 700;
 const REDUCE_RAMP_MS = 320;
-const BOOT_MIN_MS = 380;
+const BOOT_MIN_MS = 650;
 const BOOT_MAX_MS = 1200;
-const NAV_MIN_MS = 380;
+const NAV_MIN_MS = 650;
 /**
  * An armed navigation waits for the real route commit. This only exists for a
  * router that never answers; it must never fire during a slow transition.
@@ -83,7 +89,16 @@ export function BootPreloader({ allowed }: { allowed: boolean }) {
     allowed,
     reduced,
   });
-  latest.current = { bootProgress, ready, fallback, publicRoute, allowed, reduced };
+  useEffect(() => {
+    latest.current = {
+      bootProgress,
+      ready,
+      fallback,
+      publicRoute,
+      allowed,
+      reduced,
+    };
+  }, [bootProgress, ready, fallback, publicRoute, allowed, reduced]);
 
   const startCycle = useCallback((kind: CycleKind, committed = false) => {
     const now = performance.now();
@@ -155,12 +170,7 @@ export function BootPreloader({ allowed }: { allowed: boolean }) {
 
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0) return;
-      if (
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey
-      )
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
         return;
       const node =
         event.target instanceof Element
@@ -190,7 +200,8 @@ export function BootPreloader({ allowed }: { allowed: boolean }) {
     const finish = (safetyRelease: boolean) => {
       settled = true;
       cycleRef.current = null;
-      if (safetyRelease) suppressUntil.current = performance.now() + SUPPRESS_MS;
+      if (safetyRelease)
+        suppressUntil.current = performance.now() + SUPPRESS_MS;
       setHidden(true);
     };
 

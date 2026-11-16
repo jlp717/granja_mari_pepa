@@ -1,0 +1,402 @@
+{
+  "sourceHead": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "normalization": "Literal JSON strings preserved. Source files untouched.",
+  "locales": {
+    "es": {
+      "path": "frontend/messages/es.json",
+      "fileSha256": "c877c323adf99029c6ac99b5008f61ee0513bba5f0a47daadebf325ee8d19488",
+      "legal": {
+        "privacy": {
+          "title": "Política de Privacidad",
+          "intro": "En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios.",
+          "sections": {
+            "s1": {
+              "title": "1. Responsable del Tratamiento",
+              "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+            },
+            "s2": {
+              "title": "2. Finalidad del Tratamiento",
+              "content": "Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios."
+            },
+            "s3": {
+              "title": "3. Conservación de Datos",
+              "content": "Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales."
+            },
+            "s4": {
+              "title": "4. Legitimación",
+              "content": "La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos."
+            },
+            "s5": {
+              "title": "5. Destinatarios",
+              "content": "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal."
+            },
+            "s6": {
+              "title": "6. Derechos",
+              "content": "Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios."
+            }
+          }
+        },
+        "terms": {
+          "title": "Términos y Condiciones",
+          "intro": "Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+          "sections": {
+            "s1": {
+              "title": "1. Propiedad Intelectual",
+              "content": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa."
+            },
+            "s2": {
+              "title": "2. Uso del Sitio Web",
+              "content": "El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares."
+            },
+            "s3": {
+              "title": "3. Responsabilidad",
+              "content": "Granja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo."
+            },
+            "s4": {
+              "title": "4. Modificaciones",
+              "content": "Granja Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web."
+            },
+            "s5": {
+              "title": "5. Ley Aplicable",
+              "content": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
+            }
+          }
+        }
+      },
+      "clauseHashes": {
+        "privacy": {
+          "s1": "273932b80f89dfecd34f533b3eba8c7e8a57b36ae7f2f6f878d26b5a92241316",
+          "s2": "7af8f1d7a11407baa94d6772bf3ed949d2a57121de999459935d92d8422448fc",
+          "s3": "6b0da54a38ec395cf7f148afb85c5a29c4b3eb31299da128b63c64a48bb3dada",
+          "s4": "d323beef534c145df60d76f0ab151c4674e7c86d5c6b58fc3e7268548b47beb9",
+          "s5": "95c62787e79e5f53d56b34f97e577dcfec006fe5893e1e2d91356efb5075caa2",
+          "s6": "dd6c565fa3b74f9e02d6b3f4f8e887093e22403f1e4becf3800f534cf889cff3"
+        },
+        "terms": {
+          "s1": "8e28ca2769dc00670986fe2c6ceeef7397713ba56d9589c55b6ba35862432ce4",
+          "s2": "8279d3eb78d0e9a5cfba60b20747ef900e32a88c1b307d2f51a5249669f0d703",
+          "s3": "0c6dbfd35592da21cb974b025a254c80847bc86ab099ee6746ff2edb8f4912e8",
+          "s4": "e49e398c5710a0da39bb9a34f3b45b327e72bdd807608a7e0924301315e3bcb8",
+          "s5": "c22a83c2c7c141b84cf772e2c87fab35ace275810246b1217893f3e650c86d50"
+        }
+      }
+    },
+    "en": {
+      "path": "frontend/messages/en.json",
+      "fileSha256": "e3992491afa316120a4ae88ab6b1106a25fca828fa00d05ae9fad37f56b8f2c4",
+      "legal": {
+        "privacy": {
+          "title": "Privacy Policy",
+          "intro": "At Granja Mari Pepa we take the privacy of our customers and users very seriously.",
+          "sections": {
+            "s1": {
+              "title": "1. Data Controller",
+              "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+            },
+            "s2": {
+              "title": "2. Purpose of Processing",
+              "content": "We process the information you provide in order to provide the requested service, perform billing and send commercial communications related to our products and services."
+            },
+            "s3": {
+              "title": "3. Data Retention",
+              "content": "The data provided will be kept as long as the commercial relationship is maintained or for the years necessary to comply with legal obligations."
+            },
+            "s4": {
+              "title": "4. Legitimation",
+              "content": "The legal basis for the processing of your data is the execution of the contract for the provision of services and/or sale of products."
+            },
+            "s5": {
+              "title": "5. Recipients",
+              "content": "The data will not be transferred to third parties except in cases where there is a legal obligation."
+            },
+            "s6": {
+              "title": "6. Rights",
+              "content": "You have the right to obtain confirmation as to whether Granja Mari Pepa is processing your personal data, therefore you have the right to access your personal data, rectify inaccurate data or request its deletion when the data is no longer necessary."
+            }
+          }
+        },
+        "terms": {
+          "title": "Terms and Conditions",
+          "intro": "Welcome to the Granja Mari Pepa website. By accessing and using this site, you agree to the following terms and conditions.",
+          "sections": {
+            "s1": {
+              "title": "1. Intellectual Property",
+              "content": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Granja Mari Pepa."
+            },
+            "s2": {
+              "title": "2. Use of the Website",
+              "content": "The user undertakes to use the website, its services and contents diligently, correctly and lawfully, and in particular, undertakes to refrain from suppressing, circumventing or manipulating the copyright and other identifying data of the rights of its holders."
+            },
+            "s3": {
+              "title": "3. Liability",
+              "content": "Granja Mari Pepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein."
+            },
+            "s4": {
+              "title": "4. Modifications",
+              "content": "Granja Mari Pepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website."
+            },
+            "s5": {
+              "title": "5. Applicable Law",
+              "content": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Granja Mari Pepa agree to expressly submit to the courts and tribunals of Lorca (Murcia)."
+            }
+          }
+        }
+      },
+      "clauseHashes": {
+        "privacy": {
+          "s1": "273932b80f89dfecd34f533b3eba8c7e8a57b36ae7f2f6f878d26b5a92241316",
+          "s2": "57690801949d46b9502badb0e6c484fd45b3c7f79c7988ee46b63809ad1b1135",
+          "s3": "29bffec89c99e14ebe29c39427a15520840f0a334f4db3feb07c33623138e58e",
+          "s4": "d968aac7c9d41a1b11c5820af05ee99beb74dc20da4e5fb9e92a1560ef6f14e1",
+          "s5": "9fc568b2f203babd72112bee14f27b3c0a7f69c7d2e700b30ae8807959b007e6",
+          "s6": "11b21a3d3b86475bf1e49448eba23006a01e5f81153dcaecc68f3336292a727c"
+        },
+        "terms": {
+          "s1": "0b0296cacad5d15c19b7bda08988eb37321259217bb7467b4bbdf53fff6a26f2",
+          "s2": "77fc4a51df11122a2fc501c03f6f0a67dc77fb02c0ca069edf30875f57086ba6",
+          "s3": "0e5fae52a673e629dba102ded31b1fd189f0476cc305b711a877fb500187d00b",
+          "s4": "1035ae74a131fb046db9645a424732e6e83fffd97a6d0d7f3c1cea6cb01de7fd",
+          "s5": "2335b3842626cb1ed389159c19e8f6803de1f8c6881c5886fca91857fc14c17b"
+        }
+      }
+    },
+    "de": {
+      "path": "frontend/messages/de.json",
+      "fileSha256": "638a5f113ff3764753bc668bc93e0d0118a731d0cc1c527aee00893607fcb7b2",
+      "legal": {
+        "privacy": {
+          "title": "Datenschutzrichtlinie",
+          "intro": "Bei Granja Mari Pepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst.",
+          "sections": {
+            "s1": {
+              "title": "1. Verantwortlicher für die Datenverarbeitung",
+              "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@mari-pepa.com"
+            },
+            "s2": {
+              "title": "2. Zweck der Verarbeitung",
+              "content": "Wir verarbeiten die von Ihnen bereitgestellten Informationen, um den angeforderten Service zu erbringen, die Abrechnung durchzuführen und Ihnen kommerzielle Mitteilungen über unsere Produkte und Dienstleistungen zu senden."
+            },
+            "s3": {
+              "title": "3. Datenspeicherung",
+              "content": "Die bereitgestellten Daten werden so lange aufbewahrt, wie die Geschäftsbeziehung besteht oder für die Jahre, die zur Erfüllung gesetzlicher Verpflichtungen erforderlich sind."
+            },
+            "s4": {
+              "title": "4. Legitimation",
+              "content": "Die Rechtsgrundlage für die Verarbeitung Ihrer Daten ist die Durchführung des Vertrags über die Erbringung von Dienstleistungen und/oder den Verkauf von Produkten."
+            },
+            "s5": {
+              "title": "5. Empfänger",
+              "content": "Die Daten werden nicht an Dritte weitergegeben, es sei denn, es besteht eine gesetzliche Verpflichtung."
+            },
+            "s6": {
+              "title": "6. Rechte",
+              "content": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Mari Pepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind."
+            }
+          }
+        },
+        "terms": {
+          "title": "Allgemeine Geschäftsbedingungen",
+          "intro": "Willkommen auf der Website von Granja Mari Pepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen.",
+          "sections": {
+            "s1": {
+              "title": "1. Geistiges Eigentum",
+              "content": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Mari Pepa geschützt."
+            },
+            "s2": {
+              "title": "2. Nutzung der Website",
+              "content": "Der Nutzer verpflichtet sich, die Website, ihre Dienste und Inhalte sorgfältig, korrekt und rechtmäßig zu nutzen und insbesondere das Urheberrecht und andere Identifikationsdaten der Rechte ihrer Inhaber nicht zu unterdrücken, zu umgehen oder zu manipulieren."
+            },
+            "s3": {
+              "title": "3. Haftung",
+              "content": "Granja Mari Pepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können."
+            },
+            "s4": {
+              "title": "4. Änderungen",
+              "content": "Granja Mari Pepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren."
+            },
+            "s5": {
+              "title": "5. Anwendbares Recht",
+              "content": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Mari Pepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen."
+            }
+          }
+        }
+      },
+      "clauseHashes": {
+        "privacy": {
+          "s1": "e8bfd7a0690125690de13b5c3bf5bc601004a5984a1d50135644f91260011ba0",
+          "s2": "8cc9147253ea8372af62b282567378424bbaaf2e108d7c4c6cb52d96298bc6b7",
+          "s3": "8d738c938690ff8f09bb11f16ce9f4a3bb6b70804b9fa5a71024e7669d972462",
+          "s4": "ae5b5c5522dccc2f3809fe5a1423864f31d65d4256c99029817a76ea9deb69ba",
+          "s5": "40ddd0fa2eff1d46cdc362d67f7cd8cbfe4561c618fe51a549d6ccdae50e7afe",
+          "s6": "75f9e84e9d73e9e8a43108c69c2e5441468907548f4f39b9af2a14f7af0b378d"
+        },
+        "terms": {
+          "s1": "42c984374fd08ee497701635e041c903e4f06730b2da660fe89f769db1f20486",
+          "s2": "772101e2079e29bc6c929fd8a07d197337a451e603dc34c886509b0b69556cdf",
+          "s3": "693ba9b961f3a52743b162b3af19d7462910fe1091bdd0895304ef926608eb55",
+          "s4": "9a889c6cf54e97193629a3c0bd835885103bcb959afbd292665311bd4e112fc2",
+          "s5": "9b4c548e5855674ece5b4b8a4b962b0e777ff67d570008763fc1a28cbeacf8d8"
+        }
+      }
+    },
+    "it": {
+      "path": "frontend/messages/it.json",
+      "fileSha256": "dd2c6240498778f35f0b2976984b09ef646c4362f964cdfd1701efc0b9c22fd5",
+      "legal": {
+        "privacy": {
+          "title": "Informativa sulla Privacy",
+          "intro": "In Granja Mari Pepa prendiamo molto sul serio la privacy dei nostri clienti e utenti.",
+          "sections": {
+            "s1": {
+              "title": "1. Titolare del Trattamento",
+              "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+            },
+            "s2": {
+              "title": "2. Finalità del Trattamento",
+              "content": "Trattiamo le informazioni fornite al fine di erogare il servizio richiesto, effettuare la fatturazione e inviare comunicazioni commerciali relative ai nostri prodotti e servizi."
+            },
+            "s3": {
+              "title": "3. Conservazione dei Dati",
+              "content": "I dati forniti saranno conservati finché verrà mantenuto il rapporto commerciale o per gli anni necessari per adempiere agli obblighi legali."
+            },
+            "s4": {
+              "title": "4. Legittimazione",
+              "content": "La base giuridica per il trattamento dei vostri dati è l'esecuzione del contratto di prestazione di servizi e/o compravendita di prodotti."
+            },
+            "s5": {
+              "title": "5. Destinatari",
+              "content": "I dati non saranno ceduti a terzi salvo nei casi in cui esista un obbligo legale."
+            },
+            "s6": {
+              "title": "6. Diritti",
+              "content": "Avete il diritto di ottenere conferma se in Granja Mari Pepa stiamo trattando i vostri dati personali, pertanto avete diritto ad accedere ai vostri dati personali, rettificare i dati inesatti o richiederne la cancellazione quando i dati non siano più necessari."
+            }
+          }
+        },
+        "terms": {
+          "title": "Termini e Condizioni",
+          "intro": "Benvenuti nel sito web di Granja Mari Pepa. Accedendo e utilizzando questo sito, accettate i seguenti termini e condizioni.",
+          "sections": {
+            "s1": {
+              "title": "1. Proprietà Intellettuale",
+              "content": "Il codice sorgente, i disegni grafici, le immagini, le fotografie, i suoni, le animazioni, il software, i testi, così come le informazioni e i contenuti raccolti nel presente sito web sono protetti dalla legislazione spagnola sui diritti di proprietà intellettuale e industriale a favore di Granja Mari Pepa."
+            },
+            "s2": {
+              "title": "2. Uso del Sito Web",
+              "content": "L'utente si impegna a utilizzare il sito web, i suoi servizi e contenuti in modo diligente, corretto e lecito, e in particolare, si impegna ad astenersi dal sopprimere, eludere o manipolare il copyright e gli altri dati identificativi dei diritti dei suoi titolari."
+            },
+            "s3": {
+              "title": "3. Responsabilità",
+              "content": "Granja Mari Pepa non si assume la responsabilità dell'inadempimento di qualsiasi norma applicabile in cui possa incorrere l'utente nel suo accesso al sito web e/o nell'uso delle informazioni in esso contenute."
+            },
+            "s4": {
+              "title": "4. Modifiche",
+              "content": "Granja Mari Pepa si riserva il diritto di modificare o aggiornare in qualsiasi momento le presenti condizioni d'uso, così come qualsiasi tipo di informazione che possa apparire nel sito web."
+            },
+            "s5": {
+              "title": "5. Legge Applicabile",
+              "content": "Le presenti condizioni saranno regolate dalla legislazione spagnola. Per qualsiasi controversia che possa derivare dall'accesso o uso di questo sito web, l'utente e Granja Mari Pepa accettano di sottoporsi espressamente alle corti e ai tribunali di Lorca (Murcia)."
+            }
+          }
+        }
+      },
+      "clauseHashes": {
+        "privacy": {
+          "s1": "273932b80f89dfecd34f533b3eba8c7e8a57b36ae7f2f6f878d26b5a92241316",
+          "s2": "f8945620f058b251e7f96fd5ffcaf8eb11a6d657cf3ac1cb6cf2ad167f5bc310",
+          "s3": "0e0de2f78fee3605b5e064bd972b1599226222a8298d950dd0611f853ed6ade5",
+          "s4": "6fb8054c144eddbef9cb57ea26add13cc3e1ec8e68f578d1a79d05a6aef01d78",
+          "s5": "f781a5265a158fe085e93b6e0f373ae965eabcc23ef84b1c86398c3f8f187708",
+          "s6": "e46bc4440cb1fee7eb071f671933b7d4bc4118c38062a1ec453334c55325db2c"
+        },
+        "terms": {
+          "s1": "a3bf04ea1c6250d2b3bc4025f1f4508d2d6aef6c9051277bccd4e505b2470eae",
+          "s2": "882349ef23ae672266578a4024c03b4e42c0a88d495534d72e43240a6f5e613b",
+          "s3": "146f401adbddda037662ca5cad94e89ba328c897473ee2db59395f563db35869",
+          "s4": "58d4b67f064f437ba7146a4c755ba3f1750944e1628a1f669f110f6c57067abe",
+          "s5": "77391a336e5981a7b352cb44a991d61eff15264c69ca54f6e5b2be93cc19d5b4"
+        }
+      }
+    },
+    "zh": {
+      "path": "frontend/messages/zh.json",
+      "fileSha256": "e40b2431c9b47be83bd04d377f621186956c389f5f7d318f15f6fc825959a307",
+      "legal": {
+        "privacy": {
+          "title": "隐私政策",
+          "intro": "在Granja Mari Pepa，我们非常重视客户和用户的隐私。",
+          "sections": {
+            "s1": {
+              "title": "1. 数据控制方",
+              "content": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com"
+            },
+            "s2": {
+              "title": "2. 处理目的",
+              "content": "我们处理您提供的信息是为了提供所请求的服务，进行计费，并向您发送与其相关的产品和服务的商业通信。"
+            },
+            "s3": {
+              "title": "3. 数据保留",
+              "content": "只要商业关系维持或为履行法律义务所需的年限内，提供的数据将被保留。"
+            },
+            "s4": {
+              "title": "4. 合法性",
+              "content": "处理您数据的法律依据是执行服务合同和/或产品销售合同。"
+            },
+            "s5": {
+              "title": "5. 接收者",
+              "content": "除非有法律义务，否则数据不会转让给第三方。"
+            },
+            "s6": {
+              "title": "6. 权利",
+              "content": "您有权确认Granja Mari Pepa是否正在处理您的个人数据，因此您有权访问您的个人数据，更正不准确的数据或在不再需要时请求删除。"
+            }
+          }
+        },
+        "terms": {
+          "title": "条款和条件",
+          "intro": "欢迎访问Granja Mari Pepa网站。访问并使用本网站即表示您接受以下条款和条件。",
+          "sections": {
+            "s1": {
+              "title": "1. 知识产权",
+              "content": "源代码、图形设计、图像、照片、声音、动画、软件、文本以及本网站收集的信息和内容受西班牙知识产权和工业产权立法的保护，归Granja Mari Pepa所有。"
+            },
+            "s2": {
+              "title": "2. 网站使用",
+              "content": "用户承诺勤勉、正确和合法地使用网站、其服务和内容，特别是承诺不删除、规避或操纵版权和其他识别权利持有人权利的数据。"
+            },
+            "s3": {
+              "title": "3. 责任",
+              "content": "Granja Mari Pepa不对用户在访问网站和/或使用其中包含的信息时可能违反的任何适用规范负责。"
+            },
+            "s4": {
+              "title": "4. 修改",
+              "content": "Granja Mari Pepa保留随时修改或更新本使用条款以及网站上可能出现的任何类型信息的权利。"
+            },
+            "s5": {
+              "title": "5. 适用法律",
+              "content": "本条款受西班牙法律管辖。对于因访问或使用本网站而可能产生的任何争议，用户和Granja Mari Pepa同意明确提交给Lorca（穆尔西亚）的法院和法庭。"
+            }
+          }
+        }
+      },
+      "clauseHashes": {
+        "privacy": {
+          "s1": "273932b80f89dfecd34f533b3eba8c7e8a57b36ae7f2f6f878d26b5a92241316",
+          "s2": "e9b59aafd95bfee58d106d2ebb3430de9ee8a83af43534ca97f4493a77126715",
+          "s3": "1f7c072093fbbc2c897e8c375922e8b2e4cd0fa5b49ea7b0666986744c17b00c",
+          "s4": "75e8a4b7660469753c1c6978f4b2cecd419c0a66cbf33c205202c29a56276046",
+          "s5": "ef6c175ff62a430769f6e82373bc51b6861c3bae2d7f28edab2b5cd07049d144",
+          "s6": "09fb59ae4c79335ba3b3aa9c9543ba22f411b9ac915fd0ff5e957c5fb878be11"
+        },
+        "terms": {
+          "s1": "d74f35af67848bda91001d2394af3aa4862ab1f40531222e8789b9178e1c02ac",
+          "s2": "83b67e07f5ae67941428899a45491e5046af4322e285a2f9c69c148b14d9ff6f",
+          "s3": "f52f8f255890c1edccc08b9270c166058ca2574845e852b798cb72d519668d31",
+          "s4": "d429395a2f6bd329a6df18f16896c67adc694a1b19ab24802a9e640741e9af84",
+          "s5": "e9ba37eeb5d85eeb68c17ebdfbf672bdbeaabafdb1cf53d09204cb7a6b9c80ce"
+        }
+      }
+    }
+  },
+  "clauseCount": 55
+}

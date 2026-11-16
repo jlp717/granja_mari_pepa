@@ -36,6 +36,7 @@ export interface KageSnapshot {
   qualityScale: number;
   bootProgress: number;
   ready: boolean;
+  visible: boolean;
   fallback: boolean;
 }
 export interface KageRuntimeAPI {

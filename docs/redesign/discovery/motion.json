@@ -1,0 +1,262 @@
+{
+  "status": "ok",
+  "node_id": "motion",
+  "summary": "Discoveryread-only1 completo: README70/PROMPT34/index4821 leídos íntegros. Portenimplementación posterior autorizada enWTnuevo; ningúnresultado runtime inferido.",
+  "facts": [
+    {
+      "claim": "Three149 local y canvasambiental fijo; renderer36deg/.35/220,fog0x050a0e/.0168; calidad LOWDPR1.4/HIGH1.8.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 1205
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2264
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2277
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2299
+        }
+      ]
+    },
+    {
+      "claim": "Dampingexponencialliteral,CatmullRomabierta tensión.42,seisCAMsource; ajusteaspect1.62/1.05/8.2/1.1/.40 y pointer.62/.34/-.20/-.12.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 1230
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4034
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4045
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4055
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4073
+        }
+      ]
+    },
+    {
+      "claim": "PostHalfFloat4niveles,bloom.34 threshold.86 knee.50,blur5tapliteral,up.52,ACESygrade/grain/vignettes originales.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3940
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3948
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3962
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3970
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4017
+        }
+      ]
+    },
+    {
+      "claim": "Pools low/high: haze4/6,embers220/460,rain900sólohigh,ripples6/13,leaves110/260;wisp90/190 sólofinepointer.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3075
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3124
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3163
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3190
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3273
+        }
+      ]
+    },
+    {
+      "claim": "ClothrawWebGL2local,97x97nodos,dt1/120,wave30,stiff.55,gain5,bleed48;2passes yRAFpropio pausado fuera/hidden/reduced.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3499
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3514
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3771
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3804
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3845
+        }
+      ]
+    },
+    {
+      "claim": "Source tienecanvasambiental+3Cloth yRAFcursor; mandatoaclarado conservaestoscanvaslocales, no exigeRAFúnico.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3514
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3859
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4421
+        }
+      ]
+    },
+    {
+      "claim": "Scrollnativo y3estadosseparados:progressFor/rigdamp5.2,railround yFGmayorIO ratio-margin12%/thresholds0,.12,.32,.55.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4088
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4256
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4373
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4684
+        }
+      ]
+    },
+    {
+      "claim": "Source REDUCEcaptura inicial; portescucha cambios yeligeSSR/láminas estáticas completas; internalmode no inicializa renderer.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 1219
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4685
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4775
+        }
+      ]
+    },
+    {
+      "claim": "Geometríasource:podium7,steps40,stairZ-11/run.55/width8.4,templeZ-44;terrain150x150,mergeBuffers yroof52x34.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2390
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2452
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2482
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2535
+        }
+      ]
+    },
+    {
+      "claim": "WordmarksourceKAGE320/track.40/pad26,z3; portcontrolresuelve familiaNextequivalente; GMPusa sólo texturaLogoMainalpha deArt.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3019
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 3025
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4704
+        }
+      ]
+    },
+    {
+      "claim": "Governororiginal:mediatras2.2s,40frames/.9s;>.023scale*.85(o*.64si>.05),mín.55;<.0138sum.08;MSAA0siscale<=.78.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4583
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4676
+        }
+      ]
+    },
+    {
+      "claim": "Fuentecontrolconserva mundoKageliteral; GMPadapta geometríaambienteen5grupos, sin productos/envases/etiquetas ni promesas.",
+      "evidence": [
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 2475
+        },
+        {
+          "path": "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+          "line": 4703
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    "C:/Users/Javier/Desktop/Repositorios/kage-main/README.md",
+    "C:/Users/Javier/Desktop/Repositorios/kage-main/PROMPT.md",
+    "C:/Users/Javier/Desktop/Repositorios/kage-main/index.html",
+    "frontend/components/kage/contracts.ts",
+    "docs/redesign/KAGE-ANALISIS.md"
+  ],
+  "risks": [
+    "Runtime/FPS/GLcapabilities y3rondasvisuales pendientes; no producción ni100%.",
+    "KageREADMEoriginal conserva licencia; RootregistróautorizaciónUser09:24.",
+    "Fuentecontienecomentarioshistóricos(26steps/170leaves/mirror/noassets)que no coincidenconcode; mandanliterales.",
+    "Fuentes/fontsCSS/logo/assetsdepRoot; noURLsreservadosscene cargadas.",
+    "Costes/latencia no medidos."
+  ],
+  "confidence": 0.98
+}

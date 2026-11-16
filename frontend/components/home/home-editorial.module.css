@@ -71,6 +71,13 @@
   font-size: clamp(15px, 1.4vw, 19px);
   line-height: 1.62;
   color: var(--bone-dim);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.66),
+    rgba(4, 7, 10, 0.82)
+  );
+  padding: clamp(16px, 2vw, 24px);
+  border-left: 1px solid var(--line-soft);
 }
 
 .heroActions,
@@ -179,9 +186,9 @@
    lorry, the sign and the building still read, the pixels do not. */
 .heroPlate {
   object-fit: cover;
-  object-position: 52% 50%;
-  filter: saturate(0.6) contrast(1.1) brightness(0.46) blur(0.7px);
-  transform: scale(1.04);
+  object-position: 35% 55%;
+  filter: saturate(0.95) contrast(1.06) brightness(0.82);
+  transform: scale(1.02);
 }
 
 .heroAtmosVideo {
@@ -217,6 +224,7 @@
 .heroAtmosVeil {
   position: absolute;
   inset: 0;
+  opacity: 0.9;
   background:
     radial-gradient(
       78% 66% at 80% 44%,
@@ -483,11 +491,22 @@
 .originPoints {
   display: grid;
   gap: clamp(18px, 3vw, 30px);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.74),
+    rgba(4, 7, 10, 0.9)
+  );
+  padding: clamp(18px, 2.4vw, 28px);
+  border: 1px solid var(--line-soft);
 }
 
 .originPoints article {
   padding-top: 16px;
   border-top: 1px solid var(--line-soft);
+}
+
+.originPoints article:first-child {
+  border-top: 0;
 }
 
 .pointIndex,
@@ -571,7 +590,12 @@
   inset: 0;
   background:
     linear-gradient(180deg, rgba(4, 7, 10, 0.34), rgba(4, 7, 10, 0.95) 70%),
-    linear-gradient(90deg, rgba(4, 7, 10, 0.88), rgba(4, 7, 10, 0.32) 58%, transparent 84%);
+    linear-gradient(
+      90deg,
+      rgba(4, 7, 10, 0.88),
+      rgba(4, 7, 10, 0.32) 58%,
+      transparent 84%
+    );
 }
 
 .systemHead {
@@ -601,6 +625,19 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(20px, 3vw, 38px);
   margin-top: clamp(34px, 5vw, 58px);
+  /* The four figures sit over the live world; without their own dark panel
+     they took the scene colour straight behind the type. */
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.86),
+    rgba(4, 7, 10, 0.94)
+  );
+  border: 1px solid var(--line-soft);
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.steps p {
+  color: rgba(223, 231, 224, 0.78);
 }
 
 .steps article {
@@ -623,7 +660,9 @@
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+  transition:
+    border-color 0.3s var(--ease),
+    color 0.3s var(--ease);
 }
 
 .inlineAction:hover {
@@ -710,7 +749,9 @@
   border-bottom: 1px solid var(--line-soft);
   color: var(--bone);
   text-decoration: none;
-  transition: transform 0.35s var(--ease), background 0.35s var(--ease);
+  transition:
+    transform 0.35s var(--ease),
+    background 0.35s var(--ease);
 }
 
 .familyRow:hover {
@@ -760,7 +801,9 @@
   padding-bottom: 2px;
   border-bottom: 1px solid var(--line-soft);
   color: var(--bone-dim);
-  transition: color 0.3s, border-color 0.3s;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
 }
 
 .explore a:hover {
@@ -870,7 +913,9 @@
   overflow: hidden;
   border: 1px solid var(--line);
   background: #0a1015;
-  transition: transform 0.45s var(--ease), border-color 0.35s var(--ease);
+  transition:
+    transform 0.45s var(--ease),
+    border-color 0.35s var(--ease);
 }
 
 .magazineCover img {
@@ -953,7 +998,9 @@
   border: 1px solid var(--line);
   background: rgba(6, 9, 13, 0.68);
   text-decoration: none;
-  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  transition:
+    border-color 0.3s var(--ease),
+    background 0.3s var(--ease);
 }
 
 .siteCard:hover {
@@ -994,13 +1041,12 @@
 }
 
 .closing::before {
-  background:
-    radial-gradient(
-      80% 70% at 50% 48%,
-      rgba(4, 7, 10, 0.82),
-      rgba(4, 7, 10, 0.46) 70%,
-      rgba(4, 7, 10, 0.3)
-    );
+  background: radial-gradient(
+    80% 70% at 50% 48%,
+    rgba(4, 7, 10, 0.82),
+    rgba(4, 7, 10, 0.46) 70%,
+    rgba(4, 7, 10, 0.3)
+  );
   z-index: 0;
 }
 
@@ -1205,4 +1251,3 @@
     transform: scaleX(1);
   }
 }
-

@@ -40,7 +40,7 @@ const nextConfig = {
         pathname: "/photos/291528/pexels-photo-291528.jpeg",
       },
     ],
-    formats: ["image/webp"],
+    formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
@@ -117,6 +117,11 @@ const nextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups",
+          },
+          { key: "Cross-Origin-Resource-Policy", value: "same-site" },
           { key: "Strict-Transport-Security", value: "max-age=31536000" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           {
@@ -134,7 +139,6 @@ const nextConfig = {
         source: "/admin/:path*",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
-          { key: "X-Frame-Options", value: "DENY" },
           { key: "Cache-Control", value: "no-store, max-age=0" },
         ],
       },

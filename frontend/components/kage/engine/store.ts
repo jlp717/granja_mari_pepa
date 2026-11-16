@@ -56,6 +56,7 @@ export function createKageStore() {
     qualityScale: 1,
     bootProgress: 0,
     ready: false,
+    visible: false,
     fallback: false,
   };
   const publish = (patch: Partial<KageSnapshot>, force = false) => {

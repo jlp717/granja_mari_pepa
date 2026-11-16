@@ -1,13 +1,14 @@
 import { EditorialCareers } from "@/components/editorial/EditorialCareers";
 import { editorialMetadata } from "@/components/editorial/metadata";
-import { JOBS } from "@/components/editorial/careers-data";
 import { fetchPublicJobs } from "@/lib/public-content";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}) {
   const params = await props.params;
   return editorialMetadata(
     params.locale,
@@ -17,16 +18,20 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   );
 }
 
-export default async function CareersPage(props: { params: Promise<{ locale: string }> }) {
+export default async function CareersPage(props: {
+  params: Promise<{ locale: string }>;
+}) {
   const params = await props.params;
   const live = await fetchPublicJobs();
   return (
     <>
       <Breadcrumbs
         locale={params.locale}
-        items={[{ name: "Trabaja con nosotros", path: "/trabaja-con-nosotros" }]}
+        items={[
+          { name: "Trabaja con nosotros", path: "/trabaja-con-nosotros" },
+        ]}
       />
-      <EditorialCareers locale={params.locale} jobs={live ?? JOBS} />
+      <EditorialCareers locale={params.locale} jobs={live ?? []} />
     </>
   );
 }

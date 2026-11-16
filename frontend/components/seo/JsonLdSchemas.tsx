@@ -1,6 +1,9 @@
 const source = "https://www.mari-pepa.com";
 const organizationId = source + "/#organization";
-const logo = source + "/kage/brand/logo-alpha.png";
+const logo = {
+  "@type": "ImageObject",
+  url: source + "/kage/brand/logo-alpha.png",
+};
 const mapLorca =
   "https://maps.google.com/?q=Granja+Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca";
 
@@ -21,6 +24,8 @@ const addressViator = {
   postalCode: "04240",
   addressCountry: "ES",
 };
+
+// Coordenadas de calle (centroide de la vía) obtenidas de OpenStreetMap/Nominatim, ODbL.
 
 const lorcaHours = [
   {
@@ -44,9 +49,10 @@ const schemas = [
     "@id": organizationId,
     name: "Granja Maripepa",
     legalName: "Granja Maripepa, S.L.",
+    taxID: "B04008710",
     url: source,
     logo,
-    image: source + "/kage/brand/og.png",
+    image: source + "/og-maripepa.jpg",
     foundingDate: "1966",
     telephone: "+34968467514",
     email: "pedidos@granjamaripepa.com",
@@ -54,6 +60,7 @@ const schemas = [
     areaServed: [
       { "@type": "AdministrativeArea", name: "Región de Murcia" },
       { "@type": "AdministrativeArea", name: "Provincia de Almería" },
+      { "@type": "AdministrativeArea", name: "Provincia de Alicante" },
     ],
     knowsAbout: [
       "Distribución alimentaria HORECA",
@@ -62,13 +69,12 @@ const schemas = [
       "Temperatura ambiente",
       "Panadería y repostería",
       "Grupo Topgel",
-      "Froneri",
       "Nestlé Helados",
       "Panamar",
     ],
     brand: [
       { "@type": "Brand", name: "Grupo Topgel" },
-      { "@type": "Brand", name: "Nestlé Helados · Froneri" },
+      { "@type": "Brand", name: "Nestlé Helados" },
       { "@type": "Brand", name: "Panamar" },
     ],
     sameAs: [mapLorca],
@@ -101,6 +107,11 @@ const schemas = [
     telephone: "+34968467514",
     email: "pedidos@granjamaripepa.com",
     address: addressLorca,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 37.6092,
+      longitude: -1.763,
+    },
     openingHoursSpecification: lorcaHours,
     areaServed: ["Región de Murcia", "Provincia de Almería"],
     sameAs: [mapLorca],
@@ -114,6 +125,11 @@ const schemas = [
     url: source + "/es/contacto",
     telephone: "+34950973429",
     address: addressViator,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 36.8794,
+      longitude: -2.4197,
+    },
     areaServed: ["Provincia de Almería", "Región de Murcia"],
   },
 ];

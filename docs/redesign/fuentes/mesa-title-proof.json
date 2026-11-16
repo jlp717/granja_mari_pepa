@@ -1,0 +1,55 @@
+{
+  "approval": "Art before runtime R1; language adaptation to SourceKageB vertical closing title. No runtime failure is claimed.",
+  "changes": [
+    {
+      "path": "frontend/components/home/content/es.json",
+      "field": "chapters[4].title",
+      "old": "Lo importante ocurre en tu cocina.",
+      "new": "Tu cocina.",
+      "before_sha256": "fa031411378d3e88057c197c0aa283f500de3d5e44bbf9e3e77fc9ed3c3a339c",
+      "sha256": "7c3b4861701edd1ceb3df500662c9a4c87b64fa7d0631357881f119218a4c2f1",
+      "other_data_identical": true,
+      "inverse_recovers_original_bytes": true
+    },
+    {
+      "path": "frontend/components/home/content/en.json",
+      "field": "chapters[4].title",
+      "old": "What matters happens in your kitchen.",
+      "new": "Your kitchen.",
+      "before_sha256": "e9e55c03ccdc499e7aeea0780afe9be39a9c768b97331cc8e03f1f7c92ad2c43",
+      "sha256": "fc02faf8892272447b3497dc7653f2339c952d0798b8fc783d5d6dfa19d245ed",
+      "other_data_identical": true,
+      "inverse_recovers_original_bytes": true
+    },
+    {
+      "path": "frontend/components/home/content/de.json",
+      "field": "chapters[4].title",
+      "old": "Entscheidend ist die Arbeit Ihrer Küche.",
+      "new": "Ihre Küche.",
+      "before_sha256": "124e1b2b925c88b7f31367227fb24de6a31c1e3e2a3da4f0231c6202b10b1c2c",
+      "sha256": "af3384a9adb9eaed8c6732514369c26a7fc67a3219789ee1f94cb9a1f46a99ed",
+      "other_data_identical": true,
+      "inverse_recovers_original_bytes": true
+    },
+    {
+      "path": "frontend/components/home/content/it.json",
+      "field": "chapters[4].title",
+      "old": "Ciò che conta accade nella tua cucina.",
+      "new": "La tua cucina.",
+      "before_sha256": "e0344dd6ba97b915eb9c6251d7ba67920b48892754a4a919a0df8533697c8a42",
+      "sha256": "8203c44b620d5f5dd693a132ded5d508ff781bbd7fe0539575d025759fdb3a99",
+      "other_data_identical": true,
+      "inverse_recovers_original_bytes": true
+    },
+    {
+      "path": "frontend/components/home/content/zh.json",
+      "field": "chapters[4].title",
+      "old": "重要的工作，发生在您的厨房。",
+      "new": "您的厨房。",
+      "before_sha256": "95a1b8b0fb206170c017ecd9406646246d4cfc7022e8005364385a5f927368a5",
+      "sha256": "abbd986c9cc2937189ca8240c36d788949e0eb1a5451c32c922194bf035b6bb2",
+      "other_data_identical": true,
+      "inverse_recovers_original_bytes": true
+    }
+  ]
+}

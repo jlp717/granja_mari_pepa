@@ -7,11 +7,7 @@ import { WordReveal } from "@/components/kage/WordReveal";
 import { getKageHomeCopy } from "@/lib/kage-home-copy";
 import { gmailCompose } from "@/components/editorial/facts";
 import styles from "./journey.module.css";
-import {
-  BrandFallback,
-  HomeForeground,
-  ScenePlate,
-} from "./scene-plate";
+import { BrandFallback, HomeForeground, ScenePlate } from "./scene-plate";
 
 export const FAMILY_IDS = [
   "mar",
@@ -23,17 +19,17 @@ export const FAMILY_IDS = [
   "salsas",
 ] as const;
 export const FAMILY_PHOTOS = [
-  "/catalogs/familias/mar.jpg",
-  "/catalogs/familias/carne.jpg",
-  "/catalogs/familias/precocinados.jpg",
-  "/catalogs/familias/reposteria.jpg",
-  "/catalogs/familias/panaderia.jpg",
-  "/catalogs/familias/refrigerados.jpg",
-  "/catalogs/familias/salsas.jpg",
+  "/catalogs/familias/real-mar-2.jpg",
+  "/catalogs/familias/real-carne-2.jpg",
+  "/catalogs/familias/real-precocinados-2.jpg",
+  "/catalogs/familias/real-reposteria-2.jpg",
+  "/catalogs/familias/real-panaderia-2.jpg",
+  "/catalogs/familias/real-refrigerados-2.jpg",
+  "/catalogs/familias/real-salsas-2.jpg",
 ] as const;
 export const BRAND_DESTINATIONS = [
   { name: "Grupo Topgel", href: "https://www.grupotopgel.es/" },
-  { name: "Nestlé Helados · Froneri", href: "https://www.froneri.com/es/" },
+  { name: "Nestlé Helados", href: "/productos" },
   { name: "Panamar", href: "https://www.panamar.es/" },
 ] as const;
 const IDS = ["hero", "frio", "catalogo", "ruta", "mesa", "manifiesto"] as const;

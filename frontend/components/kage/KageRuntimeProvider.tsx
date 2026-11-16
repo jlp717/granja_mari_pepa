@@ -55,9 +55,12 @@ export function KageRuntimeProvider({
   children: ReactNode;
   allowWebGL?: boolean;
 }) {
-  const store = useMemo(createKageStore, []),
+  const store = useMemo(() => createKageStore(), []),
     canvas = useRef<HTMLCanvasElement>(null);
   const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    store.publish({ visible });
+  }, [store, visible]);
   useEffect(() => {
     const element = canvas.current;
     if (!element) return;
@@ -95,7 +98,9 @@ export function KageRuntimeProvider({
       /* Once the engine has presented a frame the canvas stays on: a dev
          recompile republishes ready:false and used to black the world out
          under the reader. It is still dropped on a fallback or no-WebGL. */
-      setVisible((shown) => allowWebGL && !state.fallback && (state.ready || shown));
+      setVisible(
+        (shown) => allowWebGL && !state.fallback && (state.ready || shown),
+      );
       if (nextWorld === "photo") {
         if (pending) {
           cancellation?.abort();
@@ -108,6 +113,9 @@ export function KageRuntimeProvider({
           world = null;
           delete window.__kage;
         }
+        /* A photo world never owns a GL frame: the canvas has no context and
+           must not claim presentation, or the shell hides the photo stack. */
+        setVisible(false);
         store.publish({ bootProgress: 1, ready: true, fallback: false });
         return;
       }

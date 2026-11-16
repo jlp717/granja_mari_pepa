@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "checks": 24,
+  "scope": "Actual pure selection body read from source; no network, database, framework, TypeScript compilation or browser claim."
+}

@@ -1,0 +1,60 @@
+{
+  "node_id": "public",
+  "authority": "Root afterR1closed4contexts; two own selectors only.",
+  "changes": [
+    {
+      "path": "frontend/components/home/scene-plate.module.css",
+      "before_sha256": "4f9ce9ac572d31135c97587db293398c1c555a851012ae854f4f0578bf81cb76",
+      "sha256": "36b3fc1c81a7cc480f3423c356f44b76bd5a087e1aac5ff15157c977f223d90d",
+      "change": "Only reduced-motion plate selector gains the same attributes as base. transition:none value unchanged.",
+      "proof": {
+        "baseSpecificity": [
+          0,
+          3,
+          0
+        ],
+        "oldReducedSpecificity": [
+          0,
+          1,
+          0
+        ],
+        "newReducedSpecificity": [
+          0,
+          3,
+          0
+        ],
+        "sourceOrder": "Reduced rule appears later than base; equal specificity now applies transition:none.",
+        "inverseExact": true
+      }
+    },
+    {
+      "path": "frontend/components/home/journey.module.css",
+      "before_sha256": "560cfa44969ab7bf22d7d85614acbecbd7f2aaf53bf7d723176782b4cd986f82",
+      "sha256": "68ecf2fe85b61769521c69ad818587b65dd25708ce05cb686249c77176725081",
+      "change": "Only mobile temperatures selector gains the same body condition as base. Existing grid-template-columns:1fr remains unchanged. Desktop3columns untouched.",
+      "proof": {
+        "baseSpecificity": [
+          0,
+          2,
+          1
+        ],
+        "oldMobileSpecificity": [
+          0,
+          1,
+          0
+        ],
+        "newMobileSpecificity": [
+          0,
+          2,
+          1
+        ],
+        "sourceOrder": "Mobile rule appears later than base; existing1fr applies at<=820px.",
+        "inverseExact": true
+      }
+    }
+  ],
+  "NoValuesChanged": true,
+  "NoCurvesChanged": true,
+  "ComputedBrowserStyleMeasured": false,
+  "scope": "Static selector/source-order and inverse-byte proof. Root will observe runtime."
+}

@@ -6,12 +6,7 @@
   "products": "Explore the range",
   "contact": "Talk to the team",
   "read": "Continue",
-  "familyNames": [
-    "Seafood",
-    "Meat",
-    "Prepared foods",
-    "Pastry and desserts"
-  ],
+  "familyNames": ["Seafood", "Meat", "Prepared foods", "Pastry and desserts"],
   "brandsTitle": "Brands within the published range",
   "brandsIntro": "Grupo Topgel, Nestlé and Panamar appear in our published offer. Their websites provide additional brand information; ask our team about the supply conditions for your establishment.",
   "phone": "Telephone",
@@ -59,7 +54,7 @@
     {
       "label": "03 · Range",
       "title": "A path through what your kitchen needs.",
-      "lead": "Four families open the catalogue: seafood, meat, prepared foods and pastry. You do not need an item code to begin. Start with the preparation you have in mind and bring that need to the conversation.",
+      "lead": "The published range is organised into seven families. This page presents four: seafood, meat, prepared foods and pastry. You do not need an item code to begin. Start with the preparation you have in mind and bring that need to the conversation.",
       "supports": [
         {
           "title": "Families, not a stock display",

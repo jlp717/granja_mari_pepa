@@ -1,943 +1,947 @@
 {
-    "header": {
-        "top_bar": {
-            "location": "Murcia • Almería",
-            "tagline": "自1966年以来的专业分销",
-            "tagline_short": "专业分销",
-            "quality": "优质品质"
-        },
-        "brands_title": "我们的品牌",
-        "view_all_products": "查看所有产品",
-        "cart_label": "购物车 ({count})",
-        "close_menu": "关闭菜单",
-        "open_menu": "打开菜单",
-        "you_are_here": "你在这里",
-        "browsing": "浏览",
-        "help_title": "需要帮助吗？",
-        "help_text": "我们的专家团队随时为您提供产品和订单建议。",
-        "call_cta": "电话和WhatsApp",
-        "contact_now": "立即联系",
-        "excellence_msg": "超过55年的HORECA服务卓越经验。",
-        "categories": {
-            "sea": "海鲜",
-            "meat": "肉类",
-            "precooked": "预煮食品",
-            "pastry": "糕点",
-            "dairy": "乳制品",
-            "cereals": "谷物",
-            "chocolate": "巧克力",
-            "fresh_fish": "鲜鱼",
-            "seafood_shell": "贝类",
-            "seafood": "海鲜"
-        }
+  "header": {
+    "top_bar": {
+      "location": "Murcia • Almería",
+      "tagline": "自1966年以来的专业分销",
+      "tagline_short": "专业分销",
+      "quality": "优质品质"
     },
-    "nav": {
-        "home": "首页",
-        "products": "产品",
-        "about": "关于我们",
-        "contact": "联系",
-        "customerArea": "客户专区",
-        "openMenu": "打开菜单",
-        "closeMenu": "关闭菜单"
-    },
-    "categories_section": {
-        "premium_catalog": "优质目录",
-        "our_products_1": "我们的",
-        "our_products_2": "产品",
-        "description": "探索我们精心挑选的优质食品，确保符合最高质量标准",
-        "featured": "精选",
-        "view_catalog": "查看目录",
-        "view_catalog_topgel": "查看Grupo Topgel目录"
-    },
-    "distributors_section": {
-        "official_partners": "官方合作伙伴",
-        "title_part1": "我们分销的",
-        "title_part2": "品牌",
-        "partners_description": "我们与<strong1>食品行业领导者</strong1>合作，为您提供<strong2>最高质量</strong2>和声誉的产品。",
-        "interested_text": "对我们的产品感兴趣？",
-        "request_info": "请求信息",
-        "view_products": "查看产品"
-    },
-    "common": {
-        "home": "首页",
-        "products": "产品",
-        "brands": "品牌",
-        "about": "关于我们",
-        "contact": "联系",
-        "customerArea": "客户专区",
-        "login": "登录",
-        "logout": "退出",
-        "loading": "加载中...",
-        "error": "错误",
-        "success": "成功",
-        "cancel": "取消",
-        "confirm": "确认",
-        "save": "保存",
-        "back": "返回",
-        "next": "下一步",
-        "search": "搜索",
-        "noResults": "无结果",
-        "viewMore": "查看更多",
-        "explore": "探索",
-        "learnMore": "了解更多",
-        "close": "关闭",
-        "send": "发送",
-        "download": "下载",
-        "continue": "继续",
-        "required": "必填",
-        "optional": "可选",
-        "premium": "优质",
-        "view_products": "查看产品",
-        "specialties": {
-            "seafood": "海鲜",
-            "meats": "精选肉类",
-            "precooked": "预煮菜肴",
-            "pastry": "糕点",
-            "ice_cream_hospitality": "餐饮冰淇淋",
-            "tubs": "桶装",
-            "frozen_desserts": "冷冻甜点",
-            "frozen_bread": "冷冻面包",
-            "fermented_dough": "发酵面团",
-            "specialties": "特色产品"
-        }
-    },
-    "hero": {
-        "title": "GRANJA MARIPEPA",
-        "subtitle": "HORECA冷冻、冷藏和冰淇淋产品",
-        "cta": "联系我们",
-        "since": "自1966年",
-        "description": "为专业人士提供的全面食品解决方案。专注于优质肉类、鱼类和预煮产品。",
-        "viewProducts": "查看产品",
-        "contactUs": "联系我们",
-        "explore_products": "探索产品",
-        "contact_us": "联系我们",
-        "scroll_down": "向下滑动"
-    },
-    "products": {
-        "title": "我们的产品",
-        "subtitle": "探索我们精心挑选的优质食品选择，符合最高质量标准",
-        "premium": "优质",
-        "seaProducts": "海鲜",
-        "seaDescription": "优质冷冻鱼类和海鲜",
-        "meat": "肉类",
-        "meatDescription": "精选冷冻肉类",
-        "precooked": "预煮",
-        "precookedDescription": "准备好的冷冻蔬菜",
-        "pastry": "糕点",
-        "pastryDescription": "冷冻甜食和甜点",
-        "viewCatalog": "查看目录",
-        "explore": "探索",
-        "categories": "分类",
-        "allProducts": "所有产品",
-        "frozen": "冷冻",
-        "refrigerated": "冷藏",
-        "iceCream": "冰淇淋"
-    },
-    "brands": {
-        "title": "我们分销的品牌",
-        "subtitle": "我们与行业领导者合作，为您提供最高质量和声誉的产品。",
-        "viewProducts": "查看产品",
-        "frozenPremium": "优质冷冻",
-        "iceCreamPremium": "优质冰淇淋",
-        "bakery": "烘焙",
-        "grupo-topgel": {
-            "name": "Grupo Topgel",
-            "category": "优质冷冻",
-            "detailed": "冷冻产品分销领导者：鱼类、海鲜、肉类、预煮食品和优质糕点。"
-        },
-        "nestle": {
-            "name": "雀巢",
-            "category": "优质冰淇淋",
-            "detailed": "Granja Maripepa是雀巢餐饮和机构冰淇淋的官方分销商。"
-        },
-        "panamar": {
-            "name": "Panamar",
-            "category": "烘焙",
-            "detailed": "餐饮和修复的高质量冷冻烘焙专家。"
-        },
-        "interested": "对我们的产品感兴趣？",
-        "requestInfo": "请求信息"
-    },
-    "contact_page": {
-        "hero": {
-            "badge": "直接联系",
-            "title": "让我们交谈",
-            "subtitle_1": "我们要",
-            "subtitle_highlight": "倾听",
-            "subtitle_2": "并帮助您",
-            "description": "我们的专家团队随时为您解答疑问，定制解决方案，并在成功的每一步陪伴您。",
-            "cta_send": "发送消息"
-        },
-        "channels": {
-            "title_1": "与我们",
-            "title_2": "联系",
-            "description": "多种沟通渠道，供您选择最适合的方式",
-            "murcia": {
-                "title": "穆尔西亚代表处",
-                "desc": "Lorca - 总部"
-            },
-            "email": {
-                "title": "订单邮箱",
-                "desc": "咨询和订单"
-            },
-            "almeria": {
-                "title": "阿尔梅里亚代表处",
-                "desc": "Viator"
-            }
-        },
-        "schedule": {
-            "title": "客户服务时间",
-            "days": "周一 - 周五",
-            "hours": "8:00 - 13:00 和 16:00 - 19:00",
-            "after_hours": "下班后电话"
-        },
-        "form_section": {
-            "title_1": "告诉我们关于",
-            "title_2": "您的项目",
-            "description": "每个业务都是独特的。分享您的需求，我们将创建一个个性化的解决方案来推动您的增长。",
-            "stats": {
-                "delivery": "保证交付",
-                "quality": "认证质量",
-                "foundation": "成立年份",
-                "experience": "多年经验"
-            },
-            "form_title": "发送您的消息",
-            "form_subtitle": "我们将尽快回复",
-            "labels": {
-                "name": "全名 *",
-                "company": "公司 *",
-                "email": "电子邮箱 *",
-                "phone": "电话 *",
-                "message": "消息 *",
-                "privacy": "我接受隐私政策 *",
-                "privacy_desc": "发送此表格即表示您接受我们处理您的数据以回应您的查询。"
-            },
-            "placeholders": {
-                "name": "您的名字",
-                "company": "您的公司名称",
-                "email": "you@email.com",
-                "phone": "+34 XXX XXX XXX",
-                "message": "告诉我们如何帮助您..."
-            },
-            "errors": {
-                "name": "名字必须至少有2个字符",
-                "company": "公司必须至少有2个字符",
-                "email": "无效的电子邮箱",
-                "phone": "无效的电话",
-                "message": "消息必须至少有10个字符",
-                "privacy": "您必须接受隐私政策"
-            },
-            "success": "消息发送成功！我们将尽快联系您。",
-            "submit": "发送消息",
-            "sending": "发送中..."
-        },
-        "locations": {
-            "title_1": "我们的",
-            "title_2": "地点",
-            "description": "在西班牙东南部的主要是城市，以便更接近您",
-            "main_delegation": "主要代表处",
-            "active": "活跃",
-            "address": "地址",
-            "phone": "电话",
-            "view_globe": "在地球仪上查看"
-        },
-        "globe": {
-            "title": "交互式3D地球仪",
-            "subtitle": "点击地点以获得沉浸式体验",
-            "click_points_hint": "点击点以获得沉浸式体验",
-            "view_maps": "在地图上查看",
-            "sede_murcia": "穆尔西亚总部",
-            "delegation_andalucia": "安达卢西亚商业代表处"
-        },
-        "cta_final": {
-            "title_1": "准备好",
-            "title_2": "开始了吗？",
-            "description": "我们的团队准备好帮助您找到最适合您业务的解决方案。第一步就像打电话一样简单。",
-            "whatsapp": "WhatsApp",
-            "guarantees": {
-                "delivery": {
-                    "text": "24-48小时交付",
-                    "desc": "保证冷链"
-                },
-                "support": {
-                    "text": "个性化关注",
-                    "desc": "HORECA专家"
-                },
-                "quality": {
-                    "text": "ISO 9001质量",
-                    "desc": "认证保证"
-                }
-            }
-        },
-        "whatsapp_message": "您好！我想了解更多关于您产品的信息。"
-    },
-    "about_page": {
-        "hero": {
-            "title": "Granja Maripepa",
-            "subtitle_1": "超过",
-            "subtitle_highlight": "55年",
-            "subtitle_2": "服务于HORECA行业",
-            "description": "自1966年在Lorca（穆尔西亚）成立以来，我们是餐饮、宴会和食品服务冷冻、冷藏和常温产品分销的专家。",
-            "cta_history": "了解我们的历史",
-            "cta_contact": "立即联系"
-        },
-        "history": {
-            "title_1": "我们的",
-            "title_2": "历史",
-            "description": "超过五年的经验和对食品行业质量的承诺",
-            "milestones": {
-                "1966": {
-                    "title": "在Lorca（穆尔西亚）成立",
-                    "desc": "Granja Maripepa, S.L.在Lorca（穆尔西亚）成立，从一开始就专注于HORECA市场和食品渠道。"
-                },
-                "2020": {
-                    "title": "100%绿色能源",
-                    "desc": "Feníe Energía和CNMC认证，我们的能源100%来自可再生来源。"
-                },
-                "1980s": {
-                    "title": "区域整合",
-                    "desc": "扩大餐饮和宴会的冷冻、冷藏和常温产品范围。"
-                },
-                "2000s": {
-                    "title": "ISO 9001认证",
-                    "desc": "获得ISO 9001:2008认证，保证我们的质量管理体系。"
-                },
-                "today": {
-                    "title": "超过1,500个参考",
-                    "desc": "目前我们在三个温度范围内拥有超过1,500个参考，服务于穆尔西亚和阿利坎特。"
-                }
-            }
-        },
-        "delegations": {
-            "title": "我们的代表处",
-            "description": "以下是我们Lorca（穆尔西亚）总部的官方地址。",
-            "view_maps": "在Google地图上查看"
-        },
-        "values": {
-            "title_1": "我们的",
-            "title_2": "价值观",
-            "description": "支撑我们卓越的支柱，并定义我们每天的工作方式",
-            "items": {
-                "quality": {
-                    "title": "认证质量",
-                    "desc": "ISO 9001标准支持的质量保证。所有产品的可追溯性。",
-                    "label": "质量认证"
-                },
-                "service": {
-                    "title": "快速服务",
-                    "desc": "24-48小时交付服务，始终遵守冷链。",
-                    "label": "交付时间"
-                },
-                "coverage": {
-                    "title": "区域覆盖",
-                    "desc": "穆尔西亚和阿利坎特的服务，Lorca设有战略代表处。",
-                    "label": "服务的省份"
-                },
-                "attention": {
-                    "title": "个性化关注",
-                    "desc": "了解市场和HORECA产品的高素质团队。",
-                    "label": "多年经验"
-                }
-            }
-        },
-        "commitment": {
-            "title_1": "我们的",
-            "title_2": "承诺",
-            "description": "让我们与众不同，让客户信任我们超过55年的原因",
-            "offer_title": "我们提供什么",
-            "items": {
-                "quality": "质量保证，由ISO 9001标准支持",
-                "traceability": "我们所有产品的可追溯性",
-                "delivery": "24 – 48小时交付服务",
-                "service": "穆尔西亚和阿利坎特的服务",
-                "attention": "个性化关注",
-                "capacity": "5,000m³冷藏能力"
-            },
-            "stats": {
-                "title": "Granja Maripepa数据",
-                "founded_label": "成立年份",
-                "references_label": "产品参考",
-                "capacity_label": "冷藏能力",
-                "temps_label": "温度（冷冻、冷藏、常温）"
-            }
-        },
-        "certifications": {
-            "title_1": "认证",
-            "title_2": "& 质量",
-            "description": "我们对最高质量和食品安全标准的承诺",
-            "items": {
-                "iso": {
-                    "name": "ISO 9001:2008",
-                    "desc": "质量管理体系",
-                    "label": "已认证"
-                },
-                "green": {
-                    "name": "100%绿色能源",
-                    "desc": "Feníe Energía + CNMC",
-                    "label": "可再生"
-                },
-                "traceability": {
-                    "name": "全面可追溯性",
-                    "desc": "产品控制",
-                    "label": "保证"
-                },
-                "cold_chain": {
-                    "name": "冷链",
-                    "desc": "5,000m³冷藏能力",
-                    "label": "已认证"
-                }
-            },
-            "process": {
-                "title": "质量控制流程",
-                "description": "从接收到交付，每一步都受到控制",
-                "steps": {
-                    "reception": {
-                        "title": "接收",
-                        "desc": "收到时的温度和质量控制"
-                    },
-                    "inspection": {
-                        "title": "检查",
-                        "desc": "对所有产品的详尽验证"
-                    },
-                    "certification": {
-                        "title": "认证",
-                        "desc": "根据法规进行标签和注册"
-                    },
-                    "distribution": {
-                        "title": "分销",
-                        "desc": "保证冷链的交付"
-                    }
-                }
-            }
-        },
-        "strategy": {
-            "title_1": "我们的",
-            "title_2": "业务战略",
-            "description": "致力于HORECA行业卓越服务",
-            "mission": {
-                "title": "我们的使命",
-                "item_1": "通过分销精选的优质产品为餐饮行会提供支持。",
-                "item_2": "始终寻求创新以满足最终客户的需求。",
-                "item_3": "为厨房专业人士的工作提供便利。"
-            },
-            "vision": {
-                "title": "我们的愿景",
-                "item_1": "更苛刻和知情的客户要求更高质量的产品和服务。",
-                "item_2": "选择能够满足这些期望的专业支持可能会有所不同。",
-                "item_3": "我们的目的是成为HORECA渠道的支持。"
-            }
-        },
-        "reviews": {
-            "badge": "Google评论",
-            "title_1": "我们的客户",
-            "title_highlight": "怎么说",
-            "description": "信任Granja Maripepa的客户的意见",
-            "antonio_review": {
-                "text": "这家公司分销各种冷冻食品、冰淇淋和无数产品。如果您想要优质产品和卓越待遇，请不要再寻找了。我在该行业认识的最好的公司。",
-                "role": "8条评论 · 本地向导"
-            },
-            "view_all": {
-                "title": "查看所有评论",
-                "subtitle": "在Google地图上阅读我们客户的18条意见",
-                "link": "在Google地图中打开"
-            },
-            "summary": {
-                "rating_label": "Google评级",
-                "reviews_label": "客户评论",
-                "write_review": "写评论"
-            }
-        },
-        "cta_final": {
-            "title_1": "准备好",
-            "title_highlight": "一起工作",
-            "title_suffix": "了吗？",
-            "description": "加入信任Granja Maripepa将认证优质产品带给穆尔西亚和阿利坎特客户的HORECA机构。",
-            "contact": "立即联系",
-            "catalog": "查看目录"
-        }
-    },
-    "customerArea": {
-        "title": "客户专区",
-        "welcome": "欢迎来到您的",
-        "welcomeHighlight": "个人区域",
-        "description": "访问您的个性化控制面板以管理订单、下载发票等，完全方便。",
-        "exclusiveBadge": "独家客户专区",
-        "login": {
-            "title": "登录",
-            "subtitle": "使用您的凭证访问",
-            "clientCode": "客户代码",
-            "clientCodePlaceholder": "例如 0123456789",
-            "password": "密码",
-            "passwordPlaceholder": "您的密码",
-            "forgotPassword": "忘记密码？",
-            "accessButton": "访问",
-            "loggingIn": "登录中...",
-            "needHelp": "需要帮助？",
-            "contactSupport": "联系支持",
-            "needAccount": "需要账户？",
-            "contactUs": "联系我们",
-            "contactToast": "📞 联系我们\\n\\n电话: +34 968 46 75 14\\n邮箱: pedidos@granjamaripepa.com\\n时间: 周一至周五 9:00-18:00"
-        },
-        "emailSetup": {
-            "title": "联系方式设置",
-            "subtitle": "为了您的安全，我们需要您的联系信息。",
-            "data_usage": "数据使用声明：",
-            "data_usage_desc": "仅用于找回密码和发送发票。我们不会共享此信息。",
-            "email": "电子邮箱",
-            "phone": "电话号码",
-            "save": "保存并继续",
-            "saving": "保存中..."
-        },
-        "features": {
-            "history": "完整历史记录",
-            "historyDesc": "所有订单井井有条",
-            "security": "数据安全",
-            "securityDesc": "保证信息受到保护",
-            "priority": "优先访问",
-            "priorityDesc": "独家优惠和新品"
-        },
-        "dashboard": {
-            "welcome": "欢迎",
-            "invoices": "发票",
-            "invoicesDesc": "查看和下载您的发票",
-            "orders": "订单",
-            "ordersDesc": "订单历史",
-            "profile": "个人资料",
-            "profileDesc": "管理您的数据",
-            "ivaBook": "增值税簿",
-            "ivaBookDesc": "季度增值税摘要",
-            "downloadPdf": "下载PDF",
-            "viewAll": "查看全部",
-            "noInvoices": "您没有最近的发票",
-            "lastInvoices": "最近发票",
-            "totalPending": "待付总额",
-            "logout": "退出登录",
-            "loadingPanel": "正在加载您的面板",
-            "logoutConfirm": "您确定要退出登录吗？",
-            "logoutSuccess": "会话已成功关闭",
-            "tabs": {
-                "facturas": "发票",
-                "perfil": "个人资料",
-                "favoritos": "收藏夹",
-                "pedidos": "订单",
-                "dashboard": "仪表板"
-            },
-            "status": {
-                "pending": "待处理",
-                "processing": "处理中",
-                "shipped": "已发货",
-                "delivered": "已交付",
-                "paid": "已付款",
-                "cancelled": "已取消"
-            },
-            "pdf": {
-                "loading": "正在加载PDF...",
-                "error": "加载PDF时出错",
-                "mobileTitle": "发票 {serie}-{numero}",
-                "mobileDesc": "要在移动设备上查看完整的PDF，请直接下载。",
-                "download": "下载PDF",
-                "saveInfo": "PDF将保存到您的下载文件夹"
-            },
-            "filters": {
-                "filterByYear": "按年份筛选",
-                "filterByMonth": "按月份筛选",
-                "allMonths": "所有月份",
-                "allYears": "所有年份",
-                "month": "月份",
-                "year": "年份",
-                "dateRange": "日期范围（可选）",
-                "from": "从",
-                "to": "到",
-                "search": "按发票号、系列或送货单搜索...",
-                "resetFilters": "重置筛选",
-                "clearDateRange": "清除日期范围",
-                "profile_tip": "您可以随时在个人资料中重新添加这些数据。",
-                "logoutConfirm": "您确定要退出吗？您需要重新登录才能访问您的帐户。",
-                "months": {
-                    "1": "一月",
-                    "2": "二月",
-                    "3": "三月",
-                    "4": "四月",
-                    "5": "五月",
-                    "6": "六月",
-                    "7": "七月",
-                    "8": "八月",
-                    "9": "九月",
-                    "10": "十月",
-                    "11": "十一月",
-                    "12": "十二月"
-                }
-            },
-            "table": {
-                "invoice": "发票",
-                "deliveryNote": "送货单",
-                "date": "日期",
-                "total": "总计",
-                "actions": "操作",
-                "view": "查看",
-                "download": "下载",
-                "share": "分享",
-                "noResults": "未找到发票",
-                "foundCount": "找到 {count} 张发票",
-                "downloadMessage": "下载您的PDF文档",
-                "loadingInvoices": "正在加载发票..."
-            },
-            "sidebar": {
-                "clientArea": "客户专区",
-                "controlPanel": "控制面板",
-                "viewProfile": "查看资料",
-                "filterByYear": "按年份筛选",
-                "filterByMonth": "按月份筛选",
-                "invoicesCount": "发票",
-                "totalInvoiced": "开票总额",
-                "quickAccess": "快速访问"
-            },
-            "greeting": {
-                "morning": "早上好",
-                "afternoon": "下午好",
-                "evening": "晚上好",
-                "welcomeBack": "欢迎回到您的专属门户"
-            },
-            "actions": {
-                "repeatOrder": "重复上次订单",
-                "viewCatalog": "查看目录",
-                "myInvoices": "我的发票",
-                "directLine": "直线电话",
-                "contact": "联系我们"
-            },
-            "milestones": {
-                "firstInvoice": "第一张发票",
-                "invoiced1k": "开票€1,000",
-                "invoiced5k": "开票€5,000",
-                "invoiced10k": "开票€10,000",
-                "invoiced50k": "开票€50,000",
-                "streak3": "连续3个月",
-                "streak6": "连续6个月",
-                "legendClient": "传奇客户"
-            },
-            "metrics": {
-                "thisMonth": "本月",
-                "activeStreak": "活跃连续",
-                "months": "月",
-                "avgMonthly": "月平均",
-                "totalInvoiced": "开票总额"
-            },
-            "tiers": {
-                "starter": "新客户",
-                "bronze": "铜牌客户",
-                "silver": "银牌客户",
-                "gold": "金牌客户",
-                "platinum": "白金客户",
-                "strategic": "战略客户",
-                "enterprise": "VIP客户"
-            }
-        },
-        "publicFeatures": {
-            "badge": "Panel de Control",
-            "title": "Todo lo que necesitas en un solo lugar",
-            "subtitle": "简单高效地管理您与我们的商业关系",
-            "items": {
-                "orders": {
-                    "title": "订单管理",
-                    "desc": "Realiza y consulta todos tus pedidos en tiempo real",
-                    "label": "Disponible"
-                },
-                "invoices": {
-                    "title": "Facturas PDF",
-                    "desc": "Descarga y gestiona tus facturas al instante",
-                    "label": "Digital"
-                },
-                "profile": {
-                    "title": "Perfil Personal",
-                    "desc": "Actualiza tus datos y preferencias de contacto",
-                    "label": "Personalizable"
-                },
-                "stats": {
-                    "title": "统计数据",
-                    "desc": "Analiza tu historial y patrones de compra",
-                    "label": "Insights"
-                }
-            },
-            "cta": {
-                "title": "还没有账户？",
-                "desc": "Contacta con nuestro equipo comercial para obtener acceso",
-                "button": "Contactar"
-            }
-        },
-        "invoice": {
-            "number": "编号",
-            "date": "Fecha",
-            "total": "Total",
-            "base": "Base imponible",
-            "vat": "IVA",
-            "surcharge": "Recargo equiv.",
-            "status": "Estado",
-            "paid": "Pagada",
-            "pending": "Pendiente",
-            "overdue": "Vencida",
-            "dueDate": "Fecha vencimiento",
-            "products": "Productos",
-            "quantity": "Cantidad",
-            "unitPrice": "Precio unit.",
-            "lineTotal": "Importe"
-        },
-        "password": {
-            "change": "修改密码",
-            "current": "当前密码",
-            "new": "新密码",
-            "confirm": "确认密码",
-            "requirements": "最少12个字符",
-            "strength": "Fortaleza",
-            "weak": "弱",
-            "medium": "Media",
-            "strong": "Fuerte",
-            "veryStrong": "Muy fuerte",
-            "mismatch": "密码不匹配",
-            "success": "密码修改成功"
-        }
-    },
-    "chatbot": {
-        "name": "Pepa",
-        "badge": "AI",
-        "status": "虚拟助手",
-        "greeting": "你好，我是Pepa",
-        "greetingMorning": "早上好，我是Pepa",
-        "greetingAfternoon": "下午好，我是Pepa",
-        "greetingEvening": "晚上好，我是Pepa",
-        "subtitle": "您的Granja Maripepa虚拟助手。我来这里帮您解决产品、订单、发票或任何问题。",
-        "placeholder": "输入您的消息...",
-        "thinking": "思考中",
-        "send": "发送",
-        "clearChat": "清除聊天",
-        "minimize": "最小化",
-        "maximize": "最大化",
-        "close": "关闭",
-        "quickActionsTitle": "快速操作",
-        "orAskMe": "或者直接问我：",
-        "quickActions": {
-            "invoices": "Mis facturas",
-            "invoicesQuery": "我想查看我的发票",
-            "order": "Hacer pedido",
-            "orderQuery": "如何下订单",
-            "contact": "Contacto",
-            "contactQuery": "联系电话是多少",
-            "schedule": "Horarios",
-            "scheduleQuery": "你们的营业时间是什么"
-        },
-        "suggestions": "您可能感兴趣：",
-        "quickQuestions": [
-            "你们分销哪些产品？",
-            "如何下订单？",
-            "营业时间是什么？",
-            "如何下载发票？"
-        ],
-        "voiceInput": "语音输入",
-        "voiceListening": "正在收听...",
-        "voiceNotSupported": "您的浏览器不支持语音输入",
-        "connectionError": "无法连接到服务器。请稍后重试。",
-        "poweredBy": "Pepa IA",
-        "since": "HORECA desde 1966",
-        "downloadInvoice": "Descargar factura"
-    },
-    "footer": {
-        "companyName": "GRANJA MARIPEPA",
-        "tagline": "优质食品分销商",
-        "description_short": "HORECA优质食品分销商",
-        "nestle_distributor": "雀巢官方分销商",
-        "founded_text": "成立于Lorca，1966年",
-        "green_energy": "绿色能源",
-        "quick_access": "快速访问",
-        "copyright": "© {year} Granja Maripepa。保留所有权利。",
-        "rights_reserved": "版权所有。",
-        "location_lorca": "Lorca, Murcia",
-        "description_long": "HORECA酒店餐饮冷冻、冷藏和常温产品分销专家。",
-        "quickLinks": "快速链接",
-        "legal": "法律",
-        "privacy": "隐私政策",
-        "terms": "条款和条件",
-        "cookies": "Cookie政策",
-        "legalNotice": "法律声明",
-        "contact": "联系方式",
-        "followUs": "关注我们",
-        "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
-        "delegation": "穆尔西亚代表处",
-        "catalog": "目录",
-        "client_portal": "客户门户"
-    },
-    "globe_map": {
-        "badge": "分销网络",
-        "title_1": "我们的",
-        "title_2": "存在",
-        "subtitle": "西班牙东南部的战略覆盖",
-        "operations_title": "运营中心",
-        "select_to_view": "选择在地图上查看",
-        "status_online": "在线",
-        "status_viewing": "正在查看",
-        "headquarters": "总部",
-        "regional_coverage": "区域覆盖",
-        "regional_coverage_desc": "穆尔西亚和阿利坎特的分销服务。24-48小时交付。",
-        "go_to": "前往"
-    },
-    "errors": {
-        "notFound": "找不到页面",
-        "notFoundDesc": "抱歉，您要查找的页面不存在。",
-        "serverError": "服务器错误",
-        "serverErrorDesc": "发生错误。请稍后再试。",
-        "networkError": "网络错误",
-        "networkErrorDesc": "无法连接到服务器。",
-        "unauthorized": "未授权",
-        "unauthorizedDesc": "您需要登录才能访问此页面。",
-        "forbidden": "拒绝访问",
-        "forbiddenDesc": "您没有权限访问此资源。",
-        "tryAgain": "重试",
-        "goHome": "返回首页",
-        "invalidCredentials": "凭据无效",
-        "invalidCredentialsDesc": "请检查您的客户代码和密码。"
-    },
-    "contact": {
-        "title": "Contacto",
-        "subtitle": "我们随时为您服务",
-        "phone": "电话",
-        "email": "Email",
-        "address": "地址",
-        "schedule": "Horario",
-        "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
-        "scheduleSaturday": "周六: 9:00 - 14:00",
-        "scheduleSunday": "Domingos y festivos: Cerrado",
-        "form": {
-            "title": "给我们发送消息",
-            "name": "Nombre",
-            "namePlaceholder": "Tu nombre completo",
-            "email": "Email",
-            "emailPlaceholder": "tu@email.com",
-            "phone": "电话",
-            "phonePlaceholder": "612 345 678",
-            "company": "Empresa",
-            "companyPlaceholder": "Nombre de tu empresa (opcional)",
-            "message": "Mensaje",
-            "messagePlaceholder": "我们能帮您什么？",
-            "submit": "Enviar mensaje",
-            "sending": "Enviando...",
-            "successTitle": "消息已发送！",
-            "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
-            "errorTitle": "Error al enviar",
-            "errorMessage": "请稍后重试。"
-        },
-        "location": {
-            "title": "我们的位置",
-            "mainOffice": "Oficina Principal",
-            "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
-            "city": "30817 - Lorca (Murcia)"
-        }
-    },
-    "products_page": {
-        "title": "即将推出",
-        "subtitle_1": "Estamos preparando algo especial",
-        "subtitle_2": "我们的产品目录正在更新，将推出新功能。",
-        "cta_home": "Volver al inicio",
-        "cta_clients": "Área de clientes",
-        "badge": "即将上线"
-    },
-    "accessibility": {
-        "skipToContent": "Ir al contenido principal",
-        "menuToggle": "打开菜单",
-        "languageSwitch": "Cambiar idioma",
-        "darkMode": "Modo oscuro",
-        "lightMode": "Modo claro",
-        "loading": "Cargando contenido",
-        "newWindow": "Se abre en nueva ventana"
-    },
+    "brands_title": "我们的品牌",
+    "view_all_products": "查看所有产品",
+    "cart_label": "购物车 ({count})",
+    "close_menu": "关闭菜单",
+    "open_menu": "打开菜单",
+    "you_are_here": "你在这里",
+    "browsing": "浏览",
+    "help_title": "需要帮助吗？",
+    "help_text": "我们的专家团队随时为您提供产品和订单建议。",
+    "call_cta": "电话和WhatsApp",
+    "contact_now": "立即联系",
+    "excellence_msg": "超过55年的HORECA服务卓越经验。",
     "categories": {
-        "mar": {
-            "name": "海鲜产品",
-            "description": "最高品质的冷冻鱼类和海鲜"
-        },
-        "carne": {
-            "name": "肉类",
-            "description": "精选冷冻肉类"
-        },
-        "precocinados": {
-            "name": "预煮食品",
-            "description": "冷冻预制菜和蔬菜"
-        },
-        "reposteria": {
-            "name": "糕点",
-            "description": "冷冻甜点和甜食"
-        },
-        "helados": {
-            "name": "冰淇淋",
-            "description": "雀巢餐饮系列冰淇淋"
-        },
-        "chocolate": {
-            "name": "巧克力",
-            "description": "优质巧克力和可可产品"
-        },
-        "pan": {
-            "name": "冷冻面包",
-            "description": "高品质冷冻面包和面团"
-        }
-    },
-    "meta": {
-        "title": "Granja Maripepa | 穆尔西亚和Lorca HORECA分销",
-        "description": "优质餐饮食品分销领导者。冷冻食品、肉类和鱼类。穆尔西亚和阿尔梅里亚24小时服务。",
-        "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, 食品分销, 冷冻食品, HORECA, 穆尔西亚, 阿尔梅里亚, 肉类, 鱼类, lorca"
-    },
-    "legal": {
-        "privacy": {
-            "title": "隐私政策",
-            "intro": "在Granja Maripepa，我们非常重视客户和用户的隐私。",
-            "sections": {
-                "s1": {
-                    "title": "1. 数据控制方",
-                    "content": "Granja Maripepa, S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@granjamaripepa.com"
-                },
-                "s2": {
-                    "title": "2. 处理目的",
-                    "content": "我们处理您提供的信息是为了提供所请求的服务，进行计费，并向您发送与其相关的产品和服务的商业通信。"
-                },
-                "s3": {
-                    "title": "3. 数据保留",
-                    "content": "只要商业关系维持或为履行法律义务所需的年限内，提供的数据将被保留。"
-                },
-                "s4": {
-                    "title": "4. 合法性",
-                    "content": "处理您数据的法律依据是执行服务合同和/或产品销售合同。"
-                },
-                "s5": {
-                    "title": "5. 接收者",
-                    "content": "除非有法律义务，否则数据不会转让给第三方。"
-                },
-                "s6": {
-                    "title": "6. 权利",
-                    "content": "您有权确认Granja Maripepa是否正在处理您的个人数据，因此您有权访问您的个人数据，更正不准确的数据或在不再需要时请求删除。"
-                }
-            }
-        },
-        "terms": {
-            "title": "条款和条件",
-            "intro": "欢迎访问Granja Maripepa网站。访问并使用本网站即表示您接受以下条款和条件。",
-            "sections": {
-                "s1": {
-                    "title": "1. 知识产权",
-                    "content": "源代码、图形设计、图像、照片、声音、动画、软件、文本以及本网站收集的信息和内容受西班牙知识产权和工业产权立法的保护，归Granja Maripepa所有。"
-                },
-                "s2": {
-                    "title": "2. 网站使用",
-                    "content": "用户承诺勤勉、正确和合法地使用网站、其服务和内容，特别是承诺不删除、规避或操纵版权和其他识别权利持有人权利的数据。"
-                },
-                "s3": {
-                    "title": "3. 责任",
-                    "content": "Granja Maripepa不对用户在访问网站和/或使用其中包含的信息时可能违反的任何适用规范负责。"
-                },
-                "s4": {
-                    "title": "4. 修改",
-                    "content": "Granja Maripepa保留随时修改或更新本使用条款以及网站上可能出现的任何类型信息的权利。"
-                },
-                "s5": {
-                    "title": "5. 适用法律",
-                    "content": "本条款受西班牙法律管辖。对于因访问或使用本网站而可能产生的任何争议，用户和Granja Maripepa同意明确提交给Lorca（穆尔西亚）的法院和法庭。"
-                }
-            }
-        }
+      "sea": "海鲜",
+      "meat": "肉类",
+      "precooked": "预煮食品",
+      "pastry": "糕点",
+      "dairy": "乳制品",
+      "cereals": "谷物",
+      "chocolate": "巧克力",
+      "fresh_fish": "鲜鱼",
+      "seafood_shell": "贝类",
+      "seafood": "海鲜"
     }
+  },
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "about": "关于我们",
+    "contact": "联系",
+    "customerArea": "客户专区",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "categories_section": {
+    "premium_catalog": "优质目录",
+    "our_products_1": "我们的",
+    "our_products_2": "产品",
+    "description": "探索我们精心挑选的优质食品，确保符合最高质量标准",
+    "featured": "精选",
+    "view_catalog": "查看目录",
+    "view_catalog_topgel": "查看Grupo Topgel目录"
+  },
+  "distributors_section": {
+    "official_partners": "官方合作伙伴",
+    "title_part1": "我们分销的",
+    "title_part2": "品牌",
+    "partners_description": "我们与<strong1>食品行业领导者</strong1>合作，为您提供<strong2>最高质量</strong2>和声誉的产品。",
+    "interested_text": "对我们的产品感兴趣？",
+    "request_info": "请求信息",
+    "view_products": "查看产品"
+  },
+  "common": {
+    "home": "首页",
+    "products": "产品",
+    "brands": "品牌",
+    "about": "关于我们",
+    "contact": "联系",
+    "customerArea": "客户专区",
+    "login": "登录",
+    "logout": "退出",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "back": "返回",
+    "next": "下一步",
+    "search": "搜索",
+    "noResults": "无结果",
+    "viewMore": "查看更多",
+    "explore": "探索",
+    "learnMore": "了解更多",
+    "close": "关闭",
+    "send": "发送",
+    "download": "下载",
+    "continue": "继续",
+    "required": "必填",
+    "optional": "可选",
+    "premium": "优质",
+    "view_products": "查看产品",
+    "specialties": {
+      "seafood": "海鲜",
+      "meats": "精选肉类",
+      "precooked": "预煮菜肴",
+      "pastry": "糕点",
+      "ice_cream_hospitality": "餐饮冰淇淋",
+      "tubs": "桶装",
+      "frozen_desserts": "冷冻甜点",
+      "frozen_bread": "冷冻面包",
+      "fermented_dough": "发酵面团",
+      "specialties": "特色产品"
+    }
+  },
+  "hero": {
+    "title": "GRANJA MARIPEPA",
+    "subtitle": "HORECA冷冻、冷藏和冰淇淋产品",
+    "cta": "联系我们",
+    "since": "自1966年",
+    "description": "为专业人士提供的全面食品解决方案。专注于优质肉类、鱼类和预煮产品。",
+    "viewProducts": "查看产品",
+    "contactUs": "联系我们",
+    "explore_products": "探索产品",
+    "contact_us": "联系我们",
+    "scroll_down": "向下滑动"
+  },
+  "products": {
+    "title": "我们的产品",
+    "subtitle": "探索我们精心挑选的优质食品选择，符合最高质量标准",
+    "premium": "优质",
+    "seaProducts": "海鲜",
+    "seaDescription": "优质冷冻鱼类和海鲜",
+    "meat": "肉类",
+    "meatDescription": "精选冷冻肉类",
+    "precooked": "预煮",
+    "precookedDescription": "准备好的冷冻蔬菜",
+    "pastry": "糕点",
+    "pastryDescription": "冷冻甜食和甜点",
+    "viewCatalog": "查看目录",
+    "explore": "探索",
+    "categories": "分类",
+    "allProducts": "所有产品",
+    "frozen": "冷冻",
+    "refrigerated": "冷藏",
+    "iceCream": "冰淇淋"
+  },
+  "brands": {
+    "title": "我们分销的品牌",
+    "subtitle": "我们与行业领导者合作，为您提供最高质量和声誉的产品。",
+    "viewProducts": "查看产品",
+    "frozenPremium": "优质冷冻",
+    "iceCreamPremium": "优质冰淇淋",
+    "bakery": "烘焙",
+    "grupo-topgel": {
+      "name": "Grupo Topgel",
+      "category": "优质冷冻",
+      "detailed": "冷冻产品分销领导者：鱼类、海鲜、肉类、预煮食品和优质糕点。"
+    },
+    "nestle": {
+      "name": "雀巢",
+      "category": "优质冰淇淋",
+      "detailed": "Granja Maripepa是雀巢餐饮和机构冰淇淋的官方分销商。"
+    },
+    "panamar": {
+      "name": "Panamar",
+      "category": "烘焙",
+      "detailed": "餐饮和修复的高质量冷冻烘焙专家。"
+    },
+    "interested": "对我们的产品感兴趣？",
+    "requestInfo": "请求信息"
+  },
+  "contact_page": {
+    "hero": {
+      "badge": "直接联系",
+      "title": "让我们交谈",
+      "subtitle_1": "我们要",
+      "subtitle_highlight": "倾听",
+      "subtitle_2": "并帮助您",
+      "description": "我们的专家团队随时为您解答疑问，定制解决方案，并在成功的每一步陪伴您。",
+      "cta_send": "发送消息"
+    },
+    "channels": {
+      "title_1": "与我们",
+      "title_2": "联系",
+      "description": "多种沟通渠道，供您选择最适合的方式",
+      "murcia": {
+        "title": "穆尔西亚代表处",
+        "desc": "Lorca - 总部"
+      },
+      "email": {
+        "title": "订单邮箱",
+        "desc": "咨询和订单"
+      },
+      "almeria": {
+        "title": "阿尔梅里亚代表处",
+        "desc": "Viator"
+      }
+    },
+    "schedule": {
+      "title": "客户服务时间",
+      "days": "周一 - 周五",
+      "hours": "8:00 - 13:00 和 16:00 - 19:00",
+      "after_hours": "下班后电话"
+    },
+    "form_section": {
+      "title_1": "告诉我们关于",
+      "title_2": "您的项目",
+      "description": "每个业务都是独特的。分享您的需求，我们将创建一个个性化的解决方案来推动您的增长。",
+      "stats": {
+        "delivery": "保证交付",
+        "quality": "认证质量",
+        "foundation": "成立年份",
+        "experience": "多年经验"
+      },
+      "form_title": "发送您的消息",
+      "form_subtitle": "我们将尽快回复",
+      "labels": {
+        "name": "全名 *",
+        "company": "公司 *",
+        "email": "电子邮箱 *",
+        "phone": "电话 *",
+        "message": "消息 *",
+        "privacy": "我接受隐私政策 *",
+        "privacy_desc": "发送此表格即表示您接受我们处理您的数据以回应您的查询。"
+      },
+      "placeholders": {
+        "name": "您的名字",
+        "company": "您的公司名称",
+        "email": "you@email.com",
+        "phone": "+34 XXX XXX XXX",
+        "message": "告诉我们如何帮助您..."
+      },
+      "errors": {
+        "name": "名字必须至少有2个字符",
+        "company": "公司必须至少有2个字符",
+        "email": "无效的电子邮箱",
+        "phone": "无效的电话",
+        "message": "消息必须至少有10个字符",
+        "privacy": "您必须接受隐私政策"
+      },
+      "success": "消息发送成功！我们将尽快联系您。",
+      "submit": "发送消息",
+      "sending": "发送中..."
+    },
+    "locations": {
+      "title_1": "我们的",
+      "title_2": "地点",
+      "description": "在西班牙东南部的主要是城市，以便更接近您",
+      "main_delegation": "主要代表处",
+      "active": "活跃",
+      "address": "地址",
+      "phone": "电话",
+      "view_globe": "在地球仪上查看"
+    },
+    "globe": {
+      "title": "交互式3D地球仪",
+      "subtitle": "点击地点以获得沉浸式体验",
+      "click_points_hint": "点击点以获得沉浸式体验",
+      "view_maps": "在地图上查看",
+      "sede_murcia": "穆尔西亚总部",
+      "delegation_andalucia": "安达卢西亚商业代表处"
+    },
+    "cta_final": {
+      "title_1": "准备好",
+      "title_2": "开始了吗？",
+      "description": "我们的团队准备好帮助您找到最适合您业务的解决方案。第一步就像打电话一样简单。",
+      "whatsapp": "WhatsApp",
+      "guarantees": {
+        "delivery": {
+          "text": "24-48小时交付",
+          "desc": "保证冷链"
+        },
+        "support": {
+          "text": "个性化关注",
+          "desc": "HORECA专家"
+        },
+        "quality": {
+          "text": "ISO 9001质量",
+          "desc": "认证保证"
+        }
+      }
+    },
+    "whatsapp_message": "您好！我想了解更多关于您产品的信息。"
+  },
+  "about_page": {
+    "hero": {
+      "title": "Granja Maripepa",
+      "subtitle_1": "超过",
+      "subtitle_highlight": "55年",
+      "subtitle_2": "服务于HORECA行业",
+      "description": "自1966年在Lorca（穆尔西亚）成立以来，我们是餐饮、宴会和食品服务冷冻、冷藏和常温产品分销的专家。",
+      "cta_history": "了解我们的历史",
+      "cta_contact": "立即联系"
+    },
+    "history": {
+      "title_1": "我们的",
+      "title_2": "历史",
+      "description": "超过五年的经验和对食品行业质量的承诺",
+      "milestones": {
+        "1966": {
+          "title": "在Lorca（穆尔西亚）成立",
+          "desc": "Granja Maripepa, S.L.在Lorca（穆尔西亚）成立，从一开始就专注于HORECA市场和食品渠道。"
+        },
+        "2020": {
+          "title": "100%绿色能源",
+          "desc": "Feníe Energía和CNMC认证，我们的能源100%来自可再生来源。"
+        },
+        "1980s": {
+          "title": "区域整合",
+          "desc": "扩大餐饮和宴会的冷冻、冷藏和常温产品范围。"
+        },
+        "2000s": {
+          "title": "ISO 9001认证",
+          "desc": "获得ISO 9001认证，保证我们的质量管理体系。"
+        },
+        "today": {
+          "title": "超过1,500个参考",
+          "desc": "目前我们在三个温度范围内拥有超过1,500个参考，服务于穆尔西亚和阿利坎特。"
+        }
+      }
+    },
+    "delegations": {
+      "title": "我们的代表处",
+      "description": "以下是我们Lorca（穆尔西亚）总部的官方地址。",
+      "view_maps": "在Google地图上查看"
+    },
+    "values": {
+      "title_1": "我们的",
+      "title_2": "价值观",
+      "description": "支撑我们卓越的支柱，并定义我们每天的工作方式",
+      "items": {
+        "quality": {
+          "title": "认证质量",
+          "desc": "ISO 9001标准支持的质量保证。所有产品的可追溯性。",
+          "label": "质量认证"
+        },
+        "service": {
+          "title": "快速服务",
+          "desc": "24-48小时交付服务，始终遵守冷链。",
+          "label": "交付时间"
+        },
+        "coverage": {
+          "title": "区域覆盖",
+          "desc": "穆尔西亚和阿利坎特的服务，Lorca设有战略代表处。",
+          "label": "服务的省份"
+        },
+        "attention": {
+          "title": "个性化关注",
+          "desc": "了解市场和HORECA产品的高素质团队。",
+          "label": "多年经验"
+        }
+      }
+    },
+    "commitment": {
+      "title_1": "我们的",
+      "title_2": "承诺",
+      "description": "让我们与众不同，让客户信任我们超过55年的原因",
+      "offer_title": "我们提供什么",
+      "items": {
+        "quality": "质量保证，由ISO 9001标准支持",
+        "traceability": "我们所有产品的可追溯性",
+        "delivery": "24 – 48小时交付服务",
+        "service": "穆尔西亚和阿利坎特的服务",
+        "attention": "个性化关注",
+        "capacity": "5,000m³冷藏能力"
+      },
+      "stats": {
+        "title": "Granja Maripepa数据",
+        "founded_label": "成立年份",
+        "references_label": "产品参考",
+        "capacity_label": "冷藏能力",
+        "temps_label": "温度（冷冻、冷藏、常温）"
+      }
+    },
+    "certifications": {
+      "title_1": "认证",
+      "title_2": "& 质量",
+      "description": "我们对最高质量和食品安全标准的承诺",
+      "items": {
+        "iso": {
+          "name": "ISO 9001",
+          "desc": "质量管理体系",
+          "label": "已认证"
+        },
+        "green": {
+          "name": "100%绿色能源",
+          "desc": "Feníe Energía + CNMC",
+          "label": "可再生"
+        },
+        "traceability": {
+          "name": "全面可追溯性",
+          "desc": "产品控制",
+          "label": "保证"
+        },
+        "cold_chain": {
+          "name": "冷链",
+          "desc": "5,000m³冷藏能力",
+          "label": "已认证"
+        }
+      },
+      "process": {
+        "title": "质量控制流程",
+        "description": "从接收到交付，每一步都受到控制",
+        "steps": {
+          "reception": {
+            "title": "接收",
+            "desc": "收到时的温度和质量控制"
+          },
+          "inspection": {
+            "title": "检查",
+            "desc": "对所有产品的详尽验证"
+          },
+          "certification": {
+            "title": "认证",
+            "desc": "根据法规进行标签和注册"
+          },
+          "distribution": {
+            "title": "分销",
+            "desc": "保证冷链的交付"
+          }
+        }
+      }
+    },
+    "strategy": {
+      "title_1": "我们的",
+      "title_2": "业务战略",
+      "description": "致力于HORECA行业卓越服务",
+      "mission": {
+        "title": "我们的使命",
+        "item_1": "通过分销精选的优质产品为餐饮行会提供支持。",
+        "item_2": "始终寻求创新以满足最终客户的需求。",
+        "item_3": "为厨房专业人士的工作提供便利。"
+      },
+      "vision": {
+        "title": "我们的愿景",
+        "item_1": "更苛刻和知情的客户要求更高质量的产品和服务。",
+        "item_2": "选择能够满足这些期望的专业支持可能会有所不同。",
+        "item_3": "我们的目的是成为HORECA渠道的支持。"
+      }
+    },
+    "reviews": {
+      "badge": "Google评论",
+      "title_1": "我们的客户",
+      "title_highlight": "怎么说",
+      "description": "信任Granja Maripepa的客户的意见",
+      "antonio_review": {
+        "text": "这家公司分销各种冷冻食品、冰淇淋和无数产品。如果您想要优质产品和卓越待遇，请不要再寻找了。我在该行业认识的最好的公司。",
+        "role": "8条评论 · 本地向导"
+      },
+      "view_all": {
+        "title": "查看所有评论",
+        "subtitle": "在Google地图上阅读我们客户的18条意见",
+        "link": "在Google地图中打开"
+      },
+      "summary": {
+        "rating_label": "Google评级",
+        "reviews_label": "客户评论",
+        "write_review": "写评论"
+      }
+    },
+    "cta_final": {
+      "title_1": "准备好",
+      "title_highlight": "一起工作",
+      "title_suffix": "了吗？",
+      "description": "加入信任Granja Maripepa将认证优质产品带给穆尔西亚和阿利坎特客户的HORECA机构。",
+      "contact": "立即联系",
+      "catalog": "查看目录"
+    }
+  },
+  "customerArea": {
+    "title": "客户专区",
+    "welcome": "欢迎来到您的",
+    "welcomeHighlight": "个人区域",
+    "description": "访问您的个性化控制面板以管理订单、下载发票等，完全方便。",
+    "exclusiveBadge": "独家客户专区",
+    "login": {
+      "title": "登录",
+      "subtitle": "使用您的凭证访问",
+      "clientCode": "客户代码",
+      "clientCodePlaceholder": "例如 0123456789",
+      "password": "密码",
+      "passwordPlaceholder": "您的密码",
+      "forgotPassword": "忘记密码？",
+      "accessButton": "访问",
+      "loggingIn": "登录中...",
+      "needHelp": "需要帮助？",
+      "contactSupport": "联系支持",
+      "needAccount": "需要账户？",
+      "contactUs": "联系我们",
+      "contactToast": "📞 联系我们\\n\\n电话: +34 968 46 75 14\\n邮箱: pedidos@granjamaripepa.com\\n时间: 周一至周五 9:00-18:00"
+    },
+    "emailSetup": {
+      "title": "联系方式设置",
+      "subtitle": "为了您的安全，我们需要您的联系信息。",
+      "data_usage": "数据使用声明：",
+      "data_usage_desc": "仅用于找回密码和发送发票。我们不会共享此信息。",
+      "email": "电子邮箱",
+      "phone": "电话号码",
+      "save": "保存并继续",
+      "saving": "保存中..."
+    },
+    "features": {
+      "history": "完整历史记录",
+      "historyDesc": "所有订单井井有条",
+      "security": "数据安全",
+      "securityDesc": "保证信息受到保护",
+      "priority": "优先访问",
+      "priorityDesc": "独家优惠和新品"
+    },
+    "dashboard": {
+      "welcome": "欢迎",
+      "invoices": "发票",
+      "invoicesDesc": "查看和下载您的发票",
+      "orders": "订单",
+      "ordersDesc": "订单历史",
+      "profile": "个人资料",
+      "profileDesc": "管理您的数据",
+      "ivaBook": "增值税簿",
+      "ivaBookDesc": "季度增值税摘要",
+      "downloadPdf": "下载PDF",
+      "viewAll": "查看全部",
+      "noInvoices": "您没有最近的发票",
+      "lastInvoices": "最近发票",
+      "totalPending": "待付总额",
+      "logout": "退出登录",
+      "loadingPanel": "正在加载您的面板",
+      "logoutConfirm": "您确定要退出登录吗？",
+      "logoutSuccess": "会话已成功关闭",
+      "tabs": {
+        "facturas": "发票",
+        "perfil": "个人资料",
+        "favoritos": "收藏夹",
+        "pedidos": "订单",
+        "dashboard": "仪表板"
+      },
+      "status": {
+        "pending": "待处理",
+        "processing": "处理中",
+        "shipped": "已发货",
+        "delivered": "已交付",
+        "paid": "已付款",
+        "cancelled": "已取消"
+      },
+      "pdf": {
+        "loading": "正在加载PDF...",
+        "error": "加载PDF时出错",
+        "mobileTitle": "发票 {serie}-{numero}",
+        "mobileDesc": "要在移动设备上查看完整的PDF，请直接下载。",
+        "download": "下载PDF",
+        "saveInfo": "PDF将保存到您的下载文件夹"
+      },
+      "filters": {
+        "filterByYear": "按年份筛选",
+        "filterByMonth": "按月份筛选",
+        "allMonths": "所有月份",
+        "allYears": "所有年份",
+        "month": "月份",
+        "year": "年份",
+        "dateRange": "日期范围（可选）",
+        "from": "从",
+        "to": "到",
+        "search": "按发票号、系列或送货单搜索...",
+        "resetFilters": "重置筛选",
+        "clearDateRange": "清除日期范围",
+        "profile_tip": "您可以随时在个人资料中重新添加这些数据。",
+        "logoutConfirm": "您确定要退出吗？您需要重新登录才能访问您的帐户。",
+        "months": {
+          "1": "一月",
+          "2": "二月",
+          "3": "三月",
+          "4": "四月",
+          "5": "五月",
+          "6": "六月",
+          "7": "七月",
+          "8": "八月",
+          "9": "九月",
+          "10": "十月",
+          "11": "十一月",
+          "12": "十二月"
+        }
+      },
+      "table": {
+        "invoice": "发票",
+        "deliveryNote": "送货单",
+        "date": "日期",
+        "total": "总计",
+        "actions": "操作",
+        "view": "查看",
+        "download": "下载",
+        "share": "分享",
+        "noResults": "未找到发票",
+        "foundCount": "找到 {count} 张发票",
+        "downloadMessage": "下载您的PDF文档",
+        "loadingInvoices": "正在加载发票..."
+      },
+      "sidebar": {
+        "clientArea": "客户专区",
+        "controlPanel": "控制面板",
+        "viewProfile": "查看资料",
+        "filterByYear": "按年份筛选",
+        "filterByMonth": "按月份筛选",
+        "invoicesCount": "发票",
+        "totalInvoiced": "开票总额",
+        "quickAccess": "快速访问"
+      },
+      "greeting": {
+        "morning": "早上好",
+        "afternoon": "下午好",
+        "evening": "晚上好",
+        "welcomeBack": "欢迎回到您的专属门户"
+      },
+      "actions": {
+        "repeatOrder": "重复上次订单",
+        "viewCatalog": "查看目录",
+        "myInvoices": "我的发票",
+        "directLine": "直线电话",
+        "contact": "联系我们"
+      },
+      "milestones": {
+        "firstInvoice": "第一张发票",
+        "invoiced1k": "开票€1,000",
+        "invoiced5k": "开票€5,000",
+        "invoiced10k": "开票€10,000",
+        "invoiced50k": "开票€50,000",
+        "streak3": "连续3个月",
+        "streak6": "连续6个月",
+        "legendClient": "传奇客户"
+      },
+      "metrics": {
+        "thisMonth": "本月",
+        "activeStreak": "活跃连续",
+        "months": "月",
+        "avgMonthly": "月平均",
+        "totalInvoiced": "开票总额"
+      },
+      "tiers": {
+        "starter": "新客户",
+        "bronze": "铜牌客户",
+        "silver": "银牌客户",
+        "gold": "金牌客户",
+        "platinum": "白金客户",
+        "strategic": "战略客户",
+        "enterprise": "VIP客户"
+      }
+    },
+    "publicFeatures": {
+      "badge": "Panel de Control",
+      "title": "Todo lo que necesitas en un solo lugar",
+      "subtitle": "简单高效地管理您与我们的商业关系",
+      "items": {
+        "orders": {
+          "title": "订单管理",
+          "desc": "Realiza y consulta todos tus pedidos en tiempo real",
+          "label": "Disponible"
+        },
+        "invoices": {
+          "title": "Facturas PDF",
+          "desc": "Descarga y gestiona tus facturas al instante",
+          "label": "Digital"
+        },
+        "profile": {
+          "title": "Perfil Personal",
+          "desc": "Actualiza tus datos y preferencias de contacto",
+          "label": "Personalizable"
+        },
+        "stats": {
+          "title": "统计数据",
+          "desc": "Analiza tu historial y patrones de compra",
+          "label": "Insights"
+        }
+      },
+      "cta": {
+        "title": "还没有账户？",
+        "desc": "Contacta con nuestro equipo comercial para obtener acceso",
+        "button": "Contactar"
+      }
+    },
+    "invoice": {
+      "number": "编号",
+      "date": "Fecha",
+      "total": "Total",
+      "base": "Base imponible",
+      "vat": "IVA",
+      "surcharge": "Recargo equiv.",
+      "status": "Estado",
+      "paid": "Pagada",
+      "pending": "Pendiente",
+      "overdue": "Vencida",
+      "dueDate": "Fecha vencimiento",
+      "products": "Productos",
+      "quantity": "Cantidad",
+      "unitPrice": "Precio unit.",
+      "lineTotal": "Importe"
+    },
+    "password": {
+      "change": "修改密码",
+      "current": "当前密码",
+      "new": "新密码",
+      "confirm": "确认密码",
+      "requirements": "最少12个字符",
+      "strength": "Fortaleza",
+      "weak": "弱",
+      "medium": "Media",
+      "strong": "Fuerte",
+      "veryStrong": "Muy fuerte",
+      "mismatch": "密码不匹配",
+      "success": "密码修改成功"
+    }
+  },
+  "chatbot": {
+    "name": "Pepa",
+    "badge": "AI",
+    "status": "虚拟助手",
+    "greeting": "你好，我是Pepa",
+    "greetingMorning": "早上好，我是Pepa",
+    "greetingAfternoon": "下午好，我是Pepa",
+    "greetingEvening": "晚上好，我是Pepa",
+    "subtitle": "您的Granja Maripepa虚拟助手。我来这里帮您解决产品、订单、发票或任何问题。",
+    "placeholder": "输入您的消息...",
+    "thinking": "思考中",
+    "send": "发送",
+    "clearChat": "清除聊天",
+    "minimize": "最小化",
+    "maximize": "最大化",
+    "close": "关闭",
+    "quickActionsTitle": "快速操作",
+    "orAskMe": "或者直接问我：",
+    "quickActions": {
+      "invoices": "Mis facturas",
+      "invoicesQuery": "我想查看我的发票",
+      "order": "Hacer pedido",
+      "orderQuery": "如何下订单",
+      "contact": "Contacto",
+      "contactQuery": "联系电话是多少",
+      "schedule": "Horarios",
+      "scheduleQuery": "你们的营业时间是什么"
+    },
+    "suggestions": "您可能感兴趣：",
+    "quickQuestions": [
+      "你们分销哪些产品？",
+      "如何下订单？",
+      "营业时间是什么？",
+      "如何下载发票？"
+    ],
+    "voiceInput": "语音输入",
+    "voiceListening": "正在收听...",
+    "voiceNotSupported": "您的浏览器不支持语音输入",
+    "connectionError": "无法连接到服务器。请稍后重试。",
+    "poweredBy": "Pepa IA",
+    "since": "HORECA desde 1966",
+    "downloadInvoice": "Descargar factura"
+  },
+  "footer": {
+    "companyName": "GRANJA MARIPEPA",
+    "tagline": "优质食品分销商",
+    "description_short": "HORECA优质食品分销商",
+    "nestle_distributor": "雀巢官方分销商",
+    "founded_text": "成立于Lorca，1966年",
+    "green_energy": "绿色能源",
+    "quick_access": "快速访问",
+    "copyright": "© {year} Granja Maripepa。保留所有权利。",
+    "rights_reserved": "版权所有。",
+    "location_lorca": "Lorca, Murcia",
+    "description_long": "HORECA酒店餐饮冷冻、冷藏和常温产品分销专家。",
+    "quickLinks": "快速链接",
+    "legal": "法律",
+    "privacy": "隐私政策",
+    "terms": "条款和条件",
+    "cookies": "Cookie政策",
+    "legalNotice": "法律声明",
+    "contact": "联系方式",
+    "followUs": "关注我们",
+    "schedule_hours": "08:00 - 13:00 / 16:00 - 19:00",
+    "delegation": "穆尔西亚代表处",
+    "catalog": "目录",
+    "client_portal": "客户门户"
+  },
+  "globe_map": {
+    "badge": "分销网络",
+    "title_1": "我们的",
+    "title_2": "存在",
+    "subtitle": "西班牙东南部的战略覆盖",
+    "operations_title": "运营中心",
+    "select_to_view": "选择在地图上查看",
+    "status_online": "在线",
+    "status_viewing": "正在查看",
+    "headquarters": "总部",
+    "regional_coverage": "区域覆盖",
+    "regional_coverage_desc": "穆尔西亚和阿利坎特的分销服务。24-48小时交付。",
+    "go_to": "前往"
+  },
+  "errors": {
+    "notFound": "找不到页面",
+    "notFoundDesc": "抱歉，您要查找的页面不存在。",
+    "serverError": "服务器错误",
+    "serverErrorDesc": "发生错误。请稍后再试。",
+    "networkError": "网络错误",
+    "networkErrorDesc": "无法连接到服务器。",
+    "unauthorized": "未授权",
+    "unauthorizedDesc": "您需要登录才能访问此页面。",
+    "forbidden": "拒绝访问",
+    "forbiddenDesc": "您没有权限访问此资源。",
+    "tryAgain": "重试",
+    "goHome": "返回首页",
+    "invalidCredentials": "凭据无效",
+    "invalidCredentialsDesc": "请检查您的客户代码和密码。"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "我们随时为您服务",
+    "phone": "电话",
+    "email": "Email",
+    "address": "地址",
+    "schedule": "Horario",
+    "scheduleWeekdays": "Lunes a Viernes: 8:00 - 18:00",
+    "scheduleSaturday": "周六: 9:00 - 14:00",
+    "scheduleSunday": "Domingos y festivos: Cerrado",
+    "form": {
+      "title": "给我们发送消息",
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre completo",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "phone": "电话",
+      "phonePlaceholder": "612 345 678",
+      "company": "Empresa",
+      "companyPlaceholder": "Nombre de tu empresa (opcional)",
+      "message": "Mensaje",
+      "messagePlaceholder": "我们能帮您什么？",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando...",
+      "successTitle": "消息已发送！",
+      "successMessage": "Nos pondremos en contacto contigo lo antes posible.",
+      "errorTitle": "Error al enviar",
+      "errorMessage": "请稍后重试。"
+    },
+    "location": {
+      "title": "我们的位置",
+      "mainOffice": "Oficina Principal",
+      "address": "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca",
+      "city": "30817 - Lorca (Murcia)"
+    }
+  },
+  "products_page": {
+    "title": "即将推出",
+    "subtitle_1": "Estamos preparando algo especial",
+    "subtitle_2": "我们的产品目录正在更新，将推出新功能。",
+    "cta_home": "Volver al inicio",
+    "cta_clients": "Área de clientes",
+    "badge": "即将上线"
+  },
+  "accessibility": {
+    "skipToContent": "Ir al contenido principal",
+    "menuToggle": "打开菜单",
+    "languageSwitch": "Cambiar idioma",
+    "darkMode": "Modo oscuro",
+    "lightMode": "Modo claro",
+    "loading": "Cargando contenido",
+    "newWindow": "Se abre en nueva ventana"
+  },
+  "categories": {
+    "mar": {
+      "name": "海鲜产品",
+      "description": "最高品质的冷冻鱼类和海鲜"
+    },
+    "carne": {
+      "name": "肉类",
+      "description": "精选冷冻肉类"
+    },
+    "precocinados": {
+      "name": "预煮食品",
+      "description": "冷冻预制菜和蔬菜"
+    },
+    "reposteria": {
+      "name": "糕点",
+      "description": "冷冻甜点和甜食"
+    },
+    "helados": {
+      "name": "冰淇淋",
+      "description": "雀巢餐饮系列冰淇淋"
+    },
+    "chocolate": {
+      "name": "巧克力",
+      "description": "优质巧克力和可可产品"
+    },
+    "pan": {
+      "name": "冷冻面包",
+      "description": "高品质冷冻面包和面团"
+    }
+  },
+  "meta": {
+    "title": "Granja Maripepa | 穆尔西亚和Lorca HORECA分销",
+    "description": "优质餐饮食品分销领导者。冷冻食品、肉类和鱼类。穆尔西亚和阿尔梅里亚24小时服务。",
+    "keywords": "granja maripepa, gmp, lorca gmp, lorca granja, 食品分销, 冷冻食品, HORECA, 穆尔西亚, 阿尔梅里亚, 肉类, 鱼类, lorca"
+  },
+  "legal": {
+    "privacy": {
+      "title": "隐私政策",
+      "intro": "在Granja Maripepa，我们非常重视客户和用户的隐私。",
+      "sections": {
+        "s1": {
+          "title": "1. 数据控制方",
+          "content": "Granja Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />电话: 968 46 75 14<br />Email: pedidos@granjamaripepa.com"
+        },
+        "s2": {
+          "title": "2. 处理目的",
+          "content": "我们处理您提供的信息是为了提供所请求的服务，进行计费，并向您发送与其相关的产品和服务的商业通信。"
+        },
+        "s3": {
+          "title": "3. 数据保留",
+          "content": "只要商业关系维持或为履行法律义务所需的年限内，提供的数据将被保留。"
+        },
+        "s4": {
+          "title": "4. 合法性",
+          "content": "处理您数据的法律依据是执行服务合同和/或产品销售合同。"
+        },
+        "s5": {
+          "title": "5. 接收者",
+          "content": "除非有法律义务，否则数据不会转让给第三方。"
+        },
+        "s6": {
+          "title": "6. 权利",
+          "content": "您有权确认Granja Maripepa是否正在处理您的个人数据，因此您有权访问您的个人数据，更正不准确的数据或在不再需要时请求删除。"
+        },
+        "s7": {
+          "title": "7. Cookie 与本地存储",
+          "content": "本网站不使用广告 Cookie 或第三方 Cookie。它使用访问、购物车和您的偏好所必需的技术性存储，并将您对分析的同意决定以 gmp-kage-consent-v1 为键保存在浏览器本地存储中。如果您接受可选分析，将在会话存储中创建会话标识符，并将事件发送至本网站自己的分析服务，不与第三方共享。您可以随时通过 Cookie 提示中的「隐私偏好」更改或撤回您的选择。"
+        }
+      }
+    },
+    "terms": {
+      "title": "条款和条件",
+      "intro": "欢迎访问Granja Maripepa网站。访问并使用本网站即表示您接受以下条款和条件。",
+      "sections": {
+        "s1": {
+          "title": "1. 知识产权",
+          "content": "源代码、图形设计、图像、照片、声音、动画、软件、文本以及本网站收集的信息和内容受西班牙知识产权和工业产权立法的保护，归Granja Maripepa所有。"
+        },
+        "s2": {
+          "title": "2. 网站使用",
+          "content": "用户承诺勤勉、正确和合法地使用网站、其服务和内容，特别是承诺不删除、规避或操纵版权和其他识别权利持有人权利的数据。"
+        },
+        "s3": {
+          "title": "3. 责任",
+          "content": "Granja Maripepa不对用户在访问网站和/或使用其中包含的信息时可能违反的任何适用规范负责。"
+        },
+        "s4": {
+          "title": "4. 修改",
+          "content": "Granja Maripepa保留随时修改或更新本使用条款以及网站上可能出现的任何类型信息的权利。"
+        },
+        "s5": {
+          "title": "5. 适用法律",
+          "content": "本条款受西班牙法律管辖。对于因访问或使用本网站而可能产生的任何争议，用户和Granja Maripepa同意明确提交给Lorca（穆尔西亚）的法院和法庭。"
+        }
+      }
+    }
+  }
 }

@@ -67,13 +67,13 @@ export async function EditorialLegal({
 }) {
   const t = await getTranslations({ locale, namespace: `legal.${kind}` });
   const labels = LABELS[locale as keyof typeof LABELS] || LABELS.es;
-  const length = kind === "privacy" ? 6 : 5;
+  const length = kind === "privacy" ? 7 : 5;
   const entries = Array.from({ length }, (_, i) => ({
     id: `${kind}-s${i + 1}`,
     title: t(`sections.s${i + 1}.title`),
   }));
   return (
-    <KageRoute routeId={`legal-${kind}`} mode="ambient">
+    <KageRoute routeId={`legal-${kind}`} mode="ambient" world="gmp">
       <Breadcrumbs
         locale={locale}
         items={[
@@ -94,7 +94,7 @@ export async function EditorialLegal({
         <WordReveal as="h1" className={`display h-sec ${styles.readingTitle}`}>
           {t("title")}
         </WordReveal>
-        <p className="body-lg">{t("intro")}</p>
+        <p className={`body-lg ${styles.legalLede}`}>{t("intro")}</p>
         <nav className={styles.readingNav} aria-label={labels.navigation}>
           <Link href="/legal/privacidad" className="arrowlink" data-cursor>
             {labels.privacy}

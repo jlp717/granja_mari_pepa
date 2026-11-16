@@ -9,7 +9,7 @@ export function EditorialFaq({ locale }: { locale: string }) {
   const copy = getFaqCopy(locale);
   const ui = getUICopy(locale);
   return (
-    <KageRoute routeId="preguntas-frecuentes" mode="ambient">
+    <KageRoute routeId="preguntas-frecuentes" mode="ambient" world="gmp">
       <Breadcrumbs
         locale={locale}
         items={[
@@ -57,7 +57,9 @@ export function EditorialFaq({ locale }: { locale: string }) {
               <WordReveal as="h1" className="display h-sec">
                 {copy.title}
               </WordReveal>
-              <p className="body-lg">{copy.intro}</p>
+              <p className="body-lg" data-rv="up">
+                {copy.intro}
+              </p>
               <nav
                 className={styles.readingNav}
                 aria-label={ui.groupNavigation}
@@ -79,7 +81,9 @@ export function EditorialFaq({ locale }: { locale: string }) {
               {group.title}
             </WordReveal>
           )}
-          <p className="body-lg">{group.intro}</p>
+          <p className="body-lg" data-rv="up">
+            {group.intro}
+          </p>
           <div className={styles.faqGroup}>
             {group.questions.map((q, qi) => (
               <details key={q.question} open={index === 0 && qi === 0}>

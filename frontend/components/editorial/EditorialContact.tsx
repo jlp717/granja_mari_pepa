@@ -109,7 +109,7 @@ export function EditorialContact({
     { name: "telefono", label: "phone", type: "tel", complete: "tel" },
   ] as const;
   return (
-    <KageRoute routeId="contacto" mode="ambient">
+    <KageRoute routeId="contacto" mode="ambient" world="gmp">
       <Breadcrumbs
         locale={locale}
         items={[{ name: "Contacto", path: "/contacto" }]}
@@ -127,8 +127,12 @@ export function EditorialContact({
             {copy.title}
           </WordReveal>
           <div className="gate-copy">
-            <p className="lead">{copy.intro}</p>
-            <h2 className="body-lg">{copy.channelTitle}</h2>
+            <p className="lead" data-rv="up">
+              {copy.intro}
+            </p>
+            <p className="body-lg" data-rv="up">
+              {copy.channelTitle}
+            </p>
           </div>
         </div>
         <div className={styles.channels}>
@@ -174,6 +178,7 @@ export function EditorialContact({
               className={styles.channelRow}
               href={channel.href}
               key={channel.index}
+              data-rv="up"
               data-cursor
               {...(channel.href.startsWith("http")
                 ? { target: "_blank", rel: "noopener noreferrer" }
@@ -207,7 +212,9 @@ export function EditorialContact({
           <WordReveal as="h2" className="display h-sec">
             {copy.prepareTitle}
           </WordReveal>
-          <p className="body-lg">{copy.prepareIntro}</p>
+          <p className="body-lg" data-rv="up">
+            {copy.prepareIntro}
+          </p>
         </div>
         <form className={styles.form} noValidate onSubmit={prepare}>
           <div className={styles.fields}>
@@ -230,7 +237,10 @@ export function EditorialContact({
                   }
                 />
                 {errors[field.name] && (
-                  <p className={`body ${styles.fieldError}`} id={`contacto-${field.name}-error`}>
+                  <p
+                    className={`body ${styles.fieldError}`}
+                    id={`contacto-${field.name}-error`}
+                  >
                     {errors[field.name]}
                   </p>
                 )}
@@ -251,7 +261,10 @@ export function EditorialContact({
                 }
               />
               {errors.mensaje && (
-                <p className={`body ${styles.fieldError}`} id="contacto-mensaje-error">
+                <p
+                  className={`body ${styles.fieldError}`}
+                  id="contacto-mensaje-error"
+                >
                   {errors.mensaje}
                 </p>
               )}
@@ -282,7 +295,10 @@ export function EditorialContact({
                 </Link>
               </p>
               {errors.privacidad && (
-                <p id="contacto-privacidad-error" className={`body ${styles.fieldError}`}>
+                <p
+                  id="contacto-privacidad-error"
+                  className={`body ${styles.fieldError}`}
+                >
                   {errors.privacidad}
                 </p>
               )}
@@ -342,7 +358,9 @@ export function EditorialContact({
             {copy.hoursTitle}
           </WordReveal>
           <div className="gate-copy">
-            <p className="lead">{copy.hoursBody}</p>
+            <p className="lead" data-rv="up">
+              {copy.hoursBody}
+            </p>
             <a href={facts.phoneHref} className="arrowlink" data-cursor>
               {copy.call} · {facts.phone}
             </a>
@@ -365,7 +383,9 @@ export function EditorialContact({
             {copy.locationsTitle}
           </WordReveal>
           <div className="gate-copy">
-            <p className="lead">{copy.locationsBody}</p>
+            <p className="lead" data-rv="up">
+              {copy.locationsBody}
+            </p>
             <address className={`body ${styles.address}`}>
               {facts.address}
             </address>

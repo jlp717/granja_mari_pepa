@@ -1,0 +1,493 @@
+{
+  "locale": "es",
+  "sourceHead": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "sourceFiles": {
+    "frontend/components/editorial/content.es.ts": "22ad2f41679add3f3560cc349162e9ff89b21fc625514682114c1d6d7778f2ff",
+    "frontend/components/editorial/support.es.ts": "c26f64913d43d1312ca65e163ffc706954a4a9c74be61ccc72802f8fb2664cca"
+  },
+  "stories": {
+    "acerca": {
+      "title": "El oficio de estar cerca.",
+      "eyebrow": "Granja Mari Pepa · Desde 1966",
+      "description": "Distribución alimentaria desde Lorca para la actividad profesional.",
+      "seo": {
+        "title": "Granja Mari Pepa, origen y actividad",
+        "description": "Conoce el origen de Granja Mari Pepa en Lorca, su gama informativa y los canales para una consulta profesional."
+      },
+      "chapters": [
+        {
+          "label": "Origen",
+          "title": "Una historia que empieza en Lorca.",
+          "paragraphs": [
+            "Granja Mari Pepa sitúa su origen en Lorca en 1966. Ese dato permite hablar de una trayectoria concreta, ligada a la distribución alimentaria y al trabajo de quienes preparan, sirven o comercializan alimentos. La historia no necesita una sucesión de hitos sin documento: empieza por una ciudad, un año y una actividad reconocible.",
+            "Conocer a un distribuidor también consiste en entender cómo encontrarlo y qué información ofrece. Por eso esta presentación conecta el origen con la gama, la sede y los canales publicados. Los detalles de cada producto o servicio se confirman en su contexto. Con esa información puedes reconocer el siguiente paso y qué cuestión conviene plantear al equipo."
+          ]
+        },
+        {
+          "label": "Públicos",
+          "title": "Cada negocio mira una necesidad distinta.",
+          "paragraphs": [
+            "En hostelería, restauración y catering, la elección de un producto forma parte de un trabajo mayor: preparar una propuesta, organizar una cocina y atender un servicio. Empieza por identificar la familia que buscas, el formato y el uso previsto. Con esas tres piezas resulta más fácil reconocer qué información de la referencia necesitas revisar.",
+            "En un comercio, la presentación puede ocupar el centro de la consulta. En una colectividad, pueden ser importantes los documentos que deben revisarse antes de decidir. Explica el tipo de establecimiento y sus requisitos como preguntas concretas. Ese contexto permite consultar las condiciones aplicables sin atribuir a todos los negocios las mismas necesidades."
+          ]
+        },
+        {
+          "label": "Gama",
+          "title": "Tres temperaturas. Muchas preguntas concretas.",
+          "paragraphs": [
+            "La información publicada por Granja Mari Pepa describe productos congelados, refrigerados y a temperatura ambiente. Su presentación comercial incluye familias del mar, carnes, precocinados y repostería, además de marcas de helados y panadería. Puedes recorrer estas categorías para identificar el punto de partida de tu búsqueda y preparar una consulta más precisa.",
+            "El siguiente paso es precisar qué se está buscando. Familia, marca cuando se conoce y formato son puntos de partida útiles. La fotografía representa un alimento o una categoría; las características de una referencia corresponden a su información específica. El catálogo online sigue en preparación y no muestra stock, precios ni fichas que permitan cerrar una elección desde esta página."
+          ]
+        },
+        {
+          "label": "Elegir",
+          "title": "La información también forma parte del producto.",
+          "paragraphs": [
+            "Una consulta gana precisión cuando separa lo que ya se sabe de lo que hace falta confirmar. Puede partir de una referencia conocida, de una familia o de una necesidad de formato. Si existe una ficha concreta, esa documentación será el lugar adecuado para comprobar sus características, en vez de trasladar las propiedades de otro producto parecido.",
+            "Las publicaciones fechadas ayudan a reconocer marcas, familias y material comercial de una edición concreta. Anota la fecha junto a la referencia que te interesa y señala qué detalle quieres confirmar. Gama, publicaciones y contacto forman un recorrido útil: primero orientarse, después identificar y finalmente consultar la información aplicable a la elección."
+          ]
+        },
+        {
+          "label": "Lorca",
+          "title": "Una dirección para situar la conversación.",
+          "paragraphs": [
+            "La sede de Lorca se publica en el Polígono Industrial Saprelorca, avenida Francisco Jimeno Sola, 3. La página local reúne dirección, horario y acceso al mapa para consultarlos juntos. Si la pregunta requiere un desplazamiento, prepara el motivo de la visita y confirma cómo proceder antes de salir, con la dirección completa a mano.",
+            "Para preguntar por el servicio, conviene indicar la localidad del establecimiento y qué producto o familia interesa. Puedes añadir la dirección del negocio y la condición que necesitas conocer. La conversación debe referirse a ese destino y a esa petición, para que la respuesta sea útil al establecimiento."
+          ]
+        },
+        {
+          "label": "Contacto",
+          "title": "Conversemos.",
+          "paragraphs": [
+            "Los canales publicados permiten continuar la consulta por teléfono, correo o WhatsApp. La página de contacto explica qué acción abre cada opción y permite preparar el texto antes de continuar en la aplicación elegida. Nombre del negocio, localidad, familia de producto y duda concreta ofrecen al interlocutor un contexto fácil de reconocer.",
+            "Puedes empezar con una duda pequeña: una familia que quieres conocer, un formato por identificar o una condición del servicio que necesitas aclarar. Mantén el nombre de la referencia cuando exista y separa las preguntas si son distintas. Así la conversación conserva un hilo reconocible y puedes revisar después qué información has obtenido y qué detalle falta por confirmar."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Un punto de partida claro.",
+        "text": "Una trayectoria identificable, una gama que explorar y una conversación con contexto. Conocer Granja Mari Pepa empieza por información concreta y continúa por sus canales publicados.",
+        "link": "Hablar con el equipo"
+      }
+    },
+    "lorca": {
+      "title": "Lorca, como punto de encuentro.",
+      "eyebrow": "Sede · Saprelorca",
+      "description": "Dirección, orientación y canales para preparar tu consulta.",
+      "seo": {
+        "title": "Granja Mari Pepa en Lorca",
+        "description": "Dirección de Saprelorca, horario publicado y canales para preparar una consulta con Granja Mari Pepa en Lorca."
+      },
+      "chapters": [
+        {
+          "label": "Situarse",
+          "title": "Antes de salir, saber adónde vas.",
+          "paragraphs": [
+            "Granja Mari Pepa publica su sede en Lorca, dentro del Polígono Industrial Saprelorca. Esta página reúne la información de ubicación con los canales de contacto para evitar que una dirección quede separada de la pregunta que motiva la visita. Es un lugar desde el que situar la actividad de la empresa, cuyo origen se fecha en 1966.",
+            "Si necesitas acercarte, el primer paso es comprobar la dirección y hablar con el equipo sobre el motivo de la consulta. La presencia de una sede no define por sí sola horarios de recogida, acceso a instalaciones o atención sin aviso. Esos detalles deben confirmarse antes de desplazarse, sin trasladar a esta página condiciones que no están publicadas."
+          ]
+        },
+        {
+          "label": "Dirección",
+          "title": "Saprelorca, avenida Francisco Jimeno Sola.",
+          "paragraphs": [
+            "La dirección comercial publicada sitúa la sede en avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Conviene conservar el conjunto de estos datos al preparar una ruta: vía, número, polígono y localidad identifican mejor el destino que el nombre de la empresa por separado.",
+            "El enlace de mapa abre un servicio externo de orientación cuando lo eliges. Conserva la dirección completa junto al nombre de la empresa al preparar la búsqueda y comprueba que el destino corresponde a Lorca. Si tu desplazamiento necesita una indicación específica de acceso, explica el motivo por un canal de contacto y consulta cómo llegar para ese caso."
+          ]
+        },
+        {
+          "label": "Atención",
+          "title": "Una llamada puede resolver el siguiente paso.",
+          "paragraphs": [
+            "La información de contacto incluye los teléfonos 968 46 75 14 y 639 77 86 55. El horario publicado de atención es de lunes a viernes, de 08:00 a 13:00 y de 16:00 a 19:00. Puedes reunir el número, el motivo de la llamada y la referencia que te interesa antes de iniciar la conversación.",
+            "Explica brevemente quién contacta, dónde está su establecimiento y qué necesita confirmar. Si la cuestión requiere identificar un documento o producto, prepara su nombre o referencia antes de llamar. Correo y WhatsApp ofrecen otras vías publicadas para continuar: elige la que te permita expresar mejor la pregunta y revisar los datos que vas a compartir."
+          ]
+        },
+        {
+          "label": "Productos",
+          "title": "Buscar una familia, concretar una referencia.",
+          "paragraphs": [
+            "La presentación de la gama comprende congelados, refrigerados y productos a temperatura ambiente. En la web aparecen familias del mar, carnes, precocinados y repostería, junto a marcas de helados y panadería. Puedes recorrerlas para situar la búsqueda y distinguir una pregunta sobre un producto conocido de una consulta inicial sobre la gama.",
+            "Si conoces el producto, indica su nombre y el formato que buscas. Si todavía comparas alternativas, explica el uso previsto y la familia que te interesa. La ficha de cada referencia y las condiciones de la petición deben confirmarse antes de decidir. El catálogo online está en preparación. Para conocer un precio, una presentación o la disponibilidad de una referencia, continúa la consulta con el producto identificado."
+          ]
+        },
+        {
+          "label": "Servicio",
+          "title": "La localidad de tu negocio importa.",
+          "paragraphs": [
+            "Para consultar el servicio, aporta la localidad y una descripción suficiente del establecimiento. Añade la dirección cuando resulte relevante y señala qué aspecto necesitas conocer. La sede identifica a la empresa; los datos de tu negocio sitúan la petición. Tener ambos puntos claros ayuda a formular una pregunta concreta sobre el destino que te interesa.",
+            "Si conoces el producto, conserva su nombre durante la conversación. Si todavía buscas una opción, describe la familia y el formato que necesitas. Puedes agrupar las dudas por tema: características del producto, información documental y condiciones de la petición. Esta preparación permite revisar cada respuesta con su contexto y decidir qué paso necesitas dar después."
+          ]
+        },
+        {
+          "label": "Preguntas",
+          "title": "Llegar con la información necesaria.",
+          "paragraphs": [
+            "¿Qué preparo antes de llamar? Nombre del establecimiento, localidad, familia o referencia y la pregunta que necesitas resolver. ¿Qué datos reviso antes de desplazarme? Dirección completa, horario publicado y el motivo de la visita. ¿Cómo consulto un detalle de acceso? Describe la operación que te interesa y pide la orientación que corresponda a ese caso.",
+            "¿Dónde continúo si sólo quiero información de producto? En la gama informativa o en Contacto. ¿Necesito una cuenta para localizar la sede? Los datos públicos de esta página están disponibles sin entrar al área de clientes. Su propósito es sencillo: ayudarte a situarte y a preparar una consulta útil, sin hacerte recorrer una presentación genérica antes de encontrar la dirección."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Una dirección. Un siguiente paso.",
+        "text": "Sitúa la sede, comprueba el horario y plantea tu consulta por un canal real. La orientación sirve cuando te ayuda a decidir qué hacer después.",
+        "link": "Ver contacto y mapa"
+      }
+    },
+    "calidad": {
+      "title": "Elegir empieza por entender.",
+      "eyebrow": "Información de producto",
+      "description": "Preguntas y documentación para una elección profesional con contexto.",
+      "seo": {
+        "title": "Información para elegir productos",
+        "description": "Preguntas sobre familias, formatos y documentación para una consulta profesional de productos alimentarios."
+      },
+      "chapters": [
+        {
+          "label": "Criterio",
+          "title": "El dato antes que la promesa.",
+          "paragraphs": [
+            "En una elección profesional, el nombre de una familia es sólo el comienzo. Dos productos que se parecen pueden responder a formatos, composiciones o usos distintos. Empieza por identificar qué estás comparando: el nombre comercial, la referencia cuando exista y el dato que condiciona tu decisión. Con esa base, la búsqueda de información resulta más concreta.",
+            "Este recorrido reúne preguntas útiles para consultar la gama de Granja Mari Pepa. Cada capítulo ayuda a precisar una parte de la elección: familia, presentación, documentación y conversación. Puedes utilizarlos como una lista de comprobación inicial, anotando qué conoces del producto y qué información necesitas solicitar para continuar con tu propio proceso de selección."
+          ]
+        },
+        {
+          "label": "Identificar",
+          "title": "Saber de qué producto estamos hablando.",
+          "paragraphs": [
+            "La gama publicada se organiza en congelados, refrigerados y productos a temperatura ambiente. Las familias visibles incluyen mar, carnes, precocinados y repostería, además de la presentación de marcas de helados y panadería. Recorre esa clasificación para situar la necesidad y después concreta los datos del artículo que quieres conocer.",
+            "Si dispones de un nombre, marca o referencia, inclúyelo en tu consulta. Si partes de una necesidad más abierta, describe el uso y el formato que buscas. Identificar bien el punto de partida evita comparar una imagen genérica con una ficha concreta o trasladar a un producto la información que corresponde a otro."
+          ]
+        },
+        {
+          "label": "Formato",
+          "title": "La presentación también se confirma.",
+          "paragraphs": [
+            "El formato forma parte de la elección. Prepara la denominación comercial cuando la conozcas y explica qué presentación estás buscando. Si partes de una necesidad abierta, describe el uso previsto y formula la cuestión como una consulta. Puedes distinguir entonces entre identificar una opción y comprobar las características de una referencia que ya has seleccionado.",
+            "El catálogo online de esta web permanece en preparación. La presentación actual ofrece un punto de partida para recorrer familias y situar la consulta; las características de una referencia se comprueban en su información específica. La página de gama sirve para orientarse; la consulta comercial sirve para concretar. Mantener esa diferencia hace más fácil reconocer qué información falta y dónde obtenerla."
+          ]
+        },
+        {
+          "label": "Documentar",
+          "title": "Cada documento tiene su contexto.",
+          "paragraphs": [
+            "Antes de utilizar información de un producto, comprueba a qué referencia pertenece. Si necesitas conocer composición, alérgenos, condiciones o instrucciones, solicita la documentación específica y revisa su identificación. Conserva el nombre de la referencia junto al documento y anota la cuestión que necesitas aclarar, para mantener la consulta ligada al producto correcto.",
+            "La fecha también importa. Las publicaciones de febrero y marzo de 2026 permiten reconocer el material comercial de cada edición. Si una referencia te interesa, guarda su identificación y señala la edición donde la has visto. Consulta la información aplicable a la petición actual antes de usar un precio, una condición o una disponibilidad como base de tu decisión."
+          ]
+        },
+        {
+          "label": "Conversar",
+          "title": "Preguntar.",
+          "paragraphs": [
+            "Una consulta puede reunir familia, referencia si se conoce, formato y cuestión pendiente. Añadir el tipo de establecimiento y la localidad ayuda a situar la conversación sin sustituir la información del producto. El objetivo es que ambas partes sepan qué se está intentando confirmar, no acumular expresiones generales sobre calidad que podrían referirse a cualquier artículo.",
+            "Los canales publicados están reunidos en Contacto. Puedes llamar, abrir correo o utilizar WhatsApp y preparar un mensaje con los datos que tengas. Si son varias preguntas, sepáralas para conservar el contexto de cada una. Después podrás revisar qué respuesta corresponde al producto, cuál trata del formato y qué condición de la petición has consultado."
+          ]
+        },
+        {
+          "label": "Preguntas",
+          "title": "Distinguir una orientación de una ficha.",
+          "paragraphs": [
+            "¿Una imagen confirma el producto que recibiré? No: la referencia y su información deben identificarse. ¿Puedo consultar fichas y stock online? El catálogo público todavía está en preparación. ¿Una publicación fechada confirma una oferta actual? Su fecha forma parte del contexto y las condiciones deben verificarse para la petición concreta.",
+            "¿Dónde reviso un detalle que no aparece aquí? Solicita la información de la referencia por los canales de contacto. ¿Esta página acredita una certificación? No sustituye un documento de certificación ni afirma una vigencia no contrastada. Su función es ayudarte a reconocer las preguntas y las fuentes adecuadas, para que la elección se apoye en información que corresponda realmente al producto y a la consulta."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Información que corresponde.",
+        "text": "Un producto identificable, una pregunta concreta y el documento adecuado. El criterio empieza por saber qué se conoce y qué conviene confirmar antes de elegir.",
+        "link": "Preparar una consulta"
+      }
+    },
+    "reparto": {
+      "title": "El servicio empieza por situarlo.",
+      "eyebrow": "Consulta de distribución",
+      "description": "Localidad, producto y coordinación: datos para hablar de una petición concreta.",
+      "seo": {
+        "title": "Consultar el servicio de distribución",
+        "description": "Localidad, producto y datos útiles para consultar las condiciones de una petición a Granja Mari Pepa."
+      },
+      "chapters": [
+        {
+          "label": "Punto de partida",
+          "title": "Una dirección cambia la pregunta.",
+          "paragraphs": [
+            "Hablar de distribución empieza por situar el establecimiento que consulta. Prepara el nombre del negocio, la localidad y una descripción breve de lo que necesitas. La sede publicada de Granja Mari Pepa está en Lorca; los datos de tu establecimiento permiten plantear la pregunta desde el destino concreto que te interesa.",
+            "Este recorrido ayuda a ordenar una consulta sobre el servicio. Puedes avanzar desde la familia de producto hasta la información del establecimiento, distinguir una búsqueda inicial de una petición identificada y reunir las condiciones que quieres confirmar. Al final tendrás un contexto claro para continuar por los canales publicados, con cada pregunta asociada a su motivo."
+          ]
+        },
+        {
+          "label": "La petición",
+          "title": "Qué necesitas forma parte del recorrido.",
+          "paragraphs": [
+            "Antes de consultar, identifica la familia o el producto que te interesa. La web presenta congelados, refrigerados y productos a temperatura ambiente, con familias del mar, carnes, precocinados y repostería. Si conoces marca, referencia o formato, aporta esa información; si no, explica la necesidad para que la conversación pueda concretarse.",
+            "El catálogo online sigue en preparación y no permite confirmar una existencia o cerrar un pedido desde esta página. Puedes utilizarla para identificar una familia, revisar una publicación fechada y preparar los datos que quieres contrastar. La gama informativa orienta; la disponibilidad y las condiciones de la petición requieren una confirmación específica."
+          ]
+        },
+        {
+          "label": "Contexto",
+          "title": "Explicar el uso ayuda a entender la consulta.",
+          "paragraphs": [
+            "Un establecimiento de restauración, un comercio o una colectividad pueden formular preguntas distintas sobre un mismo tipo de alimento. Indica qué actividad realiza tu negocio y qué información necesitas revisar. Una consulta sobre presentación puede necesitar datos diferentes de otra sobre documentación o coordinación de una petición: explica el propósito para situar la conversación.",
+            "También puedes señalar si tu pregunta se refiere a un producto conocido o a una búsqueda inicial. Separar ambas situaciones evita mezclar la identificación del artículo con otras cuestiones de servicio. La información debe ser suficiente para explicar la necesidad, sin enviar datos personales innecesarios o documentos que no guarden relación con esa primera conversación."
+          ]
+        },
+        {
+          "label": "El destino",
+          "title": "Preparar los datos del establecimiento.",
+          "paragraphs": [
+            "Cuando una consulta pasa a tratar una dirección concreta, conviene que el nombre del establecimiento, la localidad y los datos de contacto estén claros. Si existe una condición de acceso o recepción relevante para la pregunta, puedes describirla y pedir que se confirme cómo afecta a la petición, en lugar de darla por resuelta.",
+            "Puedes organizar esos datos como una lista breve: identificación del negocio, destino, persona de contacto y cuestión pendiente. Si necesitas aclarar un aspecto de recepción o acceso, descríbelo como una condición a consultar. La información servirá para tratar ese caso con el equipo y para reconocer después qué detalles se han confirmado durante la conversación."
+          ]
+        },
+        {
+          "label": "Contacto",
+          "title": "Coordinar.",
+          "paragraphs": [
+            "La empresa publica los teléfonos 968 46 75 14 y 639 77 86 55 y un horario de atención de lunes a viernes, de 08:00 a 13:00 y de 16:00 a 19:00. Contacto reúne además correo y WhatsApp. Puedes elegir el canal según la información que necesites explicar, manteniendo localidad y producto como referencia de la consulta.",
+            "Si preparas un mensaje desde esta web, revisa sus datos antes de abrir el canal elegido. Correo y WhatsApp permiten continuar en su aplicación; la copia deja el texto listo para que lo utilices después. Mantén la localidad y el producto al comienzo del mensaje y separa las preguntas cuando traten condiciones diferentes."
+          ]
+        },
+        {
+          "label": "Preguntas",
+          "title": "Confirmar antes de darlo por hecho.",
+          "paragraphs": [
+            "¿Qué información ayuda a consultar una localidad? Identifica el establecimiento, el destino y la familia o referencia de interés. ¿Cómo planteo una condición de recepción? Describe la situación y pregunta cómo afecta a la petición concreta. ¿Cómo organizo varias dudas? Sepáralas por producto, documentación y servicio, manteniendo el contexto de cada una.",
+            "¿Dónde continúo la conversación? Contacto reúne los canales publicados. ¿Puedo realizar un pedido desde el catálogo público? Sigue en preparación: utiliza la gama para orientarte y consulta la referencia que te interesa. Antes de decidir, revisa las condiciones que correspondan al producto y al destino concretos, conservando la información que has obtenido y las preguntas que aún necesitas resolver."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Una consulta con destino.",
+        "text": "Localidad, producto y una necesidad reconocible. Preparar bien la información permite hablar del servicio concreto, sin convertir una orientación general en una promesa.",
+        "link": "Consultar el servicio"
+      }
+    }
+  },
+  "faq": {
+    "title": "Preguntas con un lugar donde empezar.",
+    "intro": "Recorre las dudas por tema: la gama, la consulta profesional, el servicio y los canales publicados. Cada respuesta indica el siguiente paso que puedes dar con la información disponible.",
+    "seo": {
+      "title": "Preguntas frecuentes",
+      "description": "Respuestas por tema sobre gama, consulta profesional, localidad, contacto, catálogo y documentos de Granja Mari Pepa."
+    },
+    "groups": [
+      {
+        "title": "La gama",
+        "intro": "Una familia orienta la búsqueda. La información de una referencia concreta permite precisar la elección.",
+        "questions": [
+          {
+            "question": "¿Qué tipos de productos presenta Granja Mari Pepa?",
+            "answer": "La información publicada comprende congelados, refrigerados y productos a temperatura ambiente. Recorre la gama para identificar una familia y consulta las características y disponibilidad de la referencia concreta."
+          },
+          {
+            "question": "¿Qué familias puedo encontrar en la web?",
+            "answer": "Aparecen mar, carnes, precocinados y repostería. También se presentan Topgel, Nestlé y Panamar en sus contextos de congelados, helados y panadería; la gama orienta la búsqueda de una referencia."
+          },
+          {
+            "question": "¿La fotografía identifica el formato que puedo solicitar?",
+            "answer": "Las imágenes permiten reconocer una familia. Para consultar un formato, aporta el nombre o referencia cuando lo conozcas y solicita la información del producto que te interesa."
+          }
+        ]
+      },
+      {
+        "title": "La consulta profesional",
+        "intro": "El tipo de establecimiento ayuda a explicar la necesidad; los detalles de cada servicio se confirman en la consulta.",
+        "questions": [
+          {
+            "question": "¿Cómo planteo una consulta para hostelería o restauración?",
+            "answer": "Indica actividad, localidad y familia de producto. Añade marca o formato cuando los conozcas para distinguir una búsqueda inicial de una pregunta sobre una referencia identificada."
+          },
+          {
+            "question": "¿Qué datos son útiles si tengo un comercio?",
+            "answer": "Explica la presentación que buscas y la información que necesitas revisar. El contexto del establecimiento permite consultar las condiciones aplicables a esa petición."
+          },
+          {
+            "question": "¿Cómo preparo una consulta para una colectividad?",
+            "answer": "Describe la necesidad y la documentación de producto que quieres revisar. Expresa los requisitos específicos del centro como preguntas para consultar su aplicación al caso concreto."
+          }
+        ]
+      },
+      {
+        "title": "Localidad y servicio",
+        "intro": "Una dirección y una petición concretas permiten preguntar por condiciones concretas.",
+        "questions": [
+          {
+            "question": "¿Cómo consulto si se atiende mi localidad?",
+            "answer": "Aporta localidad y familia o producto de interés por un canal publicado. La cobertura aplicable al establecimiento se confirma para esa petición concreta."
+          },
+          {
+            "question": "¿Dónde puedo confirmar un plazo?",
+            "answer": "Indica qué fecha o condición necesitas conocer junto con producto y localidad. Las condiciones de la petición se consultan específicamente; esta página no establece un plazo general."
+          },
+          {
+            "question": "¿La dirección de la sede confirma una recogida?",
+            "answer": "La página de Lorca reúne ubicación y contacto. Explica el motivo de una visita, recogida o cuestión de acceso antes de desplazarte y confirma cómo proceder."
+          }
+        ]
+      },
+      {
+        "title": "Hablar y orientarse",
+        "intro": "Teléfonos, horario y dirección permanecen juntos para que puedas organizar el siguiente paso.",
+        "questions": [
+          {
+            "question": "¿Qué teléfonos están publicados?",
+            "answer": "Los teléfonos publicados son 968 46 75 14 y 639 77 86 55. Contacto reúne además correo y WhatsApp; cada acción abre el canal que eliges."
+          },
+          {
+            "question": "¿Cuál es el horario de atención publicado?",
+            "answer": "De lunes a viernes, de 08:00 a 13:00 y de 16:00 a 19:00. Para una operación o desplazamiento concreto, consulta también las condiciones que correspondan."
+          },
+          {
+            "question": "¿Dónde está la sede de Lorca?",
+            "answer": "Polígono Industrial Saprelorca, avenida Francisco Jimeno Sola, 3, 30817 Lorca, Murcia. La página local y Contacto muestran la dirección y un enlace externo de mapa."
+          }
+        ]
+      },
+      {
+        "title": "Catálogo y publicaciones",
+        "intro": "La fecha y el estado de cada recurso forman parte de su información.",
+        "questions": [
+          {
+            "question": "¿Puedo comprar desde el catálogo público?",
+            "answer": "El catálogo online está en preparación. La gama permite conocer familias y canales de consulta; no confirma stock, precios ni permite completar un pedido público."
+          },
+          {
+            "question": "¿Las revistas son ofertas de hoy?",
+            "answer": "Las publicaciones disponibles conservan sus ediciones de febrero y marzo de 2026. Consulta la aplicación actual de cualquier condición a la referencia y petición que te interesa."
+          },
+          {
+            "question": "¿Dónde confirmo un detalle que no aparece en la gama?",
+            "answer": "Prepara familia, producto o marca y la pregunta pendiente. Continúa por Contacto para consultar la información específica de esa referencia."
+          }
+        ]
+      },
+      {
+        "title": "Información y privacidad",
+        "intro": "Revisa lo que vas a compartir y consulta los documentos que corresponden a la tarea.",
+        "questions": [
+          {
+            "question": "¿Preparar un mensaje significa que ya se ha enviado?",
+            "answer": "Preparar texto no lo envía. Puedes abrir correo, WhatsApp o copiarlo; revisa y completa el envío en el canal elegido."
+          },
+          {
+            "question": "¿Qué información conviene incluir en una primera consulta?",
+            "answer": "Nombre del establecimiento, localidad, familia o referencia y duda concreta. Comparte los datos necesarios para la conversación y evita documentos o información personal ajenos a su propósito."
+          },
+          {
+            "question": "¿Dónde leo las políticas publicadas?",
+            "answer": "Privacidad y Términos enlazan los textos existentes, con lectura continua e índice por cláusulas. Preparar una consulta no modifica esos documentos."
+          }
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Hablemos de lo que necesitas.",
+    "intro": "Elige un canal o prepara una consulta con la localidad, el establecimiento y el producto que te interesa.",
+    "channelTitle": "Un canal real, a tu elección.",
+    "prepareTitle": "Prepara el contexto de tu consulta.",
+    "prepareIntro": "Estos campos preparan un mensaje en tu navegador. La web no lo envía: puedes abrir correo, continuar por WhatsApp o copiarlo y revisarlo antes de compartirlo.",
+    "hoursTitle": "Un horario para organizar la conversación.",
+    "hoursBody": "Atención de lunes a viernes, de 08:00 a 13:00 y de 16:00 a 19:00. Para una visita o una operación concreta, confirma las condiciones por un canal publicado.",
+    "locationsTitle": "La dirección, antes del mapa.",
+    "locationsBody": "Lorca · Polígono Industrial Saprelorca · avenida Francisco Jimeno Sola, 3 ·30817. El mapa se abre sólo cuando eliges consultar la ruta en su servicio externo.",
+    "questionsTitle": "Antes de continuar.",
+    "call": "Llamar",
+    "email": "Abrir correo",
+    "whatsapp": "Abrir WhatsApp",
+    "copy": "Copiar consulta",
+    "maps": "Cómo llegar",
+    "copied": "Consulta copiada. Revísala antes de compartirla.",
+    "copyError": "No se ha podido copiar. Puedes seleccionar el texto de la consulta.",
+    "preview": "Vista previa de tu consulta",
+    "privacyLink": "Leer la política de privacidad",
+    "validation": "Revisa los campos indicados antes de preparar la consulta.",
+    "prepared": "Consulta preparada. Completa el envío en el canal que elijas.",
+    "questions": [
+      {
+        "question": "¿Este formulario envía un mensaje a la empresa?",
+        "answer": "Prepara el texto de tu consulta y abre un canal real. Tú decides cuándo enviarlo desde correo o WhatsApp. La opción de copiar conserva el texto para que puedas revisarlo y usarlo después."
+      },
+      {
+        "question": "¿Puedo preguntar por productos o servicio?",
+        "answer": "Sí: indica la familia o referencia, la localidad y qué necesitas confirmar. Si todavía no conoces el formato, descríbelo como una necesidad para que la conversación pueda concretarse."
+      },
+      {
+        "question": "¿Dónde encuentro la ubicación?",
+        "answer": "La dirección de Lorca aparece en esta página y en la información de sede. Si quieres desplazarte, comprueba los datos y consulta antes cualquier detalle específico de la visita."
+      }
+    ],
+    "seo": {
+      "title": "Contactar con Granja Mari Pepa",
+      "description": "Teléfonos, correo, WhatsApp, horario y dirección publicados para preparar una consulta con Granja Mari Pepa."
+    }
+  },
+  "ui": {
+    "start": "Inicio",
+    "nextChapter": "Siguiente capítulo",
+    "askTeam": "Consultar con el equipo",
+    "chapterNavigation": "Capítulos de esta página",
+    "browseRange": "Explorar la gama",
+    "rangeDetail": "Familias y publicaciones con su contexto.",
+    "products": "Productos",
+    "findAnswer": "Encontrar una respuesta",
+    "questionsDetail": "Preguntas organizadas por tema.",
+    "questions": "Preguntas",
+    "prepareInquiry": "Preparar la consulta",
+    "contactDetail": "Canales publicados y datos útiles.",
+    "contact": "Contacto",
+    "understandInformation": "Entender la información",
+    "qualityDetail": "Preguntas para identificar producto y documentación.",
+    "quality": "Información",
+    "askService": "Consultar el servicio",
+    "serviceDetail": "Localidad y contexto de la petición.",
+    "service": "Servicio",
+    "identify": "Identificar",
+    "recognizeFamily": "Reconocer la familia",
+    "understand": "Comprender",
+    "questionsByTopic": "Preguntas por tema",
+    "confirm": "Concretar",
+    "continueRealChannel": "Continuar por un canal real",
+    "atmosphereLabel": "Escenas ambientales · enlaces de orientación",
+    "backToStart": "Volver al principio",
+    "continue": "Continuar",
+    "groupNavigation": "Grupos de preguntas",
+    "nextTopic": "Siguiente tema",
+    "allQuestions": "Ver todas las preguntas",
+    "locationInfo": "Información de Lorca",
+    "telephone": "Teléfono",
+    "directContact": "Contacto directo",
+    "emailOrders": "Email de pedidos",
+    "publishedNumbers": "Números publicados de contacto.",
+    "mobile": "Móvil",
+    "message": "Mensaje",
+    "openingHours": "Horario",
+    "location": "Ubicación",
+    "preparation": "Preparar",
+    "channelLink": "Canales",
+    "contactSubject": "Consulta para Granja Mari Pepa"
+  },
+  "contract": {
+    "storyIds": [
+      "acerca",
+      "lorca",
+      "calidad",
+      "reparto"
+    ],
+    "chaptersPerStory": 6,
+    "paragraphsPerChapter": 2,
+    "faqGroups": 6,
+    "questionsPerGroup": 3,
+    "contactQuestions": 3,
+    "immutable": "Translate only provided strings. Keep key names, array order, product/brand names, phone/address/year/date facts, policy references and action semantics. Do not add capabilities, claims or policy bodies.",
+    "resultKeys": [
+      "locale",
+      "sourceFiles",
+      "stories",
+      "faq",
+      "contact",
+      "ui",
+      "limits"
+    ]
+  }
+}

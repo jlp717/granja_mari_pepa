@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "schemaTypes": [
+    "Organization",
+    "WebSite"
+  ],
+  "method": "Evaluated actual static schema data and inspected property keys and values. Comments excluded.",
+  "firstHarnessFailure": "First extractor regex was overescaped; preserved as public-schema-check-first.cjs. No website source changed to pass this check."
+}

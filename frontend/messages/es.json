@@ -43,7 +43,7 @@
     "premium_catalog": "CATÁLOGO PREMIUM",
     "our_products_1": "NUESTROS",
     "our_products_2": "PRODUCTOS",
-    "description": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad",
+    "description": "Gama de congelado, refrigerado y ambiente para hostelería: mar, carnes, precocinados, repostería, panadería, refrigerados y salsas.",
     "featured": "Destacados",
     "view_catalog": "Ver Catálogo",
     "view_catalog_topgel": "Ver Catálogo Grupo Topgel"
@@ -105,7 +105,7 @@
     "subtitle": "Congelados, refrigerados y helados para HORECA",
     "cta": "Contactar",
     "since": "Desde 1966",
-    "description": "Soluciones integrales de alimentación para profesionales. Especialistas en carnes, pescados y precocinados de alta gama.",
+    "description": "Distribución de congelado, refrigerado y ambiente para hostelería. Siete familias de producto desde Lorca.",
     "viewProducts": "Ver productos",
     "contactUs": "Contáctanos",
     "explore_products": "Explorar Productos",
@@ -114,7 +114,7 @@
   },
   "products": {
     "title": "NUESTROS PRODUCTOS",
-    "subtitle": "Descubre nuestra selección premium de productos alimentarios, cuidadosamente elegidos para satisfacer los más altos estándares de calidad",
+    "subtitle": "Congelado, refrigerado y ambiente para hostelería: siete familias de producto y las marcas que distribuimos.",
     "premium": "PREMIUM",
     "seaProducts": "Productos del mar",
     "seaDescription": "Pescados y mariscos congelados de la más alta calidad",
@@ -164,7 +164,7 @@
       "subtitle_1": "Estamos aquí para",
       "subtitle_highlight": "escucharte",
       "subtitle_2": "y ayudarte",
-      "description": "Nuestro equipo de expertos está disponible para resolver tus dudas, personalizar soluciones y acompañarte en cada paso hacia el éxito.",
+      "description": "Escríbenos el nombre de tu establecimiento, la localidad y lo que necesitas. Te responde el equipo de Lorca.",
       "cta_send": "Enviar mensaje"
     },
     "channels": {
@@ -193,7 +193,7 @@
     "form_section": {
       "title_1": "Cuéntanos",
       "title_2": "tu proyecto",
-      "description": "Cada negocio es único. Comparte tus necesidades y crearemos una solución personalizada que impulse tu crecimiento.",
+      "description": "Cuéntanos qué cocina tienes y qué producto buscas. Con esos datos preparamos la consulta.",
       "stats": {
         "delivery": "Entrega garantizada",
         "quality": "Calidad certificada",
@@ -251,7 +251,7 @@
     "cta_final": {
       "title_1": "¿Listo para",
       "title_2": "comenzar?",
-      "description": "Nuestro equipo está preparado para ayudarte a encontrar las mejores soluciones para tu negocio. El primer paso es tan simple como una llamada.",
+      "description": "Llama al 968 46 75 14 o escribe a pedidos@granjamaripepa.com. El equipo de Lorca responde en horario comercial.",
       "whatsapp": "WhatsApp",
       "guarantees": {
         "delivery": {
@@ -283,7 +283,7 @@
     "history": {
       "title_1": "Nuestra",
       "title_2": "Historia",
-      "description": "Más de cinco décadas de experiencia y compromiso con la calidad en el sector alimentario",
+      "description": "Desde 1966 distribuyendo alimentación para hostelería desde Lorca.",
       "milestones": {
         "1966": {
           "title": "Fundación en Lorca (Murcia)",
@@ -299,7 +299,7 @@
         },
         "2000s": {
           "title": "Certificación ISO 9001",
-          "desc": "Obtención de la certificación ISO 9001:2008 que garantiza nuestro Sistema de Gestión de la Calidad."
+          "desc": "Obtención de la certificación ISO 9001 que garantiza nuestro Sistema de Gestión de la Calidad."
         },
         "today": {
           "title": "Más de 1.500 referencias",
@@ -366,7 +366,7 @@
       "description": "Nuestro compromiso con los más altos estándares de calidad y seguridad alimentaria",
       "items": {
         "iso": {
-          "name": "ISO 9001:2008",
+          "name": "ISO 9001",
           "desc": "Sistema de Gestión de Calidad",
           "label": "Certificado"
         },
@@ -487,7 +487,7 @@
     "location": {
       "title": "Nuestra ubicación",
       "mainOffice": "Oficina Principal",
-      "address": "Pol. Ind. Saprelorca-Parcela D-3, Avda. Francisco Gimeno Sola, 3",
+      "address": "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca",
       "city": "30817 - Lorca (Murcia)"
     }
   },
@@ -787,7 +787,7 @@
     "tagline": "Distribución alimentaria para hostelería",
     "description_short": "Congelado, refrigerado y temperatura ambiente para HORECA",
     "description_long": "Especialistas en distribución de productos congelados, refrigerados y temperatura ambiente para hostelería y restauración.",
-    "nestle_distributor": "Nestlé Helados · Froneri",
+    "nestle_distributor": "Nestlé Helados",
     "founded_text": "Fundada en Lorca, 1966",
     "green_energy": "Energía Verde",
     "quick_access": "Acceso Rápido",
@@ -879,17 +879,17 @@
   },
   "meta": {
     "title": "Granja Maripepa | Distribución HORECA en Murcia y Almería",
-    "description": "Distribución alimentaria para hostelería desde Lorca. Congelados, refrigerados y temperatura ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
-    "keywords": "Granja Maripepa, Maripepa, HORECA, Lorca, Polígono Saprelorca, distribución alimentaria, congelados, refrigerados, Grupo Topgel, Froneri, Nestlé Helados, Panamar, Murcia, Almería"
+    "description": "Distribución alimentaria para hostelería desde Lorca. Congelado, refrigerado y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
+    "keywords": "Granja Maripepa, Maripepa, HORECA, Lorca, Polígono Saprelorca, distribución alimentaria, congelados, refrigerados, Grupo Topgel, Nestlé Helados, Panamar, Murcia, Almería"
   },
   "legal": {
     "privacy": {
       "title": "Política de Privacidad | Granja Maripepa",
-      "intro": "En Granja Maripepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios.",
+      "intro": "Qué datos trata Granja Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos. Puedes escribir a pedidos@granjamaripepa.com para cualquier consulta sobre privacidad.",
       "sections": {
         "s1": {
           "title": "1. Responsable del Tratamiento",
-          "content": "Granja Maripepa, S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@granjamaripepa.com"
+          "content": "Granja Maripepa, S.L.<br />CIF: B04008710<br />Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca<br />30817 Lorca, Murcia<br />Teléfono: 968 46 75 14<br />Email: pedidos@granjamaripepa.com"
         },
         "s2": {
           "title": "2. Finalidad del Tratamiento",
@@ -905,11 +905,15 @@
         },
         "s5": {
           "title": "5. Destinatarios",
-          "content": "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal."
+          "content": "Los datos no se ceden a terceros salvo obligación legal. Los prestadores de alojamiento web, correo electrónico y la analítica propia del sitio actúan como encargados del tratamiento, con contrato y acceso limitado a lo necesario."
         },
         "s6": {
           "title": "6. Derechos",
-          "content": "Usted tiene derecho a obtener confirmación sobre si en Granja Maripepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios."
+          "content": "Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a pedidos@granjamaripepa.com e indicando el derecho que deseas ejercer. Puedes retirar en cualquier momento el consentimiento para la analítica opcional desde el panel de preferencias de cookies. Si consideras que el tratamiento no se ajusta al Reglamento (UE) 2016/679, puedes presentar una reclamación ante la Agencia Española de Protección de Datos en www.aepd.es."
+        },
+        "s7": {
+          "title": "7. Cookies y almacenamiento local",
+          "content": "Esta web no usa cookies publicitarias ni de terceros. Usa almacenamiento técnico necesario para el acceso, el carrito y tus preferencias, y guarda tu decisión sobre analítica en el almacenamiento local del navegador con la clave gmp-kage-consent-v1. Si aceptas la analítica opcional, se crea un identificador de sesión en el almacenamiento de sesión y se envían eventos al servicio de analítica del propio sitio, sin compartirlos con terceros. Puedes cambiar o retirar tu elección desde «Configurar preferencias» en el aviso de cookies, y borrar el almacenamiento desde tu navegador."
         }
       }
     },

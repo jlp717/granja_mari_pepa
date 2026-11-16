@@ -7,9 +7,10 @@ export function editorialMetadata(
   path: string,
   title: string,
   description: string,
+  ogImage?: string,
 ): Metadata {
   const valid = languages.includes(locale as Locale)
     ? (locale as Locale)
     : "es";
-  return createKageMetadata(valid, path, title, description);
+  return createKageMetadata(valid, path, title, description, ogImage);
 }

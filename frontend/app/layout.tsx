@@ -1,11 +1,13 @@
 import "./globals.css";
 import "@/components/kage/styles/kage.css";
 import "@/components/kage/styles/controls.css";
+import "@/components/kage/navigation/enhancement.css";
 import type { ReactNode } from "react";
 import type { Viewport } from "next";
 import { getLocale } from "next-intl/server";
 import { kageFontVariables } from "@/components/kage/fonts";
 import { JsonLdSchemas } from "@/components/seo/JsonLdSchemas";
+import { RevealController } from "@/components/kage/navigation/RevealController";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -14,7 +16,11 @@ export const viewport: Viewport = {
   themeColor: "#05070a",
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   let locale = "es";
   try {
     locale = await getLocale();
@@ -41,6 +47,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         data-layout-footer="b"
       >
         {children}
+        <RevealController />
       </body>
     </html>
   );

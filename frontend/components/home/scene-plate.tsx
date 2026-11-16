@@ -3,11 +3,11 @@ import { Foreground } from "@/components/kage/Foreground";
 import styles from "./scene-plate.module.css";
 
 export const SCENE_POSTERS = [
-  "/kage/mp/plates/umbral-bluehour.webp",
-  "/kage/mp/plates/pasillo-frio.webp",
-  "/kage/mp/plates/estanteria.webp",
-  "/kage/mp/plates/carretera.webp",
-  "/kage/mp/plates/mesa-pase.webp",
+  "/kage/careers/careers-03.jpg",
+  "/catalogs/familias/real-mar-1.jpg",
+  "/catalogs/familias/real-carne-1.jpg",
+  "/kage/careers/careers-04.jpg",
+  "/catalogs/familias/real-reposteria-1.jpg",
 ] as const;
 
 /** Decorative, complete SSR fallback. Only a live GL world may hide it. */
@@ -44,13 +44,12 @@ export function BrandFallback() {
   );
 }
 
-/** Foreground stages follow Kage's slot grammar. Only the gate keeps a near
- *  plane: the other cutouts are photographic plates rather than isolated
+/** Foreground stages follow Kage's slot grammar. No chapter keeps a near
+ *  plane any more: the cutouts were photographic plates rather than isolated
  *  objects, so at stage size they laid a hard top edge across the frame and
- *  sat under the copy. The live hall carries those chapters, which is what
- *  Kage lets the temple do. */
+ *  sat under the copy. The live hall carries the chapters, which is what Kage
+ *  lets the temple do. */
 const FG_SIZE: Record<string, readonly [number, number]> = {
-  "01-umbral": [2200, 882],
   "02-frio": [2200, 980],
   "03-catalogo": [2200, 1180],
   "04-ruta-hill": [2200, 897],
@@ -68,19 +67,19 @@ const SCENE_LAYER: Record<
   },
   1: {
     name: "pathways",
-    slots: [{ cls: "fg-bush", file: "03-catalogo" }],
+    slots: [],
   },
   2: {
     name: "lessons",
-    slots: [{ cls: "fg-wall", file: "02-frio" }],
+    slots: [],
   },
   3: {
     name: "eternity",
-    slots: [{ cls: "fg-grass", file: "04-ruta-scrub" }],
+    slots: [],
   },
   4: {
     name: "foot",
-    slots: [{ cls: "fg-bush", file: "02-frio" }],
+    slots: [],
   },
 };
 

@@ -94,6 +94,13 @@
 }
 .familyCopy {
   min-width: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.74),
+    rgba(4, 7, 10, 0.9)
+  );
+  padding: clamp(18px, 2.4vw, 30px);
+  border-left: 1px solid var(--line-soft);
 }
 .familyCopy h2 {
   margin: 20px 0 26px;

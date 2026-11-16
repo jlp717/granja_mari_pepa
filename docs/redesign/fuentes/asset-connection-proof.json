@@ -1,0 +1,84 @@
+{
+  "state": "source_connected_not_runtime_accepted",
+  "assetReadyAuthority": "Root confirmed assets copied to Root+7WT and hashes verified before this delta.",
+  "assets": [
+    {
+      "url": "/kage/brand/og.png",
+      "bytes": 799591,
+      "sha256": "a69854304315ce16e461d5fab194ee2161b35408b846fb2a091f050ab7b3640d"
+    },
+    {
+      "url": "/kage/brand/logo-alpha.png",
+      "bytes": 132243,
+      "sha256": "1757724d2a58df6a2e31d31c580c376de06c7cbdbd142eff61812c2c057e7fa8"
+    },
+    {
+      "url": "/kage/scene/01-umbral.webp",
+      "bytes": 165382,
+      "sha256": "080b947589fe10642c2dcecb42db5f265d4b045b2f7f8cb32490908323d8ac86"
+    },
+    {
+      "url": "/kage/scene/02-frio.webp",
+      "bytes": 220908,
+      "sha256": "8413d92448640e350d063947db3902ad2fd296d41cb4076831a8a1f9b57dc18d"
+    },
+    {
+      "url": "/kage/scene/03-catalogo.webp",
+      "bytes": 231760,
+      "sha256": "e9b7e1ab208801240dfdd81e330d9b8e98efc8305c0dd511c3ce389e90697e68"
+    },
+    {
+      "url": "/kage/scene/04-ruta.webp",
+      "bytes": 217558,
+      "sha256": "66cf8a34ff077a27f7f06219e9c44be46dbfb92a3ab4fb42b58d32ff0df695df"
+    },
+    {
+      "url": "/kage/scene/05-mesa.webp",
+      "bytes": 133938,
+      "sha256": "84c2958ca808ae4585547b66c67f4047dfd4a1e1d2ccaa483e88293daffc13e5"
+    },
+    {
+      "url": "/kage/foreground/01-umbral.webp",
+      "bytes": 229232,
+      "sha256": "f374e1bacd80b025c7d7f07aaf4950bca4d1dc5e40bb1d158075b7128a8235fa"
+    },
+    {
+      "url": "/kage/foreground/02-frio.webp",
+      "bytes": 83098,
+      "sha256": "401fc9224aba7e804eea523ddf8ff05ce93bbf41e054567c5dde617de4e014a3"
+    },
+    {
+      "url": "/kage/foreground/03-catalogo.webp",
+      "bytes": 33202,
+      "sha256": "c5e47701e9b9488f72e1a05a0e888c0175a0e2993d8c9a8b179156f984823c2f"
+    },
+    {
+      "url": "/kage/foreground/05-mesa.webp",
+      "bytes": 82280,
+      "sha256": "feab37459dbc38b89f2a1cf6e3c6fdf5bf1c7af46bf8ea6f0fe2cde9b1b39915"
+    },
+    {
+      "url": "/kage/secret-pathways-assets/foreground/png/hill.webp",
+      "bytes": 84142,
+      "sha256": "ffba816244bcba98e4e33c6ee56165edfe4048db4af122ef3f5822180a85edbc"
+    },
+    {
+      "url": "/kage/secret-pathways-assets/foreground/png/tall-grass.webp",
+      "bytes": 351644,
+      "sha256": "8db0b5fbd160a7225391a6283a99681e346e205f24191031657285ef85ef12d2"
+    }
+  ],
+  "OGdimensions": [
+    1200,
+    630
+  ],
+  "OGexpectedSha256": "a69854304315ce16e461d5fab194ee2161b35408b846fb2a091f050ab7b3640d",
+  "foreground": "One Foreground owner for each Home chapter0–4. Route uses literal Kage hill/grass; manifesto does not duplicate the global footer plane.",
+  "SSR": "Per-chapter scene plates and Main alpha logo visible by default; only html.kage-live hides them. Reduced motion retains plates.",
+  "peek": "SSR Umbral picture with data-kage-view-fallback; hidden only when engine marks individual frame ready after actual render/blit. Producer sets no readiness marker.",
+  "navigation": "Motion confirmed no public click/preventDefault/modal interceptors. Native data-view only provides pointer/Cloth behavior; NextLinks remain real routes.",
+  "sourceFidelity": "FooterB70px track, Main mark54px preserving600:182 ratio, second child title+lead. Removed1fr/1fr override. Values from Kage624–631, approved by Art before preview.",
+  "effectHonesty": "Removed unsupported image-focus declaration. Catalogue boundary identifies x-error-feedback: actual error alert and reset action, no fictitious form submission.",
+  "optimization": "Only already compressed local lossless masks/brand preserve unoptimized alphaRGB. Product photos remain normal Next/Image candidates for Root image optimization.",
+  "runtimePass": false
+}

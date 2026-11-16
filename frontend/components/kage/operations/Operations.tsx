@@ -9,6 +9,7 @@ import styles from "./operations.module.css";
 interface OperationsFrameProps {
   routeId: string;
   mode?: "ambient" | "internal" | "static";
+  world?: "gmp" | "photo";
   children: ReactNode;
   className?: string;
 }
@@ -16,12 +17,13 @@ interface OperationsFrameProps {
 export function OperationsFrame({
   routeId,
   mode = "ambient",
+  world,
   children,
   className = "",
 }: OperationsFrameProps) {
   const reduced = useReducedMotion();
   return (
-    <KageRoute routeId={routeId} mode={mode}>
+    <KageRoute routeId={routeId} mode={mode} world={world}>
       <MotionConfig
         reducedMotion="user"
         transition={{ duration: reduced ? 0 : 1.05, ease: [0.16, 1, 0.3, 1] }}

@@ -1,161 +1,205 @@
 export const STORY_TRANSLATIONS_EN = {
   acerca: {
-    title: "The craft of staying close.",
-    eyebrow: "Granja Maripepa · Since 1966",
+    title: "Since 1966, product and service for those who cook.",
+    eyebrow: "Lorca, since 1966",
     description:
-      "Food distribution from Lorca for hospitality across south-east Spain.",
+      "Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería.",
     chapters: [
       {
-        label: "Origins",
-        title: "A story that begins in Lorca.",
+        label: "1966",
+        title: "Since 1966, product and service for those who cook.",
         paragraphs: [
-          "Granja Maripepa was founded in Lorca in 1966. Since then it has distributed food for hospitality, restaurants and catering with a simple way of working: know the customer, understand their kitchen and respond.",
-          "Today the company keeps its head office in Lorca and a branch in Viator. Two starting points, one team and the same idea of service.",
+          "Granja Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond.",
+          "Today the company keeps its head office in Lorca and a branch in Viator, Almería. Two points of departure, one team and the same idea of service.",
         ],
       },
       {
-        label: "Customers",
-        title: "Every kitchen works in its own way.",
-        paragraphs: [
-          "A restaurant, a catering company, a canteen and a food shop do not need the same thing. Volume, format, opening hours and service change. That is why the conversation starts with your establishment.",
-          "Tell us what you cook, for how many services and in which town. With that context we can guide you on family, format and the documentation you need.",
+        label: "The company",
+        title: "Granja Maripepa in figures.",
+        paragraphs: [],
+        facts: [
+          { label: "Founded", value: "1966" },
+          { label: "Head office", value: "Lorca (Saprelorca)" },
+          { label: "Branch", value: "Viator (Almería)" },
+          { label: "Coverage", value: "Murcia, Almería and Alicante" },
+          { label: "Range", value: "Frozen, chilled and ambient" },
+          { label: "Cold storage capacity", value: "5,000 m³" },
+          { label: "References", value: "+1,500" },
+          {
+            label: "Usual lead time",
+            value: "24–48 h",
+            note: "Confirmed per order and area.",
+          },
         ],
       },
       {
-        label: "Range",
-        title: "Frozen, chilled and ambient.",
+        label: "History",
+        title: "From one house in Lorca to two sites.",
         paragraphs: [
-          "Three temperatures share the daily operation. Each family has its own storage, preparation and place in the kitchen. The range is organised so you can find a starting point without getting lost in codes.",
-          "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces open the catalogue. If you are looking for a specific reference, give us its name and format. The team confirms the product information and its documentation.",
+          "Three moments mark the company's history: its founding, the present day and the expansion that is under way.",
+        ],
+        timeline: [
+          {
+            year: "1966",
+            title: "Founded in Lorca",
+            text: "The company is born in Lorca to distribute food to the local hospitality trade.",
+          },
+          {
+            year: "Today",
+            title: "Two sites and 5,000 m³",
+            text: "Head office in Lorca and a branch in Viator, with 5,000 m³ of cold storage capacity.",
+          },
+          {
+            year: "2026",
+            title: "Expansion under way",
+            text: "The city council approves the planning for plots D2 and D3, promoted by the company to expand the facility.",
+          },
+        ],
+      },
+      {
+        label: "Brands",
+        title: "The brands we distribute.",
+        paragraphs: [
+          "Granja Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados. It works with Panamar, Okin and Pastelería Amparín. Each brand brings its own speciality to the range.",
+        ],
+        brands: [
+          {
+            name: "Grupo Topgel",
+            src: "/images/brands/topgel.png",
+            alt: "Grupo Topgel",
+            width: 266,
+            height: 107,
+          },
+          {
+            name: "Nestlé Helados",
+            src: "/images/brands/nestle.png",
+            alt: "Nestlé Helados",
+            width: 193,
+            height: 162,
+          },
+          {
+            name: "Panamar",
+            src: "/images/brands/panamar.png",
+            alt: "Panamar",
+            width: 249,
+            height: 158,
+          },
+          {
+            name: "Okin",
+            src: "/images/brands/okin.png",
+            alt: "Okin",
+            width: 223,
+            height: 192,
+          },
+          {
+            name: "Pastelería Amparín",
+            src: "/images/brands/amparin.png",
+            alt: "Pastelería Amparín",
+            width: 268,
+            height: 111,
+          },
+        ],
+      },
+      {
+        label: "Network",
+        title: "A national network with its base in Lorca.",
+        paragraphs: [
+          "Granja Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group's catalogue when a reference is not held at the Saprelorca warehouse.",
+          "The conversation stays local: the Lorca team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay in the south-east.",
+        ],
+      },
+      {
+        label: "Facilities",
+        title: "5,000 m³ of cold storage and two points of departure.",
+        paragraphs: [
+          "The operation runs from two sites: the Lorca head office and the Viator branch. Orders are prepared at both and routes organised for Murcia, Almería and Alicante.",
+          "Cold storage capacity reaches 5,000 m³.",
         ],
         shots: [
           {
             image: "/kage/careers/careers-facility.jpg",
-            title: "The Saprelorca plant.",
-            caption: "Warehouse, loading and routes from Lorca.",
+            title: "The Saprelorca warehouse.",
+            caption: "The Lorca warehouse, where loads are prepared.",
             href: "/lorca",
           },
           {
-            image: "/catalogs/familias/mar.jpg",
-            title: "The range, by family.",
-            caption: "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
-            href: "/productos",
+            image: "/kage/careers/careers-01.jpg",
+            title: "The refrigerated lorry.",
+            caption: "Refrigeration unit and loading at the site.",
+            href: "/calidad",
           },
           {
-            image: "/kage/careers/careers-04.jpg",
-            title: "Route and delivery.",
-            caption: "Lorca and Viator, two starting points.",
+            image: "/kage/careers/careers-02.jpg",
+            title: "Access and loading.",
+            caption: "Vehicle entrance and preparation area.",
             href: "/reparto",
           },
         ],
       },
       {
-        label: "Service",
-        title: "What you cannot see is also looked after.",
+        label: "Next step",
+        title: "Come and see us or give us a call.",
         paragraphs: [
-          "Preparing an order is more than gathering boxes. The warehouse organises the load, the route is adjusted to the area and the delivery closes with a note and a signature. Every step leaves a record so we can respond if something does not go as planned.",
-          "The information for each reference — ingredients, allergens, storage — is confirmed with the team. There is no need to guess: ask for the sheet of the product you are interested in.",
-        ],
-      },
-      {
-        label: "Sites",
-        title: "Lorca and Viator, two starting points.",
-        paragraphs: [
-          "The head office is in the Saprelorca industrial estate in Lorca. The Viator branch brings the operation closer to Almería. Both share the warehouse, routes and customer service.",
-          "If you need to visit us, check the address and the reason for the visit beforehand. That way we can tell you how to access the site and who to speak to.",
-        ],
-      },
-      {
-        label: "Contact",
-        title: "Let's talk about your kitchen.",
-        paragraphs: [
-          "Call, write or use WhatsApp. Tell us what you need and where your establishment is. A specific enquiry saves time for both sides.",
-          "If you already know the product, have the reference or format to hand. If you are still looking, describe the preparation and its use. The team will help you define the next step.",
+          "To visit the head office, write or call before you come. That way we can prepare access and the person who will meet you.",
+          "The address, opening hours and telephone numbers are on the contact page. If you want to see how we work in Lorca, you can also visit the head office page.",
         ],
       },
     ],
     manifesto: {
       title: "Beside the people who feed others.",
-      text: "From Lorca, since 1966. Product, route and team so the kitchen keeps running.",
+      text: "Since 1966, in Lorca. Product, route and team so the kitchen keeps running.",
       link: "Talk to the team",
     },
     seo: {
-      title: "Granja Maripepa: history and activity since 1966",
+      title: "About us | Granja Maripepa, Lorca since 1966",
       description:
-        "Food distribution for hospitality from Lorca since 1966, with a branch in Viator (Almería) and a frozen, chilled and ambient range.",
+        "Food distribution for hospitality in Lorca since 1966, with a branch in Viator (Almería) and a frozen, chilled and ambient range for professional kitchens.",
     },
   },
   lorca: {
-    title: "Lorca, where it all began.",
-    eyebrow: "Head office · Saprelorca",
-    description: "Address, opening hours and contact for the head office.",
+    title: "The Lorca head office, in Saprelorca.",
+    eyebrow: "Head office, Polígono Saprelorca",
+    description:
+      "Address, access and contact for the main site in the Polígono Industrial Saprelorca.",
     chapters: [
       {
-        label: "Arriving",
-        title: "The head office is in Saprelorca.",
+        label: "Head office",
+        title: "The Lorca head office, in Saprelorca.",
         paragraphs: [
-          "Granja Maripepa is based in the Saprelorca industrial estate in Lorca. It is the starting point of the operation and the place where the warehouse, orders and routes are coordinated.",
-          "If you are coming to see us, confirm the reason for the visit and your contact person beforehand. That way access and attention match what you need.",
+          "Granja Maripepa's operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution.",
+          "Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day of distribution is resolved here.",
         ],
       },
       {
-        label: "Address",
+        label: "Getting here",
         title: "Avenida Francisco Jimeno Sola, 3.",
         paragraphs: [
-          "The full address is Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Keep it complete for the route: street, number, industrial estate and town.",
-          "The map opens in an external service. Check that the destination is Lorca and, if you need access directions, ask us before setting out.",
+          "The head office is at Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Keep it complete for the route: street, number, industrial estate and town.",
+          "The map opens in an external service. Check that the destination is Lorca and, if you need access directions, ask us before setting off.",
+        ],
+      },
+      {
+        label: "Visiting",
+        title: "Confirm your visit before you come.",
+        paragraphs: [
+          "Visits are handled by appointment. Tell us the reason and who is coming with you, and the team will confirm the access and your contact person.",
+          "Order collections are only made if they are confirmed in advance. The address alone does not confirm a collection: check the day and time with the team.",
+        ],
+      },
+      {
+        label: "Expansion",
+        title: "A warehouse that grows in Saprelorca.",
+        paragraphs: [
+          "In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Granja Maripepa. The two plots cover a total of 8,953 m².",
+          "The project is under way: grouping and expanding the company's facilities. There is no opening date, no built square metres and no published investment figure.",
         ],
       },
       {
         label: "Contact",
-        title: "One call resolves the next step.",
+        title: "Talk to Lorca.",
         paragraphs: [
-          "Telephones: 968 46 75 14 and 639 77 86 55. Opening hours: Monday to Friday, 8:00–13:00 and 16:00–19:00.",
-          "Have the name of your establishment, its town and the reference or family you are interested in to hand. With that information the conversation starts closer to the solution.",
-        ],
-      },
-      {
-        label: "Range",
-        title: "From the family to the specific product.",
-        paragraphs: [
-          "The range includes frozen, chilled and ambient products. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces are the four entry families. Grupo Topgel, Froneri (Nestlé Helados) and Panamar are also part of it.",
-          "Browse the family that interests you and then confirm the reference, format and storage. The public catalogue guides you; the product information is confirmed with the team.",
-        ],
-        shots: [
-          {
-            image: "/kage/careers/careers-01.jpg",
-            title: "Saprelorca.",
-            caption: "Avenida Francisco Jimeno Sola, 3.",
-            href: "/contacto",
-          },
-          {
-            image: "/kage/careers/careers-03.jpg",
-            title: "Access to the site.",
-            caption: "Saprelorca industrial estate, Lorca.",
-            href: "/contacto",
-          },
-          {
-            image: "/kage/careers/careers-facility.jpg",
-            title: "Opening hours.",
-            caption: "Monday to Friday, 8:00–13:00 and 16:00–19:00.",
-            href: "/contacto",
-          },
-        ],
-      },
-      {
-        label: "Service",
-        title: "Your town is part of the enquiry.",
-        paragraphs: [
-          "To talk about delivery we need to know where you are and what you need. Give us the town, the type of establishment and the family or product you are looking for. Coverage and conditions are confirmed for that destination.",
-          "If this is a first enquiry, you do not need to have everything settled. Describe the service, the approximate volume and the date you need to start. With that we can guide you.",
-        ],
-      },
-      {
-        label: "Questions",
-        title: "Before you come or call.",
-        paragraphs: [
-          "Do I need an appointment for a visit? Confirm the reason and your contact person beforehand. Can I collect an order at the head office? Ask the team; the address alone does not confirm a collection.",
-          "Where can I check a product? On the range page or directly by phone. Do I need an account to ask? No. The customer area is for managing orders and invoices; a commercial enquiry can be made without signing in.",
+          "For the Lorca head office, call 968 46 75 14 or 639 77 86 55. You can also write to pedidos@granjamaripepa.com.",
+          "If you are coming from outside, check the opening hours first and confirm the visit. The contact page has the full details.",
         ],
       },
     ],
@@ -165,47 +209,64 @@ export const STORY_TRANSLATIONS_EN = {
       link: "See contact and map",
     },
     seo: {
-      title: "Granja Maripepa in Lorca | Saprelorca, Murcia",
+      title: "Lorca head office | Granja Maripepa, Saprelorca",
       description:
-        "Site at Avenida Francisco Jimeno Sola, 3, Saprelorca industrial estate, 30817 Lorca. Opening hours and direct contact channels.",
+        "Head office at Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Opening hours, telephone numbers and how to find Granja Maripepa in Murcia.",
     },
   },
   calidad: {
-    title: "The standard for choosing well.",
-    eyebrow: "Product · Documentation",
+    title: "Quality is being able to answer for what you deliver.",
+    eyebrow: "Quality and documentation",
     description:
-      "Product, format and documentation for a professional decision.",
+      "Product, documentation and traceability to decide with judgement.",
     chapters: [
       {
-        label: "Standard",
-        title: "Product first. Promise afterwards.",
+        label: "Judgement",
+        title: "Quality is being able to answer for what you deliver.",
         paragraphs: [
-          "Choosing well starts by knowing what you are comparing. A family name is not enough: the reference, format, intended use and the information that comes with the product all matter.",
-          "This page gathers the questions worth resolving before deciding. It does not replace a reference sheet; it helps you know what to ask for and who to ask.",
+          "Quality starts with being able to answer: what each reference contains, how it is stored and where it comes from. Without that information there is no judgement, only habit.",
+          "This page explains what the company documents and what is worth asking for before deciding. It does not replace a reference sheet: it helps you know what to ask for and who to ask.",
         ],
       },
       {
-        label: "Product",
-        title: "Identify the family and the reference.",
+        label: "System",
+        title: "A management system, not a sticker.",
         paragraphs: [
-          "The range is organised into frozen, chilled and ambient products. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces are the entry families. If you know the brand or reference, include it in the enquiry.",
-          "If you start from an open need, describe the preparation and the format. Identifying the starting point well prevents comparing products that are not equivalent.",
+          "Granja Maripepa works with a quality management system in line with the ISO 9001 standard. It is not a label to hang on the wall: it is the way processes, records and responsibilities are organised.",
+          "Traceability follows the product from reception to delivery, and the cold chain is looked after at every step. That way, when something is asked, there is a well-founded answer.",
+          "The documentation for each reference is kept and updated. If you need a sheet, an allergen or a storage condition, you ask the team and it is confirmed for the exact product.",
+        ],
+      },
+      {
+        label: "Sheet",
+        title: "Every reference has its sheet.",
+        paragraphs: [
+          "Every reference carries its sheet with ingredients, allergens, storage and format. Ask for the one for the exact reference and keep it alongside its name or code.",
+          "The information is checked with the team. If you need a sheet before deciding, give us the reference or, at least, the family and the format.",
+        ],
+      },
+      {
+        label: "Families",
+        title: "Seven families, three temperatures.",
+        paragraphs: [
+          "Three temperatures organise the range: frozen, chilled and ambient. Within them, seven families cover everything from the menu to dessert.",
+          "The three images open the journey. For the rest of the families, visit the range or ask about the one you are interested in.",
         ],
         shots: [
           {
-            image: "/catalogs/familias/mar.jpg",
-            title: "Fish and seafood.",
-            caption: "Frozen for menus and daily service.",
+            image: "/catalogs/familias/real-mar-1.jpg",
+            title: "Seafood.",
+            caption: "Frozen fish and shellfish for à la carte and set menus.",
             href: "/productos?brand=grupo-topgel&category=mar",
           },
           {
-            image: "/catalogs/familias/carne.jpg",
+            image: "/catalogs/familias/real-carne-1.jpg",
             title: "Meat.",
             caption: "Cuts and formats for the kitchen.",
             href: "/productos?brand=grupo-topgel&category=carne",
           },
           {
-            image: "/catalogs/familias/reposteria.jpg",
+            image: "/catalogs/familias/real-reposteria-1.jpg",
             title: "Pastry.",
             caption: "Desserts that do not load the kitchen.",
             href: "/productos?brand=grupo-topgel&category=reposteria",
@@ -213,121 +274,77 @@ export const STORY_TRANSLATIONS_EN = {
         ],
       },
       {
-        label: "Format",
-        title: "The format is confirmed too.",
+        label: "Magazines",
+        title: "Magazines are read with their date.",
         paragraphs: [
-          "Weight, portions, packaging and storage change the way a kitchen works. Ask about the presentation you need and check the information for the specific reference.",
-          "The public catalogue guides you on families. To close a choice, the team confirms the sheet, availability and supply conditions.",
-        ],
-      },
-      {
-        label: "Documentation",
-        title: "Every reference has its sheet.",
-        paragraphs: [
-          "Ingredients, allergens, storage and instructions must match the exact product. Request the documentation for the reference and keep it alongside its name or code.",
-          "Magazines and publications keep their date. If a condition interests you, confirm that it still applies to the current request before using it as the basis for a decision.",
-        ],
-      },
-      {
-        label: "Questions",
-        title: "What is worth confirming.",
-        paragraphs: [
-          "Does an image confirm the product? No: it identifies a family or a presentation. The reference and its sheet are what confirm ingredients, format and storage.",
-          "Are magazines current offers? They keep the date of their edition. Check any condition with the team before applying it to your order.",
+          "The magazines are dated catalogues. Each edition shows product, campaign and ideas, and its date shows when it was published.",
+          "If a condition interests you, confirm with the team that it still applies before using it as the basis of an order.",
         ],
       },
       {
         label: "Enquiry",
-        title: "Asking well saves time.",
+        title: "Ask for the sheet before deciding.",
         paragraphs: [
-          "Gather the family, the reference if you know it, the format and the open question. Add the type of establishment and the town. That is enough for the conversation to be useful.",
-          "If there are several questions, separate them. That way you can review which answer belongs to the product and which condition is still to be confirmed.",
+          "Before closing a choice, ask for the reference sheet. Ingredients, allergens and storage must match the exact product.",
+          "Gather the family, the reference if you know it and the format, and write to us. The team sends you the documentation and confirms the conditions.",
         ],
       },
     ],
     manifesto: {
       title: "Information that belongs.",
-      text: "Identified product, specific question and the right document. Good judgement starts by not assuming what is missing.",
+      text: "Identified product, specific question and the right document. Good judgement starts by not taking for granted what is missing.",
       link: "Prepare an enquiry",
     },
     seo: {
       title: "Product quality and documentation | Maripepa",
       description:
-        "Families, formats and documentation for each reference in hospitality. What the product sheet confirms before a purchasing decision.",
+        "Product quality and documentation for hospitality: ISO 9001 management system, traceability, allergens and a sheet for each reference before you buy.",
     },
   },
   reparto: {
-    title: "Service starts by locating it.",
-    eyebrow: "Distribution · HORECA",
+    title: "Delivery for hospitality in Murcia, Almería and Alicante.",
+    eyebrow: "Delivery for hospitality",
     description:
-      "Town, product and coordination to discuss a specific delivery.",
+      "Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante.",
     chapters: [
       {
-        label: "Locating",
-        title: "An address changes the question.",
+        label: "Coverage",
+        title: "Delivery for hospitality in Murcia, Almería and Alicante.",
         paragraphs: [
-          "To talk about delivery we need to know where you are. The town, the type of establishment and access all shape the route and how the delivery is organised.",
-          "Tell us your case and the team will confirm coverage, schedule and conditions for that destination. No generic promises: the answer fits your town.",
+          "Granja Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment.",
+          "The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address.",
         ],
       },
       {
-        label: "Product",
-        title: "What you need is part of the route.",
+        label: "Lead times",
+        title: "24–48 hours is the usual lead time, not an automatic promise.",
         paragraphs: [
-          "Restocking a whole family is not the same as resolving a single reference. Give us the product or family, the format and the approximate quantity.",
-          "If you are still looking, describe the preparation and its use. The range is organised into frozen, chilled and ambient products so the enquiry moves along the right path.",
-        ],
-        shots: [
-          {
-            image: "/kage/careers/careers-04.jpg",
-            title: "The route.",
-            caption: "Departing from Lorca and Viator.",
-            href: "/reparto",
-          },
-          {
-            image: "/kage/careers/careers-01.jpg",
-            title: "Load and delivery.",
-            caption: "Delivery note and signature on every service.",
-            href: "/contacto",
-          },
-          {
-            image: "/kage/careers/careers-02.jpg",
-            title: "Head office and branch.",
-            caption: "Two points to coordinate the operation.",
-            href: "/lorca",
-          },
+          "That lead time is a reference for capacity, not an automatic promise: the date is confirmed for each order and each area.",
+          "The exact day depends on the destination, the volume and when the order is placed. The team confirms it with you before delivery.",
         ],
       },
       {
-        label: "Service",
-        title: "Explain the use and the volume.",
+        label: "Reception",
+        title: "Prepare the reception.",
         paragraphs: [
-          "The number of services, opening days and storage space help us propose a reasonable delivery. You do not need an exact volume to start.",
-          "With that information the team can guide you on frequency, format and documentation. Final conditions are confirmed before the first delivery.",
+          "To receive a delivery well, have the address, the person receiving it, the establishment's opening hours and the vehicle access ready.",
+          "Delivery closes with a note and a signature. If there is a particularity, such as a pedestrian street or a loading zone, say so from the start.",
         ],
       },
       {
-        label: "Delivery",
-        title: "Prepare the reception details.",
+        label: "Incidents",
+        title: "If something does not add up, there is a record.",
         paragraphs: [
-          "Full address, person receiving the order, establishment opening hours and vehicle access. If there is a particularity — pedestrian street, loading bay, cold room — say so from the start.",
-          "The delivery closes with a note and a signature. If there is an incident, the team has the record to review it with you.",
+          "Every delivery leaves a signed delivery note. If something does not add up, that note is the basis for reviewing what happened.",
+          "Tell the team with the delivery note or order number, by phone or email. The sooner we know, the easier it is to put it right.",
         ],
       },
       {
-        label: "Questions",
-        title: "Confirm before taking it for granted.",
+        label: "Your area",
+        title: "Check your area.",
         paragraphs: [
-          "Do you deliver to my town? Ask with your specific address. Is there a general lead time? The date is confirmed for each order and destination.",
-          "What do I need to receive a delivery? A unloading space and a contact person. Where do I review an incident? With the delivery note and the team, by phone or email.",
-        ],
-      },
-      {
-        label: "Coordinating",
-        title: "The route is confirmed with you.",
-        paragraphs: [
-          "The Lorca head office and the Viator branch coordinate the operation. Delivery is adjusted to the area and the establishment's schedule; the team confirms the arrangement before setting out.",
-          "If you need to change a delivery, let us know through a contact channel. The sooner we know, the more room there is to reorganise the route.",
+          "To find out whether we deliver to your town and on what terms, write to us with the full address and the type of establishment.",
+          "The team confirms the coverage and the lead time for your case. The contact details are on the contact page.",
         ],
       },
     ],
@@ -337,9 +354,9 @@ export const STORY_TRANSLATIONS_EN = {
       link: "Check my area",
     },
     seo: {
-      title: "Hospitality delivery in Murcia and Almería | Maripepa",
+      title: "HORECA delivery in Murcia, Almería and Alicante | Maripepa",
       description:
-        "Distribution and delivery for hospitality in Murcia and Almería from Lorca and Viator. Check coverage, schedule and conditions for your town.",
+        "Delivery for hospitality in Murcia, Almería and Alicante from Lorca and Viator. Check coverage, opening hours and delivery terms for your town.",
     },
   },
 } as const;

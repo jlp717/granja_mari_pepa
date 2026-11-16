@@ -1,0 +1,255 @@
+{
+  "node_id": "application",
+  "version": 3,
+  "sourceCommit": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "sourceOnly": true,
+  "baselineCounts": {
+    "protected": 61,
+    "mixedUI": 9,
+    "namedFunctions": 80,
+    "legalClauses": 55
+  },
+  "pages": [
+    {
+      "path": "frontend/app/[locale]/acerca/page.tsx",
+      "pattern": "/[locale]/acerca",
+      "classification": "marketing"
+    },
+    {
+      "path": "frontend/app/[locale]/area-clientes/page.tsx",
+      "pattern": "/[locale]/area-clientes",
+      "classification": "transactional"
+    },
+    {
+      "path": "frontend/app/[locale]/checkout/page.tsx",
+      "pattern": "/[locale]/checkout",
+      "classification": "transactional"
+    },
+    {
+      "path": "frontend/app/[locale]/contacto/page.tsx",
+      "pattern": "/[locale]/contacto",
+      "classification": "marketing-form"
+    },
+    {
+      "path": "frontend/app/[locale]/legal/privacidad/page.tsx",
+      "pattern": "/[locale]/legal/privacidad",
+      "classification": "reading"
+    },
+    {
+      "path": "frontend/app/[locale]/legal/terminos/page.tsx",
+      "pattern": "/[locale]/legal/terminos",
+      "classification": "reading"
+    },
+    {
+      "path": "frontend/app/[locale]/login-secure-example/page.tsx",
+      "pattern": "/[locale]/login-secure-example",
+      "classification": "transactional"
+    },
+    {
+      "path": "frontend/app/[locale]/lorca/page.tsx",
+      "pattern": "/[locale]/lorca",
+      "classification": "marketing"
+    },
+    {
+      "path": "frontend/app/[locale]/offline/page.tsx",
+      "pattern": "/[locale]/offline",
+      "classification": "state"
+    },
+    {
+      "path": "frontend/app/[locale]/page.tsx",
+      "pattern": "/[locale]",
+      "classification": "marketing"
+    },
+    {
+      "path": "frontend/app/[locale]/productos/page.tsx",
+      "pattern": "/[locale]/productos",
+      "classification": "transactional-gated"
+    }
+  ],
+  "specialsBaseline": [
+    "frontend/app/[locale]/layout.tsx",
+    "frontend/app/[locale]/not-found.tsx"
+  ],
+  "currentSpecialAdditions": [
+    "frontend/app/[locale]/loading.tsx",
+    "frontend/app/[locale]/error.tsx",
+    "frontend/app/not-found.tsx",
+    "frontend/app/global-error.tsx"
+  ],
+  "publicSections": {
+    "access": [
+      "access-intro",
+      "access-form",
+      "access-help"
+    ],
+    "checkout": [
+      "draft-intro",
+      "draft-items",
+      "draft-details",
+      "draft-result"
+    ],
+    "example": [
+      "example-intro",
+      "example-form",
+      "example-help"
+    ],
+    "states": [
+      "state-loading",
+      "state-error",
+      "state-offline",
+      "state-missing"
+    ]
+  },
+  "privateSections": {
+    "customer": [
+      "customer-navigation",
+      "customer-task",
+      "customer-context"
+    ],
+    "panamar": [
+      "panamar-documents"
+    ]
+  },
+  "fields": {
+    "access": [
+      "codigoCliente",
+      "password"
+    ],
+    "recovery": [
+      "forgotPasswordClientCode",
+      "verificationCode",
+      "newPassword",
+      "confirmPassword"
+    ],
+    "contactSetup": [
+      "tempEmail",
+      "tempPhone"
+    ],
+    "localDraft": [
+      "address.name",
+      "address.street",
+      "address.city",
+      "address.state",
+      "address.zipCode",
+      "address.country",
+      "address.type",
+      "paymentPreference",
+      "reference",
+      "notes",
+      "reviewed"
+    ],
+    "customerActiveTabs": [
+      "facturas",
+      "perfil",
+      "favoritos"
+    ],
+    "customerDisabledTabs": [
+      "dashboard",
+      "pedidos"
+    ],
+    "catalogue": "Public gated; API arrays/null remain unchanged"
+  },
+  "protected": {
+    "path": "docs/redesign/PROTEGIDO-MAIN.json",
+    "sha256": "f2846dc9533b410fb35ecfb83fa7688af5ea4844784ed0c0c9d849408a8e0946",
+    "noSecretValues": true,
+    "databaseQueries": false
+  },
+  "fixtureContract": {
+    "scope": "Synthetic data only, all API responses intercepted; no real login or business action.",
+    "store": {
+      "path": "frontend/lib/store.ts",
+      "keys": [
+        "topgel-auth",
+        "topgel-cart"
+      ],
+      "sourceType": "UserProfile frontend/lib/types.ts"
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/auth/perfil",
+        "response": {
+          "success": true,
+          "perfil": {
+            "codigo": "synthetic",
+            "nombre": "synthetic",
+            "empresa": "synthetic",
+            "email": "synthetic",
+            "telefono": "synthetic",
+            "direccion": {
+              "calle": "synthetic",
+              "poblacion": "synthetic",
+              "provincia": "synthetic",
+              "codigoPostal": "synthetic",
+              "completa": "synthetic"
+            },
+            "nif": "synthetic",
+            "contacto": {
+              "email": "synthetic",
+              "telefono": "synthetic"
+            }
+          }
+        },
+        "source": "frontend/contexts/SessionContext.tsx:11; frontend/components/customer/dashboard.tsx Main:444"
+      },
+      {
+        "method": "GET",
+        "path": "Customer invoice endpoint from useApiData call",
+        "response": {
+          "success": true,
+          "facturas": []
+        },
+        "source": "frontend/hooks/useApiData.ts:65; frontend/components/customer/dashboard.tsx"
+      },
+      {
+        "method": "POST",
+        "path": "/api/generar-factura",
+        "bodyKeys": [
+          "serie",
+          "numero",
+          "ejercicio"
+        ],
+        "response": "Nonempty PDF blob; must intercept in isolated UI fixture, never send a real document action.",
+        "source": "frontend/components/customer/dashboard.tsx Main:1584"
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/v2/verificar-cambio/<SYNTHETIC_CLIENT_CODE>?_=<numeric timestamp>",
+        "response": {
+          "success": true,
+          "canChange": true,
+          "daysRemaining": 0,
+          "lastChangeDate": null,
+          "isLegacy": false
+        },
+        "source": "frontend/components/customer/password-change-form.tsx Main:59; no POST needed to view form"
+      }
+    ]
+  },
+  "checkoutException": {
+    "approvedBy": "Root V3 implementation mandate and Art prior-JSX approval",
+    "removed": [
+      "Sample addresses",
+      "Sample payment cards",
+      "Fake discount code",
+      "Unverified demo shipping/tax conditions",
+      "Payment timer",
+      "Remote-order success claim",
+      "Cart clearing on simulated success"
+    ],
+    "implemented": [
+      "Blank optional address fields from Main model",
+      "Actual localStorage draft write with quota-error feedback",
+      "Cart quantities and getTotalPrice unchanged",
+      "No API calls or payment/card data",
+      "Cart retained on save"
+    ]
+  },
+  "observedRuntime": false,
+  "limitations": [
+    "No real DB/session/order/payment/password action attempted.",
+    "Private UI awaiting synthetic isolated runtime and visual review.",
+    "Source code present is not proof that an error boundary, HTTP500, offline or PWA state has been observed."
+  ]
+}

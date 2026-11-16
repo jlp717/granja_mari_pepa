@@ -6,61 +6,59 @@ import styles from "./company-backdrop.module.css";
 
 type Frame = { src: string; pos: string; drift: number };
 
-const PLATE = "/kage/mp/plates";
-
-function plate(name: string, pos: string, drift: number): Frame {
-  return { src: `${PLATE}/${name}.webp`, pos, drift };
+function photo(src: string, pos: string, drift: number): Frame {
+  return { src, pos, drift };
 }
 
 const FRAME_SETS: Record<string, Frame[]> = {
   home: [
-    plate("umbral-bluehour", "50% 46%", 1.0),
-    plate("valle-amanecer", "50% 46%", -0.7),
-    plate("invernaderos", "52% 48%", 0.8),
+    photo("/kage/careers/careers-facility.jpg", "50% 55%", 1.0),
+    photo("/kage/careers/careers-03.jpg", "55% 50%", -0.7),
+    photo("/kage/mp/plates/invernaderos.webp", "50% 50%", 0.8),
   ],
   productos: [
-    plate("muelle-alba", "50% 44%", 1.0),
-    plate("estanteria", "52% 48%", -0.7),
-    plate("umbral-bluehour", "50% 46%", 0.8),
+    photo("/kage/careers/careers-facility.jpg", "50% 46%", 1.0),
+    photo("/kage/careers/careers-01.jpg", "52% 48%", -0.7),
+    photo("/kage/mp/plates/invernaderos.webp", "50% 50%", 0.8),
   ],
   acerca: [
-    plate("invernaderos", "50% 44%", 1.0),
-    plate("valle-amanecer", "52% 46%", -0.7),
-    plate("mesa-pase", "50% 52%", 0.8),
+    photo("/kage/careers/careers-03.jpg", "50% 55%", 1.0),
+    photo("/kage/careers/careers-facility.jpg", "55% 48%", -0.7),
+    photo("/kage/mp/plates/invernaderos.webp", "50% 50%", 0.8),
   ],
   calidad: [
-    plate("pasillo-frio", "50% 50%", 1.0),
-    plate("muelle-alba", "52% 46%", -0.7),
-    plate("estanteria", "50% 48%", 0.8),
+    photo("/kage/careers/careers-01.jpg", "50% 50%", 1.0),
+    photo("/kage/careers/careers-facility.jpg", "52% 46%", -0.7),
+    photo("/kage/mp/plates/invernaderos.webp", "50% 48%", 0.8),
   ],
   reparto: [
-    plate("carretera", "55% 52%", 1.0),
-    plate("muelle-alba", "50% 44%", -0.7),
-    plate("valle-amanecer", "52% 48%", 0.8),
+    photo("/kage/careers/careers-03.jpg", "55% 52%", 1.0),
+    photo("/kage/careers/careers-04.jpg", "50% 46%", -0.7),
+    photo("/kage/mp/plates/invernaderos.webp", "52% 48%", 0.8),
   ],
   lorca: [
-    plate("valle-amanecer-limpio", "50% 44%", 1.0),
-    plate("invernaderos", "52% 46%", -0.7),
-    plate("carretera", "55% 50%", 0.8),
+    photo("/kage/careers/careers-facility.jpg", "50% 44%", 1.0),
+    photo("/kage/careers/careers-03.jpg", "52% 46%", -0.7),
+    photo("/kage/careers/careers-04.jpg", "55% 50%", 0.8),
   ],
   "preguntas-frecuentes": [
-    plate("umbral-bluehour", "50% 46%", 1.0),
-    plate("estanteria", "52% 48%", -0.7),
+    photo("/kage/careers/careers-facility.jpg", "50% 46%", 1.0),
+    photo("/catalogs/familias/real-panaderia-1.jpg", "52% 48%", -0.7),
   ],
   contacto: [
-    plate("muelle-alba", "50% 44%", 1.0),
-    plate("mesa-pase", "52% 52%", -0.7),
+    photo("/kage/careers/careers-03.jpg", "50% 44%", 1.0),
+    photo("/kage/careers/careers-facility.jpg", "52% 50%", -0.7),
   ],
   "area-clientes": [
-    plate("pasillo-frio", "50% 50%", 1.0),
-    plate("estanteria", "50% 48%", -0.7),
+    photo("/kage/careers/careers-facility.jpg", "50% 50%", 1.0),
+    photo("/catalogs/familias/real-mar-1.jpg", "52% 48%", -0.7),
   ],
-  checkout: [plate("muelle-alba", "50% 46%", 1.0)],
-  legal: [plate("umbral-bluehour", "50% 46%", 1.0)],
+  checkout: [photo("/catalogs/familias/real-mar-1.jpg", "50% 46%", 1.0)],
+  legal: [photo("/kage/careers/careers-03.jpg", "50% 46%", 1.0)],
   default: [
-    plate("umbral-bluehour", "50% 46%", 1.0),
-    plate("valle-amanecer-limpio", "50% 46%", -0.7),
-    plate("carretera", "55% 52%", 0.8),
+    photo("/kage/careers/careers-03.jpg", "50% 46%", 1.0),
+    photo("/kage/mp/plates/invernaderos.webp", "50% 46%", -0.7),
+    photo("/kage/careers/careers-04.jpg", "55% 52%", 0.8),
   ],
 };
 
@@ -86,18 +84,48 @@ export function CompanyBackdrop() {
     let frameHandle = 0;
     let queued = false;
     let cancelled = false;
-    let idleHandle: number | undefined;
 
-    const loadFrame = (index: number) => {
-      const frame = frames[index];
+    // Loads a frame into its own layer. `priority` marks the first paint so the
+    // browser does not deprioritise it behind other work. If the image fails,
+    // the layer stays transparent (the backdrop gradient shows) and the next
+    // candidate frame is tried instead of leaving a hole.
+    const loadFrame = (index: number, priority = false) => {
       const layer = layers[index];
-      if (!frame || !layer) return;
-      const image = new Image();
-      image.onload = () => {
+      if (!layer) return;
+      const ordered = [
+        frames[index],
+        ...frames.filter((_, i) => i !== index),
+      ].filter((frame): frame is Frame => Boolean(frame));
+      let attempt = 0;
+
+      const tryNext = () => {
         if (cancelled) return;
-        layer.style.backgroundImage = `url(${frame.src})`;
+        const frame = ordered[attempt];
+        attempt += 1;
+        if (!frame) {
+          layer.style.backgroundImage = "none";
+          return;
+        }
+        const image = new Image();
+        if (priority && "fetchPriority" in image) {
+          (
+            image as HTMLImageElement & { fetchPriority?: string }
+          ).fetchPriority = "high";
+        }
+        image.decoding = "async";
+        image.onload = () => {
+          if (cancelled) return;
+          layer.style.backgroundImage = `url(${frame.src})`;
+        };
+        image.onerror = () => {
+          image.onerror = null;
+          image.onload = null;
+          tryNext();
+        };
+        image.src = `/_next/image?url=${encodeURIComponent(frame.src)}&w=1200&q=62`;
       };
-      image.src = `/_next/image?url=${encodeURIComponent(frame.src)}&w=1200&q=62`;
+
+      tryNext();
     };
 
     const loadRest = () => {
@@ -111,18 +139,11 @@ export function CompanyBackdrop() {
       window.removeEventListener("scroll", loadOnScroll);
     };
     window.addEventListener("scroll", loadOnScroll, { passive: true });
-    if (typeof window.requestIdleCallback === "function") {
-      idleHandle = window.requestIdleCallback(
-        () => {
-          loadFrame(0);
-        },
-        { timeout: 6000 },
-      );
-    } else {
-      idleHandle = window.setTimeout(() => {
-        loadFrame(0);
-      }, 1500);
-    }
+
+    // First frame paints immediately: no requestIdleCallback, no timeout. On a
+    // busy main thread idle callbacks can land seconds late and the page reads
+    // as a black screen until then.
+    loadFrame(0, true);
 
     const measure = () => {
       anchors = Array.from(
@@ -141,13 +162,20 @@ export function CompanyBackdrop() {
     const paint = () => {
       queued = false;
       if (!anchors.length) {
-        const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
+        const max = Math.max(
+          1,
+          document.body.scrollHeight - window.innerHeight,
+        );
         const progress = Math.min(1, Math.max(0, window.scrollY / max));
         const frame = progress * (frames.length - 1);
         layers.forEach((layer, i) => {
           const distance = Math.abs(frame - i);
           layer.style.opacity = (
-            reduce.matches ? (distance < 0.5 ? 1 : 0) : Math.max(0, 1 - distance * 0.82)
+            reduce.matches
+              ? distance < 0.5
+                ? 1
+                : 0
+              : Math.max(0, 1 - distance * 0.82)
           ).toFixed(3);
         });
         return;
@@ -204,15 +232,6 @@ export function CompanyBackdrop() {
 
     return () => {
       cancelled = true;
-      if (idleHandle !== undefined) {
-        const cancelIdle = (
-          window as Window & {
-            cancelIdleCallback?: (handle: number) => void;
-          }
-        ).cancelIdleCallback;
-        cancelIdle?.(idleHandle);
-        window.clearTimeout(idleHandle);
-      }
       cancelAnimationFrame(frameHandle);
       observer.disconnect();
       window.removeEventListener("scroll", request);

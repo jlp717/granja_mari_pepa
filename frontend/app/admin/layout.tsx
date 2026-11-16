@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { AdminBackdrop } from "@/components/admin/AdminBackdrop";
+import styles from "@/components/admin/AdminBackdrop.module.css";
 
 export const metadata: Metadata = {
   title: "Administración | Granja Maripepa",
@@ -12,5 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-  return children;
+  return (
+    <div className={styles.frame}>
+      <AdminBackdrop />
+      <div className={styles.stage}>{children}</div>
+    </div>
+  );
 }

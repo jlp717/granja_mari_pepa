@@ -13,13 +13,13 @@ import { getHomeEditorialCopy } from "./home-copy";
 import styles from "./home-editorial.module.css";
 
 const RANGE_IMAGES = [
-  "/catalogs/familias/mar.webp",
-  "/catalogs/familias/carne.webp",
-  "/catalogs/familias/precocinados.webp",
-  "/catalogs/familias/reposteria.webp",
-  "/catalogs/familias/panaderia.webp",
-  "/catalogs/familias/refrigerados.webp",
-  "/catalogs/familias/salsas.webp",
+  "/catalogs/familias/real-mar-1.jpg",
+  "/catalogs/familias/real-carne-1.jpg",
+  "/catalogs/familias/real-precocinados-1.jpg",
+  "/catalogs/familias/real-reposteria-1.jpg",
+  "/catalogs/familias/real-panaderia-1.jpg",
+  "/catalogs/familias/real-refrigerados-1.jpg",
+  "/catalogs/familias/real-salsas-1.jpg",
 ] as const;
 
 export function HomeEditorial({ locale }: { locale: Locale }) {
@@ -31,15 +31,20 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <Chapter id="hero" scene={0} className={`hero ${styles.hero}`} title={copy.hero.eyebrow}>
+      <Chapter
+        id="hero"
+        scene={0}
+        className={`hero ${styles.hero}`}
+        title={copy.hero.eyebrow}
+      >
         <HomeForeground chapter="hero" scene={0} />
         {/* The hero is the company itself: the Lorca facility, the cold
             lorry at the door, the sign over the bay. Graded down so the
             headline owns the left half; the hall world takes over below. */}
         <div className={styles.heroAtmos} aria-hidden="true">
           <Image
-            src="/kage/mp/plates/hero-muelle-alba.jpg"
-            alt=""
+            src="/kage/careers/careers-03.jpg"
+            alt="Sede de Granja Maripepa en Saprelorca con camión frigorífico"
             fill
             priority
             sizes="100vw"
@@ -47,7 +52,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
           />
           <div className={styles.heroAtmosVeil} />
         </div>
-        <div className={styles.heroTop}>
+        <div className={styles.heroTop} data-rv="up">
           <span className="eyebrow">
             <span className={styles.dot} />
             {copy.hero.eyebrow}
@@ -64,7 +69,11 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               {copy.hero.lead}
             </p>
             <div className={styles.heroActions} data-rv="up">
-              <Link href={catalogue} className={styles.primaryAction} data-cursor>
+              <Link
+                href={catalogue}
+                className={styles.primaryAction}
+                data-cursor
+              >
                 {copy.hero.primary}
                 <ArrowUpRight size={15} aria-hidden="true" />
               </Link>
@@ -89,7 +98,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         </div>
 
         <div className={styles.heroFoot}>
-          <div className={styles.heroStats}>
+          <div className={styles.heroStats} data-rv="up">
             {copy.stats.map((stat) => (
               <div key={stat.label}>
                 <b>{stat.value}</b>
@@ -97,8 +106,15 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               </div>
             ))}
           </div>
-          <a href="#origen" className={styles.scrollCue} data-cursor>
-            <span>{locale === "es" ? "Sigue el recorrido" : "Follow the journey"}</span>
+          <a
+            href="#origen"
+            className={styles.scrollCue}
+            data-rv="up"
+            data-cursor
+          >
+            <span>
+              {locale === "es" ? "Sigue el recorrido" : "Follow the journey"}
+            </span>
             <i aria-hidden="true" />
           </a>
         </div>
@@ -112,7 +128,9 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
       >
         <HomeForeground chapter="origen" scene={1} />
         <header className={styles.sectionHead}>
-          <span className={styles.kicker}>{copy.origin.kicker}</span>
+          <span className={styles.kicker} data-rv="up">
+            {copy.origin.kicker}
+          </span>
           <WordReveal as="h2" className={`display ${styles.sectionTitle}`}>
             {copy.origin.title}
           </WordReveal>
@@ -125,23 +143,23 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
           <div className={styles.originPhotos} data-rv="up">
             <figure className={styles.originMain}>
               <Image
-                src="/kage/mp/plates/muelle-alba.webp"
-                alt="Muelle de carga de la nave de Granja Maripepa en Lorca"
+                src="/kage/mp/plates/invernaderos.webp"
+                alt="Invernaderos del valle del Guadalentín al amanecer"
                 fill
                 sizes="(max-width: 900px) 92vw, 42vw"
                 className={styles.photo}
               />
-              <figcaption>Lorca · Pol. Saprelorca</figcaption>
+              <figcaption>Valle del Guadalentín</figcaption>
             </figure>
             <figure className={styles.originSmall}>
               <Image
-                src="/kage/mp/plates/invernaderos.webp"
-                alt="Invernaderos del valle del Guadalentín al amanecer"
+                src="/kage/careers/careers-facility.jpg"
+                alt="Nave y camión de Granja Maripepa en el Polígono Saprelorca"
                 fill
                 sizes="(max-width: 900px) 45vw, 18vw"
                 className={styles.photo}
               />
-              <figcaption>Valle del Guadalentín</figcaption>
+              <figcaption>Lorca · Pol. Saprelorca</figcaption>
             </figure>
           </div>
 
@@ -166,15 +184,17 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <HomeForeground chapter="sistema" scene={2} />
         <div className={styles.systemBand} data-rv="fade">
           <Image
-            src="/kage/careers/careers-02.jpg"
-            alt=""
+            src="/kage/careers/careers-01.jpg"
+            alt="Camión frigorífico en la sede de Granja Maripepa, Lorca"
             fill
             sizes="100vw"
             className={styles.systemPhoto}
           />
           <div className={styles.systemVeil} aria-hidden="true" />
           <div className={styles.systemHead}>
-            <span className={styles.kicker}>{copy.system.kicker}</span>
+            <span className={styles.kicker} data-rv="up">
+              {copy.system.kicker}
+            </span>
             <WordReveal as="h2" className={`display ${styles.systemTitle}`}>
               {copy.system.title}
             </WordReveal>
@@ -193,16 +213,28 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             </article>
           ))}
         </div>
-        <Link href={contact} className={styles.inlineAction} data-cursor>
+        <Link
+          href={contact}
+          className={styles.inlineAction}
+          data-rv="up"
+          data-cursor
+        >
           {copy.system.action}
           <ArrowUpRight size={14} aria-hidden="true" />
         </Link>
       </Chapter>
 
-      <Chapter id="gama" scene={3} className={styles.section} title={copy.range.kicker}>
+      <Chapter
+        id="gama"
+        scene={3}
+        className={styles.section}
+        title={copy.range.kicker}
+      >
         <HomeForeground chapter="gama" scene={3} />
         <header className={styles.sectionHead}>
-          <span className={styles.kicker}>{copy.range.kicker}</span>
+          <span className={styles.kicker} data-rv="up">
+            {copy.range.kicker}
+          </span>
           <WordReveal as="h2" className={`display ${styles.sectionTitle}`}>
             {copy.range.title}
           </WordReveal>
@@ -241,7 +273,11 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               </Link>
             ))}
           </div>
-          <figure className={styles.rangePreview} aria-hidden="true">
+          <figure
+            className={styles.rangePreview}
+            data-rv="fade"
+            aria-hidden="true"
+          >
             <div className={styles.rangeStack}>
               {RANGE_IMAGES.map((src, index) => (
                 <Image
@@ -260,43 +296,87 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             <figcaption>{copy.range.families[activeFamily].name}</figcaption>
           </figure>
         </div>
-        <Link href={catalogue} className={styles.inlineAction} data-cursor>
+        <Link
+          href={catalogue}
+          className={styles.inlineAction}
+          data-rv="up"
+          data-cursor
+        >
           {copy.range.action}
           <ArrowUpRight size={14} aria-hidden="true" />
         </Link>
         <div className={styles.brands}>
-          <span>{locale === "es" ? "Marcas en la gama" : "Brands in the range"}</span>
-          <ul className={styles.brandGrid}>
+          <span data-rv="up">
+            {locale === "es" ? "Marcas en la gama" : "Brands in the range"}
+          </span>
+          <ul className={styles.brandGrid} data-rv="fade">
             <li>
-              <a href="https://www.grupotopgel.es/" target="_blank" rel="noopener noreferrer" data-cursor>
-                <Image src="/images/brands/topgel-white.png" alt="Grupo Topgel" width={266} height={107} />
+              <a
+                href="https://www.grupotopgel.es/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor
+              >
+                <Image
+                  src="/images/brands/topgel-white.png"
+                  alt="Grupo Topgel"
+                  width={266}
+                  height={107}
+                />
               </a>
             </li>
             <li>
-              <a href="https://www.froneri.com/es/" target="_blank" rel="noopener noreferrer" data-cursor>
-                <Image src="/images/brands/nestle-white.png" alt="Nestlé Helados · Froneri" width={193} height={162} />
+              <Image
+                src="/images/brands/nestle-white.png"
+                alt="Nestlé Helados"
+                width={193}
+                height={162}
+              />
+            </li>
+            <li>
+              <a
+                href="https://www.panamar.es/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor
+              >
+                <Image
+                  src="/images/brands/panamar-white.png"
+                  alt="Panamar"
+                  width={249}
+                  height={158}
+                />
               </a>
             </li>
             <li>
-              <a href="https://www.panamar.es/" target="_blank" rel="noopener noreferrer" data-cursor>
-                <Image src="/images/brands/panamar-white.png" alt="Panamar" width={249} height={158} />
-              </a>
+              <Image
+                src="/images/brands/okin-white.png"
+                alt="Okin"
+                width={223}
+                height={192}
+              />
             </li>
             <li>
-              <Image src="/images/brands/okin-white.png" alt="Okin" width={223} height={192} />
-            </li>
-            <li>
-              <Image src="/images/brands/amparin-white.png" alt="Pastelería Amparín" width={268} height={111} />
+              <Image
+                src="/images/brands/amparin-white.png"
+                alt="Pastelería Amparín"
+                width={268}
+                height={111}
+              />
             </li>
           </ul>
         </div>
-        <div className={styles.explore}>
+        <div className={styles.explore} data-rv="up">
           <span>{locale === "es" ? "Sigue leyendo" : "Keep reading"}</span>
           <Link href="/calidad" data-cursor>
-            {locale === "es" ? "Calidad y documentación" : "Quality and documentation"}
+            {locale === "es"
+              ? "Calidad y documentación"
+              : "Quality and documentation"}
           </Link>
           <Link href="/reparto" data-cursor>
-            {locale === "es" ? "Reparto en Murcia y Almería" : "Delivery in Murcia and Almería"}
+            {locale === "es"
+              ? "Reparto en Murcia y Almería"
+              : "Delivery in Murcia and Almería"}
           </Link>
           <Link href="/lorca" data-cursor>
             {locale === "es" ? "Sede de Lorca" : "Lorca site"}
@@ -312,7 +392,9 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
       >
         <HomeForeground chapter="revistas" scene={4} />
         <header className={styles.sectionHead}>
-          <span className={styles.kicker}>{copy.magazines.kicker}</span>
+          <span className={styles.kicker} data-rv="up">
+            {copy.magazines.kicker}
+          </span>
           <WordReveal as="h2" className={`display ${styles.sectionTitle}`}>
             {copy.magazines.title}
           </WordReveal>
@@ -321,7 +403,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
           </p>
         </header>
 
-        <div className={styles.magazineRail}>
+        <div className={styles.magazineRail} data-rv="fade">
           {magazines.slice(0, 6).map((magazine) => (
             <button
               key={magazine.id}
@@ -343,15 +425,28 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             </button>
           ))}
         </div>
-        <button type="button" className={styles.inlineAction} onClick={openLibrary} data-cursor>
+        <button
+          type="button"
+          className={styles.inlineAction}
+          onClick={openLibrary}
+          data-rv="up"
+          data-cursor
+        >
           {copy.magazines.action}
           <ArrowUpRight size={14} aria-hidden="true" />
         </button>
       </Chapter>
 
-      <Chapter id="sedes" scene={5} className={styles.section} title={copy.sites.kicker}>
+      <Chapter
+        id="sedes"
+        scene={5}
+        className={styles.section}
+        title={copy.sites.kicker}
+      >
         <header className={styles.sectionHead}>
-          <span className={styles.kicker}>{copy.sites.kicker}</span>
+          <span className={styles.kicker} data-rv="up">
+            {copy.sites.kicker}
+          </span>
           <WordReveal as="h2" className={`display ${styles.sectionTitle}`}>
             {copy.sites.title}
           </WordReveal>
@@ -363,8 +458,8 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <div className={styles.sites}>
           <figure className={styles.sitesPhoto} data-rv="up">
             <Image
-              src="/kage/mp/plates/estanteria.webp"
-              alt="Interior de la nave de Granja Maripepa en Lorca"
+              src="/kage/careers/careers-04.jpg"
+              alt="Camión frigorífico de Granja Maripepa en ruta"
               fill
               sizes="(max-width: 900px) 100vw, 55vw"
               className={styles.photo}
@@ -380,7 +475,9 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               data-rv="up"
               data-cursor
             >
-              <span className={styles.siteIcon}><MapPin size={16} aria-hidden="true" /></span>
+              <span className={styles.siteIcon}>
+                <MapPin size={16} aria-hidden="true" />
+              </span>
               <b>{copy.sites.lorca.name}</b>
               <span>{copy.sites.lorca.address}</span>
             </a>
@@ -392,7 +489,9 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               data-rv="up"
               data-cursor
             >
-              <span className={styles.siteIcon}><MapPin size={16} aria-hidden="true" /></span>
+              <span className={styles.siteIcon}>
+                <MapPin size={16} aria-hidden="true" />
+              </span>
               <b>{copy.sites.viator.name}</b>
               <span>{copy.sites.viator.address}</span>
             </a>
@@ -406,17 +505,25 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         className={`${styles.section} ${styles.closing}`}
         title={copy.closing.kicker}
       >
-        <span className={styles.kicker}>{copy.closing.kicker}</span>
+        <span className={styles.kicker} data-rv="up">
+          {copy.closing.kicker}
+        </span>
         <WordReveal as="h2" className={`display ${styles.closingTitle}`}>
           {copy.closing.title}
         </WordReveal>
-        <p className={styles.closingLead}>{copy.closing.lead}</p>
-        <div className={styles.closingActions}>
+        <p className={styles.closingLead} data-rv="up">
+          {copy.closing.lead}
+        </p>
+        <div className={styles.closingActions} data-rv="up">
           <Link href={contact} className={styles.primaryAction} data-cursor>
             {copy.closing.action}
             <ArrowUpRight size={15} aria-hidden="true" />
           </Link>
-          <a href="tel:+34968467514" className={styles.secondaryAction} data-cursor>
+          <a
+            href="tel:+34968467514"
+            className={styles.secondaryAction}
+            data-cursor
+          >
             968 46 75 14
             <ArrowRight size={14} aria-hidden="true" />
           </a>

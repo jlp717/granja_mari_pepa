@@ -1,29 +1,22 @@
 "use client";
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/navigation";
 import { getKageNavigationCopy } from "@/lib/kage-navigation-copy";
 import { CookiePreferencesButton } from "@/components/kage/navigation/CookieConsent";
-import { prepareSectionReveals } from "@/components/kage/navigation/reveals";
 import { useMagazines } from "@/components/magazines/magazine-context";
 import { gmailCompose } from "@/components/editorial/facts";
-import chrome from "./site-chrome.module.css";export function Footer() {
+import chrome from "./site-chrome.module.css";
+export function Footer() {
   const locale = useLocale(),
     t = useTranslations("footer"),
     nav = useTranslations("nav"),
     copy = getKageNavigationCopy(locale);
   const isEs = locale === "es";
   const { magazines, openMagazine, openLibrary } = useMagazines();
-  const root = useRef<HTMLElement>(null);
-  useEffect(
-    () => (root.current ? prepareSectionReveals(root.current) : undefined),
-    [],
-  );
   return (
     <footer
-      ref={root}
       className={`foot ${chrome.footer}`}
       data-kage-background
       data-fx="support-stagger link-color"
@@ -32,7 +25,9 @@ import chrome from "./site-chrome.module.css";export function Footer() {
       <section className={chrome.prelude} aria-labelledby="foot-closing">
         <div data-rv="up">
           <span className={chrome.kicker}>
-            {isEs ? "Granja Maripepa · Desde 1966" : "Granja Maripepa · Since 1966"}
+            {isEs
+              ? "Granja Maripepa · Desde 1966"
+              : "Granja Maripepa · Since 1966"}
           </span>
           <h2 id="foot-closing" className={chrome.title}>
             {isEs ? (
@@ -96,7 +91,7 @@ import chrome from "./site-chrome.module.css";export function Footer() {
           >
             <Image
               src="/kage/brand/logo-alpha.png"
-              alt="Granja Maripepa"
+              alt=""
               width={70}
               height={21}
             />
@@ -104,7 +99,7 @@ import chrome from "./site-chrome.module.css";export function Footer() {
           <p>{t("description_long")}</p>
         </div>
         <div data-rv="up">
-          <h2 className="foot-label">{copy.company}</h2>
+          <p className="foot-label">{copy.company}</p>
           <ul>
             <li>
               <Link href="/acerca" data-cursor>
@@ -139,7 +134,7 @@ import chrome from "./site-chrome.module.css";export function Footer() {
           </ul>
         </div>
         <div data-rv="up">
-          <h2 className="foot-label">{copy.resources}</h2>
+          <p className="foot-label">{copy.resources}</p>
           <ul>
             <li>
               <Link href="/area-clientes" data-cursor>
@@ -194,7 +189,7 @@ import chrome from "./site-chrome.module.css";export function Footer() {
           </ul>
         </div>
         <div data-rv="up">
-          <h2 className="foot-label">{copy.contact}</h2>
+          <p className="foot-label">{copy.contact}</p>
           <ul>
             <li>
               <a href="tel:+34968467514" data-cursor>

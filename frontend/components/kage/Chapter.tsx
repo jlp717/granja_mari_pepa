@@ -1,8 +1,7 @@
 "use client";
-import { createElement, useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 import { useKageRuntime } from "./KageRuntimeProvider";
 import type { KageScene } from "./contracts";
-import { prepareSectionReveals } from "./navigation/reveals";
 export interface ChapterProps {
   id: string;
   scene: KageScene;
@@ -35,24 +34,23 @@ export function Chapter({
       { id, scene, title: accessibleTitle },
       root.current,
     );
-    const cleanReveals = prepareSectionReveals(root.current);
     return () => {
-      cleanReveals();
       unregister();
     };
   }, [runtime, id, scene, title]);
   const hero = className.split(/\s+/).includes("hero");
-  return createElement(
-    as,
-    {
-      ref: root,
-      id,
-      className: `${hero ? "" : "sec "}${className}`,
-      "data-cam": scene,
-      "data-kage-chapter": id,
-      "data-fx": fx,
-    },
-    children,
+  const Component = as as ElementType;
+  return (
+    <Component
+      ref={root}
+      id={id}
+      className={`${hero ? "" : "sec "}${className}`}
+      data-cam={scene}
+      data-kage-chapter={id}
+      data-fx={fx}
+    >
+      {children}
+    </Component>
   );
 }
 export { Chapter as KageChapter };

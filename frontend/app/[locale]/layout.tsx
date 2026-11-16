@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { KageSiteShell } from "@/components/kage/KageSiteShell";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "sonner";
@@ -18,18 +22,13 @@ import { locales, type Locale } from "@/i18n";
 
 // Viewport separado (requerido en Next.js 14+)
 
-
 // Generar metadata dinámica por locale
-export async function generateMetadata(
-  props: {
-    params: Promise<{ locale: Locale }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
   const t = await getTranslations({ locale, namespace: "meta" });
   const canonicalUrl = `https://www.mari-pepa.com/${locale}`;
@@ -86,21 +85,17 @@ export async function generateMetadata(
       description: t("description"),
       images: ["https://www.mari-pepa.com/og-maripepa.jpg"],
     },
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        es: "https://www.mari-pepa.com/es",
-        en: "https://www.mari-pepa.com/en",
-        "x-default": "https://www.mari-pepa.com/es",
-      },
-    },
     icons: {
       icon: [
         { url: "/images/icons/icon.svg", type: "image/svg+xml" },
         { url: "/favicon.ico", sizes: "any" },
       ],
       apple: [
-        { url: "/kage/brand/logo-alpha.png", sizes: "180x180", type: "image/png" },
+        {
+          url: "/kage/brand/logo-alpha.png",
+          sizes: "180x180",
+          type: "image/png",
+        },
       ],
       shortcut: "/images/icons/icon.svg",
       other: [
@@ -123,13 +118,9 @@ interface LocaleLayoutProps {
 export default async function LocaleLayout(props: LocaleLayoutProps) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
 
   // Validar locale
   if (!locales.includes(locale as Locale)) {
@@ -143,30 +134,30 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
   const messages = await getMessages();
 
   return (
-        <NextIntlClientProvider messages={messages}>
-          <ErrorBoundary>
-            <ThemeProvider>
-              <SessionProvider>
-                <AnalyticsProvider>
-                  <PerformanceProvider>
-                    <LazyLoadingProvider>
-                      <KageSiteShell
-                        auxiliary={
-                          <>
-                            <Toaster />
-                            <Sonner />
-                            <GlobalChatbot />
-                          </>
-                        }
-                      >
-                        {children}
-                      </KageSiteShell>
-                    </LazyLoadingProvider>
-                  </PerformanceProvider>
-                </AnalyticsProvider>
-              </SessionProvider>
-            </ThemeProvider>
-          </ErrorBoundary>
-        </NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages}>
+      <ErrorBoundary>
+        <ThemeProvider>
+          <SessionProvider>
+            <AnalyticsProvider>
+              <PerformanceProvider>
+                <LazyLoadingProvider>
+                  <KageSiteShell
+                    auxiliary={
+                      <>
+                        <Toaster />
+                        <Sonner />
+                        <GlobalChatbot />
+                      </>
+                    }
+                  >
+                    {children}
+                  </KageSiteShell>
+                </LazyLoadingProvider>
+              </PerformanceProvider>
+            </AnalyticsProvider>
+          </SessionProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
+    </NextIntlClientProvider>
   );
 }

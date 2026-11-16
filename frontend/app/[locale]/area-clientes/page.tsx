@@ -114,20 +114,11 @@ export default function CustomerAreaPage() {
     try {
       const result = await login(data.codigoCliente, data.password);
 
-      // DEBUG: Log what we received from backend
-      console.log("🔍 Login result:", {
-        success: result.success,
-        showPasswordChangeModal: result.showPasswordChangeModal,
-        requiresEmailSetup: result.requiresEmailSetup,
-        message: result.message,
-      });
-
       if (result.success) {
-        // ✅ Login exitoso
+        // Login exitoso
 
         // PRIORITY 1: Si necesita cambiar contraseña (usuario legacy), mostrar flujo PRIMERO
         if (result.showPasswordChangeModal) {
-          console.log("🔐 Showing password change modal");
           // Obtener el customerId del store después del login exitoso
           const currentUser = useAuthStore.getState().user;
           if (currentUser?.customerId) {
@@ -146,13 +137,11 @@ export default function CustomerAreaPage() {
 
         // PRIORITY 2: Check if email/phone setup is required (only if no password modal)
         if (result.requiresEmailSetup) {
-          console.log("📧 Showing email setup modal");
           setForgotPasswordClientCode(data.codigoCliente); // Reuse client code state
           setLoginData({ customerId: 0, password: data.password }); // Save password for re-login
           setShowEmailSetupModal(true);
           toast(
             "Por seguridad, necesitamos que configures tu email y teléfono.",
-            { icon: "📧" },
           );
           setIsLoading(false);
           return;
@@ -166,8 +155,7 @@ export default function CustomerAreaPage() {
         );
         setShowErrorModal(true);
       }
-    } catch (error) {
-      console.error("❌ Login error:", error);
+    } catch {
       setErrorMessage(
         "Error al iniciar sesión. Por favor, inténtalo más tarde.",
       );
@@ -249,8 +237,7 @@ export default function CustomerAreaPage() {
           setDaysRemaining(data.diasRestantes);
         }
       }
-    } catch (error) {
-      console.error("Error solicitando código:", error);
+    } catch {
       toast.error("Error al procesar la solicitud. Inténtalo más tarde.");
     } finally {
       setIsLoading(false);
@@ -294,8 +281,7 @@ export default function CustomerAreaPage() {
       } else {
         toast.error(data.message || "Error al configurar email");
       }
-    } catch (error) {
-      console.error("Error configurando email:", error);
+    } catch {
       toast.error("Error al configurar email. Inténtalo más tarde.");
     } finally {
       setIsConfiguringEmail(false);
@@ -349,10 +335,8 @@ export default function CustomerAreaPage() {
         const errorMsg =
           data.message || data.error || "Error al cambiar la contraseña";
         toast.error(errorMsg);
-        console.error("Password change error:", errorMsg);
       }
-    } catch (error) {
-      console.error("Error cambiando contraseña:", error);
+    } catch {
       toast.error("Error al cambiar la contraseña");
     } finally {
       setIsLoading(false);
@@ -375,7 +359,7 @@ export default function CustomerAreaPage() {
     setTempEmail("");
   };
 
-  // 🔧 FIX: Scroll al top inmediatamente cuando el usuario se autentica
+  // FIX: Scroll al top inmediatamente cuando el usuario se autentica
   // Esto evita que se vea el footer durante la transición
   useLayoutEffect(() => {
     if (isAuthenticated) {
@@ -430,8 +414,7 @@ export default function CustomerAreaPage() {
       } else {
         toast.error(data?.message || "Error al guardar email");
       }
-    } catch (error) {
-      console.error("Error guardando email:", error);
+    } catch {
       toast.error("Error al guardar. Inténtalo más tarde.");
     } finally {
       setIsConfiguringEmail(false);
@@ -468,7 +451,6 @@ export default function CustomerAreaPage() {
                 setShowEmailSetupModal(true);
                 toast(
                   "Ahora configura tu email y teléfono para recuperación de contraseña.",
-                  { icon: "📧" },
                 );
               }
             }}
@@ -505,7 +487,7 @@ export default function CustomerAreaPage() {
                 <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
                   <div className="bg-card border-l-4 border-border p-3 sm:p-4">
                     <p className="text-xs sm:text-sm text-foreground">
-                      <strong>📌 {t("emailSetup.data_usage")}</strong>{" "}
+                      <strong>{t("emailSetup.data_usage")}</strong>{" "}
                       {t("emailSetup.data_usage_desc")}
                     </p>
                   </div>
@@ -563,7 +545,7 @@ export default function CustomerAreaPage() {
   }
 
   return (
-    <OperationsFrame routeId="area-clientes" mode="ambient">
+    <OperationsFrame routeId="area-clientes" mode="ambient" world="gmp">
       <div className={ops.accessGrid}>
         <OperationsIntro
           id="access-intro"
@@ -686,8 +668,8 @@ export default function CustomerAreaPage() {
               toast(t("login.contactToast"), {
                 duration: 8000,
                 style: {
-                  background: "#3B82F6",
-                  color: "#FFFFFF",
+                  background: "var(--kage-accent)",
+                  color: "currentColor",
                   padding: "16px",
                   borderRadius: "8px",
                   whiteSpace: "pre-line",
@@ -1003,7 +985,7 @@ export default function CustomerAreaPage() {
                       {!codeVerified && (
                         <div className="bg-card p-3 border border-border">
                           <p className="text-sm text-foreground text-center">
-                            📬 Revisa tu <strong>bandeja de entrada</strong> y
+                            Revisa tu <strong>bandeja de entrada</strong> y
                             carpeta de <strong>spam</strong>. El código tardará
                             unos segundos en llegar.
                           </p>
@@ -1015,7 +997,7 @@ export default function CustomerAreaPage() {
                         <>
                           <div className="bg-card p-3 border border-border">
                             <p className="text-sm text-foreground text-center">
-                              ✅ Código verificado. Ahora elige una contraseña
+                              Código verificado. Ahora elige una contraseña
                               segura.
                             </p>
                           </div>
@@ -1054,32 +1036,16 @@ export default function CustomerAreaPage() {
                                   {[1, 2, 3, 4, 5].map((level) => (
                                     <div
                                       key={level}
-                                      className={`h-1 flex-1 ${
-                                        newPassword.length >= level * 3
-                                          ? newPassword.length >= 12
-                                            ? "bg-card"
-                                            : newPassword.length >= 8
-                                              ? "bg-card"
-                                              : "bg-card"
-                                          : "bg-card"
-                                      }`}
+                                      className="h-1 flex-1 bg-card"
                                     />
                                   ))}
                                 </div>
-                                <p
-                                  className={`text-xs mt-1 ${
-                                    newPassword.length >= 12
-                                      ? "text-muted-foreground"
-                                      : newPassword.length >= 8
-                                        ? "text-muted-foreground"
-                                        : "text-muted-foreground"
-                                  }`}
-                                >
+                                <p className="text-xs mt-1 text-muted-foreground">
                                   {newPassword.length >= 12
-                                    ? "✓ Contraseña fuerte"
+                                    ? "Contraseña fuerte"
                                     : newPassword.length >= 8
-                                      ? "⚠ Contraseña aceptable (recomendamos 12+ caracteres)"
-                                      : "✗ Contraseña muy corta (mínimo 12 caracteres)"}
+                                      ? "Contraseña aceptable (recomendamos 12+ caracteres)"
+                                      : "Contraseña muy corta (mínimo 12 caracteres)"}
                                 </p>
                               </div>
                             )}
@@ -1121,13 +1087,13 @@ export default function CustomerAreaPage() {
                             {confirmPassword &&
                               newPassword !== confirmPassword && (
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  ✗ Las contraseñas no coinciden
+                                  Las contraseñas no coinciden
                                 </p>
                               )}
                             {confirmPassword &&
                               newPassword === confirmPassword && (
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  ✓ Las contraseñas coinciden
+                                  Las contraseñas coinciden
                                 </p>
                               )}
                           </div>
@@ -1182,11 +1148,7 @@ export default function CustomerAreaPage() {
                                     data.message || "Código incorrecto",
                                   );
                                 }
-                              } catch (error) {
-                                console.error(
-                                  "Error verificando código:",
-                                  error,
-                                );
+                              } catch {
                                 toast.error("Error al verificar el código");
                               } finally {
                                 setIsLoading(false);
@@ -1268,7 +1230,7 @@ export default function CustomerAreaPage() {
                         animate={{ opacity: 1, y: 0 }}
                       >
                         <h4 className="text-2xl font-normal text-foreground mb-2">
-                          🎉 ¡Enhorabuena!
+                          ¡Enhorabuena!
                         </h4>
                         <p className="text-lg text-foreground font-normal">
                           Tu contraseña ha sido actualizada
@@ -1451,7 +1413,7 @@ export default function CustomerAreaPage() {
                 <div className="p-8 space-y-6">
                   <div className="bg-card border-l-4 border-border p-4">
                     <p className="text-sm text-foreground">
-                      <strong>📌 Uso de tus datos:</strong> Solo para{" "}
+                      <strong>Uso de tus datos:</strong> Solo para{" "}
                       <strong>recuperar tu contraseña</strong> y{" "}
                       <strong>enviar facturas</strong>. No compartimos ni usamos
                       esta información para otros fines.

@@ -8,39 +8,16 @@ import type {
   ContactCopy,
   EditorialTranslation,
   FaqCopy,
-  SeoCopy,
   StoryCopy,
   UICopy,
 } from "./types";
 
-const englishSeo: Record<EditorialStoryId, SeoCopy> = {
-  acerca: {
-    title: "Granja Maripepa: history and activity since 1966",
-    description:
-      "Food distribution for hospitality from Lorca since 1966, with a branch in Viator (Almería) and a frozen, chilled and ambient range.",
-  },
-  lorca: {
-    title: "Granja Maripepa in Lorca | Saprelorca, Murcia",
-    description:
-      "Site at Avenida Francisco Jimeno Sola, 3, Saprelorca industrial estate, 30817 Lorca. Opening hours and direct contact channels.",
-  },
-  calidad: {
-    title: "Product quality and documentation | Maripepa",
-    description:
-      "Families, formats and documentation for each reference in hospitality. What the product sheet confirms before a purchasing decision.",
-  },
-  reparto: {
-    title: "Hospitality delivery in Murcia and Almería | Maripepa",
-    description:
-      "Distribution and delivery for hospitality in Murcia and Almería from Lorca and Viator. Check coverage, schedule and conditions for your town.",
-  },
-};
 const english: EditorialTranslation = {
   stories: {
-    acerca: { ...STORY_TRANSLATIONS_EN.acerca, seo: englishSeo.acerca },
-    lorca: { ...STORY_TRANSLATIONS_EN.lorca, seo: englishSeo.lorca },
-    calidad: { ...STORY_TRANSLATIONS_EN.calidad, seo: englishSeo.calidad },
-    reparto: { ...STORY_TRANSLATIONS_EN.reparto, seo: englishSeo.reparto },
+    acerca: STORY_TRANSLATIONS_EN.acerca,
+    lorca: STORY_TRANSLATIONS_EN.lorca,
+    calidad: STORY_TRANSLATIONS_EN.calidad,
+    reparto: STORY_TRANSLATIONS_EN.reparto,
   },
   faq: SUPPORT_EN.faq,
   contact: SUPPORT_EN.contact,

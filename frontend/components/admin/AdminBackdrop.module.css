@@ -1,0 +1,96 @@
+/* Admin — fondo de scroll propio (consola interna).
+   Sustituye la foto pública del panel por una capa técnica: azul-pizarra,
+   rejilla fina, halo cian, halo ámbar y grano neutro.
+   El parallax lo mueve --admin-scroll, un número sin unidad (píxeles de scroll)
+   que escribe AdminBackdrop con un único listener + requestAnimationFrame.
+   Sin JS o con prefers-reduced-motion, las capas quedan estáticas. */
+
+.frame {
+  position: relative;
+  min-height: 100svh;
+  /* Aísla el contexto de apilado: backdrop (z 0) y contenido (z 1). */
+  isolation: isolate;
+  background-color: #060a11;
+  color: var(--bone);
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+}
+
+.backdrop {
+  --admin-scroll: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #060a11;
+  background-image: radial-gradient(
+    125% 95% at 50% -18%,
+    #0e1a29 0%,
+    #080d16 52%,
+    #04070c 100%
+  );
+}
+
+.grid {
+  position: absolute;
+  inset: -30% 0;
+  background-image:
+    linear-gradient(to right, rgba(126, 178, 204, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(126, 178, 204, 0.06) 1px, transparent 1px),
+    linear-gradient(to right, rgba(126, 178, 204, 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(126, 178, 204, 0.11) 1px, transparent 1px);
+  background-size:
+    34px 34px,
+    34px 34px,
+    170px 170px,
+    170px 170px;
+  transform: translate3d(0, calc(var(--admin-scroll) * -0.1px), 0);
+  will-change: transform;
+}
+
+.haloCyan {
+  position: absolute;
+  inset: -35%;
+  background: radial-gradient(
+    46% 40% at 22% 20%,
+    rgba(88, 202, 226, 0.22),
+    transparent 66%
+  );
+  transform: translate3d(0, calc(var(--admin-scroll) * -0.22px), 0);
+  will-change: transform;
+}
+
+.haloAmber {
+  position: absolute;
+  inset: -35%;
+  background: radial-gradient(
+    44% 38% at 84% 72%,
+    rgba(212, 156, 72, 0.18),
+    transparent 68%
+  );
+  transform: translate3d(0, calc(var(--admin-scroll) * -0.34px), 0);
+  will-change: transform;
+}
+
+.grain {
+  position: absolute;
+  inset: -10%;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='gn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23gn)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  transform: translate3d(0, calc(var(--admin-scroll) * -0.05px), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid,
+  .haloCyan,
+  .haloAmber,
+  .grain {
+    transform: none;
+    will-change: auto;
+  }
+}

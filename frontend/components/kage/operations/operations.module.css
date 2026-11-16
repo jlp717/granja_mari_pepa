@@ -77,6 +77,13 @@
 .formPanel {
   width: 100%;
   max-width: 420px;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.86),
+    rgba(4, 7, 10, 0.94)
+  );
+  padding: clamp(20px, 2.6vw, 32px);
+  border: 1px solid var(--kage-line, rgba(223, 231, 224, 0.13));
 }
 .panel {
   border: 1px solid var(--kage-line, rgba(223, 231, 224, 0.13));
@@ -97,8 +104,14 @@
   margin: 0 0 24px;
 }
 .help {
-  border-top: 1px solid var(--kage-line-soft, rgba(223, 231, 224, 0.07));
-  padding-top: 24px;
+  background: linear-gradient(
+    90deg,
+    rgba(4, 7, 10, 0.92),
+    rgba(4, 7, 10, 0.74) 62%,
+    rgba(4, 7, 10, 0.32)
+  );
+  padding: clamp(18px, 2.4vw, 28px);
+  border: 1px solid var(--kage-line-soft, rgba(223, 231, 224, 0.07));
 }
 .actions {
   display: flex;

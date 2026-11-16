@@ -1,0 +1,1803 @@
+{
+  "version": 3,
+  "baseCommit": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "createdAt": "2026-11-11T10:07:49.136Z",
+  "source": "Current fresh Main worktree only",
+  "protectedAggregateSHA256": "231f7302c2b9b50c3e0edfb2dab5683303101ab96bfa1d3adffbad3e377b62e4",
+  "counts": {
+    "protected": 61,
+    "mixedUI": 9,
+    "namedFunctions": 80,
+    "legalClauses": 55
+  },
+  "protected": [
+    {
+      "path": "backend/app/config/odbcConfig.js",
+      "sha256": "db75493228626447ec2d0562c3e76a4abb05eb5fab8c33bc062c99af3170d4f2"
+    },
+    {
+      "path": "backend/app/controllers/authController.js",
+      "sha256": "1bebf74d069f7a212a28e0014e647606a07313e71ac87cc6b1ca2581d52e67fc"
+    },
+    {
+      "path": "backend/app/controllers/authControllerV2.js",
+      "sha256": "7f6b69e6b581cfe724e662df440214b63f85895124a16c8a76a0bc0d78ea2e97"
+    },
+    {
+      "path": "backend/app/controllers/authSecureController.js",
+      "sha256": "480b45887471f1c877f9870c4f230c77f327e0f9180b3ef0785ce76c59e722c0"
+    },
+    {
+      "path": "backend/app/controllers/chatbotController.js",
+      "sha256": "2a1ca3b3d3002b127c342adb99497aa08c65b5c92b00ef515406468b1595e8e1"
+    },
+    {
+      "path": "backend/app/controllers/clienteController.js",
+      "sha256": "89eb92b421216c6bbbcc66e298ca244a5b1dfce14e9e6b8dc2b70d301bf10a1f"
+    },
+    {
+      "path": "backend/app/controllers/facturaController.js",
+      "sha256": "3e310bec9c3fc7d1d24e21b0a26900bc5d44a93cf3f4102ca0a50257aaa8670e"
+    },
+    {
+      "path": "backend/app/controllers/libroIvaController.js",
+      "sha256": "99f6734ec0ab408abbdeb39c369987d70d5c5a1be6e11ab1dece93d48bb78df1"
+    },
+    {
+      "path": "backend/app/controllers/panamarController.js",
+      "sha256": "1b75607f97d3fb5ab3962207b1f629387698eb43ea3e98b499c5c739716629e2"
+    },
+    {
+      "path": "backend/app/controllers/passwordController.js",
+      "sha256": "a24becc9ee7ad9dab2d192a658bf033c3f6fc47472ea1b5ea58936846d4538c2"
+    },
+    {
+      "path": "backend/app/controllers/passwordResetController.js",
+      "sha256": "1b22a77d372733f91ed4afdb231d6047a3358d04d4cb92651452585ec22120ed"
+    },
+    {
+      "path": "backend/app/controllers/pedidoController.js",
+      "sha256": "b770c7318faba56c530560c466e93bea47589e58875c0c304b632bf3473ae863"
+    },
+    {
+      "path": "backend/app/controllers/productsController.js",
+      "sha256": "b25d10309af16a015775b149bbf4bf9779984a804734e05863ddcb0a31c5bc9e"
+    },
+    {
+      "path": "backend/app/controllers/tempLinkController.js",
+      "sha256": "283143d2de85c22d973ccd466a42a7bd160cd33f29fdbc50222559c913ea25bb"
+    },
+    {
+      "path": "backend/app/middleware/authMiddleware.js",
+      "sha256": "a8ffec466be41e715e04e84de4a79f6ee1fc2651496ebc172305f88cd80ec5cb"
+    },
+    {
+      "path": "backend/app/middleware/errorHandler.js",
+      "sha256": "04f0e335fc74e8d271e2af3c4d9ae5d1a8323cac4f60de44137c77b4bb86fd9b"
+    },
+    {
+      "path": "backend/app/middleware/rateLimitMiddleware.js",
+      "sha256": "a222b1c4d0340e319701349b40b6c2741a388a8fb969f09d5180f8b94443b7ff"
+    },
+    {
+      "path": "backend/app/middleware/rateLimiter.js",
+      "sha256": "f2b31a791b15cd27b0646454ed942550765805aaff01f3ea5c7e83a79cd11a78"
+    },
+    {
+      "path": "backend/app/middleware/securityFortress.js",
+      "sha256": "b2d1421610712208bf6775038d168275debfff08ba7f8b17b7989bd93ed0d271"
+    },
+    {
+      "path": "backend/app/middleware/securityMiddleware.js",
+      "sha256": "6cae104f8d2fe06a862f1f4da8c1a229ded307fa1992750eefbb007ae1d39367"
+    },
+    {
+      "path": "backend/app/middleware/securityUltra.js",
+      "sha256": "2e5a778cceaf8eacc7880015cafa61511f2d637242cd012c7b99bc5649ab662c"
+    },
+    {
+      "path": "backend/app/middleware/sessionSecurity.js",
+      "sha256": "24c9f5f504a3db0161cbe37f444309a4d12c733281da098f30ecd1ea6b23b7a8"
+    },
+    {
+      "path": "backend/app/middleware/twoFactorAuth.js",
+      "sha256": "8b103a73e45586dc30a6765c5f8c3d61acdff7c8e25ff9d084bd6710c5aba39e"
+    },
+    {
+      "path": "backend/app/middleware/validation.js",
+      "sha256": "e94d3e72df9e03ba7aed0c5f228fe5bde901f2dc8b8b080f4b458bdf8e57bbe5"
+    },
+    {
+      "path": "backend/app/routes/authRoutes.js",
+      "sha256": "f43b17fa2cdad83982023de4244c27a7e612d3538648958240b615b3593481b6"
+    },
+    {
+      "path": "backend/app/routes/authSecureRoutes.js",
+      "sha256": "b84e1cd1e998b196db7e6ba2ebf2417dbc628d0c6490546f3a9df828959d14aa"
+    },
+    {
+      "path": "backend/app/routes/facturaRoutes.js",
+      "sha256": "4ac5d8006ada37454a9de728ef7f67b374a48e145009008af59691ea2a32303d"
+    },
+    {
+      "path": "backend/app/routes/health.js",
+      "sha256": "929c5e866a06cdf65f4346ff7d612f86d0c31038a4c87f7f3fb821d3b87a480d"
+    },
+    {
+      "path": "backend/app/services/authService.js",
+      "sha256": "c3efc8e9846079ccde2d6fd1c3ad524e3a246caeeabcd008885b0fcc4bbd701f"
+    },
+    {
+      "path": "backend/app/services/authServiceSecure.js",
+      "sha256": "286c0abdafcf096f82734fa743159b844f4a6a37a1236c4111c5394a02909fab"
+    },
+    {
+      "path": "backend/app/services/authService_backup.js",
+      "sha256": "ff2a69efeb50d8df909a172de9b7ad9c51d2bf38aca80749e03a84ff0bfdb151"
+    },
+    {
+      "path": "backend/app/services/authService_temp.js",
+      "sha256": "3391bc750d21069514c03272f6248b72459dadf0d49089dbc74846b76baa7cc0"
+    },
+    {
+      "path": "backend/app/services/cacheService.js",
+      "sha256": "dc28544f86b2f03953d2c1c8c51f51f63820734f2e44349e33bcca6c61c9dd4c"
+    },
+    {
+      "path": "backend/app/services/databaseService.js",
+      "sha256": "30420d66f8adeaa58a98563e7c05f2f1cb4b2cc00e43fe8dd2e5f4732f297357"
+    },
+    {
+      "path": "backend/app/services/emailService.js",
+      "sha256": "ba1e948dd2739bda17c84315ea74e35b1127144c289d5fc18050a3bc8741a162"
+    },
+    {
+      "path": "backend/app/services/libroIvaPdfService-backup.js",
+      "sha256": "235f6b51188ece189915ae424aafe7707ca40fe1a83ac9b1b8f4469772ebe512"
+    },
+    {
+      "path": "backend/app/services/libroIvaPdfService.backup.js",
+      "sha256": "72a1c37a2f658a48f19328d470922625d467220d6513a7be1b74ee63e982b722"
+    },
+    {
+      "path": "backend/app/services/libroIvaPdfService.js",
+      "sha256": "10831fec0b3fe04a7456db386ac9efee145be50c84b56a06ea2f01376818b811"
+    },
+    {
+      "path": "backend/app/services/panamarBulkService.js",
+      "sha256": "6b8b99be0f04b3ca20d3d91694b04ae6655a187675106c791af790c82b454d44"
+    },
+    {
+      "path": "backend/app/services/panamarPdfService.js",
+      "sha256": "2cd8ffd0b4f9d8e343f2af153318cb331d58beb84ca149dd541620c8faf906e3"
+    },
+    {
+      "path": "backend/app/services/panamarPricing.js",
+      "sha256": "9431d3a72c2af3314afdfba4a5ff50bcf796a0b7c697e6bb7bb2505a3e68978f"
+    },
+    {
+      "path": "backend/app/services/panamarService.js",
+      "sha256": "b06e600726bbd8e1e7f3727b1376b4f8bddee90b7f4f5193a0e19e4d0f55424f"
+    },
+    {
+      "path": "backend/app/services/pdfService-backup.js",
+      "sha256": "7921539c690ac4ceef9bc0b56e30a1167dc01cacd4fc16185421056a1878d811"
+    },
+    {
+      "path": "backend/app/services/pdfService.backup.js",
+      "sha256": "7c78c7da5d1f6931e3890f1070797816119d1ef5c272323b2723745c5d29ca35"
+    },
+    {
+      "path": "backend/app/services/pdfService.js",
+      "sha256": "2ea1c4fece4cf75eac72b9da77a918215b2379b28342c2f2fb84895052686bb2"
+    },
+    {
+      "path": "backend/server.js",
+      "sha256": "b77aea84d913b8381d2cbfce91fdf78749f0a86797e7cb62f42b30afee13f0f9"
+    },
+    {
+      "path": "frontend/components/auth/AuthFlowManager.tsx",
+      "sha256": "fa16b88af5470f7bc60a8666faf9ff989ee872a0ece066cf47ffbf026de3d16b"
+    },
+    {
+      "path": "frontend/components/auth/FinalSecurityWarningModal.tsx",
+      "sha256": "e860be4ce6446bb2f96b3adfb8af9c5995b16727db47c68d6de977c7543d0388"
+    },
+    {
+      "path": "frontend/components/auth/LegacyPasswordWarningModal.tsx",
+      "sha256": "6a4c368c86ffdb08f660205b19e4cbc686144738853528e17be0d60668e5df2e"
+    },
+    {
+      "path": "frontend/components/auth/PasswordChangeForm.tsx",
+      "sha256": "782d9971f9858768e7f41d924b2e2cae57078f8011abdfa6d600ab2ddeac0d0e"
+    },
+    {
+      "path": "frontend/components/auth/PasswordChangeSuccessModal.tsx",
+      "sha256": "f4466a1ac18d9b4e03ac79c7172f44fbfbc5500d1ccb309d25b677a2748867b0"
+    },
+    {
+      "path": "frontend/components/auth/auth-modal.tsx",
+      "sha256": "38192efab6def87ebe1729243e9bd9fd27b65dee5ec0279c71b0b8f62fb8150c"
+    },
+    {
+      "path": "frontend/components/auth/change-password-modal.tsx",
+      "sha256": "07e0b93e4256113b25c5e16b79289e47933b7e53bb9014c183d3ccf84d8c0495"
+    },
+    {
+      "path": "frontend/contexts/SessionContext.tsx",
+      "sha256": "2d5d76dff3b1ff64e5daa102c5ff6ee46567ba33cf48a8f7d248715eedaafd28"
+    },
+    {
+      "path": "frontend/hooks/useSessionManager.ts",
+      "sha256": "7646c2b32d19f8f71e3f4c3f98f0b44921b4ad003648030663b96822e21292ee"
+    },
+    {
+      "path": "frontend/lib/apiClient.ts",
+      "sha256": "a839d7dae36ddb1597ba493e1ef27b8fb4be56030bb514cdc218608d493a4771"
+    },
+    {
+      "path": "frontend/lib/secureFetch.ts",
+      "sha256": "53eb0f5514289715221949344f28e56430a92a2f298865d735cb34d35f5de0e4"
+    },
+    {
+      "path": "frontend/lib/store.ts",
+      "sha256": "0c6e4320f448daf1a1e15c0e7412ce3920c68c7303b15d31263406572f199c55"
+    },
+    {
+      "path": "frontend/lib/types.ts",
+      "sha256": "35d96ed37c3bed5b3116fa64b40879137e07c76c5905eeee29172434e27c6081"
+    },
+    {
+      "path": "frontend/middleware.ts",
+      "sha256": "92e545f3756f56e7df7672d5d6933ab8893af384966dc2d8cdb5bf2bbcb1b8c2"
+    },
+    {
+      "path": "frontend/next.config.js",
+      "sha256": "58b92e826d901e30eb06105081f56e6c1530d462e459aa9f71090942c2842c71"
+    }
+  ],
+  "mixed": [
+    {
+      "path": "frontend/app/[locale]/area-clientes/page.tsx",
+      "sha256": "86b2ebbebc5f56c447809a5d96365461c4bd8072b283e44791204e09b9ff4862",
+      "functions": {
+        "CustomerAreaPage": "6c18098b0838e549c13174a2fa0076e9ed3605636eb81ded86f9a11d9d9cd1b7",
+        "onSubmit": "172369164386bbfae12160130a2bc905a45f4c1fc13ce3d25549cc1f02933a90",
+        "handleRequestVerificationCode": "7fcdb73b7caec9f6aab88a0e818c049ed928c0f1492166d6a2b4612e4618311b",
+        "handleConfigureEmail": "71c67203120855d8e77394fa230a2653c3149350aa01f8d955a55df6a80dd2e9",
+        "handleVerifyCode": "8eca78ddcd917e343ec0e3957335cb68233d86bef22e2b1dbfc2ec750d372b22",
+        "handleConfirmPasswordChange": "3d8f2661742cb34cb7c26df39a9329812c4a834f4ed2d30173fedd4af0904018",
+        "resetForgotPasswordModal": "dd56323bfaac210071bf38ce555d0164c00838efd8486c7c9823a89e36d8d626",
+        "handleEmailSetupSubmit": "2acfd1ad71235d35f64b2edf61d1a74196dff23488c28a690f474ab4441f0ceb"
+      },
+      "events": {
+        "onFlowComplete": {
+          "5e67a492a114c6a366b1d4297d6574378a6e747293af66459b1c6aaebb4a55ab": 1
+        },
+        "onChange": {
+          "5666158a0a3e5bbe79ef37cdc7944b95b89d34c017bfd305855786f21c7c9c4d": 3,
+          "c0cfb93daeccf098f5352cf23a0eff3d6179568384b26bce922093c6b0d537e9": 2,
+          "f4fd7d9cfdbba043ca00ac626ef60d9f688aa7ed73c9ed1acbb97ec133a1de71": 1,
+          "fb414e417703a5b2a14576168cb0a2103cca412a585a42064afbd254c001f681": 1,
+          "6fc464cc32ab9315ea2878460489872f078bb01c9aa7cf8f2d486f9eb740b3dd": 1,
+          "681ab7b246f688e5479e3222bd99c8392661163a5fa8a117aea932832d416dfa": 1
+        },
+        "onClick": {
+          "221f2e16b98ef9058c4e9b9f8f9e275b57811e79a09703ca82bb949689ad458d": 2,
+          "e0f62f73571244aec8d018c6386c662a27f8077e0e4a40cb0d3c0067f357ee74": 1,
+          "4cc2937a2e64f10427d1a1cf128be39da7b669246ffd2c163be5f48564feb90d": 1,
+          "5ceaef704e9ba509273c4f058d2c4d9c9b06bacf986e3e1e72021f23c4f1cff0": 1,
+          "4d4c3f64452196f4d8f1be6856633fc88f22b0aee40be03990d4cfc3a893300d": 3,
+          "77c56eb07592cb0bd3a6f3bee5d63e750647a12e39ffbcee9533d46fcd7d903a": 2,
+          "81322be138f73c2f02c37b6a43992e98d7038bf1141260bbf7e8e5e4fe9329d2": 1,
+          "b4a64476f50c57577968accbef79ede0791f7d6005d5793fa6a238bfbd6bf7fb": 3,
+          "f405859b116cf873dfbe4e5e92ccc7e202a5d8cbbb853beec748f391da2d5b69": 1,
+          "b239bdb3fc21f6df4bb234b9d7208e9bb837bed6593b838dad7a2013726f693d": 1,
+          "3532ca9eb458a2238566b4cfd3807cb57e44d6e90a6be1b8016ea447dfa45019": 1,
+          "dea41e7ffa6d6d02076601565c9a1e8a20eb71556e866c6928ee625f78ec8b52": 1,
+          "4b178c63cbfa997e04c465b4f7536ff16df592195d1e3d7e6ade2001bbf54f16": 1,
+          "3e38dda74410fc3adbff106e700ef24960c1696b23736bc085644af19b0d9338": 1,
+          "cb5cc69955dd164b3d50da8f4da07f6a32b31364a7399c9456fe2623f12737bc": 1,
+          "d72e7e41267b23ae67233600faf63fe5af82e2eee28fa67443bef7bfb48ae4ab": 1,
+          "a184b5808ee0d8be49eb401da47eefa6d1089422f96385d5b32cc0c6a0d4d224": 1
+        },
+        "onSubmit": {
+          "aa1081e96a1a673f8b07eacca89b410d9b78200ab24f5d35f7649a35c508e732": 1
+        },
+        "onFocus": {
+          "446dec5e547c6145d9b3402d0f876ad580500c1d165cb5253baa8f26998e8c64": 1,
+          "610a398d6027a6f5b25054c25f3f3e34d6d1b6a7326cc993942bfdfce5d1060e": 1
+        },
+        "onBlur": {
+          "443e2903be88c840a4290c01f6b4a1a51e3c2e9fcc42411da4da1eed31dbefa2": 2
+        },
+        "onOpenChange": {
+          "485736fa5acc8ba426c2363f6990c01de9cb594d8fdc1c181b53d59879706733": 1
+        }
+      },
+      "calculations": {
+        "loginFormSchema": "ba1e210c171bea2eacedf6e56d77ea5225a438350a739bdea7606619e956dc87",
+        "CustomerAreaPage/t": "37060cf73e594a14e3a8e3aa7dbefe0b7834b1cad6e36a09a6ac0df5d0e1dadd",
+        "CustomerAreaPage/form": "d91162cb2327e115ac2182c65d508b3ee850b59af950fac9c54179696b04c47d",
+        "CustomerAreaPage/onSubmit": "172369164386bbfae12160130a2bc905a45f4c1fc13ce3d25549cc1f02933a90",
+        "CustomerAreaPage/onSubmit/result": "9f897ded93836c9142764aff24091fd7ec39fa280f2410807864876829cd1fc5",
+        "CustomerAreaPage/onSubmit/currentUser": "7061d355c88524ac142fcbba465600afd0b032688e0edf00a4abc4a412a0901a",
+        "CustomerAreaPage/handleRequestVerificationCode": "7fcdb73b7caec9f6aab88a0e818c049ed928c0f1492166d6a2b4612e4618311b",
+        "CustomerAreaPage/handleRequestVerificationCode/checkResponse": "da55070d6e0c19d9c02af742339055bdb34e61d88bbecc4f3a7ff4f25658fae8",
+        "CustomerAreaPage/handleRequestVerificationCode/checkData": "eb0dbf992b42eb068a7c0448aa3273c3cbb70c2c48eedb2751d9a803365b9cc2",
+        "CustomerAreaPage/handleRequestVerificationCode/mensaje": "4e356f036657dc15702dc858a35354c155c95b63d35f8d678a993cb0584ced3f",
+        "CustomerAreaPage/handleRequestVerificationCode/fechaUltimo": "a534ca7a37947fe2324753ce05fec818e9048827fd2187871a1b108808968870",
+        "CustomerAreaPage/handleRequestVerificationCode/fechaProximo": "0e12eb857d6072b48832e9bb68fc4ae76ed9bbc1f2b08a073abb20ca1e302148",
+        "CustomerAreaPage/handleRequestVerificationCode/response": "747c39b8eeee9e3649f2c91e068f7e3ff1750734ac428ff73a29673d1043bd5e",
+        "CustomerAreaPage/handleRequestVerificationCode/data": "6f12b70ae708ad1954033fe362cc475adf31ea837f3e470e202c2da911f081ce",
+        "CustomerAreaPage/handleRequestVerificationCode/emailMasked": "231ec87c98596661cf8bdc18c1bd3e63e853a655a5a4b8765acd7b1751ba872f",
+        "CustomerAreaPage/handleConfigureEmail": "71c67203120855d8e77394fa230a2653c3149350aa01f8d955a55df6a80dd2e9",
+        "CustomerAreaPage/handleConfigureEmail/emailRegex": "3dc4e20f2ec1dc390a24c0ba6351f8bc8155068dffdf0429fccabfc4b0914aec",
+        "CustomerAreaPage/handleConfigureEmail/response": "d4e626d64c78c14fd05a8542b6c0ae0a28c140588178df172e1d5ed87a485411",
+        "CustomerAreaPage/handleConfigureEmail/data": "6f12b70ae708ad1954033fe362cc475adf31ea837f3e470e202c2da911f081ce",
+        "CustomerAreaPage/handleVerifyCode": "8eca78ddcd917e343ec0e3957335cb68233d86bef22e2b1dbfc2ec750d372b22",
+        "CustomerAreaPage/handleConfirmPasswordChange": "3d8f2661742cb34cb7c26df39a9329812c4a834f4ed2d30173fedd4af0904018",
+        "CustomerAreaPage/handleConfirmPasswordChange/response": "335c9c5f117006c127643c19c1f90c9f1207e1ab718cdb2bfde7370e18a01e21",
+        "CustomerAreaPage/handleConfirmPasswordChange/data": "6f12b70ae708ad1954033fe362cc475adf31ea837f3e470e202c2da911f081ce",
+        "CustomerAreaPage/handleConfirmPasswordChange/errorMsg": "fa073df5932473a4666cceee6dcb661d62cc507f5661552cdcfeeb887c54c668",
+        "CustomerAreaPage/resetForgotPasswordModal": "dd56323bfaac210071bf38ce555d0164c00838efd8486c7c9823a89e36d8d626",
+        "CustomerAreaPage/handleEmailSetupSubmit": "2acfd1ad71235d35f64b2edf61d1a74196dff23488c28a690f474ab4441f0ceb",
+        "CustomerAreaPage/handleEmailSetupSubmit/emailRegex": "3dc4e20f2ec1dc390a24c0ba6351f8bc8155068dffdf0429fccabfc4b0914aec",
+        "CustomerAreaPage/handleEmailSetupSubmit/phoneRegex": "8052fbd347278f24e8e59db13dd8385296cab4aaa2feef046eefc2fce60368ed",
+        "CustomerAreaPage/handleEmailSetupSubmit/response": "7caae9d96db75c92806d3a91599588468d5cbfe3d741bab4d404d8c145e00296",
+        "CustomerAreaPage/handleEmailSetupSubmit/data": "9f165351a4372a56ccde652bf9b753fc7b9e1d11c7172f4d5bfd1cdd43366ecd",
+        "CustomerAreaPage/needsEmailSetup": "e3ed748bdc7cad2065ad03fcdc3487125d8d71abd553e774297d9f9af13b30e6",
+        "CustomerAreaPage/codigoCliente": "c874fec50c2a7a60bb028b2117e58bfa78e90b6b69d251085c7cc5528b91c3fa",
+        "CustomerAreaPage/IconComponent": "9649cc3498b145d4fe8a9338d25271e6246cabdee7471bbac244b5785017939b",
+        "CustomerAreaPage/response": "f368d156ca637d5fda10ab044603656982156cf3e53eec59cc6826dbd4bcd443",
+        "CustomerAreaPage/data": "6f12b70ae708ad1954033fe362cc475adf31ea837f3e470e202c2da911f081ce"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/app/[locale]/login-secure-example/page.tsx",
+      "sha256": "d83cee27c2b15ca5178b6594d1209256956931b85f9d91bbd34a29a41e74efc7",
+      "functions": {
+        "LoginSecureExample": "9b5db499768d625952d7f0c217b90659b990e0a5381417e517b4a206eb6b772c",
+        "handleLogin": "52d9fe0542c1a75b8e401baa922c36942c379b9d4e69a4c0b126908c680ba89a",
+        "handleChangeNow": "96a3231ce1497dc9623cf9c023fd7a366b4d3fb8f3b92edd1d2e24ecb208b67b",
+        "handleContinue": "ae7c95276a0b4c13d50acf96d773f334fa297fb80c86af15f31043f6d4bf565a",
+        "handlePasswordChangeSuccess": "4abc8761956e0b7de49c7bd7d5dbfc54db46ad7f8e5591e44474a749321e16d6",
+        "handleCancelChange": "84df5925d680fd62d591d2c6bbf0ca56c3193129c632cbff1d4aef6574ca596f",
+        "handleCloseSuccess": "7943c130addec2a32774aa6cfdb73c7e2e765dee4d42fd9134cdb03c6025c527"
+      },
+      "events": {
+        "onSubmit": {
+          "3124a9417099c4d9dedc2776d6e8c09a974509b652beaa115ae8e09e7e65ee76": 1
+        },
+        "onChange": {
+          "bfe9a64bb977ef12d506e41dd47af771de7821a3d724cacfbe9f0d3e357d1451": 1,
+          "0b3347fb53275cd6c2534020d81fa0d34ba8a4eec62c1b4973856260b2df2eeb": 1
+        },
+        "onClick": {
+          "e0f62f73571244aec8d018c6386c662a27f8077e0e4a40cb0d3c0067f357ee74": 1
+        },
+        "onChangeNow": {
+          "222fc3fb5e97c5804c966cf38d78a44de6aec62666cc597c04ddc52eeb43dd23": 1
+        },
+        "onContinue": {
+          "92b2b44ec7fe93da32df795201e2593029860c890140feee57e44bb5a44ebc5d": 1
+        },
+        "onSuccess": {
+          "60292c9a4f01905ca7d4b76965fa7dea7995b63de8ff1c121d144fb4cece8234": 1
+        },
+        "onCancel": {
+          "61de8c4764a6057d8f190d6d51492391f3cde6c5e63256c21c323db6b3bf4e74": 1
+        },
+        "onClose": {
+          "0a0b3fb7f10486fae43b883cabeead05146202de53f87bf23f9f68355a038fa8": 1
+        }
+      },
+      "calculations": {
+        "LoginSecureExample/router": "9a67fcf8677f83a8eb7568b63b94ea526cd5a6d86d51efe8140def78d0955c23",
+        "LoginSecureExample/handleLogin": "52d9fe0542c1a75b8e401baa922c36942c379b9d4e69a4c0b126908c680ba89a",
+        "LoginSecureExample/handleLogin/response": "9c10b1526873fcdea1a6e523c5c96fac5665322d1e6a8863a73ce46ea5223e9b",
+        "LoginSecureExample/handleLogin/data": "6f12b70ae708ad1954033fe362cc475adf31ea837f3e470e202c2da911f081ce",
+        "LoginSecureExample/handleChangeNow": "96a3231ce1497dc9623cf9c023fd7a366b4d3fb8f3b92edd1d2e24ecb208b67b",
+        "LoginSecureExample/handleContinue": "ae7c95276a0b4c13d50acf96d773f334fa297fb80c86af15f31043f6d4bf565a",
+        "LoginSecureExample/handlePasswordChangeSuccess": "4abc8761956e0b7de49c7bd7d5dbfc54db46ad7f8e5591e44474a749321e16d6",
+        "LoginSecureExample/handleCancelChange": "84df5925d680fd62d591d2c6bbf0ca56c3193129c632cbff1d4aef6574ca596f",
+        "LoginSecureExample/handleCloseSuccess": "7943c130addec2a32774aa6cfdb73c7e2e765dee4d42fd9134cdb03c6025c527"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/app/[locale]/checkout/page.tsx",
+      "sha256": "103618132ba4dc7a10a2e0317233b331f9ee248a648fd2f0f320a4d3390f0ec9",
+      "functions": {
+        "CheckoutPage": "22061a118e49e048ac9ae8ea2be819fa532bc0570fe53282a2603c5400e74184",
+        "handleApplyPromo": "c02188dd629ba2464b2757b8e19e53f68655a5a8267db21d93609f4c8832e798",
+        "handleRemovePromo": "aee514437db27b871079866d90398729f08090046733195ed25a8dbc950b22aa",
+        "handleNextStep": "8bae7bd7737c2ecd64bcb0c7b561777414ae24835fdbae299bcd35ab84d07a10",
+        "handlePrevStep": "34b4dfbb83a78bf05aeb26b2b682bbca155345e2eab0996962306f93c91cc198",
+        "handleProcessPayment": "7129d34f7dffbc83cde25c1e58b609baa7b08db3a9f3cc4d7ba78d13607b0a51",
+        "getCardBrandIcon": "659e8af57d11fa87055456c3bfcc60a3735fa39f7e385be695f5721b182c82db",
+        "getStepIcon": "e2329bffa1b3e9a24097c5466c9c08e7a84d9ed076aea002c88b41970ad45f81"
+      },
+      "events": {
+        "onError": {
+          "083084327290745c56f39a64820355552c57034f0880e382a242bbb940b7782c": 1
+        },
+        "onClick": {
+          "b496378c9c53597c320c0ab534a5580ccc4c75e765611a0f8c7e8fe8e5b15834": 1,
+          "5df1c2d7edb75846a40658941f3a4cec609017e7cb204b6e72701c15833c0e92": 1,
+          "8ddedda46aefb765fc98b9358bc416bf16bcae8fa1fdaea2cc4076578f69bb0f": 1,
+          "290160b74c09c2bbfa6be41642ff3958250ce83d00150e4666048f559af61129": 1,
+          "72bbfc13ccbd229a65804255dc687746a24749fd0dc7323680a392863b258261": 1,
+          "b389bd889e8d2b97c6c7176f90e9cf1ad892016871a60b3f03903ce5521a7cb6": 1,
+          "7ace4c939c2df3d638df3838784d993cc4bc9c5c15f61fa5dc08be56fb3c75d6": 1,
+          "19c35adc6da5f7a92ec6df943ce19c01dff22aec435e74049d86a07e2a768beb": 1,
+          "e905b9bb05ea9e7cb182ebf1d098369e57eb912aeb13e96b795641e7b9fcb8ca": 1,
+          "fa19c556c0791a9f8c7e1f3d6e3636e86098cf2360c5e351b0b1d7d3b087116d": 1,
+          "027c06ac14195914e8caff55291f47ae95c17920f6bde724fca85cb2303de26f": 1,
+          "515316205dca2d16b4fd8d5fd2b35d3827c7e24b62754ca8ef8ea4999b9f73bc": 1
+        },
+        "onChange": {
+          "d456ab7b4bdd1c2a3e5f46190a0504c7ca4b4587856e4deb38494c99e21d2831": 1,
+          "96ca18178a4df079da472b0fa032b7cfd7f400b3cf4caf34d8a72eab13ded70c": 1,
+          "1fe99f31152d86dd2e15b95605ea247f8cfa5c80da8a7bedb52fea53b91c2cbf": 1
+        }
+      },
+      "calculations": {
+        "checkoutSteps": "e958fbbdc3b60d9c3e9b6eb7d724df23a53cbce40ade411434e5785e07f684a5",
+        "sampleAddresses": "01ffcdc09adad68365af8d805f2009d4cbae6efa12d16c2032d9c5343e19f08e",
+        "samplePaymentMethods": "ceb00c7ab499efb634cd2f254e103805cbf743598c9bf00bd583d3fa5b907b11",
+        "CheckoutPage/subtotal": "57bf2c763e1646c729905a80e39a0918f77889556923b839200fb5f8e26ee154",
+        "CheckoutPage/discount": "ddc21aedefaad864c5d55d12a6af3eb7b94bac4d7e7d220429a170a1c9f1b11f",
+        "CheckoutPage/shipping": "0d76449e28295dbb58632b37b2585093aae0ac120bdb65c2dc4bb89058740604",
+        "CheckoutPage/tax": "06bed87e876505e8e528a87d9cf48944042c13252d58be0922fbfa9db9aa06d5",
+        "CheckoutPage/total": "0de98773c0b356ac06cedf8eb634e5c7e1950febbfd9f24eea84621bf52d4c4f",
+        "CheckoutPage/handleApplyPromo": "c02188dd629ba2464b2757b8e19e53f68655a5a8267db21d93609f4c8832e798",
+        "CheckoutPage/handleRemovePromo": "aee514437db27b871079866d90398729f08090046733195ed25a8dbc950b22aa",
+        "CheckoutPage/handleNextStep": "8bae7bd7737c2ecd64bcb0c7b561777414ae24835fdbae299bcd35ab84d07a10",
+        "CheckoutPage/handlePrevStep": "34b4dfbb83a78bf05aeb26b2b682bbca155345e2eab0996962306f93c91cc198",
+        "CheckoutPage/handleProcessPayment": "7129d34f7dffbc83cde25c1e58b609baa7b08db3a9f3cc4d7ba78d13607b0a51",
+        "CheckoutPage/getCardBrandIcon": "659e8af57d11fa87055456c3bfcc60a3735fa39f7e385be695f5721b182c82db",
+        "CheckoutPage/getStepIcon/StepIcon": "7de5d41b1cf471dd5499e642d0050d17d53ffa4ddad22da0b43166807134b5e7",
+        "CheckoutPage/target": "0f9466c01b056e096ec9d2cfc4756b0c47df5534856e57afd4c3872dc0a54090"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/components/cart/cart-drawer.tsx",
+      "sha256": "9a38e5d73ebd370cacdf6e657af5e48caaca8efafbb14b255f14b30a36ab2a25",
+      "functions": {
+        "CartDrawer": "6736a085bd06e9c0501bc36116fda822360e9657c9ce16ebf472a141cd5854e4",
+        "handleProceedToCheckout": "718bcf59cccb0f6da585ca9ee54f04eebc2badd7788e4cc39fcd359dfb733de4",
+        "startEditing": "f3e7f84598a5a958728d1346cda7c7648268769fd7b3b62c61e696fcff1e74f0",
+        "saveQuantity": "d382642ed0676eb5b7f115952fb4d4a3bacb5a24f45bd38672ada3cfa0b3c4dc",
+        "cancelEditing": "61bc50418c6a5d2a85af64ce2aaa09725de009a930aee53a3f004858e7cb9929",
+        "handleKeyPress": "6067e91992f411d967346c3bf40264fef878a0fae71e26f71f351f8513462e66",
+        "handleRemoveItem": "1adf02788adea9c6f2fa8e6f4e71d526a888f69f4bde3c7d8e64ae79b38631dc",
+        "confirmRemoveItem": "661443dbdd2dbe059b636197f09e76722691f78b7aa4cf1b937d80af43b9f88d",
+        "handleClearCart": "ecea03bed8a165f22136288a66e685ae288e377084aa463e75c76c4adf72b4b0",
+        "confirmClearCart": "3120027a78bc117b627816496801b1b1df05d8ffd59a3da8e4b18c88bcafde88",
+        "handleQuantityChange": "5596ae0f15e1e60b31ac4bfc030be9a22c4b9499d8b585d37c7d0db49a4bef20",
+        "handleExploreProducts": "a3d96b28b335863a74684fa94132efd57da9293c9cee4c3df4557cc376aa7775"
+      },
+      "events": {
+        "onClick": {
+          "f2541fca97415347018a1a6a84af26d3b57ebcdf84f18739a102f3e77c60b98f": 2,
+          "0b639a817de16510f6b17eccc6535bc8401602b57ebce1f05108b1b2215fe75f": 1,
+          "53de79e344c1a7b87c9ebdf3a1997c2609f42c574960d7b82c8b8c17af01d592": 1,
+          "cb587947553fe06af076df8aea5300e748e011e0fd4fc517b18844863b9989f3": 1,
+          "3295593c9779393b4b81cee831d2d8e4cd80b2f6a41df36f6fd83759961eb2b8": 1,
+          "14176faf461f4c8d35d3bab6710cc99a04f22ff9b927b88e20af76d0e33f1c8f": 1,
+          "2ced2239bc6ac102f834be1fea2541f17c74aed927b4d209a27177bc7dd8ee88": 1,
+          "4c6f2a530b73eec255b2a55017575485c27df81b030ca0a16e30c105197fce9d": 1,
+          "a3be75db0d9124cf5e4c2662aa0e39c7e917825d13a8214cc4c81fe5427a4e90": 1,
+          "a9daaf286216ab8ab64b275a1698e5eac22c4dda7c40e225c46d59eb526c798b": 1,
+          "2c1a748778b380a273f4190ccc4820633f0541d53759d06c061af3510af67b86": 1,
+          "ae943386cdb6e5e398f043783c30fce3e63f4562228d9d49ed109ca1afef3f18": 1
+        },
+        "onChange": {
+          "802d628f6ddabc4b7a7a1832be87ed47fea63561606c0c8f24cd716c233bb69a": 1
+        },
+        "onKeyDown": {
+          "93b94c84f8dc7f0c4acb5a52e578cceef4c3720aa0f6bb55476cccc11630acc9": 1
+        },
+        "onOpenChange": {
+          "bad54a2c830868825deb26bf7a14ebc8438bdeb6860ca272a04731afde1ac968": 1,
+          "889fde5f1780b1efeeb644cc5da7878dd51c227b6d1b26b96f722fd095479f6a": 1
+        }
+      },
+      "calculations": {
+        "CartDrawer/router": "9a67fcf8677f83a8eb7568b63b94ea526cd5a6d86d51efe8140def78d0955c23",
+        "CartDrawer/scrollY": "7b2e0b917672bcf1bdfe6ed41c14c1fa79190dfd41e819a7add37f2f8a611798",
+        "CartDrawer/handleProceedToCheckout": "718bcf59cccb0f6da585ca9ee54f04eebc2badd7788e4cc39fcd359dfb733de4",
+        "CartDrawer/startEditing": "f3e7f84598a5a958728d1346cda7c7648268769fd7b3b62c61e696fcff1e74f0",
+        "CartDrawer/saveQuantity": "d382642ed0676eb5b7f115952fb4d4a3bacb5a24f45bd38672ada3cfa0b3c4dc",
+        "CartDrawer/cancelEditing": "61bc50418c6a5d2a85af64ce2aaa09725de009a930aee53a3f004858e7cb9929",
+        "CartDrawer/handleKeyPress": "6067e91992f411d967346c3bf40264fef878a0fae71e26f71f351f8513462e66",
+        "CartDrawer/handleRemoveItem": "1adf02788adea9c6f2fa8e6f4e71d526a888f69f4bde3c7d8e64ae79b38631dc",
+        "CartDrawer/confirmRemoveItem": "661443dbdd2dbe059b636197f09e76722691f78b7aa4cf1b937d80af43b9f88d",
+        "CartDrawer/handleClearCart": "ecea03bed8a165f22136288a66e685ae288e377084aa463e75c76c4adf72b4b0",
+        "CartDrawer/confirmClearCart": "3120027a78bc117b627816496801b1b1df05d8ffd59a3da8e4b18c88bcafde88",
+        "CartDrawer/confirmClearCart/itemCount": "40de228fca9580c6093228bce562f612c6c32057476e34e8bd36f44230f4e63f",
+        "CartDrawer/handleQuantityChange": "5596ae0f15e1e60b31ac4bfc030be9a22c4b9499d8b585d37c7d0db49a4bef20",
+        "CartDrawer/handleQuantityChange/oldQuantity": "1e7decf6bd4f8273bb80211ffedb9997bae3f18e095be81064ba0ab349709b13",
+        "CartDrawer/handleExploreProducts": "a3d96b28b335863a74684fa94132efd57da9293c9cee4c3df4557cc376aa7775"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/components/customer/dashboard.tsx",
+      "sha256": "cc0b512a5c8286d98cdb4dfc7d238bed71f2894e46be2b7045672f63b2be85ca",
+      "functions": {
+        "PdfViewer": "c5c36b870cab3a60cc9aa7e2d992af2a0dbf6ed110a1a4c7e019dcc34bc23d6e",
+        "checkMobile": "24a5cb069b63d95cf0e861f16f9b70d7f91b4d5fdb2357a528f2f0d60db2f6f8",
+        "loadPdf": "d245cbd03631775d90a291fd9815196431bba6d03041ad3e0c0a93e06d8ec387",
+        "CustomerDashboard": "4313a7b4f3d261fef43b34f7c26d8dd1082f9bbbba91a0d23d698c5b7d4efb32",
+        "handler": "65573d36508369ac0ba7cf124917977e1a537e2b660ec24109591a3edbff8744",
+        "cargarPerfilCompleto": "a16d3f15ea12712c5beb5038e5019fc53549021ac7e388059308902ff60e1dd5",
+        "cargarDatosContacto": "736eb91d1be54bef74643be114ed60d10c3a591d04c1272416c0d5014bcba74f",
+        "handleShareInvoice": "bd794bbb517dc66bafe9d3a6d2e01e71018c248042e6d0d93c5b2340ad14312f",
+        "handleShareSubmit": "59acc3cf22fa393a4a4c30052b2ddcb370a70fc019374765fc1c55dde95a4e53",
+        "guardarDatosContacto": "9213b4731f88d5ce3a171727ae7fd5136d8b4d5690c6f2a262c506e7f2b67068",
+        "enviarFacturaPorEmail": "103b2d68e35f4ec012e940844852520504c6de85093ec405cf50d1597d533c15"
+      },
+      "events": {
+        "onClick": {
+          "65dbd85c2f1c643d211efa5c16887e608ba72c97247187d568fc38c005872c88": 1,
+          "1f5a406ffe05535b77d62b79d4fc813899f4df8fb5ef2b7698b71e333edf7f52": 3,
+          "be554613029aa52566940dcb08e972b1f2e9dd969a44a3e84f3f02a871fd6d32": 1,
+          "b7ba9fa28a4dd3d274b187bd631ef3b7151bf8962e24da9202f5ed896680b667": 1,
+          "9d131b574541a4c91fba67f0f0d6e529985f0c066e300e416f50a70c71c31423": 1,
+          "3266269420b6d538c05fdfaf0f556366200c828789f5fd689ccf49db3bdf5b01": 1,
+          "5127f41cd7a8f0eddc6a6959ff987395893f6ebb6110b54ded02f2a453aec4bc": 3,
+          "c33a1c8b618f6d032d7e6f6005ee666e838aa8ecf687e959d9ca106a1d51f810": 1,
+          "e8083e31c684f971a2f6e711f80173d68b894083dfb373380fb18285b3f928f3": 1,
+          "ea82964946eba5a3ddbb29f3f4d26bdb86122fb5a76197f596f245f5d76403b3": 2,
+          "00c312411b1c6b9f7cc28f7119d8db7ba8048ffafd27bab35d39971c933a8b3a": 1,
+          "a208249c68c38a49f71bd4e1aa07908973aa3165a0bc581c187f72754fa5e363": 1,
+          "4d0e4adc90bb8b89d20c1daf9c7af404944620b2a6e2b622493cdb004d71a036": 1,
+          "77c56eb07592cb0bd3a6f3bee5d63e750647a12e39ffbcee9533d46fcd7d903a": 5,
+          "0cbdcabcc6643ce638eb1d4a7fd71b4bcfcd11165e17380f1e0d6d4faf1159ad": 1,
+          "c1acc51cd374eadef77df402681ff3989a6336ca1ff0fe70189e15c4fcb2a8cb": 1,
+          "802a5fe875308ed26aec78d7dae9c371e6391899e9ac6a3bf956259e0d5d66c9": 1,
+          "a4ce159823e6d5890abdde68f15ad30f5c798ce9cdd2cb199dba708ca8cabf79": 2,
+          "118e36dee5bfe1e6277f36c461e1bb37d7ceee9293fc0281d053596dac976bdf": 2,
+          "bb434ef3306eb2a8f9788c2911c9f4814bc5641f2a210c1a2052dd2fdc446916": 2,
+          "c9d0cfd50451e99f64eac36fd38dd2ae46b253e3784a5173652a0771c23b418f": 2,
+          "78060476a9d784d31621046c00bb8cd7447b536507df6c471d234d1edb5ea27c": 1,
+          "6a858ebb88207e7580fab11169d3089172e68e954db44dfc403c2e81dc37fc53": 1,
+          "c1e35ccf9220e4064beee87598480ea59bf58e855868c74ff6f32c0b2782a34c": 1,
+          "595272c80a8ef5df271f7ef4035bed3953169fa546713bb26d23c230646bc9ed": 1,
+          "cb39e058231374ae32c6705c1ed4814e12d335915815decb824b8c5bd04738d6": 1,
+          "73315e7dd8c2414ece9def7f988a07e4f50b4bd117920839d07922e70ddb8f2f": 1,
+          "331b2399260afea90b695925d52e3ee312de3a6d2d8b34426658bb036c05d507": 1,
+          "86df90dc349d2d819406168082dfbc74bfc380bf0812b83eb0dc5fed77dcd7a0": 1,
+          "aba29d79f250d9b204f5109ffea5142d8f3974cbadf2e97cb00dd22f281092d8": 1,
+          "616be25d1062951f4062b7972dab3f76622371a00bbc35935888f7c64dc686d0": 2,
+          "e922035150339d599b690f349e5c1e9b09e18c15dfd9c5676fbed4501e6c19ab": 1,
+          "eb1f70d7caef01502bb752843c800ca97b1413c3bb0af9d9f963b8431979090e": 1,
+          "fd411e1f2a36ac5be1a116222b5f1ebfff6e4bd4a9c71462da9fcf4612f529b0": 2,
+          "9117ab7b02f8964d8f89004d529a293c616a2526afdf13a27f90406f2e2b8014": 1,
+          "0fa04469f4ae615c6f0eddf5bee6821f9132a8f726a786e0f94ed2b58a7803f9": 1,
+          "cc23cd6739f199093ddeb8bee8560e089dfecc4495da3997b99ae2d997f5a310": 1,
+          "6ec14555dc6596488d574d2b2f763a28b0a272029e51c9040d6cd7e46d6baa00": 1,
+          "d95da3ccdcbaa8cc03aa7eb4c257c272d6a182b9b40514dc41288852bec528b6": 2,
+          "f219927710ec3b5e7a80e79bcd33e77a7d1990734012a8cedd46bb291fc528d9": 1,
+          "d51ffabcc140c247460841ef676548ad19420b681d5efcaacb8a82de49ab9649": 3,
+          "ae6420eee654700d88a0ac4ffc9741dc8e1b876304ed08b863b1a7337221f544": 1,
+          "da656e9d9a5e8407f81326c5fbf374df204999bf2eb23766cc7ab2f530b1b403": 3,
+          "b7dee112a562dd6185b213f8a31d46750c8f7d90e69fe1430df4a510568f0b1b": 1
+        },
+        "onChange": {
+          "fee81abf56aa6828dd7d73a64916e1af5d653726df46d0b3c7655fce8a07c31f": 3,
+          "7f8a305d55a2d30c0a48d2976c3eedda53d91161d56bda611288313be9a4b82a": 2,
+          "f101d9923e871f744712823b12c53be04e0487d7bf22168cf7a73514def6e837": 2,
+          "a9c6900ba1f17152fe7a52cdd4b04b3fed8ed26bb4b686edbb7a89e778b87a89": 1,
+          "748eff8ebffdf285a8b5fb5bd427b3fb584313f08625600a349279c4df4012cb": 1,
+          "a060636df369597f2bfe3e45051f888633797dc2d8f9a78a33dd3f483dd878e1": 1,
+          "b76d479b24107bc73373dc030639f6537656959268c969b705cb99ff1af65d6c": 1,
+          "ed58a64ee93923f2af60fd0d1d7ae24d7b70df0d907cd0ed4bb9176c7b9ea176": 1,
+          "3b34828b8959e5d06f612852756020c197c4a5c3fd3d83e9d151ca234c9c60d9": 1,
+          "e2e759a185ebbd34d82cb15f1ae01d6ef55f9a44af4375fd1524a8b95cb90d0f": 1,
+          "5090c68147a6cb5ef673b75843f7e170f49fc66adb94ae67e687d3fbcc508790": 1,
+          "bd19d29ad6a1c1aa507face134b8ca5ba67234bb9338142cfc1291ba430a35e1": 1
+        },
+        "onClose": {
+          "8a95540a8dc96ffe263eb3a0d8505556bd0bcda67e17e6da1fe39af6ce65623b": 1,
+          "b091555353f272b3aefa36143b95e0b996bd4c8356367dbd7d19930a8d5cd8b7": 1
+        }
+      },
+      "calculations": {
+        "tabIds": "9f6873fbafa7ac926854cd751841fe7678dcac12a2f0ffc49e588e99ac9ca939",
+        "statusColors": "2719d2e3a040400fb1d24c6c681fdc52ea41fec3c69f571e8965b6a3dbad49d3",
+        "statusLabels": "1a1e1399990f59656b128a5f64af52b30b9bf154feee6b90f6d0fcadbc73b837",
+        "statusIcons": "152d7239fb9364230018096989dc814104eac76ee56a88e43fcb38c33643d65a",
+        "PdfViewer/t": "100627266e3ec48f1eedfbe01155b55b66747d6188f786626fd04630c6ef134c",
+        "PdfViewer/checkMobile": "24a5cb069b63d95cf0e861f16f9b70d7f91b4d5fdb2357a528f2f0d60db2f6f8",
+        "PdfViewer/checkMobile/isMobileDevice": "472f0aa80eaed5c7a75e8e7eb89460560375da6bcda0356670e21b40109be02b",
+        "PdfViewer/checkMobile/isSmallScreen": "3238c295cbb2ed5dc56d32bbf1f2f5afb6e67ba3f5e25acd5c6798869a074ff5",
+        "PdfViewer/loadPdf": "d245cbd03631775d90a291fd9815196431bba6d03041ad3e0c0a93e06d8ec387",
+        "PdfViewer/loadPdf/url": "bfa8ca1f061be2baace65dd0cf4243a30f19b910962f26962be56dbd7a973e73",
+        "CustomerDashboard/t": "211605437ba64af5b34d7241b74b44438b83941614d799eaf0416365be9b1cd4",
+        "CustomerDashboard/tabs": "ae310fe57cbcfc76b0b235790ad4e97e3ffd2b7dd6cc7b8dd593bfd6affc1d3e",
+        "CustomerDashboard/getStatusLabel": "e4d05ffb30a421ed3a1340e775df95157b6943c44e644eb3b1356d0c37a69725",
+        "CustomerDashboard/clientSearchRef": "f43ed53b495fb61c833561c6f8e584612044d230bedb5a2dda37c78dab622471",
+        "CustomerDashboard/clientDropdownRef": "0d328d3f868386b696fbc9a688b37215e039f3ba8f44efaadf976fe27bdfede9",
+        "CustomerDashboard/handler": "65573d36508369ac0ba7cf124917977e1a537e2b660ec24109591a3edbff8744",
+        "CustomerDashboard/mainContentRef": "0d328d3f868386b696fbc9a688b37215e039f3ba8f44efaadf976fe27bdfede9",
+        "CustomerDashboard/facturasEndpoint": "810a05c16bba4758f52544ecef8e71ed24963e67ab1cacc5c60a0c7bf95837fc",
+        "CustomerDashboard/facturasEndpoint/params": "77d405a7c0ff963f1b1601c73eef813707a8316201f26940f2611c1afd1f1eb9",
+        "CustomerDashboard/facturas": "370517c5d5ffd95781759797cf84885ca33b1574bf2f7c4f9774cb34a6aaefa2",
+        "CustomerDashboard/facturas/processedFacturas": "1944880e1fc6418ac42a68d051bf5fe44fa3c16caa15b939ad6dab9e40095edd",
+        "CustomerDashboard/facturas/processedFacturas/fCopy": "7c0d60ba5d760de81340ecd78ac0f9957198583457655c7d040c66079ca3c102",
+        "CustomerDashboard/cargarPerfilCompleto": "a16d3f15ea12712c5beb5038e5019fc53549021ac7e388059308902ff60e1dd5",
+        "CustomerDashboard/cargarPerfilCompleto/perfil": "e357721dc315aa8ed003746fc2aa268d3305f8613f968d4d67d610b34895dd7c",
+        "CustomerDashboard/cargarPerfilCompleto/hasLegacyPassword": "f66d17b2b3e2cc887d87086329c3a35b741da2f9b5da7ca4ca4667b0883fa2d6",
+        "CustomerDashboard/cargarPerfilCompleto/hasValidEmail": "742aef1619c426a00079e170865c05f73109d7517ca414a943810f3b63f240d7",
+        "CustomerDashboard/cargarPerfilCompleto/hasValidPhone": "48ae7b4ea6af4baa39788f7b4465f17ef02fa09aca4e80cafa76f138001988d4",
+        "CustomerDashboard/cargarPerfilCompleto/needsContactSetup": "17216066769db5466f027441b6731c2f3ace3fded9956ec8deec64895cd84a90",
+        "CustomerDashboard/handleTabChange": "e087b75b592bfbc064ac94be539b6257c5cb18cd3ad40ca712330352f4ee7c0b",
+        "CustomerDashboard/handleTabChange/isMobileOrTablet": "d9649dcbaddea0fc77f08d04428f12c357858de356e55878f676dbbef1eda0f2",
+        "CustomerDashboard/handleTabChange/yOffset": "5ceffb71fb62060ee31c66ac10e28aba8b95ea16bc1c4afda3f7119d5c9d3d80",
+        "CustomerDashboard/handleTabChange/element": "5e881570a52d426f123dacd1d15e13511f1f2bfa8c20f0c3dddfd6bf01043ab2",
+        "CustomerDashboard/handleTabChange/y": "9b72310707b42d94f14ae0669960dd45a92e47bed3573e4c9ad75ed4eb60ecb6",
+        "CustomerDashboard/timer": "a34f6dfc01784c4100fd9d6b85b6859960eb1f6b82642ef8d0625d093158dae8",
+        "CustomerDashboard/handleLogout": "e4429e5bc0df9ad7d2280ce62f2551554df0da6ca26f00c150c1af7a2be198b7",
+        "CustomerDashboard/handleLogoutClick": "46894319c50f1dbe739b3702d72d72545c87e2d0746a43193cc94ac34df10d32",
+        "CustomerDashboard/fetchClients": "aeb7403b8a91f91464fdfce3103d7e81d1c3525d189ad5cea2593aafa8d16376",
+        "CustomerDashboard/fetchClients/res": "d53a83c7eabd7fea77fc494baa49706eb5930405f201df7976dba525a66c5017",
+        "CustomerDashboard/cargarDatosContacto": "736eb91d1be54bef74643be114ed60d10c3a591d04c1272416c0d5014bcba74f",
+        "CustomerDashboard/clientProfile": "ce36c9bc9a06641f97750933ef68ae3586697b460264c55a36a240cf8a2d699b",
+        "CustomerDashboard/clientProfile/now": "d4fb94bb7e2f7d573c016d2112cb98accb1ceb50b5a26b2abf88cf2678a2294b",
+        "CustomerDashboard/clientProfile/hora": "f67e71106c1c03025000c2fc0ee4290db238c28bdb288b38639e7f153ccdff1d",
+        "CustomerDashboard/clientProfile/diaSemana": "ffe613f714c804b43c1c9f87551bc3acc8f40ac56ecf38b3977517058123aefb",
+        "CustomerDashboard/clientProfile/mesActual": "7e9c706248a70da61dc630ebb7f456c49b3ba4817f117d8312af6f7a11e1228d",
+        "CustomerDashboard/clientProfile/añoActual": "8c08b1eba5dde0a0d4223ebdafcbaeeb70c371025d54cec72c21adc9de64f16e",
+        "CustomerDashboard/clientProfile/diaDelMes": "b79f1cddadee0082eb205434410431abc58dab2eea3a9008fa1412ede30b54d2",
+        "CustomerDashboard/clientProfile/greeting": "a144036f91adc7d85cd932115781b47023a2e283b913090b32874a4a494c4ffb",
+        "CustomerDashboard/clientProfile/greetingContext": "61c3cc8079d1076d407627c252eeaf4cbc990dffc89c631c525220c5ae2f577d",
+        "CustomerDashboard/clientProfile/diasSemana": "5dd68bdc319c5d46bb652fb47ce01b5c62abeae32e789adcc55f20840fe42109",
+        "CustomerDashboard/clientProfile/esFinDeSemana": "99e96b2d4f51d80a6b9f8ed77a630ebe5c208e0d15140ce116dcaa8001abf9b9",
+        "CustomerDashboard/clientProfile/facturasValidas": "b9a0b373743f43f2ad718f5446a9b36e1d3f73bbf5cc421905d931243544fd45",
+        "CustomerDashboard/clientProfile/facturasOrdenadas": "97825758c941452340cabe1f68b260babbde9448a6df1b036b2d0e4bab78f575",
+        "CustomerDashboard/clientProfile/facturasOrdenadas/dateA": "be527d68ce49c1aa333958b1edf3563d2d411253d360fbb4e7a387d174378a69",
+        "CustomerDashboard/clientProfile/facturasOrdenadas/dateB": "4105d34c80173f8dc8b6517dcd679482257e72fe02a19426648b444be51a8bdd",
+        "CustomerDashboard/clientProfile/facturasRecientes": "bec1e51e445e7257cbfec9cefff49fc8beaa35f49fd9c0e3cd7e3768bbdb63a4",
+        "CustomerDashboard/clientProfile/facturasRecientes/dateA": "be527d68ce49c1aa333958b1edf3563d2d411253d360fbb4e7a387d174378a69",
+        "CustomerDashboard/clientProfile/facturasRecientes/dateB": "4105d34c80173f8dc8b6517dcd679482257e72fe02a19426648b444be51a8bdd",
+        "CustomerDashboard/clientProfile/totalFacturado": "38bf059fd15a0d5bbfedd695d8cac7b11d23f661987b3008f60ab9aa5d780620",
+        "CustomerDashboard/clientProfile/totalFacturas": "ac6d03126f16b906fa494c1b3bbfe55714a62c6bec36077286a37dd9099e2e4c",
+        "CustomerDashboard/clientProfile/avgPorFactura": "5286e412fbf987c2b7f5f18bee1b9eee54fe96cfa58ead2c5c9e409a9491730f",
+        "CustomerDashboard/clientProfile/primeraFactura": "640c0327f7573822069f6ca0d0aeaec7aac94dea9657bd7e4b43d44ee340581f",
+        "CustomerDashboard/clientProfile/ultimaFactura": "4d817007bce74ebd86efeaf154482b4b9ee8594e46434a0dcaea022fd843c53b",
+        "CustomerDashboard/clientProfile/diasComoCliente": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "CustomerDashboard/clientProfile/diasDesdeUltimaCompra": "285d66a5ae7fc68e664a2f17f7c7866d0dbc89d5edc9b23dfa9d7614c7b3c7bc",
+        "CustomerDashboard/clientProfile/parts": "52061a4cdcb759dd05aa3835c4c5bf9eb8152f179b3a8af949d47ef7ad8513f5",
+        "CustomerDashboard/clientProfile/fechaPrimera": "40563e72e1fbfa828d6b520c4a4ecb66d0a08079238f2178b95b8fcad388b1d5",
+        "CustomerDashboard/clientProfile/fechaUltima": "40563e72e1fbfa828d6b520c4a4ecb66d0a08079238f2178b95b8fcad388b1d5",
+        "CustomerDashboard/clientProfile/facturasPorMes": "07e112ee440cc7aa6ed90874a6be032581ca440368a9ea74ceb28b4324c98b02",
+        "CustomerDashboard/clientProfile/importesPorMes": "07e112ee440cc7aa6ed90874a6be032581ca440368a9ea74ceb28b4324c98b02",
+        "CustomerDashboard/clientProfile/facturasPorDiaSemana": "533310310917a054339821913149bccd87204102ce073b4bdfb8247c40688ac8",
+        "CustomerDashboard/clientProfile/facturasPorHora": "07e112ee440cc7aa6ed90874a6be032581ca440368a9ea74ceb28b4324c98b02",
+        "CustomerDashboard/clientProfile/mes": "400e7180b47e5a9336e9e019d699a8df581d148e059e3b1ca7a37f3fa80c686b",
+        "CustomerDashboard/clientProfile/año": "c63ad4a8b12a7b717dd859116979a4e6234a7fabba20636a9887e5afadcce3e8",
+        "CustomerDashboard/clientProfile/key": "9abb5d8a4629b03c1f48feece0ee71107ab358937dcaaf5d42255c6ef220f532",
+        "CustomerDashboard/clientProfile/fecha": "31b512322fe77e08179019dabd7f612f5b0e4dc4bba675f42ef3692cf32899cb",
+        "CustomerDashboard/clientProfile/mesesOrdenados": "05bf8aefe4a27572f616c32e1e4d19be312d997080437088cd09cdcf3eafd9a4",
+        "CustomerDashboard/clientProfile/mejorMes": "58bac13437e65dda422a5520b2729715184c3fdd5da121fd5cd0afe93c7b77f0",
+        "CustomerDashboard/clientProfile/peorMes": "55dbf358871e6feb34262891678af2ce0293c9e1dd8b27605c9aea5ed305a921",
+        "CustomerDashboard/clientProfile/diasFrecuentes": "494c17b43667dd032ff836a244b93100a99cd08fe9e2c697548c0955fa37bc9d",
+        "CustomerDashboard/clientProfile/keyMesActual": "d1439d78eadd541ca5b9ee2c92b185c6d329bcc41b91af47ea50bf301ead53e7",
+        "CustomerDashboard/clientProfile/facturasMes": "7a98f03d7e4e58c518397081d8390a0a5aecd40ad327c82351040bbede57c48f",
+        "CustomerDashboard/clientProfile/importeMes": "04ceaba852727003c80777f5434bad9b94c65969d7187969d1d5d5ea9f6dbbab",
+        "CustomerDashboard/clientProfile/mesActivo": "3e05b3dac2a4dd5ce004dff45236d35983e8332464740413f186eba702cfa258",
+        "CustomerDashboard/clientProfile/mesesConActividad": "bd411154e1d28b9ce73b0ca30ca86927d9986742c17971c7f9d700e5a85458b8",
+        "CustomerDashboard/clientProfile/avgMensual": "c9b6485be4f046b13fcc2f0a72e4503c47af8ae71a87a51276db3269ef4f3ac1",
+        "CustomerDashboard/clientProfile/keyMesAnterior": "d8983f17b2803c60220d637d020b7259044975aa1fd66531b8dabc9e22882937",
+        "CustomerDashboard/clientProfile/importeMesAnterior": "b7fc8849765705aa2709e87a097e973b7a15b019565504791a6fa0191071ba32",
+        "CustomerDashboard/clientProfile/tendencia": "e06f541a2579babdf8142c1382edd6419e8d2481214930a53a997f048f462c02",
+        "CustomerDashboard/clientProfile/porcentajeCambio": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "CustomerDashboard/clientProfile/velocidadCrecimiento": "1f95a7a1041e7215d1ab52eba3e5dd2558bc6bac2d41a40a01188213b0a2a776",
+        "CustomerDashboard/clientProfile/mesesArray": "41bdeb8bd54d54add96d8c38afe8083c911984d3985fe6f16ec0b120758ee8b0",
+        "CustomerDashboard/clientProfile/ultimos3": "d0b4272fc2d8bc380e1f7b7afe3311b5a714b893ef24c94ecb31935c2408191f",
+        "CustomerDashboard/clientProfile/anteriores3": "008d22caa6eda10829858620472ca3ce89a361d04f5061a732e94860cf277e61",
+        "CustomerDashboard/clientProfile/cambioTrimestral": "cc32064134d5721868350350372f1371fc5a5fe92b80422705d6a1d8bff3f20a",
+        "CustomerDashboard/clientProfile/rachaActiva": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "CustomerDashboard/clientProfile/i": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "CustomerDashboard/clientProfile/checkMes": "ebcd6525ddecee4c656b0d0316e5a091a9829e162156e4eef9695cfaac6734a8",
+        "CustomerDashboard/clientProfile/checkAño": "932f09a743cb70518d1ed7a1b9d58332693adf226a2441d6d491df8b82901caf",
+        "CustomerDashboard/clientProfile/frecuenciaCompra": "285d66a5ae7fc68e664a2f17f7c7866d0dbc89d5edc9b23dfa9d7614c7b3c7bc",
+        "CustomerDashboard/clientProfile/estacionalidad": "285d66a5ae7fc68e664a2f17f7c7866d0dbc89d5edc9b23dfa9d7614c7b3c7bc",
+        "CustomerDashboard/clientProfile/importes": "b8279b4525d440a0d53538812cc76fe6831461f3ec5595bfafeb76728458da01",
+        "CustomerDashboard/clientProfile/maxImporte": "e2adff19be289c0472cc38b01f65f736722db3ce85fad175d313208a299a2f7e",
+        "CustomerDashboard/clientProfile/minImporte": "6f9f6cb273b9ae560db4f5552135efb47f5a2afe597e3b3af2555dd87e1d340f",
+        "CustomerDashboard/clientProfile/variacion": "49ca7411e28095f91a6db056b118f987f27c7f6ecfd1ace0494b5dc63d5b7c6f",
+        "CustomerDashboard/clientProfile/tier": "b9938009c8f556561688b26725bc0119f414a3943d9545547f7ef048e1ff64fd",
+        "CustomerDashboard/clientProfile/tierLabel": "6563ab33ed1bce3c1c7af1e0f6c5e1340df5db0dac0c433adeace2c8cac153f1",
+        "CustomerDashboard/clientProfile/tierIcon": "8124182f13995f859177a84fcb2cc5903bec998c9f12c09127fcc35b6a53c3da",
+        "CustomerDashboard/clientProfile/tierGradient": "a523250a9e977d57a6916ffda67114bef507b18d7aa362f3e13a8ab21e34179c",
+        "CustomerDashboard/clientProfile/accentColor": "a3ad850bfb64700759c40ff1e122a7a4592ccf7b454e341be2b35eaf7a649b5e",
+        "CustomerDashboard/clientProfile/secondaryColor": "651589edd0db1957c0af830c5ec90b76c24654b0bd92e6204ff3b83fdedbd661",
+        "CustomerDashboard/clientProfile/tierScore": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "CustomerDashboard/clientProfile/proximaCompraEstimada": "285d66a5ae7fc68e664a2f17f7c7866d0dbc89d5edc9b23dfa9d7614c7b3c7bc",
+        "CustomerDashboard/clientProfile/diasParaProxima": "6d25a761111ebc2568c2bb93309aeb0a731b8ff5891d4cb5348b7cda115022bb",
+        "CustomerDashboard/clientProfile/fechaProxima": "2554c463be5bbf52afd57c4e593dc563b071501725a0eeefcbcdd36da5941429",
+        "CustomerDashboard/clientProfile/importeProximoMes": "285d66a5ae7fc68e664a2f17f7c7866d0dbc89d5edc9b23dfa9d7614c7b3c7bc",
+        "CustomerDashboard/clientProfile/factor": "d8f0a22bf54b2e2fd68a9594d49ee2f5bcce816a4287e505b2330da10da57609",
+        "CustomerDashboard/clientProfile/riesgoInactividad": "fbbd31880dd9f4abce19818cf6727e0496e10f5f63a395140be8479f404ee6c9",
+        "CustomerDashboard/clientProfile/potencialCrecimiento": "4cfc935a905b80e9c44bc9812b6915db363bf45f807cdf5901ff3d1ff626aad1",
+        "CustomerDashboard/clientProfile/insights": "cfbd33be47e5448e5803f904f0d3d3331b2c1ac5e1ffb6261015649e91f856a7",
+        "CustomerDashboard/clientProfile/quickActions": "cfbd33be47e5448e5803f904f0d3d3331b2c1ac5e1ffb6261015649e91f856a7",
+        "CustomerDashboard/clientProfile/achieved": "cfbd33be47e5448e5803f904f0d3d3331b2c1ac5e1ffb6261015649e91f856a7",
+        "CustomerDashboard/clientProfile/nextMilestone": "2c6ff9b999bbf8f3fa4cc1996118bb0feddeef9efa75a2dfc45c5ebbef38ab01",
+        "CustomerDashboard/clientProfile/highlightedMetrics": "cfbd33be47e5448e5803f904f0d3d3331b2c1ac5e1ffb6261015649e91f856a7",
+        "CustomerDashboard/clientProfile/nombreMes": "6db61c91add4c17481bad0a91a8a3fbde3a931de1fbb3f9545b9c4da4678fbe7",
+        "CustomerDashboard/clientInsights": "f6b9850bf27e068f72f9a6ec58f2688579987a3eec33a99978e0a4706238c83c",
+        "CustomerDashboard/handleShareInvoice": "bd794bbb517dc66bafe9d3a6d2e01e71018c248042e6d0d93c5b2340ad14312f",
+        "CustomerDashboard/handleShareSubmit/phoneClean": "07ae151974c3a6ddc0f317e5cae4e3f0aa73465809b9a30148eca2c1686baf94",
+        "CustomerDashboard/handleShareSubmit/whatsappUrl": "f0f357c4f7def4c0088631f5e60de924f3ef0da5b8d7ac9bfa9ad895ceff429f",
+        "CustomerDashboard/handleShareSubmit/emailRegex": "3dc4e20f2ec1dc390a24c0ba6351f8bc8155068dffdf0429fccabfc4b0914aec",
+        "CustomerDashboard/handleShareSubmit/asunto": "fed60b65d4e7a989147a1dcadba6f67e14906f277300570be8d41889b97718dc",
+        "CustomerDashboard/handleShareSubmit/cuerpo": "371fdfd9005e5a99c355c0190f6c6331235333e9e537fe06577218189459ccab",
+        "CustomerDashboard/handleShareSubmit/mailtoUrl": "260a929193f2ac8b8549e7dd3183fc66072b7c85fc2f8d1cb1301dcb56a8df4e",
+        "CustomerDashboard/guardarDatosContacto": "9213b4731f88d5ce3a171727ae7fd5136d8b4d5690c6f2a262c506e7f2b67068",
+        "CustomerDashboard/guardarDatosContacto/codigoCliente": "fd98026f62fed5d04789a7f30bef4d5d3433efd45fc0f4a504dfceff18b0c5c7",
+        "CustomerDashboard/enviarFacturaPorEmail": "103b2d68e35f4ec012e940844852520504c6de85093ec405cf50d1597d533c15",
+        "CustomerDashboard/enviarFacturaPorEmail/toastId": "cb093db7ab23db207908a392f528b2994e60d3f4cf64650f897c1c86ac15508f",
+        "CustomerDashboard/generatePdfBlob": "46a60f8315a41257cd2ae2b3e3c0a2ed496cfd0f83217d58b8ba0c4f67a9e18f",
+        "CustomerDashboard/generatePdfBlob/cacheKey": "2722ff3ebdbdbb89a8ee78e8b7f3e1fbb31b9c7b673f1a7f0b4b89d550f9ec6e",
+        "CustomerDashboard/generatePdfBlob/response": "4449a015b42b4027b540f752dca536ed50165eca1ccb91811fd940ea281ccff8",
+        "CustomerDashboard/generatePdfBlob/blob": "e81719660fff28b5963e64806d7f94d4df54727e1966874451235e91f3c1da8f",
+        "CustomerDashboard/generatePdfBlob/blobUrl": "4e9b9ab77c8016c4b3c8c624aa340bb075b9257c3a6fd5691cb5b37e1639339d",
+        "CustomerDashboard/generatePdfBlob/entries": "301ac1115476053218e7e50c65dd346f663ba7451b6904bb2af8172a3f01730e",
+        "CustomerDashboard/generatePdfBlob/errorMsg": "8c0876273250611526691d879a9cb17d23eac153f9126508d65b50eae3d9ebe7",
+        "CustomerDashboard/handlePreviewPdf": "3ddfdac2adad7e1bcb820826d54a375576fb23ec17b52ca8bf20e3fc51d83912",
+        "CustomerDashboard/handleDownloadInvoice/blobUrl": "bfa8ca1f061be2baace65dd0cf4243a30f19b910962f26962be56dbd7a973e73",
+        "CustomerDashboard/handleDownloadInvoice/link": "8b72bef58f1b8e90248e01e36fd7466b4f5b5c225da489f33c92f163b0d02b19",
+        "CustomerDashboard/handleDownloadInvoice/fechaFormateada": "b89fddf0c2a898a0135120a689ca9eabc0655455f46fa9526c5a2e2301748844",
+        "CustomerDashboard/handleDownloadInvoice/nombreArchivo": "0afa3e76459142e944ee821f3729d532e5841c9c43a57e0ec25f87c058882967",
+        "CustomerDashboard/filteredOrders": "39518de5a1ea9d89a9391ded1087abf983719a7253a77aee4539b1ce5b4808df",
+        "CustomerDashboard/filteredOrders/searchLower": "6587a7eda362973f4500d860a92259be6c689149d8e7fe47d7014c332ae9f2c8",
+        "CustomerDashboard/filteredOrders/matchesSearch": "1dde7a679f0cf94bef81adacaee355b7bdea80deccb51e02aed1b6c89ced7b27",
+        "CustomerDashboard/filteredOrders/matchesStatus": "4719949fec4c9ac6492d1d6dc4a2fa0e7fde5305ba83aec0efdd693e1ddd954d",
+        "CustomerDashboard/filteredFacturas": "776d79398f464637d6b65578481017a00f033bae0d66be99846fa5ebda88d49f",
+        "CustomerDashboard/filteredFacturas/searchLower": "6587a7eda362973f4500d860a92259be6c689149d8e7fe47d7014c332ae9f2c8",
+        "CustomerDashboard/filteredFacturas/matchesSearch": "ebbae0b475151329696f8ad4863b820f9e62c0fd5027ebb1c21bc92488d3073b",
+        "CustomerDashboard/filteredFacturas/matchesMonth": "fddd010aaa0d971fd059fd45aeae476350ea6cf6c5a9b7e2016b164c44e35bfd",
+        "CustomerDashboard/filteredFacturas/dateYear": "acec835ef050d9bcf64cce6db4a75917809bd6bea92de617c3886acc4a48afb8",
+        "CustomerDashboard/filteredFacturas/matchesYear": "2acb253aad7110d6c44349fbdc27d8f2319da8f2ba444f1a85af52d0ff41d9a9",
+        "CustomerDashboard/filteredFacturas/matchesDateRange": "0a87113ba0aa179e8dfc43d0b001762f2c65b1fd8c4599d3858588eded734696",
+        "CustomerDashboard/filteredFacturas/facturaDate": "1924a548bb31afa1551973856cc8e61e64cffdf9e1254ca8ceda170fc13f4cfe",
+        "CustomerDashboard/filteredFacturas/desde": "5c60936d452cac1f7697ca9c95a1e33307c340b6dac73a66f47049c67df95a00",
+        "CustomerDashboard/filteredFacturas/hasta": "9a6bc3864f70542414662ffc91bbab0aab8e1b800f62c90de4e718f309664583",
+        "CustomerDashboard/totalFacturasCountDashboard": "feeeabb08b101408b8d60a7feea7c965c1bdb7301a9cdd7345af76cd471adee0",
+        "CustomerDashboard/totalFacturadoDashboard": "5f9d39e10fef11417703ae2a0a147a032612e522cdb853106f4459843f6ad8de",
+        "CustomerDashboard/totalFacturasCount": "feeeabb08b101408b8d60a7feea7c965c1bdb7301a9cdd7345af76cd471adee0",
+        "CustomerDashboard/totalFacturado": "5f9d39e10fef11417703ae2a0a147a032612e522cdb853106f4459843f6ad8de",
+        "CustomerDashboard/totalPages": "9e8e7513415b1b9ceeae84f1927f5037bad1f1c27072b02fc848546175e1b5a2",
+        "CustomerDashboard/startIndex": "49d69d141f3b483a2dc9f389641f838c14651f5972f3b877a9661f2d0485585e",
+        "CustomerDashboard/endIndex": "f5e44317ad2c504bf41e9a963cffe2479dca48c25a1711607224aa395686c1a6",
+        "CustomerDashboard/paginatedFacturas": "2e00245b4be344a828d8db3b3be46f60bae4eb72fb02d25903d5a75077177dd7",
+        "CustomerDashboard/emailCandidato": "46f8c59edc5c03bc5ccea77b03f91adce505353cc64875eb8637fa17d0408d17",
+        "CustomerDashboard/esEmailValido": "2bc60d2bfe9241c2012564063a32fa582b17c86ed419f3d17d74d5cf5876f5d3",
+        "CustomerDashboard/formatted": "9a2f39dd52819d26fa8cadea0d6550e4fa58db835221b90be8917a0fc6feb986",
+        "CustomerDashboard/IconComponent": "7421e1f5da9db169187df9b0a954eac2e59ac6ed08a6f4f4ccc9a9501ed81552",
+        "CustomerDashboard/isActive": "b17dc6fa9556058281af3f49d5a420d43dd1a8de77761570f017856f4517e557",
+        "CustomerDashboard/badgeCount": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "CustomerDashboard/showBadge": "11a522386f45e4e63a2f89ef8b1bfde2bc7490d6e73c320bbf84542876e416bc",
+        "CustomerDashboard/isPaid": "dfbe891d1b9e3178ed1f206beb84356b68784218d87cf935d9adb14e98716164",
+        "CustomerDashboard/StatusIcon": "e36914960d9427c84b99317f6d7cf5a1b1304a9aa6349d4978b4d1738e6b7c41",
+        "CustomerDashboard/statusColor": "f9c423c03288940c9b6d28bf8e20184495a35c395f5d23db27a9894532cd1ec9",
+        "CustomerDashboard/statusBg": "008c57a756e03720ed121db69f4c4d1ccb794a6ebd9ab0b83afef757d9ee2c3b",
+        "CustomerDashboard/q": "8b4e082d7feb82f2cfdd0ef91b85f7cc7b7d6606322e99a4c59d6041a1b95cee",
+        "CustomerDashboard/isPagada": "d5b1eae92fda514db9d20ca569e839ff48c44f9e086465d90f533b12cfd96eb0",
+        "CustomerDashboard/datosAGuardar": "07e112ee440cc7aa6ed90874a6be032581ca440368a9ea74ceb28b4324c98b02",
+        "CustomerDashboard/emailTrimmed": "2977922859b65b47487838d2dad28768697886f79f2caec1206a2253daabdc62",
+        "CustomerDashboard/phoneTrimmed": "d1286c1f444f09ec274cc4aabc57e1e3e79d3fcbc012c9f12eb26d8e40f08912",
+        "CustomerDashboard/emailRegex": "3dc4e20f2ec1dc390a24c0ba6351f8bc8155068dffdf0429fccabfc4b0914aec",
+        "CustomerDashboard/phoneClean": "e7ed8f6665ca943d82e035b8219de1298d9463ff0e86fa274f187b6bb7d4f6d7",
+        "CustomerDashboard/phone": "45c0ba7581a7e39800dddbb1515698625cc57cd44de180c2915924ee1b8274eb",
+        "CustomerDashboard/mensaje": "d8bc0a54cf3ab46021f066c01504ce9c50b7cea9febaaf6a3ef7ea196f34d05c",
+        "CustomerDashboard/url": "7568e27a01ab8d55ea687010aad9f9cda66c7b790bec8cfe9e200b020ca0bacc"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/components/customer/password-change-form.tsx",
+      "sha256": "09c3c3fab022607ce9f967829cb08df52265034d3484dd82c576405b4ffd2289",
+      "functions": {
+        "PasswordChangeForm": "2afd1693c5234fc01bf630ba98dd890033ac3d9426aec53da299b22cce28132e",
+        "checkPasswordChangeCooldown": "8ba15cd43f4cd467a9900e8ecff370794b05d1abd3b9c0d2f88d29a6b73731e4",
+        "requestVerificationCode": "7d52ba16215e33e2685aad56c8d0a3bbcf10fbce3a3b3b714140d07cfb0c4a49",
+        "verifyAndChangePassword": "7fc53e9d0af6343194b7005398ea82e99933fcb2c7d966169c9dd09f4a38e4d4",
+        "handleClose": "50979b857527f6082b00a4af9eb9ab59f854c5a57a44f3b8d2c0515e5bf43220"
+      },
+      "events": {
+        "onClick": {
+          "1aeaf9696f39339862c9a63930b4f472084c189849d6ce5ca1bb15e92a209713": 6,
+          "77c56eb07592cb0bd3a6f3bee5d63e750647a12e39ffbcee9533d46fcd7d903a": 1,
+          "5cb6bc7fde1c0a10421ec5179e06ed120a7cb823d63d9afd8626385e652d7547": 1,
+          "e0f62f73571244aec8d018c6386c662a27f8077e0e4a40cb0d3c0067f357ee74": 1,
+          "5b52a5456279ef98466ba7b4553b3da93d02e5d937e3a314d876f7f7948fe79e": 1,
+          "58a4a9d638bf54db0db04eb3eae639c9e42770fef418872d412811e58302258f": 1
+        },
+        "onChange": {
+          "fb414e417703a5b2a14576168cb0a2103cca412a585a42064afbd254c001f681": 1,
+          "6fc464cc32ab9315ea2878460489872f078bb01c9aa7cf8f2d486f9eb740b3dd": 1,
+          "681ab7b246f688e5479e3222bd99c8392661163a5fa8a117aea932832d416dfa": 1
+        }
+      },
+      "calculations": {
+        "PasswordChangeForm/checkPasswordChangeCooldown": "8ba15cd43f4cd467a9900e8ecff370794b05d1abd3b9c0d2f88d29a6b73731e4",
+        "PasswordChangeForm/checkPasswordChangeCooldown/codigoCliente": "5d30038ca60223626eef1f572ab8876c4cfde24aca05d1000db3b83c4f6e92db",
+        "PasswordChangeForm/checkPasswordChangeCooldown/response": "53fed9228ea5778c59ac42836250e92a5d7af0f26a37658a1d82698cbbdc07db",
+        "PasswordChangeForm/checkPasswordChangeCooldown/data": "911a56ee91f33025ab07ee2d66025822ef0482f2db96e837fd37369d277234b8",
+        "PasswordChangeForm/requestVerificationCode": "7d52ba16215e33e2685aad56c8d0a3bbcf10fbce3a3b3b714140d07cfb0c4a49",
+        "PasswordChangeForm/requestVerificationCode/codigoCliente": "5d30038ca60223626eef1f572ab8876c4cfde24aca05d1000db3b83c4f6e92db",
+        "PasswordChangeForm/requestVerificationCode/response": "c0699f88eede27916253488bf15b03f3cc77077b7f89d35b2e7c4dd5d368f201",
+        "PasswordChangeForm/requestVerificationCode/data": "911a56ee91f33025ab07ee2d66025822ef0482f2db96e837fd37369d277234b8",
+        "PasswordChangeForm/verifyAndChangePassword": "7fc53e9d0af6343194b7005398ea82e99933fcb2c7d966169c9dd09f4a38e4d4",
+        "PasswordChangeForm/verifyAndChangePassword/codigoCliente": "5d30038ca60223626eef1f572ab8876c4cfde24aca05d1000db3b83c4f6e92db",
+        "PasswordChangeForm/verifyAndChangePassword/response": "6ad27c12d3a91e8bf7d31a99dd6c3a8a7bfdf5e92d53139c812cdff9e727a3b6",
+        "PasswordChangeForm/verifyAndChangePassword/data": "911a56ee91f33025ab07ee2d66025822ef0482f2db96e837fd37369d277234b8",
+        "PasswordChangeForm/strength": "b141dc5b3dc6eec5a376748d21ab27e087788da8da4a685db788d07834c1a087",
+        "PasswordChangeForm/feedback": "61c3cc8079d1076d407627c252eeaf4cbc990dffc89c631c525220c5ae2f577d",
+        "PasswordChangeForm/handleClose": "50979b857527f6082b00a4af9eb9ab59f854c5a57a44f3b8d2c0515e5bf43220"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/components/customer/libro-iva-modal.tsx",
+      "sha256": "f65e5141d4e1c89dbffc3b4742ce65c4cb06ac2d0d9fe1d30813783a09ac4c02",
+      "functions": {
+        "LibroIvaModal": "dbc21f1c40522d222a85e513064557265803f28b27abbbf0ab0798e6af64dd1c",
+        "handleGenerate": "8ab918db890a76057ee6bd4b59516a2959c5501cc26f8db7ed218bfe4bd74057",
+        "handleSendEmail": "7fe9a8022ff38692f09deb2e015525c69bb631e73acfa30a7fd0d4f971576e05",
+        "handleSendWhatsApp": "24de27b40d3c039113cbc7c49e1fdad77207c2029c5001bb23cd7545b8047c81"
+      },
+      "events": {
+        "onClick": {
+          "f32df2fec8b6af6d033b4fc1a99f037cff57a4c5b58aea23df6a88306cc27e9c": 3,
+          "95f00880f452edd81ccd57bbfe3c0b5f2829e9a039a0a2bd871c8da4ebfb63a4": 1,
+          "defdbc48a90ce9938e6e438c937bb8fd6b9645de3c59397c9f11e4bfe5a055b9": 1,
+          "457a51c8e3f0871aa85bbdbbd854570fae63c931d77e93e5d6eef754db3150a7": 1,
+          "4dec8ce73ee0cd8215078dd6b43a9e9122e68e642b860426e8ce828c6d6088a6": 1,
+          "47119e30efa50a15c5cdf0d96c8b22ae623a1b56a615beef26f07b273515927e": 1,
+          "a5aca53af376efbee25599e1873da6d3403777ba918d7412543f7245a857c6ba": 1
+        },
+        "onChange": {
+          "6eb7ce13470f870e68ac9f1b04b3ad21c7a14bd19363634a7547a740515a2cf0": 1,
+          "e8f844f6b49fd164acd7acdddd9203e9832ce79579ea6ef6630768701427ae7e": 1,
+          "ba6fa05d3ad2b26f7cb2606d201cac19f209f097032c49202e60fbeb31c38c37": 1
+        }
+      },
+      "calculations": {
+        "LibroIvaModal/currentYear": "36e430c179312661ca824ce0911c2a0fcc7d74084aadfc2c6c88ce41d479db84",
+        "LibroIvaModal/years": "3ee0facdc9221b6b05ea3f87c6c718e02ef3e2ff7025cc6a9e9ccab80b7af424",
+        "LibroIvaModal/handleGenerate": "8ab918db890a76057ee6bd4b59516a2959c5501cc26f8db7ed218bfe4bd74057",
+        "LibroIvaModal/handleGenerate/response": "cfec84cf8f5f6f0d051fb0b36d245a4cf47e918ad0067da02e31f7d4346cfb1f",
+        "LibroIvaModal/handleGenerate/text": "6de9ee464c88d642472f8db02ad86c187e8218d3a2875d412439d5d998c87d1e",
+        "LibroIvaModal/handleGenerate/errorData": "f60b5ae38d56b4e3c04be58b6bfa0138f511c882635504a288d4628534ba38fd",
+        "LibroIvaModal/handleGenerate/blob": "8c411246bbd419ad507dea6760962399293d07cfab69f2783497161facc29758",
+        "LibroIvaModal/handleGenerate/url": "46b8bf72f8384374a6a6b0f5e1efb01b4f7671654ae4bdda81c25a4f03dab580",
+        "LibroIvaModal/handleGenerate/link": "8b72bef58f1b8e90248e01e36fd7466b4f5b5c225da489f33c92f163b0d02b19",
+        "LibroIvaModal/handleGenerate/errorMessage": "b3fe1a6cf743835fc6b3c13f10f6e86123945c8e7294b583cd2d8998a824a77f",
+        "LibroIvaModal/handleSendEmail": "7fe9a8022ff38692f09deb2e015525c69bb631e73acfa30a7fd0d4f971576e05",
+        "LibroIvaModal/handleSendEmail/response": "87da8778dd5558ebf9f6f1f5e671b643d1b263aa52a208b9f00ef16aca3a7964",
+        "LibroIvaModal/handleSendEmail/errorMessage": "b3fe1a6cf743835fc6b3c13f10f6e86123945c8e7294b583cd2d8998a824a77f",
+        "LibroIvaModal/handleSendWhatsApp/response": "cfec84cf8f5f6f0d051fb0b36d245a4cf47e918ad0067da02e31f7d4346cfb1f",
+        "LibroIvaModal/handleSendWhatsApp/blob": "8c411246bbd419ad507dea6760962399293d07cfab69f2783497161facc29758",
+        "LibroIvaModal/handleSendWhatsApp/file": "1fed0b83af6b88ecf6a90ab94cde92c402247a5299bbb106a6cc7f30229238c4",
+        "LibroIvaModal/handleSendWhatsApp/url": "46b8bf72f8384374a6a6b0f5e1efb01b4f7671654ae4bdda81c25a4f03dab580",
+        "LibroIvaModal/handleSendWhatsApp/link": "8b72bef58f1b8e90248e01e36fd7466b4f5b5c225da489f33c92f163b0d02b19",
+        "LibroIvaModal/handleSendWhatsApp/phone": "ea2fbb02b60615bf3396e848e84b7255641cac12905c560508b8b1759b61ede7",
+        "LibroIvaModal/handleSendWhatsApp/mensaje": "33e69319f7fef0db24ca02163967f6a1d92c65a05d284ae563b3fffcf190acf7",
+        "LibroIvaModal/handleSendWhatsApp/whatsappUrl": "61c3cc8079d1076d407627c252eeaf4cbc990dffc89c631c525220c5ae2f577d",
+        "LibroIvaModal/handleSendWhatsApp/errorMessage": "b3fe1a6cf743835fc6b3c13f10f6e86123945c8e7294b583cd2d8998a824a77f"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/components/panamar/PanamarDashboard.tsx",
+      "sha256": "c5e9ebb5a3379e54aea9c0e232e686c822e62b3b9a633c738a49cc7c6379d840",
+      "functions": {
+        "BulkProgressOverlay": "796ffefd78aacf60e6af6720ddefc7ec49075f5b588b0cba57250fc65b5586c9",
+        "PanamarDashboard": "c44b877d770c8e4a530f665b44e2409bdbf886a06a8765478a9765f0679fa31e",
+        "handler": "65573d36508369ac0ba7cf124917977e1a537e2b660ec24109591a3edbff8744",
+        "handleFilterChange": "719f8169ed83105dae92ad0521b1533385a38e9ebf1830fc321be46967a4e887",
+        "toggleMonth": "d3e2ad51d1a87ae340e61511a4a99185f58b6d1ef27c7c158d7c94125c48163a",
+        "clearMonths": "142aa211314c170f85c199a72162ff90be62139b55e47bc7afe98ebc1f529974",
+        "getDocKey": "284d74562e8f586931acd809c60c191bcc412c5c762036e72df55dd2f51b7793",
+        "getDocRef": "d6d030dd5d10ed0f082b73dcc97f8eeed8fed53e6f393663d58c912384785385",
+        "getDocPath": "3673ea226cd32c4c57ff13e5a5c72e532e68359e66ef2d5464c2a7c684d1922a",
+        "getInvoicePath": "5fd3c9db6259c7536970a208c5ed06ed5e4e626b2afb178376038e0e060bce76",
+        "handleDownload": "b0f5781a3bcdffd59429d8e250e41fb1884ed31ed8b2a390b80ac942d1804838",
+        "handlePreview": "feec8965597357451094933b3d579e6679365d5b802b7e26466205df091aa3a6",
+        "closePreview": "44c1baeab86d3b490355638e5162e54d4c1ca27ea54cebb8e4d86ef6c8ef2e23",
+        "openShare": "369804e2d2429dac6073dd12c7ecf6f9209d19b35f9377bf83936c85222a741e",
+        "handleWhatsApp": "82e250022771b72a96e15f6495d46229618127314d372f63f2d89a0f1d649e72",
+        "openEmailModal": "f769bfc0d1c28ae5188ae5c6690d482679e73d1e6f8daf002e048b72ce56edcf",
+        "handleSendEmail": "2a2807cfe422e4d9791a72df8822ebbc8d455489bf7e45cce0bdf907ea0ef48a",
+        "handleLogout": "2ead69bfe8e88d5304eecf2f4fc3abef2926005ec7b16f6a22f4f2d42619e8ad",
+        "doSingleDownloadWithRetry": "c2f275e3cccc746a33e0ef9e0818a36d1edec311b8052e54eeee7491a79ebd7b",
+        "processDownloadQueue": "bb0bd0936939944c42d6aa6cd908ad75ddd83b840caee501fe90f8410bd59cad",
+        "triggerChunkDownload": "13d9fbc0c37024846b82d4e1b3f588c2007e305c4904c73e6269052620c96a2d",
+        "checkBulkStatus": "1f694be0f77f187e7d2830e872a1252f277174e5d30d38dbe94f8a50a87b9c4a",
+        "handleBulkDownloadInit": "eba49708a4abc0c3bd68ff5175e9a0ede21c92a6bd8f58b4c0b475a7341e9469",
+        "cancelBulkTask": "fee2a59059a5d76b9a3a5f034445542b0f2c62cb4f4e739f80d8756eecc2d50c"
+      },
+      "events": {
+        "onClick": {
+          "0b14e8e8e6f3bce3cf5c4c2f5a880e3a957f3e14484403faafd5d29ed568a02c": 1,
+          "c5259995991298200120da7978c0d53c0a083dc2bc9d6be5b0bcfcaf12073957": 1,
+          "eacb28055baa16d61d736252139da2ab07bddfa20336b768e3225c3a0568a07c": 1,
+          "5bdc05c0521145700435bf84bb2ce5143771233e2683b0e87f5c8c2dd02b22a1": 1,
+          "9dae060a27f833caaa44efd6a0f0d6b1b3dd5294805eb507e24b6e79bb396631": 1,
+          "4d0e4adc90bb8b89d20c1daf9c7af404944620b2a6e2b622493cdb004d71a036": 1,
+          "77c56eb07592cb0bd3a6f3bee5d63e750647a12e39ffbcee9533d46fcd7d903a": 2,
+          "a7587a85a369ac6ea1bd44a1b6200770f7d0a2c7a0a42c8be53f3034594ff764": 1,
+          "edf613764e67525e675ddbe2fbc9f85ee62b9e2f85867a06cebbecf94cac510c": 1,
+          "676c3634b1fdc599e994d862ec8c2f554cb7287941beaf38437cee14a53dbcad": 1,
+          "a11e549fe13916722c5f015852ad38de8fd78bb7e58033b2a29a68c296ca3895": 1,
+          "2916378707f11d76170f7a2e73e5d21401d9416dc1eb5705ebf2f82619c47a61": 1,
+          "2871c16f0c48b58129e8a57b2842f764a2e512bac0a03ae7fb65d9dd31a6c443": 2,
+          "b2bb64c16c36a55c67d3df9fe9cf03702269a99d2cc2684944ba73b991a5b563": 2,
+          "be06552323209c11d05fcb9b0217b9191b494608e3d5ddea44ba0cb5163ff5d2": 2,
+          "d6139d6b8aca557cc2643ab154a1ccd9914f32e561af3002e7acc640a0c9dae8": 2,
+          "5a23d4682030abb1fa8d223fcd8ea5179c684d42d1cebf21c7b95fc25276bc37": 1,
+          "df559e414b7082a559797e77c965520168d102c6ce009b46f3681120ed80554c": 1,
+          "6735fbcfbc68f70256e1c65d816476714d744668bd1f1b6c5a62d9e27d796e68": 1,
+          "c4bea0eed5bff64691bf8edf22fc3c24f54eb0db8063c5a733025192880bbe57": 1,
+          "ced42a57da6f89451a34a77bec125395808728763ba76e7d681e563471e1bb99": 1,
+          "a8f306f2e2248eb58e88ffade23223c3d38a3a7a67d88d1dfe31c7cd14ddc829": 2,
+          "f219927710ec3b5e7a80e79bcd33e77a7d1990734012a8cedd46bb291fc528d9": 1,
+          "6d2e600133a27835ab95f8b7914ed019382143bf7ce934c1b025081b9ca1e396": 2,
+          "aa0ea68287e51cf07c0d30f8c38692bcb3104db46a4f329f20409efc2eb17ad6": 1,
+          "da656e9d9a5e8407f81326c5fbf374df204999bf2eb23766cc7ab2f530b1b403": 2,
+          "772a1885055560cc7d0b9728cccc51369a1dcc530ce4158970094d0bd6e55403": 1,
+          "897853348b15c029f2189b889b35e9ac85d4ca2f339aaa558f520c670818c519": 1,
+          "910bf85e21a9f4cca830c53725041e0abc3e3f2353f5a68e12669b08728e2ea1": 1,
+          "c2d9c6338e43a005cd820206a597ea5831fa19c787b3ca786b51b3398fec477b": 1,
+          "47119e30efa50a15c5cdf0d96c8b22ae623a1b56a615beef26f07b273515927e": 1,
+          "18e114358c5ef467617228f73f6874b2576df7fd31e2624d2df7a6d172cd1f74": 1,
+          "d5dce3455a513cabc425a477010df4ca3136a7b191506e0867fa3941f78a9e8a": 1
+        },
+        "onCancel": {
+          "5bdc05c0521145700435bf84bb2ce5143771233e2683b0e87f5c8c2dd02b22a1": 2
+        },
+        "onChange": {
+          "3a847b2b6d1ec6c22a5ef45123a615e9f5d0e60b45f40de8226577ab6c2a49be": 2,
+          "748eff8ebffdf285a8b5fb5bd427b3fb584313f08625600a349279c4df4012cb": 1,
+          "560bf1be8f60db409e29bf9c8b91d9f4b4d4ede93efa7679ea55ed67521404b9": 1,
+          "e8f844f6b49fd164acd7acdddd9203e9832ce79579ea6ef6630768701427ae7e": 1
+        },
+        "onKeyDown": {
+          "b4ca3717dd3f7371f4fb31b86d3e34ee5c869e2a6efab5ae6d800f4663c73a6e": 1,
+          "f6253bed49f78e4f666dcd97ec247586634f60b7322a3a5385d8ff86f234530c": 1,
+          "9dc1e591ec11b7acd61e27759f8ad935fb9aaf87872abfd9b1dc1c1642173102": 1
+        }
+      },
+      "calculations": {
+        "MESES": "8bea321958629d124ab0d53947e490a1feb3e7fc9ae5ef799653593d2c5f8ac1",
+        "CHUNK_COLORS": "2d5c21492fc24dff354c133f5a416e8135a2a80cdaae1a30338d61156fac1de9",
+        "BulkProgressOverlay/completedChunks": "5a222907a1002642d29a4b869f40bc805c7761793670320ea0a2780674aedc47",
+        "BulkProgressOverlay/activeChunks": "e4f59ce65b13f099c00f1b6e405aa280611dfbc728fda0ba33e79d172a426eba",
+        "BulkProgressOverlay/totalProcessed": "1da43177c9af34f58f2719ff2907c53cda1a5f26e498a420715ca40c4b23c839",
+        "BulkProgressOverlay/totalDocs": "14150c97201284b9c2b611198611490ea9653b1a304da7e8b6d52893340d35dd",
+        "BulkProgressOverlay/pct": "93edd58b0ad54efa74dfd0fe6240b4304cf664590e1346bccb55bd12f2de32b4",
+        "BulkProgressOverlay/chunkPct": "d86b17ac9c8c908e5ffadf3f8ceb470a0a6771daa6bc951a10d85141b6bc30bf",
+        "BulkProgressOverlay/isActive": "e9aebfa69c3fdad031bca76356af878707d3c9df67aec89f9c1279738b4fddc0",
+        "BulkProgressOverlay/isDone": "e8ae72a1620160826796bcaa249a0908448fb199bcb5a6beb5fcb0f271a90853",
+        "PanamarDashboard/clientSearchRef": "f43ed53b495fb61c833561c6f8e584612044d230bedb5a2dda37c78dab622471",
+        "PanamarDashboard/clientDropdownRef": "0d328d3f868386b696fbc9a688b37215e039f3ba8f44efaadf976fe27bdfede9",
+        "PanamarDashboard/handler": "65573d36508369ac0ba7cf124917977e1a537e2b660ec24109591a3edbff8744",
+        "PanamarDashboard/currentMonth": "79244aa4051b6961dfd1410ca120f2df130cb25f8cc7853bb91b526bbc7fa80f",
+        "PanamarDashboard/defaultMeses": "9b66d08d00bf88d954d308ffd181a01becbb275b3dc651ed8e5e22eb4cd3440f",
+        "PanamarDashboard/bulkAbortRef": "addf4ea735b1abb6acf503a0403d3a288442baf0b45c8a07df60b06ce6d4834e",
+        "PanamarDashboard/fetchDocuments": "bcf0769d3149c964909f194b164ffab21078721350df6c6404f28476eb4329bf",
+        "PanamarDashboard/fetchDocuments/params": "77d405a7c0ff963f1b1601c73eef813707a8316201f26940f2611c1afd1f1eb9",
+        "PanamarDashboard/fetchDocuments/res": "759fa698e472c53d772b7d45784945ecb9462e01532718dd93a808c8e57398f9",
+        "PanamarDashboard/fetchSummary": "85d3f6a28a01c30c857b1f57d48195e0f796dc690e8a94e4c98ab15fbe369166",
+        "PanamarDashboard/fetchSummary/params": "b4da5f92bb04c864083cb5b328f21f4f44ad5e75cdc0c44b50243bfd5492e875",
+        "PanamarDashboard/fetchSummary/res": "3ec4c82598c8a1371814dd0d2bd7f01405e62d19c08b9e40e175ed969caf1bac",
+        "PanamarDashboard/fetchClients": "8dc11d3f51a724c28824b403c72941b8f61bada363280cb8efe6e0b3c4a48fff",
+        "PanamarDashboard/fetchClients/res": "406345eb9a31cb360464761c33de07e6c46e11bd6327434686ff4ced210cff6d",
+        "PanamarDashboard/handleReload": "70ed3548da334d4defa7fa3204a1e1c31b0b5c8b74636a2e6c024370c4bae92d",
+        "PanamarDashboard/timer": "4d365e4188af9c00219c5e43680050967ed5d87a9018064108fb8a71962134a2",
+        "PanamarDashboard/handleFilterChange": "719f8169ed83105dae92ad0521b1533385a38e9ebf1830fc321be46967a4e887",
+        "PanamarDashboard/handleSearch": "36d58580f45acd636d0411262e8c9a6fab44327be9681562c3ba675ed3a825bb",
+        "PanamarDashboard/toggleMonth": "d3e2ad51d1a87ae340e61511a4a99185f58b6d1ef27c7c158d7c94125c48163a",
+        "PanamarDashboard/toggleMonth/current": "5d352544682c36e03aef96694761515a2acc99c3aa70744578ccf04eb26326d6",
+        "PanamarDashboard/toggleMonth/updated": "7745d85cf38aa8bc1a1a5aef8a22815ad9cdb3c9ab451e5f6491f3a88e0461df",
+        "PanamarDashboard/clearMonths": "142aa211314c170f85c199a72162ff90be62139b55e47bc7afe98ebc1f529974",
+        "PanamarDashboard/getDocKey": "284d74562e8f586931acd809c60c191bcc412c5c762036e72df55dd2f51b7793",
+        "PanamarDashboard/getDocRef": "d6d030dd5d10ed0f082b73dcc97f8eeed8fed53e6f393663d58c912384785385",
+        "PanamarDashboard/getDocPath": "3673ea226cd32c4c57ff13e5a5c72e532e68359e66ef2d5464c2a7c684d1922a",
+        "PanamarDashboard/getInvoicePath": "5fd3c9db6259c7536970a208c5ed06ed5e4e626b2afb178376038e0e060bce76",
+        "PanamarDashboard/handleDownload/key": "4bcf8e1e2334743f327223e7593501a1b7aeb7b8c55bed0a529016c145be00a8",
+        "PanamarDashboard/handleDownload/res": "a7b16767394cab3ab19bdf7fe616537457591fcf0d28816439f166636ce0cd2e",
+        "PanamarDashboard/handleDownload/blob": "e41e80aadadc82e8c260dde52f947a56d9c9cee93f6da4f0e3b4122b544ad6a5",
+        "PanamarDashboard/handleDownload/blobUrl": "4e9b9ab77c8016c4b3c8c624aa340bb075b9257c3a6fd5691cb5b37e1639339d",
+        "PanamarDashboard/handleDownload/a": "8b72bef58f1b8e90248e01e36fd7466b4f5b5c225da489f33c92f163b0d02b19",
+        "PanamarDashboard/handlePreview": "feec8965597357451094933b3d579e6679365d5b802b7e26466205df091aa3a6",
+        "PanamarDashboard/handlePreview/key": "4bcf8e1e2334743f327223e7593501a1b7aeb7b8c55bed0a529016c145be00a8",
+        "PanamarDashboard/handlePreview/res": "a782483f0afed22491108876908862f57e5763054e80a30f1f2b9a9001ab21cd",
+        "PanamarDashboard/handlePreview/blob": "e41e80aadadc82e8c260dde52f947a56d9c9cee93f6da4f0e3b4122b544ad6a5",
+        "PanamarDashboard/handlePreview/blobUrl": "4e9b9ab77c8016c4b3c8c624aa340bb075b9257c3a6fd5691cb5b37e1639339d",
+        "PanamarDashboard/closePreview": "44c1baeab86d3b490355638e5162e54d4c1ca27ea54cebb8e4d86ef6c8ef2e23",
+        "PanamarDashboard/openShare": "369804e2d2429dac6073dd12c7ecf6f9209d19b35f9377bf83936c85222a741e",
+        "PanamarDashboard/handleWhatsApp": "82e250022771b72a96e15f6495d46229618127314d372f63f2d89a0f1d649e72",
+        "PanamarDashboard/handleWhatsApp/docRef": "91c41b4d5bd307f3df9343f34d606dff849d0b99a96007ea90299f09468415b4",
+        "PanamarDashboard/handleWhatsApp/text": "816c25d186e088bad12265a2148bd114c39f578c0e68f29393e87dd24bc839b4",
+        "PanamarDashboard/openEmailModal": "f769bfc0d1c28ae5188ae5c6690d482679e73d1e6f8daf002e048b72ce56edcf",
+        "PanamarDashboard/handleSendEmail": "2a2807cfe422e4d9791a72df8822ebbc8d455489bf7e45cce0bdf907ea0ef48a",
+        "PanamarDashboard/handleSendEmail/res": "ae02bc090e38492af96833e955ca8f790b7e611e2f92225414c791de0a52d513",
+        "PanamarDashboard/handleLogout": "2ead69bfe8e88d5304eecf2f4fc3abef2926005ec7b16f6a22f4f2d42619e8ad",
+        "PanamarDashboard/isPollingRef": "452f73ee2314601255417f899c05cca241b98d5585a955a129078f7aafd66b71",
+        "PanamarDashboard/bulkTaskRef": "e7bfe3091dc06bea487ffcc77524c95f5769e35bf80284be11e8c73697655fb5",
+        "PanamarDashboard/downloadedChunksRef": "b097bbc4a635da5222a6cb15742e4e3173e0fd88ce91c6486c53d2ac32d64f92",
+        "PanamarDashboard/downloadQueueRef": "60a03be2184d8228371cc79ffb8f21dca3454e8941cec5cae6e1e0c530b7eeef",
+        "PanamarDashboard/isProcessingQueueRef": "452f73ee2314601255417f899c05cca241b98d5585a955a129078f7aafd66b71",
+        "PanamarDashboard/chunkDlStatusRef": "a715b678e5421522d21ba44335eda6cd8b1c58f06ce3dbbbf262d98aa8b43d04",
+        "PanamarDashboard/savedTaskId": "eacf6c965f18b26cf0b2026ae8d4f5f4b30e1afebdf22eb1064a03c7394c8b8e",
+        "PanamarDashboard/completedCount": "d376bdc6351dfa14e23084796cdde9dc4ec8bb3f1db30c32b2faa7c78e97ffe4",
+        "PanamarDashboard/pollInterval": "58e933eb1bae0c9fa6c2f4bf039ddc4c157f17b9a9c5e609bcd04f2f5a0d0e5b",
+        "PanamarDashboard/doSingleDownloadWithRetry": "c2f275e3cccc746a33e0ef9e0818a36d1edec311b8052e54eeee7491a79ebd7b",
+        "PanamarDashboard/doSingleDownloadWithRetry/MAX_RETRIES": "18affd8dc134202d6b619a48e3ce6ef40bfc04eb51b84e652090cd01807b7b47",
+        "PanamarDashboard/doSingleDownloadWithRetry/endpoint": "7a65e7414ddc2304d35c6b69af3cfcdbcc55649ae655605c926433bfbae47538",
+        "PanamarDashboard/doSingleDownloadWithRetry/shortName": "4fb70a82e4b98f738c72f8e49665016925294d164b27bf968000fb552cb1789a",
+        "PanamarDashboard/doSingleDownloadWithRetry/attempt": "dde5fb3fd235f30591f56b9944f790bce0c28998a8388f7e17acef94f853fa7a",
+        "PanamarDashboard/doSingleDownloadWithRetry/status": "27806711291b731368e4815807f5fcccb4da44cee032cd0845b75ff3b8b90a25",
+        "PanamarDashboard/doSingleDownloadWithRetry/backoffMs": "9c8c1ecd543188fe9c2d0713494d3488f3850d7c338f0072a4b053fbd3c68962",
+        "PanamarDashboard/doSingleDownloadWithRetry/success": "b44fb1b48bb94d8101e6864f8fe838708a72cd281f25dd62d34b34b6a5a72e1c",
+        "PanamarDashboard/processDownloadQueue": "bb0bd0936939944c42d6aa6cd908ad75ddd83b840caee501fe90f8410bd59cad",
+        "PanamarDashboard/processDownloadQueue/next": "0f89756df383802849b889c1c52677b2d0065145a3a48580b819f14d4a375500",
+        "PanamarDashboard/triggerChunkDownload": "13d9fbc0c37024846b82d4e1b3f588c2007e305c4904c73e6269052620c96a2d",
+        "PanamarDashboard/checkBulkStatus": "1f694be0f77f187e7d2830e872a1252f277174e5d30d38dbe94f8a50a87b9c4a",
+        "PanamarDashboard/checkBulkStatus/serverChunks": "64bf92891108438d1fb6fe75348f0ba8103c4de852f60ab644656a622dac305a",
+        "PanamarDashboard/checkBulkStatus/currentDlStatus": "5e116a37f13ccf0021b9c04937999ea8183dc9728acc3ed29958eb0ba9b68b06",
+        "PanamarDashboard/checkBulkStatus/downloadableChunks": "178251cc1bf1123e3347b6a23e66fffae4e09811b8a183209fb8d38428966b0d",
+        "PanamarDashboard/handleBulkDownloadInit": "eba49708a4abc0c3bd68ff5175e9a0ede21c92a6bd8f58b4c0b475a7341e9469",
+        "PanamarDashboard/cancelBulkTask": "fee2a59059a5d76b9a3a5f034445542b0f2c62cb4f4e739f80d8756eecc2d50c",
+        "PanamarDashboard/startIndex": "2f41689827919485f43c2cbfc0059555149f4d2a7c37547fcedb1a19b128a712",
+        "PanamarDashboard/endIndex": "3ecce4d193b56ccb9913dd2483c0a4880a42c28919349d0e134365dd5c7f0fb3",
+        "PanamarDashboard/q": "8b4e082d7feb82f2cfdd0ef91b85f7cc7b7d6606322e99a4c59d6041a1b95cee",
+        "PanamarDashboard/isSelected": "9b91730405f9ea2d052013dae5b809ef71184716bad8ccc5c114b484f25dcb92",
+        "PanamarDashboard/key": "4bcf8e1e2334743f327223e7593501a1b7aeb7b8c55bed0a529016c145be00a8",
+        "PanamarDashboard/page": "c0626e5f2f8a9cc0d341ef6df2a2569219009cf82116daf1ff4c88a5a01f1cca",
+        "PanamarDashboard/dlStatus": "8157f1f98d45f11c78bcf7ce1c8240c336dcae507a5f5dc3a588dd39919347fa",
+        "PanamarDashboard/isDownloading": "70cdb5306041c872f50adbc31924a82e3ae8099554dd7fab941a2b5ac4c3f0ed",
+        "PanamarDashboard/isDownloaded": "03d8641b15291eea6c6e373a6d47bd712cd7c792f1a8d1c3332d5197019bfb6a",
+        "PanamarDashboard/isFailed": "1cf21d5876c5c7e00485b46af55801781466e62eed5c8fbc1cb28e2df77b1495",
+        "PanamarDashboard/next": "1d68b61db6624c22a4e50543b6eefa87c64036c938703ea9d832bf160a5f7e73"
+      },
+      "parseDiagnostics": 0
+    },
+    {
+      "path": "frontend/hooks/useApiData.ts",
+      "sha256": "0340c08f22708cc4f06b80ffdf5cadfc4e0f2854a6af86dc56131e35e12ba490",
+      "functions": {
+        "useApiData": "6156ac0ee2b53814b3c0a33bdbe4f376fcb85e591d3f6b21b8f66b49ced3c373"
+      },
+      "events": {},
+      "calculations": {
+        "useApiData/fetchData": "4635379fbd01a6bbc5a81598dd4d8bf56c6213ad02aa41619e6c4d35608d9d26",
+        "useApiData/fetchData/errorObj": "d01557d06f4af4a6acc329bac3038d8b220122a0f957668bfa050506d04bf5d7",
+        "useApiData/refetch": "37e1e8b61901bb01960283f7711060dac33cceff2bb0c508b613bb2fda2a67cf"
+      },
+      "parseDiagnostics": 0
+    }
+  ],
+  "legal": {
+    "clauses": [
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s1.content",
+        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s2.content",
+        "value": "Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios.",
+        "sha256": "c44d3f7e0e14379e014528abab6595d586c233b76c1fd8367189108846b14120"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s3.content",
+        "value": "Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales.",
+        "sha256": "811c7655582f9af35570d205e2e997bf122eba8f9e38301ba088ccde96380eaf"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s4.content",
+        "value": "La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos.",
+        "sha256": "c1725deebde0938ef003d33e043391a7da37c1f8e39cd0e42e8d2e1ed43eed82"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s5.content",
+        "value": "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal.",
+        "sha256": "24fca8f52e7405fe2ddfa5c9e63d1683a40c5f521ec571e4b00d10ec41a6835b"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s6.content",
+        "value": "Usted tiene derecho a obtener confirmación sobre si en Granja Mari Pepa estamos tratando sus datos personales por tanto tiene derecho a acceder a sus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios.",
+        "sha256": "ab6fb22a1b18433e524f8407fe018dc658cbf2b16f0cd7d442fc9c32cebf046a"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s1.content",
+        "value": "El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Granja Mari Pepa.",
+        "sha256": "c890527a5ed8c4813886b03b0d9696b6cd625fd463c31b6411a49441a8b505aa"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s2.content",
+        "value": "El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares.",
+        "sha256": "16e72e214ba37668ee626f6de67a7c9e3cdc7c402e811658881b31ba863316ec"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s3.content",
+        "value": "Granja Mari Pepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo.",
+        "sha256": "b8060043112eaea24ab988d5d19b1be381adf8e4027bf0744c1e11616f7cb299"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s4.content",
+        "value": "Granja Mari Pepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web.",
+        "sha256": "e54a15ef665f853070d1dfe759bc8c7d8a13566df29ecbd96545d41cce447d6e"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s5.content",
+        "value": "Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Granja Mari Pepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia).",
+        "sha256": "46943aacbd4694a4bb5d5e4da422d2e3ed6bb6250a563320756bade568144787"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s1.content",
+        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s2.content",
+        "value": "We process the information you provide in order to provide the requested service, perform billing and send commercial communications related to our products and services.",
+        "sha256": "9985798c09f31324f539b38144cd6d8d1d9166af3c5b7e56e79166b4e9ba8de5"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s3.content",
+        "value": "The data provided will be kept as long as the commercial relationship is maintained or for the years necessary to comply with legal obligations.",
+        "sha256": "b4122e5e93ddb22e5a2701c8d57789fdaf3cef26e6c06a3b2673a237d648b1b3"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s4.content",
+        "value": "The legal basis for the processing of your data is the execution of the contract for the provision of services and/or sale of products.",
+        "sha256": "b6a9a6f2c01e93fce355d02bdfee9f12f451508d3077f1e7a4497743443d9569"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s5.content",
+        "value": "The data will not be transferred to third parties except in cases where there is a legal obligation.",
+        "sha256": "e668f879f0168402c71edb27c8408546d5bb92be68c29185b1b4ce8db50b4651"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s6.content",
+        "value": "You have the right to obtain confirmation as to whether Granja Mari Pepa is processing your personal data, therefore you have the right to access your personal data, rectify inaccurate data or request its deletion when the data is no longer necessary.",
+        "sha256": "a9c566829e72a616b44ee41e56ea08ce5b9a00827a6a05f1b6ea5ba42cfba204"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s1.content",
+        "value": "The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Granja Mari Pepa.",
+        "sha256": "b2d82f1cc6010b59408aa30f82c3b26eb6c5079f1e20474ddfef964d360bbc47"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s2.content",
+        "value": "The user undertakes to use the website, its services and contents diligently, correctly and lawfully, and in particular, undertakes to refrain from suppressing, circumventing or manipulating the copyright and other identifying data of the rights of its holders.",
+        "sha256": "07e9b61bddee8cb7d1788a393ae2b5d7e3b3545443968ab20c1b04432121ba21"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s3.content",
+        "value": "Granja Mari Pepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein.",
+        "sha256": "c1decf02449a58a2da97d25eacb8983e2f133442e839cf7e004223d3ded28fa5"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s4.content",
+        "value": "Granja Mari Pepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website.",
+        "sha256": "ebfa9ca92b7f34438cffc0235ef0270e107e92c587db5c263b47cf7887aeae34"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s5.content",
+        "value": "These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Granja Mari Pepa agree to expressly submit to the courts and tribunals of Lorca (Murcia).",
+        "sha256": "79621b95b235d957d1d413def9cc73716b9342291dace2c18b3ace1d45cb99b5"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s1.content",
+        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />E-Mail: pedidos@mari-pepa.com",
+        "sha256": "a89d66bac807598a58e49b4868c0d8b9274058b3ef8bbaa9f808294a62480ca1"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s2.content",
+        "value": "Wir verarbeiten die von Ihnen bereitgestellten Informationen, um den angeforderten Service zu erbringen, die Abrechnung durchzuführen und Ihnen kommerzielle Mitteilungen über unsere Produkte und Dienstleistungen zu senden.",
+        "sha256": "6869158c50fc5970993640a61dc800e1e09268b9b5b0098e1148faab3915cdd8"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s3.content",
+        "value": "Die bereitgestellten Daten werden so lange aufbewahrt, wie die Geschäftsbeziehung besteht oder für die Jahre, die zur Erfüllung gesetzlicher Verpflichtungen erforderlich sind.",
+        "sha256": "f7c85b1bcd231712ee11d0208946ccd0eb05d32421f4f8b53c5d5315e18698e9"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s4.content",
+        "value": "Die Rechtsgrundlage für die Verarbeitung Ihrer Daten ist die Durchführung des Vertrags über die Erbringung von Dienstleistungen und/oder den Verkauf von Produkten.",
+        "sha256": "5e655444a8dc95835640baa1094d246c00eca1f4ea2b9e1a050dbb369e6989d6"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s5.content",
+        "value": "Die Daten werden nicht an Dritte weitergegeben, es sei denn, es besteht eine gesetzliche Verpflichtung.",
+        "sha256": "4a78f21662c4a9ec040cd92af8a1df085fb30fa13f447bc9cef37fc893d6d89d"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s6.content",
+        "value": "Sie haben das Recht, eine Bestätigung darüber zu erhalten, ob wir bei Granja Mari Pepa Ihre personenbezogenen Daten verarbeiten. Daher haben Sie das Recht, auf Ihre personenbezogenen Daten zuzugreifen, unrichtige Daten zu korrigieren oder deren Löschung zu verlangen, wenn die Daten nicht mehr erforderlich sind.",
+        "sha256": "0d406d8851bee29dd8a7b8760b6f366f0cc143e864ff3aba4f5b822223bb6758"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s1.content",
+        "value": "Der Quellcode, die grafischen Entwürfe, Bilder, Fotos, Töne, Animationen, Software, Texte sowie die Informationen und Inhalte, die auf dieser Website gesammelt werden, sind durch die spanische Gesetzgebung über geistiges und gewerbliches Eigentum zugunsten von Granja Mari Pepa geschützt.",
+        "sha256": "536845b4ff103d574d3428e90b097d17fdb99d5025d13a4e134d23188c3217b6"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s2.content",
+        "value": "Der Nutzer verpflichtet sich, die Website, ihre Dienste und Inhalte sorgfältig, korrekt und rechtmäßig zu nutzen und insbesondere das Urheberrecht und andere Identifikationsdaten der Rechte ihrer Inhaber nicht zu unterdrücken, zu umgehen oder zu manipulieren.",
+        "sha256": "e9669c16573a941addc0625fb09aa6fe181b34f387fee0e06d19b1352da9e57a"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s3.content",
+        "value": "Granja Mari Pepa übernimmt keine Haftung für die Nichteinhaltung geltender Vorschriften, die dem Nutzer beim Zugriff auf die Website und/oder bei der Nutzung der darin enthaltenen Informationen entstehen können.",
+        "sha256": "95d54e93d4a01d9b23f01601951cc663cbc42cfd20f5d5c9eb13a58f673144c2"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s4.content",
+        "value": "Granja Mari Pepa behält sich das Recht vor, diese Nutzungsbedingungen sowie alle Arten von Informationen, die auf der Website erscheinen können, jederzeit zu ändern oder zu aktualisieren.",
+        "sha256": "f8ed776ec7e4469537734bf18107f3db538b3baa0b7fa325c134042cedf429a8"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s5.content",
+        "value": "Diese Bedingungen unterliegen der spanischen Gesetzgebung. Für alle Streitigkeiten, die sich aus dem Zugriff oder der Nutzung dieser Website ergeben können, vereinbaren der Nutzer und Granja Mari Pepa, sich ausdrücklich den Gerichten von Lorca (Murcia) zu unterwerfen.",
+        "sha256": "cbafc10e7b84f756c745300dc515bb792b1f9e39668c20a28fa70205ad7849de"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s1.content",
+        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s2.content",
+        "value": "Trattiamo le informazioni fornite al fine di erogare il servizio richiesto, effettuare la fatturazione e inviare comunicazioni commerciali relative ai nostri prodotti e servizi.",
+        "sha256": "4a82a005ab25a2320405a2892e95e3bcd7e4e6753412b8f6c4a6b6c9bd624192"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s3.content",
+        "value": "I dati forniti saranno conservati finché verrà mantenuto il rapporto commerciale o per gli anni necessari per adempiere agli obblighi legali.",
+        "sha256": "16e51049f14832d8bec7c9acf9667c27f783fb39cdcc1e32562736907fd364e7"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s4.content",
+        "value": "La base giuridica per il trattamento dei vostri dati è l'esecuzione del contratto di prestazione di servizi e/o compravendita di prodotti.",
+        "sha256": "e7f273d4c43124e9b1934a50945bf1326a6702c55f353b312a9a2e92fad56fa4"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s5.content",
+        "value": "I dati non saranno ceduti a terzi salvo nei casi in cui esista un obbligo legale.",
+        "sha256": "faa1160180ee795f4a3e4fa8c489332f8770c3fbb923f663d4416bc65dd166df"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s6.content",
+        "value": "Avete il diritto di ottenere conferma se in Granja Mari Pepa stiamo trattando i vostri dati personali, pertanto avete diritto ad accedere ai vostri dati personali, rettificare i dati inesatti o richiederne la cancellazione quando i dati non siano più necessari.",
+        "sha256": "c5999153cbea8fef9a7779b3c56ba76f977dc06307e066eea0532927c85ed4c6"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s1.content",
+        "value": "Il codice sorgente, i disegni grafici, le immagini, le fotografie, i suoni, le animazioni, il software, i testi, così come le informazioni e i contenuti raccolti nel presente sito web sono protetti dalla legislazione spagnola sui diritti di proprietà intellettuale e industriale a favore di Granja Mari Pepa.",
+        "sha256": "faeb4b8e2da620db4fac7e72fc4cf6600568e287b16e0f45784ad9bd910bd057"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s2.content",
+        "value": "L'utente si impegna a utilizzare il sito web, i suoi servizi e contenuti in modo diligente, corretto e lecito, e in particolare, si impegna ad astenersi dal sopprimere, eludere o manipolare il copyright e gli altri dati identificativi dei diritti dei suoi titolari.",
+        "sha256": "10d3c342ab1956745d5660067b83589bac140fc783e1ec154631fc0a4d41f438"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s3.content",
+        "value": "Granja Mari Pepa non si assume la responsabilità dell'inadempimento di qualsiasi norma applicabile in cui possa incorrere l'utente nel suo accesso al sito web e/o nell'uso delle informazioni in esso contenute.",
+        "sha256": "5b39b538352c59fead6596b65ea834bd1570be108848d0daa4609c4cf2ae38e4"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s4.content",
+        "value": "Granja Mari Pepa si riserva il diritto di modificare o aggiornare in qualsiasi momento le presenti condizioni d'uso, così come qualsiasi tipo di informazione che possa apparire nel sito web.",
+        "sha256": "e6b18c71f460dbdcd355e9b5aa22dd2b0520026e82e0a6296c38050215a24609"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s5.content",
+        "value": "Le presenti condizioni saranno regolate dalla legislazione spagnola. Per qualsiasi controversia che possa derivare dall'accesso o uso di questo sito web, l'utente e Granja Mari Pepa accettano di sottoporsi espressamente alle corti e ai tribunali di Lorca (Murcia).",
+        "sha256": "cb33af0369df5f1e420869008d059175497774cd07c40aa204e272be92de662c"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s1.content",
+        "value": "Granja Mari Pepa S.L.<br />Pol. Ind. Saprelorca - Parcela D-3<br />30817 Lorca, Murcia<br />Email: pedidos@mari-pepa.com",
+        "sha256": "dc93f601e2978929db12147e0fd8729fbc284af6ded69750efb54363b2de81d3"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s2.content",
+        "value": "我们处理您提供的信息是为了提供所请求的服务，进行计费，并向您发送与其相关的产品和服务的商业通信。",
+        "sha256": "4df57419154eb20876fd5c249c96f413b1164ce54e3e0d366010aa3b252db854"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s3.content",
+        "value": "只要商业关系维持或为履行法律义务所需的年限内，提供的数据将被保留。",
+        "sha256": "a7fca692f716b46e0d47d54f116369daf0c6359e1f86810809e4ece4f583ae6b"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s4.content",
+        "value": "处理您数据的法律依据是执行服务合同和/或产品销售合同。",
+        "sha256": "2a1af9d7bb2ad4b10e70bca2be614d102274fccefac7173ca7282b361319e0f8"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s5.content",
+        "value": "除非有法律义务，否则数据不会转让给第三方。",
+        "sha256": "dedb7b3e094d16a292648b916b4476dbed1692901cef46147d3963f12243ac38"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s6.content",
+        "value": "您有权确认Granja Mari Pepa是否正在处理您的个人数据，因此您有权访问您的个人数据，更正不准确的数据或在不再需要时请求删除。",
+        "sha256": "a43e5b2fe6591ed788f8e8e6c44c5cfb2f961e1de048bb97de2e2a295321efa0"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s1.content",
+        "value": "源代码、图形设计、图像、照片、声音、动画、软件、文本以及本网站收集的信息和内容受西班牙知识产权和工业产权立法的保护，归Granja Mari Pepa所有。",
+        "sha256": "96c0b0053f9d7bcc8750c01f61e6d8513845b41e7d70fbc65895c2b37fdb1bd2"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s2.content",
+        "value": "用户承诺勤勉、正确和合法地使用网站、其服务和内容，特别是承诺不删除、规避或操纵版权和其他识别权利持有人权利的数据。",
+        "sha256": "9727068aa396b99036be47ece9f623186fa99309340ae67ff78b05ad2e34fe1f"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s3.content",
+        "value": "Granja Mari Pepa不对用户在访问网站和/或使用其中包含的信息时可能违反的任何适用规范负责。",
+        "sha256": "8ca5c2a064c543b235d2befb9d7f0586db7791fceed2d77f6be3b3f4a588fd23"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s4.content",
+        "value": "Granja Mari Pepa保留随时修改或更新本使用条款以及网站上可能出现的任何类型信息的权利。",
+        "sha256": "5cc1153997b82677990ee300808273a757e213473aa139cdca0ffcd5bf3f4ac7"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s5.content",
+        "value": "本条款受西班牙法律管辖。对于因访问或使用本网站而可能产生的任何争议，用户和Granja Mari Pepa同意明确提交给Lorca（穆尔西亚）的法院和法庭。",
+        "sha256": "5f48172006add4af9a98cdfcb01506d2af0f69984ea9fa2ad897b1287938e0d1"
+      }
+    ],
+    "auxiliary": [
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.title",
+        "value": "Política de Privacidad"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.intro",
+        "value": "En Granja Mari Pepa nos tomamos muy en serio la privacidad de nuestros clientes y usuarios."
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s1.title",
+        "value": "1. Responsable del Tratamiento"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s2.title",
+        "value": "2. Finalidad del Tratamiento"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s3.title",
+        "value": "3. Conservación de Datos"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s4.title",
+        "value": "4. Legitimación"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s5.title",
+        "value": "5. Destinatarios"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.privacy.sections.s6.title",
+        "value": "6. Derechos"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.title",
+        "value": "Términos y Condiciones"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.intro",
+        "value": "Bienvenido al sitio web de Granja Mari Pepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones."
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s1.title",
+        "value": "1. Propiedad Intelectual"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s2.title",
+        "value": "2. Uso del Sitio Web"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s3.title",
+        "value": "3. Responsabilidad"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s4.title",
+        "value": "4. Modificaciones"
+      },
+      {
+        "path": "frontend/messages/es.json",
+        "key": "legal.terms.sections.s5.title",
+        "value": "5. Ley Aplicable"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.title",
+        "value": "Privacy Policy"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.intro",
+        "value": "At Granja Mari Pepa we take the privacy of our customers and users very seriously."
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s1.title",
+        "value": "1. Data Controller"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s2.title",
+        "value": "2. Purpose of Processing"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s3.title",
+        "value": "3. Data Retention"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s4.title",
+        "value": "4. Legitimation"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s5.title",
+        "value": "5. Recipients"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.privacy.sections.s6.title",
+        "value": "6. Rights"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.title",
+        "value": "Terms and Conditions"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.intro",
+        "value": "Welcome to the Granja Mari Pepa website. By accessing and using this site, you agree to the following terms and conditions."
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s1.title",
+        "value": "1. Intellectual Property"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s2.title",
+        "value": "2. Use of the Website"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s3.title",
+        "value": "3. Liability"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s4.title",
+        "value": "4. Modifications"
+      },
+      {
+        "path": "frontend/messages/en.json",
+        "key": "legal.terms.sections.s5.title",
+        "value": "5. Applicable Law"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.title",
+        "value": "Datenschutzrichtlinie"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.intro",
+        "value": "Bei Granja Mari Pepa nehmen wir den Schutz der Privatsphäre unserer Kunden und Nutzer sehr ernst."
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s1.title",
+        "value": "1. Verantwortlicher für die Datenverarbeitung"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s2.title",
+        "value": "2. Zweck der Verarbeitung"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s3.title",
+        "value": "3. Datenspeicherung"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s4.title",
+        "value": "4. Legitimation"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s5.title",
+        "value": "5. Empfänger"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.privacy.sections.s6.title",
+        "value": "6. Rechte"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.title",
+        "value": "Allgemeine Geschäftsbedingungen"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.intro",
+        "value": "Willkommen auf der Website von Granja Mari Pepa. Durch den Zugriff auf und die Nutzung dieser Website akzeptieren Sie die folgenden Bedingungen."
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s1.title",
+        "value": "1. Geistiges Eigentum"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s2.title",
+        "value": "2. Nutzung der Website"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s3.title",
+        "value": "3. Haftung"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s4.title",
+        "value": "4. Änderungen"
+      },
+      {
+        "path": "frontend/messages/de.json",
+        "key": "legal.terms.sections.s5.title",
+        "value": "5. Anwendbares Recht"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.title",
+        "value": "Informativa sulla Privacy"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.intro",
+        "value": "In Granja Mari Pepa prendiamo molto sul serio la privacy dei nostri clienti e utenti."
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s1.title",
+        "value": "1. Titolare del Trattamento"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s2.title",
+        "value": "2. Finalità del Trattamento"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s3.title",
+        "value": "3. Conservazione dei Dati"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s4.title",
+        "value": "4. Legittimazione"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s5.title",
+        "value": "5. Destinatari"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.privacy.sections.s6.title",
+        "value": "6. Diritti"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.title",
+        "value": "Termini e Condizioni"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.intro",
+        "value": "Benvenuti nel sito web di Granja Mari Pepa. Accedendo e utilizzando questo sito, accettate i seguenti termini e condizioni."
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s1.title",
+        "value": "1. Proprietà Intellettuale"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s2.title",
+        "value": "2. Uso del Sito Web"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s3.title",
+        "value": "3. Responsabilità"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s4.title",
+        "value": "4. Modifiche"
+      },
+      {
+        "path": "frontend/messages/it.json",
+        "key": "legal.terms.sections.s5.title",
+        "value": "5. Legge Applicabile"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.title",
+        "value": "隐私政策"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.intro",
+        "value": "在Granja Mari Pepa，我们非常重视客户和用户的隐私。"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s1.title",
+        "value": "1. 数据控制方"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s2.title",
+        "value": "2. 处理目的"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s3.title",
+        "value": "3. 数据保留"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s4.title",
+        "value": "4. 合法性"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s5.title",
+        "value": "5. 接收者"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.privacy.sections.s6.title",
+        "value": "6. 权利"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.title",
+        "value": "条款和条件"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.intro",
+        "value": "欢迎访问Granja Mari Pepa网站。访问并使用本网站即表示您接受以下条款和条件。"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s1.title",
+        "value": "1. 知识产权"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s2.title",
+        "value": "2. 网站使用"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s3.title",
+        "value": "3. 责任"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s4.title",
+        "value": "4. 修改"
+      },
+      {
+        "path": "frontend/messages/zh.json",
+        "key": "legal.terms.sections.s5.title",
+        "value": "5. 适用法律"
+      }
+    ]
+  },
+  "secretValuesPersisted": false
+}

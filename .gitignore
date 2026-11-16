@@ -228,3 +228,24 @@ backend/verify_*.js
 /frontend/test-results/
 /auth.json
 *.tsbuildinfo
+
+# --- Evidencia local y artefactos de herramientas (no se despliegan) ---
+/*.png
+/*.zip
+/.agents/
+/.codex/
+/.claude-flow/
+/.cursor/
+/.playwright-mcp/
+/assets/
+/docs/redesign/art/
+/docs/redesign/baseline/
+/frontend/.cache-kage-jest/
+/frontend/.cache-gmp-jest/
+/frontend/*.log
+/frontend/admin-body.txt
+/frontend/empleo-body.txt
+/frontend/clearTimeout(id)
+/backend/tmp-*
+/.gmp-cache/
+/.gmp-worktrees/

@@ -21,11 +21,13 @@ import "./navigation/navigation.css";
 function EnvironmentClasses({ allowed }: { allowed: boolean }) {
   const mode = useKageValue((snapshot) => snapshot.mode);
   const ready = useKageValue((snapshot) => snapshot.ready);
+  const visible = useKageValue((snapshot) => snapshot.visible);
   const fallback = useKageValue((snapshot) => snapshot.fallback);
   const reduced = useKageValue((snapshot) => snapshot.reducedMotion);
   const publicRoute = mode === "journey" || mode === "ambient";
-  const live = publicRoute && allowed && ready && !fallback && !reduced;
-  const still = publicRoute && (!allowed || fallback || reduced);
+  const live =
+    publicRoute && allowed && ready && visible && !fallback && !reduced;
+  const still = publicRoute && (!allowed || !visible || fallback || reduced);
   useEffect(() => {
     const elements = [document.documentElement, document.body];
     elements.forEach((element) => {
@@ -57,8 +59,11 @@ export function KageSiteShell({
   useEffect(() => {
     const finish = () => setHydrated(true);
     const unsubscribe = useAuthStore.persist.onFinishHydration(finish);
-    setHydrated(useAuthStore.persist.hasHydrated());
-    return unsubscribe;
+    const frame = requestAnimationFrame(finish);
+    return () => {
+      unsubscribe();
+      cancelAnimationFrame(frame);
+    };
   }, []);
   const privateArea = pathname.startsWith("/area-clientes") && authenticated;
   const allowWebGL = hydrated && !privateArea;
@@ -66,33 +71,33 @@ export function KageSiteShell({
     <KageRuntimeProvider allowWebGL={allowWebGL}>
       <ForegroundProvider>
         <MagazineProvider>
-        <EnvironmentClasses allowed={allowWebGL} />
-        <div
-          className="kage-shell"
-          data-kage-webgl-allowed={allowWebGL ? "true" : "false"}
-        >
-          <a className="kage-skip" href="#main-content">
-            {copy.skip}
-          </a>
-          <CompanyBackdrop />
-          <MagazineTicker />
-          <Header />
-          <div className="page" id="top">
-            <main id="main-content" tabIndex={-1} data-kage-background>
-              {children}
-            </main>
-            <Footer />
+          <EnvironmentClasses allowed={allowWebGL} />
+          <div
+            className="kage-shell"
+            data-kage-webgl-allowed={allowWebGL ? "true" : "false"}
+          >
+            <a className="kage-skip" href="#main-content">
+              {copy.skip}
+            </a>
+            <CompanyBackdrop />
+            <MagazineTicker />
+            <Header />
+            <div className="page" id="top">
+              <main id="main-content" tabIndex={-1} data-kage-background>
+                {children}
+              </main>
+              <Footer />
+            </div>
+            <ChapterRail />
+            <NavigationContinuity />
+            <FrameEffects />
+            <Cursor />
+            <BootPreloader allowed={allowWebGL} />
+            <CookieConsent />
+            <div className="kage-auxiliary" data-kage-background>
+              {auxiliary}
+            </div>
           </div>
-          <ChapterRail />
-          <NavigationContinuity />
-          <FrameEffects />
-          <Cursor />
-          <BootPreloader allowed={allowWebGL} />
-          <CookieConsent />
-          <div className="kage-auxiliary" data-kage-background>
-            {auxiliary}
-          </div>
-        </div>
         </MagazineProvider>
       </ForegroundProvider>
     </KageRuntimeProvider>

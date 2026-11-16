@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import {
+  KAGE_CONTENT_UPDATED,
   KAGE_INDEXED_LOCALES,
   KAGE_SITE_URL,
 } from "@/lib/kage-seo";
-import { JOBS } from "@/components/editorial/careers-data";
+import { fetchPublicJobs } from "@/lib/public-content";
 
 const staticPaths = [
   "",
@@ -19,15 +20,28 @@ const staticPaths = [
   "/legal/terminos",
 ];
 
-const jobPaths = JOBS.map((job) => `/trabaja-con-nosotros/${job.slug}`);
-const paths = [...staticPaths, ...jobPaths];
+// Solo se publican ofertas que existen en el backend. Si el fetch falla o
+// devuelve una lista vacia, el sitemap no incluye slugs de empleo para no
+// generar URLs que respondan 404.
+async function liveJobPaths(): Promise<string[]> {
+  const jobs = await fetchPublicJobs();
+  if (!jobs) return [];
+  const slugs = jobs
+    .map((job) => (job.slug ?? "").trim())
+    .filter((slug) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(slug));
+  return Array.from(new Set(slugs)).map(
+    (slug) => `/trabaja-con-nosotros/${slug}`,
+  );
+}
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const livePaths = await liveJobPaths();
+  const paths = [...staticPaths, ...livePaths];
+
   return paths.flatMap((path) =>
     KAGE_INDEXED_LOCALES.map((locale) => ({
       url: KAGE_SITE_URL + "/" + locale + path,
-      lastModified: now,
+      lastModified: KAGE_CONTENT_UPDATED,
       changeFrequency: path.startsWith("/legal/")
         ? ("yearly" as const)
         : path.startsWith("/trabaja-con-nosotros/")

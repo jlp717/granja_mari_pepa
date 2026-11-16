@@ -1,0 +1,83 @@
+{
+  "status": "candidate_verified_source",
+  "created_at": "2026-11-11T11:00:40.225864+00:00",
+  "format": {
+    "exit": 0,
+    "files": 25,
+    "mesaTitleFormatCheck": 0,
+    "mesaTitleFormatFirstCheck": 1,
+    "mesaTitleFinalLiteral": "All matched files use Prettier code style!",
+    "repair": "Python text writes changed EOL. Prettier normalized only5JSON; inverse title substitution recovers each original file byte for byte."
+  },
+  "eslint": {
+    "exit": 0,
+    "scope": "13 owned TypeScript/TSX files",
+    "literal": "✔ No ESLint warnings or errors"
+  },
+  "tsc": {
+    "exit": 1,
+    "own_file_errors": 0,
+    "foreign_errors": [
+      {
+        "path": "frontend/components/kage/navigation/reveals.ts",
+        "line": 31,
+        "code": "TS2802"
+      },
+      {
+        "path": "frontend/components/kage/navigation/reveals.ts",
+        "line": 32,
+        "code": "TS7006",
+        "parameter": "el"
+      },
+      {
+        "path": "frontend/components/kage/navigation/reveals.ts",
+        "line": 32,
+        "code": "TS7006",
+        "parameter": "i"
+      }
+    ],
+    "assigned_to": "navigation",
+    "whole_project_pass": false
+  },
+  "familySelection": {
+    "exit": 0,
+    "cases": 24,
+    "literal": "PASS: public family selection 24/24 cases; source copy unchanged; no requests.",
+    "method": "Actual pure selection body read from current source, not a TypeScript/framework/browser acceptance."
+  },
+  "schemas": {
+    "exit": 0,
+    "literal": "PASS: actual Organization/WebSite schemas contain no unverified SLA, price, certification, review, social account or unavailable search action.",
+    "proof": "public-schema-check.json"
+  },
+  "legal": {
+    "clauses": 55,
+    "locales": 5,
+    "messageFilesModified": false
+  },
+  "visualAcceptance": false,
+  "pending": [
+    "Root preview and three runtime critique rounds",
+    "Focal lint rerun when Root permits check processes after disk pressure",
+    "Actual fallback/foreground/peek/route observations"
+  ],
+  "assetDelta": {
+    "format": {
+      "exit": 0,
+      "files": 7
+    },
+    "tsc": {
+      "exit": 0,
+      "literal": "",
+      "scope": "whole frontend detector, no emit/incremental"
+    },
+    "eslint": {
+      "exit": 1,
+      "literal": "ENOSPC: no space left on device, write",
+      "classification": "infrastructure_failure",
+      "codeAssertionsFailed": null
+    },
+    "checksPausedByRoot": true,
+    "sourceFreeze": "Root requested only small source/manifest writes after reclaiming1.58GB; no extra check processes run."
+  }
+}

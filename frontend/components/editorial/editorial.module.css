@@ -5,6 +5,13 @@
   gap: 12px 34px;
 }
 .heroCopy {
+  padding: clamp(18px, 2.4vw, 28px);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.68),
+    rgba(4, 7, 10, 0.84)
+  );
+  border-left: 1px solid var(--line-soft);
   max-width: 62ch;
 }
 .heroCopy p + p {
@@ -13,6 +20,15 @@
 .atlasText {
   max-width: 62ch;
   margin: 0 0 34px auto;
+}
+.atlasText p {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.68),
+    rgba(4, 7, 10, 0.84)
+  );
+  padding: clamp(18px, 2.4vw, 28px);
+  border-left: 1px solid var(--line-soft);
 }
 .atlasLinks {
   margin-top: clamp(26px, 4vh, 46px);
@@ -34,7 +50,11 @@
   content: "";
   position: absolute;
   inset: 0 calc(var(--pad) * -1);
-  background: linear-gradient(90deg, rgba(223, 231, 224, 0.05), transparent 62%);
+  background: linear-gradient(
+    90deg,
+    rgba(223, 231, 224, 0.05),
+    transparent 62%
+  );
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s var(--ease);
@@ -101,7 +121,7 @@
     gap: 12px;
     padding: 16px 0;
   }
-  .atlasText {
+  .atlasLink .atlasText {
     display: none;
   }
 }
@@ -114,6 +134,13 @@
   max-width: 13ch;
 }
 .closingCopy {
+  padding: clamp(18px, 2.4vw, 28px);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.68),
+    rgba(4, 7, 10, 0.84)
+  );
+  border-left: 1px solid var(--line-soft);
   grid-column: 1;
   grid-row: 2;
 }
@@ -148,6 +175,12 @@
 }
 .document {
   min-width: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.72),
+    rgba(4, 7, 10, 0.9)
+  );
+  padding: clamp(18px, 2.4vw, 32px);
 }
 .clause {
   position: relative;
@@ -172,19 +205,46 @@
   gap: 12px 34px;
   margin-top: 20px;
 }
+.legalLede {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.72),
+    rgba(4, 7, 10, 0.86)
+  );
+  padding: clamp(16px, 2vw, 24px);
+  border-left: 1px solid var(--line-soft);
+}
 .faqSection {
   padding-top: clamp(120px, 12vh, 160px);
   padding-bottom: clamp(56px, 8vh, 100px);
 }
+.faqSection > :global(.body-lg) {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.72),
+    rgba(4, 7, 10, 0.86)
+  );
+  padding: clamp(16px, 2vw, 24px);
+  border-left: 1px solid var(--line-soft);
+}
 .faqGroup {
   margin-top: 30px;
-  border-top: 1px solid var(--line-soft);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.74),
+    rgba(4, 7, 10, 0.9)
+  );
+  padding: 0 clamp(18px, 2.4vw, 30px) clamp(6px, 1vw, 12px);
+  border: 1px solid var(--line-soft);
 }
 .faqGroup details {
   padding: 0;
   border: 0;
   border-bottom: 1px solid var(--line-soft);
   background: transparent;
+}
+.faqGroup details:last-child {
+  border-bottom: 0;
 }
 .faqGroup summary {
   display: flex;
@@ -222,7 +282,13 @@
 }
 .channels {
   margin-top: clamp(30px, 5vh, 54px);
-  border-top: 1px solid var(--line-soft);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.84),
+    rgba(4, 7, 10, 0.92)
+  );
+  border: 1px solid var(--line-soft);
+  padding: 0 clamp(18px, 2.4vw, 30px);
 }
 .channelRow {
   position: relative;
@@ -236,11 +302,18 @@
     padding 0.5s var(--ease-out),
     background 0.55s var(--ease);
 }
+.channelRow:last-child {
+  border-bottom: 0;
+}
 .channelRow::before {
   content: "";
   position: absolute;
   inset: 0 calc(var(--pad) * -1);
-  background: linear-gradient(90deg, rgba(223, 231, 224, 0.05), transparent 62%);
+  background: linear-gradient(
+    90deg,
+    rgba(223, 231, 224, 0.05),
+    transparent 62%
+  );
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s var(--ease);
@@ -317,6 +390,13 @@
 }
 .form {
   max-width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 7, 10, 0.74),
+    rgba(4, 7, 10, 0.9)
+  );
+  padding: clamp(18px, 2.4vw, 28px);
+  border-left: 1px solid var(--line-soft);
 }
 .fields {
   display: grid;
@@ -342,7 +422,7 @@
   width: 100%;
   padding: 15px 14px;
   border: 1px solid rgba(223, 231, 224, 0.18);
-  background: rgba(5, 7, 10, 0.62);
+  background: rgba(5, 7, 10, 0.9);
   color: var(--bone);
   font: inherit;
   transition:
@@ -356,7 +436,7 @@
 .form input:focus-visible,
 .form textarea:focus-visible {
   border-color: var(--bone);
-  background: rgba(5, 7, 10, 0.82);
+  background: rgba(5, 7, 10, 0.97);
   outline: 1px solid var(--bone);
   outline-offset: 3px;
 }

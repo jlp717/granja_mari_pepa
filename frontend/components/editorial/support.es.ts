@@ -7,13 +7,12 @@ export const FAQ_ES = {
       id: "gama",
       title: "La gama",
       scene: 0,
-      intro:
-        "Siete familias en congelado, refrigerado y temperatura ambiente.",
+      intro: "Siete familias en congelado, refrigerado y temperatura ambiente.",
       questions: [
         {
           question: "¿Qué productos distribuye Granja Maripepa?",
           answer:
-            "Producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades. La gama se organiza en productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Trabajamos con Grupo Topgel, Froneri (Nestlé Helados) y Panamar.",
+            "Producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades. La gama se organiza en productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Distribuimos oficialmente Grupo Topgel y Nestlé Helados, y trabajamos con Panamar, Okin y Pastelería Amparín.",
         },
         {
           question: "¿Dónde veo las familias y las referencias?",
@@ -24,6 +23,11 @@ export const FAQ_ES = {
           question: "¿Las fotos y revistas muestran el producto exacto?",
           answer:
             "Las imágenes orientan sobre la familia o la presentación. La ficha de la referencia es la que confirma ingredientes, formato y conservación.",
+        },
+        {
+          question: "¿Qué aporta la red de Grupo Topgel?",
+          answer:
+            "Granja Maripepa es socio-delegación de Grupo Topgel. Esa red permite completar la gama con referencias que no están en el almacén de Saprelorca, manteniendo la atención y la entrega desde Lorca.",
         },
       ],
     },
@@ -42,7 +46,7 @@ export const FAQ_ES = {
         {
           question: "¿Repartís en mi localidad?",
           answer:
-            "Trabajamos en Murcia y Almería desde Lorca y Viator. Dinos tu dirección completa y el equipo confirma la cobertura y las condiciones para ese destino.",
+            "Repartimos en Murcia, Almería y Alicante desde Lorca y Viator. Dinos tu dirección completa y el equipo confirma la cobertura y las condiciones para ese destino.",
         },
         {
           question: "¿Puedo cambiar o revisar una entrega?",
@@ -55,8 +59,7 @@ export const FAQ_ES = {
       id: "documentacion",
       title: "Producto y documentación",
       scene: 3,
-      intro:
-        "La información de cada referencia se consulta con el equipo.",
+      intro: "La información de cada referencia se consulta con el equipo.",
       questions: [
         {
           question: "¿Puedo ver ingredientes, alérgenos y conservación?",
@@ -71,7 +74,7 @@ export const FAQ_ES = {
         {
           question: "¿Las revistas sirven para hacer un pedido?",
           answer:
-            "Las revistas son catálogos fechados de consulta. Si una referencia te interesa, confirma con el equipo que sigue disponible y sus condiciones actuales.",
+            "Cada revista es un catálogo de consulta con su fecha de edición. Si una referencia te interesa, confirma con el equipo que sigue disponible y sus condiciones actuales.",
         },
       ],
     },
@@ -79,8 +82,7 @@ export const FAQ_ES = {
       id: "contacto",
       title: "Contacto y horario",
       scene: 4,
-      intro:
-        "Teléfonos, correo y dirección para hablar con personas.",
+      intro: "Teléfonos, correo y dirección para hablar con personas.",
       questions: [
         {
           question: "¿Qué teléfonos están publicados?",
@@ -89,13 +91,22 @@ export const FAQ_ES = {
         },
         {
           question: "¿Cuál es el horario de atención?",
-          answer:
-            "Lunes a viernes, de 8:00 a 13:00 y de 16:00 a 19:00.",
+          answer: "Lunes a viernes, de 8:00 a 13:00 y de 16:00 a 19:00.",
         },
         {
           question: "¿Dónde está la sede?",
           answer:
-            "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. La delegación de Viator está en calle Sierra de Ronda, 26, Polígono La Juaida, Almería.",
+            "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. La delegación de Viator está en calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, Almería.",
+        },
+        {
+          question: "¿Qué es la delegación de Viator?",
+          answer:
+            "La segunda sede, en Almería. Está en calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, y acerca la operación y el reparto a la zona. Sus teléfonos son 950 97 34 29 y 670 49 01 47.",
+        },
+        {
+          question: "¿Va a ampliarse la sede de Lorca?",
+          answer:
+            "En 2026 se aprobó la ordenación urbanística de las parcelas D2 y D3 de Saprelorca para agrupar y ampliar las instalaciones, con 8.953 m². El proyecto sigue en trámite: no hay fecha de apertura ni inversión publicada.",
         },
       ],
     },
@@ -127,8 +138,7 @@ export const FAQ_ES = {
       id: "clientes",
       title: "Área de clientes",
       scene: 5,
-      intro:
-        "Pedidos, facturas y documentos en un espacio privado.",
+      intro: "Pedidos, facturas y documentos en un espacio privado.",
       questions: [
         {
           question: "¿Necesito cuenta para consultar la gama?",
@@ -151,23 +161,23 @@ export const FAQ_ES = {
   seo: {
     title: "Preguntas frecuentes | Granja Maripepa",
     description:
-      "Respuestas sobre gama, pedidos, entrega, documentación, revistas y área de clientes de Granja Maripepa en Lorca y Viator.",
+      "Respuestas sobre gama, pedidos, entrega, documentación, revistas y área de clientes de la empresa de distribución en Lorca y Viator, Murcia y Almería.",
   },
 } as const;
 export const CONTACT_ES = {
-  title: "Hablemos de tu cocina.",
+  title: "Contacto.",
   intro:
-    "Elige cómo prefieres hablar. Si quieres, prepara antes el mensaje con los datos de tu establecimiento.",
-  channelTitle: "Elige cómo quieres hablar.",
+    "Canales, horario y direcciones para hablar con el equipo. El formulario no envía solo: prepara el mensaje y tú decides cuándo y por dónde enviarlo.",
+  channelTitle: "Hablar con una persona.",
   prepareTitle: "Prepara tu consulta.",
   prepareIntro:
-    "Completa los datos y elige correo o WhatsApp. Tú revisas y envías.",
+    "Completa los datos y elige correo, WhatsApp o copiar. Tú revisas el mensaje antes de enviarlo.",
   hoursTitle: "Horario de atención.",
   hoursBody:
-    "Lunes a viernes, de 8:00 a 13:00 y de 16:00 a 19:00. Para una visita o una operación concreta, confirma antes con el equipo.",
-  locationsTitle: "Lorca, punto de partida.",
+    "Lunes a viernes, de 08:00 a 13:00 y de 16:00 a 19:00. Para una visita, confirma antes con el equipo.",
+  locationsTitle: "Dos direcciones.",
   locationsBody:
-    "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. La delegación de Viator está en calle Sierra de Ronda, 26, Polígono La Juaida, Almería.",
+    "Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería.",
   questionsTitle: "Antes de escribir.",
   call: "Llamar",
   email: "Abrir correo",
@@ -175,7 +185,8 @@ export const CONTACT_ES = {
   copy: "Copiar consulta",
   maps: "Cómo llegar",
   copied: "Consulta copiada. Revísala antes de compartirla.",
-  copyError: "No se ha podido copiar. Puedes seleccionar el texto de la consulta.",
+  copyError:
+    "No se ha podido copiar. Puedes seleccionar el texto de la consulta.",
   preview: "Vista previa de tu consulta",
   privacyLink: "Leer la política de privacidad",
   validation: "Revisa los campos indicados antes de preparar la consulta.",
@@ -187,20 +198,20 @@ export const CONTACT_ES = {
         "No. Prepara el texto y abre correo o WhatsApp. Tú decides cuándo enviarlo y puedes revisarlo antes.",
     },
     {
-      question: "¿Puedo preguntar por producto y reparto?",
+      question: "¿Qué incluyo en la consulta?",
       answer:
-        "Sí. Indica la familia o referencia, tu localidad y qué necesitas confirmar. Si no conoces el formato, descríbenos el uso.",
+        "Tu establecimiento, la localidad y la familia o referencia que te interesa. Si no conoces el formato, describe el uso. Con eso basta para empezar.",
     },
     {
-      question: "¿Dónde está la sede?",
+      question: "¿Qué canal elijo?",
       answer:
-        "En el Polígono Saprelorca de Lorca. La dirección completa y el mapa están en esta página.",
+        "Para pedidos y urgencias, el teléfono. Para enviar datos o una consulta con detalle, el correo. WhatsApp sirve para una conversación rápida. Cualquiera de los tres llega al equipo.",
     },
   ],
   seo: {
-    title: "Contacto | Granja Maripepa en Lorca y Viator",
+    title: "Contacto y horario | Granja Maripepa",
     description:
-      "Teléfonos 968 46 75 14 y 639 77 86 55, correo, WhatsApp, horario de lunes a viernes y dirección en el Polígono Saprelorca de Lorca.",
+      "Teléfonos 968 46 75 14 y 639 77 86 55, correo, WhatsApp, horario de lunes a viernes y direcciones en Lorca y Viator para hablar con Granja Maripepa.",
   },
 } as const;
 export const UI_ES = {

@@ -557,8 +557,8 @@
 /* Art-approved adaptation for sparse GMP alpha layers. Geometry comes from
    the source gate fg-wall; the edge is 0 to retain the sparse material. */
 :is([data-fg="gmp-low-left"], [data-fg="gmp-low-right"]) .fg-gmp-low {
-  width: clamp(430px, 47vw, 780px);
-  bottom: -30px;
+  width: clamp(240px, 28vw, 460px);
+  bottom: -8%;
 }
 [data-fg="gmp-low-left"] .fg-gmp-low {
   left: 0;
@@ -568,13 +568,13 @@
 }
 @media (max-width: 1080px) {
   :is([data-fg="gmp-low-left"], [data-fg="gmp-low-right"]) .fg-gmp-low {
-    width: clamp(390px, 42vw, 600px);
+    width: clamp(200px, 26vw, 360px);
   }
 }
 @media (max-width: 820px) {
   :is([data-fg="gmp-low-left"], [data-fg="gmp-low-right"]) .fg-gmp-low {
-    width: min(82vw, 440px);
-    bottom: -22px;
+    width: min(54vw, 280px);
+    bottom: -6%;
   }
 }
 

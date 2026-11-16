@@ -1,0 +1,250 @@
+{
+  "sourceHead": "592d3a8a531e919c68964fb2ec83d73625551c6f",
+  "discoveryHead": "9f94e0444db79f31b4fea088308fef28a6317d07",
+  "observedDate": "2026-11-11",
+  "databaseQueriesExecuted": 0,
+  "records": [
+    {
+      "id": "F01",
+      "state": "published_consistent",
+      "claim": "Lorca y origen en 1966",
+      "url": "https://mari-pepa.com/es/acerca",
+      "selector": "main",
+      "path": "frontend/lib/data.ts",
+      "line": 174
+    },
+    {
+      "id": "F02",
+      "state": "published_consistent",
+      "claim": "Teléfonos: 968 46 75 14 y 639 77 86 55",
+      "url": "https://mari-pepa.com/es/contacto",
+      "selector": "main",
+      "path": "frontend/lib/data.ts",
+      "line": 162
+    },
+    {
+      "id": "F03",
+      "state": "published_consistent",
+      "claim": "Lunes a viernes: 8:00–13:00 y 16:00–19:00",
+      "url": "https://mari-pepa.com/es/contacto",
+      "selector": "main",
+      "path": "frontend/lib/data.ts",
+      "line": 185
+    },
+    {
+      "id": "F04",
+      "state": "published_consistent",
+      "claim": "Saprelorca, Jimeno Sola 3, 30817 Lorca; variantes de redacción",
+      "url": "https://mari-pepa.com/es/lorca",
+      "selector": "main",
+      "path": "frontend/app/[locale]/lorca/page.tsx",
+      "line": 87
+    },
+    {
+      "id": "F05",
+      "state": "conflict",
+      "claim": "Murcia+Alicante en Acerca/globo frente a Murcia+Almería en cabecera/Lorca",
+      "url": "https://mari-pepa.com/es/acerca",
+      "selector": "main",
+      "path": "frontend/messages/es.json",
+      "line": 306
+    },
+    {
+      "id": "F06",
+      "state": "conflict",
+      "claim": "pedidos@granjamaripepa.com en Contacto/pie; pedidos@mari-pepa.com en Lorca/legal",
+      "url": "https://mari-pepa.com/es/lorca",
+      "selector": "main a[href^='mailto:']",
+      "path": "frontend/app/[locale]/lorca/page.tsx",
+      "line": 107
+    },
+    {
+      "id": "F07",
+      "state": "conflict",
+      "claim": "Servicio 24h en metadatos frente a 24–48h en cuerpo",
+      "url": "https://mari-pepa.com/es",
+      "selector": "meta[name='description']",
+      "path": "frontend/messages/es.json",
+      "line": 882
+    },
+    {
+      "id": "F08",
+      "state": "published_unverified",
+      "claim": "Viator, Almería: 950 97 34 29 / 670 49 01 47",
+      "url": "https://mari-pepa.com/es/contacto",
+      "selector": "main",
+      "path": "frontend/app/[locale]/contacto/page.tsx",
+      "line": 306
+    },
+    {
+      "id": "F09",
+      "state": "published_channel",
+      "claim": "WhatsApp publicado al 639 77 86 55; no se envió mensaje",
+      "url": "https://mari-pepa.com/es/contacto",
+      "selector": "main button",
+      "path": "frontend/app/[locale]/contacto/page.tsx",
+      "line": 822
+    },
+    {
+      "id": "F10",
+      "state": "production_state",
+      "claim": "Catálogo Próximamente, sin SKU/precio/stock público acreditado",
+      "url": "https://mari-pepa.com/es/productos",
+      "selector": "main h1",
+      "path": "frontend/app/[locale]/productos/page.tsx",
+      "line": 28
+    },
+    {
+      "id": "F11",
+      "state": "published_taxonomy",
+      "claim": "Cuatro familias Topgel: mar, carnes, precocinados, repostería",
+      "url": "https://mari-pepa.com/es",
+      "selector": "a[href*='category=']",
+      "path": "frontend/components/home/product-categories.tsx",
+      "line": 173
+    },
+    {
+      "id": "F12",
+      "state": "published_brands",
+      "claim": "Topgel, Nestlé, Panamar y destinos externos; oficialidad no acreditada aquí",
+      "url": "https://mari-pepa.com/es",
+      "selector": "main a[href^='http']",
+      "path": "frontend/components/home/distributors-section.tsx",
+      "line": 11
+    },
+    {
+      "id": "F13",
+      "state": "repository_static",
+      "claim": "40 artículos estáticos NO son resultados reales de BD",
+      "url": null,
+      "selector": "",
+      "path": "frontend/lib/data.ts",
+      "line": 199
+    },
+    {
+      "id": "F14",
+      "state": "repository_static",
+      "claim": "sampleOrders y sampleInvoices son muestras",
+      "url": null,
+      "selector": "",
+      "path": "frontend/lib/data.ts",
+      "line": 666
+    },
+    {
+      "id": "F15",
+      "state": "repository_stub",
+      "claim": "Controladores públicos devuelven [] o null",
+      "url": null,
+      "selector": "",
+      "path": "backend/app/controllers/productsController.js",
+      "line": 89
+    },
+    {
+      "id": "F16",
+      "state": "sql_definition",
+      "claim": "Consulta ODBC sobre DSEDAC.LAC definida, no ejecutada",
+      "url": null,
+      "selector": "",
+      "path": "backend/app/services/databaseService.js",
+      "line": 282
+    },
+    {
+      "id": "F17",
+      "state": "published_unverified",
+      "claim": "ISO 9001:2008, energía verde, 1.500 referencias y 5.000 m³ publicados sin acreditación vigente aportada",
+      "url": "https://mari-pepa.com/es/acerca",
+      "selector": "main",
+      "path": "frontend/lib/data.ts",
+      "line": 179
+    },
+    {
+      "id": "F18",
+      "state": "published_unverified",
+      "claim": "Reseñas y valoración hardcoded; sin comprobar Google actual",
+      "url": "https://mari-pepa.com/es/acerca",
+      "selector": "main",
+      "path": "frontend/app/[locale]/acerca/page.tsx",
+      "line": 995
+    },
+    {
+      "id": "F19",
+      "state": "literal_policy",
+      "claim": "11 cláusulas ES coinciden DOM/Main; 55 cláusulas de cinco idiomas preservadas RAW",
+      "url": "https://mari-pepa.com/es/legal/privacidad",
+      "selector": "main",
+      "path": "frontend/messages/es.json",
+      "line": 886
+    },
+    {
+      "id": "F20",
+      "state": "production_link_error",
+      "claim": "Enlace /forgot-password del ejemplo termina en /es/forgot-password, HTTP 404",
+      "url": "https://mari-pepa.com/forgot-password",
+      "selector": "document.body",
+      "path": "frontend/app/[locale]/login-secure-example/page.tsx",
+      "line": 1
+    },
+    {
+      "id": "F21",
+      "state": "production_state",
+      "claim": "URL inexistente muestra 404 genérico en inglés sin shell",
+      "url": "https://mari-pepa.com/es/ruta-v3-no-existe",
+      "selector": "document.body",
+      "path": "frontend/app/[locale]/not-found.tsx",
+      "line": 50
+    },
+    {
+      "id": "F22",
+      "state": "metadata_difference",
+      "claim": "Sitemap publicado 7 destinos; generador Main 6 rutas por 5 idiomas",
+      "url": "https://mari-pepa.com/sitemap.xml",
+      "selector": "urlset/url/loc",
+      "path": "frontend/app/sitemap.ts",
+      "line": 9
+    },
+    {
+      "id": "F23",
+      "state": "repository_declared_unverified",
+      "claim": "Facebook/Instagram sameAs y Twitter creator no acreditan titularidad",
+      "url": "https://mari-pepa.com/es",
+      "selector": "meta[name='twitter:creator']",
+      "path": "frontend/components/seo/JsonLdSchemas.tsx",
+      "line": 69
+    },
+    {
+      "id": "F24",
+      "state": "production_ui_not_tariff",
+      "claim": "Checkout vacío muestra envío 5,99 e IVA 21%; no validados como tarifas",
+      "url": "https://mari-pepa.com/es/checkout",
+      "selector": "main",
+      "path": "frontend/app/[locale]/checkout/page.tsx",
+      "line": 1
+    }
+  ],
+  "pdfs": [
+    {
+      "path": "frontend/public/catalogs/gmp-marzo-2026.pdf",
+      "url": "https://mari-pepa.com/catalogs/gmp-marzo-2026.pdf",
+      "edition": "Marzo 2026",
+      "bytes": 9749025,
+      "sha256": "d834e34e274953f9370f979637d2c921652c72c212352eabf0af45c55a3c60f7",
+      "GET": 200,
+      "mainIdentical": true
+    },
+    {
+      "path": "frontend/public/catalogs/topgel-febrero-2026.pdf",
+      "url": "https://mari-pepa.com/catalogs/topgel-febrero-2026.pdf",
+      "edition": "Febrero 2026",
+      "bytes": 13351836,
+      "sha256": "a0d27c52718ceb40d234889ae0fff5a99c6dc21ae799e0a2b11237b77005eea5",
+      "GET": 200,
+      "mainIdentical": true
+    }
+  ],
+  "limits": [
+    "Spanish DOM checked on eleven pages, not every translated variant.",
+    "No forms, sessions, orders, database queries or backend startup.",
+    "Published claims do not prove current certificates, SLA or availability.",
+    "PDF binary identity checked; internal offers not validated."
+  ]
+}

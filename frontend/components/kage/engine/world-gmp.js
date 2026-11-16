@@ -6,7 +6,11 @@
  *   2 racking    pallet bays receding to the vanishing point
  *   3 cold       insulated walls, frost, the open dock framing the sunrise
  *   4 pass       the stainless pass table under its own pendants
- * No product geometry, packaging, labels, prices or business claims.
+ * The only printed surfaces are the farm's own photographs: family prints on
+ * the loaded pallets and two on the cold wall. The yard behind the dock is
+ * drawn, not photographed — a dawn sky meant to read as outside from thirty
+ * metres away, not as a picture pasted over a hole. Still no invented product
+ * geometry, packaging copy, prices or business claims.
  */
 export function buildGmpWorld(ctx) {
   const {
@@ -86,6 +90,9 @@ export function buildGmpWorld(ctx) {
   const marking = new THREE.MeshBasicMaterial({
     color: accent.clone().multiplyScalar(0.42),
   });
+  /* worn yellow line paint. The aisle is the one place in the set where a
+     warning colour belongs, and vermilion is the headline's, not the floor's. */
+  const safety = new THREE.MeshBasicMaterial({ color: 0x8a6414 });
   const coldStrip = new THREE.MeshBasicMaterial({
     color: hdr(1.15, 1.55, 1.75),
     toneMapped: false,
@@ -95,6 +102,67 @@ export function buildGmpWorld(ctx) {
     toneMapped: false,
     fog: false,
   });
+
+  /* ------------------------------------------------------- real photography
+     The only photographs in the set belong to the farm. A basic material keeps
+     them display-referred: ACES at exposure 1 would pull every print down to
+     grey. The base colour is a dark ink, so a request that never resolves
+     leaves a blank pallet face rather than a white card in the hall. Textures
+     are cached per source, so the five family prints load once each. */
+  const photoCache = new Map();
+  const photoMaterial = (src, opts) => {
+    opts = opts || {};
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x111a1d,
+      transparent: true,
+      opacity: opts.opacity === undefined ? 1 : opts.opacity,
+      depthWrite: false,
+      fog: opts.fog === undefined ? true : opts.fog,
+      toneMapped: opts.toneMapped === undefined ? false : opts.toneMapped,
+    });
+    /* where a photograph replaces something that already worked, a failed
+       request has to restore that thing instead of leaving a dark card over it */
+    material.userData.hideOnFail = opts.hideOnFail === true;
+    const cached = photoCache.get(src);
+    if (cached && cached.texture) {
+      material.map = cached.texture;
+      material.color.setHex(0xffffff);
+      material.needsUpdate = true;
+      return material;
+    }
+    if (
+      typeof window === "undefined" ||
+      typeof Image === "undefined" ||
+      typeof document === "undefined"
+    )
+      return material;
+    const entry = cached || { texture: null, waiting: [] };
+    entry.waiting.push(material);
+    photoCache.set(src, entry);
+    const image = new Image();
+    image.onload = () => {
+      const map = new THREE.Texture(image);
+      map.encoding = THREE.sRGBEncoding;
+      map.needsUpdate = true;
+      entry.texture = map;
+      entry.waiting.forEach((waiting) => {
+        waiting.map = map;
+        waiting.color.setHex(0xffffff);
+        waiting.needsUpdate = true;
+      });
+      entry.waiting.length = 0;
+    };
+    /* a missing print is a blank face, not a broken build */
+    image.onerror = () => {
+      entry.waiting.forEach((waiting) => {
+        if (waiting.userData.hideOnFail) waiting.visible = false;
+      });
+      entry.waiting.length = 0;
+      photoCache.delete(src);
+    };
+    image.src = src;
+    return material;
+  };
 
   const add = (group, size, at, material, rot) => {
     const mesh = new THREE.Mesh(
@@ -263,6 +331,13 @@ export function buildGmpWorld(ctx) {
   [-1, 1].forEach((side) =>
     add(nave, [0.07, 0.07, 31], [side * 5.15, 8.5, -22], dark),
   );
+  /* Purlins across the trusses every 4 m, and the sprinkler main down the
+     centre: the two lines that make the roof read as a shed and not a lid. */
+  for (let z = -4; z >= -40; z -= 4)
+    add(nave, [12.6, 0.12, 0.18], [0, 9.4, z], steel);
+  add(nave, [0.08, 0.08, 30], [0, 9.0, -24], dark);
+  for (let z = -9; z >= -39; z -= 5)
+    add(nave, [0.12, 0.12, 0.12], [0, 8.9, z], steelLit);
 
   /* ------------------------------------------ 02 · the racking corridor */
   const rack = groups[2];
@@ -278,8 +353,10 @@ export function buildGmpWorld(ctx) {
       add(rack, [0.18, 0.26, 27], [side * 8.6, y, -24.8], steelLit),
     ),
   );
-  /* loads: unmarked pallets, stacked to the beam. Blank on purpose — the set
-     has to read as a working warehouse, and empty racks read as scaffolding */
+  /* loads: pallets stacked to the beam, most of them blank. The set has to
+     read as a working warehouse, and empty racks read as scaffolding — but a
+     printed face on every box reads as wallpaper. One label per face, on two
+     of every three, cycling the five families. */
   const loads = [];
   for (let bay = 0; bay < 6; bay++) {
     const z = -14.5 - bay * 4.1;
@@ -290,13 +367,81 @@ export function buildGmpWorld(ctx) {
       });
     });
   }
-  loads.forEach(([x, y, z]) => {
-    add(rack, [2.4, 1.9, 2.2], [x, y, z], ink);
+  const FAMILY_PRINTS = [
+    "/catalogs/familias/real-mar-2.jpg",
+    "/catalogs/familias/real-carne-2.jpg",
+    "/catalogs/familias/real-reposteria-2.jpg",
+    "/catalogs/familias/real-panaderia-2.jpg",
+    "/catalogs/familias/real-salsas-2.jpg",
+  ];
+  let printed = 0;
+  /* film: a wrapped pallet catches the high-bays as a sheen, not as a white
+     box. One shared material, written without depth so it never hides the
+     carton inside it. */
+  const film = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.07,
+    roughness: 0.25,
+    metalness: 0,
+    depthWrite: false,
+  });
+  loads.forEach(([x, y, z], index) => {
+    /* every load is a pallet first — bearers, deck, then the carton on top.
+       Height staggers on a fixed cycle, so the bays never read as one block,
+       and it still clears the shelf above by a few centimetres. */
+    const h = 1.55 + ((index * 7) % 4) * 0.18;
+    const bottom = y - 0.87;
+    const cy = bottom + h / 2;
     add(rack, [2.46, 0.16, 2.26], [x, y - 1.02, z], steel);
+    add(rack, [2.6, 0.12, 2.4], [x, y - 1.01, z], board);
+    [-0.85, 0, 0.85].forEach((dz) =>
+      add(rack, [2.6, 0.08, 0.35], [x, y - 0.91, z + dz], board),
+    );
+    add(rack, [2.4, h, 2.2], [x, cy, z], ink);
+    if (index % 3 === 1)
+      add(rack, [2.46, h + 0.03, 2.26], [x, cy, z], film);
+    if (index % 3 === 2) return;
+    const face = new THREE.Group();
+    face.position.set(x, cy, z + 1.12);
+    const label = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.9, 1.15),
+      photoMaterial(FAMILY_PRINTS[printed++ % FAMILY_PRINTS.length], {
+        opacity: 0.92,
+      }),
+    );
+    label.renderOrder = 4;
+    face.add(label);
+    /* the frame is surface-mounted around the sheet, not over it: bars drawn
+       across the print would cut into whatever the photograph shows */
+    add(face, [2.06, 0.05, 0.04], [0, 0.605, 0.005], steel);
+    add(face, [2.06, 0.05, 0.04], [0, -0.605, 0.005], steel);
+    add(face, [0.06, 1.26, 0.04], [-0.985, 0, 0.005], steel);
+    add(face, [0.06, 1.26, 0.04], [0.985, 0, 0.005], steel);
+    rack.add(face);
   });
   [-1, 1].forEach((side) =>
     add(rack, [0.08, 0.26, 27], [side * 7.9, 0.16, -24.8], edge),
   );
+  /* Aisle markings: two continuous edge lines, and a broken centre line that
+     gives the floor a measure of depth. Both sit a centimetre off the deck so
+     they never fight it for the same pixel. */
+  [-1, 1].forEach((side) =>
+    add(rack, [0.12, 0.01, 40], [side * 6.1, 0.014, -20], safety),
+  );
+  for (let z = -2; z >= -40; z -= 4)
+    add(rack, [0.14, 0.01, 1.5], [0, 0.014, z], safety);
+  /* Bollards at the rack ends: what a forklift would actually hit, and the
+     only dark vertical accent at floor level on either side of the aisle. */
+  for (let z = -12; z >= -38; z -= 4)
+    [-1, 1].forEach((side) =>
+      add(rack, [0.18, 0.9, 0.18], [side * 9.8, 0.45, z], dark),
+    );
+  /* One forklift parked in the aisle: body, mast, forks. Wheels and cage
+     become noise at this distance, so the silhouette stops there. */
+  add(rack, [1.6, 1.2, 2.6], [3.6, 0.6, -18], dark);
+  add(rack, [0.2, 2.8, 0.2], [3.6, 1.4, -16.8], steel);
+  add(rack, [1.2, 0.08, 0.12], [3.6, 0.2, -16.2], steelLit);
 
   /* --------------------------------- 03 · cold walls and the open dock */
   const cold = groups[3];
@@ -314,19 +459,112 @@ export function buildGmpWorld(ctx) {
     add(cold, [0.38, 8.5, 0.72], [side * 6.62, 4.25, -43.9], steelLit),
   );
   add(cold, [13.62, 0.4, 0.72], [0, 8.44, -43.9], steelLit);
-  /* the yard beyond: warm, and far enough that fog does the rest */
+  /* The yard beyond: drawn, not photographed. The print of the loading yard was
+     the last imported image in the building and it read as a postcard pasted
+     over the opening — no horizon, no scale, no depth. A 512×256 dawn sky with
+     three ridgelines and the shed next door does the same job inside the set's
+     own palette, and it cannot arrive late or broken. The warm glow stays over
+     it, so the opening keeps its heat; the plane never writes depth and ignores
+     the fog, so it sits behind the glow exactly where the print did. Every
+     curve is a fixed sine term, so the skyline is identical on every visit. */
+  /* jsdom and a canvas-less client hand back no 2d context. In that case the
+     opening keeps the glow alone, which is what it had before this plane. */
+  const yardCanvas = (() => {
+    if (typeof document === "undefined") return null;
+    try {
+      const c = document.createElement("canvas");
+      c.width = 512;
+      c.height = 256;
+      return c.getContext("2d") ? c : null;
+    } catch {
+      return null;
+    }
+  })();
+  if (yardCanvas) {
+    const W = 512;
+    const H = 256;
+    const horizon = 150;
+    const skyPx = yardCanvas.getContext("2d");
+    const skyGrad = skyPx.createLinearGradient(0, 0, 0, horizon);
+    skyGrad.addColorStop(0, "rgb(8,16,27)");
+    skyGrad.addColorStop(0.38, "rgb(25,38,53)");
+    skyGrad.addColorStop(0.68, "rgb(64,72,86)");
+    skyGrad.addColorStop(0.86, "rgb(146,120,110)");
+    skyGrad.addColorStop(1, "rgb(198,150,104)");
+    skyPx.fillStyle = skyGrad;
+    skyPx.fillRect(0, 0, W, horizon);
+    /* the yard itself is already in shadow: the darkest band in the frame */
+    const groundGrad = skyPx.createLinearGradient(0, horizon, 0, H);
+    groundGrad.addColorStop(0, "rgb(56,50,48)");
+    groundGrad.addColorStop(0.4, "rgb(30,29,30)");
+    groundGrad.addColorStop(1, "rgb(15,16,18)");
+    skyPx.fillStyle = groundGrad;
+    skyPx.fillRect(0, horizon, W, H - horizon);
+    /* three ridges, back to front, in blue-grey: the far one is palest because
+       the sky is palest behind it */
+    const ridge = (base, amp, freq, phase, color) => {
+      skyPx.beginPath();
+      skyPx.moveTo(0, H);
+      for (let i = 0; i <= W; i += 4) {
+        const t = i / W;
+        const y =
+          base -
+          amp * (0.5 + 0.5 * Math.sin(t * freq + phase)) -
+          amp * 0.22 * Math.sin(t * freq * 2.7 + phase * 1.9);
+        skyPx.lineTo(i, y);
+      }
+      skyPx.lineTo(W, H);
+      skyPx.closePath();
+      skyPx.fillStyle = color;
+      skyPx.fill();
+    };
+    ridge(horizon - 24, 21, 5.4, 0.6, "rgb(58,72,88)");
+    ridge(horizon - 10, 16, 8.1, 2.4, "rgb(39,51,63)");
+    ridge(horizon - 3, 8, 12.6, 4.1, "rgb(24,32,41)");
+    /* the shed next door, on the right: a sawtooth roofline, the only hard edge
+       in an otherwise soft horizon */
+    skyPx.fillStyle = "rgb(17,23,29)";
+    skyPx.fillRect(352, horizon - 24, 132, 24);
+    for (let i = 0; i < 4; i++) {
+      const bx = 352 + i * 33;
+      skyPx.beginPath();
+      skyPx.moveTo(bx, horizon - 24);
+      skyPx.lineTo(bx + 16.5, horizon - 36);
+      skyPx.lineTo(bx + 33, horizon - 24);
+      skyPx.closePath();
+      skyPx.fill();
+    }
+    skyPx.fillRect(462, horizon - 44, 9, 20);
+    const yardTex = new THREE.CanvasTexture(yardCanvas);
+    yardTex.encoding = THREE.sRGBEncoding;
+    yardTex.needsUpdate = true;
+    const yardWall = new THREE.Mesh(
+      new THREE.PlaneGeometry(30, 14),
+      new THREE.MeshBasicMaterial({
+        map: yardTex,
+        fog: false,
+        depthWrite: false,
+        transparent: false,
+        toneMapped: false,
+      }),
+    );
+    yardWall.position.set(0, 4.2, -53);
+    yardWall.renderOrder = 3;
+    cold.add(yardWall);
+  }
   const yard = new THREE.Mesh(
     new THREE.PlaneGeometry(38, 16),
     new THREE.MeshBasicMaterial({
       map: tx(texGlow("rgba(255,158,84,.9)", "rgba(226,92,26,.22)")),
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.24,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       fog: false,
     }),
   );
   yard.position.set(0, 4.1, -52);
+  yard.renderOrder = 4;
   cold.add(yard);
   const frost = new THREE.Mesh(
     new THREE.PlaneGeometry(14, 9),
@@ -340,6 +578,32 @@ export function buildGmpWorld(ctx) {
   );
   frost.position.set(0, 4.4, -43.2);
   cold.add(frost);
+  /* Two prints on the cold wall, at working height, where the aisle already
+     looks: the family the dock is built around on the left, the one the
+     morning shift sees on the right. They are the only thing on either side of
+     the hall that is not steel or panel, and they hang behind the racking, so
+     they never compete with the headline. */
+  const poster = (x, z, rotationY, src) => {
+    const sheet = new THREE.Group();
+    sheet.position.set(x, 4.2, z);
+    sheet.rotation.y = rotationY;
+    const print = new THREE.Mesh(
+      new THREE.PlaneGeometry(3.2, 2.0),
+      photoMaterial(src, { opacity: 0.9 }),
+    );
+    print.renderOrder = 4;
+    sheet.add(print);
+    /* the frame hangs behind the print, in the .08 the panel leaves between
+       its face and the seam bars: it reads as a recessed border and never
+       covers the photograph */
+    add(sheet, [3.4, 0.07, 0.05], [0, 1.035, -0.045], steel);
+    add(sheet, [3.4, 0.07, 0.05], [0, -1.035, -0.045], steel);
+    add(sheet, [0.07, 2.14, 0.05], [-1.665, 0, -0.045], steel);
+    add(sheet, [0.07, 2.14, 0.05], [1.665, 0, -0.045], steel);
+    cold.add(sheet);
+  };
+  poster(-12.1, -20, Math.PI / 2, "/catalogs/familias/real-mar-2.jpg");
+  poster(12.1, -20, -Math.PI / 2, "/catalogs/familias/real-reposteria-2.jpg");
   /* The brand sits on the dock header, off the axis the headline runs down.
      Kage gives its wordmark one deep, lit plane; this is that plane, sized to
      signage and placed where no copy can land on it. */
@@ -368,6 +632,25 @@ export function buildGmpWorld(ctx) {
       sign.position.set(4.15, 10.34, -8.92);
       gate.add(sign);
       WORLD.sign = sign;
+      /* The same wordmark again, far down the aisle, low and quiet against the
+         dock opening. It closes the perspective without competing with the
+         headline: the texture is already decoded, so this costs no second
+         request, and it sits below the header beam in the open bay. */
+      const endSign = new THREE.Mesh(
+        new THREE.PlaneGeometry(4.2, 1.28),
+        new THREE.MeshBasicMaterial({
+          map,
+          transparent: true,
+          depthWrite: false,
+          fog: false,
+          toneMapped: false,
+          opacity: 0.55,
+        }),
+      );
+      endSign.position.set(0, 6.95, -43.55);
+      endSign.renderOrder = 5;
+      cold.add(endSign);
+      WORLD.endSign = endSign;
     };
   }
 
@@ -377,6 +660,15 @@ export function buildGmpWorld(ctx) {
   [-1, 1].forEach((side) =>
     add(cold, [0.66, 0.86, 0.34], [side * 5.9, 0.9, -39.9], dark),
   );
+  /* Dock furniture, so the opening reads as a working door and not a hole:
+     rubber bumpers either side, the leveller lip on the platform, and the
+     shutter lamellas wound down over the gap. */
+  [-1, 1].forEach((side) =>
+    add(cold, [0.8, 1.2, 0.5], [side * 5.8, 1.0, -43.6], dark),
+  );
+  add(cold, [6.0, 0.16, 1.8], [0, 0.99, -42.4], steel);
+  for (let i = 0; i < 6; i++)
+    add(cold, [11.8, 0.18, 0.1], [0, 8.5 + i * 0.3, -43.7], steelLit);
 
   /* ------------------------------------------------- 04 · the pass table */
   const pass = groups[4];

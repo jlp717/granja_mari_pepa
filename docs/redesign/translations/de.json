@@ -1,0 +1,475 @@
+{
+  "locale": "de",
+  "sourceFiles": {
+    "frontend/components/editorial/content.es.ts": "22ad2f41679add3f3560cc349162e9ff89b21fc625514682114c1d6d7778f2ff",
+    "frontend/components/editorial/support.es.ts": "c26f64913d43d1312ca65e163ffc706954a4a9c74be61ccc72802f8fb2664cca"
+  },
+  "stories": {
+    "acerca": {
+      "title": "Nähe ist unser Handwerk.",
+      "eyebrow": "Granja Mari Pepa · Seit 1966",
+      "description": "Lebensmittelvertrieb aus Lorca für den beruflichen Alltag.",
+      "seo": {
+        "title": "Granja Mari Pepa: Ursprung und Tätigkeit",
+        "description": "Lernen Sie die Anfänge von Granja Mari Pepa in Lorca, die Sortimentsübersicht und die Kontaktmöglichkeiten für gewerbliche Anfragen kennen."
+      },
+      "chapters": [
+        {
+          "label": "Ursprung",
+          "title": "Eine Geschichte, die in Lorca beginnt.",
+          "paragraphs": [
+            "Die Anfänge von Granja Mari Pepa liegen im Jahr 1966 in Lorca. Diese Angabe steht für einen konkreten Werdegang im Lebensmittelvertrieb und für die Arbeit der Menschen, die Lebensmittel zubereiten, servieren oder verkaufen. Die Geschichte braucht keine Abfolge unbelegter Meilensteine: Sie beginnt mit einer Stadt, einem Jahr und einer klar erkennbaren Tätigkeit.",
+            "Einen Vertriebspartner kennenzulernen bedeutet auch, zu wissen, wo man ihn findet und welche Informationen er bereitstellt. Deshalb verbindet diese Vorstellung den Ursprung mit dem Sortiment, dem Standort und den veröffentlichten Kontaktkanälen. Einzelheiten zu Produkten und Dienstleistungen werden im jeweiligen Zusammenhang bestätigt. So erkennen Sie den nächsten Schritt und können überlegen, welche Frage Sie dem Team stellen sollten."
+          ]
+        },
+        {
+          "label": "Betriebe",
+          "title": "Jeder Betrieb hat andere Anforderungen.",
+          "paragraphs": [
+            "In Hotellerie, Gastronomie und Catering ist die Produktauswahl Teil einer größeren Aufgabe: ein Angebot zusammenstellen, eine Küche organisieren und einen Service durchführen. Bestimmen Sie zunächst die gesuchte Produktgruppe, das Format und den vorgesehenen Einsatz. Diese drei Angaben erleichtern es, die Informationen zu erkennen, die Sie zu einem Artikel prüfen müssen.",
+            "Im Einzelhandel kann die Präsentation im Mittelpunkt einer Anfrage stehen. In der Gemeinschaftsverpflegung können die Unterlagen wichtig sein, die vor einer Entscheidung geprüft werden müssen. Beschreiben Sie die Art des Betriebs und formulieren Sie seine Anforderungen als konkrete Fragen. Dieser Zusammenhang hilft, die geltenden Bedingungen zu erfragen, ohne allen Betrieben dieselben Bedürfnisse zuzuschreiben."
+          ]
+        },
+        {
+          "label": "Sortiment",
+          "title": "Drei Temperaturen. Viele konkrete Fragen.",
+          "paragraphs": [
+            "Die von Granja Mari Pepa veröffentlichten Informationen beschreiben tiefgekühlte, gekühlte und bei Umgebungstemperatur gelagerte Produkte. Die Sortimentsdarstellung umfasst Fisch und Meeresfrüchte, Fleisch, zubereitete Produkte sowie Backwaren und Desserts. Hinzu kommen Marken aus den Bereichen Speiseeis und Bäckerei. Erkunden Sie diese Gruppen, um den Ausgangspunkt Ihrer Suche zu bestimmen und eine genauere Anfrage vorzubereiten.",
+            "Im nächsten Schritt präzisieren Sie, was Sie suchen. Produktgruppe, gegebenenfalls die bekannte Marke und das gewünschte Format sind hilfreiche Ausgangspunkte. Ein Foto zeigt ein Lebensmittel oder eine Kategorie; die Eigenschaften eines bestimmten Artikels ergeben sich aus dessen eigenen Informationen. Der Onlinekatalog wird noch vorbereitet. Er zeigt weder Bestände und Preise noch Datenblätter, anhand derer Sie auf dieser Seite eine abschließende Auswahl treffen könnten."
+          ]
+        },
+        {
+          "label": "Auswahl",
+          "title": "Information gehört zum Produkt.",
+          "paragraphs": [
+            "Eine Anfrage wird genauer, wenn sie Bekanntes von dem trennt, was noch bestätigt werden muss. Ausgangspunkt kann ein bekannter Artikel, eine Produktgruppe oder ein bestimmtes benötigtes Format sein. Gibt es ein konkretes Datenblatt, ist dieses der richtige Ort, um die Eigenschaften zu prüfen, statt die Merkmale eines ähnlichen Produkts zu übertragen.",
+            "Datierte Veröffentlichungen helfen, Marken, Produktgruppen und die Verkaufsunterlagen einer bestimmten Ausgabe einzuordnen. Notieren Sie das Datum zusammen mit dem Artikel, der Sie interessiert, und nennen Sie die Einzelheit, die Sie bestätigen lassen möchten. Sortiment, Veröffentlichungen und Kontakt ergeben einen hilfreichen Weg: zuerst orientieren, dann identifizieren und schließlich die für die Auswahl maßgeblichen Informationen erfragen."
+          ]
+        },
+        {
+          "label": "Lorca",
+          "title": "Eine Adresse als Ausgangspunkt des Gesprächs.",
+          "paragraphs": [
+            "Der Standort in Lorca wird im Polígono Industrial Saprelorca, avenida Francisco Jimeno Sola, 3 veröffentlicht. Die lokale Seite bündelt Adresse, Öffnungszeiten und Kartenlink. Wenn Ihre Anfrage einen Besuch erfordert, bereiten Sie den Anlass vor und klären Sie vor der Abfahrt, wie Sie vorgehen sollen. Halten Sie dabei die vollständige Adresse bereit.",
+            "Bei Fragen zum Service sollten Sie den Ort Ihres Betriebs und das interessante Produkt oder die Produktgruppe nennen. Ergänzen Sie bei Bedarf die Geschäftsadresse und die Bedingung, die Sie klären möchten. Das Gespräch sollte sich auf diesen Zielort und diese Anfrage beziehen, damit die Antwort dem Betrieb weiterhilft."
+          ]
+        },
+        {
+          "label": "Kontakt",
+          "title": "Kommen wir ins Gespräch.",
+          "paragraphs": [
+            "Über die veröffentlichten Kanäle können Sie Ihre Anfrage telefonisch, per E-Mail oder WhatsApp fortsetzen. Die Kontaktseite erklärt, welche Aktion die jeweilige Option auslöst, und ermöglicht es, den Text vor dem Wechsel in die gewählte Anwendung vorzubereiten. Betriebsname, Ort, Produktgruppe und konkrete Frage geben Ihrem Gegenüber einen leicht nachvollziehbaren Zusammenhang.",
+            "Beginnen Sie ruhig mit einer kleinen Frage: einer Produktgruppe, die Sie kennenlernen möchten, einem noch zu bestimmenden Format oder einer Servicebedingung, die Sie klären müssen. Behalten Sie den Artikelnamen bei, wenn er bekannt ist, und trennen Sie unterschiedliche Fragen voneinander. So bleibt das Gespräch nachvollziehbar, und Sie können anschließend prüfen, welche Informationen Sie erhalten haben und was noch bestätigt werden muss."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Ein klarer Ausgangspunkt.",
+        "text": "Ein nachvollziehbarer Werdegang, ein Sortiment zum Erkunden und ein Gespräch mit Kontext. Granja Mari Pepa kennenzulernen beginnt mit konkreten Informationen und wird über die veröffentlichten Kontaktkanäle fortgesetzt.",
+        "link": "Mit dem Team sprechen"
+      }
+    },
+    "lorca": {
+      "title": "Lorca als Treffpunkt.",
+      "eyebrow": "Standort · Saprelorca",
+      "description": "Adresse, Orientierung und Kontaktmöglichkeiten für Ihre Anfrage.",
+      "seo": {
+        "title": "Granja Mari Pepa in Lorca",
+        "description": "Adresse in Saprelorca, veröffentlichte Kontaktzeiten und Kanäle, um eine Anfrage an Granja Mari Pepa in Lorca vorzubereiten."
+      },
+      "chapters": [
+        {
+          "label": "Orientierung",
+          "title": "Vor der Abfahrt wissen, wohin.",
+          "paragraphs": [
+            "Granja Mari Pepa veröffentlicht seinen Standort in Lorca im Polígono Industrial Saprelorca. Diese Seite verbindet die Standortangaben mit den Kontaktmöglichkeiten, damit die Adresse nicht vom Anlass des Besuchs getrennt bleibt. Sie dient dazu, die Tätigkeit des Unternehmens räumlich einzuordnen, dessen Anfänge auf 1966 datiert werden.",
+            "Wenn Sie vorbeikommen möchten, prüfen Sie zunächst die Adresse und sprechen Sie mit dem Team über den Anlass Ihrer Anfrage. Ein Standort allein sagt nichts über Abholzeiten, den Zugang zu Betriebsräumen oder Besuche ohne Anmeldung aus. Diese Einzelheiten müssen vor der Anfahrt bestätigt werden. Nicht veröffentlichte Bedingungen werden auf dieser Seite nicht ergänzt."
+          ]
+        },
+        {
+          "label": "Adresse",
+          "title": "Saprelorca, avenida Francisco Jimeno Sola.",
+          "paragraphs": [
+            "Die veröffentlichte Geschäftsadresse lautet avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Verwenden Sie bei der Routenplanung alle diese Angaben zusammen: Straße, Hausnummer, Gewerbegebiet und Ort bestimmen das Ziel genauer als der Firmenname allein.",
+            "Der Kartenlink öffnet auf Ihre Auswahl hin einen externen Orientierungsdienst. Verwenden Sie bei der Suche neben dem Firmennamen die vollständige Adresse und prüfen Sie, ob das Ziel in Lorca liegt. Benötigen Sie für Ihre Anfahrt besondere Zugangshinweise, erklären Sie den Anlass über einen Kontaktkanal und fragen Sie nach der passenden Anfahrt für diesen Fall."
+          ]
+        },
+        {
+          "label": "Kontaktzeiten",
+          "title": "Ein Anruf kann den nächsten Schritt klären.",
+          "paragraphs": [
+            "Zu den Kontaktangaben gehören die Telefonnummern 968 46 75 14 und 639 77 86 55. Die veröffentlichten Kontaktzeiten sind Montag bis Freitag, von 08:00 bis 13:00 und von 16:00 bis 19:00 Uhr. Halten Sie Nummer, Anlass des Anrufs und den Artikel, der Sie interessiert, vor dem Gespräch bereit.",
+            "Erklären Sie kurz, wer anruft, wo sich der Betrieb befindet und was bestätigt werden soll. Geht es um ein Dokument oder Produkt, halten Sie vor dem Anruf dessen Namen oder Artikelnummer bereit. E-Mail und WhatsApp sind weitere veröffentlichte Möglichkeiten, das Gespräch fortzusetzen. Wählen Sie den Kanal, über den Sie Ihre Frage am besten ausdrücken und die zu teilenden Angaben prüfen können."
+          ]
+        },
+        {
+          "label": "Produkte",
+          "title": "Eine Gruppe suchen, einen Artikel bestimmen.",
+          "paragraphs": [
+            "Das vorgestellte Sortiment umfasst tiefgekühlte, gekühlte und bei Umgebungstemperatur gelagerte Produkte. Auf der Website finden Sie Gruppen für Fisch und Meeresfrüchte, Fleisch, zubereitete Produkte sowie Backwaren und Desserts sowie Marken für Speiseeis und Bäckereiprodukte. Erkunden Sie diese Bereiche, um Ihre Suche einzuordnen und zwischen einer Frage zu einem bekannten Artikel und einer ersten Sortimentsanfrage zu unterscheiden.",
+            "Kennen Sie das Produkt, nennen Sie seinen Namen und das gesuchte Format. Vergleichen Sie noch Alternativen, erklären Sie den vorgesehenen Einsatz und die interessante Produktgruppe. Datenblatt und Bedingungen der jeweiligen Anfrage müssen vor einer Entscheidung bestätigt werden. Der Onlinekatalog ist in Vorbereitung. Um einen Preis, eine Präsentation oder die Verfügbarkeit zu erfahren, setzen Sie die Anfrage mit dem eindeutig benannten Produkt fort."
+          ]
+        },
+        {
+          "label": "Service",
+          "title": "Der Ort Ihres Betriebs ist wichtig.",
+          "paragraphs": [
+            "Für eine Serviceanfrage nennen Sie den Ort und beschreiben Sie Ihren Betrieb ausreichend genau. Ergänzen Sie die Adresse, wenn sie relevant ist, und benennen Sie den Punkt, den Sie klären möchten. Der Standort identifiziert das Unternehmen; die Angaben zu Ihrem Betrieb verorten die Anfrage. Sind beide Punkte klar, lässt sich eine konkrete Frage zum gewünschten Ziel formulieren.",
+            "Kennen Sie das Produkt, behalten Sie dessen Namen im Gespräch bei. Suchen Sie noch nach einer Möglichkeit, beschreiben Sie die benötigte Gruppe und das Format. Sie können Fragen nach Themen ordnen: Produkteigenschaften, Unterlagen und Bedingungen der Anfrage. Diese Vorbereitung hilft, jede Antwort im richtigen Zusammenhang zu prüfen und den nächsten notwendigen Schritt zu bestimmen."
+          ]
+        },
+        {
+          "label": "Fragen",
+          "title": "Mit den nötigen Informationen ankommen.",
+          "paragraphs": [
+            "Was bereite ich vor einem Anruf vor? Betriebsname, Ort, Gruppe oder Artikel und die Frage, die Sie klären möchten. Was prüfe ich vor einer Anfahrt? Vollständige Adresse, veröffentlichte Kontaktzeiten und Anlass des Besuchs. Wie frage ich nach einem Zugangsdetail? Beschreiben Sie das Vorhaben und bitten Sie um die für diesen Fall passende Orientierung.",
+            "Wo geht es weiter, wenn ich nur Produktinformationen suche? In der Sortimentsübersicht oder unter Kontakt. Brauche ich ein Konto, um den Standort zu finden? Die öffentlichen Angaben dieser Seite stehen ohne Anmeldung im Kundenbereich zur Verfügung. Ihr Zweck ist einfach: Ihnen bei der Orientierung und einer hilfreichen Anfrage zu helfen, ohne dass Sie vor der Adresse erst eine allgemeine Unternehmensvorstellung durchgehen müssen."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Eine Adresse. Ein nächster Schritt.",
+        "text": "Ordnen Sie den Standort ein, prüfen Sie die Kontaktzeiten und stellen Sie Ihre Frage über einen echten Kontaktkanal. Orientierung ist dann hilfreich, wenn sie die nächste Entscheidung erleichtert.",
+        "link": "Kontakt und Karte ansehen"
+      }
+    },
+    "calidad": {
+      "title": "Erst verstehen, dann auswählen.",
+      "eyebrow": "Produktinformationen",
+      "description": "Fragen und Unterlagen für eine fachliche Auswahl mit dem nötigen Zusammenhang.",
+      "seo": {
+        "title": "Informationen zur Produktauswahl",
+        "description": "Fragen zu Produktgruppen, Formaten und Unterlagen für eine gewerbliche Anfrage zu Lebensmitteln."
+      },
+      "chapters": [
+        {
+          "label": "Maßstab",
+          "title": "Erst die Information, dann das Versprechen.",
+          "paragraphs": [
+            "Bei einer fachlichen Auswahl ist der Name einer Produktgruppe nur der Anfang. Zwei ähnlich aussehende Produkte können sich in Format, Zusammensetzung oder Verwendung unterscheiden. Bestimmen Sie zunächst, was Sie vergleichen: die Handelsbezeichnung, gegebenenfalls die Artikelnummer und die Angabe, die für Ihre Entscheidung ausschlaggebend ist. Auf dieser Grundlage wird die Informationssuche konkreter.",
+            "Dieser Rundgang bündelt hilfreiche Fragen für eine Anfrage zum Sortiment von Granja Mari Pepa. Jedes Kapitel hilft, einen Teil der Auswahl genauer zu bestimmen: Produktgruppe, Präsentation, Unterlagen und Gespräch. Nutzen Sie die Kapitel als erste Checkliste und notieren Sie, was Sie über das Produkt wissen und welche Informationen Sie anfordern müssen, um Ihren eigenen Auswahlprozess fortzusetzen."
+          ]
+        },
+        {
+          "label": "Identifizieren",
+          "title": "Wissen, von welchem Produkt wir sprechen.",
+          "paragraphs": [
+            "Das veröffentlichte Sortiment gliedert sich in tiefgekühlte, gekühlte und bei Umgebungstemperatur gelagerte Produkte. Sichtbare Gruppen umfassen Fisch und Meeresfrüchte, Fleisch, zubereitete Produkte sowie Backwaren und Desserts; hinzu kommt die Vorstellung von Marken für Speiseeis und Bäckereiprodukte. Nutzen Sie diese Einteilung, um den Bedarf einzuordnen, und präzisieren Sie anschließend die Angaben zu dem Artikel, den Sie kennenlernen möchten.",
+            "Wenn Ihnen Name, Marke oder Artikelnummer vorliegen, nennen Sie diese in Ihrer Anfrage. Gehen Sie von einem offeneren Bedarf aus, beschreiben Sie den Einsatz und das gewünschte Format. Ein gut bestimmter Ausgangspunkt verhindert, dass ein allgemeines Bild mit einem konkreten Datenblatt verglichen oder einem Produkt die Information eines anderen zugeschrieben wird."
+          ]
+        },
+        {
+          "label": "Format",
+          "title": "Auch die Präsentation wird bestätigt.",
+          "paragraphs": [
+            "Das Format gehört zur Auswahl. Halten Sie die Handelsbezeichnung bereit, wenn Sie sie kennen, und erläutern Sie die gesuchte Präsentation. Gehen Sie von einem offenen Bedarf aus, beschreiben Sie den vorgesehenen Einsatz und formulieren Sie eine Anfrage. So unterscheiden Sie zwischen der Suche nach einer Möglichkeit und der Prüfung der Eigenschaften eines bereits ausgewählten Artikels.",
+            "Der Onlinekatalog dieser Website bleibt in Vorbereitung. Die aktuelle Darstellung bietet einen Ausgangspunkt, um Produktgruppen zu erkunden und eine Anfrage einzuordnen; die Eigenschaften eines Artikels werden in dessen eigenen Informationen geprüft. Die Sortimentsseite dient der Orientierung, die geschäftliche Anfrage der Konkretisierung. Diese Unterscheidung erleichtert es, fehlende Informationen zu erkennen und den richtigen Weg zu ihnen zu finden."
+          ]
+        },
+        {
+          "label": "Dokumentation",
+          "title": "Jedes Dokument hat seinen Zusammenhang.",
+          "paragraphs": [
+            "Prüfen Sie vor der Verwendung von Produktinformationen, zu welchem Artikel sie gehören. Benötigen Sie Angaben zu Zusammensetzung, Allergenen, Bedingungen oder Anweisungen, fordern Sie die spezifischen Unterlagen an und prüfen Sie ihre Kennzeichnung. Bewahren Sie den Artikelnamen zusammen mit dem Dokument auf und notieren Sie die offene Frage, damit die Anfrage beim richtigen Produkt bleibt.",
+            "Auch das Datum ist wichtig. Die Veröffentlichungen von Februar und März 2026 ordnen das Verkaufsmaterial der jeweiligen Ausgabe zu. Interessiert Sie ein Artikel, halten Sie seine Kennzeichnung und die Ausgabe fest, in der Sie ihn gesehen haben. Erfragen Sie die für die aktuelle Anfrage geltenden Informationen, bevor Sie einen Preis, eine Bedingung oder eine Verfügbarkeit zur Grundlage Ihrer Entscheidung machen."
+          ]
+        },
+        {
+          "label": "Gespräch",
+          "title": "Nachfragen.",
+          "paragraphs": [
+            "Eine Anfrage kann Produktgruppe, gegebenenfalls bekannte Artikelnummer, Format und offene Frage zusammenführen. Die Art des Betriebs und der Ort helfen, das Gespräch einzuordnen, ohne die Produktinformation zu ersetzen. Ziel ist, dass beide Seiten wissen, was bestätigt werden soll, statt allgemeine Qualitätsaussagen anzuhäufen, die sich auf jeden beliebigen Artikel beziehen könnten.",
+            "Die veröffentlichten Kanäle sind unter Kontakt gebündelt. Sie können anrufen, eine E-Mail öffnen oder WhatsApp nutzen und eine Nachricht mit den vorhandenen Angaben vorbereiten. Trennen Sie mehrere Fragen voneinander, damit der Zusammenhang jeder einzelnen erhalten bleibt. Anschließend können Sie prüfen, welche Antwort das Produkt betrifft, welche sich auf das Format bezieht und welche Bedingung Ihrer Anfrage Sie besprochen haben."
+          ]
+        },
+        {
+          "label": "Fragen",
+          "title": "Orientierung von einem Datenblatt unterscheiden.",
+          "paragraphs": [
+            "Bestätigt ein Bild, welches Produkt ich erhalte? Nein: Der Artikel und seine Informationen müssen eindeutig bestimmt werden. Kann ich Datenblätter und Bestände online einsehen? Der öffentliche Katalog wird noch vorbereitet. Bestätigt eine datierte Veröffentlichung ein aktuelles Angebot? Das Datum gehört zum Zusammenhang; die Bedingungen müssen für die konkrete Anfrage geprüft werden.",
+            "Wo kläre ich eine Einzelheit, die hier nicht genannt wird? Fordern Sie die Informationen zum Artikel über die Kontaktkanäle an. Belegt diese Seite eine Zertifizierung? Sie ersetzt kein Zertifizierungsdokument und behauptet keine ungeprüfte Gültigkeit. Ihre Aufgabe ist, Ihnen die passenden Fragen und Quellen aufzuzeigen, damit die Auswahl auf Informationen beruht, die tatsächlich zum Produkt und zur Anfrage gehören."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Informationen, die zum Produkt gehören.",
+        "text": "Ein eindeutig bestimmbares Produkt, eine konkrete Frage und das passende Dokument. Ein guter Maßstab beginnt damit, Bekanntes zu erkennen und vor der Auswahl offene Punkte zu bestätigen.",
+        "link": "Eine Anfrage vorbereiten"
+      }
+    },
+    "reparto": {
+      "title": "Service beginnt mit dem richtigen Bezug.",
+      "eyebrow": "Anfrage zum Vertrieb",
+      "description": "Ort, Produkt und Abstimmung: Angaben für das Gespräch über eine konkrete Anfrage.",
+      "seo": {
+        "title": "Den Vertriebsservice anfragen",
+        "description": "Ort, Produkt und hilfreiche Angaben, um die Bedingungen einer Anfrage an Granja Mari Pepa zu klären."
+      },
+      "chapters": [
+        {
+          "label": "Ausgangspunkt",
+          "title": "Eine Adresse verändert die Frage.",
+          "paragraphs": [
+            "Ein Gespräch über den Vertrieb beginnt mit dem Standort des anfragenden Betriebs. Halten Sie Betriebsname, Ort und eine kurze Beschreibung Ihres Bedarfs bereit. Der veröffentlichte Standort von Granja Mari Pepa liegt in Lorca; die Angaben zu Ihrem Betrieb ermöglichen eine Frage zum konkreten Ziel, das Sie interessiert.",
+            "Dieser Rundgang hilft, eine Serviceanfrage zu ordnen. Gehen Sie von der Produktgruppe zu den Betriebsangaben über, unterscheiden Sie eine erste Suche von einer bereits bestimmten Anfrage und sammeln Sie die Bedingungen, die bestätigt werden sollen. Am Ende haben Sie einen klaren Zusammenhang für die Fortsetzung über die veröffentlichten Kanäle, bei dem jede Frage ihrem Anlass zugeordnet ist."
+          ]
+        },
+        {
+          "label": "Die Anfrage",
+          "title": "Was Sie brauchen, gehört zum Weg.",
+          "paragraphs": [
+            "Bestimmen Sie vor der Anfrage die interessante Produktgruppe oder das Produkt. Die Website stellt tiefgekühlte, gekühlte und bei Umgebungstemperatur gelagerte Produkte vor, mit Gruppen für Fisch und Meeresfrüchte, Fleisch, zubereitete Produkte sowie Backwaren und Desserts. Kennen Sie Marke, Artikelnummer oder Format, geben Sie diese an. Andernfalls erklären Sie den Bedarf, damit das Gespräch konkreter werden kann.",
+            "Der Onlinekatalog ist weiterhin in Vorbereitung. Auf dieser Seite lässt sich weder ein Bestand bestätigen noch eine Bestellung abschließen. Sie können sie nutzen, um eine Gruppe zu bestimmen, eine datierte Veröffentlichung anzusehen und die Angaben vorzubereiten, die Sie prüfen möchten. Die Sortimentsübersicht orientiert; Verfügbarkeit und Bedingungen der Anfrage benötigen eine gesonderte Bestätigung."
+          ]
+        },
+        {
+          "label": "Zusammenhang",
+          "title": "Der geplante Einsatz erklärt die Anfrage.",
+          "paragraphs": [
+            "Ein Gastronomiebetrieb, ein Geschäft oder eine Einrichtung der Gemeinschaftsverpflegung kann zu derselben Art von Lebensmittel unterschiedliche Fragen stellen. Nennen Sie die Tätigkeit Ihres Betriebs und die Informationen, die Sie prüfen müssen. Eine Frage zur Präsentation kann andere Angaben erfordern als eine Frage zu Unterlagen oder zur Abstimmung einer Anfrage. Erklären Sie den Zweck, um das Gespräch einzuordnen.",
+            "Sie können außerdem angeben, ob Ihre Frage ein bekanntes Produkt betrifft oder zu einer ersten Suche gehört. Diese Situationen zu trennen verhindert, dass die Artikelbestimmung mit anderen Servicefragen vermischt wird. Die Angaben sollten ausreichen, um den Bedarf zu erklären, ohne unnötige personenbezogene Daten oder Unterlagen zu senden, die mit diesem ersten Gespräch nichts zu tun haben."
+          ]
+        },
+        {
+          "label": "Das Ziel",
+          "title": "Die Angaben zum Betrieb vorbereiten.",
+          "paragraphs": [
+            "Bezieht sich eine Anfrage auf eine konkrete Adresse, sollten Betriebsname, Ort und Kontaktdaten eindeutig sein. Gibt es eine für die Frage relevante Zugangs- oder Annahmebedingung, können Sie diese beschreiben und klären lassen, wie sie die Anfrage beeinflusst, statt sie als bereits gelöst vorauszusetzen.",
+            "Ordnen Sie diese Angaben beispielsweise als kurze Liste: Identifikation des Betriebs, Zielort, Kontaktperson und offene Frage. Möchten Sie einen Aspekt der Annahme oder des Zugangs klären, beschreiben Sie ihn als zu besprechende Bedingung. So kann das Team den konkreten Fall behandeln, und Sie erkennen anschließend, welche Einzelheiten im Gespräch bestätigt wurden."
+          ]
+        },
+        {
+          "label": "Kontakt",
+          "title": "Abstimmen.",
+          "paragraphs": [
+            "Das Unternehmen veröffentlicht die Telefonnummern 968 46 75 14 und 639 77 86 55 sowie Kontaktzeiten von Montag bis Freitag, von 08:00 bis 13:00 und von 16:00 bis 19:00 Uhr. Unter Kontakt finden Sie außerdem E-Mail und WhatsApp. Wählen Sie den Kanal passend zu den Informationen, die Sie erläutern müssen, und behalten Sie Ort und Produkt als Bezug Ihrer Anfrage bei.",
+            "Bereiten Sie eine Nachricht auf dieser Website vor, prüfen Sie die Angaben vor dem Öffnen des gewählten Kanals. E-Mail und WhatsApp setzen den Vorgang in der jeweiligen Anwendung fort; beim Kopieren bleibt der Text für eine spätere Verwendung bereit. Nennen Sie Ort und Produkt am Anfang und trennen Sie Fragen, wenn sie unterschiedliche Bedingungen betreffen."
+          ]
+        },
+        {
+          "label": "Fragen",
+          "title": "Bestätigen, bevor etwas vorausgesetzt wird.",
+          "paragraphs": [
+            "Welche Informationen helfen bei einer Anfrage zu einem Ort? Benennen Sie Betrieb, Zielort und interessante Produktgruppe oder Artikelnummer. Wie frage ich nach einer Annahmebedingung? Beschreiben Sie die Situation und fragen Sie, wie sie die konkrete Anfrage beeinflusst. Wie ordne ich mehrere Fragen? Trennen Sie sie nach Produkt, Unterlagen und Service und erhalten Sie dabei den jeweiligen Zusammenhang.",
+            "Wo setze ich das Gespräch fort? Unter Kontakt sind die veröffentlichten Kanäle gebündelt. Kann ich über den öffentlichen Katalog bestellen? Er wird noch vorbereitet: Nutzen Sie die Produktgruppen zur Orientierung und fragen Sie nach dem interessanten Artikel. Prüfen Sie vor einer Entscheidung die Bedingungen für das konkrete Produkt und Ziel. Bewahren Sie erhaltene Informationen ebenso auf wie die Fragen, die noch offen sind."
+          ]
+        }
+      ],
+      "manifesto": {
+        "title": "Eine Anfrage mit einem Ziel.",
+        "text": "Ort, Produkt und ein nachvollziehbarer Bedarf. Gut vorbereitete Informationen ermöglichen ein Gespräch über den konkreten Service, ohne aus einer allgemeinen Orientierung ein Versprechen zu machen.",
+        "link": "Den Service anfragen"
+      }
+    }
+  },
+  "faq": {
+    "title": "Ein Ausgangspunkt für Ihre Fragen.",
+    "intro": "Gehen Sie Fragen nach Themen durch: Sortiment, gewerbliche Anfrage, Service und veröffentlichte Kontaktkanäle. Jede Antwort zeigt einen nächsten Schritt, den Sie mit den verfügbaren Informationen gehen können.",
+    "seo": {
+      "title": "Häufig gestellte Fragen",
+      "description": "Antworten nach Themen zu Sortiment, gewerblichen Anfragen, Ort, Kontakt, Katalog und Unterlagen von Granja Mari Pepa."
+    },
+    "groups": [
+      {
+        "title": "Das Sortiment",
+        "intro": "Eine Produktgruppe gibt der Suche eine Richtung. Informationen zu einem bestimmten Artikel ermöglichen eine genauere Auswahl.",
+        "questions": [
+          {
+            "question": "Welche Produktarten stellt Granja Mari Pepa vor?",
+            "answer": "Die veröffentlichten Informationen umfassen tiefgekühlte, gekühlte und bei Umgebungstemperatur gelagerte Produkte. Erkunden Sie das Sortiment, um eine Gruppe zu bestimmen, und fragen Sie nach Eigenschaften und Verfügbarkeit des konkreten Artikels."
+          },
+          {
+            "question": "Welche Produktgruppen finde ich auf der Website?",
+            "answer": "Gezeigt werden Fisch und Meeresfrüchte, Fleisch, zubereitete Produkte sowie Backwaren und Desserts. Auch Topgel, Nestlé und Panamar werden in ihren Bereichen Tiefkühlprodukte, Speiseeis und Bäckerei vorgestellt. Das Sortiment orientiert die Suche nach einem Artikel."
+          },
+          {
+            "question": "Zeigt das Foto das Format, das ich anfragen kann?",
+            "answer": "Die Bilder helfen, eine Produktgruppe zu erkennen. Nennen Sie für eine Formatanfrage den Namen oder die Artikelnummer, wenn bekannt, und fordern Sie die Informationen zum gewünschten Produkt an."
+          }
+        ]
+      },
+      {
+        "title": "Die gewerbliche Anfrage",
+        "intro": "Die Art des Betriebs hilft, den Bedarf zu erklären. Die Einzelheiten jedes Services werden im Gespräch bestätigt.",
+        "questions": [
+          {
+            "question": "Wie formuliere ich eine Anfrage für Hotellerie oder Gastronomie?",
+            "answer": "Nennen Sie Tätigkeit, Ort und Produktgruppe. Ergänzen Sie Marke oder Format, wenn bekannt, um eine erste Suche von einer Frage zu einem eindeutig bestimmten Artikel zu unterscheiden."
+          },
+          {
+            "question": "Welche Angaben sind hilfreich, wenn ich ein Geschäft betreibe?",
+            "answer": "Erklären Sie die gesuchte Präsentation und die Informationen, die Sie prüfen müssen. Der Zusammenhang des Betriebs ermöglicht es, die für diese Anfrage geltenden Bedingungen zu klären."
+          },
+          {
+            "question": "Wie bereite ich eine Anfrage für die Gemeinschaftsverpflegung vor?",
+            "answer": "Beschreiben Sie den Bedarf und die Produktunterlagen, die Sie prüfen möchten. Formulieren Sie besondere Anforderungen der Einrichtung als Fragen, um ihre Anwendung auf den konkreten Fall zu klären."
+          }
+        ]
+      },
+      {
+        "title": "Ort und Service",
+        "intro": "Eine konkrete Adresse und Anfrage ermöglichen Fragen zu konkreten Bedingungen.",
+        "questions": [
+          {
+            "question": "Wie frage ich an, ob mein Ort bedient wird?",
+            "answer": "Nennen Sie Ort und interessante Produktgruppe oder das Produkt über einen veröffentlichten Kanal. Ob der Standort Ihres Betriebs zum Liefergebiet gehört, wird für die konkrete Anfrage bestätigt."
+          },
+          {
+            "question": "Wo kläre ich einen Zeitrahmen?",
+            "answer": "Nennen Sie zusammen mit Produkt und Ort das Datum oder die Bedingung, die Sie klären möchten. Die Bedingungen werden für die jeweilige Anfrage erfragt. Diese Seite legt keinen allgemeinen Zeitrahmen fest."
+          },
+          {
+            "question": "Bestätigt die Standortadresse eine Abholmöglichkeit?",
+            "answer": "Die Seite zu Lorca bündelt Standort und Kontakt. Erläutern Sie vor der Anfahrt den Anlass eines Besuchs, einer Abholung oder einer Zugangsfrage und bestätigen Sie das weitere Vorgehen."
+          }
+        ]
+      },
+      {
+        "title": "Gespräch und Orientierung",
+        "intro": "Telefonnummern, Kontaktzeiten und Adresse stehen zusammen, damit Sie den nächsten Schritt organisieren können.",
+        "questions": [
+          {
+            "question": "Welche Telefonnummern sind veröffentlicht?",
+            "answer": "Die veröffentlichten Telefonnummern lauten 968 46 75 14 und 639 77 86 55. Unter Kontakt finden Sie außerdem E-Mail und WhatsApp. Jede Aktion öffnet den von Ihnen gewählten Kanal."
+          },
+          {
+            "question": "Welche Kontaktzeiten sind veröffentlicht?",
+            "answer": "Montag bis Freitag, von 08:00 bis 13:00 und von 16:00 bis 19:00 Uhr. Klären Sie für einen konkreten Vorgang oder eine Anfahrt zusätzlich die jeweils geltenden Bedingungen."
+          },
+          {
+            "question": "Wo befindet sich der Standort in Lorca?",
+            "answer": "Polígono Industrial Saprelorca, avenida Francisco Jimeno Sola, 3, 30817 Lorca, Murcia. Die lokale Seite und Kontakt zeigen die Adresse und einen externen Kartenlink."
+          }
+        ]
+      },
+      {
+        "title": "Katalog und Veröffentlichungen",
+        "intro": "Datum und aktueller Status einer Ressource gehören zu ihren Informationen.",
+        "questions": [
+          {
+            "question": "Kann ich im öffentlichen Katalog einkaufen?",
+            "answer": "Der Onlinekatalog ist in Vorbereitung. Das Sortiment stellt Produktgruppen und Kontaktkanäle vor. Es bestätigt weder Bestände noch Preise und ermöglicht keinen öffentlichen Bestellabschluss."
+          },
+          {
+            "question": "Enthalten die Magazine Angebote für heute?",
+            "answer": "Die verfügbaren Veröffentlichungen behalten ihre Ausgaben von Februar und März 2026. Fragen Sie nach der aktuellen Anwendbarkeit jeder Bedingung auf den Artikel und die Anfrage, die Sie interessieren."
+          },
+          {
+            "question": "Wo bestätige ich eine Einzelheit, die in der Sortimentsübersicht fehlt?",
+            "answer": "Halten Sie Produktgruppe, Produkt oder Marke und die offene Frage bereit. Setzen Sie die Anfrage über Kontakt fort, um die spezifischen Informationen zu diesem Artikel zu erhalten."
+          }
+        ]
+      },
+      {
+        "title": "Informationen und Datenschutz",
+        "intro": "Prüfen Sie die Angaben, die Sie teilen möchten, und verwenden Sie die zur Aufgabe passenden Dokumente.",
+        "questions": [
+          {
+            "question": "Bedeutet eine vorbereitete Nachricht, dass sie bereits versendet wurde?",
+            "answer": "Einen Text vorzubereiten versendet ihn nicht. Sie können E-Mail oder WhatsApp öffnen oder den Text kopieren. Prüfen und versenden Sie ihn anschließend im gewählten Kanal."
+          },
+          {
+            "question": "Welche Informationen gehören in eine erste Anfrage?",
+            "answer": "Betriebsname, Ort, Produktgruppe oder Artikelnummer und die konkrete Frage. Teilen Sie die für das Gespräch notwendigen Angaben und vermeiden Sie Unterlagen oder persönliche Informationen, die nicht zu seinem Zweck gehören."
+          },
+          {
+            "question": "Wo lese ich die veröffentlichten Richtlinien?",
+            "answer": "Datenschutz und Nutzungsbedingungen verlinken die bestehenden Texte mit fortlaufender Lektüre und einem nach Abschnitten geordneten Inhaltsverzeichnis. Eine Anfrage vorzubereiten verändert diese Dokumente nicht."
+          }
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Sprechen wir über Ihren Bedarf.",
+    "intro": "Wählen Sie einen Kanal oder bereiten Sie eine Anfrage mit Ort, Betrieb und dem interessanten Produkt vor.",
+    "channelTitle": "Ein echter Kontaktkanal, nach Ihrer Wahl.",
+    "prepareTitle": "Den Zusammenhang Ihrer Anfrage vorbereiten.",
+    "prepareIntro": "Diese Felder bereiten eine Nachricht in Ihrem Browser vor. Die Website versendet sie nicht. Sie können eine E-Mail öffnen, über WhatsApp fortfahren oder den Text kopieren und vor dem Teilen prüfen.",
+    "hoursTitle": "Kontaktzeiten, mit denen Sie das Gespräch planen können.",
+    "hoursBody": "Kontakt von Montag bis Freitag, von 08:00 bis 13:00 und von 16:00 bis 19:00 Uhr. Bestätigen Sie für einen Besuch oder einen konkreten Vorgang die Bedingungen über einen veröffentlichten Kanal.",
+    "locationsTitle": "Die Adresse kommt vor der Karte.",
+    "locationsBody": "Lorca · Polígono Industrial Saprelorca · avenida Francisco Jimeno Sola, 3 ·30817. Die Karte öffnet sich erst, wenn Sie die Route im externen Dienst aufrufen möchten.",
+    "questionsTitle": "Bevor es weitergeht.",
+    "call": "Anrufen",
+    "email": "E-Mail öffnen",
+    "whatsapp": "WhatsApp öffnen",
+    "copy": "Anfrage kopieren",
+    "maps": "Anfahrt",
+    "copied": "Anfrage kopiert. Prüfen Sie sie vor dem Teilen.",
+    "copyError": "Kopieren war nicht möglich. Sie können den Anfragetext markieren.",
+    "preview": "Vorschau Ihrer Anfrage",
+    "privacyLink": "Datenschutzerklärung lesen",
+    "validation": "Prüfen Sie die markierten Felder, bevor Sie die Anfrage vorbereiten.",
+    "prepared": "Anfrage vorbereitet. Versenden Sie sie anschließend über den gewählten Kanal.",
+    "questions": [
+      {
+        "question": "Sendet dieses Formular eine Nachricht an das Unternehmen?",
+        "answer": "Es bereitet den Text Ihrer Anfrage vor und öffnet einen echten Kontaktkanal. Sie entscheiden, wann Sie ihn per E-Mail oder WhatsApp versenden. Beim Kopieren bleibt der Text erhalten, damit Sie ihn prüfen und später verwenden können."
+      },
+      {
+        "question": "Kann ich nach Produkten oder dem Service fragen?",
+        "answer": "Ja. Nennen Sie Produktgruppe oder Artikelnummer, den Ort und den Punkt, den Sie bestätigen lassen möchten. Kennen Sie das Format noch nicht, beschreiben Sie es als Bedarf, damit das Gespräch konkreter werden kann."
+      },
+      {
+        "question": "Wo finde ich den Standort?",
+        "answer": "Die Adresse in Lorca steht auf dieser Seite und in den Standortinformationen. Möchten Sie dorthin fahren, prüfen Sie die Angaben und klären Sie zuvor besondere Einzelheiten Ihres Besuchs."
+      }
+    ],
+    "seo": {
+      "title": "Granja Mari Pepa kontaktieren",
+      "description": "Veröffentlichte Telefonnummern, E-Mail, WhatsApp, Kontaktzeiten und Adresse zur Vorbereitung einer Anfrage an Granja Mari Pepa."
+    }
+  },
+  "ui": {
+    "start": "Startseite",
+    "nextChapter": "Nächstes Kapitel",
+    "askTeam": "Das Team fragen",
+    "chapterNavigation": "Kapitel dieser Seite",
+    "browseRange": "Das Sortiment erkunden",
+    "rangeDetail": "Produktgruppen und Veröffentlichungen mit ihrem Zusammenhang.",
+    "products": "Produkte",
+    "findAnswer": "Eine Antwort finden",
+    "questionsDetail": "Fragen nach Themen geordnet.",
+    "questions": "Fragen",
+    "prepareInquiry": "Eine Anfrage vorbereiten",
+    "contactDetail": "Veröffentlichte Kanäle und hilfreiche Angaben.",
+    "contact": "Kontakt",
+    "understandInformation": "Die Informationen verstehen",
+    "qualityDetail": "Fragen zur Bestimmung von Produkt und Unterlagen.",
+    "quality": "Informationen",
+    "askService": "Den Service anfragen",
+    "serviceDetail": "Ort und Zusammenhang der Anfrage.",
+    "service": "Service",
+    "identify": "Identifizieren",
+    "recognizeFamily": "Die Produktgruppe erkennen",
+    "understand": "Verstehen",
+    "questionsByTopic": "Fragen nach Themen",
+    "confirm": "Konkretisieren",
+    "continueRealChannel": "Über einen echten Kanal fortfahren",
+    "atmosphereLabel": "Atmosphärische Szenen · Links zur Orientierung",
+    "backToStart": "Zurück zum Anfang",
+    "continue": "Weiter",
+    "groupNavigation": "Fragengruppen",
+    "nextTopic": "Nächstes Thema",
+    "allQuestions": "Alle Fragen ansehen",
+    "locationInfo": "Informationen zu Lorca",
+    "telephone": "Telefon",
+    "directContact": "Direkter Kontakt",
+    "emailOrders": "E-Mail für Bestellungen",
+    "publishedNumbers": "Veröffentlichte Kontaktnummern.",
+    "mobile": "Mobiltelefon",
+    "message": "Nachricht",
+    "openingHours": "Kontaktzeiten",
+    "location": "Standort",
+    "preparation": "Vorbereiten",
+    "channelLink": "Kanäle",
+    "contactSubject": "Anfrage an Granja Mari Pepa"
+  },
+  "limits": [
+    "Übersetzt wurde ausschließlich der eingefrorene spanische Snapshot mit SHA256 3851862aa36ee4fe8d8a04e307f52421a674d97b4c4b6d782eccb76dd093ede7.",
+    "Schlüssel, Reihenfolge und Handlungsbedeutung sowie Marken, Orts- und Straßenangaben, Telefonnummern, Jahre und Daten bleiben erhalten. Es werden keine neuen Leistungs-, Preis- oder Verfügbarkeitszusagen ergänzt.",
+    "Die 55 bestehenden rechtlichen Klauseln wurden für diesen Auftrag weder neu übersetzt noch verändert.",
+    "Diese Sprachfassung bestätigt offene Sachfragen der spanischen Quelle nicht unabhängig. Eine Laufzeit-, Bildschirm- oder fachliche Abnahme wird mit der Datenübersetzung nicht behauptet."
+  ]
+}

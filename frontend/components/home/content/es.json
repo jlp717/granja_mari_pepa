@@ -1,17 +1,12 @@
 {
   "seoTitle": "Granja Maripepa | Distribución HORECA Murcia",
-  "seoDescription": "Distribución alimentaria para hostelería desde Lorca. Congelados, refrigerados y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
+  "seoDescription": "Distribución alimentaria para hostelería desde Lorca. Congelado, refrigerado y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
   "scroll": "Recorre nuestra historia",
   "illustration": "Fotografía ilustrativa. Consulta los formatos disponibles.",
   "products": "Consultar la gama",
   "contact": "Hablar con el equipo",
   "read": "Continuar",
-  "familyNames": [
-    "Productos del mar",
-    "Carnes",
-    "Precocinados",
-    "Repostería"
-  ],
+  "familyNames": ["Productos del mar", "Carnes", "Precocinados", "Repostería"],
   "brandsTitle": "Marcas que forman parte de la gama",
   "brandsIntro": "Grupo Topgel, Nestlé y Panamar aparecen en nuestra oferta publicada. Sus páginas permiten ampliar la información de cada marca; las condiciones de suministro se consultan con nuestro equipo.",
   "phone": "Teléfono",
@@ -59,7 +54,7 @@
     {
       "label": "03 · Gama",
       "title": "Un recorrido por lo que tu cocina necesita.",
-      "lead": "Cuatro familias abren el catálogo: mar, carnes, precocinados y repostería. No hace falta empezar por un código. Puedes partir del tipo de elaboración que preparas y llevar esa necesidad a la conversación comercial.",
+      "lead": "La gama publicada se ordena en siete familias. Esta portada presenta cuatro: mar, carnes, precocinados y repostería. No hace falta empezar por un código. Puedes partir del tipo de elaboración que preparas y llevar esa necesidad a la conversación comercial.",
       "supports": [
         {
           "title": "Familias, no escaparates de stock",

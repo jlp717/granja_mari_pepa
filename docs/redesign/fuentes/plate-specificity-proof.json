@@ -1,0 +1,49 @@
+{
+  "node_id": "public",
+  "change": "One selector only. No curve, duration, value, layout, content or asset changes.",
+  "path": "frontend/components/home/scene-plate.module.css",
+  "before_sha256": "ebc065d994bce34fe0508ca8508bf75197bed3365185cb462bb8bd2dec8f155b",
+  "sha256": "4f9ce9ac572d31135c97587db293398c1c555a851012ae854f4f0578bf81cb76",
+  "oldSelector": ":global(html.kage-live) .plate",
+  "newSelector": ":global(html.kage-live) .plate[data-scene-fallback][aria-hidden]",
+  "inverse_recovers_original_bytes": true,
+  "specificity": {
+    "base": [
+      0,
+      3,
+      0
+    ],
+    "oldLive": [
+      0,
+      2,
+      1
+    ],
+    "newLive": [
+      0,
+      4,
+      1
+    ]
+  },
+  "cascadePrediction": [
+    {
+      "condition": "No html.kage-live: SSR, reduced motion or GL failure",
+      "matching": "base only",
+      "opacity": 1,
+      "visibility": "visible"
+    },
+    {
+      "condition": "html.kage-live set by ready public GL lifecycle",
+      "matching": "newLive outranks base",
+      "opacity": 0,
+      "visibility": "hidden"
+    },
+    {
+      "condition": "Lifecycle removes html.kage-live on failure/reduced/disposal",
+      "matching": "base restored",
+      "opacity": 1,
+      "visibility": "visible"
+    }
+  ],
+  "runtimeComputedStyleMeasured": false,
+  "verificationScope": "Static specificity and byte-inverse proof only, as Root requested no browser/heavy checks."
+}
