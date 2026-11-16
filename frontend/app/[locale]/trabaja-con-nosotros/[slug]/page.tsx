@@ -14,9 +14,9 @@ import { WordReveal } from "@/components/gmp/WordReveal";
 import { editorialMetadata } from "@/components/editorial/metadata";
 import { fetchPublicJob, fetchPublicJobs } from "@/lib/public-content";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { PublicLiveRefresh } from "@/components/live/PublicLiveRefresh";
 import styles from "@/components/editorial/careers.module.css";
 
-const MAIL = "cv.rrhh@maripepa.es";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -52,15 +52,7 @@ export default async function JobPage(props: {
   if (!job) notFound();
 
   const isEs = params.locale === "es";
-  const applyHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-    MAIL,
-  )}&su=${encodeURIComponent(
-    `${isEs ? "Candidatura" : "Application"} — ${job.title}`,
-  )}&body=${encodeURIComponent(
-    isEs
-      ? `Hola,\n\nMe interesa la oferta de ${job.title} (${job.location}).\n\nNombre:\nTeléfono:\n\nAdjunto mi currículum en PDF.\n\nUn saludo.`
-      : `Hello,\n\nI am interested in the ${job.title} role (${job.location}).\n\nName:\nPhone:\n\nI attach my resume as a PDF.\n\nBest regards.`,
-  )}`;
+  const applyHref = `/${params.locale}/trabaja-con-nosotros#candidatura`;
   const liveJobs = await fetchPublicJobs();
   const related = (liveJobs ?? [])
     .filter((item) => item.slug !== job.slug)
@@ -119,6 +111,7 @@ export default async function JobPage(props: {
           },
         ]}
       />
+      <PublicLiveRefresh types="jobs,settings" />
       <GMPRoute
         routeId={`career-${job.slug}`}
         mode="journey"

@@ -797,6 +797,32 @@ export function AdminPanel() {
     }
   };
 
+  const refreshRef = useRef(refresh);
+  useEffect(() => {
+    refreshRef.current = refresh;
+  }, [refresh]);
+
+  useEffect(() => {
+    if (!user) return;
+    const source = new EventSource('/api/admin/events', {
+      withCredentials: true,
+    });
+    let timer: number | undefined;
+    const schedule = () => {
+      if (timer) window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        refreshRef.current().catch(() => {
+          /* El panel ya muestra el error en la siguiente acción. */
+        });
+      }, 250);
+    };
+    source.addEventListener('message', schedule);
+    return () => {
+      source.close();
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [user]);
+
   const reportFailure = (failure: unknown, fallback: string) => {
     notify(failure instanceof Error ? failure.message : fallback);
   };

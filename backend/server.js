@@ -229,6 +229,10 @@ app.use(compression({
     if (res.getHeader('Content-Type') === 'application/pdf') {
       return false;
     }
+    // SSE: la compresión retiene los eventos y rompe el tiempo real.
+    if (req.path.endsWith('/events')) {
+      return false;
+    }
     return compression.filter(req, res);
   }
 }));

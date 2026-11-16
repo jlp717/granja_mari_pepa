@@ -26,6 +26,7 @@ adminRouter.use(controller.requireSession);
 
 adminRouter.post('/logout', controller.logout);
 adminRouter.get('/bootstrap', controller.bootstrap);
+adminRouter.get('/events', controller.adminEvents);
 adminRouter.get('/sessions', controller.sessions);
 adminRouter.delete('/sessions/:token', controller.revokeSession);
 adminRouter.delete('/sessions', controller.revokeOtherSessions);
@@ -61,6 +62,7 @@ adminRouter.post(
 publicRouter.get('/jobs', controller.publicJobs);
 publicRouter.get('/jobs/:slug', controller.publicJob);
 publicRouter.get('/magazines', controller.publicMagazines);
+publicRouter.get('/events', controller.publicEvents);
 publicRouter.post('/applications', controller.publicApplication);
 publicRouter.post(
   '/cv',

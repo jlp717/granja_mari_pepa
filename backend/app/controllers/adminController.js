@@ -9,6 +9,7 @@ const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');
 const adminService = require('../services/adminService');
+const contentEvents = require('../services/contentEvents');
 const logger = require('../utils/logger');
 
 const COOKIE_NAME = 'gmp_admin_session';
@@ -156,12 +157,16 @@ const revokeOtherSessions = wrap(async (req, res) => {
 
 const createJob = wrap(async (req, res) => {
   const job = await adminService.createJob(req.body || {}, actor(req));
+  contentEvents.publishAdmin('jobs', 'created');
+  contentEvents.publishPublic('jobs', 'created');
   return res.status(201).json({ success: true, job });
 });
 
 const updateJob = wrap(async (req, res) => {
   const job = await adminService.updateJob(req.params.id, req.body || {}, actor(req));
   if (!job) return fail(res, 404, 'La oferta ya no existe.');
+  contentEvents.publishAdmin('jobs', 'updated');
+  contentEvents.publishPublic('jobs', 'updated');
   return res.json({ success: true, job });
 });
 
@@ -169,18 +174,24 @@ const jobStatus = wrap(async (req, res) => {
   const status = req.body && req.body.status === 'published' ? 'published' : 'draft';
   const job = await adminService.setJobStatus(req.params.id, status, actor(req));
   if (!job) return fail(res, 404, 'La oferta ya no existe.');
+  contentEvents.publishAdmin('jobs', 'updated');
+  contentEvents.publishPublic('jobs', 'updated');
   return res.json({ success: true, job });
 });
 
 const duplicateJob = wrap(async (req, res) => {
   const job = await adminService.duplicateJob(req.params.id, actor(req));
   if (!job) return fail(res, 404, 'La oferta ya no existe.');
+  contentEvents.publishAdmin('jobs', 'created');
+  contentEvents.publishPublic('jobs', 'created');
   return res.status(201).json({ success: true, job });
 });
 
 const deleteJob = wrap(async (req, res) => {
   const done = await adminService.deleteJob(req.params.id, actor(req));
   if (!done) return fail(res, 404, 'La oferta ya no existe.');
+  contentEvents.publishAdmin('jobs', 'deleted');
+  contentEvents.publishPublic('jobs', 'deleted');
   return res.json({ success: true });
 });
 
@@ -188,12 +199,16 @@ const deleteJob = wrap(async (req, res) => {
 
 const createMagazine = wrap(async (req, res) => {
   const magazine = await adminService.createMagazine(req.body || {}, actor(req));
+  contentEvents.publishAdmin('magazines', 'created');
+  contentEvents.publishPublic('magazines', 'created');
   return res.status(201).json({ success: true, magazine });
 });
 
 const updateMagazine = wrap(async (req, res) => {
   const magazine = await adminService.updateMagazine(req.params.id, req.body || {}, actor(req));
   if (!magazine) return fail(res, 404, 'La revista ya no existe.');
+  contentEvents.publishAdmin('magazines', 'updated');
+  contentEvents.publishPublic('magazines', 'updated');
   return res.json({ success: true, magazine });
 });
 
@@ -201,12 +216,16 @@ const magazineStatus = wrap(async (req, res) => {
   const status = req.body && req.body.status === 'published' ? 'published' : 'draft';
   const magazine = await adminService.setMagazineStatus(req.params.id, status, actor(req));
   if (!magazine) return fail(res, 404, 'La revista ya no existe.');
+  contentEvents.publishAdmin('magazines', 'updated');
+  contentEvents.publishPublic('magazines', 'updated');
   return res.json({ success: true, magazine });
 });
 
 const deleteMagazine = wrap(async (req, res) => {
   const done = await adminService.deleteMagazine(req.params.id, actor(req));
   if (!done) return fail(res, 404, 'La revista ya no existe.');
+  contentEvents.publishAdmin('magazines', 'deleted');
+  contentEvents.publishPublic('magazines', 'deleted');
   return res.json({ success: true });
 });
 
@@ -214,12 +233,14 @@ const deleteMagazine = wrap(async (req, res) => {
 
 const updateApplication = wrap(async (req, res) => {
   await adminService.updateApplication(req.params.id, req.body || {}, actor(req));
+  contentEvents.publishAdmin('applications', 'updated');
   return res.json({ success: true });
 });
 
 const deleteApplication = wrap(async (req, res) => {
   const done = await adminService.deleteApplication(req.params.id, actor(req));
   if (!done) return fail(res, 404, 'La candidatura ya no existe.');
+  contentEvents.publishAdmin('applications', 'deleted');
   return res.json({ success: true });
 });
 
@@ -234,12 +255,14 @@ const inviteMember = wrap(async (req, res) => {
     return fail(res, 400, 'La contraseña temporal debe tener al menos 10 caracteres.');
   }
   if (result.error) return fail(res, 400, 'Introduce un email válido.');
+  contentEvents.publishAdmin('team', 'created');
   return res.status(201).json({ success: true });
 });
 
 const revokeMember = wrap(async (req, res) => {
   const done = await adminService.revokeUser(req.params.id, actor(req));
   if (!done) return fail(res, 404, 'Ese acceso ya no existe.');
+  contentEvents.publishAdmin('team', 'deleted');
   return res.json({ success: true });
 });
 
@@ -251,6 +274,7 @@ const resendInvite = wrap(async (req, res) => {
     detail: `Invitación reenviada a ${String(email || '').slice(0, 160)}`,
     actor: actor(req),
   });
+  contentEvents.publishAdmin('team', 'updated');
   return res.json({ success: true });
 });
 
@@ -258,6 +282,8 @@ const resendInvite = wrap(async (req, res) => {
 
 const saveSettings = wrap(async (req, res) => {
   const settings = await adminService.saveSettings(req.body || {}, actor(req));
+  contentEvents.publishAdmin('settings', 'updated');
+  contentEvents.publishPublic('settings', 'updated');
   return res.json({ success: true, settings });
 });
 
@@ -364,6 +390,7 @@ const publicApplication = wrap(async (req, res) => {
   }
   const id = await adminService.createApplication(payload, { ip: req.adminIp });
   if (!id) return fail(res, 400, 'No se pudo registrar la candidatura.');
+  contentEvents.publishAdmin('applications', 'created');
   return res.status(201).json({ success: true, id });
 });
 
@@ -412,8 +439,13 @@ const downloadCv = wrap(async (req, res) => {
   return res.sendFile(full);
 });
 
+const adminEvents = (req, res) => contentEvents.streamAdmin(req, res);
+const publicEvents = (req, res) => contentEvents.streamPublic(req, res);
+
 module.exports = {
   health,
+  adminEvents,
+  publicEvents,
   requireSession,
   login,
   logout,

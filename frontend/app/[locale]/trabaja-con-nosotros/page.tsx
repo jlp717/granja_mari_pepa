@@ -2,6 +2,7 @@ import { EditorialCareers } from "@/components/editorial/EditorialCareers";
 import { editorialMetadata } from "@/components/editorial/metadata";
 import { fetchPublicJobs } from "@/lib/public-content";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { PublicLiveRefresh } from "@/components/live/PublicLiveRefresh";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -31,6 +32,7 @@ export default async function CareersPage(props: {
           { name: "Trabaja con nosotros", path: "/trabaja-con-nosotros" },
         ]}
       />
+      <PublicLiveRefresh types="jobs,settings" />
       <EditorialCareers locale={params.locale} jobs={live ?? []} />
     </>
   );

@@ -165,17 +165,7 @@ export function EditorialCareers({
     field.style.height = `${field.scrollHeight}px`;
   };
 
-  const cvEmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-    "cv.rrhh@maripepa.es",
-  )}&su=${encodeURIComponent(
-    isEs
-      ? "Candidatura espontánea — Granja Maripepa"
-      : "Open application — Granja Maripepa",
-  )}&body=${encodeURIComponent(
-    isEs
-      ? "Hola,\n\nMe gustaría enviar mi candidatura espontánea.\n\nNombre:\nTeléfono:\nSector de interés:\n\nAdjunto mi currículum en PDF.\n\nUn saludo."
-      : "Hello,\n\nI would like to send an open application.\n\nName:\nPhone:\nSector of interest:\n\nI attach my resume as a PDF.\n\nBest regards.",
-  )}`;
+  const cvEmailHref = "#candidatura";
 
   const filtered = jobs.filter((job) => {
     if (dept !== "Todos" && job.department !== dept) return false;
@@ -835,15 +825,12 @@ export function EditorialCareers({
               </p>
               <div className={styles.cvContact} data-rv="up">
                 <span>
-                  {isEs ? "O directamente por email" : "Or directly by email"}
+                  {isEs
+                    ? "Las candidaturas se registran solo desde este formulario"
+                    : "Applications are recorded only through this form"}
                 </span>
-                <a
-                  href={cvEmailHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor
-                >
-                  cv.rrhh@maripepa.es
+                <a href={cvEmailHref} data-cursor>
+                  {isEs ? "Rellenar candidatura" : "Fill in the form"}
                 </a>
               </div>
               <ul className={styles.cvNotes}>
@@ -1094,11 +1081,9 @@ export function EditorialCareers({
               <a
                 href={cvEmailHref}
                 className={styles.closeAction}
-                target="_blank"
-                rel="noopener noreferrer"
                 data-cursor
               >
-                <span>{isEs ? "Escribir a RRHH" : "Email HR"}</span>
+                <span>{isEs ? "Rellenar candidatura" : "Fill in the form"}</span>
                 <ArrowRight size={15} aria-hidden="true" />
               </a>
             </div>

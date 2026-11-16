@@ -164,8 +164,23 @@ export function usePublicMagazines(): NavMagazine[] {
     };
 
     load();
+
+    const source = new EventSource("/api/public/events");
+    source.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data) as { type?: string };
+        if (payload.type === "magazines") {
+          attempt = 0;
+          void load();
+        }
+      } catch {
+        /* Evento no válido: se ignora. */
+      }
+    };
+
     return () => {
       active = false;
+      source.close();
       if (timer) clearTimeout(timer);
     };
   }, []);
