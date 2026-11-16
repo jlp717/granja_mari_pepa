@@ -19,25 +19,33 @@ import { Rate } from "k6/metrics";
 
 const BASE = __ENV.BASE_URL || "https://www.mari-pepa.com";
 const businessErrors = new Rate("business_errors");
+const apiIterations = Number(__ENV.API_ITERATIONS ?? 10);
+
+// Los formularios devuelven 400 con datos inválidos de forma deliberada.
+http.setResponseCallback(http.expectedStatuses(200, 201, 400));
 
 const pages = ["/es", "/es/trabaja-con-nosotros", "/es/contacto"];
 
-export const options = {
-  scenarios: {
-    navegacion: {
-      executor: "constant-vus",
-      vus: Number(__ENV.PAGES_VUS || 8),
-      duration: __ENV.PAGES_DURATION || "20s",
-      exec: "browse",
-    },
-    api_lectura: {
-      executor: "per-vu-iterations",
-      vus: 1,
-      iterations: Number(__ENV.API_ITERATIONS || 10),
-      startTime: "1s",
-      exec: "apiRead",
-    },
+const scenarios = {
+  navegacion: {
+    executor: "constant-vus",
+    vus: Number(__ENV.PAGES_VUS || 8),
+    duration: __ENV.PAGES_DURATION || "20s",
+    exec: "browse",
   },
+};
+if (apiIterations > 0) {
+  scenarios.api_lectura = {
+    executor: "per-vu-iterations",
+    vus: 1,
+    iterations: apiIterations,
+    startTime: "1s",
+    exec: "apiRead",
+  };
+}
+
+export const options = {
+  scenarios,
   thresholds: {
     http_req_failed: ["rate<0.01"],
     http_req_duration: ["p(95)<1500"],

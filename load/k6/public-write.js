@@ -25,6 +25,9 @@ const businessErrors = new Rate("business_errors");
 
 const pdf = "%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n";
 
+// 400 es la respuesta esperada al enviar datos inválidos a propósito.
+http.setResponseCallback(http.expectedStatuses(200, 201, 400));
+
 const scenarios = {
   validacion: {
     executor: "per-vu-iterations",
