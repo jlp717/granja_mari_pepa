@@ -1379,7 +1379,7 @@ export default function CustomerAreaPage() {
 
   return (
     <OperationalSurface>
-      <div className="min-h-[calc(100vh-12rem)] py-8 overflow-hidden relative">
+      <div className="min-h-[calc(100vh_-_12rem)] py-8 overflow-hidden relative">
         {/* ... existing content ... */}
 
         {/* Existing content is rendered above, I am appending the modal here */}
