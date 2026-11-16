@@ -30,6 +30,11 @@ function isInternalIp(ip: string): boolean {
       process.env.ADMIN_TRUST_LOOPBACK === "1"
     );
   }
+  const exact = (process.env.ADMIN_ALLOWED_IPS || "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  if (exact.includes(ip)) return true;
   const allow = (process.env.ADMIN_ALLOWED_CIDRS || "")
     .split(",")
     .map((entry) => entry.trim())
@@ -52,7 +57,16 @@ function clientIp(request: NextRequest): string {
   return "";
 }
 
-function denied(): NextResponse {
+function denied(request: NextRequest, ip: string): NextResponse {
+  console.warn(
+    "[admin-gate] denied " +
+      JSON.stringify({
+        ip: ip || "unknown",
+        cf: request.headers.has("cf-connecting-ip"),
+        xr: request.headers.has("x-real-ip"),
+        xff: request.headers.has("x-forwarded-for"),
+      }),
+  );
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8" />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -105,7 +119,7 @@ export function proxy(request: NextRequest) {
   if (isAdminPath) {
     const ip = clientIp(request);
     const noIpAllowed = process.env.NODE_ENV !== "production";
-    if (!isInternalIp(ip) && !(noIpAllowed && !ip)) return denied();
+    if (!isInternalIp(ip) && !(noIpAllowed && !ip)) return denied(request, ip);
     const response = NextResponse.next();
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
     return response;
