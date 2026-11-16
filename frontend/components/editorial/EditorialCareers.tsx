@@ -144,6 +144,7 @@ export function EditorialCareers({
   const [search, setSearch] = useState("");
   const [cvSector, setCvSector] = useState("Otro");
   const [cvJob, setCvJob] = useState("");
+  const activeJob = jobs.find((job) => job.slug === cvJob) || null;
   const [cvSubmitted, setCvSubmitted] = useState(false);
   const [cvSending, setCvSending] = useState(false);
   const [cvError, setCvError] = useState("");
@@ -154,16 +155,16 @@ export function EditorialCareers({
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const job = params.get("puesto") || "";
-    if (job) setCvJob(job);
-    if (window.location.hash !== "#careers-cv") return;
     const timer = window.setTimeout(() => {
+      if (job && jobs.some((item) => item.slug === job)) setCvJob(job);
+      if (window.location.hash !== "#careers-cv") return;
       const target = document.getElementById("careers-cv");
       if (!target) return;
       const top = target.getBoundingClientRect().top + window.scrollY - 96;
       window.scrollTo({ top, behavior: "smooth" });
     }, 250);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [jobs]);
   const cvMessageRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -819,11 +820,26 @@ export function EditorialCareers({
         <Chapter
           id="careers-cv"
           scene={4}
-          title={isEs ? "Envía tu CV" : "Send your CV"}
+          title={
+            activeJob
+              ? isEs
+                ? "Envía tu candidatura"
+                : "Send your application"
+              : isEs
+                ? "Envía tu CV"
+                : "Send your CV"
+          }
         >
           <div className="sec-head">
             <span className="k">
-              05 — {isEs ? "Candidatura abierta" : "Open application"}
+              05 —{" "}
+              {activeJob
+                ? isEs
+                  ? "Candidatura"
+                  : "Application"
+                : isEs
+                  ? "Candidatura abierta"
+                  : "Open application"}
             </span>
             <span className="rule" />
             <span className="k">RRHH</span>
@@ -831,22 +847,47 @@ export function EditorialCareers({
           <div className={styles.cvGrid}>
             <div className={styles.cvIntro}>
               <WordReveal as="h2" className="display h-sec">
-                {isEs ? "¿No ves tu puesto?" : "Don't see your role?"}
+                {activeJob
+                  ? isEs
+                    ? `Aplica a ${activeJob.title}.`
+                    : `Apply for ${activeJob.title}.`
+                  : isEs
+                    ? "¿No ves tu puesto?"
+                    : "Don't see your role?"}
               </WordReveal>
               <p className="lead" data-rv="up">
-                {isEs
-                  ? "Envíanos tu currículum e indica el sector que te interesa. Lo revisamos y te escribimos si encaja en una vacante futura."
-                  : "Send us your CV and tell us which sector interests you. We review it and contact you if a future opening fits."}
+                {activeJob
+                  ? isEs
+                    ? `Estás aplicando a ${activeJob.title} en ${activeJob.location}. Completa tus datos y adjunta tu CV en PDF.`
+                    : `You are applying for ${activeJob.title} in ${activeJob.location}. Complete your details and attach your CV as a PDF.`
+                  : isEs
+                    ? "Envíanos tu currículum e indica el sector que te interesa. Lo revisamos y te escribimos si encaja en una vacante futura."
+                    : "Send us your CV and tell us which sector interests you. We review it and contact you if a future opening fits."}
               </p>
               <div className={styles.cvContact} data-rv="up">
-                <span>
-                  {isEs
-                    ? "Las candidaturas se registran solo desde este formulario"
-                    : "Applications are recorded only through this form"}
-                </span>
-                <a href={cvEmailHref} data-cursor>
-                  {isEs ? "Rellenar candidatura" : "Fill in the form"}
-                </a>
+                {activeJob ? (
+                  <>
+                    <span>
+                      {isEs
+                        ? "¿No es este puesto? Puedes cambiarlo en el desplegable."
+                        : "Not this role? You can change it in the selector."}
+                    </span>
+                    <Link href="/trabaja-con-nosotros" data-cursor>
+                      {isEs ? "Ver todos los puestos" : "See all roles"}
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <span>
+                      {isEs
+                        ? "Las candidaturas se registran solo desde este formulario"
+                        : "Applications are recorded only through this form"}
+                    </span>
+                    <a href={cvEmailHref} data-cursor>
+                      {isEs ? "Rellenar candidatura" : "Fill in the form"}
+                    </a>
+                  </>
+                )}
               </div>
               <ul className={styles.cvNotes}>
                 <li>
