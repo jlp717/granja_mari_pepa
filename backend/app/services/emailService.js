@@ -6,7 +6,22 @@
  */
 
 const nodemailer = require('nodemailer');
+const path = require('path');
 const logger = require('../utils/logger');
+
+// Logo real de la marca para la cabecera de los correos. Se incrusta en el
+// propio mensaje (CID) para que se vea sin depender de un servidor externo.
+const EMAIL_LOGO_PATH = path.join(__dirname, '..', '..', 'assets', 'email', 'logo-maripepa.png');
+const EMAIL_LOGO_CID = 'maripepa-logo@maripepa.es';
+
+function emailLogoAttachment() {
+    return {
+        filename: 'maripepa.png',
+        path: EMAIL_LOGO_PATH,
+        cid: EMAIL_LOGO_CID,
+        contentDisposition: 'inline'
+    };
+}
 
 // Configuración SMTP desde variables de entorno
 const SMTP_CONFIG = {
@@ -460,7 +475,8 @@ async function sendApplicationStatusEmail(application, status) {
                       <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
                         <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
                         <tr><td style="padding:26px 30px 0;">
-                          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Granja Maripepa &middot; Empleo</p>
+                          <img src="cid:${EMAIL_LOGO_CID}" alt="Granja Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
+                          <p style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Granja Maripepa &middot; Empleo</p>
                           <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">${template.title}</h1>
                         </td></tr>
                         <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
@@ -476,7 +492,8 @@ async function sendApplicationStatusEmail(application, status) {
                     </td></tr>
                   </table>
                 </div>
-            `
+            `,
+            attachments: [emailLogoAttachment()]
         });
         logger.info('Respuesta de candidatura enviada', {
             to: application.email,
@@ -493,6 +510,63 @@ async function sendApplicationStatusEmail(application, status) {
     }
 }
 
+
+/**
+ * Acuse de recibo al visitante del formulario de contacto.
+ * Sale desde noreply con el logo de la marca y respuestas a pedidos.
+ */
+async function sendContactAcknowledgment({ to, name }) {
+    const esc = (value) =>
+        String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    try {
+        const transport = initializeTransporter();
+        const inbox = process.env.CONTACT_EMAIL || 'pedidos@mari-pepa.com';
+        const info = await transport.sendMail({
+            from: `"Granja Mari Pepa" <${FROM_EMAIL}>`,
+            to,
+            replyTo: inbox,
+            subject: 'Hemos recibido tu mensaje — Granja Mari Pepa',
+            html: `
+                <div style="margin:0;padding:0;background:#f2f1ee;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
+                    <tr><td align="center">
+                      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
+                        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
+                        <tr><td style="padding:26px 30px 0;">
+                          <img src="cid:${EMAIL_LOGO_CID}" alt="Granja Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
+                          <h1 style="margin:18px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Hemos recibido tu mensaje</h1>
+                        </td></tr>
+                        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
+                          <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
+                          <p style="margin:0 0 12px;">Gracias por escribir a Granja Mari Pepa. Tu mensaje ya está en manos del equipo correspondiente y te responderemos a este mismo correo lo antes posible.</p>
+                          <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Si necesitas algo urgente, llámanos al <a href="tel:+34968467514" style="color:#cf3700;text-decoration:none;">968 46 75 14</a>.</p>
+                          <p style="margin:0;">Puedes responder a este correo y llegará directamente a <a href="mailto:${inbox}" style="color:#cf3700;">${inbox}</a>.</p>
+                        </td></tr>
+                        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#8a8578;">
+                          Granja Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
+                          968 46 75 14 &middot; pedidos@granjamaripepa.com
+                        </td></tr>
+                      </table>
+                    </td></tr>
+                  </table>
+                </div>
+            `,
+            attachments: [emailLogoAttachment()]
+        });
+        logger.info('Acuse de contacto enviado', {
+            to,
+            messageId: info && info.messageId
+        });
+        return { success: true, messageId: (info && info.messageId) || null };
+    } catch (error) {
+        logger.error('Error enviando acuse de contacto', { message: error.message });
+        return { success: false, message: error.message };
+    }
+}
 
 async function sendInternalNotification({ to, subject, text, replyTo }) {
     const recipient = to || process.env.CHATBOT_HANDOFF_EMAIL || 'pedidos@mari-pepa.com';
@@ -523,6 +597,7 @@ module.exports = {
     sendVerificationCodeEmail,
     sendApplicationNotification,
     sendApplicationStatusEmail,
+    sendContactAcknowledgment,
     sendInvoiceEmail,
     sendInternalNotification,
     verifyConnection

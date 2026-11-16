@@ -466,21 +466,9 @@ const publicContact = wrap(async (req, res) => {
       'No se pudo enviar el mensaje. Llámanos al 968 46 75 14 y lo resolvemos.',
     );
   }
-  const inbox = process.env.CONTACT_EMAIL || 'pedidos@mari-pepa.com';
-  const acknowledgment = await emailService.sendInternalNotification({
+  const acknowledgment = await emailService.sendContactAcknowledgment({
     to: email,
-    subject: 'Hemos recibido tu mensaje — Granja Maripepa',
-    text: [
-      `Hola ${name},`,
-      '',
-      'Hemos recibido tu mensaje y lo hemos pasado al equipo correspondiente.',
-      'Te responderemos a este mismo correo lo antes posible.',
-      '',
-      'Si necesitas algo urgente, llámanos al 968 46 75 14.',
-      '',
-      'Granja Maripepa, S.L. · Lorca, Murcia',
-    ].join('\n'),
-    replyTo: inbox,
+    name,
   });
   if (!acknowledgment.success) {
     logger.warn('Acuse de contacto no enviado', { message: acknowledgment.message });
