@@ -23,6 +23,13 @@ const SESSION_HOURS = 8;
 const MAX_FAILED_ATTEMPTS = 5;
 const ATTEMPT_WINDOW_MINUTES = 15;
 const BCRYPT_ROUNDS = 12;
+// Política de candidaturas: una activa por persona y 20 días naturales tras
+// un rechazo antes de poder volver a enviar.
+const REJECT_COOLDOWN_DAYS = Number(
+  process.env.APPLICATION_REJECT_COOLDOWN_DAYS || 20,
+);
+const ACTIVE_APPLICATION_STATUSES = ['new', 'review', 'interview', 'hired'];
+const applicationLocks = new Map();
 
 const DEFAULT_SETTINGS = {
   rrhh_email: 'cv.rrhh@maripepa.es',
@@ -601,64 +608,168 @@ async function deleteApplication(id, actor) {
   return true;
 }
 
-async function createApplication(payload, meta = {}) {
-  const id = newId('app');
-  const name = str(payload.name, 160);
-  if (!name) return null;
-  const jobId = str(payload.jobId, 64);
-  let jobTitle = str(payload.jobTitle, 160);
-  if (jobId && !jobTitle) {
-    const job = await getJob(jobId);
-    jobTitle = job ? job.title : '';
-  }
-  const candidateUrl = str(payload.cvUrl, 500);
-  const cvUrl = /^\/api\/admin\/cv\/[A-Za-z0-9._-]+\.pdf$/.test(candidateUrl)
-    ? candidateUrl
-    : '';
-  await query(
-    `INSERT INTO ${table('ADMIN_APPLICATIONS')}
-      (ID, JOB_ID, JOB_TITLE, NAME, EMAIL, PHONE, SECTOR, MESSAGE, CV_NAME, CV_URL, STATUS, NOTES, ACTIVE)
-     VALUES (?,?,?,?,?,?,?,?,?,?,'new','',1)`,
-    [
-      id,
-      jobId,
-      jobTitle,
-      name,
-      str(payload.email, 160),
-      str(payload.phone, 40),
-      str(payload.sector, 80),
-      str(payload.message, 4000),
-      str(payload.cvName, 255),
-      cvUrl,
-    ],
-  );
-  await logActivity({
-    kind: 'create',
-    entity: 'Candidatura',
-    detail: `${name} · candidatura recibida${meta.ip ? ` desde ${meta.ip}` : ''}`,
-    actor: name,
-  });
+function addCalendarDays(value, days) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
 
-  const settings = await getSettings().catch(() => null);
-  const inbox = (settings && settings.rrhhEmail) || 'cv.rrhh@maripepa.es';
-  emailService
-    .sendApplicationNotification(
-      {
-        name,
-        email: str(payload.email, 160),
-        phone: str(payload.phone, 40),
-        sector: str(payload.sector, 80),
-        message: str(payload.message, 4000),
+function applicationDate(row) {
+  const raw = row.STATUS_CHANGED_AT || row.UPDATED_AT || row.CREATED_AT;
+  const date = new Date(String(raw || '').replace(' ', 'T'));
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+/**
+ * Reglas de candidatura:
+ * - Una sola candidatura activa por persona.
+ * - Tras un rechazo, 20 días naturales de espera.
+ */
+async function applicationEligibility(email) {
+  const normalized = str(email, 160).toLowerCase();
+  if (!normalized) {
+    return {
+      allowed: false,
+      code: 'EMAIL_REQUIRED',
+      message: 'Necesitamos tu email para comprobar si ya tienes una candidatura.',
+    };
+  }
+  const rows = await query(
+    `SELECT ID, JOB_ID, JOB_TITLE, STATUS, CREATED_AT, UPDATED_AT, STATUS_CHANGED_AT
+       FROM ${table('ADMIN_APPLICATIONS')}
+      WHERE ACTIVE = 1 AND LOWER(EMAIL) = ?
+      ORDER BY CREATED_AT DESC`,
+    [normalized],
+  );
+  const active = rows.find((row) =>
+    ACTIVE_APPLICATION_STATUSES.includes(String(row.STATUS || '').trim()),
+  );
+  if (active) {
+    const title = String(active.JOB_TITLE || '').trim();
+    return {
+      allowed: false,
+      code: 'APPLICATION_ACTIVE',
+      message: title
+        ? `Ya tienes una candidatura activa para ${title}. Cuando el equipo la resuelva podrás enviar otra.`
+        : 'Ya tienes una candidatura activa. Cuando el equipo la resuelva podrás enviar otra.',
+    };
+  }
+  const rejected = rows.filter(
+    (row) => String(row.STATUS || '').trim() === 'rejected',
+  );
+  if (rejected.length) {
+    const since = applicationDate(rejected[0]);
+    const until = since ? addCalendarDays(since, REJECT_COOLDOWN_DAYS) : null;
+    if (until && Date.now() < until.getTime()) {
+      const formatted = until.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      });
+      return {
+        allowed: false,
+        code: 'REJECT_COOLDOWN',
+        message: `Descartamos tu candidatura hace menos de ${REJECT_COOLDOWN_DAYS} días. Podrás volver a enviarla a partir del ${formatted}.`,
+        retryAt: until.toISOString(),
+      };
+    }
+  }
+  return { allowed: true };
+}
+
+async function withApplicationLock(key, task) {
+  while (applicationLocks.has(key)) {
+    await applicationLocks.get(key).catch(() => {});
+  }
+  let release;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  applicationLocks.set(key, gate);
+  try {
+    return await task();
+  } finally {
+    applicationLocks.delete(key);
+    release();
+  }
+}
+
+async function createApplication(payload, meta = {}) {
+  const name = str(payload.name, 160);
+  const email = str(payload.email, 160).toLowerCase();
+  if (!name) return { blocked: { code: 'NAME_REQUIRED', message: 'El nombre es obligatorio.' } };
+  if (!email) return { blocked: { code: 'EMAIL_REQUIRED', message: 'El email es obligatorio.' } };
+
+  return withApplicationLock(email, async () => {
+    const eligibility = await applicationEligibility(email);
+    if (!eligibility.allowed) return { blocked: eligibility };
+
+    const jobId = str(payload.jobId, 64);
+    let jobTitle = str(payload.jobTitle, 160);
+    if (jobId) {
+      const job = await getPublicJob(jobId);
+      if (!job) {
+        return {
+          blocked: {
+            code: 'JOB_UNAVAILABLE',
+            message: 'Esta oferta ya no está disponible. Elige otra o envía una candidatura espontánea.',
+          },
+        };
+      }
+      jobTitle = job.title;
+    }
+    const candidateUrl = str(payload.cvUrl, 500);
+    const cvUrl = /^\/api\/admin\/cv\/[A-Za-z0-9._-]+\.pdf$/.test(candidateUrl)
+      ? candidateUrl
+      : '';
+    const id = newId('app');
+    await query(
+      `INSERT INTO ${table('ADMIN_APPLICATIONS')}
+        (ID, JOB_ID, JOB_TITLE, NAME, EMAIL, PHONE, SECTOR, MESSAGE, CV_NAME, CV_URL, STATUS, NOTES, ACTIVE)
+       VALUES (?,?,?,?,?,?,?,?,?,?,'new','',1)`,
+      [
+        id,
+        jobId,
         jobTitle,
-        cvName: str(payload.cvName, 255),
-      },
-      inbox,
-    )
-    .catch((error) => {
-      logger.warn('Aviso de candidatura no enviado', { message: error.message });
+        name,
+        email,
+        str(payload.phone, 40),
+        str(payload.sector, 80),
+        str(payload.message, 4000),
+        str(payload.cvName, 255),
+        cvUrl,
+      ],
+    );
+    await logActivity({
+      kind: 'create',
+      entity: 'Candidatura',
+      detail: `${name} · candidatura recibida${meta.ip ? ` desde ${meta.ip}` : ''}`,
+      actor: name,
     });
 
-  return id;
+    const settings = await getSettings().catch(() => null);
+    const inbox = (settings && settings.rrhhEmail) || 'cv.rrhh@maripepa.es';
+    emailService
+      .sendApplicationNotification(
+        {
+          name,
+          email,
+          phone: str(payload.phone, 40),
+          sector: str(payload.sector, 80),
+          message: str(payload.message, 4000),
+          jobTitle,
+          cvName: str(payload.cvName, 255),
+        },
+        inbox,
+      )
+      .catch((error) => {
+        logger.warn('Aviso de candidatura no enviado', { message: error.message });
+      });
+
+    return { id, jobTitle, name, email };
+  });
 }
 
 /* ------------------------------------------------------------ team/users */
@@ -1180,6 +1291,7 @@ module.exports = {
   updateApplication,
   deleteApplication,
   createApplication,
+  applicationEligibility,
   listUsers,
   findUserByEmail,
   inviteUser,

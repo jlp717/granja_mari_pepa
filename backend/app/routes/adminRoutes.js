@@ -68,6 +68,7 @@ publicRouter.get('/jobs', controller.publicJobs);
 publicRouter.get('/jobs/:slug', controller.publicJob);
 publicRouter.get('/magazines', controller.publicMagazines);
 publicRouter.get('/events', controller.publicEvents);
+publicRouter.get('/applications/eligibility', controller.publicEligibility);
 publicRouter.post('/applications', publicFormLimiter, controller.publicApplication);
 publicRouter.post('/contact', contactLimiter, controller.publicContact);
 publicRouter.post(

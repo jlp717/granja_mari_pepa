@@ -144,6 +144,8 @@ export function AdminApplications({
           <h1 className={styles.pageTitle}>Candidaturas</h1>
           <p className={styles.pageDesc}>
             Revisa los CV recibidos, cambia su estado y deja notas internas para el equipo.
+            Cada persona solo puede tener una candidatura activa; tras un rechazo se
+            bloquea el envío durante 20 días naturales.
           </p>
         </div>
         <button

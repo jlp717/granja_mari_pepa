@@ -1141,6 +1141,21 @@
   color: #e0704a;
 }
 
+.hpField {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.policyNote {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--bone-dim, #8a8578);
+}
+
 .successState {
   display: flex;
   flex-direction: column;

@@ -521,6 +521,71 @@ async function sendApplicationStatusEmail(application, status) {
 
 
 /**
+ * Confirmación al candidato de que su candidatura ha entrado.
+ * Sale desde el buzón de RRHH con el logo de la marca.
+ */
+async function sendApplicationReceivedEmail({ name, email, jobTitle }) {
+    const esc = (value) =>
+        String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    const dedicated = createRrhhTransporter();
+    try {
+        const transporter = dedicated || initializeTransporter();
+        const senderAddress = dedicated
+            ? process.env.SMTP_RRHH_FROM || process.env.SMTP_RRHH_USER
+            : FROM_EMAIL;
+        const job = esc(jobTitle);
+        const info = await transporter.sendMail({
+            from: `"Mari Pepa - Empleo" <${senderAddress}>`,
+            to: email,
+            replyTo: process.env.SMTP_RRHH_REPLY_TO || 'cv.rrhh@maripepa.es',
+            subject: job
+                ? `Hemos recibido tu candidatura — ${job} — Mari Pepa`
+                : 'Hemos recibido tu candidatura — Mari Pepa',
+            html: `
+                <div style="margin:0;padding:0;background:#f2f1ee;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
+                    <tr><td align="center">
+                      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
+                        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
+                        <tr><td style="padding:26px 30px 0;">
+                          <img src="cid:${EMAIL_LOGO_CID}" alt="Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
+                          <h1 style="margin:18px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Candidatura recibida</h1>
+                        </td></tr>
+                        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
+                          <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
+                          <p style="margin:0 0 12px;">Tu candidatura ha quedado registrada. El equipo de Recursos Humanos la revisará y te escribirá a este mismo correo.</p>
+                          ${job ? `<p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Puesto: ${job}</p>` : ''}
+                          <p style="margin:0 0 12px;">No es necesario que envíes otra candidatura mientras esta esté en curso. Si finalmente no encajas, podrás volver a aplicar a partir de 20 días naturales.</p>
+                          <p style="margin:0;">Si tienes cualquier duda, responde a este correo.</p>
+                        </td></tr>
+                        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#8a8578;">
+                          Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
+                          968 46 75 14 &middot; cv.rrhh@maripepa.es
+                        </td></tr>
+                      </table>
+                    </td></tr>
+                  </table>
+                </div>
+            `,
+            attachments: [emailLogoAttachment()]
+        });
+        logger.info('Confirmación de candidatura enviada', {
+            to: email,
+            hasJob: Boolean(jobTitle),
+            messageId: info && info.messageId
+        });
+        return { success: true, messageId: (info && info.messageId) || null };
+    } catch (error) {
+        logger.error('Error enviando confirmación de candidatura', { message: error.message });
+        return { success: false, message: error.message };
+    }
+}
+
+/**
  * Acuse de recibo al visitante del formulario de contacto.
  * Sale desde noreply con el logo de la marca y respuestas a pedidos.
  */
@@ -606,6 +671,7 @@ module.exports = {
     sendVerificationCodeEmail,
     sendApplicationNotification,
     sendApplicationStatusEmail,
+    sendApplicationReceivedEmail,
     sendContactAcknowledgment,
     sendInvoiceEmail,
     sendInternalNotification,

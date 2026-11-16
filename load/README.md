@@ -30,7 +30,16 @@ Umbrales: errores < 1 %, p95 < 1,5 s.
 k6 run load/k6/public-write.js
 ```
 
-Comprueba que contacto y candidatura rechazan datos inválidos (`400`) sin crear filas ni enviar correo.
+Comprueba que contacto y candidatura rechazan datos inválidos (`400`), que la
+elegibilidad responde y que una segunda candidatura del mismo email se bloquea
+con `409`. No crea filas ni envía correo en el escenario de validación.
+
+## Reglas de candidatura que se prueban
+
+- Una sola candidatura activa por email.
+- Tras un rechazo, 20 días naturales de espera.
+- No se puede aplicar a una oferta que ya no esté publicada.
+- Un segundo envío con el mismo email devuelve `409`.
 
 ## Escritura real (solo pruebas)
 

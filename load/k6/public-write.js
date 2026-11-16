@@ -25,8 +25,8 @@ const businessErrors = new Rate("business_errors");
 
 const pdf = "%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n";
 
-// 400 es la respuesta esperada al enviar datos inválidos a propósito.
-http.setResponseCallback(http.expectedStatuses(200, 201, 400));
+// 400 y 409 son respuestas esperadas (datos inválidos y duplicados).
+http.setResponseCallback(http.expectedStatuses(200, 201, 400, 409));
 
 const scenarios = {};
 const validationIterations = Number(__ENV.ITERATIONS ?? 3);
@@ -57,6 +57,23 @@ export const options = {
 };
 
 export function validation() {
+  const eligibility = http.get(
+    `${BASE}/api/public/applications/eligibility?email=carga-preflight@example.com`,
+    { tags: { name: "elegibilidad" } },
+  );
+  const eligibilityOk = check(eligibility, {
+    "elegibilidad 200": (r) => r.status === 200,
+    "elegibilidad responde": (r) => {
+      try {
+        return JSON.parse(r.body).success === true;
+      } catch {
+        return false;
+      }
+    },
+  });
+  businessErrors.add(!eligibilityOk);
+  sleep(0.5);
+
   const contact = http.post(
     `${BASE}/api/public/contact`,
     JSON.stringify({ nombre: "", email: "no-es-un-email", mensaje: "corto", privacidad: false }),
@@ -100,24 +117,33 @@ export function writeApplication() {
     cvUrl = "";
   }
 
-  const application = http.post(
-    `${BASE}/api/public/applications`,
-    JSON.stringify({
-      name: `Carga ${stamp}`,
-      email,
-      phone: "600000000",
-      sector: "Otro",
-      message: "Prueba de carga k6",
-      jobId: "",
-      jobTitle: "",
-      cvName: `carga-${stamp}.pdf`,
-      cvUrl,
-    }),
-    { headers: { "Content-Type": "application/json" }, tags: { name: "candidatura_carga" } },
-  );
+  const payload = JSON.stringify({
+    name: `Carga ${stamp}`,
+    email,
+    phone: "600000000",
+    sector: "Otro",
+    message: "Prueba de carga k6",
+    jobId: "",
+    jobTitle: "",
+    cvName: `carga-${stamp}.pdf`,
+    cvUrl,
+  });
+  const application = http.post(`${BASE}/api/public/applications`, payload, {
+    headers: { "Content-Type": "application/json" },
+    tags: { name: "candidatura_carga" },
+  });
   const applicationOk = check(application, {
     "candidatura creada": (r) => r.status === 201,
   });
   businessErrors.add(!applicationOk);
+
+  const duplicate = http.post(`${BASE}/api/public/applications`, payload, {
+    headers: { "Content-Type": "application/json" },
+    tags: { name: "candidatura_duplicada" },
+  });
+  const duplicateOk = check(duplicate, {
+    "duplicado bloqueado": (r) => r.status === 409,
+  });
+  businessErrors.add(!duplicateOk);
   sleep(1);
 }

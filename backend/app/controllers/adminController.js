@@ -422,6 +422,9 @@ const publicMagazines = wrap(async (_req, res) => {
 
 const publicApplication = wrap(async (req, res) => {
   const payload = req.body || {};
+  if (payload.web || payload.website) {
+    return fail(res, 400, 'No se pudo enviar la candidatura.');
+  }
   if (!payload.name || !payload.email) {
     return fail(res, 400, 'El nombre y el email son obligatorios.');
   }
@@ -432,10 +435,36 @@ const publicApplication = wrap(async (req, res) => {
   if (!settings.applicationsOpen) {
     return fail(res, 403, 'Las candidaturas están cerradas en este momento.', 'APPLICATIONS_CLOSED');
   }
-  const id = await adminService.createApplication(payload, { ip: req.adminIp });
-  if (!id) return fail(res, 400, 'No se pudo registrar la candidatura.');
+  const result = await adminService.createApplication(payload, { ip: req.adminIp });
+  if (result.blocked) {
+    return res.status(409).json({
+      success: false,
+      code: result.blocked.code || 'APPLICATION_BLOCKED',
+      message: result.blocked.message,
+      retryAt: result.blocked.retryAt,
+    });
+  }
+  if (!result.id) return fail(res, 400, 'No se pudo registrar la candidatura.');
   contentEvents.publishAdmin('applications', 'created');
-  return res.status(201).json({ success: true, id });
+  emailService
+    .sendApplicationReceivedEmail({
+      name: result.name,
+      email: result.email,
+      jobTitle: result.jobTitle,
+    })
+    .catch((error) => {
+      logger.warn('Confirmación de candidatura no enviada', { message: error.message });
+    });
+  return res.status(201).json({ success: true, id: result.id });
+});
+
+const publicEligibility = wrap(async (req, res) => {
+  const email = String(req.query.email || '').trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return fail(res, 400, 'El email no es válido.');
+  }
+  const result = await adminService.applicationEligibility(email);
+  return res.json({ success: true, ...result });
 });
 
 const publicContact = wrap(async (req, res) => {
@@ -575,6 +604,7 @@ module.exports = {
   publicJob,
   publicMagazines,
   publicApplication,
+  publicEligibility,
   publicContact,
   publicCv,
   downloadCv,

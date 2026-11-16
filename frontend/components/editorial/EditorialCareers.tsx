@@ -289,9 +289,18 @@ export function EditorialCareers({
     const email = String(fd.get("cv-email") || "").trim();
     const phone = String(fd.get("cv-telefono") || "").trim();
     const message = String(fd.get("cv-mensaje") || "").trim();
+    const honeypot = String(fd.get("cv-web") || "").trim();
     const jobSlug = String(fd.get("cv-puesto") || "").trim();
     const selectedJob = jobs.find((item) => item.slug === jobSlug);
     const file = fd.get("cv-file") as File | null;
+    if (honeypot) {
+      setCvError(
+        isEs
+          ? "No se pudo enviar la candidatura."
+          : "Could not send your application.",
+      );
+      return;
+    }
     const bad: BadField[] = [];
     if (name.length < 2) bad.push("nombre");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) bad.push("email");
@@ -323,6 +332,21 @@ export function EditorialCareers({
     setCvSending(true);
     setCvProgress(0);
     try {
+      const eligibilityResponse = await fetch(
+        `/api/public/applications/eligibility?email=${encodeURIComponent(email)}`,
+        { cache: "no-store", signal: AbortSignal.timeout(12000) },
+      );
+      if (eligibilityResponse.ok) {
+        const eligibility = (await eligibilityResponse.json().catch(() => null)) as {
+          allowed?: boolean;
+          message?: string;
+        } | null;
+        if (eligibility && eligibility.allowed === false) {
+          throw new Error(
+            eligibility.message || "No puedes enviar otra candidatura todavía.",
+          );
+        }
+      }
       const cvData = await uploadCv(file!, setCvProgress);
       const response = await fetch("/api/public/applications", {
         method: "POST",
@@ -1003,8 +1027,8 @@ export function EditorialCareers({
                 </h3>
                 <p>
                   {isEs
-                    ? "Gracias por tu interés. Te contactaremos si encajas en alguna vacante."
-                    : "Thank you for your interest. We will contact you if you fit an opening."}
+                    ? "Te hemos enviado un correo de confirmación. Te contactaremos si encajas en alguna vacante."
+                    : "We have sent you a confirmation email. We will contact you if you fit an opening."}
                 </p>
               </div>
             ) : (
@@ -1139,11 +1163,27 @@ export function EditorialCareers({
                   />
                 </label>
                 {fieldErr("file")}
+                <div className={styles.hpField} aria-hidden="true">
+                  <label>
+                    No rellenar
+                    <input
+                      name="cv-web"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </label>
+                </div>
                 {cvError && (
                   <p className={styles.errorMsg} role="alert">
                     {cvError}
                   </p>
                 )}
+                <p className={styles.policyNote}>
+                  {isEs
+                    ? "Solo puedes tener una candidatura activa. Si la descartamos, podrás volver a enviarla a partir de 20 días naturales."
+                    : "You can only have one active application. If we decline it, you can apply again after 20 calendar days."}
+                </p>
                 <button
                   className="cta"
                   type="submit"
