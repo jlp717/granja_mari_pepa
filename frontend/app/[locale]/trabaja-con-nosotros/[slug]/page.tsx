@@ -8,9 +8,9 @@ import {
   Clock,
   MapPin,
 } from "lucide-react";
-import { KageRoute } from "@/components/kage/KageRoute";
-import { Chapter } from "@/components/kage/Chapter";
-import { WordReveal } from "@/components/kage/WordReveal";
+import { GMPRoute } from "@/components/gmp/GMPRoute";
+import { Chapter } from "@/components/gmp/Chapter";
+import { WordReveal } from "@/components/gmp/WordReveal";
 import { editorialMetadata } from "@/components/editorial/metadata";
 import { fetchPublicJob, fetchPublicJobs } from "@/lib/public-content";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
@@ -119,7 +119,7 @@ export default async function JobPage(props: {
           },
         ]}
       />
-      <KageRoute
+      <GMPRoute
         routeId={`career-${job.slug}`}
         mode="journey"
         world="gmp"
@@ -329,7 +329,7 @@ export default async function JobPage(props: {
             </Link>
           </div>
         </Chapter>
-      </KageRoute>
+      </GMPRoute>
     </>
   );
 }

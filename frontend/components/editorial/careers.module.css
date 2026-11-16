@@ -1,4 +1,4 @@
-/* Careers page — Granja Mari Pepa. Dark editorial surface, Kage tokens. */
+/* Careers page — Granja Mari Pepa. Dark editorial surface, GMP tokens. */
 
 .careers :global(.sec) {
   padding-block: clamp(64px, 9vh, 116px);
@@ -12,16 +12,16 @@
 
 /* the role page does not need a full-screen hero: the summary must give way
    to the actual role, not to a viewport of empty scene */
-.careers[data-kage-route^="career-"] :global(.hero) {
+.careers[data-gmp-route^="career-"] :global(.hero) {
   min-height: auto;
   padding-bottom: clamp(40px, 7vh, 84px);
 }
 
-.careers[data-kage-route^="career-"] :global(.sec) {
+.careers[data-gmp-route^="career-"] :global(.sec) {
   padding-block: clamp(44px, 7vh, 78px);
 }
 
-.careers[data-kage-route^="career-"] :global(.sec-head) {
+.careers[data-gmp-route^="career-"] :global(.sec-head) {
   margin-bottom: clamp(22px, 4vh, 40px);
 }
 
@@ -232,7 +232,7 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .liveHead b {
@@ -298,7 +298,7 @@
   margin-top: 3px;
   font-size: 11px;
   letter-spacing: 0.02em;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -360,7 +360,7 @@
   font-style: normal;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .benefitList {
@@ -414,7 +414,7 @@
 .benefitNum {
   font-size: 10px;
   letter-spacing: 0.12em;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   padding-top: 5px;
   font-variant-numeric: tabular-nums;
 }
@@ -440,7 +440,7 @@
   margin: 0;
   font-size: 12.5px;
   line-height: 1.55;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ the plant */
@@ -516,7 +516,7 @@
   gap: 10px;
   font-size: 12.5px;
   line-height: 1.5;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .plantPlaces svg {
@@ -601,7 +601,7 @@
 .searchIcon {
   position: absolute;
   left: 12px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   pointer-events: none;
 }
 
@@ -619,7 +619,7 @@
 }
 
 .searchInput::placeholder {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .searchInput:focus-visible {
@@ -634,7 +634,7 @@
   justify-content: center;
   width: 26px;
   height: 26px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   border: 0;
   background: none;
   cursor: pointer;
@@ -655,7 +655,7 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .selectWrap select {
@@ -716,7 +716,7 @@
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .resultLine b {
@@ -762,7 +762,7 @@
 }
 
 .emptyIcon {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   margin-bottom: 4px;
 }
 
@@ -777,7 +777,7 @@
   margin: 0 0 14px;
   max-width: 42ch;
   font-size: 13px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .jobList {
@@ -827,7 +827,7 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .jobMain h3 {
@@ -844,7 +844,7 @@
   align-items: center;
   gap: 7px;
   font-size: 11.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .jobMeta svg {
@@ -938,7 +938,7 @@
   margin: 0;
   font-size: 12.5px;
   line-height: 1.55;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ cv */
@@ -970,7 +970,7 @@
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .cvContact a {
@@ -1003,7 +1003,7 @@
   gap: 9px;
   font-size: 12px;
   line-height: 1.5;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .cvNotes a {
@@ -1048,7 +1048,7 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .field input,
@@ -1165,7 +1165,7 @@
 .successState p {
   margin: 0;
   font-size: 13px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ faq */
@@ -1233,7 +1233,7 @@
   padding: 0 40px 18px 2px;
   font-size: 12.5px;
   line-height: 1.6;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* Closing rail: the last thing before the footer, so the logo never lands
@@ -1253,7 +1253,7 @@
   font-size: 9px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .closeActions {
@@ -1335,7 +1335,7 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -1371,7 +1371,7 @@
 }
 
 .badge svg {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .detailLead {
@@ -1403,7 +1403,7 @@
   padding-bottom: 10px;
   border-bottom: 1px solid var(--line-soft);
   font-size: 12px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .applyRows b {
@@ -1443,7 +1443,7 @@
   margin: 12px 0 0;
   font-size: 10.5px;
   line-height: 1.55;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .detailGrid {
@@ -1512,7 +1512,7 @@
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .processCard ol {
@@ -1554,7 +1554,7 @@
   margin: 14px 0 0;
   font-size: 10.5px;
   line-height: 1.55;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .processCard a {
@@ -1614,7 +1614,7 @@
   display: block;
   margin-top: 4px;
   font-size: 11px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ responsive */
@@ -1818,7 +1818,7 @@
 
 .detailList dt {
   margin: 0;
-  color: var(--kage-muted, #8a8f96);
+  color: var(--gmp-muted, #8a8f96);
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;

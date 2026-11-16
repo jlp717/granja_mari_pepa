@@ -1,13 +1,13 @@
 import "./globals.css";
-import "@/components/kage/styles/kage.css";
-import "@/components/kage/styles/controls.css";
-import "@/components/kage/navigation/enhancement.css";
+import "@/components/gmp/styles/gmp.css";
+import "@/components/gmp/styles/controls.css";
+import "@/components/gmp/navigation/enhancement.css";
 import type { ReactNode } from "react";
 import type { Viewport } from "next";
 import { getLocale } from "next-intl/server";
-import { kageFontVariables } from "@/components/kage/fonts";
+import { gmpFontVariables } from "@/components/gmp/fonts";
 import { JsonLdSchemas } from "@/components/seo/JsonLdSchemas";
-import { RevealController } from "@/components/kage/navigation/RevealController";
+import { RevealController } from "@/components/gmp/navigation/RevealController";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -28,17 +28,17 @@ export default async function RootLayout({
     /* /admin is outside the localized tree and has no request locale. */
   }
   return (
-    <html lang={locale} className={kageFontVariables}>
+    <html lang={locale} className={gmpFontVariables}>
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/kage/brand/logo-alpha.png" />
+        <link rel="apple-touch-icon" href="/gmp/brand/logo-alpha.png" />
         <link rel="icon" type="image/svg+xml" href="/images/icons/icon.svg" />
         {/* JSON-LD SEO Schemas */}
         <JsonLdSchemas />
       </head>
       <body
-        className="kage-site antialiased"
+        className="gmp-site antialiased"
         data-layout-hero="b"
         data-layout-story="b"
         data-layout-gallery="b"

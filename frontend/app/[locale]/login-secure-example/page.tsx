@@ -19,9 +19,9 @@ import { useLocale, useTranslations } from "next-intl";
 import {
   OperationsFrame,
   OperationsIntro,
-} from "@/components/kage/operations/Operations";
-import { useOperationsCopy } from "@/components/kage/operations/copy";
-import ops from "@/components/kage/operations/operations.module.css";
+} from "@/components/gmp/operations/Operations";
+import { useOperationsCopy } from "@/components/gmp/operations/copy";
+import ops from "@/components/gmp/operations/operations.module.css";
 import { useRouter } from "next/navigation";
 import LegacyPasswordWarningModal from "@/components/auth/LegacyPasswordWarningModal";
 import PasswordChangeForm from "@/components/auth/PasswordChangeForm";
@@ -191,7 +191,7 @@ export default function LoginSecureExample() {
               id="customerCode"
               value={customerCode}
               onChange={(e) => setCustomerCode(e.target.value)}
-              className="w-full px-4 py-3 border border-border focus:ring-2 focus:ring-[var(--kage-accent)] focus:border-transparent"
+              className="w-full px-4 py-3 border border-border focus:ring-2 focus:ring-[var(--gmp-accent)] focus:border-transparent"
               placeholder="0123456789"
               required
             />
@@ -211,7 +211,7 @@ export default function LoginSecureExample() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-border focus:ring-2 focus:ring-[var(--kage-accent)] focus:border-transparent pr-12"
+                className="w-full px-4 py-3 border border-border focus:ring-2 focus:ring-[var(--gmp-accent)] focus:border-transparent pr-12"
                 placeholder={t("login.passwordPlaceholder")}
                 required
               />

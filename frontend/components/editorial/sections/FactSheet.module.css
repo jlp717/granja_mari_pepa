@@ -23,7 +23,7 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .value {

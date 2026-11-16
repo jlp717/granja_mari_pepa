@@ -2,9 +2,9 @@ import Image from "next/image";
 import NextLink from "next/link";
 import type { AnchorHTMLAttributes } from "react";
 import type { Locale } from "@/i18n";
-import { Chapter } from "@/components/kage/Chapter";
-import { WordReveal } from "@/components/kage/WordReveal";
-import { getKageHomeCopy } from "@/lib/kage-home-copy";
+import { Chapter } from "@/components/gmp/Chapter";
+import { WordReveal } from "@/components/gmp/WordReveal";
+import { getGMPHomeCopy } from "@/lib/gmp-home-copy";
 import { gmailCompose } from "@/components/editorial/facts";
 import styles from "./journey.module.css";
 import { BrandFallback, HomeForeground, ScenePlate } from "./scene-plate";
@@ -79,7 +79,7 @@ function SectionHead({ label, end }: { label: string; end: string }) {
 }
 
 export function HomeJourney({ locale }: { locale: Locale }) {
-  const copy = getKageHomeCopy(locale);
+  const copy = getGMPHomeCopy(locale);
   const [hero, cold, range, route, table, manifesto] = copy.chapters;
   const catalogue = "/" + locale + "/productos";
   const contact = "/" + locale + "/contacto";
@@ -149,11 +149,11 @@ export function HomeJourney({ locale }: { locale: Locale }) {
         >
           <span className={"peek-fr " + styles.peekFrame} data-frame>
             <Image
-              src="/kage/secret-pathways-assets/generated/gmp-peek-umbral.webp"
+              src="/gmp/secret-pathways-assets/generated/gmp-peek-umbral.webp"
               alt=""
               fill
               sizes="38vw"
-              data-kage-view-fallback=""
+              data-gmp-view-fallback=""
               priority
             />
           </span>
@@ -369,7 +369,7 @@ export function HomeJourney({ locale }: { locale: Locale }) {
         <div className="foot-grid">
           <div className="foot-brand">
             <Image
-              src="/kage/brand/logo-alpha.png"
+              src="/gmp/brand/logo-alpha.png"
               alt=""
               width={600}
               height={182}

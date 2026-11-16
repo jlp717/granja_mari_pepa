@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { getCatalogueStateCopy } from "@/components/kage/catalogue/state-copy";
+import { getCatalogueStateCopy } from "@/components/gmp/catalogue/state-copy";
 export default function CatalogueError({
   reset,
 }: {

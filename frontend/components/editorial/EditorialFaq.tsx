@@ -1,7 +1,7 @@
 import { Link } from "@/lib/navigation";
-import { KageRoute } from "@/components/kage/KageRoute";
-import { Chapter } from "@/components/kage/Chapter";
-import { WordReveal } from "@/components/kage/WordReveal";
+import { GMPRoute } from "@/components/gmp/GMPRoute";
+import { Chapter } from "@/components/gmp/Chapter";
+import { WordReveal } from "@/components/gmp/WordReveal";
 import { getFaqCopy, getUICopy } from "./copy";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import styles from "./editorial.module.css";
@@ -9,7 +9,7 @@ export function EditorialFaq({ locale }: { locale: string }) {
   const copy = getFaqCopy(locale);
   const ui = getUICopy(locale);
   return (
-    <KageRoute routeId="preguntas-frecuentes" mode="ambient" world="gmp">
+    <GMPRoute routeId="preguntas-frecuentes" mode="ambient" world="gmp">
       <Breadcrumbs
         locale={locale}
         items={[
@@ -110,6 +110,6 @@ export function EditorialFaq({ locale }: { locale: string }) {
           </div>
         </Chapter>
       ))}
-    </KageRoute>
+    </GMPRoute>
   );
 }

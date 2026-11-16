@@ -7,15 +7,15 @@ import { useCartStore } from "@/lib/store";
 import {
   OperationsFrame,
   OperationsIntro,
-} from "@/components/kage/operations/Operations";
-import { useOperationsCopy } from "@/components/kage/operations/copy";
+} from "@/components/gmp/operations/Operations";
+import { useOperationsCopy } from "@/components/gmp/operations/copy";
 import {
   createLocalDraft,
   LOCAL_DRAFT_KEY,
   type DraftAddress,
   type LocalDraft,
-} from "@/components/kage/operations/draft";
-import styles from "@/components/kage/operations/operations.module.css";
+} from "@/components/gmp/operations/draft";
+import styles from "@/components/gmp/operations/operations.module.css";
 
 const blankAddress: DraftAddress = {
   name: "",
@@ -171,7 +171,7 @@ export default function CheckoutPage() {
       </section>
       <section
         id="draft-details"
-        className={`${styles.section} kage-form`}
+        className={`${styles.section} gmp-form`}
         aria-labelledby="draft-details-title"
         data-fx="form-feedback"
       >

@@ -133,7 +133,7 @@ export default function ProductsCatalog() {
       id: producto.codigo,
       name: producto.descripcionCorta || producto.descripcion,
       price: precio,
-      image: "/kage/brand/logo-alpha.png",
+      image: "/gmp/brand/logo-alpha.png",
       inStock: true,
       category: producto.familia?.descripcion || 'Otros'
     };

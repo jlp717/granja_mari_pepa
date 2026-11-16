@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva("kage-badge", {
+const badgeVariants = cva("gmp-badge", {
   variants: {
     variant: {
       default: "accent",

@@ -1,4 +1,4 @@
-import type { KageScene } from "@/components/kage/contracts";
+import type { GMPScene } from "@/components/gmp/contracts";
 import type { CONTACT_ES, UI_ES } from "./support.es";
 import type { EditorialStoryId } from "./content.es";
 
@@ -59,7 +59,7 @@ export interface StoryText {
 export interface StoryCopy extends StoryText {
   chapters: readonly (ChapterText & {
     id: string;
-    scene: KageScene;
+    scene: GMPScene;
     layout:
       | "hero"
       | "spread"
@@ -84,7 +84,7 @@ export interface FaqText {
   groups: readonly FaqGroupText[];
 }
 export interface FaqCopy extends FaqText {
-  groups: readonly (FaqGroupText & { id: string; scene: KageScene })[];
+  groups: readonly (FaqGroupText & { id: string; scene: GMPScene })[];
 }
 export interface EditorialTranslation {
   stories: Record<EditorialStoryId, StoryText>;

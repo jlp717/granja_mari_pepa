@@ -1,5 +1,5 @@
 "use client";
-import { OperationalSurface } from "@/components/kage/operations/Operations";
+import { OperationalSurface } from "@/components/gmp/operations/Operations";
 
 import { useState, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,9 +47,9 @@ import { useLocale, useTranslations } from "next-intl";
 import {
   OperationsFrame,
   OperationsIntro,
-} from "@/components/kage/operations/Operations";
-import { useOperationsCopy } from "@/components/kage/operations/copy";
-import ops from "@/components/kage/operations/operations.module.css";
+} from "@/components/gmp/operations/Operations";
+import { useOperationsCopy } from "@/components/gmp/operations/copy";
+import ops from "@/components/gmp/operations/operations.module.css";
 import AuthFlowManager from "@/components/auth/AuthFlowManager";
 import { secureFetch } from "@/lib/secureFetch";
 
@@ -504,7 +504,7 @@ export default function CustomerAreaPage() {
                           value={tempEmail}
                           onChange={(e) => setTempEmail(e.target.value)}
                           placeholder="ejemplo@correo.com"
-                          className="w-full pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--kage-accent)] focus:outline-none"
+                          className="w-full pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--gmp-accent)] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -520,7 +520,7 @@ export default function CustomerAreaPage() {
                           value={tempPhone}
                           onChange={(e) => setTempPhone(e.target.value)}
                           placeholder="612345678"
-                          className="w-full pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--kage-accent)] focus:outline-none"
+                          className="w-full pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--gmp-accent)] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -668,7 +668,7 @@ export default function CustomerAreaPage() {
               toast(t("login.contactToast"), {
                 duration: 8000,
                 style: {
-                  background: "var(--kage-accent)",
+                  background: "var(--gmp-accent)",
                   color: "currentColor",
                   padding: "16px",
                   borderRadius: "8px",
@@ -834,7 +834,7 @@ export default function CustomerAreaPage() {
                               setForgotPasswordClientCode(e.target.value)
                             }
                             placeholder="Ej: 0123456789"
-                            className="pl-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--kage-accent)]"
+                            className="pl-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--gmp-accent)]"
                           />
                         </div>
                       </div>
@@ -898,7 +898,7 @@ export default function CustomerAreaPage() {
                                 value={tempEmail}
                                 onChange={(e) => setTempEmail(e.target.value)}
                                 placeholder="tu@email.com"
-                                className="pl-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--kage-accent)]"
+                                className="pl-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--gmp-accent)]"
                               />
                             </div>
                           </div>
@@ -975,7 +975,7 @@ export default function CustomerAreaPage() {
                             )
                           }
                           placeholder="000000"
-                          className="h-12 text-center text-2xl font-mono border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--kage-accent)] tracking-widest"
+                          className="h-12 text-center text-2xl font-mono border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--gmp-accent)] tracking-widest"
                           maxLength={6}
                           disabled={codeVerified}
                         />
@@ -1013,7 +1013,7 @@ export default function CustomerAreaPage() {
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 placeholder="Mínimo 12 caracteres"
-                                className="pl-10 pr-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--kage-accent)]"
+                                className="pl-10 pr-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--gmp-accent)]"
                               />
                               <button
                                 type="button"
@@ -1066,7 +1066,7 @@ export default function CustomerAreaPage() {
                                   setConfirmPassword(e.target.value)
                                 }
                                 placeholder="Repite tu contraseña"
-                                className="pl-10 pr-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--kage-accent)]"
+                                className="pl-10 pr-10 h-12 border-2 border-border bg-card text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-[var(--gmp-accent)]"
                               />
                               <button
                                 type="button"
@@ -1432,7 +1432,7 @@ export default function CustomerAreaPage() {
                           value={tempEmail}
                           onChange={(e) => setTempEmail(e.target.value)}
                           placeholder="ejemplo@correo.com"
-                          className="pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--kage-accent)]"
+                          className="pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--gmp-accent)]"
                         />
                       </div>
                     </div>
@@ -1448,7 +1448,7 @@ export default function CustomerAreaPage() {
                           value={tempPhone}
                           onChange={(e) => setTempPhone(e.target.value)}
                           placeholder="612345678"
-                          className="pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--kage-accent)]"
+                          className="pl-10 h-12 border-2 border-border bg-card text-foreground focus:border-border focus:ring-[var(--gmp-accent)]"
                         />
                       </div>
                     </div>

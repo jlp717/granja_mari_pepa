@@ -20,7 +20,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn("kage-dialog-overlay", className)}
+    className={cn("gmp-dialog-overlay", className)}
     {...props}
   />
 ));
@@ -34,11 +34,11 @@ const DialogContent = React.forwardRef<
     <DialogOverlay />
     <DialogPrimitive.Content
       ref={ref}
-      className={cn("kage-dialog kage-dialog-centered", className)}
+      className={cn("gmp-dialog gmp-dialog-centered", className)}
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="kage-dialog-close">
+      <DialogPrimitive.Close className="gmp-dialog-close">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -81,7 +81,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("kage-dialog-title", className)}
+    className={cn("gmp-dialog-title", className)}
     {...props}
   />
 ));
@@ -93,7 +93,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("kage-dialog-description", className)}
+    className={cn("gmp-dialog-description", className)}
     {...props}
   />
 ));

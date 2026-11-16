@@ -110,7 +110,7 @@
   font-size: 9px;
   font-style: normal;
   letter-spacing: 0.04em;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-overflow: ellipsis;
 }
 
@@ -124,8 +124,8 @@
   padding: 0 22px 0 8px;
   border: 1px solid var(--line);
   background:
-    linear-gradient(45deg, transparent 50%, var(--kage-muted) 50%) calc(100% - 10px) 9px / 5px 5px no-repeat,
-    linear-gradient(135deg, var(--kage-muted) 50%, transparent 50%) calc(100% - 7px) 9px / 5px 5px no-repeat,
+    linear-gradient(45deg, transparent 50%, var(--gmp-muted) 50%) calc(100% - 10px) 9px / 5px 5px no-repeat,
+    linear-gradient(135deg, var(--gmp-muted) 50%, transparent 50%) calc(100% - 7px) 9px / 5px 5px no-repeat,
     #06090d;
   color: var(--bone-dim);
   font: inherit;
@@ -161,7 +161,7 @@
   width: 22px;
   height: 22px;
   border: 1px solid transparent;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 
@@ -241,7 +241,7 @@
   font-style: normal;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .archiveAction,
@@ -277,7 +277,7 @@
   font-size: 8px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .closeButton {
@@ -336,7 +336,7 @@
 .libraryHead p {
   margin: 0;
   font-size: 11px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .libraryGrid {
@@ -397,7 +397,7 @@
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .libraryMeta {
@@ -425,7 +425,7 @@
   margin-top: 4px;
   font-size: 10.5px;
   line-height: 1.5;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ viewer */
@@ -495,8 +495,8 @@
   padding: 0 26px 0 9px;
   border: 1px solid var(--line);
   background:
-    linear-gradient(45deg, transparent 50%, var(--kage-muted) 50%) calc(100% - 12px) 12px / 5px 5px no-repeat,
-    linear-gradient(135deg, var(--kage-muted) 50%, transparent 50%) calc(100% - 9px) 12px / 5px 5px no-repeat,
+    linear-gradient(45deg, transparent 50%, var(--gmp-muted) 50%) calc(100% - 12px) 12px / 5px 5px no-repeat,
+    linear-gradient(135deg, var(--gmp-muted) 50%, transparent 50%) calc(100% - 9px) 12px / 5px 5px no-repeat,
     #06090d;
   color: var(--bone-dim);
   font: inherit;
@@ -549,7 +549,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .searchRow input {
@@ -565,7 +565,7 @@
 }
 
 .searchRow input::placeholder {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .searchRow input:focus-visible {
@@ -624,7 +624,7 @@
 .searchResults p {
   margin: 4px 0;
   font-size: 11px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .searchResults ul {
@@ -867,7 +867,7 @@
 
 .pageCounter span {
   font-size: 10px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .pageRange {
@@ -897,7 +897,7 @@
   height: 24px;
   padding: 0 5px;
   border: 1px solid transparent;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 9px;
   font-variant-numeric: tabular-nums;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);

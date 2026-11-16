@@ -1850,12 +1850,12 @@ export function CustomerDashboard() {
             exit={{ opacity: 0, y: -12 }}
             className="mb-6 flex flex-col gap-3 border px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
             style={{
-              borderColor: 'var(--kage-accent)',
-              backgroundColor: 'color-mix(in srgb, var(--kage-accent) 10%, transparent)',
+              borderColor: 'var(--gmp-accent)',
+              backgroundColor: 'color-mix(in srgb, var(--gmp-accent) 10%, transparent)',
             }}
           >
             <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--kage-accent)]" aria-hidden="true" />
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gmp-accent)]" aria-hidden="true" />
               <span className="text-sm text-foreground">
                 {securityWarnings.hasLegacyPassword && securityWarnings.needsContactSetup
                   ? '¡Atención! Tu cuenta necesita una contraseña segura y datos de contacto.'
@@ -1898,7 +1898,7 @@ export function CustomerDashboard() {
                   Cuenta
                 </p>
                 <div className="mt-4 flex items-center gap-3">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-[var(--kage-accent)] text-lg text-white" aria-hidden="true">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-[var(--gmp-accent)] text-lg text-white" aria-hidden="true">
                     {(perfilCliente?.nombre || user?.name || 'C').charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0">
@@ -1930,7 +1930,7 @@ export function CustomerDashboard() {
                       <button
                         type="button"
                         onClick={() => handleTabChange('perfil')}
-                        className="flex w-full items-center justify-between border border-dashed border-[var(--line)] px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-[var(--kage-accent)] hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                        className="flex w-full items-center justify-between border border-dashed border-[var(--line)] px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-[var(--gmp-accent)] hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                       >
                         <span>Añadir email de contacto</span>
                         <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -1952,9 +1952,9 @@ export function CustomerDashboard() {
                       type="button"
                       onClick={() => handleTabChange(tab.id)}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`flex min-h-[44px] w-full items-center gap-3 px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)] ${
+                      className={`flex min-h-[44px] w-full items-center gap-3 px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)] ${
                         isActive
-                          ? 'bg-[var(--kage-accent)] text-white'
+                          ? 'bg-[var(--gmp-accent)] text-white'
                           : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'
                       }`}
                     >
@@ -2014,7 +2014,7 @@ export function CustomerDashboard() {
                         setFechaDesde('');
                         setFechaHasta('');
                       }}
-                      className="flex min-h-[44px] w-full items-center justify-center gap-2 border border-[var(--line)] px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-foreground/60 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                      className="flex min-h-[44px] w-full items-center justify-center gap-2 border border-[var(--line)] px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-foreground/60 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                     >
                       <X className="h-3.5 w-3.5" aria-hidden="true" />
                       {t('filters.resetFilters')}
@@ -2041,7 +2041,7 @@ export function CustomerDashboard() {
                 <button
                   type="button"
                   onClick={() => setShowLibroIvaModal(true)}
-                  className="flex min-h-[44px] w-full items-center justify-between gap-3 px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                  className="flex min-h-[44px] w-full items-center justify-between gap-3 px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                 >
                   <span className="flex items-center gap-3">
                     <BookOpen className="h-4 w-4" aria-hidden="true" />
@@ -2051,7 +2051,7 @@ export function CustomerDashboard() {
                 </button>
                 <a
                   href={`/${locale}/productos`}
-                  className="flex min-h-[44px] w-full items-center justify-between gap-3 px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                  className="flex min-h-[44px] w-full items-center justify-between gap-3 px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                 >
                   <span className="flex items-center gap-3">
                     <ShoppingBag className="h-4 w-4" aria-hidden="true" />
@@ -2062,7 +2062,7 @@ export function CustomerDashboard() {
                 <button
                   type="button"
                   onClick={handleLogoutClick}
-                  className="flex min-h-[44px] w-full items-center gap-3 border-t border-[var(--line)] px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:text-[#ff8a5c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                  className="flex min-h-[44px] w-full items-center gap-3 border-t border-[var(--line)] px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:text-[#ff8a5c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                 >
                   <LogOut className="h-4 w-4" aria-hidden="true" />
                   {t('logout')}
@@ -2079,7 +2079,7 @@ export function CustomerDashboard() {
             <div className="mb-5 border border-[var(--line)] bg-[var(--ink-2)] lg:hidden">
               <div className="flex items-center justify-between gap-3 p-4">
                 <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[var(--kage-accent)] text-sm text-white" aria-hidden="true">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[var(--gmp-accent)] text-sm text-white" aria-hidden="true">
                     {(perfilCliente?.nombre || user?.name || 'C').charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0">
@@ -2090,7 +2090,7 @@ export function CustomerDashboard() {
                 <button
                   type="button"
                   onClick={handleLogoutClick}
-                  className="flex h-11 w-11 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-[#ff8a5c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-[#ff8a5c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                   aria-label={t('logout')}
                 >
                   <LogOut className="h-4 w-4" aria-hidden="true" />
@@ -2106,9 +2106,9 @@ export function CustomerDashboard() {
                       type="button"
                       onClick={() => handleTabChange(tab.id)}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`flex min-h-[58px] flex-col items-center justify-center gap-1.5 px-1 py-2 text-[10px] tracking-[0.08em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--kage-accent)] ${
+                      className={`flex min-h-[58px] flex-col items-center justify-center gap-1.5 px-1 py-2 text-[10px] tracking-[0.08em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--gmp-accent)] ${
                         isActive
-                          ? 'bg-[var(--kage-accent)] text-white'
+                          ? 'bg-[var(--gmp-accent)] text-white'
                           : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'
                       }`}
                     >
@@ -2176,7 +2176,7 @@ export function CustomerDashboard() {
                       <div className="relative grid lg:grid-cols-[minmax(0,1fr)_320px]">
                         <div className="p-6 sm:p-10">
                           <div className="flex flex-wrap items-center gap-3 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                            <span className="h-1.5 w-1.5 bg-[var(--kage-accent)]" aria-hidden="true" />
+                            <span className="h-1.5 w-1.5 bg-[var(--gmp-accent)]" aria-hidden="true" />
                             Ficha de cliente
                             <span className="text-foreground/25" aria-hidden="true">/</span>
                             <span className="font-mono normal-case tracking-normal text-foreground/70">{user?.id || '—'}</span>
@@ -2199,12 +2199,12 @@ export function CustomerDashboard() {
                               </Badge>
                             )}
                             {securityWarnings.hasLegacyPassword || securityWarnings.needsContactSetup ? (
-                              <Badge className="border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                              <Badge className="border-[var(--gmp-accent)] bg-[var(--gmp-accent)] !text-white">
                                 <AlertTriangle className="h-3 w-3" aria-hidden="true" />
                                 Revisa tu seguridad
                               </Badge>
                             ) : (
-                              <Badge className="border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                              <Badge className="border-[var(--gmp-accent)] bg-[var(--gmp-accent)] !text-white">
                                 <Shield className="h-3 w-3" aria-hidden="true" />
                                 Cuenta protegida
                               </Badge>
@@ -2220,7 +2220,7 @@ export function CustomerDashboard() {
                                 {clientProfile.timeline.primeraFactura?.split('/')[2] || '—'}
                               </p>
                             </div>
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--line)] text-[var(--kage-accent)]" aria-hidden="true">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--line)] text-[var(--gmp-accent)]" aria-hidden="true">
                               <Building2 className="h-4 w-4" />
                             </div>
                           </div>
@@ -2244,7 +2244,7 @@ export function CustomerDashboard() {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="h-[2px] origin-left bg-[var(--kage-accent)]"
+                        className="h-[2px] origin-left bg-[var(--gmp-accent)]"
                         aria-hidden="true"
                       />
                     </section>
@@ -2255,7 +2255,7 @@ export function CustomerDashboard() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.45, delay: 0.05 }}
-                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-4 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-4 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--gmp-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
                       >
                         <div className="flex items-center justify-between gap-3">
                           <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Último pedido</p>
@@ -2286,7 +2286,7 @@ export function CustomerDashboard() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.45, delay: 0.11 }}
-                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-2 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-2 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--gmp-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
                       >
                         <div className="flex items-center justify-between gap-3">
                           <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Facturas</p>
@@ -2304,7 +2304,7 @@ export function CustomerDashboard() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.45, delay: 0.17 }}
-                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-3 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-3 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--gmp-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
                       >
                         <div className="flex items-center justify-between gap-3">
                           <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Total facturado</p>
@@ -2321,7 +2321,7 @@ export function CustomerDashboard() {
                           {monthlySeries.map((month, index) => (
                             <div key={`${month.label}-${index}`} className="flex h-full flex-1 flex-col items-center justify-end gap-1" aria-hidden="true">
                               <div
-                                className={`w-full transition-colors ${month.current ? 'bg-[var(--kage-accent)]' : 'bg-white/15 group-hover:bg-white/25'}`}
+                                className={`w-full transition-colors ${month.current ? 'bg-[var(--gmp-accent)]' : 'bg-white/15 group-hover:bg-white/25'}`}
                                 style={{ height: `${4 + Math.round((month.total / maxMonthly) * 32)}px` }}
                               />
                               <span className="text-[8px] uppercase tracking-[0.06em] text-muted-foreground">{month.label}</span>
@@ -2334,7 +2334,7 @@ export function CustomerDashboard() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.45, delay: 0.23 }}
-                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-3 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--kage-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
+                        className="group relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-5 transition-colors hover:border-foreground/30 xl:col-span-3 before:absolute before:inset-y-0 before:content-[''] before:left-0 before:w-px before:bg-[var(--gmp-accent)] before:opacity-0 before:transition-opacity hover:before:opacity-100"
                       >
                         <div className="flex items-center justify-between gap-3">
                           <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Pendiente</p>
@@ -2348,7 +2348,7 @@ export function CustomerDashboard() {
                             initial={{ width: 0 }}
                             animate={{ width: `${pendienteRatio}%` }}
                             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                            className="h-full bg-[var(--kage-accent)]"
+                            className="h-full bg-[var(--gmp-accent)]"
                           />
                         </div>
                         <p className="mt-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
@@ -2414,7 +2414,7 @@ export function CustomerDashboard() {
                                   <button
                                     type="button"
                                     onClick={() => handlePreviewPdf(factura)}
-                                    className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                    className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                     aria-label={`Ver factura ${factura.serieFactura}-${factura.numeroFactura}`}
                                   >
                                     <Eye className="h-4 w-4" aria-hidden="true" />
@@ -2422,7 +2422,7 @@ export function CustomerDashboard() {
                                   <button
                                     type="button"
                                     onClick={() => handleDownloadInvoice(factura)}
-                                    className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                    className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                     aria-label={`Descargar factura ${factura.serieFactura}-${factura.numeroFactura}`}
                                   >
                                     <Download className="h-4 w-4" aria-hidden="true" />
@@ -2445,7 +2445,7 @@ export function CustomerDashboard() {
                             <button
                               type="button"
                               onClick={() => handleTabChange('perfil')}
-                              className="flex min-h-[44px] items-center gap-1 px-2 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                              className="flex min-h-[44px] items-center gap-1 px-2 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                             >
                               Editar
                               <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -2510,7 +2510,7 @@ export function CustomerDashboard() {
                       <button
                         type="button"
                         onClick={() => setShowLibroIvaModal(true)}
-                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                       >
                         <span className="flex items-center gap-3 text-sm text-foreground">
                           <BookOpen className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
@@ -2520,7 +2520,7 @@ export function CustomerDashboard() {
                       </button>
                       <a
                         href={`/${locale}/productos`}
-                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                       >
                         <span className="flex items-center gap-3 text-sm text-foreground">
                           <ShoppingBag className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
@@ -2531,7 +2531,7 @@ export function CustomerDashboard() {
                       <button
                         type="button"
                         onClick={() => handleTabChange('favoritos')}
-                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                        className="flex min-h-[64px] items-center justify-between gap-3 border border-[var(--line)] bg-[var(--ink-2)] px-5 py-4 text-left transition-colors hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                       >
                         <span className="flex items-center gap-3 text-sm text-foreground">
                           <Heart className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
@@ -2556,7 +2556,7 @@ export function CustomerDashboard() {
                         <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Facturado</p>
                         <p className="mt-1 whitespace-nowrap text-2xl font-light tabular-nums text-foreground">{formatCurrency(totalFacturado)}</p>
                       </div>
-                      <div className={`p-4 ${pendienteTotal > 0 ? 'bg-[var(--kage-accent)] text-white' : 'bg-[var(--ink-2)]'}`}>
+                      <div className={`p-4 ${pendienteTotal > 0 ? 'bg-[var(--gmp-accent)] text-white' : 'bg-[var(--ink-2)]'}`}>
                         <p className={`text-[10px] uppercase tracking-[0.18em] ${pendienteTotal > 0 ? 'text-white' : 'text-muted-foreground'}`}>Pendiente</p>
                         <p className="mt-1 whitespace-nowrap text-2xl font-light tabular-nums">{formatCurrency(pendienteTotal)}</p>
                       </div>
@@ -2596,7 +2596,7 @@ export function CustomerDashboard() {
                               <button
                                 type="button"
                                 onClick={() => setSearchTerm('')}
-                                className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                 aria-label="Limpiar búsqueda"
                               >
                                 <X className="h-4 w-4" aria-hidden="true" />
@@ -2611,7 +2611,7 @@ export function CustomerDashboard() {
                             <button
                               type="button"
                               onClick={() => { setClientDropdownOpen(!clientDropdownOpen); setClientSearch(''); setTimeout(() => clientSearchRef.current?.focus(), 50); }}
-                              className="flex min-h-[44px] w-full items-center justify-between gap-3 border border-[var(--kage-control-border)] bg-[var(--ink-2)] px-4 text-left text-sm text-foreground transition-colors hover:border-foreground/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--kage-accent)]"
+                              className="flex min-h-[44px] w-full items-center justify-between gap-3 border border-[var(--gmp-control-border)] bg-[var(--ink-2)] px-4 text-left text-sm text-foreground transition-colors hover:border-foreground/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gmp-accent)]"
                               aria-expanded={clientDropdownOpen}
                               aria-haspopup="listbox"
                             >
@@ -2632,7 +2632,7 @@ export function CustomerDashboard() {
                                     value={clientSearch}
                                     onChange={(e) => setClientSearch(e.target.value)}
                                     onClick={(e) => e.stopPropagation()}
-                                    className="kage-input text-sm"
+                                    className="gmp-input text-sm"
                                     aria-label="Buscar cuenta"
                                   />
                                 </div>
@@ -2642,7 +2642,7 @@ export function CustomerDashboard() {
                                     onClick={() => { setSelectedCliente(undefined); setClientDropdownOpen(false); }}
                                     role="option"
                                     aria-selected={!selectedCliente}
-                                    className={`flex min-h-[44px] w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-white/5 ${!selectedCliente ? 'bg-[var(--kage-accent)] text-white' : 'text-foreground'}`}
+                                    className={`flex min-h-[44px] w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-white/5 ${!selectedCliente ? 'bg-[var(--gmp-accent)] text-white' : 'text-foreground'}`}
                                   >
                                     Todas mis cuentas
                                   </button>
@@ -2663,7 +2663,7 @@ export function CustomerDashboard() {
                                         onClick={() => { setSelectedCliente(client.codigoCliente); setClientDropdownOpen(false); }}
                                         role="option"
                                         aria-selected={selectedCliente === client.codigoCliente}
-                                        className={`flex min-h-[44px] w-full items-center justify-between gap-3 border-b border-[var(--line-soft)] px-4 py-2.5 text-left text-sm transition-colors hover:bg-white/5 ${selectedCliente === client.codigoCliente ? 'bg-[var(--kage-accent)] text-white' : 'text-foreground'}`}
+                                        className={`flex min-h-[44px] w-full items-center justify-between gap-3 border-b border-[var(--line-soft)] px-4 py-2.5 text-left text-sm transition-colors hover:bg-white/5 ${selectedCliente === client.codigoCliente ? 'bg-[var(--gmp-accent)] text-white' : 'text-foreground'}`}
                                       >
                                         <span className="min-w-0 truncate">{client.nombreCliente}</span>
                                         <span className="shrink-0 font-mono text-[10px] text-muted-foreground">{client.codigoCliente}</span>
@@ -2716,7 +2716,7 @@ export function CustomerDashboard() {
                               type="date"
                               value={fechaDesde}
                               onChange={(e) => setFechaDesde(e.target.value)}
-                              className="kage-input [color-scheme:dark]"
+                              className="gmp-input [color-scheme:dark]"
                             />
                           </div>
                           <div>
@@ -2726,7 +2726,7 @@ export function CustomerDashboard() {
                               type="date"
                               value={fechaHasta}
                               onChange={(e) => setFechaHasta(e.target.value)}
-                              className="kage-input [color-scheme:dark]"
+                              className="gmp-input [color-scheme:dark]"
                             />
                           </div>
                         </div>
@@ -2741,7 +2741,7 @@ export function CustomerDashboard() {
                               setFechaHasta('');
                               setSelectedCliente(undefined);
                             }}
-                            className="mt-3 flex min-h-[44px] items-center gap-2 text-xs text-muted-foreground underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            className="mt-3 flex min-h-[44px] items-center gap-2 text-xs text-muted-foreground underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                           >
                             <X className="h-3.5 w-3.5" aria-hidden="true" />
                             {t('filters.resetFilters')}
@@ -2893,7 +2893,7 @@ export function CustomerDashboard() {
                                     <button
                                       type="button"
                                       onClick={() => handlePreviewPdf(factura)}
-                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                       aria-label={`Ver factura ${factura.serieFactura}-${factura.numeroFactura}`}
                                     >
                                       <Eye className="h-4 w-4" aria-hidden="true" />
@@ -2901,7 +2901,7 @@ export function CustomerDashboard() {
                                     <button
                                       type="button"
                                       onClick={() => handleDownloadInvoice(factura)}
-                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                       aria-label={`Descargar factura ${factura.serieFactura}-${factura.numeroFactura}`}
                                     >
                                       <Download className="h-4 w-4" aria-hidden="true" />
@@ -2909,7 +2909,7 @@ export function CustomerDashboard() {
                                     <button
                                       type="button"
                                       onClick={() => { setSelectedFacturaForShare(factura); setShowWhatsAppModal(true); }}
-                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                       aria-label={`Compartir factura ${factura.serieFactura}-${factura.numeroFactura} por WhatsApp`}
                                     >
                                       <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -2927,7 +2927,7 @@ export function CustomerDashboard() {
                                         setEmailDestination(userEmail);
                                         setShowEmailConfirmModal(true);
                                       }}
-                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                                      className="flex h-11 w-11 items-center justify-center text-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                                       aria-label={`Enviar factura ${factura.serieFactura}-${factura.numeroFactura} por email`}
                                     >
                                       <Mail className="h-4 w-4" aria-hidden="true" />
@@ -2981,7 +2981,7 @@ export function CustomerDashboard() {
                             type="button"
                             onClick={() => setCurrentPage(1)}
                             disabled={currentPage === 1}
-                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                             aria-label="Primera página"
                           >
                             <ChevronsLeft className="h-4 w-4" aria-hidden="true" />
@@ -2990,7 +2990,7 @@ export function CustomerDashboard() {
                             type="button"
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
-                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                             aria-label="Página anterior"
                           >
                             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
@@ -3012,9 +3012,9 @@ export function CustomerDashboard() {
                                 type="button"
                                 onClick={() => setCurrentPage(pageNum)}
                                 aria-current={currentPage === pageNum ? 'page' : undefined}
-                                className={`flex h-11 w-11 items-center justify-center border text-xs tabular-nums transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)] ${
+                                className={`flex h-11 w-11 items-center justify-center border text-xs tabular-nums transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)] ${
                                   currentPage === pageNum
-                                    ? 'border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white'
+                                    ? 'border-[var(--gmp-accent)] bg-[var(--gmp-accent)] !text-white'
                                     : 'border-[var(--line)] text-muted-foreground hover:text-foreground'
                                 }`}
                               >
@@ -3026,7 +3026,7 @@ export function CustomerDashboard() {
                             type="button"
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages}
-                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                             aria-label="Página siguiente"
                           >
                             <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -3035,7 +3035,7 @@ export function CustomerDashboard() {
                             type="button"
                             onClick={() => setCurrentPage(totalPages)}
                             disabled={currentPage === totalPages}
-                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kage-accent)]"
+                            className="flex h-11 w-11 items-center justify-center border border-[var(--line)] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gmp-accent)]"
                             aria-label="Última página"
                           >
                             <ChevronsRight className="h-4 w-4" aria-hidden="true" />
@@ -3067,13 +3067,13 @@ export function CustomerDashboard() {
                     <section className="relative overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-6 sm:p-8">
                       <div className="mb-6 flex items-center justify-between gap-3 border-b border-[var(--line-soft)] pb-4 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
                         <span className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 bg-[var(--kage-accent)]" aria-hidden="true" />
+                          <span className="h-1.5 w-1.5 bg-[var(--gmp-accent)]" aria-hidden="true" />
                           Ficha de cliente
                         </span>
                         <span className="font-mono normal-case tracking-normal text-foreground/70">{user?.id || '—'}</span>
                       </div>
                       <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-                        <div className="flex h-20 w-20 shrink-0 items-center justify-center bg-[var(--kage-accent)] text-3xl font-light text-white" aria-hidden="true">
+                        <div className="flex h-20 w-20 shrink-0 items-center justify-center bg-[var(--gmp-accent)] text-3xl font-light text-white" aria-hidden="true">
                           {(perfilCliente?.nombre || user?.name || 'C').charAt(0).toUpperCase()}
                         </div>
                         <div className="min-w-0 flex-1">
@@ -3095,7 +3095,7 @@ export function CustomerDashboard() {
                               </Badge>
                             )}
                             {securityWarnings.hasLegacyPassword && (
-                              <Badge className="border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                              <Badge className="border-[var(--gmp-accent)] bg-[var(--gmp-accent)] !text-white">
                                 <AlertTriangle className="h-3 w-3" aria-hidden="true" />
                                 Contraseña mejorable
                               </Badge>
@@ -3352,7 +3352,7 @@ export function CustomerDashboard() {
                         <p className="mt-1 max-w-[46ch] text-xs leading-relaxed text-muted-foreground">
                           El catálogo de productos estará disponible próximamente. Tus favoritos se conservarán y podrás acceder a ellos cuando quieras.
                         </p>
-                        <Badge className="mt-5 border-[var(--kage-accent)] bg-[var(--kage-accent)] !text-white">
+                        <Badge className="mt-5 border-[var(--gmp-accent)] bg-[var(--gmp-accent)] !text-white">
                           <Sparkles className="h-3 w-3" aria-hidden="true" />
                           Próximamente disponible
                         </Badge>

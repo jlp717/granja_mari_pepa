@@ -2,7 +2,7 @@ const source = "https://www.mari-pepa.com";
 const organizationId = source + "/#organization";
 const logo = {
   "@type": "ImageObject",
-  url: source + "/kage/brand/logo-alpha.png",
+  url: source + "/gmp/brand/logo-alpha.png",
 };
 const mapLorca =
   "https://maps.google.com/?q=Granja+Maripepa+Avd+Francisco+Jimeno+Sola+3+Lorca";

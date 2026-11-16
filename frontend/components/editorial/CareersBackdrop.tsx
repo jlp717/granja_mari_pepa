@@ -8,14 +8,14 @@ import styles from "./careers.module.css";
    travels across the building instead of cutting between stills. No invented
    places, no stock imagery. */
 const FRAMES = [
-  { src: "/kage/careers/careers-03.jpg", pos: "56% 42%", drift: 1.0 },
-  { src: "/kage/careers/careers-01.jpg", pos: "62% 40%", drift: -0.7 },
-  { src: "/kage/careers/careers-02.jpg", pos: "36% 44%", drift: 0.8 },
-  { src: "/kage/careers/careers-04.jpg", pos: "48% 36%", drift: -0.9 },
-  { src: "/kage/careers/careers-01.jpg", pos: "58% 42%", drift: 0.6 },
-  { src: "/kage/careers/careers-03.jpg", pos: "44% 40%", drift: -0.6 },
-  { src: "/kage/careers/careers-04.jpg", pos: "52% 34%", drift: 0.9 },
-  { src: "/kage/careers/careers-02.jpg", pos: "30% 46%", drift: -0.5 },
+  { src: "/gmp/careers/careers-03.jpg", pos: "56% 42%", drift: 1.0 },
+  { src: "/gmp/careers/careers-01.jpg", pos: "62% 40%", drift: -0.7 },
+  { src: "/gmp/careers/careers-02.jpg", pos: "36% 44%", drift: 0.8 },
+  { src: "/gmp/careers/careers-04.jpg", pos: "48% 36%", drift: -0.9 },
+  { src: "/gmp/careers/careers-01.jpg", pos: "58% 42%", drift: 0.6 },
+  { src: "/gmp/careers/careers-03.jpg", pos: "44% 40%", drift: -0.6 },
+  { src: "/gmp/careers/careers-04.jpg", pos: "52% 34%", drift: 0.9 },
+  { src: "/gmp/careers/careers-02.jpg", pos: "30% 46%", drift: -0.5 },
 ];
 
 export function CareersBackdrop() {
@@ -34,7 +34,7 @@ export function CareersBackdrop() {
 
     const measure = () => {
       anchors = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-kage-chapter]"),
+        document.querySelectorAll<HTMLElement>("[data-gmp-chapter]"),
       ).map((section) => {
         const rect = section.getBoundingClientRect();
         return (

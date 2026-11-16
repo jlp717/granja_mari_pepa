@@ -913,7 +913,7 @@
         },
         "s7": {
           "title": "7. Cookies und lokale Speicherung",
-          "content": "Diese Website verwendet keine Werbe- oder Drittanbieter-Cookies. Sie nutzt technisch notwendige Speicherung für Zugang, Warenkorb und Ihre Einstellungen und speichert Ihre Entscheidung zur Analyse im lokalen Speicher des Browsers unter dem Schlüssel gmp-kage-consent-v1. Wenn Sie die optionale Analyse akzeptieren, wird eine Sitzungskennung im Sitzungsspeicher erstellt und Ereignisse an den eigenen Analysedienst der Website gesendet, ohne sie an Dritte weiterzugeben. Sie können Ihre Wahl jederzeit über „Datenschutzeinstellungen“ im Cookie-Hinweis ändern oder widerrufen."
+          "content": "Diese Website verwendet keine Werbe- oder Drittanbieter-Cookies. Sie nutzt technisch notwendige Speicherung für Zugang, Warenkorb und Ihre Einstellungen und speichert Ihre Entscheidung zur Analyse im lokalen Speicher des Browsers unter dem Schlüssel gmp-gmp-consent-v1. Wenn Sie die optionale Analyse akzeptieren, wird eine Sitzungskennung im Sitzungsspeicher erstellt und Ereignisse an den eigenen Analysedienst der Website gesendet, ohne sie an Dritte weiterzugeben. Sie können Ihre Wahl jederzeit über „Datenschutzeinstellungen“ im Cookie-Hinweis ändern oder widerrufen."
         }
       }
     },

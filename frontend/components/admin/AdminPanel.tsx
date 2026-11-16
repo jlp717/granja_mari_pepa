@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
@@ -1081,7 +1081,7 @@ export function AdminPanel() {
           <div className={styles.loginOverlay} />
           <div className={styles.loginBrand}>
             <Image
-              src="/kage/brand/logo-alpha.png"
+              src="/gmp/brand/logo-alpha.png"
               alt="Granja Maripepa"
               width={160}
               height={49}
@@ -1098,7 +1098,7 @@ export function AdminPanel() {
           <div className={styles.loginCard}>
             <div className={styles.loginCardBrand}>
               <Image
-                src="/kage/brand/logo-alpha.png"
+                src="/gmp/brand/logo-alpha.png"
                 alt="Granja Maripepa"
                 width={118}
                 height={36}
@@ -1177,7 +1177,7 @@ export function AdminPanel() {
         <div className={styles.sidebarHead}>
           <a href="/es" className={styles.brand} aria-label="Granja Maripepa">
             <Image
-              src="/kage/brand/logo-alpha.png"
+              src="/gmp/brand/logo-alpha.png"
               alt="Granja Maripepa"
               width={126}
               height={38}

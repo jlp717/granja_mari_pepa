@@ -3,8 +3,8 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/navigation";
-import { getKageNavigationCopy } from "@/lib/kage-navigation-copy";
-import { CookiePreferencesButton } from "@/components/kage/navigation/CookieConsent";
+import { getGMPNavigationCopy } from "@/lib/gmp-navigation-copy";
+import { CookiePreferencesButton } from "@/components/gmp/navigation/CookieConsent";
 import { useMagazines } from "@/components/magazines/magazine-context";
 import { gmailCompose } from "@/components/editorial/facts";
 import chrome from "./site-chrome.module.css";
@@ -12,13 +12,13 @@ export function Footer() {
   const locale = useLocale(),
     t = useTranslations("footer"),
     nav = useTranslations("nav"),
-    copy = getKageNavigationCopy(locale);
+    copy = getGMPNavigationCopy(locale);
   const isEs = locale === "es";
   const { magazines, openMagazine, openLibrary } = useMagazines();
   return (
     <footer
       className={`foot ${chrome.footer}`}
-      data-kage-background
+      data-gmp-background
       data-fx="support-stagger link-color"
       aria-label={copy.resources}
     >
@@ -90,7 +90,7 @@ export function Footer() {
             data-cursor
           >
             <Image
-              src="/kage/brand/logo-alpha.png"
+              src="/gmp/brand/logo-alpha.png"
               alt=""
               width={70}
               height={21}
@@ -180,7 +180,7 @@ export function Footer() {
                 type="button"
                 data-cursor
                 onClick={() =>
-                  window.dispatchEvent(new Event("kage:open-pepa"))
+                  window.dispatchEvent(new Event("gmp:open-pepa"))
                 }
               >
                 Pepa IA

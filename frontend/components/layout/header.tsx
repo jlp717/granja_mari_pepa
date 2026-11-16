@@ -6,8 +6,8 @@ import { Link, usePathname, useRouter } from "@/lib/navigation";
 import { ShoppingCart, ArrowUpRight } from "lucide-react";
 import { useCartStore } from "@/lib/store";
 import { CartDrawer } from "@/components/cart/cart-drawer";
-import { isolateBackground } from "@/components/kage/navigation/inert";
-import { getKageNavigationCopy } from "@/lib/kage-navigation-copy";
+import { isolateBackground } from "@/components/gmp/navigation/inert";
+import { getGMPNavigationCopy } from "@/lib/gmp-navigation-copy";
 import { useMagazines } from "@/components/magazines/magazine-context";
 import chrome from "./site-chrome.module.css";
 const languages = [
@@ -79,7 +79,7 @@ function LocaleSelect() {
   const [pending, start] = useTransition();
   const [open, setOpen] = useState(false);
   const box = useRef<HTMLDivElement>(null);
-  const copy = getKageNavigationCopy(locale);
+  const copy = getGMPNavigationCopy(locale);
   const current = (languages.find((item) => item.code === locale) ?? languages[0]) as {
     code: LocaleCode;
     name: string;
@@ -175,7 +175,7 @@ export function Header() {
   const locale = useLocale(),
     t = useTranslations("nav"),
     pathname = usePathname();
-  const copy = getKageNavigationCopy(locale);
+  const copy = getGMPNavigationCopy(locale);
   const { magazines, openMagazine, openLibrary } = useMagazines();
   const [open, setOpen] = useState(false),
     [mobile, setMobile] = useState(false),
@@ -224,21 +224,21 @@ export function Header() {
     const button = trigger.current;
     const html = document.documentElement;
     window.dispatchEvent(
-      new CustomEvent("kage:overlay-open", { detail: { id: "menu" } }),
+      new CustomEvent("gmp:overlay-open", { detail: { id: "menu" } }),
     );
     html.classList.add("nav-open");
-    document.body.classList.add("kage-menu-open");
+    document.body.classList.add("gmp-menu-open");
     setHidden(false);
     const backgrounds = mobile
       ? Array.from(
-          document.querySelectorAll<HTMLElement>("[data-kage-background]"),
+          document.querySelectorAll<HTMLElement>("[data-gmp-background]"),
         )
       : [];
     const releaseBackground = isolateBackground(backgrounds);
     const frame = requestAnimationFrame(() =>
       root.current
         ?.querySelector<HTMLElement>(
-          mobile ? ".nav-link" : ".kage-menu-resources a",
+          mobile ? ".nav-link" : ".gmp-menu-resources a",
         )
         ?.focus({ preventScroll: true }),
     );
@@ -284,10 +284,10 @@ export function Header() {
       document.removeEventListener("keydown", key);
       document.removeEventListener("pointerdown", outside);
       window.dispatchEvent(
-        new CustomEvent("kage:overlay-close", { detail: { id: "menu" } }),
+        new CustomEvent("gmp:overlay-close", { detail: { id: "menu" } }),
       );
       html.classList.remove("nav-open");
-      document.body.classList.remove("kage-menu-open");
+      document.body.classList.remove("gmp-menu-open");
       releaseBackground();
       if (reason.current === "dismiss" && button?.isConnected)
         button.focus({ preventScroll: true });
@@ -301,8 +301,8 @@ export function Header() {
         setOpen(false);
       }
     };
-    window.addEventListener("kage:overlay-open", handoff);
-    return () => window.removeEventListener("kage:overlay-open", handoff);
+    window.addEventListener("gmp:overlay-open", handoff);
+    return () => window.removeEventListener("gmp:overlay-open", handoff);
   }, []);
   const links = [
     { href: "/productos", label: t("products") },
@@ -352,12 +352,12 @@ export function Header() {
           onClick={() => routeClick("/")}
         >
           <Image
-            src="/kage/brand/logo-alpha.png"
+            src="/gmp/brand/logo-alpha.png"
             alt="Granja Maripepa"
             width={135}
             height={41}
             priority
-            className="kage-brand-image"
+            className="gmp-brand-image"
           />
         </Link>
         <nav className="nav-links" id="navlinks" aria-label={copy.primary}>
@@ -376,7 +376,7 @@ export function Header() {
               </span>
             </Link>
           ))}
-          <div className="kage-menu-resources" hidden={!open}>
+          <div className="gmp-menu-resources" hidden={!open}>
             <p className="eyebrow">{copy.resources}</p>
             <Link
               href="/lorca"
@@ -406,7 +406,7 @@ export function Header() {
             >
               {copy.faq}
             </Link>
-            <div className="kage-menu-magazines">
+            <div className="gmp-menu-magazines">
               <p className="eyebrow">
                 {copy.magazines} · {copy.archive}
               </p>
@@ -424,7 +424,7 @@ export function Header() {
               ))}
               <button
                 type="button"
-                className="kage-menu-all-magazines"
+                className="gmp-menu-all-magazines"
                 onClick={() => {
                   close("handoff");
                   requestAnimationFrame(() => openLibrary());
@@ -434,7 +434,7 @@ export function Header() {
                 {locale === "es" ? "Ver todas las revistas" : "See all magazines"}
               </button>
             </div>
-            <div className="kage-menu-language">
+            <div className="gmp-menu-language">
               <LocaleSelect />
             </div>
           </div>
@@ -443,13 +443,13 @@ export function Header() {
           {locale === "es" ? "Hablemos" : "Talk to us"}
           <ArrowUpRight size={13} aria-hidden="true" />
         </Link>
-        <div className="kage-nav-utilities">
-          <div className="kage-desktop-language">
+        <div className="gmp-nav-utilities">
+          <div className="gmp-desktop-language">
             <LocaleSelect />
           </div>
           <button
             type="button"
-            className="kage-cart"
+            className="gmp-cart"
             aria-label={`${copy.cart}${mounted ? ` (${total})` : ""}`}
             onClick={openCart}
             data-cursor

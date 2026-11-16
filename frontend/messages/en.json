@@ -913,7 +913,7 @@
         },
         "s7": {
           "title": "7. Cookies and local storage",
-          "content": "This website does not use advertising or third-party cookies. It uses technical storage required for access, the cart and your preferences, and stores your analytics choice in the browser's local storage under the key gmp-kage-consent-v1. If you accept optional analytics, a session identifier is created in session storage and events are sent to this website's own analytics service; they are not shared with third parties. You can change or withdraw your choice at any time from “Privacy preferences” in the cookie notice, and clear storage in your browser."
+          "content": "This website does not use advertising or third-party cookies. It uses technical storage required for access, the cart and your preferences, and stores your analytics choice in the browser's local storage under the key gmp-gmp-consent-v1. If you accept optional analytics, a session identifier is created in session storage and events are sent to this website's own analytics service; they are not shared with third parties. You can change or withdraw your choice at any time from “Privacy preferences” in the cookie notice, and clear storage in your browser."
         }
       }
     },

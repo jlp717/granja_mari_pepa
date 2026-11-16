@@ -77,7 +77,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/kage/:path*",
+        source: "/gmp/:path*",
         headers: [
           {
             key: "Cache-Control",

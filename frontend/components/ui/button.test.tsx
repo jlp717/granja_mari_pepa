@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Button } from "./button";
 import { Progress } from "./progress";
 
-describe("Kage controls preserve action semantics", () => {
+describe("GMP controls preserve action semantics", () => {
   it("submits an enabled native button without adding a decorative arrow", () => {
     const onClick = jest.fn();
     render(<Button onClick={onClick}>Guardar</Button>);
@@ -83,7 +83,7 @@ describe("Progress has a truthful initial value", () => {
       "20",
     );
     expect(
-      (container.querySelector(".kage-progress-value") as HTMLElement).style
+      (container.querySelector(".gmp-progress-value") as HTMLElement).style
         .transform,
     ).toBe("scaleX(0.25)");
   });

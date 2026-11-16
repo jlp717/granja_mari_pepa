@@ -1,4 +1,4 @@
-/* Operational adaptation. Kage menu .65s/.4s, CTA .62s, link .45s,
+/* Operational adaptation. GMP menu .65s/.4s, CTA .62s, link .45s,
    gallery filets, lesson numerals and Onest hierarchy; no new motion engine. */
 .widget {
   position: fixed;
@@ -6,7 +6,7 @@
   right: var(--pad, 24px);
   bottom: 22px;
   color: var(--bone, #dfe7e0);
-  font-family: var(--kage-font-onest, "Onest"), sans-serif;
+  font-family: var(--gmp-font-onest, "Onest"), sans-serif;
 }
 .launcher {
   display: flex;
@@ -29,8 +29,8 @@
     border-color 0.45s var(--ease, cubic-bezier(0.4,0,0.2,1));
 }
 .launcher:hover {
-  color: var(--kage-accent, #cf3700);
-  border-color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
+  border-color: var(--gmp-accent, #cf3700);
 }
 .launcher svg {
   width: 18px;
@@ -98,7 +98,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 24px;
-  scrollbar-color: var(--kage-muted, #78837c) var(--ink-2, #0b0f14);
+  scrollbar-color: var(--gmp-muted, #78837c) var(--ink-2, #0b0f14);
 }
 .welcome h3 {
   margin: 18px 0;
@@ -170,7 +170,7 @@
   padding-top: 0;
 }
 .message[data-role="user"] {
-  border-inline-start: 1px solid var(--kage-accent, #cf3700);
+  border-inline-start: 1px solid var(--gmp-accent, #cf3700);
   padding-inline-start: 16px;
 }
 .messageText {
@@ -186,7 +186,7 @@
   font-weight: 500;
 }
 .messageText a {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -246,16 +246,16 @@
     border-color 0.45s var(--ease, cubic-bezier(0.4,0,0.2,1));
 }
 .control:hover:not(:disabled) {
-  color: var(--kage-accent, #cf3700);
-  border-color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
+  border-color: var(--gmp-accent, #cf3700);
 }
 .control:disabled {
   cursor: not-allowed;
-  color: var(--kage-muted, #78837c);
+  color: var(--gmp-muted, #78837c);
 }
 .control[aria-pressed="true"] {
-  border-color: var(--kage-accent, #cf3700);
-  color: var(--kage-accent, #cf3700);
+  border-color: var(--gmp-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
 }
 .control svg {
   width: 16px;
@@ -268,7 +268,7 @@
   line-height: 1.5;
 }
 .widget :where(button, a):focus-visible {
-  outline: 2px solid var(--kage-accent, #cf3700);
+  outline: 2px solid var(--gmp-accent, #cf3700);
   outline-offset: 4px;
 }
 .srOnly {
@@ -316,7 +316,7 @@
   }
 }
 @media (max-width: 560px) {
-  body:has([data-kage-cookie-banner]) .launcher {
+  body:has([data-gmp-cookie-banner]) .launcher {
     display: none;
   }
   .widget {
@@ -457,7 +457,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -529,7 +529,7 @@
 }
 .switch > span[data-on="true"]::after {
   transform: translateX(12px);
-  background: var(--kage-accent, #cf3700);
+  background: var(--gmp-accent, #cf3700);
 }
 .memoryDelete {
   display: inline-flex;
@@ -576,7 +576,7 @@
 }
 .capabilities button:hover {
   border-color: rgba(207, 55, 0, 0.55);
-  color: color-mix(in srgb, var(--bone, #dfe7e0) 80%, var(--kage-accent, #cf3700));
+  color: color-mix(in srgb, var(--bone, #dfe7e0) 80%, var(--gmp-accent, #cf3700));
   background: #0c1218;
 }
 .capabilities svg {
@@ -670,7 +670,7 @@
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .sources a:hover {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   border-color: rgba(207, 55, 0, 0.5);
 }
 
@@ -692,7 +692,7 @@
 }
 .iconButton:hover,
 .iconButton[aria-pressed="true"] {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   border-color: rgba(207, 55, 0, 0.5);
 }
 .iconButton svg {
@@ -763,7 +763,7 @@
   color: #9ed49e;
 }
 .handoffRef {
-  font-family: var(--kage-font-mono, monospace);
+  font-family: var(--gmp-font-mono, monospace);
   font-size: 11px;
   opacity: 0.75;
 }
@@ -774,7 +774,7 @@
   line-height: 1.5;
 }
 .handoffNote a {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -809,8 +809,8 @@
 .loginCard button[type="submit"] {
   min-height: 40px;
   margin-top: 6px;
-  border: 1px solid var(--kage-accent, #cf3700);
-  background: var(--kage-accent, #cf3700);
+  border: 1px solid var(--gmp-accent, #cf3700);
+  background: var(--gmp-accent, #cf3700);
   color: #fff;
   font: inherit;
   font-size: 13px;
@@ -862,7 +862,7 @@
   box-shadow: 0 0 0 3px rgba(207, 55, 0, 0.14);
 }
 .textarea[data-listening="true"] {
-  border-color: var(--kage-accent, #cf3700);
+  border-color: var(--gmp-accent, #cf3700);
   box-shadow: 0 0 0 3px rgba(207, 55, 0, 0.2);
 }
 .textarea:disabled {
@@ -874,8 +874,8 @@
 }
 .control[data-listening="true"] {
   animation: pulse-mic 1.4s ease-in-out infinite;
-  border-color: var(--kage-accent, #cf3700);
-  color: var(--kage-accent, #cf3700);
+  border-color: var(--gmp-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
 }
 .recDot {
   position: absolute;
@@ -959,7 +959,7 @@
   border-color: transparent !important;
 }
 .tools button:hover:not(:disabled) {
-  color: var(--kage-accent, #cf3700) !important;
+  color: var(--gmp-accent, #cf3700) !important;
   background: rgba(255, 255, 255, 0.05) !important;
 }
 .tools button:disabled {
@@ -986,7 +986,7 @@
   width: 44px;
   height: 24px;
   border: 1px solid var(--line, rgba(223, 231, 224, 0.14));
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1049,7 +1049,7 @@
   flex: 0 0 auto;
 }
 .delivery a {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1254,7 +1254,7 @@
 }
 
 .iconButton[data-copied="true"] {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   border-color: rgba(207, 55, 0, 0.5);
 }
 
@@ -1273,7 +1273,7 @@
 }
 
 .control[aria-busy="true"] {
-  color: var(--kage-accent, #cf3700);
+  color: var(--gmp-accent, #cf3700);
   border-color: rgba(207, 55, 0, 0.55);
 }
 
@@ -1289,7 +1289,7 @@
   width: 2px;
   height: 14px;
   border-radius: 1px;
-  background: var(--kage-accent, #cf3700);
+  background: var(--gmp-accent, #cf3700);
   transform: scaleY(0.3);
   transform-origin: bottom;
 }
@@ -1328,7 +1328,7 @@
 /* En móvil el panel ocupa toda la pantalla: el lanzador flotante tapaba el
    botón de enviar del composer. */
 @media (max-width: 560px) {
-  .widget[data-kage-pepa-open] .launcher {
+  .widget[data-gmp-pepa-open] .launcher {
     display: none;
   }
   .widget .tools button {

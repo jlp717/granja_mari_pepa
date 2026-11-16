@@ -10,21 +10,21 @@ export interface InputProps
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, leftIcon, rightIcon, ...props }, ref) => (
-    <div className="kage-input-wrap">
-      {leftIcon && <div className="kage-input-icon left">{leftIcon}</div>}
+    <div className="gmp-input-wrap">
+      {leftIcon && <div className="gmp-input-icon left">{leftIcon}</div>}
       <input
         {...props}
         ref={ref}
         type={type}
         aria-invalid={error ? true : props["aria-invalid"]}
         className={cn(
-          "kage-input",
+          "gmp-input",
           leftIcon && "has-left-icon",
           rightIcon && "has-right-icon",
           className,
         )}
       />
-      {rightIcon && <div className="kage-input-icon right">{rightIcon}</div>}
+      {rightIcon && <div className="gmp-input-icon right">{rightIcon}</div>}
     </div>
   ),
 );

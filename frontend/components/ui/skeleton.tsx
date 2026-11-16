@@ -8,7 +8,7 @@ function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement> & { shimmer?: boolean }) {
   return (
     <div
-      className={cn("kage-skeleton", className)}
+      className={cn("gmp-skeleton", className)}
       data-shimmer={shimmer}
       {...props}
     />
@@ -65,7 +65,7 @@ function SkeletonCard({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("kage-surface-card p-6 space-y-4", className)}
+      className={cn("gmp-surface-card p-6 space-y-4", className)}
       {...props}
     >
       {/* Image placeholder */}

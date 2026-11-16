@@ -1,4 +1,4 @@
-/* Kage layers: section scrim -1, reading 2. The added plate sits below
+/* GMP layers: section scrim -1, reading 2. The added plate sits below
    that scrim; it is a static fallback, never a second scroll engine. */
 .plate[data-scene-fallback][aria-hidden] {
   position: absolute;
@@ -34,8 +34,8 @@
   width: min(600px, 74vw);
   height: auto;
 }
-:global(html.kage-live) .plate[data-scene-fallback][aria-hidden],
-:global(html.kage-live) .brand {
+:global(html.gmp-live) .plate[data-scene-fallback][aria-hidden],
+:global(html.gmp-live) .brand {
   opacity: 0;
   visibility: hidden;
 }

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from '@/lib/navigation';
 import { ArrowRight, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
-import { isolateBackground } from '@/components/kage/navigation/inert';
+import { isolateBackground } from '@/components/gmp/navigation/inert';
 import styles from './cart-drawer.module.css';
 
 const price = (value: number) => `${value.toFixed(2).replace('.', ',')} €`;

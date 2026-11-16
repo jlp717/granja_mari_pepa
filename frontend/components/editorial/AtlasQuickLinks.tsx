@@ -10,7 +10,7 @@ function Arrow() {
   );
 }
 
-/** Kage curriculum B: compact index of real destinations. */
+/** GMP curriculum B: compact index of real destinations. */
 export function AtlasQuickLinks({
   ui,
   label,

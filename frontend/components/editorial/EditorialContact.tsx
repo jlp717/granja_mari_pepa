@@ -3,9 +3,9 @@ import { useState, type FormEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { z } from "zod";
 import { Link } from "@/lib/navigation";
-import { KageRoute } from "@/components/kage/KageRoute";
-import { Chapter } from "@/components/kage/Chapter";
-import { WordReveal } from "@/components/kage/WordReveal";
+import { GMPRoute } from "@/components/gmp/GMPRoute";
+import { Chapter } from "@/components/gmp/Chapter";
+import { WordReveal } from "@/components/gmp/WordReveal";
 import type { ContactCopy, UICopy } from "./types";
 import {
   EDITORIAL_FACTS as facts,
@@ -109,7 +109,7 @@ export function EditorialContact({
     { name: "telefono", label: "phone", type: "tel", complete: "tel" },
   ] as const;
   return (
-    <KageRoute routeId="contacto" mode="ambient" world="gmp">
+    <GMPRoute routeId="contacto" mode="ambient" world="gmp">
       <Breadcrumbs
         locale={locale}
         items={[{ name: "Contacto", path: "/contacto" }]}
@@ -427,6 +427,6 @@ export function EditorialContact({
           {ui.allQuestions}
         </Link>
       </Chapter>
-    </KageRoute>
+    </GMPRoute>
   );
 }

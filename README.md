@@ -8,7 +8,7 @@ Se utiliza Node.js 22.22.1. Desde `frontend/`:
 
 ```powershell
 npm ci
-$env:NEXT_DIST_DIR = '.next-kage-dev'
+$env:NEXT_DIST_DIR = '.next-gmp-dev'
 npm run dev -- --port 3000
 ```
 
@@ -22,7 +22,7 @@ Desde `frontend/`:
 npm run lint
 npm run typecheck
 npm test -- --watchAll=false --runInBand
-$env:NEXT_DIST_DIR = '.next-kage-production'
+$env:NEXT_DIST_DIR = '.next-gmp-production'
 npm run build
 ```
 
@@ -30,11 +30,11 @@ Las pruebas de navegador V3 y sus recorridos se documentan en `docs/redesign/RES
 
 ## Arquitectura del rediseño
 
-- `components/kage/engine/`: motor original portado, cámara, postproceso, tarjetas Cloth y nuevo mundo de distribución.
-- `components/kage/navigation/` y `components/layout/`: navegación persistente, capítulos, consentimiento y relevo entre rutas.
-- `components/kage/fonts/` y `styles/`: siete fuentes originales y cascada editorial Kage, con adaptación medida del acento de marca.
-- `components/home/`, `components/kage/catalogue/`, `editorial/` y `operations/`: contenidos y pantallas de cada familia de rutas.
-- `public/kage/`: recursos originales aplicables y ambientes ilustrativos propios. El producto no se genera con IA.
+- `components/gmp/engine/`: motor original portado, cámara, postproceso, tarjetas Cloth y nuevo mundo de distribución.
+- `components/gmp/navigation/` y `components/layout/`: navegación persistente, capítulos, consentimiento y relevo entre rutas.
+- `components/gmp/fonts/` y `styles/`: siete fuentes originales y cascada editorial GMP, con adaptación medida del acento de marca.
+- `components/home/`, `components/gmp/catalogue/`, `editorial/` y `operations/`: contenidos y pantallas de cada familia de rutas.
+- `public/gmp/`: recursos originales aplicables y ambientes ilustrativos propios. El producto no se genera con IA.
 
 El scroll es nativo. Existe un único canvas ambiental persistente; las tarjetas Cloth originales pueden crear canvas locales que se liberan al desmontarse. Sin WebGL y con movimiento reducido, la lectura completa utiliza láminas estáticas. El área interna no activa WebGL.
 

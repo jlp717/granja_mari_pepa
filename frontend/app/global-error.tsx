@@ -1,6 +1,6 @@
 "use client";
 
-import { RootState } from "@/components/kage/operations/StateView";
+import { RootState } from "@/components/gmp/operations/StateView";
 
 export default function GlobalError({
   reset,

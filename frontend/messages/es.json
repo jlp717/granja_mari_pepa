@@ -913,7 +913,7 @@
         },
         "s7": {
           "title": "7. Cookies y almacenamiento local",
-          "content": "Esta web no usa cookies publicitarias ni de terceros. Usa almacenamiento técnico necesario para el acceso, el carrito y tus preferencias, y guarda tu decisión sobre analítica en el almacenamiento local del navegador con la clave gmp-kage-consent-v1. Si aceptas la analítica opcional, se crea un identificador de sesión en el almacenamiento de sesión y se envían eventos al servicio de analítica del propio sitio, sin compartirlos con terceros. Puedes cambiar o retirar tu elección desde «Configurar preferencias» en el aviso de cookies, y borrar el almacenamiento desde tu navegador."
+          "content": "Esta web no usa cookies publicitarias ni de terceros. Usa almacenamiento técnico necesario para el acceso, el carrito y tus preferencias, y guarda tu decisión sobre analítica en el almacenamiento local del navegador con la clave gmp-gmp-consent-v1. Si aceptas la analítica opcional, se crea un identificador de sesión en el almacenamiento de sesión y se envían eventos al servicio de analítica del propio sitio, sin compartirlos con terceros. Puedes cambiar o retirar tu elección desde «Configurar preferencias» en el aviso de cookies, y borrar el almacenamiento desde tu navegador."
         }
       }
     },

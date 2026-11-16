@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { KageRoute } from "@/components/kage/KageRoute";
-import { Chapter } from "@/components/kage/Chapter";
-import { WordReveal } from "@/components/kage/WordReveal";
+import { GMPRoute } from "@/components/gmp/GMPRoute";
+import { Chapter } from "@/components/gmp/Chapter";
+import { WordReveal } from "@/components/gmp/WordReveal";
 import { Link } from "@/lib/navigation";
 import { LegalIndex } from "./LegalIndex";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
@@ -73,7 +73,7 @@ export async function EditorialLegal({
     title: t(`sections.s${i + 1}.title`),
   }));
   return (
-    <KageRoute routeId={`legal-${kind}`} mode="ambient" world="gmp">
+    <GMPRoute routeId={`legal-${kind}`} mode="ambient" world="gmp">
       <Breadcrumbs
         locale={locale}
         items={[
@@ -151,6 +151,6 @@ export async function EditorialLegal({
           ))}
         </div>
       </div>
-    </KageRoute>
+    </GMPRoute>
   );
 }

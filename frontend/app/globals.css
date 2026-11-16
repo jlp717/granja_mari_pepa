@@ -2,26 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme adapter only. Kage literal CSS loads AFTER this file in root layout.
-   All colour values below derive from Kage index.html:12-22 except the approved
+/* Theme adapter only. GMP literal CSS loads AFTER this file in root layout.
+   All colour values below derive from GMP index.html:12-22 except the approved
    current Main/prod accent190 95%40% (Main globals.css:77). */
 :root,
 .dark {
-  --kage-accent: #cf3700;
-  --kage-bg: #05070a;
-  --kage-surface: #0a0e12;
-  --kage-fg: #dfe7e0;
-  --kage-fg-muted: #aab4ad;
-  --kage-line: rgba(223, 231, 224, 0.13);
-  --kage-line-soft: rgba(223, 231, 224, 0.07);
-  --kage-font: var(--kage-font-onest, "Onest");
-  --kage-control-border: #78837c;
-  --kage-control-focus: var(--kage-accent);
-  --kage-control-bg: var(--kage-surface);
-  --kage-control-height: 44px;
-  --kage-control-radius: 0px;
-  --kage-overlay-z: 100;
-  --kage-dialog-z: 101;
+  --gmp-accent: #cf3700;
+  --gmp-bg: #05070a;
+  --gmp-surface: #0a0e12;
+  --gmp-fg: #dfe7e0;
+  --gmp-fg-muted: #aab4ad;
+  --gmp-line: rgba(223, 231, 224, 0.13);
+  --gmp-line-soft: rgba(223, 231, 224, 0.07);
+  --gmp-font: var(--gmp-font-onest, "Onest");
+  --gmp-control-border: #78837c;
+  --gmp-control-focus: var(--gmp-accent);
+  --gmp-control-bg: var(--gmp-surface);
+  --gmp-control-height: 44px;
+  --gmp-control-radius: 0px;
+  --gmp-overlay-z: 100;
+  --gmp-dialog-z: 101;
   --background: 216 33.333333% 2.941176%;
   --background-secondary: 210 28.571429% 5.490196%;
   --background-tertiary: 210 28.571429% 5.490196%;
@@ -84,8 +84,8 @@
   --duration-slower: 0.9s;
 }
 
-/* Border utility support without Tailwind preflight changing Kage UA paragraph
-   spacing, heading defaults or button grammar. Explicit Kage borders still win. */
+/* Border utility support without Tailwind preflight changing GMP UA paragraph
+   spacing, heading defaults or button grammar. Explicit GMP borders still win. */
 *,
 *::before,
 *::after {
@@ -95,11 +95,11 @@
 
 /* Careers runs a fixed photographic backdrop. Lift the footer veil and its
    content one layer so the photograph does not wash out the legal links. */
-body:has([data-kage-world="photo"]) .foot::before {
+body:has([data-gmp-world="photo"]) .foot::before {
   z-index: 0;
 }
 
-body:has([data-kage-world="photo"]) .foot > * {
+body:has([data-gmp-world="photo"]) .foot > * {
   position: relative;
   z-index: 1;
 }

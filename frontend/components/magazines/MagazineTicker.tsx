@@ -114,7 +114,7 @@ export function MagazineTicker() {
           </button>
         </div>
         <label className={styles.tickerSelectWrap}>
-          <span className="kage-sr-only">Elegir revista</span>
+          <span className="gmp-sr-only">Elegir revista</span>
           <select
             className={styles.tickerSelect}
             value={current.id}

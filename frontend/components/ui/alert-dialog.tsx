@@ -17,7 +17,7 @@ const AlertDialogOverlay = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
-    className={cn("kage-dialog-overlay", className)}
+    className={cn("gmp-dialog-overlay", className)}
     {...props}
     ref={ref}
   />
@@ -32,7 +32,7 @@ const AlertDialogContent = React.forwardRef<
     <AlertDialogOverlay />
     <AlertDialogPrimitive.Content
       ref={ref}
-      className={cn("kage-dialog kage-dialog-centered", className)}
+      className={cn("gmp-dialog gmp-dialog-centered", className)}
       {...props}
     />
   </AlertDialogPortal>
@@ -73,7 +73,7 @@ const AlertDialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Title
     ref={ref}
-    className={cn("kage-dialog-title", className)}
+    className={cn("gmp-dialog-title", className)}
     {...props}
   />
 ));
@@ -85,7 +85,7 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Description
     ref={ref}
-    className={cn("kage-dialog-description", className)}
+    className={cn("gmp-dialog-description", className)}
     {...props}
   />
 ));

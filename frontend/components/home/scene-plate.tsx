@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Foreground } from "@/components/kage/Foreground";
+import { Foreground } from "@/components/gmp/Foreground";
 import styles from "./scene-plate.module.css";
 
 export const SCENE_POSTERS = [
-  "/kage/careers/careers-03.jpg",
+  "/gmp/careers/careers-03.jpg",
   "/catalogs/familias/real-mar-1.jpg",
   "/catalogs/familias/real-carne-1.jpg",
-  "/kage/careers/careers-04.jpg",
+  "/gmp/careers/careers-04.jpg",
   "/catalogs/familias/real-reposteria-1.jpg",
 ] as const;
 
@@ -34,7 +34,7 @@ export function BrandFallback() {
   return (
     <div className={styles.brand} aria-hidden="true">
       <Image
-        src="/kage/brand/logo-alpha.png"
+        src="/gmp/brand/logo-alpha.png"
         alt=""
         width={600}
         height={182}
@@ -44,10 +44,10 @@ export function BrandFallback() {
   );
 }
 
-/** Foreground stages follow Kage's slot grammar. No chapter keeps a near
+/** Foreground stages follow GMP's slot grammar. No chapter keeps a near
  *  plane any more: the cutouts were photographic plates rather than isolated
  *  objects, so at stage size they laid a hard top edge across the frame and
- *  sat under the copy. The live hall carries the chapters, which is what Kage
+ *  sat under the copy. The live hall carries the chapters, which is what GMP
  *  lets the temple do. */
 const FG_SIZE: Record<string, readonly [number, number]> = {
   "02-frio": [2200, 980],
@@ -98,7 +98,7 @@ export function HomeForeground({
         return (
           <span key={slot.cls} className={`fg-el ${slot.cls}`} data-fg-in="up">
             <Image
-              src={"/kage/mp/fg/" + slot.file + ".webp"}
+              src={"/gmp/mp/fg/" + slot.file + ".webp"}
               alt=""
               width={w}
               height={h}

@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.js",
-    ".next-kage-dev/types/**/*.ts",
+    ".next-gmp-dev/types/**/*.ts",
     ".next-build/types/**/*.ts",
     ".next-prod/types/**/*.ts",
     ".next/dev/types/**/*.ts",

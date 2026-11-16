@@ -1,0 +1,61 @@
+/* GMP 77–93,4146–4193; visible SSR is the progressive baseline. */
+/* Single reveal system: data-gmp-wait toggles visibility via opacity and
+   `translate` (never `transform`), leaving `transform` free for hovers. */
+.gmp-site [data-rv] {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.9s var(--ease-out),
+    translate 1.05s var(--ease-out);
+}
+.gmp-site [data-rv][data-gmp-wait] {
+  opacity: 0;
+}
+.gmp-site [data-rv="up"][data-gmp-wait] {
+  translate: 0 26px;
+}
+.gmp-site [data-rv="fade"][data-gmp-wait] {
+  translate: 0 0;
+}
+.gmp-site .word-reveal .word {
+  opacity: 1;
+  transform: none;
+}
+.gmp-site .word-reveal[data-gmp-word-wait] .word {
+  opacity: 0;
+  transform: translate3d(0, 112%, 0);
+}
+.gmp-site .gmp-word-initial .word {
+  animation:
+    gmp-word-rise 0.82s var(--ease-out) both,
+    gmp-word-fade 0.5s var(--ease-out) both;
+  animation-delay: var(--word-delay, 0ms);
+}
+@keyframes gmp-word-rise {
+  from {
+    transform: translate3d(0, 112%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes gmp-word-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gmp-site [data-rv],
+  .gmp-site [data-rv][data-gmp-wait],
+  .gmp-site .word-reveal .word,
+  .gmp-site .word-reveal[data-gmp-word-wait] .word {
+    opacity: 1;
+    transform: none;
+    translate: 0 0;
+    animation: none !important;
+    transition: none !important;
+  }
+}

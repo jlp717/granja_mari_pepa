@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { KAGE_SITE_URL } from "@/lib/kage-seo";
+import { GMP_SITE_URL } from "@/lib/gmp-seo";
 const locales = ["es", "en", "de", "it", "zh"];
 const privatePaths = [
   "/private",
@@ -54,6 +54,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow,
       },
     ],
-    sitemap: KAGE_SITE_URL + "/sitemap.xml",
+    sitemap: GMP_SITE_URL + "/sitemap.xml",
   };
 }

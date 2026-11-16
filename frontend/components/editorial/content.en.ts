@@ -117,19 +117,19 @@ export const STORY_TRANSLATIONS_EN = {
         ],
         shots: [
           {
-            image: "/kage/careers/careers-facility.jpg",
+            image: "/gmp/careers/careers-facility.jpg",
             title: "The Saprelorca warehouse.",
             caption: "The Lorca warehouse, where loads are prepared.",
             href: "/lorca",
           },
           {
-            image: "/kage/careers/careers-01.jpg",
+            image: "/gmp/careers/careers-01.jpg",
             title: "The refrigerated lorry.",
             caption: "Refrigeration unit and loading at the site.",
             href: "/calidad",
           },
           {
-            image: "/kage/careers/careers-02.jpg",
+            image: "/gmp/careers/careers-02.jpg",
             title: "Access and loading.",
             caption: "Vehicle entrance and preparation area.",
             href: "/reparto",

@@ -5,9 +5,9 @@ import Image from "next/image";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import type { Locale } from "@/i18n";
 import { Link } from "@/lib/navigation";
-import { Chapter } from "@/components/kage/Chapter";
+import { Chapter } from "@/components/gmp/Chapter";
 import { HomeForeground } from "./scene-plate";
-import { WordReveal } from "@/components/kage/WordReveal";
+import { WordReveal } from "@/components/gmp/WordReveal";
 import { useMagazines } from "@/components/magazines/magazine-context";
 import { getHomeEditorialCopy } from "./home-copy";
 import styles from "./home-editorial.module.css";
@@ -43,7 +43,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             headline owns the left half; the hall world takes over below. */}
         <div className={styles.heroAtmos} aria-hidden="true">
           <Image
-            src="/kage/careers/careers-03.jpg"
+            src="/gmp/careers/careers-03.jpg"
             alt="Sede de Granja Maripepa en Saprelorca con camión frigorífico"
             fill
             priority
@@ -83,11 +83,11 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               </a>
             </div>
           </div>
-          {/* Kage gives its wordmark the architecture; ours gets the negative
+          {/* GMP gives its wordmark the architecture; ours gets the negative
               space beside the copy, at a size that reads before the nav does. */}
           <div className={styles.heroBrand} aria-hidden="true">
             <Image
-              src="/kage/brand/logo-alpha.png"
+              src="/gmp/brand/logo-alpha.png"
               alt=""
               width={600}
               height={182}
@@ -143,7 +143,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
           <div className={styles.originPhotos} data-rv="up">
             <figure className={styles.originMain}>
               <Image
-                src="/kage/mp/plates/invernaderos.webp"
+                src="/gmp/mp/plates/invernaderos.webp"
                 alt="Invernaderos del valle del Guadalentín al amanecer"
                 fill
                 sizes="(max-width: 900px) 92vw, 42vw"
@@ -153,7 +153,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
             </figure>
             <figure className={styles.originSmall}>
               <Image
-                src="/kage/careers/careers-facility.jpg"
+                src="/gmp/careers/careers-facility.jpg"
                 alt="Nave y camión de Granja Maripepa en el Polígono Saprelorca"
                 fill
                 sizes="(max-width: 900px) 45vw, 18vw"
@@ -184,7 +184,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <HomeForeground chapter="sistema" scene={2} />
         <div className={styles.systemBand} data-rv="fade">
           <Image
-            src="/kage/careers/careers-01.jpg"
+            src="/gmp/careers/careers-01.jpg"
             alt="Camión frigorífico en la sede de Granja Maripepa, Lorca"
             fill
             sizes="100vw"
@@ -458,7 +458,7 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
         <div className={styles.sites}>
           <figure className={styles.sitesPhoto} data-rv="up">
             <Image
-              src="/kage/careers/careers-04.jpg"
+              src="/gmp/careers/careers-04.jpg"
               alt="Camión frigorífico de Granja Maripepa en ruta"
               fill
               sizes="(max-width: 900px) 100vw, 55vw"

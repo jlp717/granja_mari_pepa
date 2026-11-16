@@ -46,7 +46,7 @@
   font-size: 9px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .nav {
@@ -78,7 +78,7 @@
 
 .navItem svg {
   flex: 0 0 auto;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   transition: color 0.25s;
 }
 
@@ -186,7 +186,7 @@
 
 .userMeta small {
   font-size: 9.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .logout {
@@ -195,7 +195,7 @@
   width: 28px;
   height: 28px;
   border: 1px solid transparent;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   transition:
     color 0.25s,
     border-color 0.25s;
@@ -211,7 +211,7 @@
   margin-top: 12px;
   font-size: 9px;
   letter-spacing: 0.08em;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .main {
@@ -258,7 +258,7 @@
   gap: 6px;
   font-size: 10.5px;
   letter-spacing: 0.06em;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .crumb b {
@@ -334,7 +334,7 @@
   background-color: #05070a;
   background-image:
     linear-gradient(180deg, rgba(5, 7, 10, 0.66), rgba(5, 7, 10, 0.9)),
-    url("/kage/mp/admin/admin-acceso.webp");
+    url("/gmp/mp/admin/admin-acceso.webp");
   background-size: cover, cover;
   background-position:
     center,
@@ -356,7 +356,7 @@
 .loginImage {
   position: absolute;
   inset: 0;
-  background-image: url("/kage/mp/admin/admin-acceso.webp");
+  background-image: url("/gmp/mp/admin/admin-acceso.webp");
   background-size: cover;
   background-position: 68% 50%;
   filter: none;
@@ -455,7 +455,7 @@
   font-size: 8px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .demoPill {
@@ -474,7 +474,7 @@
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .loginTitle {
@@ -527,7 +527,7 @@
   border: 1px solid var(--line-soft);
   background: rgba(223, 231, 224, 0.02);
   font-size: 10.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .demoCredentials b {
@@ -545,7 +545,7 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-decoration: none;
 }
 
@@ -581,7 +581,7 @@
   margin: 0;
   font-size: 12.5px;
   line-height: 1.65;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .primaryBtn,
@@ -692,7 +692,7 @@
   max-width: 64ch;
   font-size: 12.5px;
   line-height: 1.65;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .welcomeActions {
@@ -742,7 +742,7 @@
   font-size: 9px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .statValue {
@@ -759,7 +759,7 @@
   align-self: end;
   justify-self: end;
   font-size: 9.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-align: right;
 }
 
@@ -796,7 +796,7 @@
   align-items: center;
   gap: 4px;
   padding: 4px 0;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 9.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -846,7 +846,7 @@
   margin-top: 2px;
   overflow: hidden;
   font-size: 10px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -888,12 +888,12 @@
   margin-top: 1px;
   font-size: 10.5px;
   line-height: 1.45;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .timelineItem time {
   font-size: 9px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   white-space: nowrap;
 }
 
@@ -911,7 +911,7 @@
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .publishRow b {
@@ -945,7 +945,7 @@
   gap: 9px;
   font-size: 11.5px;
   line-height: 1.45;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .checklist li span {
@@ -976,7 +976,7 @@
   gap: 10px;
   align-items: center;
   font-size: 10.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .statusBarRow b {
@@ -1010,7 +1010,7 @@
   background: #c35a44;
 }
 .bar_muted {
-  background: var(--kage-muted);
+  background: var(--gmp-muted);
 }
 
 /* ============================================================ tools + tables */
@@ -1033,7 +1033,7 @@
   padding: 0 11px;
   border: 1px solid var(--line);
   background: #06090d;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .searchInput {
@@ -1047,7 +1047,7 @@
 }
 
 .searchInput::placeholder {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .selectInput,
@@ -1076,8 +1076,8 @@
   appearance: none;
   padding-right: 30px;
   background-image:
-    linear-gradient(45deg, transparent 50%, var(--kage-muted) 50%),
-    linear-gradient(135deg, var(--kage-muted) 50%, transparent 50%);
+    linear-gradient(45deg, transparent 50%, var(--gmp-muted) 50%),
+    linear-gradient(135deg, var(--gmp-muted) 50%, transparent 50%);
   background-position:
     calc(100% - 15px) 16px,
     calc(100% - 10px) 16px;
@@ -1111,7 +1111,7 @@
   font-size: 9.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   white-space: nowrap;
 }
 
@@ -1134,7 +1134,7 @@
   letter-spacing: 0.16em;
   text-align: left;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   white-space: nowrap;
 }
 
@@ -1174,7 +1174,7 @@
 
 .titleCell span {
   font-size: 10px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .personCell {
@@ -1197,7 +1197,7 @@
 
 .personCell span span {
   font-size: 10px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .rowActions {
@@ -1213,7 +1213,7 @@
   width: 30px;
   height: 30px;
   border: 1px solid transparent;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-decoration: none;
   transition:
     color 0.25s,
@@ -1239,7 +1239,7 @@
   font-size: 8.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .status {
@@ -1277,7 +1277,7 @@
 .status_muted {
   border-color: var(--line);
   background: rgba(223, 231, 224, 0.03);
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .empty {
@@ -1311,7 +1311,7 @@
 .empty p {
   margin: 0 0 18px;
   font-size: 12px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ editors */
@@ -1388,7 +1388,7 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .formGrid {
@@ -1415,7 +1415,7 @@
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .fieldWide {
@@ -1498,7 +1498,7 @@
   margin: 12px 0 0;
   font-size: 10.5px;
   line-height: 1.55;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .previewLink {
@@ -1575,7 +1575,7 @@
 .magCoverText span {
   font-size: 7px;
   letter-spacing: 0.18em;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .magCoverText b {
@@ -1628,7 +1628,7 @@
 .magInfo p {
   margin: 0 0 10px;
   font-size: 11px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .magFile {
@@ -1640,7 +1640,7 @@
   padding-top: 10px;
   border-top: 1px solid var(--line-soft);
   font-size: 9.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1674,7 +1674,7 @@
 
 .applicationSummary span {
   font-size: 11px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .contactGrid {
@@ -1724,7 +1724,7 @@
   width: 100%;
   padding-left: 23px;
   font-size: 9.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .cvRow a {
@@ -1789,7 +1789,7 @@
   align-items: flex-end;
   gap: 3px;
   font-size: 9.5px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   white-space: nowrap;
 }
 
@@ -1848,7 +1848,7 @@
 .toggleRow small {
   font-size: 10.5px;
   line-height: 1.4;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .toggle {
@@ -1861,7 +1861,7 @@
   background-color: #0a0e12;
   background-image: radial-gradient(
     circle,
-    var(--kage-muted) 0 6px,
+    var(--gmp-muted) 0 6px,
     transparent 6px
   );
   background-repeat: no-repeat;
@@ -1934,7 +1934,7 @@
   font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .confirm h2 {
@@ -2121,7 +2121,7 @@
     font-size: 8.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--kage-muted);
+    color: var(--gmp-muted);
   }
 
   .table td:first-child,
@@ -2344,7 +2344,7 @@
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .securityPanel {
@@ -2382,7 +2382,7 @@
 
 .securityEmpty {
   margin: 18px 0 0;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 12px;
 }
 
@@ -2391,7 +2391,7 @@
   align-items: center;
   gap: 7px;
   margin: 16px 0 0;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 10.5px;
 }
 
@@ -2425,7 +2425,7 @@
   width: 30px;
   height: 30px;
   border: 1px solid var(--line);
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .sessionMain {
@@ -2454,7 +2454,7 @@
 
 .sessionMain small {
   overflow: hidden;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2464,7 +2464,7 @@
   display: grid;
   gap: 3px;
   min-width: 0;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 9.5px;
   line-height: 1.45;
 }
@@ -2537,7 +2537,7 @@
 }
 
 .supportWifi {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .errorCodes {
@@ -2547,7 +2547,7 @@
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px solid var(--line-soft);
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 9px;
 }
 
@@ -2598,7 +2598,7 @@
   margin: 0;
   padding: 18px 0;
   max-width: 46ch;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 11.5px;
   line-height: 1.65;
 }
@@ -2658,7 +2658,7 @@
 }
 
 .notifHead span {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 9.5px;
 }
 
@@ -2700,7 +2700,7 @@
 }
 
 .notifTop em {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 9.5px;
   font-style: normal;
   white-space: nowrap;
@@ -2708,7 +2708,7 @@
 
 .notifMeta {
   overflow: hidden;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 10.5px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2717,7 +2717,7 @@
 .notifEmpty {
   margin: 0;
   padding: 18px 14px;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   font-size: 11px;
 }
 

@@ -1,8 +1,8 @@
 import tailwindAnimate from "tailwindcss-animate";
 import type { Config } from "tailwindcss";
 
-// Kage index.html:12-27,77-107,421-431. Semantic aliases below adapt Main
-// component APIs; the literal Kage sheet is not inside a purgeable Tailwind layer.
+// GMP index.html:12-27,77-107,421-431. Semantic aliases below adapt Main
+// component APIs; the literal GMP sheet is not inside a purgeable Tailwind layer.
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -16,13 +16,13 @@ const config: Config = {
       screens: {
         xs: "560px",
         "3xl": "1920px",
-        kage: "820px",
-        "kage-wide": "1080px",
+        gmp: "820px",
+        "gmp-wide": "1080px",
       },
       fontFamily: {
-        sans: ["var(--kage-font-onest)", "system-ui", "sans-serif"],
-        display: ["var(--kage-font-onest)", "sans-serif"],
-        mono: ["var(--kage-font-onest)", "sans-serif"],
+        sans: ["var(--gmp-font-onest)", "system-ui", "sans-serif"],
+        display: ["var(--gmp-font-onest)", "sans-serif"],
+        mono: ["var(--gmp-font-onest)", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background) / <alpha-value>)",
@@ -79,9 +79,9 @@ const config: Config = {
           soft: "hsl(var(--purple-soft) / <alpha-value>)",
         },
         surface: {
-          DEFAULT: "var(--kage-bg)",
-          raised: "var(--kage-surface)",
-          overlay: "var(--kage-surface)",
+          DEFAULT: "var(--gmp-bg)",
+          raised: "var(--gmp-surface)",
+          overlay: "var(--gmp-surface)",
         },
         border: {
           DEFAULT: "hsl(var(--border) / <alpha-value>)",
@@ -96,12 +96,12 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        kage: {
-          ink: "var(--kage-bg)",
-          surface: "var(--kage-surface)",
-          bone: "var(--kage-fg)",
-          muted: "var(--kage-fg-muted)",
-          accent: "var(--kage-accent)",
+        gmp: {
+          ink: "var(--gmp-bg)",
+          surface: "var(--gmp-surface)",
+          bone: "var(--gmp-fg)",
+          muted: "var(--gmp-fg-muted)",
+          accent: "var(--gmp-accent)",
         },
       },
       borderRadius: {

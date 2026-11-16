@@ -5,8 +5,8 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-// API aliases preserve Main callers; presentation follows Kage CTA421-431.
-const buttonVariants = cva("kage-button", {
+// API aliases preserve Main callers; presentation follows GMP CTA421-431.
+const buttonVariants = cva("gmp-button", {
   variants: {
     variant: {
       default: "",

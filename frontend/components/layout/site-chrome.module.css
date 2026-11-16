@@ -1,5 +1,5 @@
 /* Global header and footer finish — Granja Mari Pepa.
-   Layered on top of the literal Kage cascade without altering the engine. */
+   Layered on top of the literal GMP cascade without altering the engine. */
 
 /* ============================================================ header */
 
@@ -42,7 +42,7 @@
   outline-offset: 4px;
 }
 
-.header :global(.kage-menu-all-magazines) {
+.header :global(.gmp-menu-all-magazines) {
   margin-top: 8px;
   padding: 6px 0 0;
   border-top: 1px solid var(--line-soft);
@@ -53,7 +53,7 @@
   text-align: left;
 }
 
-.header :global(.kage-menu-all-magazines:hover) {
+.header :global(.gmp-menu-all-magazines:hover) {
   color: var(--vermilion);
 }
 
@@ -104,7 +104,7 @@
   font-size: 9px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .title {
@@ -184,7 +184,7 @@
   font-size: 8.5px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 .asideRow a,
@@ -204,7 +204,7 @@
 .wordmark {
   overflow: hidden;
   margin: clamp(22px, 3vw, 40px) 0 clamp(10px, 2vw, 22px);
-  font-family: var(--kage-font-wordmark, "Onest"), system-ui, sans-serif;
+  font-family: var(--gmp-font-wordmark, "Onest"), system-ui, sans-serif;
   font-size: clamp(54px, 12.2vw, 190px);
   font-weight: 600;
   line-height: 0.82;
@@ -297,7 +297,7 @@
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
 }
 
 /* ============================================================ responsive */
@@ -410,7 +410,7 @@
 }
 
 .localeChevron {
-  color: var(--kage-muted);
+  color: var(--gmp-muted);
   transition: transform 0.25s var(--ease, ease);
 }
 

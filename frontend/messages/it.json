@@ -913,7 +913,7 @@
         },
         "s7": {
           "title": "7. Cookie e memoria locale",
-          "content": "Questo sito non usa cookie pubblicitari né di terze parti. Utilizza la memorizzazione tecnica necessaria per l'accesso, il carrello e le tue preferenze, e salva la tua scelta sull'analisi nella memoria locale del browser con la chiave gmp-kage-consent-v1. Se accetti l'analisi opzionale, viene creato un identificatore di sessione nella memoria di sessione e gli eventi vengono inviati al servizio di analisi del sito stesso, senza condividerli con terzi. Puoi modificare o revocare la tua scelta in qualsiasi momento da «Preferenze privacy» nell'avviso sui cookie."
+          "content": "Questo sito non usa cookie pubblicitari né di terze parti. Utilizza la memorizzazione tecnica necessaria per l'accesso, il carrello e le tue preferenze, e salva la tua scelta sull'analisi nella memoria locale del browser con la chiave gmp-gmp-consent-v1. Se accetti l'analisi opzionale, viene creato un identificatore di sessione nella memoria di sessione e gli eventi vengono inviati al servizio di analisi del sito stesso, senza condividerli con terzi. Puoi modificare o revocare la tua scelta in qualsiasi momento da «Preferenze privacy» nell'avviso sui cookie."
         }
       }
     },

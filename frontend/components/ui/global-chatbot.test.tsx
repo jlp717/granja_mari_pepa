@@ -162,7 +162,7 @@ describe("Pepa IA presentation preserves the real chat contract", () => {
     fireEvent.click(screen.getByRole("button", { name: "Abrir Pepa IA" }));
     fireEvent(
       window,
-      new CustomEvent("kage:overlay-open", { detail: { id: "cookies" } }),
+      new CustomEvent("gmp:overlay-open", { detail: { id: "cookies" } }),
     );
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(fetchMock).not.toHaveBeenCalled();

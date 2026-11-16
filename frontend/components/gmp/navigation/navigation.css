@@ -1,0 +1,473 @@
+/* Functional React adaptations; visual source blocks remain in styles/gmp.css. */
+.gmp-shell {
+  min-height: 100svh;
+}
+.gmp-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.gmp-skip {
+  position: fixed;
+  left: var(--pad);
+  top: 12px;
+  z-index: 120;
+  transform: translateY(-160%);
+  padding: 12px 20px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 14px;
+}
+.gmp-skip:focus {
+  transform: none;
+  outline: 2px solid var(--vermilion);
+  outline-offset: 4px;
+}
+.gmp-brand-image {
+  width: 135px;
+  height: 41px;
+  object-fit: contain;
+}
+.gmp-nav-utilities {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: 18px;
+}
+.gmp-locale select {
+  max-width: 110px;
+  color: var(--bone-dim);
+  background: var(--ink);
+  border: 0;
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 8px 0;
+}
+.gmp-cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  color: var(--bone-dim);
+  transition: color 0.3s;
+}
+.gmp-cart:hover {
+  color: var(--bone);
+}
+.gmp-cart:focus-visible {
+  outline: 1px solid var(--bone);
+  outline-offset: 4px;
+}
+.gmp-cart span {
+  position: absolute;
+  right: -6px;
+  top: -5px;
+  display: grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--vermilion);
+  color: #04131a;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.gmp-site .nav-link {
+  white-space: nowrap;
+}
+.gmp-menu-resources {
+  position: absolute;
+  top: var(--nav-h);
+  right: var(--pad);
+  width: min(84vw, 360px);
+  padding: 28px var(--pad) 34px;
+  background: rgba(3, 6, 9, 0.98);
+  border: 1px solid var(--line-soft);
+  max-height: calc(100svh - var(--nav-h));
+  overflow: auto;
+}
+.gmp-menu-resources[hidden] {
+  display: none;
+}
+.gmp-menu-resources > a,
+.gmp-menu-magazines > a {
+  display: block;
+  min-height: 32px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--bone-dim);
+  transition: color 0.35s;
+}
+.gmp-menu-resources a:hover,
+.gmp-menu-resources a:focus-visible {
+  color: var(--bone);
+}
+.gmp-menu-resources .eyebrow {
+  margin: 0 0 12px;
+}
+.gmp-menu-magazines {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+}
+.gmp-menu-language {
+  display: none;
+}
+.gmp-menu-open #fg-sky,
+.gmp-menu-open .gmp-auxiliary {
+  visibility: hidden;
+}
+.gmp-site:has([role="dialog"][aria-modal="true"]) #fg-sky {
+  visibility: hidden;
+}
+.gmp-fg-parked {
+  visibility: hidden;
+}
+.gmp-site .foot-base > :last-child {
+  text-align: right;
+}
+.gmp-route {
+  animation: gmp-route-arrive 0.78s var(--ease-out) both;
+}
+@keyframes gmp-route-arrive {
+  from {
+    opacity: 0;
+    filter: blur(18px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
+.gmp-scene-status {
+  position: fixed;
+  right: var(--pad);
+  bottom: 20px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--bone-dim);
+  pointer-events: none;
+}
+.gmp-scene-status > i {
+  display: block;
+  width: 54px;
+  height: 1px;
+  background: var(--bone);
+  transform-origin: left;
+  animation: cue 2.8s var(--ease-io) infinite;
+}
+@media (max-width: 1080px) {
+  .gmp-nav-utilities {
+    gap: 12px;
+    margin-left: 0;
+  }
+  .gmp-locale select {
+    max-width: 72px;
+  }
+}
+@media (max-width: 820px) {
+  .gmp-desktop-language {
+    display: none;
+  }
+  .gmp-nav-utilities {
+    margin-left: auto;
+  }
+  .gmp-site .nav-burger {
+    margin-left: 0;
+  }
+  .gmp-site .nav-links {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .gmp-menu-resources {
+    position: static;
+    width: 100%;
+    padding: 28px 0 max(34px, env(safe-area-inset-bottom));
+    border: 0;
+    background: none;
+    overflow: visible;
+    max-height: none;
+  }
+  .gmp-menu-language {
+    display: block;
+    margin-top: 20px;
+  }
+  .gmp-menu-language select {
+    max-width: 100%;
+  }
+  .gmp-site .nav-link .alt {
+    white-space: normal;
+  }
+}
+@media (max-width: 560px) {
+  .gmp-site .foot-base > :last-child {
+    text-align: left;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gmp-route {
+    animation: none !important;
+    filter: none !important;
+  }
+  .gmp-scene-status > i {
+    animation: none;
+  }
+}
+
+/* Optional storage controls use GMP's night surface and measured reveal curves. */
+.gmp-cookie-banner {
+  position: fixed;
+  z-index: 70;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 18px;
+  padding: 12px var(--pad);
+  background: rgba(3, 6, 9, 0.98);
+  border-top: 1px solid var(--line);
+  color: var(--bone);
+}
+.gmp-cookie-banner h2,
+.gmp-cookie-dialog h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.gmp-cookie-banner h2 {
+  grid-column: 1;
+  grid-row: 1;
+  flex: 0 0 auto;
+  font-size: 14px;
+}
+.gmp-cookie-banner p,
+.gmp-cookie-dialog p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--bone-dim);
+}
+.gmp-cookie-banner p {
+  grid-column: 2;
+  grid-row: 1;
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+.gmp-cookie-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.gmp-cookie-actions button {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--bone-dim);
+  color: var(--bone);
+  background: transparent;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  transition:
+    color 0.35s,
+    background 0.35s;
+}
+.gmp-cookie-actions button:hover,
+.gmp-cookie-actions button:focus-visible {
+  color: var(--ink);
+  background: var(--bone);
+}
+.gmp-cookie-configure {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.gmp-cookie-banner .gmp-cookie-actions {
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 0;
+  flex-wrap: nowrap;
+}
+.gmp-cookie-banner .gmp-cookie-actions button {
+  flex: 0 0 auto;
+  padding: 9px 14px;
+}
+.gmp-cookie-banner .gmp-cookie-configure {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  margin-top: 0;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+}
+@media (max-width: 720px) {
+  .gmp-cookie-banner {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    padding: 12px 16px;
+  }
+  .gmp-cookie-banner h2,
+  .gmp-cookie-banner p,
+  .gmp-cookie-banner .gmp-cookie-actions,
+  .gmp-cookie-banner .gmp-cookie-configure {
+    grid-column: 1;
+  }
+  .gmp-cookie-banner p {
+    grid-row: auto;
+    flex-basis: 100%;
+    font-size: 11px;
+  }
+  .gmp-cookie-banner .gmp-cookie-actions {
+    grid-row: auto;
+    width: 100%;
+  }
+  .gmp-cookie-banner .gmp-cookie-actions button {
+    flex: 1;
+  }
+  .gmp-cookie-banner .gmp-cookie-configure {
+    grid-row: auto;
+    justify-self: start;
+  }
+}
+.gmp-cookie-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(560px, calc(100vw - 40px));
+  max-height: calc(100svh - 40px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 26px;
+  color: var(--bone);
+  background: var(--ink);
+  border: 1px solid var(--line);
+}
+.gmp-cookie-dialog:not([open]) {
+  display: none;
+}
+.gmp-cookie-dialog[open] {
+  animation: gmp-cookie-enter 0.65s var(--ease-out) both;
+}
+.gmp-cookie-dialog::backdrop {
+  background: rgba(5, 7, 10, 0.62);
+  backdrop-filter: blur(14px);
+}
+.gmp-cookie-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.gmp-cookie-heading > button {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 26px;
+}
+.gmp-cookie-category {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line-soft);
+}
+.gmp-cookie-category input {
+  margin-top: 5px;
+  accent-color: var(--vermilion);
+}
+.gmp-cookie-category strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+}
+.gmp-cookie-category small {
+  display: block;
+  margin-top: 6px;
+  color: var(--bone-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.gmp-cookie-open {
+  overflow: hidden;
+}
+.gmp-menu-open [data-gmp-cookie-banner],
+.gmp-site:has([role="dialog"][aria-modal="true"]) [data-gmp-cookie-banner],
+.gmp-site:has([data-gmp-pepa-open="true"]) [data-gmp-cookie-banner] {
+  visibility: hidden;
+}
+.gmp-site .foot li button {
+  font-size: 13px;
+  color: #8f9a93;
+  transition: color 0.35s;
+  text-align: left;
+}
+.gmp-site .foot li button:hover {
+  color: var(--bone);
+}
+@keyframes gmp-cookie-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 560px) {
+  .gmp-cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    padding: 16px;
+  }
+  .gmp-cookie-banner p {
+    font-size: 12px;
+  }
+  .gmp-cookie-actions {
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .gmp-cookie-actions button {
+    width: auto;
+    flex: 1;
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 9.5px;
+  }
+  .gmp-cookie-configure {
+    margin-top: 8px;
+    font-size: 10.5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gmp-cookie-dialog[open] {
+    animation: none !important;
+  }
+}

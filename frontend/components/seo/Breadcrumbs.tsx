@@ -1,4 +1,4 @@
-import { KAGE_SITE_URL } from "@/lib/kage-seo";
+import { GMP_SITE_URL } from "@/lib/gmp-seo";
 
 export interface BreadcrumbItem {
   name: string;
@@ -21,7 +21,7 @@ export function Breadcrumbs({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: KAGE_SITE_URL + "/" + locale + item.path,
+      item: GMP_SITE_URL + "/" + locale + item.path,
     })),
   };
   return (

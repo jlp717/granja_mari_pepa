@@ -1,5 +1,5 @@
-import { Foreground } from "@/components/kage/Foreground";
-import type { KageScene } from "@/components/kage/contracts";
+import { Foreground } from "@/components/gmp/Foreground";
+import type { GMPScene } from "@/components/gmp/contracts";
 
 // Decorative atmosphere, not a photograph of GMP premises or operations.
 export function ChapterForeground({
@@ -7,7 +7,7 @@ export function ChapterForeground({
   scene,
 }: {
   chapterId: string;
-  scene: KageScene;
+  scene: GMPScene;
 }) {
   if (scene !== 3 && scene !== 5) return null;
   return (

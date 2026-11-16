@@ -15,13 +15,13 @@ const ToastViewport = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Viewport
     ref={ref}
-    className={cn("kage-toast-viewport", className)}
+    className={cn("gmp-toast-viewport", className)}
     {...props}
   />
 ));
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
-const toastVariants = cva("kage-toast", {
+const toastVariants = cva("gmp-toast", {
   variants: {
     variant: {
       default: "",
@@ -54,7 +54,7 @@ const ToastAction = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Action
     ref={ref}
-    className={cn("kage-button small", className)}
+    className={cn("gmp-button small", className)}
     {...props}
   />
 ));
@@ -66,7 +66,7 @@ const ToastClose = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Close
     ref={ref}
-    className={cn("kage-toast-close", className)}
+    className={cn("gmp-toast-close", className)}
     aria-label="Close"
     toast-close=""
     {...props}
@@ -82,7 +82,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn("kage-toast-title", className)}
+    className={cn("gmp-toast-title", className)}
     {...props}
   />
 ));
@@ -94,7 +94,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn("kage-toast-description", className)}
+    className={cn("gmp-toast-description", className)}
     {...props}
   />
 ));

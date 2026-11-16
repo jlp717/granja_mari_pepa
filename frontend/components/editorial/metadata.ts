@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n";
-import { createKageMetadata } from "@/lib/kage-seo";
+import { createGMPMetadata } from "@/lib/gmp-seo";
 const languages = ["es", "en", "de", "it", "zh"] as const;
 export function editorialMetadata(
   locale: string,
@@ -12,5 +12,5 @@ export function editorialMetadata(
   const valid = languages.includes(locale as Locale)
     ? (locale as Locale)
     : "es";
-  return createKageMetadata(valid, path, title, description, ogImage);
+  return createGMPMetadata(valid, path, title, description, ogImage);
 }

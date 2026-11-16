@@ -4,8 +4,8 @@ export interface AnalyticsConsent {
   analytics: boolean;
   updatedAt: string;
 }
-export const ANALYTICS_CONSENT_KEY = "gmp-kage-consent-v1";
-const CONSENT_EVENT = "kage:consent-change";
+export const ANALYTICS_CONSENT_KEY = "gmp-gmp-consent-v1";
+const CONSENT_EVENT = "gmp:consent-change";
 let consent: AnalyticsConsent | null | undefined;
 function parseConsent(raw: string | null): AnalyticsConsent | null {
   if (!raw) return null;

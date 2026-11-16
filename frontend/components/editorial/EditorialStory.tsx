@@ -1,9 +1,9 @@
 import { AtlasQuickLinks } from "./AtlasQuickLinks";
 import Image from "next/image";
 import { Link } from "@/lib/navigation";
-import { KageRoute } from "@/components/kage/KageRoute";
-import { Chapter } from "@/components/kage/Chapter";
-import { WordReveal } from "@/components/kage/WordReveal";
+import { GMPRoute } from "@/components/gmp/GMPRoute";
+import { Chapter } from "@/components/gmp/Chapter";
+import { WordReveal } from "@/components/gmp/WordReveal";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import type { EditorialStoryId } from "./content.es";
 import { getStoryCopy, getUICopy, getContactCopy } from "./copy";
@@ -52,7 +52,7 @@ export function EditorialStory({
         locale={locale}
         items={[{ name: STORY_NAMES[storyId], path: STORY_PATHS[storyId] }]}
       />
-      <KageRoute routeId={storyId} mode="journey" world="gmp">
+      <GMPRoute routeId={storyId} mode="journey" world="gmp">
         {page.chapters.map((chapter, index) => {
           const kind = chapter.layout;
           const id = `${storyId}-${chapter.id}`;
@@ -207,7 +207,7 @@ export function EditorialStory({
                                 fill
                                 sizes="(max-width: 820px) 100vw, 33vw"
                                 className={styles.sceneFallback}
-                                data-kage-view-fallback
+                                data-gmp-view-fallback
                                 loading="lazy"
                               />
                               <span className="card-ar">
@@ -381,7 +381,7 @@ export function EditorialStory({
             <Arrow />
           </Link>
         </Chapter>
-      </KageRoute>
+      </GMPRoute>
     </>
   );
 }

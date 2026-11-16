@@ -6,7 +6,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
-import { KageSiteShell } from "@/components/kage/KageSiteShell";
+import { GMPSiteShell } from "@/components/gmp/GMPSiteShell";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "sonner";
 import { PerformanceProvider } from "@/components/providers/performance-provider";
@@ -92,7 +92,7 @@ export async function generateMetadata(props: {
       ],
       apple: [
         {
-          url: "/kage/brand/logo-alpha.png",
+          url: "/gmp/brand/logo-alpha.png",
           sizes: "180x180",
           type: "image/png",
         },
@@ -141,7 +141,7 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
             <AnalyticsProvider>
               <PerformanceProvider>
                 <LazyLoadingProvider>
-                  <KageSiteShell
+                  <GMPSiteShell
                     auxiliary={
                       <>
                         <Toaster />
@@ -151,7 +151,7 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
                     }
                   >
                     {children}
-                  </KageSiteShell>
+                  </GMPSiteShell>
                 </LazyLoadingProvider>
               </PerformanceProvider>
             </AnalyticsProvider>

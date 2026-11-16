@@ -280,7 +280,7 @@ async function readSse(
 const LOGO_SOURCES = [
   "/brand/logo-maripepa.jpeg",
   "/images/logo.jpeg",
-  "/kage/brand/logo-alpha.png",
+  "/gmp/brand/logo-alpha.png",
 ];
 
 function BrandMark() {
@@ -671,7 +671,7 @@ export function GlobalChatbot() {
     stopSpeech();
     setIsOpen(false);
     window.dispatchEvent(
-      new CustomEvent("kage:overlay-close", { detail: { id: "pepa" } }),
+      new CustomEvent("gmp:overlay-close", { detail: { id: "pepa" } }),
     );
     launcherRef.current?.focus();
   }, [stopSpeech]);
@@ -680,7 +680,7 @@ export function GlobalChatbot() {
     setIsOpen(true);
     setIsMinimized(false);
     window.dispatchEvent(
-      new CustomEvent("kage:overlay-open", { detail: { id: "pepa" } }),
+      new CustomEvent("gmp:overlay-open", { detail: { id: "pepa" } }),
     );
   }, []);
 
@@ -696,12 +696,12 @@ export function GlobalChatbot() {
         closePanel();
       }
     };
-    window.addEventListener("kage:overlay-open", onOverlay);
-    window.addEventListener("kage:open-pepa", onOpen);
+    window.addEventListener("gmp:overlay-open", onOverlay);
+    window.addEventListener("gmp:open-pepa", onOpen);
     document.addEventListener("keydown", onKey);
     return () => {
-      window.removeEventListener("kage:overlay-open", onOverlay);
-      window.removeEventListener("kage:open-pepa", onOpen);
+      window.removeEventListener("gmp:overlay-open", onOverlay);
+      window.removeEventListener("gmp:open-pepa", onOpen);
       document.removeEventListener("keydown", onKey);
     };
   }, [isOpen, closePanel, openPanel]);
@@ -1544,7 +1544,7 @@ export function GlobalChatbot() {
       messages.filter((message) => message.role === "user").length >= 2);
 
   return (
-    <div className={styles.widget} data-kage-pepa data-kage-pepa-open={isOpen || undefined}>
+    <div className={styles.widget} data-gmp-pepa data-gmp-pepa-open={isOpen || undefined}>
       {isOpen && (
         <section
           id={panelId}
@@ -2115,7 +2115,7 @@ export function GlobalChatbot() {
         ref={launcherRef}
         type="button"
         className={styles.launcher}
-        data-kage-pepa-launcher
+        data-gmp-pepa-launcher
         aria-controls={panelId}
         aria-expanded={isOpen}
         aria-label={isOpen ? copy.close : copy.open}

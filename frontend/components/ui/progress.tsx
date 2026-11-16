@@ -14,13 +14,13 @@ const Progress = React.forwardRef<
   return (
     <ProgressPrimitive.Root
       ref={ref}
-      className={cn("kage-progress", className)}
+      className={cn("gmp-progress", className)}
       value={resolved}
       max={limit}
       {...props}
     >
       <ProgressPrimitive.Indicator
-        className="kage-progress-value"
+        className="gmp-progress-value"
         style={
           resolved === null
             ? undefined

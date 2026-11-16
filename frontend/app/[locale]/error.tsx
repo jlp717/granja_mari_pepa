@@ -1,6 +1,6 @@
 "use client";
 
-import { OperationalState } from "@/components/kage/operations/StateView";
+import { OperationalState } from "@/components/gmp/operations/StateView";
 
 export default function ErrorPage({
   reset,

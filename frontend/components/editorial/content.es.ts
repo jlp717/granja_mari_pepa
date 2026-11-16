@@ -135,19 +135,19 @@ export const STORIES_ES = {
         ],
         shots: [
           {
-            image: "/kage/careers/careers-facility.jpg",
+            image: "/gmp/careers/careers-facility.jpg",
             title: "La nave de Saprelorca.",
             caption: "Nave de Lorca, donde se prepara la carga.",
             href: "/lorca",
           },
           {
-            image: "/kage/careers/careers-01.jpg",
+            image: "/gmp/careers/careers-01.jpg",
             title: "El camión frigorífico.",
             caption: "Equipo de frío y carga en la sede.",
             href: "/calidad",
           },
           {
-            image: "/kage/careers/careers-02.jpg",
+            image: "/gmp/careers/careers-02.jpg",
             title: "Acceso y carga.",
             caption: "Entrada de vehículos y zona de preparación.",
             href: "/reparto",

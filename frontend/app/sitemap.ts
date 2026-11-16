@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import {
-  KAGE_CONTENT_UPDATED,
-  KAGE_INDEXED_LOCALES,
-  KAGE_SITE_URL,
-} from "@/lib/kage-seo";
+  GMP_CONTENT_UPDATED,
+  GMP_INDEXED_LOCALES,
+  GMP_SITE_URL,
+} from "@/lib/gmp-seo";
 import { fetchPublicJobs } from "@/lib/public-content";
 
 const staticPaths = [
@@ -39,9 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths = [...staticPaths, ...livePaths];
 
   return paths.flatMap((path) =>
-    KAGE_INDEXED_LOCALES.map((locale) => ({
-      url: KAGE_SITE_URL + "/" + locale + path,
-      lastModified: KAGE_CONTENT_UPDATED,
+    GMP_INDEXED_LOCALES.map((locale) => ({
+      url: GMP_SITE_URL + "/" + locale + path,
+      lastModified: GMP_CONTENT_UPDATED,
       changeFrequency: path.startsWith("/legal/")
         ? ("yearly" as const)
         : path.startsWith("/trabaja-con-nosotros/")
@@ -59,11 +59,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 : 0.7,
       alternates: {
         languages: Object.fromEntries([
-          ...KAGE_INDEXED_LOCALES.map((language) => [
+          ...GMP_INDEXED_LOCALES.map((language) => [
             language,
-            KAGE_SITE_URL + "/" + language + path,
+            GMP_SITE_URL + "/" + language + path,
           ]),
-          ["x-default", KAGE_SITE_URL + "/es" + path],
+          ["x-default", GMP_SITE_URL + "/es" + path],
         ]),
       },
     })),
