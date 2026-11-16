@@ -52,7 +52,7 @@ export default async function JobPage(props: {
   if (!job) notFound();
 
   const isEs = params.locale === "es";
-  const applyHref = `/${params.locale}/trabaja-con-nosotros#careers-cv`;
+  const applyHref = `/${params.locale}/trabaja-con-nosotros?puesto=${encodeURIComponent(job.slug)}#careers-cv`;
   const liveJobs = await fetchPublicJobs();
   const related = (liveJobs ?? [])
     .filter((item) => item.slug !== job.slug)
@@ -81,8 +81,6 @@ export default async function JobPage(props: {
       <a
         href={applyHref}
         className={styles.applyCardCta}
-        target="_blank"
-        rel="noopener noreferrer"
         data-cursor
       >
         <span className={styles.ctaLong}>

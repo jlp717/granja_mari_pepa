@@ -143,12 +143,27 @@ export function EditorialCareers({
   const [loc, setLoc] = useState("Todas");
   const [search, setSearch] = useState("");
   const [cvSector, setCvSector] = useState("Otro");
+  const [cvJob, setCvJob] = useState("");
   const [cvSubmitted, setCvSubmitted] = useState(false);
   const [cvSending, setCvSending] = useState(false);
   const [cvError, setCvError] = useState("");
   const [cvInvalid, setCvInvalid] = useState<BadField[]>([]);
   const [cvFileName, setCvFileName] = useState("");
   const cvFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const job = params.get("puesto") || "";
+    if (job) setCvJob(job);
+    if (window.location.hash !== "#careers-cv") return;
+    const timer = window.setTimeout(() => {
+      const target = document.getElementById("careers-cv");
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: "smooth" });
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, []);
   const cvMessageRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -945,7 +960,11 @@ export function EditorialCareers({
                       ? "Puesto al que aplicas"
                       : "Role you are applying for"}
                   </span>
-                  <select name="cv-puesto" defaultValue="">
+                  <select
+                    name="cv-puesto"
+                    value={cvJob}
+                    onChange={(event) => setCvJob(event.target.value)}
+                  >
                     <option value="">
                       {isEs ? "Candidatura espontánea" : "Open application"}
                     </option>
