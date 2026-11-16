@@ -468,6 +468,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Enviar factura por email (PROTEGIDA + AUDITORÍA)
 app.post('/api/clientes/enviar-factura-email', requireAuth, generalLimiter, validateEnviarFacturaEmail, auditDataAccess('ENVIAR_FACTURA_EMAIL'), facturaController.enviarFacturaPorEmail.bind(facturaController));
+app.post('/api/clientes/enviar-factura-whatsapp', requireAuth, generalLimiter, auditDataAccess('ENVIAR_FACTURA_WHATSAPP'), facturaController.enviarFacturaPorWhatsapp.bind(facturaController));
 
 // RUTAS DE COMPARTIR FACTURAS (ENLACES TEMPORALES + AUDITORÍA)
 app.post('/api/compartir/generar-enlace', requireAuth, generalLimiter, auditDataAccess('GENERAR_ENLACE_COMPARTIR'), tempLinkController.generarEnlace.bind(tempLinkController));

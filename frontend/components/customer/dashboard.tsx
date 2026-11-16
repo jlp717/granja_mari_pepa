@@ -364,6 +364,7 @@ export function CustomerDashboard() {
   const [emailFacturaToSend, setEmailFacturaToSend] = useState<FacturaBackend | null>(null);
   const [emailDestination, setEmailDestination] = useState('');
   const [sendingEmail, setSendingEmail] = useState(false);
+  const [sendingWhatsApp, setSendingWhatsApp] = useState(false);
 
   // Estado para modal de confirmación de borrado de contacto
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
@@ -1568,6 +1569,64 @@ export function CustomerDashboard() {
       toast.error(error.message || 'Error al enviar email', { id: toastId });
     } finally {
       setSendingEmail(false);
+    }
+  };
+
+  // Función para enviar la factura por WhatsApp con el PDF adjunto.
+  const enviarFacturaPorWhatsapp = async (
+    factura: FacturaBackend,
+    telefono: string,
+  ): Promise<boolean> => {
+    const digits = String(telefono || '').replace(/\D/g, '');
+    if (digits.length < 9) {
+      toast.error('Número de teléfono inválido');
+      return false;
+    }
+
+    setSendingWhatsApp(true);
+    const toastId = toast.loading('Enviando factura por WhatsApp...');
+    try {
+      const { data, ok } = await secureFetch<{
+        success?: boolean;
+        message?: string;
+        fallbackUrl?: string;
+        toMasked?: string;
+      }>('/api/clientes/enviar-factura-whatsapp', {
+        method: 'POST',
+        body: JSON.stringify({
+          factura: {
+            serie: factura.serieFactura,
+            numero: factura.numeroFactura,
+            ejercicio: factura.ejercicio,
+          },
+          telefono,
+        }),
+      });
+
+      if (ok && data.success) {
+        toast.success(
+          `Factura enviada por WhatsApp${data.toMasked ? ` a ${data.toMasked}` : ''}`,
+          { id: toastId },
+        );
+        return true;
+      }
+
+      toast.error(
+        data.message ||
+          'WhatsApp no está vinculado. No se ha podido enviar el PDF.',
+        { id: toastId, duration: 8000 },
+      );
+      if (data.fallbackUrl) {
+        window.open(data.fallbackUrl, '_blank', 'noopener,noreferrer');
+      }
+      return false;
+    } catch (error: any) {
+      toast.error(error.message || 'Error al enviar por WhatsApp', {
+        id: toastId,
+      });
+      return false;
+    } finally {
+      setSendingWhatsApp(false);
     }
   };
 
@@ -3454,21 +3513,21 @@ export function CustomerDashboard() {
             >
               <div className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl max-w-md w-full overflow-hidden border border-border">
                 {/* Header */}
-                <div className="border-b border-[var(--line)] bg-[var(--ink-2)] p-6 text-foreground">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-primary-foreground/20 rounded-xl">
-                        <Mail className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h2 className="text-xl font-bold">Enviar Factura por Email</h2>
-                        <p className="text-sm text-muted-foreground">Confirma el envío de tu factura</p>
-                      </div>
+                <div className="border-b border-[var(--line)] p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                        Granja Maripepa · Factura
+                      </p>
+                      <h2 className="mt-1 text-xl font-light text-foreground">
+                        Enviar por email
+                      </h2>
                     </div>
                     {!sendingEmail && (
                       <button
                         onClick={() => setShowEmailConfirmModal(false)}
-                        className="p-2 hover:bg-primary-foreground/20 rounded-xl transition-colors"
+                        className="p-1 text-muted-foreground transition-colors hover:text-foreground"
+                        aria-label="Cerrar"
                       >
                         <X className="w-5 h-5" />
                       </button>
@@ -3478,59 +3537,50 @@ export function CustomerDashboard() {
 
                 {/* Body */}
                 <div className="p-6 space-y-5">
-                  {/* Información de la factura */}
-                  <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-4">
+                  <div className="border border-[var(--line)] bg-[var(--ink)] p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div>
-                        <p className="text-sm font-semibold text-purple-900 dark:text-purple-200">
-                          📄 Factura
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                          Factura
                         </p>
-                        <p className="text-xl font-bold text-purple-900 dark:text-purple-100">
-                          {emailFacturaToSend.serieFactura} {emailFacturaToSend.numeroFactura}
+                        <p className="font-mono text-base text-foreground">
+                          {emailFacturaToSend.serieFactura}-{emailFacturaToSend.numeroFactura}
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-xs text-purple-700 dark:text-purple-300">Total</p>
-                        <p className="text-2xl font-bold text-purple-900 dark:text-purple-100">
-                          €{emailFacturaToSend.totalFactura.toFixed(2)}
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                          Total
+                        </p>
+                        <p className="text-xl font-light text-foreground">
+                          {formatCurrency(emailFacturaToSend.totalFactura)}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-purple-700 dark:text-purple-300">Fecha:</span>
-                      <span className="font-semibold text-purple-900 dark:text-purple-100">
-                        {emailFacturaToSend.fecha}
-                      </span>
+                    <div className="flex items-center justify-between border-t border-[var(--line-soft)] pt-3 text-xs">
+                      <span className="text-muted-foreground">Fecha</span>
+                      <span className="text-foreground">{emailFacturaToSend.fecha}</span>
                     </div>
                   </div>
 
-                  {/* Email de destino */}
-                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Mail className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                      <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        Se enviará a:
-                      </p>
-                    </div>
-                    <p className="text-lg font-bold text-gray-900 dark:text-gray-100 break-all">
+                  <div className="border border-[var(--line)] p-4">
+                    <p className="mb-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                      Destinatario
+                    </p>
+                    <p className="break-all text-sm text-foreground">
                       {emailDestination}
                     </p>
                   </div>
 
-                  {/* Mensaje informativo */}
-                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-                    <p className="text-sm text-blue-900 dark:text-blue-200">
-                      💡 La factura será enviada como archivo PDF adjunto al email indicado.
-                      Recibirás una notificación cuando se envíe correctamente.
-                    </p>
-                  </div>
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    La factura se enviará como PDF adjunto a la dirección
+                    indicada. Recibirás confirmación cuando el envío termine.
+                  </p>
 
-                  {/* Botones */}
-                  <div className="flex gap-3 pt-2">
+                  <div className="flex gap-3 pt-1">
                     <Button
                       onClick={() => setShowEmailConfirmModal(false)}
                       disabled={sendingEmail}
-                      className="flex-1 rounded-xl h-12 font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 border border-gray-300 dark:border-gray-600"
+                      className="h-11 flex-1 rounded-none border border-[var(--line)] bg-transparent text-foreground hover:bg-white/5"
                     >
                       Cancelar
                     </Button>
@@ -3538,18 +3588,15 @@ export function CustomerDashboard() {
                     <Button
                       onClick={() => enviarFacturaPorEmail(emailFacturaToSend, emailDestination)}
                       disabled={sendingEmail}
-                      className="flex-1 h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl"
+                      className="h-11 flex-1 rounded-none bg-[var(--gmp-accent)] text-white hover:opacity-90 disabled:opacity-50"
                     >
                       {sendingEmail ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                          <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                           Enviando...
                         </>
                       ) : (
-                        <>
-                          <Send className="w-5 h-5 mr-2" />
-                          Enviar Email
-                        </>
+                        'Enviar factura'
                       )}
                     </Button>
                   </div>
@@ -3577,47 +3624,62 @@ export function CustomerDashboard() {
               onClick={(e) => e.stopPropagation()}
               className="border border-[var(--line)] bg-[var(--ink-2)] shadow-2xl p-8 max-w-md w-full border border-border"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center border-l-4 border-emerald-500 shadow-md"
-                  style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
-                >
-                  <MessageCircle className="w-8 h-8 text-emerald-600" />
-                </div>
+              <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] pb-5 mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground">Compartir por WhatsApp</h2>
-                  <p className="text-sm text-muted-foreground">Factura {selectedFacturaForShare.serieFactura}-{selectedFacturaForShare.numeroFactura}</p>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                    Granja Maripepa · Factura
+                  </p>
+                  <h2 className="mt-1 text-xl font-light text-foreground">
+                    Enviar por WhatsApp
+                  </h2>
+                  <p className="mt-1 font-mono text-xs text-muted-foreground">
+                    {selectedFacturaForShare.serieFactura}-{selectedFacturaForShare.numeroFactura}
+                  </p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => setShowWhatsAppModal(false)}
+                  className="p-1 text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label="Cerrar"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
-              <div className="space-y-4 mb-6">
+              <div className="space-y-5 mb-6">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Número de WhatsApp (con código de país)
+                  <label className="mb-2 block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    Teléfono de destino
                   </label>
                   <Input
                     type="tel"
                     placeholder="+34 666 555 444"
                     value={whatsappPhone}
                     onChange={(e) => setWhatsappPhone(e.target.value)}
-                    className="w-full bg-secondary text-foreground border-border placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-emerald-500"
+                    className="h-11 w-full rounded-none border-[var(--line)] bg-transparent text-foreground placeholder:text-muted-foreground focus:border-[var(--gmp-accent)]"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">Ejemplo: +34666555444 (sin espacios ni guiones)</p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Incluye el código de país. Sin espacios ni guiones.
+                  </p>
                 </div>
 
-                <div
-                  className="rounded-xl p-4 border-l-4 border-emerald-400"
-                  style={{ background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' }}
-                >
-                  <p className="text-sm font-semibold text-emerald-800 mb-2">Mensaje a enviar:</p>
-                  <p className="text-sm text-emerald-700">
-                    ¡Hola! 👋<br /><br />
-                    Te envío la información de la factura:<br /><br />
-                    📄 <strong>Factura:</strong> {selectedFacturaForShare.serieFactura}-{selectedFacturaForShare.numeroFactura}<br />
-                    📅 <strong>Fecha:</strong> {selectedFacturaForShare.fecha}<br />
-                    💰 <strong>Importe:</strong> {formatCurrency(selectedFacturaForShare.totalFactura)}<br />
-                    {selectedFacturaForShare.estadoPago === 'pagada' ? '✅ Estado: Pagada' : '⏳ Estado: Pendiente'}<br /><br />
-                    ¿Necesitas el PDF? Solicítamelo y te lo envío. 📎
+                <div className="border border-[var(--line)] bg-[var(--ink)] p-4">
+                  <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    Mensaje y documento
+                  </p>
+                  <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-foreground/90">
+{`Factura ${selectedFacturaForShare.serieFactura}-${selectedFacturaForShare.numeroFactura}
+Fecha: ${selectedFacturaForShare.fecha}
+Importe: ${formatCurrency(selectedFacturaForShare.totalFactura)}
+Estado: ${selectedFacturaForShare.estadoPago === 'pagada' ? 'Pagada' : 'Pendiente'}
+
+Granja Maripepa, S.L.
+Tel. 968 46 75 14
+pedidos@granjamaripepa.com`}
+                  </pre>
+                  <p className="mt-3 border-t border-[var(--line-soft)] pt-3 text-xs text-muted-foreground">
+                    Se envía el PDF adjunto en el mismo mensaje. Requiere la
+                    sesión de WhatsApp vinculada en el servidor.
                   </p>
                 </div>
               </div>
@@ -3628,31 +3690,32 @@ export function CustomerDashboard() {
                     setShowWhatsAppModal(false);
                     setWhatsappPhone('');
                   }}
-                  className="flex-1 rounded-xl h-12 font-semibold bg-secondary hover:bg-secondary/80 text-foreground border border-border"
+                  className="h-11 flex-1 rounded-none border border-[var(--line)] bg-transparent text-foreground hover:bg-white/5"
                 >
                   Cancelar
                 </Button>
                 <Button
-                  onClick={() => {
-                    const phone = whatsappPhone.replace(/[\s\-\(\)]/g, '');
-                    if (!phone || phone.length < 10) {
-                      toast.error('Por favor, introduce un número de teléfono válido');
-                      return;
+                  onClick={async () => {
+                    const sent = await enviarFacturaPorWhatsapp(
+                      selectedFacturaForShare,
+                      whatsappPhone,
+                    );
+                    if (sent) {
+                      setShowWhatsAppModal(false);
+                      setWhatsappPhone('');
                     }
-
-                    const mensaje = `¡Hola! 👋\n\nTe envío la información de la factura:\n\n📄 *Factura:* ${selectedFacturaForShare.serieFactura}-${selectedFacturaForShare.numeroFactura}\n📅 *Fecha:* ${selectedFacturaForShare.fecha}\n💰 *Importe:* ${formatCurrency(selectedFacturaForShare.totalFactura)}\n${selectedFacturaForShare.estadoPago === 'pagada' ? '✅ Estado: Pagada' : '⏳ Estado: Pendiente'}\n\n¿Necesitas el PDF? Solicítamelo y te lo envío. 📎`;
-
-                    const url = `https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`;
-                    window.open(url, '_blank');
-
-                    setShowWhatsAppModal(false);
-                    setWhatsappPhone('');
-                    toast.success('Abriendo WhatsApp...');
                   }}
-                  className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                  disabled={sendingWhatsApp}
+                  className="h-11 flex-1 rounded-none bg-[var(--gmp-accent)] text-white hover:opacity-90 disabled:opacity-50"
                 >
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  Enviar
+                  {sendingWhatsApp ? (
+                    <>
+                      <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                      Enviando...
+                    </>
+                  ) : (
+                    'Enviar factura'
+                  )}
                 </Button>
               </div>
             </motion.div>

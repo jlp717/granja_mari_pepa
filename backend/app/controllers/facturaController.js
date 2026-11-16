@@ -8,6 +8,7 @@ const authService = require('../services/authService');
 const databaseService = require('../services/databaseService');
 const odbcPool = require('../config/odbcConfig');
 const pdfService = require('../services/pdfService');
+const whatsappService = require('../services/whatsappService');
 const logger = require('../utils/logger');
 
 /**
@@ -475,9 +476,95 @@ async function enviarFacturaPorEmail(req, res) {
 }
 
 /**
- * GET /api/metrics
- * Obtener métricas del sistema
+ * POST /api/clientes/enviar-factura-whatsapp
+ * Enviar factura por WhatsApp como documento PDF adjunto.
  */
+async function enviarFacturaPorWhatsapp(req, res) {
+  try {
+    const { factura, telefono } = req.body;
+    const codigoCliente = req.user?.codigoCliente;
+
+    if (!codigoCliente) {
+      return res.status(401).json({ success: false, message: 'No autenticado' });
+    }
+    if (
+      !factura ||
+      !factura.serie ||
+      !factura.numero ||
+      !factura.ejercicio ||
+      !telefono
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: 'Se requieren factura (serie, numero, ejercicio) y telefono',
+      });
+    }
+
+    const detail = await databaseService.getInvoiceDetail(
+      factura.serie,
+      factura.numero,
+      factura.ejercicio,
+      codigoCliente,
+    );
+    const pdfBuffer = await pdfService.generateInvoicePDF(detail);
+
+    const header = detail.header || {};
+    const serie = header.SERIEFACTURA || factura.serie;
+    const numero = header.NUMEROFACTURA || factura.numero;
+    const dia = String(header.DIAFACTURA || '').padStart(2, '0');
+    const mes = String(header.MESFACTURA || '').padStart(2, '0');
+    const ano = header.ANOFACTURA || factura.ejercicio;
+    const fecha = dia && mes ? `${dia}/${mes}/${ano}` : '';
+    const total = Number(header.TOTALFACTURA || 0)
+      .toFixed(2)
+      .replace('.', ',');
+    const filename = `Factura_${serie}_${numero}_${factura.ejercicio}.pdf`;
+    const caption = [
+      `Factura ${serie}-${numero}`,
+      fecha ? `Fecha: ${fecha}` : '',
+      `Importe: ${total} EUR`,
+      '',
+      'Granja Maripepa, S.L.',
+      'Tel. 968 46 75 14',
+      'pedidos@granjamaripepa.com',
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    const result = await whatsappService.sendInvoiceDocument({
+      to: telefono,
+      pdfBuffer,
+      filename,
+      caption,
+    });
+
+    if (!result.success) {
+      const status =
+        result.code === 'CHANNEL_NOT_READY' ||
+        result.code === 'CHANNEL_NOT_CONFIGURED'
+          ? 409
+          : 502;
+      return res.status(status).json(result);
+    }
+
+    logger.success('✅ Factura enviada por WhatsApp', {
+      factura: `${serie}-${numero}`,
+      to: result.toMasked,
+      provider: result.provider,
+    });
+    return res.json(result);
+  } catch (error) {
+    logger.error('❌ Error enviando factura por WhatsApp', error);
+    return res.status(500).json({
+      success: false,
+      message:
+        'Error enviando la factura por WhatsApp: ' +
+        (error.message || 'Error desconocido'),
+    });
+  }
+}
+
+
 async function obtenerMetricas(req, res) {
   try {
     return res.json({
@@ -696,6 +783,7 @@ module.exports = {
   getClientProducts,
   generarFactura,
   enviarFacturaPorEmail,
+  enviarFacturaPorWhatsapp,
   obtenerMetricas,
   invalidarCacheFactura,
   invalidarTodoCache,
