@@ -433,6 +433,11 @@ async function sendInvoiceEmail({ to, subject, text, html, pdfBuffer, filename }
  */
 async function sendApplicationStatusEmail(application, status) {
     const templates = {
+        new: {
+            subject: 'Tu candidatura está registrada — Mari Pepa',
+            title: 'Candidatura registrada',
+            body: 'Hemos registrado tu candidatura. El equipo de selección la revisará y te escribirá si avanza el proceso.'
+        },
         review: {
             subject: 'Tu candidatura está en revisión — Maripepa',
             title: 'Candidatura en revisión',
