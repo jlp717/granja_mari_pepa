@@ -254,12 +254,24 @@ const updateApplication = wrap(async (req, res) => {
   if (result.error === 'missing') {
     return fail(res, 404, 'La candidatura ya no existe.');
   }
-  if (result.error === 'locked') {
+  if (result.error === 'invalid') {
+    return fail(res, 400, 'Ese estado no existe.', 'INVALID_STATUS');
+  }
+  if (result.error === 'transition') {
+    const labels = {
+      new: 'Nueva',
+      review: 'En revisión',
+      interview: 'Entrevista',
+      rejected: 'Descartada',
+      hired: 'Contratada',
+    };
+    const from = labels[result.previousStatus] || result.previousStatus;
+    const to = labels[result.nextStatus] || result.nextStatus;
     return fail(
       res,
       409,
-      'Esta candidatura se cerró hace más de 5 días hábiles. Su estado ya no se puede modificar.',
-      'APPLICATION_LOCKED',
+      `No se puede pasar de «${from}» a «${to}». Las decisiones finales no se pueden cambiar.`,
+      'INVALID_TRANSITION',
     );
   }
   if (result.statusChanged) {

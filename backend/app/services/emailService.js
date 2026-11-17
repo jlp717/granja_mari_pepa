@@ -11,16 +11,56 @@ const logger = require('../utils/logger');
 
 // Logo real de la marca para la cabecera de los correos. Se incrusta en el
 // propio mensaje (CID) para que se vea sin depender de un servidor externo.
-const EMAIL_LOGO_PATH = path.join(__dirname, '..', '..', 'assets', 'email', 'logo-maripepa.png');
+const EMAIL_LOGO_PATH = path.join(__dirname, '..', '..', 'assets', 'email', 'logo-maripepa.jpg');
 const EMAIL_LOGO_CID = 'maripepa-logo@maripepa.es';
 
 function emailLogoAttachment() {
     return {
-        filename: 'maripepa.png',
+        filename: 'maripepa.jpg',
         path: EMAIL_LOGO_PATH,
         cid: EMAIL_LOGO_CID,
         contentDisposition: 'inline'
     };
+}
+
+/**
+ * Plantilla base única para todos los correos de marca.
+ * Cabecera con el logo real, acento corporativo, tipografía y pie legal.
+ */
+function renderBrandEmail({ kicker = '', title, body, footerNote = '' }) {
+    return `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${title}</title>
+</head>
+<body style="margin:0;padding:0;background:#f2f1ee;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${title}</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
+        <tr><td style="line-height:0;">
+          <img src="cid:${EMAIL_LOGO_CID}" width="560" alt="Mari Pepa" style="display:block;width:100%;max-width:560px;height:auto;border:0;outline:none;text-decoration:none;" />
+        </td></tr>
+        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
+        <tr><td style="padding:26px 30px 0;">
+          ${kicker ? `<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">${kicker}</p>` : ''}
+          <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;line-height:1.25;color:#1a1a1a;">${title}</h1>
+        </td></tr>
+        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
+          ${body}
+        </td></tr>
+        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#8a8578;">
+          Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
+          968 46 75 14 &middot; pedidos@granjamaripepa.com
+          ${footerNote ? `<br />${footerNote}` : ''}
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
 }
 
 // Configuración SMTP desde variables de entorno
@@ -93,57 +133,21 @@ async function sendPasswordResetEmail(to, resetToken, customerName) {
         const mailOptions = {
             from: `"Mari Pepa - Soporte" <${FROM_EMAIL}>`,
             to: to,
-            subject: 'Recuperación de Contraseña - Mari Pepa',
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
-                    <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <div style="text-align: center; margin-bottom: 30px;">
-                            <h1 style="color: #2c5530; margin: 0;">🔒 Recuperación de Contraseña</h1>
-                        </div>
-
-                        <p style="font-size: 16px; color: #333; line-height: 1.6;">
-                            Hola <strong>${escapeHtml(customerName)}</strong>,
-                        </p>
-
-                        <p style="font-size: 14px; color: #666; line-height: 1.6;">
-                            Hemos recibido una solicitud para restablecer tu contraseña en <strong>Mari Pepa</strong>.
-                        </p>
-
-                        <div style="background-color: #f0f7f1; padding: 20px; border-radius: 8px; margin: 25px 0;">
-                            <p style="font-size: 14px; color: #333; margin: 0 0 15px 0;">
-                                Haz clic en el siguiente botón para crear una nueva contraseña:
-                            </p>
-                            <div style="text-align: center;">
-                                <a href="${resetLink}"
-                                   style="display: inline-block; background-color: #2c5530; color: white; padding: 14px 35px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
-                                    Restablecer Contraseña
-                                </a>
-                            </div>
-                        </div>
-
-                        <p style="font-size: 13px; color: #999; line-height: 1.6; margin-top: 25px;">
-                            O copia y pega este enlace en tu navegador:<br>
-                            <span style="color: #666; word-break: break-all;">${resetLink}</span>
-                        </p>
-
-                        <div style="background-color: #fff9e6; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 25px;">
-                            <p style="font-size: 13px; color: #856404; margin: 0; line-height: 1.6;">
-                                <strong>⚠️ Importante:</strong> Este enlace expirará en <strong>30 minutos</strong> por seguridad.
-                                Si no solicitaste este cambio, ignora este email.
-                            </p>
-                        </div>
-
-                        <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
-
-                        <p style="font-size: 12px; color: #999; line-height: 1.5; margin: 0;">
-                            <strong>Mari Pepa</strong><br>
-                            Pol. Ind. Saprelorca - Parcela D-3<br>
-                            30817 Lorca, Murcia<br>
-                            📞 639 77 86 56 | 📧 pedidos@mari-pepa.com
-                        </p>
-                    </div>
-                </div>
-            `
+            subject: 'Recuperación de contraseña — Mari Pepa',
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa &middot; Soporte',
+                title: 'Recuperación de contraseña',
+                body: `
+                  <p style="margin:0 0 12px;">Hola <strong>${escapeHtml(customerName)}</strong>,</p>
+                  <p style="margin:0 0 12px;">Hemos recibido una solicitud para restablecer tu contraseña en Mari Pepa.</p>
+                  <p style="margin:18px 0;text-align:center;">
+                    <a href="${resetLink}" style="display:inline-block;padding:14px 32px;background:#1a1a1a;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;">Crear nueva contraseña</a>
+                  </p>
+                  <p style="margin:0 0 12px;font-size:12px;color:#8a8578;word-break:break-all;">O copia este enlace: ${resetLink}</p>
+                  <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:12.5px;line-height:1.65;">El enlace caduca en <strong>30 minutos</strong>. Si no solicitaste este cambio, ignora este correo.</p>
+                `,
+            }),
+            attachments: [emailLogoAttachment()]
         };
 
         const info = await transporter.sendMail(mailOptions);
@@ -178,50 +182,19 @@ async function sendVerificationCodeEmail(to, verificationCode, customerName) {
         const mailOptions = {
             from: `"Mari Pepa - Seguridad" <${FROM_EMAIL}>`,
             to: to,
-            subject: 'Código de Verificación - Mari Pepa',
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
-                    <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <div style="text-align: center; margin-bottom: 30px;">
-                            <h1 style="color: #2c5530; margin: 0;">🔐 Código de Verificación</h1>
-                        </div>
-
-                        <p style="font-size: 16px; color: #333; line-height: 1.6;">
-                            Hola <strong>${escapeHtml(customerName)}</strong>,
-                        </p>
-
-                        <p style="font-size: 14px; color: #666; line-height: 1.6;">
-                            Tu código de verificación para <strong>Mari Pepa</strong> es:
-                        </p>
-
-                        <div style="background-color: #f0f7f1; padding: 30px; border-radius: 8px; margin: 25px 0; text-align: center;">
-                            <div style="font-size: 48px; font-weight: bold; color: #2c5530; letter-spacing: 8px; font-family: 'Courier New', monospace;">
-                                ${verificationCode}
-                            </div>
-                        </div>
-
-                        <p style="font-size: 14px; color: #666; line-height: 1.6; text-align: center;">
-                            Ingresa este código en la aplicación para continuar.
-                        </p>
-
-                        <div style="background-color: #fff9e6; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 25px;">
-                            <p style="font-size: 13px; color: #856404; margin: 0; line-height: 1.6;">
-                                <strong>⚠️ Seguridad:</strong> Este código expirará en <strong>10 minutos</strong>.
-                                Si no solicitaste este código, ignora este email.
-                            </p>
-                        </div>
-
-                        <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
-
-                        <p style="font-size: 12px; color: #999; line-height: 1.5; margin: 0;">
-                            <strong>Mari Pepa</strong><br>
-                            Pol. Ind. Saprelorca - Parcela D-3<br>
-                            30817 Lorca, Murcia<br>
-                            📞 639 77 86 56 | 📧 pedidos@mari-pepa.com
-                        </p>
-                    </div>
-                </div>
-            `
+            subject: 'Código de verificación — Mari Pepa',
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa &middot; Seguridad',
+                title: 'Código de verificación',
+                body: `
+                  <p style="margin:0 0 12px;">Hola <strong>${escapeHtml(customerName)}</strong>,</p>
+                  <p style="margin:0 0 12px;">Tu código de verificación para Mari Pepa es:</p>
+                  <p style="margin:18px 0;padding:18px;background:#faf9f6;border:1px solid #e3ded3;text-align:center;font-family:'Courier New',monospace;font-size:40px;letter-spacing:8px;color:#1a1a1a;">${escapeHtml(verificationCode)}</p>
+                  <p style="margin:0 0 12px;">Ingresa este código en la aplicación para continuar.</p>
+                  <p style="margin:0;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:12.5px;line-height:1.65;">El código caduca en <strong>10 minutos</strong>. Si no lo solicitaste, ignora este correo.</p>
+                `,
+            }),
+            attachments: [emailLogoAttachment()]
         };
 
         const info = await transporter.sendMail(mailOptions);
@@ -311,64 +284,31 @@ async function sendApplicationNotification(application, to) {
             to,
             replyTo: application.email,
             subject: `Nueva candidatura: ${application.name}${application.jobTitle ? ` - ${application.jobTitle}` : ''}`,
-            html: `
-                <div style="margin:0;padding:0;background:#f2f1ee;">
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
-                    <tr>
-                      <td align="center">
-                        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
-                          <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
-                          <tr>
-                            <td style="padding:26px 30px 0;">
-                              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Maripepa &middot; Empleo</p>
-                              <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Nueva candidatura recibida</h1>
-                              <p style="margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6b6b6b;">${esc(application.receivedAt || new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }))}</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:20px 30px 0;">
-                              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-                                ${row('Nombre', application.name)}
-                                ${row('Email', application.email)}
-                                ${row('Teléfono', application.phone)}
-                                ${row('Sector', application.sector)}
-                                ${row('Puesto', application.jobTitle)}
-                                ${row('Currículum', application.cvName)}
-                              </table>
-                            </td>
-                          </tr>
-                          ${
-                            application.message
-                              ? `<tr><td style="padding:18px 30px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:12px 14px;background:#faf9f6;border-left:2px solid #d8d2c5;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.65;color:#3d3d3d;">${esc(application.message)}</td></tr></table></td></tr>`
-                              : ''
-                          }
-                          <tr>
-                            <td style="padding:24px 30px 0;">
-                              <a href="https://maripepa.es/admin" style="display:inline-block;padding:12px 22px;background:#1a1a1a;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;">Abrir la consola</a>
-                              <p style="margin:10px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8a8578;">https://maripepa.es/admin</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:22px 30px 0;">
-                              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f1;border-left:2px solid #cf3700;">
-                                <tr>
-                                  <td style="padding:13px 15px;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.65;color:#4a4a4a;">
-                                    <strong style="color:#1a1a1a;">Acceso restringido.</strong> La consola solo funciona desde la red de la empresa o conectado a la VPN. Si no carga, comprueba la conexión antes de avisar.
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:20px 30px 26px;">
-                              <p style="margin:0;padding-top:16px;border-top:1px solid #ece8df;font-family:Arial,Helvetica,sans-serif;font-size:10.5px;line-height:1.6;color:#9a958a;">Aviso automático del sistema de empleo de Maripepa. No respondas a este correo.</p>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa &middot; Empleo',
+                title: 'Nueva candidatura recibida',
+                body: `
+                  <p style="margin:0 0 12px;font-size:12px;color:#6b6b6b;">${esc(application.receivedAt || new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }))}</p>
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                    ${row('Nombre', application.name)}
+                    ${row('Email', application.email)}
+                    ${row('Teléfono', application.phone)}
+                    ${row('Sector', application.sector)}
+                    ${row('Puesto', application.jobTitle)}
+                    ${row('Currículum', application.cvName)}
                   </table>
-                </div>`,
+                  ${application.message ? `<p style="margin:14px 0 0;padding:12px 14px;background:#faf9f6;border-left:2px solid #d8d2c5;font-size:12.5px;line-height:1.65;color:#3d3d3d;">${esc(application.message)}</p>` : ''}
+                  <p style="margin:18px 0 0;">
+                    <a href="https://maripepa.es/admin" style="display:inline-block;padding:12px 22px;background:#1a1a1a;color:#ffffff;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;">Abrir la consola</a>
+                  </p>
+                  <p style="margin:10px 0 0;font-size:11px;color:#8a8578;">https://maripepa.es/admin</p>
+                  <p style="margin:16px 0 0;padding:13px 15px;background:#faf7f1;border-left:2px solid #cf3700;font-size:11.5px;line-height:1.65;color:#4a4a4a;">
+                    <strong style="color:#1a1a1a;">Acceso restringido.</strong> La consola solo funciona desde la red de la empresa o conectado a la VPN. Si no carga, comprueba la conexión antes de avisar.
+                  </p>
+                `,
+                footerNote: 'Aviso automático del sistema de empleo.',
+            }),
+            attachments: [emailLogoAttachment()],
         };
 
         const info = await transporter.sendMail(mailOptions);
@@ -482,31 +422,17 @@ async function sendApplicationStatusEmail(application, status) {
             to: application.email,
             replyTo: process.env.SMTP_RRHH_REPLY_TO || 'cv.rrhh@maripepa.es',
             subject: template.subject,
-            html: `
-                <div style="margin:0;padding:0;background:#f2f1ee;">
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
-                    <tr><td align="center">
-                      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
-                        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
-                        <tr><td style="padding:26px 30px 0;">
-                          <img src="cid:${EMAIL_LOGO_CID}" alt="Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
-                          <p style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#8a8578;">Maripepa &middot; Empleo</p>
-                          <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">${template.title}</h1>
-                        </td></tr>
-                        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
-                          <p style="margin:0 0 12px;">Hola${name ? ` ${name}` : ''},</p>
-                          <p style="margin:0 0 12px;">${template.body}</p>
-                          ${job ? `<p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Puesto: ${job}</p>` : ''}
-                          <p style="margin:0;">Si tienes cualquier duda, responde a este correo o escribe a <a href="mailto:cv.rrhh@maripepa.es" style="color:#cf3700;">cv.rrhh@maripepa.es</a>.</p>
-                        </td></tr>
-                        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8a8578;">
-                          Maripepa, S.L. &middot; Lorca, Murcia &middot; 968 46 75 14
-                        </td></tr>
-                      </table>
-                    </td></tr>
-                  </table>
-                </div>
-            `,
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa &middot; Empleo',
+                title: template.title,
+                body: `
+                  <p style="margin:0 0 12px;">Hola${name ? ` ${name}` : ''},</p>
+                  <p style="margin:0 0 12px;">${template.body}</p>
+                  ${job ? `<p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Puesto: ${job}</p>` : ''}
+                  <p style="margin:0;">Si tienes cualquier duda, responde a este correo o escribe a <a href="mailto:cv.rrhh@maripepa.es" style="color:#cf3700;">cv.rrhh@maripepa.es</a>.</p>
+                `,
+                footerNote: 'Empleo &middot; cv.rrhh@maripepa.es',
+            }),
             attachments: [emailLogoAttachment()]
         });
         logger.info('Respuesta de candidatura enviada', {
@@ -550,32 +476,18 @@ async function sendApplicationReceivedEmail({ name, email, jobTitle }) {
             subject: job
                 ? `Hemos recibido tu candidatura — ${job} — Mari Pepa`
                 : 'Hemos recibido tu candidatura — Mari Pepa',
-            html: `
-                <div style="margin:0;padding:0;background:#f2f1ee;">
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
-                    <tr><td align="center">
-                      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
-                        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
-                        <tr><td style="padding:26px 30px 0;">
-                          <img src="cid:${EMAIL_LOGO_CID}" alt="Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
-                          <h1 style="margin:18px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Candidatura recibida</h1>
-                        </td></tr>
-                        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
-                          <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
-                          <p style="margin:0 0 12px;">Tu candidatura ha quedado registrada. El equipo de Recursos Humanos la revisará y te escribirá a este mismo correo.</p>
-                          ${job ? `<p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Puesto: ${job}</p>` : ''}
-                          <p style="margin:0 0 12px;">No es necesario que envíes otra candidatura mientras esta esté en curso. Si finalmente no encajas, podrás volver a aplicar a partir de 20 días naturales.</p>
-                          <p style="margin:0;">Si tienes cualquier duda, responde a este correo.</p>
-                        </td></tr>
-                        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#8a8578;">
-                          Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
-                          968 46 75 14 &middot; cv.rrhh@maripepa.es
-                        </td></tr>
-                      </table>
-                    </td></tr>
-                  </table>
-                </div>
-            `,
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa &middot; Empleo',
+                title: 'Candidatura recibida',
+                body: `
+                  <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
+                  <p style="margin:0 0 12px;">Tu candidatura ha quedado registrada. El equipo de Recursos Humanos la revisará y te escribirá a este mismo correo.</p>
+                  ${job ? `<p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Puesto: ${job}</p>` : ''}
+                  <p style="margin:0 0 12px;">No es necesario que envíes otra candidatura mientras esta esté en curso. Si finalmente no encajas, podrás volver a aplicar a partir de 20 días naturales.</p>
+                  <p style="margin:0;">Si tienes cualquier duda, responde a este correo.</p>
+                `,
+                footerNote: 'Empleo &middot; cv.rrhh@maripepa.es',
+            }),
             attachments: [emailLogoAttachment()]
         });
         logger.info('Confirmación de candidatura enviada', {
@@ -609,31 +521,16 @@ async function sendContactAcknowledgment({ to, name }) {
             to,
             replyTo: inbox,
             subject: 'Hemos recibido tu mensaje — Mari Pepa',
-            html: `
-                <div style="margin:0;padding:0;background:#f2f1ee;">
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
-                    <tr><td align="center">
-                      <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
-                        <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
-                        <tr><td style="padding:26px 30px 0;">
-                          <img src="cid:${EMAIL_LOGO_CID}" alt="Mari Pepa" width="180" style="display:block;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;" />
-                          <h1 style="margin:18px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;color:#1a1a1a;">Hemos recibido tu mensaje</h1>
-                        </td></tr>
-                        <tr><td style="padding:18px 30px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3d3d;">
-                          <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
-                          <p style="margin:0 0 12px;">Gracias por escribir a Mari Pepa. Tu mensaje ya está en manos del equipo correspondiente y te responderemos a este mismo correo lo antes posible.</p>
-                          <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Si necesitas algo urgente, llámanos al <a href="tel:+34968467514" style="color:#cf3700;text-decoration:none;">968 46 75 14</a>.</p>
-                          <p style="margin:0;">Puedes responder a este correo y llegará directamente a <a href="mailto:${inbox}" style="color:#cf3700;">${inbox}</a>.</p>
-                        </td></tr>
-                        <tr><td style="padding:26px 30px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#8a8578;">
-                          Maripepa, S.L. &middot; Avenida Francisco Jimeno Sola, 3 &middot; 30817 Lorca, Murcia<br />
-                          968 46 75 14 &middot; pedidos@granjamaripepa.com
-                        </td></tr>
-                      </table>
-                    </td></tr>
-                  </table>
-                </div>
-            `,
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa &middot; Contacto',
+                title: 'Hemos recibido tu mensaje',
+                body: `
+                  <p style="margin:0 0 12px;">Hola${name ? ` ${esc(name)}` : ''},</p>
+                  <p style="margin:0 0 12px;">Gracias por escribir a Mari Pepa. Tu mensaje ya está en manos del equipo correspondiente y te responderemos a este mismo correo lo antes posible.</p>
+                  <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Si necesitas algo urgente, llámanos al <a href="tel:+34968467514" style="color:#cf3700;text-decoration:none;">968 46 75 14</a>.</p>
+                  <p style="margin:0;">Puedes responder a este correo y llegará directamente a <a href="mailto:${inbox}" style="color:#cf3700;">${inbox}</a>.</p>
+                `,
+            }),
             attachments: [emailLogoAttachment()]
         });
         logger.info('Acuse de contacto enviado', {
@@ -656,6 +553,12 @@ async function sendInternalNotification({ to, subject, text, replyTo }) {
             to: recipient,
             subject,
             text,
+            html: renderBrandEmail({
+                kicker: 'Mari Pepa',
+                title: escapeHtml(subject),
+                body: `<p style="margin:0;white-space:normal;">${escapeHtml(text).replace(/\n/g, '<br />')}</p>`,
+            }),
+            attachments: [emailLogoAttachment()],
             ...(replyTo ? { replyTo } : {})
         });
         logger.info('Notificacion interna enviada', {

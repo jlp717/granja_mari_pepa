@@ -28,7 +28,14 @@ const BCRYPT_ROUNDS = 12;
 const REJECT_COOLDOWN_DAYS = Number(
   process.env.APPLICATION_REJECT_COOLDOWN_DAYS || 20,
 );
-const ACTIVE_APPLICATION_STATUSES = ['new', 'review', 'interview', 'hired'];
+// Flujo permitido: solo se avanza. Las decisiones finales no se revierten.
+const APPLICATION_TRANSITIONS = {
+  new: ['review', 'interview', 'rejected', 'hired'],
+  review: ['interview', 'rejected', 'hired'],
+  interview: ['hired', 'rejected'],
+  rejected: [],
+  hired: [],
+};
 const applicationLocks = new Map();
 
 const DEFAULT_SETTINGS = {
@@ -517,25 +524,8 @@ async function listApplications() {
   return rows.map(mapApplication);
 }
 
-function businessDaysSince(value) {
-  const start = new Date(String(value || '').replace(' ', 'T'));
-  if (Number.isNaN(start.getTime())) return 0;
-  const end = new Date();
-  start.setHours(0, 0, 0, 0);
-  end.setHours(0, 0, 0, 0);
-  let days = 0;
-  const cursor = new Date(start);
-  while (cursor < end) {
-    cursor.setDate(cursor.getDate() + 1);
-    const day = cursor.getDay();
-    if (day !== 0 && day !== 6) days += 1;
-  }
-  return days;
-}
-
 async function updateApplication(id, payload, actor) {
   const allowed = ['new', 'review', 'interview', 'rejected', 'hired'];
-  const status = allowed.includes(payload.status) ? payload.status : 'new';
   const rows = await query(
     `SELECT ID, JOB_ID, JOB_TITLE, NAME, EMAIL, PHONE, SECTOR, MESSAGE,
             CV_NAME, CV_URL, STATUS, NOTES, CREATED_AT, UPDATED_AT, STATUS_CHANGED_AT
@@ -546,13 +536,19 @@ async function updateApplication(id, payload, actor) {
   if (!rows.length) return { error: 'missing' };
   const current = rows[0];
   const currentStatus = String(current.STATUS || '').trim();
-  const closed = currentStatus === 'rejected' || currentStatus === 'hired';
-  if (
-    closed &&
-    status !== currentStatus &&
-    businessDaysSince(current.STATUS_CHANGED_AT || current.UPDATED_AT) > 5
-  ) {
-    return { error: 'locked', previousStatus: currentStatus };
+  const requested =
+    payload.status === undefined ? currentStatus : String(payload.status || '').trim();
+  if (!allowed.includes(requested)) return { error: 'invalid' };
+
+  if (requested !== currentStatus) {
+    const next = APPLICATION_TRANSITIONS[currentStatus] || [];
+    if (!next.includes(requested)) {
+      return {
+        error: 'transition',
+        previousStatus: currentStatus,
+        nextStatus: requested,
+      };
+    }
   }
 
   await query(
@@ -560,20 +556,20 @@ async function updateApplication(id, payload, actor) {
        SET STATUS = ?, NOTES = ?, UPDATED_AT = CURRENT TIMESTAMP,
            STATUS_CHANGED_AT = CASE WHEN STATUS <> ? THEN CURRENT TIMESTAMP ELSE STATUS_CHANGED_AT END
      WHERE ID = ? AND ACTIVE = 1`,
-    [status, str(payload.notes, 4000), status, id],
+    [requested, str(payload.notes, 4000), requested, id],
   );
   await logActivity({
     kind: 'status',
     entity: 'Candidatura',
-    detail: `${str(payload.name, 160) || 'Candidatura'} · ${status}`,
+    detail: `${str(payload.name, 160) || 'Candidatura'} · ${requested}`,
     actor,
   });
   return {
     previousStatus: currentStatus,
-    statusChanged: currentStatus !== status,
+    statusChanged: currentStatus !== requested,
     application: mapApplication({
       ...current,
-      STATUS: status,
+      STATUS: requested,
       NOTES: str(payload.notes, 4000),
     }),
   };
@@ -1292,6 +1288,7 @@ module.exports = {
   deleteApplication,
   createApplication,
   applicationEligibility,
+  APPLICATION_TRANSITIONS,
   listUsers,
   findUserByEmail,
   inviteUser,

@@ -3,6 +3,35 @@ import { JOB_ICON_OPTIONS, type Job, type JobIcon } from "@/components/editorial
 export type JobStatus = "published" | "draft";
 export type MagazineStatus = "published" | "draft";
 export type ApplicationStatus = "new" | "review" | "interview" | "rejected" | "hired";
+
+// Debe coincidir con backend/app/services/adminService.js.
+export const APPLICATION_TRANSITIONS: Record<
+  ApplicationStatus,
+  ApplicationStatus[]
+> = {
+  new: ["review", "interview", "rejected", "hired"],
+  review: ["interview", "rejected", "hired"],
+  interview: ["hired", "rejected"],
+  rejected: [],
+  hired: [],
+};
+
+export const FINAL_APPLICATION_STATUSES: ApplicationStatus[] = [
+  "rejected",
+  "hired",
+];
+
+export function isFinalApplicationStatus(status: ApplicationStatus): boolean {
+  return FINAL_APPLICATION_STATUSES.includes(status);
+}
+
+export function canTransitionApplication(
+  from: ApplicationStatus,
+  to: ApplicationStatus,
+): boolean {
+  if (from === to) return true;
+  return APPLICATION_TRANSITIONS[from].includes(to);
+}
 export type TeamRole = "admin" | "editor";
 export type TeamStatus = "active" | "invited";
 export type ActivityKind =

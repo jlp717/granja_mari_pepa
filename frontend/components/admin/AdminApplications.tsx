@@ -17,7 +17,9 @@ import styles from "./admin.module.css";
 import { gmailCompose } from "@/components/editorial/facts";
 import {
   APPLICATION_STATUS,
+  canTransitionApplication,
   formatAdminDate,
+  isFinalApplicationStatus,
   type Application,
 } from "./admin-data";
 
@@ -38,6 +40,34 @@ export function AdminApplications({
   const [draft, setDraft] = useState<Application | null>(null);
   const [pendingStatus, setPendingStatus] = useState<Application | null>(null);
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+
+  const selectedIsFinal = selected
+    ? isFinalApplicationStatus(selected.status)
+    : false;
+  const pendingIsFinal = pendingStatus
+    ? isFinalApplicationStatus(pendingStatus.status)
+    : false;
+
+  useEffect(() => {
+    if (!pendingStatus || countdown <= 0) return;
+    const timer = window.setInterval(() => {
+      setCountdown((current) => (current <= 1 ? 0 : current - 1));
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [pendingStatus, countdown]);
+
+  const requestStatusChange = (next: Application) => {
+    setError("");
+    setPendingStatus(next);
+    setCountdown(isFinalApplicationStatus(next.status) ? 3 : 0);
+  };
+
+  const cancelStatusChange = () => {
+    setPendingStatus(null);
+    setCountdown(0);
+  };
 
   useEffect(() => {
     if (selected && !applications.some((application) => application.id === selected.id)) {
@@ -109,6 +139,8 @@ export function AdminApplications({
   };
 
   const saveDraft = async (application: Application) => {
+    if (submitting) return;
+    setSubmitting(true);
     try {
       await onUpdate({ ...application, notes: application.notes.trim() });
       setSelected(null);
@@ -118,19 +150,27 @@ export function AdminApplications({
       setError(
         failure instanceof Error ? failure.message : "No se pudo guardar la candidatura.",
       );
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!draft) return;
+    if (!draft || submitting) return;
     if (!draft.name.trim()) {
       setError("El nombre no puede quedar vacío.");
       return;
     }
     if (selected && draft.status !== selected.status) {
+      if (!canTransitionApplication(selected.status, draft.status)) {
+        setError(
+          "Ese cambio de estado no está permitido. Las decisiones finales no se pueden modificar.",
+        );
+        return;
+      }
       setError("");
-      setPendingStatus({ ...draft, notes: draft.notes.trim() });
+      requestStatusChange({ ...draft, notes: draft.notes.trim() });
       return;
     }
     await saveDraft(draft);
@@ -326,11 +366,27 @@ export function AdminApplications({
                         setDraft({ ...draft, status: event.target.value as Application["status"] })
                       }
                       className={styles.selectInput}
+                      disabled={selectedIsFinal}
                     >
                       {(Object.keys(APPLICATION_STATUS) as Array<Application["status"]>).map((key) => (
-                        <option key={key} value={key}>{APPLICATION_STATUS[key].label}</option>
+                        <option
+                          key={key}
+                          value={key}
+                          disabled={
+                            selected
+                              ? !canTransitionApplication(selected.status, key)
+                              : false
+                          }
+                        >
+                          {APPLICATION_STATUS[key].label}
+                        </option>
                       ))}
                     </select>
+                    {selectedIsFinal ? (
+                      <em className={styles.fieldError}>
+                        Decisión final: el estado no se puede modificar.
+                      </em>
+                    ) : null}
                   </label>
                   <label className={`${styles.field} ${styles.fieldWide}`}>
                     <span>Notas internas</span>
@@ -382,28 +438,43 @@ export function AdminApplications({
             aria-labelledby="status-confirm-title"
           >
             <span className={styles.confirmKicker}>Cambio de estado</span>
-            <h2 id="status-confirm-title">Confirmar cambio</h2>
+            <h2 id="status-confirm-title">
+              {pendingIsFinal ? "Confirmar decisión final" : "Confirmar cambio"}
+            </h2>
             <p>
               Vas a pasar la candidatura de{" "}
               <b>{APPLICATION_STATUS[selected.status].label}</b> a{" "}
               <b>{APPLICATION_STATUS[pendingStatus.status].label}</b>.
             </p>
-            {pendingStatus.status === "rejected" ||
-            pendingStatus.status === "hired" ? (
-              <p style={{ marginTop: 10 }}>
-                Este estado cierra el proceso. Podrás corregirlo durante los
-                próximos <b>5 días hábiles</b>; después quedará bloqueado.
-              </p>
+            {pendingIsFinal ? (
+              <>
+                <p style={{ marginTop: 10 }}>
+                  <b>Esta decisión es inamovible.</b> Una vez confirmada no se
+                  podrá cambiar el estado desde el panel ni desde la API.
+                </p>
+                <p style={{ marginTop: 10 }}>
+                  {pendingStatus.status === "rejected"
+                    ? "El candidato recibirá el correo de descarte y no podrá volver a aplicar durante 20 días naturales."
+                    : "El candidato recibirá el correo de selección y no podrá aplicar a otras ofertas mientras su candidatura siga activa."}
+                </p>
+              </>
             ) : null}
             <p style={{ marginTop: 10 }}>
               Se enviará al candidato el correo correspondiente a este estado.
             </p>
+            {pendingIsFinal && countdown > 0 ? (
+              <p style={{ marginTop: 10 }}>
+                El botón de confirmación se activará en{" "}
+                <b>{countdown} segundo{countdown === 1 ? "" : "s"}</b>.
+              </p>
+            ) : null}
             {error ? <p className={styles.fieldError}>{error}</p> : null}
             <div className={styles.confirmActions}>
               <button
                 type="button"
                 className={styles.secondaryBtn}
-                onClick={() => setPendingStatus(null)}
+                onClick={cancelStatusChange}
+                disabled={submitting}
               >
                 Cancelar
               </button>
@@ -411,8 +482,15 @@ export function AdminApplications({
                 type="button"
                 className={styles.primaryBtn}
                 onClick={() => saveDraft(pendingStatus)}
+                disabled={submitting || countdown > 0}
               >
-                Confirmar cambio
+                {countdown > 0
+                  ? `Confirmar (${countdown})`
+                  : submitting
+                    ? "Guardando…"
+                    : pendingIsFinal
+                      ? "Confirmar decisión"
+                      : "Confirmar cambio"}
               </button>
             </div>
           </div>
