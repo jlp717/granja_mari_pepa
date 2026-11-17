@@ -1,11 +1,11 @@
 # Inventario del sitio
 
-Generado: 2026-11-17T10:32:43.775Z
+Generado: 2026-11-17T10:36:29.124Z
 
 | URL | HTTP | Palabras | 1966 | Lorca | Imágenes | Sin alt | H1 |
 |---|---|---|---|---|---|---|---|
-| /en | 200 | 517 | 3 | 11 | 31 | 15 | What reaches your kitchen starts in Lorca. |
-| /en/acerca | 200 | 565 | 5 | 12 | 8 | 0 | Since 1966, product and service for those who cook. |
+| /en | 200 | 515 | 2 | 11 | 31 | 15 | What reaches your kitchen starts in Lorca. |
+| /en/acerca | 200 | 560 | 4 | 13 | 8 | 0 | HORECA distribution from Lorca. |
 | /en/calidad | 200 | 569 | 0 | 0 | 3 | 0 | Quality is being able to answer for what you deliver. |
 | /en/contacto | 200 | 324 | 0 | 8 | 0 | 0 | Contact. |
 | /en/legal/privacidad | 200 | 390 | 0 | 2 | 0 | 0 | Privacy Policy | Maripepa |
@@ -15,8 +15,8 @@ Generado: 2026-11-17T10:32:43.775Z
 | /en/productos | 200 | 740 | 0 | 1 | 7 | 0 | What your menu needs, in seven families. |
 | /en/reparto | 200 | 518 | 0 | 2 | 3 | 0 | Delivery for hospitality in Murcia, Almería and Alicante. |
 | /en/trabaja-con-nosotros | 200 | 643 | 0 | 10 | 1 | 0 | Join Maripepa |
-| /es | 200 | 534 | 3 | 11 | 31 | 15 | Lo que llega a tu cocina empieza en Lorca. |
-| /es/acerca | 200 | 558 | 5 | 11 | 8 | 0 | Desde 1966, producto y servicio para quien cocina. |
+| /es | 200 | 532 | 2 | 11 | 31 | 15 | Lo que llega a tu cocina empieza en Lorca. |
+| /es/acerca | 200 | 554 | 4 | 12 | 8 | 0 | Distribución HORECA desde Lorca. |
 | /es/calidad | 200 | 546 | 0 | 0 | 3 | 0 | Calidad es poder responder por lo que entregas. |
 | /es/contacto | 200 | 315 | 0 | 8 | 0 | 0 | Contacto. |
 | /es/legal/privacidad | 200 | 399 | 0 | 2 | 0 | 0 | Política de Privacidad | Maripepa |
@@ -32,7 +32,7 @@ Generado: 2026-11-17T10:32:43.775Z
 - (3 páginas) 05 Consultar el servicio Localidad y contexto de la entrega. — /es/lorca, /es/calidad, /es/reparto
 - (2 páginas) Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. — /es, /es/productos
 - (2 páginas) PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas De la familia al producto concreto. — /es/productos, /en/productos
-- (2 páginas) Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. — /en/productos, /en
+- (2 páginas) Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. — /en, /en/productos
 - (2 páginas) Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /es/contacto, /en/contacto
 - (2 páginas) Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería. — /es/contacto, /en/contacto
 - (2 páginas) Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /es/preguntas-frecuentes, /en/preguntas-frecuentes
