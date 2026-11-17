@@ -1,6 +1,6 @@
 export const STORY_TRANSLATIONS_EN = {
   acerca: {
-    title: "Since 1966, product and service for those who cook.",
+    title: "HORECA distribution from Lorca.",
     eyebrow: "HORECA distribution",
     description:
       "Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería.",

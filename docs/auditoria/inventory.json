@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-17T10:24:08.633Z",
+  "generatedAt": "2026-11-17T10:32:43.775Z",
   "urls": 22,
   "pages": [
     {
       "url": "https://www.mari-pepa.com/en",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/en",
-      "bytes": 751313,
+      "bytes": 751510,
       "title": "Maripepa | HORECA distribution in Murcia",
       "description": "Food distribution for hospitality from Lorca. Frozen, chilled and ambient products for restaurants, catering and collectives in Murcia and Almería.",
       "robots": "index, follow",
@@ -26,15 +26,15 @@
         "Your next menu starts with a conversation."
       ],
       "counts": {
-        "lorca": 18,
-        "year1966": 4,
+        "lorca": 11,
+        "year1966": 3,
         "brand": 4
       },
       "fullCounts": {
-        "lorca": 22,
-        "year1966": 5
+        "lorca": 15,
+        "year1966": 4
       },
-      "words": 528,
+      "words": 517,
       "images": [
         {
           "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-03.jpg&w=3840&q=75",
@@ -182,37 +182,37 @@
         },
         {
           "src": "/catalogs/covers/enero-2026-granja-mari-pepa.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Mari Pepa, Enero 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/topgel-febrero-2026.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Topgel, Febrero 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/gmp-marzo-2026.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Mari Pepa, Marzo 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/abril-2026-topgel.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Topgel, Abril 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/mayo-2026-topgel.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Topgel, Mayo 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/junio-2026-granja-mari-pepa.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Mari Pepa, Junio 2026",
           "width": "",
           "height": ""
         },
@@ -223,22 +223,21 @@
           "height": ""
         }
       ],
-      "imagesWithoutAlt": 21,
+      "imagesWithoutAlt": 15,
       "internalLinks": 42,
       "jsonLd": 4,
       "sentences": [
         "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca.",
         "We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería.",
-        "Explore the range Talk to the team 1966 Founded in Lorca 02 Sites: Lorca and Viator 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966.",
-        "We were born in Lorca and grew with hospitality in the south-east.",
-        "Today Lorca and Viator coordinate so product, order and route speak the same language.",
-        "Saprelorca 0 1 Lorca, 1966 The company was founded in Lorca, where its main site remains.",
-        "The building, the warehouse and the team are the starting point of every order.",
-        "0 2 Two sites Lorca (Murcia) and Viator (Almería) share warehouse, routes and customer service.",
+        "Explore the range Talk to the team 1966 Year founded 02 Sites: Murcia and Almería 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966.",
+        "We were born in the south-east and grew with hospitality in Murcia and Almería.",
+        "Today two warehouses coordinate so product, order and route speak the same language.",
+        "Saprelorca 0 1 The main site The Saprelorca facility brings together warehouse, preparation and dispatch.",
+        "0 2 Two sites Murcia and Almería share warehouse, routes and customer service.",
         "0 3 Three temperatures Frozen, chilled and ambient products live together in the daily operation.",
         "5,000 m³ of cold storage, more than 1,500 references and two departure points so the kitchen never stops.",
         "02 +1,500 References across seven families, from seafood to sauces and prepared dishes.",
-        "03 Two sites Lorca and Viator share warehouse, routes and customer service.",
+        "03 Two sites Both sites share warehouse, routes and customer service.",
         "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
         "Start from what you cook and take that need into the commercial conversation.",
         "0 1 Seafood View family 0 2 Meat View family 0 3 Prepared dishes View family 0 4 Pastry View family 0 5 Bakery View family 0 6 Chilled products View family 0 7 Sauces & preparations View family Seafood See all families Brands in the range Keep reading Quality and documentation Delivery in Murcia and Almería Lorca site 04 · Archive The house magazines.",
@@ -248,14 +247,14 @@
         "Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator · Almería C/ Sierra de Ronda, 26 · La Juaida industrial park 06 · Let&#x27;s talk Your next menu starts with a conversation.",
         "Tell us what you cook, which families interest you and where your venue is."
       ],
-      "mainText": "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca. We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería. Explore the range Talk to the team 1966 Founded in Lorca 02 Sites: Lorca and Viator 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966. Two sites. One way of working. We were born in Lorca and grew with hospitality in the south-east. Today Lorca and Viator coordinate so product, order and route speak the same language. Valle del Guadalentín Lorca · Pol. Saprelorca 0 1 Lorca, 1966 The company was founded in Lorca, where its main site remains. The building, the warehouse and the team are the starting point of every order. 0 2 Two sites Lorca (Murcia) and Viator (Almería) share warehouse, routes and customer service. One team, two departure points. 0 3 Three temperatures Frozen, chilled and ambient products live together in the daily operation. Each family has its own way of being stored and served. 02 · Capacity Three temperatures, one single order. Frozen, chilled and ambient share the same operation. 5,000 m³ of cold storage, more than 1,500 references and two departure points so the kitchen never stops. 01 5,000 m³ Cold-storage capacity at the Saprelorca site. Frozen and chilled in the same preparation circuit. 02 +1,500 References across seven families, from seafood to sauces and prepared dishes. 03 Two sites Lorca and Viator share warehouse, routes and customer service. Two departure points for Murcia, Almería and Alicante. 04 24–48 h Usual delivery time. Confirmed per order and area before departure. Check availability 03 · The range Seven families. One concrete conversation. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Start from what you cook and take that need into the commercial conversation. 0 1 Seafood View family 0 2 Meat View family 0 3 Prepared dishes View family 0 4 Pastry View family 0 5 Bakery View family 0 6 Chilled products View family 0 7 Sauces & preparations View family Seafood See all families Brands in the range Keep reading Quality and documentation Delivery in Murcia and Almería Lorca site 04 · Archive The house magazines. Each edition brings together product, campaign and menu ideas. Open it in the viewer and move through the pages like a presentation. Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa See all magazines 05 · Sites Two sites, one team. The main site is in Lorca. The Viator branch brings the operation closer to Almería. Both share the same approach to product and service. Lorca · Murcia Lorca · Murcia Av. Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator · Almería C/ Sierra de Ronda, 26 · La Juaida industrial park 06 · Let&#x27;s talk Your next menu starts with a conversation. Tell us what you cook, which families interest you and where your venue is. The team will guide you on product, formats and delivery. Contact the team 968 46 75 14",
-      "bodySample": "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca. We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería. Explore the range Talk to the team 1966 Founded in Lorca 02 Sites: Lorca and Viator 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966. Two sit"
+      "mainText": "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca. We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería. Explore the range Talk to the team 1966 Year founded 02 Sites: Murcia and Almería 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966. Two sites. One way of working. We were born in the south-east and grew with hospitality in Murcia and Almería. Today two warehouses coordinate so product, order and route speak the same language. Valle del Guadalentín Lorca · Pol. Saprelorca 0 1 The main site The Saprelorca facility brings together warehouse, preparation and dispatch. It is the starting point of every route. 0 2 Two sites Murcia and Almería share warehouse, routes and customer service. Two coordinated departure points. 0 3 Three temperatures Frozen, chilled and ambient products live together in the daily operation. Each family has its own way of being stored and served. 02 · Capacity Three temperatures, one single order. Frozen, chilled and ambient share the same operation. 5,000 m³ of cold storage, more than 1,500 references and two departure points so the kitchen never stops. 01 5,000 m³ Cold-storage capacity at the Saprelorca site. Frozen and chilled in the same preparation circuit. 02 +1,500 References across seven families, from seafood to sauces and prepared dishes. 03 Two sites Both sites share warehouse, routes and customer service. Two departure points for Murcia, Almería and Alicante. 04 24–48 h Usual delivery time. Confirmed per order and area before departure. Check availability 03 · The range Seven families. One concrete conversation. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Start from what you cook and take that need into the commercial conversation. 0 1 Seafood View family 0 2 Meat View family 0 3 Prepared dishes View family 0 4 Pastry View family 0 5 Bakery View family 0 6 Chilled products View family 0 7 Sauces & preparations View family Seafood See all families Brands in the range Keep reading Quality and documentation Delivery in Murcia and Almería Lorca site 04 · Archive The house magazines. Each edition brings together product, campaign and menu ideas. Open it in the viewer and move through the pages like a presentation. Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa See all magazines 05 · Sites Two sites, one team. The main site is in Lorca. The Viator branch brings the operation closer to Almería. Both share the same approach to product and service. Lorca · Murcia Lorca · Murcia Av. Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator · Almería C/ Sierra de Ronda, 26 · La Juaida industrial park 06 · Let&#x27;s talk Your next menu starts with a conversation. Tell us what you cook, which families interest you and where your venue is. The team will guide you on product, formats and delivery. Contact the team 968 46 75 14",
+      "bodySample": "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca. We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería. Explore the range Talk to the team 1966 Year founded 02 Sites: Murcia and Almería 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966. Two sites"
     },
     {
       "url": "https://www.mari-pepa.com/en/acerca",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/en/acerca",
-      "bytes": 807066,
+      "bytes": 807729,
       "title": "About us | Maripepa, Lorca since 1966",
       "description": "Food distribution for hospitality in Lorca since 1966, with a branch in Viator (Almería) and a frozen, chilled and ambient range for professional kitchens.",
       "robots": "index, follow",
@@ -270,48 +269,48 @@
         "Maripepa in figures.",
         "From one house in Lorca to two sites.",
         "The brands we distribute.",
-        "A national network with its base in Lorca.",
+        "A national network with its base in the south-east.",
         "5,000 m³ of cold storage and two points of departure.",
         "Come and see us or give us a call.",
         "Beside the people who feed others."
       ],
       "counts": {
-        "lorca": 20,
-        "year1966": 6,
+        "lorca": 12,
+        "year1966": 5,
         "brand": 6
       },
       "fullCounts": {
-        "lorca": 25,
-        "year1966": 8
+        "lorca": 17,
+        "year1966": 7
       },
-      "words": 579,
+      "words": 565,
       "images": [
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel-white.png&w=3840&q=75",
           "alt": "Grupo Topgel",
           "width": "266",
           "height": "107"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle-white.png&w=3840&q=75",
           "alt": "Nestlé Helados",
           "width": "193",
           "height": "162"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar-white.png&w=3840&q=75",
           "alt": "Panamar",
           "width": "249",
           "height": "158"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin-white.png&w=3840&q=75",
           "alt": "Okin",
           "width": "223",
           "height": "192"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin-white.png&w=3840&q=75",
           "alt": "Pastelería Amparín",
           "width": "268",
           "height": "111"
@@ -339,27 +338,28 @@
       "internalLinks": 38,
       "jsonLd": 5,
       "sentences": [
-        "Lorca, since 1966 Since 1966, product and service for those who cook.",
+        "HORECA distribution Since 1966, product and service for those who cook.",
         "Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería.",
         "Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering.",
         "Its way of working remains the same: get to know the customer, understand their kitchen and respond.",
-        "Today the company keeps its head office in Lorca and a branch in Viator, Almería.",
+        "Today the company keeps two sites between Murcia and Almería.",
         "Two points of departure, one team and the same idea of service.",
+        "05 Network A national network with its base in the south-east.",
         "Founded 1966 Head office Lorca (Saprelorca) Branch Viator (Almería) Coverage Murcia, Almería and Alicante Range Frozen, chilled and ambient Cold storage capacity 5,000 m³ References +1,500 Usual lead time 24–48 h Confirmed per order and area.",
         "Next Talk to the team 03 — History Home From one house in Lorca to two sites.",
         "Three moments mark the company&#x27;s history: its founding, the present day and the expansion that is under way.",
-        "1966 Founded in Lorca The company is born in Lorca to distribute food to the local hospitality trade.",
-        "Today Two sites and 5,000 m³ Head office in Lorca and a branch in Viator, with 5,000 m³ of cold storage capacity.",
+        "1966 Founded The company is born to distribute food to the local hospitality trade.",
+        "Today Two sites and 5,000 m³ Two sites and 5,000 m³ of cold storage between Murcia and Almería.",
         "2026 Expansion under way The city council approves the planning for plots D2 and D3, promoted by the company to expand the facility.",
         "Next Talk to the team 04 — Brands Home The brands we distribute.",
         "Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados.",
-        "Next Talk to the team 05 — Network Home A national network with its base in Lorca.",
+        "Next Talk to the team 05 — Network Home A national network with its base in the south-east.",
         "Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network.",
         "That relationship completes the range with the group&#x27;s catalogue when a reference is not held at the Saprelorca warehouse.",
-        "The conversation stays local: the Lorca team answers, confirms availability and organises the delivery.",
-        "The network broadens the catalogue; the attention and the route stay in the south-east.",
+        "The conversation stays local: the south-east team answers, confirms availability and organises the delivery.",
+        "The network broadens the catalogue; the attention and the route stay close.",
         "Next Talk to the team 06 — Facilities Home 5,000 m³ of cold storage and two points of departure.",
-        "The operation runs from two sites: the Lorca head office and the Viator branch.",
+        "The operation runs from two sites: the Saprelorca head office and the Viator branch.",
         "Orders are prepared at both and routes organised for Murcia, Almería and Alicante.",
         "Next Talk to the team 07 — Next step Home Next step Come and see us or give us a call.",
         "That way we can prepare access and the person who will meet you.",
@@ -367,8 +367,8 @@
         "If you want to see how we work in Lorca, you can also visit the head office page.",
         "Continue Maripepa Back to the start Beside the people who feed others."
       ],
-      "mainText": "Lorca, since 1966 Since 1966, product and service for those who cook. Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería. Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond. Today the company keeps its head office in Lorca and a branch in Viator, Almería. Two points of departure, one team and the same idea of service. Next Talk to the team 02 The company Maripepa in figures. 03 History From one house in Lorca to two sites. 04 Brands The brands we distribute. 05 Network A national network with its base in Lorca. 02 — The company Home Maripepa in figures. Founded 1966 Head office Lorca (Saprelorca) Branch Viator (Almería) Coverage Murcia, Almería and Alicante Range Frozen, chilled and ambient Cold storage capacity 5,000 m³ References +1,500 Usual lead time 24–48 h Confirmed per order and area. Next Talk to the team 03 — History Home From one house in Lorca to two sites. Three moments mark the company&#x27;s history: its founding, the present day and the expansion that is under way. 1966 Founded in Lorca The company is born in Lorca to distribute food to the local hospitality trade. Today Two sites and 5,000 m³ Head office in Lorca and a branch in Viator, with 5,000 m³ of cold storage capacity. 2026 Expansion under way The city council approves the planning for plots D2 and D3, promoted by the company to expand the facility. Next Talk to the team 04 — Brands Home The brands we distribute. Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados. It works with Panamar, Okin and Pastelería Amparín. Each brand brings its own speciality to the range. Next Talk to the team 05 — Network Home A national network with its base in Lorca. Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group&#x27;s catalogue when a reference is not held at the Saprelorca warehouse. The conversation stays local: the Lorca team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay in the south-east. Next Talk to the team 06 — Facilities Home 5,000 m³ of cold storage and two points of departure. The operation runs from two sites: the Lorca head office and the Viator branch. Orders are prepared at both and routes organised for Murcia, Almería and Alicante. The Saprelorca warehouse. The Lorca warehouse, where loads are prepared. 01 /0 3 The refrigerated lorry. Refrigeration unit and loading at the site. 02 /0 3 Access and loading. Vehicle entrance and preparation area. 03 /0 3 Cold storage capacity reaches 5,000 m³. Next Talk to the team 07 — Next step Home Next step Come and see us or give us a call. To visit the head office, write or call before you come. That way we can prepare access and the person who will meet you. The address, opening hours and telephone numbers are on the contact page. If you want to see how we work in Lorca, you can also visit the head office page. Continue Maripepa Back to the start Beside the people who feed others. Since 1966, in Lorca. Product, route and team so the kitchen keeps running. Talk to the team",
-      "bodySample": "Lorca, since 1966 Since 1966, product and service for those who cook. Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería. Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond. Today the company keeps its "
+      "mainText": "HORECA distribution Since 1966, product and service for those who cook. Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería. Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond. Today the company keeps two sites between Murcia and Almería. Two points of departure, one team and the same idea of service. Next Talk to the team 02 The company Maripepa in figures. 03 History From one house in Lorca to two sites. 04 Brands The brands we distribute. 05 Network A national network with its base in the south-east. 02 — The company Home Maripepa in figures. Founded 1966 Head office Lorca (Saprelorca) Branch Viator (Almería) Coverage Murcia, Almería and Alicante Range Frozen, chilled and ambient Cold storage capacity 5,000 m³ References +1,500 Usual lead time 24–48 h Confirmed per order and area. Next Talk to the team 03 — History Home From one house in Lorca to two sites. Three moments mark the company&#x27;s history: its founding, the present day and the expansion that is under way. 1966 Founded The company is born to distribute food to the local hospitality trade. Today Two sites and 5,000 m³ Two sites and 5,000 m³ of cold storage between Murcia and Almería. 2026 Expansion under way The city council approves the planning for plots D2 and D3, promoted by the company to expand the facility. Next Talk to the team 04 — Brands Home The brands we distribute. Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados. It works with Panamar, Okin and Pastelería Amparín. Each brand brings its own speciality to the range. Next Talk to the team 05 — Network Home A national network with its base in the south-east. Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group&#x27;s catalogue when a reference is not held at the Saprelorca warehouse. The conversation stays local: the south-east team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay close. Next Talk to the team 06 — Facilities Home 5,000 m³ of cold storage and two points of departure. The operation runs from two sites: the Saprelorca head office and the Viator branch. Orders are prepared at both and routes organised for Murcia, Almería and Alicante. The Saprelorca warehouse. The Lorca warehouse, where loads are prepared. 01 /0 3 The refrigerated lorry. Refrigeration unit and loading at the site. 02 /0 3 Access and loading. Vehicle entrance and preparation area. 03 /0 3 Cold storage capacity reaches 5,000 m³. Next Talk to the team 07 — Next step Home Next step Come and see us or give us a call. To visit the head office, write or call before you come. That way we can prepare access and the person who will meet you. The address, opening hours and telephone numbers are on the contact page. If you want to see how we work in Lorca, you can also visit the head office page. Continue Maripepa Back to the start Beside the people who feed others. Since 1966, in Lorca. Product, route and team so the kitchen keeps running. Talk to the team",
+      "bodySample": "HORECA distribution Since 1966, product and service for those who cook. Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería. Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond. Today the company keeps tw"
     },
     {
       "url": "https://www.mari-pepa.com/en/calidad",
@@ -618,7 +618,7 @@
       "url": "https://www.mari-pepa.com/en/lorca",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/en/lorca",
-      "bytes": 776778,
+      "bytes": 791942,
       "title": "Lorca head office | Maripepa, Saprelorca",
       "description": "Head office at Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Opening hours, telephone numbers and how to find Maripepa in Murcia.",
       "robots": "index, follow",
@@ -630,6 +630,7 @@
       "h2": [
         "From Lorca to your kitchen, without losing the origin.",
         "Your privacy",
+        "The warehouse, the dock and the load.",
         "Avenida Francisco Jimeno Sola, 3.",
         "Confirm your visit before you come.",
         "A warehouse that grows in Saprelorca.",
@@ -645,35 +646,57 @@
         "lorca": 22,
         "year1966": 1
       },
-      "words": 438,
-      "images": [],
+      "words": 525,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "La nave de Saprelorca.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-02.jpg&w=3840&q=75",
+          "alt": "Acceso y carga.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "El camión frigorífico.",
+          "width": "",
+          "height": ""
+        }
+      ],
       "imagesWithoutAlt": 0,
-      "internalLinks": 39,
+      "internalLinks": 43,
       "jsonLd": 5,
       "sentences": [
         "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca.",
         "Address, access and contact for the main site in the Polígono Industrial Saprelorca.",
         "Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes.",
         "Loads are organised and deliveries for the south-east leave from Saprelorca.",
-        "Next Talk to the team 02 Getting here Avenida Francisco Jimeno Sola, 3.",
+        "Next Talk to the team 02 Facilities The warehouse, the dock and the load.",
+        "The site brings warehouse, preparation and loading together.",
+        "03 /0 3 These images help place the operation before a visit or a collection.",
+        "Next Talk to the team 03 — Getting here Home Avenida Francisco Jimeno Sola, 3.",
         "The head office is at Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
         "Keep it complete for the route: street, number, industrial estate and town.",
         "Check that the destination is Lorca and, if you need access directions, ask us before setting off.",
-        "Next Talk to the team Get directions 03 — Visiting Home Confirm your visit before you come.",
+        "Next Talk to the team Get directions 04 — Visiting Home Confirm your visit before you come.",
         "Tell us the reason and who is coming with you, and the team will confirm the access and your contact person.",
         "Order collections are only made if they are confirmed in advance.",
         "The address alone does not confirm a collection: check the day and time with the team.",
-        "Next Talk to the team 04 — Expansion Home A warehouse that grows in Saprelorca.",
+        "Next Talk to the team 05 — Expansion Home A warehouse that grows in Saprelorca.",
         "In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Maripepa.",
         "The project is under way: grouping and expanding the company&#x27;s facilities.",
         "There is no opening date, no built square metres and no published investment figure.",
-        "Next Talk to the team 05 — Contact Home Contact Talk to Lorca.",
+        "Next Talk to the team 06 — Contact Home Contact Talk to Lorca.",
         "For the Lorca head office, call 968 46 75 14 or 639 77 86 55.",
         "If you are coming from outside, check the opening hours first and confirm the visit.",
         "Continue 968 46 75 14 [email&#160;protected] Maripepa Back to the start An address.",
         "Locate the head office, check the opening hours and talk to the team."
       ],
-      "mainText": "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca. Address, access and contact for the main site in the Polígono Industrial Saprelorca. Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution. Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day of distribution is resolved here. Next Talk to the team 02 Getting here Avenida Francisco Jimeno Sola, 3. 03 Visiting Confirm your visit before you come. 04 Expansion A warehouse that grows in Saprelorca. 05 Contact Talk to Lorca. 02 — Getting here Home Avenida Francisco Jimeno Sola, 3. The head office is at Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Keep it complete for the route: street, number, industrial estate and town. The map opens in an external service. Check that the destination is Lorca and, if you need access directions, ask us before setting off. Next Talk to the team Get directions 03 — Visiting Home Confirm your visit before you come. Visits are handled by appointment. Tell us the reason and who is coming with you, and the team will confirm the access and your contact person. Order collections are only made if they are confirmed in advance. The address alone does not confirm a collection: check the day and time with the team. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 04 — Expansion Home A warehouse that grows in Saprelorca. In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Maripepa. The two plots cover a total of 8,953 m². The project is under way: grouping and expanding the company&#x27;s facilities. There is no opening date, no built square metres and no published investment figure. Next Talk to the team 05 — Contact Home Contact Talk to Lorca. For the Lorca head office, call 968 46 75 14 or 639 77 86 55. You can also write to [email&#160;protected] . If you are coming from outside, check the opening hours first and confirm the visit. The contact page has the full details. Continue 968 46 75 14 [email&#160;protected] Maripepa Back to the start An address. A next step. Locate the head office, check the opening hours and talk to the team. Information is useful when it helps you move forward. See contact and map",
+      "mainText": "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca. Address, access and contact for the main site in the Polígono Industrial Saprelorca. Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution. Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day of distribution is resolved here. Next Talk to the team 02 Facilities The warehouse, the dock and the load. 03 Getting here Avenida Francisco Jimeno Sola, 3. 04 Visiting Confirm your visit before you come. 05 Expansion A warehouse that grows in Saprelorca. 02 — Facilities Home The warehouse, the dock and the load. The site brings warehouse, preparation and loading together. Each area has its function and its rhythm. La nave de Saprelorca. Almacén y preparación de pedidos. 01 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 02 /0 3 El camión frigorífico. Equipo de frío y carga en la sede. 03 /0 3 These images help place the operation before a visit or a collection. Next Talk to the team 03 — Getting here Home Avenida Francisco Jimeno Sola, 3. The head office is at Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Keep it complete for the route: street, number, industrial estate and town. The map opens in an external service. Check that the destination is Lorca and, if you need access directions, ask us before setting off. Next Talk to the team Get directions 04 — Visiting Home Confirm your visit before you come. Visits are handled by appointment. Tell us the reason and who is coming with you, and the team will confirm the access and your contact person. Order collections are only made if they are confirmed in advance. The address alone does not confirm a collection: check the day and time with the team. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 05 — Expansion Home A warehouse that grows in Saprelorca. In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Maripepa. The two plots cover a total of 8,953 m². The project is under way: grouping and expanding the company&#x27;s facilities. There is no opening date, no built square metres and no published investment figure. Next Talk to the team 06 — Contact Home Contact Talk to Lorca. For the Lorca head office, call 968 46 75 14 or 639 77 86 55. You can also write to [email&#160;protected] . If you are coming from outside, check the opening hours first and confirm the visit. The contact page has the full details. Continue 968 46 75 14 [email&#160;protected] Maripepa Back to the start An address. A next step. Locate the head office, check the opening hours and talk to the team. Information is useful when it helps you move forward. See contact and map",
       "bodySample": "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca. Address, access and contact for the main site in the Polígono Industrial Saprelorca. Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution. Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day"
     },
     {
@@ -872,7 +895,7 @@
       "url": "https://www.mari-pepa.com/en/reparto",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/en/reparto",
-      "bytes": 778514,
+      "bytes": 793573,
       "title": "HORECA delivery in Murcia, Almería and Alicante | Maripepa",
       "description": "Delivery for hospitality in Murcia, Almería and Alicante from Lorca and Viator. Check coverage, opening hours and delivery terms for your town.",
       "robots": "index, follow",
@@ -884,6 +907,7 @@
       "h2": [
         "From Lorca to your kitchen, without losing the origin.",
         "Your privacy",
+        "From the dock to the establishment&#x27;s door.",
         "24–48 hours is the usual lead time, not an automatic promise.",
         "Prepare the reception.",
         "If something does not add up, there is a record.",
@@ -891,18 +915,37 @@
         "An enquiry with a destination."
       ],
       "counts": {
-        "lorca": 1,
+        "lorca": 2,
         "year1966": 0,
         "brand": 2
       },
       "fullCounts": {
-        "lorca": 5,
+        "lorca": 6,
         "year1966": 1
       },
-      "words": 428,
-      "images": [],
+      "words": 518,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "Camión frigorífico.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-03.jpg&w=3840&q=75",
+          "alt": "Salida de ruta.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-02.jpg&w=3840&q=75",
+          "alt": "Acceso y carga.",
+          "width": "",
+          "height": ""
+        }
+      ],
       "imagesWithoutAlt": 0,
-      "internalLinks": 38,
+      "internalLinks": 42,
       "jsonLd": 5,
       "sentences": [
         "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante.",
@@ -910,24 +953,29 @@
         "Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante.",
         "The Lorca head office and the Viator branch organise the routes.",
         "To find out whether we reach your area, give us the full address.",
-        "Next Talk to the team 02 Lead times 24–48 hours is the usual lead time, not an automatic promise.",
-        "04 Incidents If something does not add up, there is a record.",
-        "02 — Lead times Home 24–48 hours is the usual lead time, not an automatic promise.",
+        "Next Talk to the team 02 Route From the dock to the establishment&#x27;s door.",
+        "03 Lead times 24–48 hours is the usual lead time, not an automatic promise.",
+        "05 Incidents If something does not add up, there is a record.",
+        "02 — Route Home From the dock to the establishment&#x27;s door.",
+        "The route starts at the dock and ends at the establishment&#x27;s door.",
+        "Each delivery is prepared with the order, area and access confirmed.",
+        "03 /0 3 The team checks the load and the route before departure.",
+        "Next Talk to the team 03 — Lead times Home 24–48 hours is the usual lead time, not an automatic promise.",
         "That lead time is a reference for capacity, not an automatic promise: the date is confirmed for each order and each area.",
         "The exact day depends on the destination, the volume and when the order is placed.",
-        "Next Talk to the team 03 — Reception Home Prepare the reception.",
+        "Next Talk to the team 04 — Reception Home Prepare the reception.",
         "To receive a delivery well, have the address, the person receiving it, the establishment&#x27;s opening hours and the vehicle access ready.",
         "If there is a particularity, such as a pedestrian street or a loading zone, say so from the start.",
-        "Next Talk to the team 04 — Incidents Home If something does not add up, there is a record.",
+        "Next Talk to the team 05 — Incidents Home If something does not add up, there is a record.",
         "If something does not add up, that note is the basis for reviewing what happened.",
         "Tell the team with the delivery note or order number, by phone or email.",
-        "Next Talk to the team 05 — Your area Home Your area Check your area.",
+        "Next Talk to the team 06 — Your area Home Your area Check your area.",
         "To find out whether we deliver to your town and on what terms, write to us with the full address and the type of establishment.",
         "The team confirms the coverage and the lead time for your case.",
         "Continue Maripepa Back to the start An enquiry with a destination.",
         "With that information a delivery stops being a promise and becomes a specific conversation."
       ],
-      "mainText": "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante. Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante. Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment. The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address. Next Talk to the team 02 Lead times 24–48 hours is the usual lead time, not an automatic promise. 03 Reception Prepare the reception. 04 Incidents If something does not add up, there is a record. 05 Your area Check your area. 02 — Lead times Home 24–48 hours is the usual lead time, not an automatic promise. That lead time is a reference for capacity, not an automatic promise: the date is confirmed for each order and each area. The exact day depends on the destination, the volume and when the order is placed. The team confirms it with you before delivery. Next Talk to the team 03 — Reception Home Prepare the reception. To receive a delivery well, have the address, the person receiving it, the establishment&#x27;s opening hours and the vehicle access ready. Delivery closes with a note and a signature. If there is a particularity, such as a pedestrian street or a loading zone, say so from the start. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 04 — Incidents Home If something does not add up, there is a record. Every delivery leaves a signed delivery note. If something does not add up, that note is the basis for reviewing what happened. Tell the team with the delivery note or order number, by phone or email. The sooner we know, the easier it is to put it right. Next Talk to the team 05 — Your area Home Your area Check your area. To find out whether we deliver to your town and on what terms, write to us with the full address and the type of establishment. The team confirms the coverage and the lead time for your case. The contact details are on the contact page. Continue Maripepa Back to the start An enquiry with a destination. Town, product and access. With that information a delivery stops being a promise and becomes a specific conversation. Check my area",
+      "mainText": "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante. Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante. Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment. The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address. Next Talk to the team 02 Route From the dock to the establishment&#x27;s door. 03 Lead times 24–48 hours is the usual lead time, not an automatic promise. 04 Reception Prepare the reception. 05 Incidents If something does not add up, there is a record. 02 — Route Home From the dock to the establishment&#x27;s door. The route starts at the dock and ends at the establishment&#x27;s door. Each delivery is prepared with the order, area and access confirmed. Camión frigorífico. Equipo de frío y carga en la sede. 01 /0 3 Salida de ruta. Preparación de la entrega en Saprelorca. 02 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 03 /0 3 The team checks the load and the route before departure. Next Talk to the team 03 — Lead times Home 24–48 hours is the usual lead time, not an automatic promise. That lead time is a reference for capacity, not an automatic promise: the date is confirmed for each order and each area. The exact day depends on the destination, the volume and when the order is placed. The team confirms it with you before delivery. Next Talk to the team 04 — Reception Home Prepare the reception. To receive a delivery well, have the address, the person receiving it, the establishment&#x27;s opening hours and the vehicle access ready. Delivery closes with a note and a signature. If there is a particularity, such as a pedestrian street or a loading zone, say so from the start. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 05 — Incidents Home If something does not add up, there is a record. Every delivery leaves a signed delivery note. If something does not add up, that note is the basis for reviewing what happened. Tell the team with the delivery note or order number, by phone or email. The sooner we know, the easier it is to put it right. Next Talk to the team 06 — Your area Home Your area Check your area. To find out whether we deliver to your town and on what terms, write to us with the full address and the type of establishment. The team confirms the coverage and the lead time for your case. The contact details are on the contact page. Continue Maripepa Back to the start An enquiry with a destination. Town, product and access. With that information a delivery stops being a promise and becomes a specific conversation. Check my area",
       "bodySample": "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante. Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante. Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment. The Lorca head office and the Viator branch organise the routes. To find out whet"
     },
     {
@@ -1007,7 +1055,7 @@
       "url": "https://www.mari-pepa.com/es",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/es",
-      "bytes": 753895,
+      "bytes": 754104,
       "title": "Maripepa | Distribución HORECA Murcia",
       "description": "Distribución alimentaria para hostelería desde Lorca. Congelado, refrigerado y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
       "robots": "index, follow",
@@ -1027,15 +1075,15 @@
         "Tu próxima carta empieza con una conversación."
       ],
       "counts": {
-        "lorca": 18,
-        "year1966": 4,
+        "lorca": 11,
+        "year1966": 3,
         "brand": 4
       },
       "fullCounts": {
-        "lorca": 22,
-        "year1966": 5
+        "lorca": 15,
+        "year1966": 4
       },
-      "words": 542,
+      "words": 534,
       "images": [
         {
           "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-03.jpg&w=3840&q=75",
@@ -1183,37 +1231,37 @@
         },
         {
           "src": "/catalogs/covers/enero-2026-granja-mari-pepa.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Mari Pepa, Enero 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/topgel-febrero-2026.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Topgel, Febrero 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/gmp-marzo-2026.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Mari Pepa, Marzo 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/abril-2026-topgel.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Topgel, Abril 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/mayo-2026-topgel.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Topgel, Mayo 2026",
           "width": "",
           "height": ""
         },
         {
           "src": "/catalogs/covers/junio-2026-granja-mari-pepa.jpg",
-          "alt": "",
+          "alt": "Portada de Revista Mari Pepa, Junio 2026",
           "width": "",
           "height": ""
         },
@@ -1224,23 +1272,23 @@
           "height": ""
         }
       ],
-      "imagesWithoutAlt": 21,
+      "imagesWithoutAlt": 15,
       "internalLinks": 42,
       "jsonLd": 4,
       "sentences": [
         "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca.",
         "Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería.",
-        "Ver la gama Hablar con el equipo 1966 Origen en Lorca 02 Sedes: Lorca y Viator 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada en 1966.",
-        "Hoy coordinamos Lorca y Viator para que producto, pedido y ruta hablen el mismo idioma.",
-        "Saprelorca 0 1 Lorca, 1966 La empresa nace en Lorca y mantiene allí su sede principal.",
-        "La nave, el almacén y el equipo son el punto de partida de cada pedido.",
-        "0 2 Dos sedes Lorca (Murcia) y Viator (Almería) comparten almacén, rutas y atención al cliente.",
+        "Ver la gama Hablar con el equipo 1966 Año de fundación 02 Sedes: Murcia y Almería 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada en 1966.",
+        "Nacimos en el sureste y crecimos con la hostelería de Murcia y Almería.",
+        "Hoy coordinamos dos almacenes para que producto, pedido y ruta hablen el mismo idioma.",
+        "Saprelorca 0 1 La sede principal La nave de Saprelorca concentra almacén, preparación y salida de pedidos.",
+        "0 2 Dos sedes Murcia y Almería comparten almacén, rutas y atención al cliente.",
         "0 3 Tres temperaturas Congelado, refrigerado y temperatura ambiente conviven en la operación diaria.",
         "Congelado, refrigerado y ambiente conviven en la misma operación.",
         "5.000 m³ de frío, más de 1.500 referencias y dos puntos de salida para que la cocina no se pare.",
         "Congelado y refrigerado en el mismo circuito de preparación.",
         "02 +1.500 Referencias en siete familias, de productos del mar a salsas y preparados.",
-        "03 Dos sedes Lorca y Viator comparten almacén, rutas y atención.",
+        "03 Dos sedes Las dos sedes comparten almacén, rutas y atención.",
         "Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas.",
         "Empieza por lo que preparas y lleva esa necesidad a la conversación comercial.",
         "0 1 Productos del mar Ver familia 0 2 Carnes Ver familia 0 3 Precocinados Ver familia 0 4 Repostería Ver familia 0 5 Panadería Ver familia 0 6 Refrigerados Ver familia 0 7 Salsas y preparados Ver familia Productos del mar Ver todas las familias Marcas en la gama Sigue leyendo Calidad y documentación Reparto en Murcia y Almería Sede de Lorca 04 · Hemeroteca Las revistas de la casa.",
@@ -1250,14 +1298,14 @@
         "La Juaida 06 · Hablemos Tu próxima carta empieza con una conversación.",
         "Cuéntanos qué preparas, qué familias te interesan y dónde está tu establecimiento."
       ],
-      "mainText": "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca. Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería. Ver la gama Hablar con el equipo 1966 Origen en Lorca 02 Sedes: Lorca y Viator 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar. Nacimos en Lorca y crecimos con la hostelería del sureste. Hoy coordinamos Lorca y Viator para que producto, pedido y ruta hablen el mismo idioma. Valle del Guadalentín Lorca · Pol. Saprelorca 0 1 Lorca, 1966 La empresa nace en Lorca y mantiene allí su sede principal. La nave, el almacén y el equipo son el punto de partida de cada pedido. 0 2 Dos sedes Lorca (Murcia) y Viator (Almería) comparten almacén, rutas y atención al cliente. Un mismo equipo, dos puntos de salida. 0 3 Tres temperaturas Congelado, refrigerado y temperatura ambiente conviven en la operación diaria. Cada familia tiene su forma de conservarse y servirse. 02 · Capacidad Tres temperaturas, un solo pedido. Congelado, refrigerado y ambiente conviven en la misma operación. 5.000 m³ de frío, más de 1.500 referencias y dos puntos de salida para que la cocina no se pare. 01 5.000 m³ Capacidad frigorífica en la sede de Saprelorca. Congelado y refrigerado en el mismo circuito de preparación. 02 +1.500 Referencias en siete familias, de productos del mar a salsas y preparados. 03 Dos sedes Lorca y Viator comparten almacén, rutas y atención. Dos puntos de salida para Murcia, Almería y Alicante. 04 24–48 h Plazo habitual de entrega. Se confirma por pedido y zona antes de salir. Consultar disponibilidad 03 · La gama Siete familias. Una conversación concreta. Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Empieza por lo que preparas y lleva esa necesidad a la conversación comercial. 0 1 Productos del mar Ver familia 0 2 Carnes Ver familia 0 3 Precocinados Ver familia 0 4 Repostería Ver familia 0 5 Panadería Ver familia 0 6 Refrigerados Ver familia 0 7 Salsas y preparados Ver familia Productos del mar Ver todas las familias Marcas en la gama Sigue leyendo Calidad y documentación Reparto en Murcia y Almería Sede de Lorca 04 · Hemeroteca Las revistas de la casa. Cada edición reúne producto, campaña y propuestas para carta. Ábrela en el visor y recorre las páginas como una presentación. Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa Ver todas las revistas 05 · Sedes Dos sedes, el mismo equipo. La sede principal está en Lorca. La delegación de Viator acerca la operación a Almería. Ambas comparten el mismo criterio de producto y servicio. Lorca · Murcia Lorca · Murcia Av. Francisco Jimeno Sola, 3 · Pol. Saprelorca Viator · Almería C/ Sierra de Ronda, 26 · Pol. La Juaida 06 · Hablemos Tu próxima carta empieza con una conversación. Cuéntanos qué preparas, qué familias te interesan y dónde está tu establecimiento. El equipo te orienta sobre producto, formatos y entrega. Contactar con el equipo 968 46 75 14",
-      "bodySample": "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca. Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería. Ver la gama Hablar con el equipo 1966 Origen en Lorca 02 Sedes: Lorca y Viator 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada e"
+      "mainText": "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca. Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería. Ver la gama Hablar con el equipo 1966 Año de fundación 02 Sedes: Murcia y Almería 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar. Nacimos en el sureste y crecimos con la hostelería de Murcia y Almería. Hoy coordinamos dos almacenes para que producto, pedido y ruta hablen el mismo idioma. Valle del Guadalentín Lorca · Pol. Saprelorca 0 1 La sede principal La nave de Saprelorca concentra almacén, preparación y salida de pedidos. Es el punto de partida de cada ruta. 0 2 Dos sedes Murcia y Almería comparten almacén, rutas y atención al cliente. Dos puntos de salida coordinados. 0 3 Tres temperaturas Congelado, refrigerado y temperatura ambiente conviven en la operación diaria. Cada familia tiene su forma de conservarse y servirse. 02 · Capacidad Tres temperaturas, un solo pedido. Congelado, refrigerado y ambiente conviven en la misma operación. 5.000 m³ de frío, más de 1.500 referencias y dos puntos de salida para que la cocina no se pare. 01 5.000 m³ Capacidad frigorífica en la sede de Saprelorca. Congelado y refrigerado en el mismo circuito de preparación. 02 +1.500 Referencias en siete familias, de productos del mar a salsas y preparados. 03 Dos sedes Las dos sedes comparten almacén, rutas y atención. Dos puntos de salida para Murcia, Almería y Alicante. 04 24–48 h Plazo habitual de entrega. Se confirma por pedido y zona antes de salir. Consultar disponibilidad 03 · La gama Siete familias. Una conversación concreta. Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Empieza por lo que preparas y lleva esa necesidad a la conversación comercial. 0 1 Productos del mar Ver familia 0 2 Carnes Ver familia 0 3 Precocinados Ver familia 0 4 Repostería Ver familia 0 5 Panadería Ver familia 0 6 Refrigerados Ver familia 0 7 Salsas y preparados Ver familia Productos del mar Ver todas las familias Marcas en la gama Sigue leyendo Calidad y documentación Reparto en Murcia y Almería Sede de Lorca 04 · Hemeroteca Las revistas de la casa. Cada edición reúne producto, campaña y propuestas para carta. Ábrela en el visor y recorre las páginas como una presentación. Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa Ver todas las revistas 05 · Sedes Dos sedes, el mismo equipo. La sede principal está en Lorca. La delegación de Viator acerca la operación a Almería. Ambas comparten el mismo criterio de producto y servicio. Lorca · Murcia Lorca · Murcia Av. Francisco Jimeno Sola, 3 · Pol. Saprelorca Viator · Almería C/ Sierra de Ronda, 26 · Pol. La Juaida 06 · Hablemos Tu próxima carta empieza con una conversación. Cuéntanos qué preparas, qué familias te interesan y dónde está tu establecimiento. El equipo te orienta sobre producto, formatos y entrega. Contactar con el equipo 968 46 75 14",
+      "bodySample": "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca. Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería. Ver la gama Hablar con el equipo 1966 Año de fundación 02 Sedes: Murcia y Almería 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundad"
     },
     {
       "url": "https://www.mari-pepa.com/es/acerca",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/es/acerca",
-      "bytes": 806587,
+      "bytes": 806536,
       "title": "Quiénes somos | Maripepa, Lorca desde 1966",
       "description": "Distribución alimentaria para hostelería en Lorca desde 1966, con delegación en Viator (Almería) y gama de congelado, refrigerado y ambiente.",
       "robots": "index, follow",
@@ -1270,50 +1318,50 @@
         "De Lorca a tu cocina, sin perder el origen.",
         "Tu privacidad",
         "Maripepa en datos.",
-        "De una casa en Lorca a dos sedes.",
+        "De una casa a dos sedes.",
         "Las marcas que distribuimos.",
-        "Una red nacional con base en Lorca.",
+        "Una red nacional con base en el sureste.",
         "5.000 m³ de frío y dos puntos de salida.",
         "Ven a vernos o llámanos.",
         "Al lado de quien da de comer."
       ],
       "counts": {
-        "lorca": 20,
-        "year1966": 6,
+        "lorca": 11,
+        "year1966": 5,
         "brand": 6
       },
       "fullCounts": {
-        "lorca": 25,
-        "year1966": 8
+        "lorca": 16,
+        "year1966": 7
       },
-      "words": 569,
+      "words": 558,
       "images": [
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel-white.png&w=3840&q=75",
           "alt": "Grupo Topgel",
           "width": "266",
           "height": "107"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle-white.png&w=3840&q=75",
           "alt": "Nestlé Helados",
           "width": "193",
           "height": "162"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar-white.png&w=3840&q=75",
           "alt": "Panamar",
           "width": "249",
           "height": "158"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin-white.png&w=3840&q=75",
           "alt": "Okin",
           "width": "223",
           "height": "192"
         },
         {
-          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin.png&w=3840&q=75",
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin-white.png&w=3840&q=75",
           "alt": "Pastelería Amparín",
           "width": "268",
           "height": "111"
@@ -1341,7 +1389,7 @@
       "internalLinks": 38,
       "jsonLd": 5,
       "sentences": [
-        "Lorca, desde 1966 Desde 1966, producto y servicio para quien cocina.",
+        "Distribución HORECA Desde 1966, producto y servicio para quien cocina.",
         "Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería.",
         "Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering.",
         "Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder.",
@@ -1349,20 +1397,20 @@
         "Dos puntos de salida, un mismo equipo y la misma idea de servicio.",
         "Siguiente Hablar con el equipo 02 La empresa Maripepa en datos.",
         "Fundación 1966 Sede Lorca (Saprelorca) Delegación Viator (Almería) Cobertura Murcia, Almería y Alicante Gama Congelado, refrigerado y ambiente Capacidad frigorífica 5.000 m³ Referencias +1.500 Plazo habitual 24–48 h Se confirma por pedido y zona.",
-        "Siguiente Hablar con el equipo 03 — Trayectoria Inicio De una casa en Lorca a dos sedes.",
+        "Siguiente Hablar con el equipo 03 — Trayectoria Inicio De una casa a dos sedes.",
         "Tres momentos marcan la trayectoria: la fundación, el presente y la ampliación que está en trámite.",
-        "1966 Fundación en Lorca La empresa nace en Lorca para distribuir alimentación a la hostelería de la zona.",
-        "Hoy Dos sedes y 5.000 m³ Sede en Lorca y delegación en Viator, con una capacidad frigorífica de 5.000 m³.",
+        "1966 Fundación La empresa nace para distribuir alimentación a la hostelería de la zona.",
+        "Hoy Dos sedes y 5.000 m³ Dos sedes y 5.000 m³ de capacidad frigorífica entre Murcia y Almería.",
         "2026 Ampliación en trámite El Ayuntamiento aprueba la ordenación de las parcelas D2 y D3, impulsada por la empresa para ampliar la nave.",
         "Siguiente Hablar con el equipo 04 — Marcas Inicio Las marcas que distribuimos.",
         "Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados.",
-        "Siguiente Hablar con el equipo 05 — Red Inicio Una red nacional con base en Lorca.",
+        "Siguiente Hablar con el equipo 05 — Red Inicio Una red nacional con base en el sureste.",
         "Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación.",
         "Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca.",
-        "La conversación sigue siendo local: el equipo de Lorca responde, confirma la disponibilidad y organiza la entrega.",
-        "La red amplía el catálogo; la atención y la ruta se quedan en el sureste.",
+        "La conversación sigue siendo local: el equipo del sureste responde, confirma la disponibilidad y organiza la entrega.",
+        "La red amplía el catálogo; la atención y la ruta se quedan cerca.",
         "Siguiente Hablar con el equipo 06 — Instalaciones Inicio 5.000 m³ de frío y dos puntos de salida.",
-        "La operación se apoya en dos sitios: la sede de Lorca y la delegación de Viator.",
+        "La operación se apoya en dos sitios: la sede de Saprelorca y la delegación de Viator.",
         "Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante.",
         "Siguiente Hablar con el equipo 07 — Siguiente paso Inicio Siguiente paso Ven a vernos o llámanos.",
         "La dirección, el horario y los teléfonos están en la página de contacto.",
@@ -1370,8 +1418,8 @@
         "Continuar Maripepa Volver al principio Al lado de quien da de comer.",
         "Producto, ruta y equipo para que la cocina siga funcionando."
       ],
-      "mainText": "Lorca, desde 1966 Desde 1966, producto y servicio para quien cocina. Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería. Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder. Hoy la empresa mantiene la sede en Lorca y una delegación en Viator, Almería. Dos puntos de salida, un mismo equipo y la misma idea de servicio. Siguiente Hablar con el equipo 02 La empresa Maripepa en datos. 03 Trayectoria De una casa en Lorca a dos sedes. 04 Marcas Las marcas que distribuimos. 05 Red Una red nacional con base en Lorca. 02 — La empresa Inicio Maripepa en datos. Fundación 1966 Sede Lorca (Saprelorca) Delegación Viator (Almería) Cobertura Murcia, Almería y Alicante Gama Congelado, refrigerado y ambiente Capacidad frigorífica 5.000 m³ Referencias +1.500 Plazo habitual 24–48 h Se confirma por pedido y zona. Siguiente Hablar con el equipo 03 — Trayectoria Inicio De una casa en Lorca a dos sedes. Tres momentos marcan la trayectoria: la fundación, el presente y la ampliación que está en trámite. 1966 Fundación en Lorca La empresa nace en Lorca para distribuir alimentación a la hostelería de la zona. Hoy Dos sedes y 5.000 m³ Sede en Lorca y delegación en Viator, con una capacidad frigorífica de 5.000 m³. 2026 Ampliación en trámite El Ayuntamiento aprueba la ordenación de las parcelas D2 y D3, impulsada por la empresa para ampliar la nave. Siguiente Hablar con el equipo 04 — Marcas Inicio Las marcas que distribuimos. Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados. Trabaja con Panamar, Okin y Pastelería Amparín. Cada marca aporta su especialidad a la gama. Siguiente Hablar con el equipo 05 — Red Inicio Una red nacional con base en Lorca. Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación. Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca. La conversación sigue siendo local: el equipo de Lorca responde, confirma la disponibilidad y organiza la entrega. La red amplía el catálogo; la atención y la ruta se quedan en el sureste. Siguiente Hablar con el equipo 06 — Instalaciones Inicio 5.000 m³ de frío y dos puntos de salida. La operación se apoya en dos sitios: la sede de Lorca y la delegación de Viator. Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante. La nave de Saprelorca. Nave de Lorca, donde se prepara la carga. 01 /0 3 El camión frigorífico. Equipo de frío y carga en la sede. 02 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 03 /0 3 La capacidad frigorífica alcanza los 5.000 m³. Siguiente Hablar con el equipo 07 — Siguiente paso Inicio Siguiente paso Ven a vernos o llámanos. Para conocer la sede, escribe o llama antes de venir. Así preparamos el acceso y la persona que te atenderá. La dirección, el horario y los teléfonos están en la página de contacto. Si quieres ver cómo trabajamos en Lorca, también puedes pasar por la página de la sede. Continuar Maripepa Volver al principio Al lado de quien da de comer. Desde 1966, en Lorca. Producto, ruta y equipo para que la cocina siga funcionando. Hablar con el equipo",
-      "bodySample": "Lorca, desde 1966 Desde 1966, producto y servicio para quien cocina. Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería. Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder. Hoy la empresa mantie"
+      "mainText": "Distribución HORECA Desde 1966, producto y servicio para quien cocina. Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería. Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder. Hoy la empresa mantiene la sede en Lorca y una delegación en Viator, Almería. Dos puntos de salida, un mismo equipo y la misma idea de servicio. Siguiente Hablar con el equipo 02 La empresa Maripepa en datos. 03 Trayectoria De una casa a dos sedes. 04 Marcas Las marcas que distribuimos. 05 Red Una red nacional con base en el sureste. 02 — La empresa Inicio Maripepa en datos. Fundación 1966 Sede Lorca (Saprelorca) Delegación Viator (Almería) Cobertura Murcia, Almería y Alicante Gama Congelado, refrigerado y ambiente Capacidad frigorífica 5.000 m³ Referencias +1.500 Plazo habitual 24–48 h Se confirma por pedido y zona. Siguiente Hablar con el equipo 03 — Trayectoria Inicio De una casa a dos sedes. Tres momentos marcan la trayectoria: la fundación, el presente y la ampliación que está en trámite. 1966 Fundación La empresa nace para distribuir alimentación a la hostelería de la zona. Hoy Dos sedes y 5.000 m³ Dos sedes y 5.000 m³ de capacidad frigorífica entre Murcia y Almería. 2026 Ampliación en trámite El Ayuntamiento aprueba la ordenación de las parcelas D2 y D3, impulsada por la empresa para ampliar la nave. Siguiente Hablar con el equipo 04 — Marcas Inicio Las marcas que distribuimos. Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados. Trabaja con Panamar, Okin y Pastelería Amparín. Cada marca aporta su especialidad a la gama. Siguiente Hablar con el equipo 05 — Red Inicio Una red nacional con base en el sureste. Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación. Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca. La conversación sigue siendo local: el equipo del sureste responde, confirma la disponibilidad y organiza la entrega. La red amplía el catálogo; la atención y la ruta se quedan cerca. Siguiente Hablar con el equipo 06 — Instalaciones Inicio 5.000 m³ de frío y dos puntos de salida. La operación se apoya en dos sitios: la sede de Saprelorca y la delegación de Viator. Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante. La nave de Saprelorca. Nave de Saprelorca, donde se prepara la carga. 01 /0 3 El camión frigorífico. Equipo de frío y carga en la sede. 02 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 03 /0 3 La capacidad frigorífica alcanza los 5.000 m³. Siguiente Hablar con el equipo 07 — Siguiente paso Inicio Siguiente paso Ven a vernos o llámanos. Para conocer la sede, escribe o llama antes de venir. Así preparamos el acceso y la persona que te atenderá. La dirección, el horario y los teléfonos están en la página de contacto. Si quieres ver cómo trabajamos en Lorca, también puedes pasar por la página de la sede. Continuar Maripepa Volver al principio Al lado de quien da de comer. Desde 1966, en Lorca. Producto, ruta y equipo para que la cocina siga funcionando. Hablar con el equipo",
+      "bodySample": "Distribución HORECA Desde 1966, producto y servicio para quien cocina. Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería. Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder. Hoy la empresa mant"
     },
     {
       "url": "https://www.mari-pepa.com/es/calidad",
@@ -1623,7 +1671,7 @@
       "url": "https://www.mari-pepa.com/es/lorca",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/es/lorca",
-      "bytes": 778469,
+      "bytes": 793644,
       "title": "Sede en Lorca | Maripepa, Saprelorca",
       "description": "Sede en Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Horario de atención, teléfonos y cómo llegar a Maripepa en Murcia.",
       "robots": "index, follow",
@@ -1635,6 +1683,7 @@
       "h2": [
         "De Lorca a tu cocina, sin perder el origen.",
         "Tu privacidad",
+        "La nave, el muelle y la carga.",
         "Avenida Francisco Jimeno Sola, 3.",
         "Antes de venir, confirma la visita.",
         "Una nave que crece en Saprelorca.",
@@ -1650,34 +1699,56 @@
         "lorca": 22,
         "year1966": 1
       },
-      "words": 439,
-      "images": [],
+      "words": 531,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "La nave de Saprelorca.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-02.jpg&w=3840&q=75",
+          "alt": "Acceso y carga.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "El camión frigorífico.",
+          "width": "",
+          "height": ""
+        }
+      ],
       "imagesWithoutAlt": 0,
-      "internalLinks": 39,
+      "internalLinks": 43,
       "jsonLd": 5,
       "sentences": [
         "Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca.",
         "En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas.",
         "Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste.",
-        "Siguiente Hablar con el equipo 02 Llegar Avenida Francisco Jimeno Sola, 3.",
+        "Siguiente Hablar con el equipo 02 Instalaciones La nave, el muelle y la carga.",
+        "La sede reúne almacén, preparación y carga en el mismo recinto.",
+        "03 /0 3 Estas imágenes ayudan a situar la operación antes de una visita o una recogida.",
+        "Siguiente Hablar con el equipo 03 — Llegar Inicio Avenida Francisco Jimeno Sola, 3.",
         "La sede está en avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
         "Guárdala completa para la ruta: calle, número, polígono y localidad.",
         "Comprueba que el destino corresponde a Lorca y, si necesitas una indicación de acceso, pregúntanos antes de salir.",
-        "Siguiente Hablar con el equipo Cómo llegar 03 — Visita Inicio Antes de venir, confirma la visita.",
+        "Siguiente Hablar con el equipo Cómo llegar 04 — Visita Inicio Antes de venir, confirma la visita.",
         "Indica el motivo y quién te acompaña, y el equipo te confirma el acceso y la persona de contacto.",
         "Las recogidas de pedido solo se hacen si se confirman antes.",
         "La dirección no confirma por sí sola una recogida: consulta con el equipo el día y la hora.",
         "05 Consultar el servicio Localidad y contexto de la entrega.",
-        "Siguiente Hablar con el equipo 04 — Ampliación Inicio Una nave que crece en Saprelorca.",
+        "Siguiente Hablar con el equipo 05 — Ampliación Inicio Una nave que crece en Saprelorca.",
         "En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Maripepa.",
         "El proyecto está en trámite: agrupar y ampliar las instalaciones de la empresa.",
         "No hay fecha de apertura, ni metros construidos, ni cifra de inversión publicada.",
-        "Siguiente Hablar con el equipo 05 — Contacto Inicio Contacto Hablar con Lorca.",
+        "Siguiente Hablar con el equipo 06 — Contacto Inicio Contacto Hablar con Lorca.",
         "Para la sede de Lorca, llama al 968 46 75 14 o al 639 77 86 55.",
         "Si vienes desde fuera, comprueba antes el horario y confirma la visita.",
         "Continuar 968 46 75 14 [email&#160;protected] Maripepa Volver al principio Una dirección."
       ],
-      "mainText": "Sede, Polígono Saprelorca La sede de Lorca, en Saprelorca. Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca. En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto. Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de la distribución. Siguiente Hablar con el equipo 02 Llegar Avenida Francisco Jimeno Sola, 3. 03 Visita Antes de venir, confirma la visita. 04 Ampliación Una nave que crece en Saprelorca. 05 Contacto Hablar con Lorca. 02 — Llegar Inicio Avenida Francisco Jimeno Sola, 3. La sede está en avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Guárdala completa para la ruta: calle, número, polígono y localidad. El mapa se abre en un servicio externo. Comprueba que el destino corresponde a Lorca y, si necesitas una indicación de acceso, pregúntanos antes de salir. Siguiente Hablar con el equipo Cómo llegar 03 — Visita Inicio Antes de venir, confirma la visita. Las visitas se atienden con cita previa. Indica el motivo y quién te acompaña, y el equipo te confirma el acceso y la persona de contacto. Las recogidas de pedido solo se hacen si se confirman antes. La dirección no confirma por sí sola una recogida: consulta con el equipo el día y la hora. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 04 — Ampliación Inicio Una nave que crece en Saprelorca. En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Maripepa. Las dos parcelas suman 8.953 m². El proyecto está en trámite: agrupar y ampliar las instalaciones de la empresa. No hay fecha de apertura, ni metros construidos, ni cifra de inversión publicada. Siguiente Hablar con el equipo 05 — Contacto Inicio Contacto Hablar con Lorca. Para la sede de Lorca, llama al 968 46 75 14 o al 639 77 86 55. También puedes escribir a [email&#160;protected] . Si vienes desde fuera, comprueba antes el horario y confirma la visita. En la página de contacto tienes los datos completos. Continuar 968 46 75 14 [email&#160;protected] Maripepa Volver al principio Una dirección. Un siguiente paso. Sitúa la sede, comprueba el horario y habla con el equipo. La información sirve cuando te ayuda a avanzar. Ver contacto y mapa",
+      "mainText": "Sede, Polígono Saprelorca La sede de Lorca, en Saprelorca. Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca. En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto. Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de la distribución. Siguiente Hablar con el equipo 02 Instalaciones La nave, el muelle y la carga. 03 Llegar Avenida Francisco Jimeno Sola, 3. 04 Visita Antes de venir, confirma la visita. 05 Ampliación Una nave que crece en Saprelorca. 02 — Instalaciones Inicio La nave, el muelle y la carga. La sede reúne almacén, preparación y carga en el mismo recinto. Cada zona tiene su función y su ritmo. La nave de Saprelorca. Almacén y preparación de pedidos. 01 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 02 /0 3 El camión frigorífico. Equipo de frío y carga en la sede. 03 /0 3 Estas imágenes ayudan a situar la operación antes de una visita o una recogida. Siguiente Hablar con el equipo 03 — Llegar Inicio Avenida Francisco Jimeno Sola, 3. La sede está en avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Guárdala completa para la ruta: calle, número, polígono y localidad. El mapa se abre en un servicio externo. Comprueba que el destino corresponde a Lorca y, si necesitas una indicación de acceso, pregúntanos antes de salir. Siguiente Hablar con el equipo Cómo llegar 04 — Visita Inicio Antes de venir, confirma la visita. Las visitas se atienden con cita previa. Indica el motivo y quién te acompaña, y el equipo te confirma el acceso y la persona de contacto. Las recogidas de pedido solo se hacen si se confirman antes. La dirección no confirma por sí sola una recogida: consulta con el equipo el día y la hora. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 05 — Ampliación Inicio Una nave que crece en Saprelorca. En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Maripepa. Las dos parcelas suman 8.953 m². El proyecto está en trámite: agrupar y ampliar las instalaciones de la empresa. No hay fecha de apertura, ni metros construidos, ni cifra de inversión publicada. Siguiente Hablar con el equipo 06 — Contacto Inicio Contacto Hablar con Lorca. Para la sede de Lorca, llama al 968 46 75 14 o al 639 77 86 55. También puedes escribir a [email&#160;protected] . Si vienes desde fuera, comprueba antes el horario y confirma la visita. En la página de contacto tienes los datos completos. Continuar 968 46 75 14 [email&#160;protected] Maripepa Volver al principio Una dirección. Un siguiente paso. Sitúa la sede, comprueba el horario y habla con el equipo. La información sirve cuando te ayuda a avanzar. Ver contacto y mapa",
       "bodySample": "Sede, Polígono Saprelorca La sede de Lorca, en Saprelorca. Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca. En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto. Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de"
     },
     {
@@ -1882,7 +1953,7 @@
       "url": "https://www.mari-pepa.com/es/reparto",
       "status": 200,
       "finalUrl": "https://www.mari-pepa.com/es/reparto",
-      "bytes": 777998,
+      "bytes": 793090,
       "title": "Reparto HORECA en Murcia, Almería y Alicante | Maripepa",
       "description": "Reparto para hostelería en Murcia, Almería y Alicante desde Lorca y Viator. Consulta cobertura, horario y condiciones de entrega para tu localidad.",
       "robots": "index, follow",
@@ -1894,6 +1965,7 @@
       "h2": [
         "De Lorca a tu cocina, sin perder el origen.",
         "Tu privacidad",
+        "Del muelle a la puerta del establecimiento.",
         "24–48 horas es el plazo habitual, no una promesa automática.",
         "Prepara la recepción.",
         "Si algo no cuadra, hay registro.",
@@ -1901,18 +1973,37 @@
         "Una consulta con destino."
       ],
       "counts": {
-        "lorca": 1,
+        "lorca": 2,
         "year1966": 0,
         "brand": 2
       },
       "fullCounts": {
-        "lorca": 5,
+        "lorca": 6,
         "year1966": 1
       },
-      "words": 405,
-      "images": [],
+      "words": 499,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "Camión frigorífico.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-03.jpg&w=3840&q=75",
+          "alt": "Salida de ruta.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-02.jpg&w=3840&q=75",
+          "alt": "Acceso y carga.",
+          "width": "",
+          "height": ""
+        }
+      ],
       "imagesWithoutAlt": 0,
-      "internalLinks": 38,
+      "internalLinks": 42,
       "jsonLd": 5,
       "sentences": [
         "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante.",
@@ -1921,23 +2012,28 @@
         "La cobertura se concreta para cada localidad y cada establecimiento.",
         "La sede de Lorca y la delegación de Viator organizan las rutas.",
         "Para saber si llegamos a tu zona, dinos la dirección completa.",
-        "Siguiente Hablar con el equipo 02 Plazos 24–48 horas es el plazo habitual, no una promesa automática.",
-        "02 — Plazos Inicio 24–48 horas es el plazo habitual, no una promesa automática.",
+        "Siguiente Hablar con el equipo 02 Ruta Del muelle a la puerta del establecimiento.",
+        "03 Plazos 24–48 horas es el plazo habitual, no una promesa automática.",
+        "02 — Ruta Inicio Del muelle a la puerta del establecimiento.",
+        "La ruta empieza en el muelle y termina en la puerta del establecimiento.",
+        "Cada entrega se prepara con el pedido, la zona y el acceso confirmados.",
+        "03 /0 3 El equipo revisa la carga y el reparto antes de salir.",
+        "Siguiente Hablar con el equipo 03 — Plazos Inicio 24–48 horas es el plazo habitual, no una promesa automática.",
         "Ese plazo es una referencia de capacidad, no una promesa automática: la fecha se confirma para cada pedido y cada zona.",
         "El día concreto depende del destino, del volumen y del momento del pedido.",
-        "Siguiente Hablar con el equipo 03 — Recepción Inicio Prepara la recepción.",
+        "Siguiente Hablar con el equipo 04 — Recepción Inicio Prepara la recepción.",
         "Para recibir bien, ten lista la dirección, la persona que recibe, el horario del establecimiento y el acceso para el vehículo.",
         "Si hay una particularidad, como una calle peatonal o una zona de carga, indícala desde el principio.",
         "05 Consultar el servicio Localidad y contexto de la entrega.",
-        "Siguiente Hablar con el equipo 04 — Incidencias Inicio Si algo no cuadra, hay registro.",
+        "Siguiente Hablar con el equipo 05 — Incidencias Inicio Si algo no cuadra, hay registro.",
         "Si algo no cuadra, ese albarán es la base para revisar qué ha pasado.",
         "Avisa al equipo con el número de albarán o de pedido, por teléfono o por correo.",
-        "Siguiente Hablar con el equipo 05 — Tu zona Inicio Tu zona Consulta tu zona.",
+        "Siguiente Hablar con el equipo 06 — Tu zona Inicio Tu zona Consulta tu zona.",
         "Para saber si repartimos en tu localidad y en qué condiciones, escríbenos con la dirección completa y el tipo de establecimiento.",
         "Continuar Maripepa Volver al principio Una consulta con destino.",
         "Con esos datos la entrega deja de ser una promesa y se convierte en una conversación concreta."
       ],
-      "mainText": "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante. Cobertura, plazos y recepción para hostelería en Murcia, Almería y Alicante. Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento. La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa. Siguiente Hablar con el equipo 02 Plazos 24–48 horas es el plazo habitual, no una promesa automática. 03 Recepción Prepara la recepción. 04 Incidencias Si algo no cuadra, hay registro. 05 Tu zona Consulta tu zona. 02 — Plazos Inicio 24–48 horas es el plazo habitual, no una promesa automática. Ese plazo es una referencia de capacidad, no una promesa automática: la fecha se confirma para cada pedido y cada zona. El día concreto depende del destino, del volumen y del momento del pedido. El equipo te lo confirma antes de la entrega. Siguiente Hablar con el equipo 03 — Recepción Inicio Prepara la recepción. Para recibir bien, ten lista la dirección, la persona que recibe, el horario del establecimiento y el acceso para el vehículo. La entrega se cierra con albarán y firma. Si hay una particularidad, como una calle peatonal o una zona de carga, indícala desde el principio. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 04 — Incidencias Inicio Si algo no cuadra, hay registro. Cada entrega deja un albarán firmado. Si algo no cuadra, ese albarán es la base para revisar qué ha pasado. Avisa al equipo con el número de albarán o de pedido, por teléfono o por correo. Cuanto antes lo sepamos, más fácil es corregirlo. Siguiente Hablar con el equipo 05 — Tu zona Inicio Tu zona Consulta tu zona. Para saber si repartimos en tu localidad y en qué condiciones, escríbenos con la dirección completa y el tipo de establecimiento. El equipo te confirma la cobertura y el plazo para tu caso. Los datos de contacto están en la página de contacto. Continuar Maripepa Volver al principio Una consulta con destino. Localidad, producto y acceso. Con esos datos la entrega deja de ser una promesa y se convierte en una conversación concreta. Consultar mi zona",
+      "mainText": "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante. Cobertura, plazos y recepción para hostelería en Murcia, Almería y Alicante. Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento. La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa. Siguiente Hablar con el equipo 02 Ruta Del muelle a la puerta del establecimiento. 03 Plazos 24–48 horas es el plazo habitual, no una promesa automática. 04 Recepción Prepara la recepción. 05 Incidencias Si algo no cuadra, hay registro. 02 — Ruta Inicio Del muelle a la puerta del establecimiento. La ruta empieza en el muelle y termina en la puerta del establecimiento. Cada entrega se prepara con el pedido, la zona y el acceso confirmados. Camión frigorífico. Equipo de frío y carga en la sede. 01 /0 3 Salida de ruta. Preparación de la entrega en Saprelorca. 02 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 03 /0 3 El equipo revisa la carga y el reparto antes de salir. Siguiente Hablar con el equipo 03 — Plazos Inicio 24–48 horas es el plazo habitual, no una promesa automática. Ese plazo es una referencia de capacidad, no una promesa automática: la fecha se confirma para cada pedido y cada zona. El día concreto depende del destino, del volumen y del momento del pedido. El equipo te lo confirma antes de la entrega. Siguiente Hablar con el equipo 04 — Recepción Inicio Prepara la recepción. Para recibir bien, ten lista la dirección, la persona que recibe, el horario del establecimiento y el acceso para el vehículo. La entrega se cierra con albarán y firma. Si hay una particularidad, como una calle peatonal o una zona de carga, indícala desde el principio. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 05 — Incidencias Inicio Si algo no cuadra, hay registro. Cada entrega deja un albarán firmado. Si algo no cuadra, ese albarán es la base para revisar qué ha pasado. Avisa al equipo con el número de albarán o de pedido, por teléfono o por correo. Cuanto antes lo sepamos, más fácil es corregirlo. Siguiente Hablar con el equipo 06 — Tu zona Inicio Tu zona Consulta tu zona. Para saber si repartimos en tu localidad y en qué condiciones, escríbenos con la dirección completa y el tipo de establecimiento. El equipo te confirma la cobertura y el plazo para tu caso. Los datos de contacto están en la página de contacto. Continuar Maripepa Volver al principio Una consulta con destino. Localidad, producto y acceso. Con esos datos la entrega deja de ser una promesa y se convierte en una conversación concreta. Consultar mi zona",
       "bodySample": "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante. Cobertura, plazos y recepción para hostelería en Murcia, Almería y Alicante. Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento. La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a "
     },
     {
@@ -2033,17 +2129,17 @@
       ]
     },
     {
+      "sentence": "PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas De la familia al producto concreto.",
+      "pages": [
+        "https://www.mari-pepa.com/es/productos",
+        "https://www.mari-pepa.com/en/productos"
+      ]
+    },
+    {
       "sentence": "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
       "pages": [
         "https://www.mari-pepa.com/en/productos",
         "https://www.mari-pepa.com/en"
-      ]
-    },
-    {
-      "sentence": "PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas From the family to the specific product.",
-      "pages": [
-        "https://www.mari-pepa.com/en/productos",
-        "https://www.mari-pepa.com/es/productos"
       ]
     },
     {
@@ -2063,8 +2159,8 @@
     {
       "sentence": "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
       "pages": [
-        "https://www.mari-pepa.com/en/preguntas-frecuentes",
-        "https://www.mari-pepa.com/es/preguntas-frecuentes"
+        "https://www.mari-pepa.com/es/preguntas-frecuentes",
+        "https://www.mari-pepa.com/en/preguntas-frecuentes"
       ]
     },
     {

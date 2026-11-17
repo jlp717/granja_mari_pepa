@@ -1,41 +1,41 @@
 # Inventario del sitio
 
-Generado: 2026-11-17T10:24:08.633Z
+Generado: 2026-11-17T10:32:43.775Z
 
 | URL | HTTP | Palabras | 1966 | Lorca | Imágenes | Sin alt | H1 |
 |---|---|---|---|---|---|---|---|
-| /en | 200 | 528 | 4 | 18 | 31 | 21 | What reaches your kitchen starts in Lorca. |
-| /en/acerca | 200 | 579 | 6 | 20 | 8 | 0 | Since 1966, product and service for those who cook. |
+| /en | 200 | 517 | 3 | 11 | 31 | 15 | What reaches your kitchen starts in Lorca. |
+| /en/acerca | 200 | 565 | 5 | 12 | 8 | 0 | Since 1966, product and service for those who cook. |
 | /en/calidad | 200 | 569 | 0 | 0 | 3 | 0 | Quality is being able to answer for what you deliver. |
 | /en/contacto | 200 | 324 | 0 | 8 | 0 | 0 | Contact. |
 | /en/legal/privacidad | 200 | 390 | 0 | 2 | 0 | 0 | Privacy Policy | Maripepa |
 | /en/legal/terminos | 200 | 255 | 0 | 1 | 0 | 0 | Terms and Conditions | Maripepa |
-| /en/lorca | 200 | 438 | 0 | 16 | 0 | 0 | The Lorca head office, in Saprelorca. |
+| /en/lorca | 200 | 525 | 0 | 16 | 3 | 0 | The Lorca head office, in Saprelorca. |
 | /en/preguntas-frecuentes | 200 | 853 | 0 | 7 | 0 | 0 | Questions with a direct answer. |
 | /en/productos | 200 | 740 | 0 | 1 | 7 | 0 | What your menu needs, in seven families. |
-| /en/reparto | 200 | 428 | 0 | 1 | 0 | 0 | Delivery for hospitality in Murcia, Almería and Alicante. |
+| /en/reparto | 200 | 518 | 0 | 2 | 3 | 0 | Delivery for hospitality in Murcia, Almería and Alicante. |
 | /en/trabaja-con-nosotros | 200 | 643 | 0 | 10 | 1 | 0 | Join Maripepa |
-| /es | 200 | 542 | 4 | 18 | 31 | 21 | Lo que llega a tu cocina empieza en Lorca. |
-| /es/acerca | 200 | 569 | 6 | 20 | 8 | 0 | Desde 1966, producto y servicio para quien cocina. |
+| /es | 200 | 534 | 3 | 11 | 31 | 15 | Lo que llega a tu cocina empieza en Lorca. |
+| /es/acerca | 200 | 558 | 5 | 11 | 8 | 0 | Desde 1966, producto y servicio para quien cocina. |
 | /es/calidad | 200 | 546 | 0 | 0 | 3 | 0 | Calidad es poder responder por lo que entregas. |
 | /es/contacto | 200 | 315 | 0 | 8 | 0 | 0 | Contacto. |
 | /es/legal/privacidad | 200 | 399 | 0 | 2 | 0 | 0 | Política de Privacidad | Maripepa |
 | /es/legal/terminos | 200 | 278 | 0 | 1 | 0 | 0 | Términos y Condiciones | Maripepa |
-| /es/lorca | 200 | 439 | 0 | 16 | 0 | 0 | La sede de Lorca, en Saprelorca. |
+| /es/lorca | 200 | 531 | 0 | 16 | 3 | 0 | La sede de Lorca, en Saprelorca. |
 | /es/preguntas-frecuentes | 200 | 821 | 0 | 7 | 0 | 0 | Preguntas con respuesta directa. |
 | /es/productos | 200 | 752 | 0 | 1 | 7 | 0 | Lo que tu carta necesita, en siete familias. |
-| /es/reparto | 200 | 405 | 0 | 1 | 0 | 0 | Reparto para hostelería en Murcia, Almería y Alicante. |
+| /es/reparto | 200 | 499 | 0 | 2 | 3 | 0 | Reparto para hostelería en Murcia, Almería y Alicante. |
 | /es/trabaja-con-nosotros | 200 | 647 | 0 | 10 | 1 | 0 | Únete a Maripepa |
 
 ## Frases repetidas en varias páginas
 
 - (3 páginas) 05 Consultar el servicio Localidad y contexto de la entrega. — /es/lorca, /es/calidad, /es/reparto
 - (2 páginas) Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. — /es, /es/productos
+- (2 páginas) PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas De la familia al producto concreto. — /es/productos, /en/productos
 - (2 páginas) Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. — /en/productos, /en
-- (2 páginas) PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas From the family to the specific product. — /en/productos, /es/productos
 - (2 páginas) Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /es/contacto, /en/contacto
 - (2 páginas) Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería. — /es/contacto, /en/contacto
-- (2 páginas) Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /en/preguntas-frecuentes, /es/preguntas-frecuentes
+- (2 páginas) Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /es/preguntas-frecuentes, /en/preguntas-frecuentes
 - (2 páginas) 01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
 - (2 páginas) 02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
 - (2 páginas) 03 Formación real Producto, seguridad alimentaria, PRL y manejo de sistemas desde el primer día. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros

@@ -68,7 +68,7 @@ const es: HomeEditorialCopy = {
   origin: {
     kicker: "01 · Origen",
     title:
-      "Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar.",
+      "Una empresa con dos sedes. La misma forma de trabajar.",
     lead: "Nacimos en el sureste y crecimos con la hostelería de Murcia y Almería. Hoy coordinamos dos almacenes para que producto, pedido y ruta hablen el mismo idioma.",
     points: [
       {
@@ -173,7 +173,7 @@ const en: HomeEditorialCopy = {
   ],
   origin: {
     kicker: "01 · Origin",
-    title: "A company founded in 1966. Two sites. One way of working.",
+    title: "A company with two sites. One way of working.",
     lead: "We were born in the south-east and grew with hospitality in Murcia and Almería. Today two warehouses coordinate so product, order and route speak the same language.",
     points: [
       {

@@ -1,13 +1,13 @@
 export const STORIES_ES = {
   acerca: {
-    title: "Desde 1966, producto y servicio para quien cocina.",
+    title: "Distribución HORECA desde Lorca.",
     eyebrow: "Distribución HORECA",
     description:
       "Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería.",
     chapters: [
       {
         id: "origen",
-        label: "1966",
+        label: "Origen",
         title: "Producto y servicio para quien cocina.",
         scene: 0,
         layout: "hero",
