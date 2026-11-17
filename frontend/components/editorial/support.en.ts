@@ -233,6 +233,8 @@ export const SUPPORT_EN = {
     quality: "Information",
     askService: "Check the service",
     serviceDetail: "Town and delivery context.",
+    qualityContext: "Quality and the context of your enquiry",
+    qualityContextDetail: "Where we deliver and how the cold chain is kept.",
     service: "Service",
     identify: "Choose a family",
     recognizeFamily: "See the range",

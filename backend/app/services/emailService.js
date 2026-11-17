@@ -6,22 +6,12 @@
  */
 
 const nodemailer = require('nodemailer');
-const path = require('path');
 const logger = require('../utils/logger');
 
-// Logo real de la marca para la cabecera de los correos. Se incrusta en el
-// propio mensaje (CID) para que se vea sin depender de un servidor externo.
-const EMAIL_LOGO_PATH = path.join(__dirname, '..', '..', 'assets', 'email', 'logo-maripepa.jpg');
-const EMAIL_LOGO_CID = 'maripepa-logo@maripepa.es';
-
-function emailLogoAttachment() {
-    return {
-        filename: 'maripepa.jpg',
-        path: EMAIL_LOGO_PATH,
-        cid: EMAIL_LOGO_CID,
-        contentDisposition: 'inline'
-    };
-}
+// Logo de marca servido por HTTPS. Se ve aunque el cliente bloquee adjuntos
+// incrustados (CID) y no engorda el mensaje. El PNG es blanco sobre
+// transparente: por eso va sobre banda oscura y no sobre la tarjeta blanca.
+const EMAIL_LOGO_URL = process.env.EMAIL_LOGO_URL || 'https://www.mari-pepa.com/gmp/brand/logo-alpha.png';
 
 /**
  * Plantilla base única para todos los correos de marca.
@@ -40,8 +30,10 @@ function renderBrandEmail({ kicker = '', title, body, footerNote = '' }) {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f1ee;padding:28px 12px;">
     <tr><td align="center">
       <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="width:560px;max-width:100%;background:#ffffff;border:1px solid #e3ded3;">
-        <tr><td style="line-height:0;">
-          <img src="cid:${EMAIL_LOGO_CID}" width="560" alt="Mari Pepa" style="display:block;width:100%;max-width:560px;height:auto;border:0;outline:none;text-decoration:none;" />
+        <tr><td align="center" style="background:#0a1015;padding:24px 20px;line-height:0;">
+          <a href="https://www.mari-pepa.com" style="text-decoration:none;border:0;outline:none;">
+            <img src="${EMAIL_LOGO_URL}" width="300" height="91" alt="Maripepa, S.L." style="display:block;width:300px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none;" />
+          </a>
         </td></tr>
         <tr><td style="height:3px;background:#cf3700;font-size:0;line-height:0;">&nbsp;</td></tr>
         <tr><td style="padding:26px 30px 0;">
@@ -146,8 +138,7 @@ async function sendPasswordResetEmail(to, resetToken, customerName) {
                   <p style="margin:0 0 12px;font-size:12px;color:#8a8578;word-break:break-all;">O copia este enlace: ${resetLink}</p>
                   <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:12.5px;line-height:1.65;">El enlace caduca en <strong>30 minutos</strong>. Si no solicitaste este cambio, ignora este correo.</p>
                 `,
-            }),
-            attachments: [emailLogoAttachment()]
+            })
         };
 
         const info = await transporter.sendMail(mailOptions);
@@ -193,8 +184,7 @@ async function sendVerificationCodeEmail(to, verificationCode, customerName) {
                   <p style="margin:0 0 12px;">Ingresa este código en la aplicación para continuar.</p>
                   <p style="margin:0;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:12.5px;line-height:1.65;">El código caduca en <strong>10 minutos</strong>. Si no lo solicitaste, ignora este correo.</p>
                 `,
-            }),
-            attachments: [emailLogoAttachment()]
+            })
         };
 
         const info = await transporter.sendMail(mailOptions);
@@ -307,8 +297,7 @@ async function sendApplicationNotification(application, to) {
                   </p>
                 `,
                 footerNote: 'Aviso automático del sistema de empleo.',
-            }),
-            attachments: [emailLogoAttachment()],
+            })
         };
 
         const info = await transporter.sendMail(mailOptions);
@@ -432,8 +421,7 @@ async function sendApplicationStatusEmail(application, status) {
                   <p style="margin:0;">Si tienes cualquier duda, responde a este correo o escribe a <a href="mailto:cv.rrhh@maripepa.es" style="color:#cf3700;">cv.rrhh@maripepa.es</a>.</p>
                 `,
                 footerNote: 'Empleo &middot; cv.rrhh@maripepa.es',
-            }),
-            attachments: [emailLogoAttachment()]
+            })
         });
         logger.info('Respuesta de candidatura enviada', {
             to: application.email,
@@ -487,8 +475,7 @@ async function sendApplicationReceivedEmail({ name, email, jobTitle }) {
                   <p style="margin:0;">Si tienes cualquier duda, responde a este correo.</p>
                 `,
                 footerNote: 'Empleo &middot; cv.rrhh@maripepa.es',
-            }),
-            attachments: [emailLogoAttachment()]
+            })
         });
         logger.info('Confirmación de candidatura enviada', {
             to: email,
@@ -530,8 +517,7 @@ async function sendContactAcknowledgment({ to, name }) {
                   <p style="margin:0 0 12px;padding:12px 14px;background:#faf9f6;border-left:2px solid #cf3700;font-size:13px;">Si necesitas algo urgente, llámanos al <a href="tel:+34968467514" style="color:#cf3700;text-decoration:none;">968 46 75 14</a>.</p>
                   <p style="margin:0;">Puedes responder a este correo y llegará directamente a <a href="mailto:${inbox}" style="color:#cf3700;">${inbox}</a>.</p>
                 `,
-            }),
-            attachments: [emailLogoAttachment()]
+            })
         });
         logger.info('Acuse de contacto enviado', {
             to,
@@ -558,7 +544,6 @@ async function sendInternalNotification({ to, subject, text, replyTo }) {
                 title: escapeHtml(subject),
                 body: `<p style="margin:0;white-space:normal;">${escapeHtml(text).replace(/\n/g, '<br />')}</p>`,
             }),
-            attachments: [emailLogoAttachment()],
             ...(replyTo ? { replyTo } : {})
         });
         logger.info('Notificacion interna enviada', {

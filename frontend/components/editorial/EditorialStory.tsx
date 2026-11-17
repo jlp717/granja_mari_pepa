@@ -178,7 +178,7 @@ export function EditorialStory({
                           {chapter.paragraphs[1]}
                         </p>
                       </div>
-                      <AtlasQuickLinks ui={ui} label={chapter.label} />
+                      <AtlasQuickLinks ui={ui} label={chapter.label} variant={storyId === "calidad" ? "quality" : "default"} />
                       {controls}
                     </>
                   )}

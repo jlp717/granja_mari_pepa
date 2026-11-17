@@ -736,8 +736,8 @@
     "voiceNotSupported": "您的浏览器不支持语音输入",
     "connectionError": "无法连接到服务器。请稍后重试。",
     "poweredBy": "Pepa IA",
-    "since": "HORECA desde 1966",
-    "downloadInvoice": "Descargar factura"
+    "since": "HORECA 自1966年",
+    "downloadInvoice": "下载发票"
   },
   "footer": {
     "companyName": "MARIPEPA",

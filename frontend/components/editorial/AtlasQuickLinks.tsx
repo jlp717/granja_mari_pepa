@@ -14,9 +14,11 @@ function Arrow() {
 export function AtlasQuickLinks({
   ui,
   label,
+  variant = "default",
 }: {
   ui: UICopy;
   label?: string;
+  variant?: "default" | "quality";
 }) {
   const links = [
     {
@@ -39,11 +41,17 @@ export function AtlasQuickLinks({
       title: ui.understandInformation,
       text: ui.qualityDetail,
     },
-    {
-      href: "/reparto",
-      title: ui.askService,
-      text: ui.serviceDetail,
-    },
+    variant === "quality"
+      ? {
+          href: "/reparto",
+          title: ui.qualityContext,
+          text: ui.qualityContextDetail,
+        }
+      : {
+          href: "/reparto",
+          title: ui.askService,
+          text: ui.serviceDetail,
+        },
   ];
   return (
     <nav className={styles.atlasLinks} aria-label={label ?? ui.atmosphereLabel}>
