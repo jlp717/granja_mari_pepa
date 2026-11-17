@@ -1,16 +1,16 @@
 export const STORY_TRANSLATIONS_EN = {
   acerca: {
     title: "Since 1966, product and service for those who cook.",
-    eyebrow: "Lorca, since 1966",
+    eyebrow: "HORECA distribution",
     description:
       "Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería.",
     chapters: [
       {
-        label: "1966",
-        title: "Since 1966, product and service for those who cook.",
+        label: "Company",
+        title: "Product and service for those who cook.",
         paragraphs: [
           "Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond.",
-          "Today the company keeps its head office in Lorca and a branch in Viator, Almería. Two points of departure, one team and the same idea of service.",
+          "Today the company keeps two sites between Murcia and Almería. Two points of departure, one team and the same idea of service.",
         ],
       },
       {
@@ -41,13 +41,13 @@ export const STORY_TRANSLATIONS_EN = {
         timeline: [
           {
             year: "1966",
-            title: "Founded in Lorca",
-            text: "The company is born in Lorca to distribute food to the local hospitality trade.",
+            title: "Founded",
+            text: "The company is born to distribute food to the local hospitality trade.",
           },
           {
             year: "Today",
             title: "Two sites and 5,000 m³",
-            text: "Head office in Lorca and a branch in Viator, with 5,000 m³ of cold storage capacity.",
+            text: "Two sites and 5,000 m³ of cold storage between Murcia and Almería.",
           },
           {
             year: "2026",
@@ -65,35 +65,35 @@ export const STORY_TRANSLATIONS_EN = {
         brands: [
           {
             name: "Grupo Topgel",
-            src: "/images/brands/topgel.png",
+            src: "/images/brands/topgel-white.png",
             alt: "Grupo Topgel",
             width: 266,
             height: 107,
           },
           {
             name: "Nestlé Helados",
-            src: "/images/brands/nestle.png",
+            src: "/images/brands/nestle-white.png",
             alt: "Nestlé Helados",
             width: 193,
             height: 162,
           },
           {
             name: "Panamar",
-            src: "/images/brands/panamar.png",
+            src: "/images/brands/panamar-white.png",
             alt: "Panamar",
             width: 249,
             height: 158,
           },
           {
             name: "Okin",
-            src: "/images/brands/okin.png",
+            src: "/images/brands/okin-white.png",
             alt: "Okin",
             width: 223,
             height: 192,
           },
           {
             name: "Pastelería Amparín",
-            src: "/images/brands/amparin.png",
+            src: "/images/brands/amparin-white.png",
             alt: "Pastelería Amparín",
             width: 268,
             height: 111,
@@ -102,17 +102,17 @@ export const STORY_TRANSLATIONS_EN = {
       },
       {
         label: "Network",
-        title: "A national network with its base in Lorca.",
+        title: "A national network with its base in the south-east.",
         paragraphs: [
           "Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group's catalogue when a reference is not held at the Saprelorca warehouse.",
-          "The conversation stays local: the Lorca team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay in the south-east.",
+          "The conversation stays local: the south-east team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay close.",
         ],
       },
       {
         label: "Facilities",
         title: "5,000 m³ of cold storage and two points of departure.",
         paragraphs: [
-          "The operation runs from two sites: the Lorca head office and the Viator branch. Orders are prepared at both and routes organised for Murcia, Almería and Alicante.",
+          "The operation runs from two sites: the Saprelorca head office and the Viator branch. Orders are prepared at both and routes organised for Murcia, Almería and Alicante.",
           "Cold storage capacity reaches 5,000 m³.",
         ],
         shots: [
@@ -168,6 +168,14 @@ export const STORY_TRANSLATIONS_EN = {
         paragraphs: [
           "Maripepa's operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution.",
           "Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day of distribution is resolved here.",
+        ],
+      },
+      {
+        label: "Facilities",
+        title: "The warehouse, the dock and the load.",
+        paragraphs: [
+          "The site brings warehouse, preparation and loading together. Each area has its function and its rhythm.",
+          "These images help place the operation before a visit or a collection.",
         ],
       },
       {
@@ -313,6 +321,14 @@ export const STORY_TRANSLATIONS_EN = {
         paragraphs: [
           "Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment.",
           "The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address.",
+        ],
+      },
+      {
+        label: "Route",
+        title: "From the dock to the establishment's door.",
+        paragraphs: [
+          "The route starts at the dock and ends at the establishment's door. Each delivery is prepared with the order, area and access confirmed.",
+          "The team checks the load and the route before departure.",
         ],
       },
       {

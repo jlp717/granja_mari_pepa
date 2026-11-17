@@ -1,0 +1,2162 @@
+{
+  "generatedAt": "2026-11-17T10:24:08.633Z",
+  "urls": 22,
+  "pages": [
+    {
+      "url": "https://www.mari-pepa.com/en",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en",
+      "bytes": 751313,
+      "title": "Maripepa | HORECA distribution in Murcia",
+      "description": "Food distribution for hospitality from Lorca. Frozen, chilled and ambient products for restaurants, catering and collectives in Murcia and Almería.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en",
+      "lang": "en",
+      "h1": [
+        "What reaches your kitchen starts in Lorca."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "A company founded in 1966. Two sites. One way of working.",
+        "Three temperatures, one single order.",
+        "Seven families. One concrete conversation.",
+        "The house magazines.",
+        "Two sites, one team.",
+        "Your next menu starts with a conversation."
+      ],
+      "counts": {
+        "lorca": 18,
+        "year1966": 4,
+        "brand": 4
+      },
+      "fullCounts": {
+        "lorca": 22,
+        "year1966": 5
+      },
+      "words": 528,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-03.jpg&w=3840&q=75",
+          "alt": "Sede de Maripepa en Saprelorca con camión frigorífico",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/gmp/brand/logo-alpha.png",
+          "alt": "",
+          "width": "600",
+          "height": "182"
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fmp%2Fplates%2Finvernaderos.webp&w=3840&q=75",
+          "alt": "Invernaderos del valle del Guadalentín al amanecer",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "Nave y camión de Maripepa en el Polígono Saprelorca",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "Camión frigorífico en la sede de Maripepa, Lorca",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-mar-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-carne-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-precocinados-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-reposteria-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-panaderia-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-refrigerados-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-salsas-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-mar-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-carne-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-precocinados-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-reposteria-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-panaderia-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-refrigerados-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-salsas-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel-white.png&w=640&q=75",
+          "alt": "Grupo Topgel",
+          "width": "266",
+          "height": "107"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle-white.png&w=640&q=75",
+          "alt": "Nestlé Helados",
+          "width": "193",
+          "height": "162"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar-white.png&w=640&q=75",
+          "alt": "Panamar",
+          "width": "249",
+          "height": "158"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin-white.png&w=640&q=75",
+          "alt": "Okin",
+          "width": "223",
+          "height": "192"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin-white.png&w=640&q=75",
+          "alt": "Pastelería Amparín",
+          "width": "268",
+          "height": "111"
+        },
+        {
+          "src": "/catalogs/covers/enero-2026-granja-mari-pepa.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/topgel-febrero-2026.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/gmp-marzo-2026.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/abril-2026-topgel.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/mayo-2026-topgel.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/junio-2026-granja-mari-pepa.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-04.jpg&w=3840&q=75",
+          "alt": "Camión frigorífico de Maripepa en ruta",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 21,
+      "internalLinks": 42,
+      "jsonLd": 4,
+      "sentences": [
+        "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca.",
+        "We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería.",
+        "Explore the range Talk to the team 1966 Founded in Lorca 02 Sites: Lorca and Viator 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966.",
+        "We were born in Lorca and grew with hospitality in the south-east.",
+        "Today Lorca and Viator coordinate so product, order and route speak the same language.",
+        "Saprelorca 0 1 Lorca, 1966 The company was founded in Lorca, where its main site remains.",
+        "The building, the warehouse and the team are the starting point of every order.",
+        "0 2 Two sites Lorca (Murcia) and Viator (Almería) share warehouse, routes and customer service.",
+        "0 3 Three temperatures Frozen, chilled and ambient products live together in the daily operation.",
+        "5,000 m³ of cold storage, more than 1,500 references and two departure points so the kitchen never stops.",
+        "02 +1,500 References across seven families, from seafood to sauces and prepared dishes.",
+        "03 Two sites Lorca and Viator share warehouse, routes and customer service.",
+        "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
+        "Start from what you cook and take that need into the commercial conversation.",
+        "0 1 Seafood View family 0 2 Meat View family 0 3 Prepared dishes View family 0 4 Pastry View family 0 5 Bakery View family 0 6 Chilled products View family 0 7 Sauces & preparations View family Seafood See all families Brands in the range Keep reading Quality and documentation Delivery in Murcia and Almería Lorca site 04 · Archive The house magazines.",
+        "Each edition brings together product, campaign and menu ideas.",
+        "Open it in the viewer and move through the pages like a presentation.",
+        "Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa See all magazines 05 · Sites Two sites, one team.",
+        "Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator · Almería C/ Sierra de Ronda, 26 · La Juaida industrial park 06 · Let&#x27;s talk Your next menu starts with a conversation.",
+        "Tell us what you cook, which families interest you and where your venue is."
+      ],
+      "mainText": "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca. We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería. Explore the range Talk to the team 1966 Founded in Lorca 02 Sites: Lorca and Viator 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966. Two sites. One way of working. We were born in Lorca and grew with hospitality in the south-east. Today Lorca and Viator coordinate so product, order and route speak the same language. Valle del Guadalentín Lorca · Pol. Saprelorca 0 1 Lorca, 1966 The company was founded in Lorca, where its main site remains. The building, the warehouse and the team are the starting point of every order. 0 2 Two sites Lorca (Murcia) and Viator (Almería) share warehouse, routes and customer service. One team, two departure points. 0 3 Three temperatures Frozen, chilled and ambient products live together in the daily operation. Each family has its own way of being stored and served. 02 · Capacity Three temperatures, one single order. Frozen, chilled and ambient share the same operation. 5,000 m³ of cold storage, more than 1,500 references and two departure points so the kitchen never stops. 01 5,000 m³ Cold-storage capacity at the Saprelorca site. Frozen and chilled in the same preparation circuit. 02 +1,500 References across seven families, from seafood to sauces and prepared dishes. 03 Two sites Lorca and Viator share warehouse, routes and customer service. Two departure points for Murcia, Almería and Alicante. 04 24–48 h Usual delivery time. Confirmed per order and area before departure. Check availability 03 · The range Seven families. One concrete conversation. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Start from what you cook and take that need into the commercial conversation. 0 1 Seafood View family 0 2 Meat View family 0 3 Prepared dishes View family 0 4 Pastry View family 0 5 Bakery View family 0 6 Chilled products View family 0 7 Sauces & preparations View family Seafood See all families Brands in the range Keep reading Quality and documentation Delivery in Murcia and Almería Lorca site 04 · Archive The house magazines. Each edition brings together product, campaign and menu ideas. Open it in the viewer and move through the pages like a presentation. Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa See all magazines 05 · Sites Two sites, one team. The main site is in Lorca. The Viator branch brings the operation closer to Almería. Both share the same approach to product and service. Lorca · Murcia Lorca · Murcia Av. Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator · Almería C/ Sierra de Ronda, 26 · La Juaida industrial park 06 · Let&#x27;s talk Your next menu starts with a conversation. Tell us what you cook, which families interest you and where your venue is. The team will guide you on product, formats and delivery. Contact the team 968 46 75 14",
+      "bodySample": "Maripepa · Lorca, 1966 37.67 N · 1.70 O What reaches your kitchen starts in Lorca. We distribute frozen, chilled and ambient products for hospitality, catering and collectivities across Murcia and Almería. Explore the range Talk to the team 1966 Founded in Lorca 02 Sites: Lorca and Viator 03 Temperatures: frozen, chilled and ambient Follow the journey 01 · Origin A company founded in 1966. Two sit"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/acerca",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/acerca",
+      "bytes": 807066,
+      "title": "About us | Maripepa, Lorca since 1966",
+      "description": "Food distribution for hospitality in Lorca since 1966, with a branch in Viator (Almería) and a frozen, chilled and ambient range for professional kitchens.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/acerca",
+      "lang": "en",
+      "h1": [
+        "Since 1966, product and service for those who cook."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "Maripepa in figures.",
+        "From one house in Lorca to two sites.",
+        "The brands we distribute.",
+        "A national network with its base in Lorca.",
+        "5,000 m³ of cold storage and two points of departure.",
+        "Come and see us or give us a call.",
+        "Beside the people who feed others."
+      ],
+      "counts": {
+        "lorca": 20,
+        "year1966": 6,
+        "brand": 6
+      },
+      "fullCounts": {
+        "lorca": 25,
+        "year1966": 8
+      },
+      "words": 579,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel.png&w=3840&q=75",
+          "alt": "Grupo Topgel",
+          "width": "266",
+          "height": "107"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle.png&w=3840&q=75",
+          "alt": "Nestlé Helados",
+          "width": "193",
+          "height": "162"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar.png&w=3840&q=75",
+          "alt": "Panamar",
+          "width": "249",
+          "height": "158"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin.png&w=3840&q=75",
+          "alt": "Okin",
+          "width": "223",
+          "height": "192"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin.png&w=3840&q=75",
+          "alt": "Pastelería Amparín",
+          "width": "268",
+          "height": "111"
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "The Saprelorca warehouse.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "The refrigerated lorry.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-02.jpg&w=3840&q=75",
+          "alt": "Access and loading.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 38,
+      "jsonLd": 5,
+      "sentences": [
+        "Lorca, since 1966 Since 1966, product and service for those who cook.",
+        "Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería.",
+        "Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering.",
+        "Its way of working remains the same: get to know the customer, understand their kitchen and respond.",
+        "Today the company keeps its head office in Lorca and a branch in Viator, Almería.",
+        "Two points of departure, one team and the same idea of service.",
+        "Founded 1966 Head office Lorca (Saprelorca) Branch Viator (Almería) Coverage Murcia, Almería and Alicante Range Frozen, chilled and ambient Cold storage capacity 5,000 m³ References +1,500 Usual lead time 24–48 h Confirmed per order and area.",
+        "Next Talk to the team 03 — History Home From one house in Lorca to two sites.",
+        "Three moments mark the company&#x27;s history: its founding, the present day and the expansion that is under way.",
+        "1966 Founded in Lorca The company is born in Lorca to distribute food to the local hospitality trade.",
+        "Today Two sites and 5,000 m³ Head office in Lorca and a branch in Viator, with 5,000 m³ of cold storage capacity.",
+        "2026 Expansion under way The city council approves the planning for plots D2 and D3, promoted by the company to expand the facility.",
+        "Next Talk to the team 04 — Brands Home The brands we distribute.",
+        "Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados.",
+        "Next Talk to the team 05 — Network Home A national network with its base in Lorca.",
+        "Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network.",
+        "That relationship completes the range with the group&#x27;s catalogue when a reference is not held at the Saprelorca warehouse.",
+        "The conversation stays local: the Lorca team answers, confirms availability and organises the delivery.",
+        "The network broadens the catalogue; the attention and the route stay in the south-east.",
+        "Next Talk to the team 06 — Facilities Home 5,000 m³ of cold storage and two points of departure.",
+        "The operation runs from two sites: the Lorca head office and the Viator branch.",
+        "Orders are prepared at both and routes organised for Murcia, Almería and Alicante.",
+        "Next Talk to the team 07 — Next step Home Next step Come and see us or give us a call.",
+        "That way we can prepare access and the person who will meet you.",
+        "The address, opening hours and telephone numbers are on the contact page.",
+        "If you want to see how we work in Lorca, you can also visit the head office page.",
+        "Continue Maripepa Back to the start Beside the people who feed others."
+      ],
+      "mainText": "Lorca, since 1966 Since 1966, product and service for those who cook. Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería. Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond. Today the company keeps its head office in Lorca and a branch in Viator, Almería. Two points of departure, one team and the same idea of service. Next Talk to the team 02 The company Maripepa in figures. 03 History From one house in Lorca to two sites. 04 Brands The brands we distribute. 05 Network A national network with its base in Lorca. 02 — The company Home Maripepa in figures. Founded 1966 Head office Lorca (Saprelorca) Branch Viator (Almería) Coverage Murcia, Almería and Alicante Range Frozen, chilled and ambient Cold storage capacity 5,000 m³ References +1,500 Usual lead time 24–48 h Confirmed per order and area. Next Talk to the team 03 — History Home From one house in Lorca to two sites. Three moments mark the company&#x27;s history: its founding, the present day and the expansion that is under way. 1966 Founded in Lorca The company is born in Lorca to distribute food to the local hospitality trade. Today Two sites and 5,000 m³ Head office in Lorca and a branch in Viator, with 5,000 m³ of cold storage capacity. 2026 Expansion under way The city council approves the planning for plots D2 and D3, promoted by the company to expand the facility. Next Talk to the team 04 — Brands Home The brands we distribute. Maripepa is a partner branch of Grupo Topgel and an official distributor of Nestlé Helados. It works with Panamar, Okin and Pastelería Amparín. Each brand brings its own speciality to the range. Next Talk to the team 05 — Network Home A national network with its base in Lorca. Maripepa is a partner-delegation of Grupo Topgel, a national food distribution network. That relationship completes the range with the group&#x27;s catalogue when a reference is not held at the Saprelorca warehouse. The conversation stays local: the Lorca team answers, confirms availability and organises the delivery. The network broadens the catalogue; the attention and the route stay in the south-east. Next Talk to the team 06 — Facilities Home 5,000 m³ of cold storage and two points of departure. The operation runs from two sites: the Lorca head office and the Viator branch. Orders are prepared at both and routes organised for Murcia, Almería and Alicante. The Saprelorca warehouse. The Lorca warehouse, where loads are prepared. 01 /0 3 The refrigerated lorry. Refrigeration unit and loading at the site. 02 /0 3 Access and loading. Vehicle entrance and preparation area. 03 /0 3 Cold storage capacity reaches 5,000 m³. Next Talk to the team 07 — Next step Home Next step Come and see us or give us a call. To visit the head office, write or call before you come. That way we can prepare access and the person who will meet you. The address, opening hours and telephone numbers are on the contact page. If you want to see how we work in Lorca, you can also visit the head office page. Continue Maripepa Back to the start Beside the people who feed others. Since 1966, in Lorca. Product, route and team so the kitchen keeps running. Talk to the team",
+      "bodySample": "Lorca, since 1966 Since 1966, product and service for those who cook. Food distribution for hospitality, restaurants and catering from Lorca, with a branch in Almería. Maripepa was founded in Lorca in 1966 as a food distributor for hospitality, restaurants and catering. Its way of working remains the same: get to know the customer, understand their kitchen and respond. Today the company keeps its "
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/calidad",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/calidad",
+      "bytes": 792561,
+      "title": "Product quality and documentation | Maripepa",
+      "description": "Product quality and documentation for hospitality: ISO 9001 management system, traceability, allergens and a sheet for each reference before you buy.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/calidad",
+      "lang": "en",
+      "h1": [
+        "Quality is being able to answer for what you deliver."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "A management system, not a sticker.",
+        "Every reference has its sheet.",
+        "Seven families, three temperatures.",
+        "Magazines are read with their date.",
+        "Ask for the sheet before deciding.",
+        "Information that belongs."
+      ],
+      "counts": {
+        "lorca": 0,
+        "year1966": 0,
+        "brand": 2
+      },
+      "fullCounts": {
+        "lorca": 4,
+        "year1966": 1
+      },
+      "words": 569,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-mar-1.jpg&w=3840&q=75",
+          "alt": "Seafood.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-carne-1.jpg&w=3840&q=75",
+          "alt": "Meat.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-reposteria-1.jpg&w=3840&q=75",
+          "alt": "Pastry.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 42,
+      "jsonLd": 5,
+      "sentences": [
+        "Quality and documentation Quality is being able to answer for what you deliver.",
+        "Product, documentation and traceability to decide with judgement.",
+        "Quality starts with being able to answer: what each reference contains, how it is stored and where it comes from.",
+        "This page explains what the company documents and what is worth asking for before deciding.",
+        "It does not replace a reference sheet: it helps you know what to ask for and who to ask.",
+        "Next Talk to the team 02 System A management system, not a sticker.",
+        "Maripepa works with a quality management system in line with the ISO 9001 standard.",
+        "It is not a label to hang on the wall: it is the way processes, records and responsibilities are organised.",
+        "Traceability follows the product from reception to delivery, and the cold chain is looked after at every step.",
+        "That way, when something is asked, there is a well-founded answer.",
+        "If you need a sheet, an allergen or a storage condition, you ask the team and it is confirmed for the exact product.",
+        "Next Talk to the team 03 — Sheet Home Every reference has its sheet.",
+        "Every reference carries its sheet with ingredients, allergens, storage and format.",
+        "Ask for the one for the exact reference and keep it alongside its name or code.",
+        "If you need a sheet before deciding, give us the reference or, at least, the family and the format.",
+        "Next Talk to the team 04 — Families Home Seven families, three temperatures.",
+        "Three temperatures organise the range: frozen, chilled and ambient.",
+        "Within them, seven families cover everything from the menu to dessert.",
+        "For the rest of the families, visit the range or ask about the one you are interested in.",
+        "Next Talk to the team 05 — Magazines Home Magazines are read with their date.",
+        "Each edition shows product, campaign and ideas, and its date shows when it was published.",
+        "If a condition interests you, confirm with the team that it still applies before using it as the basis of an order.",
+        "Next Talk to the team 06 — Enquiry Home Enquiry Ask for the sheet before deciding.",
+        "Ingredients, allergens and storage must match the exact product.",
+        "Gather the family, the reference if you know it and the format, and write to us.",
+        "The team sends you the documentation and confirms the conditions.",
+        "Continue Maripepa Back to the start Information that belongs.",
+        "Identified product, specific question and the right document.",
+        "Good judgement starts by not taking for granted what is missing."
+      ],
+      "mainText": "Quality and documentation Quality is being able to answer for what you deliver. Product, documentation and traceability to decide with judgement. Quality starts with being able to answer: what each reference contains, how it is stored and where it comes from. Without that information there is no judgement, only habit. This page explains what the company documents and what is worth asking for before deciding. It does not replace a reference sheet: it helps you know what to ask for and who to ask. Next Talk to the team 02 System A management system, not a sticker. 03 Sheet Every reference has its sheet. 04 Families Seven families, three temperatures. 05 Magazines Magazines are read with their date. 02 — System Home A management system, not a sticker. Maripepa works with a quality management system in line with the ISO 9001 standard. It is not a label to hang on the wall: it is the way processes, records and responsibilities are organised. Traceability follows the product from reception to delivery, and the cold chain is looked after at every step. That way, when something is asked, there is a well-founded answer. The documentation for each reference is kept and updated. If you need a sheet, an allergen or a storage condition, you ask the team and it is confirmed for the exact product. Next Talk to the team 03 — Sheet Home Every reference has its sheet. Every reference carries its sheet with ingredients, allergens, storage and format. Ask for the one for the exact reference and keep it alongside its name or code. The information is checked with the team. If you need a sheet before deciding, give us the reference or, at least, the family and the format. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 04 — Families Home Seven families, three temperatures. Three temperatures organise the range: frozen, chilled and ambient. Within them, seven families cover everything from the menu to dessert. Seafood. Frozen fish and shellfish for à la carte and set menus. 01 /0 3 Meat. Cuts and formats for the kitchen. 02 /0 3 Pastry. Desserts that do not load the kitchen. 03 /0 3 The three images open the journey. For the rest of the families, visit the range or ask about the one you are interested in. Next Talk to the team 05 — Magazines Home Magazines are read with their date. The magazines are dated catalogues. Each edition shows product, campaign and ideas, and its date shows when it was published. If a condition interests you, confirm with the team that it still applies before using it as the basis of an order. Next Talk to the team 06 — Enquiry Home Enquiry Ask for the sheet before deciding. Before closing a choice, ask for the reference sheet. Ingredients, allergens and storage must match the exact product. Gather the family, the reference if you know it and the format, and write to us. The team sends you the documentation and confirms the conditions. Continue Maripepa Back to the start Information that belongs. Identified product, specific question and the right document. Good judgement starts by not taking for granted what is missing. Prepare an enquiry",
+      "bodySample": "Quality and documentation Quality is being able to answer for what you deliver. Product, documentation and traceability to decide with judgement. Quality starts with being able to answer: what each reference contains, how it is stored and where it comes from. Without that information there is no judgement, only habit. This page explains what the company documents and what is worth asking for befor"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/contacto",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/contacto",
+      "bytes": 746713,
+      "title": "Contact and opening hours | Maripepa",
+      "description": "Telephones 968 46 75 14 and 639 77 86 55, email, WhatsApp, Monday to Friday opening hours and addresses in Lorca and Viator to talk to Maripepa.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/contacto",
+      "lang": "en",
+      "h1": [
+        "Contact."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "Prepare your enquiry.",
+        "Opening hours.",
+        "Two addresses.",
+        "Before you write."
+      ],
+      "counts": {
+        "lorca": 8,
+        "year1966": 0,
+        "brand": 0
+      },
+      "fullCounts": {
+        "lorca": 12,
+        "year1966": 1
+      },
+      "words": 324,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 31,
+      "jsonLd": 5,
+      "sentences": [
+        "The form does not send on its own: it prepares the message and you decide when and how to send it.",
+        "01 · Lorca Telephone 968 46 75 14 02 · Mobile Direct contact 639 77 86 55 03 · Orders email Orders email [email&#160;protected] 04 · Message WhatsApp Open WhatsApp 05 · Viator Telephone 950 97 34 29 06 · Viator Mobile 670 49 01 47 02 — Prepare Opening hours Prepare your enquiry.",
+        "Full name * Company * Email * Phone * Message * I accept the privacy policy * Read the privacy policy Send message Open WhatsApp Copy enquiry 03 — Opening hours Location Opening hours.",
+        "Call · 968 46 75 14 639 77 86 55 04 — Lorca Questions Two addresses.",
+        "Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+        "Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería.",
+        "Industrial Saprelorca · 30817 Lorca, Murcia Get directions Lorca information 05 — Continue Channels Before you write.",
+        "Your establishment, the town and the family or reference you are interested in."
+      ],
+      "mainText": "01 — Contact Prepare an enquiry Contact. Channels, opening hours and addresses to talk to the team. The form does not send on its own: it prepares the message and you decide when and how to send it. Talk to a person. 01 · Lorca Telephone 968 46 75 14 02 · Mobile Direct contact 639 77 86 55 03 · Orders email Orders email [email&#160;protected] 04 · Message WhatsApp Open WhatsApp 05 · Viator Telephone 950 97 34 29 06 · Viator Mobile 670 49 01 47 02 — Prepare Opening hours Prepare your enquiry. Complete the details and choose email, WhatsApp or copy. You review the message before sending it. Full name * Company * Email * Phone * Message * I accept the privacy policy * Read the privacy policy Send message Open WhatsApp Copy enquiry 03 — Opening hours Location Opening hours. Monday to Friday, 8:00–13:00 and 16:00–19:00. For a visit, confirm with the team beforehand. Call · 968 46 75 14 639 77 86 55 04 — Lorca Questions Two addresses. Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería. Avd. Francisco Jimeno Sola, 3 · Pol. Industrial Saprelorca · 30817 Lorca, Murcia Get directions Lorca information 05 — Continue Channels Before you write. Does the form send the message? No. It prepares the text and opens email or WhatsApp. You decide when to send it and can review it first. What do I include in the enquiry? Your establishment, the town and the family or reference you are interested in. If you do not know the format, describe the use. That is enough to start. Which channel do I choose? For orders and urgent matters, the phone. To send details or a detailed enquiry, email. WhatsApp is good for a quick conversation. Any of the three reaches the team. See all questions",
+      "bodySample": "01 — Contact Prepare an enquiry Contact. Channels, opening hours and addresses to talk to the team. The form does not send on its own: it prepares the message and you decide when and how to send it. Talk to a person. 01 · Lorca Telephone 968 46 75 14 02 · Mobile Direct contact 639 77 86 55 03 · Orders email Orders email [email&#160;protected] 04 · Message WhatsApp Open WhatsApp 05 · Viator Telepho"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/legal/privacidad",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/legal/privacidad",
+      "bytes": 751199,
+      "title": "Privacy Policy | Maripepa",
+      "description": "What data Maripepa processes, why, for how long and how to exercise your rights. Write to pedidos@granjamaripepa.com for any privacy question.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/legal/privacidad",
+      "lang": "en",
+      "h1": [
+        "Privacy Policy | Maripepa"
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "1. Data Controller",
+        "2. Purpose of Processing",
+        "3. Data Retention",
+        "4. Legitimation",
+        "5. Recipients",
+        "6. Rights",
+        "7. Cookies and local storage"
+      ],
+      "counts": {
+        "lorca": 2,
+        "year1966": 0,
+        "brand": 4
+      },
+      "fullCounts": {
+        "lorca": 6,
+        "year1966": 1
+      },
+      "words": 390,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 34,
+      "jsonLd": 5,
+      "sentences": [
+        "Maripepa Privacy Policy | Maripepa What data Maripepa processes, why, for how long and how to exercise your rights.",
+        "CIF: B04008710 Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca 30817 Lorca, Murcia Phone: 968 46 75 14 Email: [email&#160;protected] Back to top Next clause 2.",
+        "Purpose of Processing We process the information you provide in order to provide the requested service, perform billing and send commercial communications related to our products and services.",
+        "Data Retention The data provided will be kept as long as the commercial relationship is maintained or for the years necessary to comply with legal obligations.",
+        "Legitimation The legal basis for the processing of your data is the execution of the contract for the provision of services and/or sale of products.",
+        "Recipients The data is not transferred to third parties except where legally required.",
+        "Web hosting, email and the site's own analytics providers act as data processors, under contract and with access limited to what is necessary.",
+        "Rights You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to [email&#160;protected] and stating the right you wish to exercise.",
+        "You may withdraw consent for optional analytics at any time from the cookie preferences panel.",
+        "If you consider that the processing does not comply with Regulation (EU) 2016/679, you may lodge a complaint with the Spanish Data Protection Agency at www.aepd.es.",
+        "Cookies and local storage This website does not use advertising or third-party cookies.",
+        "It uses technical storage required for access, the cart and your preferences, and stores your analytics choice in the browser's local storage under the key gmp-gmp-consent-v1.",
+        "If you accept optional analytics, a session identifier is created in session storage and events are sent to this website's own analytics service; they are not shared with third parties.",
+        "You can change or withdraw your choice at any time from “Privacy preferences” in the cookie notice, and clear storage in your browser."
+      ],
+      "mainText": "Maripepa Privacy Policy | Maripepa What data Maripepa processes, why, for how long and how to exercise your rights. Write to [email&#160;protected] for any privacy question. Privacy Terms Contact On this page 1. Data Controller 2. Purpose of Processing 3. Data Retention 4. Legitimation 5. Recipients 6. Rights 7. Cookies and local storage 1. Data Controller Maripepa, S.L. CIF: B04008710 Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca 30817 Lorca, Murcia Phone: 968 46 75 14 Email: [email&#160;protected] Back to top Next clause 2. Purpose of Processing We process the information you provide in order to provide the requested service, perform billing and send commercial communications related to our products and services. Previous clause Next clause 3. Data Retention The data provided will be kept as long as the commercial relationship is maintained or for the years necessary to comply with legal obligations. Previous clause Next clause 4. Legitimation The legal basis for the processing of your data is the execution of the contract for the provision of services and/or sale of products. Previous clause Next clause 5. Recipients The data is not transferred to third parties except where legally required. Web hosting, email and the site's own analytics providers act as data processors, under contract and with access limited to what is necessary. Previous clause Next clause 6. Rights You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to [email&#160;protected] and stating the right you wish to exercise. You may withdraw consent for optional analytics at any time from the cookie preferences panel. If you consider that the processing does not comply with Regulation (EU) 2016/679, you may lodge a complaint with the Spanish Data Protection Agency at www.aepd.es. Previous clause Next clause 7. Cookies and local storage This website does not use advertising or third-party cookies. It uses technical storage required for access, the cart and your preferences, and stores your analytics choice in the browser's local storage under the key gmp-gmp-consent-v1. If you accept optional analytics, a session identifier is created in session storage and events are sent to this website's own analytics service; they are not shared with third parties. You can change or withdraw your choice at any time from “Privacy preferences” in the cookie notice, and clear storage in your browser. Previous clause Back to top",
+      "bodySample": "Maripepa Privacy Policy | Maripepa What data Maripepa processes, why, for how long and how to exercise your rights. Write to [email&#160;protected] for any privacy question. Privacy Terms Contact On this page 1. Data Controller 2. Purpose of Processing 3. Data Retention 4. Legitimation 5. Recipients 6. Rights 7. Cookies and local storage 1. Data Controller Maripepa, S.L. CIF: B04008710 Avenida Fra"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/legal/terminos",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/legal/terminos",
+      "bytes": 746527,
+      "title": "Terms and Conditions | Maripepa",
+      "description": "Welcome to the Maripepa website. By accessing and using this site, you agree to the following terms and conditions.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/legal/terminos",
+      "lang": "en",
+      "h1": [
+        "Terms and Conditions | Maripepa"
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "1. Intellectual Property",
+        "2. Use of the Website",
+        "3. Liability",
+        "4. Modifications",
+        "5. Applicable Law"
+      ],
+      "counts": {
+        "lorca": 1,
+        "year1966": 0,
+        "brand": 7
+      },
+      "fullCounts": {
+        "lorca": 5,
+        "year1966": 1
+      },
+      "words": 255,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 31,
+      "jsonLd": 5,
+      "sentences": [
+        "Maripepa Terms and Conditions | Maripepa Welcome to the Maripepa website.",
+        "By accessing and using this site, you agree to the following terms and conditions.",
+        "Intellectual Property The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Maripepa.",
+        "Use of the Website The user undertakes to use the website, its services and contents diligently, correctly and lawfully, and in particular, undertakes to refrain from suppressing, circumventing or manipulating the copyright and other identifying data of the rights of its holders.",
+        "Liability Maripepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein.",
+        "Modifications Maripepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website.",
+        "Applicable Law These conditions shall be governed by Spanish legislation.",
+        "For any controversy that may arise from the access or use of this website, the user and Maripepa agree to expressly submit to the courts and tribunals of Lorca (Murcia)."
+      ],
+      "mainText": "Maripepa Terms and Conditions | Maripepa Welcome to the Maripepa website. By accessing and using this site, you agree to the following terms and conditions. Privacy Terms Contact On this page 1. Intellectual Property 2. Use of the Website 3. Liability 4. Modifications 5. Applicable Law 1. Intellectual Property The source code, graphic designs, images, photographs, sounds, animations, software, texts, as well as the information and contents collected on this website are protected by Spanish legislation on intellectual and industrial property rights in favor of Maripepa. Back to top Next clause 2. Use of the Website The user undertakes to use the website, its services and contents diligently, correctly and lawfully, and in particular, undertakes to refrain from suppressing, circumventing or manipulating the copyright and other identifying data of the rights of its holders. Previous clause Next clause 3. Liability Maripepa is not responsible for the non-compliance of any applicable rule that the user may incur in their access to the website and/or in the use of the information contained therein. Previous clause Next clause 4. Modifications Maripepa reserves the right to modify or update at any time these conditions of use, as well as any type of information that may appear on the website. Previous clause Next clause 5. Applicable Law These conditions shall be governed by Spanish legislation. For any controversy that may arise from the access or use of this website, the user and Maripepa agree to expressly submit to the courts and tribunals of Lorca (Murcia). Previous clause Back to top",
+      "bodySample": "Maripepa Terms and Conditions | Maripepa Welcome to the Maripepa website. By accessing and using this site, you agree to the following terms and conditions. Privacy Terms Contact On this page 1. Intellectual Property 2. Use of the Website 3. Liability 4. Modifications 5. Applicable Law 1. Intellectual Property The source code, graphic designs, images, photographs, sounds, animations, software, tex"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/lorca",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/lorca",
+      "bytes": 776778,
+      "title": "Lorca head office | Maripepa, Saprelorca",
+      "description": "Head office at Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Opening hours, telephone numbers and how to find Maripepa in Murcia.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/lorca",
+      "lang": "en",
+      "h1": [
+        "The Lorca head office, in Saprelorca."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "Avenida Francisco Jimeno Sola, 3.",
+        "Confirm your visit before you come.",
+        "A warehouse that grows in Saprelorca.",
+        "Talk to Lorca.",
+        "An address. A next step."
+      ],
+      "counts": {
+        "lorca": 16,
+        "year1966": 0,
+        "brand": 3
+      },
+      "fullCounts": {
+        "lorca": 22,
+        "year1966": 1
+      },
+      "words": 438,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 39,
+      "jsonLd": 5,
+      "sentences": [
+        "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca.",
+        "Address, access and contact for the main site in the Polígono Industrial Saprelorca.",
+        "Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes.",
+        "Loads are organised and deliveries for the south-east leave from Saprelorca.",
+        "Next Talk to the team 02 Getting here Avenida Francisco Jimeno Sola, 3.",
+        "The head office is at Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+        "Keep it complete for the route: street, number, industrial estate and town.",
+        "Check that the destination is Lorca and, if you need access directions, ask us before setting off.",
+        "Next Talk to the team Get directions 03 — Visiting Home Confirm your visit before you come.",
+        "Tell us the reason and who is coming with you, and the team will confirm the access and your contact person.",
+        "Order collections are only made if they are confirmed in advance.",
+        "The address alone does not confirm a collection: check the day and time with the team.",
+        "Next Talk to the team 04 — Expansion Home A warehouse that grows in Saprelorca.",
+        "In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Maripepa.",
+        "The project is under way: grouping and expanding the company&#x27;s facilities.",
+        "There is no opening date, no built square metres and no published investment figure.",
+        "Next Talk to the team 05 — Contact Home Contact Talk to Lorca.",
+        "For the Lorca head office, call 968 46 75 14 or 639 77 86 55.",
+        "If you are coming from outside, check the opening hours first and confirm the visit.",
+        "Continue 968 46 75 14 [email&#160;protected] Maripepa Back to the start An address.",
+        "Locate the head office, check the opening hours and talk to the team."
+      ],
+      "mainText": "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca. Address, access and contact for the main site in the Polígono Industrial Saprelorca. Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution. Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day of distribution is resolved here. Next Talk to the team 02 Getting here Avenida Francisco Jimeno Sola, 3. 03 Visiting Confirm your visit before you come. 04 Expansion A warehouse that grows in Saprelorca. 05 Contact Talk to Lorca. 02 — Getting here Home Avenida Francisco Jimeno Sola, 3. The head office is at Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Keep it complete for the route: street, number, industrial estate and town. The map opens in an external service. Check that the destination is Lorca and, if you need access directions, ask us before setting off. Next Talk to the team Get directions 03 — Visiting Home Confirm your visit before you come. Visits are handled by appointment. Tell us the reason and who is coming with you, and the team will confirm the access and your contact person. Order collections are only made if they are confirmed in advance. The address alone does not confirm a collection: check the day and time with the team. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 04 — Expansion Home A warehouse that grows in Saprelorca. In 2026, the full council of Lorca approved the Detailed Study for plots D2 and D3 in Saprelorca, promoted by Maripepa. The two plots cover a total of 8,953 m². The project is under way: grouping and expanding the company&#x27;s facilities. There is no opening date, no built square metres and no published investment figure. Next Talk to the team 05 — Contact Home Contact Talk to Lorca. For the Lorca head office, call 968 46 75 14 or 639 77 86 55. You can also write to [email&#160;protected] . If you are coming from outside, check the opening hours first and confirm the visit. The contact page has the full details. Continue 968 46 75 14 [email&#160;protected] Maripepa Back to the start An address. A next step. Locate the head office, check the opening hours and talk to the team. Information is useful when it helps you move forward. See contact and map",
+      "bodySample": "Head office, Polígono Saprelorca The Lorca head office, in Saprelorca. Address, access and contact for the main site in the Polígono Industrial Saprelorca. Maripepa&#x27;s operation is coordinated in Lorca: the warehouse, the orders and the routes. It is the main site and the starting point of distribution. Loads are organised and deliveries for the south-east leave from Saprelorca. The day-to-day"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/preguntas-frecuentes",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/preguntas-frecuentes",
+      "bytes": 780870,
+      "title": "Frequently asked questions | Maripepa",
+      "description": "Answers about the range, orders, delivery, product documentation, magazines and customer area of Maripepa in Lorca and Viator, Murcia and Almería.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/preguntas-frecuentes",
+      "lang": "en",
+      "h1": [
+        "Questions with a direct answer."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "Orders and delivery",
+        "Product and documentation",
+        "Contact and opening hours",
+        "Magazines",
+        "Customer area"
+      ],
+      "counts": {
+        "lorca": 7,
+        "year1966": 0,
+        "brand": 2
+      },
+      "fullCounts": {
+        "lorca": 11,
+        "year1966": 1
+      },
+      "words": 853,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 42,
+      "jsonLd": 6,
+      "sentences": [
+        "What we are asked most about products, orders, delivery and contact.",
+        "The range Orders and delivery Product and documentation Contact and opening hours Magazines Customer area Seven families across frozen, chilled and ambient.",
+        "Frozen, chilled and ambient products for hospitality, catering and collective catering.",
+        "The range is organised into seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
+        "We are the official distributor of Grupo Topgel and Nestlé Helados, and we work with Panamar, Okin and Pastelería Amparín.",
+        "For a specific reference, give us its name or format and we will send you its information.",
+        "The reference sheet is what confirms ingredients, format and storage.",
+        "That network completes the range with references that are not held at the Saprelorca warehouse, while attention and delivery stay in Lorca.",
+        "Next topic Talk to the team 02 — Orders and delivery Contact Orders and delivery Coverage and schedule are confirmed for each town and each order.",
+        "Call 968 46 75 14, write to [email&#160;protected] or use the customer area if you already have an account.",
+        "For a first enquiry, the team will guide you through the channel you prefer.",
+        "We deliver in Murcia, Almería and Alicante from Lorca and Viator.",
+        "Give us your full address and the team will confirm coverage and conditions for that destination.",
+        "Let us know by phone or email with the order or delivery note number.",
+        "The sooner we know, the more room there is to reorganise the route.",
+        "Next topic Talk to the team 03 — Product and documentation Contact Product and documentation The information for each reference is checked with the team.",
+        "The documentation includes the product information and its storage conditions.",
+        "The website shows the range, not a purchasing catalogue with stock or public prices.",
+        "Each magazine is a reference catalogue with its publication date.",
+        "If a reference interests you, confirm with the team that it is still available and its current conditions.",
+        "Next topic Talk to the team 04 — Contact and opening hours Contact Contact and opening hours Telephones, email and address to speak to people.",
+        "You can also write to [email&#160;protected] or use WhatsApp.",
+        "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+        "The Viator branch is at Calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, Almería.",
+        "It is at Calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, and it brings the operation and delivery closer to the area.",
+        "In 2026 the planning for plots D2 and D3 in Saprelorca was approved to group and expand the facilities across 8,953 m².",
+        "The project remains under way: there is no opening date and no published investment figure.",
+        "Next topic Talk to the team 05 — Magazines Contact Magazines Dated publications with product, campaign and menu ideas.",
+        "You can open them in the viewer, turn the pages and download the PDF.",
+        "If you are looking for an earlier edition, ask us for it and we will send it to you.",
+        "Next topic Talk to the team 06 — Customer area Contact Customer area Orders, invoices and documents in a private space.",
+        "The customer area is for managing orders, invoices and documents.",
+        "If you have access problems, use password recovery or contact us.",
+        "Check the customer area and, if it is not there, write to us with the invoice number or the period."
+      ],
+      "mainText": "01 — The range Contact Questions with a direct answer. What we are asked most about products, orders, delivery and contact. If your case is not here, write to us. The range Orders and delivery Product and documentation Contact and opening hours Magazines Customer area Seven families across frozen, chilled and ambient. What products does Maripepa distribute? Frozen, chilled and ambient products for hospitality, catering and collective catering. The range is organised into seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. We are the official distributor of Grupo Topgel and Nestlé Helados, and we work with Panamar, Okin and Pastelería Amparín. Where can I see the families and references? On the range page you can browse the seven families. For a specific reference, give us its name or format and we will send you its information. Do the photos and magazines show the exact product? The images guide you on the family or the presentation. The reference sheet is what confirms ingredients, format and storage. What does the Grupo Topgel network add? Maripepa is a partner-delegation of Grupo Topgel. That network completes the range with references that are not held at the Saprelorca warehouse, while attention and delivery stay in Lorca. Next topic Talk to the team 02 — Orders and delivery Contact Orders and delivery Coverage and schedule are confirmed for each town and each order. How do I place an order? Call 968 46 75 14, write to [email&#160;protected] or use the customer area if you already have an account. For a first enquiry, the team will guide you through the channel you prefer. Do you deliver to my town? We deliver in Murcia, Almería and Alicante from Lorca and Viator. Give us your full address and the team will confirm coverage and conditions for that destination. Can I change or review a delivery? Yes. Let us know by phone or email with the order or delivery note number. The sooner we know, the more room there is to reorganise the route. Next topic Talk to the team 03 — Product and documentation Contact Product and documentation The information for each reference is checked with the team. Can I see ingredients, allergens and storage? Yes. Ask for the sheet of the specific reference. The documentation includes the product information and its storage conditions. Are prices and stock shown on the website? The website shows the range, not a purchasing catalogue with stock or public prices. Conditions are confirmed in the enquiry. Can I use the magazines to place an order? Each magazine is a reference catalogue with its publication date. If a reference interests you, confirm with the team that it is still available and its current conditions. Next topic Talk to the team 04 — Contact and opening hours Contact Contact and opening hours Telephones, email and address to speak to people. Which telephone numbers are published? 968 46 75 14 and 639 77 86 55. You can also write to [email&#160;protected] or use WhatsApp. What are the opening hours? Monday to Friday, 8:00–13:00 and 16:00–19:00. Where is the head office? Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. The Viator branch is at Calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, Almería. What is the Viator branch? The second site, in Almería. It is at Calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, and it brings the operation and delivery closer to the area. Its telephone numbers are 950 97 34 29 and 670 49 01 47. Is the Lorca head office going to be expanded? In 2026 the planning for plots D2 and D3 in Saprelorca was approved to group and expand the facilities across 8,953 m². The project remains under way: there is no opening date and no published investment figure. Next topic Talk to the team 05 — Magazines Contact Magazines Dated publications with product, campaign and menu ideas. Where are the magazines? In the menu, under Magazines, and on the Products page. You can open them in the viewer, turn the pages and download the PDF. Are the editions updated? Yes. The website shows the published editions. If you are looking for an earlier edition, ask us for it and we will send it to you. Can I request a printed magazine? Check with the team by phone or email. The digital version is always available on the website. Next topic Talk to the team 06 — Customer area Contact Customer area Orders, invoices and documents in a private space. Do I need an account to browse the range? No. The range and magazines are public. The customer area is for managing orders, invoices and documents. How do I access the customer area? With your full customer code and password. If you have access problems, use password recovery or contact us. What should I do if I cannot find an invoice? Check the customer area and, if it is not there, write to us with the invoice number or the period. The team will locate it with you. Back to the start Talk to the team",
+      "bodySample": "01 — The range Contact Questions with a direct answer. What we are asked most about products, orders, delivery and contact. If your case is not here, write to us. The range Orders and delivery Product and documentation Contact and opening hours Magazines Customer area Seven families across frozen, chilled and ambient. What products does Maripepa distribute? Frozen, chilled and ambient products for"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/productos",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/productos",
+      "bytes": 771470,
+      "title": "Frozen and chilled food for hospitality | Maripepa",
+      "description": "Seven families for your menu: seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Ask the team about reference and format.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/productos",
+      "lang": "en",
+      "h1": [
+        "What your menu needs, in seven families."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "A range to consult",
+        "Seafood",
+        "Meat",
+        "Prepared dishes",
+        "Pastry",
+        "Bakery",
+        "Chilled products",
+        "Sauces and preparations",
+        "Brands in the range.",
+        "The house magazines.",
+        "From the family to the specific product."
+      ],
+      "counts": {
+        "lorca": 1,
+        "year1966": 0,
+        "brand": 4
+      },
+      "fullCounts": {
+        "lorca": 5,
+        "year1966": 1
+      },
+      "words": 740,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-mar-2.jpg&w=3840&q=75",
+          "alt": "Seafood",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-carne-2.jpg&w=3840&q=75",
+          "alt": "Meat",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-precocinados-2.jpg&w=3840&q=75",
+          "alt": "Prepared dishes",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-reposteria-2.jpg&w=3840&q=75",
+          "alt": "Pastry",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-panaderia-2.jpg&w=3840&q=75",
+          "alt": "Bakery",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-refrigerados-2.jpg&w=3840&q=75",
+          "alt": "Chilled products",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-salsas-2.jpg&w=3840&q=75",
+          "alt": "Sauces and preparations",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 48,
+      "jsonLd": 6,
+      "sentences": [
+        "Range · HORECA Familias · 07 What your menu needs, in seven families.",
+        "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
+        "Start with the family you need and confirm the reference, format and documentation with our team.",
+        "Each reference&#x27;s conditions are confirmed with the team: we do not show public stock or prices.",
+        "The range is organised into seven families; the Grupo Topgel network completes the references that are not held at the warehouse.",
+        "Talk to the team Customer area Back to home Families GRUPO TOPGEL All families Seafood Meat Prepared dishes Pastry Bakery Chilled products Sauces and preparations 7 / 7 · Families Range photography.",
+        "0 1 · Frozen fish and seafood Seafood Frozen fish and seafood for menus and daily service.",
+        "A family built to keep product and organise the kitchen ahead of time.",
+        "Tell us what you serve and we will guide you on species, format and presentation.",
+        "0 2 · Frozen meat Meat Frozen meat for the grill, stews, set menus and catering.",
+        "We confirm the reference and its documentation before closing the proposal.",
+        "0 3 · Frozen preparations and vegetables Prepared dishes Frozen preparations and vegetables to complete a service, solve a side dish or lighten kitchen prep.",
+        "0 4 · Frozen desserts and pastry Pastry Frozen desserts and pastry to complete the dessert offer without adding load to the kitchen.",
+        "Ask for the presentation you need and request the reference sheet.",
+        "0 5 · Frozen bread and viennoiserie Bakery Frozen bread and viennoiserie to complete the bread service and solve breakfast or a snack without adding load to the kitchen.",
+        "0 6 · Cheese, smoked fish and foie gras Chilled products Cheese, smoked salmon and foie gras to complete a board, a starter or a menu preparation.",
+        "We confirm the reference, shelf life and documentation before closing the proposal.",
+        "0 7 · Sauces, potatoes and ready preparations Sauces and preparations Sauces, potatoes and preparations to solve a side dish or complete a plate without starting from scratch.",
+        "The team will guide you on format, storage and use in the kitchen.",
+        "Grupo Topgel, Nestlé Helados and Panamar are part of the published offer.",
+        "Their websites expand brand information; for references and supply conditions, talk to our team.",
+        "Maripepa is a partner-delegation of Grupo Topgel, a national network that completes the range when a reference is not held at the warehouse.",
+        "0 1 Grupo Topgel ↗ 0 2 Nestlé Helados ↗ 0 3 Panamar ↗ The house magazines.",
+        "PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas From the family to the specific product.",
+        "Tell us what you cook, how many services you run and which format you need.",
+        "We will guide you on product, storage and documentation before you decide.",
+        "Monday to Friday, 8:00–13:00 and 16:00–19:00 Talk to the team Call Lorca · 968 46 75 14 Ask on WhatsApp"
+      ],
+      "mainText": "Range · HORECA Familias · 07 What your menu needs, in seven families. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Start with the family you need and confirm the reference, format and documentation with our team. A range to consult This page organises the range by family. Each reference&#x27;s conditions are confirmed with the team: we do not show public stock or prices. The range is organised into seven families; the Grupo Topgel network completes the references that are not held at the warehouse. Talk to the team Customer area Back to home Families GRUPO TOPGEL All families Seafood Meat Prepared dishes Pastry Bakery Chilled products Sauces and preparations 7 / 7 · Families Range photography. The specific reference is confirmed with the team. 0 1 · Frozen fish and seafood Seafood Frozen fish and seafood for menus and daily service. A family built to keep product and organise the kitchen ahead of time. Tell us what you serve and we will guide you on species, format and presentation. Each reference&#x27;s sheet is confirmed with the team. Ask about this family Range photography. The specific reference is confirmed with the team. 0 2 · Frozen meat Meat Frozen meat for the grill, stews, set menus and catering. A stable base to complete the menu and adjust the service. Tell us the cut, use and format you need. We confirm the reference and its documentation before closing the proposal. Ask about this family Range photography. The specific reference is confirmed with the team. 0 3 · Frozen preparations and vegetables Prepared dishes Frozen preparations and vegetables to complete a service, solve a side dish or lighten kitchen prep. Tell us what you need to prepare and for how many services. We help you confirm product, format and storage. Ask about this family Range photography. The specific reference is confirmed with the team. 0 4 · Frozen desserts and pastry Pastry Frozen desserts and pastry to complete the dessert offer without adding load to the kitchen. Ask for the presentation you need and request the reference sheet. The team will guide you on format, storage and service. Ask about this family Range photography. The specific reference is confirmed with the team. 0 5 · Frozen bread and viennoiserie Bakery Frozen bread and viennoiserie to complete the bread service and solve breakfast or a snack without adding load to the kitchen. Tell us the format you need and for how many services. The team confirms the reference, storage and documentation. Ask about this family Range photography. The specific reference is confirmed with the team. 0 6 · Cheese, smoked fish and foie gras Chilled products Cheese, smoked salmon and foie gras to complete a board, a starter or a menu preparation. Chilled product with its own storage and handling. Tell us the use and format you need. We confirm the reference, shelf life and documentation before closing the proposal. Ask about this family Range photography. The specific reference is confirmed with the team. 0 7 · Sauces, potatoes and ready preparations Sauces and preparations Sauces, potatoes and preparations to solve a side dish or complete a plate without starting from scratch. Ask for the presentation you need. The team will guide you on format, storage and use in the kitchen. Ask about this family Brands in the range. Grupo Topgel, Nestlé Helados and Panamar are part of the published offer. Their websites expand brand information; for references and supply conditions, talk to our team. Maripepa is a partner-delegation of Grupo Topgel, a national network that completes the range when a reference is not held at the warehouse. 0 1 Grupo Topgel ↗ 0 2 Nestlé Helados ↗ 0 3 Panamar ↗ The house magazines. Dated catalogues with product, campaign and menu ideas. Open them in the viewer and browse the edition you need. PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas From the family to the specific product. Tell us what you cook, how many services you run and which format you need. We will guide you on product, storage and documentation before you decide. Monday to Friday, 8:00–13:00 and 16:00–19:00 Talk to the team Call Lorca · 968 46 75 14 Ask on WhatsApp",
+      "bodySample": "Range · HORECA Familias · 07 What your menu needs, in seven families. Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. Start with the family you need and confirm the reference, format and documentation with our team. A range to consult This page organises the range by family. Each reference&#x27;s conditions are confirmed with the team: we do not show public stock or pr"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/reparto",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/reparto",
+      "bytes": 778514,
+      "title": "HORECA delivery in Murcia, Almería and Alicante | Maripepa",
+      "description": "Delivery for hospitality in Murcia, Almería and Alicante from Lorca and Viator. Check coverage, opening hours and delivery terms for your town.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/reparto",
+      "lang": "en",
+      "h1": [
+        "Delivery for hospitality in Murcia, Almería and Alicante."
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "24–48 hours is the usual lead time, not an automatic promise.",
+        "Prepare the reception.",
+        "If something does not add up, there is a record.",
+        "Check your area.",
+        "An enquiry with a destination."
+      ],
+      "counts": {
+        "lorca": 1,
+        "year1966": 0,
+        "brand": 2
+      },
+      "fullCounts": {
+        "lorca": 5,
+        "year1966": 1
+      },
+      "words": 428,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 38,
+      "jsonLd": 5,
+      "sentences": [
+        "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante.",
+        "Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante.",
+        "Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante.",
+        "The Lorca head office and the Viator branch organise the routes.",
+        "To find out whether we reach your area, give us the full address.",
+        "Next Talk to the team 02 Lead times 24–48 hours is the usual lead time, not an automatic promise.",
+        "04 Incidents If something does not add up, there is a record.",
+        "02 — Lead times Home 24–48 hours is the usual lead time, not an automatic promise.",
+        "That lead time is a reference for capacity, not an automatic promise: the date is confirmed for each order and each area.",
+        "The exact day depends on the destination, the volume and when the order is placed.",
+        "Next Talk to the team 03 — Reception Home Prepare the reception.",
+        "To receive a delivery well, have the address, the person receiving it, the establishment&#x27;s opening hours and the vehicle access ready.",
+        "If there is a particularity, such as a pedestrian street or a loading zone, say so from the start.",
+        "Next Talk to the team 04 — Incidents Home If something does not add up, there is a record.",
+        "If something does not add up, that note is the basis for reviewing what happened.",
+        "Tell the team with the delivery note or order number, by phone or email.",
+        "Next Talk to the team 05 — Your area Home Your area Check your area.",
+        "To find out whether we deliver to your town and on what terms, write to us with the full address and the type of establishment.",
+        "The team confirms the coverage and the lead time for your case.",
+        "Continue Maripepa Back to the start An enquiry with a destination.",
+        "With that information a delivery stops being a promise and becomes a specific conversation."
+      ],
+      "mainText": "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante. Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante. Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment. The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address. Next Talk to the team 02 Lead times 24–48 hours is the usual lead time, not an automatic promise. 03 Reception Prepare the reception. 04 Incidents If something does not add up, there is a record. 05 Your area Check your area. 02 — Lead times Home 24–48 hours is the usual lead time, not an automatic promise. That lead time is a reference for capacity, not an automatic promise: the date is confirmed for each order and each area. The exact day depends on the destination, the volume and when the order is placed. The team confirms it with you before delivery. Next Talk to the team 03 — Reception Home Prepare the reception. To receive a delivery well, have the address, the person receiving it, the establishment&#x27;s opening hours and the vehicle access ready. Delivery closes with a note and a signature. If there is a particularity, such as a pedestrian street or a loading zone, say so from the start. 01 See the range Families and magazines. 02 Find an answer Questions organised by topic. 03 Prepare an enquiry Channels and useful details. 04 Product information Product, format and documentation. 05 Check the service Town and delivery context. Next Talk to the team 04 — Incidents Home If something does not add up, there is a record. Every delivery leaves a signed delivery note. If something does not add up, that note is the basis for reviewing what happened. Tell the team with the delivery note or order number, by phone or email. The sooner we know, the easier it is to put it right. Next Talk to the team 05 — Your area Home Your area Check your area. To find out whether we deliver to your town and on what terms, write to us with the full address and the type of establishment. The team confirms the coverage and the lead time for your case. The contact details are on the contact page. Continue Maripepa Back to the start An enquiry with a destination. Town, product and access. With that information a delivery stops being a promise and becomes a specific conversation. Check my area",
+      "bodySample": "Delivery for hospitality Delivery for hospitality in Murcia, Almería and Alicante. Coverage, lead times and reception for hospitality in Murcia, Almería and Alicante. Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment. The Lorca head office and the Viator branch organise the routes. To find out whet"
+    },
+    {
+      "url": "https://www.mari-pepa.com/en/trabaja-con-nosotros",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/en/trabaja-con-nosotros",
+      "bytes": 790792,
+      "title": "Trabaja con nosotros | Maripepa",
+      "description": "Únete al equipo de Maripepa. Ofertas de empleo en Lorca y Viator. Envía tu currículum.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/en/trabaja-con-nosotros",
+      "lang": "en",
+      "h1": [
+        "Join Maripepa"
+      ],
+      "h2": [
+        "From Lorca to your kitchen, without losing the origin.",
+        "Your privacy",
+        "Work you can understand",
+        "Find your role",
+        "No mazes",
+        "Don&#x27;t see your role?",
+        "Before you apply"
+      ],
+      "counts": {
+        "lorca": 10,
+        "year1966": 0,
+        "brand": 1
+      },
+      "fullCounts": {
+        "lorca": 14,
+        "year1966": 1
+      },
+      "words": 643,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "Maripepa warehouse at Saprelorca, Lorca",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 29,
+      "jsonLd": 5,
+      "sentences": [
+        "Team · HORECA · Lorca & Almería Join Maripepa We distribute food to hospitality across Murcia and Almería.",
+        "See open roles Send application Right now 0 roles See all roles ↓ 01 Why What to expect 02 Openings 0 open roles 03 Process 4 steps 04 Application Send your CV 02 — What we offer LORCA · VIATOR Work you can understand No brochure culture: we explain what each role does, with what means and on what schedule.",
+        "01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería.",
+        "02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar.",
+        "03 Formación real Producto, seguridad alimentaria, PRL y manejo de sistemas desde el primer día.",
+        "04 Equipo cercano Equipos pequeños, trato directo con responsables y decisiones que se explican.",
+        "05 Conciliación Turnos definidos y planificación con antelación para que puedas organizarte.",
+        "06 Seguridad primero EPIs, formación en prevención y protocolos claros en almacén y reparto.",
+        "Lorca · Saprelorca Two sites, one team We work from Lorca (Murcia) and Viator (Almería).",
+        "Routes, warehouse and customer service are coordinated across both sites.",
+        "Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator (Almería) C/ Sierra de Ronda, 26 · La Juaida industrial park Lorca in Maps Viator in Maps 03 — Openings 0 open Find your role Filter by department, site or keyword.",
+        "Every role has its own page with responsibilities, requirements and conditions.",
+        "Department All Logística Ventas Administración Calidad Location All Lorca (Murcia) Viator (Almería) Murcia / Almería 0 roles No open roles right now Leave us your CV and we will keep you in mind for upcoming roles.",
+        "Send application 04 — Process 4 steps No mazes Four steps, clear timelines and one contact person.",
+        "02 Revisión Una persona del equipo de RRHH lee tu perfil y lo contrasta con la vacante.",
+        "03 Entrevista Conversación telefónica o presencial con el responsable del área.",
+        "04 Incorporación Bienvenida, formación inicial y entrega de equipos de protección.",
+        "Applications are recorded only through this form Fill in the form We review every application CV in PDF Data used only for recruitment.",
+        "Privacy policy Full name * Email * Phone * Sector of interest * Mozo de almacén Repartidor/a Comercial Administrativo/a Técnico/a de calidad Operario/a de producción Informático/a Responsable de compras Otro Role you are applying for Open application Message (optional) Attach resume (PDF) * No rellenar You can only have one active application.",
+        "If we decline it, you can apply again after 20 calendar days.",
+        "Submit application 06 — FAQ RRHH Before you apply ¿Necesito experiencia previa?",
+        "Algunos puestos requieren experiencia específica (comercial, calidad), pero otros como mozo de almacén o repartidor admiten perfiles sin experiencia.",
+        "Formación en producto, seguridad alimentaria, manejo de sistemas y PRL.",
+        "Revisamos cada candidatura y contactamos si encaja en el proceso.",
+        "+ Sede principal en Lorca (Murcia) y delegación en Viator (Almería)."
+      ],
+      "mainText": "Team · HORECA · Lorca & Almería Join Maripepa We distribute food to hospitality across Murcia and Almería. We look for people who want to do it well, every day. See open roles Send application Right now 0 roles See all roles ↓ 01 Why What to expect 02 Openings 0 open roles 03 Process 4 steps 04 Application Send your CV 02 — What we offer LORCA · VIATOR Work you can understand No brochure culture: we explain what each role does, with what means and on what schedule. If it fits, you will know from the first conversation. 01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería. Lo que haces llega a la mesa. 02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar. 03 Formación real Producto, seguridad alimentaria, PRL y manejo de sistemas desde el primer día. 04 Equipo cercano Equipos pequeños, trato directo con responsables y decisiones que se explican. 05 Conciliación Turnos definidos y planificación con antelación para que puedas organizarte. 06 Seguridad primero EPIs, formación en prevención y protocolos claros en almacén y reparto. Lorca · Saprelorca Two sites, one team We work from Lorca (Murcia) and Viator (Almería). Routes, warehouse and customer service are coordinated across both sites. Lorca (Murcia) Av. Francisco Jimeno Sola, 3 · Saprelorca industrial park Viator (Almería) C/ Sierra de Ronda, 26 · La Juaida industrial park Lorca in Maps Viator in Maps 03 — Openings 0 open Find your role Filter by department, site or keyword. Every role has its own page with responsibilities, requirements and conditions. Department All Logística Ventas Administración Calidad Location All Lorca (Murcia) Viator (Almería) Murcia / Almería 0 roles No open roles right now Leave us your CV and we will keep you in mind for upcoming roles. Send application 04 — Process 4 steps No mazes Four steps, clear timelines and one contact person. We tell you where your application stands. 01 Candidatura Envías tu CV por el formulario o por email. Son cuatro datos y el CV. 02 Revisión Una persona del equipo de RRHH lee tu perfil y lo contrasta con la vacante. 03 Entrevista Conversación telefónica o presencial con el responsable del área. 04 Incorporación Bienvenida, formación inicial y entrega de equipos de protección. 05 — Open application RRHH Don&#x27;t see your role? Send us your CV and tell us which sector interests you. We review it and contact you if a future opening fits. Applications are recorded only through this form Fill in the form We review every application CV in PDF Data used only for recruitment. Privacy policy Full name * Email * Phone * Sector of interest * Mozo de almacén Repartidor/a Comercial Administrativo/a Técnico/a de calidad Operario/a de producción Informático/a Responsable de compras Otro Role you are applying for Open application Message (optional) Attach resume (PDF) * No rellenar You can only have one active application. If we decline it, you can apply again after 20 calendar days. Submit application 06 — FAQ RRHH Before you apply ¿Necesito experiencia previa? + No siempre. Valoramos la actitud y las ganas de aprender. Algunos puestos requieren experiencia específica (comercial, calidad), pero otros como mozo de almacén o repartidor admiten perfiles sin experiencia. ¿Qué horarios tienen? + Depende del puesto. Almacén y reparto: turnos de mañana y tarde. Administración: jornada de oficina. Comercial: según zona asignada. ¿Ofrecen formación? + Sí. Formación en producto, seguridad alimentaria, manejo de sistemas y PRL. La formación es continua y adaptada al puesto. ¿Puedo enviar mi CV aunque no haya ofertas? + Sí. Usa el formulario de candidatura abierta. Revisamos cada candidatura y contactamos si encaja en el proceso. ¿Dónde están las sedes? + Sede principal en Lorca (Murcia) y delegación en Viator (Almería). Next step See all 0 roles Send application Fill in the form",
+      "bodySample": "Team · HORECA · Lorca & Almería Join Maripepa We distribute food to hospitality across Murcia and Almería. We look for people who want to do it well, every day. See open roles Send application Right now 0 roles See all roles ↓ 01 Why What to expect 02 Openings 0 open roles 03 Process 4 steps 04 Application Send your CV 02 — What we offer LORCA · VIATOR Work you can understand No brochure culture: "
+    },
+    {
+      "url": "https://www.mari-pepa.com/es",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es",
+      "bytes": 753895,
+      "title": "Maripepa | Distribución HORECA Murcia",
+      "description": "Distribución alimentaria para hostelería desde Lorca. Congelado, refrigerado y ambiente para restaurantes, catering y colectividades en Murcia y Almería.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es",
+      "lang": "es",
+      "h1": [
+        "Lo que llega a tu cocina empieza en Lorca."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar.",
+        "Tres temperaturas, un solo pedido.",
+        "Siete familias. Una conversación concreta.",
+        "Las revistas de la casa.",
+        "Dos sedes, el mismo equipo.",
+        "Tu próxima carta empieza con una conversación."
+      ],
+      "counts": {
+        "lorca": 18,
+        "year1966": 4,
+        "brand": 4
+      },
+      "fullCounts": {
+        "lorca": 22,
+        "year1966": 5
+      },
+      "words": 542,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-03.jpg&w=3840&q=75",
+          "alt": "Sede de Maripepa en Saprelorca con camión frigorífico",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/gmp/brand/logo-alpha.png",
+          "alt": "",
+          "width": "600",
+          "height": "182"
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fmp%2Fplates%2Finvernaderos.webp&w=3840&q=75",
+          "alt": "Invernaderos del valle del Guadalentín al amanecer",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "Nave y camión de Maripepa en el Polígono Saprelorca",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "Camión frigorífico en la sede de Maripepa, Lorca",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-mar-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-carne-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-precocinados-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-reposteria-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-panaderia-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-refrigerados-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-salsas-1.jpg&w=3840&q=75",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-mar-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-carne-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-precocinados-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-reposteria-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-panaderia-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-refrigerados-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/familias/real-salsas-1.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel-white.png&w=640&q=75",
+          "alt": "Grupo Topgel",
+          "width": "266",
+          "height": "107"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle-white.png&w=640&q=75",
+          "alt": "Nestlé Helados",
+          "width": "193",
+          "height": "162"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar-white.png&w=640&q=75",
+          "alt": "Panamar",
+          "width": "249",
+          "height": "158"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin-white.png&w=640&q=75",
+          "alt": "Okin",
+          "width": "223",
+          "height": "192"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin-white.png&w=640&q=75",
+          "alt": "Pastelería Amparín",
+          "width": "268",
+          "height": "111"
+        },
+        {
+          "src": "/catalogs/covers/enero-2026-granja-mari-pepa.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/topgel-febrero-2026.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/gmp-marzo-2026.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/abril-2026-topgel.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/mayo-2026-topgel.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/catalogs/covers/junio-2026-granja-mari-pepa.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-04.jpg&w=3840&q=75",
+          "alt": "Camión frigorífico de Maripepa en ruta",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 21,
+      "internalLinks": 42,
+      "jsonLd": 4,
+      "sentences": [
+        "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca.",
+        "Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería.",
+        "Ver la gama Hablar con el equipo 1966 Origen en Lorca 02 Sedes: Lorca y Viator 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada en 1966.",
+        "Hoy coordinamos Lorca y Viator para que producto, pedido y ruta hablen el mismo idioma.",
+        "Saprelorca 0 1 Lorca, 1966 La empresa nace en Lorca y mantiene allí su sede principal.",
+        "La nave, el almacén y el equipo son el punto de partida de cada pedido.",
+        "0 2 Dos sedes Lorca (Murcia) y Viator (Almería) comparten almacén, rutas y atención al cliente.",
+        "0 3 Tres temperaturas Congelado, refrigerado y temperatura ambiente conviven en la operación diaria.",
+        "Congelado, refrigerado y ambiente conviven en la misma operación.",
+        "5.000 m³ de frío, más de 1.500 referencias y dos puntos de salida para que la cocina no se pare.",
+        "Congelado y refrigerado en el mismo circuito de preparación.",
+        "02 +1.500 Referencias en siete familias, de productos del mar a salsas y preparados.",
+        "03 Dos sedes Lorca y Viator comparten almacén, rutas y atención.",
+        "Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas.",
+        "Empieza por lo que preparas y lleva esa necesidad a la conversación comercial.",
+        "0 1 Productos del mar Ver familia 0 2 Carnes Ver familia 0 3 Precocinados Ver familia 0 4 Repostería Ver familia 0 5 Panadería Ver familia 0 6 Refrigerados Ver familia 0 7 Salsas y preparados Ver familia Productos del mar Ver todas las familias Marcas en la gama Sigue leyendo Calidad y documentación Reparto en Murcia y Almería Sede de Lorca 04 · Hemeroteca Las revistas de la casa.",
+        "Cada edición reúne producto, campaña y propuestas para carta.",
+        "Ábrela en el visor y recorre las páginas como una presentación.",
+        "Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa Ver todas las revistas 05 · Sedes Dos sedes, el mismo equipo.",
+        "La Juaida 06 · Hablemos Tu próxima carta empieza con una conversación.",
+        "Cuéntanos qué preparas, qué familias te interesan y dónde está tu establecimiento."
+      ],
+      "mainText": "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca. Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería. Ver la gama Hablar con el equipo 1966 Origen en Lorca 02 Sedes: Lorca y Viator 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar. Nacimos en Lorca y crecimos con la hostelería del sureste. Hoy coordinamos Lorca y Viator para que producto, pedido y ruta hablen el mismo idioma. Valle del Guadalentín Lorca · Pol. Saprelorca 0 1 Lorca, 1966 La empresa nace en Lorca y mantiene allí su sede principal. La nave, el almacén y el equipo son el punto de partida de cada pedido. 0 2 Dos sedes Lorca (Murcia) y Viator (Almería) comparten almacén, rutas y atención al cliente. Un mismo equipo, dos puntos de salida. 0 3 Tres temperaturas Congelado, refrigerado y temperatura ambiente conviven en la operación diaria. Cada familia tiene su forma de conservarse y servirse. 02 · Capacidad Tres temperaturas, un solo pedido. Congelado, refrigerado y ambiente conviven en la misma operación. 5.000 m³ de frío, más de 1.500 referencias y dos puntos de salida para que la cocina no se pare. 01 5.000 m³ Capacidad frigorífica en la sede de Saprelorca. Congelado y refrigerado en el mismo circuito de preparación. 02 +1.500 Referencias en siete familias, de productos del mar a salsas y preparados. 03 Dos sedes Lorca y Viator comparten almacén, rutas y atención. Dos puntos de salida para Murcia, Almería y Alicante. 04 24–48 h Plazo habitual de entrega. Se confirma por pedido y zona antes de salir. Consultar disponibilidad 03 · La gama Siete familias. Una conversación concreta. Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Empieza por lo que preparas y lleva esa necesidad a la conversación comercial. 0 1 Productos del mar Ver familia 0 2 Carnes Ver familia 0 3 Precocinados Ver familia 0 4 Repostería Ver familia 0 5 Panadería Ver familia 0 6 Refrigerados Ver familia 0 7 Salsas y preparados Ver familia Productos del mar Ver todas las familias Marcas en la gama Sigue leyendo Calidad y documentación Reparto en Murcia y Almería Sede de Lorca 04 · Hemeroteca Las revistas de la casa. Cada edición reúne producto, campaña y propuestas para carta. Ábrela en el visor y recorre las páginas como una presentación. Enero 2026 Revista Mari Pepa Febrero 2026 Revista Topgel Marzo 2026 Revista Mari Pepa Abril 2026 Revista Topgel Mayo 2026 Revista Topgel Junio 2026 Revista Mari Pepa Ver todas las revistas 05 · Sedes Dos sedes, el mismo equipo. La sede principal está en Lorca. La delegación de Viator acerca la operación a Almería. Ambas comparten el mismo criterio de producto y servicio. Lorca · Murcia Lorca · Murcia Av. Francisco Jimeno Sola, 3 · Pol. Saprelorca Viator · Almería C/ Sierra de Ronda, 26 · Pol. La Juaida 06 · Hablemos Tu próxima carta empieza con una conversación. Cuéntanos qué preparas, qué familias te interesan y dónde está tu establecimiento. El equipo te orienta sobre producto, formatos y entrega. Contactar con el equipo 968 46 75 14",
+      "bodySample": "Maripepa · Lorca, 1966 37.67 N · 1.70 O Lo que llega a tu cocina empieza en Lorca. Distribuimos producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades en Murcia y Almería. Ver la gama Hablar con el equipo 1966 Origen en Lorca 02 Sedes: Lorca y Viator 03 Temperaturas: congelado, refrigerado y ambiente Sigue el recorrido 01 · Origen Una empresa fundada e"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/acerca",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/acerca",
+      "bytes": 806587,
+      "title": "Quiénes somos | Maripepa, Lorca desde 1966",
+      "description": "Distribución alimentaria para hostelería en Lorca desde 1966, con delegación en Viator (Almería) y gama de congelado, refrigerado y ambiente.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/acerca",
+      "lang": "es",
+      "h1": [
+        "Desde 1966, producto y servicio para quien cocina."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Maripepa en datos.",
+        "De una casa en Lorca a dos sedes.",
+        "Las marcas que distribuimos.",
+        "Una red nacional con base en Lorca.",
+        "5.000 m³ de frío y dos puntos de salida.",
+        "Ven a vernos o llámanos.",
+        "Al lado de quien da de comer."
+      ],
+      "counts": {
+        "lorca": 20,
+        "year1966": 6,
+        "brand": 6
+      },
+      "fullCounts": {
+        "lorca": 25,
+        "year1966": 8
+      },
+      "words": 569,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Ftopgel.png&w=3840&q=75",
+          "alt": "Grupo Topgel",
+          "width": "266",
+          "height": "107"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fnestle.png&w=3840&q=75",
+          "alt": "Nestlé Helados",
+          "width": "193",
+          "height": "162"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fpanamar.png&w=3840&q=75",
+          "alt": "Panamar",
+          "width": "249",
+          "height": "158"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Fokin.png&w=3840&q=75",
+          "alt": "Okin",
+          "width": "223",
+          "height": "192"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fbrands%2Famparin.png&w=3840&q=75",
+          "alt": "Pastelería Amparín",
+          "width": "268",
+          "height": "111"
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "La nave de Saprelorca.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-01.jpg&w=3840&q=75",
+          "alt": "El camión frigorífico.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-02.jpg&w=3840&q=75",
+          "alt": "Acceso y carga.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 38,
+      "jsonLd": 5,
+      "sentences": [
+        "Lorca, desde 1966 Desde 1966, producto y servicio para quien cocina.",
+        "Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería.",
+        "Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering.",
+        "Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder.",
+        "Hoy la empresa mantiene la sede en Lorca y una delegación en Viator, Almería.",
+        "Dos puntos de salida, un mismo equipo y la misma idea de servicio.",
+        "Siguiente Hablar con el equipo 02 La empresa Maripepa en datos.",
+        "Fundación 1966 Sede Lorca (Saprelorca) Delegación Viator (Almería) Cobertura Murcia, Almería y Alicante Gama Congelado, refrigerado y ambiente Capacidad frigorífica 5.000 m³ Referencias +1.500 Plazo habitual 24–48 h Se confirma por pedido y zona.",
+        "Siguiente Hablar con el equipo 03 — Trayectoria Inicio De una casa en Lorca a dos sedes.",
+        "Tres momentos marcan la trayectoria: la fundación, el presente y la ampliación que está en trámite.",
+        "1966 Fundación en Lorca La empresa nace en Lorca para distribuir alimentación a la hostelería de la zona.",
+        "Hoy Dos sedes y 5.000 m³ Sede en Lorca y delegación en Viator, con una capacidad frigorífica de 5.000 m³.",
+        "2026 Ampliación en trámite El Ayuntamiento aprueba la ordenación de las parcelas D2 y D3, impulsada por la empresa para ampliar la nave.",
+        "Siguiente Hablar con el equipo 04 — Marcas Inicio Las marcas que distribuimos.",
+        "Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados.",
+        "Siguiente Hablar con el equipo 05 — Red Inicio Una red nacional con base en Lorca.",
+        "Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación.",
+        "Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca.",
+        "La conversación sigue siendo local: el equipo de Lorca responde, confirma la disponibilidad y organiza la entrega.",
+        "La red amplía el catálogo; la atención y la ruta se quedan en el sureste.",
+        "Siguiente Hablar con el equipo 06 — Instalaciones Inicio 5.000 m³ de frío y dos puntos de salida.",
+        "La operación se apoya en dos sitios: la sede de Lorca y la delegación de Viator.",
+        "Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante.",
+        "Siguiente Hablar con el equipo 07 — Siguiente paso Inicio Siguiente paso Ven a vernos o llámanos.",
+        "La dirección, el horario y los teléfonos están en la página de contacto.",
+        "Si quieres ver cómo trabajamos en Lorca, también puedes pasar por la página de la sede.",
+        "Continuar Maripepa Volver al principio Al lado de quien da de comer.",
+        "Producto, ruta y equipo para que la cocina siga funcionando."
+      ],
+      "mainText": "Lorca, desde 1966 Desde 1966, producto y servicio para quien cocina. Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería. Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder. Hoy la empresa mantiene la sede en Lorca y una delegación en Viator, Almería. Dos puntos de salida, un mismo equipo y la misma idea de servicio. Siguiente Hablar con el equipo 02 La empresa Maripepa en datos. 03 Trayectoria De una casa en Lorca a dos sedes. 04 Marcas Las marcas que distribuimos. 05 Red Una red nacional con base en Lorca. 02 — La empresa Inicio Maripepa en datos. Fundación 1966 Sede Lorca (Saprelorca) Delegación Viator (Almería) Cobertura Murcia, Almería y Alicante Gama Congelado, refrigerado y ambiente Capacidad frigorífica 5.000 m³ Referencias +1.500 Plazo habitual 24–48 h Se confirma por pedido y zona. Siguiente Hablar con el equipo 03 — Trayectoria Inicio De una casa en Lorca a dos sedes. Tres momentos marcan la trayectoria: la fundación, el presente y la ampliación que está en trámite. 1966 Fundación en Lorca La empresa nace en Lorca para distribuir alimentación a la hostelería de la zona. Hoy Dos sedes y 5.000 m³ Sede en Lorca y delegación en Viator, con una capacidad frigorífica de 5.000 m³. 2026 Ampliación en trámite El Ayuntamiento aprueba la ordenación de las parcelas D2 y D3, impulsada por la empresa para ampliar la nave. Siguiente Hablar con el equipo 04 — Marcas Inicio Las marcas que distribuimos. Maripepa es socio-delegación de Grupo Topgel y distribuidor oficial de Nestlé Helados. Trabaja con Panamar, Okin y Pastelería Amparín. Cada marca aporta su especialidad a la gama. Siguiente Hablar con el equipo 05 — Red Inicio Una red nacional con base en Lorca. Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación. Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca. La conversación sigue siendo local: el equipo de Lorca responde, confirma la disponibilidad y organiza la entrega. La red amplía el catálogo; la atención y la ruta se quedan en el sureste. Siguiente Hablar con el equipo 06 — Instalaciones Inicio 5.000 m³ de frío y dos puntos de salida. La operación se apoya en dos sitios: la sede de Lorca y la delegación de Viator. Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante. La nave de Saprelorca. Nave de Lorca, donde se prepara la carga. 01 /0 3 El camión frigorífico. Equipo de frío y carga en la sede. 02 /0 3 Acceso y carga. Entrada de vehículos y zona de preparación. 03 /0 3 La capacidad frigorífica alcanza los 5.000 m³. Siguiente Hablar con el equipo 07 — Siguiente paso Inicio Siguiente paso Ven a vernos o llámanos. Para conocer la sede, escribe o llama antes de venir. Así preparamos el acceso y la persona que te atenderá. La dirección, el horario y los teléfonos están en la página de contacto. Si quieres ver cómo trabajamos en Lorca, también puedes pasar por la página de la sede. Continuar Maripepa Volver al principio Al lado de quien da de comer. Desde 1966, en Lorca. Producto, ruta y equipo para que la cocina siga funcionando. Hablar con el equipo",
+      "bodySample": "Lorca, desde 1966 Desde 1966, producto y servicio para quien cocina. Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería. Maripepa nació en Lorca en 1966 como distribuidor de alimentación para hostelería, restauración y catering. Su forma de trabajar sigue siendo la misma: conocer al cliente, entender su cocina y responder. Hoy la empresa mantie"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/calidad",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/calidad",
+      "bytes": 794396,
+      "title": "Calidad y documentación de producto | Maripepa",
+      "description": "Calidad y documentación de producto para hostelería: sistema de gestión ISO 9001, trazabilidad, alérgenos y ficha de cada referencia antes de comprar.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/calidad",
+      "lang": "es",
+      "h1": [
+        "Calidad es poder responder por lo que entregas."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Un sistema de gestión, no una pegatina.",
+        "Cada referencia tiene su ficha.",
+        "Siete familias, tres temperaturas.",
+        "Las revistas se leen con su fecha.",
+        "Pide la ficha antes de decidir.",
+        "Información que corresponde."
+      ],
+      "counts": {
+        "lorca": 0,
+        "year1966": 0,
+        "brand": 2
+      },
+      "fullCounts": {
+        "lorca": 4,
+        "year1966": 1
+      },
+      "words": 546,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-mar-1.jpg&w=3840&q=75",
+          "alt": "Productos del mar.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-carne-1.jpg&w=3840&q=75",
+          "alt": "Carnes.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-reposteria-1.jpg&w=3840&q=75",
+          "alt": "Repostería.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 42,
+      "jsonLd": 5,
+      "sentences": [
+        "Calidad y documentación Calidad es poder responder por lo que entregas.",
+        "Producto, documentación y trazabilidad para decidir con criterio.",
+        "La calidad empieza por poder responder: qué contiene cada referencia, cómo se conserva y de dónde viene.",
+        "Esta página explica qué documenta la empresa y qué conviene pedir antes de decidir.",
+        "No sustituye la ficha de una referencia: te ayuda a saber qué pedir y a quién.",
+        "Siguiente Hablar con el equipo 02 Sistema Un sistema de gestión, no una pegatina.",
+        "Maripepa trabaja con un sistema de gestión de la calidad conforme a la norma ISO 9001.",
+        "No es una etiqueta para colgar: es la forma de ordenar procesos, registros y responsabilidades.",
+        "La trazabilidad recorre el producto de la recepción a la entrega, y la cadena de frío se cuida en cada paso.",
+        "La documentación de cada referencia se conserva y se actualiza.",
+        "Si necesitas una ficha, un alérgeno o una condición de conservación, se solicita al equipo y se confirma para el producto exacto.",
+        "Siguiente Hablar con el equipo 03 — Ficha Inicio Cada referencia tiene su ficha.",
+        "Cada referencia lleva su ficha con ingredientes, alérgenos, conservación y formato.",
+        "Pide la de la referencia exacta y guárdala junto a su nombre o código.",
+        "Si necesitas una ficha antes de decidir, indícanos la referencia o, al menos, la familia y el formato.",
+        "05 Consultar el servicio Localidad y contexto de la entrega.",
+        "Siguiente Hablar con el equipo 04 — Familias Inicio Siete familias, tres temperaturas.",
+        "Tres temperaturas organizan la gama: congelado, refrigerado y ambiente.",
+        "Dentro de ellas, siete familias cubren de la carta al postre.",
+        "Para el resto de familias, visita la gama o pregunta por la que te interesa.",
+        "Siguiente Hablar con el equipo 05 — Revistas Inicio Las revistas se leen con su fecha.",
+        "Cada edición muestra producto, campaña y propuestas, y su fecha indica cuándo se publicó.",
+        "Si una condición te interesa, confirma con el equipo que sigue vigente antes de usarla como base de un pedido.",
+        "Siguiente Hablar con el equipo 06 — Consulta Inicio Consulta Pide la ficha antes de decidir.",
+        "Antes de cerrar una elección, pide la ficha de la referencia.",
+        "Ingredientes, alérgenos y conservación deben corresponder al producto exacto.",
+        "Reúne la familia, la referencia si la conoces y el formato, y escríbenos.",
+        "El equipo te envía la documentación y confirma las condiciones.",
+        "Continuar Maripepa Volver al principio Información que corresponde.",
+        "Producto identificado, pregunta concreta y documento adecuado."
+      ],
+      "mainText": "Calidad y documentación Calidad es poder responder por lo que entregas. Producto, documentación y trazabilidad para decidir con criterio. La calidad empieza por poder responder: qué contiene cada referencia, cómo se conserva y de dónde viene. Sin esa información no hay criterio, solo hábito. Esta página explica qué documenta la empresa y qué conviene pedir antes de decidir. No sustituye la ficha de una referencia: te ayuda a saber qué pedir y a quién. Siguiente Hablar con el equipo 02 Sistema Un sistema de gestión, no una pegatina. 03 Ficha Cada referencia tiene su ficha. 04 Familias Siete familias, tres temperaturas. 05 Revistas Las revistas se leen con su fecha. 02 — Sistema Inicio Un sistema de gestión, no una pegatina. Maripepa trabaja con un sistema de gestión de la calidad conforme a la norma ISO 9001. No es una etiqueta para colgar: es la forma de ordenar procesos, registros y responsabilidades. La trazabilidad recorre el producto de la recepción a la entrega, y la cadena de frío se cuida en cada paso. Así, cuando algo se pregunta, hay una respuesta con base. La documentación de cada referencia se conserva y se actualiza. Si necesitas una ficha, un alérgeno o una condición de conservación, se solicita al equipo y se confirma para el producto exacto. Siguiente Hablar con el equipo 03 — Ficha Inicio Cada referencia tiene su ficha. Cada referencia lleva su ficha con ingredientes, alérgenos, conservación y formato. Pide la de la referencia exacta y guárdala junto a su nombre o código. La información se consulta con el equipo. Si necesitas una ficha antes de decidir, indícanos la referencia o, al menos, la familia y el formato. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 04 — Familias Inicio Siete familias, tres temperaturas. Tres temperaturas organizan la gama: congelado, refrigerado y ambiente. Dentro de ellas, siete familias cubren de la carta al postre. Productos del mar. Pescado y marisco congelado para carta y menú. 01 /0 3 Carnes. Cortes y formatos para cocina. 02 /0 3 Repostería. Postres que no cargan la cocina. 03 /0 3 Las tres imágenes abren el recorrido. Para el resto de familias, visita la gama o pregunta por la que te interesa. Siguiente Hablar con el equipo 05 — Revistas Inicio Las revistas se leen con su fecha. Las revistas son catálogos fechados. Cada edición muestra producto, campaña y propuestas, y su fecha indica cuándo se publicó. Si una condición te interesa, confirma con el equipo que sigue vigente antes de usarla como base de un pedido. Siguiente Hablar con el equipo 06 — Consulta Inicio Consulta Pide la ficha antes de decidir. Antes de cerrar una elección, pide la ficha de la referencia. Ingredientes, alérgenos y conservación deben corresponder al producto exacto. Reúne la familia, la referencia si la conoces y el formato, y escríbenos. El equipo te envía la documentación y confirma las condiciones. Continuar Maripepa Volver al principio Información que corresponde. Producto identificado, pregunta concreta y documento adecuado. El criterio empieza por no dar por hecho lo que falta. Preparar una consulta",
+      "bodySample": "Calidad y documentación Calidad es poder responder por lo que entregas. Producto, documentación y trazabilidad para decidir con criterio. La calidad empieza por poder responder: qué contiene cada referencia, cómo se conserva y de dónde viene. Sin esa información no hay criterio, solo hábito. Esta página explica qué documenta la empresa y qué conviene pedir antes de decidir. No sustituye la ficha d"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/contacto",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/contacto",
+      "bytes": 748635,
+      "title": "Contacto y horario | Maripepa",
+      "description": "Teléfonos 968 46 75 14 y 639 77 86 55, correo, WhatsApp, horario de lunes a viernes y direcciones en Lorca y Viator para hablar con Maripepa.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/contacto",
+      "lang": "es",
+      "h1": [
+        "Contacto."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Prepara tu consulta.",
+        "Horario de atención.",
+        "Dos direcciones.",
+        "Antes de escribir."
+      ],
+      "counts": {
+        "lorca": 8,
+        "year1966": 0,
+        "brand": 0
+      },
+      "fullCounts": {
+        "lorca": 12,
+        "year1966": 1
+      },
+      "words": 315,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 31,
+      "jsonLd": 5,
+      "sentences": [
+        "El formulario no envía solo: prepara el mensaje y tú decides cuándo y por dónde enviarlo.",
+        "01 · Lorca Teléfono 968 46 75 14 02 · Móvil Contacto directo 639 77 86 55 03 · Email de pedidos Email de pedidos [email&#160;protected] 04 · Mensaje WhatsApp Abrir WhatsApp 05 · Viator Teléfono 950 97 34 29 06 · Viator Móvil 670 49 01 47 02 — Preparar Horario Prepara tu consulta.",
+        "Nombre completo * Empresa * Email * Teléfono * Mensaje * Acepto la política de privacidad * Leer la política de privacidad Enviar mensaje Abrir WhatsApp Copiar consulta 03 — Horario Ubicación Horario de atención.",
+        "Llamar · 968 46 75 14 639 77 86 55 04 — Lorca Preguntas Dos direcciones.",
+        "Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+        "Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería.",
+        "Industrial Saprelorca · 30817 Lorca, Murcia Cómo llegar Información de Lorca 05 — Continuar Canales Antes de escribir.",
+        "Tu establecimiento, la localidad y la familia o referencia que te interesa."
+      ],
+      "mainText": "01 — Contacto Preparar consulta Contacto. Canales, horario y direcciones para hablar con el equipo. El formulario no envía solo: prepara el mensaje y tú decides cuándo y por dónde enviarlo. Hablar con una persona. 01 · Lorca Teléfono 968 46 75 14 02 · Móvil Contacto directo 639 77 86 55 03 · Email de pedidos Email de pedidos [email&#160;protected] 04 · Mensaje WhatsApp Abrir WhatsApp 05 · Viator Teléfono 950 97 34 29 06 · Viator Móvil 670 49 01 47 02 — Preparar Horario Prepara tu consulta. Completa los datos y elige correo, WhatsApp o copiar. Tú revisas el mensaje antes de enviarlo. Nombre completo * Empresa * Email * Teléfono * Mensaje * Acepto la política de privacidad * Leer la política de privacidad Enviar mensaje Abrir WhatsApp Copiar consulta 03 — Horario Ubicación Horario de atención. Lunes a viernes, de 08:00 a 13:00 y de 16:00 a 19:00. Para una visita, confirma antes con el equipo. Llamar · 968 46 75 14 639 77 86 55 04 — Lorca Preguntas Dos direcciones. Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería. Avd. Francisco Jimeno Sola, 3 · Pol. Industrial Saprelorca · 30817 Lorca, Murcia Cómo llegar Información de Lorca 05 — Continuar Canales Antes de escribir. ¿El formulario envía el mensaje? No. Prepara el texto y abre correo o WhatsApp. Tú decides cuándo enviarlo y puedes revisarlo antes. ¿Qué incluyo en la consulta? Tu establecimiento, la localidad y la familia o referencia que te interesa. Si no conoces el formato, describe el uso. Con eso basta para empezar. ¿Qué canal elijo? Para pedidos y urgencias, el teléfono. Para enviar datos o una consulta con detalle, el correo. WhatsApp sirve para una conversación rápida. Cualquiera de los tres llega al equipo. Ver todas las preguntas",
+      "bodySample": "01 — Contacto Preparar consulta Contacto. Canales, horario y direcciones para hablar con el equipo. El formulario no envía solo: prepara el mensaje y tú decides cuándo y por dónde enviarlo. Hablar con una persona. 01 · Lorca Teléfono 968 46 75 14 02 · Móvil Contacto directo 639 77 86 55 03 · Email de pedidos Email de pedidos [email&#160;protected] 04 · Mensaje WhatsApp Abrir WhatsApp 05 · Viator T"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/legal/privacidad",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/legal/privacidad",
+      "bytes": 754410,
+      "title": "Política de Privacidad | Maripepa",
+      "description": "Qué datos trata Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos. Puedes escribir a pedidos@granjamaripepa.com para cualquier consulta sobre privacidad.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/legal/privacidad",
+      "lang": "es",
+      "h1": [
+        "Política de Privacidad | Maripepa"
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "1. Responsable del Tratamiento",
+        "2. Finalidad del Tratamiento",
+        "3. Conservación de Datos",
+        "4. Legitimación",
+        "5. Destinatarios",
+        "6. Derechos",
+        "7. Cookies y almacenamiento local"
+      ],
+      "counts": {
+        "lorca": 2,
+        "year1966": 0,
+        "brand": 4
+      },
+      "fullCounts": {
+        "lorca": 6,
+        "year1966": 1
+      },
+      "words": 399,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 34,
+      "jsonLd": 5,
+      "sentences": [
+        "Maripepa Política de Privacidad | Maripepa Qué datos trata Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos.",
+        "Puedes escribir a [email&#160;protected] para cualquier consulta sobre privacidad.",
+        "CIF: B04008710 Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca 30817 Lorca, Murcia Teléfono: 968 46 75 14 Email: [email&#160;protected] Volver al principio Siguiente cláusula 2.",
+        "Finalidad del Tratamiento Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios.",
+        "Conservación de Datos Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales.",
+        "Legitimación La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos.",
+        "Destinatarios Los datos no se ceden a terceros salvo obligación legal.",
+        "Los prestadores de alojamiento web, correo electrónico y la analítica propia del sitio actúan como encargados del tratamiento, con contrato y acceso limitado a lo necesario.",
+        "Derechos Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a [email&#160;protected] e indicando el derecho que deseas ejercer.",
+        "Puedes retirar en cualquier momento el consentimiento para la analítica opcional desde el panel de preferencias de cookies.",
+        "Si consideras que el tratamiento no se ajusta al Reglamento (UE) 2016/679, puedes presentar una reclamación ante la Agencia Española de Protección de Datos en www.aepd.es.",
+        "Cookies y almacenamiento local Esta web no usa cookies publicitarias ni de terceros.",
+        "Usa almacenamiento técnico necesario para el acceso, el carrito y tus preferencias, y guarda tu decisión sobre analítica en el almacenamiento local del navegador con la clave gmp-gmp-consent-v1.",
+        "Si aceptas la analítica opcional, se crea un identificador de sesión en el almacenamiento de sesión y se envían eventos al servicio de analítica del propio sitio, sin compartirlos con terceros.",
+        "Puedes cambiar o retirar tu elección desde «Configurar preferencias» en el aviso de cookies, y borrar el almacenamiento desde tu navegador."
+      ],
+      "mainText": "Maripepa Política de Privacidad | Maripepa Qué datos trata Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos. Puedes escribir a [email&#160;protected] para cualquier consulta sobre privacidad. Privacidad Términos Contacto En esta página 1. Responsable del Tratamiento 2. Finalidad del Tratamiento 3. Conservación de Datos 4. Legitimación 5. Destinatarios 6. Derechos 7. Cookies y almacenamiento local 1. Responsable del Tratamiento Maripepa, S.L. CIF: B04008710 Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca 30817 Lorca, Murcia Teléfono: 968 46 75 14 Email: [email&#160;protected] Volver al principio Siguiente cláusula 2. Finalidad del Tratamiento Tratamos la información que nos facilita con el fin de prestarle el servicio solicitado, realizar la facturación del mismo y enviarle comunicaciones comerciales relacionadas con nuestros productos y servicios. Cláusula anterior Siguiente cláusula 3. Conservación de Datos Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales. Cláusula anterior Siguiente cláusula 4. Legitimación La base legal para el tratamiento de sus datos es la ejecución del contrato de prestación de servicios y/o compraventa de productos. Cláusula anterior Siguiente cláusula 5. Destinatarios Los datos no se ceden a terceros salvo obligación legal. Los prestadores de alojamiento web, correo electrónico y la analítica propia del sitio actúan como encargados del tratamiento, con contrato y acceso limitado a lo necesario. Cláusula anterior Siguiente cláusula 6. Derechos Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a [email&#160;protected] e indicando el derecho que deseas ejercer. Puedes retirar en cualquier momento el consentimiento para la analítica opcional desde el panel de preferencias de cookies. Si consideras que el tratamiento no se ajusta al Reglamento (UE) 2016/679, puedes presentar una reclamación ante la Agencia Española de Protección de Datos en www.aepd.es. Cláusula anterior Siguiente cláusula 7. Cookies y almacenamiento local Esta web no usa cookies publicitarias ni de terceros. Usa almacenamiento técnico necesario para el acceso, el carrito y tus preferencias, y guarda tu decisión sobre analítica en el almacenamiento local del navegador con la clave gmp-gmp-consent-v1. Si aceptas la analítica opcional, se crea un identificador de sesión en el almacenamiento de sesión y se envían eventos al servicio de analítica del propio sitio, sin compartirlos con terceros. Puedes cambiar o retirar tu elección desde «Configurar preferencias» en el aviso de cookies, y borrar el almacenamiento desde tu navegador. Cláusula anterior Volver al principio",
+      "bodySample": "Maripepa Política de Privacidad | Maripepa Qué datos trata Maripepa, para qué, durante cuánto tiempo y cómo ejercer tus derechos. Puedes escribir a [email&#160;protected] para cualquier consulta sobre privacidad. Privacidad Términos Contacto En esta página 1. Responsable del Tratamiento 2. Finalidad del Tratamiento 3. Conservación de Datos 4. Legitimación 5. Destinatarios 6. Derechos 7. Cookies y "
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/legal/terminos",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/legal/terminos",
+      "bytes": 748855,
+      "title": "Términos y Condiciones | Maripepa",
+      "description": "Bienvenido al sitio web de Maripepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/legal/terminos",
+      "lang": "es",
+      "h1": [
+        "Términos y Condiciones | Maripepa"
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "1. Propiedad Intelectual",
+        "2. Uso del Sitio Web",
+        "3. Responsabilidad",
+        "4. Modificaciones",
+        "5. Ley Aplicable"
+      ],
+      "counts": {
+        "lorca": 1,
+        "year1966": 0,
+        "brand": 7
+      },
+      "fullCounts": {
+        "lorca": 5,
+        "year1966": 1
+      },
+      "words": 278,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 31,
+      "jsonLd": 5,
+      "sentences": [
+        "Maripepa Términos y Condiciones | Maripepa Bienvenido al sitio web de Maripepa.",
+        "Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones.",
+        "Propiedad Intelectual El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Maripepa.",
+        "Uso del Sitio Web El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares.",
+        "Responsabilidad Maripepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo.",
+        "Modificaciones Maripepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web.",
+        "Ley Aplicable Las presentes condiciones se regirán por la legislación española.",
+        "Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Maripepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia)."
+      ],
+      "mainText": "Maripepa Términos y Condiciones | Maripepa Bienvenido al sitio web de Maripepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones. Privacidad Términos Contacto En esta página 1. Propiedad Intelectual 2. Uso del Sitio Web 3. Responsabilidad 4. Modificaciones 5. Ley Aplicable 1. Propiedad Intelectual El código fuente, los diseños gráficos, las imágenes, las fotografías, los sonidos, las animaciones, el software, los textos, así como la información y los contenidos que se recogen en el presente sitio web están protegidos por la legislación española sobre los derechos de propiedad intelectual e industrial a favor de Maripepa. Volver al principio Siguiente cláusula 2. Uso del Sitio Web El usuario se compromete a utilizar el sitio web, sus servicios y contenidos de forma diligente, correcta y lícita, y en particular, se compromete a abstenerse de suprimir, eludir o manipular el copyright y demás datos identificativos de los derechos de sus titulares. Cláusula anterior Siguiente cláusula 3. Responsabilidad Maripepa no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo. Cláusula anterior Siguiente cláusula 4. Modificaciones Maripepa se reserva el derecho a modificar o actualizar en cualquier momento las presentes condiciones de uso, así como cualquier tipo de información que pudiera aparecer en el sitio web. Cláusula anterior Siguiente cláusula 5. Ley Aplicable Las presentes condiciones se regirán por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, el usuario y Maripepa acuerdan someterse expresamente a los juzgados y tribunales de Lorca (Murcia). Cláusula anterior Volver al principio",
+      "bodySample": "Maripepa Términos y Condiciones | Maripepa Bienvenido al sitio web de Maripepa. Al acceder y utilizar este sitio, acepta los siguientes términos y condiciones. Privacidad Términos Contacto En esta página 1. Propiedad Intelectual 2. Uso del Sitio Web 3. Responsabilidad 4. Modificaciones 5. Ley Aplicable 1. Propiedad Intelectual El código fuente, los diseños gráficos, las imágenes, las fotografías, "
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/lorca",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/lorca",
+      "bytes": 778469,
+      "title": "Sede en Lorca | Maripepa, Saprelorca",
+      "description": "Sede en Avenida Francisco Jimeno Sola, 3, Polígono Saprelorca, 30817 Lorca. Horario de atención, teléfonos y cómo llegar a Maripepa en Murcia.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/lorca",
+      "lang": "es",
+      "h1": [
+        "La sede de Lorca, en Saprelorca."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Avenida Francisco Jimeno Sola, 3.",
+        "Antes de venir, confirma la visita.",
+        "Una nave que crece en Saprelorca.",
+        "Hablar con Lorca.",
+        "Una dirección. Un siguiente paso."
+      ],
+      "counts": {
+        "lorca": 16,
+        "year1966": 0,
+        "brand": 3
+      },
+      "fullCounts": {
+        "lorca": 22,
+        "year1966": 1
+      },
+      "words": 439,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 39,
+      "jsonLd": 5,
+      "sentences": [
+        "Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca.",
+        "En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas.",
+        "Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste.",
+        "Siguiente Hablar con el equipo 02 Llegar Avenida Francisco Jimeno Sola, 3.",
+        "La sede está en avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+        "Guárdala completa para la ruta: calle, número, polígono y localidad.",
+        "Comprueba que el destino corresponde a Lorca y, si necesitas una indicación de acceso, pregúntanos antes de salir.",
+        "Siguiente Hablar con el equipo Cómo llegar 03 — Visita Inicio Antes de venir, confirma la visita.",
+        "Indica el motivo y quién te acompaña, y el equipo te confirma el acceso y la persona de contacto.",
+        "Las recogidas de pedido solo se hacen si se confirman antes.",
+        "La dirección no confirma por sí sola una recogida: consulta con el equipo el día y la hora.",
+        "05 Consultar el servicio Localidad y contexto de la entrega.",
+        "Siguiente Hablar con el equipo 04 — Ampliación Inicio Una nave que crece en Saprelorca.",
+        "En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Maripepa.",
+        "El proyecto está en trámite: agrupar y ampliar las instalaciones de la empresa.",
+        "No hay fecha de apertura, ni metros construidos, ni cifra de inversión publicada.",
+        "Siguiente Hablar con el equipo 05 — Contacto Inicio Contacto Hablar con Lorca.",
+        "Para la sede de Lorca, llama al 968 46 75 14 o al 639 77 86 55.",
+        "Si vienes desde fuera, comprueba antes el horario y confirma la visita.",
+        "Continuar 968 46 75 14 [email&#160;protected] Maripepa Volver al principio Una dirección."
+      ],
+      "mainText": "Sede, Polígono Saprelorca La sede de Lorca, en Saprelorca. Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca. En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto. Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de la distribución. Siguiente Hablar con el equipo 02 Llegar Avenida Francisco Jimeno Sola, 3. 03 Visita Antes de venir, confirma la visita. 04 Ampliación Una nave que crece en Saprelorca. 05 Contacto Hablar con Lorca. 02 — Llegar Inicio Avenida Francisco Jimeno Sola, 3. La sede está en avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. Guárdala completa para la ruta: calle, número, polígono y localidad. El mapa se abre en un servicio externo. Comprueba que el destino corresponde a Lorca y, si necesitas una indicación de acceso, pregúntanos antes de salir. Siguiente Hablar con el equipo Cómo llegar 03 — Visita Inicio Antes de venir, confirma la visita. Las visitas se atienden con cita previa. Indica el motivo y quién te acompaña, y el equipo te confirma el acceso y la persona de contacto. Las recogidas de pedido solo se hacen si se confirman antes. La dirección no confirma por sí sola una recogida: consulta con el equipo el día y la hora. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 04 — Ampliación Inicio Una nave que crece en Saprelorca. En 2026, el Pleno de Lorca aprobó el Estudio de Detalle de las parcelas D2 y D3 de Saprelorca, promovido por Maripepa. Las dos parcelas suman 8.953 m². El proyecto está en trámite: agrupar y ampliar las instalaciones de la empresa. No hay fecha de apertura, ni metros construidos, ni cifra de inversión publicada. Siguiente Hablar con el equipo 05 — Contacto Inicio Contacto Hablar con Lorca. Para la sede de Lorca, llama al 968 46 75 14 o al 639 77 86 55. También puedes escribir a [email&#160;protected] . Si vienes desde fuera, comprueba antes el horario y confirma la visita. En la página de contacto tienes los datos completos. Continuar 968 46 75 14 [email&#160;protected] Maripepa Volver al principio Una dirección. Un siguiente paso. Sitúa la sede, comprueba el horario y habla con el equipo. La información sirve cuando te ayuda a avanzar. Ver contacto y mapa",
+      "bodySample": "Sede, Polígono Saprelorca La sede de Lorca, en Saprelorca. Dirección, acceso y contacto de la sede principal en el Polígono Industrial Saprelorca. En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto. Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/preguntas-frecuentes",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/preguntas-frecuentes",
+      "bytes": 782307,
+      "title": "Preguntas frecuentes | Maripepa",
+      "description": "Respuestas sobre gama, pedidos, entrega, documentación, revistas y área de clientes de la empresa de distribución en Lorca y Viator, Murcia y Almería.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/preguntas-frecuentes",
+      "lang": "es",
+      "h1": [
+        "Preguntas con respuesta directa."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Pedidos y entrega",
+        "Producto y documentación",
+        "Contacto y horario",
+        "Revistas",
+        "Área de clientes"
+      ],
+      "counts": {
+        "lorca": 7,
+        "year1966": 0,
+        "brand": 2
+      },
+      "fullCounts": {
+        "lorca": 11,
+        "year1966": 1
+      },
+      "words": 821,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 42,
+      "jsonLd": 6,
+      "sentences": [
+        "Lo que más nos preguntan sobre producto, pedidos, entrega y contacto.",
+        "La gama Pedidos y entrega Producto y documentación Contacto y horario Revistas Área de clientes Siete familias en congelado, refrigerado y temperatura ambiente.",
+        "Producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades.",
+        "La gama se organiza en productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas.",
+        "Distribuimos oficialmente Grupo Topgel y Nestlé Helados, y trabajamos con Panamar, Okin y Pastelería Amparín.",
+        "Para una referencia concreta, indícanos el nombre o el formato y te enviamos su información.",
+        "La ficha de la referencia es la que confirma ingredientes, formato y conservación.",
+        "Esa red permite completar la gama con referencias que no están en el almacén de Saprelorca, manteniendo la atención y la entrega desde Lorca.",
+        "Siguiente tema Hablar con el equipo 02 — Pedidos y entrega Contacto Pedidos y entrega La cobertura y el horario se confirman para cada localidad y cada pedido.",
+        "Llama al 968 46 75 14, escribe a [email&#160;protected] o utiliza el área de clientes si ya tienes cuenta.",
+        "Para una primera consulta, el equipo te orienta por el canal que prefieras.",
+        "Repartimos en Murcia, Almería y Alicante desde Lorca y Viator.",
+        "Dinos tu dirección completa y el equipo confirma la cobertura y las condiciones para ese destino.",
+        "Avisa por teléfono o correo con el número de pedido o albarán.",
+        "Cuanto antes lo sepamos, más margen hay para reorganizar la ruta.",
+        "Siguiente tema Hablar con el equipo 03 — Producto y documentación Contacto Producto y documentación La información de cada referencia se consulta con el equipo.",
+        "La documentación incluye la información del producto y sus condiciones de conservación.",
+        "La web muestra la gama, no un catálogo de compra con stock ni precios públicos.",
+        "Cada revista es un catálogo de consulta con su fecha de edición.",
+        "Si una referencia te interesa, confirma con el equipo que sigue disponible y sus condiciones actuales.",
+        "Siguiente tema Hablar con el equipo 04 — Contacto y horario Contacto Contacto y horario Teléfonos, correo y dirección para hablar con personas.",
+        "También puedes escribir a [email&#160;protected] o usar WhatsApp.",
+        "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+        "La delegación de Viator está en calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, Almería.",
+        "Está en calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, y acerca la operación y el reparto a la zona.",
+        "En 2026 se aprobó la ordenación urbanística de las parcelas D2 y D3 de Saprelorca para agrupar y ampliar las instalaciones, con 8.953 m².",
+        "El proyecto sigue en trámite: no hay fecha de apertura ni inversión publicada.",
+        "Siguiente tema Hablar con el equipo 05 — Revistas Contacto Revistas Publicaciones fechadas con producto, campaña y propuestas para carta.",
+        "En el menú, dentro de Revistas, y en la página de Productos.",
+        "Puedes abrirlas en el visor, pasar las páginas y descargar el PDF.",
+        "Siguiente tema Hablar con el equipo 06 — Área de clientes Contacto Área de clientes Pedidos, facturas y documentos en un espacio privado.",
+        "El área de clientes es para gestionar pedidos, facturas y documentos.",
+        "Si tienes problemas de acceso, utiliza la recuperación de contraseña o contacta con nosotros.",
+        "Revisa el área de clientes y, si no aparece, escríbenos con el número de factura o el periodo."
+      ],
+      "mainText": "01 — La gama Contacto Preguntas con respuesta directa. Lo que más nos preguntan sobre producto, pedidos, entrega y contacto. Si no encuentras tu caso, escríbenos. La gama Pedidos y entrega Producto y documentación Contacto y horario Revistas Área de clientes Siete familias en congelado, refrigerado y temperatura ambiente. ¿Qué productos distribuye Maripepa? Producto congelado, refrigerado y de temperatura ambiente para hostelería, catering y colectividades. La gama se organiza en productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Distribuimos oficialmente Grupo Topgel y Nestlé Helados, y trabajamos con Panamar, Okin y Pastelería Amparín. ¿Dónde veo las familias y las referencias? En la página de gama puedes recorrer las siete familias. Para una referencia concreta, indícanos el nombre o el formato y te enviamos su información. ¿Las fotos y revistas muestran el producto exacto? Las imágenes orientan sobre la familia o la presentación. La ficha de la referencia es la que confirma ingredientes, formato y conservación. ¿Qué aporta la red de Grupo Topgel? Maripepa es socio-delegación de Grupo Topgel. Esa red permite completar la gama con referencias que no están en el almacén de Saprelorca, manteniendo la atención y la entrega desde Lorca. Siguiente tema Hablar con el equipo 02 — Pedidos y entrega Contacto Pedidos y entrega La cobertura y el horario se confirman para cada localidad y cada pedido. ¿Cómo hago un pedido? Llama al 968 46 75 14, escribe a [email&#160;protected] o utiliza el área de clientes si ya tienes cuenta. Para una primera consulta, el equipo te orienta por el canal que prefieras. ¿Repartís en mi localidad? Repartimos en Murcia, Almería y Alicante desde Lorca y Viator. Dinos tu dirección completa y el equipo confirma la cobertura y las condiciones para ese destino. ¿Puedo cambiar o revisar una entrega? Sí. Avisa por teléfono o correo con el número de pedido o albarán. Cuanto antes lo sepamos, más margen hay para reorganizar la ruta. Siguiente tema Hablar con el equipo 03 — Producto y documentación Contacto Producto y documentación La información de cada referencia se consulta con el equipo. ¿Puedo ver ingredientes, alérgenos y conservación? Sí. Pide la ficha de la referencia concreta. La documentación incluye la información del producto y sus condiciones de conservación. ¿Hay precios y stock en la web? La web muestra la gama, no un catálogo de compra con stock ni precios públicos. Las condiciones se confirman en la consulta. ¿Las revistas sirven para hacer un pedido? Cada revista es un catálogo de consulta con su fecha de edición. Si una referencia te interesa, confirma con el equipo que sigue disponible y sus condiciones actuales. Siguiente tema Hablar con el equipo 04 — Contacto y horario Contacto Contacto y horario Teléfonos, correo y dirección para hablar con personas. ¿Qué teléfonos están publicados? 968 46 75 14 y 639 77 86 55. También puedes escribir a [email&#160;protected] o usar WhatsApp. ¿Cuál es el horario de atención? Lunes a viernes, de 8:00 a 13:00 y de 16:00 a 19:00. ¿Dónde está la sede? Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. La delegación de Viator está en calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, Almería. ¿Qué es la delegación de Viator? La segunda sede, en Almería. Está en calle Sierra de Ronda, 26, Polígono La Juaida, 04240 Viator, y acerca la operación y el reparto a la zona. Sus teléfonos son 950 97 34 29 y 670 49 01 47. ¿Va a ampliarse la sede de Lorca? En 2026 se aprobó la ordenación urbanística de las parcelas D2 y D3 de Saprelorca para agrupar y ampliar las instalaciones, con 8.953 m². El proyecto sigue en trámite: no hay fecha de apertura ni inversión publicada. Siguiente tema Hablar con el equipo 05 — Revistas Contacto Revistas Publicaciones fechadas con producto, campaña y propuestas para carta. ¿Dónde están las revistas? En el menú, dentro de Revistas, y en la página de Productos. Puedes abrirlas en el visor, pasar las páginas y descargar el PDF. ¿Se actualizan las ediciones? Sí. La web muestra las ediciones publicadas. Si buscas una edición anterior, pídenosla y te la enviamos. ¿Puedo pedir una revista impresa? Consúltalo con el equipo por teléfono o correo. La versión digital siempre está disponible en la web. Siguiente tema Hablar con el equipo 06 — Área de clientes Contacto Área de clientes Pedidos, facturas y documentos en un espacio privado. ¿Necesito cuenta para consultar la gama? No. La gama y las revistas son públicas. El área de clientes es para gestionar pedidos, facturas y documentos. ¿Cómo accedo al área de clientes? Con el código completo de cliente y tu contraseña. Si tienes problemas de acceso, utiliza la recuperación de contraseña o contacta con nosotros. ¿Qué hago si no encuentro una factura? Revisa el área de clientes y, si no aparece, escríbenos con el número de factura o el periodo. El equipo la localiza contigo. Volver al principio Hablar con el equipo",
+      "bodySample": "01 — La gama Contacto Preguntas con respuesta directa. Lo que más nos preguntan sobre producto, pedidos, entrega y contacto. Si no encuentras tu caso, escríbenos. La gama Pedidos y entrega Producto y documentación Contacto y horario Revistas Área de clientes Siete familias en congelado, refrigerado y temperatura ambiente. ¿Qué productos distribuye Maripepa? Producto congelado, refrigerado y de tem"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/productos",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/productos",
+      "bytes": 774874,
+      "title": "Congelados y refrigerados para hostelería | Maripepa",
+      "description": "Siete familias para tu carta: mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Consulta referencia y formato con el equipo.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/productos",
+      "lang": "es",
+      "h1": [
+        "Lo que tu carta necesita, en siete familias."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Una gama para consultar",
+        "Productos del mar",
+        "Carnes",
+        "Precocinados",
+        "Repostería",
+        "Panadería",
+        "Refrigerados",
+        "Salsas y preparados",
+        "Marcas que forman la gama.",
+        "Revistas de la casa.",
+        "De la familia al producto concreto."
+      ],
+      "counts": {
+        "lorca": 1,
+        "year1966": 0,
+        "brand": 4
+      },
+      "fullCounts": {
+        "lorca": 5,
+        "year1966": 1
+      },
+      "words": 752,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-mar-2.jpg&w=3840&q=75",
+          "alt": "Productos del mar",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-carne-2.jpg&w=3840&q=75",
+          "alt": "Carnes",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-precocinados-2.jpg&w=3840&q=75",
+          "alt": "Precocinados",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-reposteria-2.jpg&w=3840&q=75",
+          "alt": "Repostería",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-panaderia-2.jpg&w=3840&q=75",
+          "alt": "Panadería",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-refrigerados-2.jpg&w=3840&q=75",
+          "alt": "Refrigerados",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "/_next/image?url=%2Fcatalogs%2Ffamilias%2Freal-salsas-2.jpg&w=3840&q=75",
+          "alt": "Salsas y preparados",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 48,
+      "jsonLd": 6,
+      "sentences": [
+        "Gama · HORECA Familias · 07 Lo que tu carta necesita, en siete familias.",
+        "Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas.",
+        "Empieza por la familia que te interesa y concreta con el equipo la referencia, el formato y la documentación.",
+        "Una gama para consultar Esta página ordena la gama por familias.",
+        "Las condiciones de cada referencia se confirman con el equipo: no mostramos stock ni precios públicos.",
+        "La gama se organiza en siete familias; la red de Grupo Topgel completa las referencias que no están en el almacén.",
+        "Hablar con el equipo Área de clientes Volver al inicio Familias GRUPO TOPGEL Todas las familias Productos del mar Carnes Precocinados Repostería Panadería Refrigerados Salsas y preparados 7 / 7 · Familias Fotografía de la gama.",
+        "0 1 · Pescados y mariscos congelados Productos del mar Pescados y mariscos congelados para cartas, menús y servicio diario.",
+        "Una familia pensada para conservar producto y organizar la cocina con antelación.",
+        "Cuéntanos qué elaboración tienes en carta y te orientamos sobre especie, formato y presentación.",
+        "0 2 · Carnes congeladas Carnes Carnes congeladas para parrilla, guisos, menús del día y colectividades.",
+        "Una base estable para completar la carta y ajustar el servicio.",
+        "Confirmamos contigo la referencia y su documentación antes de cerrar la propuesta.",
+        "0 3 · Preparados y verduras congeladas Precocinados Preparados y verduras congeladas para completar servicios, resolver una guarnición o aligerar la preparación en cocina.",
+        "0 4 · Dulces y postres congelados Repostería Dulces y postres congelados para completar la propuesta de postres sin sumar carga a la cocina.",
+        "Pregunta por la presentación que necesitas y solicita la ficha de la referencia.",
+        "El equipo te orienta sobre formato, conservación y servicio.",
+        "0 5 · Pan y bollería congelados Panadería Pan y bollería congelados para completar el servicio de pan y resolver el desayuno o la merienda sin sumar carga a la cocina.",
+        "El equipo confirma la referencia, la conservación y la documentación.",
+        "0 6 · Quesos, ahumados y foie Refrigerados Quesos, salmón ahumado y foie para completar una tabla, un entrante o una elaboración de carta.",
+        "Producto refrigerado con su propia conservación y manipulación.",
+        "Confirmamos la referencia, la caducidad y la documentación antes de cerrar la propuesta.",
+        "0 7 · Salsas, patatas y platos preparados Salsas y preparados Salsas, patatas y preparados para resolver una guarnición o completar un plato sin montar la elaboración desde cero.",
+        "El equipo te orienta sobre formato, conservación y uso en cocina.",
+        "Grupo Topgel, Nestlé Helados y Panamar forman parte de la oferta publicada.",
+        "Sus webs amplían la información de marca; para referencias y condiciones de suministro, habla con nuestro equipo.",
+        "Maripepa es socio-delegación de Grupo Topgel, una red nacional que completa la gama cuando una referencia no está en el almacén.",
+        "0 1 Grupo Topgel ↗ 0 2 Nestlé Helados ↗ 0 3 Panamar ↗ Revistas de la casa.",
+        "Catálogos fechados con producto, campaña y propuestas para carta.",
+        "PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas De la familia al producto concreto.",
+        "Dinos qué cocinas, para cuántos servicios y qué formato necesitas.",
+        "Te orientamos sobre producto, conservación y documentación antes de decidir.",
+        "Lunes a viernes, 8:00–13:00 y 16:00–19:00 Hablar con el equipo Llamar a Lorca · 968 46 75 14 Consultar por WhatsApp"
+      ],
+      "mainText": "Gama · HORECA Familias · 07 Lo que tu carta necesita, en siete familias. Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Empieza por la familia que te interesa y concreta con el equipo la referencia, el formato y la documentación. Una gama para consultar Esta página ordena la gama por familias. Las condiciones de cada referencia se confirman con el equipo: no mostramos stock ni precios públicos. La gama se organiza en siete familias; la red de Grupo Topgel completa las referencias que no están en el almacén. Hablar con el equipo Área de clientes Volver al inicio Familias GRUPO TOPGEL Todas las familias Productos del mar Carnes Precocinados Repostería Panadería Refrigerados Salsas y preparados 7 / 7 · Familias Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 1 · Pescados y mariscos congelados Productos del mar Pescados y mariscos congelados para cartas, menús y servicio diario. Una familia pensada para conservar producto y organizar la cocina con antelación. Cuéntanos qué elaboración tienes en carta y te orientamos sobre especie, formato y presentación. La ficha de cada referencia se consulta con el equipo. Consultar esta familia Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 2 · Carnes congeladas Carnes Carnes congeladas para parrilla, guisos, menús del día y colectividades. Una base estable para completar la carta y ajustar el servicio. Indícanos el tipo de corte, el uso y el formato que buscas. Confirmamos contigo la referencia y su documentación antes de cerrar la propuesta. Consultar esta familia Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 3 · Preparados y verduras congeladas Precocinados Preparados y verduras congeladas para completar servicios, resolver una guarnición o aligerar la preparación en cocina. Cuéntanos qué necesitas preparar y para cuántos servicios. Te ayudamos a concretar producto, formato y conservación. Consultar esta familia Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 4 · Dulces y postres congelados Repostería Dulces y postres congelados para completar la propuesta de postres sin sumar carga a la cocina. Pregunta por la presentación que necesitas y solicita la ficha de la referencia. El equipo te orienta sobre formato, conservación y servicio. Consultar esta familia Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 5 · Pan y bollería congelados Panadería Pan y bollería congelados para completar el servicio de pan y resolver el desayuno o la merienda sin sumar carga a la cocina. Cuéntanos qué formato necesitas y para cuántos servicios. El equipo confirma la referencia, la conservación y la documentación. Consultar esta familia Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 6 · Quesos, ahumados y foie Refrigerados Quesos, salmón ahumado y foie para completar una tabla, un entrante o una elaboración de carta. Producto refrigerado con su propia conservación y manipulación. Indícanos el uso y el formato que buscas. Confirmamos la referencia, la caducidad y la documentación antes de cerrar la propuesta. Consultar esta familia Fotografía de la gama. La referencia concreta se consulta con el equipo. 0 7 · Salsas, patatas y platos preparados Salsas y preparados Salsas, patatas y preparados para resolver una guarnición o completar un plato sin montar la elaboración desde cero. Pregunta por la presentación que necesitas. El equipo te orienta sobre formato, conservación y uso en cocina. Consultar esta familia Marcas que forman la gama. Grupo Topgel, Nestlé Helados y Panamar forman parte de la oferta publicada. Sus webs amplían la información de marca; para referencias y condiciones de suministro, habla con nuestro equipo. Maripepa es socio-delegación de Grupo Topgel, una red nacional que completa la gama cuando una referencia no está en el almacén. 0 1 Grupo Topgel ↗ 0 2 Nestlé Helados ↗ 0 3 Panamar ↗ Revistas de la casa. Catálogos fechados con producto, campaña y propuestas para carta. Ábrelos en el visor y consulta la edición que te interese. PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas De la familia al producto concreto. Dinos qué cocinas, para cuántos servicios y qué formato necesitas. Te orientamos sobre producto, conservación y documentación antes de decidir. Lunes a viernes, 8:00–13:00 y 16:00–19:00 Hablar con el equipo Llamar a Lorca · 968 46 75 14 Consultar por WhatsApp",
+      "bodySample": "Gama · HORECA Familias · 07 Lo que tu carta necesita, en siete familias. Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. Empieza por la familia que te interesa y concreta con el equipo la referencia, el formato y la documentación. Una gama para consultar Esta página ordena la gama por familias. Las condiciones de cada referencia se confirman con el equipo: no"
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/reparto",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/reparto",
+      "bytes": 777998,
+      "title": "Reparto HORECA en Murcia, Almería y Alicante | Maripepa",
+      "description": "Reparto para hostelería en Murcia, Almería y Alicante desde Lorca y Viator. Consulta cobertura, horario y condiciones de entrega para tu localidad.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/reparto",
+      "lang": "es",
+      "h1": [
+        "Reparto para hostelería en Murcia, Almería y Alicante."
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "24–48 horas es el plazo habitual, no una promesa automática.",
+        "Prepara la recepción.",
+        "Si algo no cuadra, hay registro.",
+        "Consulta tu zona.",
+        "Una consulta con destino."
+      ],
+      "counts": {
+        "lorca": 1,
+        "year1966": 0,
+        "brand": 2
+      },
+      "fullCounts": {
+        "lorca": 5,
+        "year1966": 1
+      },
+      "words": 405,
+      "images": [],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 38,
+      "jsonLd": 5,
+      "sentences": [
+        "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante.",
+        "Cobertura, plazos y recepción para hostelería en Murcia, Almería y Alicante.",
+        "Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante.",
+        "La cobertura se concreta para cada localidad y cada establecimiento.",
+        "La sede de Lorca y la delegación de Viator organizan las rutas.",
+        "Para saber si llegamos a tu zona, dinos la dirección completa.",
+        "Siguiente Hablar con el equipo 02 Plazos 24–48 horas es el plazo habitual, no una promesa automática.",
+        "02 — Plazos Inicio 24–48 horas es el plazo habitual, no una promesa automática.",
+        "Ese plazo es una referencia de capacidad, no una promesa automática: la fecha se confirma para cada pedido y cada zona.",
+        "El día concreto depende del destino, del volumen y del momento del pedido.",
+        "Siguiente Hablar con el equipo 03 — Recepción Inicio Prepara la recepción.",
+        "Para recibir bien, ten lista la dirección, la persona que recibe, el horario del establecimiento y el acceso para el vehículo.",
+        "Si hay una particularidad, como una calle peatonal o una zona de carga, indícala desde el principio.",
+        "05 Consultar el servicio Localidad y contexto de la entrega.",
+        "Siguiente Hablar con el equipo 04 — Incidencias Inicio Si algo no cuadra, hay registro.",
+        "Si algo no cuadra, ese albarán es la base para revisar qué ha pasado.",
+        "Avisa al equipo con el número de albarán o de pedido, por teléfono o por correo.",
+        "Siguiente Hablar con el equipo 05 — Tu zona Inicio Tu zona Consulta tu zona.",
+        "Para saber si repartimos en tu localidad y en qué condiciones, escríbenos con la dirección completa y el tipo de establecimiento.",
+        "Continuar Maripepa Volver al principio Una consulta con destino.",
+        "Con esos datos la entrega deja de ser una promesa y se convierte en una conversación concreta."
+      ],
+      "mainText": "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante. Cobertura, plazos y recepción para hostelería en Murcia, Almería y Alicante. Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento. La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa. Siguiente Hablar con el equipo 02 Plazos 24–48 horas es el plazo habitual, no una promesa automática. 03 Recepción Prepara la recepción. 04 Incidencias Si algo no cuadra, hay registro. 05 Tu zona Consulta tu zona. 02 — Plazos Inicio 24–48 horas es el plazo habitual, no una promesa automática. Ese plazo es una referencia de capacidad, no una promesa automática: la fecha se confirma para cada pedido y cada zona. El día concreto depende del destino, del volumen y del momento del pedido. El equipo te lo confirma antes de la entrega. Siguiente Hablar con el equipo 03 — Recepción Inicio Prepara la recepción. Para recibir bien, ten lista la dirección, la persona que recibe, el horario del establecimiento y el acceso para el vehículo. La entrega se cierra con albarán y firma. Si hay una particularidad, como una calle peatonal o una zona de carga, indícala desde el principio. 01 Ver la gama Familias y revistas. 02 Buscar respuesta Preguntas organizadas por tema. 03 Preparar consulta Canales y datos útiles. 04 Calidad Producto, formato y documentación. 05 Consultar el servicio Localidad y contexto de la entrega. Siguiente Hablar con el equipo 04 — Incidencias Inicio Si algo no cuadra, hay registro. Cada entrega deja un albarán firmado. Si algo no cuadra, ese albarán es la base para revisar qué ha pasado. Avisa al equipo con el número de albarán o de pedido, por teléfono o por correo. Cuanto antes lo sepamos, más fácil es corregirlo. Siguiente Hablar con el equipo 05 — Tu zona Inicio Tu zona Consulta tu zona. Para saber si repartimos en tu localidad y en qué condiciones, escríbenos con la dirección completa y el tipo de establecimiento. El equipo te confirma la cobertura y el plazo para tu caso. Los datos de contacto están en la página de contacto. Continuar Maripepa Volver al principio Una consulta con destino. Localidad, producto y acceso. Con esos datos la entrega deja de ser una promesa y se convierte en una conversación concreta. Consultar mi zona",
+      "bodySample": "Reparto para hostelería Reparto para hostelería en Murcia, Almería y Alicante. Cobertura, plazos y recepción para hostelería en Murcia, Almería y Alicante. Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento. La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a "
+    },
+    {
+      "url": "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+      "status": 200,
+      "finalUrl": "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+      "bytes": 793013,
+      "title": "Trabaja con nosotros | Maripepa",
+      "description": "Únete al equipo de Maripepa. Ofertas de empleo en Lorca y Viator. Envía tu currículum.",
+      "robots": "index, follow",
+      "canonical": "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+      "lang": "es",
+      "h1": [
+        "Únete a Maripepa"
+      ],
+      "h2": [
+        "De Lorca a tu cocina, sin perder el origen.",
+        "Tu privacidad",
+        "Un trabajo que se entiende",
+        "Encuentra tu puesto",
+        "Sin laberintos",
+        "¿No ves tu puesto?",
+        "Antes de aplicar"
+      ],
+      "counts": {
+        "lorca": 10,
+        "year1966": 0,
+        "brand": 1
+      },
+      "fullCounts": {
+        "lorca": 14,
+        "year1966": 1
+      },
+      "words": 647,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fgmp%2Fcareers%2Fcareers-facility.jpg&w=3840&q=75",
+          "alt": "Nave de Maripepa en el Polígono Saprelorca, Lorca",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "imagesWithoutAlt": 0,
+      "internalLinks": 29,
+      "jsonLd": 5,
+      "sentences": [
+        "Equipo · HORECA · Lorca y Almería Únete a Maripepa Distribuimos alimentación a la hostelería de Murcia y Almería.",
+        "Ver ofertas Enviar candidatura Ahora mismo 0 puestos Ver las ofertas ↓ 01 Por qué Lo que puedes esperar 02 Ofertas 0 puestos abiertos 03 Proceso 4 pasos 04 Candidatura Envía tu CV 02 — Lo que ofrecemos LORCA · VIATOR Un trabajo que se entiende Sin cultura de folleto: explicamos qué se hace en cada puesto, con qué medios y en qué horario.",
+        "01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería.",
+        "02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar.",
+        "03 Formación real Producto, seguridad alimentaria, PRL y manejo de sistemas desde el primer día.",
+        "04 Equipo cercano Equipos pequeños, trato directo con responsables y decisiones que se explican.",
+        "05 Conciliación Turnos definidos y planificación con antelación para que puedas organizarte.",
+        "06 Seguridad primero EPIs, formación en prevención y protocolos claros en almacén y reparto.",
+        "Saprelorca Dos sedes, el mismo equipo Trabajamos desde Lorca (Murcia) y Viator (Almería).",
+        "Las rutas, el almacén y la atención al cliente se coordinan entre las dos sedes.",
+        "La Juaida Ver Lorca en Maps Ver Viator en Maps 03 — Ofertas 0 abiertas Encuentra tu puesto Filtra por departamento, sede o palabra clave.",
+        "Cada oferta tiene su ficha con responsabilidades, requisitos y condiciones.",
+        "Departamento Todos Logística Ventas Administración Calidad Sede Todas Lorca (Murcia) Viator (Almería) Murcia / Almería 0 ofertas Ahora mismo no hay vacantes abiertas Déjanos tu CV y te tendremos en cuenta para las próximas incorporaciones.",
+        "Enviar candidatura 04 — Proceso 4 pasos Sin laberintos Cuatro pasos, plazos claros y una persona de referencia.",
+        "02 Revisión Una persona del equipo de RRHH lee tu perfil y lo contrasta con la vacante.",
+        "03 Entrevista Conversación telefónica o presencial con el responsable del área.",
+        "04 Incorporación Bienvenida, formación inicial y entrega de equipos de protección.",
+        "Lo revisamos y te escribimos si encaja en una vacante futura.",
+        "Las candidaturas se registran solo desde este formulario Rellenar candidatura Revisamos todas las candidaturas CV en PDF Datos tratados solo para selección.",
+        "Política de privacidad Nombre y apellidos * Email * Teléfono * Sector de interés * Mozo de almacén Repartidor/a Comercial Administrativo/a Técnico/a de calidad Operario/a de producción Informático/a Responsable de compras Otro Puesto al que aplicas Candidatura espontánea Mensaje (opcional) Adjuntar currículum (PDF) * No rellenar Solo puedes tener una candidatura activa.",
+        "Si la descartamos, podrás volver a enviarla a partir de 20 días naturales.",
+        "Enviar candidatura 06 — FAQ RRHH Antes de aplicar ¿Necesito experiencia previa?",
+        "Algunos puestos requieren experiencia específica (comercial, calidad), pero otros como mozo de almacén o repartidor admiten perfiles sin experiencia.",
+        "Formación en producto, seguridad alimentaria, manejo de sistemas y PRL.",
+        "Revisamos cada candidatura y contactamos si encaja en el proceso.",
+        "+ Sede principal en Lorca (Murcia) y delegación en Viator (Almería).",
+        "Siguiente paso Ver las 0 ofertas Enviar candidatura Rellenar candidatura"
+      ],
+      "mainText": "Equipo · HORECA · Lorca y Almería Únete a Maripepa Distribuimos alimentación a la hostelería de Murcia y Almería. Buscamos personas que quieran hacerlo bien, todos los días. Ver ofertas Enviar candidatura Ahora mismo 0 puestos Ver las ofertas ↓ 01 Por qué Lo que puedes esperar 02 Ofertas 0 puestos abiertos 03 Proceso 4 pasos 04 Candidatura Envía tu CV 02 — Lo que ofrecemos LORCA · VIATOR Un trabajo que se entiende Sin cultura de folleto: explicamos qué se hace en cada puesto, con qué medios y en qué horario. Si encaja, lo sabrás desde la primera conversación. 01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería. Lo que haces llega a la mesa. 02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar. 03 Formación real Producto, seguridad alimentaria, PRL y manejo de sistemas desde el primer día. 04 Equipo cercano Equipos pequeños, trato directo con responsables y decisiones que se explican. 05 Conciliación Turnos definidos y planificación con antelación para que puedas organizarte. 06 Seguridad primero EPIs, formación en prevención y protocolos claros en almacén y reparto. Lorca · Pol. Saprelorca Dos sedes, el mismo equipo Trabajamos desde Lorca (Murcia) y Viator (Almería). Las rutas, el almacén y la atención al cliente se coordinan entre las dos sedes. Lorca (Murcia) Av. Francisco Jimeno Sola, 3 · Pol. Saprelorca Viator (Almería) C/ Sierra de Ronda, 26 · Pol. La Juaida Ver Lorca en Maps Ver Viator en Maps 03 — Ofertas 0 abiertas Encuentra tu puesto Filtra por departamento, sede o palabra clave. Cada oferta tiene su ficha con responsabilidades, requisitos y condiciones. Departamento Todos Logística Ventas Administración Calidad Sede Todas Lorca (Murcia) Viator (Almería) Murcia / Almería 0 ofertas Ahora mismo no hay vacantes abiertas Déjanos tu CV y te tendremos en cuenta para las próximas incorporaciones. Enviar candidatura 04 — Proceso 4 pasos Sin laberintos Cuatro pasos, plazos claros y una persona de referencia. Te decimos en qué punto está tu candidatura. 01 Candidatura Envías tu CV por el formulario o por email. Son cuatro datos y el CV. 02 Revisión Una persona del equipo de RRHH lee tu perfil y lo contrasta con la vacante. 03 Entrevista Conversación telefónica o presencial con el responsable del área. 04 Incorporación Bienvenida, formación inicial y entrega de equipos de protección. 05 — Candidatura abierta RRHH ¿No ves tu puesto? Envíanos tu currículum e indica el sector que te interesa. Lo revisamos y te escribimos si encaja en una vacante futura. Las candidaturas se registran solo desde este formulario Rellenar candidatura Revisamos todas las candidaturas CV en PDF Datos tratados solo para selección. Política de privacidad Nombre y apellidos * Email * Teléfono * Sector de interés * Mozo de almacén Repartidor/a Comercial Administrativo/a Técnico/a de calidad Operario/a de producción Informático/a Responsable de compras Otro Puesto al que aplicas Candidatura espontánea Mensaje (opcional) Adjuntar currículum (PDF) * No rellenar Solo puedes tener una candidatura activa. Si la descartamos, podrás volver a enviarla a partir de 20 días naturales. Enviar candidatura 06 — FAQ RRHH Antes de aplicar ¿Necesito experiencia previa? + No siempre. Valoramos la actitud y las ganas de aprender. Algunos puestos requieren experiencia específica (comercial, calidad), pero otros como mozo de almacén o repartidor admiten perfiles sin experiencia. ¿Qué horarios tienen? + Depende del puesto. Almacén y reparto: turnos de mañana y tarde. Administración: jornada de oficina. Comercial: según zona asignada. ¿Ofrecen formación? + Sí. Formación en producto, seguridad alimentaria, manejo de sistemas y PRL. La formación es continua y adaptada al puesto. ¿Puedo enviar mi CV aunque no haya ofertas? + Sí. Usa el formulario de candidatura abierta. Revisamos cada candidatura y contactamos si encaja en el proceso. ¿Dónde están las sedes? + Sede principal en Lorca (Murcia) y delegación en Viator (Almería). Siguiente paso Ver las 0 ofertas Enviar candidatura Rellenar candidatura",
+      "bodySample": "Equipo · HORECA · Lorca y Almería Únete a Maripepa Distribuimos alimentación a la hostelería de Murcia y Almería. Buscamos personas que quieran hacerlo bien, todos los días. Ver ofertas Enviar candidatura Ahora mismo 0 puestos Ver las ofertas ↓ 01 Por qué Lo que puedes esperar 02 Ofertas 0 puestos abiertos 03 Proceso 4 pasos 04 Candidatura Envía tu CV 02 — Lo que ofrecemos LORCA · VIATOR Un trabaj"
+    }
+  ],
+  "duplicates": [
+    {
+      "sentence": "05 Consultar el servicio Localidad y contexto de la entrega.",
+      "pages": [
+        "https://www.mari-pepa.com/es/lorca",
+        "https://www.mari-pepa.com/es/calidad",
+        "https://www.mari-pepa.com/es/reparto"
+      ]
+    },
+    {
+      "sentence": "Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas.",
+      "pages": [
+        "https://www.mari-pepa.com/es",
+        "https://www.mari-pepa.com/es/productos"
+      ]
+    },
+    {
+      "sentence": "Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces.",
+      "pages": [
+        "https://www.mari-pepa.com/en/productos",
+        "https://www.mari-pepa.com/en"
+      ]
+    },
+    {
+      "sentence": "PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas From the family to the specific product.",
+      "pages": [
+        "https://www.mari-pepa.com/en/productos",
+        "https://www.mari-pepa.com/es/productos"
+      ]
+    },
+    {
+      "sentence": "Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+      "pages": [
+        "https://www.mari-pepa.com/es/contacto",
+        "https://www.mari-pepa.com/en/contacto"
+      ]
+    },
+    {
+      "sentence": "Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería.",
+      "pages": [
+        "https://www.mari-pepa.com/es/contacto",
+        "https://www.mari-pepa.com/en/contacto"
+      ]
+    },
+    {
+      "sentence": "Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia.",
+      "pages": [
+        "https://www.mari-pepa.com/en/preguntas-frecuentes",
+        "https://www.mari-pepa.com/es/preguntas-frecuentes"
+      ]
+    },
+    {
+      "sentence": "01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "03 Formación real Producto, seguridad alimentaria, PRL y manejo de sistemas desde el primer día.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "04 Equipo cercano Equipos pequeños, trato directo con responsables y decisiones que se explican.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "05 Conciliación Turnos definidos y planificación con antelación para que puedas organizarte.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "06 Seguridad primero EPIs, formación en prevención y protocolos claros en almacén y reparto.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "02 Revisión Una persona del equipo de RRHH lee tu perfil y lo contrasta con la vacante.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "03 Entrevista Conversación telefónica o presencial con el responsable del área.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "04 Incorporación Bienvenida, formación inicial y entrega de equipos de protección.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "Algunos puestos requieren experiencia específica (comercial, calidad), pero otros como mozo de almacén o repartidor admiten perfiles sin experiencia.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "Formación en producto, seguridad alimentaria, manejo de sistemas y PRL.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "Revisamos cada candidatura y contactamos si encaja en el proceso.",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    },
+    {
+      "sentence": "+ Sede principal en Lorca (Murcia) y delegación en Viator (Almería).",
+      "pages": [
+        "https://www.mari-pepa.com/es/trabaja-con-nosotros",
+        "https://www.mari-pepa.com/en/trabaja-con-nosotros"
+      ]
+    }
+  ]
+}

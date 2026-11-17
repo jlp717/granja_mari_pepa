@@ -415,7 +415,11 @@ export function HomeEditorial({ locale }: { locale: Locale }) {
               <span className={styles.magazineCover}>
                 {magazine.coverUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element -- portada real extraída del PDF
-                  <img src={magazine.coverUrl} alt="" loading="lazy" />
+                  <img
+                    src={magazine.coverUrl}
+                    alt={`Portada de ${magazine.title}, ${magazine.edition}`}
+                    loading="lazy"
+                  />
                 ) : null}
               </span>
               <span className={styles.magazineMeta}>

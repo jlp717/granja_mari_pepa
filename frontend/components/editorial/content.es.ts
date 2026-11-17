@@ -1,14 +1,14 @@
 export const STORIES_ES = {
   acerca: {
     title: "Desde 1966, producto y servicio para quien cocina.",
-    eyebrow: "Lorca, desde 1966",
+    eyebrow: "Distribución HORECA",
     description:
       "Distribución alimentaria para hostelería, restauración y catering desde Lorca, con delegación en Almería.",
     chapters: [
       {
         id: "origen",
         label: "1966",
-        title: "Desde 1966, producto y servicio para quien cocina.",
+        title: "Producto y servicio para quien cocina.",
         scene: 0,
         layout: "hero",
         paragraphs: [
@@ -41,7 +41,7 @@ export const STORIES_ES = {
       {
         id: "historia",
         label: "Trayectoria",
-        title: "De una casa en Lorca a dos sedes.",
+        title: "De una casa a dos sedes.",
         scene: 5,
         layout: "timeline",
         paragraphs: [
@@ -50,13 +50,13 @@ export const STORIES_ES = {
         timeline: [
           {
             year: "1966",
-            title: "Fundación en Lorca",
-            text: "La empresa nace en Lorca para distribuir alimentación a la hostelería de la zona.",
+            title: "Fundación",
+            text: "La empresa nace para distribuir alimentación a la hostelería de la zona.",
           },
           {
             year: "Hoy",
             title: "Dos sedes y 5.000 m³",
-            text: "Sede en Lorca y delegación en Viator, con una capacidad frigorífica de 5.000 m³.",
+            text: "Dos sedes y 5.000 m³ de capacidad frigorífica entre Murcia y Almería.",
           },
           {
             year: "2026",
@@ -77,35 +77,35 @@ export const STORIES_ES = {
         brands: [
           {
             name: "Grupo Topgel",
-            src: "/images/brands/topgel.png",
+            src: "/images/brands/topgel-white.png",
             alt: "Grupo Topgel",
             width: 266,
             height: 107,
           },
           {
             name: "Nestlé Helados",
-            src: "/images/brands/nestle.png",
+            src: "/images/brands/nestle-white.png",
             alt: "Nestlé Helados",
             width: 193,
             height: 162,
           },
           {
             name: "Panamar",
-            src: "/images/brands/panamar.png",
+            src: "/images/brands/panamar-white.png",
             alt: "Panamar",
             width: 249,
             height: 158,
           },
           {
             name: "Okin",
-            src: "/images/brands/okin.png",
+            src: "/images/brands/okin-white.png",
             alt: "Okin",
             width: 223,
             height: 192,
           },
           {
             name: "Pastelería Amparín",
-            src: "/images/brands/amparin.png",
+            src: "/images/brands/amparin-white.png",
             alt: "Pastelería Amparín",
             width: 268,
             height: 111,
@@ -115,12 +115,12 @@ export const STORIES_ES = {
       {
         id: "servicio",
         label: "Red",
-        title: "Una red nacional con base en Lorca.",
+        title: "Una red nacional con base en el sureste.",
         scene: 1,
         layout: "spread",
         paragraphs: [
           "Maripepa es socio-delegación de Grupo Topgel, una red nacional de distribución de alimentación. Esa relación permite completar la gama con el catálogo del grupo cuando una referencia no está en el almacén de Saprelorca.",
-          "La conversación sigue siendo local: el equipo de Lorca responde, confirma la disponibilidad y organiza la entrega. La red amplía el catálogo; la atención y la ruta se quedan en el sureste.",
+          "La conversación sigue siendo local: el equipo del sureste responde, confirma la disponibilidad y organiza la entrega. La red amplía el catálogo; la atención y la ruta se quedan cerca.",
         ],
       },
       {
@@ -130,14 +130,14 @@ export const STORIES_ES = {
         scene: 3,
         layout: "gallery",
         paragraphs: [
-          "La operación se apoya en dos sitios: la sede de Lorca y la delegación de Viator. Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante.",
+          "La operación se apoya en dos sitios: la sede de Saprelorca y la delegación de Viator. Desde ambos se preparan pedidos y se organizan rutas para Murcia, Almería y Alicante.",
           "La capacidad frigorífica alcanza los 5.000 m³.",
         ],
         shots: [
           {
             image: "/gmp/careers/careers-facility.jpg",
             title: "La nave de Saprelorca.",
-            caption: "Nave de Lorca, donde se prepara la carga.",
+            caption: "Nave de Saprelorca, donde se prepara la carga.",
             href: "/lorca",
           },
           {
@@ -193,6 +193,37 @@ export const STORIES_ES = {
         paragraphs: [
           "En Lorca se coordina la operación de Maripepa: el almacén, los pedidos y las rutas. Es la sede principal y el punto de partida del reparto.",
           "Desde Saprelorca se organiza la carga y se da salida a las entregas del sureste. Aquí se resuelve el día a día de la distribución.",
+        ],
+      },
+      {
+        id: "instalaciones",
+        label: "Instalaciones",
+        title: "La nave, el muelle y la carga.",
+        scene: 2,
+        layout: "gallery",
+        paragraphs: [
+          "La sede reúne almacén, preparación y carga en el mismo recinto. Cada zona tiene su función y su ritmo.",
+          "Estas imágenes ayudan a situar la operación antes de una visita o una recogida.",
+        ],
+        shots: [
+          {
+            image: "/gmp/careers/careers-facility.jpg",
+            title: "La nave de Saprelorca.",
+            caption: "Almacén y preparación de pedidos.",
+            href: "/calidad",
+          },
+          {
+            image: "/gmp/careers/careers-02.jpg",
+            title: "Acceso y carga.",
+            caption: "Entrada de vehículos y zona de preparación.",
+            href: "/reparto",
+          },
+          {
+            image: "/gmp/careers/careers-01.jpg",
+            title: "El camión frigorífico.",
+            caption: "Equipo de frío y carga en la sede.",
+            href: "/calidad",
+          },
         ],
       },
       {
@@ -373,6 +404,37 @@ export const STORIES_ES = {
         paragraphs: [
           "Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento.",
           "La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa.",
+        ],
+      },
+      {
+        id: "ruta",
+        label: "Ruta",
+        title: "Del muelle a la puerta del establecimiento.",
+        scene: 2,
+        layout: "gallery",
+        paragraphs: [
+          "La ruta empieza en el muelle y termina en la puerta del establecimiento. Cada entrega se prepara con el pedido, la zona y el acceso confirmados.",
+          "El equipo revisa la carga y el reparto antes de salir.",
+        ],
+        shots: [
+          {
+            image: "/gmp/careers/careers-01.jpg",
+            title: "Camión frigorífico.",
+            caption: "Equipo de frío y carga en la sede.",
+            href: "/calidad",
+          },
+          {
+            image: "/gmp/careers/careers-03.jpg",
+            title: "Salida de ruta.",
+            caption: "Preparación de la entrega en Saprelorca.",
+            href: "/lorca",
+          },
+          {
+            image: "/gmp/careers/careers-02.jpg",
+            title: "Acceso y carga.",
+            caption: "Entrada de vehículos y zona de preparación.",
+            href: "/contacto",
+          },
         ],
       },
       {

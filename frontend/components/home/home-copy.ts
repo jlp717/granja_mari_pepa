@@ -61,23 +61,23 @@ const es: HomeEditorialCopy = {
     caption: "La nave de Lorca. Polígono Saprelorca.",
   },
   stats: [
-    { value: "1966", label: "Origen en Lorca" },
-    { value: "02", label: "Sedes: Lorca y Viator" },
+    { value: "1966", label: "Año de fundación" },
+    { value: "02", label: "Sedes: Murcia y Almería" },
     { value: "03", label: "Temperaturas: congelado, refrigerado y ambiente" },
   ],
   origin: {
     kicker: "01 · Origen",
     title:
       "Una empresa fundada en 1966. Dos sedes. La misma forma de trabajar.",
-    lead: "Nacimos en Lorca y crecimos con la hostelería del sureste. Hoy coordinamos Lorca y Viator para que producto, pedido y ruta hablen el mismo idioma.",
+    lead: "Nacimos en el sureste y crecimos con la hostelería de Murcia y Almería. Hoy coordinamos dos almacenes para que producto, pedido y ruta hablen el mismo idioma.",
     points: [
       {
-        title: "Lorca, 1966",
-        text: "La empresa nace en Lorca y mantiene allí su sede principal. La nave, el almacén y el equipo son el punto de partida de cada pedido.",
+        title: "La sede principal",
+        text: "La nave de Saprelorca concentra almacén, preparación y salida de pedidos. Es el punto de partida de cada ruta.",
       },
       {
         title: "Dos sedes",
-        text: "Lorca (Murcia) y Viator (Almería) comparten almacén, rutas y atención al cliente. Un mismo equipo, dos puntos de salida.",
+        text: "Murcia y Almería comparten almacén, rutas y atención al cliente. Dos puntos de salida coordinados.",
       },
       {
         title: "Tres temperaturas",
@@ -103,7 +103,7 @@ const es: HomeEditorialCopy = {
       {
         index: "03",
         title: "Dos sedes",
-        text: "Lorca y Viator comparten almacén, rutas y atención. Dos puntos de salida para Murcia, Almería y Alicante.",
+        text: "Las dos sedes comparten almacén, rutas y atención. Dos puntos de salida para Murcia, Almería y Alicante.",
       },
       {
         index: "04",
@@ -167,22 +167,22 @@ const en: HomeEditorialCopy = {
     caption: "The Lorca site. Saprelorca industrial park.",
   },
   stats: [
-    { value: "1966", label: "Founded in Lorca" },
-    { value: "02", label: "Sites: Lorca and Viator" },
+    { value: "1966", label: "Year founded" },
+    { value: "02", label: "Sites: Murcia and Almería" },
     { value: "03", label: "Temperatures: frozen, chilled and ambient" },
   ],
   origin: {
     kicker: "01 · Origin",
     title: "A company founded in 1966. Two sites. One way of working.",
-    lead: "We were born in Lorca and grew with hospitality in the south-east. Today Lorca and Viator coordinate so product, order and route speak the same language.",
+    lead: "We were born in the south-east and grew with hospitality in Murcia and Almería. Today two warehouses coordinate so product, order and route speak the same language.",
     points: [
       {
-        title: "Lorca, 1966",
-        text: "The company was founded in Lorca, where its main site remains. The building, the warehouse and the team are the starting point of every order.",
+        title: "The main site",
+        text: "The Saprelorca facility brings together warehouse, preparation and dispatch. It is the starting point of every route.",
       },
       {
         title: "Two sites",
-        text: "Lorca (Murcia) and Viator (Almería) share warehouse, routes and customer service. One team, two departure points.",
+        text: "Murcia and Almería share warehouse, routes and customer service. Two coordinated departure points.",
       },
       {
         title: "Three temperatures",
@@ -208,7 +208,7 @@ const en: HomeEditorialCopy = {
       {
         index: "03",
         title: "Two sites",
-        text: "Lorca and Viator share warehouse, routes and customer service. Two departure points for Murcia, Almería and Alicante.",
+        text: "Both sites share warehouse, routes and customer service. Two departure points for Murcia, Almería and Alicante.",
       },
       {
         index: "04",
