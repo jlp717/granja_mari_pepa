@@ -249,3 +249,6 @@ backend/verify_*.js
 /backend/tmp-*
 /.gmp-cache/
 /.gmp-worktrees/
+
+# Capturas de auditoría (evidencia local, no se versionan)
+/docs/auditoria/screens/v4/

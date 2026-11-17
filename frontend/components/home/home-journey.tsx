@@ -364,7 +364,7 @@ export function HomeJourney({ locale }: { locale: Locale }) {
         <div className="sec-head" data-rv="fade">
           <span className="k">{manifesto.label}</span>
           <span className="rule" />
-          <span className="k">1966 · LORCA</span>
+          <span className="k">MURCIA · ALMERÍA</span>
         </div>
         <div className="foot-grid">
           <div className="foot-brand">

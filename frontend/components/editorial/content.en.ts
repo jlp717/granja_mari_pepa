@@ -232,7 +232,7 @@ export const STORY_TRANSLATIONS_EN = {
         label: "Judgement",
         title: "Quality is being able to answer for what you deliver.",
         paragraphs: [
-          "Quality starts with being able to answer: what each reference contains, how it is stored and where it comes from. Without that information there is no judgement, only habit.",
+          "Quality starts with being able to answer: what each reference contains, how it is stored and where it comes from. Without that information there is no judgement, only habit. Maripepa answers from Lorca (Murcia) for hospitality, restaurant and catering kitchens.",
           "This page explains what the company documents and what is worth asking for before deciding. It does not replace a reference sheet: it helps you know what to ask for and who to ask.",
         ],
       },
@@ -243,6 +243,18 @@ export const STORY_TRANSLATIONS_EN = {
           "Maripepa works with a quality management system in line with the ISO 9001 standard. It is not a label to hang on the wall: it is the way processes, records and responsibilities are organised.",
           "Traceability follows the product from reception to delivery, and the cold chain is looked after at every step. That way, when something is asked, there is a well-founded answer.",
           "The documentation for each reference is kept and updated. If you need a sheet, an allergen or a storage condition, you ask the team and it is confirmed for the exact product.",
+        ],
+      },
+      {
+        label: "Control",
+        title: "What is controlled and what is documented.",
+        paragraphs: [
+          "Three things support the answer when someone asks about a product: the system, traceability and temperature.",
+        ],
+        facts: [
+          { label: "System", value: "ISO 9001", note: "Processes, records and responsibilities." },
+          { label: "Traceability", value: "Intake to delivery", note: "The product's route is recorded." },
+          { label: "Cold chain", value: "Three temperatures", note: "Frozen, chilled and ambient." },
         ],
       },
       {
@@ -320,7 +332,7 @@ export const STORY_TRANSLATIONS_EN = {
         title: "Delivery for hospitality in Murcia, Almería and Alicante.",
         paragraphs: [
           "Maripepa delivers to hospitality, restaurants and catering in Murcia, Almería and Alicante. Coverage is confirmed for each town and each establishment.",
-          "The Lorca head office and the Viator branch organise the routes. To find out whether we reach your area, give us the full address.",
+          "The Lorca (Murcia) head office and the Viator (Almería) branch organise the routes. To find out whether we reach your area, give us the full address.",
         ],
       },
       {

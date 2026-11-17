@@ -77,7 +77,7 @@ describe("Pepa IA presentation preserves the real chat contract", () => {
     expect(screen.getByRole("dialog", { name: "Pepa IA" })).toBeTruthy();
     expect(document.activeElement).toBe(screen.getByLabelText("Tu mensaje"));
     expect(document.querySelector('[role="dialog"] img')?.getAttribute("src")).toBe(
-      "/brand/logo-maripepa.jpeg",
+      "/gmp/brand/logo-alpha.png",
     );
     expect(fetchMock).not.toHaveBeenCalled();
     fireEvent.keyDown(document, { key: "Escape" });

@@ -296,7 +296,7 @@ export const STORIES_ES = {
         scene: 1,
         layout: "hero",
         paragraphs: [
-          "La calidad empieza por poder responder: qué contiene cada referencia, cómo se conserva y de dónde viene. Sin esa información no hay criterio, solo hábito.",
+          "La calidad empieza por poder responder: qué contiene cada referencia, cómo se conserva y de dónde viene. Sin esa información no hay criterio, solo hábito. Maripepa responde desde Lorca (Murcia) para cocinas de hostelería, restauración y catering.",
           "Esta página explica qué documenta la empresa y qué conviene pedir antes de decidir. No sustituye la ficha de una referencia: te ayuda a saber qué pedir y a quién.",
         ],
       },
@@ -310,6 +310,21 @@ export const STORIES_ES = {
           "Maripepa trabaja con un sistema de gestión de la calidad conforme a la norma ISO 9001. No es una etiqueta para colgar: es la forma de ordenar procesos, registros y responsabilidades.",
           "La trazabilidad recorre el producto de la recepción a la entrega, y la cadena de frío se cuida en cada paso. Así, cuando algo se pregunta, hay una respuesta con base.",
           "La documentación de cada referencia se conserva y se actualiza. Si necesitas una ficha, un alérgeno o una condición de conservación, se solicita al equipo y se confirma para el producto exacto.",
+        ],
+      },
+      {
+        id: "control",
+        label: "Control",
+        title: "Qué se controla y qué se documenta.",
+        scene: 3,
+        layout: "facts",
+        paragraphs: [
+          "Tres cosas sostienen la respuesta cuando alguien pregunta por un producto: el sistema, la trazabilidad y la temperatura.",
+        ],
+        facts: [
+          { label: "Sistema", value: "ISO 9001", note: "Procesos, registros y responsabilidades." },
+          { label: "Trazabilidad", value: "Recepción a entrega", note: "El recorrido del producto queda registrado." },
+          { label: "Cadena de frío", value: "Tres temperaturas", note: "Congelado, refrigerado y ambiente." },
         ],
       },
       {
@@ -403,7 +418,7 @@ export const STORIES_ES = {
         layout: "hero",
         paragraphs: [
           "Maripepa reparte a hostelería, restauración y catering en Murcia, Almería y Alicante. La cobertura se concreta para cada localidad y cada establecimiento.",
-          "La sede de Lorca y la delegación de Viator organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa.",
+          "La sede de Lorca (Murcia) y la delegación de Viator (Almería) organizan las rutas. Para saber si llegamos a tu zona, dinos la dirección completa.",
         ],
       },
       {

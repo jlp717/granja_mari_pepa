@@ -49,3 +49,66 @@ Generado: 2026-11-17T10:41:21.757Z
 - (2 páginas) Formación en producto, seguridad alimentaria, manejo de sistemas y PRL. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
 - (2 páginas) Revisamos cada candidatura y contactamos si encaja en el proceso. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
 - (2 páginas) + Sede principal en Lorca (Murcia) y delegación en Viator (Almería). — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
+
+## Estado final de la auditoría — rama `rediseno/v4-auditoria-contenido`
+
+Base: `rediseno/v3` == `main` == `origin/main` == `e811ade`.
+Alcance: 16 ficheros, +78 / −54. Build PASS (80/80 estáticas), `tsc --noEmit` exit 0, jest 7/7.
+
+### Criterios y evidencia
+
+| # | Criterio | Estado | Evidencia |
+|---|---|---|---|
+| 1 | 22 URLs auditadas | Cumple | Tabla superior de este documento, HTTP 200 en las 22 |
+| 2 | Sin huecos, secciones vacías ni duplicaciones | Cumple con salvedad | 0 px de overflow horizontal y 0 imágenes rotas pintadas en /es, /es/calidad, /es/productos, /es/reparto, /es/contacto. Duplicaciones corregidas: "1966 · LORCA" en el rail del manifiesto, fórmula "hostelería, restauración y catering" repetida en tres páginas, ficha duplicada en el capítulo de control |
+| 3 | Logos con el mismo tratamiento | Cumple | 20+ usos convergen en `/gmp/brand/logo-alpha.png`. Rejilla de marcas normalizada (`max-width: clamp(96px,12vw,150px)`, `max-height: 56px`, `object-fit: contain`). El chatbot deja de arrancar con el JPEG de fondo teal |
+| 4 | Correos con el logo correcto | Configuración de producción correcta; fallo TLS solo en local | Logo por URL HTTPS `https://www.mari-pepa.com/gmp/brand/logo-alpha.png` (200, `image/png`, 23.591 B), 300×91 sobre banda `#0a1015`, origen 594 px = 1,98× retina. Envío real: `cv.rrhh` enviado con `messageId <ad6ac5bc-9e78-6c38-192c-bd8ba4ee4e94@maripepa.es>`; `noreply` rechazado por el certificado del servidor SMTP (ver abajo) Producción verificada: `SMTP_HOST=mn05-02.dnspropio.com` cubre el certificado. Pendiente: envío de prueba desde el servidor. |
+| 5 | Copy claro en todas las páginas | Cumple | `/calidad` pasa de 0 a nombrar Lorca (Murcia); `/productos` y `/reparto` anclados geográficamente sin repetir fórmula. Legales sin mención por decisión editorial |
+| 6 | Calidad profesional | Cumple | `tsc --noEmit` 0, build 0 (80/80), jest 7/7, 5 capturas revisadas, 1 H1 por página, 0 overflow. Rejilla del capítulo `control` verificada por geometría: 3 items en `top: 2423`, `left: 74/505/936`, ancho 431 px |
+| 7 | Rama nueva y reversible | Cumple | `rediseno/v4-auditoria-contenido` creada desde `e811ade`. `main` y `rediseno/v3` intactas |
+
+**Estado global: 6 de 7 criterios cumplidos.** El criterio 4 queda pendiente de un envío de prueba desde el servidor. La configuración de producción es correcta (`SMTP_HOST=mn05-02.dnspropio.com`, nombre que sí cubre el certificado); el fallo TLS documentado abajo era exclusivo del `.env` local. No se firma el 100% hasta que los dos envíos de prueba lleguen con el logo correcto.
+
+### Accesibilidad: `alt` del logo
+
+Auditados todos los usos de `logo-alpha.png`:
+
+- `header.tsx` — `alt="Maripepa"` dentro de un enlace con `aria-label`. Correcto.
+- `footer.tsx` — `alt=""` dentro de un `Link` con `aria-label`. Correcto: el enlace ya tiene nombre accesible.
+- `scene-plate.tsx` (`BrandFallback`) y `HomeEditorial.tsx` (`heroBrand`) — `alt=""` dentro de contenedores con `aria-hidden="true"`. Correcto: son marcas de agua decorativas.
+
+Conclusión: no hay defecto de accesibilidad en el logo. Añadir `alt` a los decorativos provocaría anuncios duplicados en lector de pantalla.
+
+### Envío de prueba SMTP (2026-11-17)
+
+Prueba real contra los buzones configurados en `backend/.env` (12 variables `SMTP_*` presentes).
+
+| Canal | Resultado |
+|---|---|
+| `cv.rrhh` (`sendApplicationReceivedEmail`) | Enviado. `success: true`, `messageId <ad6ac5bc-9e78-6c38-192c-bd8ba4ee4e94@maripepa.es>` |
+| `noreply` (`sendContactAcknowledgment`) | Rechazado antes de autenticar. `code: ESOCKET` |
+
+Error literal del canal `noreply`:
+
+```
+Hostname/IP does not match certificate's altnames:
+Host: _dc-mx.bef93564e202.mari-pepa.com.
+is not in the cert's altnames: DNS:mn05-02.dnspropio.com
+```
+
+Causa: el `.env` **local** tenía `SMTP_HOST=_dc-mx.bef93564e202.mari-pepa.com`, nombre que el certificado presentado no cubre. El `.env` de producción usa `SMTP_HOST=mn05-02.dnspropio.com`, que sí está en los altnames del certificado. `SMTP_CONFIG` fuerza `port: 465`, `secure: true` y `tls.rejectUnauthorized: true`, lo cual es correcto.
+
+Alcance real: el fallo afectaba a todos los correos del transporte `noreply` **solo en el entorno local**. En producción no se ha reproducido: la configuración del servidor es correcta y el envío está pendiente de verificación.
+
+**Corrección 2026-11-17: la afirmación anterior sobre recuperación de contraseña caída en producción era incorrecta; el fallo era local.**
+
+Corrección recomendada (infraestructura, no código): apuntar `SMTP_HOST` al nombre que el certificado sí cubre (`mn05-02.dnspropio.com`) o instalar un certificado válido para el host usado. **No se debe poner `rejectUnauthorized: false`**: desactivaría la verificación TLS.
+
+### Fuera del alcance del agente
+
+- **Avatar del remitente en Gmail.** No lo controla el HTML del correo: depende del perfil del buzón o de BIMI (registro DNS + DMARC + certificado VMC). Requiere acceso al proveedor de correo o al DNS.
+- **Render real en cliente de correo.** Verificado el HTML y la URL, no la bandeja de entrada.
+- **QA visual continuo.** Las capturas son puntuales, tomadas con scroll completo y `prefers-reduced-motion: reduce`. Sin regresión automatizada en CI.
+- **Backend local en :5000.** Si está caído, los bloques de revistas y eventos salen vacíos en las capturas. Es entorno, no diseño.
+- **Ofertas de empleo.** Las 6 vacantes están en `draft` en DB2. Publicarlas es una escritura en base de datos de producción.
+- **Herramientas externas de auditoría** (Firecrawl, SISTRIX, extensiones de QA). Requieren cuentas, claves y navegador con extensiones; no instalables en este entorno.

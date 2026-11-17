@@ -736,8 +736,8 @@
     "voiceNotSupported": "Ihr Browser unterstützt keine Spracheingabe",
     "connectionError": "Es konnte keine Verbindung zum Server hergestellt werden. Bitte versuchen Sie es in einigen Sekunden erneut.",
     "poweredBy": "Pepa IA",
-    "since": "HORECA desde 1966",
-    "downloadInvoice": "Descargar factura"
+    "since": "HORECA seit 1966",
+    "downloadInvoice": "Rechnung herunterladen"
   },
   "footer": {
     "companyName": "MARIPEPA",

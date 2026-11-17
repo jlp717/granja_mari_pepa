@@ -233,6 +233,8 @@ export const UI_ES = {
   quality: "Calidad",
   askService: "Consultar el servicio",
   serviceDetail: "Localidad y contexto de la entrega.",
+  qualityContext: "Calidad y contexto de la consulta",
+  qualityContextDetail: "Dónde se entrega y cómo se conserva el frío.",
   service: "Servicio",
   identify: "Elegir familia",
   recognizeFamily: "Ver la gama",

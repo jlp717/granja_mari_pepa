@@ -278,9 +278,9 @@ async function readSse(
 }
 
 const LOGO_SOURCES = [
+  "/gmp/brand/logo-alpha.png",
   "/brand/logo-maripepa.jpeg",
   "/images/logo.jpeg",
-  "/gmp/brand/logo-alpha.png",
 ];
 
 function BrandMark() {
