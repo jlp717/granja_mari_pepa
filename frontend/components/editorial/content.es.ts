@@ -196,7 +196,7 @@ export const STORIES_ES = {
         ],
       },
       {
-        id: "instalaciones",
+        id: "galeria-lorca",
         label: "Instalaciones",
         title: "La nave, el muelle y la carga.",
         scene: 2,
@@ -407,7 +407,7 @@ export const STORIES_ES = {
         ],
       },
       {
-        id: "ruta",
+        id: "galeria-reparto",
         label: "Ruta",
         title: "Del muelle a la puerta del establecimiento.",
         scene: 2,

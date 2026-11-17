@@ -497,3 +497,9 @@
   object-fit: cover;
   pointer-events: none;
 }
+
+/* Las galerías fotográficas nuevas muestran la foto real aunque el motor GMP
+   tenga una escena disponible para esa sección. */
+.photoVisible {
+  opacity: 1 !important;
+}

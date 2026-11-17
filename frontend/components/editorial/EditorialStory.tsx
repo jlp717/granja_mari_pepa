@@ -206,7 +206,11 @@ export function EditorialStory({
                                 alt={shot.title}
                                 fill
                                 sizes="(max-width: 820px) 100vw, 33vw"
-                                className={styles.sceneFallback}
+                                className={`${styles.sceneFallback} ${
+                                  chapter.id.startsWith("galeria")
+                                    ? styles.photoVisible
+                                    : ""
+                                }`}
                                 data-gmp-view-fallback
                                 loading="lazy"
                               />
