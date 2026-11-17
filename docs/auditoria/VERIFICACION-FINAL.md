@@ -39,10 +39,9 @@ Corregido:
 
 Pendiente / limitación:
 
-- Las galerías de contenido se renderizan con las escenas 3D del motor GMP, que
-  tapan la fotografía de respaldo (`opacity: 0`). Es el diseño aprobado; cambiar
-  la escena por foto plana sería un rediseño, no un ajuste. Las imágenes existen
-  y están en el DOM, pero visualmente mandan las escenas.
+- Las galerías nuevas de `/lorca` y `/reparto` muestran la fotografía real
+  (`opacity: 1` comprobado en DOM); las galerías antiguas de `/acerca` y
+  `/calidad` mantienen las escenas 3D del diseño aprobado.
 - `/contacto` y `/preguntas-frecuentes` siguen siendo páginas de texto y datos,
   sin fotografía principal. No se considera un hueco: su función es informativa.
 - Las 15 imágenes sin `alt` que quedan en home son miniaturas decorativas de

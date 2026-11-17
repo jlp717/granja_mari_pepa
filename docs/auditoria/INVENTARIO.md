@@ -1,6 +1,6 @@
 # Inventario del sitio
 
-Generado: 2026-11-17T10:36:29.124Z
+Generado: 2026-11-17T10:41:21.757Z
 
 | URL | HTTP | Palabras | 1966 | Lorca | Imágenes | Sin alt | H1 |
 |---|---|---|---|---|---|---|---|
@@ -32,9 +32,9 @@ Generado: 2026-11-17T10:36:29.124Z
 - (3 páginas) 05 Consultar el servicio Localidad y contexto de la entrega. — /es/lorca, /es/calidad, /es/reparto
 - (2 páginas) Productos del mar, carnes, precocinados, repostería, panadería, refrigerados y salsas. — /es, /es/productos
 - (2 páginas) PDF Revista Mari Pepa Enero 2026 Abrir PDF Revista Topgel Febrero 2026 Abrir PDF Revista Mari Pepa Marzo 2026 Abrir PDF Revista Topgel Abril 2026 Abrir PDF Revista Topgel Mayo 2026 Abrir PDF Revista Mari Pepa Junio 2026 Abrir Ver todas las revistas De la familia al producto concreto. — /es/productos, /en/productos
-- (2 páginas) Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. — /en, /en/productos
-- (2 páginas) Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /es/contacto, /en/contacto
-- (2 páginas) Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería. — /es/contacto, /en/contacto
+- (2 páginas) Seafood, meat, prepared dishes, pastry, bakery, chilled products and sauces. — /en/productos, /en
+- (2 páginas) Lorca: Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /en/contacto, /es/contacto
+- (2 páginas) Viator: Calle Sierra de Ronda, 26, Polígono Industrial La Juaida, 04240 Viator, Almería. — /en/contacto, /es/contacto
 - (2 páginas) Avenida Francisco Jimeno Sola, 3, Polígono Industrial Saprelorca, 30817 Lorca, Murcia. — /es/preguntas-frecuentes, /en/preguntas-frecuentes
 - (2 páginas) 01 Trabajo con propósito Servimos a cocinas y negocios de Murcia y Almería. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
 - (2 páginas) 02 Sin sorpresas Las condiciones, los turnos y las rutas se explican antes de empezar. — /es/trabaja-con-nosotros, /en/trabaja-con-nosotros
