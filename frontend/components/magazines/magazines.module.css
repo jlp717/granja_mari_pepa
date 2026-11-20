@@ -706,6 +706,18 @@
   background: var(--vermilion);
 }
 
+/* Con zoom la página se arrastra con el dedo o el ratón: el navegador no
+   puede quedarse el gesto ni desplazar por su cuenta. */
+.stageZoomed {
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+}
+
+.stageDragging {
+  cursor: grabbing;
+}
+
 .stageScroll {
   display: flex;
   align-items: center;
@@ -722,6 +734,12 @@
   background: #fff;
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.52);
   transition: opacity 0.25s var(--ease);
+}
+
+/* Al soltar el arrastre y al recolocar el desplazamiento, un ajuste corto.
+   Mientras se arrastra la clase no está: el frame va pegado al dedo. */
+.panSnap {
+  transition: opacity 0.25s var(--ease), transform 120ms var(--ease);
 }
 
 .pageRendering {
@@ -1036,7 +1054,8 @@
   .libraryCover img,
   .tickerArrow,
   .tickerCurrent,
-  .pageCanvas {
+  .pageCanvas,
+  .panSnap {
     transition: none;
   }
 
