@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
   type ChangeEvent,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
 import {
   ChevronLeft,
@@ -22,6 +23,11 @@ import {
 import type { NavMagazine } from "@/lib/use-public-magazines";
 import styles from "./magazines.module.css";
 
+interface PdfRenderTask {
+  promise: Promise<void>;
+  cancel: () => Promise<void>;
+}
+
 interface PdfPage {
   getViewport: (params: { scale: number }) => { width: number; height: number };
   getTextContent: () => Promise<{ items: { str: string }[] }>;
@@ -29,7 +35,7 @@ interface PdfPage {
     canvasContext: CanvasRenderingContext2D;
     viewport: unknown;
     transform?: number[];
-  }) => { promise: Promise<void> };
+  }) => PdfRenderTask;
 }
 
 interface PdfDocument {
@@ -41,6 +47,16 @@ interface PdfDocument {
 const documentCache = new Map<string, Promise<PdfDocument>>();
 const cacheOrder: string[] = [];
 const MAX_CACHED = 3;
+
+/**
+ * PDF.js lanza `RenderingCancelledException` cuando cancelamos una tarea de
+ * render en curso (cambio de zoom, de página o desmontaje). No es un fallo:
+ * la tarea que gana es la nueva.
+ */
+function isRenderCancellation(failure: unknown): boolean {
+  if (!failure || typeof failure !== "object") return false;
+  return (failure as { name?: string }).name === "RenderingCancelledException";
+}
 
 async function loadDocument(url: string, onProgress?: (value: number) => void) {
   const cached = documentCache.get(url);
@@ -95,7 +111,15 @@ export function MagazineViewer({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const layerRef = useRef<HTMLDivElement>(null);
-  const pointerStart = useRef<number | null>(null);
+  const renderTaskRef = useRef<PdfRenderTask | null>(null);
+  const gestureRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    originX: number;
+    originY: number;
+  } | null>(null);
+  const lastTapRef = useRef<{ at: number; x: number; y: number } | null>(null);
   const [pdf, setPdf] = useState<PdfDocument | null>(null);
   const [page, setPage] = useState(1);
   const [numPages, setNumPages] = useState(0);
@@ -104,6 +128,9 @@ export function MagazineViewer({
   const [rendering, setRendering] = useState(false);
   const [error, setError] = useState("");
   const [stage, setStage] = useState({ width: 0, height: 0 });
+  const [frame, setFrame] = useState({ width: 0, height: 0 });
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [zoom, setZoom] = useState(1);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -126,6 +153,9 @@ export function MagazineViewer({
     setLoading(true);
     setPdf(null);
     setZoom(1);
+    setPan({ x: 0, y: 0 });
+    setFrame({ width: 0, height: 0 });
+    setDragging(false);
     setSearchOpen(false);
     setQuery("");
     setResults([]);
@@ -177,11 +207,47 @@ export function MagazineViewer({
       window.document.removeEventListener("fullscreenchange", onFullscreen);
   }, []);
 
+  const clampPan = useCallback(
+    (x: number, y: number) => {
+      const maxX = Math.max(0, (frame.width - stage.width) / 2);
+      const maxY = Math.max(0, (frame.height - stage.height) / 2);
+      return {
+        x: Math.min(maxX, Math.max(-maxX, x)),
+        y: Math.min(maxY, Math.max(-maxY, y)),
+      };
+    },
+    [frame.width, frame.height, stage.width, stage.height],
+  );
+
+  // Tras cada cambio de tamaño o de zoom el desplazamiento se reajusta solo.
+  useEffect(() => {
+    setPan((current) => {
+      const next = clampPan(current.x, current.y);
+      return next.x === current.x && next.y === current.y ? current : next;
+    });
+  }, [clampPan]);
+
   useEffect(() => {
     if (!pdf || !canvasRef.current || stage.width < 40) return;
     let cancelled = false;
+    let currentTask: PdfRenderTask | null = null;
+
+    const cancelPrevious = async () => {
+      const previous = renderTaskRef.current;
+      if (!previous) return;
+      try {
+        await previous.cancel();
+      } catch {
+        /* la tarea ya había terminado */
+      }
+      if (renderTaskRef.current === previous) renderTaskRef.current = null;
+    };
+
     (async () => {
       setRendering(true);
+      // Nunca dos render() vivos sobre el mismo canvas: PDF.js pierde el frame.
+      await cancelPrevious();
+      if (cancelled) return;
       try {
         const pdfPage = await pdf.getPage(page);
         if (cancelled) return;
@@ -194,37 +260,71 @@ export function MagazineViewer({
         const scale = Math.min(4, fit * zoom);
         const viewport = pdfPage.getViewport({ scale });
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        // Se dibuja fuera de pantalla y se vuelca solo al terminar: mientras
+        // tanto el canvas visible conserva el último frame bueno.
+        const work = window.document.createElement("canvas");
+        work.width = Math.floor(viewport.width * dpr);
+        work.height = Math.floor(viewport.height * dpr);
+        const workContext = work.getContext("2d");
+        if (!workContext) return;
+        workContext.clearRect(0, 0, work.width, work.height);
+        const task = pdfPage.render({
+          canvasContext: workContext,
+          viewport,
+          transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
+        });
+        currentTask = task;
+        renderTaskRef.current = task;
+        await task.promise;
+        if (renderTaskRef.current === task) renderTaskRef.current = null;
+        if (cancelled) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
-        canvas.width = Math.floor(viewport.width * dpr);
-        canvas.height = Math.floor(viewport.height * dpr);
+        canvas.width = work.width;
+        canvas.height = work.height;
         canvas.style.width = `${Math.floor(viewport.width)}px`;
         canvas.style.height = `${Math.floor(viewport.height)}px`;
         const context = canvas.getContext("2d");
         if (!context) return;
         context.clearRect(0, 0, canvas.width, canvas.height);
-        await pdfPage.render({
-          canvasContext: context,
-          viewport,
-          transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
-        }).promise;
+        context.drawImage(work, 0, 0);
+        setFrame({
+          width: Math.floor(viewport.width),
+          height: Math.floor(viewport.height),
+        });
         if (page < pdf.numPages) {
           pdf.getPage(page + 1).catch(() => undefined);
         }
-      } catch {
-        if (!cancelled) setError("No se pudo dibujar esta página.");
+      } catch (failure) {
+        if (currentTask && renderTaskRef.current === currentTask) {
+          renderTaskRef.current = null;
+        }
+        if (cancelled) return;
+        // Una cancelación no es un error: la sustituye el render nuevo.
+        if (isRenderCancellation(failure)) return;
+        setError("No se pudo dibujar esta página.");
       } finally {
         if (!cancelled) setRendering(false);
       }
     })();
+
     return () => {
       cancelled = true;
+      const task = renderTaskRef.current;
+      if (task) {
+        try {
+          void task.cancel().catch(() => undefined);
+        } catch {
+          /* la tarea ya había terminado */
+        }
+      }
     };
   }, [pdf, page, stage.width, stage.height, numPages, zoom]);
 
   const go = useCallback(
     (next: number) => {
       if (!numPages) return;
+      setPan({ x: 0, y: 0 });
       setPage(Math.min(numPages, Math.max(1, next)));
     },
     [numPages],
@@ -249,12 +349,15 @@ export function MagazineViewer({
       } else if (event.key === "+" || event.key === "=") {
         event.preventDefault();
         setZoom((value) => Math.min(3, value + 0.25));
+        setPan({ x: 0, y: 0 });
       } else if (event.key === "-") {
         event.preventDefault();
         setZoom((value) => Math.max(1, value - 0.25));
+        setPan({ x: 0, y: 0 });
       } else if (event.key === "0") {
         event.preventDefault();
         setZoom(1);
+        setPan({ x: 0, y: 0 });
       }
     };
     window.addEventListener("keydown", onKey);
@@ -322,6 +425,118 @@ export function MagazineViewer({
       setSearching(false);
       setSearchDone(true);
     }
+  };
+
+  const zoomBy = (delta: number) => {
+    setZoom((value) => Math.min(3, Math.max(1, value + delta)));
+    setPan({ x: 0, y: 0 });
+  };
+
+  const fitToScreen = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const endGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const element = event.currentTarget;
+    if (element.hasPointerCapture(event.pointerId)) {
+      try {
+        element.releasePointerCapture(event.pointerId);
+      } catch {
+        /* el navegador ya había liberado la captura */
+      }
+    }
+    if (gestureRef.current?.pointerId === event.pointerId) {
+      gestureRef.current = null;
+    }
+    setDragging(false);
+  };
+
+  const zoomAtPoint = (clientX: number, clientY: number) => {
+    const element = stageRef.current;
+    if (!element) return;
+    if (zoom > 1) {
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
+      return;
+    }
+    const rect = element.getBoundingClientRect();
+    const offsetX = clientX - (rect.left + rect.width / 2);
+    const offsetY = clientY - (rect.top + rect.height / 2);
+    const ratio = 2 / zoom;
+    setZoom(2);
+    // El punto pulsado se queda quieto: el desplazamiento compensa el
+    // crecimiento del contenido.
+    setPan({
+      x: offsetX - (offsetX - pan.x) * ratio,
+      y: offsetY - (offsetY - pan.y) * ratio,
+    });
+  };
+
+  const onStagePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    gestureRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: pan.x,
+      originY: pan.y,
+    };
+    if (zoom > 1) {
+      try {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      } catch {
+        /* el puntero ya se había soltado */
+      }
+      setDragging(true);
+    }
+  };
+
+  const onStagePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = gestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    if (zoom <= 1) return;
+    setPan(
+      clampPan(
+        gesture.originX + (event.clientX - gesture.startX),
+        gesture.originY + (event.clientY - gesture.startY),
+      ),
+    );
+  };
+
+  const onStagePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = gestureRef.current;
+    endGesture(event);
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+    const moved = Math.hypot(deltaX, deltaY);
+    // Con zoom, el arrastre recorre la página y nunca cambia de página.
+    if (zoom === 1 && Math.abs(deltaX) >= 60) {
+      lastTapRef.current = null;
+      go(deltaX < 0 ? page + 1 : page - 1);
+      return;
+    }
+    if (moved > 10) {
+      lastTapRef.current = null;
+      return;
+    }
+    const now = Date.now();
+    const last = lastTapRef.current;
+    if (
+      last &&
+      now - last.at < 320 &&
+      Math.hypot(event.clientX - last.x, event.clientY - last.y) < 30
+    ) {
+      lastTapRef.current = null;
+      zoomAtPoint(event.clientX, event.clientY);
+      return;
+    }
+    lastTapRef.current = { at: now, x: event.clientX, y: event.clientY };
+  };
+
+  const onStagePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    endGesture(event);
   };
 
   const chips = useMemo(
@@ -482,17 +697,14 @@ export function MagazineViewer({
 
         <div
           ref={stageRef}
-          className={styles.stage}
-          onPointerDown={(event) => {
-            pointerStart.current = event.clientX;
-          }}
-          onPointerUp={(event) => {
-            if (pointerStart.current === null) return;
-            const delta = event.clientX - pointerStart.current;
-            pointerStart.current = null;
-            if (zoom > 1 || Math.abs(delta) < 60) return;
-            go(delta < 0 ? page + 1 : page - 1);
-          }}
+          className={`${styles.stage} ${zoom > 1 ? styles.stageZoomed : ""} ${
+            dragging ? styles.stageDragging : ""
+          }`}
+          onPointerDown={onStagePointerDown}
+          onPointerMove={onStagePointerMove}
+          onPointerUp={onStagePointerUp}
+          onPointerCancel={onStagePointerCancel}
+          onLostPointerCapture={onStagePointerCancel}
         >
           <div className={styles.stageScroll}>
             {loading ? (
@@ -513,7 +725,10 @@ export function MagazineViewer({
             ) : (
               <canvas
                 ref={canvasRef}
-                className={`${styles.pageCanvas} ${rendering ? styles.pageRendering : ""}`}
+                className={`${styles.pageCanvas} ${rendering ? styles.pageRendering : ""} ${
+                  dragging ? "" : styles.panSnap
+                }`}
+                style={{ transform: `translate3d(${pan.x}px, ${pan.y}px, 0)` }}
                 role="img"
                 aria-label={`Página ${page} de ${numPages || 1}`}
               />
@@ -536,7 +751,7 @@ export function MagazineViewer({
         <div className={styles.zoomControls}>
           <button
             type="button"
-            onClick={() => setZoom((value) => Math.max(1, value - 0.25))}
+            onClick={() => zoomBy(-0.25)}
             disabled={zoom <= 1}
             aria-label="Reducir zoom"
           >
@@ -545,7 +760,7 @@ export function MagazineViewer({
           <button
             type="button"
             className={styles.zoomValue}
-            onClick={() => setZoom(1)}
+            onClick={fitToScreen}
             aria-label="Ajustar a la pantalla"
             title="Ajustar a la pantalla"
           >
@@ -553,7 +768,7 @@ export function MagazineViewer({
           </button>
           <button
             type="button"
-            onClick={() => setZoom((value) => Math.min(3, value + 0.25))}
+            onClick={() => zoomBy(0.25)}
             disabled={zoom >= 3}
             aria-label="Aumentar zoom"
           >
