@@ -173,6 +173,8 @@ export function AdminMagazines({
         title: editing.title.trim(),
         edition: editing.edition.trim(),
         description: editing.description.trim(),
+        priority: Math.min(9, Math.max(0, Math.round(Number(editing.priority) || 0))),
+        validUntil: editing.validUntil ? editing.validUntil.slice(0, 10) : null,
         updatedAt: now,
         createdAt: editing.createdAt || now,
       });
@@ -257,12 +259,23 @@ export function AdminMagazines({
               <div className={styles.magInfo}>
                 <div className={styles.magTopline}>
                   <span className={styles.kicker}>{formatAdminDate(magazine.date)}</span>
-                  <span className={`${styles.status} ${magazine.status === "published" ? styles.status_green : styles.status_amber}`}>
-                    {magazine.status === "published" ? "Publicada" : "Borrador"}
+                  <span className={styles.statusStack}>
+                    <span className={`${styles.status} ${magazine.status === "published" ? styles.status_green : styles.status_amber}`}>
+                      {magazine.status === "published" ? "Publicada" : "Borrador"}
+                    </span>
+                    {magazine.expired ? (
+                      <span className={`${styles.status} ${styles.status_red}`}>Caducada</span>
+                    ) : null}
                   </span>
                 </div>
                 <h2>{magazine.title || "Sin título"}</h2>
                 <p>{magazine.edition || "Sin edición"}</p>
+                <span className={styles.metaLine}>
+                  Prioridad {magazine.priority ?? 0} ·{" "}
+                  {magazine.validUntil
+                    ? `Vigente hasta ${formatAdminDate(magazine.validUntil)}`
+                    : "Sin caducidad"}
+                </span>
                 <span className={styles.magFile}>
                   <FileText size={13} aria-hidden="true" />
                   {magazine.pdfName || "Sin PDF"}
@@ -376,6 +389,36 @@ export function AdminMagazines({
                       <option value="draft">Borrador</option>
                       <option value="published">Publicada</option>
                     </select>
+                  </label>
+                  <label className={styles.field}>
+                    <span>Prioridad</span>
+                    <input
+                      type="number"
+                      min={0}
+                      max={9}
+                      step={1}
+                      value={editing.priority ?? 0}
+                      onChange={(event) =>
+                        set("priority", Math.min(9, Math.max(0, Number(event.target.value) || 0)))
+                      }
+                      className={styles.input}
+                    />
+                    <em className={styles.formHint}>
+                      0 = normal. Más alto sale antes en la web.
+                    </em>
+                  </label>
+                  <label className={styles.field}>
+                    <span>Vigencia hasta</span>
+                    <input
+                      type="date"
+                      value={(editing.validUntil || "").slice(0, 10)}
+                      onChange={(event) => set("validUntil", event.target.value || null)}
+                      className={styles.input}
+                    />
+                    <em className={styles.formHint}>
+                      Pasada esta fecha deja de mostrarse en la web. No se borra: sigue
+                      aquí para prorrogarla.
+                    </em>
                   </label>
                   <label className={`${styles.field} ${styles.fieldWide}`}>
                     <span>Descripción</span>

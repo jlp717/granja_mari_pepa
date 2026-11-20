@@ -60,6 +60,9 @@ export interface JobDetail {
 export interface AdminJob extends Job {
   id: string;
   status: JobStatus;
+  priority: number;
+  validUntil: string | null;
+  expired?: boolean;
   createdAt: string;
   updatedAt: string;
   createdBy?: string;
@@ -77,6 +80,9 @@ export interface Magazine {
   pdfName: string;
   coverUrl: string;
   status: MagazineStatus;
+  priority: number;
+  validUntil: string | null;
+  expired?: boolean;
   createdAt: string;
   updatedAt: string;
   createdBy?: string;
@@ -561,6 +567,8 @@ export function emptyJob(): AdminJob {
     icon: "",
     accent: "",
     status: "draft",
+    priority: 0,
+    validUntil: null,
     createdAt: now,
     updatedAt: now,
   };
@@ -578,6 +586,8 @@ export function emptyMagazine(): Magazine {
     pdfName: "",
     coverUrl: "",
     status: "draft",
+    priority: 0,
+    validUntil: null,
     createdAt: now,
     updatedAt: now,
   };

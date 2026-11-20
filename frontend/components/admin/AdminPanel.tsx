@@ -1031,6 +1031,12 @@ export function AdminPanel() {
       onConfirm: async () => {
         try {
           await revokeMemberRequest(member);
+          // La fila desaparece de la vista y la lista se relee del servidor.
+          setState((current) =>
+            current
+              ? { ...current, team: current.team.filter((item) => item.id !== member.id) }
+              : current,
+          );
           await refresh();
           notify("Acceso revocado");
         } catch (failure) {

@@ -316,8 +316,19 @@ const inviteMember = wrap(async (req, res) => {
 });
 
 const revokeMember = wrap(async (req, res) => {
-  const done = await adminService.revokeUser(req.params.id, actor(req));
-  if (!done) return fail(res, 404, 'Ese acceso ya no existe.');
+  const id = String(req.params.id || '').trim();
+  if (!id) {
+    return fail(res, 400, 'Falta el identificador del usuario.', 'INVALID_ID');
+  }
+  const done = await adminService.revokeUser(id, actor(req));
+  if (!done) {
+    return fail(
+      res,
+      404,
+      'Ese usuario ya no existe o ya estaba dado de baja.',
+      'NOT_FOUND',
+    );
+  }
   contentEvents.publishAdmin('team', 'deleted');
   return res.json({ success: true });
 });
