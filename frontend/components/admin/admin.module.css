@@ -1280,6 +1280,23 @@
   color: var(--gmp-muted);
 }
 
+/* Prioridad y fecha de vigencia: mismas fuentes y tokens que el resto del panel. */
+.statusStack {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.metaLine {
+  display: block;
+  margin-top: 4px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gmp-muted);
+}
+
 .empty {
   display: flex;
   flex-direction: column;

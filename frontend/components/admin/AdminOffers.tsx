@@ -200,6 +200,8 @@ export function AdminOffers({
         slug: uniqueSlug(slug, jobs, editing.id),
         title: editing.title.trim(),
         description: editing.description.trim(),
+        priority: Math.min(9, Math.max(0, Math.round(Number(editing.priority) || 0))),
+        validUntil: editing.validUntil ? editing.validUntil.slice(0, 10) : null,
         responsibilities: editing.responsibilities.map((item) => item.trim()).filter(Boolean),
         requirements: editing.requirements.map((item) => item.trim()).filter(Boolean),
         offers: editing.offers.map((item) => item.trim()).filter(Boolean),
@@ -310,8 +312,19 @@ export function AdminOffers({
                     <td data-label="Departamento">{job.department}</td>
                     <td data-label="Sede">{job.location}</td>
                     <td data-label="Estado">
-                      <span className={`${styles.status} ${job.status === "published" ? styles.status_green : styles.status_amber}`}>
-                        {statusLabel(job.status)}
+                      <div className={styles.statusStack}>
+                        <span className={`${styles.status} ${job.status === "published" ? styles.status_green : styles.status_amber}`}>
+                          {statusLabel(job.status)}
+                        </span>
+                        {job.expired ? (
+                          <span className={`${styles.status} ${styles.status_red}`}>Caducada</span>
+                        ) : null}
+                      </div>
+                      <span className={styles.metaLine}>
+                        Prioridad {job.priority ?? 0} ·{" "}
+                        {job.validUntil
+                          ? `Vigente hasta ${formatAdminDate(job.validUntil)}`
+                          : "Sin caducidad"}
                       </span>
                     </td>
                     <td data-label="Actualizada">{formatAdminDate(job.updatedAt)}</td>
@@ -463,6 +476,36 @@ export function AdminOffers({
                       onChange={(event) => set("schedule", event.target.value)}
                       className={styles.input}
                     />
+                  </label>
+                  <label className={styles.field}>
+                    <span>Prioridad</span>
+                    <input
+                      type="number"
+                      min={0}
+                      max={9}
+                      step={1}
+                      value={editing.priority ?? 0}
+                      onChange={(event) =>
+                        set("priority", Math.min(9, Math.max(0, Number(event.target.value) || 0)))
+                      }
+                      className={styles.input}
+                    />
+                    <em className={styles.formHint}>
+                      0 = normal. Más alto sale antes en la web.
+                    </em>
+                  </label>
+                  <label className={styles.field}>
+                    <span>Vigencia hasta</span>
+                    <input
+                      type="date"
+                      value={(editing.validUntil || "").slice(0, 10)}
+                      onChange={(event) => set("validUntil", event.target.value || null)}
+                      className={styles.input}
+                    />
+                    <em className={styles.formHint}>
+                      Pasada esta fecha deja de mostrarse en la web. No se borra: sigue
+                      aquí para prorrogarla.
+                    </em>
                   </label>
                 </div>
                 <datalist id="admin-departments">

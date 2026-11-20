@@ -114,28 +114,67 @@ async function main() {
     process.env.ODBC_CONNECTION_STRING,
   );
   try {
-    await connection.query("DELETE FROM JAVIER.ADMIN_MAGAZINES");
+    // Nada se borra físicamente: las revistas que ya no están en el catálogo
+    // quedan de baja lógica (ACTIVE = 0 + DELETED_AT) y se conservan.
+    const seedIds = MAGAZINES.map((magazine) => magazine.id);
+    if (seedIds.length) {
+      const marks = seedIds.map(() => '?').join(',');
+      await connection.query(
+        `UPDATE JAVIER.ADMIN_MAGAZINES
+            SET ACTIVE = 0, DELETED_AT = CURRENT TIMESTAMP,
+                UPDATED_AT = CURRENT TIMESTAMP, UPDATED_BY = 'Sistema'
+          WHERE ACTIVE = 1 AND ID NOT IN (${marks})`,
+        seedIds,
+      );
+    }
     for (const magazine of MAGAZINES) {
       const full = path.join(CATALOGS, magazine.file);
       const pdf = fs.readFileSync(full);
       const cover = `/catalogs/covers/${magazine.file.replace(/\.pdf$/i, '.jpg')}`;
-      await connection.query(
-        `INSERT INTO JAVIER.ADMIN_MAGAZINES
-          (ID, TITLE, EDITION, PUB_DATE, DESCRIPTION, PDF_URL, PDF_NAME, COVER_URL,
-           STATUS, PDF_DATA, ACTIVE, CREATED_BY, UPDATED_BY)
-         VALUES (?,?,?,?,?,?,?,?, 'published', ?, 1, 'Sistema', 'Sistema')`,
-        [
-          magazine.id,
-          magazine.title,
-          magazine.edition,
-          magazine.date,
-          magazine.description,
-          `/catalogs/${magazine.file}`,
-          magazine.file,
-          cover,
-          pdf,
-        ],
+      const existing = await connection.query(
+        'SELECT COUNT(*) AS N FROM JAVIER.ADMIN_MAGAZINES WHERE ID = ?',
+        [magazine.id],
       );
+      if (Number(existing[0].N) > 0) {
+        // Reactiva la edición si estaba de baja: se actualiza, nunca se duplica.
+        await connection.query(
+          `UPDATE JAVIER.ADMIN_MAGAZINES
+              SET TITLE = ?, EDITION = ?, PUB_DATE = ?, DESCRIPTION = ?, PDF_URL = ?,
+                  PDF_NAME = ?, COVER_URL = ?, STATUS = 'published', PDF_DATA = ?,
+                  ACTIVE = 1, DELETED_AT = NULL, UPDATED_AT = CURRENT TIMESTAMP,
+                  UPDATED_BY = 'Sistema'
+            WHERE ID = ?`,
+          [
+            magazine.title,
+            magazine.edition,
+            magazine.date,
+            magazine.description,
+            `/catalogs/${magazine.file}`,
+            magazine.file,
+            cover,
+            pdf,
+            magazine.id,
+          ],
+        );
+      } else {
+        await connection.query(
+          `INSERT INTO JAVIER.ADMIN_MAGAZINES
+            (ID, TITLE, EDITION, PUB_DATE, DESCRIPTION, PDF_URL, PDF_NAME, COVER_URL,
+             STATUS, PDF_DATA, ACTIVE, CREATED_BY, UPDATED_BY)
+           VALUES (?,?,?,?,?,?,?,?, 'published', ?, 1, 'Sistema', 'Sistema')`,
+          [
+            magazine.id,
+            magazine.title,
+            magazine.edition,
+            magazine.date,
+            magazine.description,
+            `/catalogs/${magazine.file}`,
+            magazine.file,
+            cover,
+            pdf,
+          ],
+        );
+      }
       console.log('OK', magazine.edition, Math.round(pdf.length / 1024 / 1024) + 'MB');
     }
     const count = await connection.query(

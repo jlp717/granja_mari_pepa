@@ -95,6 +95,72 @@ function slugify(value) {
     .slice(0, 120);
 }
 
+/* ------------------------------------------- prioridad y fecha de vigencia */
+
+// 0 = normal; cuanto más alto, antes sale en la web pública.
+const PRIORITY_MIN = 0;
+const PRIORITY_MAX = 9;
+
+function clampPriority(value) {
+  const parsed = Number.parseInt(String(value === undefined || value === null ? '' : value).trim(), 10);
+  if (!Number.isFinite(parsed)) return PRIORITY_MIN;
+  return Math.min(PRIORITY_MAX, Math.max(PRIORITY_MIN, parsed));
+}
+
+/**
+ * Vigencia de publicación. Acepta `YYYY-MM-DD` o un datetime ISO.
+ * - Vacío o inválido → null (sin caducidad).
+ * - Solo fecha → 23:59:59 de ese día, para que el último día siga visible.
+ * Devuelve un Date validado o null.
+ */
+function parseValidUntil(value) {
+  if (value === undefined || value === null) return null;
+  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value;
+  const match = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/.exec(
+    String(value).trim(),
+  );
+  if (!match) return null;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const hasTime = match[4] !== undefined && match[5] !== undefined;
+  const hours = hasTime ? Number(match[4]) : 23;
+  const minutes = hasTime ? Number(match[5]) : 59;
+  const seconds = hasTime ? Number(match[6] || 0) : 59;
+  const date = new Date(year, month - 1, day, hours, minutes, seconds, 0);
+  // Rechaza fechas imposibles (2026-02-31) sin depender del motor de base de datos.
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
+    return null;
+  }
+  return date;
+}
+
+function validUntilParam(value) {
+  const date = parseValidUntil(value);
+  return date ? date.toISOString() : null;
+}
+
+// La caducidad se calcula en la base de datos: VALID_UNTIL < CURRENT DATE.
+const EXPIRED_COLUMN = `CASE WHEN VALID_UNTIL IS NOT NULL AND VALID_UNTIL < CURRENT DATE
+  THEN 1 ELSE 0 END AS EXPIRED`;
+
+/**
+ * Baja lógica: el registro se conserva en la tabla con ACTIVE = 0 y DELETED_AT.
+ * Devuelve true solo si la fila existe y quedó realmente inactiva. Sirve para no
+ * responder "borrado" cuando el UPDATE no tocó ninguna fila.
+ */
+async function confirmSoftDeleted(tableName, id) {
+  const rows = await query(
+    `SELECT ACTIVE FROM ${table(tableName)} WHERE ID = ?`,
+    [id],
+  );
+  return rows.length > 0 && Number(rows[0].ACTIVE) !== 1;
+}
+
 /* ------------------------------------------------------------------ jobs */
 
 function parseDetails(value) {
@@ -142,6 +208,9 @@ function mapJob(row) {
     icon: String(row.ICON).trim(),
     accent: String(row.ACCENT).trim(),
     status: String(row.STATUS).trim(),
+    priority: clampPriority(row.PRIORITY),
+    validUntil: iso(row.VALID_UNTIL),
+    expired: Number(row.EXPIRED || 0) === 1,
     createdAt: iso(row.CREATED_AT),
     updatedAt: iso(row.UPDATED_AT),
     createdBy: String(row.CREATED_BY || '').trim(),
@@ -151,6 +220,7 @@ function mapJob(row) {
 
 const JOB_COLUMNS = `ID, SLUG, TITLE, DEPARTMENT, LOCATION, JOB_TYPE, SCHEDULE, DESCRIPTION,
   RESPONSIBILITIES, REQUIREMENTS, OFFERS, DETAILS, ICON, ACCENT, STATUS,
+  PRIORITY, VALID_UNTIL, ${EXPIRED_COLUMN},
   CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY`;
 
 async function listJobs({ includeDeleted = false } = {}) {
@@ -194,9 +264,9 @@ async function createJob(payload, actor) {
   await query(
     `INSERT INTO ${table('ADMIN_JOB_OFFERS')}
       (ID, SLUG, TITLE, DEPARTMENT, LOCATION, JOB_TYPE, SCHEDULE, DESCRIPTION,
-       RESPONSIBILITIES, REQUIREMENTS, OFFERS, DETAILS, ICON, ACCENT, STATUS, ACTIVE,
-       CREATED_BY, UPDATED_BY)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?)`,
+       RESPONSIBILITIES, REQUIREMENTS, OFFERS, DETAILS, ICON, ACCENT, STATUS,
+       PRIORITY, VALID_UNTIL, ACTIVE, CREATED_BY, UPDATED_BY)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?)`,
     [
       id,
       slug,
@@ -213,6 +283,8 @@ async function createJob(payload, actor) {
       str(payload.icon, 24) || 'warehouse',
       str(payload.accent, 24) || '#C24A1F',
       payload.status === 'published' ? 'published' : 'draft',
+      clampPriority(payload.priority),
+      validUntilParam(payload.validUntil),
       actor,
       actor,
     ],
@@ -234,7 +306,8 @@ async function updateJob(id, payload, actor) {
     `UPDATE ${table('ADMIN_JOB_OFFERS')} SET
       SLUG = ?, TITLE = ?, DEPARTMENT = ?, LOCATION = ?, JOB_TYPE = ?, SCHEDULE = ?,
       DESCRIPTION = ?, RESPONSIBILITIES = ?, REQUIREMENTS = ?, OFFERS = ?, DETAILS = ?,
-      ICON = ?, ACCENT = ?, STATUS = ?, UPDATED_AT = CURRENT TIMESTAMP, UPDATED_BY = ?
+      ICON = ?, ACCENT = ?, STATUS = ?, PRIORITY = ?, VALID_UNTIL = ?,
+      UPDATED_AT = CURRENT TIMESTAMP, UPDATED_BY = ?
      WHERE ID = ? AND ACTIVE = 1`,
     [
       slug,
@@ -251,6 +324,8 @@ async function updateJob(id, payload, actor) {
       str(payload.icon, 24) || 'warehouse',
       str(payload.accent, 24) || '#C24A1F',
       payload.status === 'published' ? 'published' : 'draft',
+      clampPriority(payload.priority),
+      validUntilParam(payload.validUntil),
       actor,
       id,
     ],
@@ -295,6 +370,8 @@ async function deleteJob(id, actor) {
      WHERE ID = ? AND ACTIVE = 1`,
     [actor, id],
   );
+  // Nada se borra físicamente: se confirma que la baja lógica se aplicó de verdad.
+  if (!(await confirmSoftDeleted('ADMIN_JOB_OFFERS', id))) return false;
   await logActivity({
     kind: 'delete',
     entity: 'Oferta',
@@ -332,6 +409,9 @@ function mapMagazine(row) {
     pdfName: String(row.PDF_NAME || '').trim(),
     coverUrl: String(row.COVER_URL || '').trim(),
     status: String(row.STATUS).trim(),
+    priority: clampPriority(row.PRIORITY),
+    validUntil: iso(row.VALID_UNTIL),
+    expired: Number(row.EXPIRED || 0) === 1,
     createdAt: iso(row.CREATED_AT),
     updatedAt: iso(row.UPDATED_AT),
     createdBy: String(row.CREATED_BY || '').trim(),
@@ -340,7 +420,8 @@ function mapMagazine(row) {
 }
 
 const MAGAZINE_COLUMNS = `ID, TITLE, EDITION, PUB_DATE, DESCRIPTION, PDF_URL, PDF_NAME,
-  COVER_URL, STATUS, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY`;
+  COVER_URL, STATUS, PRIORITY, VALID_UNTIL, ${EXPIRED_COLUMN},
+  CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY`;
 
 const ADMIN_UPLOAD_DIR = path.join(__dirname, '..', '..', 'uploads', 'admin');
 
@@ -376,8 +457,8 @@ async function createMagazine(payload, actor) {
   await query(
     `INSERT INTO ${table('ADMIN_MAGAZINES')}
       (ID, TITLE, EDITION, PUB_DATE, DESCRIPTION, PDF_URL, PDF_NAME, COVER_URL,
-       STATUS, PDF_DATA, ACTIVE, CREATED_BY, UPDATED_BY)
-     VALUES (?,?,?,?,?,?,?,?,?,?,1,?,?)`,
+       STATUS, PRIORITY, VALID_UNTIL, PDF_DATA, ACTIVE, CREATED_BY, UPDATED_BY)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,1,?,?)`,
     [
       id,
       str(payload.title, 160),
@@ -388,6 +469,8 @@ async function createMagazine(payload, actor) {
       str(payload.pdfName, 255),
       str(payload.coverUrl, 500),
       payload.status === 'published' ? 'published' : 'draft',
+      clampPriority(payload.priority),
+      validUntilParam(payload.validUntil),
       pdfData,
       actor,
       actor,
@@ -410,7 +493,7 @@ async function updateMagazine(id, payload, actor) {
     await query(
       `UPDATE ${table('ADMIN_MAGAZINES')} SET
         TITLE = ?, EDITION = ?, PUB_DATE = ?, DESCRIPTION = ?, PDF_URL = ?, PDF_NAME = ?,
-        COVER_URL = ?, STATUS = ?, PDF_DATA = ?,
+        COVER_URL = ?, STATUS = ?, PRIORITY = ?, VALID_UNTIL = ?, PDF_DATA = ?,
         UPDATED_AT = CURRENT TIMESTAMP, UPDATED_BY = ?
        WHERE ID = ? AND ACTIVE = 1`,
       [
@@ -422,6 +505,8 @@ async function updateMagazine(id, payload, actor) {
         str(payload.pdfName, 255),
         str(payload.coverUrl, 500),
         payload.status === 'published' ? 'published' : 'draft',
+        clampPriority(payload.priority),
+        validUntilParam(payload.validUntil),
         pdfData,
         actor,
         id,
@@ -431,7 +516,8 @@ async function updateMagazine(id, payload, actor) {
     await query(
       `UPDATE ${table('ADMIN_MAGAZINES')} SET
         TITLE = ?, EDITION = ?, PUB_DATE = ?, DESCRIPTION = ?, PDF_URL = ?, PDF_NAME = ?,
-        COVER_URL = ?, STATUS = ?, UPDATED_AT = CURRENT TIMESTAMP, UPDATED_BY = ?
+        COVER_URL = ?, STATUS = ?, PRIORITY = ?, VALID_UNTIL = ?,
+        UPDATED_AT = CURRENT TIMESTAMP, UPDATED_BY = ?
        WHERE ID = ? AND ACTIVE = 1`,
       [
         str(payload.title, 160),
@@ -442,6 +528,8 @@ async function updateMagazine(id, payload, actor) {
         str(payload.pdfName, 255),
         str(payload.coverUrl, 500),
         payload.status === 'published' ? 'published' : 'draft',
+        clampPriority(payload.priority),
+        validUntilParam(payload.validUntil),
         actor,
         id,
       ],
@@ -484,6 +572,8 @@ async function deleteMagazine(id, actor) {
      WHERE ID = ? AND ACTIVE = 1`,
     [actor, id],
   );
+  // La revista se conserva en la tabla; solo deja de listarse y de publicarse.
+  if (!(await confirmSoftDeleted('ADMIN_MAGAZINES', id))) return false;
   await logActivity({
     kind: 'delete',
     entity: 'Revista',
@@ -587,14 +677,9 @@ async function deleteApplication(id, actor) {
      WHERE ID = ? AND ACTIVE = 1`,
     [id],
   );
-  // El PDF no se conserva tras el borrado lógico: se elimina del disco.
-  const cvUrl = String(rows[0].CV_URL || '').trim();
-  if (/^\/api\/admin\/cv\/[A-Za-z0-9._-]+\.pdf$/.test(cvUrl)) {
-    const file = path.basename(cvUrl);
-    await fs.promises
-      .unlink(path.join(__dirname, '..', '..', 'private', 'cv', file))
-      .catch(() => {});
-  }
+  // Nada se borra físicamente: la candidatura y su CV se conservan. Solo salen
+  // de la lista del panel y dejan de contar para las reglas de candidatura.
+  if (!(await confirmSoftDeleted('ADMIN_APPLICATIONS', id))) return false;
   await logActivity({
     kind: 'delete',
     entity: 'Candidatura',
@@ -838,20 +923,26 @@ async function inviteUser(payload, actor) {
 }
 
 async function revokeUser(id, actor) {
+  const key = str(id, 64);
+  if (!key) return false;
   const rows = await query(
-    `SELECT NAME, EMAIL FROM ${table('ADMIN_USERS')} WHERE ID = ? AND ACTIVE = 1`,
-    [id],
+    `SELECT NAME, EMAIL, ACTIVE FROM ${table('ADMIN_USERS')} WHERE ID = ?`,
+    [key],
   );
+  // Sin fila o ya dado de baja: no hay nada que revocar y el panel debe saberlo.
   if (!rows.length) return false;
+  if (Number(rows[0].ACTIVE) !== 1) return false;
   await query(
     `UPDATE ${table('ADMIN_USERS')}
        SET ACTIVE = 0, DELETED_AT = CURRENT TIMESTAMP, UPDATED_AT = CURRENT TIMESTAMP
      WHERE ID = ? AND ACTIVE = 1`,
-    [id],
+    [key],
   );
+  // El UPDATE no informa de filas afectadas: se confirma releyendo el estado real.
+  if (!(await confirmSoftDeleted('ADMIN_USERS', key))) return false;
   await query(
     `UPDATE ${table('ADMIN_SESSIONS')} SET ACTIVE = 0 WHERE USER_ID = ? AND ACTIVE = 1`,
-    [id],
+    [key],
   );
   await logActivity({
     kind: 'delete',
@@ -1205,7 +1296,9 @@ async function listPublicJobs() {
   if (!settings.offersPublic) return [];
   const rows = await query(
     `SELECT ${JOB_COLUMNS} FROM ${table('ADMIN_JOB_OFFERS')}
-      WHERE ACTIVE = 1 AND STATUS = 'published' ORDER BY UPDATED_AT DESC`,
+      WHERE ACTIVE = 1 AND STATUS = 'published'
+        AND (VALID_UNTIL IS NULL OR VALID_UNTIL >= CURRENT DATE)
+      ORDER BY PRIORITY DESC, CREATED_AT DESC`,
   );
   return rows.map(mapJob);
 }
@@ -1213,7 +1306,8 @@ async function listPublicJobs() {
 async function getPublicJob(slug) {
   const rows = await query(
     `SELECT ${JOB_COLUMNS} FROM ${table('ADMIN_JOB_OFFERS')}
-      WHERE ACTIVE = 1 AND STATUS = 'published' AND SLUG = ?`,
+      WHERE ACTIVE = 1 AND STATUS = 'published' AND SLUG = ?
+        AND (VALID_UNTIL IS NULL OR VALID_UNTIL >= CURRENT DATE)`,
     [slug],
   );
   return rows.length ? mapJob(rows[0]) : null;
@@ -1222,7 +1316,9 @@ async function getPublicJob(slug) {
 async function listPublicMagazines() {
   const rows = await query(
     `SELECT ${MAGAZINE_COLUMNS} FROM ${table('ADMIN_MAGAZINES')}
-      WHERE ACTIVE = 1 AND STATUS = 'published' ORDER BY PUB_DATE DESC`,
+      WHERE ACTIVE = 1 AND STATUS = 'published'
+        AND (VALID_UNTIL IS NULL OR VALID_UNTIL >= CURRENT DATE)
+      ORDER BY PRIORITY DESC, PUB_DATE DESC, CREATED_AT DESC`,
   );
   return rows.map(mapMagazine);
 }
